@@ -59,7 +59,7 @@ npm run dev
 # This will start a standalone http node server and the host and port to access it will be displayed
 ```
 
-### App folders' structure ###
+### App folders ###
 
 App folder structure under `src`:
 
@@ -190,8 +190,9 @@ The app must be built before it is deployed. To do so, run:
 ```sh
 cd <project-root-folder>/
 npm run build
-# then point your browser to localhost:<port>/dev
 ```
+
+*Important:* to run the application built you must to set up a web server and put this repository (after the build) there. The `index.html` at the root of this repository is expected to load the app.
 
 We adopted this approach because the build process takes a considerable time and the app may be not available during the build.
 As we want to minimize the time the app may be kept unavailable,
