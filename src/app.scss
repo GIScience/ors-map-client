@@ -1,0 +1,131 @@
+/* Set the app default global progress bar component position */
+.progress-linear {
+  height: 4px !important;
+  top: 0;
+  margin-top: 0;
+  z-index: 3;
+  position:absolute
+}
+
+/* Hide the app default global progress when it is disabled */
+.progress-linear-disabled div.primary {
+  display: none;
+}
+
+.app-content {
+  padding-top: 0px !important
+}
+
+/* Set the app tab padding */
+.app-tab {
+  padding: 10px;
+}
+
+.application--wrap {
+  overflow: hidden;
+}
+
+.container.page-root {
+  height: 100%;
+}
+
+@media (min-width: 1000px) {
+  .app-tab {
+    padding: 25px;
+  }
+}
+
+/* Set the page root container padding according the media size  */
+@media (max-width: 599px) {
+  .container.page-root {
+    padding: 5px;
+  }
+}
+@media (min-width: 600px) and (max-width: 999px) {
+  .container.page-root {
+    padding: 10px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .container.page-root {
+    padding: 20px;
+  }
+}
+
+@for $i from 1 through 50 {
+  .top-#{$i} { margin-top: 1px * $i !important; }
+}
+
+@for $i from 1 through 50 {
+  .mb-#{$i} { margin-bottom: 1px * $i !important; }
+}
+
+@for $i from 1 through 50 {
+  .pr-#{$i} { padding-right: 1px * $i !important; }
+}
+
+@for $i from 1 through 50 {
+  .pl-#{$i} { padding-left: 1px * $i !important; }
+}
+
+@for $i from 1 through 50 {
+  .pt-#{$i} { padding-top: 1px * $i !important; }
+}
+
+.no-padding {
+  padding: 0;
+}
+
+code[class^='language-'] {
+  padding: 10px !important;
+  width: 99%;
+  word-wrap: break-word;
+  color: black;
+}
+code[class^='language-']:before {
+  content: none !important
+}
+
+.text-right {
+  text-align:right
+}
+.right {
+  float:right
+}
+
+.break-word-all {
+  word-break: break-all
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.no-input-details .v-input-group__details {
+  min-height: 0;
+}
+
+
+/* ## THEME CUSTOMIZATION ## */
+
+/* Customize the default font for ORS */
+* {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Set the app default font for box components.
+We define it here because we want this as a default global definition */
+.box-title {
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.headline {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+/* Customize the default font for ORS */
+
+

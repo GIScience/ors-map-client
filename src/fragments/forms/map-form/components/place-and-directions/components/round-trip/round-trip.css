@@ -1,0 +1,13 @@
+.round-trip-panel {
+  box-shadow:none;
+  width: calc(100% - 10px);
+}
+
+.round-trip-panel >>> li > div  {
+  padding: 0px;
+}
+
+.round-trip-panel-content {
+  background: transparent;
+  padding-left: 10px;;
+}

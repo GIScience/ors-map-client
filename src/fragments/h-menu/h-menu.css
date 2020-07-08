@@ -1,0 +1,59 @@
+/* Customize the ORS header menu */
+
+.app-btn-mh {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: capitalize;
+  content: unset;
+}
+
+.app-btn-mh > .v-btn__content {
+  color: #828282;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+.app-hm-list .app-btn-mh .v-btn__content {
+  padding-left: 0px;
+  text-align: left;
+  display: block;
+}
+
+.app-btn-mh > .v-btn__content:hover {
+  background-color: transparent !important
+}
+.app-btn-mh > .v-btn__content:before {
+ opacity: 0;
+}
+
+.ors-toolbar .app-btn-mh:hover > .v-btn__content:after, .ors-toolbar .app-btn-mh > .v-btn__content:hover:after, .ors-toolbar .app-btn-mh.active > .v-btn__content:after {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  content: '';
+  width: 20px;
+  height: 2px;
+  margin-left: -10px;
+  background-color: #b5152b;
+}
+
+.ors-toolbar .app-btn-mh.has-icon:hover > .v-btn__content:after {
+  background-color: transparent
+}
+
+.v-list__tile .app-btn-mh > .v-btn__content:hover:after {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  content: '';
+  width: 20px;
+  height: 2px;
+  margin-left: 0px;
+  background-color: #b5152b;
+}
+
+.hm-content {
+  margin-top: -10px;
+}
+
+/* End customize the ORS header menu */

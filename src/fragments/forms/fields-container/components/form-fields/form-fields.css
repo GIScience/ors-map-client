@@ -1,0 +1,51 @@
+.field-row {
+  min-height: 45px;
+  /*border-bottom: 1px solid rgb(213, 222, 237);*/
+
+}
+
+.field-name {
+  color: rgb(103, 121, 141);
+  border: 1px solid rgb(213, 222, 237);
+  white-space: nowrap;
+  padding: 2px 4px;
+  margin-top: 23px;
+  margin-left: -4px;
+  display: block;
+  float: left;
+}
+
+.field-row.header {
+  height: 30px;
+  color: rgb(103, 121, 141);
+  font-weight: 700;
+}
+
+.label-txt {
+  color:rgb(103, 121, 141)
+}
+
+.content-text {
+  color: black;
+}
+
+.txt-right {
+  text-align:right;
+}
+
+.pointer {
+  cursor:pointer
+}
+
+.fields-panel {
+  box-shadow:none
+}
+
+.fields-panel >>> li > div  {
+  padding: 0px;
+}
+
+.form-switch {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}

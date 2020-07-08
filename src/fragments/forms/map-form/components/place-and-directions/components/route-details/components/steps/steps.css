@@ -1,0 +1,48 @@
+.step {
+  border-bottom: 1px solid #f0f1f4;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+
+.instruction {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.on {
+  margin-bottom: 8px;
+}
+.arrived {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.turn-left {
+  transform: scaleY(-1) rotate(-45deg)
+}
+
+.turn-right {
+  transform: scaleY(-1) scaleX(-1) rotate(-45deg);
+}
+
+.slight-left {
+  transform: scaleX(-1) rotate(-15deg)
+}
+
+.slight-right {
+  transform: scaleX(1) rotate(-15deg)
+}
+
+.u-turn {
+  transform: rotate(-90deg)
+}
+
+.keep-left {
+  transform: rotate(-90deg)
+}
+
+.keep-right {
+  transform: rotate(90deg)
+}
+

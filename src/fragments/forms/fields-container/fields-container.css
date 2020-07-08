@@ -1,0 +1,15 @@
+.fields-container {
+  background:white
+}
+
+.props-modal {
+  z-index: 3
+}
+
+.label-txt {
+  color:rgb(103, 121, 141)
+}
+
+.content-text {
+  color: black;
+}

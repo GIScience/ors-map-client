@@ -1,0 +1,16 @@
+.map-form-btn {
+  width: 50px;
+  float: left;
+  padding-right: 5px;
+}
+
+.btn-legend {
+  font-size: 9px;
+  text-align: center;
+  word-break: break-all;
+}
+
+.map-form-btn .v-btn {
+  padding: 0px;
+  margin: 5px;
+}

@@ -1,0 +1,44 @@
+.map-view {
+  width: 100%;
+  z-index:2
+}
+
+.map-view-controls {
+  z-index: 5;
+}
+
+.left-context-menu {
+  position: absolute;
+  bottom: 150px;
+  right: 10px;
+  z-index: 4 !important;
+  font-size: 10px;
+  max-width: 60%;
+  overflow: hidden;
+
+}
+
+.copy-inverted {
+  transform: scaleX(-1)
+}
+
+.over-brand {
+  position: absolute;
+  bottom: 170px;
+  right: 5px;
+  z-index: 4;
+  opacity: 0.7;
+  height: 100px;
+  display: hidden;
+}
+
+.fit-all-features {
+  position: absolute !important;
+  top: 195px;
+  right: 5px;
+  z-index: 2;
+  background: white !important;
+  color: black;
+  border-radius: 3px;
+  border: 2px solid rgba(0,0,0,0.2);
+}

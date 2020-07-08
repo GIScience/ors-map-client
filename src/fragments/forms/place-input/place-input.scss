@@ -1,0 +1,90 @@
+
+.full {
+  width: 100%;
+}
+
+.input-icon {
+  padding-top: 5px;
+  cursor: pointer; float:right
+}
+
+.suggestions {
+  position: relative;
+  z-index: 5;
+  background: white;
+  width: 100%
+}
+
+.shadow {
+  -webkit-box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
+  -moz-box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
+  box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
+}
+
+.no-padding {
+  padding: 0px;
+}
+.no-marging {
+  margin: 0px;
+}
+
+.input-btn:before {
+  content: none !important
+}
+
+.input-btn {
+  padding: 0px;
+  margin: 0px;
+  float: right;
+  padding-left: 0px;
+  margin-top: 6px;
+  padding-bottom: 18px;
+  height: 40px;
+}
+
+/* small class is for md and up resolutions. In small devices, we display bigger btns to easy the interaction*/
+.input-btn.small {
+  margin-top: 10px;
+}
+
+.input-btns .v-btn__content {
+  padding: 0;
+}
+
+.input-btns .v-btn {
+  min-width: 0;
+}
+
+.input-pop-up-list .v-btn__content {
+  padding: 0;
+}
+
+.input-pop-up-list .v-btn {
+  min-width: 0;
+}
+
+.input-pop-up-list >>> a.v-list__tile {
+  padding: 5px;
+}
+
+.input-pop-up-list >>> .v-list__tile__title {
+  height: 50px;
+}
+
+.floating-menu-activator {
+  margin-right: 0px;
+}
+
+.suggestions >>> .v-list__tile__sub-title {
+  font-size: 12px !important;
+}
+
+.aproximate-distance {
+  font-weight: 600;
+  font-style: italic;
+}
+
+
+
+
+

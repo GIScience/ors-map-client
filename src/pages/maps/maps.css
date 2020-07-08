@@ -1,0 +1,12 @@
+
+.maps .places-nav {
+  z-index: 5;
+  padding-bottom: 5px !important;
+  position: absolute !important;
+}
+
+.maps .refresh-search-btn {
+  position: absolute;
+  width: 170px;
+  z-index: 5;
+}

@@ -1,0 +1,62 @@
+<template>
+  <div >
+    <v-navigation-drawer
+      app
+      clipped
+      hide-overlay
+      class="sidebar"
+      v-model="isSideBarOpen"
+      disable-resize-watcher
+      :width="$mdAndUpResolution ? 400 : 290"
+      :permanent="$store.getters.leftSideBarPinned"
+      :class="{'auto-height': $lowResolution && !$store.getters.leftSideBarPinned, 'full-height': $store.getters.leftSideBarPinned}">
+
+      <div class="sidebar-header">
+        <v-layout row class="sidebar-header-top" >
+          <v-flex xs6 md9>
+            <div class="logo-container">
+              <a :href="homeUrl"><img height="52.5" class="small ml-2" src="@/assets/img/logo@2x.png" :title="$t('global.appName')" :alt="$t('global.appName')"></a>
+            </div>
+          </v-flex>
+          <v-spacer></v-spacer>
+          <v-flex xs6 md3 class="sidebar-top-menuy" >
+            <top-menu></top-menu>
+          </v-flex>
+        </v-layout>
+        <profile-selector initial-profile="cycling-regular"></profile-selector>
+      </div>
+
+      <!-- sidebar-content padding-bottom must be the same that is caculated in footer component height -->
+      <div class="sidebar-content" :style="{height: sidebarContentHeightFormula}">
+        <div class="sidebar-content-form" :style="{'padding-bottom': $vuetify.breakpoint.smAndDown ? $store.getters.footerMiniHeight + 'px': $store.getters.footerFullHeight + 'px'}">
+          <map-form v-if="$store.getters.mapReady" class="map-search"></map-form>
+          <v-expansion-panel :value="null">
+            <v-expansion-panel-content style="background: transparent;">
+              <div slot="header">Menu</div>
+              <v-list>
+                <v-divider></v-divider>
+                <v-list dense>
+                  <template v-for='(item, index) in menuItems'>
+                    <app-v-menu :item="item" :showIcon="true" :key="index"></app-v-menu>
+                  </template>
+                </v-list>
+              </v-list>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </div>
+        <app-footer></app-footer>
+      </div>
+    </v-navigation-drawer>
+
+    <v-icon large v-if="isSideBarOpen && $highResolution" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen, 'low-res': $lowResolution}" @click.stop="isSideBarOpen = false"
+      :title="$t('sidebar.hideSidebar')">keyboard_arrow_left
+    </v-icon>
+
+    <v-icon large v-else-if="!isSideBarOpen && !$lowResolution" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen}" @click.stop="isSideBarOpen = true"
+      :title="$t('sidebar.showSidebar')">keyboard_arrow_right
+    </v-icon>
+
+  </div>
+</template>
+<script src="./sidebar.js"></script>
+<style scoped src="./sidebar.css"></style>

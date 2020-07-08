@@ -1,0 +1,28 @@
+.instructions-scroll {
+  max-height: 500px;
+  overflow-x:auto
+}
+
+
+.no-shadow {
+  box-shadow: none;
+}
+
+.route-panel {
+  background: transparent;
+}
+
+.routes-header >>> .v-expansion-panel__header {
+ padding-top: 0px !important;
+ padding-bottom: 0px !important;
+ padding-left: 5px;
+ min-height: 35px;
+}
+
+.routes-header >>> .v-expansion-panel__body .v-list {
+  padding-top: 5px !important;
+}
+
+.expansion-box >>> .box-content {
+  padding-top: 0 !important;
+}

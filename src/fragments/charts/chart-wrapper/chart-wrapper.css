@@ -1,0 +1,55 @@
+@media (max-width: 399px) {
+  .chart-container {
+    position: relative; width:87vw
+  }
+}
+@media (min-width: 400px) and (max-width: 599px) {
+  .chart-container {
+    /* in lower resolutions some padding is removed, so we have more space if compared with >= 1000px */
+    position: relative; width:90vw
+  }
+}
+@media (min-width: 600px) and (max-width: 799px) {
+  .chart-container {
+    /* in lower resolutions some padding is removed, so we have more space if compared with >= 1000px */
+    position: relative; width:91vw
+  }
+}
+@media (min-width: 800px) and (max-width: 999px) {
+  .chart-container {
+    /* in lower resolutions some padding is removed, so we have more space if compared with >= 1000px */
+    position: relative; width:93.5vw
+  }
+}
+@media (min-width: 1000px) and (max-width: 1199px) {
+  .chart-container {
+    position: relative; width:89.5vw
+  }
+}
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .chart-container {
+    position: relative; width:91vw
+  }
+}
+@media (min-width: 1400px) and (max-width: 1999px) {
+  .chart-container {
+    position: relative; width:92vw
+  }
+}
+
+@media (min-width: 2000px) and (max-width: 2499px) {
+  .chart-container {
+    position: relative; width:94vw
+  }
+}
+
+@media (min-width: 2500px) and (max-width: 2999px) {
+  .chart-container {
+    position: relative; width:95vw
+  }
+}
+@media (min-width: 3000px) {
+  .chart-container {
+    position: relative; width:96.5vw
+  }
+}

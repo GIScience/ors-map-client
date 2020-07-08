@@ -1,0 +1,110 @@
+.carousel {
+  padding: 10px;
+  width:90%;
+  height: 100% !important;
+}
+
+.carousel .item .ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.carousel >>> .item {
+  opacity: 0.5;
+}
+
+.carousel >>> .item .place-data {
+  width: 100%;
+}
+
+.carousel >>> .item.active {
+  opacity: 1;
+}
+
+.carousel-item-img {
+  max-height: 120px !important;
+}
+
+.card {
+  background:white;
+  color:black;
+}
+
+.card-title {
+  padding-bottom:0;
+  padding-top: 5px;
+}
+
+.carousel >>> .vhl-btn-right {
+  margin-right: -10px !important;
+  margin-bottom: 90px;
+}
+
+.carousel >>> .vhl-btn-left {
+  margin-left: -10px !important;
+  margin-bottom: 90px;
+}
+.carousel >>> .vhl-item {
+  padding-top: 5px;
+}
+
+.carousel >>> .directions-btn {
+  height: 35px;
+  width: 100%;
+  padding: 0;
+  border: 1px solid gray;
+}
+
+.carousel >>> .previous {
+  position: absolute;
+  left: 0;
+  z-index: 11;
+  top: 30px;
+  background-color: white !important;
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  padding-top: 2px;
+}
+
+.carousel >>> .next {
+  position: absolute;
+  right: 0;
+  z-index: 11;
+  top: 30px;
+  background-color: white !important;
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  padding-top: 2px;
+}
+
+.carousel >>> .directions-btn .text {
+  flex-direction: unset;
+  color: black;
+  text-transform: uppercase;
+}
+
+.carousel >>> .directions-btn .icon {
+  flex-direction: unset;
+  color: black !important;
+  margin-left: 5px;
+}
+
+.carousel >>> .directions-btn .v-btn__content {
+  flex-direction: unset;
+}
+
+.carousel >>> .distance {
+  font-size: 11px;
+}
+
+.carousel >>> .distance span {
+  font-weight: 700;
+}
+
+.carousel >>> .vhl-item {
+  padding-bottom: 1px;
+}

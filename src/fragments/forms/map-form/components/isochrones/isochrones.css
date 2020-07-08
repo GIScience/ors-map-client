@@ -1,0 +1,24 @@
+.isochrones-input {
+  padding-top: 10px;
+}
+.reorder-handle:hover{
+  cursor:move;
+}
+
+.reorder-handle{
+  padding-top:18px;
+}
+
+ul.place-inputs li {
+  list-style: none;
+}
+
+ul.place-inputs {
+  padding: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.extra-btns {
+  padding-left: 0px;
+}

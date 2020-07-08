@@ -1,0 +1,11 @@
+.info-menu.v-btn__content {
+  padding: 0;
+}
+
+.info-menu .v-btn {
+  min-width: 0;
+}
+
+.floating-item {
+  text-transform: none;
+}

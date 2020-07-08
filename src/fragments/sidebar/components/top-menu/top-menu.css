@@ -1,0 +1,20 @@
+.no-padding {
+  padding: 0px;
+}
+
+.top-menu.v-btn__content {
+  padding: 0;
+}
+
+.top-menu .v-btn {
+  min-width: 0;
+}
+
+.low-res-menu.v-btn__content {
+  padding: 0;
+}
+
+.low-res-menu .v-btn {
+  min-width: 0;
+}
+

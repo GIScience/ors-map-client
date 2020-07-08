@@ -1,0 +1,62 @@
+import AppRouteData from '@/models/app-route-data'
+import GeoUtils from '@/support/geo-utils'
+import Place from '@/models/place'
+import store from '@/store/store'
+
+/**
+ * SearchMode class
+ */
+class SearchMode {
+  buildAppRouteData (places, options) {
+    let appRouteData = store.getters.appRouteData || new AppRouteData()
+    appRouteData.places = places
+    appRouteData.options.search = true
+    appRouteData.options.center = store.getters.mapCenter
+    return appRouteData
+  }
+
+  /**
+   * Build a directions route
+   * @param {*} appRouteData
+   * @returns {Object} route like {name: 'MapDirections', params: {...} }
+   */
+  getRoute = (appRouteData, options = {}) => {
+    let name = ''
+    if (appRouteData.places.length > 0) {
+      let place = appRouteData.places[0]
+      name = place.placeName ? place.placeName.replace(/, /g, ',') : ''
+    }
+    // Create the route object
+    let center = `${appRouteData.options.center.lat},${appRouteData.options.center.lng}`
+    let params = {term: name, center: center}
+    let route = { name: 'MapSearch', params: params }
+    return route
+  }
+
+  /**
+   * Decode single place path
+   * @param {*} currentRoute
+   * @returns {AppRouteData}
+   */
+  decodePath = (currentRoute) => {
+    let appRouteData = new AppRouteData()
+    appRouteData.options.search = true
+
+    let coords = currentRoute.params.center.split(',')
+    let latlng = GeoUtils.buildLatLong(coords[0], coords[1])
+    appRouteData.options.center = latlng
+
+    // Get and format the place name
+    let placeName = currentRoute.params.term.replace(/, /g, ',').replace(',', ', ')
+    // Recreate the place object
+    let place = new Place(0, 0, placeName, {resolve: true})
+
+    // Add the single place to the route data
+    appRouteData.places.push(place)
+
+    // Return the object
+    return appRouteData
+  }
+}
+// export the class
+export default SearchMode

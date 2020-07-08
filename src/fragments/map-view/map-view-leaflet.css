@@ -1,0 +1,7 @@
+.map-view >>> .leaflet-top.leaflet-left {
+  margin-top: 70px;
+}
+
+.map-view.extra-low-resolution >>> .leaflet-top.leaflet-right {
+  margin-top: 70px;
+}

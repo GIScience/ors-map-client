@@ -1,0 +1,28 @@
+.logo {
+  margin: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+section {
+  padding: 5px;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.textjustify {
+  text-align: justify;
+}
+
+.brand {
+  float: left;
+  margin: 0 20px 40px 0;
+}

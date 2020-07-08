@@ -1,0 +1,116 @@
+import constants from '@/resources/constants'
+import MapViewData from '@/models/map-view-data'
+
+/**
+ * Render and deals with right click events
+ * @emits closed
+ * @emits rightClickEvent
+ * @listens mapRightClicked
+ * @listens mapLeftClicked (to close the righ click pop up)
+ */
+export default {
+  data () {
+    return {
+      showRightClickPopup: false,
+      rightClickPopUpX: null,
+      rightClickPopUpY: null,
+      clickPoint: null,
+      clickLatlng: null,
+      data: null
+    }
+  },
+  props: {
+    mapViewData: {
+      required: true,
+      type: MapViewData
+    }
+  },
+  computed: {
+    canAddStop () {
+      return this.$store.getters.mode === constants.modes.directions && this.mapViewData.hasRoutes()
+    },
+    show () {
+      return this.showRightClickPopup
+    },
+    directionsToHereText () {
+      let text = this.$t('mapRightClick.directionsToHere')
+      if (!this.mapViewData.hasRoutes()) {
+        return text
+      } else {
+        text = this.$t('mapRightClick.nonStopDirectionsToHere')
+        return text
+      }
+    },
+    canAddIsochroneCenter () {
+      return this.$store.getters.mode === constants.modes.isochrones || this.$store.getters.mode === constants.modes.place
+    }
+  },
+  methods: {
+    /**
+     * Deal with close event by hidding the right click pop up
+     * and by emitting close event
+     * @emits closed
+     */
+    closed () {
+      this.showRightClickPopup = false
+      this.$emit('closed')
+    },
+    /**
+     * Send the right click event
+     * @param {*} eventName
+     * @emits rightClickEvent
+     */
+    rightClickEvent (eventName) {
+      this.showRightClickPopup = false
+      let clickLatlng = this.clickLatlng
+      let data = {eventName, clickLatlng}
+      this.$emit('rightClickEvent', data)
+      this.clickLatlng = null
+    },
+    /**
+     * Deal wth the map rigt click, preparing the data and displaying the modal
+     * @param {*} data
+     */
+    mapRightClick (data) {
+      this.showRightClickPopup = false
+      this.data = data
+      let event = data.event
+      let mapEl = data.mapEl
+      let boxWidth = 190
+      let boxHeight = 217
+      let mapWidth = mapEl.clientWidth
+      let mapHeight = mapEl.clientHeight
+      let offsetX = 10
+      let offsetY = 10
+
+      // Define the x and y where the box must start from based on
+      // the location of the click and the box size.
+      // The goal is to avoid the box to overflow the size
+      // and always start the box in the point selected
+      // showing one of its corners joined to the selected point
+      let x = event.containerPoint.x > (mapWidth / 2) ? event.containerPoint.x - (boxWidth + offsetX) : event.containerPoint.x
+      if (x <= 0) {
+        x = event.containerPoint.x
+      }
+
+      let y = event.containerPoint.y > (mapHeight / 2) ? event.containerPoint.y - (boxHeight + offsetY) : event.containerPoint.y
+      if (y <= 0) {
+        y = event.containerPoint.y
+      }
+
+      this.rightClickPopUpX = `${x}px`
+      this.rightClickPopUpY = `${y}px`
+      this.clickLatlng = event.latlng
+      this.showRightClickPopup = true
+    }
+  },
+  created () {
+    let context = this
+    this.eventBus.$on('mapRightClicked', (data) => {
+      context.mapRightClick(data)
+    })
+    this.eventBus.$on('mapLeftClicked', () => {
+      context.showRightClickPopup = false
+    })
+  }
+}

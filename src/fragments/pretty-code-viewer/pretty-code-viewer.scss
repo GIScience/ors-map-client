@@ -1,0 +1,66 @@
+.pretty-code-viewer pre code:before {
+  content: none;
+}
+pre code[class*="language-"], pre[class*="language-"] {
+  white-space: pre-wrap;
+  word-break: break-all !important;
+}
+
+@function repeat($n, $s){
+  $string: '';
+  @for $i from 1 through $n {
+    $string: $string + $s
+  }
+  @return $string
+}
+@for $i from 1 through 5 {
+  $s: repeat($i, 'ul ');
+  .pretty-code-viewer #{$s} { margin-left: 15px * $i ; }
+}
+.pretty-code-viewer>ul>li {
+  margin-bottom: 20px;
+}
+
+.pretty-code-viewer.xml{
+  white-space: pre-wrap;
+  background: #f7f8f9;
+  word-break: normal;
+  padding: 10px;
+  color: #9aab3a;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+/* '<>' - color */
+.pretty-code-viewer .token.punctuation {
+  color: #394359;;
+}
+
+/* xml-node color*/
+.pretty-code-viewer .token.tag {
+  color: #394359;
+}
+
+/* xml-attribute name color*/
+.pretty-code-viewer .token.attr-name {
+  color: #8e0000;
+}
+
+/* xml-attribute value color*/
+.pretty-code-viewer .token.attr-value {
+  color: #2196f3;
+}
+
+.pretty-code-viewer pre code {
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.pretty-code-viewer .json-tree-value.json-tree-value-number {
+  color: #2196f3;
+}
+
+.pretty-code-viewer .json-tree-value.json-tree-value-boolean {
+  color: #8e0000;
+}

@@ -1,0 +1,47 @@
+.hightlighted-polyline-active {
+  position: absolute !important;
+  text-transform: none !important;
+  bottom: 70px;
+  left: 10px;
+  z-index: 3;
+}
+.segments-highlight-snack {
+  font-weight: 700;
+  padding: 5px;
+}
+
+.segments-highlight-snack >>> .v-snack__content {
+  padding: 5px !important;
+}
+
+.snack-highlighted-content {
+  padding: 7px;
+  padding: 5px;
+}
+
+.snack-highlighted-close {
+  color: black;
+  float: left;
+  margin-left: 10px !important;
+  height: 100%;
+}
+
+.section-highlighted {
+  margin-right: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  font-weight: 700;
+  display: unset;
+  border: 1px solid #cbced1;
+  color: black;
+}
+
+.highligh-intro {
+  color: black;
+  margin-right: 10px;
+}
+.highligh-intro, .section-highlighted {
+  display: unset;
+  float: left;
+  margin-top: 5px;
+}

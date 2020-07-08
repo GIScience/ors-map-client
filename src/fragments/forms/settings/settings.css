@@ -1,0 +1,10 @@
+.panel-content {
+  padding-right: 5px;
+}
+
+.panel-content >>> .v-expansion-panel__header {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  padding-left: 5px;
+  min-height: 35px;
+ }

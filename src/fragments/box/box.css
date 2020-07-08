@@ -1,0 +1,65 @@
+section {
+  transition:all 1s ease;
+}
+
+.fill-height {
+  height: 100%;
+}
+
+.box-header{
+  padding: 10px;
+  border-bottom: 1px solid #cbced1;
+}
+
+.shadow {
+  box-shadow: 0px 2px 1px 2px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+.box-border {
+  border: 1px solid #cbced1
+}
+.box.maximized {
+  position: fixed;
+  top: 0px;
+  left: 5px;
+  z-index: 1002; /* when the box is maximized it must have a higher z-index then the floating menu */
+  right: 5px;
+  margin-top: 100px;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  bottom: 5px;
+  overflow-y: scroll;
+}
+
+.box-footer {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* Set the box content padding according the media size  */
+@media (max-width: 599px) {
+  .box-content {
+    padding: 5px;
+  }
+}
+@media (min-width: 600px) {
+  .box-content {
+    padding: 10px;
+  }
+}
+
+.corner-btn {
+  padding: 0px;
+  min-width: 0;
+  float: right;
+  margin: 0px;
+  height: 24px;
+}
+
+.corner-btn::before {
+  padding: 0px;
+  content: none;
+}
+
+.corner-btn .v-btn__content, .corner-btn .v-btn__content::before {
+  padding: 0;
+}

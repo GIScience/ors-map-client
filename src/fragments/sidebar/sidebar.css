@@ -1,0 +1,96 @@
+.switch-side {
+  background: #C62828
+}
+
+.logo-container {
+  text-align: center;
+  padding-top: 10px;
+}
+.logo-container img.small {
+  height: 35px;
+}
+
+.logo-container a {
+  margin-left: -20px !important;
+  height: 80%;
+  display: block;
+  float: left;
+  padding-left: 20px;
+}
+
+.sidebar{
+  margin-top: 0px !important;
+  max-height: 100% !important;
+  z-index: 4;
+  height:100%;
+}
+
+.sidebar-content {
+  overflow-y: auto;
+}
+
+.sidebar-content-form {
+  height: auto;
+  min-height: 100%;
+}
+
+.auto-height {
+  height: auto !important;
+}
+
+.full-height {
+  height: 100% !important;
+}
+
+.toggle-sidebar {
+  position: absolute;
+  top: 270px;
+  left: 410px;
+  z-index: 3;
+  background: #fff;
+  transition:all 0.5s ease;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+
+.toggle-sidebar.hidden{
+  left: 10px;
+}
+
+.toggle-sidebar.low-res {
+  left: 310px;
+}
+
+.map-search >>> .suggestions.low-res {
+  max-height: 220px;
+  overflow-y:scroll;
+}
+
+.sidebar-header {
+  height: 100px;
+}
+
+.sidebar-header-top {
+  margin-bottom: 10px;
+}
+
+.info-item {
+  text-transform: none;
+}
+
+
+.sidebar-top-menu {
+  text-align: right;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+.brands {
+  padding: 20px;
+  max-width: 100%;
+  height: 300px;
+}
+
+.brands.small {
+  height: 170px !important;
+}

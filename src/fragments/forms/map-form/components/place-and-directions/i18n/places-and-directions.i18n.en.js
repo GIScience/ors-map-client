@@ -1,0 +1,46 @@
+
+export default {
+  placesAndDirections: {
+    pageTitle: 'ORS Maps',
+    Places: 'Places',
+    isochrones: 'Isochrones',
+    place: 'place',
+    notRouteFound: 'We could not find a route connecting these places',
+    notRouteFoundWithFilters: 'We could not find a route connecting these places with the applied filters',
+    noPlaceFound: 'No place found with the imputed content',
+    routeReady: 'Route ready',
+    useLocation: 'GPS',
+    addPlaceInput: 'Add place',
+    clearRoute: 'Clear route',
+    reverseRoute: 'Reverse',
+    orderByClosestPlaces: 'Order by places closer to your location',
+    calculatingRoute: 'Calculating route...',
+    yourLocation: 'Your location',
+    expandAltitudeChart: 'Expand chart',
+    errorRenderingContentUploaded: 'Erro while rendering the content uploaded. Check the file format and content',
+    roundTrip: 'Round trip',
+    days: 'd',
+    hours: 'h',
+    minutes: 'min',
+    seconds: 'sec',
+    meters: 'meters',
+    distance: 'Distance',
+    duration: 'Duration',
+    notPossibleToCalculateRoute: 'A route could not be calculated using one of the selected places',
+    apiError: {
+      2000: 'Unable to parse JSON request',
+      2001: 'Required parameter is missing',
+      2002: 'Invalid parameter format',
+      2003: 'Invalid parameter value',
+      2004: 'By using certain filters and/or avoidables the distance of a route segment must not be greater than 3000 km. When using alternative routes the distance must be at most 100 km.',
+      2006: 'Unable to parse the request to the export handler',
+      2007: 'Unsupported export format',
+      2008: 'Empty Element',
+      2009: 'Unable to find a route between places specified',
+      2010: 'It was not possible to find a suitable point that is part of the route. Maybe one of the points selected is not routable or the selected profile is not supported in this region',
+      2011: 'When using alternative routes option it is not possible to define route stops',
+      2099: 'Could not find a valid point after 3 tries'
+    },
+    genericErrorMsg: 'It was not possible to calculate the route'
+  }
+}
