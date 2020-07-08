@@ -192,11 +192,7 @@ cd <project-root-folder>/
 npm run build
 ```
 
-*Important:* to run the application built you must to set up a web server and put this repository (after the build) there. The `index.html` at the root of this repository is expected to load the app.
-
-We adopted this approach because the build process takes a considerable time and the app may be not available during the build.
-As we want to minimize the time the app may be kept unavailable,
-we decided to add the production/output files that are result of the build to the repository/git and commit/push the app ready to run.
+*Important:* to run the built application you must to set up a web server and put this repository (after the build) there. The `index.html` at the root of this repository is expected to load the app.
 
 For a detailed explanation on how webpack works, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
