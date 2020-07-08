@@ -23,8 +23,9 @@ The VueJS components allow a better code organization, weak and clear coupling b
 
 ### Set up and run locally ###
 
-*Important*
-To manage dependencies and pack the app it is necessary to have Node version 12. If you don' have it already installed, please do it by running:
+Run the app locally in three steps: set the environment up, get the code and define a configuration file.
+
+1 - To manage dependencies and pack the app it is necessary to have Node version 12. If you already have it, skip this step. If you don't, please install it by running:
 
 ```sh
 curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
@@ -34,24 +35,24 @@ npm install -g npm && \
 npm update -g
 ```
 
-Then clone the repository of the ORS Map Client and set it up
+2 - Clone the repository of the ORS Map Client, go to the root folder and install the dependencies:
 ```sh
 git clone https://github.com/GIScience/ors-map-client.git
 
 # Go to your local repository root folder
 cd ors-map-client
 
-# Installation of dependencies is required before running the ors-map-client:
+# The installation of dependencies is required before running the app:
 npm install
 ```
 
-Create a `config.js`, at the root folder, using the the provided `config-example.js` file as model. Usually only the following properties need to be defined:
+3 - Create a `config.js`, at the root folder, using the the provided `config-example.js` file as model. Usually only the following properties need to be defined:
 
 - `userApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
 - `bitlyApiKey` - the bitly key that will be used to shorten the share URL
 - `bitlyLogin` - the bitly login that will be used to shorten the share URL
 
-Run the client in `dev` mode:
+The app is ready to run in `dev` mode. Do it by running:
 
 ```sh
 npm run dev
