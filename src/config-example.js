@@ -4,7 +4,7 @@ const config = {
   prodBaseAPIUrl: 'https://openrouteservice.org/wp-json',
   mainMenuSlug: 'primary_menu',
   setCustomMenuIcons: true,
-  userApiKey: 'put-an-fall-back-user-api-token-here',
+  userApiKey: 'put-a-fall-back-ors-api-key-here',
   publicApiKeyUrl: 'https://openrouteservice.org/wp-json/ors-api/v1/weathercheck',
   baseMenuExternalUrl: 'https://openrouteservice.org',
   bitlyApiKey: 'put-the-bitly-api-key-here',
