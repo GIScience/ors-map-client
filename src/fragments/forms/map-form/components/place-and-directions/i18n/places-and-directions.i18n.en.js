@@ -6,7 +6,7 @@ export default {
     isochrones: 'Isochrones',
     place: 'place',
     notRouteFound: 'We could not find a route connecting these places',
-    notRouteFoundWithFilters: 'We could not find a route connecting these places with the applied filters',
+    notRouteFoundWithFilters: 'It was not possible to find a route connecting the selected places with the profile and filters defined',
     noPlaceFound: 'No place found with the imputed content',
     routeReady: 'Route ready',
     useLocation: 'GPS',
