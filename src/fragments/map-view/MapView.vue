@@ -20,18 +20,16 @@
       <!--- draw tool bar is added programatically via ors-map.js setAvoidPolygonDrawingTool method --->
       <!-- <l-draw-toolbar :options="drawingOptions" position="topright"/> -->
 
-      <!-- <v-marker-cluster> -->
-        <l-marker v-for="(marker, index) in markers"
-          @click="markerClicked(marker.place, $event)"
-          @move="markerMove" :draggable="markerIsDraggable"
-          :lat-lng="marker.position"
-          :key="index+'-marker'"
-          :icon="marker.icon">
-          <l-popup v-if="showMarkerPopup">
-            <div >{{marker.label}}</div>
-          </l-popup>
-        </l-marker>
-      <!-- </v-marker-cluster> -->
+      <l-marker v-for="(marker, index) in markers"
+        @click="markerClicked(marker.place, $event)"
+        @move="markerMove" :draggable="markerIsDraggable"
+        :lat-lng="marker.position"
+        :key="index+'-marker'"
+        :icon="marker.icon">
+        <l-popup v-if="showMarkerPopup">
+          <div >{{marker.label}}</div>
+        </l-popup>
+      </l-marker>
       <template v-if="polygons">
         <l-polygon v-for="(polygon, index) in polygons"
           :key="index+'-polygon'"

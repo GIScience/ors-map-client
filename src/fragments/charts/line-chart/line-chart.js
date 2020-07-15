@@ -28,9 +28,13 @@ export default {
         {
           responsive: true,
           maintainAspectRatio: false,
-          height: 100
+          height: 100,
+          onHover: this.onHover
         }
       )
+    },
+    onHover (event, data) {
+      // console.log(event, data)
     },
     tryRender (event) {
       try {

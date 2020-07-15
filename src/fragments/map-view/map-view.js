@@ -38,12 +38,9 @@ import MapLeftClick from './components/map-left-click/MapLeftClick'
 import MyLocation from './components/my-location/MyLocation'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
-import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
 import Leaflet from 'leaflet'
 import 'vue-resize/dist/vue-resize.css'
 import 'leaflet-measure/dist/leaflet-measure.css'
-import 'leaflet.markercluster/dist/MarkerCluster.css'
-import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
 
 export default {
   components: {
@@ -68,7 +65,6 @@ export default {
     MapRightClick,
     MapLeftClick,
     MyLocation,
-    'v-marker-cluster': Vue2LeafletMarkerCluster
   },
   props: {
     mapViewData: {

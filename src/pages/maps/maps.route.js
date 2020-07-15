@@ -79,7 +79,7 @@ export default [
   },
   {
     path: `${isochronesPath}`,
-    name: 'MapIsochrones',
+    name: 'MapIsochronesHome',
     component: Maps,
     beforeEnter: (to, from, next) => {
       store.commit('mode', constants.modes.isochrones)

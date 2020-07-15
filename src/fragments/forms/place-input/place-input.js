@@ -280,8 +280,10 @@ export default {
      */
     autocompleteByName () {
       this.searching = true
-
-      if (!this.localModel.placeName || this.localModel.placeName.length === 0) {
+      if (this.localModel.placeName.length === 0) {
+        this.localModel = this.model.clone()
+      }
+      if (!this.localModel.placeName || this.model.placeName.length === 0) {
         this.localModel = new Place()
         this.searching = false
       } else {
@@ -313,6 +315,9 @@ export default {
      *
      */
     autocompleteByCoords () {
+      if (this.localModel.placeName.length === 0) {
+        this.localModel = this.model.clone()
+      }
       let parts = this.localModel.placeName.split(',')
       let lng = parts[1]
       let lat = parts[0]

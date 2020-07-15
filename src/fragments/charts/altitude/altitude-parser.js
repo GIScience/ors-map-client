@@ -11,7 +11,7 @@ const getColumns = (mapViewData, routeIndex) => {
   if (route && route.geometry && route.geometry.coordinates) {
     coordinates = route.geometry.coordinates
   }
-  let columns = !coordinates || coordinates.length > 1000 ? 1000 : coordinates.length
+  let columns = coordinates.length
   return Array(columns)
 }
 
