@@ -202,7 +202,7 @@ export default {
         args.format = 'gpx'
 
         Directions(context.mapViewData.places, args).then(response => {
-          resolve(response)
+          resolve(response.content)
         }).catch(result => {
           console.log(result)
         })

@@ -33,8 +33,12 @@ export default {
         }
       )
     },
-    onHover (event, data) {
-      // console.log(event, data)
+    onHover (event, chartElements) {
+      if (chartElements.length > 0) {
+        let chartElement = chartElements[0]
+        let index = chartElement._index
+        this.$emit('chartHoverIndexChanged', index)
+      }
     },
     tryRender (event) {
       try {

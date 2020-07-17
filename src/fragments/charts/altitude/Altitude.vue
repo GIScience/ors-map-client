@@ -1,6 +1,6 @@
 <template>
-  <div v-if="altitudeData" class="pr-20">
-    <line-chart :height="height" v-if="altitudeData" :labels="altitudeData.labels" :datasets="altitudeData.datasets"></line-chart>
+  <div v-if="altitudeData" class="pr-20" @mouseleave="mouseLeftChart">
+    <line-chart :height="height" @chartHoverIndexChanged="chartHoverIndexChanged" v-if="altitudeData" :labels="altitudeData.labels" :datasets="altitudeData.datasets"></line-chart>
      <v-layout v-if="summary">
         <v-flex sm6>
           <p><v-icon>arrow_upward</v-icon> {{ascent}} {{$t('altitude.meters')}}</p>

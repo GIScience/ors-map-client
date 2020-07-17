@@ -96,7 +96,7 @@ export default {
       }
     },
     changeActiveRouteIndex (index) {
-      this.eventBus.$emit('changeActiveRouteIndex', index)
+      this.eventBus.$emit('activeRouteIndexChanged', index)
     }
   },
   components: {

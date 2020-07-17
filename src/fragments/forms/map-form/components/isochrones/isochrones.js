@@ -43,7 +43,7 @@ export default {
      * Update local object when a mapViewData is uploaded
      */
     this.eventBus.$on('mapViewDataUploaded', (mapViewData) => {
-      if (this.active) {
+      if (context.active) {
         context.mapViewData = mapViewData
         context.places = mapViewData.places
       }
@@ -54,7 +54,7 @@ export default {
      * is not active, then reset its data to the initial state
      */
     this.eventBus.$on('mapViewDataChanged', () => {
-      if (!this.active) {
+      if (!context.active) {
         context.mapViewData = new MapViewData()
         context.places = [new Place()]
       }
@@ -75,11 +75,13 @@ export default {
     // When a marker drag finishes, update
     // the place coordinates and re render the map
     this.eventBus.$on('markerDragged', (marker) => {
-      let place = new Place(marker.position.lng, marker.position.lat)
-      context.places[marker.inputIndex] = place
-      context.places[marker.inputIndex].resolve().then(() => {
-        context.updateAppRoute()
-      })
+      if (context.active) {
+        let place = new Place(marker.position.lng, marker.position.lat)
+        context.places[marker.inputIndex] = place
+        context.places[marker.inputIndex].resolve().then(() => {
+          context.updateAppRoute()
+        })
+      }
     })
   },
   watch: {

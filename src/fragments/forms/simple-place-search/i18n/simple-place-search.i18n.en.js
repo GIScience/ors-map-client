@@ -5,6 +5,7 @@ export default {
     couldNotDetermineYourLocation: 'Could not determine your location. Make sure granted the required permissions',
     noPlaceFound: 'No place found with the imputed content',
     yourLocation: 'Your location',
-    openSidebarToSeeRouteDetails: 'Open the sidebar to see route details'
+    openSidebarToSeeRouteDetails: 'Open the sidebar to see route details',
+    unknownSearchPlaceError: 'Unknown search place error'
   }
 }

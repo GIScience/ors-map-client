@@ -48,6 +48,10 @@
         :lat-lng="circleMarker.center"
         :radius="circleMarker.radius"/>
 
+       <l-circle-marker v-if="highlightedRoutePoint" :weight="2" color="#000" :fill="true" fillColor="#fff" :fillOpacity="0.9"
+        :lat-lng="highlightedRoutePoint"
+        :radius="5"/>
+
       <l-circle-marker v-if="myPositionMarker" :weight="2" color="#1D1D1E" :fill="true" fillColor="#1C97F3" :fillOpacity="myPositionMarker.opacity"
         :lat-lng="myPositionMarker.center"
         :radius="myPositionMarker.radius">
@@ -59,6 +63,7 @@
           </div>
         </l-popup>
       </l-circle-marker>
+
 
       <template  v-for="(routePolyline, index) in alternativeRoutesData">
         <template v-if="index !== $store.getters.activeRouteIndex">

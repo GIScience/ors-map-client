@@ -5,8 +5,6 @@ import utils from '@/support/utils'
 import constants from '@/resources/constants'
 
 const state = {
-  apiDataRequested: false,
-  dataAcquired: false,
   browserLocation: null,
   mapSettings: {},
   activeRouteIndex: 0,
@@ -16,12 +14,6 @@ const state = {
 }
 
 const getters = {
-  apiDataRequested: state => {
-    return state.apiDataRequested
-  },
-  dataAcquired: state => {
-    return state.dataAcquired
-  },
   browserLocation: state => {
     return state.browserLocation
   },
@@ -43,12 +35,6 @@ const getters = {
 }
 
 const mutations = {
-  apiDataRequested: (state, requested) => {
-    state.apiDataRequested = requested
-  },
-  dataAcquired: (state, dataAcquired) => {
-    state.dataAcquired = dataAcquired
-  },
   browserLocation: (state, browserLocation) => {
     state.browserLocation = browserLocation
   },

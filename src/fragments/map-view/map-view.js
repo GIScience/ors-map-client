@@ -1,16 +1,20 @@
 /**
  * MapView component.
  * Renders an leaflet map based on the mapViewData passed via props. Capture the map events, dealing with them or emitting events
+ * @uses storage defined in @see /src/store/modules/map-state
+ *
+ * Events that this component listens to:
  * @listens redrawAndFitMap [via eventBus] - event that will trigger a map redraw and refit bounds - expects {isMaximized: Boolean, guid: String}
  * @listens clearMap [via eventBus] - event that will trigger a map clear
- * @listens changeActiveRouteIndex [via eventBus] - event that will trigger active rounte index change
+ * @listens activeRouteIndexChanged [via eventBus] - event that will trigger active rounte index change
+ * @listens placeFocusChanged [via eventBus] - updates the map center when a new place is seleted
+ *
  * Events emitted via eventBus:
- * @emits activeRouteIndexChanged [via eventBus]
- * @emits setSideBarStatus [via eventBus]
- * @emits openMapForm [via eventBus]
- * @emits markerClicked [via eventBus]
- * @emits mapLeftClicked [via eventBus]
- * @emits openMapForm [via eventBus]
+ * @emits activeRouteIndexChanged
+ * @emits setSideBarStatus
+ * @emits mapLeftClicked
+ * @emits mapRightClicked
+ *
  * Local events emitted:
  * @emits zoomChanged
  * @emits markerDragged
@@ -24,23 +28,24 @@
  */
 
 import { LMap, LTileLayer, LMarker, LPolyline, LLayerGroup, LTooltip, LPopup, LControlZoom, LControlAttribution, LControlScale, LControlLayers, LGeoJson, LPolygon, LCircle, LCircleMarker } from 'vue2-leaflet'
-import utils from '@/support/utils'
-import GeoUtils from '@/support/geo-utils'
-import theme from '@/common/theme'
-import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
-import LDrawToolbar from 'vue2-leaflet-draw-toolbar'
-
-import mapDefinitions from './map-definitions'
-import drawLocales from 'leaflet-draw-locales'
 import ExtraInfoHighlight from './components/extra-info-highlight/ExtraInfoHighlight'
 import MapRightClick from './components/map-right-click/MapRightClick'
+import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
 import MapLeftClick from './components/map-left-click/MapLeftClick'
 import MyLocation from './components/my-location/MyLocation'
+import LDrawToolbar from 'vue2-leaflet-draw-toolbar'
 import MapViewData from '@/models/map-view-data'
+import drawLocales from 'leaflet-draw-locales'
+import mapDefinitions from './map-definitions'
 import constants from '@/resources/constants'
-import Leaflet from 'leaflet'
-import 'vue-resize/dist/vue-resize.css'
+import GeoUtils from '@/support/geo-utils'
+import utils from '@/support/utils'
+import theme from '@/common/theme'
+
+// imported styles
 import 'leaflet-measure/dist/leaflet-measure.css'
+import 'vue-resize/dist/vue-resize.css'
+import Leaflet from 'leaflet'
 
 export default {
   components: {
@@ -64,7 +69,7 @@ export default {
     ExtraInfoHighlight,
     MapRightClick,
     MapLeftClick,
-    MyLocation,
+    MyLocation
   },
   props: {
     mapViewData: {
@@ -85,6 +90,26 @@ export default {
     fitBounds: {
       type: Boolean,
       default: true
+    },
+    center: {
+      type: Object,
+      required: false
+    },
+    customTileProviderUrl: {
+      type: String,
+      required: false
+    },
+    shrinked: {
+      type: Boolean,
+      default: false
+    },
+    mode: {
+      type: String,
+      required: true
+    },
+    supportsDrawingTool: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -113,7 +138,8 @@ export default {
       showAlternativeRouteTooltip: true,
       dataBounds: null,
       myLocationMenuOpen: false,
-      focusedPlace: null
+      focusedPlace: null,
+      highlightedRoutePoint: null
     }
   },
   computed: {
@@ -123,7 +149,7 @@ export default {
     },
     showControls () {
       let show = true
-      if (this.$store.getters.leftSideBarPinned && this.$lowResolution) {
+      if (this.shrinked && this.$lowResolution) {
         show = false
       }
       return show
@@ -152,10 +178,7 @@ export default {
     geojsonOptions () {
       let tooltip = this.routeToolTip(0)
       return {
-        style: {
-          color: this.mainRouteColor,
-          weight: '5'
-        },
+        style: {color: this.mainRouteColor, weight: '5'},
         onEachFeature: (feature, layer) => {
           layer.bindTooltip(tooltip, { permanent: false, sticky: true })
         }
@@ -237,11 +260,11 @@ export default {
     },
     markerIsDraggable () {
       let draggableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]
-      let isDraggable = draggableModes.includes(this.$store.getters.mode)
+      let isDraggable = draggableModes.includes(this.mode)
       return isDraggable
     },
     showMarkerPopup () {
-      let show = this.$store.getters.mode !== constants.modes.search
+      let show = this.mode !== constants.modes.search
       return show
     },
     /**
@@ -272,38 +295,41 @@ export default {
       },
       deep: true
     },
-    '$store.getters.mode' () {
-      let modeWithDrawingTools = [constants.modes.directions, constants.modes.roundTrip]
-      // If the app is in one of the modes that supports drawing tool
-      if (modeWithDrawingTools.includes(this.$store.getters.mode)) {
+    supportsDrawingTool (newVal) {
+      if (newVal) {
         this.setDrawingTool()
       }
     },
-    '$store.getters.leftSideBarPinned' () {
+    shrinked () {
+      // Once the map view is shrinked
+      // we have to run the setDrawingTool
+      // utility again
       this.setDrawingTool()
     },
-    'showPopups' (newVal) {
+    showPopups (newVal) {
       this.showClickPopups = newVal
     },
-    '$store.getters.mapSettings.customTileProviderUrl' () {
+    customTileProviderUrl () {
       this.setProviders()
     },
     height () {
       this.adjustMap()
     },
-    '$store.getters.appRouteData': {
+    center: {
       handler: function () {
-        this.appRouteDataChanged()
+        this.centerChanged()
       },
       deep: true
     }
   },
   methods: {
-    appRouteDataChanged () {
-      if (this.$store.getters.appRouteData.options.center) {
-        let center = this.$store.getters.appRouteData.options.center
-        this.setMapCenter(center)
-        let currentLocation = {lat: center.lat, lng: center.lng, accuracy: 50}
+    /**
+     * Update the view center
+     */
+    centerChanged () {
+      if (this.center) {
+        this.setMapCenter(this.center)
+        let currentLocation = {lat: this.center.lat, lng: this.center.lng, accuracy: 50}
         this.$store.commit('currentLocation', currentLocation)
       }
     },
@@ -317,7 +343,7 @@ export default {
     markerClicked (place, event) {
       // Only prevent the default click, that shows the
       // place name if the app is not in the search mode
-      if (this.$store.getters.mode === constants.modes.search) {
+      if (this.mode === constants.modes.search) {
         event.originalEvent.preventDefault()
         event.originalEvent.stopPropagation()
       }
@@ -525,8 +551,8 @@ export default {
         // Run the utility that may define a more
         // appropriate map center if appRouteData is empty
         if (routePlaces.length === 0 || routePlaces[0].isEmpty()) {
-          if (this.$store.getters.appRouteData.options.center) {
-            this.setMapCenter(this.$store.getters.appRouteData.options.center)
+          if (this.center) {
+            this.setMapCenter(this.center)
           } else {
             this.setPreviousOrDefaultCenter()
           }
@@ -771,25 +797,6 @@ export default {
       }
     },
     /**
-     * Handle the marker info click event and show the pop up with the place data
-     * @param {*} marker
-     */
-    routeToMarkerLocation (marker) {
-      this.eventBus.$emit('markerClicked', marker)
-
-      if (!marker.data || !marker.data.skipShowData) {
-        let markerCoordinates = GeoUtils.getMarkerCordinates(marker)
-        if (markerCoordinates) {
-          this.$store.commit('setLeftSideBarIsOpen', true)
-          let place = {
-            coordinates: [markerCoordinates[0], markerCoordinates[1]],
-            placeName: marker.label
-          }
-          this.eventBus.$emit('openMapForm', place)
-        }
-      }
-    },
-    /**
      * Handle the polygon click event and show the polygon data in a pop up
      * @param {*} polygon
      */
@@ -896,7 +903,6 @@ export default {
       }).catch(error => {
         let message = this.getPositionErrorMessage(error)
         context.showWarning(message, {timeout: 0})
-        context.$store.commit('locationAccessDenied', true)
         context.myLocationActive = false
         console.log(error)
       })
@@ -930,16 +936,18 @@ export default {
       return message
     },
     /**
-     * Waits until map object is set the drawing tool in the map
+     * Set the drawing tool. Avoid multiple calls by
+     * udebouncing them
      */
     setDrawingTool () {
       if (this.setDrawingTimeout) {
         clearTimeout(this.setDrawingTimeout)
       }
 
+      // If the map object is already defined, go ahead
       if (this.$refs.map && this.$refs.map.mapObject) {
         this.setAvoidPolygonDrawingTool()
-      } else {
+      } else { // if not, wait a second and execute it again
         this.setDrawingTimeout = setTimeout(() => {
           this.setDrawingTool()
         }, 1000)
@@ -1080,6 +1088,20 @@ export default {
         }
       })
       return avoidPolygon
+    },
+    /**
+     * Highligh a rounte point on the active route index
+     * @param {*} routeIndex
+     */
+    hightlightRoutePoint (routeIndex) {
+      let activeRouteCoordinates = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
+      if (activeRouteCoordinates[routeIndex]) {
+        let point = activeRouteCoordinates[routeIndex]
+        this.highlightedRoutePoint = Leaflet.latLng(point[0], point[1])
+      }
+    },
+    removeRoutePoint () {
+      this.highlightedRoutePoint = null
     }
   },
 
@@ -1115,7 +1137,9 @@ export default {
     })
 
     /**
-     * Clear all the map data plotted (lines, polygons markers etc)
+     * When a place focus is changed (a new place is selected among the
+     * ones listed on the map) updates the map center if the distance
+     * between the old center and the new is greatet then 50 emter
      */
     this.eventBus.$on('placeFocusChanged', (place) => {
       context.focusedPlace = place
@@ -1129,7 +1153,11 @@ export default {
       }
     })
 
-    this.eventBus.$on('changeActiveRouteIndex', this.setActiveRouteIndex)
+    this.eventBus.$on('activeRouteIndexChanged', this.setActiveRouteIndex)
+
+    this.eventBus.$on('altitudeChartHoverIndexChanged', this.hightlightRoutePoint)
+
+    this.eventBus.$on('mouseLeftChartAltitudeChart', this.removeRoutePoint)
 
     // Once the map component is mounted, load the map data
     this.loadMapData()

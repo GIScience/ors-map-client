@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import ui from './modules/ui'
-import ors from './modules/ors'
-import apState from './modules/state'
+import mapState from './modules/map-state'
+import appState from './modules/app-state'
 import loader from '@/support/loader'
 
 Vue.use(Vuex)
@@ -18,8 +18,8 @@ const storeBuilder = {
   },
   modules: {
     ui,
-    ors,
-    apState
+    mapState,
+    appState
   }
 }
 

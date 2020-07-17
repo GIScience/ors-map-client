@@ -42,16 +42,6 @@ export default {
     this.setListeners()
     this.loadData()
   },
-  watch: {
-    '$route': function () {
-      let validModes = [constants.modes.directions, constants.modes.place, constants.modes.roundTrip]
-      if (validModes.includes(this.$store.getters.mode)) {
-        this.loadData()
-      } else {
-        this.places = [new Place()]
-      }
-    }
-  },
   computed: {
     getPlaces () {
       if (this.places.length === 0) {
@@ -113,6 +103,8 @@ export default {
     reloadAfterAppRouteDataChanged (appRouteData) {
       if (appRouteData && appRouteData.places.length > 0) {
         this.loadData()
+      } else {
+        this.places = [new Place()]
       }
     },
 
@@ -158,8 +150,10 @@ export default {
       // When a marker drag finishes, update
       // the place coordinates and re render the map
       this.eventBus.$on('markerDragged', (marker) => {
-        context.places[marker.inputIndex].coordinates = [marker.position.lng, marker.position.lat]
-        context.updateMapData()
+        if (context.active) {
+          context.places[marker.inputIndex].setLnglat(marker.position.lng, marker.position.lat)
+          context.updateAppRoute()
+        }
       })
 
       // When the filters object has changed externally, reprocess the app route
@@ -428,18 +422,24 @@ export default {
     },
 
     /**
-     * Resolve a place or route places
+     * Update map data by setting the view mode, and calculating the directions or seeing a sigle place state
      */
     updateMapData () {
+      // This method does not deal with search mode, becouse when in search mode
+      // th SimplePlaceSearch component will catch this case and list the results
       if (this.$store.getters.mode !== constants.modes.search) {
         let isRoundTrip = this.$store.getters.mode === constants.modes.roundTrip
 
+        // Just emter here if we are dealing with directions round trip
+        // If there are more then 1 place, then it is directions
+        // if there is only one place and it is round trip, then we are also
+        // dealing with directions, but an special directions (a round trip directions!)
         if (this.places.length > 1 || (this.places.length === 1 && isRoundTrip)) {
           if (!isRoundTrip) {
             this.setViewMode(constants.modes.directions)
           }
           this.calculateDirections().then(this.updatePlaceView)
-        } else if (this.places.length === 1) {
+        } else if (this.places.length === 1) { // if it is not directions, then it is a single place case
           this.setViewMode(constants.modes.place)
           this.loadSinglePlace(0)
         }

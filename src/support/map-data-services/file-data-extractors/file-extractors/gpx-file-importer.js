@@ -91,15 +91,16 @@ class GpxImported {
    */
   getRoutes = (fileObject) => {
     let routes = []
-    let tracks = lodash.get(fileObject, 'gpx.trk')
+    let tracks = lodash.get(fileObject, 'gpx.trk') || lodash.get(fileObject, 'gpx.rte')
+    let creator = lodash.get(fileObject, 'gpx.$.creator')
     if (tracks) {
       for (let key in tracks) {
         let track = tracks[key]
-        let points = lodash.get(track, 'trkseg[0].trkpt')
+        let points = lodash.get(track, 'trkseg[0].trkpt') || track.rtept
         let coordinatesParsed = []
         for (let ptKey in points) {
           let latlon = points[ptKey].$
-          let point = [latlon.lon, latlon.lat]
+          let point = creator === 'openrouteservice' ? [latlon.lat, latlon.lon] : [latlon.lon, latlon.lat]
           let elev = points[ptKey].ele
           if (elev && elev.length > 0) {
             point.push(elev[0])

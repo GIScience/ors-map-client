@@ -2,7 +2,7 @@ import Maps from '@/pages/maps/Maps'
 import store from '@/store/store'
 import RoutesResolver from '@/support/routes-resolver'
 import constants from '@/resources/constants'
-import lodash from 'lodash'
+import RouteUtils from '@/support/route-utils'
 
 let rootPath = RoutesResolver.homeUrl()
 let placePath = RoutesResolver.place()
@@ -50,12 +50,7 @@ export default [
     name: 'MapDirections',
     component: Maps,
     beforeEnter: (to, from, next) => {
-      var placeNameParams = lodash.pickBy(to.params, function (value, key) {
-        return key.startsWith('placeName') && value !== undefined
-      })
-      let placeNameParamsAmount = Object.keys(placeNameParams).length
-      let currentMode = placeNameParamsAmount === 1 ? constants.modes.roundTrip : constants.modes.directions
-      store.commit('mode', currentMode)
+      RouteUtils.setDirectionsModeBasedOnRoute(to)
       next()
     }
   },

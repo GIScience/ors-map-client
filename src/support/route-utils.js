@@ -2,6 +2,8 @@ import Utils from '@/support/utils'
 import appConfig from '@/config'
 import Place from '@/models/place'
 import lodash from 'lodash'
+import store from '@/store/store'
+import constants from '@/resources/constants'
 
 const RouteUtils = {
 
@@ -91,6 +93,20 @@ const RouteUtils = {
       parsedData = str
     }
     return parsedData
+  },
+
+  /**
+   * Set the directions mode based on the target route
+   * considering the places on the URL params
+   * @param {*} routeTo
+   */
+  setDirectionsModeBasedOnRoute (routeTo) {
+    var placeNameParams = lodash.pickBy(routeTo.params, function (value, key) {
+      return key.startsWith('placeName') && value !== undefined
+    })
+    let placeNameParamsAmount = Object.keys(placeNameParams).length
+    let currentMode = placeNameParamsAmount === 1 ? constants.modes.roundTrip : constants.modes.directions
+    store.commit('mode', currentMode)
   }
 }
 

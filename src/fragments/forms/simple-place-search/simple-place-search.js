@@ -261,13 +261,13 @@ export default {
       this.eventBus.$emit('showLoading', true)
       PlacesSearch(this.place.placeName).then(places => {
         if (places.length === 0) {
-          this.showInfo(this.$t('placeInput.noPlaceFound'))
+          this.showInfo(this.$t('simplePlaceSearch.noPlaceFound'))
         } else {
           context.showSearchResults(places)
         }
       }).catch(response => {
         console.log(response)
-        context.showError(context.$t('placeInput.unknownSearchPlaceError'))
+        context.showError(context.$t('simplePlaceSearch.unknownSearchPlaceError'))
       }).finally(() => {
         context.searching = false
         context.eventBus.$emit('showLoading', false)

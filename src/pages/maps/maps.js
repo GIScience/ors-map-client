@@ -8,6 +8,8 @@ import Settings from '@/fragments/forms/settings/Settings.vue'
 import constants from '@/resources/constants'
 import { ResizeObserver } from 'vue-resize'
 import PlacesCarousel from '@/fragments/places-carousel/PlacesCarousel'
+import RouteUtils from '@/support/route-utils'
+import resolver from '@/support/routes-resolver'
 
 export default {
   data: () => ({
@@ -69,7 +71,32 @@ export default {
         fit = false
       }
       return fit
+    },
+    mapViewCenter () {
+      let center = null
+      if (this.$store.getters.appRouteData.options.center) {
+        center = this.$store.getters.appRouteData.options.center
+      }
+      return center
+    },
+    supportsDrawingTool () {
+      let modeWithDrawingTools = [constants.modes.directions, constants.modes.roundTrip]
+      // If the app is in one of the modes that supports drawing tool
+      if (modeWithDrawingTools.includes(this.$store.getters.mode)) {
+        return true
+      }
+      return false
     }
+  },
+  beforeRouteUpdate (to, from, next) {
+    // Altough the mode is defined in the beforeEnter route event
+    // when te browser back button is pressed and we are changing from
+    // similar types of route - like directions with two places and
+    // directins with one (for round trip), then the beforeEnter is not trigered
+    if (to.fullPath.startsWith(resolver.directions())) {
+      RouteUtils.setDirectionsModeBasedOnRoute(to)
+    }
+    next()
   },
   watch: {
     $route: function (to, from) {

@@ -68,6 +68,12 @@ export default {
       if (this.mapViewData) {
         this.parsedData = AltitudeDataParser.parse(this.mapViewData, this.$store.getters.activeRouteIndex)
       }
+    },
+    chartHoverIndexChanged (index) {
+      this.eventBus.$emit('altitudeChartHoverIndexChanged', index)
+    },
+    mouseLeftChart () {
+      this.eventBus.$emit('mouseLeftChartAltitudeChart')
     }
   }
 }
