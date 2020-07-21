@@ -71,7 +71,16 @@ class Place {
     if (this.coordinates) {
       return this.coordinates
     }
-    return [this.lng, this.lat]
+    if (this.lat !== 0 && this.lng !== 0) {
+      return [this.lng, this.lat]
+    } else {
+      if (this.nameIsCoord()) {
+        let coords = this.getCoordsFromName()
+        return coords
+      } else {
+        return [0, 0]
+      }
+    }
   }
 
   /**
@@ -174,14 +183,24 @@ class Place {
    * Check if the place contains coordinates as placeName
    */
   nameIsCoord () {
-    let containsCoords = false
+    let coords = this.getCoordsFromName()
+    if (coords) {
+      return true
+    }
+    return false
+  }
+
+  /**
+   * Get the coordinates from name
+   */
+  getCoordsFromName () {
     if (this.placeName && this.placeName.indexOf(',') > -1) {
       let parts = this.placeName.split(',')
       if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
-        containsCoords = true
+        return parts
       }
     }
-    return containsCoords
+    return false
   }
 
   /**

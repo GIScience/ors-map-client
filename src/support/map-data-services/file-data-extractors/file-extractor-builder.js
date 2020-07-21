@@ -1,6 +1,7 @@
 import xmlImporter from './file-extractors/xml-file-importer'
 import gpxImporter from './file-extractors/gpx-file-importer'
 import jsonImporter from './file-extractors/json-file-importer'
+import geojsonImporter from './file-extractors/geojson-file-importer'
 import kmlImporter from './file-extractors/kml-file-importer'
 
 /**
@@ -33,6 +34,7 @@ class FileExtractorBuilder {
       xmlImporter,
       gpxImporter,
       jsonImporter,
+      geojsonImporter,
       kmlImporter
     }
     let fileExtractorName = `${fileType}Importer`

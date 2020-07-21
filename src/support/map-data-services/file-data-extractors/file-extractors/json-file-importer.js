@@ -4,10 +4,10 @@ import constants from '@/resources/constants'
 import Place from '@/models/place'
 import store from '@/store/store'
 /**
- * JsonImported Map data Builder class
+ * JsonImporter
  * @param {*} data {mapRawData: {}, translations: {}}
  */
-class JsonImported {
+class JsonImporter {
   constructor (data) {
     this.fileRawContent = data.mapRawData
     this.options = data.options
@@ -26,7 +26,7 @@ class JsonImported {
         mapViewData = parsingResult
 
         if (!mapViewData.mode) {
-          mapViewData = constants.modes.directions
+          mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
         }
 
         // Make sure that the mode defined
@@ -157,4 +157,4 @@ class JsonImported {
   }
 }
 // export the directions json builder class
-export default JsonImported
+export default JsonImporter

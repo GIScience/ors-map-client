@@ -65,7 +65,12 @@ export default {
       } else if (fileContent.startsWith('<?xml')) {
         fileType = 'xml'
       } else if (type === 'application/json') {
-        fileType = 'json'
+        let parsedJson = JSON.parse(fileContent)
+        if (parsedJson && parsedJson.features) {
+          fileType = 'geojson'
+        } else {
+          fileType = 'json'
+        }
       }
       this.sendDataToMap(fileType, fileContent, timestamp)
       this.closeImporter()

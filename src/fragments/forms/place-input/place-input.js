@@ -318,9 +318,9 @@ export default {
       if (this.localModel.placeName.length === 0) {
         this.localModel = this.model.clone()
       }
-      let parts = this.localModel.placeName.split(',')
-      let lng = parts[1]
-      let lat = parts[0]
+      let lnglatArr = this.localModel.getLnglat()
+      let lng = lnglatArr[1]
+      let lat = lnglatArr[0]
       // If the app is in low resolution mode we want less results
       let size = this.$lowResolution ? 5 : 10
 

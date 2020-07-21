@@ -2,7 +2,6 @@
 export default {
   download: {
     documentTitle: 'ORS route',
-    documentDescription: 'ORS route file',
     download: 'Download',
     downloadFileName: 'Download file name',
     downloadFormat: 'Download format',
@@ -10,6 +9,7 @@ export default {
     preparingDownload: 'Preparing download ...',
     fileReady: 'File ready',
     errorPreparingFile: 'Error preparing file',
-    fileTooBigToBeDowloaded: 'File to big to be downloaded'
+    fileTooBigToBeDowloaded: 'File to big to be downloaded',
+    standard: 'Standard'
   }
 }

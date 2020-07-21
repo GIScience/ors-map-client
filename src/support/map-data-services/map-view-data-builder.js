@@ -70,34 +70,36 @@ class MapViewDataBuilder {
   }
 
   /**
-  * Build the mapViewData object
-  * @param {*} data {content:..., options:...}
-  * @emits mapViewDataChanged - using eventBus
-  */
- static buildMapData = (data, appRouteData) => {
-   let rawContent = data.content
-   let options = data.options
-   let mapViewDataBuilder = new MapViewDataBuilder(rawContent, options)
+   * Build the mapViewData object
+   * @param {*} data {content:..., options:...}
+   * @emits mapViewDataChanged - using eventBus
+   */
+  static buildMapData = (data, appRouteData) => {
+    let rawContent = data.content
+    let options = data.options
+    let mapViewDataBuilder = new MapViewDataBuilder(rawContent, options)
 
-   return new Promise((resolve, reject) => {
-     mapViewDataBuilder.buildMapViewData().then((mapViewData) => {
-       // The places in appRouteData alreay contains the placeName, so we use it
-       // to avoid having to resolve each place coordinates to a placeName again
-       // If there is no places in appRouteData (dealing with a route import, for example)
-       // nothing happens because appRouteData.places will be an empty array
-       for (let key in appRouteData.places) {
-         mapViewData.places[key].placeName = appRouteData.places[key].placeName
-       }
+    return new Promise((resolve, reject) => {
+      mapViewDataBuilder.buildMapViewData().then((mapViewData) => {
+        // The places in appRouteData alreay contains the placeName, so we use it
+        // to avoid having to resolve each place coordinates to a placeName again
+        // If there is no places in appRouteData (dealing with a route import, for example)
+        // nothing happens because appRouteData.places will be an empty array
+        for (let key in appRouteData.places) {
+          if (mapViewData.places[key]) {
+            mapViewData.places[key].placeName = appRouteData.places[key].placeName
+          }
+        }
 
-       // Merge the app route data options with the map view data to
-       // keep the view data synced with the app url state
-       Object.assign(mapViewData.options, appRouteData.options)
-       resolve(mapViewData)
-     }).catch(error => {
-       reject(error)
-     })
-   })
- }
+        // Merge the app route data options with the map view data to
+        // keep the view data synced with the app url state
+        Object.assign(mapViewData.options, appRouteData.options)
+        resolve(mapViewData)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  }
 }
 
 export default MapViewDataBuilder

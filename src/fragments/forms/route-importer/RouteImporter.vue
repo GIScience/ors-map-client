@@ -6,7 +6,7 @@
         <h3 slot="header">{{$t('routeImporter.loadRouteFile')}}</h3>
         <vue-dropzone ref="importRouteDropzone" @vdropzone-file-added="fileAdded" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
         <v-alert :value="true" type="info" style="color:white" >
-          {{$t('routeImporter.acceptedFileTypes')}}: <b>kml</b>, <b>gpx</b> and <b>ors-json</b>
+          {{$t('routeImporter.acceptedImportTypes')}}: <b>ors-json</b>, <b>geojson</b>, <b>kml</b> {{$t('global.and')}} <b>gpx</b>
         </v-alert>
       </box>
     </v-dialog>

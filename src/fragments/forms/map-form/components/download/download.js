@@ -3,18 +3,13 @@ import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import toGpx from 'togpx'
 import toKml from 'tokml'
 import MapViewData from '@/models/map-view-data'
+import constants from '@/resources/constants'
 
 export default {
   data: () => ({
     isDownloadModalOpen: false,
     downloadFileName: null,
-    dowloadFormat: null,
-    downloadFormats: [
-      {text: 'Raw JSON', value: 'json', ext: 'json'},
-      {text: 'ORS API GPX', value: 'ors-gpx', ext: 'gpx'},
-      {text: 'Standard GPX', value: 'to-gpx', ext: 'gpx'},
-      {text: 'KML', value: 'kml', ext: 'kml'}
-    ]
+    dowloadFormat: null
   }),
   props: {
     mapViewData: {
@@ -28,14 +23,20 @@ export default {
     downloadFormatsSupported: {
       Type: Array,
       default: function () {
-        return ['json', 'ors-gpx', 'to-gpx', 'gpx', 'kml']
+        return ['json', 'ors-gpx', 'geojson', 'to-gpx', 'gpx', 'kml']
       }
     }
   },
-  created () {
-    console.log('created download')
-  },
   computed: {
+    downloadFormats () {
+      return [
+        {text: 'ORS JSON', value: 'json', ext: 'json'},
+        {text: 'GeoJSON', value: 'geojson', ext: 'json'},
+        {text: 'ORS API GPX', value: 'ors-gpx', ext: 'gpx'},
+        {text: `${this.$t('download.standard')} GPX`, value: 'to-gpx', ext: 'gpx'},
+        {text: 'KML', value: 'kml', ext: 'kml'}
+      ]
+    },
     /**
      * Return the name of the route first's point
      * @returns string
@@ -120,10 +121,9 @@ export default {
       return new Promise((resolve, reject) => {
         try {
           if (context.dowloadFormat === 'json') {
-            // Get the ORS routes json and stringfy it
-            jsonData = this.mapViewData
-            let geojsonStr = JSON.stringify(jsonData)
-            resolve(geojsonStr)
+            // Get the ORS mapViewData model and stringfy it
+            let orsJSONStr = JSON.stringify(this.mapViewData)
+            resolve(orsJSONStr)
           } else if (context.dowloadFormat === 'ors-gpx') {
             // If the format is ors-gpx, run anew request with the format being 'gpx'
             context.getORSGpx().then((orsGpx) => {
@@ -132,15 +132,19 @@ export default {
               reject(error)
             })
           } else if (context.dowloadFormat === 'to-gpx') {
-            jsonData = this.getGeoJson()
+            let geoJSON = context.getGeoJson()
             // Use the third party utility to convert geojson to gpx
-            let togpx = toGpx(jsonData)
+            let togpx = toGpx(geoJSON)
             resolve(togpx)
+          } else if (context.dowloadFormat === 'geojson') {
+            jsonData = context.getGeoJson()
+            let jsonStr = JSON.stringify(jsonData)
+            resolve(jsonStr)
           } else if (context.dowloadFormat === 'kml') {
             let routeTitle = context.originName.length > 0 ? `${context.originName} -> ${context.destinationName}` : context.$t('download.documentTitle')
             let kmlOptions = {
               documentName: routeTitle,
-              documentDescription: context.$t('download.documentDescription')
+              documentDescription: constants.orsKmlDocumentDescription
             }
             jsonData = context.getGeoJson()
             // Use the third party utility to convert geojson to kml
@@ -172,15 +176,27 @@ export default {
       let geoJsonData = { type: 'FeatureCollection', features: [] }
 
       for (let key in this.mapViewData.routes) {
-        let feature = {
+        let route = {
           type: 'Feature',
-          properties: { id: key },
+          properties: this.mapViewData.routes[key].properties,
           geometry: {
             type: 'LineString',
             coordinates: this.mapViewData.routes[key].geometry.coordinates
           }
         }
-        geoJsonData.features.push(feature)
+        geoJsonData.features.push(route)
+      }
+
+      for (let key in this.mapViewData.places) {
+        let place = {
+          type: 'Feature',
+          properties: {label: this.mapViewData.places[key].placeName},
+          geometry: {
+            type: 'Point',
+            coordinates: this.mapViewData.places[key].coordinates
+          }
+        }
+        geoJsonData.features.push(place)
       }
       return geoJsonData
     },
