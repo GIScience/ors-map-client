@@ -20,12 +20,12 @@ class GeojsonImporter {
     let context = this
     return new Promise((resolve, reject) => {
       try {
-        let mapViewData = this.buildMapViewData()
+        let mapViewData = context.buildMapViewData()
 
         if (mapViewData) {
-          context.mapRawData = this.fileRawContent
+          context.mapRawData = context.fileRawContent
           mapViewData.rawData = context.mapRawData
-          this.setRoutesSummaryData(mapViewData)
+          context.setRoutesSummaryData(mapViewData)
           mapViewData.isRouteData = true
           mapViewData.origin = constants.dataOrigins.fileImporter
           mapViewData.timestamp = context.options.timestamp

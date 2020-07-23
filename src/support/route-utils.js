@@ -45,6 +45,8 @@ const RouteUtils = {
    * @returns {Object} param
    */
   buildRouteParams: (appRouteData, options) => {
+    appRouteData.options = appRouteData.options || {}
+    Object.assign(appRouteData.options, options)
     let params = {}
     var coordinates = []
 
@@ -54,7 +56,7 @@ const RouteUtils = {
       params[placeKey] = p.placeName.replace(/, /g, ',')
       coordinates.push(`${p.lng},${p.lat}`)
     })
-    let dataString = JSON.stringify({coordinates: coordinates.join(';'), options: options})
+    let dataString = JSON.stringify({coordinates: coordinates.join(';'), options: appRouteData.options})
     let data = appConfig.useCompressedUrlData ? Utils.compressTxt(dataString) : dataString
 
     // Set the `data` param value, that goes at the end of the url

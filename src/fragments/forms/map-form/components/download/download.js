@@ -175,29 +175,35 @@ export default {
     getGeoJson () {
       let geoJsonData = { type: 'FeatureCollection', features: [] }
 
-      for (let key in this.mapViewData.routes) {
+      for (let rKey in this.mapViewData.routes) {
         let route = {
           type: 'Feature',
-          properties: this.mapViewData.routes[key].properties,
+          properties: this.mapViewData.routes[rKey].properties,
           geometry: {
             type: 'LineString',
-            coordinates: this.mapViewData.routes[key].geometry.coordinates
+            coordinates: this.mapViewData.routes[rKey].geometry.coordinates
           }
         }
         geoJsonData.features.push(route)
       }
 
-      for (let key in this.mapViewData.places) {
+      for (let plaKey in this.mapViewData.places) {
         let place = {
           type: 'Feature',
-          properties: {label: this.mapViewData.places[key].placeName},
+          properties: {label: this.mapViewData.places[plaKey].placeName},
           geometry: {
             type: 'Point',
-            coordinates: this.mapViewData.places[key].coordinates
+            coordinates: this.mapViewData.places[plaKey].coordinates
           }
         }
         geoJsonData.features.push(place)
       }
+
+      // for (let polKey in this.mapViewData.polygons) {
+      //   let polygon = this.mapViewData.polygons[polKey]
+      //   polygon.type = 'Polygon'
+      //   geoJsonData.features.push(polygon)
+      // }
       return geoJsonData
     },
 

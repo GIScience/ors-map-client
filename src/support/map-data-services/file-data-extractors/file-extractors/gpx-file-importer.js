@@ -39,7 +39,7 @@ class GpxImporter {
     let context = this
     return new Promise((resolve, reject) => {
       try {
-        this.parseFileContent().then((fileObject) => {
+        context.parseFileContent().then((fileObject) => {
           mapViewData.routes = context.getRoutes(fileObject)
           context.setPlaces(mapViewData, fileObject)
           mapViewData.isRouteData = true

@@ -39,7 +39,7 @@ class KmlImporter {
     let context = this
     return new Promise((resolve, reject) => {
       try {
-        this.parseFileContent().then((fileObject) => {
+        context.parseFileContent().then((fileObject) => {
           context.mapRawData = fileObject
           mapViewData.routes = context.getRoutes(fileObject)
           context.setPlaces(mapViewData, fileObject)

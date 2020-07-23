@@ -21,7 +21,7 @@ class JsonImporter {
     let context = this
     return new Promise((resolve, reject) => {
       let mapViewData = new MapViewData()
-      let parsingResult = this.parseFileContentToMapViewData()
+      let parsingResult = context.parseFileContentToMapViewData()
       if (parsingResult) {
         mapViewData = parsingResult
 
@@ -47,7 +47,7 @@ class JsonImporter {
 
         // If the polyline data are found
         context.mapRawData = content
-        this.setRoutesSummaryData()
+        context.setRoutesSummaryData()
         mapViewData.places = context.buildPlaces()
         mapViewData.routes = context.mapRawData.routes || []
         mapViewData.isRouteData = true
