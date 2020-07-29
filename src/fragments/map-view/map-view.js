@@ -39,6 +39,7 @@ import drawLocales from 'leaflet-draw-locales'
 import mapDefinitions from './map-definitions'
 import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
+import PolygonUtils from '@/support/polygon-utils'
 import utils from '@/support/utils'
 import theme from '@/common/theme'
 
@@ -189,7 +190,12 @@ export default {
     },
     activeRouteData () {
       if (this.localMapViewData.hasRoutes()) {
-        let activeRoute = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
+        let coords = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
+
+        // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
+        // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
+        // So we invert them to provide to the component what is expected
+        let activeRoute = GeoUtils.switchLatLonIndex(coords)
         return activeRoute
       }
     },
@@ -197,7 +203,11 @@ export default {
       let alternativeRoutesPolyline = []
       if (this.localMapViewData.hasRoutes()) {
         for (let key in this.localMapViewData.routes) {
-          alternativeRoutesPolyline.push(this.localMapViewData.routes[key].geometry.coordinates)
+          // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
+          // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
+          // So we invert them to provide to the component what is expected
+          let coords = GeoUtils.switchLatLonIndex(this.localMapViewData.routes[key].geometry.coordinates)
+          alternativeRoutesPolyline.push(coords)
         }
       }
       return alternativeRoutesPolyline
@@ -205,7 +215,19 @@ export default {
     polygons () {
       let polygons = []
       if (this.localMapViewData) {
-        polygons = this.localMapViewData.polygons || []
+        let translations = this.$t('global.units')
+        translations.polygon = this.$t('global.polygon')
+        for (let key in this.localMapViewData.polygons) {
+          let polygon = this.localMapViewData.polygons[key]
+          polygon.color = PolygonUtils.buildPolygonColor(key)
+          polygon.label = PolygonUtils.buildPolygonLabel(polygon, translations)
+
+          // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
+          // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
+          // So we invert them to provide to the component what is expected
+          polygon.latlngs = GeoUtils.switchLatLonIndex(polygon.geometry.coordinates[0])
+          polygons.push(polygon)
+        }
       }
       return polygons
     },
@@ -642,19 +664,27 @@ export default {
     buildAndSetBounds () {
       let bounds = this.localMapViewData.bbox || [{lon: 0, lat: 0}, {lon: 0, lat: 0}]
       let polylineData = []
-      for (let key in this.localMapViewData.routes) {
-        if (this.localMapViewData.routes[key].geometry.coordinates) {
-          polylineData = polylineData.concat(this.localMapViewData.routes[key].geometry.coordinates)
+
+      // Add the routes coordinates to the polyline that must
+      // be considered to  the all features databound
+      for (let rKey in this.localMapViewData.routes) {
+        if (this.localMapViewData.routes[rKey].geometry.coordinates) {
+          // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
+          // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
+          // So we invert them to provide to the component what is expected
+          let coords = GeoUtils.switchLatLonIndex(this.localMapViewData.routes[rKey].geometry.coordinates)
+          polylineData = polylineData.concat(coords)
         }
       }
-      for (let key in this.localMapViewData.polygons) {
-        if (this.localMapViewData.polygons[key].latlngs) {
-          for (let llKey in this.localMapViewData.polygons[key].latlngs) {
-            let latlngs = this.localMapViewData.polygons[key].latlngs[llKey]
-            polylineData = polylineData.concat(latlngs)
-          }
+      // Add the polygons coordinates to the polyline that must
+      // be considered to  the all features databound
+      for (let pKey in this.polygons) {
+        if (this.polygons[pKey].latlngs) {
+          polylineData = polylineData.concat(this.polygons[pKey].latlngs)
         }
       }
+      // Build the all features databounds taking into consideration
+      // the places and the roues/polygons polyline
       this.dataBounds = GeoUtils.getBounds(bounds, this.localMapViewData.places, polylineData)
     },
     /**
@@ -783,16 +813,11 @@ export default {
         // then set the zoom as the initialMaxZoom
         // becasue the fit bounds will be run
 
-        // not sure why this was necessary ... is this needed?
-        // if (this.localMapViewData.hasRoutes()) {
-        //   this.zoomLevel = this.initialMaxZoom
-        // } else if (this.localMapViewData.options.zoom) {
-        //   this.zoomLevel = this.localMapViewData.options.zoom
-        // }
         // To make it work properly we have to wait a bit
         // before fitting the map bounds
+        let context = this
         setTimeout(() => {
-          this.map.fitBounds(this.dataBounds, {padding: [20, 20], maxZoom: maxFitBoundsZoom})
+          context.map.fitBounds(context.dataBounds, {padding: [20, 20], maxZoom: maxFitBoundsZoom})
         }, 400)
       }
     },
@@ -1100,6 +1125,9 @@ export default {
         this.highlightedRoutePoint = Leaflet.latLng(point[0], point[1])
       }
     },
+    /**
+     * Remove route highlight point
+     */
     removeRoutePoint () {
       this.highlightedRoutePoint = null
     }

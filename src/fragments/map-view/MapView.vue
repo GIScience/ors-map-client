@@ -16,7 +16,9 @@
       :zoom="zoom"
       :options="mapOptions"
       :style="{height: mapHeight + 'px'}">
+
       <l-control-polyline-measure v-if="showControls" :options="polylineMeasureOptions"/>
+
       <!--- draw tool bar is added programatically via ors-map.js setAvoidPolygonDrawingTool method --->
       <!-- <l-draw-toolbar :options="drawingOptions" position="topright"/> -->
 
@@ -30,6 +32,7 @@
           <div >{{marker.label}}</div>
         </l-popup>
       </l-marker>
+
       <template v-if="polygons">
         <l-polygon v-for="(polygon, index) in polygons"
           :key="index+'-polygon'"

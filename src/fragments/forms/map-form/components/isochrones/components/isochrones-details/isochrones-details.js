@@ -1,5 +1,6 @@
 import Share from '@/fragments/forms/map-form/components/share/Share'
 import Download from '@/fragments/forms/map-form/components/download/Download'
+import PolygonUtils from '@/support/polygon-utils'
 import MapViewData from '@/models/map-view-data'
 import GeoUtils from '@/support/geo-utils'
 import tinycolor2 from 'tinycolor2'
@@ -18,9 +19,6 @@ export default {
     Share,
     Download
   },
-  created () {
-    console.log(this.mapViewData)
-  },
   methods: {
     calcArea (polygon) {
       let latlngs = []
@@ -38,9 +36,25 @@ export default {
       return foreGroundColor
     },
     hasAsCenter (place, polygon) {
-      if (polygon.properties.center.toString() === place.coordinates.toString()) {
+      if (polygon.properties.center && place.coordinates && polygon.properties.center.toString() === place.coordinates.toString()) {
         return true
       }
+    }
+  },
+  computed: {
+    polygons () {
+      let polygons = []
+      if (this.mapViewData) {
+        let translations = this.$t('global.units')
+        translations.polygon = this.$t('global.polygon')
+        for (let key in this.mapViewData.polygons) {
+          let polygon = this.mapViewData.polygons[key]
+          polygon.color = PolygonUtils.buildPolygonColor(key)
+          polygon.label = PolygonUtils.buildPolygonLabel(polygon, translations)
+          polygons.push(polygon)
+        }
+      }
+      return polygons
     }
   }
 }

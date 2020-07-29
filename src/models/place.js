@@ -134,7 +134,7 @@ class Place {
    */
   equals (otherPlace) {
     let equals = true
-    if (!otherPlace || (otherPlace.lat !== this.lat || otherPlace.lng !== this.lng || otherPlace.placeName !== this.placeName)) {
+    if (!otherPlace || (otherPlace.lat !== this.lat || otherPlace.lng !== this.lng || otherPlace.properties.layer !== this.properties.layer)) {
       equals = false
     }
     return equals

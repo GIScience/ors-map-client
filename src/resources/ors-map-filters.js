@@ -105,16 +105,6 @@ const filters = [
     value: 'distance'
   },
   {
-    availableOnModes: [], // not in use
-    useInServices: [constants.services.isochrones],
-    name: 'reverse_direction',
-    required: true,
-    type: constants.filterTypes.boolean,
-    description: 'If the reverse mode must be used or not to calculate the isochrones',
-    label: 'Reverse direction',
-    value: false
-  },
-  {
     name: 'range',
     unit: 'min',
     required: false,

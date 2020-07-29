@@ -5,7 +5,7 @@
         <v-layout v-if="showField(parameter)" :key="index" row class="field-row" :style="{'padding-left': (level * 5) + 'px'}" >
           <v-flex v-bind="{[parameter.type === constants.filterTypes.wrapper ? 'sm12': 'sm11']: true}">
             <v-autocomplete v-if="parameter.isEnum" :ref="'field'+ index"
-              class="field-input no-input-details"
+              class="field-input no-input-details form-fields-autocomplete"
               :required="parameter.required"
               @change="isModalMultiSelect(parameter) ? () => {} : fieldUpdated({index: index, value: $event})"
               :items="getSelectableItems(parameter)"
@@ -18,6 +18,7 @@
               autocomplete
               :search-input.sync="parameter.searchInput"
               :multiple="parameter.multiSelect"
+              :menu-props="{contentClass: 'form-fields-autocomplete-menu'}"
               :chips="parameter.multiSelect"
               deletable-chips>
             </v-autocomplete>
@@ -116,3 +117,4 @@
 </template>
 <script src="./form-fields.js"></script>
 <style scoped src="./form-fields.css"></style>
+<style src="./form-fields-autocomplete.css"></style>

@@ -1,4 +1,3 @@
-import DirectionsGPXDataBuilderV2 from './response-extractors/v2/directions-gpx'
 import DirectionsJSONDataBuilderV2 from './response-extractors/v2/directions-json'
 import GeocodeSearchBuilderV2 from './response-extractors/v2/geocode-search'
 import GeocodeReverseBuilderV2 from './response-extractors/v2/geocode-reverse'
@@ -38,8 +37,6 @@ class OrsResponseExtractorBuilder {
     switch (dataFromType) {
       case 'directionsJSON':
         return OrsResponseExtractorBuilder.getMapDataExtractor('DirectionsJSONDataBuilder', data, apiVersion)
-      case 'directionsGPX':
-        return OrsResponseExtractorBuilder.getMapDataExtractor('DirectionsGPXDataBuilder', data, apiVersion)
       case 'geocodeSearch':
         return OrsResponseExtractorBuilder.getMapDataExtractor('GeocodeSearchBuilder', data, apiVersion)
       case 'geocodeReverse':
@@ -69,7 +66,6 @@ class OrsResponseExtractorBuilder {
     // In this constant we have to add all the map extractors
     // for all the cases in all versions
     const extractors = {
-      DirectionsGPXDataBuilderV2,
       DirectionsJSONDataBuilderV2,
       GeocodeSearchBuilderV2,
       GeocodeReverseBuilderV2,

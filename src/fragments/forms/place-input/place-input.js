@@ -398,6 +398,9 @@ export default {
       this.model.properties = place.properties
       this.model.suggestions = []
       this.searching = false
+      // If a place is selected from a suggestion
+      // then no current location must be active.
+      this.$store.commit('currentLocation', null)
     },
 
     /**
@@ -405,14 +408,18 @@ export default {
      * @param {Place} suggestedPlace
      */
     suggestionClicked (suggestedPlace) {
-      // If the suggested place is a ra coordinate, remove the layer attribute
-      // because it is a placeholder, not a valid layer
-      if (suggestedPlace.rawCoordinate) {
-        delete suggestedPlace.properties.layer
+      // Only proceeed if it is being selected
+      // a place different from the current one
+      if (!suggestedPlace.equals(this.model)) {
+        // If the suggested place is a ra coordinate, remove the layer attribute
+        // because it is a placeholder, not a valid layer
+        if (suggestedPlace.rawCoordinate) {
+          delete suggestedPlace.properties.layer
+        }
+        this.selectPlace(suggestedPlace)
+        this.$forceUpdate()
+        this.selected()
       }
-      this.selectPlace(suggestedPlace)
-      this.$forceUpdate()
-      this.selected()
     },
 
     /**
@@ -457,6 +464,11 @@ export default {
     setFocus (data) {
       let state = typeof data === 'boolean' ? data : false
       this.focused = state
+      // If the app is in the search mode, then run
+      // the autocompleteSearch that will show the suggestions
+      if (state && this.$store.getters.mode === constants.modes.search) {
+        this.autocompleteSearch()
+      }
     },
 
     /**

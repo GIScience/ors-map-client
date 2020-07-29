@@ -13,6 +13,7 @@ export default {
     and: 'and',
     noAndDonAskAgain: 'NO (don`t ask again)',
     ok: 'OK',
+    polygon: 'polygon',
     developedByIntro: 'Services developed by',
     developedBy: 'The Heidelberg Institute for Geoinformation Technology',
     months: {

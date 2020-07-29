@@ -132,12 +132,12 @@ export default {
               reject(error)
             })
           } else if (context.dowloadFormat === 'to-gpx') {
-            let geoJSON = context.getGeoJson()
+            let geoJSON = context.mapViewData.getGeoJson()
             // Use the third party utility to convert geojson to gpx
             let togpx = toGpx(geoJSON)
             resolve(togpx)
           } else if (context.dowloadFormat === 'geojson') {
-            jsonData = context.getGeoJson()
+            jsonData = context.mapViewData.getGeoJson()
             let jsonStr = JSON.stringify(jsonData)
             resolve(jsonStr)
           } else if (context.dowloadFormat === 'kml') {
@@ -146,7 +146,7 @@ export default {
               documentName: routeTitle,
               documentDescription: constants.orsKmlDocumentDescription
             }
-            jsonData = context.getGeoJson()
+            jsonData = context.mapViewData.getGeoJson()
             // Use the third party utility to convert geojson to kml
             let tokml = toKml(jsonData, kmlOptions)
             resolve(tokml)
@@ -167,44 +167,6 @@ export default {
         orsRoutes = Object.assign({}, this.mapViewData.routes)
       }
       return orsRoutes
-    },
-    /**
-     * Get the geojson from a ors routes json object
-     * @returns {Object} geojson
-     */
-    getGeoJson () {
-      let geoJsonData = { type: 'FeatureCollection', features: [] }
-
-      for (let rKey in this.mapViewData.routes) {
-        let route = {
-          type: 'Feature',
-          properties: this.mapViewData.routes[rKey].properties,
-          geometry: {
-            type: 'LineString',
-            coordinates: this.mapViewData.routes[rKey].geometry.coordinates
-          }
-        }
-        geoJsonData.features.push(route)
-      }
-
-      for (let plaKey in this.mapViewData.places) {
-        let place = {
-          type: 'Feature',
-          properties: {label: this.mapViewData.places[plaKey].placeName},
-          geometry: {
-            type: 'Point',
-            coordinates: this.mapViewData.places[plaKey].coordinates
-          }
-        }
-        geoJsonData.features.push(place)
-      }
-
-      // for (let polKey in this.mapViewData.polygons) {
-      //   let polygon = this.mapViewData.polygons[polKey]
-      //   polygon.type = 'Polygon'
-      //   geoJsonData.features.push(polygon)
-      // }
-      return geoJsonData
     },
 
     /**
