@@ -1,4 +1,5 @@
 import htmlColors from 'html-colors'
+import GeoUtils from '@/support/geo-utils'
 
 const PolygonUtils = {
   /**
@@ -20,8 +21,21 @@ const PolygonUtils = {
    * @returns {String} label
    */
   buildPolygonLabel (polygon, translations) {
-    let unit = polygon.properties.range_type === 'time' ? translations.seconds : translations.meters
-    let label = `${polygon.properties.value} ${unit} ${translations.polygon}`
+    let label = ''
+    if (polygon.properties.range_type === 'time') {
+      let durationObj = GeoUtils.getDurationInSegments(polygon.properties.value, translations)
+      let humanizedDuration = `${durationObj.days} ${durationObj.hours} ${durationObj.minutes} ${durationObj.seconds}`
+      label = `${humanizedDuration} ${translations.polygon}`
+    } else { // the range_type is distance
+      let distance = parseFloat(polygon.properties.value)
+      if (distance >= 1000) {
+        // when the unit is in meters and very big, we convert it to kilometers
+        distance = (distance / 1000).toFixed(1)
+        label = `${distance} ${translations.km} ${translations.polygon}`
+      } else {
+        label = `${polygon.properties.value} ${translations.meters} ${translations.polygon}`
+      }
+    }
     return label
   }
 }

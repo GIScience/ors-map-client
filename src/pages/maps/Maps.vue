@@ -43,13 +43,6 @@
       </places-carousel>
     </v-bottom-nav>
 
-    <v-dialog  v-model="isAltitudeModalOpen" max-width="600" class="altitude-modal" :persistent="true">
-      <box background="white" v-if="isAltitudeModalOpen" resizable closable @closed="closeAltitudeModal()">
-        <h3 slot="header">{{$t('maps.altitude')}}</h3>
-        <altitude :height="200" :map-view-data="mapViewData"></altitude>
-      </box>
-    </v-dialog>
-
     <v-dialog v-model="isSettingsOpen" max-width="600" class="settings-modal" :persistent="true">
       <box background="white" v-if="isSettingsOpen" resizable closable @closed="closeSettingsModal()">
         <h3 slot="header">{{$t('maps.settings')}}</h3>

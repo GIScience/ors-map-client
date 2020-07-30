@@ -148,7 +148,7 @@ export default {
      */
     placeCleared (index) {
       this.places[index] = new Place()
-      this.$forceUpdate()
+      this.updateAppRoute()
     },
     /**
      * After each change on the map search we redirect the user to the built target app route
@@ -239,8 +239,9 @@ export default {
      * @param {*} args
      */
     handleCalculateIsochronesError (result) {
-      if (this.lodash.get(result.response, constants.responseErrorCodePath)) {
-        let errorKey = `isochrones.apiError.${result.response.response.body.error.code}`
+      let errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
+      if (errorCode) {
+        let errorKey = `isochrones.apiError.${errorCode}`
         let errorMsg = this.$t(errorKey)
         if (errorMsg === errorKey) {
           errorMsg = this.$t('isochrones.genericErrorMsg')

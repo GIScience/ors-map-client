@@ -205,7 +205,9 @@ export default {
      * Close the box, remove it from the maximized stack and remove the root html node overflow hide
      * @emits closed, [to parent] passing the box guid
      */
-    close () {
+    close (event) {
+      event.preventDefault()
+      event.stopPropagation()
       this.closed = true
       this.maximized = false
 

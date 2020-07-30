@@ -53,7 +53,8 @@
 
        <l-circle-marker v-if="highlightedRoutePoint" :weight="2" color="#000" :fill="true" fillColor="#fff" :fillOpacity="0.9"
         :lat-lng="highlightedRoutePoint"
-        :radius="5"/>
+        :radius="5">
+        </l-circle-marker>
 
       <l-circle-marker v-if="myPositionMarker" :weight="2" color="#1D1D1E" :fill="true" fillColor="#1C97F3" :fillOpacity="myPositionMarker.opacity"
         :lat-lng="myPositionMarker.center"
@@ -89,11 +90,11 @@
       </template>
 
       <!-- highlight extra info polyline -->
-      <extra-info-highlight v-if="activeRouteData" :polyline-data="activeRouteData"></extra-info-highlight>
+      <extra-info-highlight v-if="activeRouteData && !isAltitudeModalOpen" :polyline-data="activeRouteData"></extra-info-highlight>
 
-      <l-control-layers v-if="showControls"
-        :position="layersPosition"
-        :collapsed="true" />
+      <altitude-info v-if="isAltitudeModalOpen" @close="isAltitudeModalOpen = false" :map-view-data="localMapViewData" ></altitude-info>
+
+      <l-control-layers v-if="showControls" :position="layersPosition" :collapsed="true" />
 
       <l-tile-layer
         v-for="tileProvider in tileProviders"

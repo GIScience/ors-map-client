@@ -26,12 +26,6 @@
     <v-divider></v-divider>
     <section>
       <h4 class="sectionHeader">{{$t('about.softwareAndLibraries')}}</h4>
-      <p>
-        {{$t('about.MapSurferBackgroundLayer')}}:
-        <a class="link" href="https://korona.geog.uni-heidelberg.de/contact.html" target="_blank">
-          {{$t('about.openMapSurferTilesWMS')}}
-        </a>
-      </p>
       <p class="textjustify">
         {{$t('about.hillshadeLayer')}}: <a class='link' href='http://srtm.csi.cgiar.org'
           target='_blank'>{{$t('about.CIAT_CSI_SRTM')}}</a>. {{$t('about.info_III')}}

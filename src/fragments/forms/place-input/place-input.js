@@ -138,16 +138,20 @@ export default {
       if (this.disabled) {
         return ''
       }
-      if (this.isLast) {
-        return `(${this.index + 1}) ${this.$t('placeInput.routeDestination')}`
-      }
-      if (this.single) {
-        return this.model.isEmpty() ? this.$t('placeInput.searchPlace') : this.$t('placeInput.place')
-      } else {
-        if (this.index === 0) {
-          return `(${this.index + 1}) ${this.$t('placeInput.startingPlace')}`
+      if (this.supportDirections) {
+        if (this.isLast) {
+          return `(${this.index + 1}) ${this.$t('placeInput.routeDestination')}`
         }
-        return this.model.isEmpty() ? `(${this.index + 1}) ${this.$t('placeInput.addRouteStop')}` : `(${this.index + 1}) ${this.$t('placeInput.routePlace')}`
+        if (this.single) {
+          return this.model.isEmpty() ? this.$t('placeInput.searchPlace') : this.$t('placeInput.place')
+        } else {
+          if (this.index === 0) {
+            return `(${this.index + 1}) ${this.$t('placeInput.startingPlace')}`
+          }
+          return this.model.isEmpty() ? `(${this.index + 1}) ${this.$t('placeInput.addRouteStop')}` : `(${this.index + 1}) ${this.$t('placeInput.routePlace')}`
+        }
+      } else {
+        return `${this.$t('placeInput.place')} ${this.index + 1}`
       }
     },
 

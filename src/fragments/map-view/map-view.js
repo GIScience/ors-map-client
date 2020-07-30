@@ -29,6 +29,7 @@
 
 import { LMap, LTileLayer, LMarker, LPolyline, LLayerGroup, LTooltip, LPopup, LControlZoom, LControlAttribution, LControlScale, LControlLayers, LGeoJson, LPolygon, LCircle, LCircleMarker } from 'vue2-leaflet'
 import ExtraInfoHighlight from './components/extra-info-highlight/ExtraInfoHighlight'
+import AltitudeInfo from './components/altitude-info/AltitudeInfo'
 import MapRightClick from './components/map-right-click/MapRightClick'
 import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
 import MapLeftClick from './components/map-left-click/MapLeftClick'
@@ -70,7 +71,8 @@ export default {
     ExtraInfoHighlight,
     MapRightClick,
     MapLeftClick,
-    MyLocation
+    MyLocation,
+    AltitudeInfo
   },
   props: {
     mapViewData: {
@@ -140,7 +142,9 @@ export default {
       dataBounds: null,
       myLocationMenuOpen: false,
       focusedPlace: null,
-      highlightedRoutePoint: null
+      highlightedRoutePoint: null,
+      highlightedRoutePointAltitude: null,
+      isAltitudeModalOpen: false
     }
   },
   computed: {
@@ -513,10 +517,6 @@ export default {
         }, 1000)
       }
     },
-
-    polylineMoved (event) {
-      console.log(event)
-    },
     /**
      * Deal with the marker drag end event
      * getting the marker index and emitting and event
@@ -808,10 +808,9 @@ export default {
      * Define the zoom level or fit the bounds function
      */
     fitAndZoom (force, maxFitBoundsZoom) {
-      if (this.fitBounds === true || force === true) {
-        // If the mapViewData contains routes
-        // then set the zoom as the initialMaxZoom
-        // becasue the fit bounds will be run
+      if (this.dataBounds && (this.fitBounds === true || force === true)) {
+        // we set the max zoom in level and then fit the bounds
+        this.zoomLevel = this.initialMaxZoom
 
         // To make it work properly we have to wait a bit
         // before fitting the map bounds
@@ -1122,7 +1121,8 @@ export default {
       let activeRouteCoordinates = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
       if (activeRouteCoordinates[routeIndex]) {
         let point = activeRouteCoordinates[routeIndex]
-        this.highlightedRoutePoint = Leaflet.latLng(point[0], point[1])
+        this.highlightedRoutePointAltitude = point[2]
+        this.highlightedRoutePoint = Leaflet.latLng(point[1], point[0])
       }
     },
     /**
@@ -1130,6 +1130,13 @@ export default {
      */
     removeRoutePoint () {
       this.highlightedRoutePoint = null
+      this.highlightedRoutePointAltitude = null
+    },
+    /**
+     * Close the altitude modal
+     */
+    closeAltitudeModal () {
+      this.isAltitudeModalOpen = false
     }
   },
 
@@ -1186,6 +1193,10 @@ export default {
     this.eventBus.$on('altitudeChartHoverIndexChanged', this.hightlightRoutePoint)
 
     this.eventBus.$on('mouseLeftChartAltitudeChart', this.removeRoutePoint)
+
+    this.eventBus.$on('showAltitudeModal', function () {
+      context.isAltitudeModalOpen = true
+    })
 
     // Once the map component is mounted, load the map data
     this.loadMapData()

@@ -17,6 +17,11 @@ export default {
   },
   methods: {
     openAltitudeBox () {
+      // if in low resolution, close the sidebar
+      // before displaying the altitude modal
+      if (this.$lowResolution) {
+        this.$store.commit('setLeftSideBarIsOpen', false)
+      }
       this.eventBus.$emit('showAltitudeModal', this.mapViewData)
     }
   }

@@ -537,8 +537,9 @@ export default {
      * @param {*} args
      */
     handleCalculateDirectionsError (result) {
-      if (this.lodash.get(result.response, constants.responseErrorCodePath)) {
-        let errorKey = `placesAndDirections.apiError.${result.response.response.body.error.code}`
+      let errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
+      if (errorCode) {
+        let errorKey = `placesAndDirections.apiError.${errorCode}`
         let errorMsg = this.$t(errorKey)
         if (errorMsg === errorKey) {
           errorMsg = this.$t('placesAndDirections.genericErrorMsg')

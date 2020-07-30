@@ -4,7 +4,6 @@ import Place from '@/models/place'
 import store from '@/store/store'
 import utils from '@/support/utils'
 import RouteUtils from '@/support/route-utils'
-import appConfig from '@/config'
 
 /**
  * PlaceMode class
@@ -44,7 +43,7 @@ class PlaceMode {
 
       options = JSON.stringify(options)
 
-      let data = appConfig.useCompressedUrlData ? utils.compressTxt(options) : options
+      let data = store.getters.mapSettings.compressDataUrlSegment ? utils.compressTxt(options) : options
 
       // Create the route object
       let params = {placeName: name, coordinates: lngLatStr, data: data}

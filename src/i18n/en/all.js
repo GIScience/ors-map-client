@@ -45,13 +45,13 @@ export default {
       december: 'Dec'
     },
     units: {
-      km: 'km',
-      mi: 'mi',
+      km: 'km(s)',
+      mi: 'mi(s)',
       m: 'm',
-      meters: 'meters',
-      seconds: 'seconds',
-      minutes: 'minutes',
-      hours: 'hours'
+      meters: 'meter(s)',
+      seconds: 'sec',
+      minutes: 'min',
+      hours: 'hour(s)'
     },
     layers: {
       macrocounty: 'Macro county',

@@ -110,6 +110,7 @@
                       :placeholder="$t('settings.customTileProviderUrlHint')"
                       :label="$t('settings.customTileProviderUrl')">
                     </v-text-field>
+                    <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.compressDataUrlSegment" :label="$t('settings.compressDataUrlSegment')" ></v-checkbox>
                   </div>
                 </v-list>
               </v-list>

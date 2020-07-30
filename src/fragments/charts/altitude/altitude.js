@@ -12,6 +12,10 @@ export default {
     height: {
       type: Number,
       default: 300
+    },
+    showVariations: {
+      type: Boolean,
+      default: true
     }
   },
   data: () => ({
