@@ -19,7 +19,8 @@ const defaultMapSettings = {
   areaUnit: 'km',
   defaultTileProvider: 'osm',
   customTileProviderUrl: '',
-  prioritizeSearchingForNearbyPlaces: true
+  prioritizeSearchingForNearbyPlaces: true,
+  compressDataUrlSegment: true
 }
 
 export default defaultMapSettings

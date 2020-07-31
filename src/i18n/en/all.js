@@ -13,6 +13,7 @@ export default {
     and: 'and',
     noAndDonAskAgain: 'NO (don`t ask again)',
     ok: 'OK',
+    polygon: 'polygon',
     developedByIntro: 'Services developed by',
     developedBy: 'The Heidelberg Institute for Geoinformation Technology',
     months: {
@@ -44,13 +45,13 @@ export default {
       december: 'Dec'
     },
     units: {
-      km: 'km',
-      mi: 'mi',
+      km: 'km(s)',
+      mi: 'mi(s)',
       m: 'm',
-      meters: 'meters',
-      seconds: 'seconds',
-      minutes: 'minutes',
-      hours: 'hours'
+      meters: 'meter(s)',
+      seconds: 'sec',
+      minutes: 'min',
+      hours: 'hour(s)'
     },
     layers: {
       macrocounty: 'Macro county',

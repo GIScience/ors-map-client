@@ -16,7 +16,9 @@
       :zoom="zoom"
       :options="mapOptions"
       :style="{height: mapHeight + 'px'}">
+
       <l-control-polyline-measure v-if="showControls" :options="polylineMeasureOptions"/>
+
       <!--- draw tool bar is added programatically via ors-map.js setAvoidPolygonDrawingTool method --->
       <!-- <l-draw-toolbar :options="drawingOptions" position="topright"/> -->
 
@@ -30,6 +32,7 @@
           <div >{{marker.label}}</div>
         </l-popup>
       </l-marker>
+
       <template v-if="polygons">
         <l-polygon v-for="(polygon, index) in polygons"
           :key="index+'-polygon'"
@@ -50,7 +53,8 @@
 
        <l-circle-marker v-if="highlightedRoutePoint" :weight="2" color="#000" :fill="true" fillColor="#fff" :fillOpacity="0.9"
         :lat-lng="highlightedRoutePoint"
-        :radius="5"/>
+        :radius="5">
+        </l-circle-marker>
 
       <l-circle-marker v-if="myPositionMarker" :weight="2" color="#1D1D1E" :fill="true" fillColor="#1C97F3" :fillOpacity="myPositionMarker.opacity"
         :lat-lng="myPositionMarker.center"
@@ -86,11 +90,11 @@
       </template>
 
       <!-- highlight extra info polyline -->
-      <extra-info-highlight v-if="activeRouteData" :polyline-data="activeRouteData"></extra-info-highlight>
+      <extra-info-highlight @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" v-if="extraInfo" :extra-info="extraInfo" :polyline-data="activeRouteData"></extra-info-highlight>
 
-      <l-control-layers v-if="showControls"
-        :position="layersPosition"
-        :collapsed="true" />
+      <altitude-info v-if="isAltitudeModalOpen" @beforeOpen="extraInfo = null" @close="isAltitudeModalOpen = false" :map-view-data="localMapViewData" ></altitude-info>
+
+      <l-control-layers v-if="showControls" :position="layersPosition" :collapsed="true" />
 
       <l-tile-layer
         v-for="tileProvider in tileProviders"

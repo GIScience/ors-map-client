@@ -105,26 +105,16 @@ const filters = [
     value: 'distance'
   },
   {
-    availableOnModes: [], // not in use
-    useInServices: [constants.services.isochrones],
-    name: 'reverse_direction',
-    required: true,
-    type: constants.filterTypes.boolean,
-    description: 'If the reverse mode must be used or not to calculate the isochrones',
-    label: 'Reverse direction',
-    value: false
-  },
-  {
     name: 'range',
     unit: 'min',
     required: false,
     type: constants.filterTypes.steps,
     description: 'The time interval of the isochrones to be calculated, in minutes,',
     label: 'Time',
-    value: 1,
+    value: 5,
     min: 1,
-    max: 18,
-    multiplyValueBy: 1000,
+    max: 300,
+    multiplyValueBy: 60,
     step: 1,
     validWhen: [
       {
@@ -146,7 +136,7 @@ const filters = [
     min: 3,
     max: 30,
     step: 1,
-    multiplyValueBy: 1000,
+    multiplyValueBy: 60,
     validWhen: [
       {
         ref: 'range_type',
@@ -165,7 +155,7 @@ const filters = [
     label: 'Distance',
     value: 1,
     min: 1,
-    max: 100,
+    max: 115,
     multiplyValueBy: 1000,
     step: 1,
     validWhen: [

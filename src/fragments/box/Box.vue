@@ -2,7 +2,7 @@
   <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
     <wrapper-tag :tag="tag" :style="boxStyle" v-top-border:color="topBorderColor" class="box" :id="guid" :class="classes" v-if="isVisible">
       <div class="box-header" v-if="hasHeaderSlot"  v-bg:palette="headerBackground">
-         <v-btn class="corner-btn" flat :style="{background: headerBackground}" slot="title" v-if="closable" @click="close()" :title="$t('global.close')">
+         <v-btn class="corner-btn" flat :style="{background: headerBackground}" slot="title" v-if="closable" @click="close($event)" :title="$t('global.close')">
           <v-icon color="primary">close</v-icon>
         </v-btn>
 

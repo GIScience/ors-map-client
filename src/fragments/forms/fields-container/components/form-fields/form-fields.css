@@ -49,3 +49,38 @@
   margin-top: 0px;
   margin-bottom: 0px;
 }
+
+.form-fields-autocomplete >>> input {
+  text-transform: capitalize;
+}
+
+.form-felds-slider-text-input {
+  float: left;
+  width: 50px;
+  padding-right: 5px;
+  margin-right: 5px;
+  height: 40px;
+}
+
+.form-felds-slider-text-input >>> .v-input__slot {
+  padding: 2px !important;
+  min-height: 40px !important;
+}
+
+.form-felds-slider-text-input >>> input::-webkit-inner-spin-button, .form-felds-slider-text-input >>>
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  margin: 0;
+}
+
+
+.form-felds-slider-text-input >>> input {
+  margin-top: 5px;
+}
+
+
+.form-felds-slider {
+  float: left;
+  width: calc(100% - 55px)
+}

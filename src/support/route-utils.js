@@ -1,5 +1,4 @@
 import Utils from '@/support/utils'
-import appConfig from '@/config'
 import Place from '@/models/place'
 import lodash from 'lodash'
 import store from '@/store/store'
@@ -57,7 +56,7 @@ const RouteUtils = {
       coordinates.push(`${p.lng},${p.lat}`)
     })
     let dataString = JSON.stringify({coordinates: coordinates.join(';'), options: appRouteData.options})
-    let data = appConfig.useCompressedUrlData ? Utils.compressTxt(dataString) : dataString
+    let data = store.getters.mapSettings.compressDataUrlSegment ? Utils.compressTxt(dataString) : dataString
 
     // Set the `data` param value, that goes at the end of the url
     params.data = data
@@ -72,7 +71,7 @@ const RouteUtils = {
     if (!str) {
       return {}
     }
-    if (appConfig.useCompressedUrlData) {
+    if (store.getters.mapSettings.compressDataUrlSegment) {
       if (tryDecompress) {
         str = Utils.decompressTxt(str)
       }

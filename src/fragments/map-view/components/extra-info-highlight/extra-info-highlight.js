@@ -5,13 +5,16 @@ import { LPolyline, LTooltip } from 'vue2-leaflet'
 export default {
   props: {
     polylineData: {
-      required: false,
+      required: true,
       type: Array
+    },
+    extraInfo: {
+      required: true,
+      type: Object
     }
   },
   data () {
     return {
-      extraInfo: null,
       highlightedPolyline: null,
       highlightedPolylineSnack: false
     }
@@ -36,18 +39,24 @@ export default {
     removeHightlightedSegments () {
       this.highlightedPolyline = null
       this.highlightedPolylineSnack = false
+      this.$emit('closed')
     },
     highlightedSectionStyle (backgroundColor) {
       let foreGroundColor = tinycolor2(backgroundColor).isLight() ? 'black' : 'white'
       return { backgroundColor, color: foreGroundColor }
     }
   },
+  watch: {
+    extraInfo: {
+      handler: function () {
+        this.buildHighlightedPolyline()
+      },
+      deep: true
+    }
+  },
   created () {
-    let context = this
-    this.eventBus.$on('highlightPolylineSections', (extraInfo) => {
-      context.extraInfo = extraInfo
-      context.highlightedPolylineSnack = true
-      context.buildHighlightedPolyline()
-    })
+    this.buildHighlightedPolyline()
+    this.$emit('beforeOpen')
+    this.highlightedPolylineSnack = true
   }
 }

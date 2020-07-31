@@ -138,16 +138,20 @@ export default {
       if (this.disabled) {
         return ''
       }
-      if (this.isLast) {
-        return `(${this.index + 1}) ${this.$t('placeInput.routeDestination')}`
-      }
-      if (this.single) {
-        return this.model.isEmpty() ? this.$t('placeInput.searchPlace') : this.$t('placeInput.place')
-      } else {
-        if (this.index === 0) {
-          return `(${this.index + 1}) ${this.$t('placeInput.startingPlace')}`
+      if (this.supportDirections) {
+        if (this.isLast) {
+          return `(${this.index + 1}) ${this.$t('placeInput.routeDestination')}`
         }
-        return this.model.isEmpty() ? `(${this.index + 1}) ${this.$t('placeInput.addRouteStop')}` : `(${this.index + 1}) ${this.$t('placeInput.routePlace')}`
+        if (this.single) {
+          return this.model.isEmpty() ? this.$t('placeInput.searchPlace') : this.$t('placeInput.place')
+        } else {
+          if (this.index === 0) {
+            return `(${this.index + 1}) ${this.$t('placeInput.startingPlace')}`
+          }
+          return this.model.isEmpty() ? `(${this.index + 1}) ${this.$t('placeInput.addRouteStop')}` : `(${this.index + 1}) ${this.$t('placeInput.routePlace')}`
+        }
+      } else {
+        return `${this.$t('placeInput.place')} ${this.index + 1}`
       }
     },
 
@@ -398,6 +402,9 @@ export default {
       this.model.properties = place.properties
       this.model.suggestions = []
       this.searching = false
+      // If a place is selected from a suggestion
+      // then no current location must be active.
+      this.$store.commit('currentLocation', null)
     },
 
     /**
@@ -405,14 +412,18 @@ export default {
      * @param {Place} suggestedPlace
      */
     suggestionClicked (suggestedPlace) {
-      // If the suggested place is a ra coordinate, remove the layer attribute
-      // because it is a placeholder, not a valid layer
-      if (suggestedPlace.rawCoordinate) {
-        delete suggestedPlace.properties.layer
+      // Only proceeed if it is being selected
+      // a place different from the current one
+      if (!suggestedPlace.equals(this.model)) {
+        // If the suggested place is a ra coordinate, remove the layer attribute
+        // because it is a placeholder, not a valid layer
+        if (suggestedPlace.rawCoordinate) {
+          delete suggestedPlace.properties.layer
+        }
+        this.selectPlace(suggestedPlace)
+        this.$forceUpdate()
+        this.selected()
       }
-      this.selectPlace(suggestedPlace)
-      this.$forceUpdate()
-      this.selected()
     },
 
     /**
@@ -457,6 +468,11 @@ export default {
     setFocus (data) {
       let state = typeof data === 'boolean' ? data : false
       this.focused = state
+      // If the app is in the search mode, then run
+      // the autocompleteSearch that will show the suggestions
+      if (state && this.$store.getters.mode === constants.modes.search) {
+        this.autocompleteSearch()
+      }
     },
 
     /**

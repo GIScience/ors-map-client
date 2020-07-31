@@ -7,8 +7,7 @@ const constants = {
     geocodeSearch: 'pgeocode/search',
     autocomplete: 'pgeocode/autocomplete',
     pois: 'ppois',
-    reverseGeocode: 'pgeocode/reverse',
-    mapSurfer: 'pmapsurfer'
+    reverseGeocode: 'pgeocode/reverse'
   },
   endpoints: {
     directions: '/directions',
@@ -16,8 +15,7 @@ const constants = {
     geocodeSearch: '/geocode/search',
     autocomplete: '/geocode/autocomplete',
     pois: '/pois',
-    reverseGeocode: '/geocode/reverse',
-    mapSurfer: '/mapsurfer'
+    reverseGeocode: '/geocode/reverse'
   },
   roundTripFilterName: 'round_trip',
   avoidPpolygonsFilterName: 'avoid_polygons',

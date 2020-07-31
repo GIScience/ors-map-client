@@ -20,8 +20,7 @@ export default {
       geocodeSearch: 'Ggeocode search',
       autocomplete: 'Ggeocode autocomplete',
       pois: 'POIs',
-      reverseGeocode: 'Geocode reverse',
-      mapSurfer: 'Mapsurfer'
+      reverseGeocode: 'Geocode reverse'
     },
     apiKey: 'API key',
     apiBaseUrl: 'API base URL',
@@ -41,6 +40,7 @@ export default {
     customTileProviderUrl: 'Custom tiles provider URL',
     defaultTileProvider: 'default tiles provider',
     customTileProviderUrlHint: 'https://domain.tld/path/{z}/{x}/{y}.ext?optionalKey=value',
-    prioritizeSearchingForNearbyPlaces: 'Prioritize searching for nearby places'
+    prioritizeSearchingForNearbyPlaces: 'Prioritize searching for nearby places',
+    compressDataUrlSegment: 'Compresse URL segment after /data/'
   }
 }

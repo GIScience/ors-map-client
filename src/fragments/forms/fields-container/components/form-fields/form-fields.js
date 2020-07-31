@@ -101,19 +101,7 @@ export default {
      * @returns {String} value
      */
     sliderLabel (index) {
-      let value = this.formParameters[index].value
-
-      if (value === null) {
-        return '0'
-      }
-
-      if (this.formParameters[index].offset) {
-        value = value - this.formParameters[index].offset
-      }
-      if (this.formParameters[index].unit) {
-        value = `${value} ${this.formParameters[index].unit}`
-      }
-      return String(value)
+      return String(this.formParameters[index].unit)
     },
     /**
      * Get a new value for a random parameter

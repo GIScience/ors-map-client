@@ -1,6 +1,5 @@
-
-import VueInstance from '@/main'
 import geoUtils from '@/support/geo-utils'
+import lodash from 'lodash'
 
 /**
  * Build a geolocation response like object based on a given place object
@@ -21,7 +20,7 @@ const getFilteredFeatureResponse = (featureId, rawResponse) => {
   let filteredResponse = {}
   Object.assign(filteredResponse, rawResponse)
   if (rawResponse && Array.isArray(rawResponse.features)) {
-    filteredResponse.features = VueInstance.lodash.filter(rawResponse.features, function (f) { return f.properties.id === featureId })
+    filteredResponse.features = lodash.filter(rawResponse.features, function (f) { return f.properties.id === featureId })
     return filteredResponse
   }
 }
@@ -33,8 +32,8 @@ const getFilteredFeatureResponse = (featureId, rawResponse) => {
  * @param {*} oldResponse
 */
 const isANewResponse = (newResponse, oldResponse) => {
-  let newTimestamp = VueInstance.lodash.get(newResponse, 'metadata.timestamp')
-  let oldTimestamp = VueInstance.lodash.get(oldResponse, 'metadata.timestamp')
+  let newTimestamp = lodash.get(newResponse, 'metadata.timestamp')
+  let oldTimestamp = lodash.get(oldResponse, 'metadata.timestamp')
   if (!oldTimestamp || (newTimestamp !== oldTimestamp)) {
     return true
   }
@@ -61,7 +60,7 @@ const isANewMapViewData = (newMapData, oldMapData) => {
  * @returns {*} filter object
  */
 const getFilterRefByName = (OrsMapFiltersAccessor, name) => {
-  let filter = VueInstance.lodash.find(OrsMapFiltersAccessor, (f) => {
+  let filter = lodash.find(OrsMapFiltersAccessor, (f) => {
     return f.name === name
   })
   return filter
@@ -74,7 +73,7 @@ const getFilterRefByName = (OrsMapFiltersAccessor, name) => {
  * @returns {*} filter object
  */
 const getFilterIndexByName = (OrsMapFiltersAccessor, name) => {
-  let filterIndex = VueInstance.lodash.findIndex(OrsMapFiltersAccessor, (f) => {
+  let filterIndex = lodash.findIndex(OrsMapFiltersAccessor, (f) => {
     return f.name === name
   })
   return filterIndex
@@ -88,7 +87,7 @@ const adjustResponseCoordinates = (responseData) => {
   // When the query does not have elevation the returned result
   // comes with the coordinates position switched
   // so, we switchit back
-  let queryWithElevation = VueInstance.lodash.get(responseData, 'metadata.query.elevation')
+  let queryWithElevation = lodash.get(responseData, 'metadata.query.elevation')
 
   // Switch coordinates position and decode polyline, if necessary
   if (responseData.routes) {
@@ -96,17 +95,11 @@ const adjustResponseCoordinates = (responseData) => {
       for (let key in responseData.routes) {
         responseData.routes[key].geometry = geoUtils.decodePolyline(responseData.routes[key].geometry.geometry)
         responseData.routes[key].route.geometry_format = 'geojson'
-        if (queryWithElevation && !responseData.routes[key].geometry.switched) {
-          responseData.routes[key].geometry.coordinates = geoUtils.switchLatLonIndex(responseData.routes[key].geometry.coordinates)
-          responseData.routes[key].geometry.switched = true
-        }
       }
     }
   } else if (responseData.features) {
     for (let key in responseData.features) {
       if (queryWithElevation && !responseData.features[key].geometry.switched) {
-        responseData.features[key].geometry.coordinates = geoUtils.switchLatLonIndex(responseData.features[key].geometry.coordinates)
-        responseData.features[key].geometry.switched = true
       }
     }
   }

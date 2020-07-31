@@ -9,8 +9,7 @@ const config = {
   baseMenuExternalUrl: 'https://openrouteservice.org',
   bitlyApiKey: 'put-the-bitly-api-key-here',
   bitlyLogin: 'put-the-bitly-login-here',
-  maxPlaceInputs: 15, // Don't change this unless you know what your doing
-  useCompressedUrlData: true
+  maxPlaceInputs: 15 // Don't change this unless you know what your doing
 }
 config.getBaseUrl = () => {
   let env = process.env

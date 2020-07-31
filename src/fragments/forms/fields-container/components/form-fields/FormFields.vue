@@ -5,7 +5,7 @@
         <v-layout v-if="showField(parameter)" :key="index" row class="field-row" :style="{'padding-left': (level * 5) + 'px'}" >
           <v-flex v-bind="{[parameter.type === constants.filterTypes.wrapper ? 'sm12': 'sm11']: true}">
             <v-autocomplete v-if="parameter.isEnum" :ref="'field'+ index"
-              class="field-input no-input-details"
+              class="field-input no-input-details form-fields-autocomplete"
               :required="parameter.required"
               @change="isModalMultiSelect(parameter) ? () => {} : fieldUpdated({index: index, value: $event})"
               :items="getSelectableItems(parameter)"
@@ -18,6 +18,7 @@
               autocomplete
               :search-input.sync="parameter.searchInput"
               :multiple="parameter.multiSelect"
+              :menu-props="{contentClass: 'form-fields-autocomplete-menu'}"
               :chips="parameter.multiSelect"
               deletable-chips>
             </v-autocomplete>
@@ -53,16 +54,33 @@
 
             <template v-else-if="parameter.type === constants.filterTypes.steps" :ref="'field'+ index">
               <p>{{buildLabel(parameter)}}</p>
-              <v-slider
-                :min="parameter.min"
-                :max="parameter.max"
-                inverse-label
-                v-model="formParameters[index].value"
-                :title="buildLabel(parameter)"
-                :label="sliderLabel(index)"
-                @change="fieldUpdated({index: index, value: formParameters[index].value})"
-                :step="parameter.step"
-              ></v-slider>
+              <div>
+                <v-text-field :ref="'field-text'+ index"
+                  class="field-input form-felds-slider-text-input no-input-details"
+                  type="number"
+                  :step="1"
+                  :min="parameter.min"
+                  :max="parameter.max"
+                  box
+                  height="40px"
+                  label=""
+                  title=""
+                  v-model="formParameters[index].value"
+                  @keyup="debounceTextFieldChange(index)"
+                  @change="debounceTextFieldChange(index)"
+                  :required="parameter.required">
+                </v-text-field>
+                <v-slider class="form-felds-slider"
+                  :min="parameter.min"
+                  :max="parameter.max"
+                  inverse-label
+                  v-model="formParameters[index].value"
+                  :title="buildLabel(parameter)"
+                  :label="sliderLabel(index)"
+                  @change="fieldUpdated({index: index, value: formParameters[index].value})"
+                  :step="parameter.step"
+                ></v-slider>
+              </div>
             </template>
 
             <template v-else-if="parameter.type === constants.filterTypes.boolean" :ref="'field'+ index">
@@ -116,3 +134,4 @@
 </template>
 <script src="./form-fields.js"></script>
 <style scoped src="./form-fields.css"></style>
+<style src="./form-fields-autocomplete.css"></style>

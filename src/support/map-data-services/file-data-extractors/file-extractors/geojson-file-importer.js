@@ -1,6 +1,5 @@
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
-import Place from '@/models/place'
 import store from '@/store/store'
 /**
  * GeojsonImporter Map data Builder class
@@ -23,13 +22,16 @@ class GeojsonImporter {
         let mapViewData = context.buildMapViewData()
 
         if (mapViewData) {
-          context.mapRawData = context.fileRawContent
-          mapViewData.rawData = context.mapRawData
+          mapViewData.rawData = context.fileRawContent
           context.setRoutesSummaryData(mapViewData)
           mapViewData.isRouteData = true
           mapViewData.origin = constants.dataOrigins.fileImporter
           mapViewData.timestamp = context.options.timestamp
-          mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
+          if (mapViewData.polygons.length > 0) {
+            mapViewData.mode = constants.modes.isochrones
+          } else {
+            mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
+          }
         } else {
           reject(Error('invalid-file-content'))
         }
@@ -45,22 +47,8 @@ class GeojsonImporter {
    * @returns {Object}
    */
   buildMapViewData = () => {
-    let content = JSON.parse(this.fileRawContent)
-
-    let mapViewData = new MapViewData()
-
-    for (let key in content.features) {
-      let feature = content.features[key]
-
-      if (feature.geometry.type === 'Point') {
-        let place = new Place(feature.geometry.coordinates[0], feature.geometry.coordinates[1], feature.properties.label, {properties: feature.properties})
-        mapViewData.places.push(place)
-      }
-
-      if (feature.geometry.type === 'LineString') {
-        mapViewData.routes.push(feature)
-      }
-    }
+    let geojson = JSON.parse(this.fileRawContent)
+    let mapViewData = MapViewData.buildFromGeojson(geojson)
     return mapViewData
   }
 

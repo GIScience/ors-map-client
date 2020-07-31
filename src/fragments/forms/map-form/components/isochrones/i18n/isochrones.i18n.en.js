@@ -5,7 +5,7 @@ export default {
     isochrones: 'Isochrones',
     isochronesReady: 'Isochrones ready',
     calculatingIsochrones: 'Calculating isochrones',
-    itWasNotPossibleToCalculateIsochronesWithTheDefinedOptions: 'It was not possible to calculate isochrones with the defined options',
+    itWasNotPossibleToCalculateIsochronesWithTheDefinedOptions: 'It was not possible to calculate isochrones with the defined options. Try to define smaller isochrone(s)',
     couldResolveTheSelectedPlaceAsAsuitableCenter: 'Itwas not possble to resolve the selected point as a suitable center',
     apiError: {
       2003: 'The area of a polygon to avoid must not exceed 20.0000 square kilometers.',
