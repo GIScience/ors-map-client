@@ -319,6 +319,7 @@ export default {
         // Create a new instace of MapViewData and set all the props into the local instance
         this.localMapViewData = this.mapViewData.clone()
         this.loadMapData()
+        this.isAltitudeModalOpen = false
       },
       deep: true
     },
@@ -336,11 +337,20 @@ export default {
     showPopups (newVal) {
       this.showClickPopups = newVal
     },
+    /**
+     * Rebuild providers when a custom one is set
+     */
     customTileProviderUrl () {
       this.setProviders()
     },
     height () {
       this.adjustMap()
+    },
+    mode () {
+      // Altitude modal must be hidden if mode is not directions or roundTrip
+      if (this.mode !== constants.modes.directions && this.mode !== constants.modes.roundTrip) {
+        this.isAltitudeModalOpen = false
+      }
     },
     center: {
       handler: function () {

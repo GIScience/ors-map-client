@@ -11,7 +11,7 @@
                 </v-flex>
                 <v-flex v-bind="{[ $store.getters.mode === constants.modes.directions? 'xs11' : 'xs12']: true}">
                   <place-input :ref="'place'+index"
-                    :support-directions="$store.getters.mode === constants.modes.place"
+                    :support-directions="$store.getters.mode === constants.modes.place || $store.getters.mode === constants.modes.directions"
                     :box="places.length === 1"
                     :index="index"
                     :model="places[index]"
