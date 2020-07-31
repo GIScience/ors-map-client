@@ -1,5 +1,5 @@
 <template>
-  <v-snackbar class="altitude-snack" v-model="open"
+  <v-snackbar class="altitude-snack" @click="clicked($event)" v-model="open"
     :style="{width: `${width}px` }"
     :bottom="true"
     :auto-height="true"

@@ -144,7 +144,8 @@ export default {
       focusedPlace: null,
       highlightedRoutePoint: null,
       highlightedRoutePointAltitude: null,
-      isAltitudeModalOpen: false
+      isAltitudeModalOpen: false,
+      extraInfo: null
     }
   },
   computed: {
@@ -1131,12 +1132,6 @@ export default {
     removeRoutePoint () {
       this.highlightedRoutePoint = null
       this.highlightedRoutePointAltitude = null
-    },
-    /**
-     * Close the altitude modal
-     */
-    closeAltitudeModal () {
-      this.isAltitudeModalOpen = false
     }
   },
 
@@ -1196,6 +1191,10 @@ export default {
 
     this.eventBus.$on('showAltitudeModal', function () {
       context.isAltitudeModalOpen = true
+    })
+
+    this.eventBus.$on('highlightPolylineSections', (extraInfo) => {
+      context.extraInfo = extraInfo
     })
 
     // Once the map component is mounted, load the map data

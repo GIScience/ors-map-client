@@ -90,9 +90,9 @@
       </template>
 
       <!-- highlight extra info polyline -->
-      <extra-info-highlight v-if="activeRouteData && !isAltitudeModalOpen" :polyline-data="activeRouteData"></extra-info-highlight>
+      <extra-info-highlight @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" v-if="extraInfo" :extra-info="extraInfo" :polyline-data="activeRouteData"></extra-info-highlight>
 
-      <altitude-info v-if="isAltitudeModalOpen" @close="isAltitudeModalOpen = false" :map-view-data="localMapViewData" ></altitude-info>
+      <altitude-info v-if="isAltitudeModalOpen" @beforeOpen="extraInfo = null" @close="isAltitudeModalOpen = false" :map-view-data="localMapViewData" ></altitude-info>
 
       <l-control-layers v-if="showControls" :position="layersPosition" :collapsed="true" />
 

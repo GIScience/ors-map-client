@@ -12,6 +12,7 @@ export default {
     Altitude
   },
   created () {
+    this.$emit('beforeOpen')
     this.open = true
     let context = this
     this.eventBus.$on('highlightPolylineSections', () => {
@@ -54,6 +55,10 @@ export default {
     closeAltitudeModal () {
       this.open = false
       this.$emit('close')
+    },
+    clicked (event) {
+      event.preventDefault()
+      event.stopPropagation()
     }
   }
 }
