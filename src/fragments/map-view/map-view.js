@@ -441,7 +441,7 @@ export default {
       }
 
       // We just want to disalbe the showClickPopups
-      // temporaly, so we capy the original state
+      // temporaly, so we get the original state
       // set it as false and after a two seconds
       // we restore the original value
       let showPopupBefore = this.showClickPopups
@@ -859,12 +859,19 @@ export default {
      * Handle the map left cick event, showing the place info pop up box
      */
     mapLeftClick (event) {
-      let drawPolygonToolbarActive = this.lodash.get(this.drawControlRef, '_toolbars.draw._activeMode')
-      if (this.showClickPopups && !drawPolygonToolbarActive) {
-        let insidePolygon = this.isPointInsidePolygons(event.latlng.lat, event.latlng.lng)
-        let data = {event, insidePolygon}
-        this.eventBus.$emit('mapLeftClicked', data)
-        this.clickLatlng = {lat: event.latlng.lat, lng: event.latlng.lng}
+      // If in low resolution and sidebar is open, then left click on the map
+      // must close the side bar to allow the user to interact with the map.
+      // If not then the normal left click handlr must be executed
+      if (this.$store.getters.leftSideBarOpen && this.$lowResolution) {
+        this.eventBus.$emit('setSidebarStatus', false)
+      } else {
+        let drawPolygonToolbarActive = this.lodash.get(this.drawControlRef, '_toolbars.draw._activeMode')
+        if (this.showClickPopups && !drawPolygonToolbarActive) {
+          let insidePolygon = this.isPointInsidePolygons(event.latlng.lat, event.latlng.lng)
+          let data = {event, insidePolygon}
+          this.eventBus.$emit('mapLeftClicked', data)
+          this.clickLatlng = {lat: event.latlng.lat, lng: event.latlng.lng}
+        }
       }
     },
 

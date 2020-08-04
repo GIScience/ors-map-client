@@ -28,7 +28,6 @@ export default {
       subPropsModalTitle: null,
       subPropsModalIndex: null,
       manualEditModalActive: false,
-      disabledFieldCount: 0,
       manualEditingParameter: null,
       debounceTimeoutIds: []
     }
@@ -45,12 +44,6 @@ export default {
       this.updateFieldsStatus()
       this.$forceUpdate()
     })
-  },
-  watch: {
-    // Watches for changes in the prop parameters (endpoint change) and updates the disabledFieldCount
-    'parameters' () {
-      // this.fieldUpdated()
-    }
   },
   computed: {
     formParameters () {
@@ -88,6 +81,10 @@ export default {
       }, 1000)
     },
 
+    /**
+     * Set a ne random value for the randon component
+     * @param {*} index 
+     */
     setNewRandomValue (index) {
       let min = this.formParameters[index].min || 0
       let max = this.formParameters[index].max || 100
@@ -101,7 +98,10 @@ export default {
      * @returns {String} value
      */
     sliderLabel (index) {
-      return String(this.formParameters[index].unit)
+      if (this.formParameters[index].unit) {
+        return String(this.formParameters[index].unit)
+      }
+      return ''
     },
     /**
      * Get a new value for a random parameter
@@ -112,16 +112,7 @@ export default {
       let value = Math.floor((Math.random() * (this.formParameters[index].max + 1)) + this.formParameters[index].min)
       return value
     },
-    /**
-     * Counts the, through dependencies, disabled form fields
-     */
-    countDisabledFields () {
-      let count = 0
-      for (let key in this.formParameters) {
-        count += this.formParameters[key].disabled ? 1 : 0
-      }
-      this.disabledFieldCount = count
-    },
+
     /**
      * Update the status of all related fields based on the dependency
      * and also the count of disabled fields
@@ -129,7 +120,6 @@ export default {
      */
     updateFieldsStatus () {
       dependencyService.updateFieldsStatus(this.formParameters)
-      this.countDisabledFields()
     },
 
     /**
@@ -423,23 +413,24 @@ export default {
     },
 
     /**
-     * Determines if a wrapper parameter should be displayed expanded
+     * Determines if an expansion panel wrapper parameter should be displayed expanded
      *
      * @param {*} parameters
      * @returns {boolean}
      */
-    showExpanded (parameters) {
-      let has = false
+    showPanelExpanded (parameters) {
+      let childHascontent = false
       for (let key in parameters.props) {
-        if (parameters.props[key].value !== undefined && parameters.props[key].value !== null && parameters.props[key].value !== parameters.props[key].default) {
-          has = true
+        if (parameters.props[key].value !== undefined && parameters.props[key].value !== null) {
+          childHascontent = true
           break
         }
       }
-      return has ? 0 : null
+      return childHascontent ? 0 : null
     }
   },
   components: {
+    // avoid cyclic dependency by loading components assinchronously
     'dialog-fields': () => import('../dialog-fields/DialogFields.vue'),
     'form-fields': () => import('./FormFields.vue')
   }
