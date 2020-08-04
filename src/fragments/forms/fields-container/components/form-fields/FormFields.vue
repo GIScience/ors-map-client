@@ -58,7 +58,7 @@
                 <v-text-field :ref="'field-text'+ index"
                   class="field-input form-felds-slider-text-input no-input-details"
                   type="number"
-                  :step="1"
+                  :step="parameter.step"
                   :min="parameter.min"
                   :max="parameter.max"
                   box
@@ -67,7 +67,6 @@
                   title=""
                   v-model="formParameters[index].value"
                   @keyup="debounceTextFieldChange(index)"
-                  @change="debounceTextFieldChange(index)"
                   :required="parameter.required">
                 </v-text-field>
                 <v-slider class="form-felds-slider"
@@ -87,7 +86,7 @@
               <v-checkbox class="pt-0 top-0" v-model="formParameters[index].value" :label="buildLabel(parameter)" ></v-checkbox>
             </template>
 
-            <v-expansion-panel :value="showExpanded(parameter)" v-else-if="parameter.type === constants.filterTypes.wrapper" class="fields-panel">
+            <v-expansion-panel :value="showPanelExpanded(parameter)" v-else-if="parameter.type === constants.filterTypes.wrapper" class="fields-panel">
               <v-expansion-panel-content style="background: transparent">
                 <div slot="header"><h4>{{parameter.label}}</h4></div>
                 <template>
