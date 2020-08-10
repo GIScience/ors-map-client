@@ -29,6 +29,9 @@ const getters = {
   },
   footerMiniHeight: state => {
     return 40
+  },
+  sidebarHeaderHeight: state => {
+    return 135
   }
 }
 

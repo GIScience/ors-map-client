@@ -197,18 +197,9 @@ export default {
       }
       let suggestions = []
       if (this.localModel.nameIsCoord()) {
-        let rawCoordinatesPlace = {
-          rawCoordinate: true,
-          properties: {
-            label: this.localModel.placeName,
-            layer: 'rawCoordinate'
-          },
-          geometry: {
-            coordinates: this.localModel.placeName.split(',').reverse().map(function (item) {
-              return item.trim()
-            })
-          }
-        }
+        let coords = this.localModel.getCoordsFromName()
+        let rawCoordinatesPlace = new Place(coords[0], coords[1], this.localModel.placeName, {properties: {layer: 'rawCoordinate'}})
+        rawCoordinatesPlace.rawCoordinate = true
         suggestions.push(rawCoordinatesPlace)
       }
       suggestions = suggestions.concat(this.localModel.suggestions)
@@ -271,6 +262,10 @@ export default {
      * @param {*} index
      */
     autocompleteSearch () {
+      // Make sure that the local model is up to date
+      if (this.localModel.placeName.length === 0) {
+        this.localModel = this.model.clone()
+      }
       if (this.localModel.nameIsCoord()) {
         this.autocompleteByCoords()
       } else {
@@ -284,9 +279,6 @@ export default {
      */
     autocompleteByName () {
       this.searching = true
-      if (this.localModel.placeName.length === 0) {
-        this.localModel = this.model.clone()
-      }
       if (!this.localModel.placeName || this.model.placeName.length === 0) {
         this.localModel = new Place()
         this.searching = false
@@ -319,9 +311,6 @@ export default {
      *
      */
     autocompleteByCoords () {
-      if (this.localModel.placeName.length === 0) {
-        this.localModel = this.model.clone()
-      }
       let lnglatArr = this.localModel.getLnglat()
       let lng = lnglatArr[1]
       let lat = lnglatArr[0]
@@ -357,23 +346,26 @@ export default {
     changed (event = null) {
       if (event) {
         let isPasteEvent = event instanceof ClipboardEvent
+        // In case of a ClipboardEvent (ctr + v)
+        // we must just ignore, since we the input
+        // model  has not changed yet
         if (!isPasteEvent) {
           event.preventDefault()
           event.stopPropagation()
+          clearTimeout(this.debounceTimeoutId)
+          let context = this
+
+          // Make sure that the changes in the input are debounced
+          this.debounceTimeoutId = setTimeout(function () {
+            if (context.supportSearch && (event.key === 'Enter' || (event instanceof MouseEvent && event.type === 'click'))) {
+              context.focused = false
+              context.sendToSearchMode()
+            } else {
+              context.autocompleteSearch()
+            }
+          }, 1000)
         }
       }
-      clearTimeout(this.debounceTimeoutId)
-      let context = this
-
-      // Make sure that the changes in the input are debounced
-      this.debounceTimeoutId = setTimeout(function () {
-        if (context.supportSearch && (event.key === 'Enter' || (event instanceof MouseEvent && event.type === 'click'))) {
-          context.focused = false
-          context.sendToSearchMode()
-        } else {
-          context.autocompleteSearch()
-        }
-      }, 1000)
     },
 
     /**
@@ -396,7 +388,7 @@ export default {
      */
     selectPlace (place) {
       // We shall not reassign an external object, so we update each property
-      this.model.placeName = place.properties.label
+      this.model.placeName = place.properties.label || place.placeName
       this.model.placeId = place.properties.id
       this.model.setLnglat(place.lng, place.lat)
       this.model.properties = place.properties
@@ -525,8 +517,7 @@ export default {
     switchCoords () {
       if (this.localModel.nameIsCoord()) {
         this.model.setCoordsAsName()
-        this.$forceUpdate()
-        this.$emit('autocomplete', this.index)
+        this.autocompleteByCoords()
       }
     },
 

@@ -2,7 +2,7 @@
 export default {
   settings: {
     saveAll: 'Save all',
-    endpointsSectionTitle: 'Service endpoints',
+    endpointsSectionTitle: 'Service endpoints (URI or full URL)',
     localization: 'Localization',
     appLocale: 'App locale',
     unit: 'Unit',

@@ -17,7 +17,6 @@
          :label="placeInputLabel"
          @focus="setFocus(true)"
          @click="setFocus(true)"
-         @paste="changed($event)"
          @keyup="changed($event)"
          @click:clear="() => placeCleared(index)"
          :append-icon="supportSearch ? 'search': ''"

@@ -5,12 +5,12 @@ import store from '@/store/store'
 
 import OrsApiClient from 'openrouteservice-js'
 
-// By default we use the npm package of openrouteservice-js to query the API
-// But if it is needed to test and change the openrouteservice-js the lib source code
-// can be put in /src/ors-js folder and we can use it to be able to apply changes and see
-// these changes results on the fly. This is only to developer who will work on
-// the openrouteservice-js project. In this case comment the OrsApiClient import above
-// and uncomment the one below to use a local and unpacked openrouteservice-js
+// By default we use the openrouteservice-js npm package to query the API.
+// But, if it is needed to test and change the openrouteservice-js itself the lib source code
+// can be put in the /src/ors-js folder and then we can use it to apply changes and see
+// these changes on the fly. This is only to developers who will work on
+// the openrouteservice-js project. If you want to do this, comment the OrsApiClient import above
+// and uncomment the import lline below to use a local and unpacked openrouteservice-js lib
 // import OrsApiClient from '@/ors-js/src'
 
 /**
@@ -21,7 +21,9 @@ import OrsApiClient from 'openrouteservice-js'
  */
 const Directions = (places, customArgs = null) => {
   let directions = new OrsApiClient.Directions({
-    api_key: store.getters.mapSettings.apiKey
+    api_key: store.getters.mapSettings.apiKey,
+    host: store.getters.mapSettings.apiBaseUrl,
+    service: store.getters.mapSettings.endpoints.directions
   })
   let args = OrsParamsParser.buildRoutingArgs(places)
   if (customArgs) {
@@ -47,7 +49,8 @@ const Directions = (places, customArgs = null) => {
 const Geocode = (term, size = 10) => {
   let client = new OrsApiClient.Geocode({
     api_key: store.getters.mapSettings.apiKey,
-    service: store.getters.mapSettings.endpoints.geocodeSearch
+    host: store.getters.mapSettings.apiBaseUrl,
+    service: store.getters.mapSettings.endpoints.autocomplete // using autocomplete because it is faster
   })
   let args = OrsParamsParser.buildAutocompleteArgs(term)
   args.size = size
@@ -71,7 +74,8 @@ const Geocode = (term, size = 10) => {
 const ReverseGeocode = (lat, lng, size = 10) => {
   let client = new OrsApiClient.Geocode({
     api_key: store.getters.mapSettings.apiKey,
-    service: store.getters.mapSettings.endpoints.geocodeSearch
+    host: store.getters.mapSettings.apiBaseUrl,
+    service: store.getters.mapSettings.endpoints.reverseGeocode
   })
   let args = OrsParamsParser.buildReverseSearchArgs(lat, lng)
   args.size = size
@@ -103,6 +107,7 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
 
     let client = new OrsApiClient.Geocode({
       api_key: store.getters.mapSettings.apiKey,
+      host: store.getters.mapSettings.apiBaseUrl,
       service: store.getters.mapSettings.endpoints.geocodeSearch
     })
 
@@ -132,6 +137,7 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
 const Pois = () => {
   let pois = new OrsApiClient.Pois({
     api_key: store.getters.mapSettings.apiKey,
+    host: store.getters.mapSettings.apiBaseUrl,
     service: store.getters.mapSettings.endpoints.pois
   })
   return pois
@@ -139,7 +145,9 @@ const Pois = () => {
 
 const Isochrones = (places) => {
   var isochrones = new OrsApiClient.Isochrones({
-    api_key: store.getters.mapSettings.apiKey
+    api_key: store.getters.mapSettings.apiKey,
+    host: store.getters.mapSettings.apiBaseUrl,
+    service: store.getters.mapSettings.endpoints.isochrones
   })
   return new Promise((resolve, reject) => {
     let args = OrsParamsParser.buildIsochronesArgs(places)

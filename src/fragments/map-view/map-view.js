@@ -204,18 +204,22 @@ export default {
         return activeRoute
       }
     },
-    alternativeRoutesData () {
-      let alternativeRoutesPolyline = []
+    alternativeRoutes () {
+      let alternativeRoutesData = []
       if (this.localMapViewData.hasRoutes()) {
         for (let key in this.localMapViewData.routes) {
-          // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
-          // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
-          // So we invert them to provide to the component what is expected
-          let coords = GeoUtils.switchLatLonIndex(this.localMapViewData.routes[key].geometry.coordinates)
-          alternativeRoutesPolyline.push(coords)
+          let index = Number(key)
+          if (index !== this.$store.getters.activeRouteIndex) {
+            // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
+            // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
+            // So we invert them to provide to the component what is expected
+            let coords = GeoUtils.switchLatLonIndex(this.localMapViewData.routes[key].geometry.coordinates)
+            let alternativeRoute = { polyline: coords, index: index }
+            alternativeRoutesData.push(alternativeRoute)
+          }
         }
       }
-      return alternativeRoutesPolyline
+      return alternativeRoutesData
     },
     polygons () {
       let polygons = []
@@ -303,6 +307,14 @@ export default {
         return true
       }
       return false
+    },
+    /**
+     * If an active route data must be shown
+     * @returns {Boolean} show
+     */
+    showActivRouteData () {
+      let show = this.activeRouteData && this.showActiveRouteData
+      return show
     }
   },
   watch: {
@@ -428,17 +440,25 @@ export default {
       }
     },
     /**
+     * Handle the alternative route index seleted event
+     * @param {*} index
+     * @param {*} event
+     */
+    alternativeRouteIndexSelected (index, event) {
+      event.originalEvent.stopPropagation()
+      event.originalEvent.preventDefault()
+      this.eventBus.$emit('activeRouteIndexChanged', index)
+      this.setActiveRouteIndex(index)
+    },
+    /**
      * Change the current active route index
      * @param {*} index
      * @param {*} event
      * @emits activeRouteIndexChanged
      */
-    setActiveRouteIndex (index, event) {
+    setActiveRouteIndex (index) {
+      let context = this
       this.$store.commit('activeRouteIndex', index)
-      if (event) {
-        event.originalEvent.stopPropagation()
-        event.originalEvent.preventDefault()
-      }
 
       // We just want to disalbe the showClickPopups
       // temporaly, so we get the original state
@@ -447,7 +467,7 @@ export default {
       let showPopupBefore = this.showClickPopups
       this.showClickPopups = false
       setTimeout(() => {
-        this.showClickPopups = showPopupBefore
+        context.showClickPopups = showPopupBefore
       }, 2000)
 
       // Force the active route polyline to render again
@@ -456,19 +476,18 @@ export default {
       let showActiveRouteDataBefore = this.showActiveRouteData
       this.showActiveRouteData = false
       setTimeout(() => {
-        this.showActiveRouteData = showActiveRouteDataBefore
+        context.showActiveRouteData = showActiveRouteDataBefore
       }, 100)
 
       // Show the route selected data
-      // if in low resolution mode
-      // if not in low resolution, the route
+      // if in low resolution mode.
+      // If not in low resolution, the route
       // data is visible on the sidebar
       if (this.localMapViewData.hasRoutes()) {
-        // get tooltip and remove any html from the tool tip
+        // get tooltip message without the html tags
         let message = this.routeToolTip(index).replace(/<(?:.|\n)*?>/gm, ' ')
         this.showInfo(message)
       }
-      this.eventBus.$emit('activeRouteIndexChanged', index)
     },
 
     /**
@@ -1200,7 +1219,7 @@ export default {
       }
     })
 
-    this.eventBus.$on('activeRouteIndexChanged', this.setActiveRouteIndex)
+    this.eventBus.$on('changeActiveRouteIndex', this.setActiveRouteIndex)
 
     this.eventBus.$on('altitudeChartHoverIndexChanged', this.hightlightRoutePoint)
 
