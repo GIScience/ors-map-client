@@ -525,8 +525,13 @@ export default {
 
       if (routeSummary && typeof routeSummary === 'object' && routeSummary.distance && routeSummary.unit && routeSummary.duration) {
         let humanizedData = GeoUtils.getHumanizedTimeAndDistance(routeSummary, this.$t('global.units'))
+        let profileLabeKey = 'global.profiles.' + mapViewData.options.profile
+        let profileLabel = this.$t(profileLabeKey)
+        if (profileLabel !== profileLabeKey) {
+          message += ` ${this.$t('placesAndDirections.for')} <b>${profileLabel}</b>`
+        }
         let routeInfo = `${this.$t('placesAndDirections.distance')} ${humanizedData.distance} ${this.$t('global.and')} ${this.$t('placesAndDirections.duration')} ${humanizedData.duration}`
-        message = `${this.$t('placesAndDirections.routeReady')} - ${routeInfo.toLowerCase()}`
+        message = `${message} - ${routeInfo.toLowerCase()}`
       }
       return message
     },

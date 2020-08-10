@@ -9,10 +9,10 @@
         <b>{{placeInfo.placeName}}</b><br/>
       </template>
       <template v-if="hasPlaceInfo">
-        {{$t('mapView.lat')}},{{$t('mapView.lng')}}:
-        {{placeInfo.latlng.lat.toFixed(6)}}, {{placeInfo.latlng.lng.toFixed(6)}} <br/>
-        <v-btn :title="$t('mapView.copyLatlng')" flat small color="primary" icon class="copy-inverted" @click="copyLatlng()" > <v-icon>file_copy</v-icon> </v-btn>
+        {{$t('mapView.lng')}},{{$t('mapView.lat')}}:
+        {{placeInfo.latlng.lng.toFixed(6)}}, {{placeInfo.latlng.lat.toFixed(6)}} <br/>
         <v-btn :title="$t('mapView.copyLnglat')" flat small icon  @click="copyLnglat()" > <v-icon>file_copy</v-icon> </v-btn>
+        <v-btn :title="$t('mapView.copyLatlng')" flat small color="primary" icon class="copy-inverted" @click="copyLatlng()" > <v-icon>file_copy</v-icon> </v-btn>
       </template>
     </div>
   </box>

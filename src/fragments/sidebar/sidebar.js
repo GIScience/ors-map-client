@@ -3,7 +3,6 @@ import Footer from '@/fragments/footer/Footer'
 import ProfileSelector from '@/fragments/forms/profile-selector/ProfileSelector.vue'
 import resolver from '@/support/routes-resolver'
 import TopMenu from './components/top-menu/TopMenu'
-import constants from '@/resources/constants'
 
 export default {
   data () {
@@ -36,7 +35,7 @@ export default {
       return url
     },
     sidebarContentHeightFormula () {
-      let formula = 'calc(100% - 100px)'
+      let formula = `calc(100% - ${this.$store.getters.sidebarHeaderHeight}px)`
       return formula
     }
   },

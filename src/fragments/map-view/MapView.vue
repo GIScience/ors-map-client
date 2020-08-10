@@ -19,7 +19,7 @@
 
       <l-control-polyline-measure v-if="showControls" :options="polylineMeasureOptions"/>
 
-      <!--- draw tool bar is added programatically via ors-map.js setAvoidPolygonDrawingTool method --->
+      <!-- draw tool bar is added programatically via ors-map.js setAvoidPolygonDrawingTool method -->
       <!-- <l-draw-toolbar :options="drawingOptions" position="topright"/> -->
 
       <l-marker v-for="(marker, index) in markers"
@@ -69,18 +69,18 @@
       </l-circle-marker>
 
 
-      <template  v-for="(routePolyline, index) in alternativeRoutesData">
-        <template v-if="index !== $store.getters.activeRouteIndex">
+      <template  v-for="(alternativeRoute, index) in alternativeRoutes">
+        <template>
           <!-- background polyline to create a white outline -->
-          <l-polyline :key="index + '_bg'" :lat-lngs="routePolyline" :weight="11" color="#fff"></l-polyline>
+          <l-polyline :key="index + '_bg'" :lat-lngs="alternativeRoute.polyline" :weight="11" color="#fff"></l-polyline>
 
-          <l-polyline @click="setActiveRouteIndex(index, $event)" :key="index"  :lat-lngs="routePolyline" :weight="7" :color="alternativeRouteColor">
-            <l-tooltip @click="setActiveRouteIndex(index, $event)" :content="routeToolTip(index)"></l-tooltip>
+          <l-polyline @click="alternativeRouteIndexSelected(alternativeRoute.index, $event)" :key="alternativeRoute.index"  :lat-lngs="alternativeRoute.polyline" :weight="7" :color="alternativeRouteColor">
+            <l-tooltip @click="alternativeRouteIndexSelected(alternativeRoute.index, $event)" :content="routeToolTip(alternativeRoute.index)"></l-tooltip>
           </l-polyline>
         </template>
       </template>
 
-       <template v-if="activeRouteData && showActiveRouteData">
+       <template v-if="showActivRouteData">
         <!-- background polyline to create a white outline -->
         <l-polyline :lat-lngs="activeRouteData" :weight="11" color="#fff"></l-polyline>
 

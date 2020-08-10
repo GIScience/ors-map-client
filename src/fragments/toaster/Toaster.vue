@@ -10,7 +10,7 @@
     :vertical="snackbarMode === 'vertical'"
     :auto-height="true"
     v-model="visible">
-      {{ snackbarText }}
+    <div v-html="snackbarText"></div>
     <v-btn :style="{color: snackbarTheme === 'warning'? 'black': 'white'}" flat @click.native="visible = false">{{ $t('global.close') }}</v-btn>
     </v-snackbar>
 </template>

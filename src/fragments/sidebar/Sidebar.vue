@@ -11,7 +11,7 @@
       :permanent="$store.getters.leftSideBarPinned"
       :class="{'auto-height': $lowResolution && !$store.getters.leftSideBarPinned, 'full-height': $store.getters.leftSideBarPinned}">
 
-      <div class="sidebar-header">
+      <div class="sidebar-header" :style="{height: $store.getters.sidebarHeaderHeight + 'px'}">
         <v-layout row class="sidebar-header-top" >
           <v-flex xs6 md9>
             <div class="logo-container">

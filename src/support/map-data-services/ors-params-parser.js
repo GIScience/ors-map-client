@@ -13,11 +13,10 @@ const orsParamsParser = {
    * @returns {Object} args
    */
   buildPlaceSearchArgs: (placeName) => {
+    // build the args object
     let args = {
       text: placeName,
       size: 10,
-      service: store.getters.mapSettings.endpoints.geocodeSearch,
-      host: store.getters.mapSettings.apiBaseUrl,
       focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng]
     }
 
@@ -32,11 +31,10 @@ const orsParamsParser = {
    * @returns {Object} args
    */
   buildAutocompleteArgs: (placeName, restrictToBbox = false) => {
+    // build the args object
     let args = {
       text: placeName,
       size: 8,
-      service: store.getters.mapSettings.endpoints.autocomplete,
-      host: store.getters.mapSettings.apiBaseUrl,
       focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng]
     }
     // If is set to restrict the search to currrent mapBounds in store
@@ -83,11 +81,10 @@ const orsParamsParser = {
    * @returns {Object} args
    */
   buildPoisSearchArgs: (placeName) => {
+    // build the args object
     let args = {
       name: placeName,
       // limit: 10,
-      service: store.getters.mapSettings.endpoints.pois,
-      // host: store.getters.mapSettings.apiBaseUrl,
       geometry: {
         geojson: {
           type: 'Point',
@@ -111,14 +108,13 @@ const orsParamsParser = {
    * @returns {Object} args
    */
   buildReverseSearchArgs: (lat, long) => {
+    // build the args object
     let args = {
       point: {
         lat_lng: [lat, long],
         radius: 1 // one km radius
       },
-      size: 8,
-      service: store.getters.mapSettings.endpoints.reverseGeocode,
-      host: store.getters.mapSettings.apiBaseUrl
+      size: 8
     }
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
@@ -139,8 +135,7 @@ const orsParamsParser = {
     }
     let args = {
       locations: locations,
-      area_units: store.getters.mapSettings.unit,
-      service: store.getters.mapSettings.endpoints.isochrones
+      area_units: store.getters.mapSettings.unit
     }
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
@@ -182,11 +177,9 @@ const orsParamsParser = {
 
     // Set args object
     let args = {
-      host: store.getters.mapSettings.apiBaseUrl,
       coordinates: coordinates,
       format: 'geojson',
       elevation: mapSettings.elevationProfile,
-      service: mapSettings.endpoints.directions,
       instructions_format: 'html',
       api_version: 'v2',
       extra_info: extraInfo,
@@ -208,10 +201,10 @@ const orsParamsParser = {
     let coordinates = lodash.map(places, (p) => {
       return p.getLnglat()
     })
+
+    // build the args object
     let args = {
-      host: store.getters.mapSettings.apiBaseUrl,
       coordinates: coordinates,
-      service: store.getters.mapSettings.endpoints.directions,
       instructions_format: 'html',
       elevation: true,
       format: 'geojson'

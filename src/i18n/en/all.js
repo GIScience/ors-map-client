@@ -66,8 +66,20 @@ export default {
       address: 'Address',
       street: 'Street',
       venue: 'Venue',
-      rawCoordinate: 'Raw lat,lng coordinates',
+      rawCoordinate: 'Raw lng,lat coordinates',
       notAvailable: 'Not available'
+    },
+    profiles: {
+      'driving-car': 'car',
+      'driving-hgv': 'HGV',
+      'cycling-regular': 'cycling regular',
+      'cycling-road': 'cycling road',
+      'cycling-safe': 'cycling safe',
+      'cycling-mountain': 'cycling mountain',
+      'cycling-electric': 'cycling eletric',
+      'foot-walking': 'walking',
+      'foot-hiking': 'hiking',
+      'wheelchair': 'wheelchair'
     }
   },
   auth: {
