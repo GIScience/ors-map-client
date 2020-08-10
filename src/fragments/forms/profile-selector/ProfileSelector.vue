@@ -6,7 +6,7 @@
           <v-icon large>{{profile.icon}}</v-icon>
         </v-btn>
       </template>
-      <v-menu class="floating-menu" v-model="extraProfilesOpen"
+      <v-menu class="floating-menu" ref="floatingMenu" v-model="extraProfilesOpen"
         transition="slide-y-transition"
         :close-on-click="true"
         :close-on-content-click="true"

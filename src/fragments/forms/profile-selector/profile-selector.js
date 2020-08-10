@@ -72,6 +72,10 @@ export default {
       if (index) {
         this.activeProfileIndex = index
       }
+      let context = this
+      setTimeout(() => {
+        context.extraProfilesOpen = false
+      }, 200)
     },
     updateFilterProfile () {
       let filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
