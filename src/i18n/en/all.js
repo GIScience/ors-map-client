@@ -66,7 +66,7 @@ export default {
       address: 'Address',
       street: 'Street',
       venue: 'Venue',
-      rawCoordinate: 'Raw lat,lng coordinates',
+      rawCoordinate: 'Raw lng,lat coordinates',
       notAvailable: 'Not available'
     },
     profiles: {

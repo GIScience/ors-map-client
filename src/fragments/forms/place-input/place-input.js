@@ -312,8 +312,8 @@ export default {
      */
     autocompleteByCoords () {
       let lnglatArr = this.localModel.getLnglat()
-      let lng = lnglatArr[1]
-      let lat = lnglatArr[0]
+      let lng = lnglatArr[0]
+      let lat = lnglatArr[1]
       // If the app is in low resolution mode we want less results
       let size = this.$lowResolution ? 5 : 10
 
