@@ -11,7 +11,7 @@ import RouteUtils from '@/support/route-utils'
  */
 class RoundTripMode {
   buildAppRouteData (places, options = {}) {
-    let appRouteData = store.getters.appRouteData || new AppRouteData()
+    const appRouteData = store.getters.appRouteData || new AppRouteData()
     appRouteData.places = places
 
     // The round_trip filter will be extracted from the OrsMapFilters
@@ -29,9 +29,9 @@ class RoundTripMode {
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
   getRoute = (appRouteData, options) => {
-    let params = RouteUtils.buildRouteParams(appRouteData, options)
+    const params = RouteUtils.buildRouteParams(appRouteData, options)
     // Build and return the route object
-    let route = { name: 'MapDirections', params: params }
+    const route = { name: 'MapDirections', params: params }
     return route
   }
 
@@ -41,8 +41,8 @@ class RoundTripMode {
    * @returns {AppRouteData}
    */
   decodePath = (currentRoute) => {
-    let appRouteData = new AppRouteData()
-    let data = RouteUtils.decodeDataParam(currentRoute.params.data)
+    const appRouteData = new AppRouteData()
+    const data = RouteUtils.decodeDataParam(currentRoute.params.data)
 
     // Get coordinates and options from the param
     appRouteData.options = data.options

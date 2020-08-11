@@ -8,7 +8,7 @@ class AppRouteData {
    * @param {*} places
    * @param {*} options
    */
-  constructor (places = [], options = {fitBounds: true, search: false}) {
+  constructor (places = [], options = { fitBounds: true, search: false }) {
     this.places = places
     this.options = options
   }
@@ -18,11 +18,11 @@ class AppRouteData {
    * @returns  {MapViewData}
    */
   clone () {
-    let clone = new AppRouteData()
+    const clone = new AppRouteData()
 
     clone.options = utils.clone(this.options)
 
-    for (let key in this.places) {
+    for (const key in this.places) {
       clone.places.push(this.places[key].clone())
     }
     return clone

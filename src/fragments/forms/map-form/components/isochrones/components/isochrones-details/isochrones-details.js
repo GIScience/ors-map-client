@@ -21,18 +21,18 @@ export default {
   },
   methods: {
     calcArea (polygon) {
-      let latlngs = []
-      let coordinates = polygon.geometry.coordinates.length === 1 ? polygon.geometry.coordinates[0] : polygon.geometry.coordinates
-      for (let key in coordinates) {
-        let coordinate = coordinates[key]
+      const latlngs = []
+      const coordinates = polygon.geometry.coordinates.length === 1 ? polygon.geometry.coordinates[0] : polygon.geometry.coordinates
+      for (const key in coordinates) {
+        const coordinate = coordinates[key]
         latlngs.push(GeoUtils.buildLatLong(coordinate[1], coordinate[0]))
       }
-      let area = Leaflet.GeometryUtil.geodesicArea(latlngs)
-      let polygonArea = Leaflet.GeometryUtil.readableArea(area, this.$store.getters.mapSettings.areaUnit)
+      const area = Leaflet.GeometryUtil.geodesicArea(latlngs)
+      const polygonArea = Leaflet.GeometryUtil.readableArea(area, this.$store.getters.mapSettings.areaUnit)
       return polygonArea
     },
     polygonAreaTextColor (backgroundColor) {
-      let foreGroundColor = tinycolor2(backgroundColor).isLight() ? 'black' : 'white'
+      const foreGroundColor = tinycolor2(backgroundColor).isLight() ? 'black' : 'white'
       return foreGroundColor
     },
     hasAsCenter (place, polygon) {
@@ -43,12 +43,12 @@ export default {
   },
   computed: {
     polygons () {
-      let polygons = []
+      const polygons = []
       if (this.mapViewData) {
-        let translations = this.$t('global.units')
+        const translations = this.$t('global.units')
         translations.polygon = this.$t('global.polygon')
-        for (let key in this.mapViewData.polygons) {
-          let polygon = this.mapViewData.polygons[key]
+        for (const key in this.mapViewData.polygons) {
+          const polygon = this.mapViewData.polygons[key]
           polygon.color = PolygonUtils.buildPolygonColor(key)
           polygon.label = PolygonUtils.buildPolygonLabel(polygon, translations)
           polygons.push(polygon)

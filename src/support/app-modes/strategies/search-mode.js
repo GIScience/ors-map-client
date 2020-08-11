@@ -8,7 +8,7 @@ import store from '@/store/store'
  */
 class SearchMode {
   buildAppRouteData (places, options) {
-    let appRouteData = store.getters.appRouteData || new AppRouteData()
+    const appRouteData = store.getters.appRouteData || new AppRouteData()
     appRouteData.places = places
     appRouteData.options.search = true
     appRouteData.options.center = store.getters.mapCenter
@@ -23,13 +23,13 @@ class SearchMode {
   getRoute = (appRouteData, options = {}) => {
     let name = ''
     if (appRouteData.places.length > 0) {
-      let place = appRouteData.places[0]
+      const place = appRouteData.places[0]
       name = place.placeName ? place.placeName.replace(/, /g, ',') : ''
     }
     // Create the route object
-    let center = `${appRouteData.options.center.lat},${appRouteData.options.center.lng}`
-    let params = {term: name, center: center}
-    let route = { name: 'MapSearch', params: params }
+    const center = `${appRouteData.options.center.lat},${appRouteData.options.center.lng}`
+    const params = { term: name, center: center }
+    const route = { name: 'MapSearch', params: params }
     return route
   }
 
@@ -39,17 +39,17 @@ class SearchMode {
    * @returns {AppRouteData}
    */
   decodePath = (currentRoute) => {
-    let appRouteData = new AppRouteData()
+    const appRouteData = new AppRouteData()
     appRouteData.options.search = true
 
-    let coords = currentRoute.params.center.split(',')
-    let latlng = GeoUtils.buildLatLong(coords[0], coords[1])
+    const coords = currentRoute.params.center.split(',')
+    const latlng = GeoUtils.buildLatLong(coords[0], coords[1])
     appRouteData.options.center = latlng
 
     // Get and format the place name
-    let placeName = currentRoute.params.term.replace(/, /g, ',').replace(',', ', ')
+    const placeName = currentRoute.params.term.replace(/, /g, ',').replace(',', ', ')
     // Recreate the place object
-    let place = new Place(0, 0, placeName, {resolve: true})
+    const place = new Place(0, 0, placeName, { resolve: true })
 
     // Add the single place to the route data
     appRouteData.places.push(place)

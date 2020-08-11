@@ -3,8 +3,8 @@ import appConfig from '@/config'
 const resolver = {
 
   homeUrl: () => {
-    let currentPath = location.pathname
-    let baseUrl = appConfig.baseAppUrl
+    const currentPath = location.pathname
+    const baseUrl = appConfig.baseAppUrl
 
     // This solution covers the build of the home url
     // for local development url

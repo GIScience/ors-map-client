@@ -18,10 +18,10 @@ class JsonImporter {
    * @returns {Promise} that returns in the resolve mapData object
    */
   buildMapData = () => {
-    let context = this
+    const context = this
     return new Promise((resolve, reject) => {
       let mapViewData = new MapViewData()
-      let parsingResult = context.parseFileContentToMapViewData()
+      const parsingResult = context.parseFileContentToMapViewData()
       if (parsingResult) {
         mapViewData = parsingResult
 
@@ -37,7 +37,7 @@ class JsonImporter {
         mapViewData.origin = constants.dataOrigins.fileImporter
         mapViewData.timestamp = context.options.timestamp
       } else { // try to extract usable data from an old format exported file
-        let content = JSON.parse(context.fileRawContent)
+        const content = JSON.parse(context.fileRawContent)
         if (!content) {
           reject(Error('invalid-file-content'))
         }
@@ -64,13 +64,13 @@ class JsonImporter {
    * @returns {Object}
    */
   parseFileContentToMapViewData = () => {
-    let content = JSON.parse(this.fileRawContent)
+    const content = JSON.parse(this.fileRawContent)
 
-    let mapViewData = new MapViewData()
+    const mapViewData = new MapViewData()
 
-    for (let key in mapViewData) {
+    for (const key in mapViewData) {
       // skip loop if the property is from prototype
-      if (!mapViewData.hasOwnProperty(key)) continue
+      if (!Object.prototype.hasOwnProperty.call(mapViewData, key)) continue
 
       // If an expected property
       // does not exist in the parsed content
@@ -93,10 +93,10 @@ class JsonImporter {
    * @return [Places]
    */
   parsePlaces = (content) => {
-    let places = []
-    for (let placeKey in content.places) {
-      let place = new Place()
-      for (let prop in content.places[placeKey]) {
+    const places = []
+    for (const placeKey in content.places) {
+      const place = new Place()
+      for (const prop in content.places[placeKey]) {
         place[prop] = content.places[placeKey][prop]
       }
       place.unresolved = true // make sure the place will be resolved
@@ -110,8 +110,8 @@ class JsonImporter {
    */
   setRoutesSummaryData = () => {
     if (VueInstance.lodash.get(this, 'mapRawData.features[0].properties.summary')) {
-      for (let key in this.mapRawData.features) {
-        let summary = Object.assign({}, this.mapRawData.features[key].properties.summary)
+      for (const key in this.mapRawData.features) {
+        const summary = Object.assign({}, this.mapRawData.features[key].properties.summary)
         summary.descent = this.mapRawData.features[key].properties.descent
         summary.ascent = this.mapRawData.features[key].properties.ascent
         summary.unit = this.mapRawData.metadata.query.units || store.getters.mapSettings.unit
@@ -129,28 +129,28 @@ class JsonImporter {
    * @returns {Array} places
    */
   buildPlaces = () => {
-    let places = []
+    const places = []
     // If there are less then 15, so we get all
     if (this.coordinates.length < 16) {
-      for (let key in this.coordinates) {
-        let latlng = this.coordinates[key]
-        let lng = latlng[1]
-        let lat = latlng[0]
-        let place = new Place(lng, lat)
+      for (const key in this.coordinates) {
+        const latlng = this.coordinates[key]
+        const lng = latlng[1]
+        const lat = latlng[0]
+        const place = new Place(lng, lat)
         places.push(place)
       }
     } else { // if there are more then 15, only the first and the last
-      let firstCoords = (this.coordinates[0])
-      let lastCoords = (this.coordinates[this.coordinates.length - 1])
+      const firstCoords = (this.coordinates[0])
+      const lastCoords = (this.coordinates[this.coordinates.length - 1])
 
-      let firstLng = firstCoords[1]
-      let firstLat = firstCoords[0]
-      let firstPlace = new Place(firstLng, firstLat, '', {resolve: true})
+      const firstLng = firstCoords[1]
+      const firstLat = firstCoords[0]
+      const firstPlace = new Place(firstLng, firstLat, '', { resolve: true })
       places.push(firstPlace)
 
-      let lastLng = lastCoords[1]
-      let lastLat = lastCoords[0]
-      let lastPlace = new Place(lastLng, lastLat, '', {resolve: true})
+      const lastLng = lastCoords[1]
+      const lastLat = lastCoords[0]
+      const lastPlace = new Place(lastLng, lastLat, '', { resolve: true })
       places.push(lastPlace)
     }
     return places

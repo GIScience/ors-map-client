@@ -77,7 +77,7 @@ export default {
     // At the very beginning, the close value will be defined based on the value (v-model parameter)
     this.closed = !this.value
     this.guid = utils.guid('box')
-    let context = this
+    const context = this
 
     // When the maximize stack is changed
     // the store will emit this event
@@ -116,8 +116,8 @@ export default {
      * this is necessary to avoid doubled scroll on the page
      */
     'maximized' () {
-      let htmlNode = document.getElementsByTagName('html')[0]
-      let boxMaximized = this.resetBoxMaximizedStack()
+      const htmlNode = document.getElementsByTagName('html')[0]
+      const boxMaximized = this.resetBoxMaximizedStack()
       if (this.maximized) {
         htmlNode.style.overflow = 'hidden'
         this.$el.style.height = (window.innerHeight + 300) + 'px'
@@ -147,7 +147,7 @@ export default {
      * @returns {} maximized stack object
      */
     resetBoxMaximizedStack () {
-      let boxMaximizedStack = this.$store.getters.boxMaximizedStack || {}
+      const boxMaximizedStack = this.$store.getters.boxMaximizedStack || {}
       if (this.maximized && !boxMaximizedStack[this.guid]) {
         boxMaximizedStack[this.guid] = 'maximized'
       }
@@ -168,7 +168,7 @@ export default {
       // To achieve this we keep a stack of boxes maximized
       // but we only set the `this.maximized = true` to the box
       // that is above all others, considering the order of maximization
-      let lastGuid = this.getLasBoxMaximizedGuid()
+      const lastGuid = this.getLasBoxMaximizedGuid()
       if (!lastGuid || lastGuid !== this.guid) {
         this.maximized = false
       } else {
@@ -180,7 +180,7 @@ export default {
      * Remove the current box guid from the maximized stack
      */
     removeFromMaximizedStack () {
-      let boxMaximizedStack = this.$store.getters.boxMaximizedStack || {}
+      const boxMaximizedStack = this.$store.getters.boxMaximizedStack || {}
       if (boxMaximizedStack[this.guid]) {
         delete boxMaximizedStack[this.guid]
       }
@@ -192,8 +192,8 @@ export default {
      * last one will be displayed in the view as maximized.
      */
     getLasBoxMaximizedGuid () {
-      let boxMaximizedStack = this.$store.getters.boxMaximizedStack || {}
-      let length = Object.keys(boxMaximizedStack).length
+      const boxMaximizedStack = this.$store.getters.boxMaximizedStack || {}
+      const length = Object.keys(boxMaximizedStack).length
       let lastKey
       if (length > 0) {
         lastKey = Object.keys(boxMaximizedStack)[length - 1]
@@ -215,9 +215,9 @@ export default {
       this.removeFromMaximizedStack()
 
       // Remove any root html overflow in case that there is not other box maximized
-      let boxMaximized = this.getLasBoxMaximizedGuid()
+      const boxMaximized = this.getLasBoxMaximizedGuid()
       if (!boxMaximized) {
-        let html = document.getElementsByTagName('html')[0]
+        const html = document.getElementsByTagName('html')[0]
         html.style.overflow = 'auto'
       }
 
@@ -235,8 +235,8 @@ export default {
       this.maximized = maximized
 
       // Tell every body that the box was maximized/minimized
-      let globalEvent = this.maximized ? 'boxMaximized' : 'boxMinimized'
-      this.eventBus.$emit(globalEvent, {maximized: maximized, guid: this.guid})
+      const globalEvent = this.maximized ? 'boxMaximized' : 'boxMinimized'
+      this.eventBus.$emit(globalEvent, { maximized: maximized, guid: this.guid })
 
       // Ff is not maximized, remove this box from the maximized stack
       if (!this.maximized) {
@@ -244,7 +244,7 @@ export default {
       }
 
       // Tell the parent that the box was resized
-      this.$emit('resized', {maximized: maximized, guid: this.guid})
+      this.$emit('resized', { maximized: maximized, guid: this.guid })
     }
   },
   computed: {
@@ -256,7 +256,7 @@ export default {
      * @returns String
      */
     backgroundColor () {
-      let color = theme[this.background] ? theme[this.background] : this.background
+      const color = theme[this.background] ? theme[this.background] : this.background
       return color || 'transparent'
     },
     /**
@@ -278,21 +278,21 @@ export default {
      * @returns Boolean
      */
     hasHeaderSlot () {
-      return !!this.$slots['header']
+      return !!this.$slots.header
     },
     /**
      * Returns a boolean that indicates if it was provided a content for the `content` slot
      * @returns Boolean
      */
     hasContentSlot () {
-      return !!this.$slots['content']
+      return !!this.$slots.content
     },
     /**
      * Returns a boolean that indicates if it was provided a content for the `content` slot
      * @returns Boolean
      */
     hasFooterSlot () {
-      return !!this.$slots['footer']
+      return !!this.$slots.footer
     },
     /**
      * Returns the color that must be used to be passed to the topBorder directive
@@ -312,7 +312,7 @@ export default {
         }
       }
       // the initial color the the defined as primary at @/common/theme.js
-      var color = theme['primary']
+      var color = theme.primary
 
       // if the topBorderPalette prop is defined, use it to define the color
       if (this.topBorderPalette) {
@@ -327,7 +327,7 @@ export default {
      * @returns {} object with style properties and values
      */
     boxStyle () {
-      let styl = {
+      const styl = {
         background: this.backgroundColor
       }
       if (this.right) {
@@ -349,7 +349,7 @@ export default {
      * @returns {} containing classes to be appended to the box element
      */
     classes () {
-      let cl = {
+      const cl = {
         maximized: this.maximized,
         shadow: !this.noShadow,
         'box-border': this.noShadow && !this.noBorder

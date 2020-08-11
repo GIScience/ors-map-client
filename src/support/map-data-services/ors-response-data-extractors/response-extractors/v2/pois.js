@@ -15,8 +15,8 @@ class PoisBuilder {
    * @returns {Promise} that returns in the resolve mapViewData object
    */
   buildMapData = () => {
-    let mapViewData = new MapViewData()
-    let context = this
+    const mapViewData = new MapViewData()
+    const context = this
     return new Promise((resolve) => {
       mapViewData.places = context.buildPlaces()
       resolve(mapViewData)
@@ -28,11 +28,11 @@ class PoisBuilder {
    * @returns {Array} markers
    */
   buildPlaces = () => {
-    let places = []
+    const places = []
     if (this.responseData.features) {
       this.responseData.features.forEach(feature => {
-        let lnglat = feature.geometry.coordinates
-        let place = new Place(lnglat[0], lnglat[1], feature.properties.label, {properties: feature})
+        const lnglat = feature.geometry.coordinates
+        const place = new Place(lnglat[0], lnglat[1], feature.properties.label, { properties: feature })
         places.push(place)
       })
     }

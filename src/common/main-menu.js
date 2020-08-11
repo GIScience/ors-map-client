@@ -18,24 +18,24 @@ const loadItems = () => {
 }
 
 const loginMenuItem = {
-  'title': 'Access',
-  'icon': 'lock',
+  title: 'Access',
+  icon: 'lock',
   startOpen: true,
   requiresNotBeAuthenticated: true,
   items: [
     {
-      'href': appConfig.baseMenuExternalUrl + '/dev/#/signup',
-      'title': 'Sign up',
-      'target': '_blank',
-      'icon': 'assignment',
+      href: appConfig.baseMenuExternalUrl + '/dev/#/signup',
+      title: 'Sign up',
+      target: '_blank',
+      icon: 'assignment',
       external: true,
       requiresNotBeAuthenticated: true
     },
     {
-      'href': appConfig.baseMenuExternalUrl + '/dev/#/login',
-      'title': 'Log in',
-      'target': '_blank',
-      'icon': 'lock'
+      href: appConfig.baseMenuExternalUrl + '/dev/#/login',
+      title: 'Log in',
+      target: '_blank',
+      icon: 'lock'
     }
   ]
 }
@@ -45,7 +45,7 @@ const addBaseExternalUrl = (item) => {
     item.href = appConfig.baseMenuExternalUrl + item.href
   }
   if (item.items) {
-    for (let key in item.items) {
+    for (const key in item.items) {
       item.items[key] = addBaseExternalUrl(item.items[key])
     }
   }
@@ -58,27 +58,27 @@ const addBaseExternalUrl = (item) => {
  * @param {*} menu
  */
 const runCustomization = (menu) => {
-  for (let key in menu) {
+  for (const key in menu) {
     menu[key] = addBaseExternalUrl(menu[key])
     menu[key].target = '_blank'
   }
 
   menu.push({
-    'href': appConfig.baseMenuExternalUrl + '/dev/#/logout',
-    'title': 'Logout',
-    'target': '_blank',
-    'icon': 'power_settings_new',
+    href: appConfig.baseMenuExternalUrl + '/dev/#/logout',
+    title: 'Logout',
+    target: '_blank',
+    icon: 'power_settings_new',
     requiresBeAuthenticated: true,
     showIcon: true
   })
   menuManager.injectAt(menu, 0, {
-    'header': 'Links'
+    header: 'Links'
   })
   menuManager.injectAt(menu, 0, {
-    'href': appConfig.baseMenuExternalUrl,
-    'title': 'Home',
-    'target': '_blank',
-    'icon': 'home',
+    href: appConfig.baseMenuExternalUrl,
+    title: 'Home',
+    target: '_blank',
+    icon: 'home',
     notInHeader: true,
     external: true
   })
@@ -103,8 +103,8 @@ const setIcons = (items) => {
       return
     }
 
-    let href = item.href.endsWith('/') ? item.href.substr(0, (item.href.length - 1)) : item.href
-    let hrefEnding = href.substr(href.lastIndexOf('/'))
+    const href = item.href.endsWith('/') ? item.href.substr(0, (item.href.length - 1)) : item.href
+    const hrefEnding = href.substr(href.lastIndexOf('/'))
 
     switch (hrefEnding) {
       case '/':

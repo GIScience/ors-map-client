@@ -150,7 +150,7 @@ export default {
   },
   computed: {
     zoom () {
-      let zoom = this.zoomLevel > 0 ? this.zoomLevel : this.maxZoom
+      const zoom = this.zoomLevel > 0 ? this.zoomLevel : this.maxZoom
       return zoom
     },
     showControls () {
@@ -169,7 +169,7 @@ export default {
     },
     mapCenter () {
       if (this.hasOnlyOneMarker) {
-        let singlePlaceCenter = GeoUtils.buildLatLong(this.markers[0].position.lat, this.markers[0].position.lng)
+        const singlePlaceCenter = GeoUtils.buildLatLong(this.markers[0].position.lat, this.markers[0].position.lng)
         return singlePlaceCenter
       } else {
         return this.$store.getters.mapCenter
@@ -182,9 +182,9 @@ export default {
       return this.currentInnerHeight > 450
     },
     geojsonOptions () {
-      let tooltip = this.routeToolTip(0)
+      const tooltip = this.routeToolTip(0)
       return {
-        style: {color: this.mainRouteColor, weight: '5'},
+        style: { color: this.mainRouteColor, weight: '5' },
         onEachFeature: (feature, layer) => {
           layer.bindTooltip(tooltip, { permanent: false, sticky: true })
         }
@@ -195,26 +195,26 @@ export default {
     },
     activeRouteData () {
       if (this.localMapViewData.hasRoutes()) {
-        let coords = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
+        const coords = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
 
         // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
         // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
         // So we invert them to provide to the component what is expected
-        let activeRoute = GeoUtils.switchLatLonIndex(coords)
+        const activeRoute = GeoUtils.switchLatLonIndex(coords)
         return activeRoute
       }
     },
     alternativeRoutes () {
-      let alternativeRoutesData = []
+      const alternativeRoutesData = []
       if (this.localMapViewData.hasRoutes()) {
-        for (let key in this.localMapViewData.routes) {
-          let index = Number(key)
+        for (const key in this.localMapViewData.routes) {
+          const index = Number(key)
           if (index !== this.$store.getters.activeRouteIndex) {
             // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
             // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
             // So we invert them to provide to the component what is expected
-            let coords = GeoUtils.switchLatLonIndex(this.localMapViewData.routes[key].geometry.coordinates)
-            let alternativeRoute = { polyline: coords, index: index }
+            const coords = GeoUtils.switchLatLonIndex(this.localMapViewData.routes[key].geometry.coordinates)
+            const alternativeRoute = { polyline: coords, index: index }
             alternativeRoutesData.push(alternativeRoute)
           }
         }
@@ -222,12 +222,12 @@ export default {
       return alternativeRoutesData
     },
     polygons () {
-      let polygons = []
+      const polygons = []
       if (this.localMapViewData) {
-        let translations = this.$t('global.units')
+        const translations = this.$t('global.units')
         translations.polygon = this.$t('global.polygon')
-        for (let key in this.localMapViewData.polygons) {
-          let polygon = this.localMapViewData.polygons[key]
+        for (const key in this.localMapViewData.polygons) {
+          const polygon = this.localMapViewData.polygons[key]
           polygon.color = PolygonUtils.buildPolygonColor(key)
           polygon.label = PolygonUtils.buildPolygonLabel(polygon, translations)
 
@@ -242,7 +242,7 @@ export default {
     },
     markers () {
       if (this.localMapViewData.hasPlaces()) {
-        let markers = GeoUtils.buildMarkers(this.localMapViewData, this.focusedPlace)
+        const markers = GeoUtils.buildMarkers(this.localMapViewData, this.focusedPlace)
         return markers
       }
     },
@@ -262,7 +262,7 @@ export default {
     },
     myPositionMarker () {
       if (this.$store.getters.currentLocation) {
-        let markerData = {
+        const markerData = {
           center: Leaflet.latLng(this.$store.getters.currentLocation.lat, this.$store.getters.currentLocation.lng),
           radius: 9,
           accuracy: this.$store.getters.currentLocation.accuracy,
@@ -272,17 +272,17 @@ export default {
       }
     },
     canAddStop () {
-      let can = !Array.isArray(this.markers) || this.markers.length < 15
+      const can = !Array.isArray(this.markers) || this.markers.length < 15
       return can
     },
     polylineMeasureOptions () {
-      let polylineMeasureTranslations = this.$t('mapView.polylineMeasure')
-      let options = mapDefinitions.polylineMeasureOptions(polylineMeasureTranslations)
+      const polylineMeasureTranslations = this.$t('mapView.polylineMeasure')
+      const options = mapDefinitions.polylineMeasureOptions(polylineMeasureTranslations)
       return options
     },
 
     drawOptions () {
-      let options = mapDefinitions.drawOptions(this.$t('mapView.youCantIntersectPolygons'))
+      const options = mapDefinitions.drawOptions(this.$t('mapView.youCantIntersectPolygons'))
       return options
     },
 
@@ -290,8 +290,8 @@ export default {
       return this.height
     },
     markerIsDraggable () {
-      let draggableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]
-      let isDraggable = draggableModes.includes(this.mode)
+      const draggableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]
+      const isDraggable = draggableModes.includes(this.mode)
       return isDraggable
     },
     markerIsRemovable () {
@@ -300,7 +300,7 @@ export default {
       return isRemovable
     },
     showMarkerPopup () {
-      let show = this.mode !== constants.modes.search
+      const show = this.mode !== constants.modes.search
       return show
     },
     /**
@@ -318,7 +318,7 @@ export default {
      * @returns {Boolean} show
      */
     showActivRouteData () {
-      let show = this.activeRouteData && this.showActiveRouteData
+      const show = this.activeRouteData && this.showActiveRouteData
       return show
     }
   },
@@ -385,7 +385,7 @@ export default {
         this.setMapCenter(this.center)
         // If current location is defined, update it
         if (this.$store.getters.currentLocation || this.mode === constants.modes.search) {
-          let currentLocation = {lat: this.center.lat, lng: this.center.lng, accuracy: 50}
+          const currentLocation = {lat: this.center.lat, lng: this.center.lng, accuracy: 50}
           this.$store.commit('currentLocation', currentLocation)
         }
       }
@@ -413,8 +413,8 @@ export default {
      */
     routeToolTip (index) {
       if (this.localMapViewData) {
-        let summaryCopy = Object.assign({}, this.localMapViewData.routes[index].summary)
-        let tooltip = this.humanizeRouteToolTip(summaryCopy)
+        const summaryCopy = Object.assign({}, this.localMapViewData.routes[index].summary)
+        const tooltip = this.humanizeRouteToolTip(summaryCopy)
         return tooltip
       }
     },
@@ -425,20 +425,20 @@ export default {
      * @param {*} event
      */
     mapMoved (event) {
-      let center = event.target.getCenter()
+      const center = event.target.getCenter()
 
-      let distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.mapCenter, center, 'm')
+      const distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.mapCenter, center, 'm')
       // We only consider that the center changed if it
       // changes more than 50 meters from the previous center
       if (distance > 50) {
         this.setMapCenter(center)
-        let data = { center: this.$store.getters.mapCenter, distance: distance }
+        const data = { center: this.$store.getters.mapCenter, distance: distance }
         this.$emit('mapCenterMoved', data)
       }
       // If the map is moved by the user the myLocation is reset it in order to define if
       // my location circle should continue to appear as map center
       if (this.myLocationActive) {
-        let distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.currentLocation, center, 'm')
+        const distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.currentLocation, center, 'm')
         // For some unknow reason, when a new map center
         // is defined it may varies from the location acquired
         // via browser location api. So, we are considering that
@@ -465,14 +465,14 @@ export default {
      * @emits activeRouteIndexChanged
      */
     setActiveRouteIndex (index) {
-      let context = this
+      const context = this
       this.$store.commit('activeRouteIndex', index)
 
       // We just want to disalbe the showClickPopups
       // temporaly, so we get the original state
       // set it as false and after a two seconds
       // we restore the original value
-      let showPopupBefore = this.showClickPopups
+      const showPopupBefore = this.showClickPopups
       this.showClickPopups = false
       setTimeout(() => {
         context.showClickPopups = showPopupBefore
@@ -481,7 +481,7 @@ export default {
       // Force the active route polyline to render again
       // after a timeout in order to make sure it
       // is over the other polylines
-      let showActiveRouteDataBefore = this.showActiveRouteData
+      const showActiveRouteDataBefore = this.showActiveRouteData
       this.showActiveRouteData = false
       setTimeout(() => {
         context.showActiveRouteData = showActiveRouteDataBefore
@@ -493,7 +493,7 @@ export default {
       // data is visible on the sidebar
       if (this.localMapViewData.hasRoutes()) {
         // get tooltip message without the html tags
-        let message = this.routeToolTip(index).replace(/<(?:.|\n)*?>/gm, ' ')
+        const message = this.routeToolTip(index).replace(/<(?:.|\n)*?>/gm, ' ')
         this.showInfo(message)
       }
     },
@@ -504,7 +504,7 @@ export default {
      * after the selection
      */
     baseLayerChanged () {
-      let layerControl = document.querySelector('.leaflet-control-layers')
+      const layerControl = document.querySelector('.leaflet-control-layers')
       layerControl.classList.remove('leaflet-control-layers-expanded')
     },
     /**
@@ -528,8 +528,8 @@ export default {
     updateMarkersLabel () {
       // Before returning the markers update the label of the marker using the places data in the localMapViewData storage
       if (this.localMapViewData.hasPlaces()) {
-        for (let key in this.localMapViewData.places) {
-          let humanizedIndex = Number(key) + 1
+        for (const key in this.localMapViewData.places) {
+          const humanizedIndex = Number(key) + 1
           this.localMapViewData.places[key].index = humanizedIndex
         }
       }
@@ -574,12 +574,12 @@ export default {
      * @emits markerDragged
      */
     markerDragEnd (event) {
-      let targetLatlng = event.oldLatLng
+      const targetLatlng = event.oldLatLng
       let markerIndex = null
 
       // Find the marker index by comparing the lat and long
       for (let index = 0; index < this.markers.length; index++) {
-        let markerP = this.markers[index].position
+        const markerP = this.markers[index].position
         if (markerP.lat === targetLatlng.lat && markerP.lng === targetLatlng.lng) {
           // update the marker position
           this.markers[index].position.lat = event.latlng.lat
@@ -592,7 +592,7 @@ export default {
       }
       // If found, emits the markerDragged event
       if (markerIndex !== null) {
-        let marker = this.markers[markerIndex]
+        const marker = this.markers[markerIndex]
         marker.inputIndex = markerIndex
         this.$emit('markerDragged', marker)
       }
@@ -606,7 +606,7 @@ export default {
      */
     setMapCenter (latlng) {
       if (latlng) {
-        let previousCenter = this.$store.getters.mapCenter
+        const previousCenter = this.$store.getters.mapCenter
         this.$store.commit('mapCenter', latlng)
         this.storeMapBounds()
 
@@ -618,7 +618,7 @@ export default {
           this.$emit('mapCenterChanged', this.$store.getters.mapCenter)
         }
       } else {
-        let routePlaces = this.$store.getters.appRouteData.places
+        const routePlaces = this.$store.getters.appRouteData.places
 
         // Run the utility that may define a more
         // appropriate map center if appRouteData is empty
@@ -638,12 +638,12 @@ export default {
      * Set the default or previous center
      */
     setPreviousOrDefaultCenter () {
-      let storedMapCenter = localStorage.getItem('mapCenter')
+      const storedMapCenter = localStorage.getItem('mapCenter')
       if (storedMapCenter) {
         this.setMapCenter(JSON.parse(storedMapCenter))
       } else {
         // By default the center is Heidelberg (Germany))
-        let defaultCenter = GeoUtils.buildLatLong(49.510944, 8.76709)
+        const defaultCenter = GeoUtils.buildLatLong(49.510944, 8.76709)
         this.setMapCenter(defaultCenter)
       }
     },
@@ -652,8 +652,8 @@ export default {
      * Set map bounds
      */
     storeMapBounds () {
-      let buildBondaryes = (bounds) => {
-        let boundary = {
+      const buildBondaryes = (bounds) => {
+        const boundary = {
           rect: {
             min_lon: bounds._southWest.lng,
             max_lon: bounds._northEast.lng,
@@ -668,15 +668,15 @@ export default {
         this.map = this.$refs.map.mapObject
       }
       if (this.map) {
-        let bounds = this.map.getBounds()
-        let mapBounds = buildBondaryes(bounds)
+        const bounds = this.map.getBounds()
+        const mapBounds = buildBondaryes(bounds)
         this.$store.commit('mapBounds', mapBounds)
         this.$store.commit('mapReady', true)
       } else {
         this.$nextTick(() => {
           this.map = this.$refs.map.mapObject
-          let bounds = this.map.getBounds()
-          let mapBounds = buildBondaryes(bounds)
+          const bounds = this.map.getBounds()
+          const mapBounds = buildBondaryes(bounds)
           this.$store.commit('mapBounds', mapBounds)
           this.$store.commit('mapReady', true)
         })
@@ -712,23 +712,23 @@ export default {
      * Build and set bounds based on localMapViewData
      */
     buildAndSetBounds () {
-      let bounds = this.localMapViewData.bbox || [{lon: 0, lat: 0}, {lon: 0, lat: 0}]
+      const bounds = this.localMapViewData.bbox || [{ lon: 0, lat: 0 }, { lon: 0, lat: 0 }]
       let polylineData = []
 
       // Add the routes coordinates to the polyline that must
       // be considered to  the all features databound
-      for (let rKey in this.localMapViewData.routes) {
+      for (const rKey in this.localMapViewData.routes) {
         if (this.localMapViewData.routes[rKey].geometry.coordinates) {
           // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
           // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
           // So we invert them to provide to the component what is expected
-          let coords = GeoUtils.switchLatLonIndex(this.localMapViewData.routes[rKey].geometry.coordinates)
+          const coords = GeoUtils.switchLatLonIndex(this.localMapViewData.routes[rKey].geometry.coordinates)
           polylineData = polylineData.concat(coords)
         }
       }
       // Add the polygons coordinates to the polyline that must
       // be considered to  the all features databound
-      for (let pKey in this.polygons) {
+      for (const pKey in this.polygons) {
         if (this.polygons[pKey].latlngs) {
           polylineData = polylineData.concat(this.polygons[pKey].latlngs)
         }
@@ -746,7 +746,7 @@ export default {
      */
     defineActiveRouteIndex () {
       if (this.localMapViewData.hasRoutes()) {
-        let maxRouteIndexValid = this.localMapViewData.routes.length - 1
+        const maxRouteIndexValid = this.localMapViewData.routes.length - 1
         if (this.$store.getters.activeRouteIndex > maxRouteIndexValid) {
           this.setActiveRouteIndex(0)
         }
@@ -758,7 +758,7 @@ export default {
      * @return {Boolean} zoom changed
      */
     setZoomLevel (mapObj) {
-      let curretMapZoom = mapObj.getZoom()
+      const curretMapZoom = mapObj.getZoom()
       if (curretMapZoom !== this.zoomLevel) {
         mapObj.setZoom(this.zoomLevel)
         return true
@@ -796,7 +796,7 @@ export default {
       if (data.eventName === 'centerHere') {
         this.setMapCenter(data.clickLatlng)
       } else {
-        let dataPassed = {latlng: data.clickLatlng}
+        const dataPassed = { latlng: data.clickLatlng }
         this.$emit(data.eventName, dataPassed)
       }
     },
@@ -817,10 +817,10 @@ export default {
      * @param force - force the fit ignoring fit options
      */
     fitFeaturesBounds (force = false) {
-      let context = this
+      const context = this
 
       // get and use the fit bounds option to determine if the fit should be run
-      let maxFitBoundsZoom = this.hasOnlyOneMarker ? context.zoomLevel : this.maxZoom
+      const maxFitBoundsZoom = this.hasOnlyOneMarker ? context.zoomLevel : this.maxZoom
 
       return new Promise((resolve, reject) => {
         context.buildAndSetBounds()
@@ -869,9 +869,9 @@ export default {
 
         // To make it work properly we have to wait a bit
         // before fitting the map bounds
-        let context = this
+        const context = this
         setTimeout(() => {
-          context.map.fitBounds(context.dataBounds, {padding: [20, 20], maxZoom: maxFitBoundsZoom})
+          context.map.fitBounds(context.dataBounds, { padding: [20, 20], maxZoom: maxFitBoundsZoom })
         }, 400)
       }
     },
@@ -880,7 +880,7 @@ export default {
      * @param {*} polygon
      */
     polygonInfoClick (polygon) {
-      this.infoDialog(polygon.label, null, {code: polygon.data, resizable: true, zIndex: 1001})
+      this.infoDialog(polygon.label, null, { code: polygon.data, resizable: true, zIndex: 1001 })
     },
 
     /**
@@ -889,13 +889,13 @@ export default {
     mapRightClick (event) {
       if (this.showClickPopups) {
         // To be catch by the MapRightClick.vue component
-        let insidePolygon = this.isPointInsidePolygons(event.latlng.lat, event.latlng.lng)
+        const insidePolygon = this.isPointInsidePolygons(event.latlng.lat, event.latlng.lng)
         if (!insidePolygon) {
-          let mapEl = this.$refs.map.$el
-          let data = {event, mapEl, canAddStop: this.canAddStop}
+          const mapEl = this.$refs.map.$el
+          const data = { event, mapEl, canAddStop: this.canAddStop }
           this.eventBus.$emit('mapRightClicked', data)
         }
-        this.clickLatlng = {lat: event.latlng.lat, lng: event.latlng.lng}
+        this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
       }
     },
 
@@ -909,12 +909,12 @@ export default {
       if (this.$store.getters.leftSideBarOpen && this.$lowResolution) {
         this.eventBus.$emit('setSidebarStatus', false)
       } else {
-        let drawPolygonToolbarActive = this.lodash.get(this.drawControlRef, '_toolbars.draw._activeMode')
+        const drawPolygonToolbarActive = this.lodash.get(this.drawControlRef, '_toolbars.draw._activeMode')
         if (this.showClickPopups && !drawPolygonToolbarActive) {
-          let insidePolygon = this.isPointInsidePolygons(event.latlng.lat, event.latlng.lng)
-          let data = {event, insidePolygon}
+          const insidePolygon = this.isPointInsidePolygons(event.latlng.lat, event.latlng.lng)
+          const data = { event, insidePolygon }
           this.eventBus.$emit('mapLeftClicked', data)
-          this.clickLatlng = {lat: event.latlng.lat, lng: event.latlng.lng}
+          this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
         }
       }
     },
@@ -927,10 +927,10 @@ export default {
      * @returns Boolean|Array
      */
     isPointInsidePolygons (lat, lng) {
-      let polygons = this.extractPolygonsFromMap()
-      for (let key in polygons.coordinates) {
-        let coords = polygons.coordinates[key][0]
-        let inside = GeoUtils.isPointInsidePolygon(lat, lng, coords)
+      const polygons = this.extractPolygonsFromMap()
+      for (const key in polygons.coordinates) {
+        const coords = polygons.coordinates[key][0]
+        const inside = GeoUtils.isPointInsidePolygon(lat, lng, coords)
         if (inside) {
           return coords
         }
@@ -943,8 +943,8 @@ export default {
      */
     humanizeRouteToolTip (tooltipData) {
       if (tooltipData && typeof tooltipData === 'object' && tooltipData.distance && tooltipData.unit && tooltipData.duration) {
-        let humanizedData = GeoUtils.getHumanizedTimeAndDistance(tooltipData, this.$t('mapView'))
-        let formattedTooltip = `${this.$t('mapView.distance')} ${humanizedData.distance}<br>${this.$t('mapView.duration')} ${humanizedData.duration}`
+        const humanizedData = GeoUtils.getHumanizedTimeAndDistance(tooltipData, this.$t('mapView'))
+        const formattedTooltip = `${this.$t('mapView.distance')} ${humanizedData.distance}<br>${this.$t('mapView.duration')} ${humanizedData.duration}`
         return formattedTooltip
       }
     },
@@ -954,7 +954,7 @@ export default {
     adjustMap () {
       window.dispatchEvent(new Event('resize'))
 
-      let context = this
+      const context = this
 
       // After map container box is resized
       // we need to wait a little bit
@@ -978,17 +978,17 @@ export default {
      * @param {Boolean} showMarker
      */
     updateMyLocation  (showMarker = false) {
-      let context = this
+      const context = this
       GeoUtils.getBrowserLocation().then((location) => {
         context.$store.commit('currentLocation', location)
         context.myLocationActive = showMarker
 
         // Set returned location as map center
-        let latlng = GeoUtils.buildLatLong(location.lat, location.lng)
+        const latlng = GeoUtils.buildLatLong(location.lat, location.lng)
         this.setMapCenter(latlng)
       }).catch(error => {
-        let message = this.getPositionErrorMessage(error)
-        context.showWarning(message, {timeout: 0})
+        const message = this.getPositionErrorMessage(error)
+        context.showWarning(message, { timeout: 0 })
         context.myLocationActive = false
         console.log(error)
       })
@@ -1044,7 +1044,7 @@ export default {
      */
     setAvoidPolygonDrawingTool () {
       // Get a reference to the map object
-      let map = this.$refs.map.mapObject
+      const map = this.$refs.map.mapObject
 
       if (!this.showControls && this.drawControlRef) {
         map.removeControl(this.drawControlRef)
@@ -1070,7 +1070,7 @@ export default {
         this.drawControlRef = new Leaflet.Control.Draw(this.drawOptions)
         map.addControl(this.drawControlRef)
 
-        let context = this
+        const context = this
 
         // Add listeners to draw created,
         // deleted and edited events
@@ -1093,25 +1093,25 @@ export default {
      * on the localMapViewData avoid_polygons option
      */
     loadAvoidPolygons () {
-      let polygonsDrawn = this.extractPolygonsFromMap()
-      let avoidPolygons = this.lodash.get(this.$store.getters.appRouteData, 'options.options.avoid_polygons')
+      const polygonsDrawn = this.extractPolygonsFromMap()
+      const avoidPolygons = this.lodash.get(this.$store.getters.appRouteData, 'options.options.avoid_polygons')
 
       // If there are polygons to be recreated in the options and
       // there are not polygons already drawn, recreate/redraw them
       if (avoidPolygons && polygonsDrawn.coordinates.length === 0) {
-        let map = this.$refs.map.mapObject
-        for (let key in avoidPolygons.coordinates) {
-          let coordinates = GeoUtils.switchLatLonIndex(avoidPolygons.coordinates[key][0])
+        const map = this.$refs.map.mapObject
+        for (const key in avoidPolygons.coordinates) {
+          const coordinates = GeoUtils.switchLatLonIndex(avoidPolygons.coordinates[key][0])
 
           // Set the color options of the polygons about to be drawn
-          let polygonOptions = {color: this.drawOptions.draw.polygon.shapeOptions.color}
+          const polygonOptions = { color: this.drawOptions.draw.polygon.shapeOptions.color }
 
           // Create each polygon using the leaflet tool
           // adn add it to the map object
-          let polygon = Leaflet.polygon(coordinates, polygonOptions).addTo(map)
+          const polygon = Leaflet.polygon(coordinates, polygonOptions).addTo(map)
 
           // Add handler for the polygon click event
-          let context = this
+          const context = this
           polygon.on('click', function (event) {
             context.onPolygonClicked(polygon, event)
           })
@@ -1125,8 +1125,8 @@ export default {
      * @param {*} map
      */
     onPolygonCreation (event, map) {
-      let context = this
-      let polygon = event.layer
+      const context = this
+      const polygon = event.layer
       polygon.on('click', function (event) {
         context.onPolygonClicked(polygon, event)
       })
@@ -1139,11 +1139,11 @@ export default {
      * @param {*} event
      */
     onPolygonClicked (polygon, event) {
-      let map = this.$refs.map.mapObject
+      const map = this.$refs.map.mapObject
       polygon.editMode = true
 
       new Leaflet.Toolbar2.EditToolbar.Popup(event.latlng, {
-        actions: [ Leaflet.Toolbar2.EditAction.Popup.Edit, Leaflet.Toolbar2.EditAction.Popup.Delete ]
+        actions: [Leaflet.Toolbar2.EditAction.Popup.Edit, Leaflet.Toolbar2.EditAction.Popup.Delete]
       }).addTo(map, polygon)
     },
     /**
@@ -1152,7 +1152,7 @@ export default {
      */
     notifyAvoidPolygonsChanged () {
       if (this.$refs.map.mapObject) {
-        let avoidPolygon = this.extractPolygonsFromMap()
+        const avoidPolygon = this.extractPolygonsFromMap()
         this.$emit('avoidPolygonsChanged', avoidPolygon)
       }
     },
@@ -1164,12 +1164,12 @@ export default {
       // We create a MultPolygon object
       // becouse in it we can put one or multiple
       // polygons :-)
-      let avoidPolygon = { type: 'MultiPolygon', coordinates: [] }
+      const avoidPolygon = { type: 'MultiPolygon', coordinates: [] }
 
       // Extract each polygon from the map object
       this.$refs.map.mapObject.eachLayer(function (layer) {
         if (layer instanceof Leaflet.Polygon) {
-          let geojson = layer.toGeoJSON()
+          const geojson = layer.toGeoJSON()
           avoidPolygon.coordinates.push(geojson.geometry.coordinates)
         }
       })
@@ -1180,9 +1180,9 @@ export default {
      * @param {*} routeIndex
      */
     hightlightRoutePoint (routeIndex) {
-      let activeRouteCoordinates = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
+      const activeRouteCoordinates = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
       if (activeRouteCoordinates[routeIndex]) {
-        let point = activeRouteCoordinates[routeIndex]
+        const point = activeRouteCoordinates[routeIndex]
         this.highlightedRoutePointAltitude = point[2]
         this.highlightedRoutePoint = Leaflet.latLng(point[1], point[0])
       }
@@ -1210,7 +1210,7 @@ export default {
 
     // we need to resize the map height, redraw the map
     // and then fit the bounds
-    let context = this
+    const context = this
     this.eventBus.$on('redrawAndFitMap', (data) => {
       if (data.guid && data.guid === context.guid) {
         context.adjustMap()
@@ -1237,8 +1237,8 @@ export default {
      */
     this.eventBus.$on('placeFocusChanged', (place) => {
       context.focusedPlace = place
-      let center = GeoUtils.buildLatLong(place.lat, place.lng)
-      let distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.mapCenter, center, 'm')
+      const center = GeoUtils.buildLatLong(place.lat, place.lng)
+      const distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.mapCenter, center, 'm')
 
       // We only consider that the center changed if it
       // changes more than 50 meters from the previous center

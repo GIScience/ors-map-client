@@ -62,8 +62,8 @@ export default {
      */
     rightClickEvent (eventName) {
       this.showRightClickPopup = false
-      let clickLatlng = this.clickLatlng
-      let data = {eventName, clickLatlng}
+      const clickLatlng = this.clickLatlng
+      const data = { eventName, clickLatlng }
       this.$emit('rightClickEvent', data)
       this.clickLatlng = null
     },
@@ -74,14 +74,14 @@ export default {
     mapRightClick (data) {
       this.showRightClickPopup = false
       this.data = data
-      let event = data.event
-      let mapEl = data.mapEl
-      let boxWidth = 190
-      let boxHeight = 217
-      let mapWidth = mapEl.clientWidth
-      let mapHeight = mapEl.clientHeight
-      let offsetX = 10
-      let offsetY = 10
+      const event = data.event
+      const mapEl = data.mapEl
+      const boxWidth = 190
+      const boxHeight = 217
+      const mapWidth = mapEl.clientWidth
+      const mapHeight = mapEl.clientHeight
+      const offsetX = 10
+      const offsetY = 10
 
       // Define the x and y where the box must start from based on
       // the location of the click and the box size.
@@ -105,7 +105,7 @@ export default {
     }
   },
   created () {
-    let context = this
+    const context = this
     this.eventBus.$on('mapRightClicked', (data) => {
       context.mapRightClick(data)
     })

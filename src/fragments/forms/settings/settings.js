@@ -42,7 +42,7 @@ export default {
       this.$store.commit('mapSettings', this.mapSettingsTransient)
       localStorage.removeItem('mapSettings')
       if (this.mapSettingsTransient.saveToLocalStorage) {
-        let savingSettings = utils.clone(this.mapSettingsTransient)
+        const savingSettings = utils.clone(this.mapSettingsTransient)
 
         // The apiKey must not be saved if is the default one (if is not a custom one)
         if (savingSettings.apiKey === defaultMapSettings.apiKey) {
@@ -60,7 +60,6 @@ export default {
         this.save()
         this.showSuccess(this.$t('settings.mapSettingsSaved'))
       }
-
     },
     restoreDefaultMapSettings () {
       this.mapSettingsTransient = this.mapSettingsTransient = utils.clone(defaultMapSettings)
@@ -72,7 +71,7 @@ export default {
       if (!this.mapSettingsTransient.locale || !this.mapSettingsTransient.unit || !this.mapSettingsTransient.apiKey || this.mapSettingsTransient.apiKey === '') {
         valid = false
       }
-      for (let key in this.mapSettingsTransient.endpoints) {
+      for (const key in this.mapSettingsTransient.endpoints) {
         if (!this.mapSettingsTransient.endpoints[key] || this.mapSettingsTransient.endpoints[key] === '') {
           valid = false
         }

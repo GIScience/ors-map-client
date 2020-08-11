@@ -16,7 +16,7 @@ export default {
       return location.href
     },
     shortBtnTitle () {
-      let label = this.isShortened ? this.$t('share.fullUrl') : this.$t('share.shortUrl')
+      const label = this.isShortened ? this.$t('share.fullUrl') : this.$t('share.shortUrl')
       return label
     }
   },
@@ -44,9 +44,9 @@ export default {
      *
      */
     copyUrl () {
-      let url = this.shareUrl ? this.shareUrl : this.currentUrl
+      const url = this.shareUrl ? this.shareUrl : this.currentUrl
       if (this.copyToClipboard(url)) {
-        this.showSuccess(this.$t('share.urlCopied'), {timeout: 2000})
+        this.showSuccess(this.$t('share.urlCopied'), { timeout: 2000 })
       }
     },
     /**
@@ -60,7 +60,7 @@ export default {
       el.value = str
       document.body.appendChild(el)
       el.select()
-      let result = document.execCommand('copy')
+      const result = document.execCommand('copy')
       document.body.removeChild(el)
       return result
     },
@@ -69,21 +69,21 @@ export default {
      * Convert the full url to a short url using bit.ly api
      */
     short () {
-      let bitlyBaseApiUrl = 'https://api-ssl.bitly.com/v3/shorten'
-      let apiKey = appConfig.bitlyApiKey
-      let login = appConfig.bitlyLogin
+      const bitlyBaseApiUrl = 'https://api-ssl.bitly.com/v3/shorten'
+      const apiKey = appConfig.bitlyApiKey
+      const login = appConfig.bitlyLogin
 
       let publicUrl = location.href
 
       // The bit.ly service does not work with localhost
       // so we always replace the current host by the public host
       if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-        let baseUrl = `${location.protocol}//${location.host}`
+        const baseUrl = `${location.protocol}//${location.host}`
         publicUrl = location.href.replace(baseUrl, constants.orsPublicHost)
       }
 
-      let longUrl = encodeURIComponent(publicUrl)
-      let shortenerRequestUrl = `${bitlyBaseApiUrl}?login=${login}&apiKey=${apiKey}&longUrl=${longUrl}`
+      const longUrl = encodeURIComponent(publicUrl)
+      const shortenerRequestUrl = `${bitlyBaseApiUrl}?login=${login}&apiKey=${apiKey}&longUrl=${longUrl}`
 
       // Show the loading bar while the request runs
       this.eventBus.$emit('showLoading', true)
@@ -93,13 +93,13 @@ export default {
         if (response.data.status_code === 200) {
           this.shareUrl = response.data.data.url
           this.isShortened = true
-          this.showSuccess(this.$t('share.urlShortened'), {timeout: 2000})
+          this.showSuccess(this.$t('share.urlShortened'), { timeout: 2000 })
         } else {
-          this.showError(this.$t('share.shorteningNotPossible'), {timeout: 2000})
+          this.showError(this.$t('share.shorteningNotPossible'), { timeout: 2000 })
           console.log(response)
         }
       }).catch((error) => {
-        this.showError(this.$t('share.shorteningNotPossible'), {timeout: 2000})
+        this.showError(this.$t('share.shorteningNotPossible'), { timeout: 2000 })
         console.log(error)
       }).finally(() => {
         // Hide the loading bar when the request is finished

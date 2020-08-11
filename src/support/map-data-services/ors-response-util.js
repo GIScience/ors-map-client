@@ -7,7 +7,7 @@ import lodash from 'lodash'
  * @returns {*}
  */
 const buildSinglePlaceResponse = (place) => {
-  let responseLikeLData = { features: [ { properties: { label: place.placeName, id: place.placeId }, geometry: { coordinates: place.coordinates }, inputIndex: 0 } ] }
+  const responseLikeLData = { features: [{ properties: { label: place.placeName, id: place.placeId }, geometry: { coordinates: place.coordinates }, inputIndex: 0 }] }
   return responseLikeLData
 }
 
@@ -17,7 +17,7 @@ const buildSinglePlaceResponse = (place) => {
  * @returns {object}
  */
 const getFilteredFeatureResponse = (featureId, rawResponse) => {
-  let filteredResponse = {}
+  const filteredResponse = {}
   Object.assign(filteredResponse, rawResponse)
   if (rawResponse && Array.isArray(rawResponse.features)) {
     filteredResponse.features = lodash.filter(rawResponse.features, function (f) { return f.properties.id === featureId })
@@ -32,8 +32,8 @@ const getFilteredFeatureResponse = (featureId, rawResponse) => {
  * @param {*} oldResponse
 */
 const isANewResponse = (newResponse, oldResponse) => {
-  let newTimestamp = lodash.get(newResponse, 'metadata.timestamp')
-  let oldTimestamp = lodash.get(oldResponse, 'metadata.timestamp')
+  const newTimestamp = lodash.get(newResponse, 'metadata.timestamp')
+  const oldTimestamp = lodash.get(oldResponse, 'metadata.timestamp')
   if (!oldTimestamp || (newTimestamp !== oldTimestamp)) {
     return true
   }
@@ -60,7 +60,7 @@ const isANewMapViewData = (newMapData, oldMapData) => {
  * @returns {*} filter object
  */
 const getFilterRefByName = (OrsMapFiltersAccessor, name) => {
-  let filter = lodash.find(OrsMapFiltersAccessor, (f) => {
+  const filter = lodash.find(OrsMapFiltersAccessor, (f) => {
     return f.name === name
   })
   return filter
@@ -73,7 +73,7 @@ const getFilterRefByName = (OrsMapFiltersAccessor, name) => {
  * @returns {*} filter object
  */
 const getFilterIndexByName = (OrsMapFiltersAccessor, name) => {
-  let filterIndex = lodash.findIndex(OrsMapFiltersAccessor, (f) => {
+  const filterIndex = lodash.findIndex(OrsMapFiltersAccessor, (f) => {
     return f.name === name
   })
   return filterIndex
@@ -87,18 +87,18 @@ const adjustResponseCoordinates = (responseData) => {
   // When the query does not have elevation the returned result
   // comes with the coordinates position switched
   // so, we switchit back
-  let queryWithElevation = lodash.get(responseData, 'metadata.query.elevation')
+  const queryWithElevation = lodash.get(responseData, 'metadata.query.elevation')
 
   // Switch coordinates position and decode polyline, if necessary
   if (responseData.routes) {
     if (responseData.metadata.query.format === 'encodedpolyline') {
-      for (let key in responseData.routes) {
+      for (const key in responseData.routes) {
         responseData.routes[key].geometry = geoUtils.decodePolyline(responseData.routes[key].geometry.geometry)
         responseData.routes[key].route.geometry_format = 'geojson'
       }
     }
   } else if (responseData.features) {
-    for (let key in responseData.features) {
+    for (const key in responseData.features) {
       if (queryWithElevation && !responseData.features[key].geometry.switched) {
       }
     }

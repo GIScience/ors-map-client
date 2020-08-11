@@ -22,19 +22,20 @@ class AppMode {
     this.modeTo = modeTo
     const modes = { directionsMode, placeMode, roundtripMode, searchMode, isochronesMode }
 
-    let mode = `${this.modeTo}Mode`
+    const mode = `${this.modeTo}Mode`
     this.targetMode = new modes[mode]()
   }
+
   /**
    * Get a route object based on the places given and the app mode
    * @param {*} places
    * @returns {Object} - {name: ..., params: ...}
    */
   getRoute (places) {
-    let newAppRouteData = this.getAppRouteData(places)
+    const newAppRouteData = this.getAppRouteData(places)
     store.commit('appRouteData', newAppRouteData)
 
-    let options = this.getRouteOptions(newAppRouteData.options)
+    const options = this.getRouteOptions(newAppRouteData.options)
     var route = this.targetMode.getRoute(newAppRouteData, options)
     return route
   }
@@ -45,8 +46,8 @@ class AppMode {
    * @returns {AppRouteData} newAppRouteData
    */
   getAppRouteData (places) {
-    let options = this.getRouteOptions(store.getters.appRouteData.options)
-    let newAppRouteData = this.targetMode.buildAppRouteData(places, options)
+    const options = this.getRouteOptions(store.getters.appRouteData.options)
+    const newAppRouteData = this.targetMode.buildAppRouteData(places, options)
     return newAppRouteData
   }
 
@@ -57,8 +58,8 @@ class AppMode {
    */
   static decodePath (currentRoute) {
     // return appRouteData
-    let appMode = new AppMode(store.getters.mode)
-    let appRouteData = appMode.targetMode.decodePath(currentRoute)
+    const appMode = new AppMode(store.getters.mode)
+    const appRouteData = appMode.targetMode.decodePath(currentRoute)
     OrsParamsParser.parseOptions(OrsMapFilters, appRouteData.options)
     return appRouteData
   }
@@ -72,12 +73,12 @@ class AppMode {
    * @returns {*} validOptions
    */
   getRouteOptions = (options) => {
-    let orsFilters = OrsMapFilters
-    let validOptions = {}
-    for (let propName in options) {
+    const orsFilters = OrsMapFilters
+    const validOptions = {}
+    for (const propName in options) {
       let foundInFilters = false
-      for (let filterKey in orsFilters) {
-        let filter = orsFilters[filterKey]
+      for (const filterKey in orsFilters) {
+        const filter = orsFilters[filterKey]
         if (filter.name === propName) {
           validOptions[propName] = options[propName]
           foundInFilters = true

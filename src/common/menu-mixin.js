@@ -28,15 +28,15 @@ const getHref = (to) => {
 
 const isActive = (item) => {
   item.active = false
-  let activeRoute = location.hash.replace('#', '')
-  let itemRoute = item.href.replace('/dev/#', '')
+  const activeRoute = location.hash.replace('#', '')
+  const itemRoute = item.href.replace('/dev/#', '')
   if (activeRoute === itemRoute || (item.href === '/dev' && (activeRoute === '/login' || activeRoute === '/'))) {
     item.active = true
   }
   return item.active
 }
 
-export {showMenuItem}
-export {navigate}
-export {isActive}
-export {getHref}
+export { showMenuItem }
+export { navigate }
+export { isActive }
+export { getHref }

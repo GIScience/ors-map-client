@@ -37,9 +37,9 @@ class TableDataBuilder {
   static getTableDataExtractor = (extractorName, data) => {
     // This is a dictionary that translates
     // the API version to an extractor version
-    let apiVersionToExtractorVersionDictionary = {
-      '4.5': 'V1',
-      '4.7': 'V1'
+    const apiVersionToExtractorVersionDictionary = {
+      4.5: 'V1',
+      4.7: 'V1'
     }
 
     // In this constant we have to add all the map extractors
@@ -52,8 +52,8 @@ class TableDataBuilder {
 
     // Get the right extractor based on the extractor name
     // and on the api version from the extractors list
-    let extractorNameWithVersion = extractorName + apiVersionToExtractorVersionDictionary[data.apiVersion]
-    let extractor = new extractors[extractorNameWithVersion](data)
+    const extractorNameWithVersion = extractorName + apiVersionToExtractorVersionDictionary[data.apiVersion]
+    const extractor = new extractors[extractorNameWithVersion](data)
     return extractor
   }
 
@@ -66,7 +66,7 @@ class TableDataBuilder {
    * @memberof TableDataBuilder
    */
   static hasTableBuilderFor = (data) => {
-    let builder = TableDataBuilder.getTableDataBuilder(data)
+    const builder = TableDataBuilder.getTableDataBuilder(data)
     return builder !== null && builder !== undefined
   }
 }

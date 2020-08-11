@@ -14,7 +14,7 @@ export default {
   created () {
     this.$emit('beforeOpen')
     this.open = true
-    let context = this
+    const context = this
     this.eventBus.$on('highlightPolylineSections', () => {
       context.open = false
     })
@@ -34,11 +34,11 @@ export default {
   computed: {
     width () {
       let value = ''
-      let offset = 60
-      let leftSidebarOpen = this.$store.getters.leftSideBarPinned || this.$store.getters.leftSideBarOpen
+      const offset = 60
+      const leftSidebarOpen = this.$store.getters.leftSideBarPinned || this.$store.getters.leftSideBarOpen
       if (leftSidebarOpen) {
         // Here we use the same width that the sidebar uses depending onf the resolution
-        let sidebarWidth = this.$mdAndUpResolution ? 400 : 290
+        const sidebarWidth = this.$mdAndUpResolution ? 400 : 290
         value = window.innerWidth - (sidebarWidth + offset)
       } else {
         value = window.innerWidth - offset
@@ -46,9 +46,8 @@ export default {
       return value
     },
     height () {
-      let height = this.width / 2
+      const height = this.width / 2
       return height > 150 ? 150 : height
-
     }
   },
   methods: {

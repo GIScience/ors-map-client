@@ -7,7 +7,7 @@ const globalMixins = {
     ...showToaster, // mix the show toaster methods here
 
     confirmDialog (title, text, options) {
-      let confirm = options || {}
+      const confirm = options || {}
       confirm.text = text
       confirm.title = title
       confirm.neverOption = options && options.neverOption
@@ -24,7 +24,7 @@ const globalMixins = {
       })
     },
     infoDialog (title, text, options) {
-      let info = options || {}
+      const info = options || {}
       info.text = text
       info.title = title
       VueInstance.eventBus.$emit('triggerShowInfo', info)
@@ -38,29 +38,29 @@ const globalMixins = {
   },
   computed: {
     $xlResolution () {
-      let extraLow = this.$vuetify.breakpoint.xs
+      const extraLow = this.$vuetify.breakpoint.xs
       return extraLow
     },
     $lowResolution () {
-      let lowResolution = this.$vuetify.breakpoint.smAndDown
+      const lowResolution = this.$vuetify.breakpoint.smAndDown
       return lowResolution
     },
     $highResolution () {
-      let highResolution = this.$vuetify.breakpoint.lgAndUp
+      const highResolution = this.$vuetify.breakpoint.lgAndUp
       return highResolution
     },
 
     $mdResolution () {
-      let highResolution = this.$vuetify.breakpoint.md
+      const highResolution = this.$vuetify.breakpoint.md
       return highResolution
     },
 
     $mdAndUpResolution () {
-      let mdAndUpResolution = this.$vuetify.breakpoint.mdAndUp
+      const mdAndUpResolution = this.$vuetify.breakpoint.mdAndUp
       return mdAndUpResolution
     },
     $mdAndDownResolution () {
-      let mdAndDownResolution = this.$vuetify.breakpoint.mdAndDown
+      const mdAndDownResolution = this.$vuetify.breakpoint.mdAndDown
       return mdAndDownResolution
     },
     constants () {

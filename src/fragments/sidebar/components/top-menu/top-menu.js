@@ -8,7 +8,7 @@ export default {
   },
   computed: {
     isPinned () {
-      let isPinned = this.$store.getters.leftSideBarPinned
+      const isPinned = this.$store.getters.leftSideBarPinned
       return isPinned
     }
   },

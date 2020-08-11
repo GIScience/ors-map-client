@@ -12,15 +12,16 @@ class MapViewDataBuilder {
     this.translations = options.translations
     this.options = options
   }
+
   /**
    * Build and returns map data
    * @returns {Promise} with MapViewData @see @/models/map-view-data
    */
   buildMapViewData = () => {
     this.setMapExtractorBuilder()
-    let context = this
+    const context = this
     return new Promise((resolve, reject) => {
-      let sourceType = this.getSourceType()
+      const sourceType = this.getSourceType()
       if (sourceType) {
         context.mapDataBuilder.buildMapData(sourceType, this.apiVersion).then(mapViewData => {
           resolve(mapViewData)
@@ -30,6 +31,7 @@ class MapViewDataBuilder {
       }
     })
   }
+
   /**
    * Get the response type, considering the endpoint and the response formart
    * It is used to determin the map data extractor that is gonna be used
@@ -49,11 +51,11 @@ class MapViewDataBuilder {
    * Define the map builder instance according the current response, request and api version
    */
   setMapExtractorBuilder = () => {
-    let sourceType = this.getSourceType()
+    const sourceType = this.getSourceType()
 
     // If we have a valid source type
     if (sourceType) {
-      let data = {
+      const data = {
         mapRawData: this.mapRawData,
         dataOrigin: this.dataOrigin,
         translations: this.translations,
@@ -75,9 +77,9 @@ class MapViewDataBuilder {
    * @emits mapViewDataChanged - using eventBus
    */
   static buildMapData = (data, appRouteData) => {
-    let rawContent = data.content
-    let options = data.options
-    let mapViewDataBuilder = new MapViewDataBuilder(rawContent, options)
+    const rawContent = data.content
+    const options = data.options
+    const mapViewDataBuilder = new MapViewDataBuilder(rawContent, options)
 
     return new Promise((resolve, reject) => {
       mapViewDataBuilder.buildMapViewData().then((mapViewData) => {
@@ -85,7 +87,7 @@ class MapViewDataBuilder {
         // to avoid having to resolve each place coordinates to a placeName again
         // If there is no places in appRouteData (dealing with a route import, for example)
         // nothing happens because appRouteData.places will be an empty array
-        for (let key in appRouteData.places) {
+        for (const key in appRouteData.places) {
           if (mapViewData.places[key]) {
             mapViewData.places[key].placeName = appRouteData.places[key].placeName
           }

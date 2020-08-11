@@ -13,7 +13,7 @@ export default {
   },
   computed: {
     roundTripFilterAcessor () {
-      let filterRef = OrsFilterUtil.getFilterRefByName('round_trip')
+      const filterRef = OrsFilterUtil.getFilterRefByName('round_trip')
       return filterRef
     }
   },

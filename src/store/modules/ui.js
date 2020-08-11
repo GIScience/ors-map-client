@@ -59,7 +59,7 @@ const mutations = {
 }
 
 const actions = {
-  fetchMainMenu ({getters, commit}) {
+  fetchMainMenu ({ getters, commit }) {
     return new Promise((resolve) => {
       if (getters.mainMenu.length > 0) {
         resolve(getters.mainMenu)

@@ -54,11 +54,11 @@ export default {
       if (!this.hasRoutes) {
         return []
       }
-      let routes = []
-      let context = this
-      for (let key in this.localMapViewData.routes) {
-        let route = Object.assign({}, this.localMapViewData.routes[key])
-        let unit = route.summary.unit || route.summary.originalUnit
+      const routes = []
+      const context = this
+      for (const key in this.localMapViewData.routes) {
+        const route = Object.assign({}, this.localMapViewData.routes[key])
+        const unit = route.summary.unit || route.summary.originalUnit
         if (!route.summary.humanized) {
           route.summary = context.getHumanizedSummary(route.summary, unit)
           route.summary.humanized = true
@@ -74,20 +74,20 @@ export default {
     getHumanizedSummary (summary, unit = null) {
       unit = unit || this.$store.getters.mapSettings.unit
       summary.unit = unit
-      let durationAndDistance = geoUtils.getHumanizedTimeAndDistance(summary, this.$t('routeDetails'))
+      const durationAndDistance = geoUtils.getHumanizedTimeAndDistance(summary, this.$t('routeDetails'))
       summary.distance = durationAndDistance.distance
       summary.duration = durationAndDistance.duration
       return summary
     },
     parseSegments (segments) {
-      let context = this
-      for (let key in segments) {
+      const context = this
+      for (const key in segments) {
         let segment = Object.assign({}, segments[key])
         segment = context.getHumanizedSummary(segment, segment.unit)
         segments[key].duration = segment.duration
         segments[key].distance = segment.distance
 
-        for (let stepKey in segments[key].steps) {
+        for (const stepKey in segments[key].steps) {
           let step = Object.assign({}, segments[key].steps[stepKey])
           step = context.getHumanizedSummary(step, step.unit)
           segments[key].steps[stepKey].distance = step.distance

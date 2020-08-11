@@ -7,8 +7,8 @@ import lodash from 'lodash'
  * @param {*} scopedParameters
  */
 const getFilterWithValueValueUpdated = (parameter) => {
-  let parameterClone = utils.clone(parameter)
-  let globalParameters = OrsMapFilters
+  const parameterClone = utils.clone(parameter)
+  const globalParameters = OrsMapFilters
   setValue(parameterClone, globalParameters)
   return parameterClone
 }
@@ -36,7 +36,7 @@ const isAvailable = (parameter) => {
  */
 const setValue = (parameter, globalParameters) => {
   if (parameter.validWhen) {
-    let matchesRules = getMatchesDependencyRules(parameter, globalParameters, 'validWhen')
+    const matchesRules = getMatchesDependencyRules(parameter, globalParameters, 'validWhen')
     if (!matchesRules) {
       parameter.value = null
     }
@@ -52,8 +52,8 @@ const setValue = (parameter, globalParameters) => {
  */
 const getMatchesDependencyRules = (parameter, globalParameters, dependencyKey) => {
   let matchRule = true
-  for (let ruleKey in parameter[dependencyKey]) {
-    let rule = parameter[dependencyKey][ruleKey]
+  for (const ruleKey in parameter[dependencyKey]) {
+    const rule = parameter[dependencyKey][ruleKey]
     let dependsOn = null
     if (rule.ref === 'self') {
       dependsOn = parameter
@@ -61,7 +61,7 @@ const getMatchesDependencyRules = (parameter, globalParameters, dependencyKey) =
       dependsOn = getDependencyRelationTargetObj(globalParameters, rule)
     }
     if (dependsOn) {
-      let value = getParsedValue(dependsOn.value, dependsOn.apiDefault)
+      const value = getParsedValue(dependsOn.value, dependsOn.apiDefault)
       matchRule = applyValueRule(rule, value, matchRule)
       matchRule = applyConditionRule(rule, value, matchRule)
     }
@@ -119,9 +119,9 @@ const applyValueRule = (rule, paramValue, matchesRule) => {
   let ruleValue = rule.value || rule.valueNot
   ruleValue = getParsedValue(ruleValue)
   if (ruleValue !== undefined && paramValue !== undefined) {
-    if (rule.hasOwnProperty('value') && rule.value !== undefined) {
+    if (Object.prototype.hasOwnProperty.call(rule, 'value') && rule.value !== undefined) {
       matchesRule = matchForExistingRuleValue(paramValue, ruleValue)
-    } else if (rule.hasOwnProperty('valueNot')) {
+    } else if (Object.prototype.hasOwnProperty.call(rule, 'valueNot')) {
       matchesRule = matchForExistingRuleValue(paramValue, ruleValue, true)
     }
   } else {
@@ -172,7 +172,7 @@ const getParsedValue = (value, defaultValue = null) => {
   if (value === undefined || value === null || value === '') {
     value = defaultValue
   }
-  let type = value === 'true' || value === 'false' || typeof value === 'boolean' ? 'boolean' : null
+  const type = value === 'true' || value === 'false' || typeof value === 'boolean' ? 'boolean' : null
   if (type === 'boolean') {
     if (typeof value !== 'boolean') {
       value = value === 'true'
@@ -203,7 +203,7 @@ const getDependencyRelationTargetObj = (globalParameters, rule) => {
   }
 
   // First get the object in the root node of global parameters where the dependency ref points to
-  let rootTargetObject = lodash.find(globalParameters, function (p) { return p.name === rootParameterName })
+  const rootTargetObject = lodash.find(globalParameters, function (p) { return p.name === rootParameterName })
 
   // If the target has a child path find it inside
   // the root target parameter object and return it
@@ -216,17 +216,17 @@ const getDependencyRelationTargetObj = (globalParameters, rule) => {
 
 const getChildProp = (rootObject, propPath) => {
   if (propPath.indexOf('props.') !== -1 && Array.isArray(rootObject.props)) {
-    let childPath = propPath.replace('props.', '')
+    const childPath = propPath.replace('props.', '')
     if (childPath.indexOf('props.') > -1) {
-      let subRootName = childPath.split('.')[0]
-      let subRoot = lodash.find(rootObject.props, function (p) { return p.name === subRootName })
+      const subRootName = childPath.split('.')[0]
+      const subRoot = lodash.find(rootObject.props, function (p) { return p.name === subRootName })
       return getChildProp(subRoot, childPath.replace(`${subRootName}.`, ''))
     } else {
-      let childTargetObject = lodash.find(rootObject.props, function (p) { return p.name === childPath })
+      const childTargetObject = lodash.find(rootObject.props, function (p) { return p.name === childPath })
       return childTargetObject
     }
   } else {
-    let child = lodash.get(rootObject, propPath)
+    const child = lodash.get(rootObject, propPath)
     return child
   }
 }

@@ -39,22 +39,22 @@ export default {
   },
   computed: {
     altitudeData () {
-      let hasData = this.parsedData && Array.isArray(this.parsedData.datasets) && this.parsedData.datasets.length > 0
-      let data = hasData ? this.parsedData : false
+      const hasData = this.parsedData && Array.isArray(this.parsedData.datasets) && this.parsedData.datasets.length > 0
+      const data = hasData ? this.parsedData : false
       return data
     },
     summary () {
       if (this.mapViewData) {
-        let summary = this.mapViewData.routes[this.$store.getters.activeRouteIndex].summary
+        const summary = this.mapViewData.routes[this.$store.getters.activeRouteIndex].summary
         return summary
       }
     },
     ascent () {
-      let value = Math.abs(this.summary.ascent).toFixed(1)
+      const value = Math.abs(this.summary.ascent).toFixed(1)
       return value
     },
     descent () {
-      let value = Math.abs(this.summary.descent).toFixed(1)
+      const value = Math.abs(this.summary.descent).toFixed(1)
       return value
     }
   },

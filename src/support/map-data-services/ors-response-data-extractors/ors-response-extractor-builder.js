@@ -59,7 +59,7 @@ class OrsResponseExtractorBuilder {
   static getMapDataExtractor = (extractorName, data, apiVersion) => {
     // This is a dictionary that translates
     // the API version to an extractor version
-    let apiVersionToExtractorDictionary = {
+    const apiVersionToExtractorDictionary = {
       '5.0': 'V2'
     }
 
@@ -76,13 +76,13 @@ class OrsResponseExtractorBuilder {
 
     // Get the right extractor based on the extractor name
     // and on the api version from the extractors list
-    let extractorNameWithVersion = extractorName + apiVersionToExtractorDictionary[apiVersion]
-    let builderInputData = {
+    const extractorNameWithVersion = extractorName + apiVersionToExtractorDictionary[apiVersion]
+    const builderInputData = {
       responseData: data.mapRawData,
       requestData: data.dataOrigin,
       translations: data.translations
     }
-    let extractorInstance = new extractors[extractorNameWithVersion](builderInputData)
+    const extractorInstance = new extractors[extractorNameWithVersion](builderInputData)
     return extractorInstance
   }
 
@@ -95,7 +95,7 @@ class OrsResponseExtractorBuilder {
    * @memberof TableDataBuilder
    */
   static hasMapBuilderFor = (dataFromType, data, apiVersion) => {
-    let builder = OrsResponseExtractorBuilder.getMapDataBuilder(dataFromType, data, apiVersion)
+    const builder = OrsResponseExtractorBuilder.getMapDataBuilder(dataFromType, data, apiVersion)
     return builder !== null && builder !== undefined
   }
 }

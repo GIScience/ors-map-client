@@ -7,11 +7,11 @@ import lodash from 'lodash'
  */
 const getColumns = (mapViewData, routeIndex) => {
   let coordinates = []
-  let route = mapViewData.routes[routeIndex]
+  const route = mapViewData.routes[routeIndex]
   if (route && route.geometry && route.geometry.coordinates) {
     coordinates = route.geometry.coordinates
   }
-  let columns = coordinates.length
+  const columns = coordinates.length
   return Array(columns)
 }
 
@@ -20,7 +20,7 @@ const getColumns = (mapViewData, routeIndex) => {
  * @param {*} mapViewData
  */
 const getDatasets = (mapViewData, routeIndex) => {
-  let altitudeDataset = {
+  const altitudeDataset = {
     label: 'Meters',
     borderColor: theme.info,
     borderWidth: 0,
@@ -32,7 +32,7 @@ const getDatasets = (mapViewData, routeIndex) => {
     data: []
   }
   let coordinates = []
-  let route = mapViewData.routes[routeIndex]
+  const route = mapViewData.routes[routeIndex]
   if (route && route.geometry && route.geometry.coordinates) {
     coordinates = route.geometry.coordinates
   }
@@ -46,7 +46,7 @@ const getDatasets = (mapViewData, routeIndex) => {
 }
 
 const parse = (mapViewData, routeIndex) => {
-  let parsed = {
+  const parsed = {
     labels: getColumns(mapViewData, routeIndex),
     datasets: getDatasets(mapViewData, routeIndex)
   }

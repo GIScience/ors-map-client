@@ -22,7 +22,7 @@ export default {
     }
   },
   created () {
-    let context = this
+    const context = this
     this.$store.dispatch('fetchMainMenu').then(() => {
       context.menuItems = context.$store.getters.mainMenu
     })
@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     homeUrl () {
-      let url = resolver.homeUrl()
+      const url = resolver.homeUrl()
       return url
     }
   }

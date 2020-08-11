@@ -20,7 +20,7 @@ import OrsApiClient from 'openrouteservice-js'
  * @returns {Promise}
  */
 const Directions = (places, customArgs = null) => {
-  let directions = new OrsApiClient.Directions({
+  const directions = new OrsApiClient.Directions({
     api_key: store.getters.mapSettings.apiKey,
     host: store.getters.mapSettings.apiBaseUrl,
     service: store.getters.mapSettings.endpoints.directions
@@ -31,10 +31,10 @@ const Directions = (places, customArgs = null) => {
   }
   return new Promise((resolve, reject) => {
     directions.calculate(args).then(response => {
-      let data = { options: {origin: constants.dataOrigins.directions, apiVersion: constants.apiVersion}, content: response }
+      const data = { options: { origin: constants.dataOrigins.directions, apiVersion: constants.apiVersion }, content: response }
       resolve(data)
     }).catch(err => {
-      let result = {response: err, args: args}
+      const result = { response: err, args: args }
       reject(result)
     })
   })
@@ -47,16 +47,16 @@ const Directions = (places, customArgs = null) => {
  * @returns {Promise}
  */
 const Geocode = (term, size = 10) => {
-  let client = new OrsApiClient.Geocode({
+  const client = new OrsApiClient.Geocode({
     api_key: store.getters.mapSettings.apiKey,
     host: store.getters.mapSettings.apiBaseUrl,
     service: store.getters.mapSettings.endpoints.autocomplete // using autocomplete because it is faster
   })
-  let args = OrsParamsParser.buildAutocompleteArgs(term)
+  const args = OrsParamsParser.buildAutocompleteArgs(term)
   args.size = size
   return new Promise((resolve, reject) => {
     client.geocode(args).then((response) => {
-      let places = Place.placesFromFeatures(response.features)
+      const places = Place.placesFromFeatures(response.features)
       resolve(places)
     }).catch(err => {
       reject(err)
@@ -72,16 +72,16 @@ const Geocode = (term, size = 10) => {
  * @returns {Promise}
  */
 const ReverseGeocode = (lat, lng, size = 10) => {
-  let client = new OrsApiClient.Geocode({
+  const client = new OrsApiClient.Geocode({
     api_key: store.getters.mapSettings.apiKey,
     host: store.getters.mapSettings.apiBaseUrl,
     service: store.getters.mapSettings.endpoints.reverseGeocode
   })
-  let args = OrsParamsParser.buildReverseSearchArgs(lat, lng)
+  const args = OrsParamsParser.buildReverseSearchArgs(lat, lng)
   args.size = size
   return new Promise((resolve, reject) => {
     client.reverseGeocode(args).then((response) => {
-      let places = Place.placesFromFeatures(response.features)
+      const places = Place.placesFromFeatures(response.features)
       resolve(places)
     }).catch(err => {
       reject(err)
@@ -101,11 +101,11 @@ const ReverseGeocode = (lat, lng, size = 10) => {
  */
 const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
   return new Promise((resolve, reject) => {
-    let restrictToBbox = restrictArea && store.getters.mapSettings.prioritizeSearchingForNearbyPlaces
-    let args = OrsParamsParser.buildAutocompleteArgs(term, restrictToBbox)
+    const restrictToBbox = restrictArea && store.getters.mapSettings.prioritizeSearchingForNearbyPlaces
+    const args = OrsParamsParser.buildAutocompleteArgs(term, restrictToBbox)
     args.size = quantity
 
-    let client = new OrsApiClient.Geocode({
+    const client = new OrsApiClient.Geocode({
       api_key: store.getters.mapSettings.apiKey,
       host: store.getters.mapSettings.apiBaseUrl,
       service: store.getters.mapSettings.endpoints.geocodeSearch
@@ -122,7 +122,7 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
           reject(response)
         })
       } else {
-        let places = Place.placesFromFeatures(response.features)
+        const places = Place.placesFromFeatures(response.features)
         resolve(places)
       }
     }).catch(response => {
@@ -135,7 +135,7 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
  * Get the POI function accessor
  */
 const Pois = () => {
-  let pois = new OrsApiClient.Pois({
+  const pois = new OrsApiClient.Pois({
     api_key: store.getters.mapSettings.apiKey,
     host: store.getters.mapSettings.apiBaseUrl,
     service: store.getters.mapSettings.endpoints.pois
@@ -150,20 +150,20 @@ const Isochrones = (places) => {
     service: store.getters.mapSettings.endpoints.isochrones
   })
   return new Promise((resolve, reject) => {
-    let args = OrsParamsParser.buildIsochronesArgs(places)
+    const args = OrsParamsParser.buildIsochronesArgs(places)
     isochrones.calculate(args).then((response) => {
-      let data = { options: {origin: constants.dataOrigins.isochrones, apiVersion: constants.apiVersion}, content: response }
+      const data = { options: { origin: constants.dataOrigins.isochrones, apiVersion: constants.apiVersion }, content: response }
       resolve(data)
     }).catch((err) => {
-      let result = {response: err, args: args}
+      const result = { response: err, args: args }
       reject(result)
     })
   })
 }
 
-export {Directions}
-export {Geocode}
-export {Pois}
-export {PlacesSearch}
-export {ReverseGeocode}
-export {Isochrones}
+export { Directions }
+export { Geocode }
+export { Pois }
+export { PlacesSearch }
+export { ReverseGeocode }
+export { Isochrones }

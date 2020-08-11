@@ -22,9 +22,9 @@ class CrudForm {
     }
 
     if (!validForm && !this.options.skipShowValidationMsg) {
-      let errorMsg = this.options.invalidForm || this.vm.$t('crud.invalidForm')
+      const errorMsg = this.options.invalidForm || this.vm.$t('crud.invalidForm')
       // as we are not sure about the error message size, use multi-line model for the toaster
-      this.vm.showError(this.capitalize(errorMsg), {mode: 'multi-line'})
+      this.vm.showError(this.capitalize(errorMsg), { mode: 'multi-line' })
     }
     return validForm
   }
@@ -42,7 +42,7 @@ class CrudForm {
       // We only validate the  required attribute if the input is not yet invalid
       if (input.valid && input.required && (input.inputValue === undefined || input.inputValue === null || input.inputValue === '')) {
         input.valid = validForm = false
-        let errorMsg = `${input.label} ${this.vm.$t('crud.required')}` || this.vm.$t('crud.inputRequired')
+        const errorMsg = `${input.label} ${this.vm.$t('crud.required')}` || this.vm.$t('crud.inputRequired')
         input.errorBucket.push(errorMsg)
       }
     })

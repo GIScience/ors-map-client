@@ -11,8 +11,8 @@ const PolygonUtils = {
     index = Number(index)
     // We get a color from the color collection but we
     // skip the first 5 colors because they are not nice
-    let names = htmlColors.names() // Get an array containing all colors names
-    let color = htmlColors.hex(names[index + 6])
+    const names = htmlColors.names() // Get an array containing all colors names
+    const color = htmlColors.hex(names[index + 6])
     return color
   },
   /**
@@ -23,8 +23,8 @@ const PolygonUtils = {
   buildPolygonLabel (polygon, translations) {
     let label = ''
     if (polygon.properties.range_type === 'time') {
-      let durationObj = GeoUtils.getDurationInSegments(polygon.properties.value, translations)
-      let humanizedDuration = `${durationObj.days} ${durationObj.hours} ${durationObj.minutes} ${durationObj.seconds}`
+      const durationObj = GeoUtils.getDurationInSegments(polygon.properties.value, translations)
+      const humanizedDuration = `${durationObj.days} ${durationObj.hours} ${durationObj.minutes} ${durationObj.seconds}`
       label = `${humanizedDuration} ${translations.polygon}`
     } else { // the range_type is distance
       let distance = parseFloat(polygon.properties.value)
