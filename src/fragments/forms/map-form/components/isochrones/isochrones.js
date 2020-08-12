@@ -38,6 +38,12 @@ export default {
         context.updateAppRoute()
       }
     })
+    // When the user click on a marker to remove it
+    this.eventBus.$on('removePlace', (data) => {
+      if (context.active) {
+        context.removePlace(data)
+      }
+    })
 
     /**
      * Update local object when a mapViewData is uploaded
@@ -188,6 +194,17 @@ export default {
     removePlaceInput (index) {
       this.places.splice(index, 1)
       this.updateAppRoute()
+    },
+    /**
+    * When the user click on a marker and select to remove it
+    *
+    * @param {*} data {index: ..., place:...}
+    */
+    removePlace (data) {
+      if (this.places[data.index]) {
+        this.places.splice(data.index, 1)
+        this.updateAppRoute()
+      }
     },
     /**
      * When the user reorder the place inputs, recalculates thr route

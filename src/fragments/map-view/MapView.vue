@@ -24,12 +24,14 @@
 
       <l-marker v-for="(marker, index) in markers"
         @click="markerClicked(marker.place, $event)"
-        @move="markerMove" :draggable="markerIsDraggable"
+        @move="markerMoved" :draggable="markerIsDraggable"
         :lat-lng="marker.position"
         :key="index+'-marker'"
         :icon="marker.icon">
         <l-popup v-if="showMarkerPopup">
-          <div >{{marker.label}}</div>
+          <div >{{marker.label}} 
+            <v-btn outline small fab v-if="markerIsRemovable" :title="$t('mapView.removePlace')"  @click="removePlace($event, index)" > <v-icon >delete</v-icon> </v-btn>
+          </div>
         </l-popup>
       </l-marker>
 

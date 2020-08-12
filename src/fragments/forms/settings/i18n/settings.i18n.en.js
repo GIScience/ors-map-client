@@ -38,7 +38,7 @@ export default {
     mapViewOptions: 'Map view options',
     advancedSettingsWarning: 'Do not change the settings below if you do not know what you are doing!',
     customTileProviderUrl: 'Custom tiles provider URL',
-    defaultTileProvider: 'default tiles provider',
+    defaultTileProvider: 'Default tiles provider',
     customTileProviderUrlHint: 'https://domain.tld/path/{z}/{x}/{y}.ext?optionalKey=value',
     prioritizeSearchingForNearbyPlaces: 'Prioritize searching for nearby places',
     compressDataUrlSegment: 'Compresse URL segment after /data/'

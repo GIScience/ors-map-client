@@ -50,24 +50,26 @@ class MapViewData {
    * @returns  {MapViewData}
    */
   clone () {
-    let clone = new MapViewData()
+    let mapViewDataClone = new MapViewData()
     let propertiesToClone = ['origin', 'isRouteData', 'timestamp', 'mode']
 
     for (let key in propertiesToClone) {
       let prop = propertiesToClone[key]
-      clone[prop] = this[prop]
+      mapViewDataClone[prop] = this[prop]
     }
 
-    clone.rawData = utils.clone(this.rawData)
-    clone.routes = utils.clone(this.routes)
-    clone.polygons = utils.clone(this.polygons)
-    clone.options = utils.clone(this.options)
+    mapViewDataClone.rawData = utils.clone(this.rawData)
+    mapViewDataClone.routes = utils.clone(this.routes)
+    mapViewDataClone.polygons = utils.clone(this.polygons)
+    mapViewDataClone.options = utils.clone(this.options)
 
     for (let key in this.places) {
-      let place = this.places[key]
-      clone.places.push(place.clone())
+      if (this.places[key] instanceof Place) {
+        let place = this.places[key]
+        mapViewDataClone.places.push(place.clone())
+      }
     }
-    return clone
+    return mapViewDataClone
   }
 
   /**

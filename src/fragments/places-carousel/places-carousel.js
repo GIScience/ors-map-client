@@ -164,14 +164,6 @@ export default {
     directionsTo (place) {
       this.$emit('directionsToPoint', {place})
       this.$emit('closed')
-    },
-    /**
-     * Emmit the directions from latlg
-     * @param {*} place
-     */
-    directionsFrom (place) {
-      this.$emit('directionsFromPoint', {place})
-      this.$emit('closed')
     }
   },
   mounted () {
