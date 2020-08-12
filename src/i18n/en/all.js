@@ -67,7 +67,8 @@ export default {
       street: 'Street',
       venue: 'Venue',
       rawCoordinate: 'Raw lng,lat coordinates',
-      notAvailable: 'Not available'
+      notAvailable: 'Not available',
+      undefined: 'Not defined'
     },
     profiles: {
       'driving-car': 'car',
