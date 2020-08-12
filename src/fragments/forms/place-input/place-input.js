@@ -450,7 +450,9 @@ export default {
      * @param {*} index
      */
     placeCleared () {
-      this.$emit('cleared', this.index)
+      if (!this.model.isEmpty()) {
+        this.$emit('cleared', this.index)
+      }
     },
 
     /**

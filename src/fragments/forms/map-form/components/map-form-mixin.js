@@ -123,6 +123,41 @@ export default {
         console.error(error)
         context.showError(context.$t('mapForm.errorRenderingContentUploaded'))
       })
+    },
+
+    /**
+     * Update the place input view
+     * @param {*} index
+     */
+    updatePlaceView (index) {
+      // Propagate place view notifies the VueJS that a object inside an array ahs changed
+      this.propagatePlaceChange(index)
+      // Force a digest
+      this.$forceUpdate()
+    },
+
+    /**
+     * Let vue know that an item in an array has been updated
+     * @param {*} index
+     */
+    propagatePlaceChange (index) {
+      let place = this.places[index]
+      if (place) {
+        // Tell VueJS that the and object property (coordinates)  at the
+        // given index has changed (so the view will be updated)
+        let freshPlace = new Place(place.lng, place.lat, place.placeName)
+        this.$set(this.places, index, freshPlace)
+
+        // The above VueJS $set will remove all other parameters properties
+        // so after executing it, we restore other properties of the parameter object
+        for (let key in place) {
+          if (key !== 'coordinates') {
+            this.places[index][key] = place[key]
+          }
+        }
+      } else {
+        this.$set(this.places, index, new Place())
+      }
     }
   }
 }

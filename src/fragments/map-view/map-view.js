@@ -6,7 +6,7 @@
  * Events that this component listens to:
  * @listens redrawAndFitMap [via eventBus] - event that will trigger a map redraw and refit bounds - expects {isMaximized: Boolean, guid: String}
  * @listens clearMap [via eventBus] - event that will trigger a map clear
- * @listens activeRouteIndexChanged [via eventBus] - event that will trigger active rounte index change
+ * @listens changeActiveRouteIndex [via eventBus] - event that will trigger active rounte index change
  * @listens placeFocusChanged [via eventBus] - updates the map center when a new place is seleted
  *
  * Events emitted via eventBus:
@@ -294,6 +294,11 @@ export default {
       let isDraggable = draggableModes.includes(this.mode)
       return isDraggable
     },
+    markerIsRemovable () {
+      let markerRemovableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]
+      let isRemovable = markerRemovableModes.includes(this.mode)
+      return isRemovable
+    },
     showMarkerPopup () {
       let show = this.mode !== constants.modes.search
       return show
@@ -378,8 +383,11 @@ export default {
     centerChanged () {
       if (this.center) {
         this.setMapCenter(this.center)
-        let currentLocation = {lat: this.center.lat, lng: this.center.lng, accuracy: 50}
-        this.$store.commit('currentLocation', currentLocation)
+        // If current location is defined, update it
+        if (this.$store.getters.currentLocation || this.mode === constants.modes.search) {
+          let currentLocation = {lat: this.center.lat, lng: this.center.lng, accuracy: 50}
+          this.$store.commit('currentLocation', currentLocation)
+        }
       }
     },
     /**
@@ -535,7 +543,7 @@ export default {
      * position only when the movement has ended
      * @param {*} event
      */
-    markerMove (event) {
+    markerMoved (event) {
       // only marker changes that are a result
       // of user interaction are treated here
       // with vue2-leaflet v 2.5.2 the event.originalEvent was no instance of window.PointerEvent anymore
@@ -545,6 +553,18 @@ export default {
         this.markerMoveTimeoutId = setTimeout(() => {
           this.markerDragEnd(event)
         }, 1000)
+      }
+    },
+    /**
+     * Remove a marker/place when in directions or isochrones mode
+     * @param {*} event
+     * @param {*} markerIndex
+     */
+    removePlace (event, markerIndex) {
+      if (this.markers[markerIndex]) {
+        let place = this.markers[markerIndex].place
+        let data = {place, index: markerIndex}
+        this.$emit('removePlace', data)
       }
     },
     /**
@@ -715,7 +735,11 @@ export default {
       }
       // Build the all features databounds taking into consideration
       // the places and the roues/polygons polyline
-      this.dataBounds = GeoUtils.getBounds(bounds, this.localMapViewData.places, polylineData)
+      if (this.localMapViewData.hasPlaces() || polylineData.length > 0) {
+        this.dataBounds = GeoUtils.getBounds(bounds, this.localMapViewData.places, polylineData)
+      } else {
+        this.dataBounds = null
+      }
     },
     /**
      * Make sure the active route index is valid
@@ -840,7 +864,8 @@ export default {
     fitAndZoom (force, maxFitBoundsZoom) {
       if (this.dataBounds && (this.fitBounds === true || force === true)) {
         // we set the max zoom in level and then fit the bounds
-        this.zoomLevel = this.initialMaxZoom
+        // Temporally disabled the zoomlevel seeting to check impacts (it seems not to be necessary anymore)
+        // this.zoomLevel = this.initialMaxZoom
 
         // To make it work properly we have to wait a bit
         // before fitting the map bounds
@@ -1200,6 +1225,9 @@ export default {
       // When the clearMap event is triggred, we reset places and routes
       context.localMapViewData.places = []
       context.localMapViewData.routes = []
+      context.localMapViewData.polygons = []
+      context.clickLatlng = null
+      this.$store.commit('currentLocation', null)
     })
 
     /**

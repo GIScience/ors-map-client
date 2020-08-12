@@ -29,6 +29,7 @@
       @zoomChanged="zoomChanged"
       @mapCenterMoved="mapCenterMoved"
       @addAsIsochroneCenter="addAsIsochroneCenter"
+      @removePlace="removePlace"
       @markerClicked="markerClicked">
     </map-view>
 
@@ -38,7 +39,6 @@
         :map-view-data="mapViewData"
         @closed="closedBottomNav"
         @placeSelected="placeIndexSelectedInBottomNav"
-        @directionsFromPoint="directionsFromPoint"
         @directionsToPoint="directionsToPoint">
       </places-carousel>
     </v-bottom-nav>

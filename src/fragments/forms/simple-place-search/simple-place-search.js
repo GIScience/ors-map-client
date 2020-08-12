@@ -16,9 +16,7 @@ export default {
     rawResponse: null,
     place: new Place(),
     searching: false,
-    activeProfileIndex: 0,
     extraProfilesOpen: false,
-    activeProfile: constants.defaultProfile,
     myLocation: false,
     autoFocusOnMap: true,
     openingRouteMode: false,
@@ -130,12 +128,8 @@ export default {
     loadData () {
       let places = this.$store.getters.appRouteData.places.slice(0)
 
-      if (places.length === 1 && this.$store.getters.leftSideBarOpen) {
+      if (places.length === 1 /* && this.$store.getters.leftSideBarOpen */) {
         this.place = places[0]
-        let options = Object.assign({}, this.$store.getters.appRouteData.options)
-        if (options.activeProfile) {
-          this.activeProfile = options.activeProfile
-        }
       }
       if (this.$store.getters.mode === constants.modes.search) {
         if (!this.place.nameIsCoord()) {

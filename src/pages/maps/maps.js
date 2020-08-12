@@ -157,6 +157,13 @@ export default {
       }
     },
     /**
+     * Remove place
+     * @param {*} data
+     */
+    removePlace (data) {
+      this.eventBus.$emit('removePlace', data)
+    },
+    /**
      * Close bottom nav component
      */
     closedBottomNav () {
@@ -224,14 +231,18 @@ export default {
      * @emits appRouteDataChanged
      */
     loadRoute () {
-      let appRouteData = AppMode.decodePath(this.$route)
+      this.eventBus.$emit('clearMap')
+      // After clearing the map, wait a bit to load the new route
+      let context = this
+
+      let appRouteData = AppMode.decodePath(context.$route)
 
       if (appRouteData === false) { // if there is no app route data, load default state
-        this.$router.push({name: 'Maps'})
+        context.$router.push({name: 'Maps'})
       } else {
-        this.$store.commit('appRouteData', appRouteData)
-        this.storeZoomValue()
-        this.eventBus.$emit('appRouteDataChanged', appRouteData)
+        context.$store.commit('appRouteData', appRouteData)
+        context.storeZoomValue()
+        context.eventBus.$emit('appRouteDataChanged', appRouteData)
       }
     },
 
@@ -246,7 +257,12 @@ export default {
       this.eventBus.$emit('directionsFromPoint', data)
     },
     directionsToPoint (data) {
-      this.eventBus.$emit('directionsToPoint', data)
+      let context = this
+      this.eventBus.$emit('clearMap')
+      setTimeout(() => {
+        this.mapViewData.places = [data.place]
+        context.eventBus.$emit('directionsToPoint', data)
+      }, 100)
     },
     addAsIsochroneCenter (data) {
       this.eventBus.$emit('addAsIsochroneCenter', data)

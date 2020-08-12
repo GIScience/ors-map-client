@@ -38,6 +38,12 @@ export default {
         context.updateAppRoute()
       }
     })
+    // When the user click on a marker to remove it
+    this.eventBus.$on('removePlace', (data) => {
+      if (context.active) {
+        context.removePlace(data)
+      }
+    })
 
     /**
      * Update local object when a mapViewData is uploaded
@@ -156,13 +162,11 @@ export default {
      * url synchronized with the current map status
      */
     updateAppRoute () {
+      let places = this.getFilledPlaces()
       this.$store.commit('mode', constants.modes.isochrones)
       let appMode = new AppMode(this.$store.getters.mode)
-      let places = this.getFilledPlaces()
-      if (places.length > 0) {
-        let route = appMode.getRoute(places)
-        this.$router.push(route)
-      }
+      let route = appMode.getRoute(places)
+      this.$router.push(route)
     },
     /**
      * Update the value in the filter when a parameter is updated in form-fields
@@ -188,6 +192,18 @@ export default {
     removePlaceInput (index) {
       this.places.splice(index, 1)
       this.updateAppRoute()
+    },
+    /**
+    * When the user click on a marker and select to remove it
+    *
+    * @param {*} data {index: ..., place:...}
+    */
+    removePlace (data) {
+      if (this.places[data.index]) {
+        this.places.splice(data.index, 1)
+        this.updateAppRoute()
+        this.updatePlaceView(data.index)
+      }
     },
     /**
      * When the user reorder the place inputs, recalculates thr route

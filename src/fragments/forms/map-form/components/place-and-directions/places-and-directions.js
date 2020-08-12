@@ -178,6 +178,13 @@ export default {
         context.addRouteStop(data)
       })
 
+      // When the user click on a marker to remove it
+      this.eventBus.$on('removePlace', (data) => {
+        if (context.active) {
+          context.removePlace(data)
+        }
+      })
+
       // When the user click on the map and select to add this point as an additional destination in the route
       this.eventBus.$on('addDestinationToRoute', (data) => {
         context.addDestinationToRoute(data)
@@ -253,12 +260,12 @@ export default {
      * @returns {Promise}
      */
     resolvePlace (place) {
-      this.eventBus.$emit('showLoading', true)
       let context = this
       return new Promise((resolve, reject) => {
         if (!place.unresolved) {
           resolve(place)
         } else {
+          this.eventBus.$emit('showLoading', true)
           context.searching = true
           place.resolve(this.$store.getters.appRouteData.options.zoom).then(() => {
             resolve(place)
@@ -354,13 +361,23 @@ export default {
           let context = this
           this.resolvePlace(this.places[injectedIndex]).then(() => {
             context.updateAppRoute()
-            context.updateAppRoute()
             context.setSidebarIsOpen()
           }).catch((err) => {
             console.log(err)
             context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), {timeout: 0})
           })
         }
+      }
+    },
+    /**
+    * When the user click on a marker and select to remove it
+    *
+    * @param {*} data {index: ..., place:...}
+    */
+    removePlace (data) {
+      if (this.places[data.index]) {
+        this.places.splice(data.index, 1)
+        this.updateAppRoute()
       }
     },
 
@@ -667,22 +684,13 @@ export default {
       let filledPlaces = this.getFilledPlaces()
       if (filledPlaces.length > 1) {
         this.setViewMode(constants.modes.directions)
+      } else if (filledPlaces.length === 0) {
+        this.setViewMode(constants.modes.place)
       }
       let appMode = new AppMode(this.$store.getters.mode)
       let route = appMode.getRoute(filledPlaces)
       this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
       this.$router.push(route)
-    },
-
-    /**
-     * Update the place input view
-     * @param {*} index
-     */
-    updatePlaceView (index) {
-      // Propagate place view notifies the VueJS that a object inside an array ahs changed
-      this.propagatePlaceChange(index)
-      // Force a digest
-      this.$forceUpdate()
     },
 
     /**
@@ -721,28 +729,6 @@ export default {
         }
       })
       return filledPlaces
-    },
-
-    /**
-     * Let vue know that an item in an array has been updated
-     * @param {*} index
-     */
-    propagatePlaceChange (index) {
-      let place = this.places[index]
-      if (place) {
-        // Tell VueJS that the and object property (coordinates)  at the
-        // given index has changed (so the view will be updated)
-        let freshPlace = new Place(place.lng, place.lat, place.placeName)
-        this.$set(this.places, index, freshPlace)
-
-        // The above VueJS $set will remove all other parameters properties
-        // so after executing it, we restore other properties of the parameter object
-        for (let key in place) {
-          if (key !== 'coordinates') {
-            this.places[index][key] = place[key]
-          }
-        }
-      }
     },
 
     /**
@@ -806,7 +792,11 @@ export default {
       let appRouteData = this.$store.getters.appRouteData
 
       if (this.$store.getters.mode === constants.modes.roundTrip) {
-        delete appRouteData.options.options[constants.roundTripFilterName]
+        // Remove roundtrip from appRouteData if present
+        let filterPath = `appRouteData.options.options[${constants.roundTripFilterName}]`
+        if (this.lodash.get(appRouteData, filterPath)) {
+          delete appRouteData.options.options[constants.roundTripFilterName]
+        }
         this.$store.commit('appRouteData', appRouteData)
         this.setViewMode(constants.modes.place)
       } else {
