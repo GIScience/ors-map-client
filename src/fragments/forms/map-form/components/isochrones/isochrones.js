@@ -162,13 +162,11 @@ export default {
      * url synchronized with the current map status
      */
     updateAppRoute () {
+      let places = this.getFilledPlaces()
       this.$store.commit('mode', constants.modes.isochrones)
       let appMode = new AppMode(this.$store.getters.mode)
-      let places = this.getFilledPlaces()
-      if (places.length > 0) {
-        let route = appMode.getRoute(places)
-        this.$router.push(route)
-      }
+      let route = appMode.getRoute(places)
+      this.$router.push(route)
     },
     /**
      * Update the value in the filter when a parameter is updated in form-fields
@@ -204,6 +202,7 @@ export default {
       if (this.places[data.index]) {
         this.places.splice(data.index, 1)
         this.updateAppRoute()
+        this.updatePlaceView(data.index)
       }
     },
     /**
