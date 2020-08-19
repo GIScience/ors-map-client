@@ -1,7 +1,7 @@
 import store from '@/store/store'
 import router from '@/router/index'
 
-const showMenuItem = (item) => {
+const showMenuItem = function (item) {
   // a custom show menu item function can be passed
   // if passed, use the custom one. If not, use the default
   if (this.showMenuItemFn) {
@@ -14,7 +14,7 @@ const showMenuItem = (item) => {
     }
   }
 }
-const navigate = (to) => {
+const navigate = function (to) {
   if (to.external) {
     window.location = to.href
   } else {
@@ -22,11 +22,11 @@ const navigate = (to) => {
   }
 }
 
-const getHref = (to) => {
+const getHref = function (to) {
   return to.href
 }
 
-const isActive = (item) => {
+const isActive = function (item) {
   item.active = false
   const activeRoute = location.hash.replace('#', '')
   const itemRoute = item.href.replace('/dev/#', '')
