@@ -1,5 +1,6 @@
 import OrsMapFilters from '@/resources/ors-map-filters'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
+import defaultMapSettings from '@/resources/default-map-settings'
 import constants from '@/resources/constants'
 
 export default {
@@ -7,20 +8,19 @@ export default {
     activeProfileIndex: null,
     extraProfilesOpen: false,
     activeProfile: null,
-    orsFilters: OrsMapFilters
+    orsFilters: OrsMapFilters,
+    initialProfile: null
 
   }),
-  props: {
-    initialProfile: {
-      default: constants.defaultProfile
-    }
-  },
   created () {
-    this.activeProfile = this.initialProfile
+    this.initialProfile = this.$store.getters.mapSettings.defaultProfile || defaultMapSettings.defaultProfile
     let primaryProfiles = this.getPrimaryProfiles()
-    this.activeProfileIndex = Object.keys(primaryProfiles).indexOf(this.activeProfile)
+    this.activeProfileIndex = Object.keys(primaryProfiles).indexOf(this.currentProfile)
   },
   computed: {
+    currentProfile () {
+      return this.activeProfile || this.initialProfile
+    },
     profilesMapping () {
       let filter = this.getProfileFilter()
       return filter.mapping
@@ -28,17 +28,19 @@ export default {
   },
 
   watch: {
-    activeProfile (newVal, oldVal) {
-      if (oldVal) {
-        OrsFilterUtil.setFilterValue(constants.profileFilterName, newVal)
-        this.eventBus.$emit('filtersChangedExternally')
-      }
-    },
     orsFilters: {
       handler: function (newVal, oldVal) {
         this.updateFilterProfile()
       },
       deep: true
+    },
+    '$store.getters.mapSettings.defaultProfile' (newVal) {
+      this.initialProfile = newVal
+      if (!this.activeProfile) {
+        let primaryProfiles = this.getPrimaryProfiles()
+        this.activeProfileIndex = Object.keys(primaryProfiles).indexOf(this.currentProfile)
+        OrsFilterUtil.setFilterValue(constants.profileFilterName, newVal)
+      }
     }
   },
   methods: {
@@ -72,6 +74,9 @@ export default {
       if (index) {
         this.activeProfileIndex = index
       }
+      OrsFilterUtil.setFilterValue(constants.profileFilterName, profile)
+      this.eventBus.$emit('filtersChangedExternally')
+
       let context = this
       setTimeout(() => {
         context.extraProfilesOpen = false

@@ -17,6 +17,21 @@ const getFilterWithValueValueUpdated = (parameter) => {
  * Set the parameter disabled attribute at the specified key, which will define its visibility
  * @param {*} scopedParameters
  * @param {*} key
+ */
+const isAvailable = (parameter) => {
+  let globalParameters = OrsMapFilters
+  if (parameter.validWhen) {
+    let matchesRules = getMatchesDependencyRules(parameter, globalParameters, 'validWhen')
+    if (!matchesRules) {
+      return false
+    }
+  }
+  return true
+}
+
+/**
+ * Set the parameter disabled attribute at the specified key, which will define its visibility
+ * @param {*} scopedParameters
  * @param {*} globalParameters
  */
 const setValue = (parameter, globalParameters) => {
@@ -226,7 +241,8 @@ const getChildProp = (rootObject, propPath) => {
  * Service exported object/methods
  */
 const dependencyService = {
-  getFilterWithValueValueUpdated
+  getFilterWithValueValueUpdated,
+  isAvailable
 }
 
 export default dependencyService

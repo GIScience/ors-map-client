@@ -10,6 +10,7 @@ import MapViewData from '@/models/map-view-data'
 import {PlacesSearch} from '@/support/ors-api-runner'
 import constants from '@/resources/constants'
 import Place from '@/models/place'
+import CrudForm from '@/crud/form'
 
 export default {
   data: () => ({

@@ -10,7 +10,8 @@ export default {
     searching: false,
     focused: false,
     localModel: null,
-    placeInputFloatingMenu: false
+    placeInputFloatingMenu: false,
+    focusIsAutomatic: false
   }),
   props: {
     index: {
@@ -32,6 +33,10 @@ export default {
       Type: Boolean,
       default: false
     },
+    autofocus: {
+      Type: Boolean,
+      default: false
+    },
     height: {
       type: Number,
       default: 30
@@ -49,7 +54,7 @@ export default {
       default: true
     },
     supportSearch: {
-      ype: Boolean,
+      type: Boolean,
       default: true
     }
   },
@@ -64,6 +69,7 @@ export default {
       context.suggestionUpdated(data)
     })
     this.resolveModel()
+    this.focusIsAutomatic = this.autofocus
   },
   computed: {
     hint () {
@@ -204,6 +210,14 @@ export default {
       }
       suggestions = suggestions.concat(this.localModel.suggestions)
       return suggestions
+    },
+
+    showSuggestion () {
+      let show = this.focused && !this.focusIsAutomatic
+      if (show) {
+        console.log(this.index, show)
+      }
+      return show
     }
   },
   watch: {
@@ -292,7 +306,8 @@ export default {
         this.eventBus.$emit('showLoading', true)
         Geocode(this.localModel.placeName, size).then(places => {
           context.localModel.setSuggestions(places)
-          this.focused = true
+          context.focused = true
+          this.focusIsAutomatic = false
           if (places.length === 0) {
             context.showInfo(context.$t('placeInput.noPlaceFound'))
           }
@@ -323,7 +338,8 @@ export default {
         let place = new Place(lng, lat)
         place.setSuggestions(places)
         context.localModel = place
-        this.focused = true
+        context.focused = true
+        this.focusIsAutomatic = false
       }).catch(response => {
         console.log(response)
       }).finally(() => {
@@ -454,7 +470,6 @@ export default {
         this.$emit('cleared', this.index)
       }
     },
-
     /**
      * Set the current input as having the focus
      * @param {*} data can be a boolean value or a $event. If it is the second case, we consider it as false
@@ -462,6 +477,11 @@ export default {
     setFocus (data) {
       let state = typeof data === 'boolean' ? data : false
       this.focused = state
+      // Once the focused was set to true based on a user
+      // interaction event the it is not anymore in automatic mode
+      if (this.focused) {
+        this.focusIsAutomatic = false
+      }
       // If the app is in the search mode, then run
       // the autocompleteSearch that will show the suggestions
       if (state && this.$store.getters.mode === constants.modes.search) {

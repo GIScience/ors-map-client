@@ -31,9 +31,15 @@ export default {
      * @returns {Object}
      */
     avoidPolygonsFilterAcessor () {
-      let util = OrsFilterUtil
-      let filterRef = util.getFilterRefByName(constants.avoidPpolygonsFilterName)
+      let filterRef = OrsFilterUtil.getFilterRefByName(constants.avoidPpolygonsFilterName)
       return filterRef
+    },
+    /**
+     * Determines if the sidebar is open
+     * @returns {Boolean}
+     */
+    isSidebarOpen () {
+      return this.$store.getters.leftSideBarPinned || this.$store.getters.leftSideBarOpen
     }
   },
   methods: {

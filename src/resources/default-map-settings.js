@@ -20,6 +20,7 @@ const defaultMapSettings = {
   defaultTileProvider: 'osm',
   customTileProviderUrl: '',
   prioritizeSearchingForNearbyPlaces: true,
+  defaultProfile: 'cycling-regular',
   compressDataUrlSegment: true
 }
 

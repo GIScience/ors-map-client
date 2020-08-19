@@ -41,6 +41,7 @@ export default {
       2009: 'Unable to find a route between places specified',
       2010: 'It was not possible to find a suitable point that is part of the route. Maybe one of the points selected is not routable or the selected profile is not supported in this region',
       2011: 'When using alternative routes option it is not possible to define route stops',
+      2012: 'An invalid parameter was specified. Make sure the URL is correct',
       2099: 'Could not find a valid point after 3 tries'
     },
     genericErrorMsg: 'It was not possible to calculate the route'

@@ -1,5 +1,7 @@
+import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import settingsOptions from '@/resources/settings-options.js'
 import defaultMapSettings from '@/resources/default-map-settings'
+import constants from '@/resources/constants'
 import utils from '@/support/utils'
 import lodash from 'lodash'
 
@@ -24,6 +26,15 @@ export default {
         })
       }
       return services
+    },
+    availableProfiles () {
+      let filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
+      let options = []
+      for (let key in filterRef.enum) {
+        let itemVal = filterRef.enum[key]
+        options.push({value: itemVal, text: this.$t('global.profiles.' + itemVal)})
+      }
+      return options
     }
   },
   methods: {

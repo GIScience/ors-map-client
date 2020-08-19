@@ -14,6 +14,7 @@
                     :support-directions="$store.getters.mode === constants.modes.place || $store.getters.mode === constants.modes.directions"
                     :box="places.length === 1"
                     :index="index"
+                    :autofocus="places.length === 1 && isSidebarOpen"
                     :model="places[index]"
                     :single="places.length === 1"
                     :is-last="(places.length -1) === index && index !== 0"

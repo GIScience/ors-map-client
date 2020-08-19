@@ -1,4 +1,8 @@
-import countriesList from '@/resources/countries'
+import countriesList from '@/resources/lists/countries'
+import gradesList from '@/resources/lists/grades'
+import surfaceTypesList from '@/resources/lists/surface-types'
+import routeSmoothnessList from '@/resources/lists/route-smoothness'
+
 import constants from '@/resources/constants'
 
 const filters = [
@@ -6,7 +10,7 @@ const filters = [
     name: 'profile',
     useInServices: [constants.services.directions, constants.services.isochrones],
     hidden: true,
-    description: 'Specifies the route profile.',
+    description: 'Specifies the route profile',
     required: true,
     type: constants.filterTypes.string,
     enum: [
@@ -189,13 +193,117 @@ const filters = [
     useInServices: [constants.services.isochrones]
   },
   {
-    label: 'Avoid options',
+    label: 'Route options',
     type: constants.filterTypes.wrapper,
     useInServices: [constants.services.directions, constants.services.isochrones],
     availableOnModes: [constants.modes.roundTrip, constants.modes.directions, constants.modes.isochrones],
     valueAsObject: true,
     name: 'options',
     props: [
+      {
+        label: 'Profile parameters',
+        type: constants.filterTypes.wrapper,
+        useInServices: [constants.services.directions],
+        availableOnModes: [constants.modes.roundTrip, constants.modes.directions],
+        valueAsObject: true,
+        validWhen: [
+          {
+            ref: 'profile',
+            value: 'wheelchair'
+          }
+        ],
+        name: 'profile_params',
+        props: [
+          {
+            label: 'Restrictions',
+            type: constants.filterTypes.wrapper,
+            valueAsObject: true,
+            availableOnModes: [constants.modes.roundTrip, constants.modes.directions],
+            useInServices: [constants.services.directions, constants.services.roundTrip],
+            name: 'restrictions',
+            props: [
+              {
+                name: 'maximum_incline',
+                required: false,
+                type: constants.filterTypes.string,
+                description: 'The maximum inclination in percentage',
+                label: 'Max inclination',
+                value: '6',
+                isEnum: true,
+                enum: [
+                  '3',
+                  '6',
+                  '10',
+                  '15'
+                ]
+              },
+              {
+                name: 'maximum_sloped_kerb',
+                required: false,
+                type: constants.filterTypes.string,
+                isEnum: true,
+                description: 'Specifies the maximum height of the sloped curb in meters',
+                label: 'Max kerb height',
+                value: '0.06',
+                enum: [
+                  '0.03',
+                  '0.06',
+                  '0.1'
+                ]
+              },
+              {
+                name: 'minimum_width',
+                unit: 'meters',
+                required: false,
+                type: constants.filterTypes.steps,
+                description: 'Specifies the minimum width of the footway in metres',
+                label: 'Footway minimum width',
+                value: 1,
+                min: 0,
+                max: 30,
+                step: 1
+              },
+              {
+                name: 'smoothness_type',
+                required: false,
+                type: constants.filterTypes.string,
+                isEnum: true,
+                description: 'Specifies the minimum smoothness of the route',
+                label: 'Route smoothness',
+                value: 'good',
+                items: routeSmoothnessList,
+                itemText: 'en-US',
+                itemValue: 'value'
+              },
+              {
+                name: 'surface_type',
+                required: false,
+                type: constants.filterTypes.string,
+                isEnum: true,
+                description: 'Specifies the minimum surface type',
+                label: 'Min. surface type',
+                value: 'cobblestone',
+                items: surfaceTypesList,
+                itemText: 'en-US',
+                itemValue: 'value'
+              },
+              {
+                name: 'track_type',
+                required: false,
+                type: constants.filterTypes.string,
+                isEnum: true,
+                description: 'Specifies the minimum grade of the route',
+                label: 'Minimum route grade',
+                default: null,
+                value: 'grade1',
+                itemText: 'en-US',
+                itemValue: 'value',
+                items: gradesList
+              }
+            ]
+          }
+        ]
+      },
       {
         label: 'Round trip',
         type: constants.filterTypes.wrapper,

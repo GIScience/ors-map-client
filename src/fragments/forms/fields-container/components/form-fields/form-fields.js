@@ -83,7 +83,7 @@ export default {
 
     /**
      * Set a ne random value for the randon component
-     * @param {*} index 
+     * @param {*} index
      */
     setNewRandomValue (index) {
       let min = this.formParameters[index].min || 0
@@ -163,13 +163,21 @@ export default {
         return
       }
       let passingData = { index: data.index, value: data.value }
+
+      // There may be nested levels of paternity and these levels
+      // must be represented in the parent index property.
+      // When the passing data already has a parent index, then
+      // parentIndex will be an array containing the imediate parent
+      // at index 0 and all the acentry at the position 1.
       if ((Array.isArray(data.parentIndex) || data.parentIndex >= 0) && this.parentIndex >= 0) {
-        passingData.parentIndex = [this.parentIndex, data.parentIndex]
-      } else {
+        passingData.parentIndex = [data.parentIndex, this.parentIndex]
+      } else { // if it is a single level paternity, just set the immediate parent
         passingData.parentIndex = data.parentIndex || this.parentIndex
       }
       // Reset the search input value
-      this.parameters[data.index].searchInput = ''
+      if (this.parameters[data.index]) {
+        this.parameters[data.index].searchInput = ''
+      }
 
       this.$emit('fieldUpdated', passingData)
 

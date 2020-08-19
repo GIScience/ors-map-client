@@ -20,7 +20,6 @@ const constants = {
   roundTripFilterName: 'round_trip',
   avoidPpolygonsFilterName: 'avoid_polygons',
   roundTripOptionsPath: 'options.round_trip',
-  defaultProfile: 'cycling-regular',
   profileFilterName: 'profile',
   responseErrorCodePath: 'response.body.error.code',
   initialMapMaxZoom: 18,

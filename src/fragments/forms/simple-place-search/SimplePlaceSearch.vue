@@ -10,9 +10,10 @@
         </v-badge>
       </v-flex>
       <v-flex xs10 sm10 md11>
-        <v-form @submit.prevent>
+        <v-form ref="form" @submit.prevent>
           <place-input class="mini-input" :height="27" :mb="0" :index="0"
             :model="place"
+            :autofocus="true"
             :single="true"
             @selected="selectPlace"
             @startDirections="openDirectionsMode"

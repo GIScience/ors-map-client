@@ -117,7 +117,7 @@ export default {
     filterUpdated (data) {
       if (data.value !== undefined) {
         if (data.parentIndex !== undefined) {
-          let parent = OrsFilterUtil.getFilterByAcestryAndItemIndex(data.parentIndex, data.index)
+          let parent = OrsFilterUtil.getFilterByAncestryAndItemIndex(data.parentIndex, data.index)
           parent.value = data.value
         } else {
           this.OrsMapFiltersAccessor[data.index].value = data.value

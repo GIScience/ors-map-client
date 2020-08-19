@@ -47,8 +47,10 @@ const getFilterValue = (filter, service) => {
     let filterClone = FilterDependencyService.getFilterWithValueValueUpdated(filter)
 
     if (filterClone.type === constants.filterTypes.wrapper && filterClone.props) {
-      filterValue = getChildrenFilterValue(filter, service)
-      filterValue = filterClone.valueAsObject ? filterValue : JSON.stringify(filterValue)
+      if (FilterDependencyService.isAvailable(filterClone)) {
+        filterValue = getChildrenFilterValue(filterClone, service)
+        filterValue = filterClone.valueAsObject ? filterValue : JSON.stringify(filterValue)
+      }
     } else {
       if (filterClone.type === constants.filterTypes.array && Array.isArray(filterClone.value) && !filterClone.valueAsArray) {
         let separator = filterClone.separator || ','
@@ -67,27 +69,39 @@ const getFilterValue = (filter, service) => {
 
 /**
  * Get a filter by acestry and item index
- * @param {*} parentIndex
+ * @param {*} ancestry
  * @param {*} itemIndex
  * @returns {Object}
  */
-const getFilterByAcestryAndItemIndex = (parentIndex, itemIndex = null) => {
+const getFilterByAncestryAndItemIndex = (ancestry, immediateParent = null) => {
+  let path = buildAncestryAcessorString(ancestry, immediateParent)
+  let OrsMapFiltersAccessor = OrsMapFilters
+  let accessor = lodash.get(OrsMapFiltersAccessor, path)
+  return accessor
+}
+
+/**
+ * Build the ancestry accessor string
+ * @param {*} ancestry
+ * @param {*} immediateParent
+ * @returns {String}
+ */
+const buildAncestryAcessorString = (ancestry, itemIndex = null) => {
   let path
-  if (Array.isArray(parentIndex) && parentIndex.length > 1) {
-    if (Array.isArray(parentIndex[0])) {
-      let ancestor = getFilterByAcestryAndItemIndex(parentIndex[0])
-      path = `${ancestor}.props[${parentIndex[1]}]`
+  if (Array.isArray(ancestry) && ancestry.length > 1) {
+    if (Array.isArray(ancestry[0])) {
+      let subPath = buildAncestryAcessorString(ancestry[0])
+      path = `[${ancestry[1]}].props${subPath}`
     } else {
-      path = `[${parentIndex[0]}].props[${parentIndex[1]}]`
+      path = `[${ancestry[0]}].props[${ancestry[1]}]`
     }
   } else {
-    path = `[${parentIndex}]`
+    path = `[${ancestry}]`
   }
-  if (itemIndex >= 0) {
+  if (itemIndex !== null && itemIndex !== undefined && itemIndex >= 0) {
     path = `${path}.props[${itemIndex}]`
   }
-  let acessor = lodash.get(OrsMapFilters, path)
-  return acessor
+  return path
 }
 
 /**
@@ -206,7 +220,7 @@ const filterUtil = {
   setFilterValue,
   getFilterValue,
   isRoundTripFilterActive,
-  getFilterByAcestryAndItemIndex
+  getFilterByAncestryAndItemIndex
 }
 
 export default filterUtil
