@@ -7,18 +7,18 @@ const routeData = {
    */
   buildHighlightedPolylines: (polyLineData, extraInfo) => {
     if (polyLineData && extraInfo) {
-      let polylinesHighlighted = []
+      const polylinesHighlighted = []
 
-      for (let key in extraInfo.sections) {
-        let section = extraInfo.sections[key]
-        let polylineHighlighted = {
+      for (const key in extraInfo.sections) {
+        const section = extraInfo.sections[key]
+        const polylineHighlighted = {
           label: section.label,
           color: section.color,
           polylines: []
         }
-        for (let intervalKey in section.intervals) {
-          let interval = section.intervals[intervalKey]
-          let segment = polyLineData.slice(interval[0], interval[1])
+        for (const intervalKey in section.intervals) {
+          const interval = section.intervals[intervalKey]
+          const segment = polyLineData.slice(interval[0], interval[1])
           polylineHighlighted.polylines.push(segment)
         }
         if (polylineHighlighted.polylines.length > 0) {

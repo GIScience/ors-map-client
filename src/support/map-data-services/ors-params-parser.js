@@ -14,7 +14,7 @@ const orsParamsParser = {
    */
   buildPlaceSearchArgs: (placeName) => {
     // build the args object
-    let args = {
+    const args = {
       text: placeName,
       size: 10,
       focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng]
@@ -32,7 +32,7 @@ const orsParamsParser = {
    */
   buildAutocompleteArgs: (placeName, restrictToBbox = false) => {
     // build the args object
-    let args = {
+    const args = {
       text: placeName,
       size: 8,
       focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng]
@@ -40,28 +40,28 @@ const orsParamsParser = {
     // If is set to restrict the search to currrent mapBounds in store
     // and there is a mapBounds defined, then apply the restriction
     if (restrictToBbox && store.getters.mapBounds) {
-      let mapBounds = store.getters.mapBounds
+      const mapBounds = store.getters.mapBounds
       let valideBbox = true
 
       // Make sure that min and max lat are valid
-      let lats = ['min_lat', 'max_lat']
-      for (let key in lats) {
-        let prop = lats[key]
+      const lats = ['min_lat', 'max_lat']
+      for (const key in lats) {
+        const prop = lats[key]
         if (mapBounds.rect[prop] > 90 || mapBounds.rect[prop] < -90) {
           valideBbox = false
         }
       }
       // Make sure that min and max lng are valid
-      let lngs = ['min_lon', 'max_lon']
-      for (let key in lngs) {
-        let prop = lngs[key]
+      const lngs = ['min_lon', 'max_lon']
+      for (const key in lngs) {
+        const prop = lngs[key]
         if (mapBounds.rect[prop] > 180 || mapBounds.rect[prop] < -180) {
           valideBbox = false
         }
       }
       // If the bounding box is valid, then add it to the args
       if (valideBbox) {
-        let bbox = [
+        const bbox = [
           [mapBounds.rect.min_lat, mapBounds.rect.min_lon],
           [mapBounds.rect.max_lat, mapBounds.rect.max_lon]
         ]
@@ -82,7 +82,7 @@ const orsParamsParser = {
    */
   buildPoisSearchArgs: (placeName) => {
     // build the args object
-    let args = {
+    const args = {
       name: placeName,
       // limit: 10,
       geometry: {
@@ -109,7 +109,7 @@ const orsParamsParser = {
    */
   buildReverseSearchArgs: (lat, long) => {
     // build the args object
-    let args = {
+    const args = {
       point: {
         lat_lng: [lat, long],
         radius: 1 // one km radius
@@ -128,12 +128,12 @@ const orsParamsParser = {
    * @returns {Object} args
    */
   buildIsochronesArgs: (places) => {
-    let locations = []
-    for (let key in places) {
-      let place = places[key]
+    const locations = []
+    for (const key in places) {
+      const place = places[key]
       locations.push([place.lng, place.lat])
     }
-    let args = {
+    const args = {
       locations: locations,
       area_units: store.getters.mapSettings.unit
     }
@@ -160,23 +160,23 @@ const orsParamsParser = {
    * @returns {Object} args
    */
   buildRoutingArgs: (places) => {
-    let coordinates = lodash.map(places, (p) => {
+    const coordinates = lodash.map(places, (p) => {
       return p.getLnglat()
     })
-    let mapSettings = store.getters.mapSettings
+    const mapSettings = store.getters.mapSettings
 
     // Define the extra info that musbe be requested
     // based on the map settings
-    let extraInfo = []
+    const extraInfo = []
 
-    for (let key in constants.extraInfos) {
+    for (const key in constants.extraInfos) {
       if (mapSettings[key]) {
         extraInfo.push(constants.extraInfos[key])
       }
     }
 
     // Set args object
-    let args = {
+    const args = {
       coordinates: coordinates,
       format: 'geojson',
       elevation: mapSettings.elevationProfile,
@@ -198,12 +198,12 @@ const orsParamsParser = {
    * @returns {Object} args
    */
   buildRoutingElevationArgs: (places) => {
-    let coordinates = lodash.map(places, (p) => {
+    const coordinates = lodash.map(places, (p) => {
       return p.getLnglat()
     })
 
     // build the args object
-    let args = {
+    const args = {
       coordinates: coordinates,
       instructions_format: 'html',
       elevation: true,
@@ -221,12 +221,12 @@ const orsParamsParser = {
    * @returns {Array} args
    */
   addFilters (args, orsFilters, service) {
-    for (let key in orsFilters) {
-      let filter = orsFilters[key]
+    for (const key in orsFilters) {
+      const filter = orsFilters[key]
 
-      let available = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
+      const available = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
       if (available && !filter.onlyInFront && (!filter.useInServices || filter.useInServices.includes(service))) {
-        let filterValue = OrsFilterUtil.getFilterValue(filter, service)
+        const filterValue = OrsFilterUtil.getFilterValue(filter, service)
 
         // If the value of the filter is valid, add in the args array
         if (orsParamsParser.isFilterValueValid(filterValue)) {
@@ -234,7 +234,7 @@ const orsParamsParser = {
             args[filter.name] = orsParamsParser.getMergedParameterValues(args[filter.name], filterValue)
           } else {
             if (filter.valueAsObject && typeof filterValue === 'string') {
-              let parsed = Utils.tryParseJson(filterValue)
+              const parsed = Utils.tryParseJson(filterValue)
               args[filter.name] = parsed || filterValue
             } else {
               args[filter.name] = filterValue
@@ -255,7 +255,7 @@ const orsParamsParser = {
    * @returns {Boolean}
    */
   isFilterValueValid (filterValue) {
-    let isValid = filterValue !== '' && filterValue !== undefined && filterValue !== null && filterValue !== '{}' && (typeof filterValue !== 'object' || Object.keys(filterValue).length > 0)
+    const isValid = filterValue !== '' && filterValue !== undefined && filterValue !== null && filterValue !== '{}' && (typeof filterValue !== 'object' || Object.keys(filterValue).length > 0)
     return isValid
   },
 
@@ -270,13 +270,13 @@ const orsParamsParser = {
    * @returns {String} representing an object stringified
    */
   getMergedParameterValues (current, adding) {
-    let addingParsedJson = typeof adding === 'string' ? Utils.tryParseJson(adding) : adding
+    const addingParsedJson = typeof adding === 'string' ? Utils.tryParseJson(adding) : adding
 
     // If what we wanna add was an object stringfied
     // that was successfully parsed, continue this way
     if (addingParsedJson) {
       let newObj = null
-      let existingParsedJson = Utils.tryParseJson(current)
+      const existingParsedJson = Utils.tryParseJson(current)
 
       // If what we want to append is a parsable json
       if (existingParsedJson) {
@@ -284,7 +284,7 @@ const orsParamsParser = {
       } else { // if not, it is an object, so we append the prop directly
         newObj = Object.assign(current, addingParsedJson)
       }
-      let newStrJson = JSON.stringify(newObj)
+      const newStrJson = JSON.stringify(newObj)
       return newStrJson
     } else {
       // if it is not parsable, than retrn the original object
@@ -299,9 +299,9 @@ const orsParamsParser = {
    * @param {*} options
    */
   parseOptions (filtersInto, options) {
-    for (let key in options) {
-      for (let filtersKey in filtersInto) {
-        let filter = filtersInto[filtersKey]
+    for (const key in options) {
+      for (const filtersKey in filtersInto) {
+        const filter = filtersInto[filtersKey]
 
         if (filter.name === key) {
           // If the filter has dependencies
@@ -310,13 +310,13 @@ const orsParamsParser = {
           if (filter.validWhen) {
             DependencyService.setVisibility(filtersInto, filtersKey, filtersInto)
           }
-          let available = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
+          const available = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
 
           // If the filter is available, it not intented to be used only
           // in the interface and is not disabled, set its value
           if (available && !filter.onlyInFront && !filter.disabled) {
-            let value = options[key]
-            let parsedJson = Utils.tryParseJson(value)
+            const value = options[key]
+            const parsedJson = Utils.tryParseJson(value)
             if (parsedJson) {
               this.parseOptions(filtersInto[filtersKey].props, parsedJson)
             } else {
@@ -335,8 +335,8 @@ const orsParamsParser = {
    */
   setFilterValueFromParam (filter, paramValue) {
     if (filter.type === constants.filterTypes.wrapper && filter.props && typeof paramValue === 'object') {
-      for (let propKey in filter.props) {
-        let prop = filter.props[propKey]
+      for (const propKey in filter.props) {
+        const prop = filter.props[propKey]
         if (paramValue[prop.name]) {
           OrsFilterUtil.setFilterValue(prop.name, paramValue[prop.name])
         }

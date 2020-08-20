@@ -37,10 +37,10 @@ export default {
      * @param {*} file
      */
     fileAdded (file) {
-      let context = this
+      const context = this
       var reader = new FileReader()
       reader.addEventListener('loadend', function (event) {
-        let content = event.target.result
+        const content = event.target.result
         if (!content || content === 'null') {
           context.showError(context.$t('routeImporter.failedToLoadFile'), 20000)
         } else {
@@ -65,7 +65,7 @@ export default {
       } else if (fileContent.startsWith('<?xml')) {
         fileType = 'xml'
       } else if (type === 'application/json') {
-        let parsedJson = JSON.parse(fileContent)
+        const parsedJson = JSON.parse(fileContent)
         if (parsedJson && parsedJson.features) {
           fileType = 'geojson'
         } else {
@@ -84,9 +84,9 @@ export default {
      * @param {*} timestamp
      */
     sendDataToMap (fileType, fileContent, timestamp) {
-      let data = {
+      const data = {
         content: fileContent,
-        options: {origin: constants.dataOrigins.fileImporter, contentType: fileType, timestamp: timestamp}
+        options: { origin: constants.dataOrigins.fileImporter, contentType: fileType, timestamp: timestamp }
       }
       this.$emit('contentUploaded', data)
     },

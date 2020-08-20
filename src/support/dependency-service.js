@@ -6,8 +6,8 @@ import lodash from 'lodash'
  * @param {*} scopedParameters
  */
 const updateFieldsStatus = (scopedParameters) => {
-  let globalParameters = OrsMapFilters
-  for (let key in scopedParameters) {
+  const globalParameters = OrsMapFilters
+  for (const key in scopedParameters) {
     setVisibility(scopedParameters, key, globalParameters)
     applyItemsFilter(scopedParameters, key, globalParameters)
   }
@@ -20,9 +20,9 @@ const updateFieldsStatus = (scopedParameters) => {
  * @param {*} globalParameters
  */
 const setVisibility = (scopedParameters, key, globalParameters) => {
-  let parameter = scopedParameters[key]
+  const parameter = scopedParameters[key]
   if (parameter.validWhen) {
-    let matchesRules = getMatchesDependencyRules(parameter, globalParameters, 'validWhen')
+    const matchesRules = getMatchesDependencyRules(parameter, globalParameters, 'validWhen')
     scopedParameters[key].disabled = !matchesRules
   }
 }
@@ -36,11 +36,11 @@ const setVisibility = (scopedParameters, key, globalParameters) => {
  */
 const getMatchesDependencyRules = (parameter, globalParameters, dependencyKey) => {
   let matchRule = true
-  for (let ruleKey in parameter[dependencyKey]) {
-    let rule = parameter[dependencyKey][ruleKey]
-    let dependsOn = getDependencyRelationTargetObj(globalParameters, rule)
+  for (const ruleKey in parameter[dependencyKey]) {
+    const rule = parameter[dependencyKey][ruleKey]
+    const dependsOn = getDependencyRelationTargetObj(globalParameters, rule)
     if (dependsOn) {
-      let value = getParsedValue(dependsOn.value, dependsOn.apiDefault)
+      const value = getParsedValue(dependsOn.value, dependsOn.apiDefault)
       matchRule = applyValueRule(rule, value, matchRule)
       matchRule = applyConditionRule(rule, value, matchRule)
     }
@@ -98,9 +98,9 @@ const applyValueRule = (rule, paramValue, matchesRule) => {
   let ruleValue = rule.value || rule.valueNot
   ruleValue = getParsedValue(ruleValue)
   if (ruleValue !== undefined && paramValue !== undefined) {
-    if (rule.hasOwnProperty('value') && rule.value !== undefined) {
+    if (Object.prototype.hasOwnProperty.call(rule, 'value') && rule.value !== undefined) {
       matchesRule = matchForExistingRuleValue(paramValue, ruleValue)
-    } else if (rule.hasOwnProperty('valueNot')) {
+    } else if (Object.prototype.hasOwnProperty.call(rule, 'valueNot')) {
       matchesRule = matchForExistingRuleValue(paramValue, ruleValue, true)
     }
   } else {
@@ -139,18 +139,18 @@ const applyConditionRule = (rule, paramValue, matchesRule) => {
  * @param {*} globalParameters
  */
 const applyItemsFilter = (scopedParameters, key, globalParameters) => {
-  let parameter = scopedParameters[key]
+  const parameter = scopedParameters[key]
   if (parameter.itemRestrictions) {
-    for (let ruleKey in parameter.itemRestrictions) {
-      let rule = parameter.itemRestrictions[ruleKey]
-      let validWhen = getDependencyRelationTargetObj(globalParameters, rule)
+    for (const ruleKey in parameter.itemRestrictions) {
+      const rule = parameter.itemRestrictions[ruleKey]
+      const validWhen = getDependencyRelationTargetObj(globalParameters, rule)
       if (validWhen) {
         setFilteredItems(scopedParameters, key, validWhen, rule)
         setFilteredItemsForNullAndUndefined(scopedParameters, key, validWhen, rule)
       }
     }
   } else if (parameter.props) {
-    for (let propKey in parameter.props) {
+    for (const propKey in parameter.props) {
       applyItemsFilter(parameter.props, propKey, globalParameters)
     }
   }
@@ -167,8 +167,8 @@ const setFilteredItems = (scopedParameters, key, validWhen, rule) => {
   if (rule.itemsWhen) {
     if (validWhen.multiSelect && Array.isArray(validWhen.value)) {
       let filteredItems = []
-      for (let valueKey in validWhen.value) {
-        let value = validWhen.value[valueKey]
+      for (const valueKey in validWhen.value) {
+        const value = validWhen.value[valueKey]
         filteredItems = filteredItems.concat(rule.itemsWhen[value])
       }
       scopedParameters[key].filteredItems = filteredItems
@@ -200,11 +200,11 @@ const setFilteredItems = (scopedParameters, key, validWhen, rule) => {
  * @param {*} rule
  */
 const setFilteredItemsForNullAndUndefined = (scopedParameters, key, validWhen, rule) => {
-  if (validWhen.value === undefined && rule.itemsWhen['undefined']) {
-    scopedParameters[key].filteredItems = rule.itemsWhen['undefined']
+  if (validWhen.value === undefined && rule.itemsWhen.undefined) {
+    scopedParameters[key].filteredItems = rule.itemsWhen.undefined
   }
-  if (validWhen.value === null && rule.itemsWhen['null']) {
-    scopedParameters[key].filteredItems = rule.itemsWhen['null']
+  if (validWhen.value === null && rule.itemsWhen.null) {
+    scopedParameters[key].filteredItems = rule.itemsWhen.null
   }
 }
 
@@ -219,7 +219,7 @@ const getParsedValue = (value, defaultValue = null) => {
   if (value === undefined || value === null || value === '') {
     value = defaultValue
   }
-  let type = value === 'true' || value === 'false' || typeof value === 'boolean' ? 'boolean' : null
+  const type = value === 'true' || value === 'false' || typeof value === 'boolean' ? 'boolean' : null
   if (type === 'boolean') {
     if (typeof value !== 'boolean') {
       value = value === 'true'
@@ -250,7 +250,7 @@ const getDependencyRelationTargetObj = (globalParameters, rule) => {
   }
 
   // First get the object in the root node of global parameters where the dependency ref points to
-  let rootTargetObject = lodash.find(globalParameters, function (p) { return p.name === rootParameterName })
+  const rootTargetObject = lodash.find(globalParameters, function (p) { return p.name === rootParameterName })
 
   // If the target has a child path find it inside
   // the root target parameter object and return it
@@ -272,8 +272,8 @@ const buildHtmlDisabledTooltip = (parameter, translations) => {
 
   const buildTooltipRuleValueArray = (ruleValue) => {
     let valueCount = ruleValue.length
-    for (let valueKey in ruleValue) {
-      let value = ruleValue[valueKey]
+    for (const valueKey in ruleValue) {
+      const value = ruleValue[valueKey]
       tooltip += ' <b>' + value + '</b>'
       tooltip += valueCount === 1 ? '' : ' <i>' + translations.or + '</i> '
       valueCount--
@@ -281,11 +281,11 @@ const buildHtmlDisabledTooltip = (parameter, translations) => {
   }
 
   const buildTooltipRuleValue = (rule) => {
-    let ruleValue = rule.value || rule.valueNot
+    const ruleValue = rule.value || rule.valueNot
     tooltip += ' <b>' + rule.ref + '</b> '
-    if (rule.hasOwnProperty('value') && rule.value !== undefined) {
+    if (Object.prototype.hasOwnProperty.call(rule, 'value') && rule.value !== undefined) {
       tooltip += translations.toBe + ' '
-    } else if (rule.hasOwnProperty('valueNot')) {
+    } else if (Object.prototype.hasOwnProperty.call(rule, 'valueNot')) {
       tooltip += translations.notToBe + ' '
     }
     if (Array.isArray(ruleValue)) {
@@ -296,10 +296,10 @@ const buildHtmlDisabledTooltip = (parameter, translations) => {
   }
 
   const buildTooltipRule = (key, counter) => {
-    let rule = parameter.validWhen[key]
-    if (rule.hasOwnProperty('value') || rule.value === undefined) {
+    const rule = parameter.validWhen[key]
+    if (Object.prototype.hasOwnProperty.call(rule, 'value') || rule.value === undefined) {
       rule.value = typeof rule.value === 'boolean' ? rule.value.toString() : rule.value
-    } else if (rule.hasOwnProperty('valueNot')) {
+    } else if (Object.prototype.hasOwnProperty.call(rule, 'valueNot')) {
       rule.valueNot = typeof rule.valueNot === 'boolean' ? rule.valueNot.toString() : rule.valueNot
     }
     if (rule.value || rule.valueNot) {
@@ -314,7 +314,7 @@ const buildHtmlDisabledTooltip = (parameter, translations) => {
 
   if (parameter.validWhen) {
     let counter = 1
-    for (let key in parameter.validWhen) {
+    for (const key in parameter.validWhen) {
       buildTooltipRule.call(this, key, counter)
       counter++
     }

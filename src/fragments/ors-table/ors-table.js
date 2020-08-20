@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     showJsonData (columnName, json) {
-      this.infoDialog(columnName, null, {code: json, resizable: true, zIndex: 1001})
+      this.infoDialog(columnName, null, { code: json, resizable: true, zIndex: 1001 })
     },
     selectedRowValuesSource (source) {
       this.rowValuesSource = source
@@ -73,7 +73,7 @@ export default {
       if (this.search === '') {
         return rows
       }
-      let context = this
+      const context = this
       return this.lodash.filter(rows, function (row) {
         return context.getRowIfMeetsSearchCriteria(row)
       })
@@ -86,7 +86,7 @@ export default {
      */
     getRowIfMeetsSearchCriteria (row) {
       let found = false
-      for (let column of row) {
+      for (const column of row) {
         // we do not search inside objects
         if (typeof column !== 'object') {
           found = column.toString().includes(this.search)
@@ -105,7 +105,7 @@ export default {
      *
      */
     buildTable () {
-      let context = this
+      const context = this
       this.setTableBuilder()
       this.tableDataBuilder.buildTableData().then(tableData => {
         context.tableData = tableData
@@ -122,7 +122,7 @@ export default {
      */
     getInitialRowValuesSource (tableData) {
       if (tableData.columns && Array.isArray(tableData.columns[0])) {
-        let index = tableData.columns[0].indexOf(tableData.initialRowValuesSource)
+        const index = tableData.columns[0].indexOf(tableData.initialRowValuesSource)
         return tableData.columns[0][index]
       }
     },
@@ -133,7 +133,7 @@ export default {
      */
     setTableBuilder () {
       if (!this.tableDataBuilder) {
-        let data = {endpoint: this.endpoint, responseData: this.responseData, translations: this.$t('orsTable'), apiVersion: this.apiVersion}
+        const data = { endpoint: this.endpoint, responseData: this.responseData, translations: this.$t('orsTable'), apiVersion: this.apiVersion }
         this.tableDataBuilder = new OrsTableBuilder(data)
       }
     },
@@ -149,7 +149,7 @@ export default {
         this.pagination.sortBy = column
         this.pagination.descending = false
       }
-      let columnIndex = this.columns.indexOf(column)
+      const columnIndex = this.columns.indexOf(column)
       if (Array.isArray(this.tableData.rows)) {
         this.tableData.rows = this.lodash.orderBy(this.tableData.rows, columnIndex, ['desc'])
       } else {

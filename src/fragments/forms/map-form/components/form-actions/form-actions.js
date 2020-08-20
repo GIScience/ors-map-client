@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     isEnabled (action) {
-      let disabled = this.disabledActions
+      const disabled = this.disabledActions
       if (disabled.includes(action)) {
         return false
       }

@@ -129,9 +129,9 @@ class CRUD {
    * @returns {Promise}
    */
   index = (filters) => {
-    let context = this
+    const context = this
     return new Promise((resolve, reject) => {
-      let proceed = context.runProceedCallBack('beforeIndex', reject)
+      const proceed = context.runProceedCallBack('beforeIndex', reject)
 
       if (proceed) {
         // in the index action we do not use the resource model instance, but each
@@ -174,9 +174,9 @@ class CRUD {
    * @returns {Promise}
    */
   get = (pkValue) => {
-    let context = this
+    const context = this
     return new Promise((resolve, reject) => {
-      let proceed = context.runProceedCallBack('beforeGet', reject)
+      const proceed = context.runProceedCallBack('beforeGet', reject)
 
       if (proceed) {
         context.modelService.get(pkValue).then((resource) => {
@@ -216,19 +216,19 @@ class CRUD {
    * @returns {Promise}
    */
   save = () => {
-    let context = this
+    const context = this
 
     // We return a promise and resolve/reject it because optionally, the developer
     // can have its own save method, and after it is finished do something special
     return new Promise((resolve, reject) => {
-      let validForm = context.formIsValid(reject)
-      let proceed = context.runProceedCallBack('beforeSave', reject)
+      const validForm = context.formIsValid(reject)
+      const proceed = context.runProceedCallBack('beforeSave', reject)
 
       if (validForm && proceed) {
-        let postResource = context.vm.resource.$strip(context.vm.resource)
+        const postResource = context.vm.resource.$strip(context.vm.resource)
         if (Object.keys(postResource).length === 0) {
-          let msg = context.options.resourceEmptyMsg || context.vm.$t('crud.resourceEmptyMsg').replace(':resource', context.vm.resource.$getName())
-          context.vm.showError(context.capitalize(msg), {mode: 'multi-line'})
+          const msg = context.options.resourceEmptyMsg || context.vm.$t('crud.resourceEmptyMsg').replace(':resource', context.vm.resource.$getName())
+          context.vm.showError(context.capitalize(msg), { mode: 'multi-line' })
           reject(msg)
         } else {
           context.vm.resource.$save().then((data) => {
@@ -236,10 +236,10 @@ class CRUD {
             context.vm.resource = data.resource
 
             // Define the save confirmation message to be displayed
-            let msg = data.message || context.options.savedMsg || context.vm.$t('crud.resourceSaved').replace(':resource', context.vm.resource.$getName())
+            const msg = data.message || context.options.savedMsg || context.vm.$t('crud.resourceSaved').replace(':resource', context.vm.resource.$getName())
 
             // Capitalize and use multiline to be sure that the message won be truncated (we don't know the how big the messages from server can be)
-            context.vm.showSuccess(context.capitalize(msg), {mode: 'multi-line'})
+            context.vm.showSuccess(context.capitalize(msg), { mode: 'multi-line' })
 
             // Reload the data listed
             if (!context.options.skipAutoIndexAfterSave && !context.options.skipAutoIndexAfterAllEvents) {
@@ -280,10 +280,10 @@ class CRUD {
    * @returns {Promise}
    */
   update = () => {
-    let context = this
+    const context = this
     return new Promise((resolve, reject) => {
-      let validForm = context.formIsValid(reject)
-      let proceed = context.runProceedCallBack('beforeUpdate', reject)
+      const validForm = context.formIsValid(reject)
+      const proceed = context.runProceedCallBack('beforeUpdate', reject)
 
       if (validForm && proceed) {
         context.vm.resource.$update().then((data) => {
@@ -291,10 +291,10 @@ class CRUD {
           context.vm.resource = data.resource
 
           // Define the save confirmation message to be displayed
-          let msg = data.message || context.options.updatedMsg || context.vm.$t('crud.resourceUpdated').replace(':resource', context.vm.resource.$getName())
+          const msg = data.message || context.options.updatedMsg || context.vm.$t('crud.resourceUpdated').replace(':resource', context.vm.resource.$getName())
 
           // Capitalize and use multiline to be sure that the message won be truncated (we don't know the how big the messages from server can be)
-          context.vm.showSuccess(context.capitalize(msg), {mode: 'multi-line'})
+          context.vm.showSuccess(context.capitalize(msg), { mode: 'multi-line' })
 
           // Reload the data listed
           if (!context.options.skipAutoIndexAfterUpdate && !context.options.skipAutoIndexAfterAllEvents) {
@@ -333,13 +333,13 @@ class CRUD {
    * @returns {Promise}
    */
   confirmAndDestroy = (resource) => {
-    let context = this
+    const context = this
     return new Promise((resolve, reject) => {
       // Define the conformation modal title to be displayed before destroying
-      let confirmTitle = context.options.confirmDestroyTitle || context.vm.$t('crud.removalConfirmTitle')
+      const confirmTitle = context.options.confirmDestroyTitle || context.vm.$t('crud.removalConfirmTitle')
 
       // Define the conformation modal text to be displayed before destroying
-      let confirmMessage = context.options.confirmDestroyText || context.vm.$t('crud.doYouReallyWantToRemove').replace(':resource', context.vm.resource.$getName())
+      const confirmMessage = context.options.confirmDestroyText || context.vm.$t('crud.doYouReallyWantToRemove').replace(':resource', context.vm.resource.$getName())
 
       // Open the confirmation modal and wait for the response in a promise
       context.vm.confirmDialog(confirmTitle, confirmMessage).then(() => {
@@ -355,7 +355,7 @@ class CRUD {
         )
       }, (error) => { // If the user has clicked `no` in the dialog, abort the destroy and show an aborted message
         // Define the error message to be displayed
-        let msg = context.options.destroyAbortedMsg || context.vm.$t('crud.destroyAborted')
+        const msg = context.options.destroyAbortedMsg || context.vm.$t('crud.destroyAborted')
 
         // show the abort message as an info
         context.vm.showInfo(msg)
@@ -377,17 +377,17 @@ class CRUD {
    * @returns {Promise}
    */
   destroy = (resource) => {
-    let context = this
+    const context = this
     return new Promise((resolve, reject) => {
-      let proceed = context.runProceedCallBack('beforeDestroy', reject)
+      const proceed = context.runProceedCallBack('beforeDestroy', reject)
 
       if (proceed) {
         resource.$destroy().then((data) => {
           // Define the save confirmation message to be displayed
-          let msg = data.message || context.options.destroyedMsg || context.vm.$t('crud.resourceDestroyed').replace(':resource', context.vm.resource.$getName())
+          const msg = data.message || context.options.destroyedMsg || context.vm.$t('crud.resourceDestroyed').replace(':resource', context.vm.resource.$getName())
 
           // Capitalize and use multiline to be sure that the message won be truncated (we don't know the how big the messages from server can be)
-          context.vm.showSuccess(context.capitalize(msg), {mode: 'multi-line'})
+          context.vm.showSuccess(context.capitalize(msg), { mode: 'multi-line' })
 
           // Reload the data listed
           if (!context.options.skipAutoIndexAfterDestroy && !context.options.skipAutoIndexAfterAllEvents) {
@@ -429,7 +429,7 @@ class CRUD {
    */
   handleError (response, actionMsg, defaultCrudMsg) {
     // There is no response message in this case, so we define the message considering the options custom message, the options status msg or the default one
-    let treatment = this.getErrorTreatment(response, actionMsg, defaultCrudMsg)
+    const treatment = this.getErrorTreatment(response, actionMsg, defaultCrudMsg)
     if (treatment !== false) {
       if (typeof treatment !== 'function') {
         this.showErrorMessage(response, treatment)
@@ -475,15 +475,15 @@ class CRUD {
    */
   runProceedCallBack (callbackFunc, reject, data) {
     let proceed = true
-    if (this.vm.hasOwnProperty(callbackFunc)) {
+    if (Object.prototype.hasOwnProperty.call(this.vm, callbackFunc)) {
       proceed = this.vm[callbackFunc](data)
     }
 
     if (proceed === false) {
-      let error = `proceed stopped on ${callbackFunc} function`
+      const error = `proceed stopped on ${callbackFunc} function`
       console.log(error)
-      let errorMsg = this.options.operationAborted || this.vm.$t('crud.operationAborted')
-      this.vm.showInfo(this.capitalize(errorMsg), {mode: 'multi-line'})
+      const errorMsg = this.options.operationAborted || this.vm.$t('crud.operationAborted')
+      this.vm.showInfo(this.capitalize(errorMsg), { mode: 'multi-line' })
 
       // In the default CRUD usage, it is not necessary to
       // listen to the promise result
@@ -503,7 +503,7 @@ class CRUD {
    * @param {*} data data to be passed
    */
   runAfterCallBack (callbackFunc, data) {
-    if (this.vm.hasOwnProperty(callbackFunc)) {
+    if (Object.prototype.hasOwnProperty.call(this.vm, callbackFunc)) {
       this.vm[callbackFunc](data)
     }
   }
@@ -517,13 +517,13 @@ class CRUD {
    */
   formIsValid (reject) {
     let validForm = true // init as valid
-    let formRef = this.options.formRef || 'form' // get the form ref (custom or default one)
-    let form = this.vm.$refs[formRef] || null // get the form object using the formRef
+    const formRef = this.options.formRef || 'form' // get the form ref (custom or default one)
+    const form = this.vm.$refs[formRef] || null // get the form object using the formRef
 
-    let crudForm = new Form(form, this.vm, this.options)
+    const crudForm = new Form(form, this.vm, this.options)
     validForm = crudForm.validate()
     if (!validForm) {
-      let errorMsg = this.options.invalidForm || this.vm.$t('crud.invalidForm')
+      const errorMsg = this.options.invalidForm || this.vm.$t('crud.invalidForm')
       // In the default CRUD usage, it is not necessary to
       // listen to the promise result
       // if the promise is not being listened
@@ -558,9 +558,9 @@ class CRUD {
       showError = false
     }
 
-    if (this.vm.hasOwnProperty('beforeShowError')) {
+    if (Object.prototype.hasOwnProperty.call(this.vm.hasOwnProperty, 'beforeShowError')) {
       errorResponse.showError = showError // add the current showError status to the object passed to the call back
-      showError = this.vm['beforeShowError'](errorResponse)
+      showError = this.vm.beforeShowError(errorResponse)
     }
 
     if (showError === true) {
@@ -569,7 +569,7 @@ class CRUD {
       if (errorResponse === undefined || errorResponse.status === 500 || (!errorResponse.data || !errorResponse.data.message)) {
         // if it this and 500 case, we show only a friendly message, and log the error and log the error
         // as we are not sure about the error message size, use multi-line model for the toaster
-        this.vm.showError(this.capitalize(frontEndErrorMessage), {mode: 'multi-line'})
+        this.vm.showError(this.capitalize(frontEndErrorMessage), { mode: 'multi-line' })
         console.log(errorResponse)
       } else {
         // Define the error message to be used
@@ -581,7 +581,7 @@ class CRUD {
 
         // We show the response error message
         // As we are not sure about the error message size, use multi-line model for the toaster
-        this.vm.showError(this.capitalize(errorMsg), {mode: 'multi-line'})
+        this.vm.showError(this.capitalize(errorMsg), { mode: 'multi-line' })
       }
     }
   }
@@ -599,5 +599,5 @@ const CRUDData = {
 }
 
 // Export the CRUD and the CRUDData objects
-export {CRUD}
-export {CRUDData}
+export { CRUD }
+export { CRUDData }

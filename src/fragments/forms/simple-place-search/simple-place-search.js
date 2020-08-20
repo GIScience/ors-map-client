@@ -7,7 +7,7 @@
 import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
 import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
-import {PlacesSearch} from '@/support/ors-api-runner'
+import { PlacesSearch } from '@/support/ors-api-runner'
 import constants from '@/resources/constants'
 import Place from '@/models/place'
 import CrudForm from '@/crud/form'
@@ -55,7 +55,7 @@ export default {
      * and it there is only one place in appRouteData
      */
     setPlace () {
-      let showPlaceNameModes = [constants.modes.place, constants.modes.roundTrip, constants.modes.search, constants.modes.isochrones]
+      const showPlaceNameModes = [constants.modes.place, constants.modes.roundTrip, constants.modes.search, constants.modes.isochrones]
       if (showPlaceNameModes.includes(this.$store.getters.mode) && this.$store.getters.appRouteData.places.length === 1) {
         this.place = this.$store.getters.appRouteData.places[0]
       }
@@ -75,15 +75,15 @@ export default {
      * Set event listeners
      */
     setEventListeners () {
-      let context = this
+      const context = this
       // Set marker clicked event listener
       // When in search place mode, if the marker is clicked, we select it as the target
       // for the inputIndex
       this.eventBus.$on('markerClicked', (marker) => {
-        let lat = marker.data.geometry.coordinates[1]
-        let lng = marker.data.geometry.coordinates[0]
-        let placeOptions = { resolve: false, inputIndex: null, id: marker.data.properties.id }
-        let place = new Place(lng, lat, marker.label, placeOptions)
+        const lat = marker.data.geometry.coordinates[1]
+        const lng = marker.data.geometry.coordinates[0]
+        const placeOptions = { resolve: false, inputIndex: null, id: marker.data.properties.id }
+        const place = new Place(lng, lat, marker.label, placeOptions)
         this.selectPlace(place)
       })
 
@@ -127,7 +127,7 @@ export default {
      * and render the map with these data (place or route)
      */
     loadData () {
-      let places = this.$store.getters.appRouteData.places.slice(0)
+      const places = this.$store.getters.appRouteData.places.slice(0)
 
       if (places.length === 1 /* && this.$store.getters.leftSideBarOpen */) {
         this.place = places[0]
@@ -182,9 +182,9 @@ export default {
       if (this.$store.getters.mode !== constants.modes.directions && this.place.placeName === '') {
         this.$store.commit('mode', constants.modes.place)
       }
-      let appMode = new AppMode(this.$store.getters.mode)
-      let places = this.place.isEmpty() ? [] : [this.place]
-      let route = appMode.getRoute(places)
+      const appMode = new AppMode(this.$store.getters.mode)
+      const places = this.place.isEmpty() ? [] : [this.place]
+      const route = appMode.getRoute(places)
       this.$router.push(route)
     },
 
@@ -211,10 +211,10 @@ export default {
       }
 
       this.$store.commit('mode', constants.modes.place)
-      let appMode = new AppMode(this.$store.getters.mode)
+      const appMode = new AppMode(this.$store.getters.mode)
 
       // Define new app route
-      let route = appMode.getRoute([this.place])
+      const route = appMode.getRoute([this.place])
       this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
       this.$router.push(route)
     },
@@ -237,7 +237,7 @@ export default {
      * @param {*} location
      */
     setLocationFromBrowser (location) {
-      let place = new Place(location.lon, location.lat, this.$t('simplePlaceSearch.yourLocation'))
+      const place = new Place(location.lon, location.lat, this.$t('simplePlaceSearch.yourLocation'))
       place.seFromBrowser(true)
       place.seSkipShowData(true)
       this.myLocation = true
@@ -250,7 +250,7 @@ export default {
      */
     search () {
       this.searching = true
-      let context = this
+      const context = this
 
       // Run the place search
       this.eventBus.$emit('showLoading', true)

@@ -12,10 +12,10 @@ const RouteUtils = {
    * @returns {Array} places
    */
   getRoutePlaces: (route) => {
-    let places = []
-    let data = RouteUtils.decodeDataParam(route.params.data)
+    const places = []
+    const data = RouteUtils.decodeDataParam(route.params.data)
     // Get the collection of coordinates from the decoded data param object
-    let coordinates = data.coordinates.split(';')
+    const coordinates = data.coordinates.split(';')
 
     // Check if we have the same number of coordinates and places
     var placeNameParameters = lodash.pickBy(route.params, function (value, key) {
@@ -27,11 +27,11 @@ const RouteUtils = {
     }
     // Build each place object and add then to the places array
     let counter = 0
-    for (let key in placeNameParameters) {
-      let lnglat = coordinates[counter].split(',')
+    for (const key in placeNameParameters) {
+      const lnglat = coordinates[counter].split(',')
 
       // Add a new place
-      let placeName = route.params[key].replace(',', ', ')
+      const placeName = route.params[key].replace(',', ', ')
       places.push(new Place(lnglat[0], lnglat[1], placeName, { resolve: false, inputIndex: counter }))
       counter++
     }
@@ -46,17 +46,17 @@ const RouteUtils = {
   buildRouteParams: (appRouteData, options) => {
     appRouteData.options = appRouteData.options || {}
     Object.assign(appRouteData.options, options)
-    let params = {}
+    const params = {}
     var coordinates = []
 
     // For each place, create a param that starts with `placeName` and ends with an index, like `placeName1`, `placeName2`...
     appRouteData.places.forEach((p, index) => {
-      let placeKey = 'placeName' + (index + 1)
+      const placeKey = 'placeName' + (index + 1)
       params[placeKey] = p.placeName.replace(/, /g, ',')
       coordinates.push(`${p.lng},${p.lat}`)
     })
-    let dataString = JSON.stringify({coordinates: coordinates.join(';'), options: appRouteData.options})
-    let data = store.getters.mapSettings.compressDataUrlSegment ? Utils.compressTxt(dataString) : dataString
+    const dataString = JSON.stringify({ coordinates: coordinates.join(';'), options: appRouteData.options })
+    const data = store.getters.mapSettings.compressDataUrlSegment ? Utils.compressTxt(dataString) : dataString
 
     // Set the `data` param value, that goes at the end of the url
     params.data = data
@@ -78,10 +78,10 @@ const RouteUtils = {
     }
     let parsedData = Utils.tryParseJson(str)
     if (parsedData) {
-      for (let key in parsedData) {
+      for (const key in parsedData) {
         if (typeof parsedData[key] === 'object') {
-          for (let objKey in parsedData[key]) {
-            let value = parsedData[key][objKey]
+          for (const objKey in parsedData[key]) {
+            const value = parsedData[key][objKey]
             if (value && value.toString().length > 1) {
               parsedData[key][objKey] = RouteUtils.decodeDataParam(value, false)
             } else {
@@ -105,8 +105,8 @@ const RouteUtils = {
     var placeNameParams = lodash.pickBy(routeTo.params, function (value, key) {
       return key.startsWith('placeName') && value !== undefined
     })
-    let placeNameParamsAmount = Object.keys(placeNameParams).length
-    let currentMode = placeNameParamsAmount === 1 ? constants.modes.roundTrip : constants.modes.directions
+    const placeNameParamsAmount = Object.keys(placeNameParams).length
+    const currentMode = placeNameParamsAmount === 1 ? constants.modes.roundTrip : constants.modes.directions
     store.commit('mode', currentMode)
   }
 }

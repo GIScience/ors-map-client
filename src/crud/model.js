@@ -63,7 +63,7 @@ class Model {
     if (typeof value === 'object') {
       for (var key in value) {
         // Check also if property is not inherited from prototype
-        if (value.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(value, key)) {
           instance[key] = value[key]
         }
       }
@@ -76,10 +76,10 @@ class Model {
    * @param {*} value
    */
   $copy = () => {
-    let copied = {}
-    for (var key in this) {
+    const copied = {}
+    for (const key in this) {
       // Check also if property is not inherited from prototype
-      if (this.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(this, key)) {
         copied[key] = this[key]
       }
     }
@@ -90,7 +90,7 @@ class Model {
    * Creates or updates the resource instance in the server, depending on the primary key be null or have a value
    */
   $save = () => {
-    let pk = this.$options.pk || 'id'
+    const pk = this.$options.pk || 'id'
     if (this[pk] && this[pk] !== false && this[pk] !== '') {
       return this.$update()
     } else { // If it is a create new resource
@@ -106,7 +106,7 @@ class Model {
    */
   $post = (request) => {
     request = this.$parseRequest(request)
-    let instance = this
+    const instance = this
     instance.$pending = true
     return new Promise((resolve, reject) => {
       if (instance.$options.transformRequest) {
@@ -122,7 +122,7 @@ class Model {
         if (response.data) {
           instance.$extend(instance, response.data)
         }
-        let data = {resource: instance, message: response.data.message}
+        const data = { resource: instance, message: response.data.message }
         resolve(data)
       }).catch((error) => {
         instance.$pending = true
@@ -157,7 +157,7 @@ class Model {
    * @returns {Promise}
    */
   $create = () => {
-    let request = { endPoint: this.$endPoint, filters: {}, resource: this.$clean(this), running: 'create' }
+    const request = { endPoint: this.$endPoint, filters: {}, resource: this.$clean(this), running: 'create' }
     // $post will return a promise
     return this.$post(request)
   }
@@ -170,17 +170,17 @@ class Model {
    * on successful delete.
    */
   $destroy = () => {
-    let request = { endPoint: this.$endPoint, filters: {}, resource: this.$clean(this), running: 'destroy' }
+    const request = { endPoint: this.$endPoint, filters: {}, resource: this.$clean(this), running: 'destroy' }
     if (this.$options.transformRequest) {
       this.$options.transformRequest(request)
     }
 
-    let pk = this.$options.pk || 'id'
+    const pk = this.$options.pk || 'id'
 
-    let destroyEndPoint = `${request.endPoint}/${request.resource[pk]}`
+    const destroyEndPoint = `${request.endPoint}/${request.resource[pk]}`
     return new Promise((resolve, reject) => {
       httpApi.delete(destroyEndPoint).then((response) => {
-        let data = {resource: null, message: response.data.message}
+        const data = { resource: null, message: response.data.message }
         resolve(data)
       }).catch((error) => {
         reject(error)
@@ -192,14 +192,14 @@ class Model {
    * Update a resource
    */
   $update = () => {
-    let instance = this
-    let request = { endPoint: this.$endPoint, filters: {}, resource: this.$clean(instance), running: 'update' }
+    const instance = this
+    const request = { endPoint: this.$endPoint, filters: {}, resource: this.$clean(instance), running: 'update' }
     if (instance.$options.transformRequest) {
       instance.$options.transformRequest(request)
     }
-    let pk = instance.$options.pk || 'id'
+    const pk = instance.$options.pk || 'id'
 
-    let updateEndPoint = `${request.endPoint}/${request.resource[pk]}`
+    const updateEndPoint = `${request.endPoint}/${request.resource[pk]}`
 
     return new Promise((resolve, reject) => {
       httpApi.put(updateEndPoint, request.resource).then((response) => {
@@ -209,7 +209,7 @@ class Model {
         if (response.data) {
           instance.$extend(instance, response.data)
         }
-        let data = {resource: this, message: response.data.message}
+        const data = { resource: this, message: response.data.message }
         resolve(data)
       }).catch((error) => {
         reject(error)
@@ -222,11 +222,11 @@ class Model {
    * @param {*} resource
    */
   $strip = (resource) => {
-    let shallow = this.$copy(resource)
+    const shallow = this.$copy(resource)
     if (shallow && typeof shallow === 'object') {
-      for (var key in shallow) {
+      for (const key in shallow) {
         // check also if property is not inherited from prototype
-        if (shallow.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(shallow, key)) {
           if (this.$instanceKeywords.indexOf(key) > -1) {
             delete shallow[key]
           }
@@ -242,11 +242,11 @@ class Model {
    * @param {*} resource
    */
   $clean = (resource) => {
-    let shallow = this.$strip(resource)
+    const shallow = this.$strip(resource)
     if (shallow && typeof shallow === 'object') {
-      for (var key in shallow) {
+      for (const key in shallow) {
         // check also if property is not inherited from prototype
-        if (shallow.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(shallow, key)) {
           if (shallow[key] === '' && !this.$options.sendEmptyAttributes) {
             delete shallow[key]
           }

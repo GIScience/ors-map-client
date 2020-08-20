@@ -19,8 +19,8 @@ class IsochronesBuilder {
    * @returns {Promise} that returns in the resolve mapData object
    */
   buildMapData = () => {
-    let mapViewData = new MapViewData()
-    let context = this
+    const mapViewData = new MapViewData()
+    const context = this
     return new Promise((resolve) => {
       mapViewData.places = context.buildPlaces()
       mapViewData.polygons = context.getPolygons()
@@ -37,14 +37,14 @@ class IsochronesBuilder {
    * @returns {Array} markers
    */
   buildPlaces = () => {
-    let places = []
+    const places = []
     if (lodash.get(this, 'responseData.metadata.query.locations')) {
-      let polygonCenters = []
+      const polygonCenters = []
       this.responseData.features.forEach(feature => {
-        let locationCoordsStr = `${feature.properties.center[0]}, ${feature.properties.center[1]}`
+        const locationCoordsStr = `${feature.properties.center[0]}, ${feature.properties.center[1]}`
         if (!polygonCenters.includes(locationCoordsStr)) {
-          let lnglat = feature.properties.center
-          let place = new Place(lnglat[0], lnglat[1], locationCoordsStr, {properties: feature.properties})
+          const lnglat = feature.properties.center
+          const place = new Place(lnglat[0], lnglat[1], locationCoordsStr, { properties: feature.properties })
           places.push(place)
           polygonCenters.push(locationCoordsStr)
         }
@@ -58,10 +58,10 @@ class IsochronesBuilder {
    * @returns {Array} markers
    */
   getPolygons = () => {
-    let polygons = []
+    const polygons = []
     if (this.responseData.features) {
       this.responseData.features.forEach((feature, index) => {
-        let polygon = { geometry: feature.geometry, properties: feature.properties }
+        const polygon = { geometry: feature.geometry, properties: feature.properties }
         polygon.properties.range_type = this.responseData.metadata.query.range_type
         polygons.push(polygon)
       })

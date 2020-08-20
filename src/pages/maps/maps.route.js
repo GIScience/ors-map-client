@@ -4,11 +4,11 @@ import RoutesResolver from '@/support/routes-resolver'
 import constants from '@/resources/constants'
 import RouteUtils from '@/support/route-utils'
 
-let rootPath = RoutesResolver.homeUrl()
-let placePath = RoutesResolver.place()
-let directionsPath = RoutesResolver.directions()
-let searchPath = RoutesResolver.search()
-let isochronesPath = RoutesResolver.isochronesPath()
+const rootPath = RoutesResolver.homeUrl()
+const placePath = RoutesResolver.place()
+const directionsPath = RoutesResolver.directions()
+const searchPath = RoutesResolver.search()
+const isochronesPath = RoutesResolver.isochronesPath()
 
 export default [
   {
@@ -20,7 +20,7 @@ export default [
       //  when a more specific route is being loaded (MapPlace, MapDirections ...)
       // As this was causing a weird redirection we had to tell vue router to
       // go the target route in this case
-      let currentPath = location.hash.replace('#', '')
+      const currentPath = location.hash.replace('#', '')
       // Only laod the root route if the cleanMap flag is true
       if (currentPath !== '' && currentPath !== '/' && currentPath !== rootPath && !store.getters.cleanMap) {
         // In case of loading root route, set the
@@ -82,7 +82,7 @@ export default [
     }
   },
   {
-    path: `/settings`,
+    path: '/settings',
     name: 'MapSettings',
     component: Maps,
     beforeEnter: (to, from, next) => {
@@ -92,7 +92,7 @@ export default [
     }
   },
   {
-    path: `/about`,
+    path: '/about',
     name: 'MapAbout',
     component: Maps,
     beforeEnter: (to, from, next) => {

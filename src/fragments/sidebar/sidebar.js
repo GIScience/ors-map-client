@@ -31,11 +31,11 @@ export default {
       }
     },
     homeUrl () {
-      let url = resolver.homeUrl()
+      const url = resolver.homeUrl()
       return url
     },
     sidebarContentHeightFormula () {
-      let formula = `calc(100% - ${this.$store.getters.sidebarHeaderHeight}px)`
+      const formula = `calc(100% - ${this.$store.getters.sidebarHeaderHeight}px)`
       return formula
     }
   },
@@ -48,7 +48,7 @@ export default {
     /**
      * Set sidebar open status
      */
-    let context = this
+    const context = this
     this.eventBus.$on('setSidebarStatus', (isOpen) => {
       // pass a boolean that indicates 'force'
       context.$store.commit('setLeftSideBarIsOpen', isOpen)

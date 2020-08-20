@@ -22,7 +22,7 @@ export default {
       return this.activeProfile || this.initialProfile
     },
     profilesMapping () {
-      let filter = this.getProfileFilter()
+      const filter = this.getProfileFilter()
       return filter.mapping
     }
   },
@@ -49,7 +49,7 @@ export default {
      * @returns {Object}
      */
     getProfileFilter () {
-      let filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
+      const filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
       return filterRef
     },
 
@@ -58,7 +58,7 @@ export default {
      * @returns {Array}
      */
     getPrimaryProfiles () {
-      let primaryProfiles = this.lodash.filter(this.profilesMapping, (p) => {
+      const primaryProfiles = this.lodash.filter(this.profilesMapping, (p) => {
         return p.primary === true
       })
       return primaryProfiles
@@ -83,7 +83,7 @@ export default {
       }, 200)
     },
     updateFilterProfile () {
-      let filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
+      const filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
       if (filterRef.value && this.activeProfile !== filterRef.value) {
         this.activeProfile = filterRef.value
       }

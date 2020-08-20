@@ -12,7 +12,7 @@ const config = {
   maxPlaceInputs: 15 // Don't change this unless you know what your doing
 }
 config.getBaseUrl = () => {
-  let env = process.env
+  const env = process.env
   return env.NODE_ENV === 'production' ? config.prodBaseAPIUrl : config.devBaseAPIUrl
 }
 

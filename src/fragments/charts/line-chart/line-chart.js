@@ -1,4 +1,4 @@
-import {Line} from 'vue-chartjs'
+import { Line } from 'vue-chartjs'
 
 export default {
   extends: Line,
@@ -35,8 +35,8 @@ export default {
     },
     onHover (event, chartElements) {
       if (chartElements.length > 0) {
-        let chartElement = chartElements[0]
-        let index = chartElement._index
+        const chartElement = chartElements[0]
+        const index = chartElement._index
         this.$emit('chartHoverIndexChanged', index)
       }
     },

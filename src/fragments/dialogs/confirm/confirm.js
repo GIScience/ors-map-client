@@ -39,15 +39,15 @@ export default {
     },
     onYes () {
       this.show = false
-      this.eventBus.$emit('confirmAnswered', {response: 'yes', guid: this.guid})
+      this.eventBus.$emit('confirmAnswered', { response: 'yes', guid: this.guid })
     },
     onNo () {
       this.show = false
-      this.eventBus.$emit('confirmAnswered', {response: 'no', guid: this.guid})
+      this.eventBus.$emit('confirmAnswered', { response: 'no', guid: this.guid })
     },
     onNever () {
       this.show = false
-      this.eventBus.$emit('confirmAnswered', {response: 'never', guid: this.guid})
+      this.eventBus.$emit('confirmAnswered', { response: 'never', guid: this.guid })
     }
   },
   created () {

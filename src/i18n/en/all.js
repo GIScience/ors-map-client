@@ -80,7 +80,7 @@ export default {
       'cycling-electric': 'cycling eletric',
       'foot-walking': 'walking',
       'foot-hiking': 'hiking',
-      'wheelchair': 'wheelchair'
+      wheelchair: 'wheelchair'
     }
   },
   auth: {

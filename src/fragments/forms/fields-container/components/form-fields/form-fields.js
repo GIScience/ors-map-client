@@ -56,7 +56,7 @@ export default {
      * @param {*} parameter
      */
     showField (parameter) {
-      let show = !parameter.disabled && !parameter.hidden && (!parameter.availableOnModes || parameter.availableOnModes.indexOf(this.$store.getters.mode) > -1)
+      const show = !parameter.disabled && !parameter.hidden && (!parameter.availableOnModes || parameter.availableOnModes.indexOf(this.$store.getters.mode) > -1)
       return show
     },
     /**
@@ -64,12 +64,12 @@ export default {
      * @param {*} index
      */
     debounceTextFieldChange (index) {
-      let context = this
+      const context = this
       if (this.debounceTimeoutIds[index]) {
         clearTimeout(this.debounceTimeoutIds[index])
       }
       this.debounceTimeoutIds[index] = setTimeout(function () {
-        let param = context.formParameters[index]
+        const param = context.formParameters[index]
         // Make sure the filter has
         if (param.max && param.value > param.max) {
           context.formParameters[index].value = param.max
@@ -77,7 +77,7 @@ export default {
         if (param.min && param.value < param.min) {
           context.formParameters[index].value = param.min
         }
-        context.fieldUpdated({index: index})
+        context.fieldUpdated({ index: index })
       }, 1000)
     },
 
@@ -86,11 +86,11 @@ export default {
      * @param {*} index
      */
     setNewRandomValue (index) {
-      let min = this.formParameters[index].min || 0
-      let max = this.formParameters[index].max || 100
-      let ramdon = Math.floor(Math.random() * (max - min + 1) + min)
+      const min = this.formParameters[index].min || 0
+      const max = this.formParameters[index].max || 100
+      const ramdon = Math.floor(Math.random() * (max - min + 1) + min)
       this.formParameters[index].value = ramdon
-      this.fieldUpdated({index: index})
+      this.fieldUpdated({ index: index })
     },
     /**
      * Build slider componet label
@@ -109,7 +109,7 @@ export default {
      * @returns {Number} value
      */
     getNewRandomValue (index) {
-      let value = Math.floor((Math.random() * (this.formParameters[index].max + 1)) + this.formParameters[index].min)
+      const value = Math.floor((Math.random() * (this.formParameters[index].max + 1)) + this.formParameters[index].min)
       return value
     },
 
@@ -202,8 +202,8 @@ export default {
 
       // Convert array in string format back to array object
       if (typeof this.formParameters[index].props === 'object') {
-        for (let key in this.formParameters[index].props) {
-          let prop = this.formParameters[index].props[key]
+        for (const key in this.formParameters[index].props) {
+          const prop = this.formParameters[index].props[key]
           this.formParameters[index].props[key].oldValue = prop.value
           if (prop.separator && prop.value && typeof prop.value !== 'object') {
             this.formParameters[index].props[key].value = prop.value.split(prop.separator)
@@ -219,7 +219,7 @@ export default {
      * @param {*} index
      */
     maybeOpenAssistant (index) {
-      let param = this.formParameters[index]
+      const param = this.formParameters[index]
       if (this.subPropsModalActive === false && this.hasValidChildProps(param)) {
         this.selectParameter(index)
         if (this.formParameters[index].props) {
@@ -237,7 +237,7 @@ export default {
      * @param {*} index
      */
     maybeOpenManualEdit (index) {
-      let param = this.formParameters[index]
+      const param = this.formParameters[index]
 
       if (this.hasValidChildProps(param)) {
         // We need to wait a little so that the view is ready
@@ -256,8 +256,8 @@ export default {
      * @returns []
      */
     getSelectableItems (parameter) {
-      let stringifyItemsValue = function (parameter, propName) {
-        for (let key in parameter[propName]) {
+      const stringifyItemsValue = function (parameter, propName) {
+        for (const key in parameter[propName]) {
           parameter[propName][key] = parameter[propName][key].toString()
         }
       }
@@ -322,7 +322,7 @@ export default {
     parseChildrenPropsToJsonString (props) {
       // The above VueJS $set will remove all other parameters properties
       // so after executing it, we restore other properties of the parameter object
-      for (let key in props) {
+      for (const key in props) {
         if (key !== 'value') {
           props[key].value = this.getParamPropsValueStringified(props[key].props)
         }
@@ -344,16 +344,16 @@ export default {
       if (this.subPropsModalActive) {
         parameters = this.formParameters
       }
-      let stringifiedValue = this.getParamPropsValueStringified(parameters[parentIndex].props) || parameters[parentIndex].default
+      const stringifiedValue = this.getParamPropsValueStringified(parameters[parentIndex].props) || parameters[parentIndex].default
 
-      let parameter = parameters[parentIndex]
+      const parameter = parameters[parentIndex]
       // Update model value and trigger update in the view
       // @see https://stackoverflow.com/questions/42077023/vuejs-dynamic-property-name-not-updating-value
-      this.$set(parameters, parentIndex, {'value': stringifiedValue})
+      this.$set(parameters, parentIndex, { value: stringifiedValue })
 
       // The above VueJS $set will remove all other parameters properties
       // so after executing it, we restore other properties of the parameter object
-      for (let key in parameter) {
+      for (const key in parameter) {
         if (key !== 'value') {
           parameters[parentIndex][key] = parameter[key]
         }
@@ -368,7 +368,7 @@ export default {
      *
      */
     onModalFieldAssistedConfirm () {
-      let index = this.subPropsModalIndex
+      const index = this.subPropsModalIndex
 
       // Notify the parent about the update
       this.fieldUpdated(index, { index: index, value: this.formParameters[index].value })
@@ -389,8 +389,8 @@ export default {
      */
     getParamPropsValueStringified (props) {
       try {
-        let values = {}
-        for (let index in props) {
+        const values = {}
+        for (const index in props) {
           if (props[index].separator && props[index].value && Array.isArray(props[index].value)) {
             if (props[index].value.length === 0 || props[index].disabled) {
               continue
@@ -412,7 +412,7 @@ export default {
         stringified = stringified.replace(/ /g, '').replace(/"{/g, '{').replace(/\\/g, '').replace(/}"/g, '}').replace(/"\[/g, '[').replace(/]"/g, ']')
         return stringified === '{}' ? null : stringified
       } catch (e) {
-        for (let index in props) {
+        for (const index in props) {
           props[index].value = props[index].oldValue || null
         }
         this.showError(this.$t('formFields.wrongInputValue'))
@@ -428,7 +428,7 @@ export default {
      */
     showPanelExpanded (parameters) {
       let childHascontent = false
-      for (let key in parameters.props) {
+      for (const key in parameters.props) {
         if (parameters.props[key].value !== undefined && parameters.props[key].value !== null) {
           childHascontent = true
           break

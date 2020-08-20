@@ -1,5 +1,5 @@
 import AppMode from '@/support/app-modes/app-mode'
-import {Geocode, ReverseGeocode} from '@/support/ors-api-runner'
+import { Geocode, ReverseGeocode } from '@/support/ors-api-runner'
 import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
@@ -60,10 +60,10 @@ export default {
   },
   created () {
     // Create a local clone of the model passed via props (so we can modify if when necessary)
-    let placeClone = new Place()
+    const placeClone = new Place()
     this.localModel = Object.assign(placeClone, this.model)
 
-    let context = this
+    const context = this
 
     this.eventBus.$on('suggestionsUpdated', (data) => {
       context.suggestionUpdated(data)
@@ -89,7 +89,7 @@ export default {
      * @returns {String}
      */
     inputColumns () {
-      let columns = 12 - (this.iconsBtnCounter * this.inputColumnFactor)
+      const columns = 12 - (this.iconsBtnCounter * this.inputColumnFactor)
       return `xs${columns} sm${columns} md${columns} lg${columns}`
     },
 
@@ -98,7 +98,7 @@ export default {
      * @returns {String}
      */
     iconsColumns () {
-      let columns = this.iconsBtnCounter * this.inputColumnFactor
+      const columns = this.iconsBtnCounter * this.inputColumnFactor
       return `xs${columns} sm${columns} md${columns} lg${columns}`
     },
 
@@ -169,7 +169,7 @@ export default {
     },
     // Switch the coordinates position ([lat, long] -> [long, lat] and [long, lat] -> [lat, long])
     switchCoordsAvailable () {
-      let canSwitch = this.localModel.nameIsCoord()
+      const canSwitch = this.localModel.nameIsCoord()
       return canSwitch
     },
     /**
@@ -203,8 +203,8 @@ export default {
       }
       let suggestions = []
       if (this.localModel.nameIsCoord()) {
-        let coords = this.localModel.getCoordsFromName()
-        let rawCoordinatesPlace = new Place(coords[0], coords[1], this.localModel.placeName, {properties: {layer: 'rawCoordinate'}})
+        const coords = this.localModel.getCoordsFromName()
+        const rawCoordinatesPlace = new Place(coords[0], coords[1], this.localModel.placeName, { properties: { layer: 'rawCoordinate' } })
         rawCoordinatesPlace.rawCoordinate = true
         suggestions.push(rawCoordinatesPlace)
       }
@@ -244,9 +244,9 @@ export default {
      * @returns {Promise}
      */
     resolvePlace () {
-      let place = this.localModel
+      const place = this.localModel
       this.eventBus.$emit('showLoading', true)
-      let context = this
+      const context = this
       return new Promise((resolve, reject) => {
         context.searching = false
         place.resolve(this.$store.getters.appRouteData.options.zoom).then(() => {
@@ -298,9 +298,9 @@ export default {
         this.searching = false
       } else {
         // If the app is in low resolution mode we want less results
-        let size = this.$lowResolution ? 8 : 10
+        const size = this.$lowResolution ? 8 : 10
 
-        let context = this
+        const context = this
 
         // Run the place search
         this.eventBus.$emit('showLoading', true)
@@ -326,16 +326,16 @@ export default {
      *
      */
     autocompleteByCoords () {
-      let lnglatArr = this.localModel.getLnglat()
-      let lng = lnglatArr[0]
-      let lat = lnglatArr[1]
+      const lnglatArr = this.localModel.getLnglat()
+      const lng = lnglatArr[0]
+      const lat = lnglatArr[1]
       // If the app is in low resolution mode we want less results
-      let size = this.$lowResolution ? 5 : 10
+      const size = this.$lowResolution ? 5 : 10
 
       this.eventBus.$emit('showLoading', true)
-      let context = this
+      const context = this
       ReverseGeocode(lat, lng, size).then(places => {
-        let place = new Place(lng, lat)
+        const place = new Place(lng, lat)
         place.setSuggestions(places)
         context.localModel = place
         context.focused = true
@@ -361,7 +361,7 @@ export default {
      */
     changed (event = null) {
       if (event) {
-        let isPasteEvent = event instanceof ClipboardEvent
+        const isPasteEvent = event instanceof ClipboardEvent
         // In case of a ClipboardEvent (ctr + v)
         // we must just ignore, since we the input
         // model  has not changed yet
@@ -369,7 +369,7 @@ export default {
           event.preventDefault()
           event.stopPropagation()
           clearTimeout(this.debounceTimeoutId)
-          let context = this
+          const context = this
 
           // Make sure that the changes in the input are debounced
           this.debounceTimeoutId = setTimeout(function () {
@@ -388,10 +388,10 @@ export default {
      * Send the app to search mode
      */
     sendToSearchMode () {
-      let previousMode = this.$store.getters.mode
+      const previousMode = this.$store.getters.mode
       this.$store.commit('mode', constants.modes.search)
-      let appMode = new AppMode(this.$store.getters.mode)
-      let route = appMode.getRoute([this.localModel])
+      const appMode = new AppMode(this.$store.getters.mode)
+      const route = appMode.getRoute([this.localModel])
       this.$router.push(route)
       if (previousMode === constants.modes.search) {
         this.$emit('searchChanged')
@@ -439,7 +439,7 @@ export default {
      */
     selected () {
       this.focused = false
-      this.$emit('selected', {index: this.index, place: this.model})
+      this.$emit('selected', { index: this.index, place: this.model })
       this.$forceUpdate()
     },
 
@@ -475,7 +475,7 @@ export default {
      * @param {*} data can be a boolean value or a $event. If it is the second case, we consider it as false
      */
     setFocus (data) {
-      let state = typeof data === 'boolean' ? data : false
+      const state = typeof data === 'boolean' ? data : false
       this.focused = state
       // Once the focused was set to true based on a user
       // interaction event the it is not anymore in automatic mode
@@ -496,13 +496,13 @@ export default {
      */
     setLocationFromBrowser () {
       this.focused = false
-      let context = this
+      const context = this
 
       // Se place function that receives
       // a location and builds a selectable place
       // and run functions to upate the view
-      let setPlace = (location) => {
-        let selectablePlace = {
+      const setPlace = (location) => {
+        const selectablePlace = {
           geometry: {
             coordinates: [location.lng, location.lat]
           },
@@ -549,8 +549,8 @@ export default {
      */
     distance (suggestedPlace) {
       // Set origin and destination
-      let fromLatlng = {lat: this.$store.getters.mapCenter.lat, lng: this.$store.getters.mapCenter.lng}
-      let toLatlng = {lat: suggestedPlace.lat, lng: suggestedPlace.lng}
+      const fromLatlng = { lat: this.$store.getters.mapCenter.lat, lng: this.$store.getters.mapCenter.lng }
+      const toLatlng = { lat: suggestedPlace.lat, lng: suggestedPlace.lng }
 
       // calculate the distance between the two points
       let distance = GeoUtils.calculateDistanceBetweenLocations(fromLatlng, toLatlng, this.$store.getters.mapSettings.unit)

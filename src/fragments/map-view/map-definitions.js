@@ -8,7 +8,7 @@ const orsDefinitions = {
    */
   polylineMeasureOptions: (polylineMeasureTranslations) => {
     // eslint-disable-block no-multi-spaces
-    let options = {
+    const options = {
       // language options
       ...polylineMeasureTranslations,
       // other options
@@ -92,8 +92,8 @@ const orsDefinitions = {
    * Build map providers array
    */
   getProviders () {
-    let defaultTileProvider = store.getters.mapSettings.defaultTileProvider || 'osm'
-    let providers = [
+    const defaultTileProvider = store.getters.mapSettings.defaultTileProvider || 'osm'
+    const providers = [
       {
         name: 'Open Street Maps',
         visible: defaultTileProvider === 'osm',
@@ -137,9 +137,9 @@ const orsDefinitions = {
     ]
 
     // Add custom tile servive if defined in settings
-    let customTileProviderUrl = store.getters.mapSettings.customTileProviderUrl
+    const customTileProviderUrl = store.getters.mapSettings.customTileProviderUrl
     if (customTileProviderUrl) {
-      let customTileService = [
+      const customTileService = [
         {
           name: 'Custom',
           visible: defaultTileProvider === 'custom',

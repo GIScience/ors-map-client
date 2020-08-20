@@ -29,6 +29,7 @@ class MapViewData {
   static build (geoJson) {
     return new MapViewData(geoJson)
   }
+
   /**
    * Check if the object has places
    * @param {*} lng
@@ -37,6 +38,7 @@ class MapViewData {
   hasPlaces () {
     return this.places.length > 0
   }
+
   /**
    * Check if the object has routes
    * @param {*} lng
@@ -45,16 +47,17 @@ class MapViewData {
   hasRoutes () {
     return this.routes.length > 0
   }
+
   /**
    * Create a clone object
    * @returns  {MapViewData}
    */
   clone () {
-    let mapViewDataClone = new MapViewData()
-    let propertiesToClone = ['origin', 'isRouteData', 'timestamp', 'mode']
+    const mapViewDataClone = new MapViewData()
+    const propertiesToClone = ['origin', 'isRouteData', 'timestamp', 'mode']
 
-    for (let key in propertiesToClone) {
-      let prop = propertiesToClone[key]
+    for (const key in propertiesToClone) {
+      const prop = propertiesToClone[key]
       mapViewDataClone[prop] = this[prop]
     }
 
@@ -63,9 +66,9 @@ class MapViewData {
     mapViewDataClone.polygons = utils.clone(this.polygons)
     mapViewDataClone.options = utils.clone(this.options)
 
-    for (let key in this.places) {
+    for (const key in this.places) {
       if (this.places[key] instanceof Place) {
-        let place = this.places[key]
+        const place = this.places[key]
         mapViewDataClone.places.push(place.clone())
       }
     }
@@ -78,10 +81,10 @@ class MapViewData {
    * @returns {MapViewData} mapViewAta
    */
   static buildFromGeojson (geoJson) {
-    let mapViewAta = new MapViewData()
+    const mapViewAta = new MapViewData()
 
-    for (let fKey in geoJson.features) {
-      let feature = {
+    for (const fKey in geoJson.features) {
+      const feature = {
         properties: geoJson.features[fKey].properties,
         geometry: {
           coordinates: geoJson.features[fKey].geometry.coordinates
@@ -91,13 +94,14 @@ class MapViewData {
         case 'LineString':
           mapViewAta.routes.push(feature)
           break
-        case 'Point':
-          let lat = feature.geometry.coordinates[0]
-          let lon = feature.geometry.coordinates[1]
-          let place = new Place(lat, lon, feature.properties.label, {properties: feature.properties})
+        case 'Point': {
+          const lat = feature.geometry.coordinates[0]
+          const lon = feature.geometry.coordinates[1]
+          const place = new Place(lat, lon, feature.properties.label, { properties: feature.properties })
           feature.latlngs = feature.geometry.coordinates
           mapViewAta.places.push(place)
           break
+        }
         case 'Polygon':
           mapViewAta.polygons.push(feature)
           break
@@ -111,11 +115,11 @@ class MapViewData {
    * @returns {Object} geojson
    */
   getGeoJson () {
-    let geoJsonData = { type: 'FeatureCollection', features: [] }
+    const geoJsonData = { type: 'FeatureCollection', features: [] }
 
     // Build and add routes/linestring features to the geojson
-    for (let rKey in this.routes) {
-      let routeFeature = {
+    for (const rKey in this.routes) {
+      const routeFeature = {
         type: 'Feature',
         properties: this.routes[rKey].properties,
         geometry: {
@@ -127,10 +131,10 @@ class MapViewData {
     }
 
     // Build and add places/points features to the geojson
-    for (let plaKey in this.places) {
-      let placeFeature = {
+    for (const plaKey in this.places) {
+      const placeFeature = {
         type: 'Feature',
-        properties: {label: this.places[plaKey].placeName},
+        properties: { label: this.places[plaKey].placeName },
         geometry: {
           type: 'Point',
           coordinates: this.places[plaKey].coordinates
@@ -140,10 +144,10 @@ class MapViewData {
     }
 
     // Build and add polygons features to the geojson
-    for (let polKey in this.polygons) {
-      let polygon = this.polygons[polKey]
+    for (const polKey in this.polygons) {
+      const polygon = this.polygons[polKey]
 
-      let polygonFeature = {
+      const polygonFeature = {
         type: 'Feature',
         properties: polygon.properties,
         geometry: polygon.geometry

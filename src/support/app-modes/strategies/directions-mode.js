@@ -10,7 +10,7 @@ import RouteUtils from '@/support/route-utils'
  */
 class DirectionsMode {
   buildAppRouteData (places, options = {}) {
-    let appRouteData = new AppRouteData()
+    const appRouteData = new AppRouteData()
     appRouteData.places = places
 
     // All directions request filters will be extracted from the OrsMapFilters
@@ -29,17 +29,17 @@ class DirectionsMode {
    */
   getRoute = (appRouteData, options) => {
     // Get only the valid params for directions
-    let validOptions = {}
-    let validParams = ['profile', 'preference']
-    for (let key in validParams) {
-      let paramName = validParams[key]
+    const validOptions = {}
+    const validParams = ['profile', 'preference']
+    for (const key in validParams) {
+      const paramName = validParams[key]
       if (options[paramName]) {
         validOptions[paramName] = options[paramName]
       }
     }
-    let params = RouteUtils.buildRouteParams(appRouteData, validOptions)
+    const params = RouteUtils.buildRouteParams(appRouteData, validOptions)
     // Build the route object
-    let route = { name: 'MapDirections', params: params }
+    const route = { name: 'MapDirections', params: params }
     return route
   }
 
@@ -50,8 +50,8 @@ class DirectionsMode {
    * @returns {AppRouteData}
    */
   decodePath = (currentRoute) => {
-    let data = RouteUtils.decodeDataParam(currentRoute.params.data)
-    let appRouteData = new AppRouteData()
+    const data = RouteUtils.decodeDataParam(currentRoute.params.data)
+    const appRouteData = new AppRouteData()
 
     // Get coordinates and options from the param
     appRouteData.options = data.options

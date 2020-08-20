@@ -2,7 +2,7 @@ import VueInstance from '@/main'
 
 const showMessage = (msg, theme, options) => {
   options = options || {}
-  VueInstance.eventBus.$emit('showSnack', {message: msg, theme: theme, options: options})
+  VueInstance.eventBus.$emit('showSnack', { message: msg, theme: theme, options: options })
 }
 
 const showError = (msg, options) => {
@@ -21,8 +21,8 @@ const showSuccess = (msg, options) => {
   showMessage(msg, 'success', options)
 }
 
-export {showMessage}
-export {showError}
-export {showWarning}
-export {showInfo}
-export {showSuccess}
+export { showMessage }
+export { showError }
+export { showWarning }
+export { showInfo }
+export { showSuccess }

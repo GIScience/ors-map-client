@@ -26,7 +26,7 @@ router.beforeEach((to, from, next) => {
 })
 
 // load and get all routes from components with name following the pattern *.route.js
-let pageRoutes = loader.load(require.context('@/pages/', true, /\.route\.js$/))
+const pageRoutes = loader.load(require.context('@/pages/', true, /\.route\.js$/))
 
 pageRoutes.forEach(pageRoute => {
   if (Array.isArray(pageRoute)) {

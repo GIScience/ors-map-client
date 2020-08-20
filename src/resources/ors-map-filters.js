@@ -71,7 +71,7 @@ const filters = [
         title: 'Driving HGV',
         icon: 'directions_car'
       },
-      'wheelchair': {
+      wheelchair: {
         slug: 'wheelchair',
         title: 'wheelchair',
         icon: 'accessible_forward',
@@ -430,7 +430,7 @@ const filters = [
                 'steps',
                 'hills'
               ],
-              'wheelchair': [
+              wheelchair: [
                 'ferries',
                 'steps'
               ]

@@ -31,7 +31,7 @@ export default {
      * @returns {Object}
      */
     avoidPolygonsFilterAcessor () {
-      let filterRef = OrsFilterUtil.getFilterRefByName(constants.avoidPpolygonsFilterName)
+      const filterRef = OrsFilterUtil.getFilterRefByName(constants.avoidPpolygonsFilterName)
       return filterRef
     },
     /**
@@ -107,7 +107,7 @@ export default {
      * @param {*} data {content:..., options: ...}
      */
     contentUploaded (data) {
-      let context = this
+      const context = this
       data.options.translations = context.$t('global.units')
       MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
         context.$store.commit('mode', mapViewData.mode)
