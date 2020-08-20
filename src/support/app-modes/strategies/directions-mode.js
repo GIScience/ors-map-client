@@ -4,14 +4,13 @@ import AppRouteData from '@/models/app-route-data'
 import constants from '@/resources/constants'
 import Utils from '@/support/utils'
 import RouteUtils from '@/support/route-utils'
-import store from '@/store/store'
 
 /**
  * DirectionsMode class
  */
 class DirectionsMode {
   buildAppRouteData (places, options = {}) {
-    let appRouteData = store.getters.appRouteData || new AppRouteData()
+    let appRouteData = new AppRouteData()
     appRouteData.places = places
 
     // All directions request filters will be extracted from the OrsMapFilters

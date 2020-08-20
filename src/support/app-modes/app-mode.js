@@ -45,8 +45,15 @@ class AppMode {
    * @returns {AppRouteData} newAppRouteData
    */
   getAppRouteData (places) {
-    let options = this.getRouteOptions(store.getters.appRouteData.options)
-    let newAppRouteData = this.targetMode.buildAppRouteData(places, options)
+    // let options = this.getRouteOptions(store.getters.appRouteData.options)
+    // let newAppRouteData = this.targetMode.buildAppRouteData(places, options)
+
+    // We are about to build a new appRouteData using the passed places
+    // and the values stored in the @see ors-map-filter object in memory.
+    // We have identified that in this case we should not use the previous
+    // options in the old appRouteData and pass it as a second parameter
+    // for the method below
+    let newAppRouteData = this.targetMode.buildAppRouteData(places)
     return newAppRouteData
   }
 

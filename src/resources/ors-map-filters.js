@@ -499,7 +499,7 @@ const filters = [
         validWhen: [
           {
             ref: 'self',
-            min: 2
+            min: 1
           }
         ],
         useInServices: [constants.services.directions]

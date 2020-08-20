@@ -6,7 +6,7 @@ import lodash from 'lodash'
  * Update the status and data of the parameters based on the dependencies declared
  * @param {*} scopedParameters
  */
-const getFilterWithValueValueUpdated = (parameter) => {
+const getFilterWithValueUpdated = (parameter) => {
   let parameterClone = utils.clone(parameter)
   let globalParameters = OrsMapFilters
   setValue(parameterClone, globalParameters)
@@ -241,7 +241,7 @@ const getChildProp = (rootObject, propPath) => {
  * Service exported object/methods
  */
 const dependencyService = {
-  getFilterWithValueValueUpdated,
+  getFilterWithValueUpdated,
   isAvailable
 }
 
