@@ -25,7 +25,8 @@ export default {
     mapViewData: new MapViewData(),
     mode: constants.modes.place,
     places: [new Place()],
-    roundTripActive: false
+    roundTripActive: false,
+    placeFocusIndex: null
   }),
   components: {
     PlaceInput,
@@ -48,6 +49,9 @@ export default {
         this.addPlaceInput()
       }
       return this.places
+    },
+    setAutofocus () {
+      this.places.length === 1 && this.isSidebarOpen
     },
     /**
      * Return a boolean determining if the place details must be visible
@@ -127,6 +131,17 @@ export default {
     },
 
     /**
+     * Set the place focus index
+     * @param {*} index 
+     */
+    setfocusedPlaceInput(index) {
+      this.placeFocusIndex = index
+      setTimeout(() => {
+        this.$forceUpdate()        
+      }, 200)
+    },
+
+    /**
      * Set event listeners
      */
     setListeners () {
@@ -139,11 +154,16 @@ export default {
         context.setViewMode(constants.modes.directions)
       })
 
-      // When the simple map search send a place
+      // When the simple map search sends a place
       // set the sent place as the destination of a route
       this.eventBus.$on('switchToDirections', () => {
         if (context.places.length === 1) {
           context.addPlaceInput()
+        } 
+        if (this.places[0].isEmpty()) {
+          context.setfocusedPlaceInput(0)
+        } else {
+          context.setfocusedPlaceInput(this.places.length - 1)
         }
       })
 
@@ -244,6 +264,7 @@ export default {
         if (context.places.length === 1) {
           setTimeout(() => {
             context.addPlaceInput()
+            context.setfocusedPlaceInput(this.places.length - 1)
             context.setSidebarIsOpen(true)
           }, 200)
         }
@@ -307,12 +328,13 @@ export default {
         setTimeout(() => {
           if (context.places.length === 1) {
             context.addPlaceInput()
-
+            
             // After addging a place input it
             // is necessary to wait a bit
             // before reordering the places
             setTimeout(() => {
               context.places.reverse()
+              context.setfocusedPlaceInput(0)
               context.setSidebarIsOpen(true)
             }, 200)
           }
@@ -632,6 +654,7 @@ export default {
      */
     startDirections () {
       this.addPlaceInput()
+      this.setfocusedPlaceInput(this.places.length - 1)
       this.switchPlaceInputsValues()
       this.setViewMode(constants.modes.directions)
       this.eventBus.$emit('clearMap')
@@ -645,8 +668,9 @@ export default {
       this.places = []
       this.addPlaceInput()
 
-      if (place.coordinates) {
+      if (!place.isEmpty()) {
         this.places[0] = place
+        this.setfocusedPlaceInput(0)
         this.propagatePlaceChange(0)
         if (this.places.length === 1) {
           this.addPlaceInput()
@@ -817,6 +841,16 @@ export default {
       if (this.places.length === 1 && !this.places[0].isEmpty()) {
         this.updateAppRoute()
       }
+    },
+
+    /**
+     * Determines if a place input at a given index must be focused
+     * @param {*} index 
+     * @returns {Boolean}
+     */
+    autofocusEnabled (index) {
+      let enabled = this.placeFocusIndex === index
+      return enabled
     }
   }
 }

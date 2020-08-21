@@ -3,6 +3,7 @@ import { Geocode, ReverseGeocode } from '@/support/ors-api-runner'
 import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
+import utils from '@/support/utils'
 
 export default {
   data: () => ({
@@ -72,6 +73,17 @@ export default {
     this.focusIsAutomatic = this.autofocus
   },
   computed: {
+    /**
+     * Get the automatic focus must be set or not
+     */
+    getAutomaticFocus () {
+      // If is a mobile device, do not use automatic
+      // focus to avoid openning the keyboard
+      if (utils.isMobile()) {
+        return false
+      }
+      return this.focusIsAutomatic
+    },
     hint () {
       let hint = ''
       if (this.model.isEmpty() && !this.single && this.index > 0) {
@@ -228,6 +240,9 @@ export default {
         this.resolveModel()
       },
       deep: true
+    },
+    autofocus (newVal) {
+      this.focusIsAutomatic = newVal
     }
   },
   methods: {

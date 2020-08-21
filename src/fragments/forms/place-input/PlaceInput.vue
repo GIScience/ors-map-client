@@ -3,7 +3,7 @@
     <v-layout row wrap >
       <v-flex v-bind="{[inputColumns]: true}">
         <v-text-field
-          v-focus="focusIsAutomatic"
+          v-focus="getAutomaticFocus"
           class="place-input"
          :box="box"
          :hide-details="single || index == 0"

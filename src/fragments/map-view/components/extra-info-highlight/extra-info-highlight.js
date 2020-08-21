@@ -52,8 +52,12 @@ export default {
         this.buildHighlightedPolyline()
       },
       deep: true
+    },
+    '$route' () {
+      this.removeHightlightedSegments()
     }
   },
+  
   created () {
     this.buildHighlightedPolyline()
     this.$emit('beforeOpen')
