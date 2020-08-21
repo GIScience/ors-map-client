@@ -15,7 +15,7 @@ const loader = {
      */
     for (var prop in dependenceObjects) {
       // skip loop if the property is from prototype
-      if (!dependenceObjects.hasOwnProperty(prop)) continue
+      if (!Object.prototype.hasOwnProperty.call(dependenceObjects, prop)) continue
 
       // it is expected that each file has an default export
       // populate the array with named key of index, according the option passed
@@ -34,7 +34,7 @@ function importAll (r, dependenceObjects) {
   r.keys().forEach(
     function (key) {
       // create a safe key, considering that the file path can contain dot and slash
-      let safeKey = key.split('.').join('_').replace(/\//g, '_')
+      const safeKey = key.split('.').join('_').replace(/\//g, '_')
       dependenceObjects[safeKey] = r(key)
     }
   )

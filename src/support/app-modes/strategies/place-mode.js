@@ -10,7 +10,7 @@ import RouteUtils from '@/support/route-utils'
  */
 class PlaceMode {
   buildAppRouteData (places, options = {}) {
-    let appRouteData = store.getters.appRouteData || new AppRouteData()
+    const appRouteData = store.getters.appRouteData || new AppRouteData()
     appRouteData.places = places
 
     if (appRouteData.places.length > 0) {
@@ -18,8 +18,8 @@ class PlaceMode {
       // must be copied to the appRouteData.options. The list of properties
       // that must be copied to options are defined at @/resources/constants
       // layer', 'country'
-      appRouteData.options['layer'] = appRouteData.places[0].properties['layer'] || appRouteData.options['layer']
-      appRouteData.options['country'] = appRouteData.places[0].properties['country'] || appRouteData.options['country']
+      appRouteData.options.layer = appRouteData.places[0].properties.layer || appRouteData.options.layer
+      appRouteData.options.country = appRouteData.places[0].properties.country || appRouteData.options.country
 
       // Update the zoom acording the place type/layer
       appRouteData.options.zoom = GeoUtils.zoomLevelByLayer(appRouteData.options.layer)
@@ -35,23 +35,23 @@ class PlaceMode {
    */
   getRoute = (appRouteData, options) => {
     if (appRouteData.places.length > 0) {
-      let place = appRouteData.places[0]
-      let name = place.placeName ? place.placeName.replace(/, /g, ',') : ''
+      const place = appRouteData.places[0]
+      const name = place.placeName ? place.placeName.replace(/, /g, ',') : ''
 
       // Transform the coordinates into a comma separated value (easier to put in the url)
-      let lngLatStr = place.isEmpty() ? '' : `${place.lng},${place.lat}`
+      const lngLatStr = place.isEmpty() ? '' : `${place.lng},${place.lat}`
 
       options = JSON.stringify(options)
 
-      let data = store.getters.mapSettings.compressDataUrlSegment ? utils.compressTxt(options) : options
+      const data = store.getters.mapSettings.compressDataUrlSegment ? utils.compressTxt(options) : options
 
       // Create the route object
-      let params = {placeName: name, coordinates: lngLatStr, data: data}
-      let route = { name: 'MapPlace', params: params }
+      const params = { placeName: name, coordinates: lngLatStr, data: data }
+      const route = { name: 'MapPlace', params: params }
       return route
     } else {
       store.commit('cleanMap', true)
-      let route = {name: 'Maps'}
+      const route = { name: 'Maps' }
       return route
     }
   }
@@ -62,19 +62,19 @@ class PlaceMode {
    * @returns {AppRouteData}
    */
   decodePath = (currentRoute) => {
-    let appRouteData = new AppRouteData()
-    let data = RouteUtils.decodeDataParam(currentRoute.params.data)
+    const appRouteData = new AppRouteData()
+    const data = RouteUtils.decodeDataParam(currentRoute.params.data)
     if (data && data !== '') {
       appRouteData.options = data
     }
 
     if (currentRoute.params.coordinates) {
-      let lnglat = currentRoute.params.coordinates.split(',')
+      const lnglat = currentRoute.params.coordinates.split(',')
 
       // Get and format the place name
-      let placeName = currentRoute.params.placeName.replace(/, /g, ',').replace(',', ', ')
+      const placeName = currentRoute.params.placeName.replace(/, /g, ',').replace(',', ', ')
       // Recreate the place object
-      let place = new Place(lnglat[0], lnglat[1], placeName, {properties: data})
+      const place = new Place(lnglat[0], lnglat[1], placeName, { properties: data })
 
       // Add the single place to the route data
       appRouteData.places.push(place)

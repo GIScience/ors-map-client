@@ -42,7 +42,7 @@ const mutations = {
 }
 
 const actions = {
-  fetchApiInitialData ({getters, commit}) {
+  fetchApiInitialData ({ getters, commit }) {
     return new Promise((resolve) => {
       // If the data was already acquired
       // don't run the request again
@@ -85,15 +85,15 @@ const saveApiData = (commit, apiKey, endpoints) => {
 
   // WE will save the mapSettings on our store
   // but the default settings are preserved
-  let mapSettings = utils.clone(defaultMapSettings)
+  const mapSettings = utils.clone(defaultMapSettings)
 
   // Get map settings from local storage
-  let serializedMapSettings = localStorage.getItem('mapSettings')
+  const serializedMapSettings = localStorage.getItem('mapSettings')
 
   // Restore settings stored in local storage, if available
   if (serializedMapSettings) {
-    let storedMapSettings = JSON.parse(serializedMapSettings)
-    for (let key in storedMapSettings) {
+    const storedMapSettings = JSON.parse(serializedMapSettings)
+    for (const key in storedMapSettings) {
       if (typeof storedMapSettings[key] === 'object') {
         mapSettings[key] = Object.assign({}, storedMapSettings[key])
       } else {

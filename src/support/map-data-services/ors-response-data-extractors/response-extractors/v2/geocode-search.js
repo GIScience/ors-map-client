@@ -16,8 +16,8 @@ class GeocodeSearchBuilder {
    * @returns {Promise} that returns in the resolve mapData object
    */
   buildMapData = () => {
-    let mapViewData = new MapViewData()
-    let context = this
+    const mapViewData = new MapViewData()
+    const context = this
     return new Promise((resolve) => {
       mapViewData.places = context.buildPlaces()
       mapViewData.isRouteData = false
@@ -31,11 +31,11 @@ class GeocodeSearchBuilder {
    * @returns {Array} places
    */
   buildPlaces = () => {
-    let places = []
+    const places = []
     if (this.responseData.features) {
       this.responseData.features.forEach(feature => {
-        let lnglat = feature.geometry.coordinates
-        let place = new Place(lnglat[0], lnglat[1], feature.properties.label, {properties: feature.properties})
+        const lnglat = feature.geometry.coordinates
+        const place = new Place(lnglat[0], lnglat[1], feature.properties.label, { properties: feature.properties })
         places.push(place)
       })
     }

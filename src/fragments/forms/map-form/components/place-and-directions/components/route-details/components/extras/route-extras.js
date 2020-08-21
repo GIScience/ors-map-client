@@ -17,14 +17,14 @@ export default {
     showExtra (extraKey) {
       let show = (this.$store.getters.mapSettings[extraKey] === true)
       if (!show) { // check if the extra is being returned in a singular keyed property
-        let singular = extraKey.substring(0, extraKey.length - 1)
+        const singular = extraKey.substring(0, extraKey.length - 1)
         show = this.$store.getters.mapSettings[singular] === true
       }
       return show
     },
     showExtras () {
       let extras = 0
-      for (let extraKey in this.routeExtras) {
+      for (const extraKey in this.routeExtras) {
         if (this.showExtra(extraKey)) {
           extras++
         }
@@ -32,11 +32,11 @@ export default {
       return extras > 0
     },
     colorValue (extraKey, index) {
-      let color = orsDictionary.colors[extraKey][index]
+      const color = orsDictionary.colors[extraKey][index]
       return color
     },
     segmentStyle (extraKey, amount, index) {
-      let style = {
+      const style = {
         width: amount + '%',
         background: this.colorValue(extraKey, index)
       }
@@ -44,8 +44,8 @@ export default {
     },
     getExtraValueLabel (extraKey, value) {
       if (orsDictionary[extraKey] && orsDictionary[extraKey][value]) {
-        let key = orsDictionary[extraKey][value]
-        let labels = this.$t('routeExtras.orsDictionary')
+        const key = orsDictionary[extraKey][value]
+        const labels = this.$t('routeExtras.orsDictionary')
         if (labels[key]) {
           return labels[key]
         }
@@ -54,31 +54,31 @@ export default {
       return value
     },
     showSection (extraKey, value, index) {
-      let sectionTitle = this.$t('routeExtras.' + extraKey).toLowerCase()
-      let color = this.colorValue(extraKey, index)
-      let heighlighData = {extraKey, sectionTitle, sections: [{intervals: [], color}]}
+      const sectionTitle = this.$t('routeExtras.' + extraKey).toLowerCase()
+      const color = this.colorValue(extraKey, index)
+      const heighlighData = { extraKey, sectionTitle, sections: [{ intervals: [], color }] }
 
-      let polylineData = this.buildExtraHighlighPolylineData(extraKey, index, value)
+      const polylineData = this.buildExtraHighlighPolylineData(extraKey, index, value)
       heighlighData.sections.push(polylineData)
       this.eventBus.$emit('highlightPolylineSections', heighlighData)
     },
     showAllSections (extraKey) {
-      let sectionTitle = this.$t('routeExtras.' + extraKey).toLowerCase()
-      let heighlighData = {extraKey: extraKey, sectionTitle, sections: []}
+      const sectionTitle = this.$t('routeExtras.' + extraKey).toLowerCase()
+      const heighlighData = { extraKey: extraKey, sectionTitle, sections: [] }
 
       let index = 0
-      for (let summaryKey in this.routeExtras[extraKey].summary) {
-        let summary = this.routeExtras[extraKey].summary[summaryKey]
-        let polylineData = this.buildExtraHighlighPolylineData(extraKey, index, summary.value)
+      for (const summaryKey in this.routeExtras[extraKey].summary) {
+        const summary = this.routeExtras[extraKey].summary[summaryKey]
+        const polylineData = this.buildExtraHighlighPolylineData(extraKey, index, summary.value)
         heighlighData.sections.push(polylineData)
         index++
       }
       this.eventBus.$emit('highlightPolylineSections', heighlighData)
     },
     buildExtraHighlighPolylineData (extraKey, index, value) {
-      let color = this.colorValue(extraKey, index)
-      let label = this.getExtraValueLabel(extraKey, value).toLowerCase()
-      let intervals = this.lodash.filter(this.routeExtras[extraKey].values, (v) => {
+      const color = this.colorValue(extraKey, index)
+      const label = this.getExtraValueLabel(extraKey, value).toLowerCase()
+      const intervals = this.lodash.filter(this.routeExtras[extraKey].values, (v) => {
         return v[2] === value
       })
       return {

@@ -3,6 +3,7 @@
     <v-layout row wrap >
       <v-flex v-bind="{[inputColumns]: true}">
         <v-text-field
+          v-focus="getAutomaticFocus"
           class="place-input"
          :box="box"
          :hide-details="single || index == 0"
@@ -15,7 +16,6 @@
          :style="{'margin-bottom': mb +'px'}"
          :disabled="disabled"
          :label="placeInputLabel"
-         @focus="setFocus(true)"
          @click="setFocus(true)"
          @keyup="changed($event)"
          @click:clear="() => placeCleared(index)"
@@ -64,7 +64,7 @@
         </v-menu>
       </v-flex>
     </v-layout>
-    <div class="suggestions shadow" :class="{'low-res': $lowResolution}"  v-if="focused">
+    <div class="suggestions shadow" :class="{'low-res': $lowResolution}"  v-if="showSuggestion">
       <v-layout row wrap >
         <v-flex xs10 sm10 md11>
            <v-list-tile  @click.stop="setLocationFromBrowser()" v-if="showBrowserLocationInPlacesList" :title="$t('placeInput.yourLocation')">

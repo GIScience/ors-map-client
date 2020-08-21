@@ -4,7 +4,7 @@ import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
 import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn'
-import {Directions} from '@/support/ors-api-runner'
+import { Directions } from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
@@ -25,7 +25,8 @@ export default {
     mapViewData: new MapViewData(),
     mode: constants.modes.place,
     places: [new Place()],
-    roundTripActive: false
+    roundTripActive: false,
+    placeFocusIndex: null
   }),
   components: {
     PlaceInput,
@@ -48,6 +49,9 @@ export default {
         this.addPlaceInput()
       }
       return this.places
+    },
+    setAutofocus () {
+      this.places.length === 1 && this.isSidebarOpen
     },
     /**
      * Return a boolean determining if the place details must be visible
@@ -87,13 +91,20 @@ export default {
      * @returns {Boolean} show
      */
     showAltitudePreview () {
-      let hasElevationData = Array.isArray(this.mapViewData.routes) && this.mapViewData.hasRoutes()
-      let show = hasElevationData && this.$store.getters.mapSettings.elevationProfile
+      const hasElevationData = Array.isArray(this.mapViewData.routes) && this.mapViewData.hasRoutes()
+      const show = hasElevationData && this.$store.getters.mapSettings.elevationProfile
       return show
     }
   },
 
   methods: {
+    /**
+     * Add place input as a direct result of user interaction with the add place btn
+     */
+    addInput () {
+      this.addPlaceInput()
+      this.setfocusedPlaceInput(this.places.length - 1)
+    },
     /**
      * Every time the appRouteData changes
      * and it has at least one place defined
@@ -117,7 +128,7 @@ export default {
     filterUpdated (data) {
       if (data.value !== undefined) {
         if (data.parentIndex !== undefined) {
-          let parent = OrsFilterUtil.getFilterByAcestryAndItemIndex(data.parentIndex, data.index)
+          let parent = OrsFilterUtil.getFilterByAncestryAndItemIndex(data.parentIndex, data.index)
           parent.value = data.value
         } else {
           this.OrsMapFiltersAccessor[data.index].value = data.value
@@ -127,10 +138,21 @@ export default {
     },
 
     /**
+     * Set the place focus index
+     * @param {*} index 
+     */
+    setfocusedPlaceInput(index) {
+      this.placeFocusIndex = index
+      setTimeout(() => {
+        this.$forceUpdate()        
+      }, 200)
+    },
+
+    /**
      * Set event listeners
      */
     setListeners () {
-      let context = this
+      const context = this
 
       // When the simple map search send a place
       // set the sent place as the destination of a route
@@ -139,11 +161,16 @@ export default {
         context.setViewMode(constants.modes.directions)
       })
 
-      // When the simple map search send a place
+      // When the simple map search sends a place
       // set the sent place as the destination of a route
       this.eventBus.$on('switchToDirections', () => {
         if (context.places.length === 1) {
           context.addPlaceInput()
+        } 
+        if (this.places[0].isEmpty()) {
+          context.setfocusedPlaceInput(0)
+        } else {
+          context.setfocusedPlaceInput(this.places.length - 1)
         }
       })
 
@@ -201,7 +228,7 @@ export default {
       // If the app is in a low resolution mode
       // hidde the sidebar when route sections are highlighted
       this.eventBus.$on('highlightPolylineSections', () => {
-        let sidebarVisible = !context.$lowResolution
+        const sidebarVisible = !context.$lowResolution
         context.setSidebarIsOpen(sidebarVisible)
       })
 
@@ -234,8 +261,8 @@ export default {
      * @param {*} latlng
      */
     directionsFromPoint (data) {
-      this.places[0] = data.place || new Place(data.latlng.lng, data.latlng.lat, '', {resolve: true})
-      let context = this
+      this.places[0] = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })
+      const context = this
       this.resolvePlace(this.places[0]).then(() => {
         context.setViewMode(constants.modes.directions)
         if (context.getFilledPlaces().length > 1) {
@@ -244,12 +271,13 @@ export default {
         if (context.places.length === 1) {
           setTimeout(() => {
             context.addPlaceInput()
+            context.setfocusedPlaceInput(this.places.length - 1)
             context.setSidebarIsOpen(true)
           }, 200)
         }
       }).catch((err) => {
         console.log(err)
-        context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), {timeout: 0})
+        context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), { timeout: 0 })
       })
     },
 
@@ -285,15 +313,15 @@ export default {
      * @param {*} data
      */
     directionsToPoint (data) {
-      let toPlace = data.place || new Place(data.latlng.lng, data.latlng.lat, '', {resolve: true})
-      let placeIndex = this.places.length > 1 ? 1 : 0
+      const toPlace = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })
+      const placeIndex = this.places.length > 1 ? 1 : 0
       this.places[placeIndex] = toPlace
 
       // Make sure we keep only the first and second inputs
       if (this.places.length > 2) {
         this.places.length = 2
       }
-      let context = this
+      const context = this
 
       this.resolvePlace(this.places[placeIndex]).then(() => {
         context.setViewMode(constants.modes.directions)
@@ -307,19 +335,20 @@ export default {
         setTimeout(() => {
           if (context.places.length === 1) {
             context.addPlaceInput()
-
+            
             // After addging a place input it
             // is necessary to wait a bit
             // before reordering the places
             setTimeout(() => {
               context.places.reverse()
+              context.setfocusedPlaceInput(0)
               context.setSidebarIsOpen(true)
             }, 200)
           }
         }, 200)
       }).catch((err) => {
         console.log(err)
-        context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), {timeout: 0})
+        context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), { timeout: 0 })
       })
     },
 
@@ -328,14 +357,14 @@ export default {
      * @param {*} data {latlng: ..., place:...}
      */
     addDestinationToRoute (data) {
-      this.places.push(new Place(data.latlng.lng, data.latlng.lat, '', {resolve: true}))
-      let lastPlaceIdex = this.places.length - 1
-      let context = this
+      this.places.push(new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true }))
+      const lastPlaceIdex = this.places.length - 1
+      const context = this
       this.resolvePlace(this.places[lastPlaceIdex]).then(() => {
         context.updateAppRoute()
       }).catch((err) => {
         console.log(err)
-        context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), {timeout: 0})
+        context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), { timeout: 0 })
       })
     },
 
@@ -349,7 +378,7 @@ export default {
       if (this.places.length === 1) {
         this.directionsFromPoint(data)
       } else {
-        let closestPlaceIndex = GeoUtils.getInsertingSlotIndex(data.latlng, this.places)
+        const closestPlaceIndex = GeoUtils.getInsertingSlotIndex(data.latlng, this.places)
         // The selected point is after the last route point, so appent the place to the route ending
         if (closestPlaceIndex === this.places.length - 1) {
           this.addDestinationToRoute(data)
@@ -357,14 +386,14 @@ export default {
           // In the other cases, we have to 'inject' a route point between the exiting points
           // To do that we add a place input, setits coordinates and then
           // we change the app url so that the route will be recalculated
-          let injectedIndex = this.injectPlaceAndReturnIndex(data.latlng, closestPlaceIndex)
-          let context = this
+          const injectedIndex = this.injectPlaceAndReturnIndex(data.latlng, closestPlaceIndex)
+          const context = this
           this.resolvePlace(this.places[injectedIndex]).then(() => {
             context.updateAppRoute()
             context.setSidebarIsOpen()
           }).catch((err) => {
             console.log(err)
-            context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), {timeout: 0})
+            context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), { timeout: 0 })
           })
         }
       }
@@ -388,16 +417,16 @@ export default {
      * @returns {Integer} slot index
      */
     injectPlaceAndReturnIndex (latlng, closestPlaceIndex) {
-      let newPlaces = []
-      let insertSlotPlaceIndex = closestPlaceIndex + 1
+      const newPlaces = []
+      const insertSlotPlaceIndex = closestPlaceIndex + 1
 
-      let newLength = this.places.length + 1
+      const newLength = this.places.length + 1
       for (let index = 0; index < newLength; index++) {
         if (index === insertSlotPlaceIndex) {
-          let place = new Place(latlng.lng, latlng.lat, '', {resolve: true})
+          const place = new Place(latlng.lng, latlng.lat, '', { resolve: true })
           newPlaces.push(place)
         } else {
-          let sourceIndex = index > insertSlotPlaceIndex ? index - 1 : index
+          const sourceIndex = index > insertSlotPlaceIndex ? index - 1 : index
           newPlaces.push(this.places[sourceIndex])
         }
       }
@@ -411,7 +440,7 @@ export default {
      * and render the map with these data (place or route)
      */
     loadData () {
-      let validModes = [constants.modes.place, constants.modes.directions, constants.modes.roundTrip]
+      const validModes = [constants.modes.place, constants.modes.directions, constants.modes.roundTrip]
       this.places = this.$store.getters.appRouteData.places.slice(0)
       if (validModes.includes(this.$store.getters.mode) && this.places.length > 0) {
         // Gets the data extracted from the app route (from the url) and parse and populate
@@ -445,7 +474,7 @@ export default {
       // This method does not deal with search mode, becouse when in search mode
       // th SimplePlaceSearch component will catch this case and list the results
       if (this.$store.getters.mode !== constants.modes.search) {
-        let isRoundTrip = this.$store.getters.mode === constants.modes.roundTrip
+        const isRoundTrip = this.$store.getters.mode === constants.modes.roundTrip
 
         // Just emter here if we are dealing with directions round trip
         // If there are more then 1 place, then it is directions
@@ -472,9 +501,9 @@ export default {
       this.myLocation = true
 
       // Build a place object to be used
-      let placeName = this.$t('placesAndDirections.yourLocation')
-      let placeOptions = { fromBrowser: true, skipShowData: true }
-      let place = new Place(location.lon, location.lat, placeName, placeOptions)
+      const placeName = this.$t('placesAndDirections.yourLocation')
+      const placeOptions = { fromBrowser: true, skipShowData: true }
+      const place = new Place(location.lon, location.lat, placeName, placeOptions)
 
       // Adjust the data according the view mode
       if (this.$store.getters.mode === constants.modes.place && this.places[0].isEmpty()) {
@@ -500,12 +529,12 @@ export default {
      * @returns {Promise}
      */
     calculateDirections () {
-      let context = this
+      const context = this
       return new Promise((resolve, reject) => {
-        let places = context.getFilledPlaces()
+        const places = context.getFilledPlaces()
 
         if (places.length > 1 || context.$store.getters.mode === constants.modes.roundTrip) {
-          context.showInfo(context.$t('placesAndDirections.calculatingRoute', {timeout: 0}))
+          context.showInfo(context.$t('placesAndDirections.calculatingRoute', { timeout: 0 }))
           context.eventBus.$emit('showLoading', true)
 
           // Calculate the route
@@ -538,16 +567,16 @@ export default {
      */
     getRouteSuccessMessage (mapViewData) {
       let message = this.$t('placesAndDirections.routeReady')
-      let routeSummary = Object.assign({}, mapViewData.routes[this.$store.getters.activeRouteIndex].summary)
+      const routeSummary = Object.assign({}, mapViewData.routes[this.$store.getters.activeRouteIndex].summary)
 
       if (routeSummary && typeof routeSummary === 'object' && routeSummary.distance && routeSummary.unit && routeSummary.duration) {
-        let humanizedData = GeoUtils.getHumanizedTimeAndDistance(routeSummary, this.$t('global.units'))
-        let profileLabeKey = 'global.profiles.' + mapViewData.options.profile
-        let profileLabel = this.$t(profileLabeKey)
+        const humanizedData = GeoUtils.getHumanizedTimeAndDistance(routeSummary, this.$t('global.units'))
+        const profileLabeKey = 'global.profiles.' + mapViewData.options.profile
+        const profileLabel = this.$t(profileLabeKey)
         if (profileLabel !== profileLabeKey) {
           message += ` ${this.$t('placesAndDirections.for')} <b>${profileLabel}</b>`
         }
-        let routeInfo = `${this.$t('placesAndDirections.distance')} ${humanizedData.distance} ${this.$t('global.and')} ${this.$t('placesAndDirections.duration')} ${humanizedData.duration}`
+        const routeInfo = `${this.$t('placesAndDirections.distance')} ${humanizedData.distance} ${this.$t('global.and')} ${this.$t('placesAndDirections.duration')} ${humanizedData.duration}`
         message = `${message} - ${routeInfo.toLowerCase()}`
       }
       return message
@@ -559,18 +588,18 @@ export default {
      * @param {*} args
      */
     handleCalculateDirectionsError (result) {
-      let errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
+      const errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
       if (errorCode) {
-        let errorKey = `placesAndDirections.apiError.${errorCode}`
+        const errorKey = `placesAndDirections.apiError.${errorCode}`
         let errorMsg = this.$t(errorKey)
         if (errorMsg === errorKey) {
           errorMsg = this.$t('placesAndDirections.genericErrorMsg')
         }
-        this.showError(errorMsg, {timeout: 0, mode: 'multi-line'})
+        this.showError(errorMsg, { timeout: 0, mode: 'multi-line' })
         console.error(result.response.response.body.error)
       } else {
         if (this.hasRouteFilters(result.args)) {
-          this.showError(this.$t('placesAndDirections.notRouteFoundWithFilters'), {timeout: 0})
+          this.showError(this.$t('placesAndDirections.notRouteFoundWithFilters'), { timeout: 0 })
         } else {
           this.showError(this.$t('placesAndDirections.notRouteFound'))
         }
@@ -618,10 +647,10 @@ export default {
      * of the route, or the place at the index 1
      */
     switchPlaceInputsValues () {
-      let filled = this.getFilledPlaces()
+      const filled = this.getFilledPlaces()
       // If we are starting a route, the selected place must the be second one, the target
       if (filled.length === 1 && this.places.length === 2) {
-        let place1 = this.places[1]
+        const place1 = this.places[1]
         this.places[1] = this.places[0]
         this.places[0] = place1
       }
@@ -632,6 +661,7 @@ export default {
      */
     startDirections () {
       this.addPlaceInput()
+      this.setfocusedPlaceInput(this.places.length - 1)
       this.switchPlaceInputsValues()
       this.setViewMode(constants.modes.directions)
       this.eventBus.$emit('clearMap')
@@ -645,8 +675,9 @@ export default {
       this.places = []
       this.addPlaceInput()
 
-      if (place.coordinates) {
+      if (!place.isEmpty()) {
         this.places[0] = place
+        this.setfocusedPlaceInput(0)
         this.propagatePlaceChange(0)
         if (this.places.length === 1) {
           this.addPlaceInput()
@@ -681,14 +712,14 @@ export default {
         this.setViewMode(constants.modes.place)
       }
 
-      let filledPlaces = this.getFilledPlaces()
+      const filledPlaces = this.getFilledPlaces()
       if (filledPlaces.length > 1) {
         this.setViewMode(constants.modes.directions)
       } else if (filledPlaces.length === 0) {
         this.setViewMode(constants.modes.place)
       }
-      let appMode = new AppMode(this.$store.getters.mode)
-      let route = appMode.getRoute(filledPlaces)
+      const appMode = new AppMode(this.$store.getters.mode)
+      const route = appMode.getRoute(filledPlaces)
       this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
       this.$router.push(route)
     },
@@ -698,11 +729,11 @@ export default {
      * @param {*} index
      */
     loadSinglePlace (index) {
-      let filledPlaces = this.getFilledPlaces()
+      const filledPlaces = this.getFilledPlaces()
       this.setViewMode(constants.modes.place)
 
       // save current options in a temp object
-      let options = this.mapViewData.options || {}
+      const options = this.mapViewData.options || {}
 
       // Create a MapViewData from srcatch and set
       // places and options
@@ -723,7 +754,7 @@ export default {
      * @returns {Array} of filled places
      */
     getFilledPlaces () {
-      let filledPlaces = this.lodash.filter(this.places, (p) => {
+      const filledPlaces = this.lodash.filter(this.places, (p) => {
         if (!p.isEmpty()) {
           return p
         }
@@ -740,7 +771,7 @@ export default {
       if (this.places.length === 1) {
         this.resetStateToSinglePlace()
       }
-      let filledPlaces = this.getFilledPlaces()
+      const filledPlaces = this.getFilledPlaces()
       if (this.places.length === filledPlaces.length) {
         this.updateAppRoute()
       }
@@ -751,7 +782,7 @@ export default {
      * Reset state to sigle place
      */
     resetStateToSinglePlace () {
-      let appRouteData = this.$store.getters.appRouteData
+      const appRouteData = this.$store.getters.appRouteData
       appRouteData.options = {}
       this.$store.commit('appRouteData', appRouteData)
       this.mapViewData = new MapViewData()
@@ -762,7 +793,7 @@ export default {
      * @param {*} index
      */
     placeCleared (index) {
-      let wasEmpty = this.places[index].isEmpty()
+      const wasEmpty = this.places[index].isEmpty()
       this.places[index] = new Place()
 
       // When a place input is cleared having a valid place
@@ -789,7 +820,7 @@ export default {
       // It it is in single place or directions mode, it must be reset
       // to single place. So, in all cases, we must run resetStateToSinglePlace
       this.mapViewData = new MapViewData()
-      let appRouteData = this.$store.getters.appRouteData
+      const appRouteData = this.$store.getters.appRouteData
 
       if (this.$store.getters.mode === constants.modes.roundTrip) {
         // Remove roundtrip from appRouteData if present
@@ -817,6 +848,16 @@ export default {
       if (this.places.length === 1 && !this.places[0].isEmpty()) {
         this.updateAppRoute()
       }
+    },
+
+    /**
+     * Determines if a place input at a given index must be focused
+     * @param {*} index 
+     * @returns {Boolean}
+     */
+    autofocusEnabled (index) {
+      let enabled = this.placeFocusIndex === index
+      return enabled
     }
   }
 }

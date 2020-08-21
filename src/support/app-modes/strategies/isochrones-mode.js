@@ -11,7 +11,7 @@ import store from '@/store/store'
  */
 class IsochronesMode {
   buildAppRouteData (places, options = {}) {
-    let appRouteData = store.getters.appRouteData || new AppRouteData()
+    const appRouteData = store.getters.appRouteData || new AppRouteData()
     appRouteData.places = places
 
     OrsParamsParser.addFilters(options, OrsMapFilters, constants.services.isochrones)
@@ -26,9 +26,9 @@ class IsochronesMode {
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
   getRoute = (appRouteData, options) => {
-    let params = RouteUtils.buildRouteParams(appRouteData, options)
+    const params = RouteUtils.buildRouteParams(appRouteData, options)
     // Build the route object
-    let route = { name: 'MapIsochrones', params: params }
+    const route = { name: 'MapIsochrones', params: params }
     return route
   }
 
@@ -39,8 +39,8 @@ class IsochronesMode {
    * @returns {AppRouteData}
    */
   decodePath = (currentRoute) => {
-    let data = RouteUtils.decodeDataParam(currentRoute.params.data)
-    let appRouteData = new AppRouteData()
+    const data = RouteUtils.decodeDataParam(currentRoute.params.data)
+    const appRouteData = new AppRouteData()
 
     // Get coordinates and options from the param
     appRouteData.options = data.options

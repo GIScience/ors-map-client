@@ -8,6 +8,7 @@ import store from '@/store/store'
 import i18n from '@/i18n/lang'
 import topBorder from '@/directives/top-border'
 import title from '@/directives/title'
+import focus from '@/directives/focus'
 import clickOutside from '@/directives/click-outside'
 import bg from '@/directives/bg'
 import uppercase from '@/filters/uppercase'
@@ -64,6 +65,7 @@ Vue.directive('top-border', topBorder)
 Vue.directive('bg', bg)
 Vue.directive('title', title)
 Vue.directive('click-outside', clickOutside)
+Vue.directive('focus', focus)
 
 // add global custom components
 Vue.component('box', box)

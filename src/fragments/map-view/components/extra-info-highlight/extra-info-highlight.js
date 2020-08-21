@@ -42,7 +42,7 @@ export default {
       this.$emit('closed')
     },
     highlightedSectionStyle (backgroundColor) {
-      let foreGroundColor = tinycolor2(backgroundColor).isLight() ? 'black' : 'white'
+      const foreGroundColor = tinycolor2(backgroundColor).isLight() ? 'black' : 'white'
       return { backgroundColor, color: foreGroundColor }
     }
   },
@@ -52,8 +52,12 @@ export default {
         this.buildHighlightedPolyline()
       },
       deep: true
+    },
+    '$route' () {
+      this.removeHightlightedSegments()
     }
   },
+  
   created () {
     this.buildHighlightedPolyline()
     this.$emit('beforeOpen')

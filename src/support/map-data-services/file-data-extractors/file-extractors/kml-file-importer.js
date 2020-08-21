@@ -1,4 +1,4 @@
-import {parseString} from 'xml2js'
+import { parseString } from 'xml2js'
 import MapViewData from '@/models/map-view-data'
 import Place from '@/models/place'
 import constants from '@/resources/constants'
@@ -20,7 +20,7 @@ class KmlImporter {
    */
   parseFileContent = () => {
     return new Promise((resolve, reject) => {
-      parseString(this.fileRawContent, {trim: true}, function (err, parsedXml) {
+      parseString(this.fileRawContent, { trim: true }, function (err, parsedXml) {
         if (err) {
           reject(err)
         } else {
@@ -35,8 +35,8 @@ class KmlImporter {
    * @returns {Promise} that returns in the resolve mapData object
    */
   buildMapData = () => {
-    let mapViewData = new MapViewData()
-    let context = this
+    const mapViewData = new MapViewData()
+    const context = this
     return new Promise((resolve, reject) => {
       try {
         context.parseFileContent().then((fileObject) => {
@@ -73,17 +73,17 @@ class KmlImporter {
    * @returns {Array} of places
    */
   getPlaces = (fileObject) => {
-    let places = []
-    let placeMarks = lodash.get(fileObject, 'kml.Document[0].Folder[0].Placemark') || lodash.get(fileObject, 'kml.Document[0].Placemark')
+    const places = []
+    const placeMarks = lodash.get(fileObject, 'kml.Document[0].Folder[0].Placemark') || lodash.get(fileObject, 'kml.Document[0].Placemark')
 
     if (placeMarks) {
-      for (let key in placeMarks) {
+      for (const key in placeMarks) {
         if (placeMarks[key].Point) {
-          let coordinatesStr = placeMarks[key].Point[0].coordinates[0]
-          let coordinatesaArr = coordinatesStr.split(',')
-          let latlon = {lat: coordinatesaArr[0], lon: coordinatesaArr[1]}
-          let name = lodash.get(placeMarks[key], 'ExtendedData[0].Data[0].value[0]')
-          let place = new Place(latlon.lat, latlon.lon, name)
+          const coordinatesStr = placeMarks[key].Point[0].coordinates[0]
+          const coordinatesaArr = coordinatesStr.split(',')
+          const latlon = { lat: coordinatesaArr[0], lon: coordinatesaArr[1] }
+          const name = lodash.get(placeMarks[key], 'ExtendedData[0].Data[0].value[0]')
+          const place = new Place(latlon.lat, latlon.lon, name)
           places.push(place)
         }
       }
@@ -96,30 +96,30 @@ class KmlImporter {
    * @returns {Array} places
    */
   buildPlaces = (routes) => {
-    let places = []
+    const places = []
 
     if (routes.length > 0) {
       // If there are less then 15, so we get all
       if (routes[0].length < 16) {
-        for (let key in routes[0]) {
-          let latlng = routes[0][key].geometry.coordinates
-          let lng = latlng[1]
-          let lat = latlng[0]
-          let place = new Place(lng, lat)
+        for (const key in routes[0]) {
+          const latlng = routes[0][key].geometry.coordinates
+          const lng = latlng[1]
+          const lat = latlng[0]
+          const place = new Place(lng, lat)
           places.push(place)
         }
       } else { // if there are more then 15, only the first and the last
-        let firstCoords = routes[0].geometry.coordinates[0]
-        let lastCoords = (routes[0].geometry.coordinates[routes[0].geometry.coordinates.length - 1])
+        const firstCoords = routes[0].geometry.coordinates[0]
+        const lastCoords = (routes[0].geometry.coordinates[routes[0].geometry.coordinates.length - 1])
 
-        let firstLng = firstCoords[1]
-        let firstLat = firstCoords[0]
-        let firstPlace = new Place(firstLng, firstLat, '', {resolve: true})
+        const firstLng = firstCoords[1]
+        const firstLat = firstCoords[0]
+        const firstPlace = new Place(firstLng, firstLat, '', { resolve: true })
         places.push(firstPlace)
 
-        let lastLng = lastCoords[1]
-        let lastLat = lastCoords[0]
-        let lastPlace = new Place(lastLng, lastLat, '', {resolve: true})
+        const lastLng = lastCoords[1]
+        const lastLat = lastCoords[0]
+        const lastPlace = new Place(lastLng, lastLat, '', { resolve: true })
         places.push(lastPlace)
       }
     }
@@ -131,19 +131,19 @@ class KmlImporter {
    * @returns {Array} routes
    */
   getRoutes = (fileObject) => {
-    let routes = []
-    let placeMarks = lodash.get(fileObject, 'kml.Document[0].Folder[0].Placemark') || lodash.get(fileObject, 'kml.Document[0].Placemark')
-    let description = lodash.get(fileObject, 'kml.Document[0].description[0]')
+    const routes = []
+    const placeMarks = lodash.get(fileObject, 'kml.Document[0].Folder[0].Placemark') || lodash.get(fileObject, 'kml.Document[0].Placemark')
+    const description = lodash.get(fileObject, 'kml.Document[0].description[0]')
 
     if (placeMarks) {
-      for (let rKey in placeMarks) {
-        let placeMark = placeMarks[rKey]
+      for (const rKey in placeMarks) {
+        const placeMark = placeMarks[rKey]
         if (placeMark.LineString) {
-          let coordinatesParsed = []
-          for (let cKey in placeMark.LineString[0].coordinates) {
-            let routeCoords = placeMark.LineString[0].coordinates[cKey].split(' ')
-            for (let pkey in routeCoords) {
-              let routePointStr = routeCoords[pkey]
+          const coordinatesParsed = []
+          for (const cKey in placeMark.LineString[0].coordinates) {
+            const routeCoords = placeMark.LineString[0].coordinates[cKey].split(' ')
+            for (const pkey in routeCoords) {
+              const routePointStr = routeCoords[pkey]
               if (routePointStr.length > 2) {
                 let point = routePointStr.split(',')
                 // It is a ORS generated KML

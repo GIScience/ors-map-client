@@ -23,7 +23,7 @@
             <top-menu></top-menu>
           </v-flex>
         </v-layout>
-        <profile-selector initial-profile="cycling-regular"></profile-selector>
+        <profile-selector></profile-selector>
       </div>
 
       <!-- sidebar-content padding-bottom must be the same that is caculated in footer component height -->

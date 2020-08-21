@@ -37,7 +37,7 @@ class FileExtractorBuilder {
       geojsonImporter,
       kmlImporter
     }
-    let fileExtractorName = `${fileType}Importer`
+    const fileExtractorName = `${fileType}Importer`
     return new fileExtractors[fileExtractorName](data)
   }
 
@@ -50,7 +50,7 @@ class FileExtractorBuilder {
    * @memberof TableDataBuilder
    */
   static hasFilepBuilderFor = (contentType, data) => {
-    let builder = FileExtractorBuilder.getFileDataExtractor(contentType, data)
+    const builder = FileExtractorBuilder.getFileDataExtractor(contentType, data)
     return builder !== null && builder !== undefined
   }
 }

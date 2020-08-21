@@ -1,7 +1,7 @@
 
 import Leaflet from 'leaflet'
 import GeoUtils from '@/support/geo-utils'
-import {ReverseGeocode} from '@/support/ors-api-runner'
+import { ReverseGeocode } from '@/support/ors-api-runner'
 import Place from '@/models/place'
 
 export default {
@@ -33,7 +33,7 @@ export default {
       return false
     },
     placeInfoTitle () {
-      let title = this.clickInsidePolygon ? this.$t('mapView.placeInsidePolygon') : this.$t('mapView.placeInfo')
+      const title = this.clickInsidePolygon ? this.$t('mapView.placeInsidePolygon') : this.$t('mapView.placeInfo')
       return title
     }
   },
@@ -53,15 +53,15 @@ export default {
       this.clickInsidePolygon = data.insidePolygon
       this.showLeftClickPopup = true
       this.clickLatlng = data.event.latlng
-      this.clickPoint = {latlng: data.event.latlng}
+      this.clickPoint = { latlng: data.event.latlng }
 
       // Calculate and set polygon area
       if (this.clickInsidePolygon !== false) {
-        let latlngs = []
-        for (let key in this.clickInsidePolygon) {
+        const latlngs = []
+        for (const key in this.clickInsidePolygon) {
           latlngs.push(GeoUtils.buildLatLong(this.clickInsidePolygon[key][1], this.clickInsidePolygon[key][0]))
         }
-        let area = Leaflet.GeometryUtil.geodesicArea(latlngs)
+        const area = Leaflet.GeometryUtil.geodesicArea(latlngs)
         this.clickPoint.containerArea = Leaflet.GeometryUtil.readableArea(area, this.$store.getters.mapSettings.areaUnit)
         this.clickInsidePolygon = true
       }
@@ -70,7 +70,7 @@ export default {
         this.$refs.placeInfoBox.show()
       }
 
-      let context = this
+      const context = this
       this.resolvePoint(data.event.latlng.lat, data.event.latlng.lng).then((place) => {
         if (place) {
           context.clickPoint.placeName = place.placeName
@@ -88,13 +88,13 @@ export default {
     resolvePoint (lat, lng) {
       return new Promise((resolve, reject) => {
         this.eventBus.$emit('showLoading', true)
-        let context = this
+        const context = this
         ReverseGeocode(lat, lng).then(places => {
           if (places.length > 0) {
-            let selectedPlace = Place.selectPlaceByZoomLevel(context.currentZoom, places)
+            const selectedPlace = Place.selectPlaceByZoomLevel(context.currentZoom, places)
             resolve(selectedPlace)
           } else {
-            let place = new Place(lat, lng)
+            const place = new Place(lat, lng)
             resolve(place)
           }
         }).catch(response => {
@@ -110,9 +110,9 @@ export default {
      *
      */
     copyLatlng () {
-      let latlng = `${this.clickLatlng.lat}, ${this.clickLatlng.lng}`
+      const latlng = `${this.clickLatlng.lat}, ${this.clickLatlng.lng}`
       if (this.copyToClipboard(latlng)) {
-        this.showSuccess(this.$t('mapView.latlngCopied'), {timeout: 2000})
+        this.showSuccess(this.$t('mapView.latlngCopied'), { timeout: 2000 })
       }
     },
     /**
@@ -120,9 +120,9 @@ export default {
      *
      */
     copyLnglat () {
-      let lnglat = `${this.clickLatlng.lng}, ${this.clickLatlng.lat}`
+      const lnglat = `${this.clickLatlng.lng}, ${this.clickLatlng.lat}`
       if (this.copyToClipboard(lnglat)) {
-        this.showSuccess(this.$t('mapView.lnglatCopied'), {timeout: 2000})
+        this.showSuccess(this.$t('mapView.lnglatCopied'), { timeout: 2000 })
       }
     },
     /**
@@ -136,13 +136,13 @@ export default {
       el.value = str
       document.body.appendChild(el)
       el.select()
-      let result = document.execCommand('copy')
+      const result = document.execCommand('copy')
       document.body.removeChild(el)
       return result
     }
   },
   created () {
-    let context = this
+    const context = this
     this.eventBus.$on('mapLeftClicked', (data) => {
       context.mapLeftClick(data)
     })

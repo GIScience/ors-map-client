@@ -15,8 +15,8 @@ const getFilterRefByName = (filterName, OrsMapFiltersAccessor = null, onlyIfEnab
   OrsMapFiltersAccessor = OrsMapFiltersAccessor || OrsMapFilters
 
   var filter
-  for (let filterKey in OrsMapFiltersAccessor) {
-    let f = OrsMapFiltersAccessor[filterKey]
+  for (const filterKey in OrsMapFiltersAccessor) {
+    const f = OrsMapFiltersAccessor[filterKey]
     // Don't get disabled filters if the
     // onlyIfEnabled param is true
     if (!onlyIfEnabled || !f.disabled) {
@@ -35,30 +35,34 @@ const getFilterRefByName = (filterName, OrsMapFiltersAccessor = null, onlyIfEnab
 }
 
 /**
- * Get the filter value considering its attributes
+ * Get the filter value considering its attributes and dependencies
  * @param {*} filter
  * @param {*} service
  * @returns {*} filterValue
  */
 const getFilterValue = (filter, service) => {
   let filterValue = null
-  let filterAvailable = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
+  const filterAvailable = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
   if (filterAvailable) {
-    let filterClone = FilterDependencyService.getFilterWithValueValueUpdated(filter)
+    // Get rhe filter with value updated considering dependencies and filter rules
+    const filterClone = FilterDependencyService.getFilterWithValueUpdated(filter)
 
     if (filterClone.type === constants.filterTypes.wrapper && filterClone.props) {
-      filterValue = getChildrenFilterValue(filter, service)
-      filterValue = filterClone.valueAsObject ? filterValue : JSON.stringify(filterValue)
+      // Proceed only if filter is available considering other filter's value
+      if (FilterDependencyService.isAvailable(filterClone)) {
+        filterValue = getChildrenFilterValue(filterClone, service)
+        filterValue = filterClone.valueAsObject ? filterValue : JSON.stringify(filterValue)
+      }
     } else {
+      // Check if the filter value must be extracted as an array and do it if so
       if (filterClone.type === constants.filterTypes.array && Array.isArray(filterClone.value) && !filterClone.valueAsArray) {
-        let separator = filterClone.separator || ','
+        const separator = filterClone.separator || ','
         filterValue = filterClone.value.join(separator)
-      } else {
-        if (filterClone.min === undefined || filterClone.min === null || filterClone.value >= filterClone.min) {
-          filterValue = filterClone.value
-        }
+      } else { // In the other cases, just get the filter raw value
+        filterValue = filterClone.value
       }
     }
+    // Apply filter conditions like min, multiplier etc
     filterValue = applyFilterValueConditions(filterClone, filterValue)
   }
 
@@ -67,27 +71,61 @@ const getFilterValue = (filter, service) => {
 
 /**
  * Get a filter by acestry and item index
- * @param {*} parentIndex
+ * @param {*} ancestry
  * @param {*} itemIndex
- * @returns {Object}
+ * @returns {Object} accessor
  */
-const getFilterByAcestryAndItemIndex = (parentIndex, itemIndex = null) => {
+const getFilterByAncestryAndItemIndex = (ancestry, itemIndex = null) => {
+  let path = buildAncestryAcessorString(ancestry, itemIndex)
+  let OrsMapFiltersAccessor = OrsMapFilters
+  let accessor = lodash.get(OrsMapFiltersAccessor, path)
+  return accessor
+}
+
+/**
+ * Build the ancestry accessor string as a goal to build a string
+ * that represents the path to retrive a target item present in
+ * @see /resources/ors-map-filter.js.
+ * The map filters is a array of objects that may contains
+ * child objects under the `props` prperty, that, if defined,
+ * also contains an array of child objects. Many levels of objects
+ * with props and child objets is possible. This method creates
+ * a string that represets the navigation required to access a target
+ * object considering the index of each step
+ * @param {*} ancestry
+ * @param {*} itemIndex
+ * @returns {String} path
+ */
+const buildAncestryAcessorString = (ancestry, itemIndex = null) => {
   let path
-  if (Array.isArray(parentIndex) && parentIndex.length > 1) {
-    if (Array.isArray(parentIndex[0])) {
-      let ancestor = getFilterByAcestryAndItemIndex(parentIndex[0])
-      path = `${ancestor}.props[${parentIndex[1]}]`
+  // Multiple levels of ancestry is suppported.
+  // So, if ancestry is an array, then the first value
+  // is the parent level of ancestry and we have to
+  // resolve it recursively
+  if (Array.isArray(ancestry) && ancestry.length > 1) {
+    if (Array.isArray(ancestry[0])) {
+      let subPath = buildAncestryAcessorString(ancestry[0])
+      // In case of recursive ancestry, the value in
+      // position 1 is the immediate parent and we must
+      // assembly this with the subpath generated
+      path = `[${ancestry[1]}].props${subPath}`
     } else {
-      path = `[${parentIndex[0]}].props[${parentIndex[1]}]`
+      // In case there is not recursive ancestry
+      // just build the path using the immediate parent
+      // and the target prop index
+      path = `[${ancestry[0]}].props[${ancestry[1]}]`
     }
   } else {
-    path = `[${parentIndex}]`
+    // ancestry is jut an integer,
+    // pointing to a position in a index
+    path = `[${ancestry}]`
   }
-  if (itemIndex >= 0) {
+  // Item index is the last level of navigation towards the
+  // target item and we append it to the building path if it
+  if (itemIndex !== null && itemIndex !== undefined && itemIndex >= 0) {
     path = `${path}.props[${itemIndex}]`
   }
-  let acessor = lodash.get(OrsMapFilters, path)
-  return acessor
+  return path
 }
 
 /**
@@ -100,7 +138,7 @@ const applyFilterValueConditions = (filterClone, filterValue) => {
   if (filterClone.offset && filterClone.step && filterClone.value > filterClone.step) {
     filterValue = filterValue - filterClone.offset
   }
-  if (filterValue < filterClone.min) {
+  if (filterClone.min !== null && filterClone.min !== undefined && filterValue < filterClone.min) {
     filterValue = null
   }
   if (filterValue && filterClone.multiplyValueBy) {
@@ -118,10 +156,14 @@ const applyFilterValueConditions = (filterClone, filterValue) => {
 const getChildrenFilterValue = (filter, service) => {
   var childFilter = {}
   for (let propKey in filter.props) {
-    let prop = filter.props[propKey]
-    let childValue = getFilterValue(prop, service)
-    if (childValue !== undefined && childValue !== null) {
-      childFilter[prop.name] = childValue
+    const prop = filter.props[propKey]
+    // Filter may have dependency and only be available
+    // if other filters have a certain value.
+    if (FilterDependencyService.isAvailable(prop)) {
+      const childValue = getFilterValue(prop, service)
+      if (childValue !== undefined && childValue !== null) {
+        childFilter[prop.name] = childValue
+      }
     }
   }
   return Object.keys(childFilter).length > 0 ? childFilter : null
@@ -135,15 +177,15 @@ const getChildrenFilterValue = (filter, service) => {
  * @returns {Boolean} set
  */
 const setFilterValue = (filterName, filterValue, OrsMapFiltersAccessor = null) => {
-  let filter = getFilterRefByName(filterName, OrsMapFiltersAccessor, true)
+  const filter = getFilterRefByName(filterName, OrsMapFiltersAccessor, true)
   if (typeof filter === 'object') {
     let value = filterValue
     if (filter.type === constants.filterTypes.array && typeof optionValue === 'string' && !filter.valueAsArray) {
-      let separator = filter.separator || ','
+      const separator = filter.separator || ','
       value = filterValue.split(separator)
     } else if (filter.type === constants.filterTypes.wrapper) {
-      for (let key in filter.props) {
-        let propName = filter.props[key].name
+      for (const key in filter.props) {
+        const propName = filter.props[key].name
         setFilterValue(propName, filterValue[propName])
       }
     } else {
@@ -170,7 +212,7 @@ const setFilterValue = (filterName, filterValue, OrsMapFiltersAccessor = null) =
  */
 const getFilterRefByRootIndex = (index, OrsMapFiltersAccessor = null) => {
   OrsMapFiltersAccessor = OrsMapFiltersAccessor || OrsMapFilters
-  let filter = OrsMapFiltersAccessor[index]
+  const filter = OrsMapFiltersAccessor[index]
   return filter
 }
 
@@ -182,7 +224,7 @@ const getFilterRefByRootIndex = (index, OrsMapFiltersAccessor = null) => {
  */
 const getFilterIndexByName = (name, OrsMapFiltersAccessor = null) => {
   OrsMapFiltersAccessor = OrsMapFiltersAccessor || OrsMapFilters
-  let filterIndex = lodash.findIndex(OrsMapFiltersAccessor, (f) => {
+  const filterIndex = lodash.findIndex(OrsMapFiltersAccessor, (f) => {
     return f.name === name
   })
   return filterIndex
@@ -193,9 +235,9 @@ const getFilterIndexByName = (name, OrsMapFiltersAccessor = null) => {
  * @returns {Boolean} isRoundTrip
  */
 const isRoundTripFilterActive = () => {
-  let roundTripFilter = getFilterRefByName(constants.roundTripFilterName)
-  let roundTripValue = getFilterValue(roundTripFilter, constants.services.directions)
-  let isRoundTrip = roundTripValue !== null
+  const roundTripFilter = getFilterRefByName(constants.roundTripFilterName)
+  const roundTripValue = getFilterValue(roundTripFilter, constants.services.directions)
+  const isRoundTrip = roundTripValue !== null
   return isRoundTrip
 }
 
@@ -206,7 +248,7 @@ const filterUtil = {
   setFilterValue,
   getFilterValue,
   isRoundTripFilterActive,
-  getFilterByAcestryAndItemIndex
+  getFilterByAncestryAndItemIndex
 }
 
 export default filterUtil

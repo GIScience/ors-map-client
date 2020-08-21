@@ -3,7 +3,7 @@ import MapViewDataBuilder from '@/support/map-data-services/map-view-data-builde
 import FieldsContainer from '@/fragments/forms/fields-container/FieldsContainer'
 import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
-import {Isochrones} from '@/support/ors-api-runner'
+import { Isochrones } from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
 import constants from '@/resources/constants'
 import MapViewData from '@/models/map-view-data'
@@ -31,7 +31,7 @@ export default {
   },
   created () {
     this.loadData()
-    let context = this
+    const context = this
     // When the filters object has changed externally, reprocess the app route
     this.eventBus.$on('filtersChangedExternally', () => {
       if (context.active) {
@@ -82,7 +82,7 @@ export default {
     // the place coordinates and re render the map
     this.eventBus.$on('markerDragged', (marker) => {
       if (context.active) {
-        let place = new Place(marker.position.lng, marker.position.lat)
+        const place = new Place(marker.position.lng, marker.position.lat)
         context.places[marker.inputIndex] = place
         context.places[marker.inputIndex].resolve().then(() => {
           context.updateAppRoute()
@@ -91,7 +91,7 @@ export default {
     })
   },
   watch: {
-    '$route': function () {
+    $route: function () {
       if (this.$store.getters.mode === constants.modes.isochrones) {
         this.loadData()
       } else {
@@ -105,14 +105,14 @@ export default {
      * @param {*} data {latlng: ..., place:...}
      */
     addAsIsochroneCenter (data) {
-      this.places.push(new Place(data.latlng.lng, data.latlng.lat, '', {resolve: true}))
-      let lastPlaceIdex = this.places.length - 1
-      let context = this
+      this.places.push(new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true }))
+      const lastPlaceIdex = this.places.length - 1
+      const context = this
       this.places[lastPlaceIdex].resolve().then(() => {
         context.updateAppRoute()
       }).catch((err) => {
         console.log(err)
-        context.showError(this.$t('isochrones.couldResolveTheSelectedPlaceAsAsuitableCenter'), {timeout: 0})
+        context.showError(this.$t('isochrones.couldResolveTheSelectedPlaceAsAsuitableCenter'), { timeout: 0 })
       })
     },
     /**
@@ -126,7 +126,7 @@ export default {
      * @returns {Array} of filled places
      */
     getFilledPlaces () {
-      let filledPlaces = this.lodash.filter(this.places, (p) => {
+      const filledPlaces = this.lodash.filter(this.places, (p) => {
         if (!p.isEmpty()) {
           return p
         }
@@ -141,10 +141,10 @@ export default {
       if (data.place) {
         this.places[data.index] = data.place
         this.$store.commit('mode', constants.modes.isochrones)
-        let appMode = new AppMode(this.$store.getters.mode)
+        const appMode = new AppMode(this.$store.getters.mode)
 
         // Define new app route
-        let route = appMode.getRoute(this.places)
+        const route = appMode.getRoute(this.places)
         this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
         this.$router.push(route)
       }
@@ -162,10 +162,10 @@ export default {
      * url synchronized with the current map status
      */
     updateAppRoute () {
-      let places = this.getFilledPlaces()
+      const places = this.getFilledPlaces()
       this.$store.commit('mode', constants.modes.isochrones)
-      let appMode = new AppMode(this.$store.getters.mode)
-      let route = appMode.getRoute(places)
+      const appMode = new AppMode(this.$store.getters.mode)
+      const route = appMode.getRoute(places)
       this.$router.push(route)
     },
     /**
@@ -177,7 +177,7 @@ export default {
     filterUpdated (data) {
       if (data.value !== undefined) {
         if (data.parentIndex !== undefined) {
-          let parent = OrsFilterUtil.getFilterByAcestryAndItemIndex(data.parentIndex, data.index)
+          const parent = OrsFilterUtil.getFilterByAcestryAndItemIndex(data.parentIndex, data.index)
           parent.value = data.value
         } else {
           this.OrsMapFiltersAccessor[data.index].value = data.value
@@ -219,12 +219,12 @@ export default {
      * @returns {Promise}
      */
     calculateIsochrones () {
-      let context = this
+      const context = this
       return new Promise((resolve, reject) => {
-        let places = context.getFilledPlaces()
+        const places = context.getFilledPlaces()
 
         if (places.length > 0) {
-          context.showInfo(context.$t('isochrones.calculatingIsochrones', {timeout: 0}))
+          context.showInfo(context.$t('isochrones.calculatingIsochrones', { timeout: 0 }))
           context.eventBus.$emit('showLoading', true)
 
           // Calculate the route
@@ -255,17 +255,17 @@ export default {
      * @param {*} args
      */
     handleCalculateIsochronesError (result) {
-      let errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
+      const errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
       if (errorCode) {
-        let errorKey = `isochrones.apiError.${errorCode}`
+        const errorKey = `isochrones.apiError.${errorCode}`
         let errorMsg = this.$t(errorKey)
         if (errorMsg === errorKey) {
           errorMsg = this.$t('isochrones.genericErrorMsg')
         }
-        this.showError(errorMsg, {timeout: 0, mode: 'multi-line'})
+        this.showError(errorMsg, { timeout: 0, mode: 'multi-line' })
         console.error(result.response.response.body.error)
       } else {
-        this.showError(this.$t('isochrones.itWasNotPossibleToCalculateIsochronesWithTheDefinedOptions'), {timeout: 0})
+        this.showError(this.$t('isochrones.itWasNotPossibleToCalculateIsochronesWithTheDefinedOptions'), { timeout: 0 })
         console.error(result)
       }
     },

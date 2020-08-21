@@ -18,7 +18,7 @@ export default {
   watch: {
     'horizontalListRef.position' (newIndex) {
       if (this.mapViewData.places[newIndex]) {
-        let place = this.mapViewData.places[newIndex]
+        const place = this.mapViewData.places[newIndex]
         this.placeActive = place
         this.$emit('placeSelected', newIndex)
       }
@@ -60,11 +60,11 @@ export default {
         responsive: [
           // responsive breakpoints to calculate how many items to show in the list at each width interval
           // it will always fall back to these:
-          {end: 576, size: 1},
-          {start: 576, end: 768, size: 2},
-          {start: 768, end: 992, size: 3},
-          {start: 992, end: 1200, size: 4},
-          {start: 1200, size: 5}
+          { end: 576, size: 1 },
+          { start: 576, end: 768, size: 2 },
+          { start: 768, end: 992, size: 3 },
+          { start: 992, end: 1200, size: 4 },
+          { start: 1200, size: 5 }
         ],
         navigation: {
           // when to show navigation
@@ -85,9 +85,9 @@ export default {
      */
     imagePath (place) {
       if (this.placeLayer) {
-        let zoom = geoUtils.zoomLevelByLayer(this.placeLayer(place))
-        let tileData = geoUtils.getTileData(place.lat, place.lng, zoom)
-        let url = `${this.worldImageryTileProviderBaseUrl}/${tileData.z}/${tileData.y}/${tileData.x}`
+        const zoom = geoUtils.zoomLevelByLayer(this.placeLayer(place))
+        const tileData = geoUtils.getTileData(place.lat, place.lng, zoom)
+        const url = `${this.worldImageryTileProviderBaseUrl}/${tileData.z}/${tileData.y}/${tileData.x}`
         return url
       } else {
         return this.imageUrlFallBack
@@ -112,7 +112,7 @@ export default {
      * @param {*} place
      */
     placeLayer (place) {
-      let layer = place.properties.layer
+      const layer = place.properties.layer
       if (layer !== this.$t('placesCarousel.notAvailable')) {
         return layer
       }
@@ -125,7 +125,7 @@ export default {
      */
     itemClicked (place) {
       this.placeActive = place
-      let index = place.findIndex(this.mapViewData.places)
+      const index = place.findIndex(this.mapViewData.places)
       this.$emit('placeSelected', index)
     },
     /**
@@ -162,13 +162,13 @@ export default {
      * @param {*} place
      */
     directionsTo (place) {
-      this.$emit('directionsToPoint', {place})
+      this.$emit('directionsToPoint', { place })
       this.$emit('closed')
     }
   },
   mounted () {
     this.horizontalListRef = this.$refs.horizontalList
-    let context = this
+    const context = this
 
     // Set the active index after a second
     setTimeout(() => {

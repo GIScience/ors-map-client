@@ -1,14 +1,13 @@
 {
   "presets": [
-    ["env", {
+    ["@babel/preset-env", {
       "modules": false,
       "targets": {
         "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
       }
-    }],
-    "stage-2"
+    }]
   ],
-  "plugins": ["transform-vue-jsx", "transform-runtime", ["transform-imports", {
+  "plugins": ["transform-vue-jsx", "@babel/transform-runtime", ["transform-imports", {
     "vuetify": {
       "transform": "vuetify/es5/components/${member}",
       "preventFullImport": true
@@ -18,10 +17,11 @@
     "languages": ["javascript", "css", "markup", "bash", "java", "json", "perl", "python", "php", "ruby", "csharp", "go", "visual-basic", "groovy", "objectivec", "swift", "markdown"],
     "theme": "default",
     "css": true
-  }]],
+  }],
+  ["@babel/plugin-proposal-class-properties"]],
   "env": {
     "test": {
-      "presets": ["env", "stage-2"],
+      "presets": ["@babel/preset-env"],
       "plugins": ["transform-vue-jsx", "istanbul"]
     }
   }

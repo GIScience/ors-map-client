@@ -34,7 +34,7 @@ export default {
     },
     onOk () {
       this.show = false
-      this.eventBus.$emit('infoOk', {event: 'ok', guid: this.guid})
+      this.eventBus.$emit('infoOk', { event: 'ok', guid: this.guid })
     }
   },
   created () {

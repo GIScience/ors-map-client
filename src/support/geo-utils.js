@@ -1,9 +1,9 @@
-import {each, get} from 'lodash'
+import { each, get } from 'lodash'
 import Leaflet from 'leaflet'
 import moment from 'moment'
 import layerZoomMap from '@/resources/layer-zoom-map'
 
-const lodash = {each, get}
+const lodash = { each, get }
 
 const geoUtils = {
   /**
@@ -12,13 +12,13 @@ const geoUtils = {
    * @returns {Array} of reordered coordinates
    */
   switchLatLonIndex: (coordinatesArr) => {
-    let switchedCoords = []
+    const switchedCoords = []
     // the lat and long data of the geometry comes in the
     // inverted order from the one that is expected by leaflet
     // so we just iterate over than and create an array
     // with lat and long in the expected order
     coordinatesArr.forEach(function (coordinate) {
-      let switched = [coordinate[1], coordinate[0]]
+      const switched = [coordinate[1], coordinate[0]]
       if (coordinate[2]) {
         switched[2] = coordinate[2]
       }
@@ -63,13 +63,13 @@ const geoUtils = {
    * @returns {Array} of markers
    */
   buildMarkers: (mapViewData, highlightedPlace = null) => {
-    let markers = []
+    const markers = []
     if (!mapViewData.places || mapViewData.places.length === 0) {
       return []
     }
     lodash.each(mapViewData.places, (place, key) => {
       // Define the marker color
-      let lastIndexKey = mapViewData.places.length - 1
+      const lastIndexKey = mapViewData.places.length - 1
       let coloredMarkerName = geoUtils.getMarkerColor(key, lastIndexKey, mapViewData.hasRoutes())
 
       if (highlightedPlace) {
@@ -81,8 +81,8 @@ const geoUtils = {
       }
 
       // Build the marker
-      let markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName)
-      let marker = { position: { lng: place.lng, lat: place.lat }, icon: markerIcon }
+      const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName)
+      const marker = { position: { lng: place.lng, lat: place.lat }, icon: markerIcon }
 
       // if the way point array has the third parameter, it is its label
       marker.label = place.placeName || `${place.lng},${place.lat}`
@@ -104,7 +104,7 @@ const geoUtils = {
    * @param {*} marker
    */
   getMarkerCordinates (marker) {
-    let markerCoordinates = lodash.get(marker, 'data.geometry.coordinates')
+    const markerCoordinates = lodash.get(marker, 'data.geometry.coordinates')
     return markerCoordinates
   },
 
@@ -115,7 +115,7 @@ const geoUtils = {
    * @returns {Object} markerIcon
    */
   buildMarkerIcon: (color) => {
-    let markerIcon = Leaflet.icon({
+    const markerIcon = Leaflet.icon({
       iconUrl: require(`./static/${color}-marker.png`).default,
       shadowUrl: require('leaflet/dist/images/marker-shadow.png').default,
       iconAnchor: [14, 35],
@@ -173,7 +173,7 @@ const geoUtils = {
    * @returns {Matrix} polyline with arrays of lngLat
    */
   getBounds: (originalBbox, places = [], polyline = []) => {
-    let boundsCollection = [{lon: originalBbox[0], lat: originalBbox[1]}, {lon: originalBbox[2], lat: originalBbox[3]}]
+    const boundsCollection = [{ lon: originalBbox[0], lat: originalBbox[1] }, { lon: originalBbox[2], lat: originalBbox[3] }]
 
     let minLat = originalBbox[1]
     let maxLat = originalBbox[3]
@@ -181,16 +181,16 @@ const geoUtils = {
     let maxLon = originalBbox[2]
 
     places.forEach((place) => {
-      boundsCollection.push({lat: place.lat, lon: place.lng})
+      boundsCollection.push({ lat: place.lat, lon: place.lng })
     })
     if (Array.isArray(polyline)) {
       polyline.forEach((lngLatArr) => {
-        boundsCollection.push({lat: lngLatArr[0], lon: lngLatArr[1]})
+        boundsCollection.push({ lat: lngLatArr[0], lon: lngLatArr[1] })
       })
     }
 
     if (places.length === 1 && boundsCollection.length === 1) {
-      let place = places[0]
+      const place = places[0]
       minLat = maxLat = place.lat
       minLon = maxLon = place.lng
     } else {
@@ -203,8 +203,8 @@ const geoUtils = {
     }
 
     return [
-      {lon: minLon, lat: minLat},
-      {lon: maxLon, lat: maxLat}
+      { lon: minLon, lat: minLat },
+      { lon: maxLon, lat: maxLat }
     ]
   },
 
@@ -234,7 +234,7 @@ const geoUtils = {
       if (typeof data.duration === 'string') {
         humanizedDuration = data.duration
       } else {
-        let durationObj = geoUtils.getDurationInSegments(data.duration, translations)
+        const durationObj = geoUtils.getDurationInSegments(data.duration, translations)
         humanizedDuration = `${durationObj.days} ${durationObj.hours} ${durationObj.minutes} ${durationObj.seconds}`
       }
     }
@@ -251,7 +251,7 @@ const geoUtils = {
    * @returns {String} formatted tool tip
    */
   getDurationInSegments: (seconds, translations) => {
-    let durationObj = moment.duration(seconds, 'seconds') // the duration value is expected to be always in seconds
+    const durationObj = moment.duration(seconds, 'seconds') // the duration value is expected to be always in seconds
     return {
       days: durationObj._data.days > 0 ? durationObj._data.days + translations.days : '',
       hours: durationObj._data.hours > 0 ? durationObj._data.hours + ' ' + translations.hours : '',
@@ -268,8 +268,8 @@ const geoUtils = {
    * @returns {{z: number, x: number, y: number}}
    */
   getTileData: (lat, lon, zoom) => {
-    let row = (Math.floor((lon + 180) / 360 * Math.pow(2, zoom)))
-    let column = (Math.floor((1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom)))
+    const row = (Math.floor((lon + 180) / 360 * Math.pow(2, zoom)))
+    const column = (Math.floor((1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom)))
     return {
       z: zoom, x: row, y: column
     }
@@ -278,17 +278,17 @@ const geoUtils = {
   getBrowserLocation: () => {
     return new Promise((resolve, reject) => {
       if (!navigator.geolocation) {
-        let error = 'Geo location not available'
+        const error = 'Geo location not available'
         reject(error)
       }
-      let getPositionSuccess = (position) => {
-        let location = {lng: position.coords.longitude, lat: position.coords.latitude, accuracy: position.coords.accuracy}
+      const getPositionSuccess = (position) => {
+        const location = { lng: position.coords.longitude, lat: position.coords.latitude, accuracy: position.coords.accuracy }
         resolve(location)
       }
-      let getPositionError = (error) => {
+      const getPositionError = (error) => {
         reject(error)
       }
-      navigator.geolocation.getCurrentPosition(getPositionSuccess, getPositionError, {enableHighAccuracy: true})
+      navigator.geolocation.getCurrentPosition(getPositionSuccess, getPositionError, { enableHighAccuracy: true })
     })
   },
 
@@ -303,8 +303,8 @@ const geoUtils = {
 
     places.forEach((p, index) => {
       if (p.coordinates) {
-        let toLatlng = geoUtils.buildLatLong(p.coordinates[1], p.coordinates[0])
-        let currentDistance = geoUtils.calculateDistanceBetweenLocations(latlng, toLatlng)
+        const toLatlng = geoUtils.buildLatLong(p.coordinates[1], p.coordinates[0])
+        const currentDistance = geoUtils.calculateDistanceBetweenLocations(latlng, toLatlng)
         if (shorterDistance) {
           if (currentDistance < shorterDistance) {
             shorterDistance = currentDistance
@@ -322,13 +322,13 @@ const geoUtils = {
     // then the the last place. If so, we define move
     // the new place slot to  be before the last
     if (closestPlaceIndex === places.length - 1) {
-      let placeBefore = places[closestPlaceIndex - 1]
-      let lastPlace = places[closestPlaceIndex]
-      let beforeLatlng = geoUtils.buildLatLong(placeBefore.coordinates[1], placeBefore.coordinates[0])
-      let fromNewToPlaceBefore = geoUtils.calculateDistanceBetweenLocations(latlng, beforeLatlng)
-      let lastLatlng = geoUtils.buildLatLong(lastPlace.coordinates[1], lastPlace.coordinates[0])
+      const placeBefore = places[closestPlaceIndex - 1]
+      const lastPlace = places[closestPlaceIndex]
+      const beforeLatlng = geoUtils.buildLatLong(placeBefore.coordinates[1], placeBefore.coordinates[0])
+      const fromNewToPlaceBefore = geoUtils.calculateDistanceBetweenLocations(latlng, beforeLatlng)
+      const lastLatlng = geoUtils.buildLatLong(lastPlace.coordinates[1], lastPlace.coordinates[0])
 
-      let fromBeforeToLast = geoUtils.calculateDistanceBetweenLocations(lastLatlng, beforeLatlng)
+      const fromBeforeToLast = geoUtils.calculateDistanceBetweenLocations(lastLatlng, beforeLatlng)
       if (fromNewToPlaceBefore < fromBeforeToLast) {
         closestPlaceIndex--
       }
@@ -341,8 +341,8 @@ const geoUtils = {
    * Return the zoom level accoding the layer
    */
   zoomLevelByLayer: (layer) => {
-    let map = layerZoomMap
-    let zoom = map[layer]
+    const map = layerZoomMap
+    const zoom = map[layer]
     if (!zoom) {
       return 8
     }
@@ -357,19 +357,19 @@ const geoUtils = {
    * @returns {Number}
    */
   calculateDistanceBetweenLocations (fromLatlng, toLatlng, unit = 'km') {
-    let toRadians = function (deg) {
+    const toRadians = function (deg) {
       return deg * (Math.PI / 180)
     }
 
-    let R = 6371 // km
+    const R = 6371 // km
     // has a problem with the .toRad() method below
-    let x1 = toLatlng.lat - fromLatlng.lat
-    let dLat = toRadians(x1)
-    let x2 = toLatlng.lng - fromLatlng.lng
-    let dLon = toRadians(x2)
-    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadians(fromLatlng.lat)) * Math.cos(toRadians(toLatlng.lat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-    let distance = R * c
+    const x1 = toLatlng.lat - fromLatlng.lat
+    const dLat = toRadians(x1)
+    const x2 = toLatlng.lng - fromLatlng.lng
+    const dLon = toRadians(x2)
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadians(fromLatlng.lat)) * Math.cos(toRadians(toLatlng.lat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    const distance = R * c
 
     if (unit === 'mi') {
       return distance * 0.62137
@@ -392,9 +392,9 @@ const geoUtils = {
     let selectedPlace = null
     if (Array.isArray(places) && places.length > 0) {
       selectedPlace = places[0]
-      for (let key in places) {
-        let featureZoom = geoUtils.zoomLevelByLayer(places[key].properties.layer)
-        let selectedFeatureZoom = geoUtils.zoomLevelByLayer(selectedPlace.properties.layer)
+      for (const key in places) {
+        const featureZoom = geoUtils.zoomLevelByLayer(places[key].properties.layer)
+        const selectedFeatureZoom = geoUtils.zoomLevelByLayer(selectedPlace.properties.layer)
 
         // If the difference betwen the reference zoom and
         // the current feature zoom is smaller than the
@@ -412,17 +412,17 @@ const geoUtils = {
    * Check if a point is inside a polygon
    */
   isPointInsidePolygon: (lat, lng, polyPoints) => {
-    let x = lat
-    let y = lng
+    const x = lat
+    const y = lng
 
     var inside = false
     for (var i = 0, j = polyPoints.length - 1; i < polyPoints.length; j = i++) {
-      let xi = polyPoints[i][1]
-      let yi = polyPoints[i][0]
-      let xj = polyPoints[j][1]
-      let yj = polyPoints[j][0]
+      const xi = polyPoints[i][1]
+      const yi = polyPoints[i][0]
+      const xj = polyPoints[j][1]
+      const yj = polyPoints[j][0]
 
-      let intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)
+      const intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)
       if (intersect) inside = !inside
     }
 

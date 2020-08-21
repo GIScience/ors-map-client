@@ -14,13 +14,13 @@
                     :support-directions="$store.getters.mode === constants.modes.place || $store.getters.mode === constants.modes.directions"
                     :box="places.length === 1"
                     :index="index"
+                    :autofocus="autofocusEnabled(index)"
                     :model="places[index]"
                     :single="places.length === 1"
                     :is-last="(places.length -1) === index && index !== 0"
                     @selected="selectPlace"
                     @delete="removePlaceInput"
                     @startDirections="startDirections"
-                    @addInput="addPlaceInput"
                     @cleared="placeCleared">
                   </place-input>
                 </v-flex>
@@ -31,7 +31,7 @@
       </template>
       <v-layout row class="form-actions-btns">
          <form-actions :place-inputs="places.length"
-            @addPlaceInput="addPlaceInput"
+            @addPlaceInput="addInput"
             @clearPlaces="clearPlaces"
             @reverseRoute="reverseRoute"
             @toggleRoundTrip="toggleRoundTrip"

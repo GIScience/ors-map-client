@@ -49,7 +49,7 @@ export default {
       return height
     },
     zoom () {
-      let zoom = this.$store.getters.appRouteData.options.zoom || this.defaultZoom
+      const zoom = this.$store.getters.appRouteData.options.zoom || this.defaultZoom
       return zoom
     },
     showBottomNav () {
@@ -59,13 +59,13 @@ export default {
       return this.viewHeight - this.bottomNavHeight
     },
     refreshSearchAvailable () {
-      let available = this.$store.getters.mode === constants.modes.search && this.searchBtnAvailable
+      const available = this.$store.getters.mode === constants.modes.search && this.searchBtnAvailable
       return available
     },
     fitMapBounds () {
       let fit = true
-      let directionsMode = constants.modes.directions
-      let routeChanged = this.previousRoute && this.previousRoute.name !== this.$route.name
+      const directionsMode = constants.modes.directions
+      const routeChanged = this.previousRoute && this.previousRoute.name !== this.$route.name
 
       if (!this.firstLoad && !routeChanged && this.$store.getters.mode === directionsMode && !this.$store.getters.mapSettings.alwaysFitBounds) {
         fit = false
@@ -80,7 +80,7 @@ export default {
       return center
     },
     supportsDrawingTool () {
-      let modeWithDrawingTools = [constants.modes.directions, constants.modes.roundTrip]
+      const modeWithDrawingTools = [constants.modes.directions, constants.modes.roundTrip]
       // If the app is in one of the modes that supports drawing tool
       if (modeWithDrawingTools.includes(this.$store.getters.mode)) {
         return true
@@ -134,7 +134,7 @@ export default {
      */
     refreshViewSizeAfterTouchMode () {
       clearTimeout(this.touchmoveDebounceTimeoutId)
-      let context = this
+      const context = this
 
       // Make sure that the changes in the input are debounced
       this.touchmoveDebounceTimeoutId = setTimeout(function () {
@@ -150,7 +150,7 @@ export default {
     markerClicked (place) {
       // At least 100px height must be available for the map view
       if ((window.innerHeight > this.bottomNavHeight + 100) && this.$store.getters.mode === constants.modes.search) {
-        let index = place.findIndex(this.mapViewData.places)
+        const index = place.findIndex(this.mapViewData.places)
         this.activeplaceIndex = index
         this.bottomNavActive = true
         this.setViewHeight()
@@ -220,7 +220,7 @@ export default {
      * @param {Number} zoom
      */
     storeZoomValue (zoom = null) {
-      let appRouteData = this.$store.getters.appRouteData
+      const appRouteData = this.$store.getters.appRouteData
       zoom = zoom || appRouteData.options.zoom || this.defaultZoom
       appRouteData.options.zoom = zoom
       this.$store.commit('appRouteData', appRouteData)
@@ -235,7 +235,7 @@ export default {
       // After clearing the map, wait a bit to load the new route
       let context = this
 
-      let appRouteData = AppMode.decodePath(context.$route)
+      const appRouteData = AppMode.decodePath(context.$route)
 
       if (appRouteData === false) { // if there is no app route data, load default state
         context.$router.push({name: 'Maps'})
@@ -281,14 +281,14 @@ export default {
       this.isSettingsOpen = false
       if (this.$route.name === 'MapSettings') {
         this.$store.commit('cleanMap', true)
-        this.$router.push({name: 'Maps'})
+        this.$router.push({ name: 'Maps' })
       }
     },
     closeAboutModal () {
       this.isAboutOpen = false
       if (this.$route.name === 'MapAbout') {
         this.$store.commit('cleanMap', true)
-        this.$router.push({name: 'Maps'})
+        this.$router.push({ name: 'Maps' })
       }
     },
     avoidPolygonsChanged (polygons) {
@@ -319,7 +319,7 @@ export default {
     this.$store.commit('setDisplayFooter', false)
     this.$store.commit('setLeftSideBarIsOpen', false)
 
-    let context = this
+    const context = this
     this.eventBus.$on('mapViewDataChanged', function (mapViewData) {
       context.setMapDataAndUpdateMapView(mapViewData)
       context.setViewHeightAndBottomNav()

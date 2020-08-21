@@ -1,4 +1,4 @@
-import {Directions} from '@/support/ors-api-runner'
+import { Directions } from '@/support/ors-api-runner'
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import toGpx from 'togpx'
 import toKml from 'tokml'
@@ -30,11 +30,11 @@ export default {
   computed: {
     downloadFormats () {
       return [
-        {text: 'ORS JSON', value: 'json', ext: 'json'},
-        {text: 'GeoJSON', value: 'geojson', ext: 'json'},
-        {text: 'ORS API GPX', value: 'ors-gpx', ext: 'gpx'},
-        {text: `${this.$t('download.standard')} GPX`, value: 'to-gpx', ext: 'gpx'},
-        {text: 'KML', value: 'kml', ext: 'kml'}
+        { text: 'ORS JSON', value: 'json', ext: 'json' },
+        { text: 'GeoJSON', value: 'geojson', ext: 'json' },
+        { text: 'ORS API GPX', value: 'ors-gpx', ext: 'gpx' },
+        { text: `${this.$t('download.standard')} GPX`, value: 'to-gpx', ext: 'gpx' },
+        { text: 'KML', value: 'kml', ext: 'kml' }
       ]
     },
     /**
@@ -42,7 +42,7 @@ export default {
      * @returns string
      */
     originName () {
-      let origin = this.mapViewData.places[0]
+      const origin = this.mapViewData.places[0]
       return origin ? origin.placeName : ''
     },
     /**
@@ -50,12 +50,12 @@ export default {
      * @returns string
      */
     destinationName () {
-      let destination = this.mapViewData.places[this.mapViewData.places.length - 1]
+      const destination = this.mapViewData.places[this.mapViewData.places.length - 1]
       return destination ? destination.placeName : ''
     },
     availableDownloadFormats () {
-      let context = this
-      let available = this.lodash.filter(this.downloadFormats, (f) => {
+      const context = this
+      const available = this.lodash.filter(this.downloadFormats, (f) => {
         return context.downloadFormatsSupported.includes(f.value)
       })
       return available
@@ -80,33 +80,33 @@ export default {
      * Build the string download content and force a native browser download
      */
     download () {
-      let context = this
+      const context = this
 
-      this.showInfo(this.$t('download.preparingDownload'), {timeout: 0})
+      this.showInfo(this.$t('download.preparingDownload'), { timeout: 0 })
       this.buildContent().then((content) => {
         // The way to force a native browser download of a string is by
         // creating a hidden anchor and setting its href as a data text
-        let link = document.createElement('a')
+        const link = document.createElement('a')
         link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(content)
 
         // check if it has reached the max lenght
         if (link.href.length > 2097152) {
-          this.showError(this.$t('download.fileTooBigToBeDowloaded'), {timeout: 2000})
+          this.showError(this.$t('download.fileTooBigToBeDowloaded'), { timeout: 2000 })
         } else {
           // Set the filename
-          let timestamp = new Date().getTime()
-          let format = context.lodash.find(context.downloadFormats, (df) => { return df.value === context.dowloadFormat })
+          const timestamp = new Date().getTime()
+          const format = context.lodash.find(context.downloadFormats, (df) => { return df.value === context.dowloadFormat })
           link.download = `${context.downloadFileName}_${timestamp}.${format.ext}`
 
           // Fire the download by triggering a click on the hidden anchor
           document.body.appendChild(link)
           link.click()
           link.remove()
-          this.showSuccess(this.$t('download.fileReady'), {timeout: 2000})
+          this.showSuccess(this.$t('download.fileReady'), { timeout: 2000 })
         }
       }).catch(error => {
         console.error(error)
-        this.showError(this.$t('download.errorPreparingFile'), {timeout: 2000})
+        this.showError(this.$t('download.errorPreparingFile'), { timeout: 2000 })
       })
     },
     /**
@@ -117,12 +117,12 @@ export default {
      */
     buildContent () {
       let jsonData
-      let context = this
+      const context = this
       return new Promise((resolve, reject) => {
         try {
           if (context.dowloadFormat === 'json') {
             // Get the ORS mapViewData model and stringfy it
-            let orsJSONStr = JSON.stringify(this.mapViewData)
+            const orsJSONStr = JSON.stringify(this.mapViewData)
             resolve(orsJSONStr)
           } else if (context.dowloadFormat === 'ors-gpx') {
             // If the format is ors-gpx, run anew request with the format being 'gpx'
@@ -132,23 +132,23 @@ export default {
               reject(error)
             })
           } else if (context.dowloadFormat === 'to-gpx') {
-            let geoJSON = context.mapViewData.getGeoJson()
+            const geoJSON = context.mapViewData.getGeoJson()
             // Use the third party utility to convert geojson to gpx
-            let togpx = toGpx(geoJSON)
+            const togpx = toGpx(geoJSON)
             resolve(togpx)
           } else if (context.dowloadFormat === 'geojson') {
             jsonData = context.mapViewData.getGeoJson()
-            let jsonStr = JSON.stringify(jsonData)
+            const jsonStr = JSON.stringify(jsonData)
             resolve(jsonStr)
           } else if (context.dowloadFormat === 'kml') {
-            let routeTitle = context.originName.length > 0 ? `${context.originName} -> ${context.destinationName}` : context.$t('download.documentTitle')
-            let kmlOptions = {
+            const routeTitle = context.originName.length > 0 ? `${context.originName} -> ${context.destinationName}` : context.$t('download.documentTitle')
+            const kmlOptions = {
               documentName: routeTitle,
               documentDescription: constants.orsKmlDocumentDescription
             }
             jsonData = context.mapViewData.getGeoJson()
             // Use the third party utility to convert geojson to kml
-            let tokml = toKml(jsonData, kmlOptions)
+            const tokml = toKml(jsonData, kmlOptions)
             resolve(tokml)
           }
         } catch (error) {
@@ -175,7 +175,7 @@ export default {
      * @returns {Promise}
      */
     getORSGpx () {
-      let context = this
+      const context = this
       return new Promise((resolve, reject) => {
         // Build the args for a directions api request
         let args = OrsParamsParser.buildRoutingArgs(context.mapViewData.places)

@@ -31,9 +31,15 @@ export default {
      * @returns {Object}
      */
     avoidPolygonsFilterAcessor () {
-      let util = OrsFilterUtil
-      let filterRef = util.getFilterRefByName(constants.avoidPpolygonsFilterName)
+      const filterRef = OrsFilterUtil.getFilterRefByName(constants.avoidPpolygonsFilterName)
       return filterRef
+    },
+    /**
+     * Determines if the sidebar is open
+     * @returns {Boolean}
+     */
+    isSidebarOpen () {
+      return this.$store.getters.leftSideBarPinned || this.$store.getters.leftSideBarOpen
     }
   },
   methods: {
@@ -101,7 +107,7 @@ export default {
      * @param {*} data {content:..., options: ...}
      */
     contentUploaded (data) {
-      let context = this
+      const context = this
       data.options.translations = context.$t('global.units')
       MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
         context.$store.commit('mode', mapViewData.mode)

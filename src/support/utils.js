@@ -16,7 +16,7 @@ const utils = {
     return (/^[?#]/.test(query) ? query.slice(1) : query)
       .split('&')
       .reduce((params, param) => {
-        let [key, value] = param.split('=')
+        const [key, value] = param.split('=')
         params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : ''
         return params
       }, {})
@@ -56,8 +56,8 @@ const utils = {
         .toString(16)
         .substring(1)
     }
-    let random = s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4()
-    let dateTime = new Date().getTime()
+    const random = s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4()
+    const dateTime = new Date().getTime()
     return `${prefix}${random}-${dateTime}`
   },
 
@@ -85,7 +85,7 @@ const utils = {
   tryParseJson: (str) => {
     if (isNaN(str)) {
       try {
-        let obj = JSON.parse(str)
+        const obj = JSON.parse(str)
         return obj
       } catch (e) {
         return false
@@ -98,7 +98,7 @@ const utils = {
    * @returns {Boolean}
    */
   isMobile () {
-    let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     return isMobile
   },
   /**
@@ -122,9 +122,9 @@ const utils = {
         clone = []
       }
     }
-    for (let key in obj) {
+    for (const key in obj) {
       if (typeof obj[key] === 'object') {
-        let prop = clone[key]
+        const prop = clone[key]
         if (prop !== undefined) {
           clone[key] = utils.clone(obj[key], prop)
         } else {
@@ -142,7 +142,7 @@ const utils = {
    * @param {*} txt
    */
   compressTxt (txt) {
-    let compressed = lzString.compressToUint8Array(txt)
+    const compressed = lzString.compressToUint8Array(txt)
     return compressed
   },
   /**
@@ -153,8 +153,8 @@ const utils = {
     let numericArr = []
     // Make sure that we are processing an array of numbers
     if (typeof data === 'string' && data.indexOf(',') > -1) {
-      let arr = data.split(',')
-      for (let key in arr) {
+      const arr = data.split(',')
+      for (const key in arr) {
         numericArr.push(Number(arr[key]))
       }
     } else {

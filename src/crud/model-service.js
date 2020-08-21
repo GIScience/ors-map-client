@@ -59,7 +59,7 @@ function ModelService (endPoint, resourceName, options) {
     return new Promise((resolve, reject) => {
       let endPoint = this.endPoint
       endPoint += this.buildParams(filters)
-      let request = {
+      const request = {
         endPoint: endPoint,
         filters: filters,
         running: 'query'
@@ -84,7 +84,7 @@ function ModelService (endPoint, resourceName, options) {
         } else {
           // transform each resource returned in a active record Model
           // @see @/core/model to read more
-          let items = modelCollection(response.data, this)
+          const items = modelCollection(response.data, this)
           resolve(items)
         }
       },
@@ -106,7 +106,7 @@ function ModelService (endPoint, resourceName, options) {
    * @param {*} endPoint  the endpoint to which the request will be made
    */
   this.customQuery = (customOptions, endPoint) => {
-    let cOptions = customOptions || options
+    const cOptions = customOptions || options
 
     // set the raw option
     cOptions.raw = cOptions.raw === undefined ? options.raw : cOptions.raw
@@ -114,7 +114,7 @@ function ModelService (endPoint, resourceName, options) {
     return new Promise((resolve, reject) => {
       endPoint = endPoint || this.getEndPoint()
 
-      let request = {
+      const request = {
         endPoint: endPoint,
         query: cOptions.query,
         running: 'customQuery',
@@ -147,7 +147,7 @@ function ModelService (endPoint, resourceName, options) {
         } else {
           // transform each resource returned in a active record Model
           // @see @/core/model to read more
-          let items = modelCollection(response.data, this)
+          const items = modelCollection(response.data, this)
           resolve(items)
         }
       },
@@ -165,9 +165,9 @@ function ModelService (endPoint, resourceName, options) {
    */
   this.get = (pkValue) => {
     return new Promise((resolve, reject) => {
-      let endPoint = `${this.endPoint}/${pkValue}`
+      const endPoint = `${this.endPoint}/${pkValue}`
 
-      let request = {
+      const request = {
         endPoint: endPoint,
         running: 'get'
       }
@@ -192,7 +192,7 @@ function ModelService (endPoint, resourceName, options) {
           } else {
             // transform the resource returned in a active record Model
             // @see @/core/model to read more
-            let model = new Model(response.data, this.endPoint, this.resourceName, this.options)
+            const model = new Model(response.data, this.endPoint, this.resourceName, this.options)
             resolve(model)
           }
         },

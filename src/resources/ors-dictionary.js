@@ -39,21 +39,21 @@ const orsDictionary = {
     '-3': '7-11%',
     '-2': '4-6%',
     '-1': '1-3%',
-    '0': '0%',
-    '1': '1-3%',
-    '2': '4-6%',
-    '3': '7-11%',
-    '4': '12-15%',
-    '5': '>16%'
+    0: '0%',
+    1: '1-3%',
+    2: '4-6%',
+    3: '7-11%',
+    4: '12-15%',
+    5: '>16%'
   },
   roadaccessrestrictions: {
-    '0': 'none',
-    '1': 'no',
-    '2': 'nustomers',
-    '4': 'destination',
-    '8': 'delivery',
-    '16': 'private',
-    '32': 'permissive'
+    0: 'none',
+    1: 'no',
+    2: 'nustomers',
+    4: 'destination',
+    8: 'delivery',
+    16: 'private',
+    32: 'permissive'
   },
   colors: {
     waytypes: [

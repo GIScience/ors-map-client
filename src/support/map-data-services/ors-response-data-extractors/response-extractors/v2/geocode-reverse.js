@@ -16,8 +16,8 @@ class GeocodeReverseBuilder {
    * @returns {Promise} that returns in the resolve mapData object
    */
   buildMapData = () => {
-    let mapViewData = new MapViewData()
-    let context = this
+    const mapViewData = new MapViewData()
+    const context = this
     return new Promise((resolve) => {
       mapViewData.places = context.buildPlaces()
       mapViewData.isRouteData = false
@@ -32,15 +32,15 @@ class GeocodeReverseBuilder {
    * @returns {Array} places
    */
   buildPlaces = () => {
-    let places = []
+    const places = []
     if (this.responseData.features) {
       this.responseData.features.forEach(feature => {
-        let lnglat = feature.geometry.coordinates
-        let place = new Place(lnglat[0], lnglat[0], feature.properties.label, {properties: feature})
+        const lnglat = feature.geometry.coordinates
+        const place = new Place(lnglat[0], lnglat[0], feature.properties.label, { properties: feature })
         places.push(place)
       })
-      let queryPoint = this.responseData.geocoding.query
-      let queryPlace = new Place([queryPoint['point.lon'], queryPoint['point.lat']])
+      const queryPoint = this.responseData.geocoding.query
+      const queryPlace = new Place([queryPoint['point.lon'], queryPoint['point.lat']])
       places.push(queryPlace)
     }
     return places

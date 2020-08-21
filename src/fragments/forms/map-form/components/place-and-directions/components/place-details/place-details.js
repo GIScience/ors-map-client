@@ -17,16 +17,16 @@ export default {
   computed: {
     imagePath () {
       if (this.placeLayer) {
-        let zoom = geoUtils.zoomLevelByLayer(this.placeLayer)
-        let tileData = geoUtils.getTileData(this.place.lat, this.place.lng, zoom)
-        let url = `${this.worldImageryTileProviderBaseUrl}/${tileData.z}/${tileData.y}/${tileData.x}`
+        const zoom = geoUtils.zoomLevelByLayer(this.placeLayer)
+        const tileData = geoUtils.getTileData(this.place.lat, this.place.lng, zoom)
+        const url = `${this.worldImageryTileProviderBaseUrl}/${tileData.z}/${tileData.y}/${tileData.x}`
         return url
       } else {
         return this.imageUrlFallBack
       }
     },
     place () {
-      let place = this.mapViewData.places[0]
+      const place = this.mapViewData.places[0]
       if (!place.properties.country) {
         place.resolve().then(() => {
           if (!place.properties.layer) {
@@ -37,7 +37,7 @@ export default {
       return place
     },
     placeLayer () {
-      let layer = this.place.properties.layer
+      const layer = this.place.properties.layer
       if (layer !== 'notAvailable') {
         return layer
       }

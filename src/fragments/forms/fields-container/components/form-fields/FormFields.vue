@@ -4,12 +4,12 @@
       <template v-for="(parameter, index) in formParameters">
         <v-layout v-if="showField(parameter)" :key="index" row class="field-row" :style="{'padding-left': (level * 5) + 'px'}" >
           <v-flex v-bind="{[parameter.type === constants.filterTypes.wrapper ? 'sm12': 'sm11']: true}">
-            <v-autocomplete v-if="parameter.isEnum" :ref="'field'+ index"
+            <v-autocomplete v-if="parameter.isEnum || parameter.items" :ref="'field'+ index"
               class="field-input no-input-details form-fields-autocomplete"
               :required="parameter.required"
               @change="isModalMultiSelect(parameter) ? () => {} : fieldUpdated({index: index, value: $event})"
               :items="getSelectableItems(parameter)"
-              v-model="parameter.value"
+              v-model="formParameters[index].value"
               :item-text="parameter.itemText"
               :item-value="parameter.itemValue"
               :label="buildLabel(parameter)"
@@ -86,7 +86,11 @@
               <v-checkbox class="pt-0 top-0" v-model="formParameters[index].value" :label="buildLabel(parameter)" ></v-checkbox>
             </template>
 
-            <v-expansion-panel :value="showPanelExpanded(parameter)" v-else-if="parameter.type === constants.filterTypes.wrapper" class="fields-panel">
+            <v-switch class="form-switch" v-else-if="parameter.type === constants.filterTypes.switch"
+              :label="buildLabel(parameter)" @change="fieldUpdated({index: index})" v-model="formParameters[index].value"
+            ></v-switch>
+
+            <v-expansion-panel v-else-if="parameter.type === constants.filterTypes.wrapper" :value="showPanelExpanded(parameter)" class="fields-panel">
               <v-expansion-panel-content style="background: transparent">
                 <div slot="header"><h4>{{parameter.label}}</h4></div>
                 <template>
@@ -94,9 +98,6 @@
                 </template>
               </v-expansion-panel-content>
             </v-expansion-panel>
-            <v-switch class="form-switch" v-else-if="parameter.type === constants.filterTypes.switch"
-              :label="buildLabel(parameter)" @change="fieldUpdated({index: index})" v-model="formParameters[index].value"
-            ></v-switch>
           </v-flex>
           <v-flex sm1 class="txt-right top-15" v-if="parameter.type !== constants.filterTypes.wrapper">
             <v-tooltip left>

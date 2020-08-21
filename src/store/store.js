@@ -24,9 +24,9 @@ const storeBuilder = {
 }
 
 // load and get all routes from *.route.js default export using custom loader
-let storeModules = loader.load(require.context('@/pages/', true, /\.store\.js$/), true)
-let fragmentModules = loader.load(require.context('@/fragments/', true, /\.store\.js$/), true)
-let mergedModules = { ...storeModules, ...fragmentModules }
+const storeModules = loader.load(require.context('@/pages/', true, /\.store\.js$/), true)
+const fragmentModules = loader.load(require.context('@/fragments/', true, /\.store\.js$/), true)
+const mergedModules = { ...storeModules, ...fragmentModules }
 
 for (var key in mergedModules) {
   storeBuilder.modules[key] = mergedModules[key]

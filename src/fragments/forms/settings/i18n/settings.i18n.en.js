@@ -41,6 +41,7 @@ export default {
     defaultTileProvider: 'Default tiles provider',
     customTileProviderUrlHint: 'https://domain.tld/path/{z}/{x}/{y}.ext?optionalKey=value',
     prioritizeSearchingForNearbyPlaces: 'Prioritize searching for nearby places',
+    defaultProfile: 'Default profile',
     compressDataUrlSegment: 'Compresse URL segment after /data/'
   }
 }

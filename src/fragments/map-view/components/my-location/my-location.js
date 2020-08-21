@@ -58,7 +58,7 @@ export default {
         this.setLocationFromBrowser(false)
         this.toolTipVisible = false
       } else {
-        let context = this
+        const context = this
         setTimeout(() => {
           if (context.menuOpen) {
             context.showToolTip()
@@ -77,7 +77,7 @@ export default {
       this.toolTipVisible = false
       this.continously = continously
       // Reset the location access denied flag
-      let context = this
+      const context = this
 
       if (this.locationActive) {
         this.$store.commit('currentLocation', null)

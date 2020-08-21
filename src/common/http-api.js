@@ -3,7 +3,7 @@ import appConfig from '@/config'
 import VueInstance from '@/main'
 import store from '@/store/store'
 
-let baseURL = appConfig.getBaseUrl()
+const baseURL = appConfig.getBaseUrl()
 
 const httpApi = axios.create({
   baseURL: baseURL,
@@ -28,7 +28,7 @@ const requestInterceptors = (config) => {
       VueInstance.eventBus.$emit('showLoading', true)
       // Set/increase the pending request counter
       VueInstance.$pendingRequest = VueInstance.$pendingRequest ? VueInstance.$pendingRequest + 1 : 1
-      config.headers.common['Authorization'] = 'Bearer ' + store.getters.user.token
+      config.headers.common.Authorization = 'Bearer ' + store.getters.user.token
     }
   }
   return config // you have to return the config, otherwise the request wil be blocked

@@ -19,8 +19,8 @@ class DirectionsJSONBuilder {
    * @returns {Promise} that returns in the resolve mapData object
    */
   buildMapData = () => {
-    let mapViewData = new MapViewData()
-    let context = this
+    const mapViewData = new MapViewData()
+    const context = this
     return new Promise((resolve) => {
       OrsResponseUtil.adjustResponseCoordinates(context.responseData)
       mapViewData.places = context.buildPlaces()
@@ -39,11 +39,11 @@ class DirectionsJSONBuilder {
    * @returns {Array} markersData
    */
   buildPlaces = () => {
-    let places = []
+    const places = []
     if (lodash.get(this, 'responseData.metadata.query.coordinates')) {
-      for (let key in this.responseData.metadata.query.coordinates) {
-        let lnglat = this.responseData.metadata.query.coordinates[key]
-        let place = new Place(lnglat[0], lnglat[1])
+      for (const key in this.responseData.metadata.query.coordinates) {
+        const lnglat = this.responseData.metadata.query.coordinates[key]
+        const place = new Place(lnglat[0], lnglat[1])
         places.push(place)
       }
       return places
@@ -56,8 +56,8 @@ class DirectionsJSONBuilder {
    */
   setRoutesSummaryData = () => {
     if (lodash.get(this, 'responseData.features[0].properties.summary')) {
-      for (let key in this.responseData.features) {
-        let summary = Object.assign({}, this.responseData.features[key].properties.summary)
+      for (const key in this.responseData.features) {
+        const summary = Object.assign({}, this.responseData.features[key].properties.summary)
         summary.descent = this.responseData.features[key].properties.descent
         summary.ascent = this.responseData.features[key].properties.ascent
         summary.unit = this.responseData.metadata.query.units || store.getters.mapSettings.unit
