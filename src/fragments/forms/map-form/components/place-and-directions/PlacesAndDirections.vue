@@ -21,7 +21,6 @@
                     @selected="selectPlace"
                     @delete="removePlaceInput"
                     @startDirections="startDirections"
-                    @addInput="addPlaceInput"
                     @cleared="placeCleared">
                   </place-input>
                 </v-flex>
@@ -32,7 +31,7 @@
       </template>
       <v-layout row class="form-actions-btns">
          <form-actions :place-inputs="places.length"
-            @addPlaceInput="addPlaceInput"
+            @addPlaceInput="addInput"
             @clearPlaces="clearPlaces"
             @reverseRoute="reverseRoute"
             @toggleRoundTrip="toggleRoundTrip"

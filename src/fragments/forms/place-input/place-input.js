@@ -362,13 +362,6 @@ export default {
         context.eventBus.$emit('showLoading', false)
       })
     },
-    /**
-     * Add a place input
-     */
-    addInput () {
-      this.placeInputFloatingMenu = false
-      this.$emit('addInput')
-    },
 
     /**
      * Handles the input change with a debounce

@@ -99,6 +99,13 @@ export default {
 
   methods: {
     /**
+     * Add place input as a direct result of user interaction with the add place btn
+     */
+    addInput () {
+      this.addPlaceInput()
+      this.setfocusedPlaceInput(this.places.length - 1)
+    },
+    /**
      * Every time the appRouteData changes
      * and it has at least one place defined
      * the map data is reloaded, so we keep the
