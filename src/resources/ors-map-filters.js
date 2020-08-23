@@ -74,7 +74,7 @@ const filters = [
       wheelchair: {
         slug: 'wheelchair',
         title: 'wheelchair',
-        icon: 'accessible_forward',
+        icon: 'accessible',
         primary: true
       }
     }

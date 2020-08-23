@@ -8,7 +8,7 @@
     <v-btn slot="activator" v-if="locationActive" small fab class="my-location-btn" @click="activatorClicked()" :title="$t('myLocation.stopShowingCurrentLocation')">
       <v-icon large :color="continously === true ? 'primary' : 'dark'" >my_location</v-icon>
     </v-btn>
-    <v-btn slot="activator" @click="activatorClicked()"  v-else small fab class="my-location-btn" :title="$t('myLocation.showCurrentLocation')"><v-icon large color="dark" >not_listed_location</v-icon> </v-btn>
+    <v-btn slot="activator" @click="activatorClicked()"  v-else small fab class="my-location-btn" :title="$t('myLocation.showCurrentLocation')"><v-icon large color="dark" >person_pin_circle</v-icon> </v-btn>
 
     <v-list  v-if="!locationActive" light style="background:transparent; box-shadow:none" class="input-pop-up-list">
       <div class="text-xs-right">

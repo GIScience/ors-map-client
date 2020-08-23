@@ -87,6 +87,14 @@ export default {
     },
 
     /**
+     * Determines if the inputs support diretions mode
+     */
+    inputsupportsDirections () {
+      let supports = this.$store.getters.mode === constants.modes.place || this.$store.getters.mode === constants.modes.directions
+      return supports
+    },
+
+    /**
      * Determines if altitude preview must be shown
      * @returns {Boolean} show
      */
