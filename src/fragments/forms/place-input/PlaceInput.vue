@@ -2,25 +2,24 @@
   <div v-click-outside="setFocus">
     <v-layout row wrap >
       <v-flex v-bind="{[inputColumns]: true}">
-        <v-text-field
-          v-focus="getAutomaticFocus"
-          class="place-input"
-         :box="box"
-         :hide-details="single || index == 0"
-         clearable
-         :hint="hint"
-         :persistent-hint="!single && index > 0"
-         flat
-         v-model="model.placeName"
-         :height="height"
-         :style="{'margin-bottom': mb +'px'}"
-         :disabled="disabled"
-         :label="placeInputLabel"
-         @click="setFocus(true)"
-         @keyup="changed($event)"
-         @click:clear="() => placeCleared(index)"
-         :append-icon="supportSearch ? 'search': ''"
-         @click:append="changed($event)"
+        <v-text-field class="place-input"
+          v-focus="getAutomaticFocus"          
+          v-model="model.placeName"
+          clearable
+          flat
+          :box="box"
+          :hide-details="single || index == 0"
+          :hint="hint"
+          :persistent-hint="!single && index > 0"         
+          :height="height"
+          :style="{'margin-bottom': mb +'px'}"
+          :disabled="disabled"
+          :append-icon="supportSearch === true ? 'search': ''"
+          :label="placeInputLabel"
+          @click="setFocus(true)"
+          @keyup="changed($event)"
+          @click:clear="() => placeCleared(index)"
+          @click:append="changed($event)"
         ></v-text-field>
       </v-flex>
       <v-flex v-if="iconsBtnCounter > 0" v-bind="{[iconsColumns]: true}" class="input-btns">
