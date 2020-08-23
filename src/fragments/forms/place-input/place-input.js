@@ -545,8 +545,12 @@ export default {
      * @returns void
      */
     switchCoords () {
-      if (this.localModel.nameIsCoord()) {
+      if (this.model.nameIsCoord()) {
+        let coordinates = this.model.getLnglat()
+        let switchedCords = coordinates.reverse()
+        this.model.setLnglat(switchedCords[0], switchedCords[1])
         this.model.setCoordsAsName()
+        this.localModel = this.model.clone()
         this.autocompleteByCoords()
       }
     },
