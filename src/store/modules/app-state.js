@@ -49,23 +49,30 @@ const actions = {
       if (getters.dataAcquired) {
         resolve(getters.mapSettings.apiKey)
       } else {
-        // For some reason not yet discovered (maybe a vue router bug?)
+        // For some reason not yet identified (maybe a vue router bug?)
         // the `beforeEnter` guard used to fire this action is being called
-        // multiple times. so, we had to implement this `apiKeyRequested` flag
+        // multiple times. so, we had to implement this `apiDataRequested` flag
         // so that we avoid running several requests before the promise is resolved
         if (!getters.apiDataRequested) {
           commit('apiDataRequested', true)
 
-          // Request the public API key from the remote service
-          // If the request fails, use the local user key
-          httpApi.get(appConfig.publicApiKeyUrl).then(response => {
-            saveApiData(commit, response.data, constants.publicEndpoints)
-            resolve(response.data)
-          }).catch(error => {
-            saveApiData(commit, appConfig.userApiKey, constants.endpoints)
-            console.log(error)
-            resolve(appConfig.userApiKey)
-          })
+          // By default, the app must use an ors API key stored in config.js
+          if (appConfig.useUserKey) {
+            saveApiData(commit, appConfig.ORSApiKey, constants.endpoints)
+            resolve()
+          } else {
+            // Request the public API key from the remote service 
+            // (only works when runing the app on valid ORS domains).
+            // If the request fails, use the local user key instead
+            httpApi.get(appConfig.publicApiKeyUrl).then(response => {
+              saveApiData(commit, response.data, constants.publicEndpoints)
+              resolve(response.data)
+            }).catch(error => {
+              saveApiData(commit, appConfig.ORSApiKey, constants.endpoints)
+              console.log(error)
+              resolve()
+            })
+          }
         }
       }
     })
