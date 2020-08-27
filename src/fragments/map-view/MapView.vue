@@ -112,12 +112,12 @@
 
     <img class="over-brand" v-if="showBrand" src="@/assets/img/heigit-and-hd-uni.png" :alt="$t('global.brand')" :title="$t('global.brand')">
 
-    <my-location :active="myLocationActive" @updateLocation="updateMyLocation"></my-location>
-
-    <!-- <v-btn v-else small fab class="my-location-btn" @click="setLocationFromBrowser()" :title="$t('mapView.showCurrentLocation')"><v-icon large color="dark" >person_pin_circle</v-icon> </v-btn> -->
     <v-btn fab small v-if="canFitFeatures && showControls" :title="$t('mapView.fitAllFeatures')" class="fit-all-features" @click="fitAllFeatures()" > <v-icon large >all_out</v-icon> </v-btn>
 
-    <map-right-click :map-view-data="mapViewData" @closed="clickLatlng = null" @rightClickEvent="handleRightClickEvent"></map-right-click>
+    <v-btn v-if="$store.getters.embed" small :title="$t('mapView.viewOnORS')" class="view-on-ors" target="_blank" :href="nonEmbedUrl" > {{$t('mapView.viewOnORS')}} <v-icon right small >aspect_ratio</v-icon> </v-btn>
+    <my-location v-else :active="myLocationActive" @updateLocation="updateMyLocation"></my-location>
+
+    <map-right-click v-if="!$store.getters.embed" :map-view-data="mapViewData" @closed="clickLatlng = null" @rightClickEvent="handleRightClickEvent"></map-right-click>
     <map-left-click :current-zoom="zoom" @closed="clickLatlng = null" ></map-left-click>
   </div>
 </template>

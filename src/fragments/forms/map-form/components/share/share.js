@@ -15,6 +15,10 @@ export default {
     currentUrl () {
       return location.href
     },
+    embedCode () {
+      let code = `<iframe src="${this.currentUrl}/embed/${this.$store.getters.mapSettings.locale}"></iframe>`
+      return code
+    },
     shortBtnTitle () {
       const label = this.isShortened ? this.$t('share.fullUrl') : this.$t('share.shortUrl')
       return label
@@ -47,6 +51,16 @@ export default {
       const url = this.shareUrl ? this.shareUrl : this.currentUrl
       if (this.copyToClipboard(url)) {
         this.showSuccess(this.$t('share.urlCopied'), { timeout: 2000 })
+      }
+    },
+    /**
+     * Copy the current url to clipboard
+     *
+     */
+    copyEmbed () {
+      const url = this.embedCode ? this.shareUrl : this.currentUrl
+      if (this.copyToClipboard(this.embedCode)) {
+        this.showSuccess(this.$t('share.embedCodeCopied'), { timeout: 2000 })
       }
     },
     /**

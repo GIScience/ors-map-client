@@ -65,16 +65,15 @@ const RouteUtils = {
   /**
    * Decode string url value into an object
    * @param {String} str
-   * @returns {}
+   * @param {Boolean} tryDecompress
+   * @returns {Object|String}
    */
   decodeDataParam: (str, tryDecompress = true) => {
     if (!str) {
       return {}
     }
-    if (store.getters.mapSettings.compressDataUrlSegment) {
-      if (tryDecompress) {
-        str = Utils.decompressTxt(str)
-      }
+    if (tryDecompress) {
+      str = Utils.decompressTxt(str)
     }
     let parsedData = Utils.tryParseJson(str)
     if (parsedData) {

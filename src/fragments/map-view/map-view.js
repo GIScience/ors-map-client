@@ -150,6 +150,10 @@ export default {
     }
   },
   computed: {
+    nonEmbedUrl() {
+      let url = location.href.split('/embed')[0]
+      return url
+    },
     zoom () {
       const zoom = this.zoomLevel > 0 ? this.zoomLevel : this.maxZoom
       return zoom
@@ -1047,17 +1051,19 @@ export default {
      * udebouncing them
      */
     setDrawingTool () {
-      if (this.setDrawingTimeout) {
-        clearTimeout(this.setDrawingTimeout)
-      }
-
-      // If the map object is already defined, go ahead
-      if (this.$refs.map && this.$refs.map.mapObject) {
-        this.setAvoidPolygonDrawingTool()
-      } else { // if not, wait a second and execute it again
-        this.setDrawingTimeout = setTimeout(() => {
-          this.setDrawingTool()
-        }, 1000)
+      if (!this.$store.getters.embed) {
+        if (this.setDrawingTimeout) {
+          clearTimeout(this.setDrawingTimeout)
+        }
+  
+        // If the map object is already defined, go ahead
+        if (this.$refs.map && this.$refs.map.mapObject) {
+          this.setAvoidPolygonDrawingTool()
+        } else { // if not, wait a second and execute it again
+          this.setDrawingTimeout = setTimeout(() => {
+            this.setDrawingTool()
+          }, 1000)
+        }
       }
     },
     /**

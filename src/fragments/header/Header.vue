@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar :class="{'hidden': !$store.getters.topBarOpen}" class="ors-toolbar app-toolbar" height="93" app
+    <v-toolbar v-if="!$store.getters.embed" :class="{'hidden': !$store.getters.topBarOpen}" class="ors-toolbar app-toolbar" height="93" app
       :clipped-left="clipped" v-click-outside="hideTopBar">
       <v-btn slot="defaukt" icon @click.stop="toggleSidebar" class="hidden-md-and-up">
         <v-icon>menu</v-icon>
@@ -16,10 +16,10 @@
       </v-toolbar-items>
       <v-spacer></v-spacer>
     </v-toolbar>
-    <v-icon large v-if="$store.getters.topBarOpen" class="toggle-top-bar"
+    <v-icon large v-if="$store.getters.topBarOpen && !$store.getters.embed" class="toggle-top-bar"
       :class="{'hidden': !$store.getters.topBarOpen}" @click.stop="toggleTopBar" :title="'Hidde menu bar'">
       keyboard_arrow_up</v-icon>
-    <v-icon large v-else-if="$highResolution" class="toggle-top-bar" :class="{'hidden': !$store.getters.topBarOpen}"
+    <v-icon large v-else-if="$highResolution && !$store.getters.embed" class="toggle-top-bar" :class="{'hidden': !$store.getters.topBarOpen}"
       @click.stop="toggleTopBar" :title="'Show menu bar'">keyboard_arrow_down</v-icon>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="maps" :style="{height: viewHeight + 'px'}">
     <resize-observer @notify="setViewHeight()" />
-    <simple-place-search :height="simpleMapSearcHeight" v-if="$store.getters.mapReady && !$store.getters.isSidebarVisible"></simple-place-search>
+    <simple-place-search :height="simpleMapSearcHeight" v-if="simpleSearchIsVisible"></simple-place-search>
     <v-btn round v-if="refreshSearchAvailable"
       :style="{top: mapHeight - 50 + 'px !important'}"
       :title="$t('maps.updateSearchAfterZoomOrCenterChange')"
@@ -33,7 +33,7 @@
       @markerClicked="markerClicked">
     </map-view>
 
-    <v-bottom-nav v-if="showBottomNav" :style="{height: bottomNavHeight + 'px !important', top: bottomNavTop + 'px !important'}" class="places-nav" absolute color="white" >
+    <v-bottom-nav v-if="showBottomNav && !$store.getters.embed" :style="{height: bottomNavHeight + 'px !important', top: bottomNavTop + 'px !important'}" class="places-nav" absolute color="white" >
       <places-carousel
         :active-index="activeplaceIndex"
         :map-view-data="mapViewData"
