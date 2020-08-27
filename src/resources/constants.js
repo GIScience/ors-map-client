@@ -10,12 +10,12 @@ const constants = {
     reverseGeocode: 'pgeocode/reverse'
   },
   endpoints: {
-    directions: '/directions',
-    isochrones: '/isochrones',
-    geocodeSearch: '/geocode/search',
-    autocomplete: '/geocode/autocomplete',
-    pois: '/pois',
-    reverseGeocode: '/geocode/reverse'
+    directions: 'directions',
+    isochrones: 'isochrones',
+    geocodeSearch: 'geocode/search',
+    autocomplete: 'geocode/autocomplete',
+    pois: 'pois',
+    reverseGeocode: 'geocode/reverse'
   },
   roundTripFilterName: 'round_trip',
   avoidPpolygonsFilterName: 'avoid_polygons',
