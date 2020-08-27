@@ -21,7 +21,8 @@ const defaultMapSettings = {
   customTileProviderUrl: '',
   prioritizeSearchingForNearbyPlaces: true,
   defaultProfile: 'cycling-regular',
-  compressDataUrlSegment: true
+  compressDataUrlSegment: true,
+  autoFitHighlightedBounds: true
 }
 
 export default defaultMapSettings

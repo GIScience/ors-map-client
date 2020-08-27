@@ -52,7 +52,7 @@
       :title="$t('sidebar.hideSidebar')">keyboard_arrow_left
     </v-icon>
 
-    <v-icon large v-else-if="!isSideBarOpen && !$lowResolution" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen}" @click.stop="isSideBarOpen = true"
+    <v-icon large v-else-if="!isSideBarOpen && !$lowResolution && !$store.getters.embed" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen}" @click.stop="isSideBarOpen = true"
       :title="$t('sidebar.showSidebar')">keyboard_arrow_right
     </v-icon>
 

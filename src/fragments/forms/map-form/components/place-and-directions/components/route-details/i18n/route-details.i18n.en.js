@@ -17,6 +17,7 @@ export default {
     instruction: 'Instruction',
     name: 'Name',
     selectRoute: 'Select this route',
-    selectedRoute: 'Selected route'
+    selectedRoute: 'Selected route',
+    gotoSegment: 'Go to segment'
   }
 }

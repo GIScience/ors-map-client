@@ -11,14 +11,24 @@
               @click="copyUrl()" readonly
               v-model="shareUrl"
               :label="$t('share.share')" >
-              </v-text-field>
+            </v-text-field>
           </v-flex>
           <v-flex xs12 sm2 d-flex>
             <v-btn style="margin-top:11px" color="primary" :title="shortBtnTitle" @click="toggleShortUrl()">{{shortBtnTitle}}</v-btn>
+          </v-flex>          
+        </v-layout>
+        <v-alert :value="true" type="info" > {{$t('share.copyUrlInfo')}}</v-alert>
+        <br><br>
+        <v-layout row wrap>
+          <v-flex xs12 sm12 d-flex>
+            <v-textarea auto-grow
+              @click="copyEmbed()" readonly
+              v-model="embedCode"
+              :label="$t('share.embed')" >
+            </v-textarea>
           </v-flex>
         </v-layout>
-
-        <v-alert :value="true" type="info" > {{$t('share.copyUrlInfo')}}</v-alert>
+        <v-alert :value="true" type="info" > {{$t('share.useThiscodeToEmbedorsMapsInyourWebsite')}}</v-alert>
       </box>
     </v-dialog>
   </div>

@@ -9,6 +9,13 @@ const placePath = RoutesResolver.place()
 const directionsPath = RoutesResolver.directions()
 const searchPath = RoutesResolver.search()
 const isochronesPath = RoutesResolver.isochronesPath()
+const embedParameters = '/:embed?/:locale?'
+
+// Build the optional placesNames Path
+var optionalplaceNamesPath = ''
+for (let index = 2; index <= 15; index++) {
+  optionalplaceNamesPath += `/:placeName${index}?`  
+}
 
 export default [
   {
@@ -35,41 +42,49 @@ export default [
     }
   },
   {
-    path: `${placePath}:placeName/@:coordinates/data/:data`,
+    path: `${placePath}:placeName/@:coordinates/data/:data${embedParameters}`,
     name: 'MapPlace',
     component: Maps,
     beforeEnter: (to, from, next) => {
       store.commit('mode', constants.modes.place)
-      next()
+      store.dispatch('checkAndSetEmbedState', to).then(() => {
+        next()
+      })
     }
   },
   {
     // The maximum number of places/points of a route is 15. so, we can have 15 places more the data parameter that contains the coordinates for all the palces in que query encoded in base64 format
     // The minimum is one (becaue of round trip needs only one place)
-    path: `${directionsPath}:placeName1/:placeName2?/:placeName3?/:placeName4?/:placeName5?/:placeName6?/:placeName7?/:placeName8?/:placeName9?/:placeName10?/:placeName11?/:placeName12?/:placeName13?/:placeName14?/:placeName15?/data/:data`,
+    path: `${directionsPath}:placeName1${optionalplaceNamesPath}/data/:data${embedParameters}`,
     name: 'MapDirections',
     component: Maps,
     beforeEnter: (to, from, next) => {
       RouteUtils.setDirectionsModeBasedOnRoute(to)
-      next()
+      store.dispatch('checkAndSetEmbedState', to).then(() => {
+        next()
+      })
     }
   },
   {
-    path: `${searchPath}:term/@:center`,
+    path: `${searchPath}:term/@:center${embedParameters}`,
     name: 'MapSearch',
     component: Maps,
     beforeEnter: (to, from, next) => {
       store.commit('mode', constants.modes.search)
-      next()
+      store.dispatch('checkAndSetEmbedState', to).then(() => {
+        next()
+      })
     }
   },
   {
-    path: `${isochronesPath}:placeName1/:placeName2?/:placeName3?/:placeName4?/:placeName5?/:placeName6?/:placeName7?/:placeName8?/:placeName9?/:placeName10?/:placeName11?/:placeName12?/:placeName13?/:placeName14?/:placeName15?/data/:data`,
+    path: `${isochronesPath}:placeName1${optionalplaceNamesPath}/data/:data${embedParameters}`,
     name: 'MapIsochrones',
     component: Maps,
     beforeEnter: (to, from, next) => {
       store.commit('mode', constants.modes.isochrones)
-      next()
+      store.dispatch('checkAndSetEmbedState', to).then(() => {
+        next()
+      })
     }
   },
   {

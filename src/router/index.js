@@ -17,7 +17,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (!store.getters.dataAcquired) {
-    store.dispatch('fetchApiInitialData').then(() => {
+    store.dispatch('setAppState', to).then(() => {
       next()
     })
   } else {

@@ -34,7 +34,12 @@
                     <v-divider></v-divider>
                     <v-list dense class="instructions-scroll">
                       <div style="padding:0 0 0 0px">
-                        <div>{{$t('routeDetails.distance')}}:  <b>{{segment.distance}} </b></div>
+                        <div>
+                          {{$t('routeDetails.distance')}}:  <b>{{segment.distance}} </b>
+                          <v-btn :max-width="30" fab icon small @click="segmentClicked(segment, index)" :title="$t('routeDetails.gotoSegment')">
+                            <v-icon>remove_red_eye</v-icon>
+                          </v-btn>
+                        </div>
                         <div>{{$t('routeDetails.duration')}}:  <b>{{segment.duration}} </b></div>
                       </div>
                       <div style="padding:0 0 0 0px">

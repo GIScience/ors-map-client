@@ -4,6 +4,8 @@ export default {
     distance: 'Distance',
     duration: 'Duration',
     instruction: 'Instruction',
-    on: 'On'
+    on: 'On',
+    step: 'step',
+    gotoStep: 'Go to step'
   }
 }

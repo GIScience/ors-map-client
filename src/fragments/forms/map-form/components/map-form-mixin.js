@@ -39,7 +39,7 @@ export default {
      * @returns {Boolean}
      */
     isSidebarOpen () {
-      return this.$store.getters.leftSideBarPinned || this.$store.getters.leftSideBarOpen
+      return this.$store.getters.isSidebarVisible
     }
   },
   methods: {
@@ -68,13 +68,31 @@ export default {
       this.places.push(place)
     },
     /**
-     * Remove a place input at a given index
+     * Remove a place input at a given index as a result of user remove input action
      * @param {*} index
      */
     removePlaceInput (index) {
       this.places.splice(index, 1)
+      this.mapViewData.places = this.places
+      // If there are no more places, then
+      // there may not be routes
+      if (!this.mapViewData.hasPlaces()) {
+        this.mapViewData.routes = []
+      }
       this.updateAppRoute()
     },
+
+    /**
+    * When the user click on a mpa view marker and click to remove it
+    *
+    * @param {*} data {index: ..., place:...}
+    */
+   removePlace (data) {
+    if (this.places[data.index]) {
+      this.removePlaceInput(data.index)
+      this.updatePlaceView(data.index)
+    }
+  },
     /**
      * Set the visibility of the sidebar depending on the screen breakpoint
      * and the auto focus on map option

@@ -7,7 +7,7 @@
 .btn-legend {
   font-size: 9px;
   text-align: center;
-  word-break: break-all;
+  word-break: break-word;
 }
 
 .map-form-btn .v-btn {

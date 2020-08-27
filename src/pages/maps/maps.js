@@ -41,6 +41,10 @@ export default {
     ResizeObserver
   },
   computed: {
+    simpleSearchIsVisible () {
+      let isVisible = !this.$store.getters.embed && this.$store.getters.mapReady && !this.$store.getters.isSidebarVisible
+      return isVisible
+    },
     mapHeight () {
       let height = this.viewHeight
       if (this.showBottomNav) {
@@ -183,6 +187,7 @@ export default {
      * @param {MapViewData} mapViewData
      */
     setMapDataAndUpdateMapView (mapViewData) {
+      this.mapViewData = mapViewData
       this.searchBtnAvailable = false
 
       // If the previous state of mapViewData

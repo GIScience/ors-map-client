@@ -3,12 +3,15 @@ import defaultMapSettings from '@/resources/default-map-settings'
 import appConfig from '@/config'
 import utils from '@/support/utils'
 import constants from '@/resources/constants'
+import settingsOptions from '@/resources/settings-options.js'
+import lodash from 'lodash'
 
 const state = {
   mode: constants.modes.place,
   apiDataRequested: false,
   dataAcquired: false,
-  mapSettings: {}
+  mapSettings: {},
+  embed: false
 }
 
 const getters = {
@@ -23,6 +26,9 @@ const getters = {
   },
   mapSettings: state => {
     return state.mapSettings
+  },
+  embed: state => {
+    return state.embed
   }
 }
 
@@ -38,10 +44,16 @@ const mutations = {
   },
   mapSettings: (state, mapSettings) => {
     state.mapSettings = mapSettings
+  },
+  embed: (state, embed) => {
+    state.embed = embed
   }
 }
 
 const actions = {
+  setAppState ( {getters, commit }) {
+    return actions.fetchApiInitialData({getters, commit })
+  },
   fetchApiInitialData ({ getters, commit }) {
     return new Promise((resolve) => {
       // If the data was already acquired
@@ -76,7 +88,31 @@ const actions = {
         }
       }
     })
-  }
+  },
+  /**
+   * check if the embed is in the url params and set the embed state
+   * @param {*} getters 
+   * @param {*} commit 
+   * @param {*} to 
+   */
+  checkAndSetEmbedState ({getters, commit}, routeTo) {
+    return new Promise((resolve) => {
+      let isEmbed = routeTo.params.embed === 'embed' || routeTo.params.embed === '1'
+      commit('embed', isEmbed)
+
+      if (isEmbed && routeTo.params.locale ) {
+        let validLocales = settingsOptions.appLocales
+        let localeSupported = lodash.find(validLocales, ['value', routeTo.params.locale])
+
+        if (lodash.isObject(localeSupported)) {
+          let settings = getters.mapSettings
+          settings.locale = routeTo.params.locale
+          commit('mapSettings', settings)      
+        }
+      }
+      resolve(isEmbed)
+    })
+  } 
 }
 
 /**

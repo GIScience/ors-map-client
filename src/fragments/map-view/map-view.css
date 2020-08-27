@@ -42,3 +42,14 @@
   border-radius: 3px;
   border: 2px solid rgba(0,0,0,0.2);
 }
+
+.view-on-ors {
+  position: absolute !important;
+  bottom: 40px;
+  right: 2px;
+  z-index: 2;
+  background: white !important;
+  color: black;
+  border-radius: 3px;
+  text-transform: initial !important;
+}

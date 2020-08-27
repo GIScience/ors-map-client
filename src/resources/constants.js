@@ -62,7 +62,8 @@ const constants = {
     steepness: 'steepness',
     waytype: 'waytype'
   },
-  orsKmlDocumentDescription: 'ORS route file'
+  orsKmlDocumentDescription: 'ORS route file',
+  segmentHightlightColor: '#9ACD32'
 }
 
 export default constants

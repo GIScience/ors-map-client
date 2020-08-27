@@ -99,8 +99,7 @@ export default {
      * @returns {Boolean} show
      */
     showAltitudePreview () {
-      const hasElevationData = Array.isArray(this.mapViewData.routes) && this.mapViewData.hasRoutes()
-      const show = hasElevationData && this.$store.getters.mapSettings.elevationProfile
+      const show = this.mapViewData.hasRoutes() && this.$store.getters.mapSettings.elevationProfile === true
       return show
     }
   },
@@ -404,17 +403,6 @@ export default {
             context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), { timeout: 0 })
           })
         }
-      }
-    },
-    /**
-    * When the user click on a marker and select to remove it
-    *
-    * @param {*} data {index: ..., place:...}
-    */
-    removePlace (data) {
-      if (this.places[data.index]) {
-        this.places.splice(data.index, 1)
-        this.updateAppRoute()
       }
     },
 

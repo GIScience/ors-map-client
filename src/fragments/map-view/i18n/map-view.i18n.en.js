@@ -70,6 +70,7 @@ export default {
     setMyLocationasMapCenter: 'Do you want to center the map at your current location? This will improve place search precision. You will have to authorize it if prompted.',
     youCanReverseTheNeverInSettigns: 'You can reverse the "don`t ask my location" at any time in settings',
     mapCenterWillBeAtAGenericLocation: 'Based on your settings the map is centered at a generic location. The search results consider the map center.',
-    removePlace: 'Remove place'
+    removePlace: 'Remove place',
+    viewOnORS: 'View on ORS'
   }
 }
