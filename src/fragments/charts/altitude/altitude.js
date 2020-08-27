@@ -29,7 +29,7 @@ export default {
     ChartWrapper
   },
   created () {
-    if (this.mapViewData) {
+    if (this.mapViewData.hasRoutes()) {
       this.localMapViewData = this.mapViewData
     }
     this.build()
@@ -69,7 +69,7 @@ export default {
 
   methods: {
     build () {
-      if (this.mapViewData) {
+      if (this.mapViewData.hasRoutes()) {
         this.parsedData = AltitudeDataParser.parse(this.mapViewData, this.$store.getters.activeRouteIndex)
       }
     },

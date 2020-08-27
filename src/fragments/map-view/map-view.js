@@ -1188,6 +1188,13 @@ export default {
       }
     },
     /**
+     * When altitude info over map close is hit
+     */
+    closeAltitudeInfo () {
+      this.isAltitudeModalOpen = false
+      this.removeRoutePoint()
+    },
+    /**
      * Remove route highlight point
      */
     removeRoutePoint () {

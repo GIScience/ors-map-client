@@ -194,18 +194,6 @@ export default {
       this.updateAppRoute()
     },
     /**
-    * When the user click on a marker and select to remove it
-    *
-    * @param {*} data {index: ..., place:...}
-    */
-    removePlace (data) {
-      if (this.places[data.index]) {
-        this.places.splice(data.index, 1)
-        this.updateAppRoute()
-        this.updatePlaceView(data.index)
-      }
-    },
-    /**
      * When the user reorder the place inputs, recalculates thr route
      */
     onReordered () {

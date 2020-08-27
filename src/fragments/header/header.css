@@ -12,10 +12,6 @@
   transition:all 1s ease;
 }
 
-.highlight-menu {
-
-}
-
 .app-toolbar.hidden {
   top:-100px;
 }
@@ -23,7 +19,7 @@
 .toggle-top-bar {
   position: absolute;
   top: 110px;
-  right: 150px;
+  right: 170px;
   z-index: 3;
   background: #fff;
   transition:all 1s ease;

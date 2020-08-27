@@ -183,6 +183,7 @@ export default {
      * @param {MapViewData} mapViewData
      */
     setMapDataAndUpdateMapView (mapViewData) {
+      this.mapViewData = mapViewData
       this.searchBtnAvailable = false
 
       // If the previous state of mapViewData

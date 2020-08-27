@@ -29,7 +29,8 @@
         :key="index+'-marker'"
         :icon="marker.icon">
         <l-popup v-if="showMarkerPopup">
-          <div >{{marker.label}} 
+          <div >
+            {{marker.label}} 
             <v-btn outline small fab v-if="markerIsRemovable" :title="$t('mapView.removePlace')"  @click="removePlace($event, index)" > <v-icon >delete</v-icon> </v-btn>
           </div>
         </l-popup>
@@ -94,7 +95,7 @@
       <!-- highlight extra info polyline -->
       <extra-info-highlight @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" v-if="extraInfo" :extra-info="extraInfo" :polyline-data="activeRouteData"></extra-info-highlight>
 
-      <altitude-info v-if="isAltitudeModalOpen" @beforeOpen="extraInfo = null" @close="isAltitudeModalOpen = false" :map-view-data="localMapViewData" ></altitude-info>
+      <altitude-info v-if="isAltitudeModalOpen" @beforeOpen="extraInfo = null" @close="closeAltitudeInfo" :map-view-data="localMapViewData" ></altitude-info>
 
       <l-control-layers v-if="showControls" :position="layersPosition" :collapsed="true" />
 
