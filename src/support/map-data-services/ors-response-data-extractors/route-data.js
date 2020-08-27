@@ -1,21 +1,28 @@
 
 const routeData = {
   /**
-   * Reorder the values of an array of coordinates switching the position of lat and long of each coordinate
-   * @param {*} coordinatesArr
-   * @returns {Array} of reordered coordinates
+   * Build an array of polylines based on extra info data that contains
+   * route intervals and the color that each segment must be highlighted with
+   * @param {*} polyLineData
+   * @param {*} extraInfo
+   * @returns {Array} of polylinesHighlighted
    */
   buildHighlightedPolylines: (polyLineData, extraInfo) => {
     if (polyLineData && extraInfo) {
       const polylinesHighlighted = []
 
+      // Build the sections
+      // Each section contains a label, a color and 
+      // may contain multiple polylines
       for (const key in extraInfo.sections) {
         const section = extraInfo.sections[key]
         const polylineHighlighted = {
           label: section.label,
           color: section.color,
-          polylines: []
+          polylines: [] // It starts empty and will be populated below
         }
+        // Use the intervals data to extract the 
+        // polyline data for the given interval
         for (const intervalKey in section.intervals) {
           const interval = section.intervals[intervalKey]
           const segment = polyLineData.slice(interval[0], interval[1])
@@ -28,6 +35,13 @@ const routeData = {
       return polylinesHighlighted
     }
   },
+  
+  /**
+   * Get the response data source type based on the endpoint and the type of responseData
+   * @param {String} endpoint
+   * @param {Object} responseData
+   * @returns {String}  response source type
+   */
   getSourceType (endpoint, responseData) {
     // In the case of directions andpoint, there are
     // two possibilities. If the response is an object (json) or a gpx (xml)

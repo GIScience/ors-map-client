@@ -39,7 +39,7 @@ export default {
      * @returns {Boolean}
      */
     isSidebarOpen () {
-      return this.$store.getters.leftSideBarPinned || this.$store.getters.leftSideBarOpen
+      return this.$store.getters.isSidebarVisible
     }
   },
   methods: {

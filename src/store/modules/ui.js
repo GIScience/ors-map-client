@@ -32,6 +32,9 @@ const getters = {
   },
   sidebarHeaderHeight: state => {
     return 135
+  },
+  isSidebarVisible: state => {
+    return state.leftSideBarOpen || state.leftSideBarPinned
   }
 }
 

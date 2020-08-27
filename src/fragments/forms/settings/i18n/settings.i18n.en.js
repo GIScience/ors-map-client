@@ -42,6 +42,7 @@ export default {
     customTileProviderUrlHint: 'https://domain.tld/path/{z}/{x}/{y}.ext?optionalKey=value',
     prioritizeSearchingForNearbyPlaces: 'Prioritize searching for nearby places',
     defaultProfile: 'Default profile',
-    compressDataUrlSegment: 'Compresse URL segment after /data/'
+    compressDataUrlSegment: 'Compresse URL segment after /data/',
+    autoFitHighlightedBounds: 'Auto fit highlighted bounds'
   }
 }

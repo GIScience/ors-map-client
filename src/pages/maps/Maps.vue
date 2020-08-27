@@ -1,7 +1,7 @@
 <template>
   <div class="maps" :style="{height: viewHeight + 'px'}">
     <resize-observer @notify="setViewHeight()" />
-    <simple-place-search :height="simpleMapSearcHeight" v-if="$store.getters.mapReady && !$store.getters.leftSideBarOpen"></simple-place-search>
+    <simple-place-search :height="simpleMapSearcHeight" v-if="$store.getters.mapReady && !$store.getters.isSidebarVisible"></simple-place-search>
     <v-btn round v-if="refreshSearchAvailable"
       :style="{top: mapHeight - 50 + 'px !important'}"
       :title="$t('maps.updateSearchAfterZoomOrCenterChange')"

@@ -28,6 +28,7 @@
  */
 
 import { LMap, LTileLayer, LMarker, LPolyline, LLayerGroup, LTooltip, LPopup, LControlZoom, LControlAttribution, LControlScale, LControlLayers, LGeoJson, LPolygon, LCircle, LCircleMarker } from 'vue2-leaflet'
+import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
 import ExtraInfoHighlight from './components/extra-info-highlight/ExtraInfoHighlight'
 import AltitudeInfo from './components/altitude-info/AltitudeInfo'
 import MapRightClick from './components/map-right-click/MapRightClick'
@@ -715,31 +716,51 @@ export default {
       const bounds = this.localMapViewData.bbox || [{ lon: 0, lat: 0 }, { lon: 0, lat: 0 }]
       let polylineData = []
 
-      // Add the routes coordinates to the polyline that must
-      // be considered to  the all features databound
-      for (const rKey in this.localMapViewData.routes) {
-        if (this.localMapViewData.routes[rKey].geometry.coordinates) {
-          // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
-          // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
-          // So we invert them to provide to the component what is expected
-          const coords = GeoUtils.switchLatLonIndex(this.localMapViewData.routes[rKey].geometry.coordinates)
-          polylineData = polylineData.concat(coords)
-        }
-      }
-      // Add the polygons coordinates to the polyline that must
-      // be considered to  the all features databound
-      for (const pKey in this.polygons) {
-        if (this.polygons[pKey].latlngs) {
-          polylineData = polylineData.concat(this.polygons[pKey].latlngs)
-        }
-      }
-      // Build the all features databounds taking into consideration
-      // the places and the roues/polygons polyline
-      if (this.localMapViewData.hasPlaces() || polylineData.length > 0) {
-        this.dataBounds = GeoUtils.getBounds(bounds, this.localMapViewData.places, polylineData)
+      if (this.extraInfo) {
+        polylineData = this.buildExtraInfoBoundsPolyline()
+        this.dataBounds = GeoUtils.getBounds(bounds, [], polylineData)
       } else {
-        this.dataBounds = null
+        // Add the routes coordinates to the polyline that must
+        // be considered to  the all features databound
+        for (const rKey in this.localMapViewData.routes) {
+          if (this.localMapViewData.routes[rKey].geometry.coordinates) {
+            // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
+            // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
+            // So we invert them to provide to the component what is expected
+            const coords = GeoUtils.switchLatLonIndex(this.localMapViewData.routes[rKey].geometry.coordinates)
+            polylineData = polylineData.concat(coords)
+          }
+        }
+        // Add the polygons coordinates to the polyline that must
+        // be considered to  the all features databound
+        for (const pKey in this.polygons) {
+          if (this.polygons[pKey].latlngs) {
+            polylineData = polylineData.concat(this.polygons[pKey].latlngs)
+          }
+        }
+        // Build the all features databounds taking into consideration
+        // the places and the roues/polygons polyline
+        if (this.localMapViewData.hasPlaces() || polylineData.length > 0) {
+          this.dataBounds = GeoUtils.getBounds(bounds, this.localMapViewData.places, polylineData)
+        } else {
+          this.dataBounds = null
+        }
       }
+    },
+    /**
+     * Build the polyline that contains the extra info to be used in the bounds definition
+     * @returns {Array} polylineData
+     */
+    buildExtraInfoBoundsPolyline () {
+      let polylineData = []
+      const highlightData = routeData.buildHighlightedPolylines(this.activeRouteData, this.extraInfo)
+        for (let key in highlightData) {
+          let polylines = highlightData[key].polylines
+          for (let plKey in polylines) {
+            polylineData = polylineData.concat(polylines[plKey])
+          }
+        }
+      return polylineData
     },
     /**
      * Make sure the active route index is valid
@@ -1266,6 +1287,10 @@ export default {
 
     this.eventBus.$on('highlightPolylineSections', (extraInfo) => {
       context.extraInfo = extraInfo
+      if (this.$store.getters.mapSettings.autoFitHighlightedBounds) {
+        context.buildAndSetBounds()
+        context.fitAndZoom()
+      }
     })
 
     // Once the map component is mounted, load the map data

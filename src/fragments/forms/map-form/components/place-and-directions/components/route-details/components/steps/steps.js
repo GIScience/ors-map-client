@@ -1,4 +1,6 @@
 
+import constants from '@/resources/constants'
+
 export default {
   props: {
     steps: {
@@ -39,6 +41,19 @@ export default {
         case 13:
           return { icon: 'vertical_align_top', class: 'keep-right' } // Keep right
       }
+    },
+    stepClicked (step, index) {
+      const sectionTitle = this.$t('steps.step')
+      const heighlighData = {sectionTitle, sections: [] }
+      const segmentData = this.buildExtraHighlighPolylineData(step, index)
+      heighlighData.sections.push(segmentData)
+      this.eventBus.$emit('highlightPolylineSections', heighlighData)
+    },
+    buildExtraHighlighPolylineData (step, index) {
+      const color = constants.segmentHightlightColor
+      const label = step.instruction.replace(/<(?:.|\n)*?>/gm, '')
+      const intervals = [step.way_points]
+      return { intervals, color, label }
     }
   }
 }

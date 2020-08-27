@@ -1,8 +1,10 @@
-import Share from '@/fragments/forms/map-form/components/share/Share'
+import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
 import Download from '@/fragments/forms/map-form/components/download/Download'
+import Share from '@/fragments/forms/map-form/components/share/Share'
 import RouteExtras from './components/extras/RouteExtras'
 import MapViewData from '@/models/map-view-data'
 import Steps from './components/steps/Steps'
+import constants from '@/resources/constants'
 import geoUtils from '@/support/geo-utils'
 
 export default {
@@ -97,6 +99,23 @@ export default {
     },
     changeActiveRouteIndex (index) {
       this.eventBus.$emit('changeActiveRouteIndex', index)
+    },
+    segmentClicked (segment, index) {
+      const sectionTitle = ''
+      const heighlighData = {sectionTitle, sections: [] }
+      const segmentData = this.buildExtraHighlighPolylineData(segment, index)
+      heighlighData.sections.push(segmentData)
+      this.eventBus.$emit('highlightPolylineSections', heighlighData)
+    },
+    buildExtraHighlighPolylineData (segment, index) {
+      const color = constants.segmentHightlightColor
+      const label = `${this.$t('routeDetails.segment')} ${index+1}`
+      const intervals = []
+      for (let key in segment.steps) {
+        let wps = segment.steps[key].way_points
+        intervals.push(wps)
+      }
+      return { intervals, color, label }
     }
   },
   components: {
