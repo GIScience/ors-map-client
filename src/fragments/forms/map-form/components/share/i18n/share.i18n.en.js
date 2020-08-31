@@ -11,8 +11,8 @@ export default {
     copyUrlInfo: 'You can also copy the link from your browser`s address bar.',
     urlShortened: 'Url shortened',
     shorteningNotPossible: 'It was not possible to generate a short url. Please use the full Url',
-    embedCodeCopied: 'Embeding code copied',
-    embed: 'Embeding (click to copy)',
+    embedCodeCopied: 'Embedding code copied',
+    embed: 'Embedding (click to copy)',
     useThiscodeToEmbedorsMapsInyourWebsite: 'Use this code to embed ORS map in your website'
   }
 }
