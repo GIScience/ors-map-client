@@ -114,7 +114,7 @@
 
     <v-btn fab small v-if="canFitFeatures && showControls" :title="$t('mapView.fitAllFeatures')" class="fit-all-features" @click="fitAllFeatures()" > <v-icon large >all_out</v-icon> </v-btn>
 
-    <v-btn v-if="$store.getters.embed" small :title="$t('mapView.viewOnORS')" class="view-on-ors" target="_blank" :href="nonEmbedUrl" > {{$t('mapView.viewOnORS')}} <v-icon right small >aspect_ratio</v-icon> </v-btn>
+    <v-btn v-if="$store.getters.embed" small :title="$t('mapView.viewOnORS')" class="view-on-ors" target="_blank" :href="nonEmbedUrl" > {{$t('mapView.viewOnORS')}} <v-icon right small >open_in_new</v-icon> </v-btn>
     <my-location v-else :active="myLocationActive" @updateLocation="updateMyLocation"></my-location>
 
     <map-right-click v-if="!$store.getters.embed" :map-view-data="mapViewData" @closed="clickLatlng = null" @rightClickEvent="handleRightClickEvent"></map-right-click>

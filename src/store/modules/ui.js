@@ -31,7 +31,7 @@ const getters = {
     return 40
   },
   sidebarHeaderHeight: state => {
-    return 135
+    return 140
   },
   isSidebarVisible: state => {
     return state.leftSideBarOpen || state.leftSideBarPinned

@@ -19,7 +19,7 @@
             </div>
           </v-flex>
           <v-spacer></v-spacer>
-          <v-flex xs6 md3 class="sidebar-top-menuy" >
+          <v-flex xs6 md3 class="sidebar-top-menu" >
             <top-menu></top-menu>
           </v-flex>
         </v-layout>

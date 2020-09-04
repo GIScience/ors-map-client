@@ -26,6 +26,8 @@ ul.place-inputs li {
 
 .reorder-handle{
   padding-top:18px;
+  padding-bottom: 10px;
+  margin-left: 0px;
 }
 
 .ghost {

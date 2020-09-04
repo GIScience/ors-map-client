@@ -7,11 +7,11 @@
         </v-btn>
 
         <v-btn class="corner-btn" flat :style="{background: headerBackground}" slot="title" v-if="resizable && maximized" @click="resize(false)" :title="$t('box.minimize')">
-          <v-icon color="dark">aspect_ratio</v-icon>
+          <v-icon color="dark">open_in_new</v-icon>
         </v-btn>
 
         <v-btn class="corner-btn" flat :style="{background: headerBackground}" slot="title" v-if="resizable && !maximized" @click="resize(true)" :title="$t('box.maximize')">
-          <v-icon color="dark">aspect_ratio</v-icon>
+          <v-icon color="dark">open_in_new</v-icon>
         </v-btn>
         <slot name="header"></slot>
       </div>
