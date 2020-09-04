@@ -2,7 +2,7 @@
   <box background="white" class="simple-place-search" :class="{'extra-low-resolution': $xlResolution}" :style="{height: height+ 'px'}">
     <v-layout row wrap>
       <v-flex xs2 sm2 md1>
-        <v-badge overlap right v-model="showNewInfo" color="info">
+        <v-badge overlap left v-model="showNewInfo" color="info">
           <b slot="badge">i</b>
           <v-btn :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''" class="open-menu" slot="default" flat @click="openMenu()">
             <v-icon>menu</v-icon>

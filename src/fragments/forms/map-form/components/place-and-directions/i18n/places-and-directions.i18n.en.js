@@ -44,6 +44,7 @@ export default {
       2012: 'An invalid parameter was specified. Make sure the URL is correct',
       2099: 'Could not find a valid point after 3 tries'
     },
-    genericErrorMsg: 'It was not possible to calculate the route'
+    genericErrorMsg: 'It was not possible to calculate the route',
+    reorder: 'Reorder'
   }
 }

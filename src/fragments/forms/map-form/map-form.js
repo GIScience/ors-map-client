@@ -33,7 +33,11 @@ export default {
     tabChanged () {
       if (this.activeTab === 0) {
         if (this.$store.getters.mode === constants.modes.isochrones) {
-          this.$store.commit('mode', constants.modes.place)
+          if (this.$route.fullPath.includes(resolver.directions())) {
+            this.$store.commit('mode', constants.modes.directions)
+          } else {
+            this.$store.commit('mode', constants.modes.place)
+          }
         }
       } else if (this.activeTab === 1) {
         this.$store.commit('mode', constants.modes.isochrones)
