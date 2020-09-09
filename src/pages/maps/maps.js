@@ -120,7 +120,7 @@ export default {
     },
     mapCenterMoved (data) {
       // Only enables the refresh search btn
-      // if the map is moved more than 500 meters
+      // if the map has been moved more than 500 meters
       if (data.distance > 500) {
         this.searchBtnAvailable = true
       }
@@ -209,8 +209,8 @@ export default {
      * Set the view height and the bottom nav status
      */
     setViewHeightAndBottomNav () {
-      // Make sure that bottom nav is clsed if the app is not in search mode
-      // At list 100 x must available for the map view
+      // Make sure that bottom nav is closed if the app is not in search mode
+      // At list 100px must available for the map view
       if (this.$store.getters.mode === constants.modes.search && window.innerHeight > this.bottomNavHeight + 100) {
         this.bottomNavActive = true
         this.activeplaceIndex = this.activeplaceIndex || 0

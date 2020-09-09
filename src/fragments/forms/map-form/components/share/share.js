@@ -16,7 +16,7 @@ export default {
       return location.href
     },
     embedCode () {
-      let code = `<iframe src="${this.currentUrl}/embed/${this.$store.getters.mapSettings.locale}"></iframe>`
+      let code = `<iframe style='border:none' width='100%' height='100%'  src="${this.currentUrl}/embed/${this.$store.getters.mapSettings.locale}"></iframe>`
       return code
     },
     shortBtnTitle () {

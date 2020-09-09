@@ -510,16 +510,8 @@ export default {
       // a location and builds a selectable place
       // and run functions to upate the view
       const setPlace = (location) => {
-        const selectablePlace = {
-          geometry: {
-            coordinates: [location.lng, location.lat]
-          },
-          properties: {
-            label: context.$t('placeInput.yourLocation'),
-            layer: 'venue'
-          }
-        }
-        context.selectPlace(selectablePlace)
+        let place = new Place(location.lng, location.lat, context.$t('placeInput.yourLocation'), {properties: {layer: 'venue'}})
+        context.selectPlace(place)
         context.selected()
         context.$forceUpdate()
       }
