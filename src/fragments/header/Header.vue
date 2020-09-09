@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar v-if="!$store.getters.embed" :class="{'hidden': !$store.getters.topBarOpen}" class="ors-toolbar app-toolbar" height="93" app
+    <v-toolbar v-if="showToolbar" :class="{'hidden': !$store.getters.topBarOpen}" class="ors-toolbar app-toolbar" height="93" app
       :clipped-left="clipped" v-click-outside="hideTopBar">
       <v-btn slot="defaukt" icon @click.stop="toggleSidebar" class="hidden-md-and-up">
         <v-icon>menu</v-icon>

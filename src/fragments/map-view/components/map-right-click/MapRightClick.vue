@@ -8,7 +8,6 @@
       <v-btn flat v-if="canAddStop" small :title="$t('mapRightClick.addRouteStop')" @click="rightClickEvent('addRouteStop')" class="right-click-btn" >{{$t('mapRightClick.addRouteStop')}}</v-btn><br v-if="canAddStop">
       <v-btn flat v-if="!canAddStop" small :title="$t('mapRightClick.centerHere')" @click="rightClickEvent('centerHere')" class="right-click-btn" >{{$t('mapRightClick.centerHere')}}</v-btn><br v-if="!canAddStop">
       <v-btn flat v-if="canAddIsochroneCenter" small :title="$t('mapRightClick.addAsIsochroneCenter')" @click="rightClickEvent('addAsIsochroneCenter')" class="right-click-btn" >{{$t('mapRightClick.addAsIsochroneCenter')}}</v-btn>
-
     </div>
   </box>
 </template>

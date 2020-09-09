@@ -44,6 +44,7 @@ import GeoUtils from '@/support/geo-utils'
 import PolygonUtils from '@/support/polygon-utils'
 import utils from '@/support/utils'
 import theme from '@/common/theme'
+import Place from '@/models/place'
 
 // imported styles
 import 'leaflet-measure/dist/leaflet-measure.css'
@@ -146,7 +147,8 @@ export default {
       highlightedRoutePoint: null,
       highlightedRoutePointAltitude: null,
       isAltitudeModalOpen: false,
-      extraInfo: null
+      extraInfo: null,
+      tempPlaces: null
     }
   },
   computed: {
@@ -246,8 +248,15 @@ export default {
       return polygons
     },
     markers () {
-      if (this.localMapViewData.hasPlaces()) {
-        const markers = GeoUtils.buildMarkers(this.localMapViewData, this.focusedPlace)
+      let tempMapViewData
+      if (this.tempPlaces) {
+        tempMapViewData = new MapViewData()
+        tempMapViewData.places = this.tempPlaces
+      } else {
+        tempMapViewData = this.localMapViewData
+      }
+      if (tempMapViewData.places.length > 0) {
+        const markers = GeoUtils.buildMarkers(tempMapViewData, this.focusedPlace)
         return markers
       }
     },
@@ -340,6 +349,7 @@ export default {
 
         // Create a new instace of MapViewData and set all the props into the local instance
         this.localMapViewData = this.mapViewData.clone()
+        this.tempPlaces = null
         this.loadMapData()
         this.isAltitudeModalOpen = false
       },
@@ -821,9 +831,31 @@ export default {
       if (data.eventName === 'centerHere') {
         this.setMapCenter(data.clickLatlng)
       } else {
-        const dataPassed = { latlng: data.clickLatlng }
-        this.$emit(data.eventName, dataPassed)
+        this.prepareDataAndEmitRightClickEvent(data)     
       }
+    },
+
+    /**
+     * Update localMapViewData places
+     */
+    prepareDataAndEmitRightClickEvent (data) {
+      let place = new Place(data.clickLatlng.lng, data.clickLatlng.lat)
+      place.resolve().then(() =>{
+        // If the app is in the place mode (no route yet drawn on the map)
+        // and the user is selecting points to calculate a route, then
+        // show this points as markers on the map view. These points will
+        // not be synchronized with the app url, so we just add them in the
+        // localMapViewData and we do not emit a mapViewDatachanged event. 
+        // This will only happens when two points are selected (then the app 
+        // goes to the directions mode)
+        if (this.mode === constants.modes.place && data.eventName === 'directionsToPoint' || data.eventName === 'directionsFromPoint') {
+          let placesCopy = [... this.localMapViewData.places]
+          placesCopy.push(place)
+          this.tempPlaces = placesCopy
+        }
+        const dataPassed = { latlng: data.clickLatlng, place}
+        this.$emit(data.eventName, dataPassed)
+      })
     },
 
     /**

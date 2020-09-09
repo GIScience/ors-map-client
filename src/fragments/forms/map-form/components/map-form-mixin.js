@@ -110,6 +110,8 @@ export default {
       this.mapViewData = new MapViewData()
       this.addPlaceInput()
       this.$store.commit('appRouteData', new AppRouteData())
+      this.$store.commit('mode', constants.modes.place)
+      this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
       this.eventBus.$emit('clearMap')
       this.updateAppRoute()
     },
