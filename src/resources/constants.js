@@ -63,7 +63,9 @@ const constants = {
     waytype: 'waytype'
   },
   orsKmlDocumentDescription: 'ORS route file',
-  segmentHightlightColor: '#9ACD32'
+  segmentHightlightColor: '#9ACD32',
+  alternativeRouteColor: '#6E6E6E',
+  routeBackgroundColor: '#fff'
 }
 
 export default constants

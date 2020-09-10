@@ -119,39 +119,40 @@ export default {
   },
   data () {
     return {
-      tileProviders: [],
+      tileProviders: [], // list fo tiles provider that will be set via setProviders
       layersPosition: 'topright',
-      map: null,
+      map: null, // map object reference. it will will be defined later
       zoomLevel: constants.initialZoomLevel,
       mapDataBuilder: null,
       initialMaxZoom: constants.initialMapMaxZoom,
       localMapViewData: new MapViewData(), // we use a local copy of the mapViewData to be able to modify it
-      info: null,
       mainRouteColor: theme.primary,
-      alternativeRouteColor: '#6E6E6E',
+      alternativeRouteColor: constants.alternativeRouteColor,
+      routeBackgroundColor: constants.routeBackgroundColor,
       guid: null,
-      markersLatLong: [],
       clickLatlng: null,
       myLocationActive: false,
       setDrawingTimeout: null,
       markerMoveTimeoutId: null,
-      drawControlRef: null,
+      drawControlRef: null, // a reference to the drawing polygon component
       clickInsidePolygon: null,
       currentInnerHeight: null,
       showClickPopups: true,
       showActiveRouteData: true,
       showAlternativeRouteTooltip: true,
-      dataBounds: null,
+      dataBounds: null, // the current bounds of features displayed on the map
       myLocationMenuOpen: false,
-      focusedPlace: null,
-      highlightedRoutePoint: null,
+      focusedPlace: null, // the place that must be focused among the ones visible on the map view (for search mode)
+      highlightedRoutePoint: null, // a point on the route that must be highlighted (a Leaflet latLng)
       highlightedRoutePointAltitude: null,
       isAltitudeModalOpen: false,
-      extraInfo: null,
-      tempPlaces: null
+      extraInfo: null, // Extra route info (waytypes, surface, steepness etc)
+      tempPlaces: null // a place selected by the user on the map but not yet used for computing directions
     }
   },
   computed: {
+    // When in embedded mode, a 'view on ors' btn is displayed and
+    // thhe target url of this btn is the not embedded versios
     nonEmbedUrl() {
       let url = location.href.split('/embed')[0]
       return url
@@ -198,10 +199,11 @@ export default {
       }
     },
     geojsonOutlineOptions () {
-      return { style: { color: '#fff', weight: '9' } }
+      return { style: { color: constants.routeBackgroundColor, weight: '9' } }
     },
     activeRouteData () {
       if (this.localMapViewData.hasRoutes()) {
+        // get the coordinates of the active route
         const coords = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
 
         // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
