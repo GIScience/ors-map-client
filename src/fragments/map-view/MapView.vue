@@ -1,6 +1,5 @@
 <template>
   <div>
-    <v-alert :value="info" outline type="info" style="color:white" >{{ info }}</v-alert>
     <l-map
       id="map-view"
       ref="map"
@@ -75,7 +74,7 @@
       <template  v-for="(alternativeRoute, index) in alternativeRoutes">
         <template>
           <!-- background polyline to create a white outline -->
-          <l-polyline :key="index + '_bg'" :lat-lngs="alternativeRoute.polyline" :weight="11" color="#fff"></l-polyline>
+          <l-polyline :key="index + '_bg'" :lat-lngs="alternativeRoute.polyline" :weight="11" :color="routeBackgroundColor"></l-polyline>
 
           <l-polyline @click="alternativeRouteIndexSelected(alternativeRoute.index, $event)" :key="alternativeRoute.index"  :lat-lngs="alternativeRoute.polyline" :weight="7" :color="alternativeRouteColor">
             <l-tooltip @click="alternativeRouteIndexSelected(alternativeRoute.index, $event)" :content="routeToolTip(alternativeRoute.index)"></l-tooltip>

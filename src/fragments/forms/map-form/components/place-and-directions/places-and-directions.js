@@ -192,7 +192,11 @@ export default {
 
       // When the filters object has changed externally, reprocess the app route
       this.eventBus.$on('filtersChangedExternally', () => {
-        if (this.active) {
+        // Filters are only used to calculate route
+        // so we must update the app route if we are already in directions
+        // mode and a filter has changed. If the app is, for example
+        // in place mode and filter changes, there is nothing to be done
+        if (this.active && this.mode === constants.modes.directions) {
           context.updateAppRoute()
         }
       })
