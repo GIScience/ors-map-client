@@ -1,4 +1,5 @@
 import Leaflet from 'leaflet'
+import GeoUtils from '@/support/geo-utils'
 
 // The import below will add some methods to Leaflet.GeometryUtil 
 // Even if it is not been accessed within this class, it is being used
@@ -179,6 +180,9 @@ class OrsExtendedPolyline {
    * @returns {Boolean}
    */
   isInvalidDrag (index) {
+    if (!index) {
+      return true
+    }
     var maxIndex = (this._poly._latlngs.length - 1)
 
     if ((this.options.vertices.first === false && index == 0) ||
@@ -219,12 +223,24 @@ class OrsExtendedPolyline {
    * @returns {Integer} closestIndex
    */
   getClosestIndex () {
-    var closestIndex
+    var closestIndex = null
+    var minDistance = null
     for (let index = 0; index < this._poly._latlngs.length; index++) {
       let latlng = this._poly._latlngs[index]
-      if (latlng && this.closest && latlng.lat === this.closest.lat && latlng.lng === this.closest.lng) {
-        closestIndex = index
-        break
+      
+      if (latlng && this.closest) {
+        let closestLatLng = this.closest.point || this.closest
+        
+        let currentDistance = GeoUtils.calculateDistanceBetweenLocations(latlng, closestLatLng, 'm')
+        if (currentDistance === 0) {
+          closestIndex = index
+          break
+        } else {
+          if (minDistance === null || currentDistance < minDistance) {
+            minDistance = currentDistance
+            closestIndex = index
+          }
+        }
       }            
     }
     return closestIndex
@@ -238,15 +254,15 @@ class OrsExtendedPolyline {
   processDrag () {
     var closestIndex = this._getClosestIndex()
 
-    if (!closestIndex) {
+    if (this._isInvalidDrag(closestIndex)) {
       this.closest = null
       this._marker.options.draggable = false
       this._dragging = false
       return
+    } else {
+      //add a new vertex
+      this._poly._latlngs.splice(closestIndex, 0, this.closest)
     }
-
-    //add a new vertex
-    this._poly._latlngs.splice(closestIndex, 0, this.closest)        
   }
 
   /**
