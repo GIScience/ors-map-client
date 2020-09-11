@@ -84,9 +84,9 @@
 
        <template v-if="showActivRouteData">
         <!-- background polyline to create a white outline -->
-        <l-polyline :lat-lngs="activeRouteData" :weight="11" color="#fff"></l-polyline>
+        <l-polyline :lat-lngs="activeRouteData" :weight="11" :color="routeBackgroundColor"></l-polyline>
 
-        <l-polyline :lat-lngs="activeRouteData" :weight="7" :color="mainRouteColor">
+        <l-polyline @follow="followPolyline" @addstop="addStopViaPolylineDrag" :options="{edit_with_drag: true}" :lat-lngs="activeRouteData" :weight="7" :color="mainRouteColor">
           <l-tooltip :content="routeToolTip($store.getters.activeRouteIndex)"></l-tooltip>
         </l-polyline>
       </template>

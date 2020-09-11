@@ -30,23 +30,27 @@
 import { LMap, LTileLayer, LMarker, LPolyline, LLayerGroup, LTooltip, LPopup, LControlZoom, LControlAttribution, LControlScale, LControlLayers, LGeoJson, LPolygon, LCircle, LCircleMarker } from 'vue2-leaflet'
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
 import ExtraInfoHighlight from './components/extra-info-highlight/ExtraInfoHighlight'
-import AltitudeInfo from './components/altitude-info/AltitudeInfo'
 import MapRightClick from './components/map-right-click/MapRightClick'
+import { EditableMap, EditablePolyline } from 'vue2-leaflet-editable'
+import OrsExtendedPolyline from './components/ors-extended-polyline'
 import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
 import MapLeftClick from './components/map-left-click/MapLeftClick'
+import AltitudeInfo from './components/altitude-info/AltitudeInfo'
 import MyLocation from './components/my-location/MyLocation'
+import { GestureHandling } from 'leaflet-gesture-handling'
 import LDrawToolbar from 'vue2-leaflet-draw-toolbar'
+import PolygonUtils from '@/support/polygon-utils'
 import MapViewData from '@/models/map-view-data'
 import drawLocales from 'leaflet-draw-locales'
 import mapDefinitions from './map-definitions'
 import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
-import PolygonUtils from '@/support/polygon-utils'
 import utils from '@/support/utils'
 import theme from '@/common/theme'
 import Place from '@/models/place'
 
 // imported styles
+import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import 'leaflet-measure/dist/leaflet-measure.css'
 import 'vue-resize/dist/vue-resize.css'
 import Leaflet from 'leaflet'
@@ -70,6 +74,8 @@ export default {
     LCircleMarker,
     LControlPolylineMeasure,
     LDrawToolbar,
+    EditablePolyline,
+    EditableMap,
     ExtraInfoHighlight,
     MapRightClick,
     MapLeftClick,
@@ -147,7 +153,8 @@ export default {
       highlightedRoutePointAltitude: null,
       isAltitudeModalOpen: false,
       extraInfo: null, // Extra route info (waytypes, surface, steepness etc)
-      tempPlaces: null // a place selected by the user on the map but not yet used for computing directions
+      tempPlaces: null, // a place selected by the user on the map but not yet used for computing directions,
+      polylineIsEdibale: false
     }
   },
   computed: {
@@ -172,7 +179,8 @@ export default {
       return {
         zoomControl: this.showControls,
         attributionControl: true,
-        measureControl: true
+        measureControl: true,
+        gestureHandling:this.$store.getters.embed
       }
     },
     mapCenter () {
@@ -336,6 +344,11 @@ export default {
     showActivRouteData () {
       const show = this.activeRouteData && this.showActiveRouteData
       return show
+    },
+
+    activeRouteIsDraggable () {
+      let isDraggable = this.mode === constants.modes.directions
+      return isDraggable
     }
   },
   watch: {
@@ -571,6 +584,15 @@ export default {
           this.markerDragEnd(event)
         }, 1000)
       }
+    },
+    addStopViaPolylineDrag (data) {
+      console.log(data) // {event, closest, closestIndex}
+      data.latlng = data.event.target.getLatLng()
+      this.$emit('addRouteStop', data)
+    },
+    followPolyline (latlng) {
+      // implement show the point altitude
+      // console.log(latlng)
     },
     /**
      * Remove a marker/place when in directions or isochrones mode
@@ -1265,6 +1287,12 @@ export default {
   },
 
   mounted () {
+    // Extends the leaflet polyline by adding the drag capability
+    // and these fireble events: 'follow' and 'addstop'.
+    // Even if this object is not been acessed within this class
+    // it is in use and must not be removed
+    const orsExtendedPolyline = new OrsExtendedPolyline()
+    
     this.zoomLevel = this.initialZoom
 
     // Define a unique identifier to the map component instance
@@ -1332,6 +1360,10 @@ export default {
         context.fitAndZoom()
       }
     })
+    // Add the gesture handling so that when the user is 
+    // scrolling a page (embed state) with an ors map it 
+    // will actually scroll the page and not the map
+    Leaflet.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
 
     // Once the map component is mounted, load the map data
     this.loadMapData()

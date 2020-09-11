@@ -13,8 +13,7 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "build": "node build/build.js",
-    "analyze": "npm run build --report"
+    "build": "node build/build.js"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.11.3",
@@ -26,6 +25,8 @@
     "html-colors": "0.0.4",
     "leaflet": "^1.5.7",
     "leaflet-draw-locales": "^1.1.0",
+    "leaflet-geometryutil": "^0.9.3",
+    "leaflet-gesture-handling": "^1.1.8",
     "leaflet-measure": "^3.1.0",
     "lodash": "^4.17.19",
     "lz-string": "^1.4.4",
@@ -49,6 +50,7 @@
     "vue2-dropzone": "^3.6.0",
     "vue2-leaflet": "^2.2.1",
     "vue2-leaflet-draw-toolbar": "^0.1.1",
+    "vue2-leaflet-editable": "^0.4.0",
     "vue2-leaflet-polyline-measure": "^1.0.0",
     "vuedraggable": "^2.17.0",
     "vuetify": "^1.5.19",
@@ -132,7 +134,6 @@
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.22",
     "webpack": "^4.44.1",
-    "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.1.0"
