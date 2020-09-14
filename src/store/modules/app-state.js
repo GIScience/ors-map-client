@@ -11,7 +11,8 @@ const state = {
   apiDataRequested: false,
   dataAcquired: false,
   mapSettings: {},
-  embed: false
+  embed: false,
+  acessibleModeActive: false
 }
 
 const getters = {
@@ -29,6 +30,9 @@ const getters = {
   },
   embed: state => {
     return state.embed
+  },
+  acessibleModeActive: state => {
+    return state.acessibleModeActive
   }
 }
 
@@ -47,6 +51,9 @@ const mutations = {
   },
   embed: (state, embed) => {
     state.embed = embed
+  },
+  acessibleModeActive: (state, acessibleModeActive) => {
+    state.acessibleModeActive = acessibleModeActive
   }
 }
 

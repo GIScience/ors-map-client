@@ -45,20 +45,22 @@
 .toggle-sidebar {
   position: absolute;
   top: 270px;
-  left: 410px;
+  left: 400px;
   z-index: 3;
   background: #fff;
   transition:all 0.5s ease;
   box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+  border-radius: 3px;
+  border: 2px solid rgba(0,0,0,0.2);
 }
 
 
 .toggle-sidebar.hidden{
-  left: 10px;
+  left: 0px;
 }
 
 .toggle-sidebar.low-res {
-  left: 310px;
+  left: 300px;
 }
 
 .map-search >>> .suggestions.low-res {

@@ -80,7 +80,13 @@ html {
 .no-padding {
   padding: 0;
 }
+.no-margin {
+  margin: 0;
+}
 
+.no-capitalize {
+  text-transform: none;
+}
 code[class^='language-'] {
   padding: 10px !important;
   width: 99%;

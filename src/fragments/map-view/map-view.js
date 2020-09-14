@@ -300,8 +300,7 @@ export default {
       return can
     },
     polylineMeasureOptions () {
-      const polylineMeasureTranslations = this.$t('mapView.polylineMeasure')
-      const options = mapDefinitions.polylineMeasureOptions(polylineMeasureTranslations)
+      const options = mapDefinitions.polylineMeasureOptions(this.$t('mapView.polylineMeasure'))
       return options
     },
 
@@ -407,6 +406,33 @@ export default {
     }
   },
   methods: {
+    /**
+     * Move the map center according the direction
+     * @param {String} direction 
+     */
+    moveMapCenter(direction) {
+      console.log(direction)
+      // Calculate the offset
+      var offsset
+      switch (direction) {
+        case 'left':
+          var offset = this.map.getSize().x*0.15;
+          this.map.panBy(new L.Point(-offset, 0), {animate: true})
+          break;
+        case 'right':
+          var offset = this.map.getSize().x*0.15;
+          this.map.panBy(new L.Point(offset, 0), {animate: true})
+          break;
+        case 'up':
+          var offset = this.map.getSize().y*0.15;
+          this.map.panBy(new L.Point(0, -offset), {animate: true})
+          break;
+        case 'down':
+          var offset = this.map.getSize().y*0.15;
+          this.map.panBy(new L.Point(0, offset), {animate: true})
+          break;
+      }
+    },
     /**
      * Update the view center
      */

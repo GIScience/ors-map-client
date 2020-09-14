@@ -53,3 +53,26 @@
   border-radius: 3px;
   text-transform: initial !important;
 }
+
+.move-map-arrow {
+  position: absolute !important;
+  z-index: 4;
+  background: white !important;
+  color: black;
+}
+.move-map-arrow.left{
+  left: 0;
+  top: 340px;
+}
+.move-map-arrow.right{
+  top: 340px;
+  right: 0px;
+}
+.move-map-arrow.up{
+  left: calc(50% - 30px);
+  top: 70px;
+}
+.move-map-arrow.down{
+  left: calc(50% - 30px);
+  bottom: 10px;
+}
