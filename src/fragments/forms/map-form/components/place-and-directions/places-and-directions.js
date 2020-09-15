@@ -389,7 +389,7 @@ export default {
       if (this.places.length === 1) {
         this.directionsFromPoint(data)
       } else {
-        const closestPlaceIndex = GeoUtils.getInsertingSlotIndex(data.latlng, this.places)
+        const closestPlaceIndex = data.injectIndex || GeoUtils.getClosestPlaceIndex(data.latlng, this.places)
         // The selected point is after the last route point, so appent the place to the route ending
         if (closestPlaceIndex === this.places.length - 1) {
           this.addDestinationToRoute(data)

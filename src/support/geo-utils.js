@@ -297,7 +297,7 @@ const geoUtils = {
    * @param {*} latlng
    * @param {Array} places
    */
-  getInsertingSlotIndex: (latlng, places) => {
+  getClosestPlaceIndex: (latlng, places) => {
     let shorterDistance = null
     let closestPlaceIndex = 0
 
@@ -335,6 +335,50 @@ const geoUtils = {
     }
 
     return closestPlaceIndex
+  },
+  /**
+   * Get the appropriate place index to inject a stop considering the polyline path
+   * @param {Object} targetLattng 
+   * @param {Array} places 
+   * @param {Array} polylineArr 
+   * @param {Integer} draggedFromIndex 
+   * @returns {Integer} injectPlaceIndex
+   */
+  getStopInjectIndexFromPolyline (targetLattng, places, polylineArr, draggedFromIndex) {
+    // the default inject is the one considering promixity
+    let injectPlaceIndex = geoUtils.getClosestPlaceIndex(targetLattng, places)
+    let closestPlace = places[injectPlaceIndex]    
+    var closestPlaceIndexOnPolyline
+    var minDistance = null
+
+    // Find an more appropriate inject index, it this is the case
+    for (let pIndex = 0; pIndex < polylineArr.length; pIndex++) {
+      const polylineCoords = polylineArr[pIndex]
+      const polylineCoordsLatlng = {lat: polylineCoords[0], lng: polylineCoords[1]}
+      const placeLatlng = {lat: closestPlace.lat, lng: closestPlace.lng}
+
+      // Check the place that has the shortest distace to the polyline point
+      let currentDistance = geoUtils.calculateDistanceBetweenLocations(polylineCoordsLatlng, placeLatlng, 'm')
+      if (currentDistance === 0) {
+        // Get the closest polyline point index
+        closestPlaceIndexOnPolyline = pIndex
+        break
+      } else {
+        if (minDistance === null || currentDistance < minDistance) {
+          minDistance = currentDistance
+          // Get the closest polyline point index
+          closestPlaceIndexOnPolyline = pIndex
+        }
+      } 
+    }
+    // If the index of the point where the drag started from
+    // if lowest than the corresponding index of the closest place 
+    // over the polyline, then we must indext the stop before the
+    // closest place index
+    if (draggedFromIndex < closestPlaceIndexOnPolyline) {
+      injectPlaceIndex--
+    }
+    return injectPlaceIndex
   },
 
   /**

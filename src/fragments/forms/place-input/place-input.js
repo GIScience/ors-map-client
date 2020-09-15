@@ -226,9 +226,6 @@ export default {
 
     showSuggestion () {
       let show = this.focused && !this.focusIsAutomatic
-      if (show) {
-        console.log(this.index, show)
-      }
       return show
     }
   },
