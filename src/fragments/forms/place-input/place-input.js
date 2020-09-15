@@ -226,9 +226,6 @@ export default {
 
     showSuggestion () {
       let show = this.focused && !this.focusIsAutomatic
-      if (show) {
-        console.log(this.index, show)
-      }
       return show
     }
   },
@@ -382,8 +379,13 @@ export default {
           // Make sure that the changes in the input are debounced
           this.debounceTimeoutId = setTimeout(function () {
             if (context.supportSearch && (event.key === 'Enter' || (event instanceof MouseEvent && event.type === 'click'))) {
-              context.focused = false
-              context.sendToSearchMode()
+              if (!this.model.placeName || this.model.placeName.length === 0) {
+                this.showError(this.$t('placeInput.pleaseTypeSomething'))
+                return
+              } else {
+                context.focused = false
+                context.sendToSearchMode()
+              }
             } else {
               context.autocompleteSearch()
             }

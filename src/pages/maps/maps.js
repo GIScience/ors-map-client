@@ -110,6 +110,10 @@ export default {
     }
   },
   methods: {
+    toggleAcessibleMode () {
+      let newStatus = !this.$store.getters.acessibleModeActive
+      this.$store.commit('acessibleModeActive', newStatus)
+    },
     zoomChanged () {
       this.storeZoomValue()
       this.searchBtnAvailable = true

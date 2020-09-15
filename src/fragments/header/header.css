@@ -16,20 +16,6 @@
   top:-100px;
 }
 
-.toggle-top-bar {
-  position: absolute;
-  top: 110px;
-  right: 170px;
-  z-index: 3;
-  background: #fff;
-  transition:all 1s ease;
-  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
-}
-
-.toggle-top-bar.hidden{
-  top: 10px;
-}
-
 @media (min-width: 1200px) {
   .app-toolbar .v-toolbar__content {
     max-width: 1170px;

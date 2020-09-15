@@ -186,7 +186,15 @@ export default {
       this.eventBus.$on('markerDragged', (marker) => {
         if (context.active) {
           context.places[marker.inputIndex].setLnglat(marker.position.lng, marker.position.lat)
-          context.updateAppRoute()
+          // remove the name so that the resolve will use only the coordinates
+          context.places[marker.inputIndex].placeName = ''
+          // Resolve the place to update its name and properties
+          context.places[marker.inputIndex].resolve(() => {
+            // Only updates the app route if we are already in
+            // directions or roundtrip mode
+            if (this.mode !== constants.modes.place)
+            context.updateAppRoute()
+          })
         }
       })
 
@@ -389,7 +397,7 @@ export default {
       if (this.places.length === 1) {
         this.directionsFromPoint(data)
       } else {
-        const closestPlaceIndex = GeoUtils.getInsertingSlotIndex(data.latlng, this.places)
+        const closestPlaceIndex = data.injectIndex || GeoUtils.getClosestPlaceIndex(data.latlng, this.places)
         // The selected point is after the last route point, so appent the place to the route ending
         if (closestPlaceIndex === this.places.length - 1) {
           this.addDestinationToRoute(data)

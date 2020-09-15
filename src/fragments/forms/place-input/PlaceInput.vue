@@ -48,14 +48,14 @@
             <v-list-tile @click.stop="deletePlace()" v-if="deleteAvailable">
               <v-list-tile-title>
                 <v-btn flat class="no-padding">
-                 <v-icon :title="$t('placeInput.removeInput')" color="dark" large >delete</v-icon>
+                  <v-icon :title="$t('placeInput.removeInput')" color="dark" large >delete</v-icon>
                 </v-btn>
               </v-list-tile-title>
             </v-list-tile>
             <v-list-tile v-if="switchCoordsAvailable" @click.stop="switchCoords()">
               <v-list-tile-title>
                 <v-btn flat class="no-padding">
-                 <v-icon :title="$t('placeInput.switchCoords')" color="dark" large >compare_arrows</v-icon>
+                  <v-icon :title="$t('placeInput.switchCoords')" color="dark" large >compare_arrows</v-icon>
                 </v-btn>
               </v-list-tile-title>
             </v-list-tile>
@@ -71,7 +71,11 @@
               <v-icon>gps_fixed</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title> {{ $t('placeInput.yourLocation') }} </v-list-tile-title>
+              <v-list-tile-title> 
+                <v-btn flat small @click.stop="suggestionClicked(placeSuggested)" class="no-padding no-margin no-capitalize">
+                  {{ $t('placeInput.yourLocation') }} 
+                </v-btn>
+              </v-list-tile-title>
               <v-list-tile-sub-title>{{ $t('placeInput.fromYourBrowser') }}</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
@@ -81,7 +85,11 @@
               <v-icon>place</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title :title="placeSuggested.placeName"> {{ placeSuggested.placeName }} </v-list-tile-title>
+              <v-list-tile-title :title="placeSuggested.placeName">                 
+                <v-btn flat small @click.stop="suggestionClicked(placeSuggested)" class="no-padding no-margin no-capitalize">
+                  {{ placeSuggested.placeName }} 
+                </v-btn>
+              </v-list-tile-title>
               <v-list-tile-sub-title>
                 {{ $t('global.layers.'+ placeSuggested.properties.layer) }}
                 <span v-if="placeSuggested.properties.country"> - {{ placeSuggested.properties.country }} </span>

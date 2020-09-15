@@ -71,6 +71,10 @@ export default {
     youCanReverseTheNeverInSettigns: 'You can reverse the "don`t ask my location" at any time in settings',
     mapCenterWillBeAtAGenericLocation: 'Based on your settings the map is centered at a generic location. The search results consider the map center.',
     removePlace: 'Remove place',
-    viewOnORS: 'View on ORS'
+    viewOnORS: 'View on ORS',
+    moveMapPositionToLeft: 'moveMapPositionToLeft',
+    moveMapPositionToRight: 'moveMapPositionToRight',
+    moveMapPositionToUp: 'moveMapPositionToUp',
+    moveMapPositionToDown: 'moveMapPositionToDown',
   }
 }

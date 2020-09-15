@@ -10,3 +10,12 @@
   width: 170px;
   z-index: 5;
 }
+
+.accessibility-btn {
+  position: absolute !important;
+  bottom: 150px;
+  right: 10px;
+  z-index: 4;
+  background: white !important;
+  color: black;
+}

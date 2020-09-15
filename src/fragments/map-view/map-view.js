@@ -54,6 +54,7 @@ import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import 'leaflet-measure/dist/leaflet-measure.css'
 import 'vue-resize/dist/vue-resize.css'
 import Leaflet from 'leaflet'
+import geoUtils from '../../support/geo-utils'
 
 export default {
   components: {
@@ -154,7 +155,8 @@ export default {
       isAltitudeModalOpen: false,
       extraInfo: null, // Extra route info (waytypes, surface, steepness etc)
       tempPlaces: null, // a place selected by the user on the map but not yet used for computing directions,
-      polylineIsEdibale: false
+      polylineIsEdibale: false,
+      orsExtendedPolyline: new OrsExtendedPolyline()
     }
   },
   computed: {
@@ -300,8 +302,7 @@ export default {
       return can
     },
     polylineMeasureOptions () {
-      const polylineMeasureTranslations = this.$t('mapView.polylineMeasure')
-      const options = mapDefinitions.polylineMeasureOptions(polylineMeasureTranslations)
+      const options = mapDefinitions.polylineMeasureOptions(this.$t('mapView.polylineMeasure'))
       return options
     },
 
@@ -407,6 +408,33 @@ export default {
     }
   },
   methods: {
+    /**
+     * Move the map center according the direction
+     * @param {String} direction 
+     */
+    moveMapCenter(direction) {
+      console.log(direction)
+      // Calculate the offset
+      var offsset
+      switch (direction) {
+        case 'left':
+          var offset = this.map.getSize().x*0.15;
+          this.map.panBy(new L.Point(-offset, 0), {animate: true})
+          break;
+        case 'right':
+          var offset = this.map.getSize().x*0.15;
+          this.map.panBy(new L.Point(offset, 0), {animate: true})
+          break;
+        case 'up':
+          var offset = this.map.getSize().y*0.15;
+          this.map.panBy(new L.Point(0, -offset), {animate: true})
+          break;
+        case 'down':
+          var offset = this.map.getSize().y*0.15;
+          this.map.panBy(new L.Point(0, offset), {animate: true})
+          break;
+      }
+    },
     /**
      * Update the view center
      */
@@ -585,9 +613,14 @@ export default {
         }, 1000)
       }
     },
+    /**
+     * Add stop via polyline drag
+     * @param {*} data 
+     */
     addStopViaPolylineDrag (data) {
-      console.log(data) // {event, closest, closestIndex}
       data.latlng = data.event.target.getLatLng()
+      const closestPlaceIndex = GeoUtils.getStopInjectIndexFromPolyline(data.latlng, this.mapViewData.places, this.activeRouteData, data.draggedFromIndex)
+      data.injectIndex = closestPlaceIndex
       this.$emit('addRouteStop', data)
     },
     followPolyline (latlng) {
@@ -1286,13 +1319,7 @@ export default {
     }
   },
 
-  mounted () {
-    // Extends the leaflet polyline by adding the drag capability
-    // and these fireble events: 'follow' and 'addstop'.
-    // Even if this object is not been acessed within this class
-    // it is in use and must not be removed
-    const orsExtendedPolyline = new OrsExtendedPolyline()
-    
+  mounted () {    
     this.zoomLevel = this.initialZoom
 
     // Define a unique identifier to the map component instance

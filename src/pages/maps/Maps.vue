@@ -2,6 +2,11 @@
   <div class="maps" :style="{height: viewHeight + 'px'}">
     <resize-observer @notify="setViewHeight()" />
     <simple-place-search :height="simpleMapSearcHeight" v-if="simpleSearchIsVisible"></simple-place-search>
+
+    <v-btn fab small @click="toggleAcessibleMode" :title="$t('maps.turnOnAcessibleMode')" class="accessibility-btn" > 
+      <v-icon large :color="$store.getters.acessibleModeActive? 'primary': 'default'" >accessibility</v-icon>
+    </v-btn>
+    
     <v-btn round v-if="refreshSearchAvailable"
       :style="{top: mapHeight - 50 + 'px !important'}"
       :title="$t('maps.updateSearchAfterZoomOrCenterChange')"

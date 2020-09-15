@@ -27,17 +27,13 @@
     <section>
       <h4 class="sectionHeader">{{$t('about.softwareAndLibraries')}}</h4>
       <p class="textjustify">
-        {{$t('about.hillshadeLayer')}}: <a class='link' href='http://srtm.csi.cgiar.org'
-          target='_blank'>{{$t('about.CIAT_CSI_SRTM')}}</a>. {{$t('about.info_III')}}
-      </p>
-      <p class="textjustify">
         {{$t('about.dataProvided')}} <a class='link' href='https://ghsl.jrc.ec.europa.eu/about.php'
           target='_blank'>{{$t('about.ghsFramework')}}</a>
       </p>
       <p>
-        {{$t('about.sources')}} <a class='link' href='https://github.com/GIScience/openrouteservice-app/' target='_blank'>github</a>.
+        {{$t('about.sources')}} <a class='link' href='https://github.com/GIScience/ors-map-client' target='_blank'>github</a>.
       </p>
-      <p>{{$t('about.feefFreeToReportBugs')}} <a href='https://github.com/GIScience/openrouteservice-app/issues/new' target='_blank'>github</a> {{$t('about.orToFixThem')}}.</p>
+      <p>{{$t('about.feefFreeToReportBugs')}} <a href='https://github.com/GIScience/ors-map-client/issues/new' target='_blank'>github</a> {{$t('about.orToFixThem')}}.</p>
     </section>
     <v-divider></v-divider>
     <br>
@@ -55,7 +51,7 @@
       <p class="textjustify">{{$t('about.info_V')}}</p>
 
       <v-divider></v-divider>
-      <h4 class="sectionHeader"><a class="link" href="https://www.uni-heidelberg.de/privacypolicy_web.html" target="_blank">{{$t('about.privacyPolicy')}}</a></h4>
+      <h4 class="sectionHeader"><a class="link" href="https://openrouteservice.org/terms-of-service" target="_blank">{{$t('about.privacyPolicy')}}</a></h4>
       <br>
     </section>
   </div>
