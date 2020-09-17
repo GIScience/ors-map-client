@@ -23,6 +23,7 @@
                     :single="places.length === 1"
                     :is-last="(places.length -1) === index && index !== 0"
                     @selected="selectPlace"
+                    @changedDirectPlace="changedDirectPlace"
                     @delete="removePlaceInput"
                     @startDirections="startDirections"
                     @cleared="placeCleared">

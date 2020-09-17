@@ -172,6 +172,13 @@ export default {
       this.eventBus.$emit('removePlace', data)
     },
     /**
+     * Remove place
+     * @param {*} data
+     */
+    directChanged (data) {
+      this.eventBus.$emit('directChanged', data)
+    },
+    /**
      * Close bottom nav component
      */
     closedBottomNav () {

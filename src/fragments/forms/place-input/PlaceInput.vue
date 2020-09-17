@@ -23,9 +23,11 @@
         ></v-text-field>
       </v-flex>
       <v-flex v-if="iconsBtnCounter > 0" v-bind="{[iconsColumns]: true}" class="input-btns">
-
         <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="deleteAvailable && $mdAndUpResolution"  @click="deletePlace()">
           <v-icon :title="$t('placeInput.removeInput')" class="input-icon" >delete</v-icon>
+        </v-btn>
+        <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="directIsAvailable && $mdAndUpResolution"  @click="toggleDirect()">
+          <v-icon :color="this.model.direct? 'primary': 'dark'" :title="$t('placeInput.toggleDirect')" class="input-icon" >settings_ethernet</v-icon>
         </v-btn>
 
         <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="directionsAvailable" @click="startDirections()">
@@ -52,10 +54,17 @@
                 </v-btn>
               </v-list-tile-title>
             </v-list-tile>
-            <v-list-tile v-if="switchCoordsAvailable" @click.stop="switchCoords()">
+            <v-list-tile v-if="switchCoordsAvailable">
               <v-list-tile-title>
-                <v-btn flat class="no-padding">
+                <v-btn flat class="no-padding" @click.stop="switchCoords()">
                   <v-icon :title="$t('placeInput.switchCoords')" color="dark" large >compare_arrows</v-icon>
+                </v-btn>
+              </v-list-tile-title>
+            </v-list-tile>
+             <v-list-tile v-if="directIsAvailable">
+              <v-list-tile-title>
+                <v-btn flat class="input-btn" @click.stop="toggleDirect()">
+                  <v-icon :color="this.model.direct? 'primary': 'dark'" :title="$t('placeInput.toggleDirect')" class="input-icon" >settings_ethernet</v-icon>
                 </v-btn>
               </v-list-tile-title>
             </v-list-tile>

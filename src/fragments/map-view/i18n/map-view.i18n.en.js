@@ -76,5 +76,6 @@ export default {
     moveMapPositionToRight: 'moveMapPositionToRight',
     moveMapPositionToUp: 'moveMapPositionToUp',
     moveMapPositionToDown: 'moveMapPositionToDown',
+    toggleDirect: 'Toggle direct from here until next place'
   }
 }

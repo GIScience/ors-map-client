@@ -23,7 +23,6 @@ export default {
   mixins: [MapFormMixin],
   data: () => ({
     mapViewData: new MapViewData(),
-    mode: constants.modes.place,
     places: [new Place()],
     roundTripActive: false,
     placeFocusIndex: null
@@ -189,12 +188,21 @@ export default {
           // remove the name so that the resolve will use only the coordinates
           context.places[marker.inputIndex].placeName = ''
           // Resolve the place to update its name and properties
-          context.places[marker.inputIndex].resolve(() => {
+          context.places[marker.inputIndex].resolve().then(() => {
             // Only updates the app route if we are already in
             // directions or roundtrip mode
-            if (this.mode !== constants.modes.place)
-            context.updateAppRoute()
+            if (context.$store.getters.mode !== constants.modes.place) {
+              context.updateAppRoute()
+            }
           })
+        }
+      })
+      // When a marker is marked as a start place of
+      // a direct segment
+      this.eventBus.$on('directChanged', (data) => {
+        if (context.active) {
+          this.places[data.index] = data.place
+          context.updateAppRoute()
         }
       })
 
@@ -204,7 +212,7 @@ export default {
         // so we must update the app route if we are already in directions
         // mode and a filter has changed. If the app is, for example
         // in place mode and filter changes, there is nothing to be done
-        if (this.active && this.mode === constants.modes.directions) {
+        if (this.active && this.$store.getters.mode === constants.modes.directions) {
           context.updateAppRoute()
         }
       })
@@ -784,6 +792,19 @@ export default {
         this.updateAppRoute()
       }
       this.searching = false
+    },
+
+    /**
+     * When the direct property of a place changes
+     * updates the app route so that a new route is
+     * calculated
+     * @param {*} data 
+     */
+    changedDirectPlace (data) {
+      const filledPlaces = this.getFilledPlaces()
+      if (this.places.length === filledPlaces.length && this.places.length > 1) {
+        this.updateAppRoute()
+      }
     },
 
     /**

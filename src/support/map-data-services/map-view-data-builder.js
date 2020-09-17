@@ -90,6 +90,7 @@ class MapViewDataBuilder {
         for (const key in appRouteData.places) {
           if (mapViewData.places[key]) {
             mapViewData.places[key].placeName = appRouteData.places[key].placeName
+            mapViewData.places[key].direct = appRouteData.places[key].direct
           }
         }
 

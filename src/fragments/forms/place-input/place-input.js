@@ -138,6 +138,9 @@ export default {
       if (this.directionsAvailable && !this.placeMenuAvailable) {
         btnColumns++
       }
+      if (this.directIsAvailable && !this.placeMenuAvailable) {
+        btnColumns++
+      }
       if (this.placeMenuAvailable) {
         btnColumns++
       }
@@ -179,6 +182,12 @@ export default {
     deleteAvailable () {
       return this.index !== 0
     },
+    /**
+     * If a place input can have the direct option
+     */
+    directIsAvailable () {
+      return this.supportDirections && !this.isLast
+    },
     // Switch the coordinates position ([lat, long] -> [long, lat] and [long, lat] -> [lat, long])
     switchCoordsAvailable () {
       const canSwitch = this.localModel.nameIsCoord()
@@ -188,7 +197,7 @@ export default {
      * Determines if the place input floating menu button is availabel for the current place input
      */
     placeMenuAvailable () {
-      return this.$lowResolution && !this.single && this.index > 0
+      return this.$lowResolution && !this.single && (this.index > 0 || this.directIsAvailable)
     },
     /**
      * Determines if the place input directions menu button is availabel for the current place input
@@ -462,11 +471,20 @@ export default {
       return (val === undefined || val == null || val.length <= 0)
     },
 
+    /**
+     * Deal with the remove a place input click 
+     * by hidden the floating menu (if visible)
+     * and by emitting the corresponding event
+     */
     deletePlace () {
-      this.placeInputFloatingMenu = false
+      this.placeInputFloatingMenu = false // When a place is removed we have to make sure that the floating menu is hidden
       this.$emit('delete', this.index)
     },
 
+    /**
+     * Deal with the start directions button click 
+     * by emitting the corresponsing event
+     */
     startDirections () {
       this.$emit('startDirections')
     },
@@ -567,6 +585,15 @@ export default {
         distance = 0
       }
       return distance
+    },
+    /**
+     * Toggle the input/place direct mode
+     * by setting the value on the place input model
+     */
+    toggleDirect() {
+      this.model.direct = !this.model.direct
+      let data = { index: this.index, place: this.model }
+      this.$emit('changedDirectPlace', data)
     }
   }
 }
