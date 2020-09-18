@@ -111,8 +111,10 @@ export default {
   },
   methods: {
     toggleAcessibleMode () {
-      let newStatus = !this.$store.getters.acessibleModeActive
-      this.$store.commit('acessibleModeActive', newStatus)
+      let mapSettings = this.$store.getters.mapSettings
+      mapSettings.acessibleModeActive = !mapSettings.acessibleModeActive
+      this.$store.commit('mapSettings', mapSettings)
+      localStorage.setItem('mapSettings', JSON.stringify(mapSettings))
     },
     zoomChanged () {
       this.storeZoomValue()

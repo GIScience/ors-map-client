@@ -54,6 +54,10 @@ export default {
       type: Boolean,
       default: true
     },
+    supportDirect: {
+      type: Boolean,
+      default: false
+    },
     supportSearch: {
       type: Boolean,
       default: true
@@ -186,7 +190,7 @@ export default {
      * If a place input can have the direct option
      */
     directIsAvailable () {
-      return this.supportDirections && !this.isLast
+      return this.supportDirect && !this.isLast && (this.index > 0 || (!this.single && !this.model.isEmpty()))
     },
     // Switch the coordinates position ([lat, long] -> [long, lat] and [long, lat] -> [lat, long])
     switchCoordsAvailable () {

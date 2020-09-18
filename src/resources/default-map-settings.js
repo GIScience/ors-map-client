@@ -22,7 +22,8 @@ const defaultMapSettings = {
   prioritizeSearchingForNearbyPlaces: true,
   defaultProfile: 'cycling-regular',
   compressDataUrlSegment: true,
-  autoFitHighlightedBounds: true
+  autoFitHighlightedBounds: true,
+  acessibleModeActive: false
 }
 
 export default defaultMapSettings

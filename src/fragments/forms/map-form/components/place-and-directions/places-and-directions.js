@@ -42,15 +42,19 @@ export default {
     this.setListeners()
     this.loadData()
   },
+  watch: {
+    '$store.getters.leftSideBarOpen': function (newVal) {
+      if (newVal === true && this.places.length === 1) {
+        this.setfocusedPlaceInput(0)
+      }
+    }
+  },
   computed: {
     getPlaces () {
       if (this.places.length === 0) {
         this.addPlaceInput()
       }
       return this.places
-    },
-    setAutofocus () {
-      this.places.length === 1 && this.isSidebarOpen
     },
     /**
      * Return a boolean determining if the place details must be visible

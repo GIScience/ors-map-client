@@ -34,13 +34,17 @@
 
 .fit-all-features {
   position: absolute !important;
-  top: 195px;
-  right: 5px;
+  top: 145px;
+  right: 0px;
   z-index: 2;
   background: white !important;
   color: black;
   border-radius: 3px;
   border: 2px solid rgba(0,0,0,0.2);
+}
+
+.fit-all-features.extra-low-resolution {
+  top: 255px;
 }
 
 .view-on-ors {
@@ -61,12 +65,12 @@
   color: black;
 }
 .move-map-arrow.left{
-  left: 0;
-  top: 340px;
+  left: 35px;
+  top: calc(50% - 10px);
 }
 .move-map-arrow.right{
-  top: 340px;
-  right: 0px;
+  top: calc(50% - 10px);
+  right: 45px;
 }
 .move-map-arrow.up{
   left: calc(50% - 30px);

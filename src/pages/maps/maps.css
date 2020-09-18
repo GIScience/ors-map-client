@@ -13,8 +13,8 @@
 
 .accessibility-btn {
   position: absolute !important;
-  bottom: 150px;
-  right: 10px;
+  bottom: 125px;
+  right: 0px;
   z-index: 4;
   background: white !important;
   color: black;

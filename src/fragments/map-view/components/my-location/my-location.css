@@ -2,7 +2,7 @@
 .my-location-btn {
   position: absolute !important;
   bottom: 70px;
-  right: 10px;
+  right: 0px;
   z-index: 3;
   background: white !important;
 }

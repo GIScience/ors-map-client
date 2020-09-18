@@ -72,8 +72,8 @@
         </v-menu>
       </v-flex>
     </v-layout>
-    <div class="suggestions shadow" :class="{'low-res': $lowResolution}"  v-if="showSuggestion">
-      <v-layout row wrap >
+    <div class="suggestions shadow" :class="{'scrollable': $lowResolution && placeSuggestions.length > 0}"  v-if="showSuggestion">
+      <v-layout row>
         <v-flex xs10 sm10 md11>
            <v-list-tile  @click.stop="setLocationFromBrowser()" v-if="showBrowserLocationInPlacesList" :title="$t('placeInput.yourLocation')">
             <v-list-tile-action>
@@ -110,8 +110,13 @@
             </v-list-tile-content>
           </v-list-tile>
         </v-flex>
-         <v-flex xs2 sm2 md1 >
-           <v-icon :title="$t('global.close')" :large="$lowResolution" class="close-suggestions" @click="setFocus(false)">close</v-icon>
+        <v-spacer></v-spacer>
+        <v-flex xs2 sm2 md1 >
+          <div>
+            <v-btn flat small fab class="close-suggestions no-marging no-padding" style="width:40px" @click="setFocus(false)">
+              <v-icon :title="$t('global.close')" :large="$lowResolution" class="close-suggestions" >close</v-icon>
+            </v-btn>
+          </div>
         </v-flex>
       </v-layout>
     </div>
