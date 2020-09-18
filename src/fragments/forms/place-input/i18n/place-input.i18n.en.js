@@ -24,6 +24,7 @@ export default {
     unknownSearchPlaceError: 'Unknown place search error',
     aproximateDistance: 'Approximate distance in a straight line from current map center',
     couldNotDetermineYourPreciseLocationUsingIpLocation: 'It was not possible to determine your precise location. Your IP based location will be used instead',
-    pleaseTypeSomething: 'Please type something to search'
+    pleaseTypeSomething: 'Please type something to search',
+    toggleDirect: 'Toggle direct from here until next place'
   }
 }

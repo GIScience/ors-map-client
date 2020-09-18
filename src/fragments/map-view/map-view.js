@@ -324,6 +324,7 @@ export default {
       let isRemovable = markerRemovableModes.includes(this.mode)
       return isRemovable
     },
+
     showMarkerPopup () {
       const show = this.mode !== constants.modes.search
       return show
@@ -631,12 +632,27 @@ export default {
      * Remove a marker/place when in directions or isochrones mode
      * @param {*} event
      * @param {*} markerIndex
+     * @emits removePlace
      */
     removePlace (event, markerIndex) {
       if (this.markers[markerIndex]) {
         let place = this.markers[markerIndex].place
         let data = {place, index: markerIndex}
         this.$emit('removePlace', data)
+      }
+    },
+    /**
+     * Remove a marker/place when in directions or isochrones mode
+     * @param {*} event
+     * @param {*} markerIndex
+     * @emits directChanged
+     */
+    marAsDirectfromHere (event, markerIndex) {
+      if (this.markers[markerIndex]) {
+        this.markers[markerIndex].place.direct = !this.markers[markerIndex].place.direct
+        let place = this.markers[markerIndex].place
+        let data = {place, index: markerIndex}
+        this.$emit('directChanged', data)
       }
     },
     /**
@@ -1316,7 +1332,20 @@ export default {
     removeRoutePoint () {
       this.highlightedRoutePoint = null
       this.highlightedRoutePointAltitude = null
-    }
+    },
+    /**
+     * Determines if the direct mode is available to be
+     * triggered from a marker at a given index
+     * @param {*} index 
+     * @returns {Boolean} available
+     */
+    directIsAvailable (index) {
+      let available = false
+      if (this.$store.getters.mode === constants.modes.directions && index < (this.markers.length -1)) {
+        available = true
+      }
+      return available
+    },
   },
 
   mounted () {    

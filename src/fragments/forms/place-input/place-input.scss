@@ -8,11 +8,17 @@
   cursor: pointer; float:right
 }
 
+.suggestions.scrollable {
+  max-height: 220px;
+  overflow-y:scroll;
+}
+
 .suggestions {
   position: relative;
-  z-index: 5;
+  z-index: 6;
   background: white;
-  width: 100%
+  width: 100%;
+  overflow: hidden;
 }
 
 .shadow {

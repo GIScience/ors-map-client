@@ -80,7 +80,7 @@ App folder structure under `src`:
 
 ### App flow overview ###
 
-This is a Single Page Application (SPA). This means that the client app is loaded on the browser and defines which components and pages are processed based on the browser URL. The app watches every change in the browser URL and updates its state based on that. These URL changes don't trigger a request to the back-end directly, but the components loaded/updated will decide which RESTfull requests must be made to load the required data. In other words, it means that the front-end (this app) is decoupled from the back-ends (ORS API and ORS website)
+This is a Single Page Application (SPA). This means that the client app is loaded on the browser and defines which components and pages are processed based on the browser URL. The app watches every change in the browser URL and updates its state based on that. These URL changes don't trigger a request to the back-end directly, but the components loaded/updated will decide which RESTfull requests must be run to load the required data. In other words, it means that the front-end (this app) is decoupled from the back-ends (ORS API and ORS website)
 
 The app load cycle follows these steps:
 
@@ -97,10 +97,10 @@ Data flow, state and requests to services, in a simplified view, happens as foll
   2. the app `mode` is defined based on the matching URL in the targeted route.js file
   3. the `maps` page, uses the app mode utility to define the app state using the current `mode`. This utility will also populate the values of the `ors-map-filters` based on the URL and build the `AppRouteData`
   4. based on the app mode/state certain components are activated/displayed
-  5. Every component, once activated, may use the data in `ors-map-filters` to render its elements and  may run requests to the ORS api using the `ors-api-runner` lib. Once the request succeed, the response data will be used to fill the `MapViewData` object.
-  6. Once a input is changed the app goes to a new URL and this makes the flow restart at the number 2.
+  5. Every component, once activated, may use the data in `ors-map-filters` to render its elements and  may run requests to the ORS api using the `ors-api-runner`. Once the request succeed, the response data will be used to fill the `MapViewData` object.
+  6. Once an input is changed the app goes to a new URL and this makes the flow restart at the number II.
   7. If a component changes the `MapViewData` model, it emits an event to the `maps` page, that passes the current `MapViewData` object to the `MapView` component.
-  8. Interactions via `MapView` may result in events sent back to `maps` page, that may notify other child components that in their turn may change the URL and trigger the step 2 again.
+  8. Interactions via `MapView` may result in events sent back to `maps` page, that may notify other child components that in their turn may change the URL and trigger the step II again.
 
 ### Feature-by-folder design ###
 
@@ -121,9 +121,8 @@ Component:
 - my-fragment-name (folder under `src/fragments/`)
 
   - MyFragmentName.vue (main VueJS component file)
-  - my-fragment-name.css (styles for the page, included by the MyPageName.vue component)
-  - my-fragment-name`.store.js` (Vuex store module for the page, included by the store/store.js loader)
-  - my-fragment-name`.route.js` (route to reach this page, included by the router/index loader)
+  - my-fragment-name.css (styles for the page, included by the MyFragmentName.vue component)
+  - my-fragment-name`.store.js` (Vuex store module for the fragment, included by the store/store.js loader)
   - i18n (folder)
     - my-fragment-name`.i18n.en.js` (in this example containing the EN resources for the component)
 
@@ -198,19 +197,19 @@ For a detailed explanation on how webpack works, check out the [guide](http://vu
 
 ### Contribute ###
 
-Any comment, feedback and contribution is very welcomed!
+Any comment, feedback or contribution is very welcomed!
 
 But, like almost every team, we have limited workforce and we have to define priorities.
 
 `Bugs`:
-If you have identified any bug and think that you can help fixing it, please create an issue first instead of directly submitting a push request. So the people involved will have the opportunity to discuss it.
+If you have identified any bug and think that you can help fixing it, please create an issue first, instead of directly submitting a push request. So the people involved will have the opportunity to discuss it.
 
 `New festures`:
 If you want to contribute by adding a new feature or improve an existing one, please also create an issue. We do want contributions and the community effort is very important to us, but features may add complexity and future maintenance effort. Because of this, we have also to analyze the trade off of such contributions. We just have to decide about them together before the hands on. This approach is intended to create cohesion and keep the project sustainable.
 
 #### Current needs ####
 
-As you may notice, this project is an on going project and thus there is a lot of room for improvement. We already have in mind some of these possible improvements and some of them are listed below:
+As you may notice, this project is an on going project and thus, there is a lot of room for improvement. We already have in mind some of these possible improvements and some of them are listed below:
 
 - `Tests` (unit, e2e) - we need it, but we were not able to implement it yet. It is one of the priorities of our list. So, if you can contribute with it, please let us know.
 - `Rendering performance` - we are continuously looking for performance improvement. If you think you can suggest a better way to deal with the rendering phase in a way that it improves the speed, please tell us. We are relying on [Vue2leaflet](https://github.com/vue-leaflet/Vue2Leaflet) for this.

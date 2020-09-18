@@ -186,6 +186,19 @@ const orsParamsParser = {
       language: mapSettings.routingInstructionsLocale,
       units: mapSettings.unit
     }
+
+    let skipSegments = []
+    for (let pIndex in places) {
+      if (places[pIndex].direct) {
+        let segment = Number(pIndex) +1
+        skipSegments.push(segment)
+      }
+    }
+    if (skipSegments.length > 0) {
+      args.skip_segments = skipSegments
+    }
+    args.skip_segments
+
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
     orsParamsParser.addFilters(args, OrsMapFilters, constants.services.directions)

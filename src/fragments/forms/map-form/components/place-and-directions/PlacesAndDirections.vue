@@ -15,6 +15,7 @@
                 <v-flex v-bind="{[ $store.getters.mode === constants.modes.directions? 'sm10 md11' : 'sm12']: true}">
                   <place-input :ref="'place'+index"
                     :support-directions="inputsupportsDirections"
+                    support-direct
                     :support-search="places.length === 1"
                     :box="places.length === 1"
                     :index="index"
@@ -23,6 +24,7 @@
                     :single="places.length === 1"
                     :is-last="(places.length -1) === index && index !== 0"
                     @selected="selectPlace"
+                    @changedDirectPlace="changedDirectPlace"
                     @delete="removePlaceInput"
                     @startDirections="startDirections"
                     @cleared="placeCleared">

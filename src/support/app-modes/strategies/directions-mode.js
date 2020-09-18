@@ -64,6 +64,14 @@ class DirectionsMode {
     }
 
     appRouteData.places = RouteUtils.getRoutePlaces(currentRoute)
+
+    // If there are direct waipoints (at least 2)
+    // add their indexes to the options
+    if (appRouteData.options.directPlaces) {
+      appRouteData.options.directPlaces.forEach(index => {
+        appRouteData.places[index].direct = true
+      })
+    }
     return appRouteData
   }
 }

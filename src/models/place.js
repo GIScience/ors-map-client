@@ -44,6 +44,9 @@ class Place {
     // The index of the Place
     this.index = null
 
+    // The index of the Place
+    this.direct = false
+
     if (lng !== 0 && lat !== 0) {
       this.coordinates = [Number(lng), Number(lat)]
 
@@ -157,7 +160,8 @@ class Place {
       'placeId',
       'fromBrowser',
       'skipShowData',
-      'index'
+      'index',
+      'direct'
     ]
 
     for (const key in propertiesToClone) {

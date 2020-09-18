@@ -4,7 +4,7 @@
     <simple-place-search :height="simpleMapSearcHeight" v-if="simpleSearchIsVisible"></simple-place-search>
 
     <v-btn fab small @click="toggleAcessibleMode" :title="$t('maps.turnOnAcessibleMode')" class="accessibility-btn" > 
-      <v-icon large :color="$store.getters.acessibleModeActive? 'primary': 'default'" >accessibility</v-icon>
+      <v-icon large :color="$store.getters.mapSettings.acessibleModeActive? 'primary': 'default'" >accessibility</v-icon>
     </v-btn>
     
     <v-btn round v-if="refreshSearchAvailable"
@@ -35,6 +35,7 @@
       @mapCenterMoved="mapCenterMoved"
       @addAsIsochroneCenter="addAsIsochroneCenter"
       @removePlace="removePlace"
+      @directChanged="directChanged"
       @markerClicked="markerClicked">
     </map-view>
 

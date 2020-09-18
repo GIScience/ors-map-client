@@ -63,11 +63,6 @@
   left: 300px;
 }
 
-.map-search >>> .suggestions.low-res {
-  max-height: 220px;
-  overflow-y:scroll;
-}
-
 .sidebar-header-top {
   margin-bottom: 10px;
 }

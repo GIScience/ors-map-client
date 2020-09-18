@@ -30,7 +30,11 @@
         <l-popup v-if="showMarkerPopup">
           <div >
             {{marker.label}} 
+            <div style="width=:100%;height:1px"></div>
             <v-btn outline small fab v-if="markerIsRemovable" :title="$t('mapView.removePlace')"  @click="removePlace($event, index)" > <v-icon >delete</v-icon> </v-btn>
+            <v-btn outline small fab v-if="directIsAvailable(index)" :title="$t('mapView.toggleDirect')"  @click="marAsDirectfromHere($event, index)" > 
+              <v-icon :color="marker.place.direct? 'primary' : 'dark'">settings_ethernet</v-icon> 
+            </v-btn>
           </div>
         </l-popup>
       </l-marker>
@@ -109,13 +113,20 @@
         layer-type="base"/>
     </l-map>
     <img class="over-brand" v-if="showBrand" src="@/assets/img/heigit-and-hd-uni.png" :alt="$t('global.brand')" :title="$t('global.brand')">
-    <v-btn fab small v-if="canFitFeatures && showControls" :title="$t('mapView.fitAllFeatures')" class="fit-all-features" @click="fitAllFeatures()" > <v-icon large >all_out</v-icon> </v-btn>
+    <v-btn fab small v-if="canFitFeatures && showControls" 
+      class="fit-all-features"
+      :title="$t('mapView.fitAllFeatures')" 
+      :class="{'extra-low-resolution': $xlResolution}" 
+      @click="fitAllFeatures()" > 
+      <v-icon large >all_out</v-icon> 
+    </v-btn>
+
     <v-btn v-if="$store.getters.embed" small :title="$t('mapView.viewOnORS')" class="view-on-ors" target="_blank" :href="nonEmbedUrl" > {{$t('mapView.viewOnORS')}} <v-icon right small >open_in_new</v-icon> </v-btn>
     <my-location v-else :active="myLocationActive" @updateLocation="updateMyLocation"></my-location>
     <map-right-click v-if="!$store.getters.embed" :map-view-data="mapViewData" @closed="clickLatlng = null" @rightClickEvent="handleRightClickEvent"></map-right-click>
     <map-left-click :current-zoom="zoom" @closed="clickLatlng = null" ></map-left-click>
 
-    <div v-if="$store.getters.acessibleModeActive">
+    <div v-if="$store.getters.mapSettings.acessibleModeActive">
       <v-btn fab small @click="moveMapCenter('left')" :title="$t('mapView.moveMapPositionToLeft')" class="move-map-arrow left" > <v-icon large color="primary" >arrow_back</v-icon> </v-btn>
       <v-btn fab small @click="moveMapCenter('up')" :title="$t('mapView.moveMapPositionToUp')" class="move-map-arrow up" > <v-icon large color="primary" >arrow_upward</v-icon> </v-btn>
       <v-btn fab small @click="moveMapCenter('right')" :title="$t('mapView.moveMapPositionToRight')" class="move-map-arrow right" > <v-icon large color="primary" >arrow_forward</v-icon> </v-btn>

@@ -23,9 +23,11 @@
         ></v-text-field>
       </v-flex>
       <v-flex v-if="iconsBtnCounter > 0" v-bind="{[iconsColumns]: true}" class="input-btns">
-
         <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="deleteAvailable && $mdAndUpResolution"  @click="deletePlace()">
           <v-icon :title="$t('placeInput.removeInput')" class="input-icon" >delete</v-icon>
+        </v-btn>
+        <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="directIsAvailable && $mdAndUpResolution"  @click="toggleDirect()">
+          <v-icon :color="this.model.direct? 'primary': 'dark'" :title="$t('placeInput.toggleDirect')" class="input-icon" >settings_ethernet</v-icon>
         </v-btn>
 
         <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="directionsAvailable" @click="startDirections()">
@@ -52,10 +54,17 @@
                 </v-btn>
               </v-list-tile-title>
             </v-list-tile>
-            <v-list-tile v-if="switchCoordsAvailable" @click.stop="switchCoords()">
+            <v-list-tile v-if="switchCoordsAvailable">
               <v-list-tile-title>
-                <v-btn flat class="no-padding">
+                <v-btn flat class="no-padding" @click.stop="switchCoords()">
                   <v-icon :title="$t('placeInput.switchCoords')" color="dark" large >compare_arrows</v-icon>
+                </v-btn>
+              </v-list-tile-title>
+            </v-list-tile>
+             <v-list-tile v-if="directIsAvailable">
+              <v-list-tile-title>
+                <v-btn flat class="input-btn" @click.stop="toggleDirect()">
+                  <v-icon :color="this.model.direct? 'primary': 'dark'" :title="$t('placeInput.toggleDirect')" class="input-icon" >settings_ethernet</v-icon>
                 </v-btn>
               </v-list-tile-title>
             </v-list-tile>
@@ -63,8 +72,8 @@
         </v-menu>
       </v-flex>
     </v-layout>
-    <div class="suggestions shadow" :class="{'low-res': $lowResolution}"  v-if="showSuggestion">
-      <v-layout row wrap >
+    <div class="suggestions shadow" :class="{'scrollable': $lowResolution && placeSuggestions.length > 0}"  v-if="showSuggestion">
+      <v-layout row>
         <v-flex xs10 sm10 md11>
            <v-list-tile  @click.stop="setLocationFromBrowser()" v-if="showBrowserLocationInPlacesList" :title="$t('placeInput.yourLocation')">
             <v-list-tile-action>
@@ -101,8 +110,13 @@
             </v-list-tile-content>
           </v-list-tile>
         </v-flex>
-         <v-flex xs2 sm2 md1 >
-           <v-icon :title="$t('global.close')" :large="$lowResolution" class="close-suggestions" @click="setFocus(false)">close</v-icon>
+        <v-spacer></v-spacer>
+        <v-flex xs2 sm2 md1 >
+          <div>
+            <v-btn flat small fab class="close-suggestions no-marging no-padding" style="width:40px" @click="setFocus(false)">
+              <v-icon :title="$t('global.close')" :large="$lowResolution" class="close-suggestions" >close</v-icon>
+            </v-btn>
+          </div>
         </v-flex>
       </v-layout>
     </div>

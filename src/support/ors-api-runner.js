@@ -21,6 +21,8 @@ import OrsApiClient from 'openrouteservice-js'
  */
 const Directions = (places, customArgs = null) => {
   const mapSettings = store.getters.mapSettings
+
+  // Build the ors client object
   const directions = new OrsApiClient.Directions({
     api_key: mapSettings.apiKey,
     host: mapSettings.apiBaseUrl,

@@ -6,8 +6,8 @@
             <draggable v-model="places" @end="onReordered()" handle=".reorder-handle">
               <li :key="index" v-for="(place, index) in places">
                 <v-layout row >
-                  <v-flex xs1 v-if="$store.getters.mode === constants.modes.directions">
-                    <v-icon class="reorder-handle">drag_indicator</v-icon>
+                  <v-flex xs1 v-if="$store.getters.mode === constants.modes.isochrones">
+                    <v-icon class="reorder-handle">reorder</v-icon>
                   </v-flex>
                   <v-flex v-bind="{[ $store.getters.mode === constants.modes.directions? 'xs11' : 'xs12']: true}">
                     <place-input :ref="'place'+index"
