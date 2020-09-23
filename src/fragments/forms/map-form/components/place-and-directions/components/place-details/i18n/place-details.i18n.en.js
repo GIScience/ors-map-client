@@ -6,6 +6,7 @@ export default {
     lat: 'Lat.',
     lon: 'Lon.',
     notAvailable: 'Not available',
-    placeDetails: 'Place details'
+    placeDetails: 'Place details',
+    placeName: 'Name'
   }
 }

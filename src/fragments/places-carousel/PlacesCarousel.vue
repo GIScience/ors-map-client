@@ -17,11 +17,14 @@
             </v-card-title>
             <v-card-actions style="text-align: right">
               <v-layout>
-                <v-flex xs4>
+                <v-flex xs5>
+                  <v-btn class="navigate-btn" @click="gotToPlace(item)"><span class="text">{{$t('placesCarousel.selectPlace')}}</span>
+                    <v-icon class="icon" right dark>place</v-icon>
+                  </v-btn>
                 </v-flex>
                 <v-spacer></v-spacer>
-                <v-flex xs7>
-                  <v-btn class="directions-btn" @click="directionsTo(item)"><span class="text">{{$t('placesCarousel.directionsTo')}}</span>
+                <v-flex xs6>
+                  <v-btn class="navigate-btn" @click="directionsTo(item)"><span class="text">{{$t('placesCarousel.directionsTo')}}</span>
                     <v-icon class="icon" right dark>directions</v-icon>
                   </v-btn>
                 </v-flex>

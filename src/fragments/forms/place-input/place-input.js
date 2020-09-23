@@ -392,8 +392,8 @@ export default {
           // Make sure that the changes in the input are debounced
           this.debounceTimeoutId = setTimeout(function () {
             if (context.supportSearch && (event.key === 'Enter' || (event instanceof MouseEvent && event.type === 'click'))) {
-              if (!this.model.placeName || this.model.placeName.length === 0) {
-                this.showError(this.$t('placeInput.pleaseTypeSomething'))
+              if (!context.model.placeName || context.model.placeName.length === 0) {
+                context.showError(context.$t('placeInput.pleaseTypeSomething'))
                 return
               } else {
                 context.focused = false

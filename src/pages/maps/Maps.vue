@@ -3,7 +3,10 @@
     <resize-observer @notify="setViewHeight()" />
     <simple-place-search :height="simpleMapSearcHeight" v-if="simpleSearchIsVisible"></simple-place-search>
 
-    <v-btn fab small @click="toggleAcessibleMode" :title="$t('maps.turnOnAcessibleMode')" class="accessibility-btn" > 
+    <v-btn fab small @click="toggleAcessibleMode" 
+      :title="$t('maps.turnOnAcessibleMode')" 
+      class="do-not-trigger-close-bottom-nav accessibility-btn"
+      :style="{bottom: accessibilityButtomHeight}" > 
       <v-icon large :color="$store.getters.mapSettings.acessibleModeActive? 'primary': 'default'" >accessibility</v-icon>
     </v-btn>
     
@@ -43,8 +46,9 @@
       <places-carousel
         :active-index="activeplaceIndex"
         :map-view-data="mapViewData"
-        @closed="closedBottomNav"
+        @close="closedBottomNav"
         @placeSelected="placeIndexSelectedInBottomNav"
+        @gotToPlace="gotToPlace"
         @directionsToPoint="directionsToPoint">
       </places-carousel>
     </v-bottom-nav>

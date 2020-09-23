@@ -45,9 +45,6 @@ export default {
     },
     showNewInfo () {
       return this.newInfoAvailable
-    },
-    setAutofocus () {
-
     }
   },
 
@@ -119,8 +116,20 @@ export default {
       })
 
       this.eventBus.$on('refreshSearch', () => {
-        context.search()
+        context.refreshSearch()
       })
+    },
+
+    refreshSearch() {
+      const appMode = new AppMode(this.$store.getters.mode)
+      const newRoute = appMode.getRoute([this.place])
+      // Only navigate to a new route if params has changed     
+      const zoomChanged =  Number(newRoute.params.zoom) !== Number(this.$route.params.zoom)
+      const centerChanged = newRoute.params.center !== this.$route.params.center
+      const termchanged = newRoute.params.term !== this.$route.params.term
+      if (zoomChanged || termchanged || centerChanged) {
+        this.$router.push(newRoute)
+      }
     },
 
     /**

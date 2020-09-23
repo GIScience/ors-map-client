@@ -27,7 +27,7 @@ export default {
     acquirePositionErros: {
       generic: 'It was not possible to acquire your location because it was not authorized or the browser/device does not support it.',
       unavailable: 'According to your browser/device your location is not currenctly available. Make sure the positioning option/service is properly configured.',
-      permissionDenied: 'Your posistion could not be acquired because the browser/device denied access to it. You can retry it by changing the browser/device settings and clicking on the "my position button"',
+      permissionDenied: 'Your posistion could not be acquired because the browser/device denied access to it. You can retry it by changing the browser/device settings and then click again on the "my position button"',
       timeout: 'Your browser/device returned "timeout" while trying to acquire a position. You can retry it by clicking on the "my position button"'
     },
     couldNotDetermineYourPreciseLocationUsingIpLocation: 'It was not possible to determine your precise location. Your IP based location will be used instead',

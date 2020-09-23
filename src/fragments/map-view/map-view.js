@@ -156,20 +156,37 @@ export default {
       extraInfo: null, // Extra route info (waytypes, surface, steepness etc)
       tempPlaces: null, // a place selected by the user on the map but not yet used for computing directions,
       polylineIsEdibale: false,
-      orsExtendedPolyline: new OrsExtendedPolyline()
+      orsExtendedPolyline: new OrsExtendedPolyline(),
+      featuresJustFitted: false,
     }
   },
   computed: {
-    // When in embedded mode, a 'view on ors' btn is displayed and
-    // thhe target url of this btn is the not embedded versios
+    /**
+     * Returns the non embedded mode URL.
+     * When in embedded mode, a 'view on ors' btn is displayed and
+     * thhe target url of this btn is the not embedded versios.
+     * @returns {String} url
+     */
     nonEmbedUrl() {
       let url = location.href.split('/embed')[0]
       return url
     },
+    /**
+     * Return the current applicable zoom leve 
+     * based either on the zoomLevel attribute or
+     * on the maxZoom
+     * @returns {Number} zoom
+     */
     zoom () {
       const zoom = this.zoomLevel > 0 ? this.zoomLevel : this.maxZoom
       return zoom
     },
+    /**
+     * Determines if the map controls
+     * must be shown based on the current
+     * view resolution and the shrinked value
+     * @returns {Boolean} show
+     */
     showControls () {
       let show = true
       if (this.shrinked && this.$lowResolution) {
@@ -177,6 +194,12 @@ export default {
       }
       return show
     },
+    /**
+     * Returns the map options
+     * based on the embed mode value
+     * and the show controls computed prop
+     * @returns {Object}
+     */
     mapOptions () {
       return {
         zoomControl: this.showControls,
@@ -185,6 +208,12 @@ export default {
         gestureHandling:this.$store.getters.embed
       }
     },
+    /**
+     * Build and return the map center
+     * based either on the single visible marker
+     * or the current map center defined/set in the store
+     * @returns {Lalng}
+     */
     mapCenter () {
       if (this.hasOnlyOneMarker) {
         const singlePlaceCenter = GeoUtils.buildLatLong(this.markers[0].position.lat, this.markers[0].position.lng)
@@ -193,12 +222,27 @@ export default {
         return this.$store.getters.mapCenter
       }
     },
+    /**
+     * Determines if only one markes if on the map view
+     * @returns {Boolean}
+     */
     hasOnlyOneMarker () {
       return this.markers && this.markers.length === 1
     },
+    /**
+     * Determines if the brand over the 
+     * map view must be shown
+     * @returns {Boolean}
+     */
     showBrand () {
       return this.currentInnerHeight > 450
     },
+    /**
+     * Buil and return the geojson options based on the
+     * color defined as main and the built tooltip 
+     * string
+     * @returns {Object}
+     */
     geojsonOptions () {
       const tooltip = this.routeToolTip(0)
       return {
@@ -208,30 +252,45 @@ export default {
         }
       }
     },
+    /**
+     * Return the geojson style options
+     * using the value in constants object
+     * @returns {Object}
+     */
     geojsonOutlineOptions () {
       return { style: { color: constants.routeBackgroundColor, weight: '9' } }
     },
+    /**
+     * Build and return the ative route data
+     * based on the $store.getters.activeRouteIndex
+     * @returns {Array} of latlngs
+     */
     activeRouteData () {
       if (this.localMapViewData.hasRoutes()) {
         // get the coordinates of the active route
         const coords = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
 
-        // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
-        // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
-        // So we invert them to provide to the component what is expected
+        // Vue2-Leaflet, the component used to render data on the map, expect the coordinates in the [lat,lon] order,
+        // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
+        // So we invert them to provide what the component expectes
         const activeRoute = GeoUtils.switchLatLonIndex(coords)
         return activeRoute
       }
     },
+    /**
+     * Build and return an array of alternative routes
+     * to be rendered on the map view
+     * @returns {Array} alternativeRoutesData objects
+     */
     alternativeRoutes () {
       const alternativeRoutesData = []
       if (this.localMapViewData.hasRoutes()) {
         for (const key in this.localMapViewData.routes) {
           const index = Number(key)
           if (index !== this.$store.getters.activeRouteIndex) {
-            // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
-            // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
-            // So we invert them to provide to the component what is expected
+            // Vue2-Leaflet, the component used to render data on the map, expect the coordinates in the [lat,lon] order,
+            // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
+            // So we invert them to provide what the component expectes
             const coords = GeoUtils.switchLatLonIndex(this.localMapViewData.routes[key].geometry.coordinates)
             const alternativeRoute = { polyline: coords, index: index }
             alternativeRoutesData.push(alternativeRoute)
@@ -240,6 +299,16 @@ export default {
       }
       return alternativeRoutesData
     },
+    /**
+     * Build and return the polygons to be rendered
+     * on the map view based on the polygons 
+     * defined in the localmapViewData object.
+     * As the renderer expect the polygons coords in the
+     * [lat,lon] order, we switch the coords of each polygon
+     * and also set the color and label based on the polygon 
+     * data and translations
+     * @returns {Array} polygons
+     */
     polygons () {
       const polygons = []
       if (this.localMapViewData) {
@@ -250,15 +319,22 @@ export default {
           polygon.color = PolygonUtils.buildPolygonColor(key)
           polygon.label = PolygonUtils.buildPolygonLabel(polygon, translations)
 
-          // Vue2-Leaflet,used to render data on the mpa, expect the coordinates in the [lat,lon] order,
-          // but the GeoJSON format returned by ORS API contains coordinates in the [lon lat] order.
-          // So we invert them to provide to the component what is expected
+          // Vue2-Leaflet, the component used to render data on the map, expect the coordinates in the [lat,lon] order,
+          // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
+          // So we invert them to provide what the component expectes
           polygon.latlngs = GeoUtils.switchLatLonIndex(polygon.geometry.coordinates[0])
           polygons.push(polygon)
         }
       }
       return polygons
     },
+    /**
+     * Build and return an array of marker object
+     * based either on the  tempPlaces value 
+     * (used when a place was selected but a route was not calculated yet)
+     * or based on the places defined on the localMapViewData
+     * @returns {Array} of markers
+     */
     markers () {
       let tempMapViewData
       if (this.tempPlaces) {
@@ -272,12 +348,24 @@ export default {
         return markers
       }
     },
+    /**
+     * Determines the max zoom applicable
+     * for the map based on the map view data nax zoom or on the
+     * initial max zoom
+     * @returns {Number}
+     */
     maxZoom () {
       if (this.localMapViewData.maxZoom) {
         return this.localMapViewData.maxZoom
       }
       return this.initialMaxZoom
     },
+    /**
+     * Build and return the circle marker
+     * based on the clickLatlng position
+     * to show to the user where s/he has clicked
+     * @returns {Object}
+     */
     circleMarker () {
       if (this.clickLatlng) {
         return {
@@ -286,6 +374,11 @@ export default {
         }
       }
     },
+    /**
+     * Build and return the my position marker object
+     * based on the current location stored in the store
+     * @returns {Object}
+     */
     myPositionMarker () {
       if (this.$store.getters.currentLocation) {
         const markerData = {
@@ -297,28 +390,53 @@ export default {
         return markerData
       }
     },
+    /**
+     * Determines if a route stop can be added
+     */
     canAddStop () {
       const can = !Array.isArray(this.markers) || this.markers.length < 15
       return can
     },
+    /**
+     * Return the current map polyline measures options
+     * @returns {Object} options
+     */
     polylineMeasureOptions () {
       const options = mapDefinitions.polylineMeasureOptions(this.$t('mapView.polylineMeasure'))
       return options
     },
 
+    /**
+     * Return the current map drawing options
+     * @returns {Object} options
+     */
     drawOptions () {
       const options = mapDefinitions.drawOptions(this.$t('mapView.youCantIntersectPolygons'))
       return options
     },
 
+    /**
+     * Returns the current map height prop
+     * @returns {Number} height
+     */
     mapHeight () {
       return this.height
     },
+    /**
+     * Determines if markers are draggable
+     * based on the current app mode
+     * @returns {Boolean} isDraggable
+     */
     markerIsDraggable () {
       const draggableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]
       const isDraggable = draggableModes.includes(this.mode)
       return isDraggable
     },
+    /**
+     * Determines if markers are removable
+     * based on the current app mode
+     * @returns {Boolean} isRemovable
+     */
     markerIsRemovable () {
       let markerRemovableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]
       let isRemovable = markerRemovableModes.includes(this.mode)
@@ -348,9 +466,23 @@ export default {
       return show
     },
 
+    /**
+     * Determines if the current active
+     * route is draggable based on app mode
+     * @returns {Boolean} isDraggable
+     */
     activeRouteIsDraggable () {
       let isDraggable = this.mode === constants.modes.directions
       return isDraggable
+    },
+    /**
+     * Return the accessibility btn top position
+     * based on the current map view height
+     * @returns {String} height
+     */
+    acessibilityBtnTopPosition () {
+      const height = `${this.height - 60}px`
+      return height
     }
   },
   watch: {
@@ -482,6 +614,7 @@ export default {
      * component. Get the current map center, set it via setMapCenter and
      * define the current myLocationActive based on the last map center
      * @param {*} event
+     * @emits mapCenterMoved
      */
     mapMoved (event) {
       const center = event.target.getCenter()
@@ -491,6 +624,7 @@ export default {
       // changes more than 50 meters from the previous center
       if (distance > 50) {
         this.setMapCenter(center)
+        this.storeMapBounds()
         const data = { center: this.$store.getters.mapCenter, distance: distance }
         this.$emit('mapCenterMoved', data)
       }
@@ -503,13 +637,14 @@ export default {
         // via browser location api. So, we are considering that
         // if this distance is less then 50 meters, then the my
         // location must still be considered as active
-        this.myLocationActive = distance < 50
+        this.myLocationActive = (distance < 50)
       }
     },
     /**
      * Handle the alternative route index seleted event
      * @param {*} index
      * @param {*} event
+     * @emits activeRouteIndexChanged
      */
     alternativeRouteIndexSelected (index, event) {
       event.originalEvent.stopPropagation()
@@ -520,8 +655,6 @@ export default {
     /**
      * Change the current active route index
      * @param {*} index
-     * @param {*} event
-     * @emits activeRouteIndexChanged
      */
     setActiveRouteIndex (index) {
       const context = this
@@ -568,11 +701,20 @@ export default {
     },
     /**
      * We watch the box model for changes and update the internal closed data that is used to control the visibility of the box
+     * @param {Object} event
      * @emits zoomChanged
      */
     zoomed (event) {
       this.zoomLevel = event.sourceTarget._zoom
-      this.$emit('zoomChanged', event.sourceTarget._zoom)
+      if (!this.featuresJustFitted) {
+        this.storeMapBounds()
+        this.$emit('zoomChanged', event.sourceTarget._zoom)
+      } else {
+        // If the zoom was changed programatically
+        // reset the flag to false, as it has already 
+        // been acomplished its goal for one zoom event cycle
+        this.featuresJustFitted = false
+      }
     },
 
     /**
@@ -603,10 +745,9 @@ export default {
      * @param {*} event
      */
     markerMoved (event) {
-      // only marker changes that are a result
-      // of user interaction are treated here
-      // with vue2-leaflet v 2.5.2 the event.originalEvent was no instance of window.PointerEvent anymore
-      // use parent window.MouseEvent instead
+      // only marker changes that are a result of user interaction are treated here.
+      // With vue2-leaflet version 2.5.2 the event.originalEvent is not  an instance of 
+      // window.PointerEvent anymore and use parent window.MouseEvent instead
       if (event.originalEvent instanceof window.MouseEvent) {
         clearTimeout(this.markerMoveTimeoutId)
         this.markerMoveTimeoutId = setTimeout(() => {
@@ -617,6 +758,7 @@ export default {
     /**
      * Add stop via polyline drag
      * @param {*} data 
+     * @emits addRouteStop
      */
     addStopViaPolylineDrag (data) {
       data.latlng = data.event.target.getLatLng()
@@ -624,6 +766,10 @@ export default {
       data.injectIndex = closestPlaceIndex
       this.$emit('addRouteStop', data)
     },
+    /**
+     * Show the point altitude (to be implemented)
+     * @param {Object} latlng 
+     */
     followPolyline (latlng) {
       // implement show the point altitude
       // console.log(latlng)
@@ -696,7 +842,6 @@ export default {
       if (latlng) {
         const previousCenter = this.$store.getters.mapCenter
         this.$store.commit('mapCenter', latlng)
-        this.storeMapBounds()
 
         // Store current map center
         localStorage.setItem('mapCenter', JSON.stringify(latlng))
@@ -737,7 +882,7 @@ export default {
     },
 
     /**
-     * Set map bounds
+     * Store map bounds and mapReady flag
      */
     storeMapBounds () {
       const buildBondaryes = (bounds) => {
@@ -861,19 +1006,6 @@ export default {
       }
     },
     /**
-     * Set zoom level based on the layer when has only asingle maker rendered
-     * @param {Object} leaflet map object
-     * @return {Boolean} zoom changed
-     */
-    setZoomLevel (mapObj) {
-      const curretMapZoom = mapObj.getZoom()
-      if (curretMapZoom !== this.zoomLevel) {
-        mapObj.setZoom(this.zoomLevel)
-        return true
-      }
-      return false
-    },
-    /**
      * Redraw the map component by faking a window resize event
      */
     redrawMap () {
@@ -910,6 +1042,11 @@ export default {
 
     /**
      * Update localMapViewData places
+     * @param {Object} data {clickLatlng: latlng, eventName:String}
+     * @emits directionsFromPoint
+     * @emits directionsToPoint
+     * @emits addRouteStop
+     * @emits addDestinationToRoute
      */
     prepareDataAndEmitRightClickEvent (data) {
       let place = new Place(data.clickLatlng.lng, data.clickLatlng.lat)
@@ -957,14 +1094,14 @@ export default {
         // If the map object is already defined
         // then we can directly access it
         if (context.map && context.isValidBounds(context.dataBounds)) {
-          context.fitAndZoom(force, maxFitBoundsZoom)
+          context.fit(force, maxFitBoundsZoom)
         } else {
           // If not, it wil be available only in the next tick
           context.$nextTick(() => {
             context.buildAndSetBounds()
             if (context.$refs.map && context.isValidBounds(context.dataBounds)) {
               context.map = context.$refs.map.mapObject // work as expected when wrapped in a $nextTick
-              context.fitAndZoom(force, maxFitBoundsZoom)
+              context.fit(force, maxFitBoundsZoom)
             }
             resolve()
           })
@@ -989,9 +1126,11 @@ export default {
     },
 
     /**
-     * Define the zoom level or fit the bounds function
+     * Fit the bounds  of the map considering the databounds defined
+     * @param {Boolean} force
+     * @param {Number} maxFitBoundsZoom integer
      */
-    fitAndZoom (force, maxFitBoundsZoom) {
+    fit (force, maxFitBoundsZoom) {
       if (this.dataBounds && (this.fitBounds === true || force === true)) {
         // we set the max zoom in level and then fit the bounds
         // Temporally disabled the zoomlevel seeting to check impacts (it seems not to be necessary anymore)
@@ -1001,7 +1140,20 @@ export default {
         // before fitting the map bounds
         const context = this
         setTimeout(() => {
+          // The fit may affect the zoom level.
+          // So we set the programatically zoom flag to let 
+          // other methods to have this information if 
+          // they need, specially method `zoomed`
+          context.featuresJustFitted = true
           context.map.fitBounds(context.dataBounds, { padding: [20, 20], maxZoom: maxFitBoundsZoom })
+          context.storeMapBounds()
+          // Yeah, it is not nice to have nested timeout 
+          // but we need it to make sure that this flag is only
+          // set as false after a while so other components 
+          // have time to treat this before it is set to false again
+          setTimeout(() => {
+            context.featuresJustFitted = false
+          }, 500)
         }, 400)
       }
     },
@@ -1105,23 +1257,27 @@ export default {
     /**
      * Update the current browser's/user's location on the map
      * If the location can not be determined, show a toaster with this error
-     * @param {Boolean} showMarker
+     * @param {Boolean} showLocation
      */
-    updateMyLocation  (showMarker = false) {
+    updateMyLocation  (showLocation = false) {
       const context = this
-      GeoUtils.getBrowserLocation().then((location) => {
-        context.$store.commit('currentLocation', location)
-        context.myLocationActive = showMarker
-
-        // Set returned location as map center
-        const latlng = GeoUtils.buildLatLong(location.lat, location.lng)
-        this.setMapCenter(latlng)
-      }).catch(error => {
-        const message = this.getPositionErrorMessage(error)
-        context.showWarning(message, { timeout: 0 })
+      if (showLocation) {
+        GeoUtils.getBrowserLocation().then((location) => {
+          context.$store.commit('currentLocation', location)
+          context.myLocationActive = showLocation
+  
+          // Set returned location as map center
+          const latlng = GeoUtils.buildLatLong(location.lat, location.lng)
+          this.setMapCenter(latlng)
+        }).catch(error => {
+          const message = this.getPositionErrorMessage(error)
+          context.showWarning(message, { timeout: 0 })
+          context.myLocationActive = false
+          console.log(error)
+        })
+      } else {
         context.myLocationActive = false
-        console.log(error)
-      })
+      }
     },
 
     /**
@@ -1413,7 +1569,7 @@ export default {
       context.extraInfo = extraInfo
       if (this.$store.getters.mapSettings.autoFitHighlightedBounds) {
         context.buildAndSetBounds()
-        context.fitAndZoom()
+        context.fit()
       }
     })
     // Add the gesture handling so that when the user is 
@@ -1425,6 +1581,7 @@ export default {
     this.loadMapData()
     this.setProviders()
     this.setDrawingTool()
+    this.storeMapBounds()
   },
   created () {
     // Copy the prop value to a local prop

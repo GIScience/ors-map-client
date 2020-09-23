@@ -131,9 +131,15 @@ export default {
     /**
      * Hanles the click outside event
      * emitting the closed event
+     * @emits close
      */
-    clickOutside () {
-      this.$emit('closed')
+    clickOutside (event) {
+      const source = event.currentTarget.activeElement
+      // If the accessibility buttom is hit
+      // we don't have to emit the closed
+      if (!source.classList.contains('do-not-trigger-close-bottom-nav')) {
+        this.$emit('close')
+      }
     },
     /**
      * Scroll to the next block of places
@@ -163,6 +169,14 @@ export default {
      */
     directionsTo (place) {
       this.$emit('directionsToPoint', { place })
+      this.$emit('closed')
+    },
+    /**
+     * Emmit the directions to latlg
+     * @param {*} place
+     */
+    gotToPlace (place) {
+      this.$emit('gotToPlace', place)
       this.$emit('closed')
     }
   },

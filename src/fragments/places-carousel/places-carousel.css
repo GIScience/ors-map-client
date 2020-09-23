@@ -50,13 +50,6 @@
   padding-top: 5px;
 }
 
-.carousel >>> .directions-btn {
-  height: 35px;
-  width: 100%;
-  padding: 0;
-  border: 1px solid gray;
-}
-
 .carousel >>> .previous {
   position: absolute;
   left: 0;
@@ -81,19 +74,27 @@
   padding-top: 2px;
 }
 
-.carousel >>> .directions-btn .text {
+.carousel >>> .navigate-btn {
+  height: 35px;
+  width: 100%;
+  padding: 0;
+  border: 1px solid gray;
+}
+
+
+.carousel >>> .navigate-btn .text {
   flex-direction: unset;
   color: black;
   text-transform: uppercase;
 }
 
-.carousel >>> .directions-btn .icon {
+.carousel >>> .navigate-btn .icon {
   flex-direction: unset;
   color: black !important;
   margin-left: 5px;
 }
 
-.carousel >>> .directions-btn .v-btn__content {
+.carousel >>> .navigate-btn .v-btn__content {
   flex-direction: unset;
 }
 

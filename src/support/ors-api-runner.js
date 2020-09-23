@@ -120,7 +120,7 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
 
     client.geocode(args).then(response => {
       // If no features were returned and the search
-      // was limited to the defined bounding box, redo
+      // was limited to the defined bounding box, rerun
       // the search at this time without the bounding box
       if (response.features.length === 0 && restrictToBbox) {
         return PlacesSearch(term, quantity, false).then(places => {

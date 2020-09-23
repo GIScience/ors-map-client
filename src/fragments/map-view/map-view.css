@@ -78,5 +78,4 @@
 }
 .move-map-arrow.down{
   left: calc(50% - 30px);
-  bottom: 10px;
 }

@@ -28,7 +28,7 @@ class SearchMode {
     }
     // Create the route object
     const center = `${appRouteData.options.center.lat},${appRouteData.options.center.lng}`
-    const params = { term: name, center: center }
+    const params = { term: name, center: center, zoom: appRouteData.options.zoom}
     const route = { name: 'MapSearch', params: params }
     return route
   }
@@ -45,6 +45,7 @@ class SearchMode {
     const coords = currentRoute.params.center.split(',')
     const latlng = GeoUtils.buildLatLong(coords[0], coords[1])
     appRouteData.options.center = latlng
+    appRouteData.options.zoom = Number(currentRoute.params.zoom)
 
     // Get and format the place name
     const placeName = currentRoute.params.term.replace(/, /g, ',').replace(',', ', ')

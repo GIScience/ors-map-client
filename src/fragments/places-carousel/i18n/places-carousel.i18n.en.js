@@ -11,6 +11,7 @@ export default {
     prev: 'Previous block',
     directionsTo: 'Directions to',
     distance: 'Distance',
-    distanceFromLocationMarkedOnTheMap: 'Approximate distance from location marked on the map'
+    distanceFromLocationMarkedOnTheMap: 'Approximate distance from location marked on the map',
+    selectPlace: 'Select'
   }
 }
