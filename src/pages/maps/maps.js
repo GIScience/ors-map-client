@@ -29,7 +29,8 @@ export default {
     touchmoveDebounceTimeoutId: null,
     searchBtnAvailable: false,
     firstLoad: true,
-    previousRoute: null
+    previousRoute: null,
+    refreshingSearch: false
   }),
   components: {
     MapView,
@@ -41,10 +42,20 @@ export default {
     ResizeObserver
   },
   computed: {
+    /**
+     * Determines if the simple search component is visible
+     * based on the embed mode value, the mapready and the sidebar visibility
+     * @returns {Boolean} isVisible
+     */
     simpleSearchIsVisible () {
       let isVisible = !this.$store.getters.embed && this.$store.getters.mapReady && !this.$store.getters.isSidebarVisible
       return isVisible
     },
+    /**
+     * Determines the map view height based on the view height,
+     * the bottom nav visibility and the map height offset
+     * @returns {Number} height
+     */
     mapHeight () {
       let height = this.viewHeight
       if (this.showBottomNav) {
@@ -52,30 +63,78 @@ export default {
       }
       return height
     },
+    /**
+     * Returns the accessinility bottom height
+     * based on the visibility of the bottomNavHeight
+     * @returns {String} bottomHeight
+     */
+    accessibilityButtomHeight () {
+      var bottomHeight = '125px'
+      if (this.showBottomNav) {
+        const height = this.bottomNavHeight + 10
+        bottomHeight = `${height}px`      
+      } 
+      return bottomHeight
+    },
+    /**
+     * Returns the zoom level tha must be used based on 
+     * the app route options and the default zoom level
+     * @returns {Number} zoom
+     */
     zoom () {
       const zoom = this.$store.getters.appRouteData.options.zoom || this.defaultZoom
       return zoom
     },
+    /**
+     * Determines if the bottom nav must be visible based on
+     * the availability of the bottom nav
+     * @returns {Boolean}
+     */
     showBottomNav () {
       return this.bottomNavActive
     },
+    /**
+     * Returns the bottom nav element top position value
+     * based on the view height and the bottom nav height
+     * @returns {Number}
+     */
     bottomNavTop () {
       return this.viewHeight - this.bottomNavHeight
     },
+    /**
+     * Determines if the refresh search should be visible
+     * based on the app mode and if the search btn is available
+     * @returns {Boolean} available
+     */
     refreshSearchAvailable () {
       const available = this.$store.getters.mode === constants.modes.search && this.searchBtnAvailable
       return available
     },
+    /**
+     * Determines if the bounds of the map
+     * must be fitted based on the route change, the app mode
+     * and if it is the firs load
+     * @returns {Boolean} fit
+     * 
+     */
     fitMapBounds () {
-      let fit = true
+      let fit = this.refreshingSearch ? false : true
+      var routeChanged = false
+      if(this.previousRoute) {
+        routeChanged = this.previousRoute.name !== this.$route.name
+      }
+      
       const directionsMode = constants.modes.directions
-      const routeChanged = this.previousRoute && this.previousRoute.name !== this.$route.name
-
       if (!this.firstLoad && !routeChanged && this.$store.getters.mode === directionsMode && !this.$store.getters.mapSettings.alwaysFitBounds) {
         fit = false
       }
       return fit
     },
+    /**
+     * Returns the map center based on the app route data
+     * of this is available. If it is not available, returns null
+     * @returns {Latlng|null}
+     */
     mapViewCenter () {
       let center = null
       if (this.$store.getters.appRouteData.options.center) {
@@ -83,6 +142,11 @@ export default {
       }
       return center
     },
+    /**
+     * Retursn a boolean determining if the drawing tool
+     * is available based on the app mode
+     * @returns {Boolean}
+     */
     supportsDrawingTool () {
       const modeWithDrawingTools = [constants.modes.directions, constants.modes.roundTrip]
       // If the app is in one of the modes that supports drawing tool
@@ -110,20 +174,57 @@ export default {
     }
   },
   methods: {
+    /**
+     * Toggle the accessible mode by
+     * storing the flag under the mapSettings store
+     * to do so we get the current setgin object, update it,
+     * convert it to a stringified representation and
+     * save it to the browsers'local storage
+     * @uses localStorage
+     */
     toggleAcessibleMode () {
       let mapSettings = this.$store.getters.mapSettings
       mapSettings.acessibleModeActive = !mapSettings.acessibleModeActive
       this.$store.commit('mapSettings', mapSettings)
       localStorage.setItem('mapSettings', JSON.stringify(mapSettings))
     },
-    zoomChanged () {
-      this.storeZoomValue()
+    /**
+     * Stores the new zomm value and set the
+     * searchBtnAvailable flag as true, since
+     * once the map has been moved, the user may wants to
+     * refresh the search to get features within the
+     * visible map view
+     * @param {*} newZoomLevel 
+     */
+    zoomChanged (newZoomLevel) {
+      this.storeZoomValue(newZoomLevel)
       this.searchBtnAvailable = true
     },
+    /**
+     * Set the refreshing search flag as true,
+     * the searchBtnAvailable flag as false
+     * and emits the refreshSearch event
+     * @emits refreshSearch via eventBus
+     */
     refreshSearch () {
+      // the refresh search event will
+      // trigger a flow that will make other
+      // components to re do the search
+      // and update the data. During this cycle
+      // we need a flag that tells us we are on
+      // this state so that the computed fitMapBounds
+      // can avoid returning the `fitMapBounds` as true
+      // what should not happen in the case that
+      // the map bounds have been already defined by the user
+      this.refreshingSearch = true
       this.searchBtnAvailable = false
       this.eventBus.$emit('refreshSearch')
     },
+    /**
+     * Defines if the searchBtnAvailable based on 
+     * how much the map has been moved
+     * @param {Object} data 
+     */
     mapCenterMoved (data) {
       // Only enables the refresh search btn
       // if the map has been moved more than 500 meters
@@ -216,6 +317,11 @@ export default {
       // when it changes. So, by changing it here
       // the map component is refresed
       this.mapViewData = mapViewData
+
+      // once the mapViewData is changed, the
+      // possible refreshing search event
+      // cycle is concluded
+      this.refreshingSearch = false
     },
 
     /**
@@ -264,16 +370,45 @@ export default {
       }
     },
 
+    /**
+     * Store the current map view guid
+     * in a local property. so in case
+     * there are more then one map (future)
+     * we can check which map must be accessed
+     * @param {*} mapViewGuid 
+     */
     orsMapCreated (mapViewGuid) {
       this.mapViewGuid = mapViewGuid
     },
+    /**
+     * When a marker has been dragged
+     * emits the markerDragged event (via eventbus)
+     * @param {Object} marker 
+     * @emits markerDragged via eventbus
+     */
     markerDragged (marker) {
       this.eventBus.$emit('markerDragged', marker)
     },
 
+    /**
+     * When a directions from point is hit, 
+     * emit a directionsFromPoint event via eventbus.
+     * The map-view component does not emit events via
+     * eventBus, only local events to its container (this component)
+     * @param {Object} data 
+     * @emits directionsFromPoint via eventbus
+     */
     directionsFromPoint (data) {
       this.eventBus.$emit('directionsFromPoint', data)
     },
+    /**
+     * Trigger directions based on the data passed
+     * that includes a Place by clearing the map
+     * and by emitting the directionsToPoint evet (via eventBus)
+     * The map-view component does not emit events via
+     * eventBus, only local events to its container (this component)
+     * @param {Objet} data {place: Place}
+     */
     directionsToPoint (data) {
       let context = this
       this.eventBus.$emit('clearMap')
@@ -282,19 +417,66 @@ export default {
         context.eventBus.$emit('directionsToPoint', data)
       }, 100)
     },
+    /**
+     * Navigate the app to the single place mode
+     * @param {Place} place 
+     */
+    gotToPlace (place) {
+      this.$store.commit('mode', constants.modes.place)
+      const appMode = new AppMode(this.$store.getters.mode)
+
+      // Define new app route
+      const route = appMode.getRoute([place])
+      this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
+      this.$router.push(route)
+      this.$store.commit('setLeftSideBarIsOpen', true)
+    },
+     /**
+     * When an `add isochrones center` option is hit, 
+     * emits an addAsIsochroneCenter event via eventbus.
+     * The map-view component does not emit events via
+     * eventBus, only local events to its container (this component)
+     * @param {Object} data 
+     * @emits addAsIsochroneCenter via eventbus
+     */
     addAsIsochroneCenter (data) {
       this.eventBus.$emit('addAsIsochroneCenter', data)
     },
 
+    /**
+     * When an `add route stop` option is hit, 
+     * emits an addRouteStop event via eventbus.
+     * The map-view component does not emit events via
+     * eventBus, only local events to its container (this component)
+     * @param {Object} data 
+     * @emits addRouteStop via eventbus
+     */
     addRouteStop (data) {
       this.eventBus.$emit('addRouteStop', data)
     },
+    /**
+     * When an `add destination to route` option is hit, 
+     * emits an addDestinationToRoute event via eventbus.
+     * The map-view component does not emit events via
+     * eventBus, only local events to its container (this component)
+     * @param {Object} data 
+     * @emits addDestinationToRoute via eventbus
+     */
     addDestinationToRoute (data) {
       this.eventBus.$emit('addDestinationToRoute', data)
     },
+    /**
+     * Set the altitude modal open flag as false
+     */
     closeAltitudeModal () {
       this.isAltitudeModalOpen = false
     },
+    /**
+     * Set the `settings` open flag as false
+     * and if the current route is MapSettings
+     * clear the map and redirect the app the the
+     * `Maps` route
+     */
     closeSettingsModal () {
       this.isSettingsOpen = false
       if (this.$route.name === 'MapSettings') {
@@ -302,6 +484,12 @@ export default {
         this.$router.push({ name: 'Maps' })
       }
     },
+    /**
+     * Set the `about` open flag as false
+     * and if the current route is MapSettings
+     * clear the map and redirect the app the the
+     * `Maps` route
+     */
     closeAboutModal () {
       this.isAboutOpen = false
       if (this.$route.name === 'MapAbout') {
@@ -309,9 +497,22 @@ export default {
         this.$router.push({ name: 'Maps' })
       }
     },
+    /**
+     * When an avoid polygons option changes, 
+     * emits an avoidPolygonsChanged event via eventbus.
+     * The map-view component does not emit events via
+     * eventBus, only local events to its container (this component)
+     * @param {Object} polygons 
+     * @emits avoidPolygonsChanged via eventbus
+     */
     avoidPolygonsChanged (polygons) {
       this.eventBus.$emit('avoidPolygonsChanged', polygons)
     },
+    /**
+     * Set the app `settings` and `about` modals' state (open or closed)
+     * based on the store definitions. These definitions are saved based
+     * on the app route
+     */
     setModalState () {
       // Open settings if it was defined in map.route.js
       if (this.$store.getters.openSettings) {
@@ -331,36 +532,43 @@ export default {
   },
 
   created () {
-    // emit the an event catch by root App component
+    // Emit the an event catch by root App component
     // telling it to update the page title
     this.eventBus.$emit('titleChanged', this.$t('maps.pageTitle'))
     this.$store.commit('setDisplayFooter', false)
     this.$store.commit('setLeftSideBarIsOpen', false)
 
     const context = this
+    // Listen to the mapViewDataChanged event and call the
+    // necessary methods when it happes
     this.eventBus.$on('mapViewDataChanged', function (mapViewData) {
       context.setMapDataAndUpdateMapView(mapViewData)
       context.setViewHeightAndBottomNav()
     })
 
-    this.eventBus.$on('showAltitudeModal', function () {
+    // Set the modal open falgs to true when
+    // a show-<something> events happen
+    this.eventBus.$on('showAltitudeModal', () => {
       context.isAltitudeModalOpen = true
     })
-    this.eventBus.$on('showSettingsModal', function () {
+    this.eventBus.$on('showSettingsModal', () => {
       context.isSettingsOpen = true
     })
-    this.eventBus.$on('showAboutModal', function () {
+    this.eventBus.$on('showAboutModal', () => {
       context.isAboutOpen = true
     })
-    this.loadRoute()
-    this.setModalState()
-    this.setViewHeight()
-
+  
     // When the touch move event occours
     // the view size may change (mobile devices)
     // due to the url bar visibility
     document.addEventListener('touchmove', () => {
       this.refreshViewSizeAfterTouchMode()
     })
+
+    // Run the init methods whe 
+    // this component is created
+    this.loadRoute()
+    this.setModalState()
+    this.setViewHeight()
   }
 }

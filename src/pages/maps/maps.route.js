@@ -66,7 +66,7 @@ export default [
     }
   },
   {
-    path: `${searchPath}:term/@:center${embedParameters}`,
+    path: `${searchPath}:term/@:center/z/:zoom${embedParameters}`,
     name: 'MapSearch',
     component: Maps,
     beforeEnter: (to, from, next) => {

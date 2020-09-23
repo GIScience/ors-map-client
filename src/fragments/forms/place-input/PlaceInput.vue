@@ -81,7 +81,7 @@
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title> 
-                <v-btn flat small @click.stop="suggestionClicked(placeSuggested)" class="no-padding no-margin no-capitalize">
+                <v-btn flat small @click.stop="setLocationFromBrowser()" class="no-padding no-margin no-capitalize">
                   {{ $t('placeInput.yourLocation') }} 
                 </v-btn>
               </v-list-tile-title>
