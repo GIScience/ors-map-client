@@ -15,7 +15,7 @@ const RouteUtils = {
     const places = []
     const data = RouteUtils.decodeDataParam(route.params.data)
     // Get the collection of coordinates from the decoded data param object
-    const coordinates = data.coordinates.split(';')
+    const coordinates = data.coordinates ? data.coordinates.split(';') : []
 
     // Check if we have the same number of coordinates and places
     var placeNameParameters = lodash.pickBy(route.params, function (value, key) {

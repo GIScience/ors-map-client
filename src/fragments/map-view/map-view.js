@@ -54,7 +54,6 @@ import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import 'leaflet-measure/dist/leaflet-measure.css'
 import 'vue-resize/dist/vue-resize.css'
 import Leaflet from 'leaflet'
-import geoUtils from '../../support/geo-utils'
 
 export default {
   components: {
