@@ -503,17 +503,31 @@ export default {
       },
       deep: true
     },
+    /**
+     * When the prop supportsDrawingTool 
+     * changes run the setDrawingTool 
+     * if the prop value is true
+     * @param {Boolean} newVal 
+     */
     supportsDrawingTool (newVal) {
       if (newVal) {
         this.setDrawingTool()
       }
     },
+    /**
+     * Once the map view is shrinked
+     * we have to run the setDrawingTool 
+     * utility again
+     */
     shrinked () {
-      // Once the map view is shrinked
-      // we have to run the setDrawingTool
-      // utility again
       this.setDrawingTool()
     },
+    /**
+     * When the prop showPopups changes
+     * copy its value to the local
+     * attribute
+     * @param {*} newVal 
+     */
     showPopups (newVal) {
       this.showClickPopups = newVal
     },
@@ -523,15 +537,31 @@ export default {
     customTileProviderUrl () {
       this.setProviders()
     },
+    /**
+     * When the prop height changes
+     * run the adjust map method
+     * to make sure that it fits the
+     * current view
+     */
     height () {
       this.adjustMap()
     },
+    /**
+     * When the prop mode changes
+     * set the isAltitudeModalOpen attribute
+     * based on the current mode
+     */
     mode () {
       // Altitude modal must be hidden if mode is not directions or roundTrip
       if (this.mode !== constants.modes.directions && this.mode !== constants.modes.roundTrip) {
         this.isAltitudeModalOpen = false
       }
     },
+    /**
+     * Whhen the center prop value changes
+     * run the centerChanged method that will
+     * store the current location on localstorage
+     */
     center: {
       handler: function () {
         this.centerChanged()
@@ -545,26 +575,23 @@ export default {
      * @param {String} direction 
      */
     moveMapCenter(direction) {
-      console.log(direction)
-      // Calculate the offset
-      var offsset
       switch (direction) {
         case 'left':
-          var offset = this.map.getSize().x*0.15;
+          var offset = this.map.getSize().x*0.15
           this.map.panBy(new L.Point(-offset, 0), {animate: true})
-          break;
+          break
         case 'right':
-          var offset = this.map.getSize().x*0.15;
+          var offset = this.map.getSize().x*0.15
           this.map.panBy(new L.Point(offset, 0), {animate: true})
           break;
         case 'up':
-          var offset = this.map.getSize().y*0.15;
+          var offset = this.map.getSize().y*0.15
           this.map.panBy(new L.Point(0, -offset), {animate: true})
-          break;
+          break
         case 'down':
-          var offset = this.map.getSize().y*0.15;
+          var offset = this.map.getSize().y*0.15
           this.map.panBy(new L.Point(0, offset), {animate: true})
-          break;
+          break
       }
     },
     /**
@@ -586,6 +613,7 @@ export default {
      * a local event
      * @param {*} place
      * @param {*} event
+     * @emits markerClicked
      */
     markerClicked (place, event) {
       // Only prevent the default click, that shows the
@@ -1165,15 +1193,20 @@ export default {
     },
 
     /**
-     * Handle the map right cick event, showing the options pop up box
+     * Handle the map right cick event, 
+     * Set the clickLatlng curresnt value
+     * and emits events that will trigger the displaying 
+     * of the right click floating-context menu
+     * @param {Object} event
+     * @emits mapRightClicked (via eventBus)
      */
     mapRightClick (event) {
       if (this.showClickPopups) {
-        // To be catch by the MapRightClick.vue component
         const insidePolygon = this.isPointInsidePolygons(event.latlng.lat, event.latlng.lng)
         if (!insidePolygon) {
           const mapEl = this.$refs.map.$el
           const data = { event, mapEl, canAddStop: this.canAddStop }
+          // Event to be catch by the MapRightClick.vue component
           this.eventBus.$emit('mapRightClicked', data)
         }
         this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
@@ -1181,7 +1214,13 @@ export default {
     },
 
     /**
-     * Handle the map left cick event, showing the place info pop up box
+     * Handle the map left cick event
+     * Set the clickLatlng curresnt value
+     * and emits events that will trigger the displaying 
+     * of the place info pop up box
+     * @param {Object} event
+     * @emits setSidebarStatus (via eventBus)
+     * @emits mapLeftClicked (via eventBus)
      */
     mapLeftClick (event) {
       // If in low resolution and sidebar is open, then left click on the map
@@ -1205,7 +1244,7 @@ export default {
      * If it is returnd the polygon points array
      * @param {*} lat
      * @param {*} lng
-     * @returns Boolean|Array
+     * @returns {Boolean|Array}
      */
     isPointInsidePolygons (lat, lng) {
       const polygons = this.extractPolygonsFromMap()
@@ -1220,6 +1259,7 @@ export default {
     },
     /**
      * Get the polyline humanized tool tip if the response contains a route summary
+     * @param {Object} tooltipData
      * @returns {Array} coordinates
      */
     humanizeRouteToolTip (tooltipData) {
@@ -1231,6 +1271,7 @@ export default {
     },
     /**
      * Adjust the map dimensions and redraw it according the current window size
+     * @dispatch resize event
      */
     adjustMap () {
       window.dispatchEvent(new Event('resize'))
@@ -1257,6 +1298,7 @@ export default {
      * Update the current browser's/user's location on the map
      * If the location can not be determined, show a toaster with this error
      * @param {Boolean} showLocation
+     * @uses currentLocation
      */
     updateMyLocation  (showLocation = false) {
       const context = this
@@ -1307,8 +1349,8 @@ export default {
       return message
     },
     /**
-     * Set the drawing tool. Avoid multiple calls by
-     * udebouncing them
+     * Set the drawing tool. Avoid multiple 
+     * calls by udebouncing them
      */
     setDrawingTool () {
       if (!this.$store.getters.embed) {
@@ -1328,6 +1370,9 @@ export default {
     },
     /**
      * Set drawing polygon tool to the map object
+     * @listens map.draw:created
+     * @listens map.draw:deleted
+     * @listens map.draw:edited
      */
     setAvoidPolygonDrawingTool () {
       // Get a reference to the map object
@@ -1378,6 +1423,7 @@ export default {
     /**
      * Recreate/redraw polygons on the view based
      * on the localMapViewData avoid_polygons option
+     * @listens polgon.click
      */
     loadAvoidPolygons () {
       const polygonsDrawn = this.extractPolygonsFromMap()
@@ -1407,9 +1453,11 @@ export default {
     },
 
     /**
-     * When a polygon is created add it to the map and a hendler to the click event
+     * When a polygon is created add it to the 
+     * map and a hendler to the click event
      * @param {*} event
      * @param {*} map
+     * @listens polygon.click
      */
     onPolygonCreation (event, map) {
       const context = this
@@ -1436,6 +1484,7 @@ export default {
     /**
      * Get all the polygons and  notify the parent component when
      * an avoid polygon is created
+     * @emits avoidPolygonsChanged
      */
     notifyAvoidPolygonsChanged () {
       if (this.$refs.map.mapObject) {
@@ -1446,6 +1495,7 @@ export default {
 
     /**
      * Get all the polygons from the map object
+     * @returns {Object} avoidPolygon
      */
     extractPolygonsFromMap () {
       // We create a MultPolygon object
@@ -1501,8 +1551,84 @@ export default {
       }
       return available
     },
+    /**
+     * Add component initial listeners via eventBus
+     * @listens redrawAndFitMap (via eventBus)
+     * @listens clearMap (via eventBus)
+     * @listens clearMap (via eventBus)
+     * @listens placeFocusChanged (via eventBus)
+     * @listens changeActiveRouteIndex (via eventBus)
+     * @listens altitudeChartHoverIndexChanged (via eventBus)
+     * @listens mouseLeftChartAltitudeChart (via eventBus)
+     * @listens showAltitudeModal (via eventBus)
+     * @listens highlightPolylineSections (via eventBus)
+     */
+    setListeners () {
+      // we need to resize the map height, redraw the map
+      // and then fit the bounds
+      const context = this
+      this.eventBus.$on('redrawAndFitMap', (data) => {
+        if (data.guid && data.guid === context.guid) {
+          context.adjustMap()
+        }
+      })
+
+      /**
+       * Clear all the map data plotted (lines, polygons markers etc)
+       */
+      this.eventBus.$on('clearMap', () => {
+        context.mapDataBuilder = null
+        // When the clearMap event is triggred, we reset places and routes
+        context.localMapViewData.places = []
+        context.localMapViewData.routes = []
+        context.localMapViewData.polygons = []
+        context.clickLatlng = null
+        this.$store.commit('currentLocation', null)
+      })
+
+      /**
+       * When a place focus is changed (a new place is selected among the
+       * ones listed on the map) updates the map center if the distance
+       * between the old center and the new is greatet then 50 emter
+       */
+      this.eventBus.$on('placeFocusChanged', (place) => {
+        context.focusedPlace = place
+        const center = GeoUtils.buildLatLong(place.lat, place.lng)
+        const distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.mapCenter, center, 'm')
+
+        // We only consider that the center changed if it
+        // changes more than 50 meters from the previous center
+        if (distance > 50) {
+          this.setMapCenter(center)
+        }
+      })
+
+      this.eventBus.$on('changeActiveRouteIndex', this.setActiveRouteIndex)
+
+      this.eventBus.$on('altitudeChartHoverIndexChanged', this.hightlightRoutePoint)
+
+      this.eventBus.$on('mouseLeftChartAltitudeChart', this.removeRoutePoint)
+
+      this.eventBus.$on('showAltitudeModal', function () {
+        context.isAltitudeModalOpen = true
+      })
+
+      this.eventBus.$on('highlightPolylineSections', (extraInfo) => {
+        context.extraInfo = extraInfo
+        if (this.$store.getters.mapSettings.autoFitHighlightedBounds) {
+          context.buildAndSetBounds()
+          context.fit()
+        }
+      })
+    }
   },
 
+  /**
+   * Set the initial state of the map when the component is mounted
+   * and call calling loadMapData, setProviders, setDrawingTool, storeMapBounds.
+   * @emits onCreate
+   * @listens map.addInitHook and add a handler
+   */
   mounted () {    
     this.zoomLevel = this.initialZoom
 
@@ -1513,64 +1639,8 @@ export default {
     // an event to its parent telling the parent its guid
     this.$emit('onCreate', this.guid)
 
-    // When the box that contains the map is resized
-
-    // we need to resize the map height, redraw the map
-    // and then fit the bounds
-    const context = this
-    this.eventBus.$on('redrawAndFitMap', (data) => {
-      if (data.guid && data.guid === context.guid) {
-        context.adjustMap()
-      }
-    })
-
-    /**
-     * Clear all the map data plotted (lines, polygons markers etc)
-     */
-    this.eventBus.$on('clearMap', () => {
-      context.mapDataBuilder = null
-      // When the clearMap event is triggred, we reset places and routes
-      context.localMapViewData.places = []
-      context.localMapViewData.routes = []
-      context.localMapViewData.polygons = []
-      context.clickLatlng = null
-      this.$store.commit('currentLocation', null)
-    })
-
-    /**
-     * When a place focus is changed (a new place is selected among the
-     * ones listed on the map) updates the map center if the distance
-     * between the old center and the new is greatet then 50 emter
-     */
-    this.eventBus.$on('placeFocusChanged', (place) => {
-      context.focusedPlace = place
-      const center = GeoUtils.buildLatLong(place.lat, place.lng)
-      const distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.mapCenter, center, 'm')
-
-      // We only consider that the center changed if it
-      // changes more than 50 meters from the previous center
-      if (distance > 50) {
-        this.setMapCenter(center)
-      }
-    })
-
-    this.eventBus.$on('changeActiveRouteIndex', this.setActiveRouteIndex)
-
-    this.eventBus.$on('altitudeChartHoverIndexChanged', this.hightlightRoutePoint)
-
-    this.eventBus.$on('mouseLeftChartAltitudeChart', this.removeRoutePoint)
-
-    this.eventBus.$on('showAltitudeModal', function () {
-      context.isAltitudeModalOpen = true
-    })
-
-    this.eventBus.$on('highlightPolylineSections', (extraInfo) => {
-      context.extraInfo = extraInfo
-      if (this.$store.getters.mapSettings.autoFitHighlightedBounds) {
-        context.buildAndSetBounds()
-        context.fit()
-      }
-    })
+    this.setListeners()
+    
     // Add the gesture handling so that when the user is 
     // scrolling a page (embed state) with an ors map it 
     // will actually scroll the page and not the map
@@ -1582,6 +1652,10 @@ export default {
     this.setDrawingTool()
     this.storeMapBounds()
   },
+  /**
+   * Set the local showClickPopups value
+   * and set the map center on create
+   */
   created () {
     // Copy the prop value to a local prop
     // so it can be modified locally
