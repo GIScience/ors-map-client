@@ -84,6 +84,7 @@ export default {
      * @param lng
      * @param options
      * @returns {Promise}
+     * @emits showLoading (via eventBus)
      */
     resolvePoint (lat, lng) {
       return new Promise((resolve, reject) => {

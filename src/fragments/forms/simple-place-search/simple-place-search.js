@@ -170,15 +170,24 @@ export default {
      */
     openDirectionsMode () {
       this.$store.commit('setLeftSideBarIsOpen', true)
-      if (this.place.isEmpty()) {
-        // Make sure that the place will
-        // not be resolved if it is empty
-        // when switching to directions
-        this.place.placeName = ''
-        this.place.unresolved = false
-        this.eventBus.$emit('switchToDirections')
-      } else {
+      // If the app is in search mode and the search has returned only one
+      // place, then it is assumed that whe the directions button is hit
+      // the only search result place must auto selected as target
+      if (this.$store.getters.mode === constants.modes.search && this.mapViewData.places.length === 1) {
+        this.place = this.mapViewData.places[0]
         this.eventBus.$emit('openDirectionsMode', this.place)
+      } else {
+        if (this.place.isEmpty()) { // place has no lat and lng
+          // Make sure that the place will
+          // not be resolved using its name 
+          // if it is empty when switching to directions
+          // It must be resolved using its coordinates
+          this.place.placeName = ''
+          this.place.unresolved = false
+          this.eventBus.$emit('switchToDirections')
+        } else {
+          this.eventBus.$emit('openDirectionsMode', this.place)
+        }
       }
       this.openingRouteMode = true
       this.place = new Place()

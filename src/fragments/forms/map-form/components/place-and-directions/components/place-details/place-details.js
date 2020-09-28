@@ -14,6 +14,43 @@ export default {
     imageUrlFallBack: (resolver.homeUrl() + '/static/img/map-pin-600x400.jpg').replace('//', '/'),
     worldImageryTileProviderBaseUrl: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile'
   }),
+  methods: {
+    /**
+     * Copy latitude.longitude to clipboard
+     *
+     */
+    copyLatlng () {
+      const latlng = `${this.place.lat}, ${this.place.lng}`
+      if (this.copyToClipboard(latlng)) {
+        this.showSuccess(this.$t('placeDetails.latlngCopied'), { timeout: 2000 })
+      }
+    },
+    /**
+     * Copy longitude, latitude to clipboard
+     *
+     */
+    copyLnglat () {
+      const lnglat = `${this.place.lng}, ${this.place.lat}`
+      if (this.copyToClipboard(lnglat)) {
+        this.showSuccess(this.$t('placeDetails.lnglatCopied'), { timeout: 2000 })
+      }
+    },
+    /**
+     * Copy the string to chipboard by creating a temporary textarea element
+     *
+     * @param {*} str
+     * @returns {Boolean}
+     */
+    copyToClipboard (str) {
+      const el = document.createElement('textarea')
+      el.value = str
+      document.body.appendChild(el)
+      el.select()
+      const result = document.execCommand('copy')
+      document.body.removeChild(el)
+      return result
+    }
+  },
   computed: {
     imagePath () {
       if (this.placeLayer) {
