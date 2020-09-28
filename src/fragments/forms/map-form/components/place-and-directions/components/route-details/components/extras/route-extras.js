@@ -9,11 +9,23 @@ export default {
     }
   },
   computed: {
+    /**
+     * Return the array of extras or an empty array
+     * @returns {Array}
+     */
     routeExtras () {
       return this.route.properties.extras || []
     }
   },
   methods: {
+    /**
+     * Determines if a given
+     * extra must be shown by 
+     * checking if it is enabled
+     * in the app settings
+     * @param {*} extraKey 
+     * @returns {Boolean}
+     */
     showExtra (extraKey) {
       let show = (this.$store.getters.mapSettings[extraKey] === true)
       if (!show) { // check if the extra is being returned in a singular keyed property
@@ -22,6 +34,12 @@ export default {
       }
       return show
     },
+    /**
+     * Determines if the extras block must
+     * be shown, checking if exists
+     * extra data
+     * @returns {Boolean}
+     */
     showExtras () {
       let extras = 0
       for (const extraKey in this.routeExtras) {
@@ -31,10 +49,24 @@ export default {
       }
       return extras > 0
     },
+    /**
+     * Get the color from the ors dictionary 
+     * based on the extra key and index
+     * @param {*} extraKey 
+     * @param {*} index 
+     */
     colorValue (extraKey, index) {
       const color = orsDictionary.colors[extraKey][index]
       return color
     },
+    /**
+     * Build and return 
+     * the segment style object
+     * @param {String} extraKey 
+     * @param {Number} amount 
+     * @param {Integer} index 
+     * @returns {Object}
+     */
     segmentStyle (extraKey, amount, index) {
       const style = {
         width: amount + '%',
@@ -42,6 +74,12 @@ export default {
       }
       return style
     },
+    /**
+     * Get the label of an extra value
+     * @param {String} extraKey 
+     * @param {Integer} value 
+     * @returns {Integer} value
+     */
     getExtraValueLabel (extraKey, value) {
       if (orsDictionary[extraKey] && orsDictionary[extraKey][value]) {
         const key = orsDictionary[extraKey][value]
@@ -53,6 +91,17 @@ export default {
       }
       return value
     },
+    /**
+     * Handle the show section click by 
+     * building the object and emitting a
+     * highlightPolylineSections event 
+     * that will be catch by the map view
+     * to highlight a given section of a given extra key
+     * @param {String} extraKey 
+     * @param {Integer} value
+     * @param {Integer} index
+     * @emits highlightPolylineSections (via eventBus)
+     */
     showSection (extraKey, value, index) {
       const sectionTitle = this.$t('routeExtras.' + extraKey).toLowerCase()
       const color = this.colorValue(extraKey, index)
@@ -62,6 +111,15 @@ export default {
       heighlighData.sections.push(polylineData)
       this.eventBus.$emit('highlightPolylineSections', heighlighData)
     },
+    /**
+     * Handle the show all sections click by 
+     * building the object and emitting a
+     * highlightPolylineSections event 
+     * that will be catch by the map view
+     * to highlight all sections of a given extra key
+     * @param {String} extraKey 
+     * @emits highlightPolylineSections (via eventBus)
+     */
     showAllSections (extraKey) {
       const sectionTitle = this.$t('routeExtras.' + extraKey).toLowerCase()
       const heighlighData = { extraKey: extraKey, sectionTitle, sections: [] }
@@ -75,10 +133,30 @@ export default {
       }
       this.eventBus.$emit('highlightPolylineSections', heighlighData)
     },
+    /**
+     * Build the the extra info highlighting data
+     * @param {String} extraKey 
+     * @param {Integer} index 
+     * @param {Integer} value
+     * @returns {Object} {intervals: Array, color: string, label: String}
+     */
     buildExtraHighlighPolylineData (extraKey, index, value) {
       const color = this.colorValue(extraKey, index)
       const label = this.getExtraValueLabel(extraKey, value).toLowerCase()
-      const intervals = this.lodash.filter(this.routeExtras[extraKey].values, (v) => {
+      // Values contains an array with the following data: 
+      // a) position `zero` - the starting index on the route polyline array of
+      // where the given extra info starts
+      // b) position `1` - the final index on the route polyline array where the
+      // given extra info ends.
+      // c) position 2 - the value that represents the extra info to be 
+      // swhown on over the route. For example, steepness
+      const values = this.routeExtras[extraKey].values
+
+      
+      // As some extra info may be present in several non-continuous
+      // segments we must get the intervals where the value matches
+      // so that we show onlt the extra info wth the value selected by the user
+      const intervals = this.lodash.filter(values, (v) => {
         return v[2] === value
       })
       return {

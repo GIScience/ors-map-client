@@ -25,7 +25,11 @@ const routeData = {
         // polyline data for the given interval
         for (const intervalKey in section.intervals) {
           const interval = section.intervals[intervalKey]
-          const segment = polyLineData.slice(interval[0], interval[1])
+          // since we are getting items from an array
+          // starting with the index 0, the amout of
+          // items is the final position + 1
+          const amoundOfItems = interval[1] +1
+          const segment = polyLineData.slice(interval[0], amoundOfItems)
           polylineHighlighted.polylines.push(segment)
         }
         if (polylineHighlighted.polylines.length > 0) {

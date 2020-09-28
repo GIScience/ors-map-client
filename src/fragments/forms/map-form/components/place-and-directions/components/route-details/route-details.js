@@ -45,6 +45,10 @@ export default {
     startedPanelExtended () {
       return this.mapViewData.routes.length === 1 ? 0 : null
     },
+    /**
+     * Builds and return route summary
+     * @returns {Object}
+     */
     routeSummary () {
       if (this.hasRoutes) {
         let summary = Object.assign({}, this.localMapViewData.routes[this.$store.getters.activeRouteIndex].summary)
@@ -52,6 +56,12 @@ export default {
         return summary
       }
     },
+    /**
+     * Builds and return the routes 
+     * parsed, with translations and 
+     * humanized content
+     * @returns {Array} of route objects
+     */
     parsedRoutes () {
       if (!this.hasRoutes) {
         return []
@@ -73,6 +83,13 @@ export default {
     }
   },
   methods: {
+    /**
+     * Get the route summary with humanized 
+     * distance and duration data
+     * @param {*} summary 
+     * @param {*} unit 
+     * @return {Object} summary
+     */
     getHumanizedSummary (summary, unit = null) {
       unit = unit || this.$store.getters.mapSettings.unit
       summary.unit = unit
@@ -81,6 +98,12 @@ export default {
       summary.duration = durationAndDistance.duration
       return summary
     },
+    /**
+     * get the parsed segments by
+     * humanizing the duration and distances
+     * @param {*} segments 
+     * @returns {Object} segments
+     */
     parseSegments (segments) {
       const context = this
       for (const key in segments) {
@@ -97,9 +120,25 @@ export default {
         }
       }
     },
+    /**
+     * Handle the active route index change
+     * by emitting a changeActiveRouteIndex
+     * event via eventBus
+     * @param {*} index 
+     * @emits changeActiveRouteIndex
+     */
     changeActiveRouteIndex (index) {
       this.eventBus.$emit('changeActiveRouteIndex', index)
     },
+    /**
+     * When a segment is clicked
+     * prepare the data and emit
+     * and event targeting the highlight
+     * of this segment
+     * @param {*} segment 
+     * @param {*} index 
+     * @emits highlightPolylineSections
+     */
     segmentClicked (segment, index) {
       const sectionTitle = ''
       const heighlighData = {sectionTitle, sections: [] }
@@ -107,6 +146,12 @@ export default {
       heighlighData.sections.push(segmentData)
       this.eventBus.$emit('highlightPolylineSections', heighlighData)
     },
+    /**
+     * Build the the extra info highlighting data
+     * @param {*} segment 
+     * @param {*} index 
+     * @returns {Object}
+     */
     buildExtraHighlighPolylineData (segment, index) {
       const color = constants.segmentHightlightColor
       const label = `${this.$t('routeDetails.segment')} ${index+1}`
