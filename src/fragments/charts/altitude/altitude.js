@@ -16,6 +16,10 @@ export default {
     showVariations: {
       type: Boolean,
       default: true
+    },
+    propagateActivePoint: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -74,7 +78,9 @@ export default {
       }
     },
     chartHoverIndexChanged (index) {
-      this.eventBus.$emit('altitudeChartHoverIndexChanged', index)
+      if (this.propagateActivePoint) {
+        this.eventBus.$emit('altitudeChartHoverIndexChanged', index)
+      }
     },
     mouseLeftChart () {
       this.eventBus.$emit('mouseLeftChartAltitudeChart')

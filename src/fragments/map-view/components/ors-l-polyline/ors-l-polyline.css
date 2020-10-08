@@ -1,0 +1,34 @@
+
+.ors-l-polyline-info-wrapper {
+  background: transparent;
+  height: 130px;
+  width: 220px;
+  margin-top: -100px; 
+  margin-left: 12px;
+}
+
+.ors-l-polyline-vertical-bar {
+  background-color: black;width: 2px; height: 130px;float: left;
+}
+.ors-l-polyline-content-block {
+  background-color: white; width: 178px; float: left;background:transparent;
+  opacity: 0.8;
+}
+
+.ors-l-polyline-top-block-info {
+  width: 178px; height: 85px; background:white; padding-left: 5px;
+  -webkit-box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
+  -moz-box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
+  box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
+  font-size: 12px;
+  word-break: break-all;
+  opacity: 1;
+}
+
+.ors-l-polyline-bottom-block-info {
+  width: 148px; height: 45px; background:transparent
+}
+
+
+
+
