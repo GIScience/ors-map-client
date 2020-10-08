@@ -7,7 +7,7 @@
       class="sidebar"
       v-model="isSideBarOpen"
       disable-resize-watcher
-      :width="$mdAndUpResolution ? 400 : 290"
+      :width="$mdAndUpResolution ? $store.getters.sidebarFullWidth : $store.getters.sidebarShrinkeWidth"
       :permanent="$store.getters.leftSideBarPinned"
       :class="{'auto-height': $lowResolution && !$store.getters.leftSideBarPinned, 'full-height': $store.getters.leftSideBarPinned}">
 

@@ -57,11 +57,6 @@
         :lat-lng="circleMarker.center"
         :radius="circleMarker.radius"/>
 
-       <l-circle-marker v-if="highlightedRoutePoint" :weight="2" color="#000" :fill="true" fillColor="#fff" :fillOpacity="0.9"
-        :lat-lng="highlightedRoutePoint"
-        :radius="5">
-        </l-circle-marker>
-
       <l-circle-marker v-if="myPositionMarker" :weight="2" color="#1D1D1E" :fill="true" fillColor="#1C97F3" :fillOpacity="myPositionMarker.opacity"
         :lat-lng="myPositionMarker.center"
         :radius="myPositionMarker.radius">
@@ -73,33 +68,26 @@
           </div>
         </l-popup>
       </l-circle-marker>
-
-
       <template  v-for="(alternativeRoute, index) in alternativeRoutes">
         <template>
-          <!-- background polyline to create a white outline -->
-          <l-polyline :key="index + '_bg'" :lat-lngs="alternativeRoute.polyline" :weight="11" :color="routeBackgroundColor"></l-polyline>
-
-          <l-polyline @click="alternativeRouteIndexSelected(alternativeRoute.index, $event)" :key="alternativeRoute.index"  :lat-lngs="alternativeRoute.polyline" :weight="7" :color="alternativeRouteColor">
-            <l-tooltip @click="alternativeRouteIndexSelected(alternativeRoute.index, $event)" :content="routeToolTip(alternativeRoute.index)"></l-tooltip>
-          </l-polyline>
+          <ors-l-polyline :key="index" not-active
+            :color="alternativeRouteColor"
+            @click="alternativeRouteIndexSelected(alternativeRoute.index, $event)"
+            @tooltipClick="alternativeRouteIndexSelected(alternativeRoute.index, $event)"            
+            :lat-lngs="alternativeRoute.polyline" 
+            :tooltip="routeToolTip(alternativeRoute.index)">
+          </ors-l-polyline>
         </template>
       </template>
-
        <template v-if="showActivRouteData">
-        <!-- background polyline to create a white outline -->
-        <l-polyline :lat-lngs="activeRouteData" :weight="11" :color="routeBackgroundColor"></l-polyline>
-
-        <l-polyline @follow="followPolyline" @addstop="addStopViaPolylineDrag" :options="{edit_with_drag: true}" :lat-lngs="activeRouteData" :weight="7" :color="mainRouteColor">
-          <l-tooltip :content="routeToolTip($store.getters.activeRouteIndex)"></l-tooltip>
-        </l-polyline>
+        <ors-l-polyline :draggable="isInDirectionsMode"
+          @followPolyline="followPolyline" 
+          :focused-poly-index="highlightedRoutePointIndex"
+          @addStopViaPolylineDrag="addStopViaPolylineDrag" 
+          :route="activeRouteData" 
+          :tooltip="routeToolTip($store.getters.activeRouteIndex)">
+        </ors-l-polyline>
       </template>
-
-      <!-- highlight extra info polyline -->
-      <extra-info-highlight @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" v-if="extraInfo" :extra-info="extraInfo" :polyline-data="activeRouteData"></extra-info-highlight>
-
-      <altitude-info v-if="isAltitudeModalOpen" @beforeOpen="extraInfo = null" @close="closeAltitudeInfo" :map-view-data="localMapViewData" ></altitude-info>
-
       <l-control-layers v-if="showControls" :position="layersPosition" :collapsed="true" />
 
       <l-tile-layer
@@ -111,6 +99,10 @@
         :attribution="tileProvider.attribution"
         :token="tileProvider.token"
         layer-type="base"/>
+
+      <!-- highlight extra info polyline -->
+      <extra-info-highlight @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" v-if="extraInfo" :extra-info="extraInfo" :polyline-data="activeRouteData.geometry.coordinates"/>
+      <l-height-graph v-if="isAltitudeModalOpen" @closed="closeAltitudeInfo" lg8 sm12 :data="localMapViewData.rawData" :options="lHeightGraphOptions"/>
     </l-map>
     <img class="over-brand" v-if="showBrand" src="@/assets/img/heigit-and-hd-uni.png" :alt="$t('global.brand')" :title="$t('global.brand')">
     <v-btn fab small v-if="canFitFeatures && showControls" 

@@ -100,7 +100,7 @@ const actions = {
    * check if the embed is in the url params and set the embed state
    * @param {*} getters 
    * @param {*} commit 
-   * @param {*} to 
+   * @param {*} routeTo 
    */
   checkAndSetEmbedState ({getters, commit}, routeTo) {
     return new Promise((resolve) => {

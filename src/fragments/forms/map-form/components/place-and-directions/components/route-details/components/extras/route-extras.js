@@ -83,7 +83,7 @@ export default {
     getExtraValueLabel (extraKey, value) {
       if (orsDictionary[extraKey] && orsDictionary[extraKey][value]) {
         const key = orsDictionary[extraKey][value]
-        const labels = this.$t('routeExtras.orsDictionary')
+        const labels = this.$t('global.orsDictionary')
         if (labels[key]) {
           return labels[key]
         }

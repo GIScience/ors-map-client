@@ -168,43 +168,43 @@ const geoUtils = {
 
   /**
    * Build a bounding box the also includes the plaes and the polyline
-   * @param {Array} originalBbox
    * @param {Array} places
-   * @returns {Matrix} polyline with arrays of lngLat
+   * @param {Array} polyline containing arrays where index 0 is lng and index 1 is lat
+   * @returns {Array} of 2 objects {lon:..., lat:...}
    */
-  getBounds: (originalBbox, places = [], polyline = []) => {
-    const boundsCollection = [{ lon: originalBbox[0], lat: originalBbox[1] }, { lon: originalBbox[2], lat: originalBbox[3] }]
-
-    let minLat = originalBbox[1]
-    let maxLat = originalBbox[3]
-    let minLon = originalBbox[0]
-    let maxLon = originalBbox[2]
+  getBounds: (places = [], polyline = []) => {
+    var boundsCollection = []
+    var minLat = null
+    var maxLat = null
+    var minLng = null
+    var maxLng = null
 
     places.forEach((place) => {
-      boundsCollection.push({ lat: place.lat, lon: place.lng })
+      boundsCollection.push({ lat: place.lat, lng: place.lng })
     })
     if (Array.isArray(polyline)) {
       polyline.forEach((lngLatArr) => {
-        boundsCollection.push({ lat: lngLatArr[0], lon: lngLatArr[1] })
+        boundsCollection.push({ lng: lngLatArr[0], lat: lngLatArr[1] })
       })
     }
 
     if (places.length === 1 && boundsCollection.length === 1) {
       const place = places[0]
       minLat = maxLat = place.lat
-      minLon = maxLon = place.lng
+      minLng = maxLng = place.lng
     } else {
-      boundsCollection.forEach(latLon => {
-        minLat = latLon.lat > minLat ? minLat : latLon.lat
-        minLon = latLon.lon > minLon ? minLon : latLon.lon
-        maxLat = latLon.lat < maxLat ? maxLat : latLon.lat
-        maxLon = latLon.lon < maxLon ? maxLon : latLon.lon
-      })
+      for (let itemKey in boundsCollection) {
+        let lngLat = boundsCollection[itemKey] 
+        minLat = minLat ===  null || lngLat.lat < minLat ? lngLat.lat : minLat
+        minLng = minLng ===  null || lngLat.lng < minLng ? lngLat.lng : minLng
+        maxLat = maxLat ===  null || lngLat.lat > maxLat ? lngLat.lat : maxLat
+        maxLng = maxLng ===  null || lngLat.lng > maxLng ? lngLat.lng : maxLng
+      }
     }
 
     return [
-      { lon: minLon, lat: minLat },
-      { lon: maxLon, lat: maxLat }
+      { lon: minLng, lat: minLat },
+      { lon: maxLng, lat: maxLat }
     ]
   },
 

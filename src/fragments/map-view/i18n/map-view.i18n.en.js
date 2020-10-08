@@ -76,6 +76,13 @@ export default {
     moveMapPositionToRight: 'moveMapPositionToRight',
     moveMapPositionToUp: 'moveMapPositionToUp',
     moveMapPositionToDown: 'moveMapPositionToDown',
-    toggleDirect: 'Toggle direct from here until next place'
+    toggleDirect: 'Toggle direct from here until next place',
+    heightGraph: {
+      distance: "Distance",
+      elevation: "Elevation",
+      segment_length: "Segment length",
+      type: "Type",
+      legend: "Legend"
+    }
   }
 }

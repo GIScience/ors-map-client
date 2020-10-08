@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import ui from './modules/ui'
+import appUI from './modules/app-ui'
 import mapState from './modules/map-state'
 import appState from './modules/app-state'
 import loader from '@/support/loader'
@@ -17,7 +17,7 @@ const storeBuilder = {
 
   },
   modules: {
-    ui,
+    appUI,
     mapState,
     appState
   }
