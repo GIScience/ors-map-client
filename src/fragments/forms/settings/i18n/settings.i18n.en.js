@@ -1,9 +1,9 @@
 
 export default {
   settings: {
-    saveAll: 'Save all',
+    save: 'Save',
     endpointsSectionTitle: 'Service endpoints (URI or full URL)',
-    localization: 'Localization',
+    language: 'Language',
     appLocale: 'App locale',
     unit: 'Unit',
     areaUnit: 'Area unit',
@@ -17,14 +17,14 @@ export default {
     endpointsTitle: {
       directions: 'Directions',
       isochrones: 'Isochrones',
-      geocodeSearch: 'Ggeocode search',
-      autocomplete: 'Ggeocode autocomplete',
+      geocodeSearch: 'Geocode search',
+      autocomplete: 'Geocode autocomplete',
       pois: 'POIs',
       reverseGeocode: 'Geocode reverse'
     },
     apiKey: 'API key',
     apiBaseUrl: 'API base URL',
-    invalidSettingsValue: 'Invalid settings value(s). Pleach check the fields or restore default values',
+    invalidSettingsValue: 'Invalid settings value(s). Please check the fields or restore default values',
     restoreDefaults: 'Restore defaults',
     advanced: 'Advanced',
     mapSettingsSaved: 'Map settings saved',
@@ -42,7 +42,7 @@ export default {
     customTileProviderUrlHint: 'https://domain.tld/path/{z}/{x}/{y}.ext?optionalKey=value',
     prioritizeSearchingForNearbyPlaces: 'Prioritize searching for nearby places',
     defaultProfile: 'Default profile',
-    compressDataUrlSegment: 'Compresse URL segment after /data/',
+    compressDataUrlSegment: 'Compress URL segment after /data/',
     autoFitHighlightedBounds: 'Auto fit highlighted bounds'
   }
 }

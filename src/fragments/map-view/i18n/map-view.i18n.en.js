@@ -8,7 +8,6 @@ export default {
     seconds: 'sec',
     meters: 'meters',
     routeTo: 'Route to this place',
-    viewBasedOnEquivalentGeoJsonResponse: 'Visualization based on an equivalent GeoJSON response',
     polygonDetails: 'Polygon details',
     polygon: 'Polygon',
     placeInfo: 'Place info',
@@ -24,10 +23,10 @@ export default {
     directionsToHere: 'Directions to here',
     addRouteStop: 'Add a route stop here',
     addDestinationToRoute: 'Add destination to route',
-    acquirePositionErros: {
+    acquirePositionErrors: {
       generic: 'It was not possible to acquire your location because it was not authorized or the browser/device does not support it.',
-      unavailable: 'According to your browser/device your location is not currenctly available. Make sure the positioning option/service is properly configured.',
-      permissionDenied: 'Your posistion could not be acquired because the browser/device denied access to it. You can retry it by changing the browser/device settings and then click again on the "my position button"',
+      unavailable: 'According to your browser/device your location is currently not available. Make sure the positioning option/service is properly configured.',
+      permissionDenied: 'Your position could not be acquired because the browser/device denied access to it. You can retry it by changing the browser/device settings and then click again on the "my position button"',
       timeout: 'Your browser/device returned "timeout" while trying to acquire a position. You can retry it by clicking on the "my position button"'
     },
     couldNotDetermineYourPreciseLocationUsingIpLocation: 'It was not possible to determine your precise location. Your IP based location will be used instead',
@@ -36,7 +35,7 @@ export default {
     polylineMeasure: {
       bearingTextIn: 'In',
       bearingTextOut: 'Out',
-      tooltipTextDraganddelete: 'Click and drag to <b>move point</b><br>Press SHIFT-key and click to <b>delete point</b>',
+      tooltipTextDragAndDelete: 'Click and drag to <b>move point</b><br>Press SHIFT-key and click to <b>delete point</b>',
       tooltipTextResume: '<br>Press CTRL-key and click to <b>resume line</b>',
       tooltipTextAdd: 'Press CTRL-key and click to <b>add point</b>',
       clearControlTitle: 'Clear Measurements',
@@ -55,8 +54,8 @@ export default {
         metres: 'm',
         kilometres: 'km',
         feet: 'ft',
-        landmiles: 'mi',
-        nauticalmiles: 'nm'
+        landmiles: 'M',
+        nauticalmiles: 'NM'
       }
     },
     defineAvoidPolygon: 'Define avoid polygons to directions',

@@ -17,7 +17,7 @@ export default {
     calculatingRoute: 'Calculating route...',
     yourLocation: 'Your location',
     expandAltitudeChart: 'Expand chart',
-    errorRenderingContentUploaded: 'Erro while rendering the content uploaded. Check the file format and content',
+    errorRenderingContentUploaded: 'Error while rendering the content uploaded. Check the file format and content',
     roundTrip: 'Round trip',
     days: 'd',
     hours: 'h',

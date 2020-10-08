@@ -171,7 +171,7 @@ export default {
       return url
     },
     /**
-     * Return the current applicable zoom leve 
+     * Return the current applicable zoom leve
      * based either on the zoomLevel attribute or
      * on the maxZoom
      * @returns {Number} zoom
@@ -229,7 +229,7 @@ export default {
       return this.markers && this.markers.length === 1
     },
     /**
-     * Determines if the brand over the 
+     * Determines if the brand over the
      * map view must be shown
      * @returns {Boolean}
      */
@@ -238,7 +238,7 @@ export default {
     },
     /**
      * Buil and return the geojson options based on the
-     * color defined as main and the built tooltip 
+     * color defined as main and the built tooltip
      * string
      * @returns {Object}
      */
@@ -271,7 +271,7 @@ export default {
 
         // get the coordinates of the active route
         const route = toBeTransformedMapViewData.routes[this.$store.getters.activeRouteIndex]
-        
+
         // Vue2-Leaflet, the component used to render data on the map, expect the coordinates in the [lat,lon] order,
         // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
         // So we invert them to provide what the component expectes
@@ -289,7 +289,7 @@ export default {
       if (this.localMapViewData.hasRoutes()) {
         // We must not change the orignal object
         const toBeTransformedMapViewData = this.localMapViewData.clone()
-        
+
         for (const key in toBeTransformedMapViewData.routes) {
           const index = Number(key)
           if (index !== this.$store.getters.activeRouteIndex) {
@@ -306,11 +306,11 @@ export default {
     },
     /**
      * Build and return the polygons to be rendered
-     * on the map view based on the polygons 
+     * on the map view based on the polygons
      * defined in the localmapViewData object.
      * As the renderer expect the polygons coords in the
      * [lat,lon] order, we switch the coords of each polygon
-     * and also set the color and label based on the polygon 
+     * and also set the color and label based on the polygon
      * data and translations
      * @returns {Array} polygons
      */
@@ -338,7 +338,7 @@ export default {
     },
     /**
      * Build and return an array of marker object
-     * based either on the  tempPlaces value 
+     * based either on the  tempPlaces value
      * (used when a place was selected but a route was not calculated yet)
      * or based on the places defined on the localMapViewData
      * @returns {Array} of markers
@@ -503,7 +503,7 @@ export default {
       let mappings = undefined
       let activRoute = this.localMapViewData.routes[this.$store.getters.activeRouteIndex]
       let heightGraphTranslations = this.$t('mapView.heightGraph')
-      
+
       // Build the  mapping for the extra info
       // that wil be displayd in the graph
       // including the translation and the color
@@ -517,7 +517,7 @@ export default {
           mappings[extraKey] = {}
           let extra = activRoute.properties.extras[extraKey]
           let extraDict = dict[extraKey]
-  
+
           // Build the map for each extra summary value
           for (let summaryKey in extra.summary) {
             let summary = extra.summary[summaryKey]
@@ -553,10 +553,10 @@ export default {
       deep: true
     },
     /**
-     * When the prop supportsDrawingTool 
-     * changes run the setDrawingTool 
+     * When the prop supportsDrawingTool
+     * changes run the setDrawingTool
      * if the prop value is true
-     * @param {Boolean} newVal 
+     * @param {Boolean} newVal
      */
     supportsDrawingTool (newVal) {
       if (newVal) {
@@ -565,7 +565,7 @@ export default {
     },
     /**
      * Once the map view is shrinked
-     * we have to run the setDrawingTool 
+     * we have to run the setDrawingTool
      * utility again
      */
     shrinked () {
@@ -575,7 +575,7 @@ export default {
      * When the prop showPopups changes
      * copy its value to the local
      * attribute
-     * @param {*} newVal 
+     * @param {*} newVal
      */
     showPopups (newVal) {
       this.showClickPopups = newVal
@@ -621,7 +621,7 @@ export default {
   methods: {
     /**
      * Move the map center according the direction
-     * @param {String} direction 
+     * @param {String} direction
      */
     moveMapCenter(direction) {
       switch (direction) {
@@ -787,7 +787,7 @@ export default {
         this.$emit('zoomChanged', event.sourceTarget._zoom)
       } else {
         // If the zoom was changed programatically
-        // reset the flag to false, as it has already 
+        // reset the flag to false, as it has already
         // been acomplished its goal for one zoom event cycle
         this.featuresJustFitted = false
       }
@@ -822,7 +822,7 @@ export default {
      */
     markerMoved (event) {
       // only marker changes that are a result of user interaction are treated here.
-      // With vue2-leaflet version 2.5.2 the event.originalEvent is not  an instance of 
+      // With vue2-leaflet version 2.5.2 the event.originalEvent is not  an instance of
       // window.PointerEvent anymore and use parent window.MouseEvent instead
       if (event.originalEvent instanceof window.MouseEvent) {
         clearTimeout(this.markerMoveTimeoutId)
@@ -833,7 +833,7 @@ export default {
     },
     /**
      * Add stop via polyline drag
-     * @param {*} data 
+     * @param {*} data
      * @emits addRouteStop
      */
     addStopViaPolylineDrag (data) {
@@ -845,7 +845,7 @@ export default {
     },
     /**
      * Show the point altitude (to be implemented)
-     * @param {Object} latlng 
+     * @param {Object} latlng
      */
     followPolyline (latlng) {
       // implement show the point altitude
@@ -1115,7 +1115,7 @@ export default {
       if (data.eventName === 'centerHere') {
         this.setMapCenter(data.clickLatlng)
       } else {
-        this.prepareDataAndEmitRightClickEvent(data)     
+        this.prepareDataAndEmitRightClickEvent(data)
       }
     },
 
@@ -1134,8 +1134,8 @@ export default {
         // and the user is selecting points to calculate a route, then
         // show this points as markers on the map view. These points will
         // not be synchronized with the app url, so we just add them in the
-        // localMapViewData and we do not emit a mapViewDatachanged event. 
-        // This will only happens when two points are selected (then the app 
+        // localMapViewData and we do not emit a mapViewDatachanged event.
+        // This will only happens when two points are selected (then the app
         // goes to the directions mode)
         if (this.mode === constants.modes.place && data.eventName === 'directionsToPoint' || data.eventName === 'directionsFromPoint') {
           let placesCopy = [... this.localMapViewData.places]
@@ -1220,15 +1220,15 @@ export default {
         const context = this
         setTimeout(() => {
           // The fit may affect the zoom level.
-          // So we set the programatically zoom flag to let 
-          // other methods to have this information if 
+          // So we set the programatically zoom flag to let
+          // other methods to have this information if
           // they need, specially method `zoomed`
           context.featuresJustFitted = true
           context.map.fitBounds(context.dataBounds, { padding: [20, 20], maxZoom: maxFitBoundsZoom })
           context.storeMapBounds()
-          // Yeah, it is not nice to have nested timeout 
+          // Yeah, it is not nice to have nested timeout
           // but we need it to make sure that this flag is only
-          // set as false after a while so other components 
+          // set as false after a while so other components
           // have time to treat this before it is set to false again
           setTimeout(() => {
             context.featuresJustFitted = false
@@ -1245,9 +1245,9 @@ export default {
     },
 
     /**
-     * Handle the map right cick event, 
+     * Handle the map right cick event,
      * Set the clickLatlng curresnt value
-     * and emits events that will trigger the displaying 
+     * and emits events that will trigger the displaying
      * of the right click floating-context menu
      * @param {Object} event
      * @emits mapRightClicked (via eventBus)
@@ -1268,7 +1268,7 @@ export default {
     /**
      * Handle the map left cick event
      * Set the clickLatlng curresnt value
-     * and emits events that will trigger the displaying 
+     * and emits events that will trigger the displaying
      * of the place info pop up box
      * @param {Object} event
      * @emits setSidebarStatus (via eventBus)
@@ -1359,7 +1359,7 @@ export default {
         GeoUtils.getBrowserLocation().then((location) => {
           context.$store.commit('currentLocation', location)
           context.myLocationActive = showLocation
-  
+
           // Set returned location as map center
           const latlng = GeoUtils.buildLatLong(location.lat, location.lng)
           this.setMapCenter(latlng)
@@ -1381,7 +1381,7 @@ export default {
      */
     getPositionErrorMessage (error) {
       // Set the default message
-      let message = this.$t('mapView.acquirePositionErros.generic')
+      let message = this.$t('mapView.acquirePositionErrors.generic')
 
       if (typeof error === 'object') {
         // Treat the error cases
@@ -1389,20 +1389,20 @@ export default {
 
         switch (error.code) {
           case 1:
-            message = this.$t('mapView.acquirePositionErros.permissionDenied') // PERMISSION_DENIED
+            message = this.$t('mapView.acquirePositionErrors.permissionDenied') // PERMISSION_DENIED
             break
           case 2:
-            message = this.$t('mapView.acquirePositionErros.unavailable') // POSITION_UNAVAILABLE
+            message = this.$t('mapView.acquirePositionErrors.unavailable') // POSITION_UNAVAILABLE
             break
           case 3:
-            message = this.$t('mapView.acquirePositionErros.timeout') // TIMEOUT
+            message = this.$t('mapView.acquirePositionErrors.timeout') // TIMEOUT
             break
         }
       }
       return message
     },
     /**
-     * Set the drawing tool. Avoid multiple 
+     * Set the drawing tool. Avoid multiple
      * calls by udebouncing them
      */
     setDrawingTool () {
@@ -1410,7 +1410,7 @@ export default {
         if (this.setDrawingTimeout) {
           clearTimeout(this.setDrawingTimeout)
         }
-  
+
         // If the map object is already defined, go ahead
         if (this.$refs.map && this.$refs.map.mapObject) {
           this.setAvoidPolygonDrawingTool()
@@ -1506,7 +1506,7 @@ export default {
     },
 
     /**
-     * When a polygon is created add it to the 
+     * When a polygon is created add it to the
      * map and a hendler to the click event
      * @param {*} event
      * @param {*} map
@@ -1591,7 +1591,7 @@ export default {
     /**
      * Determines if the direct mode is available to be
      * triggered from a marker at a given index
-     * @param {*} index 
+     * @param {*} index
      * @returns {Boolean} available
      */
     directIsAvailable (index) {
@@ -1679,7 +1679,7 @@ export default {
    * @emits onCreate
    * @listens map.addInitHook and add a handler
    */
-  mounted () {    
+  mounted () {
     this.zoomLevel = this.initialZoom
 
     // Define a unique identifier to the map component instance
@@ -1690,9 +1690,9 @@ export default {
     this.$emit('onCreate', this.guid)
 
     this.setListeners()
-    
-    // Add the gesture handling so that when the user is 
-    // scrolling a page (embed state) with an ors map it 
+
+    // Add the gesture handling so that when the user is
+    // scrolling a page (embed state) with an ors map it
     // will actually scroll the page and not the map
     Leaflet.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
 

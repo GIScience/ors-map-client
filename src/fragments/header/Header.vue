@@ -16,13 +16,13 @@
       </v-toolbar-items>
       <v-spacer></v-spacer>
     </v-toolbar>
-    <v-btn fab small v-if="!$store.getters.embed && $highResolution" 
-      :title="$store.getters.topBarOpen? $t('header.hiddeMenuBar'): $t('header.showMenuBar')" 
-      style="position:absolute; right:170px; z-index:4; transition:all 1s ease; border-radius: 3px; border: 2px solid rgba(0,0,0,0.2);" 
+    <v-btn fab small v-if="!$store.getters.embed && $highResolution"
+      :title="$store.getters.topBarOpen? $t('header.hideMenuBar'): $t('header.showMenuBar')"
+      style="position:absolute; right:170px; z-index:4; transition:all 1s ease; border-radius: 3px; border: 2px solid rgba(0,0,0,0.2);"
       :style="{top: $store.getters.topBarOpen? '110px' : '10px'}"
-      @click.stop="toggleTopBar" > 
-      <v-icon large v-if="$store.getters.topBarOpen" >keyboard_arrow_up </v-icon> 
-      <v-icon large v-else >keyboard_arrow_down </v-icon> 
+      @click.stop="toggleTopBar" >
+      <v-icon large v-if="$store.getters.topBarOpen" >keyboard_arrow_up </v-icon>
+      <v-icon large v-else >keyboard_arrow_down </v-icon>
     </v-btn>
   </div>
 </template>

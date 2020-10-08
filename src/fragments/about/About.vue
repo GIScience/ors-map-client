@@ -33,7 +33,7 @@
       <p>
         {{$t('about.sources')}} <a class='link' href='https://github.com/GIScience/ors-map-client' target='_blank'>github</a>.
       </p>
-      <p>{{$t('about.feefFreeToReportBugs')}} <a href='https://github.com/GIScience/ors-map-client/issues/new' target='_blank'>github</a> {{$t('about.orToFixThem')}}.</p>
+      <p>{{$t('about.feelFreeToReportBugs')}} <a href='https://github.com/GIScience/ors-map-client/issues/new' target='_blank'>github</a> {{$t('about.orToFixThem')}}.</p>
     </section>
     <v-divider></v-divider>
     <br>

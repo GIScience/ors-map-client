@@ -3,7 +3,7 @@
     <div slot="header">
       <download :download-formats-supported="['json', 'geojson']" :map-view-data="mapViewData" ></download>
       <share></share>
-      <h3>{{$t('isochronesDetails.isochrones')}}</h3>
+      <h3>{{$t('isochrones.isochrones')}}</h3>
     </div>
     <div slot="content">
       <h4 >{{$t('isochronesDetails.polygons')}}</h4>

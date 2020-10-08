@@ -3,14 +3,14 @@
     <v-layout row wrap >
       <v-flex v-bind="{[inputColumns]: true}">
         <v-text-field class="place-input"
-          v-focus="getAutomaticFocus"          
+          v-focus="getAutomaticFocus"
           v-model="model.placeName"
           clearable
           flat
           :box="box"
           :hide-details="single || index == 0"
           :hint="hint"
-          :persistent-hint="!single && index > 0"         
+          :persistent-hint="!single && index > 0"
           :height="height"
           :style="{'margin-bottom': mb +'px'}"
           :disabled="disabled"
@@ -80,9 +80,9 @@
               <v-icon>gps_fixed</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title> 
+              <v-list-tile-title>
                 <v-btn flat small @click.stop="setLocationFromBrowser()" class="no-padding no-margin no-capitalize">
-                  {{ $t('placeInput.yourLocation') }} 
+                  {{ $t('placeInput.yourLocation') }}
                 </v-btn>
               </v-list-tile-title>
               <v-list-tile-sub-title>{{ $t('placeInput.fromYourBrowser') }}</v-list-tile-sub-title>
@@ -94,15 +94,15 @@
               <v-icon>place</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title :title="placeSuggested.placeName">                 
+              <v-list-tile-title :title="placeSuggested.placeName">
                 <v-btn flat small @click.stop="suggestionClicked(placeSuggested)" class="no-padding no-margin no-capitalize">
-                  {{ placeSuggested.placeName }} 
+                  {{ placeSuggested.placeName }}
                 </v-btn>
               </v-list-tile-title>
               <v-list-tile-sub-title>
                 {{ $t('global.layers.'+ placeSuggested.properties.layer) }}
                 <span v-if="placeSuggested.properties.country"> - {{ placeSuggested.properties.country }} </span>
-                <span class="aproximate-distance" :title="$t('placeInput.aproximateDistance')">
+                <span class="approximate-distance" :title="$t('placeInput.approximateDistance')">
                   ~{{distance(placeSuggested)}}
                   {{$t('global.units.' + $store.getters.mapSettings.unit)}}
                 </span>

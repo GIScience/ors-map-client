@@ -6,7 +6,7 @@ export default {
     responseDataInATable: 'Response data in a table',
     search: 'Search',
     noDataWithSuchFilter: 'No data with such filter',
-    seeData: 'See data',
+    showData: 'Show data',
     duration: 'Duration: ',
     distance: 'Distance: ',
     days: 'd',
