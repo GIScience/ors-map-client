@@ -303,7 +303,6 @@ export default {
           setTimeout(() => {
             context.addPlaceInput()
             context.setfocusedPlaceInput(this.places.length - 1)
-            context.setSidebarIsOpen(true)
           }, 200)
         }
       }).catch((err) => {
@@ -373,7 +372,6 @@ export default {
             setTimeout(() => {
               context.places.reverse()
               context.setfocusedPlaceInput(0)
-              context.setSidebarIsOpen(true)
             }, 200)
           }
         }, 200)

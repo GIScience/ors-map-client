@@ -102,7 +102,7 @@
 
       <!-- highlight extra info polyline -->
       <extra-info-highlight @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" v-if="extraInfo" :extra-info="extraInfo" :polyline-data="activeRouteData.geometry.coordinates"/>
-      <l-height-graph v-if="isAltitudeModalOpen" @closed="closeAltitudeInfo" lg8 sm12 :data="localMapViewData.rawData" :options="lHeightGraphOptions"/>
+      <l-height-graph v-if="isAltitudeModalOpen" @closed="closeAltitudeInfo" lg8 sm11 :data="localMapViewData.rawData" :options="lHeightGraphOptions"/>
     </l-map>
     <img class="over-brand" v-if="showBrand" src="@/assets/img/heigit-and-hd-uni.png" :alt="$t('global.brand')" :title="$t('global.brand')">
     <v-btn fab small v-if="canFitFeatures && showControls" 
