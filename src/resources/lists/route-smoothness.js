@@ -1,4 +1,4 @@
-// List of countries for avoid countries feature
+// List of smoothness possibilities
 
 const routeSmothness = [
   {
