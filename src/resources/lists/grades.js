@@ -2,23 +2,23 @@
 
 const grades = [
   {
-    'en-US': 'Grade 1',
+    'en-us': 'Grade 1',
     value: 'grade1'
   },
   {
-    'en-US': 'Grade 2',
+    'en-us': 'Grade 2',
     value: 'grade2'
   },
   {
-    'en-US': 'Grade 3',
+    'en-us': 'Grade 3',
     value: 'grade3'
   },
   {
-    'en-US': 'Grade 4',
+    'en-us': 'Grade 4',
     value: 'grade4'
   },
   {
-    'en-US': 'Grade 5',
+    'en-us': 'Grade 5',
     value: 'grade5'
   }
 ]

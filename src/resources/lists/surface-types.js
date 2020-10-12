@@ -2,71 +2,71 @@
 
 const surfaceTypes = [
   {
-    'en-US': 'Paved',
+    'en-us': 'Paved',
     value: 'paved'
   },
   {
-    'en-US': 'Asphalt',
+    'en-us': 'Asphalt',
     value: 'asphalt'
   },
   {
-    'en-US': 'Concrete',
+    'en-us': 'Concrete',
     value: 'concrete'
   },
   {
-    'en-US': 'Concrete lanes',
+    'en-us': 'Concrete lanes',
     value: 'concrete:lanes'
   },
   {
-    'en-US': 'Paving stones',
+    'en-us': 'Paving stones',
     value: 'paving_stones'
   },
   {
-    'en-US': 'Sett',
+    'en-us': 'Sett',
     value: 'sett'
   },
   {
-    'en-US': 'Unhewn cobblestone',
+    'en-us': 'Unhewn cobblestone',
     value: 'unhewn_cobblestone'
   },
   {
-    'en-US': 'Cobblestone',
+    'en-us': 'Cobblestone',
     value: 'cobblestone'
   },
   {
-    'en-US': 'Metal',
+    'en-us': 'Metal',
     value: 'metal'
   },
   {
-    'en-US': 'Wood',
+    'en-us': 'Wood',
     value: 'wood'
   },
   {
-    'en-US': 'Unpaved',
+    'en-us': 'Unpaved',
     value: 'unpaved'
   },
   {
-    'en-US': 'Compacted',
+    'en-us': 'Compacted',
     value: 'compacted'
   },
   {
-    'en-US': 'Fine gravel',
+    'en-us': 'Fine gravel',
     value: 'fine_gravel'
   },
   {
-    'en-US': 'Gravel',
+    'en-us': 'Gravel',
     value: 'gravel'
   },
   {
-    'en-US': 'Pebblestone',
+    'en-us': 'Pebblestone',
     value: 'pebblestone'
   },
   {
-    'en-US': 'Ground',
+    'en-us': 'Ground',
     value: 'ground'
   },
   {
-    'en-US': 'Grass',
+    'en-us': 'Grass',
     value: 'grass'
   }
 ]

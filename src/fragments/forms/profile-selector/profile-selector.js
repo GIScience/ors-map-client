@@ -87,6 +87,11 @@ export default {
       if (filterRef.value && this.activeProfile !== filterRef.value) {
         this.activeProfile = filterRef.value
       }
+    },
+    getProfileTitle (slug) {
+      let filterKey = `orsMapFilters.profiles.${slug}`
+      let title = this.$t(filterKey)
+      return title
     }
   }
 }

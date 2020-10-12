@@ -32,7 +32,7 @@ export default {
       let options = []
       for (let key in filterRef.enum) {
         let itemVal = filterRef.enum[key]
-        options.push({value: itemVal, text: this.$t('global.profiles.' + itemVal)})
+        options.push({value: itemVal, text: this.$t('orsMapFilters.profiles.' + itemVal)})
       }
       return options
     }

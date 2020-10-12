@@ -256,20 +256,46 @@ export default {
      * @returns []
      */
     getSelectableItems (parameter) {
-      const stringifyItemsValue = function (parameter, propName) {
-        for (const key in parameter[propName]) {
-          parameter[propName][key] = parameter[propName][key].toString()
+      let items = []
+      if (parameter.filteredItems) {
+        items = parameter.filteredItems
+      } else if (parameter.items) {
+        items = parameter.items
+      } else {
+        items = parameter.enum
+      }
+      
+      return this.adjustItems(items, parameter)
+    },
+
+    /**
+     * Set item option structure and translation
+     * @param {Array} items 
+     * @return {Array} items 
+     */
+    adjustItems (items, parameter) {
+      for (let key in items) {
+        let item = items[key]
+        if (typeof item !== 'object' || !item.itemText) {
+          if (typeof item === 'object') {
+            for (const itemKey in item) {
+              item[itemKey] = item[itemKey].toString()
+            }
+            let itemText = item[this.$store.getters.mapSettings.locale] || item[this.$store.getters.defaultMapSettings.locale]
+            item.itemText = itemText
+            item.itemValue = item[parameter.itemValue]
+          } else {
+            let filterTranslKey = `orsMapFilters.filters.${parameter.name}.enum.${item}`
+            let itemText = this.$t(filterTranslKey)
+            let itemObj = {
+              itemValue: item,
+              itemText: itemText
+            }
+            items[key] = itemObj          
+          }
         }
       }
-      if (parameter.filteredItems) {
-        stringifyItemsValue(parameter, 'filteredItems')
-        return parameter.filteredItems
-      } else if (parameter.items) {
-        return parameter.items
-      } else {
-        stringifyItemsValue(parameter, 'enum')
-        return parameter.enum
-      }
+      return items
     },
 
     /**
@@ -297,7 +323,8 @@ export default {
       if (!parameter) {
         return ''
       }
-      let label = parameter.label
+      let filterKey = `orsMapFilters.filters.${parameter.name}.label`
+      let label = this.$t(filterKey)
 
       if (parameter.apiDefault) {
         label += (' ' + this.$t('formFields.defaultAbbreviation') + ' ' + parameter.apiDefault)
@@ -305,6 +332,20 @@ export default {
         label += (' ' + this.$t('formFields.exampleAbbreviation') + ' ' + parameter.example)
       }
       return label
+    },
+    /**
+     * Build the parameter description
+     *
+     * @param {*} parameter
+     * @returns {String}
+     */
+    buildDescription (parameter) {
+      if (!parameter) {
+        return ''
+      }
+      let filterKey = `orsMapFilters.filters.${parameter.name}.description`
+      let description = this.$t(filterKey)
+      return description
     },
 
     /**

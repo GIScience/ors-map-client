@@ -2,35 +2,35 @@
 
 const routeSmothness = [
   {
-    'en-US': 'Impassable',
+    'en-us': 'Impassable',
     value: 'impassable'
   },
   {
-    'en-US': 'Very horrible',
+    'en-us': 'Very horrible',
     value: 'very_horrible'
   },
   {
-    'en-US': 'Horrible',
+    'en-us': 'Horrible',
     value: 'horrible'
   },
   {
-    'en-US': 'Very bad',
+    'en-us': 'Very bad',
     value: 'very_bad'
   },
   {
-    'en-US': 'Bad',
+    'en-us': 'Bad',
     value: 'bad'
   },
   {
-    'en-US': 'Intermediate',
+    'en-us': 'Intermediate',
     value: 'intermediate'
   },
   {
-    'en-US': 'Good',
+    'en-us': 'Good',
     value: 'good'
   },
   {
-    'en-US': 'Excellent',
+    'en-us': 'Excellent',
     value: 'excellent'
   }
 ]

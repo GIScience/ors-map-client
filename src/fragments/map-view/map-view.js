@@ -510,7 +510,7 @@ export default {
       // associated to each extra value
       if (lodash.get(activRoute, 'properties.extras')) {
         let dict = orsDictionary
-        let translations = this.$t('global.orsDictionary')
+        let translations = this.$t('orsDictionary')
         mappings = {}
         // Set the mapping for each extra info key
         for (let extraKey in activRoute.properties.extras) {

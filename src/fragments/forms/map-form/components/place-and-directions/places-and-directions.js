@@ -591,7 +591,7 @@ export default {
 
       if (routeSummary && typeof routeSummary === 'object' && routeSummary.distance && routeSummary.unit && routeSummary.duration) {
         const humanizedData = GeoUtils.getHumanizedTimeAndDistance(routeSummary, this.$t('global.units'))
-        const profileLabeKey = 'global.profiles.' + mapViewData.options.profile
+        const profileLabeKey = 'orsMapFilters.profiles.' + mapViewData.options.profile
         const profileLabel = this.$t(profileLabeKey)
         if (profileLabel !== profileLabeKey) {
           message += ` ${this.$t('placesAndDirections.for')} <b>${profileLabel}</b>`

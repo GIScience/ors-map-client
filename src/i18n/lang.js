@@ -39,6 +39,14 @@ addComponentKeys('en', deCoreMessages)
 const deSharedPartsMessages = loader.load(require.context('@/fragments/', true, /\.i18n\.de\.js$/), true)
 addComponentKeys('en', deSharedPartsMessages)
 
+// load and get all EN messages from shared parts *i18n.en.js default export using custom loader
+const enResourcesMessages = loader.load(require.context('@/resources/', true, /\.i18n\.en\.js$/), true)
+addComponentKeys('en', enResourcesMessages)
+
+// load and get all EN messages from shared parts *i18n.en.js default export using custom loader
+const deResourcesMessages = loader.load(require.context('@/resources/', true, /\.i18n\.de\.js$/), true)
+addComponentKeys('de', deResourcesMessages)
+
 export default new VueI18n(i18n)
 
 function addComponentKeys (languageKey, i18nObject) {
