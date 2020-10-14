@@ -47,9 +47,7 @@ export default [
     component: Maps,
     beforeEnter: (to, from, next) => {
       store.commit('mode', constants.modes.place)
-      store.dispatch('checkAndSetEmbedState', to).then(() => {
-        next()
-      })
+      next()
     }
   },
   {
@@ -60,9 +58,7 @@ export default [
     component: Maps,
     beforeEnter: (to, from, next) => {
       RouteUtils.setDirectionsModeBasedOnRoute(to)
-      store.dispatch('checkAndSetEmbedState', to).then(() => {
-        next()
-      })
+      next()
     }
   },
   {
@@ -71,9 +67,7 @@ export default [
     component: Maps,
     beforeEnter: (to, from, next) => {
       store.commit('mode', constants.modes.search)
-      store.dispatch('checkAndSetEmbedState', to).then(() => {
-        next()
-      })
+      next()
     }
   },
   {
@@ -82,9 +76,7 @@ export default [
     component: Maps,
     beforeEnter: (to, from, next) => {
       store.commit('mode', constants.modes.isochrones)
-      store.dispatch('checkAndSetEmbedState', to).then(() => {
-        next()
-      })
+      next()
     }
   },
   {

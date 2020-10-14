@@ -7,7 +7,7 @@ const defaultMapSettings = {
   waytype: true,
   apiKey: null,
   endpoints: null,
-  locale: 'en-us',
+  locale: 'en',
   routingInstructionsLocale: 'en',
   unit: 'km',
   alwaysFitBounds: true,

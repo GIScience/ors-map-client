@@ -49,6 +49,7 @@ export default {
           delete savingSettings.apiKey
         }
         localStorage.setItem('mapSettings', JSON.stringify(savingSettings))
+        this.$i18n.locale = savingSettings.locale
       }
       // Dispatch an event about the locale change
       this.eventBus.$emit('localeChanged', this.mapSettingsTransient.locale)

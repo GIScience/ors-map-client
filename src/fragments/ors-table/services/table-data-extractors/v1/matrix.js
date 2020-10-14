@@ -1,4 +1,4 @@
-import VueInstance from '@/main'
+import main from '@/main'
 /**
  * MatrixBuilder table data Builder class
  * @param {*} data {responseData: {}, translations: {}}
@@ -100,6 +100,7 @@ class MatrixBuilder {
       // Add the location lat-lon as a first value in the row
       row.push(`${source.location[0]}, ${source.location[1]}`)
       // Add the distances
+      let VueInstance = main.getInstance()
       const rowValues = VueInstance.lodash.map(this.responseData.distances[index], (value) => {
         return `${value} ${this.responseData.info.query.units}`
       })

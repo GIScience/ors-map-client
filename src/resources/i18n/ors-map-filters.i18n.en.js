@@ -6,6 +6,7 @@ export default {
       'cycling-road': 'Cycling road',
       'cycling-electric': 'Cycling electric',
       'cycling-mountain': 'cycling mountain',
+      'cycling-safe': 'Cycling safe',
       'foot-walking': 'Foot walking',
       'foot-hiking': 'Foot hiking',
       'driving-car': 'Driving car',

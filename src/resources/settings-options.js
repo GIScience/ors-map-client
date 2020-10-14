@@ -25,8 +25,8 @@ const settingsOptions = {
     { text: 'Sq meters', value: 'm' }
   ],
   appLocales: [
-    { text: 'English US', value: 'en-us' }
-    // {text: 'Deutsch DE', value: 'de-de'},
+    { text: 'English US', value: 'en' },
+    { text: 'Deutsch DE', value: 'de' },
     // {text: 'Português BR', value: 'pt-br'}
   ],
   tileServices: [

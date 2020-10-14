@@ -13,6 +13,6 @@ export default {
     shorteningNotPossible: 'It was not possible to generate a short url. Please use the full Url',
     embedCodeCopied: 'Embedding code copied',
     embed: 'Embedding (click to copy)',
-    useThiscodeToEmbedorsMapsInyourWebsite: 'Use this code to embed ORS map in your website'
+    emdedInstructions: 'Use this code to embed ORS map in your website'
   }
 }

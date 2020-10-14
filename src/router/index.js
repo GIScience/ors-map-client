@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import loader from '@/support/loader'
-import store from '@/store/store'
 import resolver from '@/support/routes-resolver'
+import AppLoader from '@/app-loader'
 
 Vue.use(Router)
 
@@ -16,13 +16,9 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (!store.getters.dataAcquired) {
-    store.dispatch('setAppState', to).then(() => {
-      next()
-    })
-  } else {
+  AppLoader.checkAndSetEmbedState().then(() => {
     next()
-  }
+  })
 })
 
 // load and get all routes from components with name following the pattern *.route.js

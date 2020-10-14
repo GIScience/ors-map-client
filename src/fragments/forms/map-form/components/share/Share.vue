@@ -28,7 +28,7 @@
             </v-textarea>
           </v-flex>
         </v-layout>
-        <v-alert :value="true" type="info" > {{$t('share.useThisCodeToEmbedOrsMapsInYourWebsite')}}</v-alert>
+        <v-alert :value="true" type="info" > {{$t('share.emdedInstructions')}}</v-alert>
       </box>
     </v-dialog>
   </div>

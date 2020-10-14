@@ -13,6 +13,6 @@ export default {
     shorteningNotPossible: 'Keine kurz Url möglich. Bitte die komplette Url verwenden',
     embedCodeCopied: 'Code zur Einbettung kopiert',
     embed: 'Einbettung auf anderer Website (klicken zum kopieren)',
-    useThisCodeToEmbedOrsMapsInYourWebsite: 'Diesen Code zum Einbetten der Karte auf Ihrer Website benutzen'
+    emdedInstructions: 'Diesen Code zum Einbetten der Karte auf Ihrer Website benutzen'
   }
 }
