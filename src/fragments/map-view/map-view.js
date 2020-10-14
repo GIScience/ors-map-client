@@ -782,7 +782,7 @@ export default {
      */
     zoomed (event) {
       this.zoomLevel = event.sourceTarget._zoom
-      if (!this.featuresJustFitted) {
+      if (!this.featuresJustFitted && !this.hasOnlyOneMarker) {
         this.storeMapBounds()
         this.$emit('zoomChanged', event.sourceTarget._zoom)
       } else {
@@ -1005,18 +1005,11 @@ export default {
      */
     loadMapData () {
       if (this.localMapViewData.hasPlaces()) {
-        this.defineMapViewMaxZoom()
         this.defineActiveRouteIndex()
         this.updateMarkersLabel()
         this.fitFeaturesBounds()
         this.loadAvoidPolygons()
       }
-    },
-    /**
-     * Defines the appropriate max zoom level to be used
-     */
-    defineMapViewMaxZoom () {
-      this.localMapViewData.maxZoom = this.localMapViewData.maxZoom ? this.localMapViewData.maxZoom : this.initialMaxZoom
     },
     /**
      * Build and set bounds based on localMapViewData

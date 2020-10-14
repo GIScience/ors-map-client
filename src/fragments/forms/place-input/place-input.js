@@ -228,8 +228,8 @@ export default {
       }
       let suggestions = []
       if (this.localModel.nameIsCoord()) {
-        const coords = this.localModel.getCoordsFromName()
-        const rawCoordinatesPlace = new Place(coords[0], coords[1], this.localModel.placeName, { properties: { layer: 'rawCoordinate' } })
+        const lnglatArr = this.localModel.getLnglat()
+        const rawCoordinatesPlace = new Place(lnglatArr[0], lnglatArr[1], this.localModel.placeName, { properties: { layer: 'rawCoordinate' } })
         rawCoordinatesPlace.rawCoordinate = true
         suggestions.push(rawCoordinatesPlace)
       }
@@ -381,8 +381,9 @@ export default {
       if (event) {
         const isPasteEvent = event instanceof ClipboardEvent
         // In case of a ClipboardEvent (ctr + v)
-        // we must just ignore, since we the input
-        // model  has not changed yet
+        // we must just ignore, since the input
+        // model  has not changed yet and it will 
+        // trigger another change event when it changes
         if (!isPasteEvent) {
           event.preventDefault()
           event.stopPropagation()
