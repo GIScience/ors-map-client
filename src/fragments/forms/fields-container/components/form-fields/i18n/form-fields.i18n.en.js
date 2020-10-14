@@ -1,9 +1,6 @@
 export default {
   formFields: {
     meansRequired: 'means it is required',
-    key: 'Key',
-    help: 'Help',
-    value: 'Value',
     fieldHelp: 'Click to open the description',
     exampleAbbreviation: 'eg.: ',
     defaultAbbreviation: 'df.: ',
@@ -18,8 +15,5 @@ export default {
     notToBe: 'not to be',
     and: 'AND',
     attention: 'Attention',
-    parameterWrappingNotice: 'listing parameters that are wrapped by',
-    editJson: 'Edit JSON',
-    generateRandomValue: 'Generate random value'
   }
 }

@@ -112,7 +112,7 @@ export default {
         context.updateAppRoute()
       }).catch((err) => {
         console.log(err)
-        context.showError(this.$t('isochrones.couldResolveTheSelectedPlaceAsAsuitableCenter'), { timeout: 0 })
+        context.showError(this.$t('isochrones.couldResolveTheSelectedPlaceAsASuitableCenter'), { timeout: 0 })
       })
     },
     /**

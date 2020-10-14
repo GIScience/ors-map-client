@@ -11,7 +11,7 @@ export default {
       'driving-car': 'Driving car',
       'driving-hgv': 'Driving HGV',
       'wheelchair': 'Wheelchair'
-    },    
+    },
     filters: {
       preference: {
         label: 'Route preference',
@@ -56,24 +56,20 @@ export default {
         description: 'Specifies the maximum height of the sloped curb in meters'
       },
       minimum_width: {
-        description: 'Specifies the minimum width of the footway in metres',
-        label: 'Footway minimum width'
+        label: 'Footway minimum width',
+        description: 'Specifies the minimum width of the footway in metres'
       },
       smoothness_type: {
         label: 'Route smoothness',
-        description: 'Specifies the minimum smoothness of the route'
-      },
-      smoothness_type: {
-        label: 'Route smoothness',
-        description: 'Specifies the minimum smoothness of the route'
+        description: 'Specifies the minimum smoothness of the route. Further infos: https://wiki.openstreetmap.org/wiki/Key:smoothness'
       },
       surface_type: {
         label: 'Min. surface type',
-        description: 'Specifies the minimum surface type'
+        description: 'Specifies the minimum surface type. Type order: https://wiki.openstreetmap.org/wiki/Key:surface'
       },
       track_type: {
         label: 'Minimum route grade',
-        description: 'Specifies the minimum grade of the route'
+        description: 'Specifies the minimum grade of the route. Grade values: https://wiki.openstreetmap.org/wiki/Key:tracktype'
       },
       round_trip: {
         label: 'Round trip'
@@ -98,16 +94,12 @@ export default {
         label: 'Avoid polygons',
         description: 'Avoid polygons',
         enum: {
-          'highways': 'Highways', 
+          'highways': 'Highways',
           'tollways': 'Tollways',
           'ferries': 'Ferries',
           'tunnels': 'Tunnels',
-          'pavedroads': 'Pavedroads',
-          'unpavedroads': 'Unpavedroads',
-          'tracks': 'Tracks',
           'fords': 'Fords',
           'steps': 'Steps',
-          'hills': 'Hills'
         }
       },
       avoid_borders: {
@@ -117,22 +109,22 @@ export default {
           'all': 'All',
           'controlled': 'Controlled'
         }
-      },  
+      },
       avoid_countries: {
         label: 'Avoid countries',
         description: 'Avoid countries'
-      }, 
+      },
       alternative_routes: {
         label: 'Alternative routes'
-      }, 
+      },
       target_count: {
         label: 'Number of routes',
         description: 'Target number of alternative routes to compute. Service returns up to this number of routes that fulfill the share-factor and weight-factor constraints.'
-      }, 
+      },
       share_factor: {
         label: 'Share factor',
         description: 'Maximum fraction of the route that alternatives may share with the optimal route. The default value of 0.6 means alternatives can share up to 60% of path segments with the optimal route.'
-      }, 
+      },
       weight_factor: {
         label: 'Weight factor',
         description: 'Maximum factor by which route weight may diverge from the optimal route. The default value of 1.4 means alternatives can be up to 1.4 times longer (costly) than the optimal route.'

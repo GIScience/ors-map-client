@@ -28,7 +28,7 @@
         <template slot="items" slot-scope="props">
           <td v-for="(column, index) in columns" :key="index" style="text-align:center">
             <template v-if="typeof props.item[index] === 'object'">
-              <v-btn style="text-transform:none" @click="showJsonData(column, props.item[index])" flat color="secondary">{{$t('orsTable.seeData')}}</v-btn>
+              <v-btn style="text-transform:none" @click="showJsonData(column, props.item[index])" flat color="secondary">{{$t('orsTable.showData')}}</v-btn>
             </template>
             <template v-else>
               {{ props.item[index]}}

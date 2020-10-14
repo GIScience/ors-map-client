@@ -1,10 +1,10 @@
 export default {
   global: {
     send: 'Send',
-    save: 'SAve',
+    save: 'Save',
     confirm: 'Confirm',
     cancel: 'Cancel',
-    appName: 'OpenRouteService Maps',
+    appName: 'Openrouteservice Maps',
     brand: 'HeiGIT - Heidelberg University',
     close: 'Close',
     select: 'Select',
@@ -15,7 +15,7 @@ export default {
     ok: 'OK',
     polygon: 'polygon',
     developedByIntro: 'Services developed by',
-    developedBy: 'The Heidelberg Institute for Geoinformation Technology',
+    developedBy: 'Heidelberg Institute for Geoinformation Technology',
     months: {
       january: 'January',
       february: 'February',
@@ -68,12 +68,7 @@ export default {
       venue: 'Venue',
       rawCoordinate: 'Raw lng,lat coordinates',
       notAvailable: 'Not available',
-      undefined: 'Not defined'
+      'undefined': 'Not defined'
     }
-  },
-  auth: {
-    yourGithubAccountIsNotLinkedYet: 'Your GitHub account is not linked yet with OpenRouteService. Please make sure that you have already signed up with this GitHub account on ORS',
-    processingOAuth: 'Processing authentication, please wait...',
-    authenticationWithOAuthCompleted: 'Authentication completed'
   }
 }

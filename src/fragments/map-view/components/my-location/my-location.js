@@ -11,7 +11,7 @@ export default {
     menuOpen: false,
     myLocationInterval: false,
     locationActive: false,
-    continously: false,
+    continuously: false,
     toolTipVisible: false
   }),
   watch: {
@@ -71,11 +71,11 @@ export default {
     /**
      * Get the browser location and store it in our store
      * If fail, shows a toaster to the user
-     * @param {Boolean} continously
+     * @param {Boolean} continuously
      */
-    setLocationFromBrowser (continously = false) {
+    setLocationFromBrowser (continuously = false) {
       this.toolTipVisible = false
-      this.continously = continously
+      this.continuously = continuously
       // Reset the location access denied flag
       const context = this
 
@@ -89,7 +89,7 @@ export default {
         }, 100)
       } else {
         context.$emit('updateLocation', true)
-        if (continously) {
+        if (continuously) {
           this.myLocationInterval = setInterval(() => {
             context.$emit('updateLocation', true)
           }, 2000)

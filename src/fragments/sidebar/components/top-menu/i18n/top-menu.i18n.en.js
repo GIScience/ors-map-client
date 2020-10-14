@@ -1,8 +1,8 @@
 export default {
   topMenu: {
-    openSettings: 'Open settings',
-    showAbout: 'Show ORS about',
-    about: 'About ORS',
+    openSettings: 'Settings',
+    showAbout: 'Show general information',
+    about: 'About ors',
     pinSidebar: 'Pin sidebar'
   }
 }

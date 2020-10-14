@@ -22,7 +22,7 @@ export default {
     fillOrRemoveInput: 'Choose a location or remove input',
     noPlaceFound: 'No results returned',
     unknownSearchPlaceError: 'Unknown place search error',
-    aproximateDistance: 'Approximate distance in a straight line from current map center',
+    approximateDistance: 'Approximate distance in a straight line from current map center',
     couldNotDetermineYourPreciseLocationUsingIpLocation: 'It was not possible to determine your precise location. Your IP based location will be used instead',
     pleaseTypeSomething: 'Please type something to search',
     toggleDirect: 'Toggle direct from here until next place'

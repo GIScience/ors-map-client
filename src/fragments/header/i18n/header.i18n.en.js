@@ -1,6 +1,6 @@
 export default {
   header: {
-    hiddeMenuBar: 'Hidde menu bar',
+    hideMenuBar: 'Hide menu bar',
     showMenuBar: 'Show menu bar'
   }
 }
