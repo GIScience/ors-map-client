@@ -61,7 +61,7 @@ const findFittingLocale = (storedLocale) => {
   })
   // If the selected locale is not supported, set the default
   if (!isLocaleValid) {
-    locale = 'en'
+    locale = appConfig.defaultLocale
   }
   return locale
 }

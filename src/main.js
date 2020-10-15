@@ -85,7 +85,7 @@ AppLoader.load().then(() => {
   let i18n = I18nLoader.get()
 
   // In some previous version of this app the `en` locale was stored as `en-us`
-  let locale = store.getters.mapSettings.locale === 'en-us' ? 'en' : store.getters.mapSettings.locale
+  let locale = store.getters.mapSettings.locale === 'en' ? 'en-us' : store.getters.mapSettings.locale
   // Set locale from store/local storage
   i18n.locale = locale
 
