@@ -235,7 +235,7 @@ export default {
      * @returns {Boolean}
      */
     showBrand () {
-      return this.mapHeight > 450
+      return this.mapHeight > 450 || this.$store.getters.embed 
     },
     /**
      * Buil and return the geojson options based on the
