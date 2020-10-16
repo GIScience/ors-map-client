@@ -303,6 +303,7 @@ export default {
           setTimeout(() => {
             context.addPlaceInput()
             context.setfocusedPlaceInput(this.places.length - 1)
+            context.setSidebarIsOpen(true)
           }, 200)
         }
       }).catch((err) => {
@@ -372,6 +373,7 @@ export default {
             setTimeout(() => {
               context.places.reverse()
               context.setfocusedPlaceInput(0)
+              context.setSidebarIsOpen(true)
             }, 200)
           }
         }, 200)
@@ -589,12 +591,12 @@ export default {
 
       if (routeSummary && typeof routeSummary === 'object' && routeSummary.distance && routeSummary.unit && routeSummary.duration) {
         const humanizedData = GeoUtils.getHumanizedTimeAndDistance(routeSummary, this.$t('global.units'))
-        const profileLabeKey = 'global.profiles.' + mapViewData.options.profile
+        const profileLabeKey = 'orsMapFilters.profiles.' + mapViewData.options.profile
         const profileLabel = this.$t(profileLabeKey)
         if (profileLabel !== profileLabeKey) {
           message += ` ${this.$t('placesAndDirections.for')} <b>${profileLabel}</b>`
         }
-        const routeInfo = `${this.$t('placesAndDirections.distance')} ${humanizedData.distance} ${this.$t('global.and')} ${this.$t('placesAndDirections.duration')} ${humanizedData.duration}`
+        const routeInfo = `${this.$t('global.distance')} ${humanizedData.distance} ${this.$t('global.and')} ${this.$t('global.duration')} ${humanizedData.duration}`
         message = `${message} - ${routeInfo.toLowerCase()}`
       }
       return message

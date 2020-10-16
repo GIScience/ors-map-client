@@ -19,12 +19,12 @@
           <v-divider></v-divider>
           <v-list dense>
             <div style="padding:0 0 0 10px">
-              <div>{{$t('routeDetails.distance')}}:  <b>{{route.summary.distance}} </b></div>
-              <div>{{$t('routeDetails.duration')}}:  <b>{{route.summary.duration}} </b></div>
+              <div>{{$t('global.distance')}}:  <b>{{route.summary.distance}} </b></div>
+              <div>{{$t('global.duration')}}:  <b>{{route.summary.duration}} </b></div>
             </div>
             <div  style="padding:0 0 0 10px" v-if="route.properties.warnings">
               <h4 >{{$t('routeDetails.warnings')}}:</h4>
-              <v-alert :key="warning.code" v-for="warning in route.properties.warnings" :value="warning.message"  type="warning" style="color:black" >{{ warning.message }}</v-alert>
+              <v-alert :key="warning.code" v-for="warning in route.properties.warnings" :value="getWarningTranslated(warning)"  type="warning" style="color:black" >{{ getWarningTranslated(warning) }}</v-alert>
             </div>
             <div v-if="route.properties.segments.length > 1 && index === $store.getters.activeRouteIndex">
               <v-expansion-panel class="no-shadow" v-if="hasRoutes" :value="route.properties.segments.length === 1 ? 0 : null">
@@ -35,12 +35,12 @@
                     <v-list dense class="instructions-scroll">
                       <div style="padding:0 0 0 0px">
                         <div>
-                          {{$t('routeDetails.distance')}}:  <b>{{segment.distance}} </b>
+                          {{$t('global.distance')}}:  <b>{{segment.distance}} </b>
                           <v-btn :max-width="30" fab icon small @click="segmentClicked(segment, index)" :title="$t('routeDetails.gotoSegment')">
                             <v-icon>remove_red_eye</v-icon>
                           </v-btn>
                         </div>
-                        <div>{{$t('routeDetails.duration')}}:  <b>{{segment.duration}} </b></div>
+                        <div>{{$t('global.duration')}}:  <b>{{segment.duration}} </b></div>
                       </div>
                       <div style="padding:0 0 0 0px">
                         <h4 >{{$t('routeDetails.instructions')}}:</h4>

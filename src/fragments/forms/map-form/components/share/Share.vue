@@ -15,7 +15,7 @@
           </v-flex>
           <v-flex xs12 sm2 d-flex>
             <v-btn style="margin-top:11px" color="primary" :title="shortBtnTitle" @click="toggleShortUrl()">{{shortBtnTitle}}</v-btn>
-          </v-flex>          
+          </v-flex>
         </v-layout>
         <v-alert :value="true" type="info" > {{$t('share.copyUrlInfo')}}</v-alert>
         <br><br>
@@ -28,7 +28,7 @@
             </v-textarea>
           </v-flex>
         </v-layout>
-        <v-alert :value="true" type="info" > {{$t('share.useThiscodeToEmbedorsMapsInyourWebsite')}}</v-alert>
+        <v-alert :value="true" type="info" > {{$t('share.emdedInstructions')}}</v-alert>
       </box>
     </v-dialog>
   </div>

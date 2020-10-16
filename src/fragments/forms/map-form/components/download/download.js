@@ -91,7 +91,7 @@ export default {
 
         // check if it has reached the max lenght
         if (link.href.length > 2097152) {
-          this.showError(this.$t('download.fileTooBigToBeDowloaded'), { timeout: 2000 })
+          this.showError(this.$t('download.fileTooBigToBeDownloaded'), { timeout: 2000 })
         } else {
           // Set the filename
           const timestamp = new Date().getTime()

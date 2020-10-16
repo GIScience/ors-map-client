@@ -69,7 +69,7 @@ export default {
      * @returns {String} bottomHeight
      */
     accessibilityButtomHeight () {
-      var bottomHeight = '125px'
+      var bottomHeight = '135px'
       if (this.showBottomNav) {
         const height = this.bottomNavHeight + 10
         bottomHeight = `${height}px`      
@@ -301,7 +301,6 @@ export default {
      * @param {MapViewData} mapViewData
      */
     setMapDataAndUpdateMapView (mapViewData) {
-      this.mapViewData = mapViewData
       this.searchBtnAvailable = false
 
       // If the previous state of mapViewData

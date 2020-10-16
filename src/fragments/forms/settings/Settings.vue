@@ -6,7 +6,7 @@
           <br>
           <v-expansion-panel slot="content" :value="0">
             <v-expansion-panel-content class="panel-content" style="background: transparent;">
-              <div slot="header"><h4 >{{$t('settings.localization')}}</h4></div>
+              <div slot="header"><h4 >{{$t('settings.language')}}</h4></div>
               <v-list>
                 <v-list dense>
                   <div style="padding:0 0 0 10px">
@@ -128,7 +128,7 @@
               <v-btn :block="$lowResolution" color="primary" :title="$t('settings.restoreDefaults')" @click="restoreDefaultMapSettings">{{$t('settings.restoreDefaults')}}</v-btn>
             </v-flex>
             <v-flex text-xs-right xs12 sm3 md3 :class="{'ml-2': $vuetify.breakpoint.smAndDown}">
-              <v-btn :block="$lowResolution" color="primary" :title="$t('settings.saveAll')" @click="saveAll">{{$t('settings.saveAll')}}</v-btn>
+              <v-btn :block="$lowResolution" color="primary" :title="$t('settings.save')" @click="saveAll">{{$t('settings.save')}}</v-btn>
             </v-flex>
           </v-layout>
           <br>

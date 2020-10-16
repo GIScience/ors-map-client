@@ -10,7 +10,6 @@ const filters = [
     name: 'profile',
     useInServices: [constants.services.directions, constants.services.isochrones],
     hidden: true,
-    description: 'Specifies the route profile',
     required: true,
     type: constants.filterTypes.string,
     enum: [
@@ -30,61 +29,50 @@ const filters = [
     mapping: {
       'cycling-regular': {
         slug: 'cycling-regular',
-        title: 'Cycling regular',
         icon: 'directions_bike',
         primary: true
       },
       'cycling-road': {
         slug: 'cycling-road',
-        title: 'Cycling road',
         icon: 'directions_bike'
       },
       'cycling-electric': {
         slug: 'cycling-electric',
-        title: 'Cycling electric',
         icon: 'directions_bike'
       },
       'cycling-mountain': {
         slug: 'cycling-mountain',
-        title: 'Cycling mountain',
         icon: 'directions_bike'
       },
       'foot-walking': {
         slug: 'foot-walking',
-        title: 'Foot walking',
         icon: 'directions_walk',
         primary: true
       },
       'foot-hiking': {
         slug: 'foot-hiking',
-        title: 'Foot hiking',
         icon: 'directions_walk'
       },
       'driving-car': {
         slug: 'driving-car',
-        title: 'Driving car',
         icon: 'directions_car',
         primary: true
       },
       'driving-hgv': {
         slug: 'driving-hgv',
-        title: 'Driving HGV',
         icon: 'directions_car'
       },
       wheelchair: {
         slug: 'wheelchair',
-        title: 'wheelchair',
         icon: 'accessible',
         primary: true
       }
     }
   },
   {
-    label: 'Route preference',
     name: 'preference',
     useInServices: [constants.services.directions],
     availableOnModes: [constants.modes.directions],
-    description: 'The preferred factor to be considered when calculating routes',
     type: constants.filterTypes.string,
     isEnum: true,
     separator: '|',
@@ -102,8 +90,6 @@ const filters = [
     name: 'range_type',
     required: true,
     type: constants.filterTypes.string,
-    description: 'Method used to calculate the isochrone',
-    label: 'Isochrone Method',
     isEnum: true,
     enum: ['time', 'distance'],
     value: 'distance'
@@ -113,7 +99,6 @@ const filters = [
     unit: 'min',
     required: false,
     type: constants.filterTypes.steps,
-    description: 'The time interval of the isochrones to be calculated, in minutes,',
     label: 'Time',
     value: 5,
     min: 1,
@@ -134,8 +119,6 @@ const filters = [
     unit: 'min',
     required: false,
     type: constants.filterTypes.steps,
-    description: 'The time interval of the isochrones to be calculated, in minutes,',
-    label: 'Interval',
     value: 1,
     min: 3,
     max: 30,
@@ -155,8 +138,6 @@ const filters = [
     unit: 'km',
     required: false,
     type: constants.filterTypes.steps,
-    description: 'The max distance of the isochrones, in kilometers',
-    label: 'Distance',
     value: 1,
     min: 1,
     max: 115,
@@ -176,8 +157,6 @@ const filters = [
     unit: 'km',
     required: false,
     type: constants.filterTypes.steps,
-    description: 'The distance interval of the isochrones to be calculated, in kilometers',
-    label: 'Interval',
     value: 1,
     min: 3,
     max: 30,
@@ -193,15 +172,14 @@ const filters = [
     useInServices: [constants.services.isochrones]
   },
   {
-    label: 'Route options',
+    name: 'options',
     type: constants.filterTypes.wrapper,
     useInServices: [constants.services.directions, constants.services.isochrones],
     availableOnModes: [constants.modes.roundTrip, constants.modes.directions, constants.modes.isochrones],
     valueAsObject: true,
-    name: 'options',
     props: [
       {
-        label: 'Profile parameters',
+        name: 'profile_params',
         type: constants.filterTypes.wrapper,
         useInServices: [constants.services.directions],
         availableOnModes: [constants.modes.roundTrip, constants.modes.directions],
@@ -211,23 +189,19 @@ const filters = [
             ref: 'profile',
             value: 'wheelchair'
           }
-        ],
-        name: 'profile_params',
+        ],        
         props: [
           {
-            label: 'Restrictions',
+            name: 'restrictions',
             type: constants.filterTypes.wrapper,
             valueAsObject: true,
             availableOnModes: [constants.modes.roundTrip, constants.modes.directions],
             useInServices: [constants.services.directions, constants.services.roundTrip],
-            name: 'restrictions',
             props: [
               {
                 name: 'maximum_incline',
                 required: false,
                 type: constants.filterTypes.string,
-                description: 'The maximum inclination in percentage',
-                label: 'Max inclination',
                 value: '6',
                 isEnum: true,
                 enum: [
@@ -242,8 +216,6 @@ const filters = [
                 required: false,
                 type: constants.filterTypes.string,
                 isEnum: true,
-                description: 'Specifies the maximum height of the sloped curb in meters',
-                label: 'Max kerb height',
                 value: '0.06',
                 enum: [
                   '0.03',
@@ -256,8 +228,6 @@ const filters = [
                 unit: 'meters',
                 required: false,
                 type: constants.filterTypes.steps,
-                description: 'Specifies the minimum width of the footway in metres',
-                label: 'Footway minimum width',
                 value: 1,
                 min: 0,
                 max: 30,
@@ -268,11 +238,8 @@ const filters = [
                 required: false,
                 type: constants.filterTypes.string,
                 isEnum: true,
-                description: 'Specifies the minimum smoothness of the route',
-                label: 'Route smoothness',
                 value: 'good',
-                items: routeSmoothnessList,
-                itemText: 'en-US',
+                items: routeSmoothnessList,                
                 itemValue: 'value'
               },
               {
@@ -280,11 +247,8 @@ const filters = [
                 required: false,
                 type: constants.filterTypes.string,
                 isEnum: true,
-                description: 'Specifies the minimum surface type',
-                label: 'Min. surface type',
                 value: 'cobblestone',
-                items: surfaceTypesList,
-                itemText: 'en-US',
+                items: surfaceTypesList,                
                 itemValue: 'value'
               },
               {
@@ -292,11 +256,8 @@ const filters = [
                 required: false,
                 type: constants.filterTypes.string,
                 isEnum: true,
-                description: 'Specifies the minimum grade of the route',
-                label: 'Minimum route grade',
                 default: null,
-                value: 'grade1',
-                itemText: 'en-US',
+                value: 'grade1',                
                 itemValue: 'value',
                 items: gradesList
               }
@@ -305,13 +266,12 @@ const filters = [
         ]
       },
       {
-        label: 'Round trip',
+        name: 'round_trip',
         type: constants.filterTypes.wrapper,
         valueAsObject: true,
         hidden: true,
         availableOnModes: [constants.modes.roundTrip],
         useInServices: [constants.services.directions],
-        name: 'round_trip',
         props: [
           {
             name: 'length',
@@ -319,8 +279,6 @@ const filters = [
             multiplyValueBy: 1000,
             required: false,
             type: constants.filterTypes.steps,
-            description: 'The target length of the route (note that this is a preferred value, but results may be different).',
-            label: 'Length of the round trip',
             default: null,
             value: 10,
             min: 0,
@@ -335,7 +293,6 @@ const filters = [
             useInServices: [constants.services.directions]
           },
           {
-            label: 'Points',
             name: 'points',
             useInServices: [constants.services.directions],
             required: false,
@@ -351,15 +308,12 @@ const filters = [
                 min: 0
               }
             ],
-            description: 'The number of points to use on the route. Larger values create more circular routes.'
           },
           {
-            label: 'Random seed',
             name: 'seed',
             required: false,
             type: constants.filterTypes.random,
             inputType: 'number',
-            description: 'A random seed to use for adding randomisation to the generated route (min:0, max: 90)',
             default: 0,
             value: 0,
             min: 0,
@@ -375,22 +329,18 @@ const filters = [
         ]
       },
       {
-        label: 'Avoid polygons',
         name: 'avoid_polygons',
         useInServices: [constants.services.directions, constants.services.isochrones],
         hidden: true,
         required: false,
         type: constants.filterTypes.array,
-        description: 'Avoid polygons',
         default: []
       },
       {
         name: 'avoid_features',
         required: false,
         type: constants.filterTypes.array,
-        description: 'Avoid features',
         default: false,
-        label: 'Avoid features',
         apiDefault: false,
         isEnum: true,
         valueAsArray: true,
@@ -442,9 +392,7 @@ const filters = [
         name: 'avoid_borders',
         required: false,
         type: constants.filterTypes.array,
-        description: 'Avoid borders',
         default: false,
-        label: 'Avoid borders',
         apiDefault: false,
         isEnum: true,
         separator: '|',
@@ -458,10 +406,7 @@ const filters = [
         name: 'avoid_countries',
         required: false,
         type: constants.filterTypes.array,
-        description: 'Avoid countries',
-        default: false,
-        label: 'Avoid countries',
-        itemText: 'en-US',
+        default: false,        
         itemValue: 'cid',
         apiDefault: false,
         isEnum: true,
@@ -472,12 +417,12 @@ const filters = [
     ]
   },
   {
-    label: 'Alternative routes',
+
+    name: 'alternative_routes',
     type: constants.filterTypes.wrapper,
     valueAsObject: true,
     availableOnModes: [constants.modes.directions],
     useInServices: [constants.services.directions],
-    name: 'alternative_routes',
     validWhen: [
       {
         ref: 'alternative_routes.props.target_count',
@@ -489,8 +434,6 @@ const filters = [
         name: 'target_count',
         required: false,
         type: constants.filterTypes.steps,
-        description: 'Target number of alternative routes to compute. Service returns up to this number of routes that fulfill the share-factor and weight-factor constraints.',
-        label: 'Number of routes',
         default: 1,
         value: 1,
         min: 1,
@@ -505,7 +448,6 @@ const filters = [
         useInServices: [constants.services.directions]
       },
       {
-        label: 'Share factor',
         name: 'share_factor',
         useInServices: [constants.services.directions],
         required: false,
@@ -520,20 +462,17 @@ const filters = [
             ref: 'alternative_routes.props.target_count',
             min: 2
           }
-        ],
-        description: 'Maximum fraction of the route that alternatives may share with the optimal route. The default value of 0.6 means alternatives can share up to 60% of path segments with the optimal route.'
+        ]
       },
       {
         name: 'weight_factor',
         required: false,
         type: constants.filterTypes.steps,
-        description: 'Maximum factor by which route weight may diverge from the optimal route. The default value of 1.4 means alternatives can be up to 1.4 times longer (costly) than the optimal route.',
         default: 1.4,
         value: 1.4,
         min: 1,
         max: 2,
         step: 0.1,
-        label: 'Weight factor',
         useInServices: [constants.services.directions],
         validWhen: [
           {

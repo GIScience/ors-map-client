@@ -1,8 +1,8 @@
-import VueInstance from '@/main'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import Place from '@/models/place'
 import store from '@/store/store'
+import lodash from 'lodash'
 /**
  * JsonImporter
  * @param {*} data {mapRawData: {}, translations: {}}
@@ -109,7 +109,7 @@ class JsonImporter {
    * Adjust summary data
    */
   setRoutesSummaryData = () => {
-    if (VueInstance.lodash.get(this, 'mapRawData.features[0].properties.summary')) {
+    if (lodash.get(this, 'mapRawData.features[0].properties.summary')) {
       for (const key in this.mapRawData.features) {
         const summary = Object.assign({}, this.mapRawData.features[key].properties.summary)
         summary.descent = this.mapRawData.features[key].properties.descent

@@ -8,6 +8,7 @@ const defaultMapSettings = {
   apiKey: null,
   endpoints: null,
   locale: 'en-us',
+  defaultLocale: 'en-us',
   routingInstructionsLocale: 'en',
   unit: 'km',
   alwaysFitBounds: true,

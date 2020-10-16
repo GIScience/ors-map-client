@@ -32,7 +32,7 @@ export default {
       let options = []
       for (let key in filterRef.enum) {
         let itemVal = filterRef.enum[key]
-        options.push({value: itemVal, text: this.$t('global.profiles.' + itemVal)})
+        options.push({value: itemVal, text: this.$t('orsMapFilters.profiles.' + itemVal)})
       }
       return options
     }
@@ -49,6 +49,7 @@ export default {
           delete savingSettings.apiKey
         }
         localStorage.setItem('mapSettings', JSON.stringify(savingSettings))
+        this.$i18n.locale = savingSettings.locale
       }
       // Dispatch an event about the locale change
       this.eventBus.$emit('localeChanged', this.mapSettingsTransient.locale)

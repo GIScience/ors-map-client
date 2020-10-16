@@ -49,7 +49,7 @@ const orsDictionary = {
   roadaccessrestrictions: {
     0: 'none',
     1: 'no',
-    2: 'nustomers',
+    2: 'customers',
     4: 'destination',
     8: 'delivery',
     16: 'private',

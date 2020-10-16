@@ -1,0 +1,77 @@
+export default {
+  mapView: {
+    routeTo: 'Route hierher',
+    polygonDetails: 'Polygon details',
+    polygon: 'Polygon',
+    placeInfo: 'Ort Details',
+    lat: 'Lat',
+    lng: 'Long',
+    latlngCopied: 'Breitengrad und Längengrad kopiert',
+    lnglatCopied: 'Längengrad und Breitengrad kopiert',
+    copyLatlng: 'Kopieren in Lat,Long Format',
+    copyLnglat: 'Kopieren in Long,Lat Format',
+    whatIsHere: 'Was ist hier?',
+    directionsFromHere: 'Route von hier',
+    fitAllFeatures: 'Alles anzeigen',
+    directionsToHere: 'Route hierher',
+    addRouteStop: 'Wegpunkt hinzufügen',
+    addDestinationToRoute: 'Als Ziel hinzufügen',
+    acquirePositionErrors: {
+      generic: 'Es war nicht möglich, Ihren Standort zu ermitteln, da der Zugriff nicht autorisiert war oder vom Browser / Gerät nicht unterstützt wird.',
+      unavailable: 'Ihr Standort ist derzeit nicht verfügbar. Stellen Sie sicher, dass die Positionierung-Option/-Dienst ordnungsgemäß konfiguriert ist.',
+      permissionDenied: 'Ihre Position konnte nicht erfasst werden, da der Browser / das Gerät den Zugriff darauf verweigert hat. Sie können es erneut versuchen, indem Sie die Browser- / Geräteeinstellungen ändern und dann erneut auf den "Mein Standort" Button klicken',
+      timeout: 'Ihr Browser/Gerät hat beim Versuch, ihre Position zu finden, "Timeout" zurückgegeben. Sie können es erneut versuchen, indem Sie auf den "Mein Standort" Button klicken'
+    },
+    yourCurrentLocation: 'Mein Standort',
+    options: 'Optionen',
+    polylineMeasure: {
+      bearingTextIn: 'Ein',
+      bearingTextOut: 'Aus',
+      tooltipTextDragAndDelete: 'Ziehen zum <b>bewegen</b><br>SHIFT-Klick zum <b>Löschen</b>',
+      tooltipTextResume: '<br>CTRL-Klick um Linie <b>weiter zu zeichnen</b>',
+      tooltipTextAdd: 'CTRL-Klick um <b>Punkt hinzuzufügen</b>',
+      clearControlTitle: 'Messung zurücksetzen',
+      measureControlTitleOn: 'Entfernung messen AN',
+      measureControlTitleOff: 'Entfernung messen AUS',
+      unitControlTitle: {
+        text: 'Einheit ändern',
+        metres: 'Meter',
+        landmiles: 'Meilen',
+        nauticalmiles: 'Seemeilen'
+      },
+      clearControlLabel: '&times',
+      measureControlLabel: '&#8614;',
+      measureControlClasses: [],
+      unitControlLabel: {
+        metres: 'm',
+        kilometres: 'km',
+        feet: 'ft',
+        landmiles: 'M',
+        nauticalmiles: 'NM'
+      }
+    },
+    defineAvoidPolygon: 'Zeichne zu vermeidende Polygone (bei Routen oder Isochronen)',
+    youCantIntersectPolygons: 'Polygone dürfen sich nicht überschneiden',
+    placeInsidePolygon: 'Ort in "Avoid Polygon"',
+    polygonArea: 'Polygon Fläche',
+    highlighting: 'Hervorhebung',
+    accuracy: 'Genauigkeit',
+    youCanCenterAtYourLocationLater: 'Sie können die Karte jederzeit auf Ihren aktuellen Standort zentrieren, indem Sie auf die Schaltfläche "Mein Standort" klicken',
+    yourLocation: 'Meinen Standort nutzen',
+    setMyLocationasMapCenter: 'Möchten Sie die Karte an Ihrem aktuellen Standort zentrieren? Dies verbessert die Genauigkeit der Ortssuche. Sie müssen es autorisieren, wenn Sie dazu aufgefordert werden.',
+    removePlace: 'Ort löschen',
+    viewOnORS: 'In ORS anzeigen',
+    moveMapPositionToLeft: 'Karte nach Links bewegen',
+    moveMapPositionToRight: 'Karte nach Rechts bewegen',
+    moveMapPositionToUp: 'harte nach oben bewegen',
+    moveMapPositionToDown: 'karte nach unten bewegen',
+    toggleDirect: 'Direkter Weg (Luftlinie) zu nächstem Punkt an/aus',
+    heightGraph: {
+      distance: "Entfernung",
+      elevation: "Höhe",
+      segment_length: "Abschnittslänge",
+      type: "Typ",
+      legend: "Legende"
+    }
+  }
+}

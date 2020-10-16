@@ -1,5 +1,6 @@
 
 import dependencyService from '@/support/dependency-service.js'
+import defaultMapSettings from '@/resources/default-map-settings'
 
 export default {
   props: {
@@ -256,20 +257,72 @@ export default {
      * @returns []
      */
     getSelectableItems (parameter) {
-      const stringifyItemsValue = function (parameter, propName) {
-        for (const key in parameter[propName]) {
-          parameter[propName][key] = parameter[propName][key].toString()
+      let items = []
+      if (parameter.filteredItems) {
+        items = parameter.filteredItems
+      } else if (parameter.items) {
+        items = parameter.items
+      } else {
+        items = parameter.enum
+      }
+      
+      return this.adjustItems(items, parameter)
+    },
+
+    /**
+     * Set item option structure and translation
+     * @param {Array} items 
+     * @return {Array} items 
+     */
+    adjustItems (items, parameter) {
+      for (let key in items) {
+        let item = items[key]
+        if (typeof item !== 'object' || !item.itemText) {
+          if (typeof item === 'object') {
+            for (const itemKey in item) {
+              item[itemKey] = item[itemKey].toString()
+            }
+            var itemText = item[this.$store.getters.mapSettings.locale] || item[defaultMapSettings.locale]  
+            item.itemText = itemText
+            item.itemValue = item[parameter.itemValue]
+          } else { // item is not an object, but a simple value
+            let itemObj = {
+              itemValue: item,
+              itemText: this.getItemTranslation(item, parameter)
+            }
+            items[key] = itemObj          
+          }
         }
       }
-      if (parameter.filteredItems) {
-        stringifyItemsValue(parameter, 'filteredItems')
-        return parameter.filteredItems
-      } else if (parameter.items) {
-        return parameter.items
-      } else {
-        stringifyItemsValue(parameter, 'enum')
-        return parameter.enum
+      return items
+    },
+
+    /**
+     * Get item translation by item value
+     * @param {String} itemValue 
+     * @returns {String}
+     */
+    getItemTranslation (itemValue, parameter) {
+      var translation = itemValue
+
+      // if the value is not a number, find the translation
+      if(isNaN(itemValue)) {
+
+        // The translation can be either in the ors map filters translation
+        // or in the global ors dictionary translation
+
+        // try first the orsMapFilters
+        let translationObject = this.$t(`orsMapFilters.filters.${parameter.name}`)
+        if (translationObject.enum && translationObject.enum[itemValue]) {
+          translation = translationObject.enum[itemValue]
+        } else { // fall back to orsDictionary
+          let dicObj = this.$t('orsDictionary')
+          translation = dicObj[itemValue]
+        }
+      } else { // if it is a number, then do not translate it
+        translation = itemValue
       }
+      return translation
     },
 
     /**
@@ -297,7 +350,8 @@ export default {
       if (!parameter) {
         return ''
       }
-      let label = parameter.label
+      let filterKey = `orsMapFilters.filters.${parameter.name}.label`
+      let label = this.$t(filterKey)
 
       if (parameter.apiDefault) {
         label += (' ' + this.$t('formFields.defaultAbbreviation') + ' ' + parameter.apiDefault)
@@ -305,6 +359,20 @@ export default {
         label += (' ' + this.$t('formFields.exampleAbbreviation') + ' ' + parameter.example)
       }
       return label
+    },
+    /**
+     * Build the parameter description
+     *
+     * @param {*} parameter
+     * @returns {String}
+     */
+    buildDescription (parameter) {
+      if (!parameter) {
+        return ''
+      }
+      let filterKey = `orsMapFilters.filters.${parameter.name}.description`
+      let description = this.$t(filterKey)
+      return description
     },
 
     /**

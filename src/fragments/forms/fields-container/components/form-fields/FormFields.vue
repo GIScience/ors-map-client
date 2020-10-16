@@ -10,8 +10,8 @@
               @change="isModalMultiSelect(parameter) ? () => {} : fieldUpdated({index: index, value: $event})"
               :items="getSelectableItems(parameter)"
               v-model="formParameters[index].value"
-              :item-text="parameter.itemText"
-              :item-value="parameter.itemValue"
+              item-text="itemText"
+              item-value="itemValue"
               :label="buildLabel(parameter)"
               :title="buildLabel(parameter)"
               :clearable="true"
@@ -101,7 +101,7 @@
           </v-flex>
           <v-flex sm1 class="txt-right top-15" v-if="parameter.type !== constants.filterTypes.wrapper">
             <v-tooltip left>
-              <v-icon @click="infoDialog(buildLabel(parameter), parameter.description, {markdown: true, resizable: true})"
+              <v-icon @click="infoDialog(buildLabel(parameter), buildDescription(parameter), {markdown: true, resizable: true})"
                 class="pointer" slot="activator">help
               </v-icon>
               <span v-html="$t('formFields.fieldHelp')"></span>
