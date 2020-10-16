@@ -93,10 +93,15 @@ export default {
     getHumanizedSummary (summary, unit = null) {
       unit = unit || this.$store.getters.mapSettings.unit
       summary.unit = unit
-      const durationAndDistance = geoUtils.getHumanizedTimeAndDistance(summary, this.$t('routeDetails'))
+      const durationAndDistance = geoUtils.getHumanizedTimeAndDistance(summary, this.$t('global.units'))
       summary.distance = durationAndDistance.distance
       summary.duration = durationAndDistance.duration
       return summary
+    },
+    getWarningTranslated (warning) {
+      let translationKey = 'routeDetails.warningCodes.' + warning.code
+      let trans =  this.$t(translationKey)
+      return trans
     },
     /**
      * get the parsed segments by

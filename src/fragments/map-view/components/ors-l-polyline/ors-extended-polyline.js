@@ -286,8 +286,9 @@ class OrsExtendedPolyline {
       const totaldistance = route.summary.distance.toFixed(1)
       const currentStep = (route.geometry.coordinates.length / (coordinatePolylineIndex + 1))
       const currentDistance = (totaldistance / currentStep).toFixed(1)
-      const translations = context.$t('orsLPolyline')
       const globalTranslations = context.$t('global')
+      const orsPolylineTranslations = context.$t('orsLPolyline')
+      const orsDictionaryTranslations = context.$t('orsDictionary')
       var surfaceType = null
       
       // Get the surface type for the given point
@@ -296,7 +297,7 @@ class OrsExtendedPolyline {
           let value = route.properties.extras.surface.values[key]
           if (coordinatePolylineIndex >= value[0] && coordinatePolylineIndex <= value[1]) {
             let surfaceTypeKey = orsDictionary.surface[value[2]]
-            surfaceType = globalTranslations.orsDictionary[surfaceTypeKey]
+            surfaceType = orsDictionaryTranslations[surfaceTypeKey]
             break
           }
         }
@@ -312,9 +313,9 @@ class OrsExtendedPolyline {
           <div class='ors-l-polyline-vertical-bar'></div>          
           <div class='ors-l-polyline-content-block'>
             <div class='ors-l-polyline-top-block-info'>
-              <b>${translations.distance}</b>: ${currentDistance} / ${totaldistance} ${route.summary.unit}<br/>
-              <b>${translations.elevation}</b>: ${altitude} ${translations.meters}<br/>
-              <b>${translations.surface}</b>: ${surfaceType}
+              <b>${globalTranslations.distance}</b>: ${currentDistance} / ${totaldistance} ${route.summary.unit}<br/>
+              <b>${globalTranslations.elevation}</b>: ${altitude} ${globalTranslations.units.meters}<br/>
+              <b>${orsPolylineTranslations.surface}</b>: ${surfaceType}
             </div>
             <div class='ors-l-polyline-bottom-block-info'></div>
           </div>

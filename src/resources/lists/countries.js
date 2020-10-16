@@ -14,7 +14,7 @@ const countries = [
     'fr-fr': 'Afghanistan',
     country_code: 'AFG',
     'es-es': 'AfganistÃ¡n',
-    'pt-pt': 'AfeganistÃ£o'
+    'pt-br': 'Afeganistão'
   }, {
     'en-gb': 'Albania',
     official_en_name: 'Republic of Albania',
@@ -28,7 +28,7 @@ const countries = [
     'fr-fr': 'Albanie',
     country_code: 'ALB',
     'es-es': 'Albania',
-    'pt-pt': 'AlbÃ¢nia'
+    'pt-br': 'Albânia'
   }, {
     'en-gb': 'Algeria',
     official_en_name: 'People`s Democratic Republic of Algeria',
@@ -42,7 +42,7 @@ const countries = [
     'fr-fr': 'AlgÃ©rie',
     country_code: 'DZA',
     'es-es': 'Argelia',
-    'pt-pt': 'ArgÃ©lia'
+    'pt-br': 'Argélia'
   }, {
     'en-gb': 'Andorra',
     official_en_name: 'Principality of Andorra',
@@ -56,7 +56,7 @@ const countries = [
     'fr-fr': 'Andorre',
     country_code: 'AND',
     'es-es': 'Andorra',
-    'pt-pt': 'Andorra'
+    'pt-br': 'Andorra'
   }, {
     'en-gb': 'Angola',
     official_en_name: 'Republic of Angola',
@@ -70,7 +70,7 @@ const countries = [
     'fr-fr': 'Angola',
     country_code: 'AGO',
     'es-es': 'Angola',
-    'pt-pt': 'Angola'
+    'pt-br': 'Angola'
   }, {
     'en-gb': 'Anguilla',
     official_en_name: 'Anguilla',
@@ -78,7 +78,7 @@ const countries = [
     native_names: 'Anguilla',
     'ru-ru': 'ÐÐ½Ð³Ð¸Ð»ÑŒÑ',
     'en-us': 'Anguilla',
-    'pt-pt': 'Anguilla',
+    'pt-br': 'Anguilla',
     'de-de': 'Anguilla',
     cid: '6',
     'fr-fr': 'Anguilla',
@@ -98,7 +98,7 @@ const countries = [
     'fr-fr': 'Antigua-et-Barbuda',
     country_code: 'ATG',
     'es-es': 'Antigua y Barbuda',
-    'pt-pt': 'AntÃ­gua e Barbuda'
+    'pt-br': 'Antígua e Barbuda'
   }, {
     'en-gb': 'Argentina',
     official_en_name: 'Argentine Republic',
@@ -112,7 +112,7 @@ const countries = [
     'fr-fr': 'Argentine',
     country_code: 'ARG',
     'es-es': 'Argentina',
-    'pt-pt': 'Argentina'
+    'pt-br': 'Argentina'
   }, {
     'en-gb': 'Armenia',
     official_en_name: 'Republic of Armenia',
@@ -126,7 +126,7 @@ const countries = [
     'fr-fr': 'ArmÃ©nie',
     country_code: 'ARM',
     'es-es': 'Armenia',
-    'pt-pt': 'ArmÃ©nia'
+    'pt-br': 'Armênia'
   }, {
     'en-gb': 'Australia',
     official_en_name: 'Commonwealth of Australia',
@@ -140,7 +140,7 @@ const countries = [
     'fr-fr': 'Australie',
     country_code: 'AUS',
     'es-es': 'Australia',
-    'pt-pt': 'AustrÃ¡lia'
+    'pt-br': 'AustrÃ¡lia'
   }, {
     'en-gb': 'Austria',
     official_en_name: 'Republic of Austria',
@@ -154,7 +154,7 @@ const countries = [
     'fr-fr': 'Autriche',
     country_code: 'AUT',
     'es-es': 'Austria',
-    'pt-pt': 'Ãustria'
+    'pt-br': 'Áustria'
   }, {
     'en-gb': 'Azerbaijan',
     official_en_name: 'Republic of Azerbaijan',
@@ -168,7 +168,7 @@ const countries = [
     'fr-fr': 'AzerbaÃ¯djan',
     country_code: 'AZE',
     'es-es': 'AzerbaiyÃ¡n',
-    'pt-pt': 'AzerbeijÃ£o'
+    'pt-br': 'Azerbaijão'
   }, {
     'en-gb': 'Bahrain',
     official_en_name: 'Kingdom of Bahrain',
@@ -182,7 +182,7 @@ const countries = [
     'fr-fr': 'BahreÃ¯n',
     country_code: 'BHR',
     'es-es': 'Bahrein',
-    'pt-pt': 'Bahrein'
+    'pt-br': 'Bahrein'
   }, {
     'en-gb': 'Bangladesh',
     official_en_name: 'People`s Republic of Bangladesh',
@@ -196,7 +196,7 @@ const countries = [
     'fr-fr': 'Bangladesh',
     country_code: 'BGD',
     'es-es': 'Bangladesh',
-    'pt-pt': 'Bangladesh'
+    'pt-br': 'Bangladesh'
   }, {
     'en-gb': 'Barbados',
     official_en_name: 'Barbados',
@@ -210,7 +210,7 @@ const countries = [
     'fr-fr': 'Barbade',
     country_code: 'BRB',
     'es-es': 'Barbados',
-    'pt-pt': 'Barbados'
+    'pt-br': 'Barbados'
   }, {
     'en-gb': 'Belarus',
     official_en_name: 'Republic of Belarus',
@@ -224,7 +224,7 @@ const countries = [
     'fr-fr': 'BiÃ©lorussie',
     country_code: 'BLR',
     'es-es': 'Bielorrusia',
-    'pt-pt': 'BielorÃºssia'
+    'pt-br': 'Bielorrússia'
   }, {
     'en-gb': 'Belgium',
     official_en_name: 'Kingdom of Belgium',
@@ -238,7 +238,7 @@ const countries = [
     'fr-fr': 'Belgique',
     country_code: 'BEL',
     'es-es': 'BÃ©lgica',
-    'pt-pt': 'BÃ©lgica'
+    'pt-br': 'Bélgica'
   }, {
     'en-gb': 'Belize',
     official_en_name: 'Belize',
@@ -252,7 +252,7 @@ const countries = [
     'fr-fr': 'Belize',
     country_code: 'BLZ',
     'es-es': 'Belice',
-    'pt-pt': 'Belize'
+    'pt-br': 'Belize'
   }, {
     'en-gb': 'Benin',
     official_en_name: 'Republic of Benin',
@@ -266,7 +266,7 @@ const countries = [
     'fr-fr': 'BÃ©nin',
     country_code: 'BEN',
     'es-es': 'BenÃ­n',
-    'pt-pt': 'Benin'
+    'pt-br': 'Benin'
   }, {
     'en-gb': 'Bermuda',
     official_en_name: 'Bermuda',
@@ -280,7 +280,7 @@ const countries = [
     'fr-fr': 'Bermudes',
     country_code: 'BMU',
     'es-es': 'Bermudas',
-    'pt-pt': 'Bermudas'
+    'pt-br': 'Bermudas'
   }, {
     'en-gb': 'Bhutan',
     official_en_name: 'Kingdom of Bhutan',
@@ -294,7 +294,7 @@ const countries = [
     'fr-fr': 'Bhoutan',
     country_code: 'BTN',
     'es-es': 'ButÃ¡n',
-    'pt-pt': 'ButÃ£o'
+    'pt-br': 'Butão'
   }, {
     'en-gb': 'Bolivia',
     official_en_name: 'Plurinational State of Bolivia',
@@ -308,7 +308,7 @@ const countries = [
     'fr-fr': 'Bolivie',
     country_code: 'BOL',
     'es-es': 'Bolivia',
-    'pt-pt': 'BolÃ­via'
+    'pt-br': 'Bolívia'
   }, {
     'en-gb': 'Bosnia and Herzegovina',
     official_en_name: 'Bosnia and Herzegovina',
@@ -322,7 +322,7 @@ const countries = [
     'fr-fr': 'Bosnie-HerzÃ©govine',
     country_code: 'BIH',
     'es-es': 'Bosnia y Herzegovina',
-    'pt-pt': 'BÃ³snia e Herzegovina'
+    'pt-br': 'Bósnia e Herzegovina'
   }, {
     'en-gb': 'Botswana',
     official_en_name: 'Republic of Botswana',
@@ -330,7 +330,7 @@ const countries = [
     native_names: 'Botswana',
     'ru-ru': 'Ð‘Ð¾Ñ‚ÑÐ²Ð°Ð½Ð°',
     'en-us': 'Botswana',
-    'pt-pt': 'Botswana',
+    'pt-br': 'Botswana',
     'de-de': 'Botswana',
     cid: '24',
     'fr-fr': 'Botswana',
@@ -350,7 +350,7 @@ const countries = [
     'fr-fr': 'BrÃ©sil',
     country_code: 'BRA',
     'es-es': 'Brasil',
-    'pt-pt': 'Brasil'
+    'pt-br': 'Brasil'
   }, {
     'en-gb': 'British Indian Ocean Territory',
     official_en_name: 'British Indian Ocean Territory',
@@ -364,7 +364,7 @@ const countries = [
     'fr-fr': 'Territoire britannique de l`ocÃ©an Indien',
     country_code: 'IOT',
     'es-es': 'Territorio BritÃ¡nico del OcÃ©ano Ãndico',
-    'pt-pt': 'TerritÃ³rio BritÃ¢nico do Oceano Ãndico'
+    'pt-br': 'Território Britânico do Oceano Índico'
   }, {
     'en-gb': 'British Virgin Islands',
     official_en_name: 'Virgin Islands',
@@ -372,7 +372,7 @@ const countries = [
     native_names: 'British Virgin Islands',
     'ru-ru': 'Ð‘Ñ€Ð¸Ñ‚Ð°Ð½ÑÐºÐ¸Ðµ Ð’Ð¸Ñ€Ð³Ð¸Ð½ÑÐºÐ¸Ðµ Ð¾ÑÑ‚Ñ€Ð¾Ð²Ð°',
     'en-us': 'British Virgin Islands',
-    'pt-pt': 'Ilhas Virgens',
+    'pt-br': 'Ilhas Virgens',
     'de-de': 'Britische Jungferninseln',
     cid: '28',
     'fr-fr': 'ÃŽles Vierges britanniques',
@@ -392,7 +392,7 @@ const countries = [
     'fr-fr': 'Brunei',
     country_code: 'BRN',
     'es-es': 'Brunei',
-    'pt-pt': 'Brunei'
+    'pt-br': 'Brunei'
   }, {
     'en-gb': 'Bulgaria',
     official_en_name: 'Republic of Bulgaria',
@@ -406,7 +406,7 @@ const countries = [
     'fr-fr': 'Bulgarie',
     country_code: 'BGR',
     'es-es': 'Bulgaria',
-    'pt-pt': 'BulgÃ¡ria'
+    'pt-br': 'Bulgária'
   }, {
     'en-gb': 'Burkina Faso',
     official_en_name: 'Burkina Faso',
@@ -420,7 +420,7 @@ const countries = [
     'fr-fr': 'Burkina Faso',
     country_code: 'BFA',
     'es-es': 'Burkina Faso',
-    'pt-pt': 'Burkina Faso'
+    'pt-br': 'Burkina Faso'
   }, {
     'en-gb': 'Burundi',
     official_en_name: 'Republic of Burundi',
@@ -434,7 +434,7 @@ const countries = [
     'fr-fr': 'Burundi',
     country_code: 'BDI',
     'es-es': 'Burundi',
-    'pt-pt': 'Burundi'
+    'pt-br': 'Burundi'
   }, {
     'en-gb': 'Cambodia',
     official_en_name: 'Kingdom of Cambodia',
@@ -448,7 +448,7 @@ const countries = [
     'fr-fr': 'Cambodge',
     country_code: 'KHM',
     'es-es': 'Camboya',
-    'pt-pt': 'Camboja'
+    'pt-br': 'Camboja'
   }, {
     'en-gb': 'Cameroon',
     official_en_name: 'Republic of Cameroon',
@@ -462,7 +462,7 @@ const countries = [
     'fr-fr': 'Cameroun',
     country_code: 'CMR',
     'es-es': 'CamerÃºn',
-    'pt-pt': 'CamarÃµes'
+    'pt-br': 'Camarões'
   }, {
     'en-gb': 'Canada',
     official_en_name: 'Canada',
@@ -476,7 +476,7 @@ const countries = [
     'fr-fr': 'Canada',
     country_code: 'CAN',
     'es-es': 'CanadÃ¡',
-    'pt-pt': 'CanadÃ¡'
+    'pt-br': 'Canadá'
   }, {
     'en-gb': 'Cape Verde',
     official_en_name: 'Republic of Cabo Verde',
@@ -490,7 +490,7 @@ const countries = [
     'fr-fr': 'ÃŽles du Cap-Vert',
     country_code: 'CPV',
     'es-es': 'Cabo Verde',
-    'pt-pt': 'Cabo Verde'
+    'pt-br': 'Cabo Verde'
   }, {
     'en-gb': 'Cayman Islands',
     official_en_name: 'Cayman Islands',
@@ -504,7 +504,7 @@ const countries = [
     'fr-fr': 'ÃŽles CaÃ¯mans',
     country_code: 'CYM',
     'es-es': 'Islas CaimÃ¡n',
-    'pt-pt': 'Ilhas CaimÃ£o'
+    'pt-br': 'Ilhas Caimã'
   }, {
     'en-gb': 'Central African Republic',
     official_en_name: 'Central African Republic',
@@ -518,7 +518,7 @@ const countries = [
     'fr-fr': 'RÃ©publique centrafricaine',
     country_code: 'CAF',
     'es-es': 'RepÃºblica Centroafricana',
-    'pt-pt': 'RepÃºblica Centro-Africana'
+    'pt-br': 'República Centro-Africana'
   }, {
     'en-gb': 'Chad',
     official_en_name: 'Republic of Chad',
@@ -532,7 +532,7 @@ const countries = [
     'fr-fr': 'Tchad',
     country_code: 'TCD',
     'es-es': 'Chad',
-    'pt-pt': 'Chade'
+    'pt-br': 'Chade'
   }, {
     'en-gb': 'Chile',
     official_en_name: 'Republic of Chile',
@@ -546,7 +546,7 @@ const countries = [
     'fr-fr': 'Chili',
     country_code: 'CHL',
     'es-es': 'Chile',
-    'pt-pt': 'Chile'
+    'pt-br': 'Chile'
   }, {
     'en-gb': 'China',
     official_en_name: 'People`s Republic of China',
@@ -554,7 +554,7 @@ const countries = [
     native_names: '`Ä¸­å›½, China',
     'ru-ru': 'ÐšÐ¸Ñ‚Ð°Ð¹',
     'en-us': 'China',
-    'pt-pt': 'China',
+    'pt-br': 'China',
     'de-de': 'China',
     'fr-fr': 'Chine',
     country_code: 'CHN',
@@ -573,7 +573,7 @@ const countries = [
     'fr-fr': 'Colombie',
     country_code: 'COL',
     'es-es': 'Colombia',
-    'pt-pt': 'ColÃ´mbia'
+    'pt-br': 'Colômbia'
   }, {
     'en-gb': 'Comoros',
     official_en_name: 'Union of the Comoros',
@@ -587,7 +587,7 @@ const countries = [
     'fr-fr': 'Comores',
     country_code: 'COM',
     'es-es': 'Comoras',
-    'pt-pt': 'Comores'
+    'pt-br': 'Comores'
   }, {
     'en-gb': 'Republic of the Congo',
     official_en_name: 'Republic of the Congo',
@@ -601,7 +601,7 @@ const countries = [
     'fr-fr': 'Congo',
     country_code: 'COG',
     'es-es': 'Congo',
-    'pt-pt': 'Congo'
+    'pt-br': 'Congo'
   }, {
     'en-gb': 'DR Congo',
     official_en_name: 'Democratic Republic of the Congo',
@@ -615,7 +615,7 @@ const countries = [
     'fr-fr': 'Congo (RÃ©p. dÃ©m.)',
     country_code: 'COD',
     'es-es': 'Congo (Rep. Dem.)',
-    'pt-pt': 'RepÃºblica DemocrÃ¡tica do Congo'
+    'pt-br': 'República Democrática do Congo'
   }, {
     'en-gb': 'Cook Islands',
     official_en_name: 'Cook Islands',
@@ -629,7 +629,7 @@ const countries = [
     'fr-fr': 'ÃŽles Cook',
     country_code: 'COK',
     'es-es': 'Islas Cook',
-    'pt-pt': 'Ilhas Cook'
+    'pt-br': 'Ilhas Cook'
   }, {
     'en-gb': 'Costa Rica',
     official_en_name: 'Republic of Costa Rica',
@@ -643,7 +643,7 @@ const countries = [
     'fr-fr': 'Costa Rica',
     country_code: 'CRI',
     'es-es': 'Costa Rica',
-    'pt-pt': 'Costa Rica'
+    'pt-br': 'Costa Rica'
   }, {
     'en-gb': 'Ivory Coast',
     official_en_name: 'Republic of CÃ´te d`Ivoire',
@@ -651,7 +651,7 @@ const countries = [
     native_names: 'Côte d`Ivoire, Ivory Coast',
     'ru-ru': 'ÐšÐ¾Ñ‚-Ð´â€™Ð˜Ð²ÑƒÐ°Ñ€',
     'en-us': 'Ivory Coast',
-    'pt-pt': 'Costa do Marfim',
+    'pt-br': 'Costa do Marfim',
     'de-de': 'ElfenbeinkÃ¼ste',
     cid: '48',
     'fr-fr': 'Côte d`Ivoire',
@@ -671,7 +671,7 @@ const countries = [
     'fr-fr': 'Croatie',
     country_code: 'HRV',
     'es-es': 'Croacia',
-    'pt-pt': 'CroÃ¡cia'
+    'pt-br': 'Croácia'
   }, {
     'en-gb': 'Cuba',
     official_en_name: 'Republic of Cuba',
@@ -685,7 +685,7 @@ const countries = [
     'fr-fr': 'Cuba',
     country_code: 'CUB',
     'es-es': 'Cuba',
-    'pt-pt': 'Cuba'
+    'pt-br': 'Cuba'
   }, {
     'en-gb': 'Cyprus',
     official_en_name: 'Republic of Cyprus',
@@ -699,7 +699,7 @@ const countries = [
     'fr-fr': 'Chypre',
     country_code: 'CYP',
     'es-es': 'Chipre',
-    'pt-pt': 'Chipre'
+    'pt-br': 'Chipre'
   }, {
     'en-gb': 'Czechia',
     official_en_name: 'Czech Republic',
@@ -713,7 +713,7 @@ const countries = [
     'fr-fr': 'TchÃ©quie',
     country_code: 'CZE',
     'es-es': 'Chequia',
-    'pt-pt': 'ChÃ©quia'
+    'pt-br': 'República Checa'
   }, {
     'en-gb': 'Denmark',
     official_en_name: 'Kingdom of Denmark',
@@ -727,7 +727,7 @@ const countries = [
     'fr-fr': 'Danemark',
     country_code: 'DNK',
     'es-es': 'Dinamarca',
-    'pt-pt': 'Dinamarca'
+    'pt-br': 'Dinamarca'
   }, {
     'en-gb': 'Djibouti',
     official_en_name: 'Republic of Djibouti',
@@ -741,7 +741,7 @@ const countries = [
     'fr-fr': 'Djibouti',
     country_code: 'DJI',
     'es-es': 'Djibouti',
-    'pt-pt': 'Djibouti'
+    'pt-br': 'Djibouti'
   }, {
     'en-gb': 'Dominica',
     official_en_name: 'Commonwealth of Dominica',
@@ -755,7 +755,7 @@ const countries = [
     'fr-fr': 'Dominique',
     country_code: 'DMA',
     'es-es': 'Dominica',
-    'pt-pt': 'Dominica'
+    'pt-br': 'Dominica'
   }, {
     'en-gb': 'Dominican Republic',
     official_en_name: 'Dominican Republic',
@@ -768,8 +768,8 @@ const countries = [
     'de-de': 'Dominikanische Republik',
     'fr-fr': 'RÃ©publique dominicaine',
     country_code: 'DOM',
-    'es-es': 'RepÃºblica Dominicana',
-    'pt-pt': 'RepÃºblica Dominicana'
+    'es-es': 'República Dominicana',
+    'pt-br': 'República Dominicana'
   }, {
     'en-gb': 'Timor-Leste',
     official_en_name: 'Democratic Republic of Timor-Leste',
@@ -777,7 +777,7 @@ const countries = [
     native_names: 'TimÃ³r-Leste, Timor-Leste',
     'ru-ru': 'Ð’Ð¾ÑÑ‚Ð¾Ñ‡Ð½Ñ‹Ð¹ Ð¢Ð¸Ð¼Ð¾Ñ€',
     'en-us': 'Timor-Leste',
-    'pt-pt': 'Timor-Leste',
+    'pt-br': 'Timor-Leste',
     'de-de': 'Timor-Leste',
     cid: '57',
     'fr-fr': 'Timor oriental',
@@ -797,7 +797,7 @@ const countries = [
     'fr-fr': 'Ã‰quateur',
     country_code: 'ECU',
     'es-es': 'Ecuador',
-    'pt-pt': 'Equador'
+    'pt-br': 'Equador'
   }, {
     'en-gb': 'Egypt',
     official_en_name: 'Arab Republic of Egypt',
@@ -811,7 +811,7 @@ const countries = [
     'fr-fr': 'Ã‰gypte',
     country_code: 'EGY',
     'es-es': 'Egipto',
-    'pt-pt': 'Egito'
+    'pt-br': 'Egito'
   }, {
     'en-gb': 'El Salvador',
     official_en_name: 'Republic of El Salvador',
@@ -825,7 +825,7 @@ const countries = [
     'fr-fr': 'salvador',
     country_code: 'sLV',
     'es-es': 'El Salvador',
-    'pt-pt': 'El Salvador'
+    'pt-br': 'El Salvador'
   }, {
     'en-gb': 'Equatorial Guinea',
     official_en_name: 'Republic of Equatorial Guinea',
@@ -839,7 +839,7 @@ const countries = [
     'fr-fr': 'GuinÃ©e Ã©quatoriale',
     country_code: 'GNQ',
     'es-es': 'Guinea Ecuatorial',
-    'pt-pt': 'GuinÃ© Equatorial'
+    'pt-br': 'Guiné Equatorial'
   }, {
     'en-gb': 'Eritrea',
     official_en_name: 'state of Eritrea',
@@ -853,7 +853,7 @@ const countries = [
     'fr-fr': 'Ã‰rythrÃ©e',
     country_code: 'ERI',
     'es-es': 'Eritrea',
-    'pt-pt': 'Eritreia'
+    'pt-br': 'Eritréia'
   }, {
     'en-gb': 'Estonia',
     official_en_name: 'Republic of Estonia',
@@ -867,7 +867,7 @@ const countries = [
     'fr-fr': 'Estonie',
     country_code: 'EST',
     'es-es': 'Estonia',
-    'pt-pt': 'EstÃ³nia'
+    'pt-br': 'Estônia'
   }, {
     'en-gb': 'Ethiopia',
     official_en_name: 'Federal Democratic Republic of Ethiopia',
@@ -881,7 +881,7 @@ const countries = [
     'fr-fr': 'Ã‰thiopie',
     country_code: 'ETH',
     'es-es': 'EtiopÃ­a',
-    'pt-pt': 'EtiÃ³pia'
+    'pt-br': 'Etiópia'
   }, {
     'en-gb': 'Falkland Islands',
     official_en_name: 'Falkland Islands',
@@ -889,7 +889,7 @@ const countries = [
     native_names: 'Falkland Islands',
     'ru-ru': 'Ð¤Ð¾Ð»ÐºÐ»ÐµÐ½Ð´ÑÐºÐ¸Ðµ Ð¾ÑÑ‚Ñ€Ð¾Ð²Ð°',
     'en-us': 'Falkland Islands',
-    'pt-pt': 'Ilhas Malvinas',
+    'pt-br': 'Ilhas Malvinas',
     'de-de': 'Falklandinseln',
     cid: '65',
     'fr-fr': 'ÃŽles Malouines',
@@ -903,7 +903,7 @@ const countries = [
     native_names: 'FÃ¦rÃ¸erne, Faroe Islands, FÃ¸royar',
     'ru-ru': 'Ð¤Ð°Ñ€ÐµÑ€ÑÐºÐ¸Ðµ Ð¾ÑÑ‚Ñ€Ð¾Ð²Ð°',
     'en-us': 'Faroe Islands',
-    'pt-pt': 'Ilhas FaroÃ©',
+    'pt-br': 'Ilhas Faroé',
     'de-de': 'FÃ¤rÃ¶er-Inseln',
     cid: '66',
     'fr-fr': 'ÃŽles FÃ©roÃ©',
@@ -917,7 +917,7 @@ const countries = [
     native_names: 'Micronesia',
     'ru-ru': 'Ð¤ÐµÐ´ÐµÑ€Ð°Ñ‚Ð¸Ð²Ð½Ñ‹Ðµ Ð¨Ñ‚Ð°Ñ‚Ñ‹ ÐœÐ¸ÐºÑ€Ð¾Ð½ÐµÐ·Ð¸Ð¸',
     'en-us': 'Micronesia',
-    'pt-pt': 'MicronÃ©sia',
+    'pt-br': 'Micronésia',
     'de-de': 'Mikronesien',
     cid: '67',
     'fr-fr': 'MicronÃ©sie',
@@ -931,7 +931,7 @@ const countries = [
     native_names: 'Viti, Fiji, à¤«à¤¿à¤œà¥€',
     'ru-ru': 'Ð¤Ð¸Ð´Ð¶Ð¸',
     'en-us': 'Fiji',
-    'pt-pt': 'Fiji',
+    'pt-br': 'Fiji',
     'de-de': 'Fidschi',
     cid: '68',
     'fr-fr': 'Fidji',
@@ -945,7 +945,7 @@ const countries = [
     native_names: 'Finland, Suomi',
     'ru-ru': 'Ð¤Ð¸Ð½Ð»ÑÐ½Ð´Ð¸Ñ',
     'en-us': 'Finland',
-    'pt-pt': 'FinlÃ¢ndia',
+    'pt-br': 'Finlândia',
     'de-de': 'Finnland',
     cid: '69',
     'fr-fr': 'Finlande',
@@ -959,7 +959,7 @@ const countries = [
     native_names: 'France',
     'ru-ru': 'Ð¤Ñ€Ð°Ð½Ñ†Ð¸Ñ',
     'en-us': 'France',
-    'pt-pt': 'FranÃ§a',
+    'pt-br': 'França',
     'de-de': 'Frankreich',
     cid: '70',
     'fr-fr': 'France',
@@ -973,7 +973,7 @@ const countries = [
     native_names: 'Gabon',
     'ru-ru': 'Ð“Ð°Ð±Ð¾Ð½',
     'en-us': 'Gabon',
-    'pt-pt': 'GabÃ£o',
+    'pt-br': 'Gabão',
     'de-de': 'Gabun',
     cid: '71',
     'fr-fr': 'Gabon',
@@ -987,7 +987,7 @@ const countries = [
     native_names: 'Gambia',
     'ru-ru': 'Ð“Ð°Ð¼Ð±Ð¸Ñ',
     'en-us': 'Gambia',
-    'pt-pt': 'GÃ¢mbia',
+    'pt-br': 'Gâmbia',
     'de-de': 'Gambia',
     cid: '72',
     'fr-fr': 'Gambie',
@@ -1001,7 +1001,7 @@ const countries = [
     native_names: 'áƒ¡áƒáƒ¥áƒáƒ áƒ—áƒ•áƒ”áƒšáƒ, Georgia',
     'ru-ru': 'Ð“Ñ€ÑƒÐ·Ð¸Ñ',
     'en-us': 'Georgia',
-    'pt-pt': 'GeÃ³rgia',
+    'pt-br': 'Geórgia',
     'de-de': 'Georgien',
     cid: '73',
     'fr-fr': 'GÃ©orgie',
@@ -1015,7 +1015,7 @@ const countries = [
     native_names: 'Deutschland, Germany',
     'ru-ru': 'Ð“ÐµÑ€Ð¼Ð°Ð½Ð¸Ñ',
     'en-us': 'Germany',
-    'pt-pt': 'Alemanha',
+    'pt-br': 'Alemanha',
     'de-de': 'Deutschland',
     cid: '74',
     'fr-fr': 'Allemagne',
@@ -1029,7 +1029,7 @@ const countries = [
     native_names: 'Ghana',
     'ru-ru': 'Ð“Ð°Ð½Ð°',
     'en-us': 'Ghana',
-    'pt-pt': 'Gana',
+    'pt-br': 'Gana',
     'de-de': 'Ghana',
     cid: '76',
     'fr-fr': 'Ghana',
@@ -1043,7 +1043,7 @@ const countries = [
     native_names: 'Gibraltar',
     'ru-ru': 'Ð“Ð¸Ð±Ñ€Ð°Ð»Ñ‚Ð°Ñ€',
     'en-us': 'Gibraltar',
-    'pt-pt': 'Gibraltar',
+    'pt-br': 'Gibraltar',
     'de-de': 'Gibraltar',
     cid: '77',
     'fr-fr': 'Gibraltar',
@@ -1057,7 +1057,7 @@ const countries = [
     native_names: 'Î•Î»Î»Î¬Î´Î±, Greece',
     'ru-ru': 'Ð“Ñ€ÐµÑ†Ð¸Ñ',
     'en-us': 'Greece',
-    'pt-pt': 'GrÃ©cia',
+    'pt-br': 'Grécia',
     'de-de': 'Griechenland',
     cid: '78',
     'fr-fr': 'GrÃ¨ce',
@@ -1071,7 +1071,7 @@ const countries = [
     native_names: 'Kalaallit Nunaat, Greenland',
     'ru-ru': 'Ð“Ñ€ÐµÐ½Ð»Ð°Ð½Ð´Ð¸Ñ',
     'en-us': 'Greenland',
-    'pt-pt': 'GronelÃ¢ndia',
+    'pt-br': 'Groelândia',
     'de-de': 'GrÃ¶nland',
     cid: '79',
     'fr-fr': 'Groenland',
@@ -1085,7 +1085,7 @@ const countries = [
     native_names: 'Grenada',
     'ru-ru': 'Ð“Ñ€ÐµÐ½Ð°Ð´Ð°',
     'en-us': 'Grenada',
-    'pt-pt': 'Granada',
+    'pt-br': 'Granada',
     'de-de': 'Grenada',
     cid: '80',
     'fr-fr': 'Grenade',
@@ -1099,7 +1099,7 @@ const countries = [
     native_names: 'Guatemala',
     'ru-ru': 'Ð“Ð²Ð°Ñ‚ÐµÐ¼Ð°Ð»Ð°',
     'en-us': 'Guatemala',
-    'pt-pt': 'Guatemala',
+    'pt-br': 'Guatemala',
     'de-de': 'Guatemala',
     cid: '81',
     'fr-fr': 'Guatemala',
@@ -1113,7 +1113,7 @@ const countries = [
     native_names: 'Guernesey, Guernsey, DgÃ¨rnÃ©siais',
     'ru-ru': 'Ð“ÐµÑ€Ð½ÑÐ¸',
     'en-us': 'Guernsey',
-    'pt-pt': 'Guernsey',
+    'pt-br': 'Guernsey',
     'de-de': 'Guernsey',
     cid: '82',
     'fr-fr': 'Guernesey',
@@ -1127,7 +1127,7 @@ const countries = [
     native_names: 'GuinÃ©e, Guinea',
     'ru-ru': 'Ð“Ð²Ð¸Ð½ÐµÑ',
     'en-us': 'Guinea',
-    'pt-pt': 'GuinÃ©',
+    'pt-br': 'Guiné',
     'de-de': 'Guinea',
     cid: '83',
     'fr-fr': 'GuinÃ©e',
@@ -1141,7 +1141,7 @@ const countries = [
     native_names: 'GuinÃ©-Bissau, Guinea-Bissau',
     'ru-ru': 'Ð“Ð²Ð¸Ð½ÐµÑ-Ð‘Ð¸ÑÐ°Ñƒ',
     'en-us': 'Guinea-Bissau',
-    'pt-pt': 'GuinÃ©-Bissau',
+    'pt-br': 'Guiné-Bissau',
     'de-de': 'Guinea-Bissau',
     cid: '84',
     'fr-fr': 'GuinÃ©e-Bissau',
@@ -1155,7 +1155,7 @@ const countries = [
     native_names: 'Guyana',
     'ru-ru': 'Ð“Ð°Ð¹Ð°Ð½Ð°',
     'en-us': 'Guyana',
-    'pt-pt': 'Guiana',
+    'pt-br': 'Guiana',
     'de-de': 'Guyana',
     cid: '85',
     'fr-fr': 'Guyana',
@@ -1169,7 +1169,7 @@ const countries = [
     native_names: 'HaÃ¯ti, Haiti, Ayiti',
     'ru-ru': 'Ð“Ð°Ð¸Ñ‚Ð¸',
     'en-us': 'Haiti',
-    'pt-pt': 'Haiti',
+    'pt-br': 'Haiti',
     'de-de': 'Haiti',
     cid: '86',
     'fr-fr': 'HaÃ¯ti',
@@ -1183,7 +1183,7 @@ const countries = [
     native_names: 'Honduras',
     'ru-ru': 'Ð“Ð¾Ð½Ð´ÑƒÑ€Ð°Ñ',
     'en-us': 'Honduras',
-    'pt-pt': 'Honduras',
+    'pt-br': 'Honduras',
     'de-de': 'Honduras',
     cid: '87',
     'fr-fr': 'Honduras',
@@ -1197,7 +1197,7 @@ const countries = [
     native_names: 'MagyarorszÃ¡g, Hungary',
     'ru-ru': 'Ð’ÐµÐ½Ð³Ñ€Ð¸Ñ',
     'en-us': 'Hungary',
-    'pt-pt': 'Hungria',
+    'pt-br': 'Hungria',
     'de-de': 'Ungarn',
     cid: '88',
     'fr-fr': 'Hongrie',
@@ -1211,7 +1211,7 @@ const countries = [
     native_names: 'Ãsland, Iceland',
     'ru-ru': 'Ð˜ÑÐ»Ð°Ð½Ð´Ð¸Ñ',
     'en-us': 'Iceland',
-    'pt-pt': 'IslÃ¢ndia',
+    'pt-br': 'Islândia',
     'de-de': 'Island',
     cid: '89',
     'fr-fr': 'Islande',
@@ -1225,7 +1225,7 @@ const countries = [
     native_names: 'à®‡à®¨à¯à®¤à®¿à®¯à®¾, India, à¤­à¤¾à¤°à¤¤',
     'ru-ru': 'Ð˜Ð½Ð´Ð¸Ñ',
     'en-us': 'India',
-    'pt-pt': 'Ãndia',
+    'pt-br': 'Índia',
     'de-de': 'Indien',
     cid: '90',
     'fr-fr': 'Inde',
@@ -1239,7 +1239,7 @@ const countries = [
     native_names: 'Indonesia',
     'ru-ru': 'Ð˜Ð½Ð´Ð¾Ð½ÐµÐ·Ð¸Ñ',
     'en-us': 'Indonesia',
-    'pt-pt': 'IndonÃ©sia',
+    'pt-br': 'Indonésia',
     'de-de': 'Indonesien',
     cid: '91',
     'fr-fr': 'IndonÃ©sie',
@@ -1253,7 +1253,7 @@ const countries = [
     native_names: 'Ø§ÛŒØ±Ø§Ù†, Iran',
     'ru-ru': 'Ð˜Ñ€Ð°Ð½',
     'en-us': 'Iran',
-    'pt-pt': 'IrÃ£o',
+    'pt-br': 'Irã',
     'de-de': 'Iran',
     cid: '92',
     'fr-fr': 'Iran',
@@ -1267,7 +1267,7 @@ const countries = [
     native_names: 'Ø§Ù„Ø¹Ø±Ø§Ù‚, Iraq, Ü©Ü˜Ü¼Ü›Ü¢ÜµÜ, Ú©Û†Ù…Ø§Ø±ÛŒ',
     'ru-ru': 'Ð˜Ñ€Ð°Ðº',
     'en-us': 'Iraq',
-    'pt-pt': 'Iraque',
+    'pt-br': 'Iraque',
     'de-de': 'Irak',
     cid: '93',
     'fr-fr': 'Irak',
@@ -1281,7 +1281,7 @@ const countries = [
     native_names: 'Ã‰ire, Ireland',
     'ru-ru': 'Ð˜Ñ€Ð»Ð°Ð½Ð´Ð¸Ñ',
     'en-us': 'Ireland',
-    'pt-pt': 'Irlanda',
+    'pt-br': 'Irlanda',
     'de-de': 'Irland',
     cid: '94',
     'fr-fr': 'Irlande',
@@ -1295,7 +1295,7 @@ const countries = [
     native_names: 'Mannin, Isle of Man',
     'ru-ru': 'ÐžÑÑ‚Ñ€Ð¾Ð² ÐœÑÐ½',
     'en-us': 'Isle of Man',
-    'pt-pt': 'Ilha de Man',
+    'pt-br': 'Ilha de Man',
     'de-de': 'Insel Man',
     cid: '95',
     'fr-fr': 'ÃŽle de Man',
@@ -1309,7 +1309,7 @@ const countries = [
     native_names: 'Ø¥Ø³Ø±Ø§Ø¦ÙŠÙ„, Israel, ×™×©×¨××œ',
     'ru-ru': 'Ð˜Ð·Ñ€Ð°Ð¸Ð»ÑŒ',
     'en-us': 'Israel',
-    'pt-pt': 'Israel',
+    'pt-br': 'Israel',
     'de-de': 'Israel',
     cid: '96',
     'fr-fr': 'IsraÃ«l',
@@ -1323,7 +1323,7 @@ const countries = [
     native_names: 'Italia, Italy',
     'ru-ru': 'Ð˜Ñ‚Ð°Ð»Ð¸Ñ',
     'en-us': 'Italy',
-    'pt-pt': 'ItÃ¡lia',
+    'pt-br': 'Itália',
     'de-de': 'Italien',
     cid: '97',
     'fr-fr': 'Italie',
@@ -1337,7 +1337,7 @@ const countries = [
     native_names: 'Jamaica',
     'ru-ru': 'Ð¯Ð¼Ð°Ð¹ÐºÐ°',
     'en-us': 'Jamaica',
-    'pt-pt': 'Jamaica',
+    'pt-br': 'Jamaica',
     'de-de': 'Jamaika',
     cid: '98',
     'fr-fr': 'JamaÃ¯que',
@@ -1351,7 +1351,7 @@ const countries = [
     native_names: 'æ—¥æœ¬, Japan',
     'ru-ru': 'Ð¯Ð¿Ð¾Ð½Ð¸Ñ',
     'en-us': 'Japan',
-    'pt-pt': 'JapÃ£o',
+    'pt-br': 'Japão',
     'de-de': 'Japan',
     cid: '100',
     'fr-fr': 'Japon',
@@ -1365,7 +1365,7 @@ const countries = [
     native_names: 'Jersey, JÃ¨rri',
     'ru-ru': 'Ð”Ð¶ÐµÑ€ÑÐ¸',
     'en-us': 'Jersey',
-    'pt-pt': 'Jersey',
+    'pt-br': 'Jersey',
     'de-de': 'Jersey',
     cid: '101',
     'fr-fr': 'Jersey',
@@ -1379,7 +1379,7 @@ const countries = [
     native_names: 'Ø§Ù„Ø£Ø±Ø¯Ù†, Jordan',
     'ru-ru': 'Ð˜Ð¾Ñ€Ð´Ð°Ð½Ð¸Ñ',
     'en-us': 'Jordan',
-    'pt-pt': 'JordÃ¢nia',
+    'pt-br': 'Jordânia',
     'de-de': 'Jordanien',
     cid: '102',
     'fr-fr': 'Jordanie',
@@ -1393,7 +1393,7 @@ const countries = [
     native_names: 'ÒšÐ°Ð·Ð°Ò›ÑÑ‚Ð°Ð½, Kazakhstan, ÐšÐ°Ð·Ð°Ñ…ÑÑ‚Ð°Ð½',
     'ru-ru': 'ÐšÐ°Ð·Ð°Ñ…ÑÑ‚Ð°Ð½',
     'en-us': 'Kazakhstan',
-    'pt-pt': 'CazaquistÃ£o',
+    'pt-br': 'Cazaquistão',
     'de-de': 'Kasachstan',
     cid: '103',
     'fr-fr': 'Kazakhstan',
@@ -1407,7 +1407,7 @@ const countries = [
     native_names: 'Kenya',
     'ru-ru': 'ÐšÐµÐ½Ð¸Ñ',
     'en-us': 'Kenya',
-    'pt-pt': 'QuÃ©nia',
+    'pt-br': 'Quênia',
     'de-de': 'Kenia',
     cid: '104',
     'fr-fr': 'Kenya',
@@ -1421,7 +1421,7 @@ const countries = [
     native_names: 'Kiribati',
     'ru-ru': 'ÐšÐ¸Ñ€Ð¸Ð±Ð°Ñ‚Ð¸',
     'en-us': 'Kiribati',
-    'pt-pt': 'Kiribati',
+    'pt-br': 'Kiribati',
     'de-de': 'Kiribati',
     cid: '105',
     'fr-fr': 'Kiribati',
@@ -1435,7 +1435,7 @@ const countries = [
     native_names: 'Kosova, Kosovo, ÐšÐ¾ÑÐ¾Ð²Ð¾',
     'ru-ru': 'Ð ÐµÑÐ¿ÑƒÐ±Ð»Ð¸ÐºÐ° ÐšÐ¾ÑÐ¾Ð²Ð¾',
     'en-us': 'Kosovo',
-    'pt-pt': 'Kosovo',
+    'pt-br': 'Kosovo',
     'de-de': 'Kosovo',
     cid: '106',
     'fr-fr': 'Kosovo',
@@ -1449,7 +1449,7 @@ const countries = [
     native_names: 'Ø§Ù„ÙƒÙˆÙŠØª, Kuwait',
     'ru-ru': 'ÐšÑƒÐ²ÐµÐ¹Ñ‚',
     'en-us': 'Kuwait',
-    'pt-pt': 'Kuwait',
+    'pt-br': 'Kuwait',
     'de-de': 'Kuwait',
     cid: '107',
     'fr-fr': 'KoweÃ¯t',
@@ -1463,7 +1463,7 @@ const countries = [
     native_names: 'ÐšÑ‹Ñ€Ð³Ñ‹Ð·ÑÑ‚Ð°Ð½, Kyrgyzstan, ÐšÐ¸Ñ€Ð³Ð¸Ð·Ð¸Ñ',
     'ru-ru': 'ÐšÐ¸Ñ€Ð³Ð¸Ð·Ð¸Ñ',
     'en-us': 'Kyrgyzstan',
-    'pt-pt': 'QuirguistÃ£o',
+    'pt-br': 'Quirguistão',
     'de-de': 'Kirgisistan',
     cid: '108',
     'fr-fr': 'Kirghizistan',
@@ -1477,7 +1477,7 @@ const countries = [
     native_names: 'àºªàº›àº›àº¥àº²àº§, Laos',
     'ru-ru': 'Ð›Ð°Ð¾Ñ',
     'en-us': 'Laos',
-    'pt-pt': 'Laos',
+    'pt-br': 'Laos',
     'de-de': 'Laos',
     cid: '109',
     'fr-fr': 'Laos',
@@ -1491,7 +1491,7 @@ const countries = [
     native_names: 'Latvija, Latvia',
     'ru-ru': 'Ð›Ð°Ñ‚Ð²Ð¸Ñ',
     'en-us': 'Latvia',
-    'pt-pt': 'LetÃ³nia',
+    'pt-br': 'Letônia',
     'de-de': 'Lettland',
     cid: '110',
     'fr-fr': 'Lettonie',
@@ -1505,7 +1505,7 @@ const countries = [
     native_names: 'Ù„Ø¨Ù†Ø§Ù†, Lebanon, Liban',
     'ru-ru': 'Ð›Ð¸Ð²Ð°Ð½',
     'en-us': 'Lebanon',
-    'pt-pt': 'LÃ­bano',
+    'pt-br': 'Líbano',
     'de-de': 'Libanon',
     cid: '111',
     'fr-fr': 'Liban',
@@ -1519,7 +1519,7 @@ const countries = [
     native_names: 'Lesotho',
     'ru-ru': 'Ð›ÐµÑÐ¾Ñ‚Ð¾',
     'en-us': 'Lesotho',
-    'pt-pt': 'Lesoto',
+    'pt-br': 'Lesoto',
     'de-de': 'Lesotho',
     cid: '112',
     'fr-fr': 'Lesotho',
@@ -1533,7 +1533,7 @@ const countries = [
     native_names: 'Liberia',
     'ru-ru': 'Ð›Ð¸Ð±ÐµÑ€Ð¸Ñ',
     'en-us': 'Liberia',
-    'pt-pt': 'LibÃ©ria',
+    'pt-br': 'Libéria',
     'de-de': 'Liberia',
     cid: '113',
     'fr-fr': 'Liberia',
@@ -1547,7 +1547,7 @@ const countries = [
     native_names: 'â€Ù„ÙŠØ¨ÙŠØ§, Libya',
     'ru-ru': 'Ð›Ð¸Ð²Ð¸Ñ',
     'en-us': 'Libya',
-    'pt-pt': 'LÃ­bia',
+    'pt-br': 'Lí­bia',
     'de-de': 'Libyen',
     cid: '114',
     'fr-fr': 'Libye',
@@ -1561,7 +1561,7 @@ const countries = [
     native_names: 'Liechtenstein',
     'ru-ru': 'Ð›Ð¸Ñ…Ñ‚ÐµÐ½ÑˆÑ‚ÐµÐ¹Ð½',
     'en-us': 'Liechtenstein',
-    'pt-pt': 'Liechtenstein',
+    'pt-br': 'Liechtenstein',
     'de-de': 'Liechtenstein',
     cid: '115',
     'fr-fr': 'Liechtenstein',
@@ -1575,7 +1575,7 @@ const countries = [
     native_names: 'Lietuva, Lithuania',
     'ru-ru': 'Ð›Ð¸Ñ‚Ð²Ð°',
     'en-us': 'Lithuania',
-    'pt-pt': 'LituÃ¢nia',
+    'pt-br': 'Lituânia',
     'de-de': 'Litauen',
     cid: '116',
     'fr-fr': 'Lituanie',
@@ -1589,7 +1589,7 @@ const countries = [
     native_names: 'LÃ«tzebuerg, Luxembourg, Luxemburg',
     'ru-ru': 'Ð›ÑŽÐºÑÐµÐ¼Ð±ÑƒÑ€Ð³',
     'en-us': 'Luxembourg',
-    'pt-pt': 'Luxemburgo',
+    'pt-br': 'Luxemburgo',
     'de-de': 'Luxemburg',
     cid: '117',
     'fr-fr': 'Luxembourg',
@@ -1603,7 +1603,7 @@ const countries = [
     native_names: 'ÐœÐ°ÐºÐµÐ´Ð¾Ð½Ð¸Ñ˜Ð°, Macedonia',
     'ru-ru': 'Ð ÐµÑÐ¿ÑƒÐ±Ð»Ð¸ÐºÐ° ÐœÐ°ÐºÐµÐ´Ð¾Ð½Ð¸Ñ',
     'en-us': 'Macedonia',
-    'pt-pt': 'MacedÃ³nia',
+    'pt-br': 'Macedônia',
     'de-de': 'Mazedonien',
     cid: '118',
     'fr-fr': 'MacÃ©doine',
@@ -1617,7 +1617,7 @@ const countries = [
     native_names: 'Madagascar, Madagasikara',
     'ru-ru': 'ÐœÐ°Ð´Ð°Ð³Ð°ÑÐºÐ°Ñ€',
     'en-us': 'Madagascar',
-    'pt-pt': 'MadagÃ¡scar',
+    'pt-br': 'Madagascar',
     'de-de': 'Madagaskar',
     cid: '119',
     'fr-fr': 'Madagascar',
@@ -1631,7 +1631,7 @@ const countries = [
     native_names: 'MalaÅµi, Malawi',
     'ru-ru': 'ÐœÐ°Ð»Ð°Ð²Ð¸',
     'en-us': 'Malawi',
-    'pt-pt': 'Malawi',
+    'pt-br': 'Malawi',
     'de-de': 'Malawi',
     cid: '120',
     'fr-fr': 'Malawi',
@@ -1645,7 +1645,7 @@ const countries = [
     native_names: 'Ù…Ù„ÙŠØ³ÙŠØ§, Malaysia',
     'ru-ru': 'ÐœÐ°Ð»Ð°Ð¹Ð·Ð¸Ñ',
     'en-us': 'Malaysia',
-    'pt-pt': 'MalÃ¡sia',
+    'pt-br': 'Malásia',
     'de-de': 'Malaysia',
     cid: '121',
     'fr-fr': 'Malaisie',
@@ -1659,7 +1659,7 @@ const countries = [
     native_names: 'Þ‹Þ¨ÞˆÞ¬Þ€Þ¨ÞƒÞ§Þ‡Þ°Þ–Þ­ÞŽÞ¬, Maldives',
     'ru-ru': 'ÐœÐ°Ð»ÑŒÐ´Ð¸Ð²Ñ‹',
     'en-us': 'Maldives',
-    'pt-pt': 'Maldivas',
+    'pt-br': 'Maldivas',
     'de-de': 'Malediven',
     cid: '122',
     'fr-fr': 'Maldives',
@@ -1673,7 +1673,7 @@ const countries = [
     native_names: 'Mali',
     'ru-ru': 'ÐœÐ°Ð»Ð¸',
     'en-us': 'Mali',
-    'pt-pt': 'Mali',
+    'pt-br': 'Mali',
     'de-de': 'Mali',
     cid: '123',
     'fr-fr': 'Mali',
@@ -1687,7 +1687,7 @@ const countries = [
     native_names: 'Malta',
     'ru-ru': 'ÐœÐ°Ð»ÑŒÑ‚Ð°',
     'en-us': 'Malta',
-    'pt-pt': 'Malta',
+    'pt-br': 'Malta',
     'de-de': 'Malta',
     cid: '124',
     'fr-fr': 'Malte',
@@ -1701,7 +1701,7 @@ const countries = [
     native_names: 'MÌ§ajeÄ¼, Marshall Islands',
     'ru-ru': 'ÐœÐ°Ñ€ÑˆÐ°Ð»Ð»Ð¾Ð²Ñ‹ ÐžÑÑ‚Ñ€Ð¾Ð²Ð°',
     'en-us': 'Marshall Islands',
-    'pt-pt': 'Ilhas Marshall',
+    'pt-br': 'Ilhas Marshall',
     'de-de': 'Marshallinseln',
     cid: '125',
     'fr-fr': 'ÃŽles Marshall',
@@ -1715,7 +1715,7 @@ const countries = [
     native_names: 'Ù…ÙˆØ±ÙŠØªØ§Ù†ÙŠØ§, Mauritania',
     'ru-ru': 'ÐœÐ°Ð²Ñ€Ð¸Ñ‚Ð°Ð½Ð¸Ñ',
     'en-us': 'Mauritania',
-    'pt-pt': 'MauritÃ¢nia',
+    'pt-br': 'Mauritânia',
     'de-de': 'Mauretanien',
     cid: '126',
     'fr-fr': 'Mauritanie',
@@ -1729,7 +1729,7 @@ const countries = [
     native_names: 'Maurice, Mauritius, Moris',
     'ru-ru': 'ÐœÐ°Ð²Ñ€Ð¸ÐºÐ¸Ð¹',
     'en-us': 'Mauritius',
-    'pt-pt': 'MaurÃ­cio',
+    'pt-br': 'Maurício',
     'de-de': 'Mauritius',
     cid: '127',
     'fr-fr': 'ÃŽle Maurice',
@@ -1743,7 +1743,7 @@ const countries = [
     native_names: 'MÃ©xico, Mexico',
     'ru-ru': 'ÐœÐµÐºÑÐ¸ÐºÐ°',
     'en-us': 'Mexico',
-    'pt-pt': 'MÃ©xico',
+    'pt-br': 'México',
     'de-de': 'Mexiko',
     cid: '128',
     'fr-fr': 'Mexique',
@@ -1757,7 +1757,7 @@ const countries = [
     native_names: 'Moldova',
     'ru-ru': 'ÐœÐ¾Ð»Ð´Ð°Ð²Ð¸Ñ',
     'en-us': 'Moldova',
-    'pt-pt': 'MoldÃ¡via',
+    'pt-br': 'Moldávia',
     'de-de': 'Moldawie',
     cid: '129',
     'fr-fr': 'Moldavie',
@@ -1771,7 +1771,7 @@ const countries = [
     native_names: 'Monaco',
     'ru-ru': 'ÐœÐ¾Ð½Ð°ÐºÐ¾',
     'en-us': 'Monaco',
-    'pt-pt': 'MÃ³naco',
+    'pt-br': 'Mônaco',
     'de-de': 'Monaco',
     cid: '130',
     'fr-fr': 'Monaco',
@@ -1785,7 +1785,7 @@ const countries = [
     native_names: 'ÐœÐ¾Ð½Ð³Ð¾Ð» ÑƒÐ»Ñ, Mongolia',
     'ru-ru': 'ÐœÐ¾Ð½Ð³Ð¾Ð»Ð¸Ñ',
     'en-us': 'Mongolia',
-    'pt-pt': 'MongÃ³lia',
+    'pt-br': 'Mongólia',
     'de-de': 'Mongolei',
     cid: '131',
     'fr-fr': 'Mongolie',
@@ -1799,7 +1799,7 @@ const countries = [
     native_names: 'Ð¦Ñ€Ð½Ð° Ð“Ð¾Ñ€Ð°, Montenegro',
     'ru-ru': 'Ð§ÐµÑ€Ð½Ð¾Ð³Ð¾Ñ€Ð¸Ñ',
     'en-us': 'Montenegro',
-    'pt-pt': 'Montenegro',
+    'pt-br': 'Montenegro',
     'de-de': 'Montenegro',
     cid: '132',
     'fr-fr': 'MontÃ©nÃ©gro',
@@ -1813,7 +1813,7 @@ const countries = [
     native_names: 'Montserrat',
     'ru-ru': 'ÐœÐ¾Ð½Ñ‚ÑÐµÑ€Ñ€Ð°Ñ‚',
     'en-us': 'Montserrat',
-    'pt-pt': 'Montserrat',
+    'pt-br': 'Montserrat',
     'de-de': 'Montserrat',
     cid: '133',
     'fr-fr': 'Montserrat',
@@ -1827,7 +1827,7 @@ const countries = [
     native_names: 'âµâµŽâ´°âµ–âµ”âµ‰â´±, Morocco, Ø§Ù„Ù…ØºØ±Ø¨',
     'ru-ru': 'ÐœÐ°Ñ€Ð¾ÐºÐºÐ¾',
     'en-us': 'Morocco',
-    'pt-pt': 'Marrocos',
+    'pt-br': 'Marrocos',
     'de-de': 'Marokko',
     cid: '134',
     'fr-fr': 'Maroc',
@@ -1841,7 +1841,7 @@ const countries = [
     native_names: 'MoÃ§ambique, Mozambique',
     'ru-ru': 'ÐœÐ¾Ð·Ð°Ð¼Ð±Ð¸Ðº',
     'en-us': 'Mozambique',
-    'pt-pt': 'MoÃ§ambique',
+    'pt-br': 'Moçambique',
     'de-de': 'Mosambik',
     cid: '135',
     'fr-fr': 'Mozambique',
@@ -1855,7 +1855,7 @@ const countries = [
     native_names: 'á€™á€¼á€”á€ºá€™á€¬, Myanmar',
     'ru-ru': 'ÐœÑŒÑÐ½Ð¼Ð°',
     'en-us': 'Myanmar',
-    'pt-pt': 'Myanmar',
+    'pt-br': 'Myanmar',
     'de-de': 'Myanmar',
     cid: '136',
     'fr-fr': 'Birmanie',
@@ -1869,7 +1869,7 @@ const countries = [
     native_names: 'Namibia, NamibiÃ«',
     'ru-ru': 'ÐÐ°Ð¼Ð¸Ð±Ð¸Ñ',
     'en-us': 'Namibia',
-    'pt-pt': 'NamÃ­bia',
+    'pt-br': 'Namíbia',
     'de-de': 'Namibia',
     cid: '138',
     'fr-fr': 'Namibie',
@@ -1883,7 +1883,7 @@ const countries = [
     native_names: 'Nauru',
     'ru-ru': 'ÐÐ°ÑƒÑ€Ñƒ',
     'en-us': 'Nauru',
-    'pt-pt': 'Nauru',
+    'pt-br': 'Nauru',
     'de-de': 'Nauru',
     cid: '139',
     'fr-fr': 'Nauru',
@@ -1897,7 +1897,7 @@ const countries = [
     native_names: 'à¤¨à¥‡à¤ªà¤¾à¤², Nepal',
     'ru-ru': 'ÐÐµÐ¿Ð°Ð»',
     'en-us': 'Nepal',
-    'pt-pt': 'Nepal',
+    'pt-br': 'Nepal',
     'de-de': 'NÃ©pal',
     cid: '140',
     'fr-fr': 'NÃ©pal',
@@ -1911,7 +1911,7 @@ const countries = [
     native_names: 'Nederland, Netherlands',
     'ru-ru': 'ÐÐ¸Ð´ÐµÑ€Ð»Ð°Ð½Ð´Ñ‹',
     'en-us': 'Netherlands',
-    'pt-pt': 'Holanda',
+    'pt-br': 'Holanda',
     'de-de': 'Niederlande',
     cid: '141',
     'fr-fr': 'Pays-Bas',
@@ -1925,7 +1925,7 @@ const countries = [
     native_names: 'New Zealand, Aotearoa',
     'ru-ru': 'ÐÐ¾Ð²Ð°Ñ Ð—ÐµÐ»Ð°Ð½Ð´Ð¸Ñ',
     'en-us': 'New Zealand',
-    'pt-pt': 'Nova ZelÃ¢ndia',
+    'pt-br': 'Nova Zelândia',
     'de-de': 'Neuseeland',
     cid: '142',
     'fr-fr': 'Nouvelle-ZÃ©lande',
@@ -1939,7 +1939,7 @@ const countries = [
     native_names: 'Nicaragua',
     'ru-ru': 'ÐÐ¸ÐºÐ°Ñ€Ð°Ð³ÑƒÐ°',
     'en-us': 'Nicaragua',
-    'pt-pt': 'NicarÃ¡gua',
+    'pt-br': 'Nicarágua',
     'de-de': 'Nicaragua',
     cid: '143',
     'fr-fr': 'Nicaragua',
@@ -1953,7 +1953,7 @@ const countries = [
     native_names: 'Niger',
     'ru-ru': 'ÐÐ¸Ð³ÐµÑ€',
     'en-us': 'Niger',
-    'pt-pt': 'NÃ­ger',
+    'pt-br': 'Ní­ger',
     'de-de': 'Niger',
     cid: '144',
     'fr-fr': 'Niger',
@@ -1967,7 +1967,7 @@ const countries = [
     native_names: 'Nigeria',
     'ru-ru': 'ÐÐ¸Ð³ÐµÑ€Ð¸Ñ',
     'en-us': 'Nigeria',
-    'pt-pt': 'NigÃ©ria',
+    'pt-br': 'Nigéria',
     'de-de': 'Nigeria',
     cid: '145',
     'fr-fr': 'NigÃ©ria',
@@ -1981,7 +1981,7 @@ const countries = [
     native_names: 'NiuÄ“, Niue',
     'ru-ru': 'ÐÐ¸ÑƒÑ',
     'en-us': 'Niue',
-    'pt-pt': 'Niue',
+    'pt-br': 'Niue',
     'de-de': 'Niue',
     cid: '146',
     'fr-fr': 'Niue',
@@ -1995,7 +1995,7 @@ const countries = [
     native_names: 'ë¶í•œ, North Korea',
     'ru-ru': 'Ð¡ÐµÐ²ÐµÑ€Ð½Ð°Ñ ÐšÐ¾Ñ€ÐµÑ',
     'en-us': 'North Korea',
-    'pt-pt': 'Coreia do Norte',
+    'pt-br': 'Coreia do Norte',
     'de-de': 'Nordkorea',
     cid: '147',
     'fr-fr': 'CorÃ©e du Nord',
@@ -2009,7 +2009,7 @@ const countries = [
     native_names: 'Noreg, Norway, Norgga, Norge',
     'ru-ru': 'ÐÐ¾Ñ€Ð²ÐµÐ³Ð¸Ñ',
     'en-us': 'Norway',
-    'pt-pt': 'Noruega',
+    'pt-br': 'Noruega',
     'de-de': 'Norwegen',
     cid: '148',
     'fr-fr': 'NorvÃ¨ge',
@@ -2023,7 +2023,7 @@ const countries = [
     native_names: 'Ø¹Ù…Ø§Ù†, Oman',
     'ru-ru': 'ÐžÐ¼Ð°Ð½',
     'en-us': 'Oman',
-    'pt-pt': 'OmÃ£',
+    'pt-br': 'Omã',
     'de-de': 'Oman',
     cid: '149',
     'fr-fr': 'Oman',
@@ -2037,7 +2037,7 @@ const countries = [
     native_names: 'Ù¾Ø§ÙƒØ³ØªØ§Ù†, Pakistan',
     'ru-ru': 'ÐŸÐ°ÐºÐ¸ÑÑ‚Ð°Ð½',
     'en-us': 'Pakistan',
-    'pt-pt': 'PaquistÃ£o',
+    'pt-br': 'Paquistão',
     'de-de': 'Pakistan',
     cid: '150',
     'fr-fr': 'Pakistan',
@@ -2051,7 +2051,7 @@ const countries = [
     native_names: 'Belau, Palau',
     'ru-ru': 'ÐŸÐ°Ð»Ð°Ñƒ',
     'en-us': 'Palau',
-    'pt-pt': 'Palau',
+    'pt-br': 'Palau',
     'de-de': 'Palau',
     cid: '151',
     'fr-fr': 'Palaos (Palau)',
@@ -2065,7 +2065,7 @@ const countries = [
     native_names: 'PanamÃ¡, Panama',
     'ru-ru': 'ÐŸÐ°Ð½Ð°Ð¼Ð°',
     'en-us': 'Panama',
-    'pt-pt': 'PanamÃ¡',
+    'pt-br': 'Panamá',
     'de-de': 'Panama',
     cid: '153',
     'fr-fr': 'Panama',
@@ -2079,7 +2079,7 @@ const countries = [
     native_names: 'Papua Niu Gini, Papua New Guinea, Papua Niugini',
     'ru-ru': 'ÐŸÐ°Ð¿ÑƒÐ° â€” ÐÐ¾Ð²Ð°Ñ Ð“Ð²Ð¸Ð½ÐµÑ',
     'en-us': 'Papua New Guinea',
-    'pt-pt': 'Papua Nova GuinÃ©',
+    'pt-br': 'Papua Nova Guiné',
     'de-de': 'Papua-Neuguinea',
     cid: '154',
     'fr-fr': 'Papouasie-Nouvelle-GuinÃ©e',
@@ -2093,7 +2093,7 @@ const countries = [
     native_names: 'ParaguÃ¡i, Paraguay',
     'ru-ru': 'ÐŸÐ°Ñ€Ð°Ð³Ð²Ð°Ð¹',
     'en-us': 'Paraguay',
-    'pt-pt': 'Paraguai',
+    'pt-br': 'Paraguai',
     'de-de': 'Paraguay',
     cid: '155',
     'fr-fr': 'Paraguay',
@@ -2107,7 +2107,7 @@ const countries = [
     native_names: 'Piruw, Peru, PerÃº',
     'ru-ru': 'ÐŸÐµÑ€Ñƒ',
     'en-us': 'Peru',
-    'pt-pt': 'PerÃº',
+    'pt-br': 'Perú',
     'de-de': 'Peru',
     cid: '156',
     'fr-fr': 'PÃ©rou',
@@ -2121,7 +2121,7 @@ const countries = [
     native_names: 'Pilipinas, Philippines',
     'ru-ru': 'Ð¤Ð¸Ð»Ð¸Ð¿Ð¿Ð¸Ð½Ñ‹',
     'en-us': 'Philippines',
-    'pt-pt': 'Filipinas',
+    'pt-br': 'Filipinas',
     'de-de': 'Philippinen',
     cid: '157',
     'fr-fr': 'Philippines',
@@ -2135,7 +2135,7 @@ const countries = [
     native_names: 'Pitcairn Islands',
     'ru-ru': 'ÐžÑÑ‚Ñ€Ð¾Ð²Ð° ÐŸÐ¸Ñ‚ÐºÑÑ€Ð½',
     'en-us': 'Pitcairn Islands',
-    'pt-pt': 'Ilhas Pitcairn',
+    'pt-br': 'Ilhas Pitcairn',
     'de-de': 'Pitcairn',
     cid: '158',
     'fr-fr': 'ÃŽles Pitcairn',
@@ -2149,7 +2149,7 @@ const countries = [
     native_names: 'Polska, Poland',
     'ru-ru': 'ÐŸÐ¾Ð»ÑŒÑˆÐ°',
     'en-us': 'Poland',
-    'pt-pt': 'PolÃ³nia',
+    'pt-br': 'Polônia',
     'de-de': 'Polen',
     cid: '159',
     'fr-fr': 'Pologne',
@@ -2163,7 +2163,7 @@ const countries = [
     native_names: 'Portugal',
     'ru-ru': 'ÐŸÐ¾Ñ€Ñ‚ÑƒÐ³Ð°Ð»Ð¸Ñ',
     'en-us': 'Portugal',
-    'pt-pt': 'Portugal',
+    'pt-br': 'Portugal',
     'de-de': 'Portugal',
     cid: '160',
     'fr-fr': 'Portugal',
@@ -2177,7 +2177,7 @@ const countries = [
     native_names: 'Ù‚Ø·Ø±, Qatar',
     'ru-ru': 'ÐšÐ°Ñ‚Ð°Ñ€',
     'en-us': 'Qatar',
-    'pt-pt': 'Catar',
+    'pt-br': 'Catar',
     'de-de': 'Katar',
     cid: '161',
     'fr-fr': 'Qatar',
@@ -2191,7 +2191,7 @@ const countries = [
     native_names: 'RomÃ¢nia, Romania',
     'ru-ru': 'Ð ÑƒÐ¼Ñ‹Ð½Ð¸Ñ',
     'en-us': 'Romania',
-    'pt-pt': 'RomÃ©nia',
+    'pt-br': 'Romênia',
     'de-de': 'RumÃ¤nien',
     cid: '162',
     'fr-fr': 'Roumanie',
@@ -2205,7 +2205,7 @@ const countries = [
     native_names: 'Ð Ð¾ÑÑÐ¸Ñ, Russia',
     'ru-ru': 'Ð Ð¾ÑÑÐ¸Ñ',
     'en-us': 'Russia',
-    'pt-pt': 'RÃºssia',
+    'pt-br': 'Rússia',
     'de-de': 'Russland',
     cid: '163',
     'fr-fr': 'Russie',
@@ -2219,7 +2219,7 @@ const countries = [
     native_names: 'Rwanda',
     'ru-ru': 'Ð ÑƒÐ°Ð½Ð´Ð°',
     'en-us': 'Rwanda',
-    'pt-pt': 'Ruanda',
+    'pt-br': 'Ruanda',
     'de-de': 'Ruanda',
     cid: '164',
     'fr-fr': 'Rwanda',
@@ -2233,7 +2233,7 @@ const countries = [
     native_names: 'Western Sahara, Sahara Occidental, Ø§Ù„ØµØ­Ø±Ø§Ø¡ Ø§Ù„ØºØ±Ø¨ÙŠØ©',
     'ru-ru': 'Ð—Ð°Ð¿Ð°Ð´Ð½Ð°Ñ Ð¡Ð°Ñ…Ð°Ñ€Ð°',
     'en-us': 'Western Sahara',
-    'pt-pt': 'saara Ocidental',
+    'pt-br': 'saara Ocidental',
     'de-de': 'Westsahara',
     cid: '165',
     'fr-fr': 'sahara Occidental',
@@ -2247,7 +2247,7 @@ const countries = [
     native_names: 'saint Kitts and Nevis',
     'ru-ru': 'Ð¡ÐµÐ½Ñ‚-ÐšÐ¸Ñ‚Ñ Ð¸ ÐÐµÐ²Ð¸Ñ',
     'en-us': 'saint Kitts and Nevis',
-    'pt-pt': 'sÃ£o CristÃ³vÃ£o e Nevis',
+    'pt-br': 'São Cristóvão e Nevis',
     'de-de': 'saint Christopher und Nevis',
     cid: '167',
     'fr-fr': 'saint-Christophe-et-NiÃ©vÃ¨s',
@@ -2261,7 +2261,7 @@ const countries = [
     native_names: 'saint Lucia',
     'ru-ru': 'Ð¡ÐµÐ½Ñ‚-Ð›ÑŽÑÐ¸Ñ',
     'en-us': 'saint Lucia',
-    'pt-pt': 'santa LÃºcia',
+    'pt-br': 'Santa Lúcia',
     'de-de': 'saint Lucia',
     cid: '168',
     'fr-fr': 'sainte-Lucie',
@@ -2275,7 +2275,7 @@ const countries = [
     native_names: 'saint Vincent and the Grenadines',
     'ru-ru': 'Ð¡ÐµÐ½Ñ‚-Ð’Ð¸Ð½ÑÐµÐ½Ñ‚ Ð¸ Ð“Ñ€ÐµÐ½Ð°Ð´Ð¸Ð½Ñ‹',
     'en-us': 'saint Vincent and the Grenadines',
-    'pt-pt': 'sÃ£o Vincente e Granadinas',
+    'pt-br': 'São Vincente e Granadinas',
     'de-de': 'saint Vincent und die Grenadinen',
     cid: '169',
     'fr-fr': 'saint-Vincent-et-les-Grenadines',
@@ -2289,7 +2289,7 @@ const countries = [
     native_names: 'sÄmoa, Samoa',
     'ru-ru': 'Ð¡Ð°Ð¼Ð¾Ð°',
     'en-us': 'samoa',
-    'pt-pt': 'samoa',
+    'pt-br': 'Samoa',
     'de-de': 'samoa',
     cid: '170',
     'fr-fr': 'samoa',
@@ -2303,7 +2303,7 @@ const countries = [
     native_names: 'san Marino',
     'ru-ru': 'Ð¡Ð°Ð½-ÐœÐ°Ñ€Ð¸Ð½Ð¾',
     'en-us': 'san Marino',
-    'pt-pt': 'san Marino',
+    'pt-br': 'San Marino',
     'de-de': 'san Marino',
     cid: '171',
     'fr-fr': 'saint-Marin',
@@ -2317,7 +2317,7 @@ const countries = [
     native_names: 'sÃ£o TomÃ© e PrÃ­ncipe, SÃ£o TomÃ© and PrÃ­ncipe',
     'ru-ru': 'Ð¡Ð°Ð½-Ð¢Ð¾Ð¼Ðµ Ð¸ ÐŸÑ€Ð¸Ð½ÑÐ¸Ð¿Ð¸',
     'en-us': 'sÃ£o TomÃ© and PrÃ­ncipe',
-    'pt-pt': 'sÃ£o TomÃ© e PrÃ­ncipe',
+    'pt-br': 'São Tomé e Prí­ncipe',
     'de-de': 'sÃ£o TomÃ© und PrÃ­ncipe',
     cid: '172',
     'fr-fr': 'sÃ£o TomÃ© et PrÃ­ncipe',
@@ -2331,7 +2331,7 @@ const countries = [
     native_names: 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ© Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©, Saudi Arabia',
     'ru-ru': 'Ð¡Ð°ÑƒÐ´Ð¾Ð²ÑÐºÐ°Ñ ÐÑ€Ð°Ð²Ð¸Ñ',
     'en-us': 'saudi Arabia',
-    'pt-pt': 'ArÃ¡bia Saudita',
+    'pt-br': 'Arábia Saudita',
     'de-de': 'saudi-Arabien',
     cid: '173',
     'fr-fr': 'Arabie Saoudite',
@@ -2345,7 +2345,7 @@ const countries = [
     native_names: 'sÃ©nÃ©gal, Senegal',
     'ru-ru': 'Ð¡ÐµÐ½ÐµÐ³Ð°Ð»',
     'en-us': 'senegal',
-    'pt-pt': 'senegal',
+    'pt-br': 'Senegal',
     'de-de': 'senegal',
     cid: '174',
     'fr-fr': 'sÃ©nÃ©gal',
@@ -2359,7 +2359,7 @@ const countries = [
     native_names: 'Ð¡Ñ€Ð±Ð¸Ñ˜Ð°, Serbia',
     'ru-ru': 'Ð¡ÐµÑ€Ð±Ð¸Ñ',
     'en-us': 'serbia',
-    'pt-pt': 'sÃ©rvia',
+    'pt-br': 'Sérvia',
     'de-de': 'serbien',
     cid: '175',
     'fr-fr': 'serbie',
@@ -2373,7 +2373,7 @@ const countries = [
     native_names: 'sesel, Seychelles',
     'ru-ru': 'Ð¡ÐµÐ¹ÑˆÐµÐ»ÑŒÑÐºÐ¸Ðµ ÐžÑÑ‚Ñ€Ð¾Ð²Ð°',
     'en-us': 'seychelles',
-    'pt-pt': 'seicheles',
+    'pt-br': 'Seicheles',
     'de-de': 'seychellen',
     cid: '176',
     'fr-fr': 'seychelles',
@@ -2387,7 +2387,7 @@ const countries = [
     native_names: 'sierra Leone',
     'ru-ru': 'Ð¡ÑŒÐµÑ€Ñ€Ð°-Ð›ÐµÐ¾Ð½Ðµ',
     'en-us': 'sierra Leone',
-    'pt-pt': 'serra Leoa',
+    'pt-br': 'serra Leoa',
     'de-de': 'sierra Leone',
     cid: '177',
     'fr-fr': 'sierra Leone',
@@ -2401,7 +2401,7 @@ const countries = [
     native_names: 'à®šà®¿à®™à¯à®•à®ªà¯à®ªà¯‚à®°à¯, Singapore, Singapura, æ–°åŠ å¡',
     'ru-ru': 'Ð¡Ð¸Ð½Ð³Ð°Ð¿ÑƒÑ€',
     'en-us': 'singapore',
-    'pt-pt': 'singapura',
+    'pt-br': 'singapura',
     'de-de': 'singapur',
     'fr-fr': 'singapour',
     country_code: 'sGP',
@@ -2414,7 +2414,7 @@ const countries = [
     native_names: 'slovensko, Slovakia',
     'ru-ru': 'Ð¡Ð»Ð¾Ð²Ð°ÐºÐ¸Ñ',
     'en-us': 'slovakia',
-    'pt-pt': 'EslovÃ¡quia',
+    'pt-br': 'Eslováquia',
     'de-de': 'slowakei',
     cid: '179',
     'fr-fr': 'slovaquie',
@@ -2428,7 +2428,7 @@ const countries = [
     native_names: 'slovenija, Slovenia',
     'ru-ru': 'Ð¡Ð»Ð¾Ð²ÐµÐ½Ð¸Ñ',
     'en-us': 'slovenia',
-    'pt-pt': 'EslovÃ©nia',
+    'pt-br': 'Eslovênia',
     'de-de': 'slowenien',
     cid: '180',
     'fr-fr': 'slovÃ©nie',
@@ -2442,7 +2442,7 @@ const countries = [
     native_names: 'solomon Islands',
     'ru-ru': 'Ð¡Ð¾Ð»Ð¾Ð¼Ð¾Ð½Ð¾Ð²Ñ‹ ÐžÑÑ‚Ñ€Ð¾Ð²Ð°',
     'en-us': 'solomon Islands',
-    'pt-pt': 'Ilhas SalomÃ£o',
+    'pt-br': 'Ilhas Salomão',
     'de-de': 'salomonen',
     cid: '181',
     'fr-fr': 'ÃŽles Salomon',
@@ -2456,7 +2456,7 @@ const countries = [
     native_names: 'Ø§Ù„ØµÙˆÙ…Ø§Ù„â€Žâ€Ž, Somalia, Soomaaliya',
     'ru-ru': 'Ð¡Ð¾Ð¼Ð°Ð»Ð¸',
     'en-us': 'somalia',
-    'pt-pt': 'somÃ¡lia',
+    'pt-br': 'somália',
     'de-de': 'somalia',
     cid: '182',
     'fr-fr': 'somalie',
@@ -2470,7 +2470,7 @@ const countries = [
     native_names: 'Aforika Borwa, South Africa, Afrika Dzonga, Ningizimu Afrika, Afrika-Borwa, Mzantsi Afrika, Afrika Borwa, Sewula Afrika, Afurika Tshipembe',
     'ru-ru': 'Ð®Ð¶Ð½Ð¾-ÐÑ„Ñ€Ð¸ÐºÐ°Ð½ÑÐºÐ°Ñ Ð ÐµÑÐ¿ÑƒÐ±Ð»Ð¸ÐºÐ°',
     'en-us': 'south Africa',
-    'pt-pt': 'Ãfrica do Sul',
+    'pt-br': 'África do Sul',
     'de-de': 'Republik SÃ¼dafrika',
     cid: '183',
     'fr-fr': 'Afrique du Sud',
@@ -2484,7 +2484,7 @@ const countries = [
     native_names: 'south Georgia',
     'ru-ru': 'Ð®Ð¶Ð½Ð°Ñ Ð“ÐµÐ¾Ñ€Ð³Ð¸Ñ Ð¸ Ð®Ð¶Ð½Ñ‹Ðµ Ð¡Ð°Ð½Ð´Ð²Ð¸Ñ‡ÐµÐ²Ñ‹ Ð¾ÑÑ‚Ñ€Ð¾Ð²Ð°',
     'en-us': 'south Georgia',
-    'pt-pt': 'Ilhas GeÃ³rgia do Sul e Sandwich do Sul',
+    'pt-br': 'Ilhas Geórgia do Sul e Sandwich do Sul',
     'de-de': 'sÃ¼dgeorgien und die SÃ¼dlichen Sandwichinseln',
     cid: '184',
     'fr-fr': 'GÃ©orgie du Sud-et-les ÃŽles Sandwich du Sud',
@@ -2498,7 +2498,7 @@ const countries = [
     native_names: 'ëŒ€í•œë¯¼êµ­, South Korea',
     'ru-ru': 'Ð®Ð¶Ð½Ð°Ñ ÐšÐ¾Ñ€ÐµÑ',
     'en-us': 'south Korea',
-    'pt-pt': 'Coreia do Sul',
+    'pt-br': 'Coreia do Sul',
     'de-de': 'sÃ¼dkorea',
     cid: '185',
     'fr-fr': 'CorÃ©e du Sud',
@@ -2512,7 +2512,7 @@ const countries = [
     native_names: 'south Sudan',
     'ru-ru': 'Ð®Ð¶Ð½Ñ‹Ð¹ Ð¡ÑƒÐ´Ð°Ð½',
     'en-us': 'south Sudan',
-    'pt-pt': 'sudÃ£o do Sul',
+    'pt-br': 'sudão do Sul',
     'de-de': 'sÃ¼dsudan',
     cid: '186',
     'fr-fr': 'soudan du Sud',
@@ -2526,7 +2526,7 @@ const countries = [
     native_names: 'EspaÃ±a, Spain',
     'ru-ru': 'Ð˜ÑÐ¿Ð°Ð½Ð¸Ñ',
     'en-us': 'spain',
-    'pt-pt': 'Espanha',
+    'pt-br': 'Espanha',
     'de-de': 'spanien',
     cid: '187',
     'fr-fr': 'Espagne',
@@ -2540,7 +2540,7 @@ const countries = [
     native_names: 'à®‡à®²à®™à¯à®•à¯ˆ, Sri Lanka, à·à·Šâ€à¶»à·“ à¶½à¶‚à¶šà·à·€',
     'ru-ru': 'Ð¨Ñ€Ð¸-Ð›Ð°Ð½ÐºÐ°',
     'en-us': 'sri Lanka',
-    'pt-pt': 'sri Lanka',
+    'pt-br': 'Siri Lanka',
     'de-de': 'sri Lanka',
     cid: '188',
     'fr-fr': 'sri Lanka',
@@ -2554,7 +2554,7 @@ const countries = [
     native_names: 'Ø§Ù„Ø³ÙˆØ¯Ø§Ù†, Sudan',
     'ru-ru': 'Ð¡ÑƒÐ´Ð°Ð½',
     'en-us': 'sudan',
-    'pt-pt': 'sudÃ£o',
+    'pt-br': 'sudão',
     'de-de': 'sudan',
     cid: '189',
     'fr-fr': 'soudan',
@@ -2568,7 +2568,7 @@ const countries = [
     native_names: 'suriname',
     'ru-ru': 'Ð¡ÑƒÑ€Ð¸Ð½Ð°Ð¼',
     'en-us': 'suriname',
-    'pt-pt': 'suriname',
+    'pt-br': 'suriname',
     'de-de': 'suriname',
     cid: '190',
     'fr-fr': 'surinam',
@@ -2582,7 +2582,7 @@ const countries = [
     native_names: 'swaziland',
     'ru-ru': 'Ð¡Ð²Ð°Ð·Ð¸Ð»ÐµÐ½Ð´',
     'en-us': 'swaziland',
-    'pt-pt': 'suazilÃ¢ndia',
+    'pt-br': 'suazilãndia',
     'de-de': 'swasiland',
     cid: '191',
     'fr-fr': 'swaziland',
@@ -2596,7 +2596,7 @@ const countries = [
     native_names: 'sverige, Sweden',
     'ru-ru': 'Ð¨Ð²ÐµÑ†Ð¸Ñ',
     'en-us': 'sweden',
-    'pt-pt': 'suÃ©cia',
+    'pt-br': 'suécia',
     'de-de': 'schweden',
     cid: '192',
     'fr-fr': 'suÃ¨de',
@@ -2610,7 +2610,7 @@ const countries = [
     native_names: 'svizra, Switzerland, Suisse, Schweiz, Svizzera',
     'ru-ru': 'Ð¨Ð²ÐµÐ¹Ñ†Ð°Ñ€Ð¸Ñ',
     'en-us': 'switzerland',
-    'pt-pt': 'suÃ­Ã§a',
+    'pt-br': 'suíça',
     'de-de': 'schweiz',
     cid: '193',
     'fr-fr': 'suisse',
@@ -2624,7 +2624,7 @@ const countries = [
     native_names: 'Ø³ÙˆØ±ÙŠØ§, Syria',
     'ru-ru': 'Ð¡Ð¸Ñ€Ð¸Ñ',
     'en-us': 'syria',
-    'pt-pt': 'sÃ­ria',
+    'pt-br': 'síria',
     'de-de': 'syrien',
     cid: '194',
     'fr-fr': 'syrie',
@@ -2638,7 +2638,7 @@ const countries = [
     native_names: 'å°ç£, Taiwan',
     'ru-ru': 'Ð¢Ð°Ð¹Ð²Ð°Ð½ÑŒ',
     'en-us': 'Taiwan',
-    'pt-pt': 'Ilha Formosa',
+    'pt-br': 'Taiwan',
     'de-de': 'Taiwan',
     'fr-fr': 'TaÃ¯wan',
     country_code: 'TWN',
@@ -2651,7 +2651,7 @@ const countries = [
     native_names: 'Ð¢Ð°Ð´Ð¶Ð¸ÐºÐ¸ÑÑ‚Ð°Ð½, Tajikistan, Ð¢Ð¾Ò·Ð¸ÐºÐ¸ÑÑ‚Ð¾Ð½',
     'ru-ru': 'Ð¢Ð°Ð´Ð¶Ð¸ÐºÐ¸ÑÑ‚Ð°Ð½',
     'en-us': 'Tajikistan',
-    'pt-pt': 'TajiquistÃ£o',
+    'pt-br': 'Tajiquistão',
     'de-de': 'Tadschikistan',
     cid: '196',
     'fr-fr': 'Tadjikistan',
@@ -2665,7 +2665,7 @@ const countries = [
     native_names: 'Tanzania',
     'ru-ru': 'Ð¢Ð°Ð½Ð·Ð°Ð½Ð¸Ñ',
     'en-us': 'Tanzania',
-    'pt-pt': 'TanzÃ¢nia',
+    'pt-br': 'Tanzânia',
     'de-de': 'Tansania',
     cid: '197',
     'fr-fr': 'Tanzanie',
@@ -2679,7 +2679,7 @@ const countries = [
     native_names: 'à¸›à¸£à¸°à¹€à¸—à¸¨à¹„à¸—à¸¢, Thailand',
     'ru-ru': 'Ð¢Ð°Ð¸Ð»Ð°Ð½Ð´',
     'en-us': 'Thailand',
-    'pt-pt': 'TailÃ¢ndia',
+    'pt-br': 'Tailândia',
     'de-de': 'Thailand',
     cid: '198',
     'fr-fr': 'ThaÃ¯lande',
@@ -2699,7 +2699,7 @@ const countries = [
     'fr-fr': 'Bahamas',
     country_code: 'BHS',
     'es-es': 'Bahamas',
-    'pt-pt': 'Bahamas'
+    'pt-br': 'Bahamas'
   }, {
     'en-gb': 'Togo',
     official_en_name: 'Togolese Republic',
@@ -2707,7 +2707,7 @@ const countries = [
     native_names: 'Togo',
     'ru-ru': 'Ð¢Ð¾Ð³Ð¾',
     'en-us': 'Togo',
-    'pt-pt': 'Togo',
+    'pt-br': 'Togo',
     'de-de': 'Togo',
     cid: '201',
     'fr-fr': 'Togo',
@@ -2721,7 +2721,7 @@ const countries = [
     native_names: 'Tokelau',
     'ru-ru': 'Ð¢Ð¾ÐºÐµÐ»Ð°Ñƒ',
     'en-us': 'Tokelau',
-    'pt-pt': 'Tokelau',
+    'pt-br': 'Tokelau',
     'de-de': 'Tokelau',
     cid: '202',
     'fr-fr': 'Tokelau',
@@ -2735,7 +2735,7 @@ const countries = [
     native_names: 'Tonga',
     'ru-ru': 'Ð¢Ð¾Ð½Ð³Ð°',
     'en-us': 'Tonga',
-    'pt-pt': 'Tonga',
+    'pt-br': 'Tonga',
     'de-de': 'Tonga',
     cid: '203',
     'fr-fr': 'Tonga',
@@ -2749,7 +2749,7 @@ const countries = [
     native_names: 'Trinidad and Tobago',
     'ru-ru': 'Ð¢Ñ€Ð¸Ð½Ð¸Ð´Ð°Ð´ Ð¸ Ð¢Ð¾Ð±Ð°Ð³Ð¾',
     'en-us': 'Trinidad and Tobago',
-    'pt-pt': 'Trinidade e Tobago',
+    'pt-br': 'Trinidade e Tobago',
     'de-de': 'Trinidad und Tobago',
     cid: '204',
     'fr-fr': 'TrinitÃ©-et-Tobago',
@@ -2763,7 +2763,7 @@ const countries = [
     native_names: 'ØªÙˆÙ†Ø³, Tunisia',
     'ru-ru': 'Ð¢ÑƒÐ½Ð¸Ñ',
     'en-us': 'Tunisia',
-    'pt-pt': 'TunÃ­sia',
+    'pt-br': 'Tuní­sia',
     'de-de': 'Tunesien',
     cid: '205',
     'fr-fr': 'Tunisie',
@@ -2777,7 +2777,7 @@ const countries = [
     native_names: 'TÃ¼rkiye, Turkey',
     'ru-ru': 'Ð¢ÑƒÑ€Ñ†Ð¸Ñ',
     'en-us': 'Turkey',
-    'pt-pt': 'Turquia',
+    'pt-br': 'Turquia',
     'de-de': 'TÃ¼rkei',
     cid: '206',
     'fr-fr': 'Turquie',
@@ -2791,7 +2791,7 @@ const countries = [
     native_names: 'Ð¢ÑƒÑ€ÐºÐ¼ÐµÐ½Ð¸Ñ, Turkmenistan, TÃ¼rkmenistan',
     'ru-ru': 'Ð¢ÑƒÑ€ÐºÐ¼ÐµÐ½Ð¸Ñ',
     'en-us': 'Turkmenistan',
-    'pt-pt': 'TurquemenistÃ£o',
+    'pt-br': 'Turcomenistão',
     'de-de': 'Turkmenistan',
     cid: '207',
     'fr-fr': 'TurkmÃ©nistan',
@@ -2805,7 +2805,7 @@ const countries = [
     native_names: 'Turks and Caicos Islands',
     'ru-ru': 'Ð¢ÐµÑ€ÐºÑ Ð¸ ÐšÐ°Ð¹ÐºÐ¾Ñ',
     'en-us': 'Turks and Caicos Islands',
-    'pt-pt': 'Ilhas Turks e Caicos',
+    'pt-br': 'Ilhas Turks e Caicos',
     'de-de': 'Turks-und Caicosinseln',
     cid: '208',
     'fr-fr': 'ÃŽles Turques-et-CaÃ¯ques',
@@ -2819,7 +2819,7 @@ const countries = [
     native_names: 'Tuvalu',
     'ru-ru': 'Ð¢ÑƒÐ²Ð°Ð»Ñƒ',
     'en-us': 'Tuvalu',
-    'pt-pt': 'Tuvalu',
+    'pt-br': 'Tuvalu',
     'de-de': 'Tuvalu',
     cid: '209',
     'fr-fr': 'Tuvalu',
@@ -2833,7 +2833,7 @@ const countries = [
     native_names: 'Uganda',
     'ru-ru': 'Ð£Ð³Ð°Ð½Ð´Ð°',
     'en-us': 'Uganda',
-    'pt-pt': 'Uganda',
+    'pt-br': 'Uganda',
     'de-de': 'Uganda',
     cid: '210',
     'fr-fr': 'Ouganda',
@@ -2847,7 +2847,7 @@ const countries = [
     native_names: 'Ð£ÐºÑ€Ð°Ñ—Ð½Ð°, Ukraine',
     'ru-ru': 'Ð£ÐºÑ€Ð°Ð¸Ð½Ð°',
     'en-us': 'Ukraine',
-    'pt-pt': 'UcrÃ¢nia',
+    'pt-br': 'Ucrânia',
     'de-de': 'Ukraine',
     cid: '211',
     'fr-fr': 'Ukraine',
@@ -2861,7 +2861,7 @@ const countries = [
     native_names: 'Ø¯ÙˆÙ„Ø© Ø§Ù„Ø¥Ù…Ø§Ø±Ø§Øª Ø§Ù„Ø¹Ø±Ø¨ÙŠØ© Ø§Ù„Ù…ØªØ­Ø¯Ø©, United Arab Emirates',
     'ru-ru': 'ÐžÐ±ÑŠÐµÐ´Ð¸Ð½Ñ‘Ð½Ð½Ñ‹Ðµ ÐÑ€Ð°Ð±ÑÐºÐ¸Ðµ Ð­Ð¼Ð¸Ñ€Ð°Ñ‚Ñ‹',
     'en-us': 'United Arab Emirates',
-    'pt-pt': 'Emirados Ãrabes Unidos',
+    'pt-br': 'Emirados Árabes Unidos',
     'de-de': 'Vereinigte Arabische Emirate',
     cid: '212',
     'fr-fr': 'Ã‰mirats arabes unis',
@@ -2875,7 +2875,7 @@ const countries = [
     native_names: 'United Kingdom',
     'ru-ru': 'Ð’ÐµÐ»Ð¸ÐºÐ¾Ð±Ñ€Ð¸Ñ‚Ð°Ð½Ð¸Ñ',
     'en-us': 'United Kingdom',
-    'pt-pt': 'Reino Unido',
+    'pt-br': 'Reino Unido',
     'de-de': 'Vereinigtes KÃ¶nigreich',
     cid: '213',
     'fr-fr': 'Royaume-Uni',
@@ -2889,7 +2889,7 @@ const countries = [
     native_names: 'United States',
     'ru-ru': 'Ð¡Ð¾ÐµÐ´Ð¸Ð½Ñ‘Ð½Ð½Ñ‹Ðµ Ð¨Ñ‚Ð°Ñ‚Ñ‹ ÐÐ¼ÐµÑ€Ð¸ÐºÐ¸',
     'en-us': 'United States',
-    'pt-pt': 'Estados Unidos',
+    'pt-br': 'Estados Unidos',
     'de-de': 'Vereinigte Staaten von Amerika',
     cid: '214',
     'fr-fr': 'Ã‰tats-Unis',
@@ -2903,7 +2903,7 @@ const countries = [
     native_names: 'Uruguay',
     'ru-ru': 'Ð£Ñ€ÑƒÐ³Ð²Ð°Ð¹',
     'en-us': 'Uruguay',
-    'pt-pt': 'Uruguai',
+    'pt-br': 'Uruguai',
     'de-de': 'Uruguay',
     cid: '215',
     'fr-fr': 'Uruguay',
@@ -2917,7 +2917,7 @@ const countries = [
     native_names: 'Ð£Ð·Ð±ÐµÐºÐ¸ÑÑ‚Ð°Ð½, Uzbekistan, Oâ€˜zbekiston',
     'ru-ru': 'Ð£Ð·Ð±ÐµÐºÐ¸ÑÑ‚Ð°Ð½',
     'en-us': 'Uzbekistan',
-    'pt-pt': 'UzbequistÃ£o',
+    'pt-br': 'Uzbequistão',
     'de-de': 'Usbekistan',
     cid: '216',
     'fr-fr': 'OuzbÃ©kistan',
@@ -2931,7 +2931,7 @@ const countries = [
     native_names: 'Vanuatu',
     'ru-ru': 'Ð’Ð°Ð½ÑƒÐ°Ñ‚Ñƒ',
     'en-us': 'Vanuatu',
-    'pt-pt': 'Vanuatu',
+    'pt-br': 'Vanuatu',
     'de-de': 'Vanuatu',
     cid: '217',
     'fr-fr': 'Vanuatu',
@@ -2945,7 +2945,7 @@ const countries = [
     native_names: 'VaticanÃ¦, Vatican City, Vaticano',
     'ru-ru': 'Ð’Ð°Ñ‚Ð¸ÐºÐ°Ð½',
     'en-us': 'Vatican City',
-    'pt-pt': 'Cidade do Vaticano',
+    'pt-br': 'Cidade do Vaticano',
     'de-de': 'Vatikanstadt',
     cid: '218',
     'fr-fr': 'CitÃ© du Vatican',
@@ -2959,7 +2959,7 @@ const countries = [
     native_names: 'Venezuela',
     'ru-ru': 'Ð’ÐµÐ½ÐµÑÑƒÑÐ»Ð°',
     'en-us': 'Venezuela',
-    'pt-pt': 'Venezuela',
+    'pt-br': 'Venezuela',
     'de-de': 'Venezuela',
     cid: '219',
     'fr-fr': 'Venezuela',
@@ -2973,7 +2973,7 @@ const countries = [
     native_names: 'Viá»‡t Nam, Vietnam',
     'ru-ru': 'Ð’ÑŒÐµÑ‚Ð½Ð°Ð¼',
     'en-us': 'Vietnam',
-    'pt-pt': 'Vietname',
+    'pt-br': 'Vietname',
     'de-de': 'Vietnam',
     cid: '220',
     'fr-fr': 'ViÃªt Nam',
@@ -2987,7 +2987,7 @@ const countries = [
     native_names: 'Ø§Ù„ÙŠÙŽÙ…ÙŽÙ†, Yemen',
     'ru-ru': 'Ð™ÐµÐ¼ÐµÐ½',
     'en-us': 'Yemen',
-    'pt-pt': 'IÃ©men',
+    'pt-br': 'Iêmen',
     'de-de': 'Jemen',
     cid: '221',
     'fr-fr': 'YÃ©men',
@@ -3001,7 +3001,7 @@ const countries = [
     native_names: 'Zambia',
     'ru-ru': 'Ð—Ð°Ð¼Ð±Ð¸Ñ',
     'en-us': 'Zambia',
-    'pt-pt': 'ZÃ¢mbia',
+    'pt-br': 'Zâmbia',
     'de-de': 'sambia',
     cid: '222',
     'fr-fr': 'Zambie',
@@ -3015,7 +3015,7 @@ const countries = [
     native_names: 'Zimbabwe',
     'ru-ru': 'Ð—Ð¸Ð¼Ð±Ð°Ð±Ð²Ðµ',
     'en-us': 'Zimbabwe',
-    'pt-pt': 'Zimbabwe',
+    'pt-br': 'Zimbabwe',
     'de-de': 'simbabwe',
     cid: '223',
     'fr-fr': 'Zimbabwe',

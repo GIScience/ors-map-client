@@ -2,15 +2,9 @@
 export default {
   routeDetails: {
     routeSummary: 'Route summary',
-    distance: 'Distance',
-    duration: 'Duration',
     warnings: 'Warnings',
     routes: 'Routes',
     route: 'Route',
-    days: 'D',
-    hours: 'hr',
-    minutes: 'min',
-    seconds: 'sec',
     segments: 'Segments',
     segment: 'Segment',
     instructions: 'Instructions',
@@ -18,6 +12,12 @@ export default {
     name: 'Name',
     selectRoute: 'Select this route',
     selectedRoute: 'Selected route',
-    gotoSegment: 'Go to segment'
+    gotoSegment: 'Go to segment',
+    warningCodes: {
+      1: 'There may be restrictions on some roads',
+      2: 'There are tollways along the route',
+      3: 'There are skipped segments along the route. Durations and accessibility may not be correct',
+      4: 'At least one extra info requested but it is not available',
+    }
   }
 }

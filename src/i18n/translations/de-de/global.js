@@ -17,6 +17,9 @@ export default {
     polygon: 'Polygon',
     developedByIntro: 'Services entwickelt von',
     developedBy: 'Heidelberg Institute for Geoinformation Technology',
+    duration: 'Dauer: ',
+    distance: 'Entfernung: ',
+    elevation: 'Höhe',
     months: {
       january: 'Januar',
       february: 'Februar',
@@ -52,7 +55,9 @@ export default {
       meters: 'Meter',
       seconds: 'sek',
       minutes: 'min',
-      hours: 'h'
+      hours: 's',
+      days: 't',
+      minutes: 'min',
     },
     layers: {
       macrocounty: 'Macro county',

@@ -596,7 +596,7 @@ export default {
         if (profileLabel !== profileLabeKey) {
           message += ` ${this.$t('placesAndDirections.for')} <b>${profileLabel}</b>`
         }
-        const routeInfo = `${this.$t('placesAndDirections.distance')} ${humanizedData.distance} ${this.$t('global.and')} ${this.$t('placesAndDirections.duration')} ${humanizedData.duration}`
+        const routeInfo = `${this.$t('global.distance')} ${humanizedData.distance} ${this.$t('global.and')} ${this.$t('global.duration')} ${humanizedData.duration}`
         message = `${message} - ${routeInfo.toLowerCase()}`
       }
       return message

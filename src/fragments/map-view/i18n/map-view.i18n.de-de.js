@@ -1,12 +1,5 @@
 export default {
   mapView: {
-    duration: 'Dauer: ',
-    distance: 'Entfernung: ',
-    days: 'd',
-    hours: 'h',
-    minutes: 'min',
-    seconds: 'sek',
-    meters: 'Meter',
     routeTo: 'Route hierher',
     polygonDetails: 'Polygon details',
     polygon: 'Polygon',
@@ -29,7 +22,6 @@ export default {
       permissionDenied: 'Ihre Position konnte nicht erfasst werden, da der Browser / das Gerät den Zugriff darauf verweigert hat. Sie können es erneut versuchen, indem Sie die Browser- / Geräteeinstellungen ändern und dann erneut auf den "Mein Standort" Button klicken',
       timeout: 'Ihr Browser/Gerät hat beim Versuch, ihre Position zu finden, "Timeout" zurückgegeben. Sie können es erneut versuchen, indem Sie auf den "Mein Standort" Button klicken'
     },
-    couldNotDetermineYourPreciseLocationUsingIpLocation: 'Es war nicht möglich, Ihren Standort zu bestimmen. Stattdessen wird Ihr IP-basierter Standort verwendet',
     yourCurrentLocation: 'Mein Standort',
     options: 'Optionen',
     polylineMeasure: {
@@ -67,14 +59,12 @@ export default {
     youCanCenterAtYourLocationLater: 'Sie können die Karte jederzeit auf Ihren aktuellen Standort zentrieren, indem Sie auf die Schaltfläche "Mein Standort" klicken',
     yourLocation: 'Meinen Standort nutzen',
     setMyLocationasMapCenter: 'Möchten Sie die Karte an Ihrem aktuellen Standort zentrieren? Dies verbessert die Genauigkeit der Ortssuche. Sie müssen es autorisieren, wenn Sie dazu aufgefordert werden.',
-    youCanReverseTheNeverInSettigns: 'Sie können Ihre Entscheidung zu Ihrem Standort jederzeit in den Einstellungen ändern',
-    mapCenterWillBeAtAGenericLocation: 'Basierend auf Ihren Einstellungen wird die Karte an einem allgemeinen Ort zentriert. Die Suchergebnisse berücksichtigen das Kartenzentrum.',
     removePlace: 'Ort löschen',
     viewOnORS: 'In ORS anzeigen',
-    moveMapPositionToLeft: 'karteNachLinksBewegen',
-    moveMapPositionToRight: 'karteNachRechtsBewegen',
-    moveMapPositionToUp: 'karteNachObenBewegen',
-    moveMapPositionToDown: 'karteNachUntenBewegen',
+    moveMapPositionToLeft: 'Karte nach Links bewegen',
+    moveMapPositionToRight: 'Karte nach Rechts bewegen',
+    moveMapPositionToUp: 'harte nach oben bewegen',
+    moveMapPositionToDown: 'karte nach unten bewegen',
     toggleDirect: 'Direkter Weg (Luftlinie) zu nächstem Punkt an/aus',
     heightGraph: {
       distance: "Entfernung",

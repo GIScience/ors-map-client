@@ -23,7 +23,7 @@ export default {
     noPlaceFound: 'No results returned',
     unknownSearchPlaceError: 'Unknown place search error',
     approximateDistance: 'Approximate distance in a straight line from current map center',
-    couldNotDetermineYourPreciseLocationUsingIpLocation: 'It was not possible to determine your precise location. Your IP based location will be used instead',
+    couldNotDetermineYourPreciseLocationUsingPreviousLocation: 'It was not possible to determine your precise location. Your previous location will be used instead',
     pleaseTypeSomething: 'Please type something to search',
     toggleDirect: 'Toggle direct from here until next place'
   }

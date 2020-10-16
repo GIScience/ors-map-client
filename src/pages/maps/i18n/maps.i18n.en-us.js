@@ -11,13 +11,6 @@ export default {
     turnOnAcessibleMode: 'Turn on acessible mode',
     about: 'About ORS',
     updateSearch: 'Search this area',
-    updateSearchAfterZoomOrCenterChange: 'Update search after zoom or center change',
-    mapDataTranslations: {
-      days: 'd',
-      hours: 'h',
-      minutes: 'min',
-      seconds: 'sec',
-      meters: 'meters'
-    }
+    updateSearchAfterZoomOrCenterChange: 'Update search after zoom or center change'
   }
 }

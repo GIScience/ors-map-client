@@ -18,7 +18,7 @@ export default {
     termsOfService: 'Terms of Service',
     privacyPolicy: 'Privacy Policy',
     openStreetMapOrg: 'OpenStreetMap.org',
-    infoSupport: 'Please Support openrouteservice.org',
+    infoSupport: 'Please support openrouteservice.org',
     supportText: 'Openrouteservice offers free services and relies on donations for a majority of its funding. If you would like to support the further development of features and server infrastructure donations are very welcome.',
     softwareAndLibraries: 'Software & Libraries'
   }

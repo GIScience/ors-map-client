@@ -23,7 +23,7 @@ export default {
     noPlaceFound: 'Keine Orte gefunden',
     unknownSearchPlaceError: 'Unbekannter Fehler beim Suchen',
     approximateDistance: 'Ungefähre Entfernung in einer geraden Linie vom aktuellen Kartenzentrum',
-    couldNotDetermineYourPreciseLocationUsingIpLocation: 'Es war nicht möglich, Ihren Standort zu bestimmen. Stattdessen wird Ihr IP-basierter Standort verwendet',
+    couldNotDetermineYourPreciseLocationUsingPreviousLocation: 'Es war nicht möglich, Ihren Standort zu bestimmen. Ihr bisheriger Standort wird stattdessen verwendet.',
     pleaseTypeSomething: 'Bitte geben Sie etwas ein, um zu suchen',
     toggleDirect: 'Direkter Weg (Luftlinie) zu nächstem Punkt an/aus'
   }

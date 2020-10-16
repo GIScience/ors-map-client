@@ -251,20 +251,6 @@ export default {
     },
 
     /**
-     * Defines the place input values at the given index based in the browser location api
-     * It will requires the users' authorization to access the browser location. Id denied
-     * will show a toaster with an error message
-     * @param {*} location
-     */
-    setLocationFromBrowser (location) {
-      const place = new Place(location.lon, location.lat, this.$t('simplePlaceSearch.yourLocation'))
-      place.seFromBrowser(true)
-      place.seSkipShowData(true)
-      this.myLocation = true
-      this.updateAppRoute()
-    },
-
-    /**
      * Search a place by name
      *
      */

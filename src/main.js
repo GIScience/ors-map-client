@@ -5,7 +5,7 @@ import Vue from '@/common/vue-with-vuetify.js'
 import App from '@/App'
 import router from '@/router'
 import store from '@/store/store'
-import I18nLoader from '@/i18n/i18n-loader'
+import I18nBuilder from '@/i18n/i18n-builder'
 import topBorder from '@/directives/top-border'
 import title from '@/directives/title'
 import focus from '@/directives/focus'
@@ -82,7 +82,7 @@ Vue.filter('capitalize', capitalize)
 let VueInstance = null
 
 AppLoader.load().then(() => {
-  let i18n = I18nLoader.get()
+  let i18n = I18nBuilder.build()
 
   // In some previous version of this app the `en` locale was stored as `en-us`
   let locale = store.getters.mapSettings.locale === 'en' ? 'en-us' : store.getters.mapSettings.locale

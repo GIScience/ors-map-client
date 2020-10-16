@@ -1,5 +1,6 @@
 
 import dependencyService from '@/support/dependency-service.js'
+import defaultMapSettings from '@/resources/default-map-settings'
 
 export default {
   props: {
@@ -281,21 +282,47 @@ export default {
             for (const itemKey in item) {
               item[itemKey] = item[itemKey].toString()
             }
-            let itemText = item[this.$store.getters.mapSettings.locale] || item[this.$store.getters.defaultMapSettings.locale]
+            var itemText = item[this.$store.getters.mapSettings.locale] || item[defaultMapSettings.locale]  
             item.itemText = itemText
             item.itemValue = item[parameter.itemValue]
-          } else {
-            let filterTranslKey = `orsMapFilters.filters.${parameter.name}.enum.${item}`
-            let itemText = this.$t(filterTranslKey)
+          } else { // item is not an object, but a simple value
             let itemObj = {
               itemValue: item,
-              itemText: itemText
+              itemText: this.getItemTranslation(item, parameter)
             }
             items[key] = itemObj          
           }
         }
       }
       return items
+    },
+
+    /**
+     * Get item translation by item value
+     * @param {String} itemValue 
+     * @returns {String}
+     */
+    getItemTranslation (itemValue, parameter) {
+      var translation = itemValue
+
+      // if the value is not a number, find the translation
+      if(isNaN(itemValue)) {
+
+        // The translation can be either in the ors map filters translation
+        // or in the global ors dictionary translation
+
+        // try first the orsMapFilters
+        let translationObject = this.$t(`orsMapFilters.filters.${parameter.name}`)
+        if (translationObject.enum && translationObject.enum[itemValue]) {
+          translation = translationObject.enum[itemValue]
+        } else { // fall back to orsDictionary
+          let dicObj = this.$t('orsDictionary')
+          translation = dicObj[itemValue]
+        }
+      } else { // if it is a number, then do not translate it
+        translation = itemValue
+      }
+      return translation
     },
 
     /**

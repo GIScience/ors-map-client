@@ -1,23 +1,16 @@
 
 export default {
   maps: {
-    pageTitle: 'ORS Maps',
-    Places: 'Places',
-    isochrones: 'Isochrones',
-    searchPlace: 'Find a place on ORS',
-    placeNameRequired: 'Place name required',
-    altitude: 'Altitude variation',
-    settings: 'Settings',
-    turnOnAcessibleMode: 'Turn on acessible mode',
-    about: 'About ORS',
-    updateSearch: 'Search this area',
-    updateSearchAfterZoomOrCenterChange: 'Update search after zoom or center change',
-    mapDataTranslations: {
-      days: 'd',
-      hours: 'h',
-      minutes: 'min',
-      seconds: 'sec',
-      meters: 'meters'
-    }
+    pageTitle: 'Ors Maps',
+    Places: 'Orte',
+    isochrones: 'Isochronen',
+    searchPlace: 'Suche einen Ort auf ',
+    placeNameRequired: 'Ortsangabe benötigt',
+    altitude: 'Höhenänderung',
+    settings: 'Einstellungen',
+    turnOnAcessibleMode: 'Barrierefreien Modus aktivieren',
+    about: 'Über ors',
+    updateSearch: 'Suche in dieser Gegend',
+    updateSearchAfterZoomOrCenterChange: 'Suche nach Kartenbewegung aktualisieren'
   }
 }

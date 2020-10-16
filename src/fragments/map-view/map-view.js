@@ -45,6 +45,7 @@ import MapViewData from '@/models/map-view-data'
 import drawLocales from 'leaflet-draw-locales'
 import mapDefinitions from './map-definitions'
 import constants from '@/resources/constants'
+import I18nBuilder from '@/i18n/i18n-builder'
 import GeoUtils from '@/support/geo-utils'
 import utils from '@/support/utils'
 import theme from '@/common/theme'
@@ -234,7 +235,7 @@ export default {
      * @returns {Boolean}
      */
     showBrand () {
-      return this.currentInnerHeight > 450
+      return this.mapHeight > 450
     },
     /**
      * Buil and return the geojson options based on the
@@ -500,6 +501,12 @@ export default {
      * @returns {Object}
      */
     lHeightGraphOptions () {
+      // distance: "Distance",
+      // elevation: "Elevation",
+      // segment_length: "Segment length",
+      // type: "Type",
+      // legend: "Legend"
+
       let mappings = undefined
       let activRoute = this.localMapViewData.routes[this.$store.getters.activeRouteIndex]
       let heightGraphTranslations = this.$t('mapView.heightGraph')
@@ -529,7 +536,7 @@ export default {
           }
         }
       }
-      let options = { parser: 'ors', mappings: mappings, translations: heightGraphTranslations }
+      let options = { parser: 'ors', mappings: mappings, translation: heightGraphTranslations }
       return options
     }
   },
@@ -1310,8 +1317,8 @@ export default {
      */
     humanizeRouteToolTip (tooltipData) {
       if (tooltipData && typeof tooltipData === 'object' && tooltipData.distance && tooltipData.unit && tooltipData.duration) {
-        const humanizedData = GeoUtils.getHumanizedTimeAndDistance(tooltipData, this.$t('mapView'))
-        const formattedTooltip = `${this.$t('mapView.distance')} ${humanizedData.distance}<br>${this.$t('mapView.duration')} ${humanizedData.duration}`
+        const humanizedData = GeoUtils.getHumanizedTimeAndDistance(tooltipData, this.$t('global.units'))
+        const formattedTooltip = `${this.$t('global.distance')} ${humanizedData.distance}<br>${this.$t('global.duration')} ${humanizedData.duration}`
         return formattedTooltip
       }
     },
@@ -1436,7 +1443,8 @@ export default {
 
         // Tell the leaflet drawing locale to use the current app locale
         // check the locales supported here: https://github.com/DenisCarriere/Leaflet.draw.locales
-        const locale = drawLocales(this.$i18n.locale)
+        let shortLocale = I18nBuilder.getShortLocale(this.$i18n.locale)
+        const locale = drawLocales(shortLocale)
 
         // Override the tooltip message
         locale.draw.toolbar.buttons.polygon = this.$t('mapView.defineAvoidPolygon')

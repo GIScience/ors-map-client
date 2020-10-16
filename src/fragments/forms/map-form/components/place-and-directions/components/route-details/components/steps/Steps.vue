@@ -11,7 +11,7 @@
         </div>
         <div v-else class="arrived" ><v-icon color="success">place</v-icon> <span   v-html="step.instruction"></span></div>
       </template>
-      <div v-if="step.distance">{{$t('steps.distance')}}:  <b>{{step.distance}} </b></div>
+      <div v-if="step.distance">{{$t('global.distance')}}:  <b>{{step.distance}} </b></div>
       <div v-if="step.duration"> <v-icon small>access_time</v-icon> <b>{{step.duration}} </b></div>
     </div>
   </div>

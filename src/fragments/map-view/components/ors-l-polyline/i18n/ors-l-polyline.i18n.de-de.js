@@ -1,10 +1,7 @@
 
 export default {
   orsLPolyline: {
-    distance: 'Distanz',
-    elevation: 'Höhe',
-    type: 'Typ',
-    meters: 'm',
+    type: 'Type',
     surface: 'Oberfläche',
     unknownSurfaceType: 'Unbekannt'
   }

@@ -5,7 +5,7 @@ import loader from '@/support/loader'
  * Fetch required api data to run the app
  */
 const build = () => {
-  // EN LANGUAGE
+  // DE LANGUAGE
 
   let translationsObj = global
 

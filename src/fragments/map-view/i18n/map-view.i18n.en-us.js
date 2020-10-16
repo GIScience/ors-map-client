@@ -1,12 +1,5 @@
 export default {
   mapView: {
-    duration: 'Duration: ',
-    distance: 'Distance: ',
-    days: 'd',
-    hours: 'h',
-    minutes: 'min',
-    seconds: 'sec',
-    meters: 'meters',
     routeTo: 'Route to this place',
     polygonDetails: 'Polygon details',
     polygon: 'Polygon',
@@ -29,7 +22,6 @@ export default {
       permissionDenied: 'Your position could not be acquired because the browser/device denied access to it. You can retry it by changing the browser/device settings and then click again on the "my position button"',
       timeout: 'Your browser/device returned "timeout" while trying to acquire a position. You can retry it by clicking on the "my position button"'
     },
-    couldNotDetermineYourPreciseLocationUsingIpLocation: 'It was not possible to determine your precise location. Your IP based location will be used instead',
     yourCurrentLocation: 'Your current location',
     options: 'Options',
     polylineMeasure: {
@@ -43,7 +35,7 @@ export default {
       measureControlTitleOff: 'Turn off distance measurement',
       unitControlTitle: {
         text: 'Change Units',
-        metres: 'metres',
+        metres: 'meters',
         landmiles: 'land miles',
         nauticalmiles: 'nautical miles'
       },
@@ -67,14 +59,12 @@ export default {
     youCanCenterAtYourLocationLater: 'You can center the map at your current location at any time by clicking on "my location" button',
     yourLocation: 'Use your location',
     setMyLocationasMapCenter: 'Do you want to center the map at your current location? This will improve place search precision. You will have to authorize it if prompted.',
-    youCanReverseTheNeverInSettigns: 'You can reverse the "don`t ask my location" at any time in settings',
-    mapCenterWillBeAtAGenericLocation: 'Based on your settings the map is centered at a generic location. The search results consider the map center.',
     removePlace: 'Remove place',
     viewOnORS: 'View on ORS',
-    moveMapPositionToLeft: 'moveMapPositionToLeft',
-    moveMapPositionToRight: 'moveMapPositionToRight',
-    moveMapPositionToUp: 'moveMapPositionToUp',
-    moveMapPositionToDown: 'moveMapPositionToDown',
+    moveMapPositionToLeft: 'Move map center to the left',
+    moveMapPositionToRight: 'Move map center to the right',
+    moveMapPositionToUp: 'Move map center up',
+    moveMapPositionToDown: 'Move map center down',
     toggleDirect: 'Toggle direct from here until next place',
     heightGraph: {
       distance: "Distance",

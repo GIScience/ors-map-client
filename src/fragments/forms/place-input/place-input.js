@@ -549,7 +549,7 @@ export default {
         // if so, use the ip based location to resolve the broser location
         if (context.$store.getters.currentLocation) {
           setPlace(context.$store.getters.currentLocation)
-          context.showWarning(context.$t('placeInput.couldNotDetermineYourPreciseLocationUsingIpLocation'))
+          context.showWarning(context.$t('placeInput.couldNotDetermineYourPreciseLocationUsingPreviousLocation'))
         } else {
           console.log(error)
           this.showError(this.$t('placeInput.couldNotDetermineYourLocation'))
