@@ -120,13 +120,15 @@ const checkAndSetEmbedState = () => {
     let isEmbed = location.href.indexOf('/embed') > -1
     store.commit('embed', isEmbed)
 
-    if (isEmbed && routeTo.params.locale ) {
+    let parts = location.href.split('/embed/')
+    if (isEmbed && Array.isArray(parts) && parts.length > 1 && parts[1] ) {
+      let locale = parts[1]
       let validLocales = settingsOptions.appLocales
-      let localeSupported = lodash.find(validLocales, ['value', routeTo.params.locale])
+      let localeSupported = lodash.find(validLocales, ['value', locale])
 
       if (lodash.isObject(localeSupported)) {
         let settings = store.getters.mapSettings
-        settings.locale = routeTo.params.locale
+        settings.locale = locale
         store.commit('mapSettings', settings)      
       }
     }
