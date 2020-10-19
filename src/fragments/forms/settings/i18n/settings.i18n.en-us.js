@@ -43,6 +43,8 @@ export default {
     prioritizeSearchingForNearbyPlaces: 'Prioritize searching for nearby places',
     defaultProfile: 'Default profile',
     compressDataUrlSegment: 'Compress URL segment after /data/',
-    autoFitHighlightedBounds: 'Auto fit highlighted bounds'
+    autoFitHighlightedBounds: 'Auto fit highlighted bounds',
+    reloadToApplyLanguageChangeTitle: 'It is necessary to reload the app',
+    reloadToApplyLanguageChangeText: 'In order to fully apply the language change it is necessary to reload the app. Reload now?'
   }
 }

@@ -49,7 +49,14 @@ export default {
           delete savingSettings.apiKey
         }
         localStorage.setItem('mapSettings', JSON.stringify(savingSettings))
-        this.$i18n.locale = savingSettings.locale
+        if (this.$i18n.locale !== savingSettings.locale) {
+          this.$i18n.locale = savingSettings.locale
+          this.confirmDialog(this.$t('settings.reloadToApplyLanguageChangeTitle'), this.$t('settings.reloadToApplyLanguageChangeText')).then((result) => {
+            if (result) {
+              window.location.reload()
+            }
+          })
+        }
       }
       // Dispatch an event about the locale change
       this.eventBus.$emit('localeChanged', this.mapSettingsTransient.locale)
