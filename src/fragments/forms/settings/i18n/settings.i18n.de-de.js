@@ -43,6 +43,8 @@ export default {
     prioritizeSearchingForNearbyPlaces: 'Ortssuche priorisiert nahe Orte',
     defaultProfile: 'Standard Profil',
     compressDataUrlSegment: 'URL Segment hinter /data/ komprimieren',
-    autoFitHighlightedBounds: 'Auto-Zoom zu selektiertem Wegabschnitt'
+    autoFitHighlightedBounds: 'Auto-Zoom zu selektiertem Wegabschnitt',
+    reloadToApplyLanguageChangeTitle: 'App muss neu geladen werden',
+    reloadToApplyLanguageChangeText: 'Um die Sprache komplett umzustellen, muss die App neu geladen werden. Jetzt neu laden?'
   }
 }
