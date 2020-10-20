@@ -99,16 +99,12 @@
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-flex>
-          <v-flex sm1 class="txt-right top-15" v-if="parameter.type !== constants.filterTypes.wrapper">
-            <v-tooltip left>
-              <v-icon @click="infoDialog(buildLabel(parameter), buildDescription(parameter), {markdown: true, resizable: true})"
-                class="pointer" slot="activator">help
-              </v-icon>
-              <span v-html="$t('formFields.fieldHelp')"></span>
-            </v-tooltip>
+          <v-flex sm1 class="txt-right top-15" v-if="parameter.type !== constants.filterTypes.wrapper">           
+            <v-btn :title="buildDescription(parameter)" flat icon class="help-btn" @click="infoDialog(buildLabel(parameter), buildDescription(parameter), {markdown: true, resizable: true})">
+              <v-icon class="pointer">help</v-icon>
+            </v-btn>        
           </v-flex>
         </v-layout>
-
       </template>
     </template>
     <dialog-fields v-if="subPropsModalActive" :is-modal=true :title="subPropsModalTitle" :sub-props-index="subPropsModalIndex"
