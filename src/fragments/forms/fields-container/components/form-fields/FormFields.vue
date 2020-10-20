@@ -92,7 +92,7 @@
 
             <v-expansion-panel v-else-if="parameter.type === constants.filterTypes.wrapper" :value="showPanelExpanded(parameter)" class="fields-panel">
               <v-expansion-panel-content style="background: transparent">
-                <div slot="header"><h4>{{parameter.label}}</h4></div>
+                <div slot="header"><h4>{{buildLabel(parameter)}}</h4></div>
                 <template>
                   <form-fields :level="level + 1" :parent-index="index" :parameters="parameter.props" @fieldUpdated="fieldUpdated"></form-fields>
                 </template>
