@@ -88,12 +88,12 @@ export default {
         description: 'A random seed to use for adding randomisation to the generated route (min:0, max: 90)'
       },
       avoid_polygons: {
-        label: 'Avoid features',
-        description: 'Avoid features'
+        label: 'Avoid polygons',
+        description: 'Avoid polygons'
       },
       avoid_features: {
-        label: 'Avoid polygons',
-        description: 'Avoid polygons',
+        label: 'Avoid features',
+        description: 'Avoid features',
         enum: {
           'highways': 'Highways',
           'tollways': 'Tollways',

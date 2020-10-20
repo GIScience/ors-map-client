@@ -88,19 +88,19 @@ export default {
         description: 'Uma semente aleatória a ser utilizada para adicionar aleatoriedade à rota gerada (min:0, max: 90)'
       },
       avoid_polygons: {
-        label: 'Elementos a evitar',
-        description: 'Elementos a evitar'
+        label: 'Polígonos a evitar',
+        description: 'Polígonos a evitar'
       },
       avoid_features: {
-        label: 'Polígonos a evitar',
-        description: 'Polígonos a evitar',
+        label: 'Elementos a evitar',
+        description: 'Elementos a evitar',
         enum: {
           'highways': 'Auto-estradas',
           'tollways': 'Pedágios',
           'ferries': 'Ferries',
           'tunnels': 'Túneis',
           'fords': 'Vau',
-          'steps': 'Degrais',
+          'steps': 'Escadaria',
         }
       },
       avoid_borders: {
