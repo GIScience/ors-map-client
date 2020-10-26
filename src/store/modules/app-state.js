@@ -56,6 +56,7 @@ const mutations = {
 const actions = {
   saveSettings ({ commit }, savingSettings) {
     return new Promise((resolve) => {
+      localStorage.removeItem('mapSettings')
       const defaultSettings = defaultMapSettings
 
       // The apiKey must not be saved if it is the default one (only if is a custom one)

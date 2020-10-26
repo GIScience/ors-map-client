@@ -43,10 +43,9 @@ export default {
   },
   methods: {
     save () {
-      this.$store.commit('mapSettings', this.mapSettingsTransient)
-      localStorage.removeItem('mapSettings')
       if (this.mapSettingsTransient.saveToLocalStorage) {
         let context = this
+        var savingSettings = utils.clone(this.mapSettingsTransient)
         this.$store.dispatch('saveSettings', savingSettings).then(() => {
           if (context.$i18n.locale !== savingSettings.locale) {
             context.$i18n.locale = savingSettings.locale
