@@ -23,6 +23,7 @@ export default {
       reverseGeocode: 'Geocode reverse'
     },
     apiKey: 'API key',
+    customApiKey: 'Custom API key',
     apiBaseUrl: 'API base URL',
     invalidSettingsValue: 'Invalid settings value(s). Please check the fields or restore default values',
     restoreDefaults: 'Restore defaults',

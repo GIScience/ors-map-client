@@ -23,6 +23,7 @@ export default {
       reverseGeocode: 'Geocódigo reverso'
     },
     apiKey: 'chave da API',
+    customApiKey: 'Chave da API personalizada',
     apiBaseUrl: 'URL base da API',
     invalidSettingsValue: 'Valor(es) de configuração inválido(s). Por favor, verifique os campos ou restaure os valores padrão',
     restoreDefaults: 'Restaurar padrões',
