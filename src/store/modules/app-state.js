@@ -1,4 +1,6 @@
 import constants from '@/resources/constants'
+import defaultMapSettings from '@/resources/default-map-settings'
+import utils from '@/support/utils'
 
 const state = {
   mode: constants.modes.place,
@@ -52,6 +54,19 @@ const mutations = {
 }
 
 const actions = {
+  saveSettings ({ commit }, savingSettings) {
+    return new Promise((resolve) => {
+      const defaultSettings = defaultMapSettings
+
+      // The apiKey must not be saved if it is the default one (only if is a custom one)
+      if (savingSettings.apiKey === defaultSettings.apiKey || savingSettings.apiKey === '' || savingSettings.apiKey === null) {
+        delete savingSettings.apiKey
+      }
+      commit('mapSettings', savingSettings)
+      localStorage.setItem('mapSettings', JSON.stringify(savingSettings))
+      resolve(savingSettings)
+    })
+  }
 }
 
 export default {

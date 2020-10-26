@@ -12,7 +12,8 @@ export default {
     },
     appLocales: [],
     availableUnits: [],
-    availableAreaUnits: []
+    availableAreaUnits: [],
+    customApiKey: false,
   }),
   computed: {
     routingLocales () {
@@ -35,6 +36,9 @@ export default {
         options.push({value: itemVal, text: this.$t('orsMapFilters.profiles.' + itemVal)})
       }
       return options
+    },
+    apiKeyLabel () {
+      return this.customApiKey == true ? this.$t('settings.customApiKey') : this.$t('settings.apiKey')
     }
   },
   methods: {
@@ -42,21 +46,17 @@ export default {
       this.$store.commit('mapSettings', this.mapSettingsTransient)
       localStorage.removeItem('mapSettings')
       if (this.mapSettingsTransient.saveToLocalStorage) {
-        const savingSettings = utils.clone(this.mapSettingsTransient)
-
-        // The apiKey must not be saved if is the default one (if is not a custom one)
-        if (savingSettings.apiKey === defaultMapSettings.apiKey) {
-          delete savingSettings.apiKey
-        }
-        localStorage.setItem('mapSettings', JSON.stringify(savingSettings))
-        if (this.$i18n.locale !== savingSettings.locale) {
-          this.$i18n.locale = savingSettings.locale
-          this.confirmDialog(this.$t('settings.reloadToApplyLanguageChangeTitle'), this.$t('settings.reloadToApplyLanguageChangeText')).then((result) => {
-            if (result) {
-              window.location.reload()
-            }
-          })
-        }
+        let context = this
+        this.$store.dispatch('saveSettings', savingSettings).then(() => {
+          if (context.$i18n.locale !== savingSettings.locale) {
+            context.$i18n.locale = savingSettings.locale
+            context.confirmDialog(context.$t('settings.reloadToApplyLanguageChangeTitle'), context.$t('settings.reloadToApplyLanguageChangeText')).then((response) => {
+              if (response === true) {
+                window.location.reload()
+              }
+            })
+          }          
+        })        
       }
       // Dispatch an event about the locale change
       this.eventBus.$emit('localeChanged', this.mapSettingsTransient.locale)
@@ -71,8 +71,10 @@ export default {
     },
     restoreDefaultMapSettings () {
       this.mapSettingsTransient = this.mapSettingsTransient = utils.clone(defaultMapSettings)
+      this.setIsCustomApiKey()
       this.save()
       this.showSuccess(this.$t('settings.defaultMapSettingsRestored'))
+
     },
     validateSettings () {
       let valid = true
@@ -89,6 +91,15 @@ export default {
     saveMapSettings () {
       this.$store.commit('mapSettings', this.mapSettingsTransient)
       this.showSuccess(this.$t('settings.mapSettingsSaved'))
+    },
+    setIsCustomApiKey () {
+      const savingSettings = utils.clone(this.mapSettingsTransient)
+      const defaultSettings = defaultMapSettings
+
+      // The apiKey must not be saved if it is the default one (if is not a custom one)
+      if (savingSettings.apiKey !== defaultSettings.apiKey) {
+        this.customApiKey = true
+      }
     }
   },
 
@@ -97,5 +108,6 @@ export default {
     this.availableUnits = settingsOptions.units
     this.availableAreaUnits = settingsOptions.areUnits
     this.mapSettingsTransient = utils.clone(this.$store.getters.mapSettings)
+    this.setIsCustomApiKey()
   }
 }

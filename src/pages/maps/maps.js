@@ -185,8 +185,10 @@ export default {
     toggleAcessibleMode () {
       let mapSettings = this.$store.getters.mapSettings
       mapSettings.acessibleModeActive = !mapSettings.acessibleModeActive
-      this.$store.commit('mapSettings', mapSettings)
-      localStorage.setItem('mapSettings', JSON.stringify(mapSettings))
+
+      this.$store.dispatch('saveSettings', mapSettings).then(() => {
+        console.log('Settings saved')
+      })
     },
     /**
      * Stores the new zomm value and set the

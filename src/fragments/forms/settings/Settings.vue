@@ -78,9 +78,10 @@
                   <div style="padding:0 0 0 10px">
                     <v-text-field hide-details clearable required flat
                       v-model="mapSettingsTransient.apiKey"
-                      type="password"
+                      :type="customApiKey ? 'text' : 'password'"
+                      @change="setIsCustomApiKey"
                       :style="{'margin-bottom':'10px'}"
-                      :label="$t('settings.apiKey')">
+                      :label="apiKeyLabel">
                     </v-text-field>
                   </div>
                   <div style="padding:0 0 0 10px">
