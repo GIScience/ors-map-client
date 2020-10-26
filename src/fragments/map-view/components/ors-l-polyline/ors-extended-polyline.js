@@ -266,9 +266,10 @@ class OrsExtendedPolyline {
 
     let closestIndex = this._getClosestIndex()
     const infoIcon = this._buildInfoIcon(closestIndex)
-    if (infoIcon) {
-      this._markerInfo = Leaflet.marker(closest.latlng, { clickable: false, draggable: false, icon: infoIcon }).addTo(this._map)
-    }
+    // The hover polyline route info pop up is disabled for now
+    // if (infoIcon) {
+    //   this._markerInfo = Leaflet.marker(closest.latlng, { clickable: false, draggable: false, icon: infoIcon }).addTo(this._map)
+    // }
   }
 
   /**
