@@ -256,7 +256,7 @@ export default {
     appendIcon () {
       if (this.supportSearch) {
         return 'search'
-      } else if (this.$lowResolution && this.localModel.isEmpty()) {
+      } else if (this.$lowResolution) {
         return 'map'
       }
     }
