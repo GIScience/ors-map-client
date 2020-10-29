@@ -14,12 +14,12 @@
           :height="height"
           :style="{'margin-bottom': mb +'px'}"
           :disabled="disabled"
-          :append-icon="supportSearch === true ? 'search': ''"
+          :append-icon="appendIcon"
           :label="placeInputLabel"
           @click="setFocus(true)"
           @keyup="changed($event)"
           @click:clear="() => placeCleared(index)"
-          @click:append="changed($event)"
+          @click:append="appendClick($event)"
         ></v-text-field>
       </v-flex>
       <v-flex v-if="iconsBtnCounter > 0" v-bind="{[iconsColumns]: true}" class="input-btns">

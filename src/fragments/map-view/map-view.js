@@ -1300,19 +1300,21 @@ export default {
      * @emits mapLeftClicked (via eventBus)
      */
     mapLeftClick (event) {
-      // If in low resolution and sidebar is open, then left click on the map
-      // must close the side bar to allow the user to interact with the map.
-      // If not then the normal left click handlr must be executed
-      if (this.$store.getters.leftSideBarOpen && !this.$store.getters.leftSideBarPinned) {
-        if (this.$store.getters.pickPlaceIndex !== null) {
-          this.pickPlaceViaClick(event)
-        } else if (this.$lowResolution) {
-          this.eventBus.$emit('setSidebarStatus', false)
+      if (this.$store.getters.pickPlaceIndex !== null) {
+        this.pickPlaceViaClick(event)
+      } else {
+        // If in low resolution and sidebar is open, then left click on the map
+        // must close the side bar to allow the user to interact with the map.
+        // If not then the normal left click handlr must be executed
+        if (this.$store.getters.leftSideBarOpen && !this.$store.getters.leftSideBarPinned) {
+          if (this.$lowResolution) {
+            this.eventBus.$emit('setSidebarStatus', false)
+          } else {
+            this.handleShowLeftClickPlaceInfo(event)
+          }  
         } else {
           this.handleShowLeftClickPlaceInfo(event)
         }
-      } else {
-        this.handleShowLeftClickPlaceInfo(event)
       }
     },
 

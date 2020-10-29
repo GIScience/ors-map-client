@@ -252,6 +252,13 @@ export default {
     showSuggestion () {
       let show = this.focused && !this.focusIsAutomatic
       return show
+    },
+    appendIcon () {
+      if (this.supportSearch) {
+        return 'search'
+      } else if (this.$lowResolution && this.localModel.isEmpty()) {
+        return 'map'
+      }
     }
   },
   watch: {
@@ -268,6 +275,16 @@ export default {
     }
   },
   methods: {
+    appendClick (event) {
+      if (this.supportSearch === true) {
+        changed(event)
+      } else {
+        this.$store.commit('pickPlaceIndex', this.index)
+        if(this.$lowResolution) {
+          this.$store.commit('setLeftSideBarIsOpen', false)
+        }
+      }
+    },
     setPickPlaceIndex () {
       if (this.pickPlaceSupported && this.localModel.isEmpty()) {
         this.$store.commit('pickPlaceIndex', this.index)
