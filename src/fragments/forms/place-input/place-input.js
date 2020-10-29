@@ -256,7 +256,7 @@ export default {
     appendIcon () {
       if (this.supportSearch) {
         return 'search'
-      } else if (this.$lowResolution) {
+      } else if (this.$lowResolution || this.localModel.isEmpty()) {
         return 'map'
       }
     }
@@ -279,6 +279,7 @@ export default {
       if (this.supportSearch === true) {
         changed(event)
       } else {
+        this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
         this.$store.commit('pickPlaceIndex', this.index)
         if(this.$lowResolution) {
           this.$store.commit('setLeftSideBarIsOpen', false)

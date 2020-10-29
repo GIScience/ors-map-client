@@ -25,6 +25,7 @@ export default {
     approximateDistance: 'Ungefähre Entfernung in einer geraden Linie vom aktuellen Kartenzentrum',
     couldNotDetermineYourPreciseLocationUsingPreviousLocation: 'Es war nicht möglich, Ihren Standort zu bestimmen. Ihr bisheriger Standort wird stattdessen verwendet.',
     pleaseTypeSomething: 'Bitte geben Sie etwas ein, um zu suchen',
-    toggleDirect: 'Direkter Weg (Luftlinie) zu nächstem Punkt an/aus'
+    toggleDirect: 'Direkter Weg (Luftlinie) zu nächstem Punkt an/aus',
+    clickOnTheMapToSelectAPlace: 'Klicke auf die Karte um einen Ort auszuwählen'
   }
 }

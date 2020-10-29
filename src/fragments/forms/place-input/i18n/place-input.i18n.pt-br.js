@@ -25,6 +25,7 @@ export default {
     approximateDistance: 'Distância aproximada em linha reta do centro do mapa atual',
     couldNotDetermineYourPreciseLocationUsingPreviousLocation: 'Não foi possível determinar sua localização precisa. Sua localização anterior será utilizada',
     pleaseTypeSomething: 'Digite algo para buscars',
-    toggleDirect: 'Alternar para modo direto daqui até o próximo local'
+    toggleDirect: 'Alternar para modo direto daqui até o próximo local',
+    clickOnTheMapToSelectAPlace: 'Selecione um local clicando num ponto do mapa'
   }
 }

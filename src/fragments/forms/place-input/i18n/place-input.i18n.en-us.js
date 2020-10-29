@@ -25,6 +25,7 @@ export default {
     approximateDistance: 'Approximate distance in a straight line from current map center',
     couldNotDetermineYourPreciseLocationUsingPreviousLocation: 'It was not possible to determine your precise location. Your previous location will be used instead',
     pleaseTypeSomething: 'Please type something to search',
-    toggleDirect: 'Toggle direct from here until next place'
+    toggleDirect: 'Toggle direct from here until next place',
+    clickOnTheMapToSelectAPlace: 'Pick a place by clicking on a map location'
   }
 }
