@@ -213,7 +213,7 @@ export default {
      * Determines if the place input floating menu button is availabel for the current place input
      */
     placeMenuAvailable () {
-      return this.$lowResolution && !this.single && (this.index > 0 || this.directIsAvailable)
+      return this.$lowResolution && !this.single && (this.index > 0 || this.directIsAvailable || this.switchCoordsAvailable)
     },
     /**
      * Determines if the place input directions menu button is availabel for the current place input
