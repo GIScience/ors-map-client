@@ -1,5 +1,5 @@
 <template>
-  <div v-click-outside="setFocus">
+  <div v-click-outside="setFocus" :id="'place-input-container-' + index" >
     <v-layout row wrap >
       <v-flex v-bind="{[inputColumns]: true}">
         <v-text-field class="place-input"
@@ -8,9 +8,9 @@
           clearable
           flat
           :box="box"
-          :hide-details="single || index == 0"
+          :hide-details="hideDetails"
           :hint="hint"
-          :persistent-hint="!single && index > 0"
+          :persistent-hint="!hideDetails"
           :height="height"
           :style="{'margin-bottom': mb +'px'}"
           :disabled="disabled"

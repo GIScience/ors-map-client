@@ -1,3 +1,11 @@
+/**
+ * Render and deals with left click events
+ * @emits closed
+ * @emits showLoading [via eventBus] (when resolving place info)
+ * @emits directionsToPoint
+ * @listens mapRightClicked
+ * @listens mapLeftClicked (to close the righ click pop up)
+ */
 
 import Leaflet from 'leaflet'
 import GeoUtils from '@/support/geo-utils'
@@ -33,7 +41,7 @@ export default {
       return false
     },
     placeInfoTitle () {
-      const title = this.clickInsidePolygon ? this.$t('mapView.placeInsidePolygon') : this.$t('mapView.placeInfo')
+      const title = this.clickInsidePolygon ? this.$t('mapLeftClick.placeInsidePolygon') : this.$t('mapLeftClick.placeInfo')
       return title
     }
   },
@@ -74,6 +82,9 @@ export default {
       this.resolvePoint(data.event.latlng.lat, data.event.latlng.lng).then((place) => {
         if (place) {
           context.clickPoint.placeName = place.placeName
+          if (context.$refs.placeInfoBox) {
+            context.$refs.placeInfoBox.show()
+          }
           context.$forceUpdate()
         }
       })
@@ -113,7 +124,7 @@ export default {
     copyLatlng () {
       const latlng = `${this.clickLatlng.lat}, ${this.clickLatlng.lng}`
       if (this.copyToClipboard(latlng)) {
-        this.showSuccess(this.$t('mapView.latlngCopied'), { timeout: 2000 })
+        this.showSuccess(this.$t('mapLeftClick.latlngCopied'), { timeout: 2000 })
       }
     },
     /**
@@ -123,7 +134,7 @@ export default {
     copyLnglat () {
       const lnglat = `${this.clickLatlng.lng}, ${this.clickLatlng.lat}`
       if (this.copyToClipboard(lnglat)) {
-        this.showSuccess(this.$t('mapView.lnglatCopied'), { timeout: 2000 })
+        this.showSuccess(this.$t('mapLeftClick.lnglatCopied'), { timeout: 2000 })
       }
     },
     /**
@@ -140,6 +151,18 @@ export default {
       const result = document.execCommand('copy')
       document.body.removeChild(el)
       return result
+    },
+    /**
+     * Build a place and emits an event to set the 
+     * app in directions mode to the clicked place
+     * @param {*} placeInfo 
+     * @emits directionsToPoint
+     */
+    directionstoPoint (placeInfo) {
+      const place = new Place(placeInfo.latlng.lng, placeInfo.latlng.lat)
+      place.resolve().then(() => {
+        this.$emit('directionsToPoint', {place})
+      })
     }
   },
   created () {

@@ -16,6 +16,7 @@
                   <place-input :ref="'place'+index"
                     :support-directions="inputsupportsDirections"
                     support-direct
+                    :pick-place-supported="places.length > 1"
                     :support-search="places.length === 1"
                     :box="places.length === 1"
                     :index="index"

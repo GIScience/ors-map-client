@@ -19,7 +19,7 @@ export default {
     addInput: 'Ortseingabe hinzufügen',
     switchCoords: 'Koordinaten vertauschen',
     rawCoordinate: 'Lat,Long Koordinaten',
-    fillOrRemoveInput: 'Wähle einen Ort oder lösche die Eingabe',
+    fillOrRemoveInput: 'Suche ein Ort oder wählen ein auf der Karte aus',
     noPlaceFound: 'Keine Orte gefunden',
     unknownSearchPlaceError: 'Unbekannter Fehler beim Suchen',
     approximateDistance: 'Ungefähre Entfernung in einer geraden Linie vom aktuellen Kartenzentrum',

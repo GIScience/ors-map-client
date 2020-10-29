@@ -57,6 +57,8 @@ export default {
       hours: 'h',
       days: 'd',
       minutes: 'min',
+      lat: 'lat',
+      lng: 'long'
     },
     layers: {
       macrocounty: 'Macro condado',

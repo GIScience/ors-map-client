@@ -61,7 +61,12 @@ export default {
     supportSearch: {
       type: Boolean,
       default: true
+    },
+    pickPlaceSupported: {
+      type: Boolean,
+      default: false
     }
+
   },
   created () {
     // Create a local clone of the model passed via props (so we can modify if when necessary)
@@ -81,6 +86,9 @@ export default {
      * Get the automatic focus must be set or not
      */
     getAutomaticFocus () {
+      if (this.focusIsAutomatic) {
+        this.setPickPlaceIndex()
+      }
       // If is a mobile device, do not use automatic
       // focus to avoid openning the keyboard
       if (utils.isMobile()) {
@@ -90,10 +98,14 @@ export default {
     },
     hint () {
       let hint = ''
-      if (this.model.isEmpty() && !this.single && this.index > 0) {
+      if (this.model.isEmpty() && !this.single) {
         hint = this.$t('placeInput.fillOrRemoveInput')
       }
       return hint
+    },
+    hideDetails () {
+      let hide =  this.single || (!this.focused && !this.getAutomaticFocus)
+      return hide
     },
     placeNameRules () {
       return [
@@ -256,6 +268,11 @@ export default {
     }
   },
   methods: {
+    setPickPlaceIndex () {
+      if (this.pickPlaceSupported && this.localModel.isEmpty()) {
+        this.$store.commit('pickPlaceIndex', this.index)
+      }
+    },
     /**
      * Run search if in search mode or resolve place if model is unresolved
      */
@@ -502,14 +519,25 @@ export default {
       if (!this.model.isEmpty()) {
         this.$emit('cleared', this.index)
       }
+      this.localModel = new Place()
+      this.setFocus(true)
     },
     /**
      * Set the current input as having the focus
      * @param {*} data can be a boolean value or a $event. If it is the second case, we consider it as false
      */
-    setFocus (data) {
-      const state = typeof data === 'boolean' ? data : false
-      this.focused = state
+    setFocus (data) {      
+      // Check if the element that was clicked outside 
+      // is a place input that was previously focused
+      if (typeof data === 'object' && data.clickedOutside) {
+        if (this.inputWasActiveAndLostFocus(data)) {
+          this.$store.commit('pickPlaceIndex', null)
+          this.focused = false
+        }
+      } else {
+        this.focused = data
+        this.setPickPlaceIndex()        
+      }
       // Once the focused was set to true based on a user
       // interaction event the it is not anymore in automatic mode
       if (this.focused) {
@@ -517,8 +545,21 @@ export default {
       }
       // If the app is in the search mode, then run
       // the autocompleteSearch that will show the suggestions
-      if (state && this.$store.getters.mode === constants.modes.search) {
+      if (this.focused && this.$store.getters.mode === constants.modes.search) {
         this.autocompleteSearch()
+      }
+    },
+    /**
+     * Determines if the current place input was clicked outside
+     * @returns {Boolean}
+     */
+    inputWasActiveAndLostFocus (event) {
+      let selfContainerId = `place-input-container-${this.index}`
+      let isInputIndexStored = this.$store.getters.pickPlaceIndex === this.index
+      let thisElIdWasOutsided = event.outsideEl.id === selfContainerId
+      // Check if it matches the conditions
+      if (thisElIdWasOutsided && isInputIndexStored) {
+        return true
       }
     },
 

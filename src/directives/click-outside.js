@@ -10,7 +10,12 @@ const clickOutside = {
     // Define Handler and cache it on the element
     const bubble = binding.modifiers.bubble
     const handler = (e) => {
+      if (el.id) {
+        el = document.getElementById(el.id)
+      }
       if (bubble || (!el.contains(e.target) && el !== e.target)) {
+        e.clickedOutside = true
+        e.outsideEl = el
         binding.value(e)
       }
     }

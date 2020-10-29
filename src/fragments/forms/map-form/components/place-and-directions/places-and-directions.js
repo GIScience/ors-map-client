@@ -177,10 +177,10 @@ export default {
         if (context.places.length === 1) {
           context.addPlaceInput()
         } 
-        if (this.places[0].isEmpty()) {
+        if (context.places[0].isEmpty()) {
           context.setfocusedPlaceInput(0)
         } else {
-          context.setfocusedPlaceInput(this.places.length - 1)
+          context.setfocusedPlaceInput(context.places.length - 1)
         }
       })
 
@@ -205,7 +205,7 @@ export default {
       // a direct segment
       this.eventBus.$on('directChanged', (data) => {
         if (context.active) {
-          this.places[data.index] = data.place
+          context.places[data.index] = data.place
           context.updateAppRoute()
         }
       })
@@ -216,7 +216,7 @@ export default {
         // so we must update the app route if we are already in directions
         // mode and a filter has changed. If the app is, for example
         // in place mode and filter changes, there is nothing to be done
-        if (this.active && this.$store.getters.mode === constants.modes.directions) {
+        if (context.active && context.$store.getters.mode === constants.modes.directions) {
           context.updateAppRoute()
         }
       })
@@ -270,7 +270,7 @@ export default {
 
       // Update local object when a mapViewData is uploaded
       this.eventBus.$on('mapViewDataUploaded', (mapViewData) => {
-        if (this.active) {
+        if (context.active) {
           context.mapViewData = mapViewData
           context.places = mapViewData.places
         }
@@ -280,9 +280,22 @@ export default {
        * is not active, then reset its data to the initial state
        */
       this.eventBus.$on('mapViewDataChanged', () => {
-        if (!this.active) {
+        if (!context.active) {
           context.mapViewData = new MapViewData()
           context.places = [new Place()]
+        }
+      })
+
+      this.eventBus.$on('setInputPlace', (data) => {
+        if (context.active) {
+          context.places[data.pickPlaceIndex] = data.place
+          let filledPlaces = context.getFilledPlaces()
+          if (context.places.length == filledPlaces.length && filledPlaces.length > 1) {
+            context.updateAppRoute()
+          } else {
+            context.setSidebarIsOpen(true)
+            context.$forceUpdate()
+          }
         }
       })
     },

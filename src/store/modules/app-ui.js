@@ -5,6 +5,7 @@ const state = {
   leftSideBarPinned: false,
   topBarOpen: true,
   displayFooter: true,
+  pickPlaceIndex: null,
   mainMenu: [],
   footerFullHeight: 74,
   footerMiniHeight: 140,
@@ -15,7 +16,9 @@ const state = {
 
 const getters = {
   leftSideBarOpen: state => {
-    return state.leftSideBarOpen
+    // if the sidebar is pinned it is not 
+    // considered open but pinned!
+    return !state.leftSideBarPinned && state.leftSideBarOpen
   },
   leftSideBarPinned: state => {
     return state.leftSideBarPinned
@@ -46,6 +49,9 @@ const getters = {
   },
   isSidebarVisible: state => {
     return state.leftSideBarOpen || state.leftSideBarPinned
+  },
+  pickPlaceIndex: state => {
+    return state.pickPlaceIndex
   }
 }
 
@@ -66,6 +72,9 @@ const mutations = {
   },
   setDisplayFooter: (state, display) => {
     state.displayFooter = display
+  },
+  pickPlaceIndex: (state, index) => {
+    state.pickPlaceIndex = index
   },
   mainMenu: (state, items) => {
     state.mainMenu = items

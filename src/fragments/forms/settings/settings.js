@@ -49,8 +49,10 @@ export default {
         this.$store.dispatch('saveSettings', savingSettings).then(() => {
           if (context.$i18n.locale !== savingSettings.locale) {
             context.$i18n.locale = savingSettings.locale
-            context.confirmDialog(context.$t('settings.reloadToApplyLanguageChangeTitle'), context.$t('settings.reloadToApplyLanguageChangeText')).then((response) => {
-              if (response === true) {
+            let title = context.$t('settings.reloadToApplyLanguageChangeTitle')
+            let text = context.$t('settings.reloadToApplyLanguageChangeText')
+            context.confirmDialog(title, text).then((data) => {
+              if (data.response === 'yes') {
                 window.location.reload()
               }
             })

@@ -21,6 +21,24 @@ const utils = {
         return params
       }, {})
   },
+  getChildElements (el, childElType) {
+    var results = []
+    var search = function search (children) {
+      var depth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0
+
+      for (var index = 0; index < children.length; index++) {
+        var child = children[index]
+        if (child.localName === childElType) {
+          results.push(child)
+        } else {
+          search(child.children, depth + 1)
+        }
+      }
+      if (depth === 0) return results
+    }
+
+    return search(el.children)
+  },
 
   /**
    * Get the camel case version of the string provided

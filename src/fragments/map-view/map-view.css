@@ -1,6 +1,11 @@
 .map-view {
   width: 100%;
-  z-index:2
+  z-index:2;
+  cursor: pointer;
+}
+
+.map-view.click-to-pick {
+  cursor: crosshair;
 }
 
 .map-view-controls {

@@ -418,6 +418,18 @@ export default {
         context.eventBus.$emit('directionsToPoint', data)
       }, 100)
     },
+
+    /**
+     * Check if the data contaisn the pick place index
+     * and emits the setInputPlace via eventBus
+     * @param {*} data 
+     * @emits setInputPlace
+     */
+    setInputPlace (data) {
+      if (data.pickPlaceIndex !== null) {
+        this.eventBus.$emit('setInputPlace', data)
+      }
+    },
     /**
      * Navigate the app to the single place mode
      * @param {Place} place 

@@ -60,6 +60,8 @@ export default {
       minutes: 'min',
       seconds: 'sec',
       meters: 'meters',
+      lat: 'lat',
+      lng: 'long'
     },
     layers: {
       macrocounty: 'Macro county',

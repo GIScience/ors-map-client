@@ -19,7 +19,7 @@ export default {
     addInput: 'Add place input',
     switchCoords: 'Switch coordinates',
     rawCoordinate: 'Lat,lng raw coordinate',
-    fillOrRemoveInput: 'Choose a location or remove input',
+    fillOrRemoveInput: 'Search a place of pick one on the map',
     noPlaceFound: 'No results returned',
     unknownSearchPlaceError: 'Unknown place search error',
     approximateDistance: 'Approximate distance in a straight line from current map center',

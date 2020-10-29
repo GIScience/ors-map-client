@@ -25,6 +25,7 @@
  * @emits directionsToPoint
  * @emits addRouteStop
  * @emits addDestinationToRoute
+ * @emits setInputPlace
  */
 
 import { LMap, LTileLayer, LMarker, LLayerGroup, LTooltip, LPopup, LControlZoom, LControlAttribution, LControlScale, LControlLayers, LGeoJson, LPolygon, LCircle, LCircleMarker } from 'vue2-leaflet'
@@ -161,13 +162,16 @@ export default {
     }
   },
   computed: {
+    clickToPickActive () {
+      return this.$store.getters.pickPlaceIndex !== null
+    },
     /**
      * Returns the non embedded mode URL.
      * When in embedded mode, a 'view on ors' btn is displayed and
      * thhe target url of this btn is the not embedded versios.
      * @returns {String} url
      */
-    nonEmbedUrl() {
+    nonEmbedUrl () {
       let url = location.href.split('/embed')[0]
       return url
     },
@@ -1148,6 +1152,27 @@ export default {
     },
 
     /**
+     * Emit the event that will trigger the Set the 
+     * directions to place contained in the data object
+     * @param {*} data 
+     * @emits directionsToPoint
+     */
+    directionsToPoint (data) {
+      this.$emit('directionsToPoint', data)
+    },
+    /**
+     * Emit the event that will trigger the Set the 
+     * directions to place contained in the data object
+     * @param {Number} placeIndex 
+     * @param {Place} place
+     * @emits setInputPlace
+     */
+    setInputPlace (placeIndex, place) {
+      let data = {pickPlaceIndex: placeIndex, place: place}
+      this.$emit('setInputPlace', data)
+    },
+
+    /**
      * Determines if the given bounds Array is valid
      * @param {*} dataBounds
      * @returns Boolean
@@ -1278,18 +1303,48 @@ export default {
       // If in low resolution and sidebar is open, then left click on the map
       // must close the side bar to allow the user to interact with the map.
       // If not then the normal left click handlr must be executed
-      if (this.$store.getters.leftSideBarOpen && this.$lowResolution) {
-        this.eventBus.$emit('setSidebarStatus', false)
-      } else {
-        const drawPolygonToolbarActive = this.lodash.get(this.drawControlRef, '_toolbars.draw._activeMode')
-        const clckedOverPolyline = event.originalEvent && event.originalEvent.clckedOverPolyline === true
-        if (this.showClickPopups && !drawPolygonToolbarActive && !clckedOverPolyline) {
-          const insidePolygon = this.isPointInsidePolygons(event.latlng.lat, event.latlng.lng)
-          const data = { event, insidePolygon }
-          this.eventBus.$emit('mapLeftClicked', data)
-          this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
+      if (this.$store.getters.leftSideBarOpen && !this.$store.getters.leftSideBarPinned) {
+        if (this.$store.getters.pickPlaceIndex !== null) {
+          this.pickPlaceViaClick(event)
+        } else if (this.$lowResolution) {
+          this.eventBus.$emit('setSidebarStatus', false)
+        } else {
+          this.handleShowLeftClickPlaceInfo(event)
         }
+      } else {
+        this.handleShowLeftClickPlaceInfo(event)
       }
+    },
+
+    /**
+     * Handle the left click when the place info box must be shown
+     * @param {*} event 
+     * @emits mapLeftClicked
+     */
+    handleShowLeftClickPlaceInfo (event) {
+      const drawPolygonToolbarActive = this.lodash.get(this.drawControlRef, '_toolbars.draw._activeMode')
+      const clckedOverPolyline = event.originalEvent && event.originalEvent.clckedOverPolyline === true
+      if (this.showClickPopups && !drawPolygonToolbarActive && !clckedOverPolyline) {
+        const insidePolygon = this.isPointInsidePolygons(event.latlng.lat, event.latlng.lng)
+        const data = { event, insidePolygon }
+        this.eventBus.$emit('mapLeftClicked', data)
+        this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
+      }
+    },
+
+    /**
+     * Pick place via click when and cal setInputPlace that will emit 'setInputPlace'
+     * @param {*} event 
+     * @uses pickPlaceIndex store getter
+     */
+    pickPlaceViaClick (event) {      
+      let place = new Place(event.latlng.lng, event.latlng.lat)
+      let context = this
+      let pickPlaceIndex = context.$store.getters.pickPlaceIndex
+      place.resolve().then(() => {
+        context.setInputPlace(pickPlaceIndex, place)
+        context.$store.commit('pickPlaceIndex', null)
+      })      
     },
 
     /**
@@ -1603,6 +1658,16 @@ export default {
       return available
     },
     /**
+     * Dosable pick a place mode by
+     * settting the pick pace index as null
+     * @param event
+     */
+    disablePickPlaceMode (event) {
+      if (event.which === 27) { // esc 
+        this.$store.commit('pickPlaceIndex', null)
+      }
+    },
+    /**
      * Add component initial listeners via eventBus
      * @listens redrawAndFitMap (via eventBus)
      * @listens clearMap (via eventBus)
@@ -1713,5 +1778,7 @@ export default {
     this.showClickPopups = this.showPopups
 
     this.setMapCenter()
+
+    window.addEventListener("keyup", this.disablePickPlaceMode);
   }
 }
