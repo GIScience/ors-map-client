@@ -109,7 +109,7 @@ export default {
       return isMobile
     },
     showInputPickPlaceTooltip () {
-      let show = this.model.isEmpty() && (this.getAutomaticFocus || this.isMobile) && this.$store.getters.isSidebarVisible
+      let show = this.model.isEmpty() && !this.single && this.$store.getters.isSidebarVisible
       return show
     },
     hint () {

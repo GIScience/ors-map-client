@@ -21,7 +21,7 @@
           <template v-slot:append>
             <v-btn v-if="appendIcon === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
               @click="appendClick($event)"
-              v-popper-tooltip="{show: showInputPickPlaceTooltip, text: $t('placeInput.clickOnTheMapBtnToPickAPlace'), position: 'bottom', dark: true, saveClose: true, name: 'pickAPlaceOnTheMap'}">
+              v-popper-tooltip="{show: showInputPickPlaceTooltip, text: $t('placeInput.clickOnTheMapBtnToPickAPlace'), position: 'bottom', dark: true, showOnce: true, name: 'pickAPlaceOnTheMap'}">
               <v-icon left>map</v-icon>
             </v-btn>
             <v-btn v-else icon small flat class="append-input-btn" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
