@@ -98,6 +98,9 @@ const saveApiData = (apiKey, endpoints) => {
         }
       }
     }
+    if ( typeof mapSettings.apiKey !== 'string' || mapSettings.apiKey === '') {
+      mapSettings.apiKey = defaultMapSettings.apiKey
+    }
     // If the settings was saved in local storage
     // then this option is must start as true
     mapSettings.saveToLocalStorage = true

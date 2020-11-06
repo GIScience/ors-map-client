@@ -11,7 +11,11 @@
       <template v-if="hasPlaceInfo">
         {{$t('global.units.lng')}},{{$t('global.units.lat')}}:
         {{placeInfo.latlng.lng.toFixed(6)}}, {{placeInfo.latlng.lat.toFixed(6)}} <br/>
-        <v-btn flat icon @click="directionstoPoint(placeInfo)"><v-icon :title="$t('mapLeftClick.directionsToClickedPoint')" color="dark" >directions</v-icon></v-btn>
+        <v-btn flat icon 
+          v-popper-tooltip="{show: true, text: $t('mapLeftClick.directionsToClickedPoint'), position: $lowResolution? 'top' : 'left', dark: true, saveClose: true, name: 'directionsToClickedPoint'}"
+          @click="directionstoPoint(placeInfo)"><v-icon 
+          :title="$t('mapLeftClick.directionsToClickedPoint')" color="dark" >directions</v-icon>
+        </v-btn>
         <v-btn :title="$t('mapLeftClick.copyLnglat')" flat small icon  @click="copyLnglat()" > <v-icon>content_copy</v-icon> </v-btn>
         <v-btn :title="$t('mapLeftClick.copyLatlng')" flat small color="primary" icon class="copy-inverted" @click="copyLatlng()" > <v-icon>content_copy</v-icon> </v-btn>
       </template>

@@ -14,13 +14,22 @@
           :height="height"
           :style="{'margin-bottom': mb +'px'}"
           :disabled="disabled"
-          :append-icon="appendIcon"
           :label="placeInputLabel"
           @click="setFocus(true)"
           @keyup="changed($event)"
-          @click:clear="() => placeCleared(index)"
-          @click:append="appendClick($event)"
-        ></v-text-field>
+          @click:clear="() => placeCleared(index)">
+          <template v-slot:append>
+            <v-btn v-if="appendIcon === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
+              @click="appendClick($event)"
+              v-popper-tooltip="{show: model.isEmpty() && getAutomaticFocus, text: $t('placeInput.clickOnTheMapBtnToPickAPlace'), position: 'right', dark: true, saveClose: true, name: 'pickAPlaceOnTheMap'}">
+              <v-icon left>map</v-icon>
+            </v-btn>
+            <v-btn v-else icon small flat class="append-input-btn" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
+              @click="appendClick($event)">
+              <v-icon left>search</v-icon>
+            </v-btn>
+          </template>
+        </v-text-field>
       </v-flex>
       <v-flex v-if="iconsBtnCounter > 0" v-bind="{[iconsColumns]: true}" class="input-btns">
         <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="deleteAvailable && $mdAndUpResolution"  @click="deletePlace()">
@@ -30,7 +39,9 @@
           <v-icon :color="this.model.direct? 'primary': 'dark'" :title="$t('placeInput.toggleDirect')" class="input-icon" >settings_ethernet</v-icon>
         </v-btn>
 
-        <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="directionsAvailable" @click="startDirections()">
+        <v-btn flat class="input-btn" :id="getNewGuid('directions')" :class="{small: $mdAndUpResolution}" 
+          v-if="directionsAvailable" @click="startDirections()"
+          v-popper-tooltip="{show: directionsButtonTooltip, text: $t('placeInput.goToDirectionsMode'), position: directionsButtonTooltipPosition, dark: true, showOnce: true, name: 'useDiretionsButton'}">
           <v-icon :title="$t('placeInput.directions')" color="dark" :large="$lowResolution" class="input-icon" >directions</v-icon>
         </v-btn>
 

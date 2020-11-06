@@ -5,6 +5,7 @@ export default {
     about: 'Über ORS',
     openrouteserviceAPI: 'Openrouteservice API',
     openrouteserviceForDisasters: 'Openrouteservice für Katastrophenmanagement',
-    askOpenrouteservice: 'Frage openrouteservice'
+    askOpenrouteservice: 'Frage openrouteservice',
+    settingsTooltip: 'Klicken Sie hier, wenn Sie Einstellungen anpassen und andere Optionen sehen möchten'
   }
 }

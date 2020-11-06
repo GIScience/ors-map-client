@@ -26,6 +26,9 @@ export default {
     couldNotDetermineYourPreciseLocationUsingPreviousLocation: 'It was not possible to determine your precise location. Your previous location will be used instead',
     pleaseTypeSomething: 'Please type something to search',
     toggleDirect: 'Toggle direct from here until next place',
-    clickOnTheMapToSelectAPlace: 'Pick a place by clicking on a map location'
+    clickOnTheMapToSelectAPlace: 'Pick a place by clicking on a map location',
+    clickOnTheMapBtnToPickAPlace: 'Click on this button to pick a place on the map for this input',
+    goToDirectionsMode: 'Click the directions button to switch to routing mode',
+    clickToSearchAndShowResultsOnTheMap: 'Click to search and show results on the map'
   }
 }

@@ -8,5 +8,6 @@ export default {
     directionsToClickedPoint: 'Route zum angeklickten Ort',
     latlngCopied: 'Breitengrad und Längengrad kopiert',
     lnglatCopied: 'Längengrad und Breitengrad kopiert',
+    directionsToClickedPoint: 'Klicken Sie auf diese Schaltfläche, um eine Wegbeschreibung zu dem angeklickten Punkt auf der Karte zu starten'
   }
 }

@@ -8,5 +8,6 @@ export default {
     directionsToClickedPoint: 'Rota para o local clicado',
     lnglatCopied: 'Longitude e latitude copiadas',
     latlngCopied: 'Latitude e longitude copiadas',
+    directionsToClickedPoint: 'Clique no botão de rota para iniciar uma rota para o ponto clicado no mapa'
   }
 }

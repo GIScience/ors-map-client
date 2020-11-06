@@ -1,8 +1,9 @@
 export default {
   topMenu: {
-    openSettings: 'Settings',
+    openSettings: 'Open settings',
     showAbout: 'Show general information',
     about: 'About ORS',
-    pinSidebar: 'Pin sidebar'
+    pinSidebar: 'Pin sidebar',
+    settingsTooltip: 'Click here if you want to adjust app settings'
   }
 }

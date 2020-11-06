@@ -65,6 +65,14 @@ export default {
     pickPlaceSupported: {
       type: Boolean,
       default: false
+    },
+    directionsButtonTooltip: {
+      default: false,
+      type: Boolean
+    },
+    directionsButtonTooltipPosition: {
+      default: 'right',
+      type: String
     }
 
   },
@@ -277,7 +285,7 @@ export default {
   methods: {
     appendClick (event) {
       if (this.supportSearch === true) {
-        changed(event)
+        this.changed(event)
       } else {
         this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
         this.$store.commit('pickPlaceIndex', this.index)
@@ -658,6 +666,10 @@ export default {
       this.model.direct = !this.model.direct
       let data = { index: this.index, place: this.model }
       this.$emit('changedDirectPlace', data)
+    },
+    getNewGuid (prefix) {
+      let guid = utils.guid(prefix)
+      return guid
     }
   }
 }

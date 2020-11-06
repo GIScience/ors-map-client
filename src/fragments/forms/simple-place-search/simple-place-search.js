@@ -20,7 +20,8 @@ export default {
     myLocation: false,
     autoFocusOnMap: true,
     openingRouteMode: false,
-    newInfoAvailable: false
+    newInfoAvailable: false,
+    showDirectionsButtonTooltip: true
   }),
   props: {
     height: {
@@ -31,6 +32,9 @@ export default {
     this.setEventListeners()
     this.setPlace()
     this.loadData()
+  },
+  beforeDestroy () {
+    this.showDirectionsButtonTooltip = false
   },
   components: {
     PlaceInput

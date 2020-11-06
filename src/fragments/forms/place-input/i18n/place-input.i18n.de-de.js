@@ -26,6 +26,9 @@ export default {
     couldNotDetermineYourPreciseLocationUsingPreviousLocation: 'Es war nicht möglich, Ihren Standort zu bestimmen. Ihr bisheriger Standort wird stattdessen verwendet.',
     pleaseTypeSomething: 'Bitte geben Sie etwas ein, um zu suchen',
     toggleDirect: 'Direkter Weg (Luftlinie) zu nächstem Punkt an/aus',
-    clickOnTheMapToSelectAPlace: 'Klicke auf die Karte um einen Ort auszuwählen'
+    clickOnTheMapToSelectAPlace: 'Klicke auf die Karte um einen Ort auszuwählen',
+    clickOnTheMapBtnToPickAPlace: 'Klicken Sie auf diese Schaltfläche, um einen Ort auf der Karte für diese Eingabe auszuwählen',
+    goToDirectionsMode: 'Klicken Sie auf die Schaltfläche Wegbeschreibung, um zum Routing-Modus zu wechseln',
+    clickToSearchAndShowResultsOnTheMap: 'Klicken Sie, um zu suchen und die Ergebnisse auf der Karte anzuzeigen'
   }
 }

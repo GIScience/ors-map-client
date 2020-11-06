@@ -5,10 +5,18 @@
     top offset-y
     :close-on-content-click="true" >
 
-    <v-btn slot="activator" v-if="locationActive" small fab class="my-location-btn" @click="activatorClicked()" :title="$t('myLocation.stopShowingCurrentLocation')">
+    <v-btn slot="activator" v-if="locationActive" 
+      v-popper-tooltip="{show: toolTipVisible, text: $t('myLocation.myPositionToolTip'), position: 'left', dark: true, showOnce: true, name: 'useMyLocation'}" small fab 
+      class="my-location-btn" @click="activatorClicked()" 
+      :title="$t('myLocation.stopShowingCurrentLocation')">
       <v-icon large :color="continuously === true ? 'primary' : 'dark'" >my_location</v-icon>
     </v-btn>
-    <v-btn slot="activator" @click="activatorClicked()"  v-else small fab class="my-location-btn" :title="$t('myLocation.showCurrentLocation')"><v-icon large color="dark" >person_pin_circle</v-icon> </v-btn>
+    <v-btn slot="activator" @click="activatorClicked()"  v-else 
+      small fab class="my-location-btn"
+      v-popper-tooltip="{show: toolTipVisible, text: $t('myLocation.myPositionToolTip'), dark: true, showOnce: true, name: 'useMyLocation'}" 
+      :title="$t('myLocation.showCurrentLocation')">
+        <v-icon large color="dark" >person_pin_circle</v-icon> 
+    </v-btn>
 
     <v-list  v-if="!locationActive" light style="background:transparent; box-shadow:none" class="input-pop-up-list">
       <div class="text-xs-right">
@@ -23,13 +31,6 @@
       </div>
     </v-list>
   </v-menu>
-  <div id="my-position-tooltip" v-if="toolTipVisible" role="tooltip">
-    <v-btn @click="toolTipVisible = false" small flat icon class="close-tooltip"><v-icon small color="dark" >close</v-icon> </v-btn>
-    <div class="tooltip-content">
-      {{$t('myLocation.myPositionToolTip')}}
-    </div>
-    <div id="arrow" data-popper-arrow></div>
-  </div>
 </div>
 
 </template>

@@ -13,6 +13,8 @@
         <v-form ref="form" @submit.prevent>
           <place-input class="mini-input" :height="27" :mb="0" :index="0"
             :model="place"
+            :directions-button-tooltip="showDirectionsButtonTooltip"
+            directions-button-tooltip-position="bottom"   
             :autofocus="true"
             :single="true"
             @selected="selectPlace"

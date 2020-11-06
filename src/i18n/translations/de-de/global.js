@@ -8,6 +8,7 @@ export default {
     appName: 'Openrouteservice Maps',
     brand: 'HeiGIT - Universität Heidelberg',
     close: 'Schließen',
+    closeAndDoNotShowAgain: 'Close and do not show again',
     select: 'Auswählen',
     yes: 'Ja',
     no: 'Nein',

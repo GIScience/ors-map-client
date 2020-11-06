@@ -1,8 +1,10 @@
 <template>
   <v-layout row class="top-menu">
     <v-flex sm4 v-if="$mdAndUpResolution">
-      <v-btn class="no-padding" v-if="$mdAndUpResolution" flat @click="eventBus.$emit('showSettingsModal')">
-        <v-icon :title="$t('topMenu.showAbout')" color="dark" :medium="$lowResolution">settings</v-icon>
+      <v-btn class="no-padding" v-if="$mdAndUpResolution" 
+        flat @click="settingsClicked"
+        v-popper-tooltip="{show: showSettingsTooltip, text: $t('topMenu.settingsTooltip'), position: 'right', dark: true, showOnce: true, name: 'settingsTooltip'}">
+        <v-icon :title="$t('topMenu.openSettings')" color="dark" :medium="$lowResolution">settings</v-icon>
       </v-btn>
     </v-flex>
     <v-flex sm4 v-if="$mdAndUpResolution">

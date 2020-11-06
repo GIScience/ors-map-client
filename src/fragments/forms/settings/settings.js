@@ -14,6 +14,7 @@ export default {
     availableUnits: [],
     availableAreaUnits: [],
     customApiKey: false,
+    resetShownOnceTooltips: false
   }),
   computed: {
     routingLocales () {
@@ -46,6 +47,11 @@ export default {
       if (this.mapSettingsTransient.saveToLocalStorage) {
         let context = this
         var savingSettings = utils.clone(this.mapSettingsTransient)
+        if (this.resetShownOnceTooltips) {
+          savingSettings.shownOnceTooltips = {}
+        } else {
+          savingSettings.shownOnceTooltips = this.$store.getters.mapSettings.shownOnceTooltips
+        }
         this.$store.dispatch('saveSettings', savingSettings).then(() => {
           if (context.$i18n.locale !== savingSettings.locale) {
             context.$i18n.locale = savingSettings.locale
@@ -108,6 +114,7 @@ export default {
     this.availableUnits = settingsOptions.units
     this.availableAreaUnits = settingsOptions.areUnits
     this.mapSettingsTransient = utils.clone(this.$store.getters.mapSettings)
+    this.mapSettingsTransient.apiKey = this.mapSettingsTransient.apiKey || defaultMapSettings.apiKey
     this.setIsCustomApiKey()
   }
 }
