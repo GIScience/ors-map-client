@@ -99,10 +99,14 @@ export default {
       }
       // If is a mobile device, do not use automatic
       // focus to avoid openning the keyboard
-      if (utils.isMobile()) {
+      if (this.isMobile) {
         return false
       }
       return this.focusIsAutomatic
+    },
+    isMobile () {
+      let isMobile = utils.isMobile()
+      return isMobile
     },
     hint () {
       let hint = ''
