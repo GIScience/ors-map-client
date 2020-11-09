@@ -94,14 +94,19 @@ export default {
     this.focusIsAutomatic = this.autofocus
   },
   computed: {
+    /**
+     * Build and returns the input predictable id
+     * @returns {String}
+     */
     predictableId () {
       let id = `place-input-container-${this.idPostfix}-${this.index}`
       return id
     },
     /**
-     * Get the automatic focus must be set or not
+     * Determines if the automatic focus must be set or not
+     * @returns {Boolean}
      */
-    getAutomaticFocus () {
+    hasAutomaticFocus () {
       if (this.focusIsAutomatic) {
         this.setPickPlaceSource()
       }
@@ -112,14 +117,26 @@ export default {
       }
       return this.focusIsAutomatic
     },
+    /**
+     * Determines if the device is mobile
+     * @returns {Boolean}
+     */
     isMobile () {
       let isMobile = utils.isMobile()
       return isMobile
     },
+    /**
+     * Determines if the pick a place button must show its tooltip
+     * @returns {Boolean}
+     */
     showInputPickPlaceTooltip () {
       let show = this.model.isEmpty() && !this.single && this.$store.getters.isSidebarVisible
       return show
     },
+    /**
+     * Get the input hint to be displayed
+     * @returns {String}
+     */
     hint () {
       let hint = ''
       if (this.model.isEmpty() && !this.single) {
@@ -127,10 +144,18 @@ export default {
       }
       return hint
     },
+    /**
+     * Determines if the input details must be hidden
+     * @returns {Boolean}
+     */
     hideDetails () {
-      let hide =  this.single || (!this.focused && !this.getAutomaticFocus)
+      let hide =  this.single || (!this.focused && !this.hasAutomaticFocus)
       return hide
     },
+    /**
+     * Returns the place input rule required message if it is empty
+     * @returns {Boolean|String}
+     */
     placeNameRules () {
       return [
         v => !!v || this.$t('placeInput.placeNameRequired')
@@ -299,13 +324,21 @@ export default {
     }
   },
   methods: {
-    pickPlaceClick () {
+    /**
+     * Handle the click on the pick a place btn
+     */
+    pickPlaceClick (event) {
       this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
       this.localModel = new Place()
       this.setPickPlaceSource()
       if(this.$lowResolution) {
         this.$store.commit('setLeftSideBarIsOpen', false)
       }
+      // The pick plave btn is 'inside' the place input text field
+      // so it will trigger the focus event. In mobile devices
+      // it will cause the keyboard opeening. We don't want this
+      event.stopPropagation()
+      event.preventDefault()
     },
     /**
      * Set the pick place input source
@@ -576,22 +609,28 @@ export default {
     },
     /**
      * Set the current input as having the focus
-     * @param {*} data can be a boolean value or a $event. If it is the second case, we consider it as false
+     * @param {*} data can be a boolean value or an Event. 
+     * If it is the second case, we consider it as false
      */
     setFocus (data) {      
-      // Check if the element that was clicked outside 
-      // is a place input that was previously focused
+      // When the user clicks outside an input
+      // this method is called and is intended to
+      // set the focus as false in rhis case.
+      // To do so, we check if the was previously focused
+      // The parameters passed (automatically) by the click-outside
+      // is expected to be MouseEvent object and no a boolean.
       if (typeof data === 'object' && data.clickedOutside) {
         if (this.inputWasActiveAndLostFocus(data)) {
           this.emptyPickPlaceSource()          
           this.focused = false
         }
       } else {
-        this.focused = data
-        this.setPickPlaceSource()        
+        this.focused = data // data is boolean in this case
+        // If the input is focused, set the pick place source 
+        this.setPickPlaceSource()  
       }
       // Once the focused was set to true based on a user
-      // interaction event the it is not anymore in automatic mode
+      // interaction event then it is not anymore in automatic mode
       if (this.focused) {
         this.focusIsAutomatic = false
       }

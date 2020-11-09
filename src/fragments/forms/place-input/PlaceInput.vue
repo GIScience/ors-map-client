@@ -3,7 +3,7 @@
     <v-layout row wrap >
       <v-flex v-bind="{[inputColumns]: true}">
         <v-text-field class="place-input"
-          v-focus="getAutomaticFocus"
+          v-focus="hasAutomaticFocus"
           v-model="model.placeName"
           clearable
           flat
@@ -20,7 +20,7 @@
           @click:clear="() => placeCleared(index)">
           <template v-slot:append>
             <v-btn v-if="appendBtn === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
-              @click="pickPlaceClick()"
+              @click="pickPlaceClick($event)"
               v-popper-tooltip="{show: showInputPickPlaceTooltip, text: $t('placeInput.clickOnTheMapBtnToPickAPlace'), position: 'bottom', dark: true, showOnce: true, name: 'pickAPlaceOnTheMap'}">
               <v-icon left>map</v-icon>
             </v-btn>
