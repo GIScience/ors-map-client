@@ -107,9 +107,6 @@ export default {
      * @returns {Boolean}
      */
     hasAutomaticFocus () {
-      if (this.focusIsAutomatic) {
-        this.setPickPlaceSource()
-      }
       // If is a mobile device, do not use automatic
       // focus to avoid openning the keyboard
       if (this.isMobile) {
@@ -324,6 +321,15 @@ export default {
     }
   },
   methods: {
+    inputFocused (event) {
+      event.stopPropagation()
+      event.preventDefault()
+    },
+    appendClicked(event) {
+      console.log(event)
+      event.stopPropagation()
+      event.preventDefault()
+    },
     /**
      * Handle the click on the pick a place btn
      */
@@ -334,6 +340,8 @@ export default {
       if(this.$lowResolution) {
         this.$store.commit('setLeftSideBarIsOpen', false)
       }
+      event.stopPropagation()
+      event.preventDefault()
     },
     /**
      * Set the pick place input source
@@ -341,7 +349,7 @@ export default {
      * @uses predictableIda
      */
     setPickPlaceSource () {
-      if (this.pickPlaceSupported && this.localModel.isEmpty()) {
+      if (this.pickPlaceSupported) {
         this.$store.commit('pickPlaceIndex', this.index)
         this.$store.commit('pickPlaceId', this.predictableId)
       }

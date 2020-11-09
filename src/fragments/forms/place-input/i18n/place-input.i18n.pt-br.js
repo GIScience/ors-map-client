@@ -19,7 +19,7 @@ export default {
     addInput: 'Adicionar um campo de local',
     switchCoords: 'Inverter coordenadas',
     rawCoordinate: 'Coordenadas simples lat,lng',
-    fillOrRemoveInput: 'Busque ou selecione no mapa um local',
+    fillOrRemoveInput: 'Busque ou selecione no mapa usando o botão de mapa ao lado',
     noPlaceFound: 'Nenhum resultado returnado',
     unknownSearchPlaceError: 'Erro desconhecido na busca por local',
     approximateDistance: 'Distância aproximada em linha reta do centro do mapa atual',

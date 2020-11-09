@@ -16,18 +16,20 @@
           :disabled="disabled"
           :label="placeInputLabel"
           @click="setFocus(true)"
+          @focus="inputFocused($event)"
           @keyup="changed($event)"
-          @click:append.stop=""
           @click:clear="() => placeCleared(index)">
           <template v-slot:append>
+            <v-btn v-if="appendBtn === 'search'" icon small flat class="append-input-btn" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
+              @click="changed($event)">
+              <v-icon left>search</v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:append-outer>
             <v-btn v-if="appendBtn === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
               @click="pickPlaceClick($event)"
               v-popper-tooltip="{show: showInputPickPlaceTooltip, text: $t('placeInput.clickOnTheMapBtnToPickAPlace'), position: 'bottom', dark: true, showOnce: true, name: 'pickAPlaceOnTheMap'}">
               <v-icon left>map</v-icon>
-            </v-btn>
-            <v-btn v-else icon small flat class="append-input-btn" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
-              @click="changed($event)">
-              <v-icon left>search</v-icon>
             </v-btn>
           </template>
         </v-text-field>
