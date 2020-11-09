@@ -14,6 +14,7 @@
                 </v-flex>
                 <v-flex v-bind="{[ $store.getters.mode === constants.modes.directions? 'sm10 md11' : 'sm12']: true}">
                   <place-input :ref="'place'+index"
+                    id-postfix="places-and-directions"
                     :support-directions="inputsupportsDirections"
                     :directions-button-tooltip="$store.getters.isSidebarVisible"
                     directions-button-tooltip-position="right" 

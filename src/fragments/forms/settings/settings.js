@@ -78,6 +78,7 @@ export default {
     },
     restoreDefaultMapSettings () {
       this.mapSettingsTransient = this.mapSettingsTransient = utils.clone(defaultMapSettings)
+      this.resetShownOnceTooltips = true
       this.save()
       this.customApiKey = false
       this.showSuccess(this.$t('settings.defaultMapSettingsRestored'))

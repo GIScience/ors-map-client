@@ -73,6 +73,10 @@ export default {
     directionsButtonTooltipPosition: {
       default: 'right',
       type: String
+    },
+    idPostfix: {
+      default: '',
+      type: String
     }
 
   },
@@ -90,12 +94,16 @@ export default {
     this.focusIsAutomatic = this.autofocus
   },
   computed: {
+    predictableId () {
+      let id = `place-input-container-${this.idPostfix}-${this.index}`
+      return id
+    },
     /**
      * Get the automatic focus must be set or not
      */
     getAutomaticFocus () {
       if (this.focusIsAutomatic) {
-        this.setPickPlaceIndex()
+        this.setPickPlaceSource()
       }
       // If is a mobile device, do not use automatic
       // focus to avoid openning the keyboard
@@ -269,7 +277,7 @@ export default {
       let show = this.focused && !this.focusIsAutomatic
       return show
     },
-    appendIcon () {
+    appendBtn () {
       if (this.supportSearch) {
         return 'search'
       } else if (this.$lowResolution || this.localModel.isEmpty()) {
@@ -291,21 +299,31 @@ export default {
     }
   },
   methods: {
-    appendClick (event) {
-      if (this.supportSearch === true) {
-        this.changed(event)
-      } else {
-        this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
-        this.$store.commit('pickPlaceIndex', this.index)
-        if(this.$lowResolution) {
-          this.$store.commit('setLeftSideBarIsOpen', false)
-        }
+    pickPlaceClick () {
+      this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
+      this.localModel = new Place()
+      this.setPickPlaceSource()
+      if(this.$lowResolution) {
+        this.$store.commit('setLeftSideBarIsOpen', false)
       }
     },
-    setPickPlaceIndex () {
+    /**
+     * Set the pick place input source
+     * @uses index 
+     * @uses predictableIda
+     */
+    setPickPlaceSource () {
       if (this.pickPlaceSupported && this.localModel.isEmpty()) {
         this.$store.commit('pickPlaceIndex', this.index)
+        this.$store.commit('pickPlaceId', this.predictableId)
       }
+    },
+    /**
+     * Empty the pick place source
+     */
+    emptyPickPlaceSource () {
+      this.$store.commit('pickPlaceIndex', null)
+      this.$store.commit('pickPlaceId', null)   
     },
     /**
      * Run search if in search mode or resolve place if model is unresolved
@@ -565,12 +583,12 @@ export default {
       // is a place input that was previously focused
       if (typeof data === 'object' && data.clickedOutside) {
         if (this.inputWasActiveAndLostFocus(data)) {
-          this.$store.commit('pickPlaceIndex', null)
+          this.emptyPickPlaceSource()          
           this.focused = false
         }
       } else {
         this.focused = data
-        this.setPickPlaceIndex()        
+        this.setPickPlaceSource()        
       }
       // Once the focused was set to true based on a user
       // interaction event the it is not anymore in automatic mode
@@ -588,11 +606,10 @@ export default {
      * @returns {Boolean}
      */
     inputWasActiveAndLostFocus (event) {
-      let selfContainerId = `place-input-container-${this.index}`
-      let isInputIndexStored = this.$store.getters.pickPlaceIndex === this.index
-      let thisElIdWasOutsided = event.outsideEl.id === selfContainerId
+      let isThisInputStored = this.$store.getters.pickPlaceIndex === this.index && this.$store.getters.pickPlaceId === this.predictableId
+      let thisElIdWasOutsided = event.outsideEl.id === this.predictableId
       // Check if it matches the conditions
-      if (thisElIdWasOutsided && isInputIndexStored) {
+      if (thisElIdWasOutsided && isThisInputStored) {
         return true
       }
     },

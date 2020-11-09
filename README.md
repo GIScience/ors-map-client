@@ -16,6 +16,7 @@ The VueJS components allow a better code organization, weak and clear coupling b
 - [CRUD component](#crud-component)
 - [Reserved methods and accessors](#reserved-methods-and-accessors)
 - [pages](#pages)
+- [Add language](#add-language)
 - [Menu](#menu)
 - [Debug](#debug)
 - [Build and deploy](#build-and-deploy)
@@ -163,7 +164,32 @@ All the VueJS components created (including the fragments) will have, by default
 
 ### Pages ###
 
-- `maps` - the page where the user can search places, routes and create isochrones
+- `maps` - the page where the user can search places, routes and create isochrones.
+
+### Add language ###
+
+Follow the steps below to add a language.
+
+- Create a copy of the /src/i18n/translations/`en-us` folder giving it the identification of the target language. For example: if you are adding the French from France, then the folder should be called `fr-fr`.
+
+- Edit the builder.js file inside the just created folder in order to replace the language pattern to the one you are creating. For example, where is /\.i18n\.`en-us\`.js$, put /\.i18n\.`fr-fr`\.js$
+
+- Translate the language strings for each key in the `global.js` file
+
+- Search for each file inside the `/src` folder that ends with `i18n.en-en.js` and create a copy of it and each one so that each new created file now ends with `i18n.fr-fr.js`
+
+- Translate the language strings for each key in all the files created in the previous step.
+
+- Edit the /src/resources/`settings-options.js`and add the new locale object to the `appLocales` array. For this example, you would add { text: 'Français FR', value: 'fr-fr' }
+
+- Open the src/i18n/`i18n-builder.js` file and apply the following changes:
+  - Import the object from the new language builder that you just created. For this example it would be `import frFRTranslations from './translations/fr-fr/builder`'
+
+  - Inside the `build` method, add the new language placeholder object to the messages object. For this example you would add `, 'fr-fr': {}`
+  
+  - Still inside the `build` method, add the result of the new language building to the previously created message object. In this example you would add: `i18n.messages['en-us'] = frFRTranslations.build()`
+  
+  - Save all the files changed and rebuild the application.
 
 ### Menu ###
 

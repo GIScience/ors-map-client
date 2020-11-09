@@ -6,6 +6,7 @@ const state = {
   topBarOpen: true,
   displayFooter: true,
   pickPlaceIndex: null,
+  pickPlaceId: null,
   mainMenu: [],
   footerFullHeight: 74,
   footerMiniHeight: 140,
@@ -52,7 +53,10 @@ const getters = {
   },
   pickPlaceIndex: state => {
     return state.pickPlaceIndex
-  }
+  },
+  pickPlaceId: state => {
+    return state.pickPlaceId
+  }  
 }
 
 const mutations = {
@@ -75,6 +79,9 @@ const mutations = {
   },
   pickPlaceIndex: (state, index) => {
     state.pickPlaceIndex = index
+  },
+  pickPlaceId: (state, id) => {
+    state.pickPlaceId = id
   },
   mainMenu: (state, items) => {
     state.mainMenu = items

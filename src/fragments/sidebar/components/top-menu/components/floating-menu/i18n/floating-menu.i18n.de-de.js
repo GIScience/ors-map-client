@@ -6,6 +6,6 @@ export default {
     openrouteserviceAPI: 'Openrouteservice API',
     openrouteserviceForDisasters: 'Openrouteservice für Katastrophenmanagement',
     askOpenrouteservice: 'Frage openrouteservice',
-    settingsTooltip: 'Klicken Sie hier, wenn Sie Einstellungen anpassen und andere Optionen sehen möchten'
+    settingsTooltip: 'Hier klicken um Einstellungen und andere Optionen anzupassen'
   }
 }

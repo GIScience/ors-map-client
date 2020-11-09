@@ -4,6 +4,6 @@ export default {
     showAbout: 'Allgemeine Informationen',
     about: 'Über ORS',
     pinSidebar: 'Seitenleiste dauerhaft',
-    settingsTooltip: 'Klicken Sie hier, wenn Sie Einstellungen anpassen möchten'
+    settingsTooltip: 'Hier klicken um Einstellungen anzzupassen'
   }
 }

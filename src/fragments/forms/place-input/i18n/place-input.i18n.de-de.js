@@ -27,8 +27,8 @@ export default {
     pleaseTypeSomething: 'Bitte geben Sie etwas ein, um zu suchen',
     toggleDirect: 'Direkter Weg (Luftlinie) zu nächstem Punkt an/aus',
     clickOnTheMapToSelectAPlace: 'Klicke auf die Karte um einen Ort auszuwählen',
-    clickOnTheMapBtnToPickAPlace: 'Klicken Sie auf diese Schaltfläche, um einen Ort auf der Karte für diese Eingabe auszuwählen',
-    goToDirectionsMode: 'Klicken Sie auf die Schaltfläche Wegbeschreibung, um zum Routing-Modus zu wechseln',
-    clickToSearchAndShowResultsOnTheMap: 'Klicken Sie, um zu suchen und die Ergebnisse auf der Karte anzuzeigen'
+    clickOnTheMapBtnToPickAPlace: 'Diesen Button klicken um einen Ort auf der Karte auszuwählen',
+    goToDirectionsMode: 'Klicke den {Directions translation} Button um zum Routing-Modus zu wechseln',
+    clickToSearchAndShowResultsOnTheMap: 'Hier klicken um zu Suchen und die Ergebnisse auf der Karte anzuzeigen'
   }
 }

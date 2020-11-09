@@ -1167,8 +1167,8 @@ export default {
      * @param {Place} place
      * @emits setInputPlace
      */
-    setInputPlace (placeIndex, place) {
-      let data = {pickPlaceIndex: placeIndex, place: place}
+    setInputPlace (placeIndex, placeInputId, place) {
+      let data = {pickPlaceIndex: placeIndex, placeInputId: placeInputId, place: place}
       this.$emit('setInputPlace', data)
     },
 
@@ -1343,9 +1343,13 @@ export default {
       let place = new Place(event.latlng.lng, event.latlng.lat)
       let context = this
       let pickPlaceIndex = context.$store.getters.pickPlaceIndex
+      let pickPlaceId = context.$store.getters.pickPlaceId
       place.resolve().then(() => {
-        context.setInputPlace(pickPlaceIndex, place)
+        context.setInputPlace(pickPlaceIndex, pickPlaceId, place)
+        // Once a place was picked up, 
+        // remove the sstore pick place data
         context.$store.commit('pickPlaceIndex', null)
+        context.$store.commit('pickPlaceId', null)
       })      
     },
 

@@ -12,6 +12,7 @@
       <v-flex xs10 sm10 md11>
         <v-form ref="form" @submit.prevent>
           <place-input class="mini-input" :height="27" :mb="0" :index="0"
+            id-postfix="simple-place-search"
             :model="place"
             :directions-button-tooltip="showDirectionsButtonTooltip"
             directions-button-tooltip-position="bottom"   

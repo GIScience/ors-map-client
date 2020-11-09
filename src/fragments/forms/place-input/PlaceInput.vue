@@ -1,5 +1,5 @@
 <template>
-  <div v-click-outside="setFocus" :id="'place-input-container-' + index" >
+  <div v-click-outside="setFocus" :id="predictableId" >
     <v-layout row wrap >
       <v-flex v-bind="{[inputColumns]: true}">
         <v-text-field class="place-input"
@@ -19,13 +19,13 @@
           @keyup="changed($event)"
           @click:clear="() => placeCleared(index)">
           <template v-slot:append>
-            <v-btn v-if="appendIcon === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
-              @click="appendClick($event)"
+            <v-btn v-if="appendBtn === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
+              @click="pickPlaceClick()"
               v-popper-tooltip="{show: showInputPickPlaceTooltip, text: $t('placeInput.clickOnTheMapBtnToPickAPlace'), position: 'bottom', dark: true, showOnce: true, name: 'pickAPlaceOnTheMap'}">
               <v-icon left>map</v-icon>
             </v-btn>
             <v-btn v-else icon small flat class="append-input-btn" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
-              @click="appendClick($event)">
+              @click="changed($event)">
               <v-icon left>search</v-icon>
             </v-btn>
           </template>
