@@ -19,12 +19,16 @@ export default {
     addInput: 'Ortseingabe hinzufügen',
     switchCoords: 'Koordinaten vertauschen',
     rawCoordinate: 'Lat,Long Koordinaten',
-    fillOrRemoveInput: 'Wähle einen Ort oder lösche die Eingabe',
+    fillOrRemoveInput: 'Suche ein Ort oder benutzen Sie die Karten-Schaltfläche auf der rechten Seite',
     noPlaceFound: 'Keine Orte gefunden',
     unknownSearchPlaceError: 'Unbekannter Fehler beim Suchen',
     approximateDistance: 'Ungefähre Entfernung in einer geraden Linie vom aktuellen Kartenzentrum',
     couldNotDetermineYourPreciseLocationUsingPreviousLocation: 'Es war nicht möglich, Ihren Standort zu bestimmen. Ihr bisheriger Standort wird stattdessen verwendet.',
     pleaseTypeSomething: 'Bitte geben Sie etwas ein, um zu suchen',
-    toggleDirect: 'Direkter Weg (Luftlinie) zu nächstem Punkt an/aus'
+    toggleDirect: 'Direkter Weg (Luftlinie) zu nächstem Punkt an/aus',
+    clickOnTheMapToSelectAPlace: 'Klicke auf die Karte um einen Ort auszuwählen',
+    clickOnTheMapBtnToPickAPlace: 'Diesen Button klicken um einen Ort auf der Karte auszuwählen',
+    goToDirectionsMode: 'Klicke den {Directions translation} Button um zum Routing-Modus zu wechseln',
+    clickToSearchAndShowResultsOnTheMap: 'Hier klicken um zu Suchen und die Ergebnisse auf der Karte anzuzeigen'
   }
 }

@@ -46,6 +46,7 @@ export default {
     compressDataUrlSegment: 'Comprimir o segmento da URL depois de /data/',
     autoFitHighlightedBounds: 'Automaticamente enquadrar elemento(s) selecionad(o)',
     reloadToApplyLanguageChangeTitle: 'É necessário recarregar a aplicação',
-    reloadToApplyLanguageChangeText: 'Para que a mudança de idioma seja totalmente aplicada é necessário recarregar a aplicação. Recarregar agora?'
+    reloadToApplyLanguageChangeText: 'Para que a mudança de idioma seja totalmente aplicada é necessário recarregar a aplicação. Recarregar agora?',
+    resetShownOnceTooltips: 'Exibir dicas quando a aplicação é carregada'
   }
 }

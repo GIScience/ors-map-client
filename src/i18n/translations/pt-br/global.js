@@ -7,6 +7,7 @@ export default {
     appName: 'Openrouteservice Maps',
     brand: 'HeiGIT - Heidelberg University',
     close: 'Fechar',
+    closeAndDoNotShowAgain: 'Fechar e não exibir novamente',
     select: 'Selecionar',
     yes: 'Sim',
     no: 'Não',
@@ -57,6 +58,8 @@ export default {
       hours: 'h',
       days: 'd',
       minutes: 'min',
+      lat: 'lat',
+      lng: 'long'
     },
     layers: {
       macrocounty: 'Macro condado',

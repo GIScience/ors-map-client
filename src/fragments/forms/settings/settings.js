@@ -14,6 +14,7 @@ export default {
     availableUnits: [],
     availableAreaUnits: [],
     customApiKey: false,
+    resetShownOnceTooltips: false
   }),
   computed: {
     routingLocales () {
@@ -46,11 +47,18 @@ export default {
       if (this.mapSettingsTransient.saveToLocalStorage) {
         let context = this
         var savingSettings = utils.clone(this.mapSettingsTransient)
+        if (this.resetShownOnceTooltips) {
+          savingSettings.shownOnceTooltips = {}
+        } else {
+          savingSettings.shownOnceTooltips = this.$store.getters.mapSettings.shownOnceTooltips
+        }
         this.$store.dispatch('saveSettings', savingSettings).then(() => {
           if (context.$i18n.locale !== savingSettings.locale) {
             context.$i18n.locale = savingSettings.locale
-            context.confirmDialog(context.$t('settings.reloadToApplyLanguageChangeTitle'), context.$t('settings.reloadToApplyLanguageChangeText')).then((response) => {
-              if (response === true) {
+            let title = context.$t('settings.reloadToApplyLanguageChangeTitle')
+            let text = context.$t('settings.reloadToApplyLanguageChangeText')
+            context.confirmDialog(title, text).then((data) => {
+              if (data.response === 'yes') {
                 window.location.reload()
               }
             })
@@ -70,6 +78,7 @@ export default {
     },
     restoreDefaultMapSettings () {
       this.mapSettingsTransient = this.mapSettingsTransient = utils.clone(defaultMapSettings)
+      this.resetShownOnceTooltips = true
       this.save()
       this.customApiKey = false
       this.showSuccess(this.$t('settings.defaultMapSettingsRestored'))
@@ -106,6 +115,7 @@ export default {
     this.availableUnits = settingsOptions.units
     this.availableAreaUnits = settingsOptions.areUnits
     this.mapSettingsTransient = utils.clone(this.$store.getters.mapSettings)
+    this.mapSettingsTransient.apiKey = this.mapSettingsTransient.apiKey || defaultMapSettings.apiKey
     this.setIsCustomApiKey()
   }
 }

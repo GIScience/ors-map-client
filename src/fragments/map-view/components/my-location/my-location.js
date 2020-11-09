@@ -1,4 +1,3 @@
-import { createPopper } from '@popperjs/core'
 
 export default {
   props: {
@@ -20,36 +19,9 @@ export default {
     }
   },
   mounted () {
-    // Run the utility that may define a more appropriate map
-    // center center if appRouteData is empty
-    if (this.$store.getters.appRouteData.places.length === 0) {
-      this.showToolTip()
-    }
+    this.toolTipVisible = this.$store.getters.appRouteData.places.length === 0
   },
   methods: {
-    showToolTip () {
-      this.toolTipVisible = true
-      this.$nextTick(() => {
-        const button = document.querySelector('.my-location-btn')
-        const tooltip = document.querySelector('#my-position-tooltip')
-
-        // Pass the button, the tooltip, and some options, and Popper will do the
-        // magic positioning for you:
-        createPopper(button, tooltip,
-          {
-            placement: 'left',
-            modifiers: [
-              {
-                name: 'offset',
-                options: {
-                  offset: [0, 8]
-                }
-              }
-            ]
-          }
-        )
-      })
-    },
     /**
      * Handles the menu activation event
      */
@@ -61,7 +33,7 @@ export default {
         const context = this
         setTimeout(() => {
           if (context.menuOpen) {
-            context.showToolTip()
+            context.toolTipVisible = true
           } else {
             context.toolTipVisible = false
           }

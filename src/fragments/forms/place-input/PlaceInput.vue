@@ -1,26 +1,38 @@
 <template>
-  <div v-click-outside="setFocus">
+  <div v-click-outside="setFocus" :id="predictableId" >
     <v-layout row wrap >
       <v-flex v-bind="{[inputColumns]: true}">
         <v-text-field class="place-input"
-          v-focus="getAutomaticFocus"
+          v-focus="hasAutomaticFocus"
           v-model="model.placeName"
           clearable
           flat
           :box="box"
-          :hide-details="single || index == 0"
+          :hide-details="hideDetails"
           :hint="hint"
-          :persistent-hint="!single && index > 0"
+          :persistent-hint="!hideDetails"
           :height="height"
           :style="{'margin-bottom': mb +'px'}"
           :disabled="disabled"
-          :append-icon="supportSearch === true ? 'search': ''"
           :label="placeInputLabel"
           @click="setFocus(true)"
+          @focus="inputFocused($event)"
           @keyup="changed($event)"
-          @click:clear="() => placeCleared(index)"
-          @click:append="changed($event)"
-        ></v-text-field>
+          @click:clear="() => placeCleared(index)">
+          <template v-slot:append>
+            <v-btn v-if="appendBtn === 'search'" icon small flat class="append-input-btn" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
+              @click="changed($event)">
+              <v-icon left>search</v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:append-outer>
+            <v-btn v-if="appendBtn === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
+              @click="pickPlaceClick($event)"
+              v-popper-tooltip="{show: showInputPickPlaceTooltip, text: $t('placeInput.clickOnTheMapBtnToPickAPlace'), position: 'bottom', dark: true, showOnce: true, name: 'pickAPlaceOnTheMap'}">
+              <v-icon left>map</v-icon>
+            </v-btn>
+          </template>
+        </v-text-field>
       </v-flex>
       <v-flex v-if="iconsBtnCounter > 0" v-bind="{[iconsColumns]: true}" class="input-btns">
         <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="deleteAvailable && $mdAndUpResolution"  @click="deletePlace()">
@@ -30,11 +42,13 @@
           <v-icon :color="this.model.direct? 'primary': 'dark'" :title="$t('placeInput.toggleDirect')" class="input-icon" >settings_ethernet</v-icon>
         </v-btn>
 
-        <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="directionsAvailable" @click="startDirections()">
+        <v-btn flat class="input-btn" :id="getNewGuid('directions')" :class="{small: $mdAndUpResolution}" 
+          v-if="directionsAvailable" @click="startDirections()"
+          v-popper-tooltip="{show: directionsButtonTooltip, text: $t('placeInput.goToDirectionsMode'), position: directionsButtonTooltipPosition, dark: true, showOnce: true, name: 'useDiretionsButton'}">
           <v-icon :title="$t('placeInput.directions')" color="dark" :large="$lowResolution" class="input-icon" >directions</v-icon>
         </v-btn>
 
-        <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="switchCoordsAvailable && ($mdAndUpResolution || index === 0)" @click="switchCoords()">
+        <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="switchCoordsAvailable && ($mdAndUpResolution)" @click="switchCoords()">
           <v-icon :title="$t('placeInput.switchCoords')" color="dark" :large="$lowResolution" class="input-icon" >compare_arrows</v-icon>
         </v-btn>
 
@@ -72,22 +86,34 @@
         </v-menu>
       </v-flex>
     </v-layout>
-    <div class="suggestions shadow" :class="{'scrollable': $lowResolution && placeSuggestions.length > 0}"  v-if="showSuggestion">
+    <div class="suggestions shadow" :class="{'scrollable': $lowResolution && placeSuggestions.length > 0, 'multiple-input': !single && $lowResolution}"  v-if="showSuggestion">
       <v-layout row>
-        <v-flex xs10 sm10 md11>
-           <v-list-tile  @click.stop="setLocationFromBrowser()" v-if="showBrowserLocationInPlacesList" :title="$t('placeInput.yourLocation')">
-            <v-list-tile-action>
-              <v-icon>gps_fixed</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>
-                <v-btn flat small @click.stop="setLocationFromBrowser()" class="no-padding no-margin no-capitalize">
-                  {{ $t('placeInput.yourLocation') }}
+        <v-flex>
+          <v-layout row>
+            <v-flex xs10 sm10 md11>
+              <v-list-tile  @click.stop="setLocationFromBrowser()" v-if="showBrowserLocationInPlacesList" :title="$t('placeInput.yourLocation')">
+                <v-list-tile-action>
+                  <v-icon>gps_fixed</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>
+                    <v-btn flat small @click.stop="setLocationFromBrowser()" class="no-padding no-margin no-capitalize">
+                      {{ $t('placeInput.yourLocation') }}
+                    </v-btn>
+                  </v-list-tile-title>
+                  <v-list-tile-sub-title>{{ $t('placeInput.fromYourBrowser') }}</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-flex xs2 sm2 md1 >
+              <div>
+                <v-btn flat small fab class="close-suggestions no-marging no-padding" style="width:40px" @click="setFocus(false)">
+                  <v-icon :title="$t('global.close')" :large="$lowResolution" >close</v-icon>
                 </v-btn>
-              </v-list-tile-title>
-              <v-list-tile-sub-title>{{ $t('placeInput.fromYourBrowser') }}</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+              </div>
+            </v-flex>
+          </v-layout>
           <v-list-tile @click.stop="suggestionClicked(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'
             :title="placeSuggested.placeName">
             <v-list-tile-action class="hidden-sm-and-down">
@@ -109,15 +135,7 @@
               </v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-        </v-flex>
-        <v-spacer></v-spacer>
-        <v-flex xs2 sm2 md1 >
-          <div>
-            <v-btn flat small fab class="close-suggestions no-marging no-padding" style="width:40px" @click="setFocus(false)">
-              <v-icon :title="$t('global.close')" :large="$lowResolution" class="close-suggestions" >close</v-icon>
-            </v-btn>
-          </div>
-        </v-flex>
+        </v-flex>        
       </v-layout>
     </div>
   </div>

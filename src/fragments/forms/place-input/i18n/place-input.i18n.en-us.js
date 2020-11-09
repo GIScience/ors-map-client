@@ -19,12 +19,16 @@ export default {
     addInput: 'Add place input',
     switchCoords: 'Switch coordinates',
     rawCoordinate: 'Lat,lng raw coordinate',
-    fillOrRemoveInput: 'Choose a location or remove input',
+    fillOrRemoveInput: 'Search a place or use the map button on the right',
     noPlaceFound: 'No results returned',
     unknownSearchPlaceError: 'Unknown place search error',
     approximateDistance: 'Approximate distance in a straight line from current map center',
     couldNotDetermineYourPreciseLocationUsingPreviousLocation: 'It was not possible to determine your precise location. Your previous location will be used instead',
     pleaseTypeSomething: 'Please type something to search',
-    toggleDirect: 'Toggle direct from here until next place'
+    toggleDirect: 'Toggle direct from here until next place',
+    clickOnTheMapToSelectAPlace: 'Pick a place by clicking on a map location',
+    clickOnTheMapBtnToPickAPlace: 'Click on this button to pick a place on the map for this input',
+    goToDirectionsMode: 'Click the directions button to switch to routing mode',
+    clickToSearchAndShowResultsOnTheMap: 'Click to search and show results on the map'
   }
 }

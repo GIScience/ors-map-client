@@ -4,7 +4,7 @@
       id="map-view"
       ref="map"
       class="map-view"
-      :class="{'low-resolution': $lowResolution, 'extra-low-resolution': $xlResolution}"
+      :class="{'low-resolution': $lowResolution, 'extra-low-resolution': $xlResolution, 'click-to-pick': clickToPickActive}"
       @click.right="mapRightClick"
       @zoomend="zoomed"
       @baselayerchange="baseLayerChanged"
@@ -116,7 +116,7 @@
     <v-btn v-if="$store.getters.embed" small :title="$t('mapView.viewOnORS')" class="view-on-ors" target="_blank" :href="nonEmbedUrl" > {{$t('mapView.viewOnORS')}} <v-icon right small >open_in_new</v-icon> </v-btn>
     <my-location v-else :active="myLocationActive" @updateLocation="updateMyLocation"></my-location>
     <map-right-click v-if="!$store.getters.embed" :map-view-data="mapViewData" @closed="clickLatlng = null" @rightClickEvent="handleRightClickEvent"></map-right-click>
-    <map-left-click :current-zoom="zoom" @closed="clickLatlng = null" ></map-left-click>
+    <map-left-click :current-zoom="zoom" @closed="clickLatlng = null" @directionsToPoint="directionsToPoint"></map-left-click>
 
     <div v-if="$store.getters.mapSettings.acessibleModeActive">
       <v-btn fab small @click="moveMapCenter('left')" :title="$t('mapView.moveMapPositionToLeft')" class="move-map-arrow left do-not-trigger-close-bottom-nav" > <v-icon large color="primary" >arrow_back</v-icon> </v-btn>

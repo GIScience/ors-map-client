@@ -7,6 +7,10 @@
   padding-top: 5px;
   cursor: pointer; float:right
 }
+.append-input-btn {
+  margin-top: -7px;
+  padding-left: 15px;
+}
 
 .suggestions.scrollable {
   max-height: 220px;
@@ -19,6 +23,10 @@
   background: white;
   width: 100%;
   overflow: hidden;
+}
+
+.suggestions.multiple-input {
+  margin-left: -34px;
 }
 
 .shadow {

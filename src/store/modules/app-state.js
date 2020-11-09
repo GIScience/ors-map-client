@@ -6,7 +6,7 @@ const state = {
   mode: constants.modes.place,
   apiDataRequested: false,
   dataAcquired: false,
-  mapSettings: {},
+  mapSettings: {shownOnceTooltips: {}},
   embed: false,
   acessibleModeActive: false
 }
@@ -59,13 +59,15 @@ const actions = {
       localStorage.removeItem('mapSettings')
       const defaultSettings = defaultMapSettings
 
+      const settingsToKeepInAppStore = utils.clone(savingSettings)
+
       // The apiKey must not be saved if it is the default one (only if is a custom one)
       if (savingSettings.apiKey === defaultSettings.apiKey || savingSettings.apiKey === '' || savingSettings.apiKey === null) {
         delete savingSettings.apiKey
       }
-      commit('mapSettings', savingSettings)
+      commit('mapSettings', settingsToKeepInAppStore)
       localStorage.setItem('mapSettings', JSON.stringify(savingSettings))
-      resolve(savingSettings)
+      resolve(settingsToKeepInAppStore)
     })
   }
 }

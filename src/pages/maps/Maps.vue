@@ -39,6 +39,7 @@
       @addAsIsochroneCenter="addAsIsochroneCenter"
       @removePlace="removePlace"
       @directChanged="directChanged"
+      @setInputPlace="setInputPlace"
       @markerClicked="markerClicked">
     </map-view>
 

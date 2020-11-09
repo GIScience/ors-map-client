@@ -61,7 +61,24 @@ export default {
     supportSearch: {
       type: Boolean,
       default: true
+    },
+    pickPlaceSupported: {
+      type: Boolean,
+      default: false
+    },
+    directionsButtonTooltip: {
+      default: false,
+      type: Boolean
+    },
+    directionsButtonTooltipPosition: {
+      default: 'right',
+      type: String
+    },
+    idPostfix: {
+      default: '',
+      type: String
     }
+
   },
   created () {
     // Create a local clone of the model passed via props (so we can modify if when necessary)
@@ -78,23 +95,64 @@ export default {
   },
   computed: {
     /**
-     * Get the automatic focus must be set or not
+     * Build and returns the input predictable id
+     * @returns {String}
      */
-    getAutomaticFocus () {
+    predictableId () {
+      let id = `place-input-container-${this.idPostfix}-${this.index}`
+      return id
+    },
+    /**
+     * Determines if the automatic focus must be set or not
+     * @returns {Boolean}
+     */
+    hasAutomaticFocus () {
       // If is a mobile device, do not use automatic
       // focus to avoid openning the keyboard
-      if (utils.isMobile()) {
+      if (this.isMobile) {
         return false
       }
       return this.focusIsAutomatic
     },
+    /**
+     * Determines if the device is mobile
+     * @returns {Boolean}
+     */
+    isMobile () {
+      let isMobile = utils.isMobile()
+      return isMobile
+    },
+    /**
+     * Determines if the pick a place button must show its tooltip
+     * @returns {Boolean}
+     */
+    showInputPickPlaceTooltip () {
+      let show = this.model.isEmpty() && !this.single && this.$store.getters.isSidebarVisible
+      return show
+    },
+    /**
+     * Get the input hint to be displayed
+     * @returns {String}
+     */
     hint () {
       let hint = ''
-      if (this.model.isEmpty() && !this.single && this.index > 0) {
+      if (this.model.isEmpty() && !this.single) {
         hint = this.$t('placeInput.fillOrRemoveInput')
       }
       return hint
     },
+    /**
+     * Determines if the input details must be hidden
+     * @returns {Boolean}
+     */
+    hideDetails () {
+      let hide =  this.single || (!this.focused && !this.hasAutomaticFocus)
+      return hide
+    },
+    /**
+     * Returns the place input rule required message if it is empty
+     * @returns {Boolean|String}
+     */
     placeNameRules () {
       return [
         v => !!v || this.$t('placeInput.placeNameRequired')
@@ -201,7 +259,7 @@ export default {
      * Determines if the place input floating menu button is availabel for the current place input
      */
     placeMenuAvailable () {
-      return this.$lowResolution && !this.single && (this.index > 0 || this.directIsAvailable)
+      return this.$lowResolution && !this.single && (this.index > 0 || this.directIsAvailable || this.switchCoordsAvailable)
     },
     /**
      * Determines if the place input directions menu button is availabel for the current place input
@@ -240,6 +298,13 @@ export default {
     showSuggestion () {
       let show = this.focused && !this.focusIsAutomatic
       return show
+    },
+    appendBtn () {
+      if (this.supportSearch) {
+        return 'search'
+      } else if (this.$lowResolution || this.localModel.isEmpty()) {
+        return 'map'
+      }
     }
   },
   watch: {
@@ -256,6 +321,46 @@ export default {
     }
   },
   methods: {
+    inputFocused (event) {
+      event.stopPropagation()
+      event.preventDefault()
+    },
+    appendClicked(event) {
+      console.log(event)
+      event.stopPropagation()
+      event.preventDefault()
+    },
+    /**
+     * Handle the click on the pick a place btn
+     */
+    pickPlaceClick (event) {
+      this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
+      this.localModel = new Place()
+      this.setPickPlaceSource()
+      if(this.$lowResolution) {
+        this.$store.commit('setLeftSideBarIsOpen', false)
+      }
+      event.stopPropagation()
+      event.preventDefault()
+    },
+    /**
+     * Set the pick place input source
+     * @uses index 
+     * @uses predictableIda
+     */
+    setPickPlaceSource () {
+      if (this.pickPlaceSupported) {
+        this.$store.commit('pickPlaceIndex', this.index)
+        this.$store.commit('pickPlaceId', this.predictableId)
+      }
+    },
+    /**
+     * Empty the pick place source
+     */
+    emptyPickPlaceSource () {
+      this.$store.commit('pickPlaceIndex', null)
+      this.$store.commit('pickPlaceId', null)   
+    },
     /**
      * Run search if in search mode or resolve place if model is unresolved
      */
@@ -502,23 +607,52 @@ export default {
       if (!this.model.isEmpty()) {
         this.$emit('cleared', this.index)
       }
+      this.localModel = new Place()
+      this.setFocus(true)
     },
     /**
      * Set the current input as having the focus
-     * @param {*} data can be a boolean value or a $event. If it is the second case, we consider it as false
+     * @param {*} data can be a boolean value or an Event. 
+     * If it is the second case, we consider it as false
      */
-    setFocus (data) {
-      const state = typeof data === 'boolean' ? data : false
-      this.focused = state
+    setFocus (data) {      
+      // When the user clicks outside an input
+      // this method is called and is intended to
+      // set the focus as false in rhis case.
+      // To do so, we check if the was previously focused
+      // The parameters passed (automatically) by the click-outside
+      // is expected to be MouseEvent object and no a boolean.
+      if (typeof data === 'object' && data.clickedOutside) {
+        if (this.inputWasActiveAndLostFocus(data)) {
+          this.emptyPickPlaceSource()          
+          this.focused = false
+        }
+      } else {
+        this.focused = data // data is boolean in this case
+        // If the input is focused, set the pick place source 
+        this.setPickPlaceSource()  
+      }
       // Once the focused was set to true based on a user
-      // interaction event the it is not anymore in automatic mode
+      // interaction event then it is not anymore in automatic mode
       if (this.focused) {
         this.focusIsAutomatic = false
       }
       // If the app is in the search mode, then run
       // the autocompleteSearch that will show the suggestions
-      if (state && this.$store.getters.mode === constants.modes.search) {
+      if (this.focused && this.$store.getters.mode === constants.modes.search) {
         this.autocompleteSearch()
+      }
+    },
+    /**
+     * Determines if the current place input was clicked outside
+     * @returns {Boolean}
+     */
+    inputWasActiveAndLostFocus (event) {
+      let isThisInputStored = this.$store.getters.pickPlaceIndex === this.index && this.$store.getters.pickPlaceId === this.predictableId
+      let thisElIdWasOutsided = event.outsideEl.id === this.predictableId
+      // Check if it matches the conditions
+      if (thisElIdWasOutsided && isThisInputStored) {
+        return true
       }
     },
 
@@ -599,6 +733,10 @@ export default {
       this.model.direct = !this.model.direct
       let data = { index: this.index, place: this.model }
       this.$emit('changedDirectPlace', data)
+    },
+    getNewGuid (prefix) {
+      let guid = utils.guid(prefix)
+      return guid
     }
   }
 }

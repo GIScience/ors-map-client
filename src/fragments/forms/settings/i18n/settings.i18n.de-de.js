@@ -46,6 +46,7 @@ export default {
     compressDataUrlSegment: 'URL Segment hinter /data/ komprimieren',
     autoFitHighlightedBounds: 'Auto-Zoom zu selektiertem Wegabschnitt',
     reloadToApplyLanguageChangeTitle: 'App muss neu geladen werden',
-    reloadToApplyLanguageChangeText: 'Um die Sprache komplett umzustellen, muss die App neu geladen werden. Jetzt neu laden?'
+    reloadToApplyLanguageChangeText: 'Um die Sprache komplett umzustellen, muss die App neu geladen werden. Jetzt neu laden?',
+    resetShownOnceTooltips: 'Hinweise erneut anzeigen'
   }
 }

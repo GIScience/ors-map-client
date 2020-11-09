@@ -121,10 +121,15 @@
           </v-expansion-panel>
           <br>
           <v-layout row :wrap="$lowResolution">
-            <v-spacer class="hidden-md-and-down"></v-spacer>
-            <v-flex text-xs-right xs12 sm4 md5 :class="{'mb-2': $lowResolution}" >
+            <v-flex>
               <v-checkbox v-model="mapSettingsTransient.saveToLocalStorage" :label="$t('settings.saveToLocalStorage')" ></v-checkbox>
             </v-flex>
+            <v-flex>
+              <v-checkbox v-model="resetShownOnceTooltips" :label="$t('settings.resetShownOnceTooltips')" ></v-checkbox>      
+            </v-flex>
+          </v-layout> 
+          <v-layout row :wrap="$lowResolution">
+            <v-spacer class="hidden-md-and-down"></v-spacer>
             <v-flex text-xs-right xs12 sm4 md4 :class="{'ml-2': $vuetify.breakpoint.smAndDown, 'mb-2': $lowResolution}" >
               <v-btn :block="$lowResolution" color="primary" :title="$t('settings.restoreDefaults')" @click="restoreDefaultMapSettings">{{$t('settings.restoreDefaults')}}</v-btn>
             </v-flex>

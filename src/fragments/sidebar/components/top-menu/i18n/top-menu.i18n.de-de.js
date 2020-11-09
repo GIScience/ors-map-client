@@ -3,6 +3,7 @@ export default {
     openSettings: 'Einstellungen',
     showAbout: 'Allgemeine Informationen',
     about: 'Über ORS',
-    pinSidebar: 'Seitenleiste dauerhaft'
+    pinSidebar: 'Seitenleiste dauerhaft',
+    settingsTooltip: 'Hier klicken um Einstellungen anzzupassen'
   }
 }

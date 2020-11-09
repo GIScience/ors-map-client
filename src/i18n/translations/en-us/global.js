@@ -7,6 +7,7 @@ export default {
     appName: 'Openrouteservice Maps',
     brand: 'HeiGIT - Heidelberg University',
     close: 'Close',
+    closeAndDoNotShowAgain: 'Close and do not show again',
     select: 'Select',
     yes: 'Yes',
     no: 'No',
@@ -60,6 +61,8 @@ export default {
       minutes: 'min',
       seconds: 'sec',
       meters: 'meters',
+      lat: 'lat',
+      lng: 'long'
     },
     layers: {
       macrocounty: 'Macro county',

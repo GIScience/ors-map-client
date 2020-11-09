@@ -4,7 +4,10 @@
       <v-flex xs2 sm2 md1>
         <v-badge overlap left v-model="showNewInfo" color="info">
           <b slot="badge">i</b>
-          <v-btn :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''" class="open-menu" slot="default" flat @click="openMenu()">
+          <v-btn 
+            :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''" 
+            class="open-menu" slot="default" flat @click="openMenu()"
+            v-popper-tooltip="{show: showNewInfo, text: $t('simplePlaceSearch.openSidebarToSeeRouteDetails'), position: 'bottom', dark: true, showOnce: true, name: 'openSidebarToSeeRouteDetails'}">
             <v-icon>menu</v-icon>
           </v-btn>
         </v-badge>
@@ -12,7 +15,10 @@
       <v-flex xs10 sm10 md11>
         <v-form ref="form" @submit.prevent>
           <place-input class="mini-input" :height="27" :mb="0" :index="0"
+            id-postfix="simple-place-search"
             :model="place"
+            :directions-button-tooltip="showDirectionsButtonTooltip"
+            directions-button-tooltip-position="bottom"   
             :autofocus="true"
             :single="true"
             @selected="selectPlace"
