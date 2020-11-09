@@ -334,11 +334,6 @@ export default {
       if(this.$lowResolution) {
         this.$store.commit('setLeftSideBarIsOpen', false)
       }
-      // The pick plave btn is 'inside' the place input text field
-      // so it will trigger the focus event. In mobile devices
-      // it will cause the keyboard opeening. We don't want this
-      event.stopPropagation()
-      event.preventDefault()
     },
     /**
      * Set the pick place input source

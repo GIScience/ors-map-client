@@ -17,6 +17,7 @@
           :label="placeInputLabel"
           @click="setFocus(true)"
           @keyup="changed($event)"
+          @click:append.stop=""
           @click:clear="() => placeCleared(index)">
           <template v-slot:append>
             <v-btn v-if="appendBtn === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
