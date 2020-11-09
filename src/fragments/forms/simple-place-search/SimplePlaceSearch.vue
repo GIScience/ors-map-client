@@ -4,7 +4,10 @@
       <v-flex xs2 sm2 md1>
         <v-badge overlap left v-model="showNewInfo" color="info">
           <b slot="badge">i</b>
-          <v-btn :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''" class="open-menu" slot="default" flat @click="openMenu()">
+          <v-btn 
+            :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''" 
+            class="open-menu" slot="default" flat @click="openMenu()"
+            v-popper-tooltip="{show: showNewInfo, text: $t('simplePlaceSearch.openSidebarToSeeRouteDetails'), position: 'bottom', dark: true, showOnce: true, name: 'openSidebarToSeeRouteDetails'}">
             <v-icon>menu</v-icon>
           </v-btn>
         </v-badge>
