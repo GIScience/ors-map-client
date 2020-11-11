@@ -67,7 +67,9 @@ export default {
     setTab () {
       if (this.$store.getters.mode === constants.modes.isochrones) {
         this.activeTab = 1
-        this.$store.commit('setLeftSideBarIsOpen', true)
+        if (this.$mdAndUpResolution && !this.$store.getters.embed) {
+          this.$store.commit('setLeftSideBarIsOpen', true)
+        }
       } else {
         this.activeTab = 0
       }

@@ -16,7 +16,8 @@ export default {
   },
   computed: {
     showSettingsTooltip () {
-      return this.showSettings && !this.settingsTooltipClicked && this.$store.getters.isSidebarVisible
+      let show = this.showSettings && !this.settingsTooltipClicked && this.$store.getters.isSidebarVisible
+      return show
     }
   },
   methods: {
