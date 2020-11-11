@@ -12,7 +12,8 @@ export default {
       return isPinned
     },
     showSettingsTooltip () {
-      return !this.settingsTooltipClicked && this.$store.getters.isSidebarVisible
+      let show = !this.settingsTooltipClicked && this.$store.getters.isSidebarVisible
+      return show
     }
   },
   methods: {

@@ -99,7 +99,7 @@ export default {
      * @param open boolean|event - sidebar pinned desired status - if it is a boolean, use it.
      */
     setSidebarIsOpen (open) {
-      open = typeof open === 'boolean' ? open : this.$store.getters.leftSideBarPinned || this.$mdAndUpResolution
+      open = typeof open === 'boolean' ? open : this.$store.getters.leftSideBarPinned || (this.$mdAndUpResolution && !this.$store.getters.embed)
       this.$store.commit('setLeftSideBarIsOpen', open)
     },
     /**
