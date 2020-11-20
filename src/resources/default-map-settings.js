@@ -8,15 +8,9 @@ const defaultMapSettings = {
   apiKey: null,
   endpoints: null,
   locale: 'en-us',
-  defaultLocale: 'en-us',
   routingInstructionsLocale: 'en',
   unit: 'km',
   alwaysFitBounds: true,
-  // settings not being used yet:
-  tollways: false,
-  randomizedIsochroneColors: false,
-  suitabilityOfWays: false,
-  distanceMarkers: false,
   areaUnit: 'km',
   defaultTileProvider: 'osm',
   customTileProviderUrl: '',
@@ -24,7 +18,15 @@ const defaultMapSettings = {
   defaultProfile: 'cycling-regular',
   compressDataUrlSegment: true,
   autoFitHighlightedBounds: true,
-  acessibleModeActive: false
+  acessibleModeActive: false,
+  shownOnceTooltips: {},
+  mapCenter: {lat: 49.510944, lng: 8.76709}, // Default center is at Heidelberg, Germany
+
+  // Settings not being used yet:
+  tollways: false,
+  randomizedIsochroneColors: false,
+  suitabilityOfWays: false,
+  distanceMarkers: false,
 }
 
 export default defaultMapSettings

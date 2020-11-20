@@ -20,6 +20,7 @@ export default {
     duration: 'Duration: ',
     distance: 'Distance: ',
     elevation: 'Elevation',
+    profile: 'Profile',
     months: {
       january: 'January',
       february: 'February',

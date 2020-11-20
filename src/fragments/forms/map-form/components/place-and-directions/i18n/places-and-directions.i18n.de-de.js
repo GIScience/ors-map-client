@@ -21,7 +21,6 @@ export default {
     roundTrip: 'Rundweg',
     notPossibleToCalculateRoute: 'Keine Route zwischen den gewählten Orten gefunden.',
     for: 'für',
-    activeProfile: 'Actives Fahrzeugprofil',
     apiError: {
       2000: 'Umwandlung der JSON Anfrage nicht möglich.',
       2001: 'Pflichtparameter fehlt',

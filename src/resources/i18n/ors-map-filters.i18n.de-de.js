@@ -100,7 +100,9 @@ export default {
           'ferries': 'Fähren',
           'tunnels': 'Tunnel',
           'fords': 'Furten',
-          'steps': 'Stufen'
+          'steps': 'Stufen',
+          'pavedroads': 'Gepflasterte Straßen',
+          'unpavedroads': 'Ungepflasterte Straßen'
         }
       },
       avoid_borders: {

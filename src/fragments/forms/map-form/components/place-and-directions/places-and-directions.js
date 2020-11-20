@@ -212,11 +212,15 @@ export default {
 
       // When the filters object has changed externally, reprocess the app route
       this.eventBus.$on('filtersChangedExternally', () => {
+        // get the info if all the inputs are filled
+        let allPlacesAreFilled = this.getFilledPlaces().length === this.places.length
+        
         // Filters are only used to calculate route
-        // so we must update the app route if we are already in directions
-        // mode and a filter has changed. If the app is, for example
-        // in place mode and filter changes, there is nothing to be done
-        if (context.active && context.$store.getters.mode === constants.modes.directions) {
+        // so we must update the app route if we are already 
+        // in directions mode if all the place inputs are filled 
+        // and. If the app is, for example in place mode 
+        // there is nothing to be done
+        if (context.active && context.$store.getters.mode === constants.modes.directions && allPlacesAreFilled) {
           context.updateAppRoute()
         }
       })
@@ -239,7 +243,7 @@ export default {
       // When the user click on a marker to remove it
       this.eventBus.$on('removePlace', (data) => {
         if (context.active) {
-          context.removePlace(data)
+          context.removePlaceInput(data, true)
         }
       })
 
@@ -552,9 +556,12 @@ export default {
      */
     onReordered () {
       // If the user has changed the order
+      // and all place inputs are filled
       // we have to change the app route
       // and reload the map
-      this.updateAppRoute()
+      if (this.getFilledPlaces().length === this.places.length) {
+        this.updateAppRoute()
+      }
     },
 
     /**
@@ -576,7 +583,7 @@ export default {
             MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
               context.mapViewData = mapViewData
               context.eventBus.$emit('newInfoAvailable')
-              context.showSuccess(context.getRouteSuccessMessage(mapViewData))
+              context.showSuccess(context.$t('placesAndDirections.routeReady'))
               context.eventBus.$emit('mapViewDataChanged', mapViewData)
               context.setSidebarIsOpen()
               resolve(mapViewData)
@@ -591,28 +598,6 @@ export default {
           resolve({})
         }
       })
-    },
-
-    /**
-     * Get route sucess message
-     * @param {*} routeSummary
-     * @returns {String} message
-     */
-    getRouteSuccessMessage (mapViewData) {
-      let message = this.$t('placesAndDirections.routeReady')
-      const routeSummary = Object.assign({}, mapViewData.routes[this.$store.getters.activeRouteIndex].summary)
-
-      if (routeSummary && typeof routeSummary === 'object' && routeSummary.distance && routeSummary.unit && routeSummary.duration) {
-        const humanizedData = GeoUtils.getHumanizedTimeAndDistance(routeSummary, this.$t('global.units'))
-        const profileLabeKey = 'orsMapFilters.profiles.' + mapViewData.options.profile
-        const profileLabel = this.$t(profileLabeKey)
-        if (profileLabel !== profileLabeKey) {
-          message += ` ${this.$t('placesAndDirections.for')} <b>${profileLabel}</b>`
-        }
-        const routeInfo = `${this.$t('global.distance')} ${humanizedData.distance} ${this.$t('global.and')} ${this.$t('global.duration')} ${humanizedData.duration}`
-        message = `${message} - ${routeInfo.toLowerCase()}`
-      }
-      return message
     },
 
     /**
@@ -724,13 +709,25 @@ export default {
      * Remove a place input at a given index
      * @param {*} index
      */
-    removePlaceInput (index) {
+    removePlaceInput (index, keepDirectionsMode = false) {
+      let placeInputsBeforeRemoval = this.places.length
       this.places.splice(index, 1)
-
       // Set the view mode constants.modes.directions or constants.modes.place
       this.setViewMode()
-
       this.updateAppRoute()
+
+      // If there was two inputs before one
+      // place input removal, then the
+      // updateAppRoute will switch to place
+      // mode. To keep two place inputs
+      // in order to allow the user to continue to
+      // use the directions mode, readd a place input
+      if (keepDirectionsMode && placeInputsBeforeRemoval === 2) {
+        setTimeout(() => {
+          this.addInput()
+          this.setViewMode(constants.modes.directions)
+        }, 100)
+      }
     },
 
     /**

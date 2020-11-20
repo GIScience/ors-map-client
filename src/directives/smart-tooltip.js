@@ -6,7 +6,7 @@ import main from '@/main'
 /**
  * Popper tooltip cdirective hanlder
  */
-const popperTooltip = {
+const smartTooltip = {
   bind (el, binding, vNode) {
     render(el, binding, vNode)
   },
@@ -224,4 +224,4 @@ const buildArrowPosition = (options) => {
 }
 
 
-export default popperTooltip
+export default smartTooltip

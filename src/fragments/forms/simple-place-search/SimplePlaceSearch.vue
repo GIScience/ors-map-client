@@ -7,7 +7,7 @@
           <v-btn 
             :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''" 
             class="open-menu" slot="default" flat @click="openMenu()"
-            v-popper-tooltip="{show: showRouteDetailsTooltip, text: $t('simplePlaceSearch.openSidebarToSeeRouteDetails'), position: 'bottom', dark: true, showOnce: true, name: 'openSidebarToSeeRouteDetails'}">
+            v-smart-tooltip="{show: showRouteDetailsTooltip, text: $t('simplePlaceSearch.openSidebarToSeeRouteDetails'), position: 'bottom', dark: true, showOnce: true, name: 'openSidebarToSeeRouteDetails'}">
             <v-icon>menu</v-icon>
           </v-btn>
         </v-badge>
@@ -17,7 +17,7 @@
           <place-input class="mini-input" :height="27" :mb="0" :index="0"
             id-postfix="simple-place-search"
             :model="place"
-            :directions-button-tooltip="showDirectionsButtonTooltip"
+            :directions-button-tooltip="showDirectionsBtnTooltip"
             directions-button-tooltip-position="bottom"   
             :autofocus="true"
             :single="true"

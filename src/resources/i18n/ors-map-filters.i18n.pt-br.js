@@ -4,8 +4,8 @@ export default {
     profiles: {
       'cycling-regular': 'Ciclismo regular',
       'cycling-road': 'Ciclismo de estrada',
-      'cycling-electric': 'Ciclismo com bicicleta elétrica',
-      'cycling-mountain': 'Montainbike',
+      'cycling-electric': 'E-bike',
+      'cycling-mountain': 'Mountainbike',
       'cycling-safe': 'Ciclismo seguro',
       'foot-walking': 'A pé',
       'foot-hiking': 'Caminhada recreativa',
@@ -101,6 +101,8 @@ export default {
           'tunnels': 'Túneis',
           'fords': 'Vau',
           'steps': 'Escadaria',
+          'pavedroads': 'Rodovias pavimentadas',
+          'unpavedroads': 'Rodovias não pavimentadas'
         }
       },
       avoid_borders: {

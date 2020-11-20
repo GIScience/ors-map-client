@@ -7,7 +7,7 @@ import router from '@/router'
 import store from '@/store/store'
 import I18nBuilder from '@/i18n/i18n-builder'
 import topBorder from '@/directives/top-border'
-import popperTooltip from '@/directives/popper-tooltip'
+import smartTooltip from '@/directives/smart-tooltip'
 import title from '@/directives/title'
 import focus from '@/directives/focus'
 import clickOutside from '@/directives/click-outside'
@@ -68,7 +68,7 @@ Vue.directive('bg', bg)
 Vue.directive('title', title)
 Vue.directive('click-outside', clickOutside)
 Vue.directive('focus', focus)
-Vue.directive('popper-tooltip', popperTooltip)
+Vue.directive('smart-tooltip', smartTooltip)
 
 
 

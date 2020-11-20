@@ -21,7 +21,6 @@ export default {
     roundTrip: 'Round trip',
     notPossibleToCalculateRoute: 'A route could not be calculated using one of the selected places',
     for: 'for',
-    activeProfile: 'Active profile',
     apiError: {
       2000: 'Unable to parse JSON request',
       2001: 'Required parameter is missing',

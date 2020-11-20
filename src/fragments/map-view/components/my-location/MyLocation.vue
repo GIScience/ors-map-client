@@ -1,19 +1,19 @@
 <template>
 <div style="height:0">
-  <v-menu class="floating-menu" style="box-shadow:none" transition="slide-y-transition" v-model="menuOpen"
+  <v-menu class="my-location-floating-menu" style="box-shadow:none" transition="slide-y-transition" v-model="menuOpen"
     :close-on-click="true"
     top offset-y
     :close-on-content-click="true" >
 
     <v-btn slot="activator" v-if="locationActive" 
-      v-popper-tooltip="{show: toolTipVisible, text: $t('myLocation.myPositionToolTip'), position: 'left', dark: true, showOnce: true, name: 'useMyLocation'}" small fab 
-      class="my-location-btn" @click="activatorClicked()" 
+      v-smart-tooltip="{show: toolTipVisible, text: $t('myLocation.myPositionToolTip'), position: 'left', dark: true, showOnce: true, name: 'useMyLocation'}" small fab 
+      class="my-location-btn" @click.stop="activatorClicked()" 
       :title="$t('myLocation.stopShowingCurrentLocation')">
       <v-icon large :color="continuously === true ? 'primary' : 'dark'" >my_location</v-icon>
     </v-btn>
-    <v-btn slot="activator" @click="activatorClicked()"  v-else 
+    <v-btn slot="activator" @click.stop="activatorClicked()"  v-else 
       small fab class="my-location-btn"
-      v-popper-tooltip="{show: toolTipVisible, text: $t('myLocation.myPositionToolTip'), dark: true, showOnce: true, name: 'useMyLocation'}" 
+      v-smart-tooltip="{show: toolTipVisible, text: $t('myLocation.myPositionToolTip'), dark: true, showOnce: true, name: 'useMyLocation'}" 
       :title="$t('myLocation.showCurrentLocation')">
         <v-icon large color="dark" >person_pin_circle</v-icon> 
     </v-btn>

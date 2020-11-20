@@ -223,7 +223,7 @@ export default {
         const singlePlaceCenter = GeoUtils.buildLatLong(this.markers[0].position.lat, this.markers[0].position.lng)
         return singlePlaceCenter
       } else {
-        return this.$store.getters.mapCenter
+        return this.$store.getters.mapSettings.mapCenter
       }
     },
     /**
@@ -243,17 +243,12 @@ export default {
     },
     /**
      * Buil and return the geojson options based on the
-     * color defined as main and the built tooltip
-     * string
+     * color defined as main
      * @returns {Object}
      */
     geojsonOptions () {
-      const tooltip = this.routeToolTip(0)
       return {
         style: { color: this.mainRouteColor, weight: '5' },
-        onEachFeature: (feature, layer) => {
-          layer.bindTooltip(tooltip, { permanent: false, sticky: true })
-        }
       }
     },
     /**
@@ -685,18 +680,6 @@ export default {
       this.$emit('markerClicked', place)
     },
     /**
-     * Builds the route tooltip string
-     * @param {*} index
-     * @returns {String} tooltip
-     */
-    routeToolTip (index) {
-      if (this.localMapViewData) {
-        const summaryCopy = Object.assign({}, this.localMapViewData.routes[index].summary)
-        const tooltip = this.humanizeRouteToolTip(summaryCopy)
-        return tooltip
-      }
-    },
-    /**
      * Deals with the map center changed event trigerred by the vue2leaflet
      * component. Get the current map center, set it via setMapCenter and
      * define the current myLocationActive based on the last map center
@@ -765,16 +748,6 @@ export default {
       setTimeout(() => {
         context.showActiveRouteData = showActiveRouteDataBefore
       }, 100)
-
-      // Show the route selected data
-      // if in low resolution mode.
-      // If not in low resolution, the route
-      // data is visible on the sidebar
-      if (this.localMapViewData.hasRoutes()) {
-        // get tooltip message without the html tags
-        const message = this.routeToolTip(index).replace(/<(?:.|\n)*?>/gm, ' ')
-        this.showInfo(message)
-      }
     },
 
     /**
@@ -928,16 +901,16 @@ export default {
      */
     setMapCenter (latlng) {
       if (latlng) {
-        const previousCenter = this.$store.getters.mapCenter
-        this.$store.commit('mapCenter', latlng)
+        let mapSettings = this.$store.getters.mapSettings
+        const previousCenter = utils.clone(mapSettings.mapCenter)
+        mapSettings.mapCenter = latlng
 
-        // Store current map center
-        localStorage.setItem('mapCenter', JSON.stringify(latlng))
-
-        if (previousCenter) {
-          // Notify about the current map center change
-          this.$emit('mapCenterChanged', this.$store.getters.mapCenter)
-        }
+        this.$store.dispatch('saveSettings', mapSettings).then(() => {
+          if (previousCenter) {
+            // Notify about the current map center change
+            this.$emit('mapCenterChanged', mapSettings.mapCenter)
+          }
+        })
       } else {
         const routePlaces = this.$store.getters.appRouteData.places
 
@@ -947,25 +920,21 @@ export default {
           if (this.center) {
             this.setMapCenter(this.center)
           } else {
-            this.setPreviousOrDefaultCenter()
+            this.setPreviousMapCenter()
           }
         } else {
-          this.setPreviousOrDefaultCenter()
+          this.setPreviousMapCenter()
         }
       }
     },
 
     /**
-     * Set the default or previous center
+     * Set the previous center as map center
      */
-    setPreviousOrDefaultCenter () {
-      const storedMapCenter = localStorage.getItem('mapCenter')
-      if (storedMapCenter) {
-        this.setMapCenter(JSON.parse(storedMapCenter))
-      } else {
-        // By default the center is Heidelberg (Germany))
-        const defaultCenter = GeoUtils.buildLatLong(49.510944, 8.76709)
-        this.setMapCenter(defaultCenter)
+    setPreviousMapCenter () {
+      let mapSettings = this.$store.getters.mapSettings
+      if (mapSettings.mapCenter) {
+        this.setMapCenter(mapSettings.mapCenter)
       }
     },
 
@@ -1372,18 +1341,6 @@ export default {
       return false
     },
     /**
-     * Get the polyline humanized tool tip if the response contains a route summary
-     * @param {Object} tooltipData
-     * @returns {Array} coordinates
-     */
-    humanizeRouteToolTip (tooltipData) {
-      if (tooltipData && typeof tooltipData === 'object' && tooltipData.distance && tooltipData.unit && tooltipData.duration) {
-        const humanizedData = GeoUtils.getHumanizedTimeAndDistance(tooltipData, this.$t('global.units'))
-        const formattedTooltip = `${this.$t('global.distance')} ${humanizedData.distance}<br>${this.$t('global.duration')} ${humanizedData.duration}`
-        return formattedTooltip
-      }
-    },
-    /**
      * Adjust the map dimensions and redraw it according the current window size
      * @dispatch resize event
      */
@@ -1742,7 +1699,23 @@ export default {
           context.fit()
         }
       })
-    }
+    },
+    /**
+     * Toggle the accessible mode by
+     * storing the flag under the mapSettings store
+     * to do so we get the current setgin object, update it,
+     * convert it to a stringified representation and
+     * save it to the browsers'local storage
+     * @uses localStorage
+     */
+    toggleAcessibleMode () {
+      let mapSettings = this.$store.getters.mapSettings
+      mapSettings.acessibleModeActive = !mapSettings.acessibleModeActive
+
+      this.$store.dispatch('saveSettings', mapSettings).then(() => {
+        console.log('Settings saved')
+      })
+    },
   },
 
   /**

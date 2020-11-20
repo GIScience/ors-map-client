@@ -89,6 +89,7 @@ export default {
     */
    removePlace (data) {
     if (this.places[data.index]) {
+      // call the specilized script method
       this.removePlaceInput(data.index)
       this.updatePlaceView(data.index)
     }

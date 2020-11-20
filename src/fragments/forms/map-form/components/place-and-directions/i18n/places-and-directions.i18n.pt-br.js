@@ -21,7 +21,6 @@ export default {
     roundTrip: 'Rota circular',
     notPossibleToCalculateRoute: 'Uma rota não pôde ser calculada usando um dos locais selecionados',
     for: 'para',
-    activeProfile: 'Perfil ativo',
     apiError: {
       2000: 'Não foi possível processar a requisição JSON',
       2001: 'Parâmetro obrigatório faltando',

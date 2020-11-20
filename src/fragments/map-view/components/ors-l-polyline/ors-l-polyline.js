@@ -1,6 +1,8 @@
+import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import OrsExtendedPolyline from './ors-extended-polyline'
-import { LPolyline, LTooltip} from 'vue2-leaflet'
+import { LPolyline, LTooltip, LPopup} from 'vue2-leaflet'
 import constants from '@/resources/constants'
+import GeoUtils from '@/support/geo-utils'
 import theme from '@/common/theme'
 import Leaflet from 'leaflet'
 import lodash from 'lodash'
@@ -14,7 +16,8 @@ export default {
   },
   components: {
     LPolyline,
-    LTooltip
+    LTooltip,
+    LPopup
   },
   props: {
     options: {
@@ -52,9 +55,9 @@ export default {
       type: String,
       default: constants.routeBackgroundColor,
     },
-    tooltip: {
+    profile: {
       type: String,
-      default: ''
+      default: null
     },
     draggable: {
       type: Boolean,
@@ -79,6 +82,19 @@ export default {
     followPolyline (data) {
       this.$emit('followPolyline', data)
     },
+    openPopup(event) {
+      this.$nextTick(() => {
+        event.target.openPopup()
+      })
+    },
+    /**
+     * Get the a profile icon
+     * @returns {Object}
+     */
+    getProfileIcon (profile) {
+      const filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
+      return filterRef.mapping[profile].icon
+    },
     /**
      * When the polyline is clicked
      * check if it is active. If so, show clicked point
@@ -89,8 +105,8 @@ export default {
      */
     click (event) {
       if (!this.notActive && this.$refs.foregroundPolyline.mapObject) {
-        this.showPolylinePointDetails(event)
-      } else {
+        this.openPopup(event)
+      } else {        
         this.$emit('click', event)
       }
     },
@@ -139,6 +155,23 @@ export default {
         } else {
           return []
         }
+      }
+    },
+    popupContent () {
+      if (this.profile) {
+        const summaryCopy = Object.assign({}, this.route.summary)
+        const humanizedData = GeoUtils.getHumanizedTimeAndDistance(summaryCopy, this.$t('global.units'))
+        let tooltip = `${this.$t('global.distance')} ${humanizedData.distance}<br> ${this.$t('global.duration')} ${humanizedData.duration}`
+
+        const profileIcon = this.getProfileIcon(this.profile)
+        tooltip = `
+        <div>
+          <div style='width:20%;height:50px;float:left'>
+            <span class="material-icons">${profileIcon}</span>
+          </div>
+          <div>${tooltip}</div>
+        </div>`
+        return tooltip
       }
     }
   },

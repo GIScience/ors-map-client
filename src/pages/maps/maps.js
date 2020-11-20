@@ -64,19 +64,6 @@ export default {
       return height
     },
     /**
-     * Returns the accessinility bottom height
-     * based on the visibility of the bottomNavHeight
-     * @returns {String} bottomHeight
-     */
-    accessibilityButtomHeight () {
-      var bottomHeight = '135px'
-      if (this.showBottomNav) {
-        const height = this.bottomNavHeight + 10
-        bottomHeight = `${height}px`      
-      } 
-      return bottomHeight
-    },
-    /**
      * Returns the zoom level tha must be used based on 
      * the app route options and the default zoom level
      * @returns {Number} zoom
@@ -174,22 +161,6 @@ export default {
     }
   },
   methods: {
-    /**
-     * Toggle the accessible mode by
-     * storing the flag under the mapSettings store
-     * to do so we get the current setgin object, update it,
-     * convert it to a stringified representation and
-     * save it to the browsers'local storage
-     * @uses localStorage
-     */
-    toggleAcessibleMode () {
-      let mapSettings = this.$store.getters.mapSettings
-      mapSettings.acessibleModeActive = !mapSettings.acessibleModeActive
-
-      this.$store.dispatch('saveSettings', mapSettings).then(() => {
-        console.log('Settings saved')
-      })
-    },
     /**
      * Stores the new zomm value and set the
      * searchBtnAvailable flag as true, since

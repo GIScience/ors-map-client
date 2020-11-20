@@ -39,11 +39,31 @@
   display: hidden;
 }
 
+.my-location-btn {
+  position: absolute !important;
+  bottom: 80px;
+  right: 0px;
+  z-index: 500;
+}
+
+.accessibility-btn {
+  position: absolute !important;
+  top: 60px;
+  right: 0px;
+  z-index: 501;
+  background: white !important;
+  color: black;
+}
+.accessibility-btn.extra-low-resolution {
+  top: 130px;
+}
+
+
 .fit-all-features {
   position: absolute !important;
-  top: 145px;
+  top: 110px;
   right: 0px;
-  z-index: 4;
+  z-index: 500;
   background: white !important;
   color: black;
   border-radius: 3px;
@@ -51,7 +71,7 @@
 }
 
 .fit-all-features.extra-low-resolution {
-  top: 255px;
+  top: 180px;
 }
 
 .view-on-ors {

@@ -1,7 +1,6 @@
 const state = {
   browserLocation: null,
   activeRouteIndex: 0,
-  mapCenter: null,
   mapBounds: null,
   currentLocation: null
 }
@@ -12,9 +11,6 @@ const getters = {
   },
   activeRouteIndex: state => {
     return state.activeRouteIndex
-  },
-  mapCenter: state => {
-    return state.mapCenter
   },
   mapBounds: state => {
     return state.mapBounds
@@ -30,9 +26,6 @@ const mutations = {
   },
   activeRouteIndex: (state, activeRouteIndex) => {
     state.activeRouteIndex = activeRouteIndex
-  },
-  mapCenter: (state, mapCenter) => {
-    state.mapCenter = mapCenter
   },
   mapBounds: (state, mapBounds) => {
     state.mapBounds = mapBounds

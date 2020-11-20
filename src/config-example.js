@@ -4,7 +4,7 @@ const config = {
   prodBaseAPIUrl: 'https://openrouteservice.org/wp-json',
   mainMenuSlug: 'primary_menu',
   setCustomMenuIcons: true,
-  defaultLocale: 'en-us',
+  defaultLocale: 'en-us', // only set as default a locale that is present in the app
   ORSApiKey: 'put-here-an-ors-api-key',
   useUserKey: true,
   baseMenuExternalUrl: 'https://openrouteservice.org',

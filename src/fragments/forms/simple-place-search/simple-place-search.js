@@ -21,7 +21,7 @@ export default {
     autoFocusOnMap: true,
     openingRouteMode: false,
     newInfoAvailable: false,
-    showDirectionsButtonTooltip: true
+    showDirectionsBtnTooltip: false
   }),
   props: {
     height: {
@@ -32,12 +32,15 @@ export default {
     this.setEventListeners()
     this.setPlace()
     this.loadData()
-  },
-  beforeDestroy () {
-    this.showDirectionsButtonTooltip = false
+    this.setShowDirectionsBtnTooltip()
   },
   components: {
     PlaceInput
+  },
+  watch: {
+    '$store.getters.isSidebarVisible': function () {
+      this.setShowDirectionsBtnTooltip()
+    }
   },
   computed: {
     visible () {
@@ -56,6 +59,11 @@ export default {
   },
 
   methods: {
+    setShowDirectionsBtnTooltip () {
+      setTimeout(() => {
+        this.showDirectionsBtnTooltip = !this.$store.getters.isSidebarVisible
+      }, 1000)
+    },
     /**
      * Se the place model if the app is in place mode
      * and it there is only one place in appRouteData
