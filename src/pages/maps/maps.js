@@ -414,6 +414,7 @@ export default {
       this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
       this.$router.push(route)
       this.$store.commit('setLeftSideBarIsOpen', true)
+      this.showBottomNav = false
     },
      /**
      * When an `add isochrones center` option is hit, 
