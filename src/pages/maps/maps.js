@@ -388,7 +388,7 @@ export default {
         this.mapViewData.places = [data.place]
         context.eventBus.$emit('directionsToPoint', data)
       }, 100)
-      this.showBottomNav = false
+      this.bottomNavActive = false
     },
 
     /**
@@ -415,7 +415,7 @@ export default {
       this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
       this.$router.push(route)
       this.$store.commit('setLeftSideBarIsOpen', true)
-      this.showBottomNav = false
+      this.bottomNavActive = false
     },
      /**
      * When an `add isochrones center` option is hit, 

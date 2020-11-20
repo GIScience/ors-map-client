@@ -155,16 +155,22 @@ export default {
     loadData () {
       const places = this.$store.getters.appRouteData.places.slice(0)
 
-      if (places.length === 1 /* && this.$store.getters.leftSideBarOpen */) {
+      if (places.length === 1) {
         this.place = places[0]
       }
       if (this.$store.getters.mode === constants.modes.search) {
         if (!this.place.nameIsCoord()) {
-          this.$store.commit('mapCenter', this.$store.getters.appRouteData.options.center)
-          this.search()
+          let mapSettings = this.$store.getters.mapSettings
+          mapSettings.mapCenter = this.$store.getters.appRouteData.options.center
+          this.$store.dispatch('saveSettings', mapSettings).then(() => {
+            this.search()    
+            this.$forceUpdate()        
+          })          
         }
+      } else {
+        this.$forceUpdate()
       }
-      this.$forceUpdate()
+      
     },
     /**
      * When the menu btn is clicked, open the main
