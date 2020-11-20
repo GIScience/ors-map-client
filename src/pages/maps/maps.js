@@ -388,6 +388,7 @@ export default {
         this.mapViewData.places = [data.place]
         context.eventBus.$emit('directionsToPoint', data)
       }, 100)
+      this.showBottomNav = false
     },
 
     /**
