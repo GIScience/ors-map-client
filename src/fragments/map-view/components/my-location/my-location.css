@@ -1,16 +1,3 @@
-
-.my-location-btn {
-  position: absolute !important;
-  bottom: 70px;
-  right: 0px;
-  z-index: 3;
-  background: white !important;
-}
-
-.my-location-btn:hover {
-  position: absolute !important
-}
-
 .my-location-title {
   height: 40px;
 }

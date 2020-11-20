@@ -35,11 +35,13 @@ export default {
       deep: true
     },
     '$store.getters.mapSettings.defaultProfile' (newVal) {
-      this.initialProfile = newVal
-      if (!this.activeProfile) {
-        let primaryProfiles = this.getPrimaryProfiles()
-        this.activeProfileIndex = Object.keys(primaryProfiles).indexOf(this.currentProfile)
-        OrsFilterUtil.setFilterValue(constants.profileFilterName, newVal)
+      if (this.activeProfile !== newVal) {
+        this.initialProfile = newVal
+        if (!this.activeProfile) {
+          let primaryProfiles = this.getPrimaryProfiles()
+          this.activeProfileIndex = Object.keys(primaryProfiles).indexOf(this.currentProfile)
+          OrsFilterUtil.setFilterValue(constants.profileFilterName, newVal)
+        }
       }
     }
   },
@@ -74,13 +76,19 @@ export default {
       if (index) {
         this.activeProfileIndex = index
       }
-      OrsFilterUtil.setFilterValue(constants.profileFilterName, profile)
-      this.eventBus.$emit('filtersChangedExternally')
+      let mapSettings = this.$store.getters.mapSettings
+      mapSettings.defaultProfile = profile
 
-      let context = this
-      setTimeout(() => {
-        context.extraProfilesOpen = false
-      }, 200)
+      this.$store.dispatch('saveSettings', mapSettings).then(() => {
+        OrsFilterUtil.setFilterValue(constants.profileFilterName, profile)    
+        this.eventBus.$emit('filtersChangedExternally')    
+        let context = this
+        
+        setTimeout(() => {
+          context.extraProfilesOpen = false
+        }, 200)
+      })
+        
     },
     updateFilterProfile () {
       const filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)

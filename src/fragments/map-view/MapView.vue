@@ -18,7 +18,7 @@
 
       <l-control-polyline-measure v-if="showControls" :options="polylineMeasureOptions"/>
 
-      <!-- draw tool bar is added programatically via ors-map.js setAvoidPolygonDrawingTool method -->
+      <!-- draw tool bar is added programatically via map-view.js setAvoidPolygonDrawingTool method -->
       <!-- <l-draw-toolbar :options="drawingOptions" position="topright"/> -->
 
       <l-marker v-for="(marker, index) in markers"
@@ -72,10 +72,8 @@
         <template>
           <ors-l-polyline :key="index" not-active
             :color="alternativeRouteColor"
-            @click="alternativeRouteIndexSelected(alternativeRoute.index, $event)"
-            @tooltipClick="alternativeRouteIndexSelected(alternativeRoute.index, $event)"            
-            :lat-lngs="alternativeRoute.polyline" 
-            :tooltip="routeToolTip(alternativeRoute.index)">
+            @click="alternativeRouteIndexSelected(alternativeRoute.index, $event)"            
+            :lat-lngs="alternativeRoute.polyline" >
           </ors-l-polyline>
         </template>
       </template>
@@ -85,36 +83,40 @@
           :focused-poly-index="highlightedRoutePointIndex"
           @addStopViaPolylineDrag="addStopViaPolylineDrag" 
           :route="activeRouteData" 
-          :tooltip="routeToolTip($store.getters.activeRouteIndex)">
+          :profile="this.localMapViewData.options.profile">
         </ors-l-polyline>
       </template>
-      <l-control-layers v-if="showControls" :position="layersPosition" :collapsed="true" />
+      <l-control-layers v-if="showControls" :position="layersPosition" :collapsed="true"/>
+        <l-tile-layer
+          v-for="tileProvider in tileProviders"
+          :key="tileProvider.name"
+          :name="tileProvider.name"
+          :visible="tileProvider.visible"
+          :url="tileProvider.url"
+          :attribution="tileProvider.attribution"
+          :token="tileProvider.token"
+          layer-type="base"/>
+      <v-btn fab small @click.stop="toggleAcessibleMode" 
+        :title="$t('maps.turnOnAcessibleMode')" 
+        :class="{'extra-low-resolution': $xlResolution}"
+        class="do-not-trigger-close-bottom-nav accessibility-btn" > 
+        <v-icon large :color="$store.getters.mapSettings.acessibleModeActive? 'primary': 'default'" >accessibility</v-icon>
+      </v-btn>
+      <v-btn fab small v-if="canFitFeatures && showControls" 
+        class="fit-all-features"
+        :title="$t('mapView.fitAllFeatures')"
+        :class="{'extra-low-resolution': $xlResolution}" 
+        @click.stop="fitAllFeatures()" > 
+        <v-icon large >all_out</v-icon> 
+      </v-btn>
 
-      <l-tile-layer
-        v-for="tileProvider in tileProviders"
-        :key="tileProvider.name"
-        :name="tileProvider.name"
-        :visible="tileProvider.visible"
-        :url="tileProvider.url"
-        :attribution="tileProvider.attribution"
-        :token="tileProvider.token"
-        layer-type="base"/>
-
-      <!-- highlight extra info polyline -->
+       <!-- highlight extra info polyline -->
       <extra-info-highlight @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" v-if="extraInfo" :extra-info="extraInfo" :polyline-data="activeRouteData.geometry.coordinates"/>
       <l-height-graph v-if="isAltitudeModalOpen" @closed="closeAltitudeInfo" lg8 sm11 :data="localMapViewData.rawData" :options="lHeightGraphOptions"/>
+      <my-location class="my-location-btn" :active="myLocationActive" @updateLocation="updateMyLocation"></my-location>
     </l-map>
     <img class="over-brand" v-if="showBrand" src="@/assets/img/heigit-and-hd-uni.png" :alt="$t('global.brand')" :title="$t('global.brand')">
-    <v-btn fab small v-if="canFitFeatures && showControls" 
-      class="fit-all-features"
-      :title="$t('mapView.fitAllFeatures')" 
-      :class="{'extra-low-resolution': $xlResolution}" 
-      @click="fitAllFeatures()" > 
-      <v-icon large >all_out</v-icon> 
-    </v-btn>
-
     <v-btn v-if="$store.getters.embed" small :title="$t('mapView.viewOnORS')" class="view-on-ors" target="_blank" :href="nonEmbedUrl" > {{$t('mapView.viewOnORS')}} <v-icon right small >open_in_new</v-icon> </v-btn>
-    <my-location v-else :active="myLocationActive" @updateLocation="updateMyLocation"></my-location>
     <map-right-click v-if="!$store.getters.embed" :map-view-data="mapViewData" @closed="clickLatlng = null" @rightClickEvent="handleRightClickEvent"></map-right-click>
     <map-left-click :current-zoom="zoom" @closed="clickLatlng = null" @directionsToPoint="directionsToPoint"></map-left-click>
 

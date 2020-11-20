@@ -1,15 +1,7 @@
 <template>
   <div class="maps" :style="{height: viewHeight + 'px'}">
     <resize-observer @notify="setViewHeight()" />
-    <simple-place-search :height="simpleMapSearcHeight" v-if="simpleSearchIsVisible"></simple-place-search>
-
-    <v-btn fab small @click="toggleAcessibleMode" 
-      :title="$t('maps.turnOnAcessibleMode')" 
-      class="do-not-trigger-close-bottom-nav accessibility-btn"
-      :style="{bottom: accessibilityButtomHeight}" > 
-      <v-icon large :color="$store.getters.mapSettings.acessibleModeActive? 'primary': 'default'" >accessibility</v-icon>
-    </v-btn>
-    
+    <simple-place-search :height="simpleMapSearcHeight" v-if="simpleSearchIsVisible"></simple-place-search>    
     <v-btn round v-if="refreshSearchAvailable"
       :style="{top: mapHeight - 50 + 'px !important'}"
       :title="$t('maps.updateSearchAfterZoomOrCenterChange')"

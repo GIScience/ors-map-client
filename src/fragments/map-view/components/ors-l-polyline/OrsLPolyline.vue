@@ -4,12 +4,14 @@
     <l-polyline ref="foregroundPolyline"
       @follow="followPolyline" 
       @click.exact="click($event)"
-      @addstop="addStopViaPolylineDrag" 
+      @followMarkerClicked="click($event)"
+      @addstop="addStopViaPolylineDrag"
+      @add="openPopup"
       :options="options" 
       :lat-lngs="latLngsCoordinates" 
       :weight="weight" 
       :color="color">
-      <l-tooltip @click="tooltipClick($event)" :content="tooltip"></l-tooltip>
+      <l-popup v-if="!notActive" :content="popupContent" :options="{ autoClose: false, closeOnClick: true }"></l-popup>
     </l-polyline>
   </div>
 </template>

@@ -5,10 +5,18 @@ import lodash from 'lodash'
 
 // The import below will add some methods to Leaflet.GeometryUtil 
 // Even if it is not been accessed within this class, it is being used!
-import LeafletGeometryutil from 'leaflet-geometryutil'
+import 'leaflet-geometryutil'
 
+/**
+ * Add custom behaviors to the polyline, specially the drag
+ * to create an stop point.
+ * @emits followMarkerClicked - when the marker created over the polyline to show current cursor position is clicked
+ * @emits follow - when a point of the polyline is focused with the mouse
+ * @emits addstop - when the user drag the new polyline vertice into a location
+ */
 class OrsExtendedPolyline {
-  constructor (context) {
+  constructor (context, showPointInfo = false) {
+    this.showPointInfo = showPointInfo
     const options = {
       options: {
         distance: 20,   //distance from pointer to the polyline
@@ -26,11 +34,12 @@ class OrsExtendedPolyline {
       },
       tempPolylineDraggingMarkerRef: null,
       tempPolylineDraggingMarkerInfoRef: null,
-    
+      
       initialize: this.initialize,    
       addHooks: this.addHooks,    
       removeHooks: this.removeHooks,
-
+      
+      _showPointInfo: this.showPointInfo,
       _processDrag: this.processDrag,    
       _getClosestPointAndSegment: this.getClosestPointAndSegment,    
       _mouseContextClick: this.mouseContextClick,    
@@ -183,6 +192,10 @@ class OrsExtendedPolyline {
     }
   }
 
+  /**
+   * Show custom markers that appears over the polyline
+   * @param {*} event 
+   */
   showCustomMarkers (event) {
     if (this.options.edit_with_drag) {
       const originalEvent = event.originalEvent || event
@@ -262,14 +275,19 @@ class OrsExtendedPolyline {
     this._marker.on('drag', this._markerDrag, this)
     this._marker.on('dragend', this._markerDragEnd, this)
     this._marker.on('contextmenu', this._mouseContextClick, this)
-    this._marker.on('click', this._polylineClicked, this)
+    this._marker.on('click', () => {
+      this._poly.fireEvent('followMarkerClicked')
+    })
 
     let closestIndex = this._getClosestIndex()
-    const infoIcon = this._buildInfoIcon(closestIndex)
+    
     // The hover polyline route info pop up is disabled for now
-    // if (infoIcon) {
-    //   this._markerInfo = Leaflet.marker(closest.latlng, { clickable: false, draggable: false, icon: infoIcon }).addTo(this._map)
-    // }
+    if (this._showPointInfo) {
+      const infoIcon = this._buildInfoIcon(closestIndex)
+      if (infoIcon) {
+       this._markerInfo = Leaflet.marker(closest.latlng, { clickable: false, draggable: false, icon: infoIcon }).addTo(this._map)
+      }
+    }
   }
 
   /**
@@ -364,7 +382,8 @@ class OrsExtendedPolyline {
     this.closest = Leaflet.GeometryUtil.closest(this._map, this._poly, latlng, true)
     this.startingDragPoint = latlng
     this._dragging = true
-    //check the tollerance
+    
+    // Check the tollerance
     if (this.closest.distance < this.options.tollerance) {
       this._processDrag()    
     } else {
@@ -471,8 +490,10 @@ class OrsExtendedPolyline {
     const data = {event, closest: this.closest, draggedFromIndex}
     this._poly.fireEvent('addstop', data)
     this._dragging = false
-    this._map.removeLayer(this.tempPolylineDraggingMarkerRef)   
-    this._map.removeLayer(this.tempPolylineDraggingMarkerInfoRef)    
+    this._map.removeLayer(this.tempPolylineDraggingMarkerRef) 
+    if (this.tempPolylineDraggingMarkerInfoRef) {
+      this._map.removeLayer(this.tempPolylineDraggingMarkerInfoRef)
+    }  
     this.startingDragPoint = null   
   }
 }

@@ -25,7 +25,8 @@ export default {
     /**
      * Handles the menu activation event
      */
-    activatorClicked () {
+    activatorClicked (event) {
+      this.menuOpen = !this.menuOpen
       if (this.locationActive) {
         this.setLocationFromBrowser(false)
         this.toolTipVisible = false

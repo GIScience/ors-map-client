@@ -21,7 +21,7 @@ export default {
     autoFocusOnMap: true,
     openingRouteMode: false,
     newInfoAvailable: false,
-    showDirectionsButtonTooltip: true
+    showDirectionsBtnTooltip: false
   }),
   props: {
     height: {
@@ -32,12 +32,15 @@ export default {
     this.setEventListeners()
     this.setPlace()
     this.loadData()
-  },
-  beforeDestroy () {
-    this.showDirectionsButtonTooltip = false
+    this.setShowDirectionsBtnTooltip()
   },
   components: {
     PlaceInput
+  },
+  watch: {
+    '$store.getters.isSidebarVisible': function () {
+      this.setShowDirectionsBtnTooltip()
+    }
   },
   computed: {
     visible () {
@@ -56,6 +59,11 @@ export default {
   },
 
   methods: {
+    setShowDirectionsBtnTooltip () {
+      setTimeout(() => {
+        this.showDirectionsBtnTooltip = !this.$store.getters.isSidebarVisible
+      }, 1000)
+    },
     /**
      * Se the place model if the app is in place mode
      * and it there is only one place in appRouteData
@@ -147,16 +155,22 @@ export default {
     loadData () {
       const places = this.$store.getters.appRouteData.places.slice(0)
 
-      if (places.length === 1 /* && this.$store.getters.leftSideBarOpen */) {
+      if (places.length === 1) {
         this.place = places[0]
       }
       if (this.$store.getters.mode === constants.modes.search) {
         if (!this.place.nameIsCoord()) {
-          this.$store.commit('mapCenter', this.$store.getters.appRouteData.options.center)
-          this.search()
+          let mapSettings = this.$store.getters.mapSettings
+          mapSettings.mapCenter = this.$store.getters.appRouteData.options.center
+          this.$store.dispatch('saveSettings', mapSettings).then(() => {
+            this.search()    
+            this.$forceUpdate()        
+          })          
         }
+      } else {
+        this.$forceUpdate()
       }
-      this.$forceUpdate()
+      
     },
     /**
      * When the menu btn is clicked, open the main

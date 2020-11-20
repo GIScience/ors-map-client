@@ -6,7 +6,7 @@ const state = {
   mode: constants.modes.place,
   apiDataRequested: false,
   dataAcquired: false,
-  mapSettings: {shownOnceTooltips: {}},
+  mapSettings: {}, // centered at Heidelberg (DE) by default
   embed: false,
   acessibleModeActive: false
 }
@@ -23,6 +23,10 @@ const getters = {
   },
   mapSettings: state => {
     return state.mapSettings
+  },
+  // shortcut to map center
+  mapCenter: state => {
+    return state.mapSettings.mapCenter
   },
   embed: state => {
     return state.embed
@@ -61,9 +65,19 @@ const actions = {
 
       const settingsToKeepInAppStore = utils.clone(savingSettings)
 
-      // The apiKey must not be saved if it is the default one (only if is a custom one)
-      if (savingSettings.apiKey === defaultSettings.apiKey || savingSettings.apiKey === '' || savingSettings.apiKey === null) {
+      // The apiKey must not be saved if it is empty
+      if (savingSettings.apiKey === '' || savingSettings.apiKey === null) {
         delete savingSettings.apiKey
+      }
+      // Do not save settings keys with default value
+      for (let key in savingSettings) {
+        if (defaultSettings[key] !== undefined && savingSettings[key] != undefined) {
+          let saveVal = JSON.stringify(savingSettings[key])
+          let defaultVal = JSON.stringify(defaultSettings[key])
+          if (saveVal === defaultVal) {
+            delete savingSettings[key]
+          }
+        }
       }
       commit('mapSettings', settingsToKeepInAppStore)
       localStorage.setItem('mapSettings', JSON.stringify(savingSettings))

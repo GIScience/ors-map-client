@@ -30,8 +30,7 @@
     </v-btn-toggle>
     <div>
       <v-chip outline small disabled color="primary">
-        <v-icon>check_circle</v-icon>
-        {{$t('orsMapFilters.profiles.' + currentProfile)}}
+        {{$t('global.profile')}}: {{($t('orsMapFilters.profiles.' + currentProfile)).toLowerCase()}}
       </v-chip>
     </div>
   </div>

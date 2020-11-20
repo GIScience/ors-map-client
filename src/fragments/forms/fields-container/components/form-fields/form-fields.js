@@ -280,7 +280,9 @@ export default {
         if (typeof item !== 'object' || !item.itemText) {
           if (typeof item === 'object') {
             for (const itemKey in item) {
-              item[itemKey] = item[itemKey].toString()
+              if (item[itemKey]) {
+                item[itemKey] = item[itemKey].toString()
+              }
             }
             var itemText = item[this.$store.getters.mapSettings.locale] || item[defaultMapSettings.locale]  
             item.itemText = itemText
