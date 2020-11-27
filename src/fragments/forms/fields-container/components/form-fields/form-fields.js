@@ -499,7 +499,7 @@ export default {
     showPanelExpanded (parameters) {
       let childHascontent = false
       for (const key in parameters.props) {
-        if (parameters.props[key].value !== undefined && parameters.props[key].value !== null) {
+        if (parameters.props[key].value !== undefined && parameters.props[key].value !== null && parameters.props[key].value !== parameters.props[key].default) {
           childHascontent = true
           break
         }

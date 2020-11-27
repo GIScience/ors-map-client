@@ -1,5 +1,5 @@
 import AppMode from '@/support/app-modes/app-mode'
-import { Geocode, ReverseGeocode } from '@/support/ors-api-runner'
+import { PlacesSearch, ReverseGeocode } from '@/support/ors-api-runner'
 import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
@@ -54,7 +54,7 @@ export default {
       type: Boolean,
       default: true
     },
-    supportDirect: {
+    supportDirectRouting: {
       type: Boolean,
       default: false
     },
@@ -248,7 +248,7 @@ export default {
      * If a place input can have the direct option
      */
     directIsAvailable () {
-      return this.supportDirect && !this.isLast && (this.index > 0 || (!this.single && !this.model.isEmpty()))
+      return this.supportDirectRouting && !this.isLast && (this.index > 0 || (!this.single && !this.model.isEmpty()))
     },
     // Switch the coordinates position ([lat, long] -> [long, lat] and [long, lat] -> [lat, long])
     switchCoordsAvailable () {
@@ -434,7 +434,7 @@ export default {
 
         // Run the place search
         this.eventBus.$emit('showLoading', true)
-        Geocode(this.localModel.placeName, size).then(places => {
+        PlacesSearch(this.localModel.placeName, size).then(places => {
           context.localModel.setSuggestions(places)
           context.focused = true
           this.focusIsAutomatic = false
@@ -497,14 +497,9 @@ export default {
 
           // Make sure that the changes in the input are debounced
           this.debounceTimeoutId = setTimeout(function () {
-            if (context.supportSearch && (event.key === 'Enter' || (event instanceof MouseEvent && event.type === 'click'))) {
-              if (!context.model.placeName || context.model.placeName.length === 0) {
-                context.showError(context.$t('placeInput.pleaseTypeSomething'))
-                return
-              } else {
-                context.focused = false
-                context.sendToSearchMode()
-              }
+            if (context.supportSearch && (event.key === 'Enter')) {
+              context.focused = false
+              context.sendToSearchMode()
             } else {
               context.autocompleteSearch()
             }
@@ -517,13 +512,18 @@ export default {
      * Send the app to search mode
      */
     sendToSearchMode () {
-      const previousMode = this.$store.getters.mode
-      this.$store.commit('mode', constants.modes.search)
-      const appMode = new AppMode(this.$store.getters.mode)
-      const route = appMode.getRoute([this.localModel])
-      this.$router.push(route)
-      if (previousMode === constants.modes.search) {
-        this.$emit('searchChanged')
+      if (!this.model.placeName || this.model.placeName.length === 0) {
+        this.showError(this.$t('placeInput.pleaseTypeSomething'))
+        return
+      } else {
+        const previousMode = this.$store.getters.mode
+        this.$store.commit('mode', constants.modes.search)
+        const appMode = new AppMode(this.$store.getters.mode)
+        const route = appMode.getRoute([this.localModel])
+        this.$router.push(route)
+        if (previousMode === constants.modes.search) {
+          this.$emit('searchChanged')
+        }
       }
     },
 

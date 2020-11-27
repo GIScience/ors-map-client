@@ -16,9 +16,9 @@
                   <place-input :ref="'place'+index"
                     id-postfix="places-and-directions"
                     :support-directions="inputsupportsDirections"
-                    :directions-button-tooltip="$store.getters.isSidebarVisible"
+                    :directions-button-tooltip="$store.getters.isSidebarVisible && active"
                     directions-button-tooltip-position="right" 
-                    support-direct
+                    support-direct-routing
                     :pick-place-supported="places.length > 1"
                     :support-search="places.length === 1"
                     :box="places.length === 1"
@@ -58,10 +58,13 @@
         <br/>
       </template>
       <round-trip v-if="$store.getters.mode === constants.modes.roundTrip" @changed="roundTripFilterChanged"></round-trip>
-      <template v-if="$store.getters.mode === constants.modes.directions">
+      <box v-if="$store.getters.mode === constants.modes.directions" background="white" no-shadow>
+        <div slot="header">
+          <h3>{{$t('global.options')}}</h3>
+        </div>
         <fields-container @fieldUpdated="filterUpdated" :parameters="OrsMapFiltersAccessor"></fields-container>
         <br/>
-      </template>
+      </box>
       <place-details v-if="showPlaceDetails" :map-view-data="mapViewData"></place-details>
     </v-form>
   </div>

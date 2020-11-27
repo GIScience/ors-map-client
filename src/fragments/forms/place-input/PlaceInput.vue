@@ -21,7 +21,7 @@
           @click:clear="() => placeCleared(index)">
           <template v-slot:append>
             <v-btn v-if="appendBtn === 'search'" icon small flat class="append-input-btn" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
-              @click="changed($event)">
+              @click="sendToSearchMode()">
               <v-icon left>search</v-icon>
             </v-btn>
           </template>

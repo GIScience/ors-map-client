@@ -709,9 +709,9 @@ export default {
      * Remove a place input at a given index
      * @param {*} index
      */
-    removePlaceInput (index, keepDirectionsMode = false) {
+    removePlaceInput (data, keepDirectionsMode = false) {
       let placeInputsBeforeRemoval = this.places.length
-      this.places.splice(index, 1)
+      this.places.splice(data.index, 1)
       // Set the view mode constants.modes.directions or constants.modes.place
       this.setViewMode()
       this.updateAppRoute()

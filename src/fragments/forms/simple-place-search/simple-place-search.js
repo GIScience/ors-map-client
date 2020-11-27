@@ -138,6 +138,7 @@ export default {
     refreshSearch() {
       const appMode = new AppMode(this.$store.getters.mode)
       const newRoute = appMode.getRoute([this.place])
+
       // Only navigate to a new route if params has changed     
       const zoomChanged =  Number(newRoute.params.zoom) !== Number(this.$route.params.zoom)
       const centerChanged = newRoute.params.center !== this.$route.params.center
@@ -174,7 +175,7 @@ export default {
     },
     /**
      * When the menu btn is clicked, open the main
-     * map search by setting the setLeftSideBarIsOpen
+     * map form by setting the setLeftSideBarIsOpen
      */
     openMenu () {
       this.$store.commit('setLeftSideBarIsOpen', true)
