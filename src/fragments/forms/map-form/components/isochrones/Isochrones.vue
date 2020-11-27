@@ -40,9 +40,15 @@
       </v-layout>
       <template v-if="mapViewData">
         <ischrones-details v-if="mapViewData && mapViewData.hasPlaces()" :map-view-data="mapViewData"></ischrones-details>
-        <br><br>
+        <br>
       </template>
-      <fields-container @fieldUpdated="filterUpdated" :parameters="OrsMapFiltersAccessor"></fields-container>
+      <box v-if="$store.getters.mode === constants.modes.isochrones" background="white" no-shadow>
+        <div slot="header">
+          <h3>{{$t('global.options')}}</h3>
+        </div>
+        <fields-container @fieldUpdated="filterUpdated" :parameters="OrsMapFiltersAccessor"></fields-container>
+        <br/>
+      </box>      
       <br>
     </v-form>
   </div>

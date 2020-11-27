@@ -66,6 +66,7 @@ const orsParamsParser = {
           [mapBounds.rect.max_lat, mapBounds.rect.max_lon]
         ]
         args.boundary_bbox = bbox
+        delete args.focus_point // if we restrict by bounday bbox focus point is not necessary
       }
     }
 

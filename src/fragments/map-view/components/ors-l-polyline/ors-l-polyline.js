@@ -161,15 +161,18 @@ export default {
       if (this.profile) {
         const summaryCopy = Object.assign({}, this.route.summary)
         const humanizedData = GeoUtils.getHumanizedTimeAndDistance(summaryCopy, this.$t('global.units'))
-        let tooltip = `${this.$t('global.distance')} ${humanizedData.distance}<br> ${this.$t('global.duration')} ${humanizedData.duration}`
+        let tooltip = `${this.$t('global.distance')} ${humanizedData.distance}`
+        if (humanizedData.duration) {
+          tooltip += `<br> ${this.$t('global.duration')} ${humanizedData.duration}`
+        }  
 
         const profileIcon = this.getProfileIcon(this.profile)
         tooltip = `
         <div>
-          <div style='width:20%;height:50px;float:left'>
+          <div style='min-width:30px;width:20%;height:50px;float:left'>
             <span class="material-icons">${profileIcon}</span>
           </div>
-          <div>${tooltip}</div>
+          <div style='min-width:180px'>${tooltip}</div>
         </div>`
         return tooltip
       }

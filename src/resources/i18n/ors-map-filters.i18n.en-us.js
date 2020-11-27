@@ -10,7 +10,7 @@ export default {
       'foot-walking': 'Foot walking',
       'foot-hiking': 'Foot hiking',
       'driving-car': 'Car',
-      'driving-hgv': 'HGV',
+      'driving-hgv': 'Truck',
       'wheelchair': 'Wheelchair'
     },
     filters: {

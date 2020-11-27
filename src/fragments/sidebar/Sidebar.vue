@@ -30,7 +30,7 @@
       <div class="sidebar-content" :style="{height: sidebarContentHeightFormula}">
         <div class="sidebar-content-form" :style="{'padding-bottom': $vuetify.breakpoint.smAndDown ? $store.getters.footerMiniHeight + 'px': $store.getters.footerFullHeight + 'px'}">
           <map-form v-if="$store.getters.mapReady" class="map-search"></map-form>
-          <v-expansion-panel :value="null">
+          <v-expansion-panel :value="null" v-if="!$highResolution">
             <v-expansion-panel-content style="background: transparent;">
               <div slot="header">Menu</div>
               <v-list>

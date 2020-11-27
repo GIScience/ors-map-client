@@ -21,6 +21,7 @@ export default {
     distance: 'Distância: ',
     elevation: 'Elevação',
     profile: 'Perfil',
+    options: 'Opções',
     months: {
       january: 'Janeiro',
       february: 'Fevereiro',

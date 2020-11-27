@@ -8,7 +8,7 @@ export default {
     appName: 'Openrouteservice Maps',
     brand: 'HeiGIT - Universität Heidelberg',
     close: 'Schließen',
-    closeAndDoNotShowAgain: 'Close and do not show again',
+    closeAndDoNotShowAgain: 'Close and do not show it again',
     select: 'Auswählen',
     yes: 'Ja',
     no: 'Nein',
@@ -22,6 +22,7 @@ export default {
     distance: 'Entfernung: ',
     elevation: 'Höhe',
     profile: 'Fahrzeugprofil',
+    options: 'Optionen',
     months: {
       january: 'Januar',
       february: 'Februar',
