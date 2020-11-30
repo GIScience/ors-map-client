@@ -1,5 +1,5 @@
 <template>
-  <div class="ors-l-polyline">
+  <div class="ors-l-polyline" v-if="active">
     <l-polyline :lat-lngs="latLngs" :weight="backgroundWeight" :color="backgroundColor"></l-polyline>
     <l-polyline ref="foregroundPolyline"
       @follow="followPolyline" 
@@ -11,7 +11,7 @@
       :lat-lngs="latLngsCoordinates" 
       :weight="weight" 
       :color="color">
-      <l-popup v-if="!notActive" :content="popupContent" :options="{ autoClose: false, closeOnClick: true }"></l-popup>
+      <l-popup :content="popupContent" :options="{ autoClose: false, closeOnClick: true }"></l-popup>
     </l-polyline>
   </div>
 </template>

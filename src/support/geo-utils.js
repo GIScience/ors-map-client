@@ -27,8 +27,8 @@ const geoUtils = {
     return switchedCoords
   },
 
-  buildLatLong: (lat, long) => {
-    return Leaflet.latLng(lat, long)
+  buildLatLong: (lat, lng) => {
+    return Leaflet.latLng(lat, lng)
   },
 
   /**

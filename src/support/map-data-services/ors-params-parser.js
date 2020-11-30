@@ -162,7 +162,7 @@ const orsParamsParser = {
    */
   buildRoutingArgs: (places) => {
     const coordinates = lodash.map(places, (p) => {
-      return p.getLnglat()
+      return p.getLngLatArr()
     })
     const mapSettings = store.getters.mapSettings
 
@@ -213,7 +213,7 @@ const orsParamsParser = {
    */
   buildRoutingElevationArgs: (places) => {
     const coordinates = lodash.map(places, (p) => {
-      return p.getLnglat()
+      return p.getLngLatArr()
     })
 
     // build the args object

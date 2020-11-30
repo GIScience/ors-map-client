@@ -82,10 +82,11 @@ const RouteUtils = {
     if (!str) {
       return {}
     }
-    if (tryDecompress) {
-      str = Utils.decompressTxt(str)
-    }
     let parsedData = Utils.tryParseJson(str)
+    if (tryDecompress && !parsedData) {
+      str = Utils.decompressTxt(str)
+      parsedData = Utils.tryParseJson(str)
+    }
     if (parsedData) {
       for (const key in parsedData) {
         if (typeof parsedData[key] === 'object') {

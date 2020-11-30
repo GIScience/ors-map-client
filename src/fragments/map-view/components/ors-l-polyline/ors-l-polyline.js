@@ -11,7 +11,8 @@ export default {
   data () {
     return {
       orsExtendedPolyline: null,
-      backgroundWeight: 11 // will automaticaly be changed based on the weight value on `created`
+      backgroundWeight: 11, // will automaticaly be changed based on the weight value on `created`,
+      active: true
     }
   },
   components: {
@@ -73,7 +74,13 @@ export default {
       if (newVal !== null) {
         this.showPolylinePointByIndex(newVal)
       }
-    }
+    },
+    'route': function () {
+      this.active = false
+      setTimeout(() => {
+        this.active = true
+      }, 100)
+    },
   },
   methods: {
     addStopViaPolylineDrag (data) {
@@ -133,10 +140,7 @@ export default {
       const point = this.latLngsCoordinates[polylineCoordsIndex]
       customEvent.latlng = Leaflet.latLng(point[0], point[1])
       this.showPolylinePointDetails(customEvent)
-    },
-    tooltipClick (data) {
-      this.$emit('tooltipClick', data)
-    },
+    }
   },
   computed: {
     /**
@@ -179,6 +183,7 @@ export default {
     }
   },
   created () {
+    this.active = !this.notActive
     if (this.latLngs.length === 0 && !lodash.get(this.route, 'geometry.coordinates')) {
       console.error('Latlngs or route object must be passed with valid values')
     } else {

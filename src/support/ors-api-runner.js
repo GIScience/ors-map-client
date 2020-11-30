@@ -1,7 +1,9 @@
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import constants from '@/resources/constants'
+import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
 import store from '@/store/store'
+import lodash from 'lodash'
 
 import OrsApiClient from 'openrouteservice-js'
 
@@ -108,34 +110,78 @@ const ReverseGeocode = (lat, lng, size = 10) => {
 const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
   return new Promise((resolve, reject) => {
     const mapSettings = store.getters.mapSettings
-    const restrictToBbox = restrictArea && mapSettings.prioritizeSearchingForNearbyPlaces
-    const args = OrsParamsParser.buildAutocompleteArgs(term, restrictToBbox)
-    args.size = quantity
 
     const client = new OrsApiClient.Geocode({
       api_key: mapSettings.apiKey,
       host: mapSettings.apiBaseUrl,
       service: mapSettings.endpoints.geocodeSearch
     })
+    
+    let promises = []
 
-    client.geocode(args).then(response => {
-      // If no features were returned and the search
-      // was limited to the defined bounding box, rerun
-      // the search at this time without the bounding box
-      if (response.features.length === 0 && restrictToBbox) {
-        return PlacesSearch(term, quantity, false).then(places => {
-          resolve(places)
-        }).catch(response => {
-          reject(response)
-        })
-      } else {
-        const places = Place.placesFromFeatures(response.features)
-        resolve(places)
-      }
+    // Build args to search for address only
+    let addressesArgs = OrsParamsParser.buildAutocompleteArgs(term, false)
+    addressesArgs.size = quantity
+     // priority administrative places and addresses
+    addressesArgs.layers = ['country', 'region', 'macrocounty', 'borough', 'macroregion', 'county', 'locality', 'neighbourhood', 'borough', 'street', 'address', 'localadmin']
+    promises.push(client.geocode(addressesArgs))   
+
+    // Build a second query that searchs for everything, including venues
+    const restrictToBbox = restrictArea && mapSettings.prioritizeSearchingForNearbyPlaces
+    let poisArgs = OrsParamsParser.buildAutocompleteArgs(term, restrictToBbox)
+    poisArgs.size = quantity
+    poisArgs.layers = ['venue'] // POIs  
+    promises.push(client.geocode(poisArgs))    
+
+    Promise.all(promises).then((responses) => {
+      const places = buildPlacesSearchResult(responses, quantity)
+      resolve(places)
     }).catch(response => {
       reject(response)
-    })
+    })  
   })
+}
+
+/**
+ * Build places result from promises response
+ * @param {Array} responses 
+ * @returns {Array} of Places
+ */
+const buildPlacesSearchResult = (responses, quantity) => {
+  let features = responses[0].features
+  if (responses.length === 2) {
+    features = responses[0].features.slice(0, quantity / 2)
+    let availableSlots = (quantity - features.length)
+    features = features.concat(responses[1].features.slice(0, availableSlots))
+  } else {
+    features = responses[0].features
+  }
+
+  features = sortFeatures(features)
+  const places = Place.placesFromFeatures(features)
+  return places
+}
+
+/**
+ * Sort features by layer and distance from current map center
+ * @param {*} features 
+ * @returns {Array} features
+ */
+const sortFeatures  = (features) => {
+  features = lodash.uniqBy(features, function (f) { return f.properties.id })
+  
+  for (let key in features) {    
+    let featureLatLng = GeoUtils.buildLatLong(features[key].geometry.coordinates[1], features[key].geometry.coordinates[0])
+    features[key].distance = GeoUtils.calculateDistanceBetweenLocations(store.getters.mapSettings.mapCenter, featureLatLng, store.getters.mapSettings.unit)    
+  }
+  features = lodash.sortBy(features, ['distance', 'asc'])
+
+  let closestCityIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'locality' || f.properties.layer === 'city' })
+  if (closestCityIndex) {
+    // Move closest city to first postion
+    features.splice(0, 0, features.splice(closestCityIndex, 1)[0])
+  }
+  return features
 }
 
 /**
