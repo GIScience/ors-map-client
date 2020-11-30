@@ -70,8 +70,9 @@ class Place {
 
   /**
    * Returns an array containing lng and lat
+   * @returns {Array} containing [lng, lat]
    */
-  getLnglat () {
+  getLngLatArr () {
     if (this.coordinates) {
       return this.coordinates
     }
@@ -85,6 +86,22 @@ class Place {
         return [0, 0]
       }
     }
+  }
+
+  /**
+   * Returns LatLng object
+   * @returns {LatLng}
+   */
+  getLatLng () {
+    return GeoUtils.buildLatLong(this.lat, this.lng)
+  }
+
+   /**
+   * Returns an array containing lat and lng
+   * @returns {Array} containing [lat, lng]
+   */
+  getLatLngArr () {
+    return this.getLngLatArr().reverse()
   }
 
   /**

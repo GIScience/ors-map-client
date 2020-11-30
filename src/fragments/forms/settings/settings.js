@@ -53,7 +53,7 @@ export default {
           savingSettings.shownOnceTooltips = this.$store.getters.mapSettings.shownOnceTooltips
         }
         this.$store.dispatch('saveSettings', savingSettings).then(() => {
-          if (context.$i18n.locale !== savingSettings.locale) {
+          if (savingSettings.locale && context.$i18n.locale !== savingSettings.locale) {
             context.$i18n.locale = savingSettings.locale
             let title = context.$t('settings.reloadToApplyLanguageChangeTitle')
             let text = context.$t('settings.reloadToApplyLanguageChangeText')

@@ -20,7 +20,7 @@ const settingsOptions = {
     { text: 'Miles', value: 'mi' }
   ],
   areUnits: [
-    { text: 'Sq kilometers', value: 'km' },
+    { text: 'Sq kms', value: 'km' },
     { text: 'Hectare', value: 'ha' },
     { text: 'Sq meters', value: 'm' }
   ],

@@ -219,12 +219,8 @@ export default {
      * @returns {Lalng}
      */
     mapCenter () {
-      if (this.hasOnlyOneMarker) {
-        const singlePlaceCenter = GeoUtils.buildLatLong(this.markers[0].position.lat, this.markers[0].position.lng)
-        return singlePlaceCenter
-      } else {
-        return this.$store.getters.mapSettings.mapCenter
-      }
+      let latlng = GeoUtils.buildLatLong(this.$store.getters.mapSettings.mapCenter)
+      return latlng
     },
     /**
      * Determines if only one markes if on the map view
@@ -989,6 +985,9 @@ export default {
         this.updateMarkersLabel()
         this.fitFeaturesBounds()
         this.loadAvoidPolygons()
+        if (this.localMapViewData.places.length === 1 && !this.localMapViewData.places[0].isEmpty()) {
+          this.setMapCenter(this.localMapViewData.places[0].getLatLng())
+        }
       }
     },
     /**

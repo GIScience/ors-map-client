@@ -22,7 +22,7 @@ export default {
     fillOrRemoveInput: 'Busque ou selecione no mapa usando o botão de mapa ao lado',
     noPlaceFound: 'Nenhum resultado returnado',
     unknownSearchPlaceError: 'Erro desconhecido na busca por local',
-    approximateDistance: 'Distância aproximada em linha reta do centro do mapa atual',
+    approximateDistance: 'Distância aproximada em linha reta do centro atual do mapa',
     couldNotDetermineYourPreciseLocationUsingPreviousLocation: 'Não foi possível determinar sua localização precisa. Sua localização anterior será utilizada',
     pleaseTypeSomething: 'Digite algo para buscars',
     toggleDirect: 'Alternar para modo direto daqui até o próximo local',

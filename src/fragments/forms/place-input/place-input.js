@@ -286,7 +286,7 @@ export default {
       }
       let suggestions = []
       if (this.localModel.nameIsCoord()) {
-        const lnglatArr = this.localModel.getLnglat()
+        const lnglatArr = this.localModel.getLngLatArr()
         const rawCoordinatesPlace = new Place(lnglatArr[0], lnglatArr[1], this.localModel.placeName, { properties: { layer: 'rawCoordinate' } })
         rawCoordinatesPlace.rawCoordinate = true
         suggestions.push(rawCoordinatesPlace)
@@ -427,14 +427,11 @@ export default {
         this.localModel = new Place()
         this.searching = false
       } else {
-        // If the app is in low resolution mode we want less results
-        const size = this.$lowResolution ? 8 : 10
-
         const context = this
 
         // Run the place search
         this.eventBus.$emit('showLoading', true)
-        PlacesSearch(this.localModel.placeName, size).then(places => {
+        PlacesSearch(this.localModel.placeName, 10).then(places => {
           context.localModel.setSuggestions(places)
           context.focused = true
           this.focusIsAutomatic = false
@@ -456,16 +453,11 @@ export default {
      *
      */
     autocompleteByCoords () {
-      const lnglatArr = this.localModel.getLnglat()
-      const lng = lnglatArr[0]
-      const lat = lnglatArr[1]
-      // If the app is in low resolution mode we want less results
-      const size = this.$lowResolution ? 5 : 10
-
+      const latlng = this.localModel.getLatLng()
       this.eventBus.$emit('showLoading', true)
       const context = this
-      ReverseGeocode(lat, lng, size).then(places => {
-        const place = new Place(lng, lat)
+      ReverseGeocode(latlng.lat, latlng.lng, 10).then(places => {
+        const place = new Place(latlng.lng, latlng.lat)
         place.setSuggestions(places)
         context.localModel = place
         context.focused = true
@@ -567,7 +559,7 @@ export default {
      * Emit the selected event
      */
     selected () {
-      this.focused = false
+      this.focused = false // TODO: if is a simple place input, set the place selected as ma center
       this.$emit('selected', { index: this.index, place: this.model })
       this.$forceUpdate()
     },
@@ -697,7 +689,7 @@ export default {
      */
     switchCoords () {
       if (this.model.nameIsCoord()) {
-        let coordinates = this.model.getLnglat()
+        let coordinates = this.model.getLngLatArr()
         let switchedCords = coordinates.reverse()
         this.model.setLnglat(switchedCords[0], switchedCords[1])
         this.model.setCoordsAsName()
