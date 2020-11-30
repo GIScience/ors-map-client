@@ -1,0 +1,10 @@
+.profile-btn {
+    opacity: 0.4 !important;
+}
+.profile-btn::before {
+    background-color: white !important;
+}
+
+.profile-btn.active {
+    opacity: 1 !important;
+}

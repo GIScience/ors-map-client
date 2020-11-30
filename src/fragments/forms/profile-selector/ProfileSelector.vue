@@ -2,7 +2,7 @@
   <div>
     <v-btn-toggle v-model="activeProfileIndex" mandatory>
       <template v-for="profile in profilesMapping">
-        <v-btn :title="getProfileTitle(profile.slug)" v-if="profile.primary" :color="currentProfile === profile.slug ? 'primary' : 'dark'" :key="profile.slug" flat @click="setProfile(profile.slug)">
+        <v-btn :title="getProfileTitle(profile.slug)" class="profile-btn" :class="{'active': currentProfile === profile.slug}" v-if="profile.primary" :color="currentProfile === profile.slug ? 'primary' : 'dark'" :key="profile.slug" flat @click="setProfile(profile.slug)">
           <v-icon large>{{profile.icon}}</v-icon>
         </v-btn>
       </template>
@@ -28,7 +28,7 @@
         </v-list>
       </v-menu>
     </v-btn-toggle>
-    <div>
+    <div v-if="currentProfile">
       <v-chip outline small disabled color="primary">
         {{$t('global.profile')}}: {{($t('orsMapFilters.profiles.' + currentProfile)).toLowerCase()}}
       </v-chip>

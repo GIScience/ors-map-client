@@ -559,7 +559,7 @@ export default {
      * Emit the selected event
      */
     selected () {
-      this.focused = false // TODO: if is a simple place input, set the place selected as ma center
+      this.focused = false
       this.$emit('selected', { index: this.index, place: this.model })
       this.$forceUpdate()
     },
