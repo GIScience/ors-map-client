@@ -309,6 +309,13 @@ export default {
      * @param {*} latlng
      */
     directionsFromPoint (data) {
+      // If there is already a place selected and
+      // directions from a selected point is triggered
+      // then we consider that the existing point is 
+      // the destination, and then goes to position 1
+      if (this.places.length === 1) {
+        this.places[1] = this.places[0]
+      }
       this.places[0] = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })
       const context = this
       this.resolvePlace(this.places[0]).then(() => {
@@ -361,8 +368,8 @@ export default {
      * @param {*} data
      */
     directionsToPoint (data) {
-      const toPlace = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })
-      const placeIndex = this.places.length > 1 ? 1 : 0
+      const toPlace = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })      
+      const placeIndex = this.places.length === 1 ? 1 : 0
       this.places[placeIndex] = toPlace
 
       // Make sure we keep only the first and second inputs

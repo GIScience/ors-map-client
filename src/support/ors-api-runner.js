@@ -168,6 +168,9 @@ const buildPlacesSearchResult = (responses, quantity) => {
  * @returns {Array} features
  */
 const sortFeatures  = (features) => {
+  if (features.length < 2) {
+    return features
+  }
   features = lodash.uniqBy(features, function (f) { return f.properties.id })
   
   for (let key in features) {    
