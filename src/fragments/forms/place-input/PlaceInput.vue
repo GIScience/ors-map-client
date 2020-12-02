@@ -117,7 +117,8 @@
           <v-list-tile @click.stop="suggestionClicked(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'
             :title="placeSuggested.placeName">
             <v-list-tile-action class="hidden-sm-and-down">
-              <v-icon>place</v-icon>
+              <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city'">location_city</v-icon>
+              <v-icon v-else>place</v-icon>              
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title :title="placeSuggested.placeName">

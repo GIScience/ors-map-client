@@ -20,7 +20,7 @@ export default {
       return this.activeProfile
     },
     profilesMapping () {
-      const filter = this.getProfileFilter()
+      const filter = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
       return filter.mapping
     }
   },
@@ -28,17 +28,12 @@ export default {
   watch: {
     orsFilters: {
       handler: function (newVal, oldVal) {
-        this.updateFilterProfile()
+        this.updateActiveProfileWhenFilterChangedExternally()
       },
       deep: true
     },
     '$store.getters.mapReady' (newVal) {
       if (newVal) {
-        this.loadActiveProfile()
-      }
-    },
-    '$route' () {
-      if (this.$store.getters.mapReady) {
         this.loadActiveProfile()
       }
     },
@@ -52,15 +47,17 @@ export default {
     loadActiveProfile () {
       const profileFromAppRoute = lodash.get(this, '$store.getters.appRouteData.options.profile')
       let profile = profileFromAppRoute || this.$store.getters.mapSettings.defaultProfile || defaultMapSettings.defaultProfile
-      this.setProfile(profile, false)
+      if (profile !== this.activeProfile) {
+        this.setProfile(profile, false)
+      }
     },
     /**
      * Get the profile filter object
      * @returns {Object}
      */
-    getProfileFilter () {
+    getCurrentProfileFilterValue () {
       const filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
-      return filterRef
+      return filterRef.value
     },
 
     /**
@@ -82,8 +79,10 @@ export default {
     setProfile (profile, notify = true) {
       this.activeProfile = profile
       let primaryProfiles = this.getPrimaryProfiles()
-      let index = Object.keys(primaryProfiles).indexOf(this.profile)
-      this.activeProfileIndex = index
+      this.activeProfileIndex = lodash.findIndex(primaryProfiles, function(p) { return p.slug == profile })
+      if (this.activeProfileIndex === -1) {
+        this.activeProfileIndex = 5 // plus btn
+      }
 
       let mapSettings = this.$store.getters.mapSettings
       mapSettings.defaultProfile = profile
@@ -101,7 +100,7 @@ export default {
       })
         
     },
-    updateFilterProfile () {
+    updateActiveProfileWhenFilterChangedExternally () {
       const filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
       if (filterRef.value && this.activeProfile !== filterRef.value) {
         this.setProfile(filterRef.value, false)

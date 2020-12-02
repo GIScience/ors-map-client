@@ -12,8 +12,8 @@
         :close-on-content-click="true"
         :open-on-hover="true"
         bottom >
-        <v-btn slot="activator">
-          <v-icon :color="activeProfileIndex >= 4 ? 'primary' : 'dark'">add</v-icon>
+        <v-btn class="profile-btn" :class="{'active': activeProfileIndex === 5}" slot="activator">
+          <v-icon>add</v-icon>
         </v-btn>
         <v-list light style="background:white">
           <template  v-for="(profile, index) in profilesMapping">
