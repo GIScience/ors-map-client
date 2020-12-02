@@ -313,8 +313,9 @@ export default {
       // directions from a selected point is triggered
       // then we consider that the existing point is 
       // the destination, and then goes to position 1
-      if (this.places.length === 1) {
-        this.places[1] = this.places[0]
+      let filledPlaces = this.getFilledPlaces()
+      if (filledPlaces.length === 1) {
+        this.places[1] = filledPlaces[0]
       }
       this.places[0] = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })
       const context = this
@@ -327,7 +328,9 @@ export default {
           setTimeout(() => {
             context.addPlaceInput()
             context.setfocusedPlaceInput(this.places.length - 1)
-            context.setSidebarIsOpen(true)
+            if (context.$highResolution) {
+              context.setSidebarIsOpen(true)
+            }
           }, 200)
         }
       }).catch((err) => {
@@ -369,12 +372,12 @@ export default {
      */
     directionsToPoint (data) {
       const toPlace = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })      
-      const placeIndex = this.places.length === 1 ? 1 : 0
+      const placeIndex = this.getFilledPlaces().length === 1 ? 1 : 0
       this.places[placeIndex] = toPlace
 
       // Make sure we keep only the first and second inputs
       if (this.places.length > 2) {
-        this.places.length = 2
+        this.places = this.places.slice(0,2)
       }
       const context = this
 
@@ -397,7 +400,9 @@ export default {
             setTimeout(() => {
               context.places.reverse()
               context.setfocusedPlaceInput(0)
-              context.setSidebarIsOpen(true)
+              if (context.$highResolution) {
+                context.setSidebarIsOpen(true)
+              }
             }, 200)
           }
         }, 200)
