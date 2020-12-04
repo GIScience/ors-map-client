@@ -1,6 +1,7 @@
 import OrsMapFilters from '@/resources/ors-map-filters'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import defaultMapSettings from '@/resources/default-map-settings'
+import ProfileSelectorOption from './components/profile-selector-option/ProfileSelectorOption'
 import lodash from 'lodash'
 import constants from '@/resources/constants'
 
@@ -9,22 +10,25 @@ export default {
     activeProfileIndex: null,
     extraProfilesOpen: false,
     activeProfile: null,
-    orsFilters: OrsMapFilters
-
+    orsFilters: OrsMapFilters,
+    nestedProfileActive: null,
+    vehicleType: null
   }),
-  created () {
-    // this.loadActiveProfile()
-  },
   computed: {
     currentProfile () {
       return this.activeProfile
+    },
+    currentNestedItem () {
+      return this.nestedProfileActive
     },
     profilesMapping () {
       const filter = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
       return filter.mapping
     }
   },
-
+  components: {
+    ProfileSelectorOption
+  },
   watch: {
     orsFilters: {
       handler: function (newVal, oldVal) {
@@ -44,6 +48,14 @@ export default {
     }
   },
   methods: {
+    profileSelected (data) {
+      if (data.vehicleType){
+        this.vehicleType = data.vehicleType                 
+      } else {
+        this.vehicleType = null 
+      }
+      this.setProfile(data.profileSlug)
+    },
     loadActiveProfile () {
       const profileFromAppRoute = lodash.get(this, '$store.getters.appRouteData.options.profile')
       let profile = profileFromAppRoute || this.$store.getters.mapSettings.defaultProfile || defaultMapSettings.defaultProfile
@@ -106,7 +118,7 @@ export default {
         this.setProfile(filterRef.value, false)
       }
     },
-    getProfileTitle (slug) {
+    getProfileTitle (slug, nestedItem) {
       let filterKey = `orsMapFilters.profiles.${slug}`
       let title = this.$t(filterKey)
       return title

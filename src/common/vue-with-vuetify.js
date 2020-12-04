@@ -40,7 +40,8 @@ import {
   VSlider,
   VBadge,
   VBottomNav,
-  VCarousel
+  VCarousel,
+  VItemGroup
 } from 'vuetify'
 
 Vue.use(Vuetify, {
@@ -82,7 +83,8 @@ Vue.use(Vuetify, {
     VSlider,
     VBadge,
     VBottomNav,
-    VCarousel
+    VCarousel,
+    VItemGroup
   }
 })
 
