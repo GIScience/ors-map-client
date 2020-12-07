@@ -15,7 +15,7 @@ export default {
 
       'hgv': 'LKW',
       'bus': 'Bus',
-      'agricultural': 'Landwirtschaftliches Fahrzeug',
+      'agricultural': 'Forstwirtschaftliches Fahrzeug',
       'delivery': 'Lieferwagen',
       'forestry': 'Forstwirtschaftlicher Lkw',
       'goods': 'Güter-Lkwk'
