@@ -11,6 +11,7 @@ import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
+import lodash from 'lodash'
 // Local components:
 import AltitudePreview from './components/altitude-preview/AltitudePreview'
 import RouteDetails from './components/route-details/RouteDetails.vue'
@@ -215,12 +216,16 @@ export default {
         // get the info if all the inputs are filled
         let allPlacesAreFilled = this.getFilledPlaces().length === this.places.length
         
-        // Filters are only used to calculate route
+        // Filters are only used to calculate route (directions or round trip)
         // so we must update the app route if we are already 
-        // in directions mode if all the place inputs are filled 
+        // in directions/round trip mode if all the place inputs are filled 
         // and. If the app is, for example in place mode 
         // there is nothing to be done
-        if (context.active && context.$store.getters.mode === constants.modes.directions && allPlacesAreFilled) {
+        let readyToDirections = (context.$store.getters.mode === constants.modes.directions && allPlacesAreFilled)
+        let hasRoundTripInAppRoute = lodash.get(context, '$store.getters.appRouteData.options.options.round_trip')
+        let readyToRoundTrip = (context.$store.getters.mode === constants.modes.roundTrip && hasRoundTripInAppRoute)
+        
+        if (context.active && (readyToDirections || readyToRoundTrip)) {
           context.updateAppRoute()
         }
       })

@@ -1,9 +1,9 @@
 .option-container {
-  width: 58px;
+  width: 40px;
 }
 
 .profile-option-btn {
-  min-width: 36px;
+  min-width: 30px;
   margin-bottom: 5px;
   padding-left: 8px;
   padding-right: 5px;
@@ -15,7 +15,7 @@
 
 .profile-menu-activator {
   min-width: 36px;
-  height: 20px;
+  height: 13px;
   margin-top: 0px;
   margin-bottom: 5px;
   padding-left: 5px;

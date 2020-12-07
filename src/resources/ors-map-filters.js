@@ -167,7 +167,7 @@ const filters = [
         hidden: true,
         type: constants.filterTypes.string,
         useInServices: [constants.services.directions],
-        availableOnModes: [constants.modes.roundTrip, constants.modes.directions],
+        availableOnModes: [constants.modes.directions],
       },
       {
         name: 'profile_params',

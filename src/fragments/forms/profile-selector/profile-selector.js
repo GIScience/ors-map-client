@@ -92,7 +92,7 @@ export default {
     setProfile (profileSlug, vehicleTypeSlug = null) {
       return new Promise((resolve) => {
         this.activeProfileSlug = profileSlug
-        this.activeVehicleType = vehicleTypeSlug 
+        this.activeVehicleType = vehicleTypeSlug
 
         // Update the values in map filtes object
         OrsFilterUtil.setFilterValue(constants.profileFilterName, profileSlug) 

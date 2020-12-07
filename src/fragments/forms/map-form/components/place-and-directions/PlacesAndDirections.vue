@@ -53,10 +53,6 @@
         <route-details  :map-view-data="mapViewData"></route-details>
         <br/>
       </template>
-      <template v-if="showAltitudePreview">
-        <altitude-preview :map-view-data="mapViewData" ></altitude-preview>
-        <br/>
-      </template>
       <round-trip v-if="$store.getters.mode === constants.modes.roundTrip" @changed="roundTripFilterChanged"></round-trip>
       <box v-if="$store.getters.mode === constants.modes.directions" background="white" no-shadow>
         <div slot="header">
@@ -65,6 +61,10 @@
         <fields-container @fieldUpdated="filterUpdated" :parameters="OrsMapFiltersAccessor"></fields-container>
         <br/>
       </box>
+      <template v-if="showAltitudePreview">
+        <altitude-preview :map-view-data="mapViewData" ></altitude-preview>
+        <br/>
+      </template>
       <place-details v-if="showPlaceDetails" :map-view-data="mapViewData"></place-details>
     </v-form>
   </div>
