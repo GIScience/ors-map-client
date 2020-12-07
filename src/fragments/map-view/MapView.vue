@@ -83,7 +83,7 @@
           :focused-poly-index="highlightedRoutePointIndex"
           @addStopViaPolylineDrag="addStopViaPolylineDrag" 
           :route="activeRouteData" 
-          :profile="this.localMapViewData.options.profile">
+          :tooltip-icon="routingProfileIcon">
         </ors-l-polyline>
       </template>
       <l-control-layers v-if="showControls" :position="layersPosition" :collapsed="true"/>

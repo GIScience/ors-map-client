@@ -12,7 +12,7 @@ const state = {
   footerMiniHeight: 140,
   sidebarFullWidth: 400,
   sidebarShrinkeWidth: 290,
-  sidebarHeaderHeight: 140
+  sidebarHeaderHeight: 160
 }
 
 const getters = {

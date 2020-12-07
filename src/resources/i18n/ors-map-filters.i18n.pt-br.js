@@ -11,7 +11,13 @@ export default {
       'foot-hiking': 'Caminhada recreativa',
       'driving-car': 'Carro',
       'driving-hgv': 'Veículo pesado',
-      'wheelchair': 'Cadeira de rodas'
+      'wheelchair': 'Cadeira de rodas',
+      'hgv': 'Veículo pesado',
+      'bus': 'Ônibus',
+      'agricultural': 'Veículo agrícola',
+      'delivery': 'Caminhão de entrega',
+      'forestry': 'Caminhão florestal',
+      'goods': 'Caminhão de carga'
     },
     filters: {
       preference: {

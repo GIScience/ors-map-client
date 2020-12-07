@@ -1,10 +1,20 @@
 .profile-btn {
-    opacity: 0.4 !important;
+  opacity: 0.4 !important;
 }
 .profile-btn::before {
-    background-color: white !important;
+  background-color: white !important;
 }
 
 .profile-btn.active {
-    opacity: 1 !important;
+  opacity: 1 !important;
+}
+
+.profile-options-wrapper {
+  margin-left: 2px;
+  max-width: 275px;
+  padding-top: 5px;
+  padding-right: 5px;
+  border-radius: 4px;
+  border: 1px solid #cbced1;
+  background-color: #f5f5f5;
 }

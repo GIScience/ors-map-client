@@ -30,42 +30,25 @@ const filters = [
       'cycling-regular': {
         slug: 'cycling-regular',
         icon: 'directions_bike',
-        primary: true
-      },
-      'cycling-road': {
-        slug: 'cycling-road',
-        icon: 'directions_bike'
-      },
-      'cycling-electric': {
-        slug: 'cycling-electric',
-        icon: 'directions_bike'
-      },
-      'cycling-mountain': {
-        slug: 'cycling-mountain',
-        icon: 'directions_bike'
+        nestedProfiles: ['cycling-regular', 'cycling-road', 'cycling-electric', 'cycling-mountain']
       },
       'foot-walking': {
         slug: 'foot-walking',
         icon: 'directions_walk',
-        primary: true
-      },
-      'foot-hiking': {
-        slug: 'foot-hiking',
-        icon: 'directions_walk'
+        nestedProfiles: ['foot-walking', 'foot-hiking']
       },
       'driving-car': {
         slug: 'driving-car',
-        icon: 'directions_car',
-        primary: true
+        icon: 'directions_car'  
       },
       'driving-hgv': {
         slug: 'driving-hgv',
-        icon: 'directions_car'
+        icon: 'directions_bus',
+        vehicleTypes: ['bus', 'hgv', 'agricultural', 'delivery', 'forestry', 'goods']
       },
       wheelchair: {
         slug: 'wheelchair',
-        icon: 'accessible',
-        primary: true
+        icon: 'accessible'
       }
     }
   },
@@ -178,6 +161,14 @@ const filters = [
     availableOnModes: [constants.modes.roundTrip, constants.modes.directions, constants.modes.isochrones],
     valueAsObject: true,
     props: [
+      {
+        name: 'vehicle_type',
+        required: false,
+        hidden: true,
+        type: constants.filterTypes.string,
+        useInServices: [constants.services.directions],
+        availableOnModes: [constants.modes.directions],
+      },
       {
         name: 'profile_params',
         type: constants.filterTypes.wrapper,

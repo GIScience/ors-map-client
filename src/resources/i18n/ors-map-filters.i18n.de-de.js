@@ -11,7 +11,14 @@ export default {
       'foot-hiking': 'Wandern',
       'driving-car': 'Auto',
       'driving-hgv': 'LKW',
-      'wheelchair': 'Rollstuhl'
+      'wheelchair': 'Rollstuhl',
+
+      'hgv': 'LKW',
+      'bus': 'Bus',
+      'agricultural': 'Forstwirtschaftliches Fahrzeug',
+      'delivery': 'Lieferwagen',
+      'forestry': 'Forstwirtschaftlicher Lkw',
+      'goods': 'Güter-Lkwk'
     },
     filters: {
       preference: {

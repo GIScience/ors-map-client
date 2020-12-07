@@ -21,6 +21,7 @@ const constants = {
   avoidPpolygonsFilterName: 'avoid_polygons',
   roundTripOptionsPath: 'options.round_trip',
   profileFilterName: 'profile',
+  vehicleTypeFilterName: 'vehicle_type',
   responseErrorCodePath: 'response.body.error.code',
   initialMapMaxZoom: 18,
   initialZoomLevel: 12,

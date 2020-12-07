@@ -1,0 +1,23 @@
+.option-container {
+  width: 40px;
+}
+
+.profile-option-btn {
+  min-width: 30px;
+  margin-bottom: 5px;
+  padding-left: 8px;
+  padding-right: 5px;
+}
+
+.profile-option-btn::before {
+  background-color: white !important;
+}
+
+.profile-menu-activator {
+  min-width: 36px;
+  height: 13px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}

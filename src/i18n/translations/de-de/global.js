@@ -21,7 +21,7 @@ export default {
     duration: 'Dauer: ',
     distance: 'Entfernung: ',
     elevation: 'Höhe',
-    profile: 'Fahrzeugprofil',
+    profile: 'Profil',
     options: 'Optionen',
     months: {
       january: 'Januar',
