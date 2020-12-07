@@ -1,15 +1,17 @@
-import MapView from '@/fragments/map-view/MapView.vue'
 import SimplePlaceSearch from '@/fragments/forms/simple-place-search/SimplePlaceSearch'
-import AppMode from '@/support/app-modes/app-mode'
-import Altitude from '@/fragments/charts/altitude/Altitude'
-import MapViewData from '@/models/map-view-data'
-import About from '@/fragments/about/About.vue'
+import PlacesCarousel from '@/fragments/places-carousel/PlacesCarousel'
+import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import Settings from '@/fragments/forms/settings/Settings.vue'
+import Altitude from '@/fragments/charts/altitude/Altitude'
+import MapView from '@/fragments/map-view/MapView.vue'
+import AppMode from '@/support/app-modes/app-mode'
+import MapViewData from '@/models/map-view-data'
+import resolver from '@/support/routes-resolver'
+import About from '@/fragments/about/About.vue'
+import RouteUtils from '@/support/route-utils'
 import constants from '@/resources/constants'
 import { ResizeObserver } from 'vue-resize'
-import PlacesCarousel from '@/fragments/places-carousel/PlacesCarousel'
-import RouteUtils from '@/support/route-utils'
-import resolver from '@/support/routes-resolver'
+import lodash from 'lodash'
 
 export default {
   data: () => ({
@@ -50,6 +52,25 @@ export default {
     simpleSearchIsVisible () {
       let isVisible = !this.$store.getters.embed && this.$store.getters.mapReady && !this.$store.getters.isSidebarVisible
       return isVisible
+    },
+    /**
+     * Get the current routing profile icon, if available
+     * @returns {Object}
+     */
+    currentProfileIcon () {
+      let profile =  lodash.get(this, 'mapViewData.options.profile')
+      if (profile) {
+        const filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
+        if (filterRef.mapping[profile]) {
+          return filterRef.mapping[profile].icon
+        } else {
+          for (let key in filterRef.mapping) {
+            if (filterRef.mapping[key].nestedProfiles.includes(profile) || filterRef.mapping[key].vehicleTypes.includes(profile)) {
+              return filterRef.mapping[key].icon
+            }
+          }
+        }
+      }
     },
     /**
      * Determines the map view height based on the view height,

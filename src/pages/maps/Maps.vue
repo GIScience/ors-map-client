@@ -19,6 +19,7 @@
       :shrinked="$store.getters.leftSideBarPinned"
       :mode="$store.getters.mode"
       :supports-drawing-tool="supportsDrawingTool"
+      :routing-profile-icon="currentProfileIcon"
       @onCreate="orsMapCreated"
       @markerDragged="markerDragged"
       @directionsFromPoint="directionsFromPoint"

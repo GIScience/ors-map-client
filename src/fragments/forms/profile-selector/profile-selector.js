@@ -7,19 +7,15 @@ import constants from '@/resources/constants'
 
 export default {
   data: () => ({
-    activeProfileIndex: null,
     extraProfilesOpen: false,
-    activeProfile: null,
+    activeProfileSlug: null,
     orsFilters: OrsMapFilters,
-    nestedProfileActive: null,
+    activeVehicleType: null,
     vehicleType: null
   }),
   computed: {
-    currentProfile () {
-      return this.activeProfile
-    },
     currentNestedItem () {
-      return this.nestedProfileActive
+      return this.activeVehicleType
     },
     profilesMapping () {
       const filter = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
@@ -31,36 +27,36 @@ export default {
   },
   watch: {
     orsFilters: {
-      handler: function (newVal, oldVal) {
+      handler: function () {
         this.updateActiveProfileWhenFilterChangedExternally()
       },
       deep: true
     },
     '$store.getters.mapReady' (newVal) {
       if (newVal) {
-        this.loadActiveProfile()
+        this.loadActiveProfileAndVehicle()
       }
     },
-    '$store.getters.mapSettings.defaultProfile' (newVal) {
-      if (this.activeProfile !== newVal) {
-        this.setProfile(newVal, false)
-      }
+    '$store.getters.appRouteData.options.profile' (newVal) {
+      this.loadActiveProfileAndVehicle()
+    },
+    '$store.getters.appRouteData.options.vehicle_type' (newVal) {
+      this.loadActiveProfileAndVehicle()
     }
   },
   methods: {
     profileSelected (data) {
-      if (data.vehicleType){
-        this.vehicleType = data.vehicleType                 
-      } else {
-        this.vehicleType = null 
-      }
-      this.setProfile(data.profileSlug)
+      this.setProfile(data.profileSlug, data.vehicleType).then(() => {
+        this.notifyProfileChanged()
+      })
     },
-    loadActiveProfile () {
-      const profileFromAppRoute = lodash.get(this, '$store.getters.appRouteData.options.profile')
+    loadActiveProfileAndVehicle () {
+      let profileFromAppRoute = lodash.get(this, '$store.getters.appRouteData.options.profile')
       let profile = profileFromAppRoute || this.$store.getters.mapSettings.defaultProfile || defaultMapSettings.defaultProfile
-      if (profile !== this.activeProfile) {
-        this.setProfile(profile, false)
+      let vehicleType = lodash.get(this, '$store.getters.appRouteData.options.options.vehicle_type')
+
+      if (profile !== this.activeProfileSlug || this.activeVehicleType !== vehicleType) {
+        this.setProfile(profile, vehicleType)
       }
     },
     /**
@@ -83,45 +79,54 @@ export default {
       return primaryProfiles
     },
 
+    notifyProfileChanged () {
+      this.eventBus.$emit('filtersChangedExternally')
+    },
+
     /**
      * Set the profile used to route
-     * @param {*} profile
-     * @param {*} index
+     * @param {*} profileSlug
+     * @param {*} vehicleTypeSlug
+     * @returns {Promise}
      */
-    setProfile (profile, notify = true) {
-      this.activeProfile = profile
-      let primaryProfiles = this.getPrimaryProfiles()
-      this.activeProfileIndex = lodash.findIndex(primaryProfiles, function(p) { return p.slug == profile })
-      if (this.activeProfileIndex === -1) {
-        this.activeProfileIndex = 5 // plus btn
-      }
+    setProfile (profileSlug, vehicleTypeSlug = null) {
+      return new Promise((resolve) => {
+        this.activeProfileSlug = profileSlug
+        this.activeVehicleType = vehicleTypeSlug 
 
-      let mapSettings = this.$store.getters.mapSettings
-      mapSettings.defaultProfile = profile
-      OrsFilterUtil.setFilterValue(constants.profileFilterName, profile)  
+        // Update the values in map filtes object
+        OrsFilterUtil.setFilterValue(constants.profileFilterName, profileSlug) 
+        OrsFilterUtil.setFilterValue(constants.vehicleTypeFilterName, vehicleTypeSlug)  
 
-      this.$store.dispatch('saveSettings', mapSettings).then(() => {
-        if (notify) {
-          this.eventBus.$emit('filtersChangedExternally')
-        }
-        let context = this
+        // Store the selected profile as default profile
+        // so the next time the ap is loaded, it will be selected by default
+        let mapSettings = this.$store.getters.mapSettings
+        mapSettings.defaultProfile = profileSlug
+        mapSettings.defaultVehicleType = vehicleTypeSlug
         
-        setTimeout(() => {
-          context.extraProfilesOpen = false
-        }, 200)
-      })
-        
+        this.$store.dispatch('saveSettings', mapSettings).then(() => {
+          let context = this          
+          setTimeout(() => {
+            context.extraProfilesOpen = false
+            resolve(profileSlug)
+          }, 200)
+        })
+      })        
     },
+    /**
+     * Change the value of local profile and vehicle type
+     * when the ors map filter object changes externally
+     */
     updateActiveProfileWhenFilterChangedExternally () {
-      const filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
-      if (filterRef.value && this.activeProfile !== filterRef.value) {
-        this.setProfile(filterRef.value, false)
-      }
-    },
-    getProfileTitle (slug, nestedItem) {
-      let filterKey = `orsMapFilters.profiles.${slug}`
-      let title = this.$t(filterKey)
-      return title
+      const profileFilterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
+      const vehicleTypeFilterRef = OrsFilterUtil.getFilterRefByName(constants.vehicleTypeFilterName)
+
+      let profile = profileFilterRef.value|| this.activeProfileSlug
+      let vehicleType = vehicleTypeFilterRef.value|| this.activeVehicleType
+
+      if (this.activeProfileSlug !== profile || this.activeVehicleType !== vehicleType) {
+        this.setProfile(profile, vehicleType)
+      }      
     }
   }
 }

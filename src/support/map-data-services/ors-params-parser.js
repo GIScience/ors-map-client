@@ -244,9 +244,10 @@ const orsParamsParser = {
 
         // If the value of the filter is valid, add in the args array
         if (orsParamsParser.isFilterValueValid(filterValue)) {
+          // If the parent is a wrapping object and it is already defined in args, add it to the object
           if (filter.type === constants.filterTypes.wrapper && typeof args[filter.name] !== 'undefined') {
             args[filter.name] = orsParamsParser.getMergedParameterValues(args[filter.name], filterValue)
-          } else {
+          } else { // if not 
             if (filter.valueAsObject && typeof filterValue === 'string') {
               const parsed = Utils.tryParseJson(filterValue)
               args[filter.name] = parsed || filterValue

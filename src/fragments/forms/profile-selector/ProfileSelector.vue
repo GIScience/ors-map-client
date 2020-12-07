@@ -1,23 +1,25 @@
 <template>
   <div>
-    <v-item-group>    
-       <v-layout>  
-        <v-item v-for="profile in profilesMapping" :key="profile.slug">        
+    <v-item-group>
+      <v-layout class="profile-options-wrapper">
+        <v-item v-for="profile in profilesMapping" :key="profile.slug">
           <v-flex>
-            <profile-selector-option @profileSelected="profileSelected" :profile="profile" :active-profile="currentProfile" :nested-item-active="nestedProfileActive"></profile-selector-option>
-          </v-flex>              
+            <profile-selector-option @profileSelected="profileSelected" :profile="profile"
+              :active-profile-slug="activeProfileSlug" :active-vehicle-type="activeVehicleType">
+            </profile-selector-option>
+          </v-flex>
         </v-item>
-       </v-layout>  
+      </v-layout>
     </v-item-group>
-    
-    <div v-if="vehicleType">
+
+    <div v-if="activeVehicleType">
       <v-chip outline small disabled color="primary">
-        {{$t('global.profile')}}: {{($t('orsMapFilters.profiles.' + vehicleType)).toLowerCase()}}
+        {{$t('global.profile')}}: {{($t('orsMapFilters.profiles.' + activeVehicleType)).toLowerCase()}}
       </v-chip>
     </div>
-    <div v-else-if="currentProfile">
+    <div v-else-if="activeProfileSlug">
       <v-chip outline small disabled color="primary">
-        {{$t('global.profile')}}: {{($t('orsMapFilters.profiles.' + currentProfile)).toLowerCase()}}
+        {{$t('global.profile')}}: {{($t('orsMapFilters.profiles.' + activeProfileSlug)).toLowerCase()}}
       </v-chip>
     </div>
   </div>
