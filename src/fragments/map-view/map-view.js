@@ -33,7 +33,6 @@ import { LMap, LTileLayer, LMarker, LLayerGroup, LTooltip, LPopup, LControlZoom,
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
 import ExtraInfoHighlight from './components/extra-info-highlight/ExtraInfoHighlight'
 import MapRightClick from './components/map-right-click/MapRightClick'
-import { EditableMap, EditablePolyline } from 'vue2-leaflet-editable'
 import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
 import MapLeftClick from './components/map-left-click/MapLeftClick'
 import OrsLPolyline from './components/ors-l-polyline/OrsLPolyline'
@@ -79,8 +78,6 @@ export default {
     LCircleMarker,
     LControlPolylineMeasure,
     LDrawToolbar,
-    EditablePolyline,
-    EditableMap,
     ExtraInfoHighlight,
     MapRightClick,
     MapLeftClick,
