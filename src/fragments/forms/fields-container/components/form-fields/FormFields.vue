@@ -14,7 +14,7 @@
               item-value="itemValue"
               :label="buildLabel(parameter)"
               :title="buildLabel(parameter)"
-              :clearable="true"
+              :clearable="!parameter.notClearable"
               autocomplete
               :search-input.sync="parameter.searchInput"
               :multiple="parameter.multiSelect"

@@ -21,10 +21,12 @@ import DatePicker from '@/fragments/date-picker/DatePicker'
 import globalMixins from '@/common/global-mixins'
 import VeeValidate from 'vee-validate'
 import VueLodash from 'vue-lodash'
-import lodash from 'lodash'
+import lodash, { constant } from 'lodash'
 import VueMoment from 'vue-moment'
 import wrapperTag from '@/fragments/wrapper/wrapper-tag'
 import AppLoader from '@/app-loader'
+import AppHooks from '@/support/app-hooks'
+import MainMenu from '@/common/main-menu'
 
 /**
  * Fix Vue leaflet issues:
@@ -102,6 +104,10 @@ AppLoader.load().then(() => {
     store: store,
     template: '<App/>'
   })
+  VueInstance.appHooks = new AppHooks()
+  VueInstance.appHooks.loadRegistedHooks()
+  VueInstance.appHooks.run('appLoaded', VueInstance)
+  MainMenu.adjustMenu()
 })
 
 const main = {

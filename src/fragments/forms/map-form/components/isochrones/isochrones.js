@@ -1,14 +1,16 @@
 import FormActions from '@/fragments/forms/map-form/components/form-actions/FormActions'
 import MapViewDataBuilder from '@/support/map-data-services/map-view-data-builder'
 import FieldsContainer from '@/fragments/forms/fields-container/FieldsContainer'
-import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
+import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
 import { Isochrones } from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
-import constants from '@/resources/constants'
 import MapViewData from '@/models/map-view-data'
+import constants from '@/resources/constants'
+import appConfig from '@/config/app-config'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
+import main from '@/main'
 
 // Local components
 import IschronesDetails from './components/isochrones-details/IsochronesDetails'
@@ -28,6 +30,11 @@ export default {
     Draggable,
     FormActions,
     IschronesDetails
+  },
+  computed: {
+    disabledActions () {
+      return appConfig.disabledActionsForIsochrones
+    }
   },
   created () {
     this.loadData()
@@ -69,6 +76,7 @@ export default {
     // Avoid polygons changed, so recalculate the route
     this.eventBus.$on('avoidPolygonsChanged', (polygons) => {
       if (context.active) {
+        context.$root.appHooks.run('avoidPolygonsChangedInIsochrones', polygons)
         context.avoidPolygonsFilterAcessor.value = polygons
         context.updateAppRoute()
       }

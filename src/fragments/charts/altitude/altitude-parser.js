@@ -1,4 +1,4 @@
-import theme from '@/common/theme'
+import theme from '@/config/theme'
 import lodash from 'lodash'
 
 /**

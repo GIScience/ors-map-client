@@ -1,4 +1,5 @@
-import menuService from '@/shared-services/menu-service'
+import menuService from './menu-service'
+import appConfig from '@/config/app-config'
 import Vue from 'vue'
 
 /**
@@ -28,6 +29,22 @@ const getMenu = (slug) => {
         console.log(error)
       })
   })
+}
+
+/**
+ * Add external URL to menu item
+ * @param {*} item
+ */
+const addBaseExternalUrl = (item) => {
+  if (!item.href.startsWith('http')) {
+    item.href = appConfig.baseMenuExternalUrl + item.href
+  }
+  if (item.items) {
+    for (const key in item.items) {
+      item.items[key] = addBaseExternalUrl(item.items[key])
+    }
+  }
+  return item
 }
 
 /**
@@ -202,7 +219,8 @@ const MenuManager = {
   injectBeforeItemEndingWith,
   replaceItemStartingWith,
   injectAt,
-  setMenuActiveStatus
+  setMenuActiveStatus,
+  addBaseExternalUrl
 }
 
 export default MenuManager

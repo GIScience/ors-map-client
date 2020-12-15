@@ -1,7 +1,8 @@
 
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
-import OrsMapFilters from '@/resources/ors-map-filters'
+import OrsMapFilters from '@/config/ors-map-filters'
 import store from '@/store/store'
+import main from '@/main'
 
 // Modes
 import directionsMode from './strategies/directions-mode'
@@ -9,6 +10,7 @@ import roundtripMode from './strategies/roundtrip-mode'
 import searchMode from './strategies/search-mode'
 import placeMode from './strategies/place-mode'
 import isochronesMode from './strategies/isochrones-mode'
+
 
 /**
  * AppState
@@ -34,7 +36,6 @@ class AppMode {
   getRoute (places) {
     const newAppRouteData = this.getAppRouteData(places)
     store.commit('appRouteData', newAppRouteData)
-
     const options = this.getRouteOptions(newAppRouteData.options)
     var route = this.targetMode.getRoute(newAppRouteData, options)
     return route
@@ -72,30 +73,13 @@ class AppMode {
   }
 
   /**
-   * Extract valid options/filters for a request
-   * checking if each prop is in a list of valid parameters
-   * or the if is present in the OrsMapFilters @see '@/resources/ors-map-filters'
+   * Run the afterGetRouteOptions hook and return the options
    * @param {*} options
-   * @uses OrsMapFilters @see '@/resources/ors-map-filters'
-   * @returns {*} validOptions
+   * @returns {*} options
    */
   getRouteOptions = (options) => {
-    const orsFilters = OrsMapFilters
-    const validOptions = {}
-    for (const propName in options) {
-      let foundInFilters = false
-      for (const filterKey in orsFilters) {
-        const filter = orsFilters[filterKey]
-        if (filter.name === propName) {
-          validOptions[propName] = options[propName]
-          foundInFilters = true
-        }
-      }
-      if (!foundInFilters) {
-        validOptions[propName] = options[propName]
-      }
-    }
-    return validOptions
+    main.getInstance().appHooks.run('afterGetRouteOptions', options)
+    return options
   }
 }
 // export the class

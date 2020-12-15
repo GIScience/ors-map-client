@@ -1,7 +1,7 @@
 import RouteImporter from '@/fragments/forms/route-importer/RouteImporter.vue'
 import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn.vue'
 import constants from '@/resources/constants'
-import appConfig from '@/config'
+import appConfig from '@/config/app-config'
 
 export default {
   data: () => ({

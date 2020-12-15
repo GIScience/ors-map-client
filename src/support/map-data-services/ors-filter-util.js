@@ -1,5 +1,5 @@
 
-import OrsMapFilters from '@/resources/ors-map-filters'
+import OrsMapFilters from '@/config/ors-map-filters'
 import FilterDependencyService from './filter-dependency-service'
 import store from '@/store/store'
 import constants from '@/resources/constants'

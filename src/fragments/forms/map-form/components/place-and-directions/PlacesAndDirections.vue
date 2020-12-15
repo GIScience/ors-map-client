@@ -40,7 +40,7 @@
         </ul>
       </template>
       <v-layout row class="form-actions-btns">
-         <form-actions :place-inputs="places.length"
+         <form-actions :place-inputs="places.length" :disabled-actions="disabledActions"
             @addPlaceInput="addInput"
             @clearPlaces="clearPlaces"
             @reverseRoute="reverseRoute"

@@ -10,7 +10,7 @@
  * @listens closeBox [global, via eventBus] expecting box guid
  * @listens closeBox [global, via eventBus] expecting {guid:<id>, maximized: boolean}
  */
-import theme from '@/common/theme'
+import theme from '@/config/theme'
 import utils from '@/support/utils'
 
 export default {

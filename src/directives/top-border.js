@@ -1,4 +1,4 @@
-import theme from '@/common/theme'
+import theme from '@/config/theme'
 const topBorder = {
   bind (el, binding) {
     render(el, binding)

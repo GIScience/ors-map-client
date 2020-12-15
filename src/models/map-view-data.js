@@ -159,5 +159,5 @@ class MapViewData {
     return geoJsonData
   }
 }
-// export the directions json builder class
+// export the MapViewData class
 export default MapViewData

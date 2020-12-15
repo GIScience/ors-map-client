@@ -1,5 +1,6 @@
 import menuManager from '@/support/menu-manager'
 import resolver from '@/support/routes-resolver'
+import appConfig from '@/config/app-config'
 
 export default {
   data () {
@@ -19,13 +20,15 @@ export default {
     },
     hideTopBar () {
       this.$store.commit('setTopBarIsOpen', false)
+    },
+    getConfigVal (key) {
+      let configVal = appConfig[key]
+      return configVal
     }
   },
   created () {
     const context = this
-    this.$store.dispatch('fetchMainMenu').then(() => {
-      context.menuItems = context.$store.getters.mainMenu
-    })
+    context.menuItems = context.$store.getters.mainMenu
 
     this.eventBus.$on('routeChanged', (routeParams) => {
       if (context.menuItems.length > 0) {
@@ -40,6 +43,14 @@ export default {
       setTimeout(() => {
         this.$store.commit('setTopBarIsOpen', false)
       }, 1500)
+    }
+  },
+  watch: {
+    '$store.getters.mainMenu': {
+      handler: function () {
+        this.menuItems = this.$store.getters.mainMenu
+      },
+      deep: true
     }
   },
   computed: {

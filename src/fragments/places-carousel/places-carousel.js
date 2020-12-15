@@ -2,7 +2,7 @@ import geoUtils from '@/support/geo-utils'
 import resolver from '@/support/routes-resolver'
 import MapViewData from '@/models/map-view-data'
 import VueHorizontalList from 'vue-horizontal-list'
-import theme from '@/common/theme'
+import theme from '@/config/theme'
 
 export default {
   props: {

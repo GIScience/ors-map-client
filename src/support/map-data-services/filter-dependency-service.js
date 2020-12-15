@@ -1,4 +1,4 @@
-import OrsMapFilters from '@/resources/ors-map-filters'
+import OrsMapFilters from '@/config/ors-map-filters'
 import utils from '@/support/utils'
 import lodash from 'lodash'
 

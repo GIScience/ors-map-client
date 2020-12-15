@@ -320,5 +320,5 @@ class Place {
     return new Place(lng, lat, placeName, options)
   }
 }
-// export the directions json builder class
+// export the place class
 export default Place

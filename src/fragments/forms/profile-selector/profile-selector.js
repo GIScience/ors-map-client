@@ -1,4 +1,4 @@
-import OrsMapFilters from '@/resources/ors-map-filters'
+import OrsMapFilters from '@/config/ors-map-filters'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import defaultMapSettings from '@/resources/default-map-settings'
 import ProfileSelectorOption from './components/profile-selector-option/ProfileSelectorOption'

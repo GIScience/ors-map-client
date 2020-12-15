@@ -33,7 +33,6 @@ import { LMap, LTileLayer, LMarker, LLayerGroup, LTooltip, LPopup, LControlZoom,
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
 import ExtraInfoHighlight from './components/extra-info-highlight/ExtraInfoHighlight'
 import MapRightClick from './components/map-right-click/MapRightClick'
-import { EditableMap, EditablePolyline } from 'vue2-leaflet-editable'
 import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
 import MapLeftClick from './components/map-left-click/MapLeftClick'
 import OrsLPolyline from './components/ors-l-polyline/OrsLPolyline'
@@ -50,7 +49,7 @@ import constants from '@/resources/constants'
 import I18nBuilder from '@/i18n/i18n-builder'
 import GeoUtils from '@/support/geo-utils'
 import utils from '@/support/utils'
-import theme from '@/common/theme'
+import theme from '@/config/theme'
 import Place from '@/models/place'
 import lodash from 'lodash'
 
@@ -79,8 +78,6 @@ export default {
     LCircleMarker,
     LControlPolylineMeasure,
     LDrawToolbar,
-    EditablePolyline,
-    EditableMap,
     ExtraInfoHighlight,
     MapRightClick,
     MapLeftClick,
@@ -441,6 +438,9 @@ export default {
       const isDraggable = draggableModes.includes(this.mode)
       return isDraggable
     },
+    /**
+     * Determines if the directios mode is active
+     */
     isInDirectionsMode () {
       return constants.modes.directions === this.mode
     },
@@ -455,6 +455,9 @@ export default {
       return isRemovable
     },
 
+    /**
+     * Show the marker popup
+     */
     showMarkerPopup () {
       const show = this.mode !== constants.modes.search
       return show
@@ -1484,12 +1487,15 @@ export default {
         // deleted and edited events
         map.on('draw:created', function (e) {
           context.onPolygonCreation(e, map)
+          context.$root.appHooks.run('polygonCreated', e.layer)
           context.notifyAvoidPolygonsChanged()
         })
         map.on('draw:deleted', function (e) {
+          context.$root.appHooks.run('polygonDeleted', e.layer)
           context.notifyAvoidPolygonsChanged()
         })
         map.on('draw:edited', function (e) {
+          context.$root.appHooks.run('polygonEdited', e.layer)
           context.notifyAvoidPolygonsChanged()
         })
         this.loadAvoidPolygons()

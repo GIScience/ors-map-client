@@ -1,3 +1,5 @@
+import main from '@/main'
+
 const state = {
   browserLocation: null,
   activeRouteIndex: 0,
@@ -29,8 +31,10 @@ const mutations = {
   },
   mapBounds: (state, mapBounds) => {
     state.mapBounds = mapBounds
+    main.getInstance().appHooks.run('mapBoundsChanged', mapBounds)
   },
   currentLocation: (state, currentLocation) => {
+    main.getInstance().appHooks.run('beforeStoreNewCurrentLocation', currentLocation)
     state.currentLocation = currentLocation
   }
 }

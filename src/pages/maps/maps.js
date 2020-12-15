@@ -12,6 +12,7 @@ import RouteUtils from '@/support/route-utils'
 import constants from '@/resources/constants'
 import { ResizeObserver } from 'vue-resize'
 import lodash from 'lodash'
+import main from '@/main'
 
 export default {
   data: () => ({
@@ -549,6 +550,7 @@ export default {
     // Listen to the mapViewDataChanged event and call the
     // necessary methods when it happes
     this.eventBus.$on('mapViewDataChanged', function (mapViewData) {
+      context.$root.appHooks.run('mapViewDataChanged', mapViewData)
       context.setMapDataAndUpdateMapView(mapViewData)
       context.setViewHeightAndBottomNav()
     })

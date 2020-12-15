@@ -5,7 +5,6 @@ export default {
     save: 'Speichern',
     confirm: 'Bestätigen',
     cancel: 'Abbrechen',
-    appName: 'Openrouteservice Maps',
     brand: 'HeiGIT - Universität Heidelberg',
     close: 'Schließen',
     closeAndDoNotShowAgain: 'Close and do not show it again',

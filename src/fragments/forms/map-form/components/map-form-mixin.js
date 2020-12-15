@@ -1,6 +1,6 @@
 import MapViewDataBuilder from '@/support/map-data-services/map-view-data-builder'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
-import OrsMapFilters from '@/resources/ors-map-filters'
+import OrsMapFilters from '@/config/ors-map-filters'
 import AppRouteData from '@/models/app-route-data'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'

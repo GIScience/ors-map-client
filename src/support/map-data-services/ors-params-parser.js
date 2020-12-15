@@ -1,6 +1,6 @@
 import store from '@/store/store'
 import lodash from 'lodash'
-import OrsMapFilters from '@/resources/ors-map-filters'
+import OrsMapFilters from '@/config/ors-map-filters'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import DependencyService from '@/support/dependency-service.js'
 import Utils from '@/support/utils'

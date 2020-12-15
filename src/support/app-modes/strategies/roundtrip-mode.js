@@ -1,10 +1,11 @@
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import AppRouteData from '@/models/app-route-data'
-import OrsMapFilters from '@/resources/ors-map-filters'
+import OrsMapFilters from '@/config/ors-map-filters'
 import constants from '@/resources/constants'
 import store from '@/store/store'
 import Utils from '@/support/utils'
 import RouteUtils from '@/support/route-utils'
+import main from '@/main'
 
 /**
  * RoundTripMode class
@@ -56,6 +57,7 @@ class RoundTripMode {
 
     // Get the collection of coordinates from the decoded data param object
     appRouteData.places = RouteUtils.getRoutePlaces(currentRoute)
+    main.getInstance().appHooks.run('afterRoundtripPathDecoded', appRouteData)
     return appRouteData
   }
 }
