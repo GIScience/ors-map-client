@@ -1,7 +1,7 @@
 import lodash from 'lodash'
 
 /**
- * MapViewData class
+ * AppHooks class
  */
 class AppHooks {
   /**
@@ -12,7 +12,7 @@ class AppHooks {
   }
 
   /**
-   * Load registered hook defined in config/hooks.js
+   * Load registered hooks defined in src/config/hooks.js
    */
   loadRegistedHooks () {
     require('@/config/hooks')
