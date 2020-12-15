@@ -47,13 +47,13 @@ cd ors-map-client
 npm install
 ```
 
-3. Create a `app-config.js`, in the `/config`folder using the the provided `config-example.js` file as model. Usually only the following properties need to be defined:
+3. Create an `app-config.js`, in the `/src/config`folder using the the provided `/src/config/config-example.js` file as model. Usually only the following properties need to be defined:
 
 - `userApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
 - `bitlyApiKey` - the bitly key that will be used to shorten the share URL
 - `bitlyLogin` - the bitly login that will be used to shorten the share URL
 
-4. Create also a the files ors-map-filters`-example`.js, hooks`-example`.js and theme`-example`.js without the `-example`, so that you have also *ors-map-filters.js*, *theme.js* and *hooks.js* in the `/config` folder.
+4. Create also a the files ors-map-filters`-example`.js, hooks`-example`.js and theme`-example`.js without the `-example`, so that you have also *ors-map-filters.js*, *theme.js* and *hooks.js* in the `/src/config` folder.
 
 5. The ORS menu is loaded/used by default. If you want to use a custom menu, have a look in the hooks-example.js
 

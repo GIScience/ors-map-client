@@ -44,7 +44,7 @@ appHooks.add('modifyMenu', (menu) => {
 }, 1)
 
 // The hooks below are just for demonstration about what 
-// can be used. If you are not using you can remove them.
+// can be used. If you are not using, you can remove them.
 
 appHooks.add('afterGetRouteOptions', (options) => {
   // Do something when the route options are ready
