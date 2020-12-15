@@ -26,6 +26,7 @@ import VueMoment from 'vue-moment'
 import wrapperTag from '@/fragments/wrapper/wrapper-tag'
 import AppLoader from '@/app-loader'
 import AppHooks from '@/support/app-hooks'
+import MainMenu from '@/common/main-menu'
 
 /**
  * Fix Vue leaflet issues:
@@ -106,6 +107,7 @@ AppLoader.load().then(() => {
   VueInstance.appHooks = new AppHooks()
   VueInstance.appHooks.loadRegistedHooks()
   VueInstance.appHooks.run('appLoaded', VueInstance)
+  MainMenu.adjustMenu()
 })
 
 const main = {

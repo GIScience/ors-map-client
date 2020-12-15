@@ -55,6 +55,8 @@ npm install
 
 4. Create also a the files ors-map-filters`-example`.js, hooks`-example`.js and theme`-example`.js without the `-example`, so that you have also *ors-map-filters.js*, *theme.js* and *hooks.js* in the `/config` folder.
 
+5. The ORS menu is loaded/used by default. If you want to use a custom menu, have a look in the hooks-example.js
+
 The map client filters, the theme and the hooks can be customized, if you need.
 
 At this point the app is ready to run in `dev` mode. Do it by running:

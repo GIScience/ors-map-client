@@ -46,10 +46,16 @@ export default {
       return configVal
     }
   },
+  watch: {
+    '$store.getters.mainMenu': {
+      handler: function () {
+        this.menuItems = this.$store.getters.mainMenu
+      },
+      deep: true
+    }
+  },
   created () {
-    this.$store.dispatch('fetchMainMenu').then(() => {
-      this.menuItems = this.$store.getters.mainMenu
-    })
+    this.menuItems = this.$store.getters.mainMenu
     /**
      * Set sidebar open status
      */
