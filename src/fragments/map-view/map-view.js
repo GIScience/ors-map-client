@@ -1487,16 +1487,19 @@ export default {
         // deleted and edited events
         map.on('draw:created', function (e) {
           context.onPolygonCreation(e, map)
-          context.$root.appHooks.run('polygonCreated', e.layer)
-          context.notifyAvoidPolygonsChanged()
+          const avoidPolygons = context.extractPolygonsFromMap()
+          context.$root.appHooks.run('polygonCreated', avoidPolygons)
+          context.notifyAvoidPolygonsChanged(avoidPolygons)
         })
         map.on('draw:deleted', function (e) {
-          context.$root.appHooks.run('polygonDeleted', e.layer)
-          context.notifyAvoidPolygonsChanged()
+          const avoidPolygons = context.extractPolygonsFromMap()
+          context.$root.appHooks.run('polygonDeleted', avoidPolygons)
+          context.notifyAvoidPolygonsChanged(avoidPolygons)
         })
         map.on('draw:edited', function (e) {
-          context.$root.appHooks.run('polygonEdited', e.layer)
-          context.notifyAvoidPolygonsChanged()
+          const avoidPolygons = context.extractPolygonsFromMap()
+          context.$root.appHooks.run('polygonEdited', avoidPolygons)
+          context.notifyAvoidPolygonsChanged(avoidPolygons)
         })
         this.loadAvoidPolygons()
       }
@@ -1566,12 +1569,12 @@ export default {
     /**
      * Get all the polygons and  notify the parent component when
      * an avoid polygon is created
+     * @param {Object} avoidPolygons
      * @emits avoidPolygonsChanged
      */
-    notifyAvoidPolygonsChanged () {
+    notifyAvoidPolygonsChanged (avoidPolygons) {
       if (this.$refs.map.mapObject) {
-        const avoidPolygon = this.extractPolygonsFromMap()
-        this.$emit('avoidPolygonsChanged', avoidPolygon)
+        this.$emit('avoidPolygonsChanged', avoidPolygons)
       }
     },
 
