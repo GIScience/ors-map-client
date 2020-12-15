@@ -3,7 +3,7 @@ import VueI18n from 'vue-i18n'
 import enUSTranslations from './translations/en-us/builder'
 import deDETranslations from './translations/de-de/builder'
 import ptBRTranslations from './translations/pt-br/builder'
-import appConfig from '@/config'
+import appConfig from '@/config/app-config'
 
 Vue.use(VueI18n)
 

@@ -1,9 +1,10 @@
+import appConfig from '@/config/app-config'
 
 export default {
   data () {
     return {
-      footerMainSiteName: 'openrouteservice',
-      footerLink: 'http://www.heigit.org/'
+      footerMainSiteName: appConfig.footerAppName,
+      footerLink: appConfig.footerDevelopedByLink
     }
   },
   computed: {

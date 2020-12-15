@@ -1,5 +1,5 @@
 import axios from 'axios'
-import appConfig from '@/config'
+import appConfig from '@/config/app-config'
 import main from '@/main'
 import store from '@/store/store'
 

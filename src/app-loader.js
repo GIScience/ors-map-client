@@ -1,11 +1,12 @@
 import store from '@/store/store'
 import httpApi from '@/common/http-api'
 import defaultMapSettings from '@/resources/default-map-settings'
-import appConfig from '@/config'
+import appConfig from '@/config/app-config'
 import utils from '@/support/utils'
 import constants from '@/resources/constants'
 import settingsOptions from '@/resources/settings-options.js'
 import lodash from 'lodash'
+import main from '@/main'
 
 /**
  * Fetch required api data to run the app
@@ -108,6 +109,12 @@ const saveApiData = (apiKey, endpoints) => {
 
   // Save the map settings
   store.commit('mapSettings', mapSettings)
+
+  let appInstance = main.getInstance()
+  // If there is no instance yet, it is the initial settings commit
+  if (appInstance) {
+    appInstance.appHooks.run('mapSettingsChanged', mapSettings)
+  }
 
   // Save the data acquired flag as true
   store.commit('dataAcquired', true)

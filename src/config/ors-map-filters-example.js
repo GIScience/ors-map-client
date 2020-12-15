@@ -6,7 +6,7 @@ import routeSmoothnessList from '@/resources/lists/route-smoothness'
 import constants from '@/resources/constants'
 
 const filters = [
-  {
+  { // Profile filter is required. What you can change is the avaialble items in enum and mapping
     name: 'profile',
     useInServices: [constants.services.directions, constants.services.isochrones],
     hidden: true,
@@ -60,12 +60,11 @@ const filters = [
     isEnum: true,
     separator: '|',
     enum: [
-      'fastest',
       'shortest',
       'recommended'
     ],
-    default: 'fastest',
-    value: 'fastest'
+    default: 'recommended',
+    value: 'recommended'
   },
   {
     availableOnModes: [constants.modes.isochrones],

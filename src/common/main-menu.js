@@ -1,5 +1,5 @@
 import menuManager from '@/support/menu-manager'
-import appConfig from '@/config'
+import appConfig from '@/config/app-config'
 
 /**
  * Load the primary menu by its slug defined app config

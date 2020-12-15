@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import theme from './theme'
+import theme from '@/config/theme'
 import '../../node_modules/vuetify/src/stylus/app.styl'
 
 import {

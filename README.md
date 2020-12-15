@@ -26,7 +26,7 @@ The VueJS components allow a better code organization, weak and clear coupling b
 
 Run the app locally in three steps: set the environment up, get the code and define a configuration file.
 
-1 - To manage dependencies and pack the app it is necessary to have Node version 12. If you already have it, skip this step. If you don't, please install it by running:
+1. To manage dependencies and pack the app it is necessary to have Node version 12. If you already have it, skip this step. If you don't, please install it by running:
 
 ```sh
 curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
@@ -36,7 +36,7 @@ npm install -g npm && \
 npm update -g
 ```
 
-2 - Clone the repository of the ORS Map Client, go to the root folder and install the dependencies:
+2. Clone the repository of the ORS Map Client, go to the root folder and install the dependencies:
 ```sh
 git clone https://github.com/GIScience/ors-map-client.git
 
@@ -47,13 +47,17 @@ cd ors-map-client
 npm install
 ```
 
-3 - Create a `config.js`, at the root folder, using the the provided `config-example.js` file as model. Usually only the following properties need to be defined:
+3. Create a `app-config.js`, in the `/config`folder using the the provided `config-example.js` file as model. Usually only the following properties need to be defined:
 
 - `userApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
 - `bitlyApiKey` - the bitly key that will be used to shorten the share URL
 - `bitlyLogin` - the bitly login that will be used to shorten the share URL
 
-The app is ready to run in `dev` mode. Do it by running:
+4. Create also a the files ors-map-filters`-example`.js, hooks`-example`.js and theme`-example`.js without the `-example`, so that you have also *ors-map-filters.js*, *theme.js* and *hooks.js* in the `/config` folder.
+
+The map client filters, the theme and the hooks can be customized, if you need.
+
+At this point the app is ready to run in `dev` mode. Do it by running:
 
 ```sh
 npm run dev
@@ -87,7 +91,7 @@ The app load cycle follows these steps:
 
 1. Execute the `main.js` file and add global extensions, mixins components and external libs.
 2. The `main.js` also includes the main router script, the main vuex store and the main i18n file, that will internally, each one, load all the additional `.router.js` files, `.store.js` files and `.i18n.js` files.
-3. `main.js` file will create a VueJS app instance and load the `App.vue`.
+3. `main.js` file will create a VueJS app instance and load the `App.vue`. At this point `AppHooks` is set up and attached to the main VueJS instance and the hook `appLoaded` is run.
 4. `App.vue` includes all basic navigation components, like menu, sidebar, footer and etc.
 5. As soon as all the routes are loaded, including the ones in the `pages` sub folder, the page with the `/` route will also be rendered in the `<router-view></router-view>` in `App.vue` component.
 
@@ -102,6 +106,7 @@ Data flow, state and requests to services, in a simplified view, happens as foll
   6. Once an input is changed the app goes to a new URL and this makes the flow restart at the number II.
   7. If a component changes the `MapViewData` model, it emits an event to the `maps` page, that passes the current `MapViewData` object to the `MapView` component.
   8. Interactions via `MapView` may result in events sent back to `maps` page, that may notify other child components that in their turn may change the URL and trigger the step II again.
+  9. Several app hook are called during the app flow and and it is possible to listen to these hooks and run custom code to modify some of the app behavior. The available hooks are listed in `/config/hook-example.js` and must be coded in `config/hooks.js`.
 
 ### Feature-by-folder design ###
 

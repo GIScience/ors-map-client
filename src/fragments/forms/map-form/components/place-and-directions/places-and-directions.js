@@ -8,10 +8,13 @@ import { Directions } from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
+import appConfig from '@/config/app-config'
 import GeoUtils from '@/support/geo-utils'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
 import lodash from 'lodash'
+import main from '@/main'
+
 // Local components:
 import AltitudePreview from './components/altitude-preview/AltitudePreview'
 import RouteDetails from './components/route-details/RouteDetails.vue'
@@ -51,6 +54,9 @@ export default {
     }
   },
   computed: {
+    disabledActions () {
+      return appConfig.disabledActionsForPlacesAndDirections
+    },
     getPlaces () {
       if (this.places.length === 0) {
         this.addPlaceInput()
@@ -260,6 +266,7 @@ export default {
       // Avoid polygons changed, so recalculate the route
       this.eventBus.$on('avoidPolygonsChanged', (polygons) => {
         if (context.active) {
+          context.$root.appHooks.run('avoidPolygonsChangedInDrections', polygons)
           context.avoidPolygonsFilterAcessor.value = polygons
           context.updateAppRoute()
         }

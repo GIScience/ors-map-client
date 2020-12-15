@@ -3,6 +3,7 @@ import Footer from '@/fragments/footer/Footer'
 import ProfileSelector from '@/fragments/forms/profile-selector/ProfileSelector.vue'
 import resolver from '@/support/routes-resolver'
 import TopMenu from './components/top-menu/TopMenu'
+import appConfig from '@/config/app-config'
 
 export default {
   data () {
@@ -40,6 +41,10 @@ export default {
     }
   },
   methods: {
+    getConfigVal (key) {
+      let configVal = appConfig[key]
+      return configVal
+    }
   },
   created () {
     this.$store.dispatch('fetchMainMenu').then(() => {

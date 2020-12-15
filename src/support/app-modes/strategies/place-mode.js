@@ -4,6 +4,7 @@ import Place from '@/models/place'
 import store from '@/store/store'
 import utils from '@/support/utils'
 import RouteUtils from '@/support/route-utils'
+import main from '@/main'
 
 /**
  * PlaceMode class
@@ -80,6 +81,7 @@ class PlaceMode {
       appRouteData.places.push(place)
     }
     // Return the object
+    main.getInstance().appHooks.run('afterPlacePathDecoded', appRouteData)
     return appRouteData
   }
 }

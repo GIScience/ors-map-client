@@ -1,5 +1,6 @@
 import menuManager from '@/support/menu-manager'
 import resolver from '@/support/routes-resolver'
+import appConfig from '@/config/app-config'
 
 export default {
   data () {
@@ -19,6 +20,10 @@ export default {
     },
     hideTopBar () {
       this.$store.commit('setTopBarIsOpen', false)
+    },
+    getConfigVal (key) {
+      let configVal = appConfig[key]
+      return configVal
     }
   },
   created () {

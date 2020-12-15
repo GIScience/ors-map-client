@@ -6,7 +6,7 @@
         <v-icon>menu</v-icon>
       </v-btn>
       <a :href="homeUrl">
-        <img height="52.5" src="@/assets/img/logo@2x.png" :alt="$t('global.appName')" class="ml-3">
+        <img height="52.5" :src="getConfigVal('logoImgSrc')" :alt="getConfigVal('appName')" class="ml-3">
       </a>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">

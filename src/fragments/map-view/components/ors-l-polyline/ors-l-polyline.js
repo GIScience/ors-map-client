@@ -2,7 +2,7 @@ import OrsExtendedPolyline from './ors-extended-polyline'
 import { LPolyline, LTooltip, LPopup} from 'vue2-leaflet'
 import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
-import theme from '@/common/theme'
+import theme from '@/config/theme'
 import Leaflet from 'leaflet'
 import lodash from 'lodash'
 

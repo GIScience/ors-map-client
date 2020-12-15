@@ -31,7 +31,7 @@
           </ul>
         </template>
       <v-layout row class="form-actions-btns">
-        <form-actions :place-inputs="places.length" :disabled-actions="['roundtrip']"
+        <form-actions :place-inputs="places.length" :disabled-actions="disabledActions"
           @addPlaceInput="addPlaceInput"
           @clearPlaces="clearPlaces"
           @reverseRoute="reverseRoute"

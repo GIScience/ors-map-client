@@ -9,7 +9,12 @@ yarn-error.log*
 selenium-debug.log
 /src/ors-js/
 /src/vue2-leaflet-height-graph/
-/src/config.js
+
+# Ignore config file examples
+/src/config/app-config.js
+/src/config/theme.js
+/src/config/ors-map-filters.js
+/src/config/hooks.js
 
 # Editor directories and files
 .idea

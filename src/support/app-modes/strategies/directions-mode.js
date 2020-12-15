@@ -1,9 +1,10 @@
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
-import OrsMapFilters from '@/resources/ors-map-filters'
+import OrsMapFilters from '@/config/ors-map-filters'
 import AppRouteData from '@/models/app-route-data'
 import constants from '@/resources/constants'
 import Utils from '@/support/utils'
 import RouteUtils from '@/support/route-utils'
+import main from '@/main'
 
 /**
  * DirectionsMode class
@@ -72,6 +73,7 @@ class DirectionsMode {
         appRouteData.places[index].direct = true
       })
     }
+    main.getInstance().appHooks.run('afterDirectionsPathDecoded', appRouteData)
     return appRouteData
   }
 }
