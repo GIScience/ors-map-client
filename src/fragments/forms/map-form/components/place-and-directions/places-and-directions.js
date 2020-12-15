@@ -268,7 +268,9 @@ export default {
         if (context.active) {
           context.$root.appHooks.run('avoidPolygonsChangedInDrections', polygons)
           context.avoidPolygonsFilterAcessor.value = polygons
-          context.updateAppRoute()
+          if (context.getFilledPlaces().length > 1) {
+            context.updateAppRoute()
+          }
         }
       })
 

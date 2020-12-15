@@ -78,7 +78,9 @@ export default {
       if (context.active) {
         context.$root.appHooks.run('avoidPolygonsChangedInIsochrones', polygons)
         context.avoidPolygonsFilterAcessor.value = polygons
-        context.updateAppRoute()
+        if (context.getFilledPlaces().length > 0) {
+          context.updateAppRoute()
+        }
       }
     })
     // When the user click on the map and select to add this point as an additional destination in the route
