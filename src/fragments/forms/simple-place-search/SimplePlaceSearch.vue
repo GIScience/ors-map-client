@@ -17,6 +17,7 @@
           <place-input class="mini-input" :height="27" :mb="0" :index="0"
             id-postfix="simple-place-search"
             :model="place"
+            :support-directions="supportsPlacesAndDirections"
             :directions-button-tooltip="showDirectionsBtnTooltip"
             directions-button-tooltip-position="bottom"   
             :autofocus="true"

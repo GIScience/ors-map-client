@@ -25,7 +25,7 @@
               <v-icon left>search</v-icon>
             </v-btn>
           </template>
-          <template v-slot:append-outer>
+          <template v-slot:append-outer v-if="pickPlaceSupported">
             <v-btn v-if="appendBtn === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
               @click="pickPlaceClick($event)"
               v-smart-tooltip="{show: showInputPickPlaceTooltip, text: $t('placeInput.clickOnTheMapBtnToPickAPlace'), position: 'bottom', dark: true, showOnce: true, name: 'pickAPlaceOnTheMap'}">

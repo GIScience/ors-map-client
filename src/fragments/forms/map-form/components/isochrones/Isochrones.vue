@@ -42,7 +42,7 @@
         <ischrones-details v-if="mapViewData && mapViewData.hasPlaces()" :map-view-data="mapViewData"></ischrones-details>
         <br>
       </template>
-      <box v-if="$store.getters.mode === constants.modes.isochrones" background="white" no-shadow>
+      <box v-if="showMapFiltersBox" background="white" no-shadow>
         <div slot="header">
           <h3>{{$t('global.options')}}</h3>
         </div>

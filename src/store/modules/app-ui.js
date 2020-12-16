@@ -1,7 +1,8 @@
 import MainMenu from '@/common/main-menu'
+import appConfig from '@/config/app-config'
 
 const state = {
-  leftSideBarOpen: false,
+  leftSideBarOpen: appConfig.sidebarStartsOpenInheighResolution,
   leftSideBarPinned: false,
   topBarOpen: true,
   displayFooter: true,

@@ -80,6 +80,9 @@ const actions = {
             delete savingSettings[key]
           }
         }
+        if (savingSettings[key] === null || savingSettings[key] === '') {
+          delete savingSettings[key]
+        }
       }
       commit('mapSettings', settingsToKeepInAppStore)
       localStorage.setItem('mapSettings', JSON.stringify(savingSettings))

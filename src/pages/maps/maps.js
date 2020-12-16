@@ -10,9 +10,9 @@ import resolver from '@/support/routes-resolver'
 import About from '@/fragments/about/About.vue'
 import RouteUtils from '@/support/route-utils'
 import constants from '@/resources/constants'
+import appConfig from '@/config/app-config'
 import { ResizeObserver } from 'vue-resize'
 import lodash from 'lodash'
-import main from '@/main'
 
 export default {
   data: () => ({
@@ -544,7 +544,9 @@ export default {
     // telling it to update the page title
     this.eventBus.$emit('titleChanged', this.$t('maps.pageTitle'))
     this.$store.commit('setDisplayFooter', false)
-    this.$store.commit('setLeftSideBarIsOpen', false)
+    if (!appConfig.sidebarStartsOpenInheighResolution) {
+      this.$store.commit('setLeftSideBarIsOpen', false)
+    }
 
     const context = this
     // Listen to the mapViewDataChanged event and call the

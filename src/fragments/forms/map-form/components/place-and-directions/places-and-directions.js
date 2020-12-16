@@ -12,8 +12,7 @@ import appConfig from '@/config/app-config'
 import GeoUtils from '@/support/geo-utils'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
-import lodash from 'lodash'
-import main from '@/main'
+import lodash, { isNumber } from 'lodash'
 
 // Local components:
 import AltitudePreview from './components/altitude-preview/AltitudePreview'
@@ -54,6 +53,9 @@ export default {
     }
   },
   computed: {
+    showMapFiltersBox () {
+      return this.$store.getters.mode === constants.modes.directions && appConfig.supportsMapFiltersOnSidebar
+    },
     disabledActions () {
       return appConfig.disabledActionsForPlacesAndDirections
     },

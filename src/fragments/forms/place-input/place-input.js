@@ -74,7 +74,7 @@ export default {
       default: 'right',
       type: String
     },
-    idPostfix: {
+    idPostfix: { // used to generate a predictable input id
       default: '',
       type: String
     }
@@ -226,7 +226,7 @@ export default {
           return `(${this.index + 1}) ${this.$t('placeInput.routeDestination')}`
         }
         if (this.single) {
-          return this.model.isEmpty() ? this.$t('placeInput.searchPlace') : this.$t('placeInput.place')
+          return this.model.isEmpty() ? this.$t('placeInput.findAPlace') : this.$t('placeInput.place')
         } else {
           if (this.index === 0) {
             return `(${this.index + 1}) ${this.$t('placeInput.startingPlace')}`
@@ -234,7 +234,7 @@ export default {
           return this.model.isEmpty() ? `(${this.index + 1}) ${this.$t('placeInput.addRouteStop')}` : `(${this.index + 1}) ${this.$t('placeInput.routePlace')}`
         }
       } else {
-        return `${this.$t('placeInput.place')} ${this.index + 1}`
+        return `${this.$t('placeInput.findAPlace')}`
       }
     },
 
@@ -296,7 +296,7 @@ export default {
     },
 
     showSuggestion () {
-      let show = this.focused && !this.focusIsAutomatic
+      let show = this.focused && !this.focusIsAutomatic && this.placeSuggestions.length > 0
       return show
     },
     appendBtn () {
