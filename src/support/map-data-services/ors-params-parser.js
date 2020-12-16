@@ -5,7 +5,6 @@ import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import DependencyService from '@/support/dependency-service.js'
 import Utils from '@/support/utils'
 import constants from '@/resources/constants'
-import main from '@/main'
 
 const orsParamsParser = {
   /**
@@ -22,7 +21,6 @@ const orsParamsParser = {
     }
 
     orsParamsParser.addFilters(args, OrsMapFilters, constants.filterTypes.geocodeSearch)
-    main.getInstance().appHooks.run('placeSearchArgsCreated', args)
     return args
   },
 
@@ -75,7 +73,6 @@ const orsParamsParser = {
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
     orsParamsParser.addFilters(args, OrsMapFilters, constants.services.autocomplete)
-    main.getInstance().appHooks.run('autocompleteArgsCreated', args)
     return args
   },
 
@@ -101,7 +98,6 @@ const orsParamsParser = {
     }
 
     // orsParamsParser.addFilters(args, OrsMapFilters, constants.filterTypes.geocodeSearch)
-    main.getInstance().appHooks.run('poisSearchArgsCreated', args)
     return args
   },
 
@@ -124,7 +120,6 @@ const orsParamsParser = {
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
     orsParamsParser.addFilters(args, OrsMapFilters, constants.services.reverseGeocode)
-    main.getInstance().appHooks.run('reverseSearchArgsCreated', args)
     return args
   },
 
@@ -157,7 +152,6 @@ const orsParamsParser = {
       args.range = args.range_distance
       delete args.range_distance
     }
-    main.getInstance().appHooks.run('isochronesArgsCreated', args)
     return args
   },
 
@@ -209,7 +203,6 @@ const orsParamsParser = {
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
     orsParamsParser.addFilters(args, OrsMapFilters, constants.services.directions)
-    main.getInstance().appHooks.run('routingArgsCreated', args)
     return args
   },
 
@@ -231,7 +224,6 @@ const orsParamsParser = {
       format: 'geojson'
     }
     orsParamsParser.addFilters(args, OrsMapFilters, constants.services.directions)
-    main.getInstance().appHooks.run('routingElevationArgsCreated', args)
     return args
   },
 
@@ -243,8 +235,6 @@ const orsParamsParser = {
    * @returns {Array} args
    */
   addFilters (args, orsFilters, service) {
-    let appHooks = main.getInstance().appHooks
-
     for (const key in orsFilters) {
       const filter = orsFilters[key]
 
@@ -264,7 +254,6 @@ const orsParamsParser = {
             } else {
               args[filter.name] = filterValue
             }
-            appHooks.run('mapFilterAdded', {filters: args, name: filter.name})
           }
         } else {
           if (args[filter.name] && !orsParamsParser.isFilterValueValid(args[filter.name])) {

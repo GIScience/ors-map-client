@@ -2,7 +2,6 @@ import { each, get } from 'lodash'
 import Leaflet from 'leaflet'
 import moment from 'moment'
 import layerZoomMap from '@/resources/layer-zoom-map'
-import main from '@/main'
 
 const lodash = { each, get }
 
@@ -93,8 +92,6 @@ const geoUtils = {
 
       // if the way point array has the fourth parameter, it is its way point json data
       marker.place = place
-
-      main.getInstance().appHooks.run('markerCreated', marker)
 
       // Add the markers to the returning array
       markers.push(marker)

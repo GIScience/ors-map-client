@@ -1,6 +1,5 @@
 import constants from '@/resources/constants'
 import MapViewData from '@/models/map-view-data'
-import appConfig from '@/config/app-config'
 
 /**
  * Render and deals with right click events
@@ -43,10 +42,10 @@ export default {
       }
     },
     canAddIsochroneCenter () {
-      return appConfig.supportsIsochrones && (this.$store.getters.mode === constants.modes.isochrones || (this.$store.getters.mode === constants.modes.place && !this.$store.getters.isSidebarVisible))
+      return this.$store.getters.mode === constants.modes.isochrones || (this.$store.getters.mode === constants.modes.place && !this.$store.getters.isSidebarVisible)
     },
     canRoute () {
-      return this.$store.getters.mode !== constants.modes.isochrones && appConfig.supportsPlacesAndDirections
+      return this.$store.getters.mode !== constants.modes.isochrones
     }
   },
   methods: {

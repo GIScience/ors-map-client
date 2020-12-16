@@ -61,6 +61,7 @@ export default {
      */
     const context = this
     this.eventBus.$on('setSidebarStatus', (isOpen) => {
+      // pass a boolean that indicates 'force'
       context.$store.commit('setLeftSideBarIsOpen', isOpen)
     })
   },

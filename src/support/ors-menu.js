@@ -11,7 +11,7 @@ const loginMenuItem = {
     requiresNotBeAuthenticated: true,
     items: [
       {
-        href: appConfig.appMenu.baseMenuExternalUrl + '/dev/#/signup',
+        href: appConfig.baseMenuExternalUrl + '/dev/#/signup',
         title: 'Sign up',
         target: '_blank',
         icon: 'assignment',
@@ -19,7 +19,7 @@ const loginMenuItem = {
         requiresNotBeAuthenticated: true
       },
       {
-        href: appConfig.appMenu.baseMenuExternalUrl + '/dev/#/login',
+        href: appConfig.baseMenuExternalUrl + '/dev/#/login',
         title: 'Log in',
         target: '_blank',
         icon: 'lock'
@@ -39,7 +39,7 @@ const runORSMenuCustomization = (menu) => {
     }
   
     menu.push({
-      href: appConfig.appMenu.baseMenuExternalUrl + '/dev/#/logout',
+      href: appConfig.baseMenuExternalUrl + '/dev/#/logout',
       title: 'Logout',
       target: '_blank',
       icon: 'power_settings_new',
@@ -50,7 +50,7 @@ const runORSMenuCustomization = (menu) => {
       header: 'Links'
     })
     menuManager.injectAt(menu, 0, {
-      href: appConfig.appMenu.baseMenuExternalUrl,
+      href: appConfig.baseMenuExternalUrl,
       title: 'Home',
       target: '_blank',
       icon: 'home',
@@ -62,7 +62,7 @@ const runORSMenuCustomization = (menu) => {
     menuManager.replaceItemEndingWith(menu, '/signup', loginMenuItem.items[0])
   
     // we can control if the custom icons are applied in the app config
-    if (appConfig.appMenu.setCustomMenuIcons === true) {
+    if (appConfig.setCustomMenuIcons === true) {
        setORSMenuIcons(menu)
     }
   }

@@ -1,5 +1,3 @@
-import appConfig from '@/config/app-config'
-
 const defaultMapSettings = {
   apiBaseUrl: 'https://api.openrouteservice.org',
   saveToLocalStorage: true,
@@ -14,7 +12,7 @@ const defaultMapSettings = {
   unit: 'km',
   alwaysFitBounds: true,
   areaUnit: 'km',
-  defaultTileProvider: appConfig.defaultTileProvider,
+  defaultTileProvider: 'osm',
   customTileProviderUrl: '',
   prioritizeSearchingForNearbyPlaces: true,
   defaultProfile: 'cycling-regular',

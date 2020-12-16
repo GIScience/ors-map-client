@@ -47,18 +47,11 @@ export default {
       if (this.mapSettingsTransient.saveToLocalStorage) {
         let context = this
         var savingSettings = utils.clone(this.mapSettingsTransient)
-
-        // If reset tooltip was checked
-        // reset the value of it by assiging an empty object
         if (this.resetShownOnceTooltips) {
           savingSettings.shownOnceTooltips = {}
         } else {
           savingSettings.shownOnceTooltips = this.$store.getters.mapSettings.shownOnceTooltips
         }
-        // Create a copy of the locale about to be saved
-        // because the savingSettings object may be modified
-        // inside the store function, when only non default
-        // settings options are kept/saved.
         let activeLocale = savingSettings.locale
         this.$store.dispatch('saveSettings', savingSettings).then(() => {
           if (activeLocale && context.$i18n.locale !== activeLocale) {

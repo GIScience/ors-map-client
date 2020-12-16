@@ -7,9 +7,6 @@ const appHooks = main.getInstance().appHooks
 // It is possible to use values from the store, like, for example:
 // store.getters.mapCenter, store.getters.mapBounds and store.getters.mode
 
-// It is also possible to emit events using the eventBus. For example:
-// main.getInstance().eventBus.$emit('mapViewDataChanged', mapViewDataChanged)
-
 // When adding a hook, three parameters can be passed:
 // the name of the hook (string) to be listened, the 
 // function to be run and the priority (number).
@@ -57,6 +54,10 @@ appHooks.add('appLoaded', (vueInstance) => {
   // Do something when the app is loaded
 }, 1)
 
+appHooks.add('appLoaded', (vueInstance) => {
+  // Do something when the app is loaded
+}, 1)
+
 appHooks.add('afterDirectionsPathDecoded', (appRouteData) => {
   // Do something when the app is loaded
 }, 1)
@@ -93,15 +94,15 @@ appHooks.add('beforeStoreNewCurrentLocation', (location) => {
   // Do something
 }, 1)
 
-appHooks.add('polygonCreated', (polygons) => {
+appHooks.add('polygonCreated', (polygon) => {
   // Do something
 }, 1)
 
-appHooks.add('polygonDeleted', (polygons) => {
+appHooks.add('polygonDeleted', (polygon) => {
   // Do something
 }, 1)
 
-appHooks.add('polygonEdited', (polygons) => {
+appHooks.add('polygonEdited', (polygon) => {
   // Do something
 }, 1)
 
@@ -116,42 +117,3 @@ appHooks.add('mapSettingsChanged', (mapSettings) => {
 appHooks.add('appModeChanged', (mode) => {
   // Do something
 }, 1)
-
-appHooks.add('markerCreated', (marker) => {
-  // Do something
-}, 1)
-
-appHooks.add('mapFiltersAdded', (filters) => {
-  // Do something
-}, 1)
-
-appHooks.add('placeSearchArgsCreated', (args) => {
-  // Do something
-}, 1)
-
-appHooks.add('autocompleteArgsCreated', (args) => {
-  // Do something
-}, 1)
-
-appHooks.add('poisSearchArgsCreated', (args) => {
-  // Do something
-}, 1)
-
-appHooks.add('reverseSearchArgsCreated', (args) => {
-  // Do something
-}, 1)
-
-appHooks.add('isochronesArgsCreated', (args) => {
-  // Do something
-}, 1)
-
-appHooks.add('routingArgsCreated', (args) => {
-  // Do something
-}, 1)
-
-appHooks.add('routingElevationArgsCreated', (args) => {
-  // Do something
-}, 1)
-
-
-

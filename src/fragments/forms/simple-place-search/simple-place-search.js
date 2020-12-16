@@ -9,7 +9,6 @@ import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
 import { PlacesSearch } from '@/support/ors-api-runner'
 import constants from '@/resources/constants'
-import appConfig from '@/config/app-config'
 import Place from '@/models/place'
 
 export default {
@@ -44,10 +43,6 @@ export default {
     }
   },
   computed: {
-    supportsPlacesAndDirections () {
-      let supports = appConfig.supportsPlacesAndDirections
-      return supports
-    },
     visible () {
       let isVisible = this.$lowResolution
       if (this.$store.getters.leftSideBarOpen || this.$store.getters.leftSideBarPinned) {
@@ -251,13 +246,13 @@ export default {
      * @param {*} data - can be the palce object or an object containing the place
      */
     selectPlace (data) {
-      this.place = data.place || data
-
-      if (this.supportsPlacesAndDirections) {
-        this.$store.commit('mode', constants.modes.place)
+      if (data.place) {
+        this.place = data.place
       } else {
-        this.$store.commit('mode', constants.modes.isochrones)
+        this.place = data
       }
+
+      this.$store.commit('mode', constants.modes.place)
       const appMode = new AppMode(this.$store.getters.mode)
 
       // Define new app route

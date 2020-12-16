@@ -34,10 +34,7 @@ export default {
   computed: {
     disabledActions () {
       return appConfig.disabledActionsForIsochrones
-    },
-    showMapFiltersBox () {
-      return this.$store.getters.mode === constants.modes.isochrones && appConfig.supportsMapFiltersOnSidebar
-    },
+    }
   },
   created () {
     this.loadData()
@@ -89,13 +86,6 @@ export default {
     // When the user click on the map and select to add this point as an additional destination in the route
     this.eventBus.$on('addAsIsochroneCenter', (data) => {
       context.addAsIsochroneCenter(data)
-    })
-
-    // Reload the map data after the app route has changed
-    this.eventBus.$on('appRouteDataChanged', (appRouteData) => {
-      if (context.active) {
-        context.loadData()
-      }
     })
 
     // When a marker drag finishes, update

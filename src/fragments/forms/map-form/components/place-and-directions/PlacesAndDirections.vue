@@ -54,7 +54,7 @@
         <br/>
       </template>
       <round-trip v-if="$store.getters.mode === constants.modes.roundTrip" @changed="roundTripFilterChanged"></round-trip>
-      <box v-if="showMapFiltersBox" background="white" no-shadow>
+      <box v-if="$store.getters.mode === constants.modes.directions" background="white" no-shadow>
         <div slot="header">
           <h3>{{$t('global.options')}}</h3>
         </div>
