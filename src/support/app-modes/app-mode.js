@@ -1,7 +1,10 @@
 
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import OrsMapFilters from '@/config/ors-map-filters'
+import PolygonUtils from '@/support/polygon-utils'
+import constants from '@/resources/constants'
 import store from '@/store/store'
+import lodash from 'lodash'
 import main from '@/main'
 
 // Modes
@@ -10,7 +13,6 @@ import roundtripMode from './strategies/roundtrip-mode'
 import searchMode from './strategies/search-mode'
 import placeMode from './strategies/place-mode'
 import isochronesMode from './strategies/isochrones-mode'
-
 
 /**
  * AppState
@@ -38,6 +40,7 @@ class AppMode {
     store.commit('appRouteData', newAppRouteData)
     const options = this.getRouteOptions(newAppRouteData.options)
     var route = this.targetMode.getRoute(newAppRouteData, options)
+    main.getInstance().appHooks.run('appModeRouteReady', route)
     return route
   }
 
@@ -47,9 +50,6 @@ class AppMode {
    * @returns {AppRouteData} newAppRouteData
    */
   getAppRouteData (places) {
-    // const options = this.getRouteOptions(store.getters.appRouteData.options)
-    // const newAppRouteData = this.targetMode.buildAppRouteData(places, options)
-
     // We are about to build a new appRouteData using the passed places
     // and the values stored in the @see ors-map-filter object in memory.
     // We have identified that in this case we should not use the previous

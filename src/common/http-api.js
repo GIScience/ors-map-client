@@ -3,10 +3,17 @@ import appConfig from '@/config/app-config'
 import main from '@/main'
 import store from '@/store/store'
 
-const baseURL = appConfig.getBaseUrl()
+/**
+ * Function used to get the the menu items base url according the node env.
+ * @returns {String}
+ */
+const getBaseUrl = () => {
+  const env = process.env
+  return env.NODE_ENV === 'production' ? appConfig.appMenu.prodBaseAPIUrl : appConfig.appMenu.devBaseAPIUrl
+}
 
 const httpApi = axios.create({
-  baseURL: baseURL,
+  baseURL: getBaseUrl(),
   headers: {
   }
 })

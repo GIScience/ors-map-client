@@ -1,5 +1,5 @@
 import constants from '@/resources/constants'
-import defaultMapSettings from '@/resources/default-map-settings'
+import defaultMapSettings from '@/config/default-map-settings'
 import utils from '@/support/utils'
 import main from '@/main'
 

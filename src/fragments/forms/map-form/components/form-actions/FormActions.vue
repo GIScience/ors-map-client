@@ -18,8 +18,8 @@
         @clicked="toggleRoundTrip" :icon="'settings_backup_restore'"
         :color="roundtripActive ? 'primary' : 'default'"></map-form-btn>
     </v-flex>
-    <v-flex xs2 v-if="isEnabled('routeImporter')" @contentUploaded="contentUploaded">
-      <route-importer></route-importer>
+    <v-flex xs2 v-if="isEnabled('routeImporter')">
+      <route-importer @contentUploaded="contentUploaded"></route-importer>
     </v-flex>
     <v-spacer></v-spacer>
   </v-layout>

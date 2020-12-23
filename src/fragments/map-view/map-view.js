@@ -36,28 +36,45 @@ import MapRightClick from './components/map-right-click/MapRightClick'
 import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
 import MapLeftClick from './components/map-left-click/MapLeftClick'
 import OrsLPolyline from './components/ors-l-polyline/OrsLPolyline'
+import defaultMapSettings from '@/config/default-map-settings'
 import MyLocation from './components/my-location/MyLocation'
 import { GestureHandling } from 'leaflet-gesture-handling'
 import orsDictionary from '@/resources/ors-dictionary'
 import LHeightGraph from 'vue2-leaflet-height-graph'
-import LDrawToolbar from 'vue2-leaflet-draw-toolbar'
 import PolygonUtils from '@/support/polygon-utils'
 import MapViewData from '@/models/map-view-data'
 import drawLocales from 'leaflet-draw-locales'
 import mapDefinitions from './map-definitions'
 import constants from '@/resources/constants'
 import I18nBuilder from '@/i18n/i18n-builder'
+import appConfig from '@/config/app-config'
 import GeoUtils from '@/support/geo-utils'
 import utils from '@/support/utils'
 import theme from '@/config/theme'
 import Place from '@/models/place'
+import 'vue2-leaflet-draw-toolbar'
+import Leaflet from 'leaflet'
 import lodash from 'lodash'
+
+/**
+ * Fix Vue leaflet issues:
+ * - import leaflet styles for proper map rendering
+ * - edit marker image path
+ */
+
+delete Leaflet.Icon.Default.prototype._getIconUrl
+
+Leaflet.Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+})
 
 // imported styles
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import 'leaflet-measure/dist/leaflet-measure.css'
 import 'vue-resize/dist/vue-resize.css'
-import Leaflet from 'leaflet'
+import 'leaflet/dist/leaflet.css'
 
 export default {
   components: {
@@ -77,7 +94,6 @@ export default {
     LCircle,
     LCircleMarker,
     LControlPolylineMeasure,
-    LDrawToolbar,
     ExtraInfoHighlight,
     MapRightClick,
     MapLeftClick,
@@ -127,7 +143,11 @@ export default {
     routingProfileIcon: {
       type: String,
       required: false
-    }
+    },
+    avoidPolygons: {
+      type: Array,
+      required: false
+    },    
   },
   data () {
     return {
@@ -161,9 +181,30 @@ export default {
       tempPlaces: null, // a place selected by the user on the map but not yet used for computing directions,
       polylineIsEdibale: false,
       featuresJustFitted: false,
+      localAvoidPolygons: null
     }
   },
   computed: {
+    /**
+     * Determines if the distance measure tool is available
+     * @returns {Boolean}
+     */
+    distanceMeasureToolAvailable () {
+      let available = appConfig.distanceMeasureToolAvailable
+      return available
+    },
+    /**
+     * Determines if the accessbility tool is available
+     * @returns {Boolean}
+     */
+    accessbilityToolAvailable () {
+      let available = appConfig.accessbilityToolAvailable
+      return available
+    },
+    /**
+     * Determinses if click on the map to pick a location is active
+     * @returns {Boolean}
+     */
     clickToPickActive () {
       return this.$store.getters.pickPlaceIndex !== null
     },
@@ -221,7 +262,7 @@ export default {
      * @returns {Lalng}
      */
     mapCenter () {
-      let latlng = GeoUtils.buildLatLong(this.$store.getters.mapSettings.mapCenter)
+      let latlng = GeoUtils.buildLatLong(this.$store.getters.mapCenter)
       return latlng
     },
     /**
@@ -350,7 +391,8 @@ export default {
         tempMapViewData = this.localMapViewData
       }
       if (tempMapViewData.places.length > 0) {
-        const markers = GeoUtils.buildMarkers(tempMapViewData, this.focusedPlace)
+        let markers = GeoUtils.buildMarkers(tempMapViewData, this.focusedPlace)
+        markers = this.$root.appHooks.run('markersCreated', markers)
         return markers
       }
     },
@@ -409,6 +451,7 @@ export default {
      */
     polylineMeasureOptions () {
       const options = mapDefinitions.polylineMeasureOptions(this.$t('mapView.polylineMeasure'))
+      this.$root.appHooks.run('polylineMeasureOptionsBuilt', options)
       return options
     },
 
@@ -418,6 +461,7 @@ export default {
      */
     drawOptions () {
       const options = mapDefinitions.drawOptions(this.$t('mapView.youCantIntersectPolygons'))
+      this.$root.appHooks.run('drawingOptionsBuilt', options)
       return options
     },
 
@@ -467,7 +511,8 @@ export default {
      * @returns boolean
      */
     canFitFeatures () {
-      if (this.mapViewData.hasPlaces() || this.mapViewData.hasRoutes()) {
+      let available = appConfig.fitAllFeaturesToolAvailable
+      if (available && (this.mapViewData.hasPlaces() || this.mapViewData.hasRoutes())) {
         return true
       }
       return false
@@ -559,6 +604,15 @@ export default {
         this.tempPlaces = null
         this.loadMapData()
         this.isAltitudeModalOpen = false
+      },
+      deep: true
+    },
+    avoidPolygons: {
+      handler: function () {
+        // When the avoidPolygons prop changes, we copy its value to a
+        // local instance so that we can modify it when necessary
+        this.localAvoidPolygons = utils.clone(this.avoidPolygons)
+        this.loadAvoidPolygons()
       },
       deep: true
     },
@@ -674,14 +728,29 @@ export default {
      * @param {*} event
      * @emits markerClicked
      */
-    markerClicked (place, event) {
+    markerClicked (index, marker, event) {
       // Only prevent the default click, that shows the
       // place name if the app is not in the search mode
       if (this.mode === constants.modes.search) {
         event.originalEvent.preventDefault()
         event.originalEvent.stopPropagation()
       }
-      this.$emit('markerClicked', place)
+      this.$emit('markerClicked', marker.place)
+      let markerPopupContainerRef = this.$refs[`markerPopupContainer${index}`]
+      markerPopupContainerRef = Array.isArray(markerPopupContainerRef) ? markerPopupContainerRef[0] : markerPopupContainerRef
+      this.$root.appHooks.run('beforeOpenMarkerPopup', {markerPopupContainerRef, marker})
+    },
+
+    /**
+     * Handle the isochrone polygon clicked event
+     * @param {Number} index 
+     * @param {Object} polygon 
+     * @param {Event} event 
+     */
+    isochroneClicked (index, polygon, event) {
+      let isochronePopupContainerRef = this.$refs[`isochronePopupContainer${index}`]
+      isochronePopupContainerRef = Array.isArray(isochronePopupContainerRef) ? isochronePopupContainerRef[0] : isochronePopupContainerRef
+      this.$root.appHooks.run('beforeOpenIsochronePopup', {isochronePopupContainerRef, polygon})
     },
     /**
      * Deals with the map center changed event trigerred by the vue2leaflet
@@ -698,7 +767,7 @@ export default {
       // changes more than 50 meters from the previous center
       if (distance > 50) {
         this.setMapCenter(center)
-        this.storeMapBounds()
+        this.storeMapBoundsAndSetMapAsReady()
         const data = { center: this.$store.getters.mapCenter, distance: distance }
         this.$emit('mapCenterMoved', data)
       }
@@ -771,7 +840,7 @@ export default {
     zoomed (event) {
       this.zoomLevel = event.sourceTarget._zoom
       if (!this.featuresJustFitted && !this.hasOnlyOneMarker) {
-        this.storeMapBounds()
+        this.storeMapBoundsAndSetMapAsReady()
         this.$emit('zoomChanged', event.sourceTarget._zoom)
       } else {
         // If the zoom was changed programatically
@@ -909,17 +978,12 @@ export default {
         const previousCenter = utils.clone(mapSettings.mapCenter)
         mapSettings.mapCenter = latlng
 
-        this.$store.dispatch('saveSettings', mapSettings).then(() => {
-          if (previousCenter) {
-            // Notify about the current map center change
-            this.$emit('mapCenterChanged', mapSettings.mapCenter)
-          }
-        })
+        if (defaultMapSettings.mapCenter.toString() !== latlng.toString()) {
+          this.$emit('mapCenterChanged', latlng)
+        }        
       } else {
         const routePlaces = this.$store.getters.appRouteData.places
-
-        // Run the utility that may define a more
-        // appropriate map center if appRouteData is empty
+        // TODO: stop using appRouteData, receive places as a prop?
         if (routePlaces.length === 0 || routePlaces[0].isEmpty()) {
           if (this.center) {
             this.setMapCenter(this.center)
@@ -943,9 +1007,11 @@ export default {
     },
 
     /**
-     * Store map bounds and mapReady flag
+     * Store map bounds and set map as ready
+     * @emits mapReady
+     * @stores mapBounds
      */
-    storeMapBounds () {
+    storeMapBoundsAndSetMapAsReady () {
       const buildBondaryes = (bounds) => {
         const boundary = {
           rect: {
@@ -958,23 +1024,12 @@ export default {
 
         return boundary
       }
-      if (!this.map && this.$refs.map) {
-        this.map = this.$refs.map.mapObject
-      }
-      if (this.map) {
-        const bounds = this.map.getBounds()
+      this.getMapObject().then((map) => {
+        const bounds = map.getBounds()
         const mapBounds = buildBondaryes(bounds)
         this.$store.commit('mapBounds', mapBounds)
-        this.$store.commit('mapReady', true)
-      } else {
-        this.$nextTick(() => {
-          this.map = this.$refs.map.mapObject
-          const bounds = this.map.getBounds()
-          const mapBounds = buildBondaryes(bounds)
-          this.$store.commit('mapBounds', mapBounds)
-          this.$store.commit('mapReady', true)
-        })
-      }
+        this.$emit('mapReady', map)
+      })
     },
 
     /**
@@ -992,7 +1047,6 @@ export default {
         this.defineActiveRouteIndex()
         this.updateMarkersLabel()
         this.fitFeaturesBounds()
-        this.loadAvoidPolygons()
         if (this.localMapViewData.places.length === 1 && !this.localMapViewData.places[0].isEmpty()) {
           this.setMapCenter(this.localMapViewData.places[0].getLatLng())
         }
@@ -1226,7 +1280,7 @@ export default {
           // they need, specially method `zoomed`
           context.featuresJustFitted = true
           context.map.fitBounds(context.dataBounds, { padding: [20, 20], maxZoom: maxFitBoundsZoom })
-          context.storeMapBounds()
+          context.storeMapBoundsAndSetMapAsReady()
           // Yeah, it is not nice to have nested timeout
           // but we need it to make sure that this flag is only
           // set as false after a while so other components
@@ -1275,23 +1329,44 @@ export default {
      * @emits setSidebarStatus (via eventBus)
      * @emits mapLeftClicked (via eventBus)
      */
-    mapLeftClick (event) {
+    mapLeftClick (event) {       
       if (this.$store.getters.pickPlaceIndex !== null) {
         this.pickPlaceViaClick(event)
       } else {
-        // If in low resolution and sidebar is open, then left click on the map
-        // must close the side bar to allow the user to interact with the map.
-        // If not then the normal left click handlr must be executed
-        if (this.$store.getters.leftSideBarOpen && !this.$store.getters.leftSideBarPinned) {
-          if (this.$lowResolution) {
-            this.eventBus.$emit('setSidebarStatus', false)
+        let polygonInEditMode = this.isThereAnPolygonInEditMode()
+        if (polygonInEditMode) {
+          this.saveAvoidPolygonChanges(polygonInEditMode)
+        } else {
+          // If in low resolution and sidebar is open, then left click on the map
+          // must close the side bar to allow the user to interact with the map.
+          // If not then the normal left click handlr must be executed
+          if (this.$store.getters.leftSideBarOpen && !this.$store.getters.leftSideBarPinned) {
+            if (this.$lowResolution) {
+              this.eventBus.$emit('setSidebarStatus', false)
+            } else {
+              this.handleShowLeftClickPlaceInfo(event)
+            }  
           } else {
             this.handleShowLeftClickPlaceInfo(event)
-          }  
-        } else {
-          this.handleShowLeftClickPlaceInfo(event)
+          }
+        }
+      }      
+    },
+
+    /**
+     * Check if a polygon is in edit mode
+     * and if yes, return it
+     * @returns {Object|false}
+     */
+    isThereAnPolygonInEditMode () {
+      let polygons = this.extractAvoidPolygonsFromMap()
+      for (let key in polygons) {
+        let polygon = polygons[key]
+        if (polygon.editing && polygon.editing._enabled) {
+          return polygon
         }
       }
+      return false
     },
 
     /**
@@ -1337,9 +1412,9 @@ export default {
      * @returns {Boolean|Array}
      */
     isPointInsidePolygons (lat, lng) {
-      const polygons = this.extractPolygonsFromMap()
-      for (const key in polygons.coordinates) {
-        const coords = polygons.coordinates[key][0]
+      for (const key in this.localAvoidPolygons) {
+        let polygon = this.localAvoidPolygons[key]
+        const coords = polygon.geometry.coordinates[0]
         const inside = GeoUtils.isPointInsidePolygon(lat, lng, coords)
         if (inside) {
           return coords
@@ -1426,12 +1501,28 @@ export default {
       }
       return message
     },
+     /**
+     * Get map Object
+     * @returns {Promise}
+     */
+    getMapObject () {
+      return new Promise((resolve) => {
+        if (this.map) {
+          resolve(this.map)
+        } else {
+          this.$nextTick(() => {
+            this.map = this.$refs.map.mapObject
+            resolve(this.map)
+          })
+        }
+      })      
+    },
     /**
      * Set the drawing tool. Avoid multiple
      * calls by udebouncing them
      */
     setDrawingTool () {
-      if (!this.$store.getters.embed) {
+      if (!this.$store.getters.embed && appConfig.supportsAvoidPolygonDrawing) {
         if (this.setDrawingTimeout) {
           clearTimeout(this.setDrawingTimeout)
         }
@@ -1449,8 +1540,6 @@ export default {
     /**
      * Set drawing polygon tool to the map object
      * @listens map.draw:created
-     * @listens map.draw:deleted
-     * @listens map.draw:edited
      */
     setAvoidPolygonDrawingTool () {
       // Get a reference to the map object
@@ -1473,6 +1562,7 @@ export default {
 
         // Override the tooltip message
         locale.draw.toolbar.buttons.polygon = this.$t('mapView.defineAvoidPolygon')
+        locale.draw.toolbar.buttons.rectangle = this.$t('mapView.defineAvoidPolygon')
 
         // Set th custom draw locale to the leaflet draw locale
         Leaflet.drawLocal = locale
@@ -1486,116 +1576,201 @@ export default {
         // Add listeners to draw created,
         // deleted and edited events
         map.on('draw:created', function (e) {
-          context.onPolygonCreation(e, map)
-          const avoidPolygons = context.extractPolygonsFromMap()
-          context.$root.appHooks.run('polygonCreated', avoidPolygons)
-          context.notifyAvoidPolygonsChanged(avoidPolygons)
+          context.avoidPolygonCreated(e, map)
         })
-        map.on('draw:deleted', function (e) {
-          const avoidPolygons = context.extractPolygonsFromMap()
-          context.$root.appHooks.run('polygonDeleted', avoidPolygons)
-          context.notifyAvoidPolygonsChanged(avoidPolygons)
-        })
-        map.on('draw:edited', function (e) {
-          const avoidPolygons = context.extractPolygonsFromMap()
-          context.$root.appHooks.run('polygonEdited', avoidPolygons)
-          context.notifyAvoidPolygonsChanged(avoidPolygons)
-        })
-        this.loadAvoidPolygons()
       }
     },
 
     /**
-     * Recreate/redraw polygons on the view based
-     * on the localMapViewData avoid_polygons option
-     * @listens polgon.click
+     * Set polygon properties
+     * @param {Object} polygon 
+     */
+    setAvoidPolygonPropreties (polygon) {
+     // define polygon feature prop.
+     // It will be returned when we get the geojson
+     // rpresentation of the polygon
+      polygon.feature = polygon.feature || {}
+      polygon.feature.type = polygon.feature.type || "Feature";
+      polygon.feature.properties = polygon.feature.properties || {};
+      polygon.feature.properties.guid = polygon.feature.properties.guid || utils.guid('avoid_polygon')
+      polygon.feature.properties.avoidPolygon = true
+    },
+
+    /**
+     * Handle polygon created
+     * @param {*} event
+     * @param {*} map 
+     */
+    avoidPolygonCreated (event, map) {
+      var polygon = event.layer
+      this.setAvoidPolygonPropreties(polygon)
+      polygon.feature.properties.type = event.layerType
+      let context = this
+      polygon.on('click', function (event) { context.onAvoidPolygonClicked(polygon, event) })
+      polygon.addTo(map)
+      this.$root.appHooks.run('avoidPolygonCreated', polygon)
+      this.notifyAvoidPolygonsChanged()
+    },
+
+    /**
+     * Remove all avoid polygons from map
+     */
+    removeAllAvoidPolygons() {
+      if (this.map) {
+        let map = this.map
+        map.eachLayer(function (layer) {
+          if (layer instanceof Leaflet.Polygon) {
+            if (lodash.get(layer, 'feature.properties.avoidPolygon')) {
+              map.removeLayer(layer)
+            }
+          }
+        })
+      }
+    },
+
+    /**
+     * Load all avoid polygons from the localAvoidPolygons
      */
     loadAvoidPolygons () {
-      const polygonsDrawn = this.extractPolygonsFromMap()
-      const avoidPolygons = this.lodash.get(this.$store.getters.appRouteData, 'options.options.avoid_polygons')
-
-      // If there are polygons to be recreated in the options and
-      // there are not polygons already drawn, recreate/redraw them
-      if (avoidPolygons && polygonsDrawn.coordinates.length === 0) {
-        const map = this.$refs.map.mapObject
-        for (const key in avoidPolygons.coordinates) {
-          const coordinates = GeoUtils.switchLatLonIndex(avoidPolygons.coordinates[key][0])
-
+      let context = this
+      this.getMapObject().then((map) => {
+        context.removeAllAvoidPolygons()
+        for (const key in this.localAvoidPolygons) {
+          const polygonData = context.localAvoidPolygons[key]
+          const coordinates = GeoUtils.switchLatLonIndex(polygonData.geometry.coordinates[0])
+  
           // Set the color options of the polygons about to be drawn
-          const polygonOptions = { color: this.drawOptions.draw.polygon.shapeOptions.color }
-
+          const polygonOptions = { color: context.drawOptions.draw.polygon.shapeOptions.color}
+  
+          let polygon
           // Create each polygon using the leaflet tool
           // adn add it to the map object
-          const polygon = Leaflet.polygon(coordinates, polygonOptions).addTo(map)
-
+          let polygonShapeType = GeoUtils.geojsonShapeType(polygonData)
+          if (polygonShapeType === 'rectangle') {
+            polygon = Leaflet.rectangle(coordinates, polygonOptions)            
+          } else {
+            polygon = Leaflet.polygon(coordinates, polygonOptions)
+          }
+          context.setAvoidPolygonPropreties(polygon)
+          polygon.addTo(map)
+  
           // Add handler for the polygon click event
-          const context = this
           polygon.on('click', function (event) {
-            context.onPolygonClicked(polygon, event)
+            context.onAvoidPolygonClicked(polygon, event)
           })
         }
-      }
-    },
+      })
+    },        
 
     /**
-     * When a polygon is created add it to the
-     * map and a hendler to the click event
-     * @param {*} event
-     * @param {*} map
-     * @listens polygon.click
+     * Get all the polygons from the map object
+     * @returns {Array} avoidPolygon
      */
-    onPolygonCreation (event, map) {
-      const context = this
-      const polygon = event.layer
-      polygon.on('click', function (event) {
-        context.onPolygonClicked(polygon, event)
-      })
-      polygon.addTo(map)
-    },
+    extractAvoidPolygonsFromMap (inGeoJsonFormat = false) {
+      const mapAvoidPolygons = []
 
+      if (this.map) {
+        // Extract each polygon from the map object
+        this.map.eachLayer(function (layer) {
+          if (layer instanceof Leaflet.Polygon) {
+            let polygonGeoJson = layer.toGeoJSON()
+
+            // properties defined via feature.properties in layer are acessible via 
+            // .properties when the layer is converted to geojson.
+            if (polygonGeoJson.properties && polygonGeoJson.properties.avoidPolygon) {
+              if (inGeoJsonFormat) {
+                mapAvoidPolygons.push(polygonGeoJson)
+              } else {
+                mapAvoidPolygons.push(layer)
+              }
+            }            
+          }
+        })
+      }
+      return mapAvoidPolygons
+    },
     /**
      * Enable edit mode for polygon by ading a edit popup when clicked
      * @param {*} polygon
-     * @param {*} event
      */
-    onPolygonClicked (polygon, event) {
-      const map = this.$refs.map.mapObject
-      polygon.editMode = true
+    onAvoidPolygonClicked (polygon) {
+      if (polygon.editing._enabled) { // polygon is already in edit mode
+       this.saveAvoidPolygonChanges(polygon)
+      } else { // build the standard popup, run the popup hoook and open the popup
+        let popupHtmlFragment = this.buildPolygonClickPopupContent(polygon)
+        this.$root.appHooks.run('beforeShowAvoidPolygonPopup', {popupHtmlFragment, polygon})
+        polygon.bindPopup(popupHtmlFragment).openPopup()
+      }      
+    },
 
-      new Leaflet.Toolbar2.EditToolbar.Popup(event.latlng, {
-        actions: [Leaflet.Toolbar2.EditAction.Popup.Edit, Leaflet.Toolbar2.EditAction.Popup.Delete]
-      }).addTo(map, polygon)
+    /**
+     * Save avoid polygon changes
+     * @param {*} polygon 
+     */
+    saveAvoidPolygonChanges (polygon) {
+      polygon.editing.disable()
+      polygon.closePopup()
+      this.$root.appHooks.run('avoidPolygonEdited', polygon)
+      this.showSuccess(this.$t('mapView.avoidPolygonSaved'))
+      this.notifyAvoidPolygonsChanged()
+    },
+    /**
+     * Enable polygon shape edit and run the corresponding hook
+     * @param {*} polygon 
+     */
+    enableAvoidPolygonShapeEdit(polygon) {
+      polygon.editing.enable()
+      polygon.closePopup()
+      this.$root.appHooks.run('avoidPolygonEditModeEnabled', polygon)
+      this.showInfo('When you finish, click anywhere to save the changes')
+    },
+    /**
+     * Delete avoid polygon layer and run corresponding hook
+     * @param {Object} polygon
+     */
+    deleteAvoidPolygon (polygon) {
+      this.getMapObject().then((map) => {
+        map.removeLayer(polygon)
+        this.$root.appHooks.run('avoidPolygonRemoved', polygon)
+        this.notifyAvoidPolygonsChanged()
+      })
+    },
+
+    /**
+     * Build polygon clicked popup content
+     * @param {Object} polygon
+     * @returns {DocumentFragment}
+     */
+    buildPolygonClickPopupContent (polygon) {
+      var popupContentWrapper = document.createElement("div")
+
+      let editShapeEl = document.createElement('a')
+      editShapeEl.onclick = () => {this.enableAvoidPolygonShapeEdit(polygon)}
+      editShapeEl.innerText = 'edit' // material close icon will be rendered
+      editShapeEl.title = this.$t('mapView.editShape')
+      editShapeEl.className = 'material-icons leaflet-draw-custom-actions'
+
+      let deleteEl = document.createElement('a')
+      deleteEl.onclick = () => {this.deleteAvoidPolygon(polygon)}
+      deleteEl.innerText = 'delete' // material close icon will be rendered
+      deleteEl.title = this.$t('mapView.remove')
+      deleteEl.className = 'material-icons leaflet-draw-custom-actions'
+
+      popupContentWrapper.appendChild(editShapeEl)
+      popupContentWrapper.appendChild(deleteEl)
+
+      return popupContentWrapper
     },
     /**
      * Get all the polygons and  notify the parent component when
      * an avoid polygon is created
-     * @param {Object} avoidPolygons
      * @emits avoidPolygonsChanged
      */
-    notifyAvoidPolygonsChanged (avoidPolygons) {
+    notifyAvoidPolygonsChanged () {
       if (this.$refs.map.mapObject) {
-        this.$emit('avoidPolygonsChanged', avoidPolygons)
+        this.localAvoidPolygons = this.extractAvoidPolygonsFromMap(true)
+        this.$emit('avoidPolygonsChanged', this.localAvoidPolygons)
       }
-    },
-
-    /**
-     * Get all the polygons from the map object
-     * @returns {Object} avoidPolygon
-     */
-    extractPolygonsFromMap () {
-      // We create a MultPolygon object
-      // becouse in it we can put one or multiple
-      // polygons :-)
-      const avoidPolygon = { type: 'MultiPolygon', coordinates: [] }
-
-      // Extract each polygon from the map object
-      this.$refs.map.mapObject.eachLayer(function (layer) {
-        if (layer instanceof Leaflet.Polygon) {
-          const geojson = layer.toGeoJSON()
-          avoidPolygon.coordinates.push(geojson.geometry.coordinates)
-        }
-      })
-      return avoidPolygon
     },
     /**
      * Highligh a rounte point on the active route index
@@ -1733,7 +1908,7 @@ export default {
 
   /**
    * Set the initial state of the map when the component is mounted
-   * and call calling loadMapData, setProviders, setDrawingTool, storeMapBounds.
+   * and call calling loadMapData, setProviders, setDrawingTool, storeMapBoundsAndSetMapAsReady.
    * @emits onCreate
    * @listens map.addInitHook and add a handler
    */
@@ -1758,7 +1933,7 @@ export default {
     this.loadMapData()
     this.setProviders()
     this.setDrawingTool()
-    this.storeMapBounds()
+    this.storeMapBoundsAndSetMapAsReady()
   },
   /**
    * Set the local showClickPopups value
@@ -1768,9 +1943,9 @@ export default {
     // Copy the prop value to a local prop
     // so it can be modified locally
     this.showClickPopups = this.showPopups
-
+    this.localAvoidPolygons = this.avoidPolygons
+    this.loadAvoidPolygons()
     this.setMapCenter()
-
     window.addEventListener("keyup", this.disablePickPlaceMode);
   }
 }

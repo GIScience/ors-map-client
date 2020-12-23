@@ -113,8 +113,25 @@ export default {
      */
     placeLayer (place) {
       const layer = place.properties.layer
-      if (layer !== this.$t('placesCarousel.notAvailable')) {
+      if (layer && layer !== this.$t('placesCarousel.notAvailable')) {
         return layer
+      }
+    },
+
+    getItemLayer (place) {
+      const layer = this.placeLayer(place)
+      if (layer) {
+        let trasnlation = this.$t('global.layers.'+ layer)
+        return trasnlation
+      } else {
+        if (place.properties.category_ids) {
+          let categoriesKeys = Object.keys(place.properties.category_ids)
+          if (categoriesKeys.length > 0) {
+            // TODO: map every category name and create a translation for them
+            let firstCategory = place.properties.category_ids[categoriesKeys[0]]
+            return firstCategory.category_name
+          }
+        }
       }
     },
     /**

@@ -22,7 +22,6 @@ class DirectionsJSONBuilder {
     const mapViewData = new MapViewData()
     const context = this
     return new Promise((resolve) => {
-      OrsResponseUtil.adjustResponseCoordinates(context.responseData)
       mapViewData.places = context.buildPlaces()
       context.setRoutesSummaryData()
       mapViewData.routes = context.responseData.features

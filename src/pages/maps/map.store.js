@@ -34,7 +34,6 @@ const mutations = {
   },
   mapReady: (state, value) => {
     state.mapReady = value
-    main.getInstance().appHooks.run('mapReady', true)
   },
   cleanMap: (state, value) => {
     state.cleanMap = value

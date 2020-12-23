@@ -1,10 +1,10 @@
 import store from '@/store/store'
 import httpApi from '@/common/http-api'
-import defaultMapSettings from '@/resources/default-map-settings'
+import defaultMapSettings from '@/config/default-map-settings'
 import appConfig from '@/config/app-config'
 import utils from '@/support/utils'
 import constants from '@/resources/constants'
-import settingsOptions from '@/resources/settings-options.js'
+import settingsOptions from '@/config/settings-options.js'
 import lodash from 'lodash'
 import main from '@/main'
 

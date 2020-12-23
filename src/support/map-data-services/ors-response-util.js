@@ -79,36 +79,9 @@ const getFilterIndexByName = (OrsMapFiltersAccessor, name) => {
   return filterIndex
 }
 
-/**
- * Adjust response coordinates by switching the coordinates position in the responseData object
- * @param {*} responseData
- */
-const adjustResponseCoordinates = (responseData) => {
-  // When the query does not have elevation the returned result
-  // comes with the coordinates position switched
-  // so, we switchit back
-  const queryWithElevation = lodash.get(responseData, 'metadata.query.elevation')
-
-  // Switch coordinates position and decode polyline, if necessary
-  if (responseData.routes) {
-    if (responseData.metadata.query.format === 'encodedpolyline') {
-      for (const key in responseData.routes) {
-        responseData.routes[key].geometry = geoUtils.decodePolyline(responseData.routes[key].geometry.geometry)
-        responseData.routes[key].route.geometry_format = 'geojson'
-      }
-    }
-  } else if (responseData.features) {
-    for (const key in responseData.features) {
-      if (queryWithElevation && !responseData.features[key].geometry.switched) {
-      }
-    }
-  }
-}
-
 const responseUtils = {
   buildSinglePlaceResponse,
   getFilteredFeatureResponse,
-  adjustResponseCoordinates,
   isANewResponse,
   isANewMapViewData,
   getFilterRefByName,

@@ -1,4 +1,9 @@
-const config = {
+// This is an example file and is expected to be cloned 
+// without the -example on the same folder that it resides.
+
+// You can change the value of a property (a supported values), but shouldn't remove a property
+
+const appConfig = {
   appName: 'Openrouteservice Maps',
   footerAppName: 'openrouteservice',
   baseAppUrl: '/', // could be, for example, '/map'
@@ -28,6 +33,10 @@ const config = {
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
   sidebarStartsOpenInheighResolution: false, // if the sidebar must start open in heigh resolution
   defaultTileProvider: 'osm', // the default tipe provider
+  supportsAvoidPolygonDrawing: true, // if the avoid polygon drawing tools must be available on the map view
+  distanceMeasureToolAvailable: true, // if the polyline distance measure tool must be available on the map view
+  accessbilityToolAvailable: true, // if the accessibility tool must be available on the map view
+  fitAllFeaturesToolAvailable: true, // if the fitAllFeatures to0l must be available on the map view
 
   // The map tile providers available. At least one must be present
   mapTileProviders: [
@@ -79,9 +88,5 @@ const config = {
     }
   ]
 }
-config.getBaseUrl = () => {
-  const env = process.env
-  return env.NODE_ENV === 'production' ? config.prodBaseAPIUrl : config.devBaseAPIUrl
-}
 
-export default config
+export default appConfig

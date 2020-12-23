@@ -3,7 +3,6 @@ import { LPolyline, LTooltip, LPopup} from 'vue2-leaflet'
 import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
 import theme from '@/config/theme'
-import Leaflet from 'leaflet'
 import lodash from 'lodash'
 
 export default {
@@ -129,7 +128,7 @@ export default {
     showPolylinePointByIndex (polylineCoordsIndex) {
       const customEvent = new Event('showPolylinePointByIndex')
       const point = this.latLngsCoordinates[polylineCoordsIndex]
-      customEvent.latlng = Leaflet.latLng(point[0], point[1])
+      customEvent.latlng = GeoUtils.buildLatLong(point[0], point[1])
       this.showPolylinePointDetails(customEvent)
     }
   },

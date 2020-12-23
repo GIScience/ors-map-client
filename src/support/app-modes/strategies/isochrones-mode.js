@@ -15,7 +15,7 @@ class IsochronesMode {
     const appRouteData = store.getters.appRouteData || new AppRouteData()
     appRouteData.places = places
 
-    OrsParamsParser.addFilters(options, OrsMapFilters, constants.services.isochrones)
+    OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.isochrones)
     appRouteData.options = options
     appRouteData.options.zoom = constants.initialMapMaxZoom
     return appRouteData
