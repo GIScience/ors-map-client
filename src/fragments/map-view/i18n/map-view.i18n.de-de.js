@@ -43,6 +43,7 @@ export default {
       }
     },
     defineAvoidPolygon: 'Zeichne zu vermeidende Polygone (bei Routen oder Isochronen)',
+    defineAvoidRectangle: 'Zeichne zu vermeidende Rechteck (bei Routen oder Isochronen)',
     youCantIntersectPolygons: 'Polygone dürfen sich nicht überschneiden',
     polygonArea: 'Polygon Fläche',
     highlighting: 'Hervorhebung',
@@ -63,6 +64,9 @@ export default {
       segment_length: "Abschnittslänge",
       type: "Typ",
       legend: "Legende"
-    }
+    },
+    editShape: 'Editieren Form',
+    remove: 'Entfernen',
+    avoidPolygonSaved: 'Polygon vermeiden gespeichert'
   }
 }

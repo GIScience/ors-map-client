@@ -1,6 +1,6 @@
 import store from '@/store/store'
 
-const orsDefinitions = {
+const mapDefinitions = {
   /**
    * Reorder the values of an array of coordinates switching the position of lat and long of each coordinate
    * @param {*} coordinatesArr
@@ -67,10 +67,10 @@ const orsDefinitions = {
       position: 'topleft',
       draw: {
         polyline: false,
-        rectangle: false,
+        rectangle: true,
         marker: false,
         circlemarker: false,
-        circle: false,
+        circle: false, // circle is not supported as an avoid area
         polygon: {
           allowIntersection: false, // Restricts shapes to simple polygons
           drawError: {
@@ -152,4 +152,4 @@ const orsDefinitions = {
     return providers
   }
 }
-export default orsDefinitions
+export default mapDefinitions

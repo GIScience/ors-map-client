@@ -218,24 +218,28 @@ export default {
      * @param {*} index
      */
     placeInputLabel () {
+      let label = ''
       if (this.disabled) {
-        return ''
+        return label
       }
       if (this.supportDirections) {
         if (this.isLast) {
-          return `(${this.index + 1}) ${this.$t('placeInput.routeDestination')}`
+          label = `(${this.index + 1}) ${this.$t('placeInput.routeDestination')}`
         }
         if (this.single) {
-          return this.model.isEmpty() ? this.$t('placeInput.searchPlace') : this.$t('placeInput.place')
+          label = this.model.isEmpty() ? this.$t('placeInput.findAPlace') : this.$t('placeInput.place')
         } else {
           if (this.index === 0) {
-            return `(${this.index + 1}) ${this.$t('placeInput.startingPlace')}`
+            label = `(${this.index + 1}) ${this.$t('placeInput.startingPlace')}`
           }
-          return this.model.isEmpty() ? `(${this.index + 1}) ${this.$t('placeInput.addRouteStop')}` : `(${this.index + 1}) ${this.$t('placeInput.routePlace')}`
+          label = this.model.isEmpty() ? `(${this.index + 1}) ${this.$t('placeInput.addRouteStop')}` : `(${this.index + 1}) ${this.$t('placeInput.routePlace')}`
         }
       } else {
-        return `${this.$t('placeInput.place')} ${this.index + 1}`
+        label= `${this.$t('placeInput.findAPlace')}`
       }
+      let labelData = {label: label, supportDirections: this.supportDirections, single: this.single}
+      this.$root.appHooks.run('placeInputLabelBuilt', labelData)
+      return labelData.label
     },
 
     /**

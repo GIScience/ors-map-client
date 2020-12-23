@@ -4,7 +4,6 @@ import PolygonUtils from '@/support/polygon-utils'
 import MapViewData from '@/models/map-view-data'
 import GeoUtils from '@/support/geo-utils'
 import tinycolor2 from 'tinycolor2'
-import Leaflet from 'leaflet'
 
 export default {
   data: () => ({
@@ -27,8 +26,7 @@ export default {
         const coordinate = coordinates[key]
         latlngs.push(GeoUtils.buildLatLong(coordinate[1], coordinate[0]))
       }
-      const area = Leaflet.GeometryUtil.geodesicArea(latlngs)
-      const polygonArea = Leaflet.GeometryUtil.readableArea(area, this.$store.getters.mapSettings.areaUnit)
+      const polygonArea = GeoUtils.readableArea(latlngs, this.$store.getters.mapSettings.areaUnit)
       return polygonArea
     },
     polygonAreaTextColor (backgroundColor) {

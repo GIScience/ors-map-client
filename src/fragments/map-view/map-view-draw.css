@@ -4,4 +4,9 @@
   color: white;
 }
 
+.leaflet-draw-custom-actions {
+  margin-right: 10px;
+  color: black !important
+}
+
 

@@ -8,7 +8,7 @@
             <v-card-title primary-title class="card-title">
               <div class="place-data">
                 <h3 :title="item.placeName" class="title ellipsis mb-0">{{item.placeName}}</h3>
-                <div class="ellipsis"> <span>{{ $t('global.layers.'+ item.properties.layer) }}</span> <span v-if="item.properties.locality"> - {{ item.properties.locality }}</span> - <span>{{ item.properties.country_a }}</span> </div>
+                <div class="ellipsis"> <span>{{ getItemLayer(item)}}</span> <span v-if="item.properties.locality"> - {{ item.properties.locality }}</span> <span>{{ item.properties.country_a }}</span> </div>
                 <div v-if="item.properties.distance" class="distance">
                   {{$t('placesCarousel.distance')}}
                   <span :title="$t('placesCarousel.distanceFromLocationMarkedOnTheMap')">{{item.properties.distance.toFixed(1)}} {{$t('global.units.km')}}</span>

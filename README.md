@@ -16,6 +16,8 @@ The VueJS components allow a better code organization, weak and clear coupling b
 - [CRUD component](#crud-component)
 - [Reserved methods and accessors](#reserved-methods-and-accessors)
 - [pages](#pages)
+- [Configuration and theming](#configuration-and-theming)
+- [plug-ins](#plug-ins)
 - [Add language](#add-language)
 - [Menu](#menu)
 - [Debug](#debug)
@@ -37,6 +39,7 @@ npm update -g
 ```
 
 2. Clone the repository of the ORS Map Client, go to the root folder and install the dependencies:
+
 ```sh
 git clone https://github.com/GIScience/ors-map-client.git
 
@@ -47,19 +50,27 @@ cd ors-map-client
 npm install
 ```
 
-3. Create an `app-config.js`, in the `/src/config`folder using the the provided `/src/config/config-example.js` file as model. Usually only the following properties need to be defined:
+3. In the `src/config` folder, create a copy of the following files, without `-example` in their names:
+
+- app-config-`example`.js => **app-config.js**
+- ors-map-filters`-example`.js => **ors-map-filters.js**
+- layer-zoom-mapping`-example`.js => **layer-zoom-mapping.js**
+- hooks`-example`.js => **hooks.js**
+- theme`-example`.js => **theme.js**
+- default-map-settings`-example`.js => **default-map-settings**
+- settings-options`-example`.js => **settings-options**
+
+4. Set the app-config.js values for:
 
 - `userApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
 - `bitlyApiKey` - the bitly key that will be used to shorten the share URL
 - `bitlyLogin` - the bitly login that will be used to shorten the share URL
 
-4. Create also a the files ors-map-filters`-example`.js, hooks`-example`.js and theme`-example`.js without the `-example`, so that you have also *ors-map-filters.js*, *theme.js* and *hooks.js* in the `/src/config` folder.
-
 5. The ORS menu is loaded/used by default. If you want to use a custom menu, have a look in the hooks-example.js
 
 The map client filters, the theme and the hooks can be customized, if you need.
 
-At this point the app is ready to run in `dev` mode. Do it by running:
+At this point the app is ready to run in `dev` mode. Do it by executing the following command in the app root folder:
 
 ```sh
 npm run dev
@@ -92,23 +103,24 @@ This is a Single Page Application (SPA). This means that the client app is loade
 The app load cycle follows these steps:
 
 1. Execute the `main.js` file and add global extensions, mixins components and external libs.
-2. The `main.js` also includes the main router script, the main vuex store and the main i18n file, that will internally, each one, load all the additional `.router.js` files, `.store.js` files and `.i18n.js` files.
-3. `main.js` file will create a VueJS app instance and load the `App.vue`. At this point `AppHooks` is set up and attached to the main VueJS instance and the hook `appLoaded` is run.
-4. `App.vue` includes all basic navigation components, like menu, sidebar, footer and etc.
-5. As soon as all the routes are loaded, including the ones in the `pages` sub folder, the page with the `/` route will also be rendered in the `<router-view></router-view>` in `App.vue` component.
+2. The registered hooks are loaded and the `appLoaded` hook is run.
+3. The `main.js` also includes the main router script, the main vuex store and the main i18n file, that will internally, each one, load all the additional `.router.js` files, `.store.js` files and `.i18n.js` files.
+4. `main.js` file will create a VueJS app instance and load the `App.vue`. At this point `AppHooks` is set up and attached to the main VueJS instance and the hook `appLoaded` is run.
+5. `App.vue` includes all basic navigation components, like menu, sidebar, footer and etc.
+6. As soon as all the routes are loaded, including the ones in the `pages` sub folder, the page with the `/` route will also be rendered in the `<router-view></router-view>` in `App.vue` component.
 
 Data flow, state and requests to services, in a simplified view, happens as follows:
 
 - The app is loaded
-  1. the menu items are loaded from ORS website service
-  2. the app `mode` is defined based on the matching URL in the targeted route.js file
-  3. the `maps` page, uses the app mode utility to define the app state using the current `mode`. This utility will also populate the values of the `ors-map-filters` based on the URL and build the `AppRouteData`
+  1. the API data are fetched from ORS website service and if `appConfig.appMenu.useORSMenu` is **true**, the menu items are loaded in `src/main.js` using `src/app-loader.js`.
+  2. the app `mode` is defined based on the matching URL in the `maps.route.js`
+  3. the `maps` page, uses the app mode utility to define the app state using the current `mode`. This utility will also populate the values of the `ors-map-filters` based on the URL and build the `AppRouteData` (in src/models/app-route-data.js).
   4. based on the app mode/state certain components are activated/displayed
-  5. Every component, once activated, may use the data in `ors-map-filters` to render its elements and  may run requests to the ORS api using the `ors-api-runner`. Once the request succeed, the response data will be used to fill the `MapViewData` object.
-  6. Once an input is changed the app goes to a new URL and this makes the flow restart at the number II.
+  5. Every component, once activated, may use the data in `src/config/ors-map-filters` to render its elements and  may run requests to the ORS api using the `src/support/ors-api-runner`. Once the request succeed, the response data will be used to fill the `MapViewData` object.
+  6. Once an input is changed the app goes to a new URL and this makes the flow restart at the step 2.
   7. If a component changes the `MapViewData` model, it emits an event to the `maps` page, that passes the current `MapViewData` object to the `MapView` component.
-  8. Interactions via `MapView` may result in events sent back to `maps` page, that may notify other child components that in their turn may change the URL and trigger the step II again.
-  9. Several app hook are called during the app flow and and it is possible to listen to these hooks and run custom code to modify some of the app behavior. The available hooks are listed in `/config/hook-example.js` and must be coded in `config/hooks.js`.
+  8. Interactions via `MapView` may result in events sent back to `maps` page, that may notify other child components, that in their turn may change the URL and trigger the step 2 again.
+  9. Several app hooks are called during the app flow and and it is possible to listen to these hooks and run custom code to modify some of the app behavior. The available hooks are listed in `src/config/hook-example.js` and must be coded in `src/config/hooks.js`.
 
 ### Feature-by-folder design ###
 
@@ -173,6 +185,21 @@ All the VueJS components created (including the fragments) will have, by default
 
 - `maps` - the page where the user can search places, routes and create isochrones.
 
+### Configuration and theming ###
+
+It is possible to configure/disable some app features and behaviors by changing the values
+of the `src/config/app-config.js` values. Some of the configurable items are:
+disabledActionsForIsochrones,  disabledActionsForPlacesAndDirections, logoImgSrc, footerDevelopedByLink,
+supportsPlacesAndDirections, supportsIsochrones, supportsMapFiltersOnSidebar, sidebarStartsOpenInheighResolution,
+mapTileProviders, defaultTileProvider. Check the config file to see all the possibilities.
+
+It is possible to change the app theme colors by changing the values of `src/config/theme.js`
+
+### Plug-ins ###
+
+It is possible to add plug-ins to the application to change its behavior or extend it.
+Please check the `src/plugins folder, the [plugins readme](src/plugins/readme.md) readme and the and the [plugin example](src/plugins/plugin-example/plugin-example.js) for more details.
+
 ### Add language ###
 
 Follow the steps below to add a language.
@@ -187,7 +214,7 @@ Follow the steps below to add a language.
 
 - Translate the language strings for each key in all the files created in the previous step.
 
-- Edit the /src/resources/`settings-options.js`and add the new locale object to the `appLocales` array. For this example, you would add { text: 'Français FR', value: 'fr-fr' }
+- Edit the /src/config/`settings-options.js`and add the new locale object to the `appLocales` array. For this example, you would add { text: 'Français FR', value: 'fr-fr' }
 
 - Open the src/i18n/`i18n-builder.js` file and apply the following changes:
   - Import the object from the new language builder that you just created. For this example it would be `import frFRTranslations from './translations/fr-fr/builder`'

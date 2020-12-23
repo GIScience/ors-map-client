@@ -9,21 +9,20 @@ const build = () => {
 
   let translationsObj = global
 
-  // load and get all EN messages from components *i18n.en.js default export using custom loader
   const componentMessages = loader.load(require.context('@/pages/', true, /\.i18n\.de-de\.js$/), true)
   addComponentKeys(componentMessages, translationsObj)
 
-  // load and get all EN messages from core *i18n.en.js default export using custom loader
   const CRUDMessages = loader.load(require.context('@/crud/', true, /\.i18n\.de-de\.js$/), true)
   addComponentKeys(CRUDMessages, translationsObj)
 
-  // load and get all EN messages from shared parts *i18n.en.js default export using custom loader
   const sharedPartsMessages = loader.load(require.context('@/fragments/', true, /\.i18n\.de-de\.js$/), true)
   addComponentKeys(sharedPartsMessages, translationsObj)
 
-  // load and get all EN messages from shared parts *i18n.en.js default export using custom loader
   const resourcesMessages = loader.load(require.context('@/resources/', true, /\.i18n\.de-de\.js$/), true)
   addComponentKeys(resourcesMessages, translationsObj)
+
+  const pluginsMessages = loader.load(require.context('@/plugins/', true, /\.i18n\.de-de\.js$/), true)
+  addComponentKeys(pluginsMessages, translationsObj)
 
   return translationsObj
 }

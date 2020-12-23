@@ -1,6 +1,6 @@
 import OrsMapFilters from '@/config/ors-map-filters'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
-import defaultMapSettings from '@/resources/default-map-settings'
+import defaultMapSettings from '@/config/default-map-settings'
 import ProfileSelectorOption from './components/profile-selector-option/ProfileSelectorOption'
 import lodash from 'lodash'
 import constants from '@/resources/constants'

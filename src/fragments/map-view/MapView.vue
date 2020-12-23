@@ -16,19 +16,19 @@
       :options="mapOptions"
       :style="{height: mapHeight + 'px'}">
 
-      <l-control-polyline-measure v-if="showControls" :options="polylineMeasureOptions"/>
+      <l-control-polyline-measure v-if="showControls && distanceMeasureToolAvailable" :options="polylineMeasureOptions"/>
 
       <!-- draw tool bar is added programatically via map-view.js setAvoidPolygonDrawingTool method -->
       <!-- <l-draw-toolbar :options="drawingOptions" position="topright"/> -->
 
       <l-marker v-for="(marker, index) in markers"
-        @click="markerClicked(marker.place, $event)"
+        @click="markerClicked(index, marker, $event)"
         @move="markerMoved" :draggable="markerIsDraggable"
         :lat-lng="marker.position"
         :key="index+'-marker'"
         :icon="marker.icon">
         <l-popup v-if="showMarkerPopup">
-          <div >
+          <div :ref="'markerPopupContainer' + index">
             {{marker.label}} 
             <div style="width=:100%;height:1px"></div>
             <v-btn outline small fab v-if="markerIsRemovable" :title="$t('mapView.removePlace')"  @click="removePlace($event, index)" > <v-icon >delete</v-icon> </v-btn>
@@ -39,14 +39,16 @@
         </l-popup>
       </l-marker>
 
+      <!--render isochrones polygons -->
       <template v-if="polygons">
         <l-polygon v-for="(polygon, index) in polygons"
           :key="index+'-polygon'"
+          @click="isochroneClicked(index, polygon, $event)"
           :lat-lngs="polygon.latlngs"
           :fillColor="polygon.color"
           :color="polygon.color">
           <l-popup v-if="polygon.label">
-            <div >
+            <div :ref="'isochronePopupContainer' + index" >
               {{polygon.label}}
             </div>
           </l-popup>
@@ -68,14 +70,12 @@
           </div>
         </l-popup>
       </l-circle-marker>
-      <template  v-for="(alternativeRoute, index) in alternativeRoutes">
-        <template>
-          <ors-l-polyline :key="index" not-active
-            :color="alternativeRouteColor"
-            @click="alternativeRouteIndexSelected(alternativeRoute.index, $event)"            
-            :lat-lngs="alternativeRoute.polyline" >
-          </ors-l-polyline>
-        </template>
+      <template  v-for="alternativeRoute in alternativeRoutes">
+        <ors-l-polyline :key="alternativeRoute.index" not-active
+          :color="alternativeRouteColor"
+          @click="alternativeRouteIndexSelected(alternativeRoute.index, $event)"            
+          :lat-lngs="alternativeRoute.polyline" >
+        </ors-l-polyline>
       </template>
        <template v-if="showActivRouteData">
         <ors-l-polyline :draggable="isInDirectionsMode"
@@ -96,7 +96,7 @@
           :attribution="tileProvider.attribution"
           :token="tileProvider.token"
           layer-type="base"/>
-      <v-btn fab small @click.stop="toggleAcessibleMode" 
+      <v-btn fab small @click.stop="toggleAcessibleMode" v-if="accessbilityToolAvailable"
         :title="$t('maps.turnOnAcessibleMode')" 
         :class="{'extra-low-resolution': $xlResolution}"
         class="do-not-trigger-close-bottom-nav accessibility-btn" > 
@@ -110,8 +110,8 @@
         <v-icon large >all_out</v-icon> 
       </v-btn>
 
-       <!-- highlight extra info polyline -->
-      <extra-info-highlight @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" v-if="extraInfo" :extra-info="extraInfo" :polyline-data="activeRouteData.geometry.coordinates"/>
+      <!-- highlight extra info polyline -->
+      <extra-info-highlight v-if="extraInfo" @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" :extra-info="extraInfo" :polyline-data="activeRouteData.geometry.coordinates"/>
       <l-height-graph v-if="isAltitudeModalOpen" @closed="closeAltitudeInfo" lg8 sm11 :data="localMapViewData.rawData" :options="lHeightGraphOptions"/>
       <my-location class="my-location-btn" :active="myLocationActive" @updateLocation="updateMyLocation"></my-location>
       <img class="over-brand" v-if="showBrand" src="@/assets/img/heigit-and-hd-uni.png" :alt="$t('global.brand')" :title="$t('global.brand')">

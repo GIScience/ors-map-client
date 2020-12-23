@@ -1,3 +1,6 @@
+// This is an example file and is expected to be cloned 
+// without the -example on the same folder that it resides.
+
 const theme = {
   primary: '#C62828',
   secondary: '#8e0000',

@@ -42,7 +42,8 @@ export default {
         nauticalmiles: 'MN'
       }
     },
-    defineAvoidPolygon: 'Definir polígonos a evitar a direções',
+    defineAvoidPolygon: 'Definir polígonos a serem evitados na rota',
+    defineAvoidRectangle: 'Definir retângulos a serem evitados na rota',
     youCantIntersectPolygons: 'Não é possível interceptar polígonos',
     polygonArea: 'Área do polígono',
     highlighting: 'Destaque',
@@ -63,6 +64,9 @@ export default {
       segment_length: "Distância do segmento",
       type: "Tipo",
       legend: "Legenda"
-    }
+    },
+    editShape: 'Alterar forma',
+    remove: 'Remover',
+    avoidPolygonSaved: 'Polígono a evitar salvo'
   }
 }

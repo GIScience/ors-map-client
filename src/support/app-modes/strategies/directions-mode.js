@@ -17,7 +17,7 @@ class DirectionsMode {
     // All directions request filters will be extracted from the OrsMapFilters
     // object that is an in memory object used by all the filters
     // rendered as model in in its respective key
-    OrsParamsParser.addFilters(options, OrsMapFilters, constants.services.directions)
+    OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
     appRouteData.options = options
     appRouteData.options.zoom = constants.initialMapMaxZoom
     return appRouteData

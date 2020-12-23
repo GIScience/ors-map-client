@@ -6,8 +6,6 @@
  * @listens mapRightClicked
  * @listens mapLeftClicked (to close the righ click pop up)
  */
-
-import Leaflet from 'leaflet'
 import GeoUtils from '@/support/geo-utils'
 import { ReverseGeocode } from '@/support/ors-api-runner'
 import Place from '@/models/place'
@@ -54,7 +52,7 @@ export default {
       this.$emit('closed')
     },
     /**
-     * Deal wth the map rigt click, preparing the data and displaying the modal
+     * Deal wth the map left click, preparing the data and displaying the popup
      * @param {*} data
      */
     mapLeftClick (data) {
@@ -69,9 +67,8 @@ export default {
         for (const key in this.clickInsidePolygon) {
           latlngs.push(GeoUtils.buildLatLong(this.clickInsidePolygon[key][1], this.clickInsidePolygon[key][0]))
         }
-        const area = Leaflet.GeometryUtil.geodesicArea(latlngs)
-        this.clickPoint.containerArea = Leaflet.GeometryUtil.readableArea(area, this.$store.getters.mapSettings.areaUnit)
-        this.clickInsidePolygon = true
+        this.clickPoint.containerArea = GeoUtils.readableArea(latlngs, this.$store.getters.mapSettings.areaUnit)
+        this.clickInsidePolygon = this.clickPoint.clickInsidePolygon = true
       }
 
       if (this.$refs.placeInfoBox) {
@@ -82,6 +79,8 @@ export default {
       this.resolvePoint(data.event.latlng.lat, data.event.latlng.lng).then((place) => {
         if (place) {
           context.clickPoint.placeName = place.placeName
+          let hookData = {placeInfo: this.clickPoint, htmlFragment: this.$refs.placeInfoContainer}
+          this.$root.appHooks.run('beforeShowResolvedPlaceInfo', hookData)
           if (context.$refs.placeInfoBox) {
             context.$refs.placeInfoBox.show()
           }

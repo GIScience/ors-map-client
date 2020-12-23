@@ -20,6 +20,7 @@ const constants = {
   roundTripFilterName: 'round_trip',
   avoidPpolygonsFilterName: 'avoid_polygons',
   roundTripOptionsPath: 'options.round_trip',
+  avoidPolygonsOptionsPath: 'options.options.avoid_polygons',
   profileFilterName: 'profile',
   vehicleTypeFilterName: 'vehicle_type',
   responseErrorCodePath: 'response.body.error.code',

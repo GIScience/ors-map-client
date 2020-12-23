@@ -1,10 +1,11 @@
-import store from '@/store/store'
-import lodash from 'lodash'
-import OrsMapFilters from '@/config/ors-map-filters'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import DependencyService from '@/support/dependency-service.js'
-import Utils from '@/support/utils'
+import OrsMapFilters from '@/config/ors-map-filters'
 import constants from '@/resources/constants'
+import Utils from '@/support/utils'
+import store from '@/store/store'
+import lodash from 'lodash'
+import main from '@/main'
 
 const orsParamsParser = {
   /**
@@ -20,7 +21,8 @@ const orsParamsParser = {
       focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng]
     }
 
-    orsParamsParser.addFilters(args, OrsMapFilters, constants.filterTypes.geocodeSearch)
+    orsParamsParser.setFilters(args, OrsMapFilters, constants.filterTypes.geocodeSearch)
+    main.getInstance().appHooks.run('placeSearchArgsCreated', args)
     return args
   },
 
@@ -37,34 +39,12 @@ const orsParamsParser = {
       size: 8,
       focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng]
     }
-    // If is set to restrict the search to currrent mapBounds in store
-    // and there is a mapBounds defined, then apply the restriction
-    if (restrictToBbox && store.getters.mapBounds) {
-      const mapBounds = store.getters.mapBounds
-      let valideBbox = true
-
-      // Make sure that min and max lat are valid
-      const lats = ['min_lat', 'max_lat']
-      for (const key in lats) {
-        const prop = lats[key]
-        if (mapBounds.rect[prop] > 90 || mapBounds.rect[prop] < -90) {
-          valideBbox = false
-        }
-      }
-      // Make sure that min and max lng are valid
-      const lngs = ['min_lon', 'max_lon']
-      for (const key in lngs) {
-        const prop = lngs[key]
-        if (mapBounds.rect[prop] > 180 || mapBounds.rect[prop] < -180) {
-          valideBbox = false
-        }
-      }
+    // If is set to restrict the search to currrent mapBounds,
+    // then apply the restriction
+    if (restrictToBbox) {
+      let bbox = orsParamsParser.getCurrentBbox()
       // If the bounding box is valid, then add it to the args
-      if (valideBbox) {
-        const bbox = [
-          [mapBounds.rect.min_lat, mapBounds.rect.min_lon],
-          [mapBounds.rect.max_lat, mapBounds.rect.max_lon]
-        ]
+      if (bbox) {
         args.boundary_bbox = bbox
         delete args.focus_point // if we restrict by bounday bbox focus point is not necessary
       }
@@ -72,32 +52,79 @@ const orsParamsParser = {
 
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
-    orsParamsParser.addFilters(args, OrsMapFilters, constants.services.autocomplete)
+    orsParamsParser.setFilters(args, OrsMapFilters, constants.services.autocomplete)
+    main.getInstance().appHooks.run('autocompleteArgsCreated', args)
     return args
   },
 
   /**
-   * Build the args object to be used in search places request
-   * @param {String} placeName
-   * @returns {Object} args
+   * Get current bbox based on the stored ma bounds
+   * @returns {Array} bbox
    */
-  buildPoisSearchArgs: (placeName) => {
+  getCurrentBbox () {
+    if (!store.getters.mapBounds) {
+      return false
+    }
+    const mapBounds = store.getters.mapBounds
+    let valideBbox = true
+
+    // Make sure that min and max lat are valid
+    const lats = ['min_lat', 'max_lat']
+    for (const key in lats) {
+      const prop = lats[key]
+      if (mapBounds.rect[prop] > 90 || mapBounds.rect[prop] < -90) {
+        valideBbox = false
+      }
+    }
+    // Make sure that min and max lng are valid
+    const lngs = ['min_lon', 'max_lon']
+    for (const key in lngs) {
+      const prop = lngs[key]
+      if (mapBounds.rect[prop] > 180 || mapBounds.rect[prop] < -180) {
+        valideBbox = false
+      }
+    }
+    // If the bounding box is valid, then add it to the args
+    if (valideBbox) {
+      let bbox = [
+        [mapBounds.rect.min_lat, mapBounds.rect.min_lon],
+        [mapBounds.rect.max_lat, mapBounds.rect.max_lon]
+      ]
+      return bbox  
+    } else {
+      return false
+    }    
+  },
+
+  /**
+   * Build the args object to be used in search POIs request
+   * @param {Object} filters {
+   *  category_group_ids: Array, 
+   *  category_ids: Array, 
+   *  name: Array [String], 
+   *  wheelchair: Array ["yes","no","limited","designated"], 
+   *  smoking: Array ['dedicated','yes','no','separated','isolated','outside'], 
+   *  fee: Array ['yes', 'no']
+   * } @see https://openrouteservice.org/dev/#/api-docs/pois/post
+   * @param {Number} limit
+   * @param {Number} distanceBuffer
+   */
+  buildPoisSearchArgs: (filters, limit = 100, distanceBuffer = 100) => {
     // build the args object
     const args = {
-      name: placeName,
-      // limit: 10,
+      filters: filters,
+      limit: limit,
       geometry: {
         geojson: {
           type: 'Point',
-          coordinates: [store.getters.mapCenter.lat, store.getters.mapCenter.lng]
+          coordinates: [store.getters.mapCenter.lng, store.getters.mapCenter.lat]
         },
-        buffer: 500
+        // bbox: orsParamsParser.getCurrentBbox(),
+        buffer: distanceBuffer
       }
-      // category_group_ids: [],
-      // category_ids: []
     }
-
-    // orsParamsParser.addFilters(args, OrsMapFilters, constants.filterTypes.geocodeSearch)
+    // orsParamsParser.setFilters(args, OrsMapFilters, constants.filterTypes.geocodeSearch)
+    main.getInstance().appHooks.run('poisSearchArgsCreated', args)
     return args
   },
 
@@ -119,7 +146,8 @@ const orsParamsParser = {
     }
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
-    orsParamsParser.addFilters(args, OrsMapFilters, constants.services.reverseGeocode)
+    orsParamsParser.setFilters(args, OrsMapFilters, constants.services.reverseGeocode)
+    main.getInstance().appHooks.run('reverseSearchArgsCreated', args)
     return args
   },
 
@@ -140,7 +168,7 @@ const orsParamsParser = {
     }
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
-    orsParamsParser.addFilters(args, OrsMapFilters, constants.services.isochrones)
+    orsParamsParser.setFilters(args, OrsMapFilters, constants.services.isochrones)
     if (args.range && !Array.isArray(args.range)) {
       args.range = [args.range]
     }
@@ -202,7 +230,8 @@ const orsParamsParser = {
 
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
-    orsParamsParser.addFilters(args, OrsMapFilters, constants.services.directions)
+    orsParamsParser.setFilters(args, OrsMapFilters, constants.services.directions)
+    main.getInstance().appHooks.run('routingArgsCreated', args)
     return args
   },
 
@@ -223,46 +252,64 @@ const orsParamsParser = {
       elevation: true,
       format: 'geojson'
     }
-    orsParamsParser.addFilters(args, OrsMapFilters, constants.services.directions)
+    orsParamsParser.setFilters(args, OrsMapFilters, constants.services.directions)
+    main.getInstance().appHooks.run('routingElevationArgsCreated', args)
     return args
   },
 
   /**
-   * Add OrsMapFilters to args object to a given service
-   * @param {Object} args - taget object to the filters that will be extracted from orsFilters
+   * Add OrsMapFilters to intoArgs object to a given service
+   * @param {Object} intoArgs - taget object to the filters that will be extracted from sourceFilters
    * @param {Object} orsFilters
    * @param {String} service
-   * @returns {Array} args
+   * @returns {Array} intoArgs
+   * @uses store.getters.mode
    */
-  addFilters (args, orsFilters, service) {
-    for (const key in orsFilters) {
-      const filter = orsFilters[key]
+  setFilters (intoArgs, sourceFilters, service) {
+    for (const key in sourceFilters) {
+      const filter = sourceFilters[key]
 
+      // Define if the current filter is available fot the current app mode
       const available = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
+
+      // Check if the filter matches the conditions to be used
       if (available && !filter.onlyInFront && (!filter.useInServices || filter.useInServices.includes(service))) {
+
+        // Build the value for the current filter (if it has child filters, they are gonna be built too)
         const filterValue = OrsFilterUtil.getFilterValue(filter, service)
 
-        // If the value of the filter is valid, add in the args array
+        // If the value of the filter is valid, add in the intoArgs array
         if (orsParamsParser.isFilterValueValid(filterValue)) {
-          // If the parent is a wrapping object and it is already defined in args, add it to the object
-          if (filter.type === constants.filterTypes.wrapper && typeof args[filter.name] !== 'undefined') {
-            args[filter.name] = orsParamsParser.getMergedParameterValues(args[filter.name], filterValue)
-          } else { // if not 
-            if (filter.valueAsObject && typeof filterValue === 'string') {
-              const parsed = Utils.tryParseJson(filterValue)
-              args[filter.name] = parsed || filterValue
-            } else {
-              args[filter.name] = filterValue
-            }
-          }
-        } else {
-          if (args[filter.name] && !orsParamsParser.isFilterValueValid(args[filter.name])) {
-            delete args[filter.name]
-          }
+          orsParamsParser.setFilterVal(filter, filterValue, intoArgs)
+        } else if (intoArgs[filter.name] && !orsParamsParser.isFilterValueValid(intoArgs[filter.name])) {
+          delete intoArgs[filter.name]
         }
       }
     }
-    return args
+    return intoArgs
+  },
+
+  /**
+   * Set the filter value into an args object
+   * @param {*} filter 
+   * @param {*} filterValue 
+   * @param {*} intoArgs 
+   * @hook mapFilterAdded
+   */
+  setFilterVal (filter, filterValue, intoArgs) {
+    // If the parent is a wrapping object and it is already defined in intoArgs, add it to the object
+    if (filter.type === constants.filterTypes.wrapper && typeof intoArgs[filter.name] !== 'undefined') {
+      intoArgs[filter.name] = orsParamsParser.getMergedParameterValues(intoArgs[filter.name], filterValue)
+    } else { // if not 
+      if (filter.valueAsObject && typeof filterValue === 'string') {
+        const parsed = Utils.tryParseJson(filterValue)
+        intoArgs[filter.name] = parsed || filterValue
+      } else {
+        intoArgs[filter.name] = filterValue
+      }
+    }
+    let appHooks = main.getInstance().appHooks
+    appHooks.run('mapFilterAdded', {filters: intoArgs, name: filter.name})
   },
   /**
    * Determines if a filter value is valid

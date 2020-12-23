@@ -14,7 +14,7 @@ class AppHooks {
   /**
    * Load registered hooks defined in src/config/hooks.js
    */
-  loadRegistedHooks () {
+  loadRegisteredHooks () {
     require('@/config/hooks')
   }
 
@@ -55,11 +55,13 @@ class AppHooks {
       // Loop and run each hook
       for(let key in orderedHooks) {
         if (arg) {
-          orderedHooks[key].runFunction(arg)
+          return orderedHooks[key].runFunction(arg)
         } else {
-          orderedHooks[key].runFunction()
+          return orderedHooks[key].runFunction()
         }
       }
+    } else {
+      return arg
     }
   }
 }

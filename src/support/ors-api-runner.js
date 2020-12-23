@@ -4,6 +4,7 @@ import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
 import store from '@/store/store'
 import lodash from 'lodash'
+import main from '@/main'
 
 import OrsApiClient from 'openrouteservice-js'
 
@@ -122,16 +123,21 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
     // Build args to search for address only
     let addressesArgs = OrsParamsParser.buildAutocompleteArgs(term, false)
     addressesArgs.size = quantity
-     // priority administrative places and addresses
+    
+    // Priority administrative places and addresses
     addressesArgs.layers = ['country', 'region', 'macrocounty', 'borough', 'macroregion', 'county', 'locality', 'neighbourhood', 'borough', 'street', 'address', 'localadmin']
     promises.push(client.geocode(addressesArgs))   
+    main.getInstance().appHooks.run('placeSearchAddressArgsDefined', addressesArgs)
 
     // Build a second query that searchs for everything, including venues
     const restrictToBbox = restrictArea && mapSettings.prioritizeSearchingForNearbyPlaces
     let poisArgs = OrsParamsParser.buildAutocompleteArgs(term, restrictToBbox)
     poisArgs.size = quantity
-    poisArgs.layers = ['venue'] // POIs  
-    promises.push(client.geocode(poisArgs))    
+    poisArgs.layers = ['venue'] // venue = POI 
+    promises.push(client.geocode(poisArgs)) 
+    main.getInstance().appHooks.run('placeSearchPoisArgsDefined', addressesArgs)
+
+    promises = main.getInstance().appHooks.run('placeSearchPromisesDefined', promises)
 
     Promise.all(promises).then((responses) => {
       const places = buildPlacesSearchResult(responses, quantity)
@@ -148,17 +154,27 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
  * @returns {Array} of Places
  */
 const buildPlacesSearchResult = (responses, quantity) => {
-  let features = responses[0].features
-  if (responses.length === 2) {
-    features = responses[0].features.slice(0, quantity / 2)
-    let availableSlots = (quantity - features.length)
-    features = features.concat(responses[1].features.slice(0, availableSlots))
+  let features = []
+  // By default, get all the features of the administrative places list
+  let adminFeatures = responses[0].features
+
+  // If there are administrative places and also places 
+  // from POIs (venues) then merge them into the collection
+  let poisFeatures = responses.length === 2 ? responses[1].features : []
+  
+  if (poisFeatures.length > 0) {
+    let amountTobGetFromPOIsList = (quantity / 2) > poisFeatures.length ? quantity / 2 : poisFeatures.length
+    let amountTobGetFromAdminList = quantity  - amountTobGetFromPOIsList
+
+    features = adminFeatures.slice(0, amountTobGetFromAdminList)
+    features = features.concat(poisFeatures.slice(0, amountTobGetFromPOIsList))
   } else {
-    features = responses[0].features
+    features = adminFeatures
   }
 
   features = sortFeatures(features)
-  const places = Place.placesFromFeatures(features)
+  let places = Place.placesFromFeatures(features)
+  places = main.getInstance().appHooks.run('placeSearchResultPrepared', places)
   return places
 }
 
@@ -171,16 +187,17 @@ const sortFeatures  = (features) => {
   if (features.length < 2) {
     return features
   }
-  features = lodash.uniqBy(features, function (f) { return f.properties.id })
-  
   for (let key in features) {    
     let featureLatLng = GeoUtils.buildLatLong(features[key].geometry.coordinates[1], features[key].geometry.coordinates[0])
     features[key].distance = GeoUtils.calculateDistanceBetweenLocations(store.getters.mapSettings.mapCenter, featureLatLng, store.getters.mapSettings.unit)    
+    features[key].properties.unique_id = features[key].properties.id || `osm_id_${features[key].properties.osm_id}`
   }
+  // Get unique items
+  features = lodash.uniqBy(features, function (f) { return f.properties.unique_id })
   features = lodash.sortBy(features, ['distance', 'asc'])
 
   let closestCityIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'locality' || f.properties.layer === 'city' })
-  if (closestCityIndex) {
+  if (closestCityIndex > -1) {
     // Move closest city to first postion
     features.splice(0, 0, features.splice(closestCityIndex, 1)[0])
   }
@@ -188,9 +205,20 @@ const sortFeatures  = (features) => {
 }
 
 /**
- * Get the POI function accessor
+ * Get the POIs
+ * @param {Object} filters {
+ *  category_group_ids: Array, 
+ *  category_ids: Array, 
+ *  name: Array [String], 
+ *  wheelchair: Array ["yes","no","limited","designated"], 
+ *  smoking: Array ['dedicated','yes','no','separated','isolated','outside'], 
+ *  fee: Array ['yes', 'no']
+ * } @see https://openrouteservice.org/dev/#/api-docs/pois/post
+ * @param {Number} limit
+ * @param {Number} distanceBuffer
+ * @returns {Promise}
  */
-const Pois = () => {
+const Pois = (filters, limit = 100, distanceBuffer = 500) => {
   const mapSettings = store.getters.mapSettings
 
   const pois = new OrsApiClient.Pois({
@@ -198,9 +226,22 @@ const Pois = () => {
     host: mapSettings.apiBaseUrl,
     service: mapSettings.endpoints.pois
   })
-  return pois
+  
+  return new Promise((resolve, reject) => {
+    let args = OrsParamsParser.buildPoisSearchArgs(filters, limit, distanceBuffer)
+    pois.pois(args).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
 }
 
+/**
+ * Get isochrones for a list of places
+ * @param {*} places 
+ * @returns {Promise}
+ */
 const Isochrones = (places) => {
   const mapSettings = store.getters.mapSettings
 
