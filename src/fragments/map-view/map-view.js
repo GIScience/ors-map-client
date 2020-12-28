@@ -1603,23 +1603,18 @@ export default {
       this.setAvoidPolygonPropreties(polygon)
       polygon.feature.properties.type = event.layerType
       let context = this
-      polygon.on('click', function (event) { context.onAvoidPolygonClicked(polygon, map) })
+      polygon.addTo(map)
+      polygon.on('click', function () { context.onAvoidPolygonClicked(polygon, map) })
       let expectedPromise = this.$root.appHooks.run('avoidPolygonCreated', {polygon, map, context})
       
       // If a promise is returned
       if (expectedPromise instanceof Promise) {
         expectedPromise.then((result) => {
-          polygon.addTo(map)
           context.notifyAvoidPolygonsChanged()
-          let message = result.msg || context.$t('mapView.avoidPolygonSaved')
-          context.showSuccess(message)
         }).catch (err => {
-          let message = err.msg || context.$t('mapView.avoidPolygonNotSaved')
-          context.showError(message)
           console.log(err)
         })
       } else {
-        polygon.addTo(map)
         context.notifyAvoidPolygonsChanged()
         context.showSuccess(context.$t('mapView.avoidPolygonSaved'))
       }
@@ -1639,11 +1634,7 @@ export default {
           polygon.editing.disable()
           polygon.closePopup()
           context.notifyAvoidPolygonsChanged()
-          let message = result.msg || context.$t('mapView.avoidPolygonSaved')
-          context.showSuccess(message)
         }).catch (err => {
-          let message = err.msg || context.$t('mapView.avoidPolygonNotSaved')
-          context.showError(message)
           console.log(err)
         })
       } else {
@@ -1660,17 +1651,13 @@ export default {
     deleteAvoidPolygon (polygon) {
       let context = this
       this.getMapObject().then((map) => {
+        map.removeLayer(polygon)
         let expectedPromise = this.$root.appHooks.run('avoidPolygonRemoved', {polygon, map, context})
         // If a promise is returned
         if (expectedPromise instanceof Promise) {
-          expectedPromise.then((result) => {
-            map.removeLayer(polygon)
+          expectedPromise.then((result) => {            
             context.notifyAvoidPolygonsChanged()
-            let message = result.msg || context.$t('mapView.avoidPolygonRemoved')
-            context.showSuccess(message)
           }).catch (err => {
-            let message = err.msg || context.$t('mapView.avoidPolygonNotRemoved')
-            context.showError(message)
             console.log(err)
           })
         } else {

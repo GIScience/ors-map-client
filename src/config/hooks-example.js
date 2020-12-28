@@ -106,12 +106,6 @@ appHooks.add('beforeUseNewDeviceLocation', (location) => {
 appHooks.add('avoidPolygonCreated', (hookData) => {
   // hookData has the following structure {polygon: Object, map: Object, context: Object}
   return new Promise((resolve, reject) => {
-    // Do something
-    let result = {msg: 'Put your success message here'}
-    // If the result object returned via resolver has a 
-    // property `msg` the content of it will be showed
-    // via toaster. The same principle applies to the
-    // reject.
     resolve(result)
   })
 }, 1)
@@ -119,12 +113,6 @@ appHooks.add('avoidPolygonCreated', (hookData) => {
 appHooks.add('avoidPolygonRemoved', (hookData) => {
   // hookData has the following structure {polygon: Object, map: Object, context: Object}
   return new Promise((resolve, reject) => {
-    // Do something
-    let result = {msg: 'Put your success message here'}
-    // If the result object returned via resolver has a 
-    // property `msg` the content of it will be showed
-    // via toaster. The same principle applies to the
-    // reject.
     resolve(result)
   })
 }, 1)
@@ -132,12 +120,6 @@ appHooks.add('avoidPolygonRemoved', (hookData) => {
 appHooks.add('avoidPolygonEdited', (hookData) => {
   // hookData has the following structure {polygon: Object, map: Object, context: Object}
   return new Promise((resolve, reject) => {
-    // Do something
-    let result = {msg: 'Put your success message here'}
-    // If the result object returned via resolver has a 
-    // property `msg` the content of it will be showed
-    // via toaster. The same principle applies to the
-    // reject.
     resolve(result)
   })
 }, 1)
