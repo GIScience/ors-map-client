@@ -1589,7 +1589,6 @@ export default {
       polygon.feature = polygon.feature || {}
       polygon.feature.type = polygon.feature.type || "Feature";
       polygon.feature.properties = polygon.feature.properties || {};
-      polygon.feature.properties.guid = polygon.feature.properties.guid || utils.guid('avoid_polygon')
       polygon.feature.properties.avoidPolygon = true
     },
 
