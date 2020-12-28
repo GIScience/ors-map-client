@@ -1660,6 +1660,7 @@ export default {
     deleteAvoidPolygon (polygon) {
       let context = this
       this.getMapObject().then((map) => {
+        let expectedPromise = this.$root.appHooks.run('avoidPolygonRemoved', {polygon, map})
         // If a promise is returned
         if (expectedPromise instanceof Promise) {
           expectedPromise.then((result) => {
