@@ -103,16 +103,43 @@ appHooks.add('beforeUseNewDeviceLocation', (location) => {
   // Do something
 }, 1)
 
-appHooks.add('avoidPolygonCreated', (polygon) => {
-  // Do something
+appHooks.add('avoidPolygonCreated', (hookData) => {
+  // hookData has the following structure {polygon: Object, map: Object}
+  return new Promise((resolve, reject) => {
+    // Do something
+    let result = {msg: 'Put your success message here'}
+    // If the result object returned via resolver has a 
+    // property `msg` the content of it will be showed
+    // via toaster. The same principle applies to the
+    // reject.
+    resolve(result)
+  })
 }, 1)
 
-appHooks.add('avoidPolygonRemoved', (polygon) => {
-  // Do something
+appHooks.add('avoidPolygonRemoved', (hookData) => {
+  // hookData has the following structure {polygon: Object, map: Object}
+  return new Promise((resolve, reject) => {
+    // Do something
+    let result = {msg: 'Put your success message here'}
+    // If the result object returned via resolver has a 
+    // property `msg` the content of it will be showed
+    // via toaster. The same principle applies to the
+    // reject.
+    resolve(result)
+  })
 }, 1)
 
-appHooks.add('avoidPolygonEdited', (polygon) => {
-  // Do something
+appHooks.add('avoidPolygonEdited', (hookData) => {
+  // hookData has the following structure {polygon: Object, map: Object}
+  return new Promise((resolve, reject) => {
+    // Do something
+    let result = {msg: 'Put your success message here'}
+    // If the result object returned via resolver has a 
+    // property `msg` the content of it will be showed
+    // via toaster. The same principle applies to the
+    // reject.
+    resolve(result)
+  })
 }, 1)
 
 appHooks.add('mapBoundsChanged', (mapBounds) => {

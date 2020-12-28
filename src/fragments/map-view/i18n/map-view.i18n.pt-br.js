@@ -67,6 +67,10 @@ export default {
     },
     editShape: 'Alterar forma',
     remove: 'Remover',
-    avoidPolygonSaved: 'Polígono a evitar salvo'
+    avoidPolygonSaved: 'Polígono a evitar salvo',
+    avoidPolygonRemoved: 'Polígono a evitar excluído',
+    avoidPolygonNotRemoved: 'Não foi possível excluir o polígono a evitar',
+    avoidPolygonNotSaved: 'Não foi possível salvar o polígono a evitar',
+    polygonEditModeEnabled: 'Quando terminar as alterações clicke em qualquer lugar para salvar'
   }
 }

@@ -549,12 +549,6 @@ export default {
      * @returns {Object}
      */
     lHeightGraphOptions () {
-      // distance: "Distance",
-      // elevation: "Elevation",
-      // segment_length: "Segment length",
-      // type: "Type",
-      // legend: "Legend"
-
       let mappings = undefined
       let activRoute = this.localMapViewData.routes[this.$store.getters.activeRouteIndex]
       let heightGraphTranslations = this.$t('mapView.heightGraph')
@@ -563,14 +557,15 @@ export default {
       // that wil be displayd in the graph
       // including the translation and the color
       // associated to each extra value
-      if (lodash.get(activRoute, 'properties.extras')) {
+      let extras = lodash.get(activRoute, 'properties.extras')
+      if (extras) {
         let dict = orsDictionary
         let translations = this.$t('orsDictionary')
         mappings = {}
         // Set the mapping for each extra info key
-        for (let extraKey in activRoute.properties.extras) {
+        for (let extraKey in extras) {
           mappings[extraKey] = {}
-          let extra = activRoute.properties.extras[extraKey]
+          let extra = extras[extraKey]
           let extraDict = dict[extraKey]
 
           // Build the map for each extra summary value
@@ -1335,7 +1330,9 @@ export default {
       } else {
         let polygonInEditMode = this.isThereAnPolygonInEditMode()
         if (polygonInEditMode) {
-          this.saveAvoidPolygonChanges(polygonInEditMode)
+          this.getMapObject().then(map => {
+            this.saveAvoidPolygonChanges(polygonInEditMode, map)
+          })
         } else {
           // If in low resolution and sidebar is open, then left click on the map
           // must close the side bar to allow the user to interact with the map.
@@ -1598,18 +1595,100 @@ export default {
 
     /**
      * Handle polygon created
-     * @param {*} event
-     * @param {*} map 
+     * @param {Object} event
+     * @param {Object} map 
      */
     avoidPolygonCreated (event, map) {
       var polygon = event.layer
       this.setAvoidPolygonPropreties(polygon)
       polygon.feature.properties.type = event.layerType
       let context = this
-      polygon.on('click', function (event) { context.onAvoidPolygonClicked(polygon, event) })
-      polygon.addTo(map)
-      this.$root.appHooks.run('avoidPolygonCreated', polygon)
-      this.notifyAvoidPolygonsChanged()
+      polygon.on('click', function (event) { context.onAvoidPolygonClicked(polygon, map) })
+      let expectedPromise = this.$root.appHooks.run('avoidPolygonCreated', {polygon, map})
+      
+      // If a promise is returned
+      if (expectedPromise instanceof Promise) {
+        expectedPromise.then((result) => {
+          polygon.addTo(map)
+          context.notifyAvoidPolygonsChanged()
+          let message = result.msg || context.$t('mapView.avoidPolygonSaved')
+          context.showSuccess(message)
+        }).catch (err => {
+          let message = err.msg || context.$t('mapView.avoidPolygonNotSaved')
+          context.showError(message)
+          console.log(err)
+        })
+      } else {
+        polygon.addTo(map)
+        context.notifyAvoidPolygonsChanged()
+        context.showSuccess(context.$t('mapView.avoidPolygonSaved'))
+      }
+    },
+    /**
+     * Save avoid polygon changes
+     * @param {Object} polygon 
+     * @param {Object} map
+     */
+    saveAvoidPolygonChanges (polygon, map) {
+      let expectedPromise = this.$root.appHooks.run('avoidPolygonEdited', {polygon, map})
+      let context = this
+
+      // If a promise is returned
+      if (expectedPromise instanceof Promise) {
+        expectedPromise.then((result) => {
+          polygon.editing.disable()
+          polygon.closePopup()
+          context.notifyAvoidPolygonsChanged()
+          let message = result.msg || context.$t('mapView.avoidPolygonSaved')
+          context.showSuccess(message)
+        }).catch (err => {
+          let message = err.msg || context.$t('mapView.avoidPolygonNotSaved')
+          context.showError(message)
+          console.log(err)
+        })
+      } else {
+        polygon.editing.disable()
+        polygon.closePopup()
+        context.showSuccess(context.$t('mapView.avoidPolygonSaved'))
+        context.notifyAvoidPolygonsChanged()
+      }
+    },
+    /**
+     * Delete avoid polygon layer and run corresponding hook
+     * @param {Object} polygon
+     */
+    deleteAvoidPolygon (polygon) {
+      let context = this
+      this.getMapObject().then((map) => {
+        // If a promise is returned
+        if (expectedPromise instanceof Promise) {
+          expectedPromise.then((result) => {
+            map.removeLayer(polygon)
+            context.notifyAvoidPolygonsChanged()
+            let message = result.msg || context.$t('mapView.avoidPolygonRemoved')
+            context.showSuccess(message)
+          }).catch (err => {
+            let message = err.msg || context.$t('mapView.avoidPolygonNotRemoved')
+            context.showError(message)
+            console.log(err)
+          })
+        } else {
+          map.removeLayer(polygon)
+          context.notifyAvoidPolygonsChanged()
+          context.showError(context.$t('mapView.avoidPolygonNotRemoved'))
+        }
+      })
+    },
+
+    /**
+     * Enable polygon shape edit and run the corresponding hook
+     * @param {*} polygon 
+     */
+    enableAvoidPolygonShapeEdit(polygon) {
+      polygon.editing.enable()
+      polygon.closePopup()
+      this.$root.appHooks.run('avoidPolygonEditModeEnabled', polygon)
+      this.showInfo(this.$t('mapView.polygonEditModeEnabled'), {timeout: 10000})
     },
 
     /**
@@ -1656,7 +1735,7 @@ export default {
   
           // Add handler for the polygon click event
           polygon.on('click', function (event) {
-            context.onAvoidPolygonClicked(polygon, event)
+            context.onAvoidPolygonClicked(polygon, map)
           })
         }
       })
@@ -1693,47 +1772,16 @@ export default {
      * Enable edit mode for polygon by ading a edit popup when clicked
      * @param {*} polygon
      */
-    onAvoidPolygonClicked (polygon) {
-      if (polygon.editing._enabled) { // polygon is already in edit mode
-       this.saveAvoidPolygonChanges(polygon)
+    onAvoidPolygonClicked (polygon, map) {
+      // polygon is already in edit mode
+      // So the click is used to sav the changes
+      if (polygon.editing._enabled) {
+       this.saveAvoidPolygonChanges(polygon, map)
       } else { // build the standard popup, run the popup hoook and open the popup
         let popupHtmlFragment = this.buildPolygonClickPopupContent(polygon)
         this.$root.appHooks.run('beforeShowAvoidPolygonPopup', {popupHtmlFragment, polygon})
         polygon.bindPopup(popupHtmlFragment).openPopup()
       }      
-    },
-
-    /**
-     * Save avoid polygon changes
-     * @param {*} polygon 
-     */
-    saveAvoidPolygonChanges (polygon) {
-      polygon.editing.disable()
-      polygon.closePopup()
-      this.$root.appHooks.run('avoidPolygonEdited', polygon)
-      this.showSuccess(this.$t('mapView.avoidPolygonSaved'))
-      this.notifyAvoidPolygonsChanged()
-    },
-    /**
-     * Enable polygon shape edit and run the corresponding hook
-     * @param {*} polygon 
-     */
-    enableAvoidPolygonShapeEdit(polygon) {
-      polygon.editing.enable()
-      polygon.closePopup()
-      this.$root.appHooks.run('avoidPolygonEditModeEnabled', polygon)
-      this.showInfo('When you finish, click anywhere to save the changes')
-    },
-    /**
-     * Delete avoid polygon layer and run corresponding hook
-     * @param {Object} polygon
-     */
-    deleteAvoidPolygon (polygon) {
-      this.getMapObject().then((map) => {
-        map.removeLayer(polygon)
-        this.$root.appHooks.run('avoidPolygonRemoved', polygon)
-        this.notifyAvoidPolygonsChanged()
-      })
     },
 
     /**

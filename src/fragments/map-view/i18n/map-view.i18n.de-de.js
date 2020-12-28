@@ -65,8 +65,12 @@ export default {
       type: "Typ",
       legend: "Legende"
     },
-    editShape: 'Editieren Form',
+    editShape: 'Fläche bearbeiten',
     remove: 'Entfernen',
-    avoidPolygonSaved: 'Polygon vermeiden gespeichert'
+    avoidPolygonSaved: 'Polygon vermeiden gespeichert',
+    avoidPolygonRemoved: 'Polygon vermeiden entfernt',
+    avoidPolygonNotRemoved: 'Es war nicht möglich, das Ausweichpolygon zu entfernen',
+    avoidPolygonNotSaved: 'Es war nicht möglich, das Vermeidungspolygon zu speichern',
+    polygonEditModeEnabled: 'Wenn Sie die Bearbeitung abgeschlossen haben, klicken Sie auf eine beliebige Stelle, um die Änderungen zu speichern'
   }
 }
