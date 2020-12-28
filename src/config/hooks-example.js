@@ -104,7 +104,7 @@ appHooks.add('beforeUseNewDeviceLocation', (location) => {
 }, 1)
 
 appHooks.add('avoidPolygonCreated', (hookData) => {
-  // hookData has the following structure {polygon: Object, map: Object}
+  // hookData has the following structure {polygon: Object, map: Object, context: Object}
   return new Promise((resolve, reject) => {
     // Do something
     let result = {msg: 'Put your success message here'}
@@ -117,7 +117,7 @@ appHooks.add('avoidPolygonCreated', (hookData) => {
 }, 1)
 
 appHooks.add('avoidPolygonRemoved', (hookData) => {
-  // hookData has the following structure {polygon: Object, map: Object}
+  // hookData has the following structure {polygon: Object, map: Object, context: Object}
   return new Promise((resolve, reject) => {
     // Do something
     let result = {msg: 'Put your success message here'}
@@ -130,7 +130,7 @@ appHooks.add('avoidPolygonRemoved', (hookData) => {
 }, 1)
 
 appHooks.add('avoidPolygonEdited', (hookData) => {
-  // hookData has the following structure {polygon: Object, map: Object}
+  // hookData has the following structure {polygon: Object, map: Object, context: Object}
   return new Promise((resolve, reject) => {
     // Do something
     let result = {msg: 'Put your success message here'}

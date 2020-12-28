@@ -1604,7 +1604,7 @@ export default {
       polygon.feature.properties.type = event.layerType
       let context = this
       polygon.on('click', function (event) { context.onAvoidPolygonClicked(polygon, map) })
-      let expectedPromise = this.$root.appHooks.run('avoidPolygonCreated', {polygon, map})
+      let expectedPromise = this.$root.appHooks.run('avoidPolygonCreated', {polygon, map, context})
       
       // If a promise is returned
       if (expectedPromise instanceof Promise) {
@@ -1630,8 +1630,8 @@ export default {
      * @param {Object} map
      */
     saveAvoidPolygonChanges (polygon, map) {
-      let expectedPromise = this.$root.appHooks.run('avoidPolygonEdited', {polygon, map})
       let context = this
+      let expectedPromise = this.$root.appHooks.run('avoidPolygonEdited', {polygon, map, context})
 
       // If a promise is returned
       if (expectedPromise instanceof Promise) {
@@ -1660,7 +1660,7 @@ export default {
     deleteAvoidPolygon (polygon) {
       let context = this
       this.getMapObject().then((map) => {
-        let expectedPromise = this.$root.appHooks.run('avoidPolygonRemoved', {polygon, map})
+        let expectedPromise = this.$root.appHooks.run('avoidPolygonRemoved', {polygon, map, context})
         // If a promise is returned
         if (expectedPromise instanceof Promise) {
           expectedPromise.then((result) => {
