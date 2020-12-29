@@ -13,7 +13,6 @@ import RouteUtils from '@/support/route-utils'
 import constants from '@/resources/constants'
 import { ResizeObserver } from 'vue-resize'
 import lodash from 'lodash'
-import main from '@/main'
 
 export default {
   data: () => ({
@@ -34,7 +33,8 @@ export default {
     searchBtnAvailable: false,
     firstLoad: true,
     previousRoute: null,
-    refreshingSearch: false
+    refreshingSearch: false,
+    localAvoidPolygons: []
   }),
   components: {
     MapView,
@@ -47,12 +47,7 @@ export default {
   },
   computed: {
     avoidPolygons () {
-      let polygons = []
-      let multiPolygon = lodash.get(this.$store.getters.appRouteData, constants.avoidPolygonsOptionsPath)
-      if (multiPolygon) {
-        polygons = PolygonUtils.splitMultiPolygonIntoPolygons(multiPolygon)
-      }
-      return polygons
+      return this.localAvoidPolygons
     },
     /**
      * Determines if the simple search component is visible
@@ -191,6 +186,7 @@ export default {
       this.previousRoute = from
       this.loadRoute()
       this.setModalState()
+      this.loadAvoidPolygonsFromAppRoute()
     }
   },
   methods: {
@@ -574,6 +570,17 @@ export default {
       } else {
         this.isAboutOpen = false
       }
+    },
+    /**
+     * Load avoid polygons from app route
+     */
+    loadAvoidPolygonsFromAppRoute () {
+      let polygons = []
+      let multiPolygon = lodash.get(this.$store.getters.appRouteData, constants.avoidPolygonsOptionsPath)
+      if (multiPolygon) {
+        polygons = PolygonUtils.splitMultiPolygonIntoPolygons(multiPolygon)
+      }
+      this.localAvoidPolygons = polygons
     }
   },
 
@@ -603,6 +610,9 @@ export default {
     })
     this.eventBus.$on('showAboutModal', () => {
       context.isAboutOpen = true
+    })
+    this.eventBus.$on('loadAvoidPolygons', (avoidPolygons) => {
+      context.localAvoidPolygons = avoidPolygons
     })
   
     // When the touch move event occours

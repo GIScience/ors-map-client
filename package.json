@@ -51,6 +51,7 @@
     "vue2-leaflet": "^2.2.1",
     "vue2-leaflet-draw-toolbar": "^0.1.1",
     "vue2-leaflet-height-graph": "git+https://github.com/GIScience/vue2-leaflet-height-graph.git",
+    "vue-rest-crud": "git+https://github.com/amoncaldas/vue-rest-crud.git",
     "vue2-leaflet-polyline-measure": "^1.0.0",
     "vuedraggable": "^2.17.0",
     "vuetify": "^1.5.19",

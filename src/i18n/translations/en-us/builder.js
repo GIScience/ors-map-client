@@ -12,9 +12,6 @@ const build = () => {
   const componentMessages = loader.load(require.context('@/pages/', true, /\.i18n\.en-us\.js$/), true)
   addComponentKeys(componentMessages, translationsObj)
 
-  const CRUDMessages = loader.load(require.context('@/crud/', true, /\.i18n\.en-us\.js$/), true)
-  addComponentKeys(CRUDMessages, translationsObj)
-
   const sharedPartsMessages = loader.load(require.context('@/fragments/', true, /\.i18n\.en-us\.js$/), true)
   addComponentKeys(sharedPartsMessages, translationsObj)
 

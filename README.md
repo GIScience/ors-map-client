@@ -13,7 +13,6 @@ The VueJS components allow a better code organization, weak and clear coupling b
 - [App folders](#app-folders)
 - [App flow overview](#app-flow-overview)
 - [Feature-by-folder design](#feature-by-folder-design)
-- [CRUD component](#crud-component)
 - [Reserved methods and accessors](#reserved-methods-and-accessors)
 - [pages](#pages)
 - [Configuration and theming](#configuration-and-theming)
@@ -83,7 +82,6 @@ App folder structure under `src`:
 
 - `assets` - where the images and icon sare stored
 - `common` - available mixins, http client, main menu, Vue with Vuetify and theme
-- `crud` - custom CRUD solution to interact with data repository
 - `directives` - custom directives
 - `filters` - custom filters
 - `fragments` - all app fragments used by pages
@@ -152,11 +150,6 @@ The app will automatically load:
 - the defined routes in files ending with `.routes.js`
 - the store definitions in files ending with `.store.js`
 
-### CRUD component ###
-
-The generic crud solution allows the communication with a back-end api with minimum code.
-You just need to define the endpoint of a resource and add the crud to a component by instantiating it to a vue.js component. See more at [CRUD docs](docs/crud.md)
-
 ### Reserved methods and accessors ###
 
 All the VueJS components created (including the fragments) will have, by default, the following methods/accessors define din the main vue instance app:
@@ -175,8 +168,6 @@ All the VueJS components created (including the fragments) will have, by default
 
 - `eventBus` - accessor to global event bus object, that allows to broadcast and get events in all components
 
-- `$http` - accessor to custom wrapped axios http client, encapsulating authentication and loading bar status
-
 - `$store` - accessor to app store that used vuex
 
 - `lodash` - accessor to lodash lib, useful for manipulate arrays an objects.
@@ -189,9 +180,7 @@ All the VueJS components created (including the fragments) will have, by default
 
 It is possible to configure/disable some app features and behaviors by changing the values
 of the `src/config/app-config.js` values. Some of the configurable items are:
-disabledActionsForIsochrones,  disabledActionsForPlacesAndDirections, logoImgSrc, footerDevelopedByLink,
-supportsPlacesAndDirections, supportsIsochrones, supportsMapFiltersOnSidebar, sidebarStartsOpenInheighResolution,
-mapTileProviders, defaultTileProvider. Check the config file to see all the possibilities.
+disabledActionsForIsochrones,  disabledActionsForPlacesAndDirections, logoImgSrc, footerDevelopedByLink, supportsPlacesAndDirections, supportsIsochrones, supportsMapFiltersOnSidebar, sidebarStartsOpenInheighResolution, mapTileProviders, defaultTileProvider. Check the config file to see all the possibilities.
 
 It is possible to change the app theme colors by changing the values of `src/config/theme.js`
 
