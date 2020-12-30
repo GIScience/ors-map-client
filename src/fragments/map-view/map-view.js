@@ -1581,8 +1581,9 @@ export default {
     /**
      * Set polygon properties
      * @param {Object} polygon 
+     * @param {Object} polygonData
      */
-    setAvoidPolygonPropreties (polygon, polygonData) {
+    setAvoidPolygonPropreties (polygon, polygonData = null) {
      // define polygon feature prop.
      // It will be returned when we get the geojson
      // rpresentation of the polygon
@@ -1592,7 +1593,7 @@ export default {
       polygon.feature.properties.avoidPolygon = true
 
       // Append the properties from polygon data
-      if (polygonData.properties) {
+      if (polygonData && polygonData.properties) {
         for (let key in polygonData.properties) {
           polygon.feature.properties[key] = polygonData.properties[key]
         }
