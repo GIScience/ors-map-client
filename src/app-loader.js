@@ -1,12 +1,12 @@
-import store from '@/store/store'
 import defaultMapSettings from '@/config/default-map-settings'
-import appConfig from '@/config/app-config'
-import utils from '@/support/utils'
-import constants from '@/resources/constants'
 import settingsOptions from '@/config/settings-options.js'
+import constants from '@/resources/constants'
+import appConfig from '@/config/app-config'
+import {HttpClient} from 'vue-rest-client'
+import utils from '@/support/utils'
+import store from '@/store/store'
 import lodash from 'lodash'
 import main from '@/main'
-import {CrudHttpApi} from 'vue-rest-crud'
 
 /**
  * Fetch required api data to run the app
@@ -30,11 +30,11 @@ const fetchApiInitialData = () => {
           saveApiData(appConfig.ORSApiKey, constants.endpoints)
           resolve()
         } else {
-          let crudHttpApi = new CrudHttpApi({baseURL: appConfig.dataServiceBaseUrl})          
+          let httpClient = new HttpClient({baseURL: appConfig.dataServiceBaseUrl})          
           // Request the public API key from the remote service 
           // (only works when runing the app on valid ORS domains).
           // If the request fails, use the local user key instead
-          crudHttpApi.http.get(appConfig.publicApiKeyUrl).then(response => {
+          httpClient.http.get(appConfig.publicApiKeyUrl).then(response => {
             saveApiData(response.data, constants.publicEndpoints)
             resolve(response.data)
           }).catch(error => {

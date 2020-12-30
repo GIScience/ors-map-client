@@ -140,7 +140,11 @@ const geoUtils = {
    * @returns {String|false}
    */
   geojsonShapeType (geojson) {
-    if (geojson.type !== 'Polygon') {
+    let type = geojson.type
+    if (geojson.geometry && geojson.geometry.type) {
+      type = geojson.geometry.type
+    }
+    if (type !== 'Polygon') {
       return false
     }
     if (geoUtils.geojsonIsARectangle(geojson)) {

@@ -1582,7 +1582,7 @@ export default {
      * Set polygon properties
      * @param {Object} polygon 
      */
-    setAvoidPolygonPropreties (polygon) {
+    setAvoidPolygonPropreties (polygon, polygonData) {
      // define polygon feature prop.
      // It will be returned when we get the geojson
      // rpresentation of the polygon
@@ -1590,6 +1590,13 @@ export default {
       polygon.feature.type = polygon.feature.type || "Feature";
       polygon.feature.properties = polygon.feature.properties || {};
       polygon.feature.properties.avoidPolygon = true
+
+      // Append the properties from polygon data
+      if (polygonData.properties) {
+        for (let key in polygonData.properties) {
+          polygon.feature.properties[key] = polygonData.properties[key]
+        }
+      }
     },
 
     /**
@@ -1706,8 +1713,18 @@ export default {
           const coordinates = GeoUtils.switchLatLonIndex(polygonData.geometry.coordinates[0])
   
           // Set the color options of the polygons about to be drawn
-          const polygonOptions = { color: context.drawOptions.draw.polygon.shapeOptions.color}
-  
+          let color = context.drawOptions.draw.polygon.shapeOptions.color
+          let dashArray = null
+          if (polygonData.properties) {
+            if (polygonData.properties.color) {
+              color = polygonData.properties.color
+            }
+            if (polygonData.properties.dashArray) {
+              dashArray = polygonData.properties.dashArray
+            }
+          }
+          const polygonOptions = { color: color, dashArray: dashArray}
+            
           let polygon
           // Create each polygon using the leaflet tool
           // adn add it to the map object
@@ -1717,7 +1734,7 @@ export default {
           } else {
             polygon = Leaflet.polygon(coordinates, polygonOptions)
           }
-          context.setAvoidPolygonPropreties(polygon)
+          context.setAvoidPolygonPropreties(polygon, polygonData)
           polygon.addTo(map)
   
           // Add handler for the polygon click event

@@ -627,5 +627,6 @@ export default {
     this.loadRoute()
     this.setModalState()
     this.setViewHeight()
+    this.loadAvoidPolygonsFromAppRoute()
   }
 }

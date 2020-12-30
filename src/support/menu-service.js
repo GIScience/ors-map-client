@@ -1,9 +1,9 @@
-import {ModelService} from 'vue-rest-crud'
+import {ModelService} from 'vue-rest-client'
 import appConfig from '@/config/app-config'
 import main from '@/main'
 
 const options = {
-  http: {
+  httpClientOptions: {
     baseURL: appConfig.dataServiceBaseUrl, // String, an empty string is the default,
     getVueInstance: () => {
       return main.getInstance()

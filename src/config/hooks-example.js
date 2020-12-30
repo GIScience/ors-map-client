@@ -5,6 +5,7 @@ import main from '@/main'
 import store from '@/store/store'
 import appConfig from '@/config/app-config'
 import PluginExample from '@/plugins/plugin-example/plugin-example.js'
+import { result } from 'lodash'
 
 // Create a var that will have a reference to the
 // plugin instante when it is instantiated in 
@@ -32,6 +33,15 @@ appHooks.add('mapViewDataChanged', (mapViewData) => {
 
 appHooks.add('mapReady', (mapObject) => {
   pluginExample.mapReady(mapObject)
+}, 1)
+
+appHooks.add('loadMenuItems', () => {
+  // This hook is called if appConfig.appMenu.useORSMenu is not true
+  // A promise is expcted to be returned.
+  return new Promise((resolve, reject) => {
+    let items = [] // `items` is expected to contain an array of menu items
+    resolve(items)
+  })
 }, 1)
 
 /**
