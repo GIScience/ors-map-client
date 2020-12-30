@@ -45,7 +45,7 @@
     "vue-markdown": "^2.2.4",
     "vue-moment": "^4.0.0",
     "vue-resize": "^0.4.5",
-    "vue-rest-client": "^0.1.2",
+    "vue-rest-client": "^0.1.4",
     "vue-router": "^3.0.1",
     "vue-scrollto": "^2.11.0",
     "vue2-dropzone": "^3.6.0",
