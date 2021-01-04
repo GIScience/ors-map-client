@@ -1,15 +1,17 @@
 <template>
   <div>
     <v-item-group>
-      <v-layout class="profile-options-wrapper">
-        <v-item v-for="profile in profilesMapping" :key="profile.slug">
-          <v-flex>
-            <profile-selector-option @profileSelected="profileSelected" :profile="profile"
-              :active-profile-slug="activeProfileSlug" :active-vehicle-type="activeVehicleType">
-            </profile-selector-option>
-          </v-flex>
-        </v-item>
-      </v-layout>
+      <div style="min-width:275px; height:70px">
+        <v-layout class="profile-options-wrapper">
+          <v-item v-for="profile in profilesMapping" :key="profile.slug">
+            <v-flex style="min-width:45px">
+              <profile-selector-option @profileSelected="profileSelected" :profile="profile"
+                :active-profile-slug="activeProfileSlug" :active-vehicle-type="activeVehicleType">
+              </profile-selector-option>
+            </v-flex>
+          </v-item>
+        </v-layout>
+      </div>
     </v-item-group>
 
     <div v-if="activeVehicleType">

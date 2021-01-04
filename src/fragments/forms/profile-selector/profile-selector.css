@@ -13,8 +13,9 @@
   margin-left: 2px;
   max-width: 275px;
   padding-top: 5px;
-  padding-right: 5px;
+  padding-right: 10px;
   border-radius: 4px;
   border: 1px solid #cbced1;
   background-color: #f5f5f5;
+  float: left;
 }
