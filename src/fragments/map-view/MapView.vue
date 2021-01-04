@@ -23,7 +23,7 @@
 
       <v-marker-cluster v-if="supportsClusteredMarkers" :options="markersClusterOptions" ref="markerClusterRef">
         <template v-for="(marker, index) in markers">
-          <l-marker v-if="marker.inCluster"
+          <l-marker v-if="marker.clustered"
             @click="markerClicked(index, marker, $event)"
             @move="markerMoved" :draggable="markerIsDraggable"
             :lat-lng="marker.position"
@@ -44,7 +44,7 @@
       </v-marker-cluster>
 
       <template v-for="(marker, index) in markers">
-        <l-marker v-if="!marker.inCluster"
+        <l-marker v-if="!marker.clustered"
           @click="markerClicked(index, marker, $event)"
           @move="markerMoved" :draggable="markerIsDraggable"
           :lat-lng="marker.position"
