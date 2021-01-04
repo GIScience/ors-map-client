@@ -193,7 +193,7 @@ export default {
     mapReady (mapObject) {
       if (mapObject) {
         this.$store.commit('mapReady', true)
-        this.$root.appHooks.run('mapReady', mapObject)
+        this.$root.appHooks.run('mapReady', {context: this.$refs.mapView, map: mapObject})
       } else {
         this.$store.commit('mapReady', false)
       }
