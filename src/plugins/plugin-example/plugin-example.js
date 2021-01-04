@@ -1,4 +1,6 @@
-
+import VaccinationPlacesService from './covid-vaccianation-service'
+import MapViewData from '@/models/map-view-data'
+import Place from '@/models/place'
 /**
  * This is an example of a simple plugin aiming at demonstrating how you can add 
  * custom behavior to the maps client. To make the plugin work it is necessary
@@ -27,8 +29,9 @@ class PluginExample {
    * IMPORTANT: this method is expected to be called on
    * hooks.js on the mapReady hook.
    */
-  mapReady (mapObject) {
-    // The leaflet map object is passed 
+  mapReady (hookData) {
+    // hookData has the following structure {context: Object, map: Object}
+    // The leaflet `map` object is passed 
     // you could potentially change it
     // like adding or removing controls
   }

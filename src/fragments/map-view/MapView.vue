@@ -21,23 +21,47 @@
       <!-- draw tool bar is added programatically via map-view.js setAvoidPolygonDrawingTool method -->
       <!-- <l-draw-toolbar :options="drawingOptions" position="topright"/> -->
 
-      <l-marker v-for="(marker, index) in markers"
-        @click="markerClicked(index, marker, $event)"
-        @move="markerMoved" :draggable="markerIsDraggable"
-        :lat-lng="marker.position"
-        :key="index+'-marker'"
-        :icon="marker.icon">
-        <l-popup v-if="showMarkerPopup">
-          <div :ref="'markerPopupContainer' + index">
-            {{marker.label}} 
-            <div style="width=:100%;height:1px"></div>
-            <v-btn outline small fab v-if="markerIsRemovable" :title="$t('mapView.removePlace')"  @click="removePlace($event, index)" > <v-icon >delete</v-icon> </v-btn>
-            <v-btn outline small fab v-if="directIsAvailable(index)" :title="$t('mapView.toggleDirect')"  @click="marAsDirectfromHere($event, index)" > 
-              <v-icon :color="marker.place.direct? 'primary' : 'dark'">settings_ethernet</v-icon> 
-            </v-btn>
-          </div>
-        </l-popup>
-      </l-marker>
+      <v-marker-cluster v-if="supportsClusteredMarkers" :options="markersClusterOptions" ref="markerClusterRef">
+        <template v-for="(marker, index) in markers">
+          <l-marker v-if="marker.inCluster"
+            @click="markerClicked(index, marker, $event)"
+            @move="markerMoved" :draggable="markerIsDraggable"
+            :lat-lng="marker.position"
+            :key="index+'-marker'"
+            :icon="marker.icon">
+            <l-popup v-if="showMarkerPopup">
+              <div :ref="'markerPopupContainer' + index">
+                {{marker.label}} 
+                <div style="width=:100%;height:1px"></div>
+                <v-btn outline small fab v-if="markerIsRemovable" :title="$t('mapView.removePlace')"  @click="removePlace($event, index)" > <v-icon >delete</v-icon> </v-btn>
+                <v-btn outline small fab v-if="directIsAvailable(index)" :title="$t('mapView.toggleDirect')"  @click="marAsDirectfromHere($event, index)" > 
+                  <v-icon :color="marker.place.direct? 'primary' : 'dark'">settings_ethernet</v-icon> 
+                </v-btn>
+              </div>
+            </l-popup>
+          </l-marker>         
+        </template>
+      </v-marker-cluster>
+
+      <template v-for="(marker, index) in markers">
+        <l-marker v-if="!marker.inCluster"
+          @click="markerClicked(index, marker, $event)"
+          @move="markerMoved" :draggable="markerIsDraggable"
+          :lat-lng="marker.position"
+          :key="index+'-marker'"
+          :icon="marker.icon">
+          <l-popup v-if="showMarkerPopup">
+            <div :ref="'markerPopupContainer' + index">
+              {{marker.label}} 
+              <div style="width=:100%;height:1px"></div>
+              <v-btn outline small fab v-if="markerIsRemovable" :title="$t('mapView.removePlace')"  @click="removePlace($event, index)" > <v-icon >delete</v-icon> </v-btn>
+              <v-btn outline small fab v-if="directIsAvailable(index)" :title="$t('mapView.toggleDirect')"  @click="marAsDirectfromHere($event, index)" > 
+                <v-icon :color="marker.place.direct? 'primary' : 'dark'">settings_ethernet</v-icon> 
+              </v-btn>
+            </div>
+          </l-popup>
+        </l-marker>       
+      </template>
 
       <!--render isochrones polygons -->
       <template v-if="polygons">

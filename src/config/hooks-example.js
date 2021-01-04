@@ -5,7 +5,6 @@ import main from '@/main'
 import store from '@/store/store'
 import appConfig from '@/config/app-config'
 import PluginExample from '@/plugins/plugin-example/plugin-example.js'
-import { result } from 'lodash'
 
 // Create a var that will have a reference to the
 // plugin instante when it is instantiated in 
@@ -31,8 +30,9 @@ appHooks.add('mapViewDataChanged', (mapViewData) => {
   pluginExample.mapViewDataChanged(mapViewData)
 }, 1)
 
-appHooks.add('mapReady', (mapObject) => {
-  pluginExample.mapReady(mapObject)
+appHooks.add('mapReady', (hookData) => {
+  // hookData has the following structure {context: Object, map: Object}
+  pluginExample.mapReady(hookData)
 }, 1)
 
 appHooks.add('loadMenuItems', () => {

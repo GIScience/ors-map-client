@@ -38,6 +38,7 @@ const appConfig = {
   distanceMeasureToolAvailable: true, // if the polyline distance measure tool must be available on the map view
   accessbilityToolAvailable: true, // if the accessibility tool must be available on the map view
   fitAllFeaturesToolAvailable: true, // if the fitAllFeatures to0l must be available on the map view
+  supportsClusteredMarkers: true,
 
   // The map tile providers available. At least one must be present
   mapTileProviders: [

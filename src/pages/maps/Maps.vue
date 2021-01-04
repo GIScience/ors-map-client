@@ -9,6 +9,7 @@
       @click="refreshSearch()" > {{$t('maps.updateSearch')}}
     </v-btn>
     <map-view
+      ref="mapView"
       :initial-zoom="zoom"
       :avoid-polygons="avoidPolygons"
       :map-view-data="mapViewData"

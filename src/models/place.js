@@ -93,6 +93,10 @@ class Place {
    * @returns {LatLng}
    */
   getLatLng () {
+    if (this.nameIsCoord()) {
+      let coords = this.getCoordsFromName()
+      return GeoUtils.buildLatLong(coords[1], coords[0])
+    }
     return GeoUtils.buildLatLong(this.lat, this.lng)
   }
 

@@ -36,6 +36,7 @@ import MapRightClick from './components/map-right-click/MapRightClick'
 import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
 import MapLeftClick from './components/map-left-click/MapLeftClick'
 import OrsLPolyline from './components/ors-l-polyline/OrsLPolyline'
+import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
 import defaultMapSettings from '@/config/default-map-settings'
 import MyLocation from './components/my-location/MyLocation'
 import { GestureHandling } from 'leaflet-gesture-handling'
@@ -75,6 +76,8 @@ import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import 'leaflet-measure/dist/leaflet-measure.css'
 import 'vue-resize/dist/vue-resize.css'
 import 'leaflet/dist/leaflet.css'
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 
 export default {
   components: {
@@ -98,7 +101,8 @@ export default {
     MapRightClick,
     MapLeftClick,
     MyLocation,
-    LHeightGraph
+    LHeightGraph,
+    'v-marker-cluster': Vue2LeafletMarkerCluster
   },
   props: {
     mapViewData: {
@@ -185,6 +189,26 @@ export default {
     }
   },
   computed: {
+    /**
+     * Determines if marker cluster must be used or not
+     * @returns {Boolean}
+     */
+    supportsClusteredMarkers () {
+      return appConfig.supportsClusteredMarkers
+    },
+
+    /**
+     * Return the marker cluster options. By default it is empty
+     * but it can be changed via app hook
+     * @returns {Object}
+     */
+    markersClusterOptions () {
+      let options = {}
+      // If the options objext is modified in the hook, the changes
+      // will reflect here and the returned object will incorporate the changes
+      this.$root.appHooks.run('beforeUseMarkerClusterOptions', options)
+      return options
+    },
     /**
      * Determines if the distance measure tool is available
      * @returns {Boolean}
@@ -1799,7 +1823,7 @@ export default {
 
       let editShapeEl = document.createElement('a')
       editShapeEl.onclick = () => {this.enableAvoidPolygonShapeEdit(polygon)}
-      editShapeEl.innerText = 'edit' // material close icon will be rendered
+      editShapeEl.innerText = 'flip_to_front' // material close icon will be rendered
       editShapeEl.title = this.$t('mapView.editShape')
       editShapeEl.className = 'material-icons leaflet-draw-custom-actions'
 

@@ -256,7 +256,7 @@ export default {
     },
     // Switch the coordinates position ([lat, long] -> [long, lat] and [long, lat] -> [lat, long])
     switchCoordsAvailable () {
-      const canSwitch = this.localModel.nameIsCoord()
+      const canSwitch = this.model.nameIsCoord()
       return canSwitch
     },
     /**
@@ -279,7 +279,7 @@ export default {
      * Determines if the current browser location option should be prepend to the suggestion lis of the current place input
      */
     showBrowserLocationInPlacesList () {
-      return this.focused && !this.model.coordinates
+      return this.focused
     },
     /**
      * Return an array with the place's suggestion based on the model suggestion data
@@ -693,7 +693,7 @@ export default {
      */
     switchCoords () {
       if (this.model.nameIsCoord()) {
-        let coordinates = this.model.getLngLatArr()
+        let coordinates = this.model.getCoordsFromName()
         let switchedCords = coordinates.reverse()
         this.model.setLnglat(switchedCords[0], switchedCords[1])
         this.model.setCoordsAsName()
