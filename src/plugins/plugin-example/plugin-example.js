@@ -1,6 +1,3 @@
-import VaccinationPlacesService from './covid-vaccianation-service'
-import MapViewData from '@/models/map-view-data'
-import Place from '@/models/place'
 /**
  * This is an example of a simple plugin aiming at demonstrating how you can add 
  * custom behavior to the maps client. To make the plugin work it is necessary
