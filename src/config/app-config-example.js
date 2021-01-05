@@ -39,6 +39,7 @@ const appConfig = {
   accessbilityToolAvailable: true, // if the accessibility tool must be available on the map view
   fitAllFeaturesToolAvailable: true, // if the fitAllFeatures to0l must be available on the map view
   supportsClusteredMarkers: true,
+  supportsSearchBottomCarousel: true,
 
   // The map tile providers available. At least one must be present
   mapTileProviders: [

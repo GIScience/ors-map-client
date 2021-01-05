@@ -54,6 +54,8 @@ appHooks.add('mapViewDataChanged', (mapViewData) => {
 
 appHooks.add('mapReady', (hookData) => {
   // hookData has the following structure {context: Object, map: Object}
+  // custom map controls/components can be added via map objects 
+  // or via context.customMapControlsContainerRef (a vue ref for an emptyy container inside the map view)
   pluginExample.mapReady(hookData)
 }, 1)
 
