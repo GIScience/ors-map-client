@@ -21,28 +21,13 @@ import DatePicker from '@/fragments/date-picker/DatePicker'
 import globalMixins from '@/common/global-mixins'
 import VeeValidate from 'vee-validate'
 import VueLodash from 'vue-lodash'
-import lodash, { constant } from 'lodash'
+import lodash from 'lodash'
 import VueMoment from 'vue-moment'
 import wrapperTag from '@/fragments/wrapper/wrapper-tag'
 import AppLoader from '@/app-loader'
 import AppHooks from '@/support/app-hooks'
 import MainMenu from '@/common/main-menu'
 
-/**
- * Fix Vue leaflet issues:
- * - import leaflet styles for proper map rendering
- * - edit marker image path
- */
-import 'leaflet/dist/leaflet.css'
-import L from 'leaflet'
-
-delete L.Icon.Default.prototype._getIconUrl
-
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-})
 
 const options = { lodash: lodash } // customize the way you want to call it
 Vue.use(VueLodash, options) // options is optional
@@ -105,7 +90,7 @@ AppLoader.load().then(() => {
     template: '<App/>'
   })
   VueInstance.appHooks = new AppHooks()
-  VueInstance.appHooks.loadRegistedHooks()
+  VueInstance.appHooks.loadRegisteredHooks()
   VueInstance.appHooks.run('appLoaded', VueInstance)
   MainMenu.adjustMenu()
 })

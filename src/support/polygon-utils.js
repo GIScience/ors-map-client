@@ -37,6 +37,39 @@ const PolygonUtils = {
       }
     }
     return label
+  },
+
+  /**
+   * Merge polygons into one multipolygon
+   * @param {Array} polygons 
+   * @returns {Object}
+   */
+  mergePolygonsIntoMultiPolygon (polygons) {
+    const avoidPolygon = { type: 'MultiPolygon', coordinates: [] }
+
+    let coordinates = []
+    for (let key in polygons) {
+      avoidPolygon.coordinates.push(polygons[key].geometry.coordinates)
+    }
+    return avoidPolygon
+  },
+  /**
+   * Merge polygons into one multipolygon
+   * @param {Object} multiPolygon 
+   * @returns {Array} polygons
+   */
+  splitMultiPolygonIntoPolygons (multiPolygon) {
+    let polygons = []
+    for (let cKey in multiPolygon.coordinates) {
+      let polygon = {
+        type: 'Polygon', 
+        geometry: {
+          coordinates: multiPolygon.coordinates[cKey]
+        }
+      }
+      polygons.push(polygon)
+    }
+    return polygons
   }
 }
 

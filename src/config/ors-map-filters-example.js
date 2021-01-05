@@ -1,12 +1,14 @@
+// This is an example file and is expected to be cloned 
+// without the -example on the same folder that it resides.
+
+import routeSmoothnessList from '@/resources/lists/route-smoothness'
+import surfaceTypesList from '@/resources/lists/surface-types'
 import countriesList from '@/resources/lists/countries'
 import gradesList from '@/resources/lists/grades'
-import surfaceTypesList from '@/resources/lists/surface-types'
-import routeSmoothnessList from '@/resources/lists/route-smoothness'
-
 import constants from '@/resources/constants'
 
 const filters = [
-  { // Profile filter is required. What you can change is the avaialble items in enum and mapping
+  { // Profile filter is required. What you can change is the avaialble items in the enum and mapping
     name: 'profile',
     useInServices: [constants.services.directions, constants.services.isochrones],
     hidden: true,

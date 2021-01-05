@@ -9,7 +9,9 @@
       @click="refreshSearch()" > {{$t('maps.updateSearch')}}
     </v-btn>
     <map-view
+      ref="mapView"
       :initial-zoom="zoom"
+      :avoid-polygons="avoidPolygons"
       :map-view-data="mapViewData"
       :center="mapViewCenter"
       :show-popups="(!$store.getters.leftSideBarOpen || $highResolution) && !showBottomNav"
@@ -20,6 +22,7 @@
       :mode="$store.getters.mode"
       :supports-drawing-tool="supportsDrawingTool"
       :routing-profile-icon="currentProfileIcon"
+      @mapReady="mapReady"
       @onCreate="orsMapCreated"
       @markerDragged="markerDragged"
       @directionsFromPoint="directionsFromPoint"
@@ -32,6 +35,7 @@
       @addAsIsochroneCenter="addAsIsochroneCenter"
       @removePlace="removePlace"
       @directChanged="directChanged"
+      @mapCenterChanged="mapCenterChanged"
       @setInputPlace="setInputPlace"
       @markerClicked="markerClicked">
     </map-view>

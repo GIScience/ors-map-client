@@ -4,6 +4,7 @@ import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import Settings from '@/fragments/forms/settings/Settings.vue'
 import Altitude from '@/fragments/charts/altitude/Altitude'
 import MapView from '@/fragments/map-view/MapView.vue'
+import PolygonUtils from '@/support/polygon-utils'
 import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
 import resolver from '@/support/routes-resolver'
@@ -12,7 +13,6 @@ import RouteUtils from '@/support/route-utils'
 import constants from '@/resources/constants'
 import { ResizeObserver } from 'vue-resize'
 import lodash from 'lodash'
-import main from '@/main'
 
 export default {
   data: () => ({
@@ -33,7 +33,8 @@ export default {
     searchBtnAvailable: false,
     firstLoad: true,
     previousRoute: null,
-    refreshingSearch: false
+    refreshingSearch: false,
+    localAvoidPolygons: []
   }),
   components: {
     MapView,
@@ -45,6 +46,9 @@ export default {
     ResizeObserver
   },
   computed: {
+    avoidPolygons () {
+      return this.localAvoidPolygons
+    },
     /**
      * Determines if the simple search component is visible
      * based on the embed mode value, the mapready and the sidebar visibility
@@ -59,14 +63,16 @@ export default {
      * @returns {Object}
      */
     currentProfileIcon () {
-      let profile =  lodash.get(this, 'mapViewData.options.profile')
-      if (profile) {
+      if (this.mapViewData.options.profile) {
+        let profile = this.mapViewData.options.profile
         const filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
         if (filterRef.mapping[profile]) {
           return filterRef.mapping[profile].icon
         } else {
           for (let key in filterRef.mapping) {
-            if (filterRef.mapping[key].nestedProfiles.includes(profile) || filterRef.mapping[key].vehicleTypes.includes(profile)) {
+            let hasNestedProfiles = filterRef.mapping[key].nestedProfiles && filterRef.mapping[key].nestedProfiles.includes(profile)
+            let hasVehicleType = filterRef.mapping[key].vehicleTypes && filterRef.mapping[key].vehicleTypes.includes(profile)
+            if (hasNestedProfiles || hasVehicleType) {
               return filterRef.mapping[key].icon
             }
           }
@@ -180,9 +186,18 @@ export default {
       this.previousRoute = from
       this.loadRoute()
       this.setModalState()
+      this.loadAvoidPolygonsFromAppRoute()
     }
   },
   methods: {
+    mapReady (mapObject) {
+      if (mapObject) {
+        this.$store.commit('mapReady', true)
+        this.$root.appHooks.run('mapReady', {context: this.$refs.mapView, map: mapObject})
+      } else {
+        this.$store.commit('mapReady', false)
+      }
+    },
     /**
      * Stores the new zomm value and set the
      * searchBtnAvailable flag as true, since
@@ -226,6 +241,21 @@ export default {
       if (data.distance > 500) {
         this.searchBtnAvailable = true
       }
+    },
+    /**
+     * Save the new map center in mapSettings when it changes
+     * and emit a mapcenterchanged event via eventBus
+     * @param {*} latlng
+     * @emits mapCenterChanged [via eventBus]
+     */
+    mapCenterChanged (latlng) {
+      let context = this
+      let mapSettings = this.$store.getters.mapSettings
+      mapSettings.mapCenter = latlng
+      this.$store.dispatch('saveSettings', mapSettings).then(() => {
+        context.$root.appHooks.run('mapCenterChanged', mapSettings.mapCenter)
+        context.eventBus.$emit('mapCenterChanged', mapSettings.mapCenter)
+      })      
     },
     /**
      * Set the view height using the iner height
@@ -507,14 +537,18 @@ export default {
     },
     /**
      * When an avoid polygons option changes, 
+     * merge the avoid polygons array into a multipolygon and
      * emits an avoidPolygonsChanged event via eventbus.
-     * The map-view component does not emit events via
-     * eventBus, only local events to its container (this component)
-     * @param {Object} polygons 
+     * @param {Array} polygons 
      * @emits avoidPolygonsChanged via eventbus
      */
     avoidPolygonsChanged (polygons) {
-      this.eventBus.$emit('avoidPolygonsChanged', polygons)
+      if (polygons) {
+        // As it is possible to have several polygons, we merge them into
+        // a multipolygon so that all them are considered (array of polygons is not supported)
+        let multiPolygon = PolygonUtils.mergePolygonsIntoMultiPolygon(polygons)
+        this.eventBus.$emit('avoidPolygonsChanged', multiPolygon)
+      }
     },
     /**
      * Set the app `settings` and `about` modals' state (open or closed)
@@ -536,6 +570,17 @@ export default {
       } else {
         this.isAboutOpen = false
       }
+    },
+    /**
+     * Load avoid polygons from app route
+     */
+    loadAvoidPolygonsFromAppRoute () {
+      let polygons = []
+      let multiPolygon = lodash.get(this.$store.getters.appRouteData, constants.avoidPolygonsOptionsPath)
+      if (multiPolygon) {
+        polygons = PolygonUtils.splitMultiPolygonIntoPolygons(multiPolygon)
+      }
+      this.localAvoidPolygons = polygons
     }
   },
 
@@ -566,6 +611,9 @@ export default {
     this.eventBus.$on('showAboutModal', () => {
       context.isAboutOpen = true
     })
+    this.eventBus.$on('loadAvoidPolygons', (avoidPolygons) => {
+      context.localAvoidPolygons = avoidPolygons
+    })
   
     // When the touch move event occours
     // the view size may change (mobile devices)
@@ -579,5 +627,6 @@ export default {
     this.loadRoute()
     this.setModalState()
     this.setViewHeight()
+    this.loadAvoidPolygonsFromAppRoute()
   }
 }

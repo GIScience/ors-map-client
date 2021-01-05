@@ -13,7 +13,6 @@ import GeoUtils from '@/support/geo-utils'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
 import lodash from 'lodash'
-import main from '@/main'
 
 // Local components:
 import AltitudePreview from './components/altitude-preview/AltitudePreview'

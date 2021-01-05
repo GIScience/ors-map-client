@@ -15,8 +15,8 @@ import Vue from 'vue'
 const getMenu = (slug) => {
   return new Promise((resolve, reject) => {
     menuService.query()
-      .then(resources => {
-        const menuBySlug = Vue.lodash.find(resources, (menu) => {
+      .then(response => {
+        const menuBySlug = Vue.lodash.find(response.data, (menu) => {
           return menu.slug === slug
         })
         menuService.get(menuBySlug.term_id)

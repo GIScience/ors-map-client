@@ -17,7 +17,16 @@ const loadItems = () => {
         resolve([])
       })
     } else {
-      resolve([])
+      let expectedPromise = main.getInstance().appHooks.run('loadMenuItems')
+      if (expectedPromise instanceof Promise) {
+        expectedPromise.then((result) => {
+          resolve(result)
+        }).catch (err => {
+          console.log(err)
+        })
+      } else {
+        resolve([])
+      }      
     }
   })
 }

@@ -43,6 +43,7 @@ export default {
       }
     },
     defineAvoidPolygon: 'Zeichne zu vermeidende Polygone (bei Routen oder Isochronen)',
+    defineAvoidRectangle: 'Zeichne zu vermeidende Rechteck (bei Routen oder Isochronen)',
     youCantIntersectPolygons: 'Polygone dürfen sich nicht überschneiden',
     polygonArea: 'Polygon Fläche',
     highlighting: 'Hervorhebung',
@@ -63,6 +64,13 @@ export default {
       segment_length: "Abschnittslänge",
       type: "Typ",
       legend: "Legende"
-    }
+    },
+    editShape: 'Fläche bearbeiten',
+    remove: 'Entfernen',
+    avoidPolygonSaved: 'Polygon vermeiden gespeichert',
+    avoidPolygonRemoved: 'Polygon vermeiden entfernt',
+    avoidPolygonNotRemoved: 'Es war nicht möglich, das Ausweichpolygon zu entfernen',
+    avoidPolygonNotSaved: 'Es war nicht möglich, das Vermeidungspolygon zu speichern',
+    polygonEditModeEnabled: 'Wenn Sie die Bearbeitung abgeschlossen haben, klicken Sie auf eine beliebige Stelle, um die Änderungen zu speichern'
   }
 }

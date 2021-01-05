@@ -79,6 +79,23 @@ export default {
       rawCoordinate: 'Long,Lat Koordinaten',
       notAvailable: 'Nicht verfügbar',
       'undefined': 'Nicht definiert'
+    },
+    crud: {
+      failWhileTryingToGetTheResourceMsg: 'Abfragen von :resource(s) nicht möglich',
+      failWhileTryingToSaveResourceMsg: 'Speichern von :resource nicht möglich',
+      failWhileTryingToUpdateResourceMsg: 'Aktualisieren von :resource nicht möglich',
+      failWhileTryingToDestroyResourceMsg: 'Löschen von :resource nicht möglich',
+      resourceSavedMsg: ':resource erfolgreich gespeichert',
+      resourceDestroyedMsg: ':resource erfolgreich gelöscht',
+      resourceUpdatedMsg: ':resource erfolgreich aktualisiert',
+      removalConfirmTitle: 'Löschvorgang bestätigen',
+      doYouReallyWantToRemoveMsg: 'Möchten Sie :resource wirklich löschen?',
+      destroyAbortedMsg: 'Löschen abgebrochen',
+      resourceEmptyMsg: ':resource ist leer. Speichern nicht möglich.',
+      invalidFormMsg: 'Ungültige oder unvollständige Eingaben. Bitte korrigieren Sie die Eingabe.',
+      operationAbortedMsg: 'Vorgang abgebrochen',
+      inputRequiredMsg: 'Eingabe erforderlich',
+      requiredMsg: 'erforderlich'
     }
   }
 }

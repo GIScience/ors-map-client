@@ -42,7 +42,8 @@ export default {
         nauticalmiles: 'NM'
       }
     },
-    defineAvoidPolygon: 'Define avoid polygons to directions',
+    defineAvoidPolygon: 'Define avoid polygons to route calculation',
+    defineAvoidRectangle: 'Define avoid rectangles route calculation',
     youCantIntersectPolygons: 'You can`t intersect polygons',
     polygonArea: 'Polygon area',
     highlighting: 'Highlighting',
@@ -63,6 +64,13 @@ export default {
       segment_length: "Segment length",
       type: "Type",
       legend: "Legend"
-    }
+    },
+    editShape: 'Edit shape',
+    remove: 'Remove',
+    avoidPolygonSaved: 'Avoid polygon saved',
+    avoidPolygonRemoved: 'Avoid polygon removed',
+    avoidPolygonNotRemoved: 'It was not possible to remove the avoid polygon',
+    avoidPolygonNotSaved: 'It was not possible to save the avoid polygon',
+    polygonEditModeEnabled: 'When you finish editing, click anywhere to save the changes'
   }
 }

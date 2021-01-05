@@ -1,9 +1,12 @@
-import { each, get } from 'lodash'
+import layerZoomMapping from '@/config/layer-zoom-mapping'
+import lodash from 'lodash'
 import Leaflet from 'leaflet'
 import moment from 'moment'
-import layerZoomMap from '@/resources/layer-zoom-map'
+import main from '@/main'
 
-const lodash = { each, get }
+// The import below will add some methods to Leaflet.GeometryUtil 
+// Even if it is not been accessed within this class, it is being used!
+import 'leaflet-geometryutil'
 
 const geoUtils = {
   /**
@@ -27,6 +30,10 @@ const geoUtils = {
     return switchedCoords
   },
 
+  /**
+   * Build a leaflet latlng object
+   * @returns {Object}
+   */
   buildLatLong: (lat, lng) => {
     return Leaflet.latLng(lat, lng)
   },
@@ -84,19 +91,67 @@ const geoUtils = {
       const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName)
       const marker = { position: { lng: place.lng, lat: place.lat }, icon: markerIcon }
 
-      // if the way point array has the third parameter, it is its label
+      // If the way point array has the third parameter, it is its label
       marker.label = place.placeName || `${place.lng},${place.lat}`
       if (!isNaN(place.index) && mapViewData.hasRoutes()) {
         marker.label = `(${place.index}) ${marker.label}`
       }
 
-      // if the way point array has the fourth parameter, it is its way point json data
+      // If the way point array has the fourth parameter, it is its way point json data
       marker.place = place
 
       // Add the markers to the returning array
       markers.push(marker)
     })
     return markers
+  },
+
+  /**
+   * Determines if a geojson is a rectangle
+   * @param {Object} geojson 
+   * @returns {Boolean}
+   */
+  geojsonIsARectangle (geojson) {
+    let coordinates = geojson.geometry.coordinates[0]
+    let firstVortice = coordinates[0].toString()
+    let lastVortice = coordinates[coordinates.length -1].toString()
+
+    // It is a four side closed polygon
+    if (coordinates.length === 5 && firstVortice === lastVortice) {
+      let topLeftVortice = coordinates[0]
+      let topRightVortice = coordinates[1]
+      let bottomRightVortice = coordinates[2]
+      let bottomLeftVortice = coordinates[3]
+      
+      let topAndBottomParallel = (topLeftVortice[1] - bottomLeftVortice[1]) === (topRightVortice[1] - bottomRightVortice[1])
+      let trightAndLeftParallel = (topLeftVortice[0] - bottomLeftVortice[0]) === (topRightVortice[0] - bottomRightVortice[0])
+
+      if (topAndBottomParallel && trightAndLeftParallel) {
+        return true
+      }
+      return false
+    }
+  },
+
+  /**
+   * Determines the type of polygon a geojson has. 
+   * If the geojson is of the type  Polygon it retirns false.
+   * @param {Object} geojson 
+   * @returns {String|false}
+   */
+  geojsonShapeType (geojson) {
+    let type = geojson.type
+    if (geojson.geometry && geojson.geometry.type) {
+      type = geojson.geometry.type
+    }
+    if (type !== 'Polygon') {
+      return false
+    }
+    if (geoUtils.geojsonIsARectangle(geojson)) {
+      return 'rectangle'
+    } else {
+      return 'polygon'
+    }
   },
 
   /**
@@ -107,6 +162,28 @@ const geoUtils = {
     const markerCoordinates = lodash.get(marker, 'data.geometry.coordinates')
     return markerCoordinates
   },
+
+  /**
+   * Calculate geodesic area
+   * @param {Array} latlngs 
+   */
+  geodesicArea (latlngs) {
+    return Leaflet.GeometryUtil.geodesicArea(latlngs)
+  },
+
+   /**
+   * Get readable area
+   * @param {Number} area 
+   * @param {String} unit 
+   */
+  readableArea (latlngs, unit) {
+    let area = Leaflet.GeometryUtil.geodesicArea(latlngs)
+    return Leaflet.GeometryUtil.readableArea(area, unit)
+  },
+
+
+
+  
 
   /**
    * Build a marker icon based on the color specified
@@ -124,46 +201,6 @@ const geoUtils = {
       popupAnchor: [0, -32]
     })
     return markerIcon
-  },
-
-  /**
-   * Decode an encoded polyline
-   * @param {*} encodedPolyline
-   * @returns {Array} of coordinates
-   */
-  decodePolyline: (encodedPolyline) => {
-    // array that holds the points
-    var points = []
-    var index = 0
-    var len = encodedPolyline.length
-    var lat = 0
-    var lng = 0
-    while (index < len) {
-      var b
-      var shift = 0
-      var result = 0
-      do {
-        b = encodedPolyline.charAt(index++).charCodeAt(0) - 63 // finds ascii
-        // and subtract it by 63
-        result |= (b & 0x1f) << shift
-        shift += 5
-      } while (b >= 0x20)
-
-      var dlat = ((result & 1) !== 0 ? ~(result >> 1) : (result >> 1))
-      lat += dlat
-      shift = 0
-      result = 0
-      do {
-        b = encodedPolyline.charAt(index++).charCodeAt(0) - 63
-        result |= (b & 0x1f) << shift
-        shift += 5
-      } while (b >= 0x20)
-      var dlng = ((result & 1) !== 0 ? ~(result >> 1) : (result >> 1))
-      lng += dlng
-
-      points.push([(lat / 1E5), (lng / 1E5)])
-    }
-    return points
   },
 
   /**
@@ -385,7 +422,7 @@ const geoUtils = {
    * Return the zoom level accoding the layer
    */
   zoomLevelByLayer: (layer) => {
-    const map = layerZoomMap
+    const map = layerZoomMapping
     const zoom = map[layer]
     if (!zoom) {
       return 8

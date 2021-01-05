@@ -1,6 +1,6 @@
 
 import dependencyService from '@/support/dependency-service.js'
-import defaultMapSettings from '@/resources/default-map-settings'
+import defaultMapSettings from '@/config/default-map-settings'
 
 export default {
   props: {

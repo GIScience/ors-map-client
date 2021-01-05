@@ -218,24 +218,28 @@ export default {
      * @param {*} index
      */
     placeInputLabel () {
+      let label = ''
       if (this.disabled) {
-        return ''
+        return label
       }
       if (this.supportDirections) {
         if (this.isLast) {
-          return `(${this.index + 1}) ${this.$t('placeInput.routeDestination')}`
+          label = `(${this.index + 1}) ${this.$t('placeInput.routeDestination')}`
         }
         if (this.single) {
-          return this.model.isEmpty() ? this.$t('placeInput.searchPlace') : this.$t('placeInput.place')
+          label = this.model.isEmpty() ? this.$t('placeInput.findAPlace') : this.$t('placeInput.place')
         } else {
           if (this.index === 0) {
-            return `(${this.index + 1}) ${this.$t('placeInput.startingPlace')}`
+            label = `(${this.index + 1}) ${this.$t('placeInput.startingPlace')}`
           }
-          return this.model.isEmpty() ? `(${this.index + 1}) ${this.$t('placeInput.addRouteStop')}` : `(${this.index + 1}) ${this.$t('placeInput.routePlace')}`
+          label = this.model.isEmpty() ? `(${this.index + 1}) ${this.$t('placeInput.addRouteStop')}` : `(${this.index + 1}) ${this.$t('placeInput.routePlace')}`
         }
       } else {
-        return `${this.$t('placeInput.place')} ${this.index + 1}`
+        label= `${this.$t('placeInput.findAPlace')}`
       }
+      let labelData = {label: label, supportDirections: this.supportDirections, single: this.single}
+      this.$root.appHooks.run('placeInputLabelBuilt', labelData)
+      return labelData.label
     },
 
     /**
@@ -252,7 +256,7 @@ export default {
     },
     // Switch the coordinates position ([lat, long] -> [long, lat] and [long, lat] -> [lat, long])
     switchCoordsAvailable () {
-      const canSwitch = this.localModel.nameIsCoord()
+      const canSwitch = this.model.nameIsCoord()
       return canSwitch
     },
     /**
@@ -275,7 +279,7 @@ export default {
      * Determines if the current browser location option should be prepend to the suggestion lis of the current place input
      */
     showBrowserLocationInPlacesList () {
-      return this.focused && !this.model.coordinates
+      return this.focused
     },
     /**
      * Return an array with the place's suggestion based on the model suggestion data
@@ -689,7 +693,7 @@ export default {
      */
     switchCoords () {
       if (this.model.nameIsCoord()) {
-        let coordinates = this.model.getLngLatArr()
+        let coordinates = this.model.getCoordsFromName()
         let switchedCords = coordinates.reverse()
         this.model.setLnglat(switchedCords[0], switchedCords[1])
         this.model.setCoordsAsName()

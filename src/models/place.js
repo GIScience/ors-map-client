@@ -93,6 +93,10 @@ class Place {
    * @returns {LatLng}
    */
   getLatLng () {
+    if (this.nameIsCoord()) {
+      let coords = this.getCoordsFromName()
+      return GeoUtils.buildLatLong(coords[1], coords[0])
+    }
     return GeoUtils.buildLatLong(this.lat, this.lng)
   }
 
@@ -302,7 +306,14 @@ class Place {
     const places = []
     for (const key in features) {
       const feature = features[key]
-      const place = new Place(feature.geometry.coordinates[0], feature.geometry.coordinates[1], feature.properties.label)
+
+      let placeName = null
+      if (feature.properties.label) {
+        placeName = feature.properties.label
+      } else if (feature.properties.osm_tags && feature.properties.osm_tags.name) {
+        placeName = feature.properties.osm_tags.name
+      }
+      const place = new Place(feature.geometry.coordinates[0], feature.geometry.coordinates[1], placeName)
       place.properties = feature.properties
       place.inputIndex = key
       place.skipShowData = true
