@@ -30,7 +30,7 @@
     "leaflet-measure": "^3.1.0",
     "lodash": "^4.17.19",
     "lz-string": "^1.4.4",
-    "openrouteservice-js": "^0.1.14",
+    "openrouteservice-js": "^0.1.15",
     "prismjs": "^1.15.0",
     "tinycolor2": "^1.4.1",
     "togpx": "^0.5.4",
