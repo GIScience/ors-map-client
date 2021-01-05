@@ -10,6 +10,7 @@ import MapViewData from '@/models/map-view-data'
 import resolver from '@/support/routes-resolver'
 import About from '@/fragments/about/About.vue'
 import RouteUtils from '@/support/route-utils'
+import appConfig from '@/config/app-config'
 import constants from '@/resources/constants'
 import { ResizeObserver } from 'vue-resize'
 import lodash from 'lodash'
@@ -46,6 +47,18 @@ export default {
     ResizeObserver
   },
   computed: {
+
+    /**
+     * Returns a reference to the custom map controls container
+     */
+    customMapControlsContainerRef () {
+      return this.$refs.customMapControlsContainer
+    },
+
+    /**
+     * Return the local avoid polygons
+     * @returns {Array}
+     */
     avoidPolygons () {
       return this.localAvoidPolygons
     },
@@ -106,7 +119,7 @@ export default {
      * @returns {Boolean}
      */
     showBottomNav () {
-      return this.bottomNavActive
+      return this.bottomNavActive && appConfig.supportsSearchBottomCarousel
     },
     /**
      * Returns the bottom nav element top position value

@@ -33,6 +33,7 @@ import { LMap, LTileLayer, LMarker, LLayerGroup, LTooltip, LPopup, LControlZoom,
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
 import ExtraInfoHighlight from './components/extra-info-highlight/ExtraInfoHighlight'
 import MapRightClick from './components/map-right-click/MapRightClick'
+import MapViewMarkers from './components/map-view-markers/MapViewMarkers'
 import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
 import MapLeftClick from './components/map-left-click/MapLeftClick'
 import OrsLPolyline from './components/ors-l-polyline/OrsLPolyline'
@@ -83,7 +84,6 @@ export default {
   components: {
     LMap,
     LTileLayer,
-    LMarker,
     OrsLPolyline,
     LLayerGroup,
     LTooltip,
@@ -102,6 +102,7 @@ export default {
     MapLeftClick,
     MyLocation,
     LHeightGraph,
+    MapViewMarkers,
     'v-marker-cluster': Vue2LeafletMarkerCluster
   },
   props: {
@@ -496,39 +497,12 @@ export default {
     mapHeight () {
       return this.height
     },
-    /**
-     * Determines if markers are draggable
-     * based on the current app mode
-     * @returns {Boolean} isDraggable
-     */
-    markerIsDraggable () {
-      const draggableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]
-      const isDraggable = draggableModes.includes(this.mode)
-      return isDraggable
-    },
+    
     /**
      * Determines if the directios mode is active
      */
     isInDirectionsMode () {
       return constants.modes.directions === this.mode
-    },
-    /**
-     * Determines if markers are removable
-     * based on the current app mode
-     * @returns {Boolean} isRemovable
-     */
-    markerIsRemovable () {
-      let markerRemovableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]
-      let isRemovable = markerRemovableModes.includes(this.mode)
-      return isRemovable
-    },
-
-    /**
-     * Show the marker popup
-     */
-    showMarkerPopup () {
-      const show = this.mode !== constants.modes.search
-      return show
     },
     /**
      * Determines if the fit features button is visible
@@ -747,17 +721,8 @@ export default {
      * @param {*} event
      * @emits markerClicked
      */
-    markerClicked (index, marker, event) {
-      // Only prevent the default click, that shows the
-      // place name if the app is not in the search mode
-      if (this.mode === constants.modes.search) {
-        event.originalEvent.preventDefault()
-        event.originalEvent.stopPropagation()
-      }
-      this.$emit('markerClicked', marker.place)
-      let markerPopupContainerRef = this.$refs[`markerPopupContainer${index}`]
-      markerPopupContainerRef = Array.isArray(markerPopupContainerRef) ? markerPopupContainerRef[0] : markerPopupContainerRef
-      this.$root.appHooks.run('beforeOpenMarkerPopup', {markerPopupContainerRef, marker})
+    markerClicked (place) {
+      this.$emit('markerClicked', place)
     },
 
     /**
@@ -933,7 +898,7 @@ export default {
      * @param {*} markerIndex
      * @emits removePlace
      */
-    removePlace (event, markerIndex) {
+    removePlace (markerIndex) {
       if (this.markers[markerIndex]) {
         let place = this.markers[markerIndex].place
         let data = {place, index: markerIndex}
@@ -946,7 +911,7 @@ export default {
      * @param {*} markerIndex
      * @emits directChanged
      */
-    marAsDirectfromHere (event, markerIndex) {
+    markAsDirectfromHere (markerIndex) {
       if (this.markers[markerIndex]) {
         this.markers[markerIndex].place.direct = !this.markers[markerIndex].place.direct
         let place = this.markers[markerIndex].place
@@ -1871,19 +1836,6 @@ export default {
      */
     removeRoutePoint () {
       this.highlightedRoutePointIndex = null
-    },
-    /**
-     * Determines if the direct mode is available to be
-     * triggered from a marker at a given index
-     * @param {*} index
-     * @returns {Boolean} available
-     */
-    directIsAvailable (index) {
-      let available = false
-      if (this.$store.getters.mode === constants.modes.directions && index < (this.markers.length -1)) {
-        available = true
-      }
-      return available
     },
     /**
      * Dosable pick a place mode by
