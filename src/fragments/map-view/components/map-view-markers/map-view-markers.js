@@ -20,9 +20,6 @@ export default {
     LMarker,
     LPopup
   },
-  created() {
-    console.log(this.markers)
-  },
   computed: {
     localMarkers () {
       return this.markers
