@@ -60,7 +60,7 @@ npm install
 
 4. Set the app-config.js values for:
 
-- `userApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
+- `orsApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
 - `bitlyApiKey` - the bitly key that will be used to shorten the share URL
 - `bitlyLogin` - the bitly login that will be used to shorten the share URL
 

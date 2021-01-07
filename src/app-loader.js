@@ -27,7 +27,7 @@ const fetchApiInitialData = () => {
 
         // By default, the app must use an ors API key stored in config.js
         if (appConfig.useUserKey) {
-          saveApiData(appConfig.ORSApiKey, constants.endpoints)
+          saveApiData(appConfig.orsApiKey, constants.endpoints)
           resolve()
         } else {
           let httpClient = new HttpClient({baseURL: appConfig.dataServiceBaseUrl})          
@@ -38,7 +38,7 @@ const fetchApiInitialData = () => {
             saveApiData(response.data, constants.publicEndpoints)
             resolve(response.data)
           }).catch(error => {
-            saveApiData(appConfig.ORSApiKey, constants.endpoints)
+            saveApiData(appConfig.orsApiKey, constants.endpoints)
             console.log(error)
             resolve()
           })

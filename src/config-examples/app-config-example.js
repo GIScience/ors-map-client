@@ -18,7 +18,7 @@ const appConfig = {
   },
   setCustomMenuIcons: true,
   defaultLocale: 'en-us', // only set as default a locale that is present in the app. By default they are: 'en-us', 'de-de' and 'pt-br'
-  ORSApiKey: 'put-here-an-ors-api-key',
+  orsApiKey: 'put-here-an-ors-api-key',
   useUserKey: true,
   baseMenuExternalUrl: 'https://openrouteservice.org',
   bitlyApiKey: 'put-the-bitly-api-key-here',
