@@ -364,4 +364,15 @@ appHooks.add('beforeHandleDirectionsError', (response) => {
 appHooks.add('beforeHandleIsochronesError', (response) => {
   // Do something
 })
+
+appHooks.add('beforeBuildIsochronesMapViewData', (responseData) => {
+  // Do something
+  return responseData // if null or false is returned, then the building will be aborted
+})
+
+appHooks.add('beforeBuildDirectionsMapViewData', (responseData) => {
+  // Do something
+  return responseData // if null or false is returned, then the building will be aborted
+})
+
 */
