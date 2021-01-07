@@ -254,6 +254,8 @@ export default {
      * @param {*} args
      */
     handleCalculateIsochronesError (result) {
+      this.$root.appHooks.run('beforeHandleIsochronesError', result)
+      
       const errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
       if (errorCode) {
         const errorKey = `isochrones.apiError.${errorCode}`

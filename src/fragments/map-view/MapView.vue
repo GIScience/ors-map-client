@@ -21,15 +21,6 @@
       <!-- draw tool bar is added programatically via map-view.js setAvoidPolygonDrawingTool method -->
       <!-- <l-draw-toolbar :options="drawingOptions" position="topright"/> -->
 
-      <v-marker-cluster v-if="supportsClusteredMarkers" :options="markersClusterOptions" ref="markerClusterRef">
-        <map-view-markers clustered :mode="mode" :markers="markers"          
-          @markerMoved="markerMoved"
-          @markerClicked="markerClicked"
-          @removePlace="removePlace"
-          @markAsDirectfromHere="markAsDirectfromHere">
-        </map-view-markers>
-      </v-marker-cluster>
-
       <map-view-markers :mode="mode" :markers="markers"          
         @markerMoved="markerMoved"
         @markerClicked="markerClicked"

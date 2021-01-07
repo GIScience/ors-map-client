@@ -48,7 +48,7 @@ cd ors-map-client
 npm install
 ```
 
-3. In the `src/config` folder, create a copy of the following files, without `-example` in their names:
+3. Copy fo the files in the `src/config-example` to `src/config`, without `-example` in their names. The files are:
 
 - app-config-`example`.js => **app-config.js**
 - ors-map-filters`-example`.js => **ors-map-filters.js**
@@ -175,12 +175,19 @@ All the VueJS components created (including the fragments) will have, by default
 
 ### Configuration, theming, customization and extension ###
 
-The map client app can be configured, customized and extended. Several aspects can be defined/changed in order to disable features,
-customize visual identity and change/extend features/behaviors. It is also possible to add plug-ins to the app and subscribe to hooks, listen and emit evens that will make the app respond to specific needs. The items of the menu can also be customized via hooks.
+The map client app can be configured, customized and extended. Several aspects can be defined/changed in order to disable features, customize visual identity and change/extend its features/behaviors. It is also possible to add plug-ins to the app and subscribe to hooks, listen and emit evens that will make the app respond to specific needs. The items of the menu can also be customized via hooks.
 
-It is possible to define your custom settings and plug-ins and keep getting updates from the ORS repository because the `src/plugins` and `src/config` folders are not vesioned.
+It is possible to define your custom settings and plug-ins and keep getting updates from the ORS repository because the `src/plugins` and `src/config` folders are not vesioned. To keep the original ors-map-client as a secondary repository, do the following:
 
-The three ways to change/extend the app are:
+```sh
+# Rename the original remote
+git remote rename origin ors-map-client-origin
+
+# Add your remote as the origin one
+git remote add origin <git-repo-url>
+```
+
+The ways to change/extend the app are:
 
 1. Define custom settings that will change the standard way that the app works.
 1. Add hook listeners in `src/config/hooks.js` and run custom code inside those hooks
@@ -189,12 +196,12 @@ The three ways to change/extend the app are:
 #### Configuration ####
 
 It is possible to configure/disable some app features and behaviors by changing the values
-of the `src/config/app-config.js`. It is also possible to change the app theme/colors by changing the values of `src/config/theme.js`. The app logo can also be changed in the `app-config` file.
+of the `src/config/app-config.js`. It is also possible to change the app theme/colors by changing the values of `src/config/theme.js`. The app logo can also be changed in the `app-config` file. The available filters/options to be used in the services are defined in the ors-map-filters. They can be adjusted according the needs. Other files can be used to adjust app configurations are the `layer-zoom-mapping.js`, `settings-options.js` and the `default-map-settings.js`.
 
 #### Plug-ins ####
 
 It is possible to add plug-ins to the application in order to change its behavior or extend it.
-Please check the `src/plugins` folder, the [plugins readme](src/plugins/readme.md) and the [plugin example](src/plugins/plugin-example/plugin-example.js) for more details.
+Please check the `src/plugins` folder, the [plug-ins readme](src/plugins/readme.md) and the [plugin example](src/plugins/plugin-example/plugin-example.js) for more details.
 
 ### Add language ###
 

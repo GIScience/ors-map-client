@@ -1,15 +1,16 @@
-
-import {LMarker, LPopup } from 'vue2-leaflet'
+import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
 import constants from '@/resources/constants'
+import {LMarker, LPopup } from 'vue2-leaflet'
+import appConfig from '@/config/app-config'
+
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+
 export default {
   props: {
     markers: {
       default: () => [],
       type: Array
-    },
-    clustered: {
-      type: Boolean,
-      default: false,
     },
     mode: {
       type: String,
@@ -18,11 +19,31 @@ export default {
   },
   components: {
     LMarker,
-    LPopup
+    LPopup,
+    'v-marker-cluster': Vue2LeafletMarkerCluster
   },
   computed: {
     localMarkers () {
       return this.markers
+    },
+    /**
+     * Determines if marker cluster must be used or not
+     * @returns {Boolean}
+     */
+    supportsClusteredMarkers () {
+      return appConfig.supportsClusteredMarkers
+    },
+    /**
+     * Return the marker cluster options. By default it is empty
+     * but it can be changed via app hook
+     * @returns {Object}
+     */
+    markersClusterOptions () {
+      let options = {}
+      // If the options objext is modified in the hook, the changes
+      // will reflect here and the returned object will incorporate the changes
+      this.$root.appHooks.run('beforeUseMarkerClusterOptions', options)
+      return options
     },
     /**
      * Determines if markers are removable
@@ -49,7 +70,7 @@ export default {
      * Show the marker popup
      */
     showMarkerPopup () {
-      const show = this.mode !== constants.modes.search
+      const show = this.mode !== constants.modes.search || appConfig.supportsSearchBottomCarousel !== true
       return show
     },
   },
@@ -70,15 +91,15 @@ export default {
     markerMoved (event) {
       this.$emit('markerMoved', event)
     },
-    show (index) {
+    show (index, clustered = false) {
       let markerIsClustered = this.markers[index].clustered === true
-      let matchesClusteringRule = markerIsClustered === this.clustered
+      let matchesClusteringRule = clustered === markerIsClustered
       return matchesClusteringRule
     },
     markerClicked (index, marker, event) {
       // Only prevent the default click, that shows the
       // place name if the app is not in the search mode
-      if (this.mode === constants.modes.search) {
+      if (this.mode === constants.modes.search && appConfig.supportsSearchBottomCarousel === true) {
         event.originalEvent.preventDefault()
         event.originalEvent.stopPropagation()
       }
