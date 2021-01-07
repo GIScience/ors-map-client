@@ -230,11 +230,10 @@ Follow the steps below to add a language.
 
 ### Menu ###
 
-The menu displayed in the header and in the sidebar (low resolution and mobile devices) is loaded from the ORS website back-end server and adjusted to be shown according the resolution.
+The menu displayed in the header and in the sidebar (low resolution and mobile devices) is loaded from the ORS website back-end and adjusted to be shown according the resolution.
 
-The menu items are fetched on the `created` event of the `@/fragments/Header` component.
-It dispatches the store `fetchMainMenu` and the menu is retrieved by `@/common/main-menu.js` that internally uses `@/support/menu-manager.js` and `@/support/model-service.js`.
-Once the items from the back-end are loaded, they are used to add/remove custom items and define sidebar item icons in `@/common/main-menu.js`.
+The menu items are fetched on the app load (`src/app-loader.js`). It dispatches the store `fetchMainMenu` and the menu is retrieved by `@/common/main-menu.js` that internally uses `@/support/menu-manager.js` and `@/support/model-service.js`.
+Once the items from the back-end are loaded, `MenuManager` is used to add/remove custom items and define sidebar item icons. The items displayed on the menu can be changed by running custom code on the `loadMenuItems`  and/or the `modifyMenu` hooks. Check the `/src/config-example/hooks-example.js` to see more details.
 
 ### Debug ###
 
