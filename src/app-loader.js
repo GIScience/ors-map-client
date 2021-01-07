@@ -111,10 +111,12 @@ const saveApiData = (apiKey, endpoints) => {
   // Save the map settings
   store.commit('mapSettings', mapSettings)
 
-  let appInstance = main.getInstance()
-  // If there is no instance yet, it is the initial settings commit
-  if (appInstance) {
-    appInstance.appHooks.run('mapSettingsChanged', mapSettings)
+  let mainVue = main
+  if (mainVue) { // main maz be not available when app is loading
+    let appInstance = mainVue.getInstance()
+    if (appInstance) {
+      appInstance.appHooks.run('mapSettingsChanged', mapSettings)
+    }
   }
 
   // Save the data acquired flag as true
