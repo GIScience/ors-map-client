@@ -605,14 +605,17 @@ export default {
           // Calculate the route
           Directions(places).then(data => {
             data.options.translations = context.$t('global.units')
-            MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
-              context.mapViewData = mapViewData
-              context.eventBus.$emit('newInfoAvailable')
-              context.showSuccess(context.$t('placesAndDirections.routeReady'))
-              context.eventBus.$emit('mapViewDataChanged', mapViewData)
-              context.setSidebarIsOpen()
-              resolve(mapViewData)
-            })
+            data = context.$root.appHooks.run('beforeBuildDirectionsMapViewData', data)
+            if (data) {
+              MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
+                context.mapViewData = mapViewData
+                context.eventBus.$emit('newInfoAvailable')
+                context.showSuccess(context.$t('placesAndDirections.routeReady'))
+                context.eventBus.$emit('mapViewDataChanged', mapViewData)
+                context.setSidebarIsOpen()
+                resolve(mapViewData)
+              })             
+            }
           }).catch(result => {
             context.handleCalculateDirectionsError(result)
           }).finally(() => {
@@ -631,6 +634,8 @@ export default {
      * @param {*} args
      */
     handleCalculateDirectionsError (result) {
+      this.$root.appHooks.run('beforeHandleDirectionsError', result)
+
       const errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
       if (errorCode) {
         const errorKey = `placesAndDirections.apiError.${errorCode}`

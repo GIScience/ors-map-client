@@ -229,14 +229,17 @@ export default {
           // Calculate the route
           Isochrones(places).then(data => {
             data.options.translations = context.$t('global.units')
-            MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
-              context.mapViewData = mapViewData
-              context.eventBus.$emit('mapViewDataChanged', mapViewData)
-              context.eventBus.$emit('newInfoAvailable')
-              context.showSuccess(context.$t('isochrones.isochronesReady'))
-              context.setSidebarIsOpen()
-              resolve(mapViewData)
-            })
+            data = context.$root.appHooks.run('beforeBuildIsochronesMapViewData', data)
+            if (data) {
+              MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
+                context.mapViewData = mapViewData
+                context.eventBus.$emit('mapViewDataChanged', mapViewData)
+                context.eventBus.$emit('newInfoAvailable')
+                context.showSuccess(context.$t('isochrones.isochronesReady'))
+                context.setSidebarIsOpen()
+                resolve(mapViewData)
+              })
+            }
           }).catch(result => {
             context.handleCalculateIsochronesError(result)
           }).finally(() => {
@@ -254,6 +257,8 @@ export default {
      * @param {*} args
      */
     handleCalculateIsochronesError (result) {
+      this.$root.appHooks.run('beforeHandleIsochronesError', result)
+      
       const errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
       if (errorCode) {
         const errorKey = `isochrones.apiError.${errorCode}`

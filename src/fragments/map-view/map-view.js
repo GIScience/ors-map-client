@@ -37,7 +37,6 @@ import MapViewMarkers from './components/map-view-markers/MapViewMarkers'
 import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
 import MapLeftClick from './components/map-left-click/MapLeftClick'
 import OrsLPolyline from './components/ors-l-polyline/OrsLPolyline'
-import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
 import defaultMapSettings from '@/config/default-map-settings'
 import MyLocation from './components/my-location/MyLocation'
 import { GestureHandling } from 'leaflet-gesture-handling'
@@ -77,8 +76,6 @@ import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import 'leaflet-measure/dist/leaflet-measure.css'
 import 'vue-resize/dist/vue-resize.css'
 import 'leaflet/dist/leaflet.css'
-import "leaflet.markercluster/dist/MarkerCluster.css";
-import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 
 export default {
   components: {
@@ -102,8 +99,7 @@ export default {
     MapLeftClick,
     MyLocation,
     LHeightGraph,
-    MapViewMarkers,
-    'v-marker-cluster': Vue2LeafletMarkerCluster
+    MapViewMarkers
   },
   props: {
     mapViewData: {
@@ -190,26 +186,6 @@ export default {
     }
   },
   computed: {
-    /**
-     * Determines if marker cluster must be used or not
-     * @returns {Boolean}
-     */
-    supportsClusteredMarkers () {
-      return appConfig.supportsClusteredMarkers
-    },
-
-    /**
-     * Return the marker cluster options. By default it is empty
-     * but it can be changed via app hook
-     * @returns {Object}
-     */
-    markersClusterOptions () {
-      let options = {}
-      // If the options objext is modified in the hook, the changes
-      // will reflect here and the returned object will incorporate the changes
-      this.$root.appHooks.run('beforeUseMarkerClusterOptions', options)
-      return options
-    },
     /**
      * Determines if the distance measure tool is available
      * @returns {Boolean}
@@ -1547,8 +1523,16 @@ export default {
         const locale = drawLocales(shortLocale)
 
         // Override the tooltip message
-        locale.draw.toolbar.buttons.polygon = this.$t('mapView.defineAvoidPolygon')
-        locale.draw.toolbar.buttons.rectangle = this.$t('mapView.defineAvoidPolygon')
+        let avoidPolygonBtnTranslations = {
+          avoidPolygon: this.$t('mapView.defineAvoidPolygon'),
+          avoidRectangle: this.$t('mapView.defineAvoidRectangle')
+        }
+        // Run the hook that mey modify the translations
+        this.$root.appHooks.run('avoidPolygonBtnTraslations', avoidPolygonBtnTranslations)
+
+        // Set the translations to the buttons
+        locale.draw.toolbar.buttons.polygon = avoidPolygonBtnTranslations.avoidPolygon
+        locale.draw.toolbar.buttons.rectangle = avoidPolygonBtnTranslations.avoidRectangle
 
         // Set th custom draw locale to the leaflet draw locale
         Leaflet.drawLocal = locale
