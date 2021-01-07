@@ -43,7 +43,7 @@ export default {
       }
     },
     defineAvoidPolygon: 'Define avoid polygons to route calculation',
-    defineAvoidRectangle: 'Define avoid rectangles route calculation',
+    defineAvoidRectangle: 'Define avoid rectangles to route calculation',
     youCantIntersectPolygons: 'You can`t intersect polygons',
     polygonArea: 'Polygon area',
     highlighting: 'Highlighting',

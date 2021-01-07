@@ -375,4 +375,8 @@ appHooks.add('beforeBuildDirectionsMapViewData', (responseData) => {
   return responseData // if null or false is returned, then the building will be aborted
 })
 
+appHooks.add('avoidPolygonBtnTraslations', (translationsObject) => {
+  // Do something
+})
+
 */

@@ -1523,8 +1523,16 @@ export default {
         const locale = drawLocales(shortLocale)
 
         // Override the tooltip message
-        locale.draw.toolbar.buttons.polygon = this.$t('mapView.defineAvoidPolygon')
-        locale.draw.toolbar.buttons.rectangle = this.$t('mapView.defineAvoidPolygon')
+        let avoidPolygonBtnTranslations = {
+          avoidPolygon: this.$t('mapView.defineAvoidPolygon'),
+          avoidRectangle: this.$t('mapView.defineAvoidRectangle')
+        }
+        // Run the hook that mey modify the translations
+        this.$root.appHooks.run('avoidPolygonBtnTraslations', avoidPolygonBtnTranslations)
+
+        // Set the translations to the buttons
+        locale.draw.toolbar.buttons.polygon = avoidPolygonBtnTranslations.avoidPolygon
+        locale.draw.toolbar.buttons.rectangle = avoidPolygonBtnTranslations.avoidRectangle
 
         // Set th custom draw locale to the leaflet draw locale
         Leaflet.drawLocal = locale
