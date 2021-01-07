@@ -55,8 +55,8 @@ npm install
 - layer-zoom-mapping`-example`.js => **layer-zoom-mapping.js**
 - hooks`-example`.js => **hooks.js**
 - theme`-example`.js => **theme.js**
-- default-map-settings`-example`.js => **default-map-settings**
-- settings-options`-example`.js => **settings-options**
+- default-map-settings`-example`.js => **default-map-settings.js**
+- settings-options`-example`.js => **settings-options.js**
 
 4. Set the app-config.js values for:
 
