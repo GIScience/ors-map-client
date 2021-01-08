@@ -9,6 +9,17 @@ yarn-error.log*
 selenium-debug.log
 /src/ors-js/
 
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+## The ignores below can be removed/commented in the case
+## you want to include the config files, the plugins
+## and the built static app in a custom repo.
 
 # Ignore config file
 /src/config/
@@ -17,14 +28,6 @@ selenium-debug.log
 # Ignore config file
 /src/plugins/
 !/src/plugins/plugin-example/
-
-# Editor directories and files
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
 
 # Built web app #
 /static/

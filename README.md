@@ -187,6 +187,12 @@ git remote rename origin ors-map-client-origin
 git remote add origin <git-repo-url>
 ```
 
+After doing this we recommend you to remove from gitignore the lines that makes git ignore the folders `/src/config`, `src/plugins` and eventually `/static` and run the initial push to a the just defined new origin repository, with the following command:
+
+```sh
+git push -u origin master
+```
+
 The ways to change/extend the app are:
 
 1. Define custom settings that will change the standard way that the app works.
