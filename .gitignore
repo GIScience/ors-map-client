@@ -11,13 +11,12 @@ selenium-debug.log
 
 
 # Ignore config file
-/src/config/app-config.js
-/src/config/theme.js
-/src/config/ors-map-filters.js
-/src/config/hooks.js
-/src/config/default-map-settings.js
-/src/config/layer-zoom-mapping.js
-/src/config/settings-options.js
+/src/config/
+!/src/config/.gitkeep
+
+# Ignore config file
+/src/plugins/
+!/src/plugins/plugin-example/
 
 # Editor directories and files
 .idea
@@ -27,5 +26,8 @@ selenium-debug.log
 *.njsproj
 *.sln
 
-# Web app #
-!static/.gitkeep
+# Built web app #
+/static/
+!/static/css/.gitkeep
+!/static/fonts/.gitkeep
+!/static/img/.gitkeep
