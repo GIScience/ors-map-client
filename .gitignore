@@ -27,4 +27,7 @@ selenium-debug.log
 *.sln
 
 # Built web app #
-!static/.gitkeep
+/static/
+!/static/css/.gitkeep
+!/static/fonts/.gitkeep
+!/static/img/.gitkeep
