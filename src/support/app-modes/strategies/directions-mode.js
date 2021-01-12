@@ -73,6 +73,14 @@ class DirectionsMode {
         appRouteData.places[index].direct = true
       })
     }
+
+    // If there are poi places, mark them as pois
+    if (appRouteData.options.poiPlaces) {
+      appRouteData.options.poiPlaces.forEach(index => {
+        appRouteData.places[index].isPoi = true
+      })
+    }
+
     main.getInstance().appHooks.run('afterDirectionsPathDecoded', appRouteData)
     return appRouteData
   }

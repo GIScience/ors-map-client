@@ -10,9 +10,9 @@ const appConfig = {
   dataServiceBaseUrl: 'https://openrouteservice.org/wp-json/',
   appMenu: {
     useORSMenu: true,
-    mainMenuId: 'define-the-id-of-the-menu-to-be-loaded', // only if useORSMenu is true
-    menuServiceEndpoint: 'the-restfull-endpoint-to-load-the-menu-from', // only if useORSMenu is true
-    menuPrimaryKeyField: 'the-field-used-as-primary-key-in-the-service', // only if useORSMenu is true
+    mainMenuId: 'primary_menu',// only if useORSMenu is true
+    menuServiceEndpoint: 'wp-api-menus/v2/menus',// only if useORSMenu is true
+    menuPrimaryKeyField: 'term_id', // only if useORSMenu is true
     setCustomMenuIcons: true,
     baseMenuExternalUrl: 'https://openrouteservice.org'
   },
@@ -20,7 +20,6 @@ const appConfig = {
   defaultLocale: 'en-us', // only set as default a locale that is present in the app. By default they are: 'en-us', 'de-de' and 'pt-br'
   orsApiKey: 'put-here-an-ors-api-key',
   useUserKey: true,
-  baseMenuExternalUrl: 'https://openrouteservice.org',
   bitlyApiKey: 'put-the-bitly-api-key-here',
   bitlyLogin: 'put-the-bitly-login-here',
   maxPlaceInputs: 15, // Don't change this unless you know what your doing

@@ -384,8 +384,9 @@ export default {
      * @param {*} data
      */
     directionsToPoint (data) {
-      const toPlace = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })      
-      const placeIndex = this.getFilledPlaces().length === 1 ? 1 : 0
+      const toPlace = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })  
+      let filledPlaces = this.getFilledPlaces().length     
+      const placeIndex = filledPlaces === 0 ? 0 : 1
       this.places[placeIndex] = toPlace
 
       // Make sure we keep only the first and second inputs
@@ -608,6 +609,7 @@ export default {
             data = context.$root.appHooks.run('beforeBuildDirectionsMapViewData', data)
             if (data) {
               MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
+                mapViewData.places = context.places
                 context.mapViewData = mapViewData
                 context.eventBus.$emit('newInfoAvailable')
                 context.showSuccess(context.$t('placesAndDirections.routeReady'))

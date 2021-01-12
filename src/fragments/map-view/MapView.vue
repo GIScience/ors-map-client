@@ -28,6 +28,13 @@
         @markAsDirectfromHere="markAsDirectfromHere">
       </map-view-markers> 
 
+       <map-view-markers 
+        :mode="mode" 
+        :markers="pois" 
+        is-poi
+        @markerClicked="markerClicked">
+      </map-view-markers> 
+
       <!--render isochrones polygons -->
       <template v-if="polygons">
         <l-polygon v-for="(polygon, index) in polygons"

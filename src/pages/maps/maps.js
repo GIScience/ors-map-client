@@ -33,9 +33,9 @@ export default {
     touchmoveDebounceTimeoutId: null,
     searchBtnAvailable: false,
     firstLoad: true,
-    previousRoute: null,
     refreshingSearch: false,
-    localAvoidPolygons: []
+    localAvoidPolygons: [],
+    previousMapViewDataTimeStamp: null
   }),
   components: {
     MapView,
@@ -146,17 +146,27 @@ export default {
      * 
      */
     fitMapBounds () {
-      let fit = this.refreshingSearch ? false : true
-      var routeChanged = false
-      if(this.previousRoute) {
-        routeChanged = this.previousRoute.name !== this.$route.name
+      if (this.previousMapViewDataTimeStamp !== this.mapViewData.timestamp && this.$store.getters.mapSettings.alwaysFitBounds) {
+        return true
+      } else if (this.firstLoad) {
+        return true
       }
-      
-      const directionsMode = constants.modes.directions
-      if (!this.firstLoad && !routeChanged && this.$store.getters.mode === directionsMode && !this.$store.getters.mapSettings.alwaysFitBounds) {
-        fit = false
-      }
-      return fit
+      return false
+      // if (this.$route.fullPath === '/') {
+      //   return false
+      // }
+      // let fit = this.refreshingSearch ? false : true
+      // var routeChanged = false
+      // if(this.previousRoute) {
+      //   routeChanged = this.previousRoute.name !== this.$route.name
+      // } else {
+      //   routeChanged = true
+      // }
+      // const directionsMode = constants.modes.directions
+      // if (!this.firstLoad && !routeChanged && this.$store.getters.mode === directionsMode && !this.$store.getters.mapSettings.alwaysFitBounds) {
+      //   fit = false
+      // }
+      // return fit
     },
     /**
      * Returns the map center based on the app route data
@@ -196,7 +206,6 @@ export default {
   },
   watch: {
     $route: function (to, from) {
-      this.previousRoute = from
       this.loadRoute()
       this.setModalState()
       this.loadAvoidPolygonsFromAppRoute()
@@ -217,10 +226,11 @@ export default {
      * once the map has been moved, the user may wants to
      * refresh the search to get features within the
      * visible map view
-     * @param {*} newZoomLevel 
+     * @param {Object} { zoom: Object, map: Object, context: Object} 
      */
-    zoomChanged (newZoomLevel) {
-      this.storeZoomValue(newZoomLevel)
+    zoomChanged (data) {
+      this.$root.appHooks.run('zoomChanged', data)
+      this.storeZoomValue(data.zoom)
       this.searchBtnAvailable = true
     },
     /**
@@ -345,9 +355,11 @@ export default {
       // already had places, then it is changing
       // from to a new set of data and is not
       // first load anymore
-      if (this.mapViewData.hasPlaces()) {
+      if (this.mapViewData.hasPlaces() || this.mapViewData.hasPois()) {
         this.firstLoad = false
       }
+
+      this.previousMapViewDataTimeStamp = this.mapViewData.timestamp
 
       // The mapViewData is watched by the map
       // component and the content re-rendered

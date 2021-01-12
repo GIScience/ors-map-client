@@ -64,26 +64,26 @@ const geoUtils = {
 
   /**
    * Build the markers based in an array of coordinates
-   * @param markersData - coordinates of the marker
+   * @param {Array} places - coordinates of the marker
    * @param {Boolean} isRoute - default true
    * @param {Place|null} highlightedPlace - place to have a corresponding marker hightlighed (red)
    * @returns {Array} of markers
    */
-  buildMarkers: (mapViewData, highlightedPlace = null) => {
+  buildMarkers: (places, isRoute = false,  highlightedPlace = null) => {
     const markers = []
-    if (!mapViewData.places || mapViewData.places.length === 0) {
+    if (!places || places.length === 0) {
       return []
     }
-    lodash.each(mapViewData.places, (place, key) => {
+    lodash.each(places, (place, key) => {
       // Define the marker color
-      const lastIndexKey = mapViewData.places.length - 1
-      let coloredMarkerName = geoUtils.getMarkerColor(key, lastIndexKey, mapViewData.hasRoutes())
+      const lastIndexKey = places.length - 1
+      let coloredMarkerName = geoUtils.getMarkerColor(key, lastIndexKey, isRoute)
 
       if (highlightedPlace) {
         if (place.equals(highlightedPlace)) {
           coloredMarkerName = 'red'
         }
-      } else if (Number(key) === 0 && !mapViewData.hasRoutes()) {
+      } else if (Number(key) === 0 && !isRoute) {
         coloredMarkerName = 'red'
       }
 
@@ -93,7 +93,7 @@ const geoUtils = {
 
       // If the way point array has the third parameter, it is its label
       marker.label = place.placeName || `${place.lng},${place.lat}`
-      if (!isNaN(place.index) && mapViewData.hasRoutes()) {
+      if (!isNaN(place.index) && isRoute) {
         marker.label = `(${place.index}) ${marker.label}`
       }
 
