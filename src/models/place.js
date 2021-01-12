@@ -44,8 +44,11 @@ class Place {
     // The index of the Place
     this.index = null
 
-    // The index of the Place
+    // The if a route should be routed directly to this Place
     this.direct = false
+
+    // If it is a POI
+    this.isPoi = options.isPoi
 
     if (lng !== 0 && lat !== 0) {
       this.coordinates = [Number(lng), Number(lat)]
@@ -182,7 +185,8 @@ class Place {
       'fromBrowser',
       'skipShowData',
       'index',
-      'direct'
+      'direct',
+      'isPoi'
     ]
 
     for (const key in propertiesToClone) {

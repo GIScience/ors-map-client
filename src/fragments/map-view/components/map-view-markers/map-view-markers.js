@@ -8,6 +8,10 @@ import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 
 export default {
   props: {
+    isPoi: {
+      type: Boolean,
+      default: false
+    },
     markers: {
       default: () => [],
       type: Array
@@ -51,6 +55,9 @@ export default {
      * @returns {Boolean} isRemovable
      */
     markerIsRemovable () {
+      if (this.isPoi) {
+        return false
+      }
       let markerRemovableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]
       let isRemovable = markerRemovableModes.includes(this.mode)
       return isRemovable
@@ -61,6 +68,9 @@ export default {
      * @returns {Boolean} isDraggable
      */
     markerIsDraggable () {
+      if (this.isPoi) {
+        return false
+      }
       const draggableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]
       const isDraggable = draggableModes.includes(this.mode)
       return isDraggable

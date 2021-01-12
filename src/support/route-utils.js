@@ -49,6 +49,7 @@ const RouteUtils = {
     const params = {}
     var coordinates = []
     var directPlaces = []
+    var poiPlaces = []
 
     // For each place, create a param that starts with `placeName` and ends with an index, like `placeName1`, `placeName2`...
     appRouteData.places.forEach((p, index) => {
@@ -59,11 +60,19 @@ const RouteUtils = {
       if (p.direct === true) {
         directPlaces.push(index)
       }
+      if (p.isPoi === true) {
+        poiPlaces.push(index)
+      }
     })
     // If there are direct waipoints
     // add their indexes to the options
     if (directPlaces.length > 0) {
       appRouteData.options.directPlaces = directPlaces
+    }
+    // If there are poi places
+    // add their indexes to the options
+    if (poiPlaces.length > 0) {
+      appRouteData.options.poiPlaces = poiPlaces
     }
     const dataString = JSON.stringify({ coordinates: coordinates.join(';'), options: appRouteData.options })
     const data = store.getters.mapSettings.compressDataUrlSegment ? Utils.compressTxt(dataString) : dataString
