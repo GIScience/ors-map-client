@@ -74,13 +74,13 @@ class JsonImporter {
 
       // If an expected property
       // does not exist in the parsed content
-      // the parsed object is invalid
-      if (content[key] === undefined) {
+      // the parsed object is invalid (pois is not mandatory)
+      if (content[key] === undefined && key !== 'pois') {
         return false
       } else {
         if (key === 'places') {
           mapViewData.places = this.parsePlaces(content)
-        } else {
+        } else if (content[key]) {
           mapViewData[key] = content[key]
         }
       }
