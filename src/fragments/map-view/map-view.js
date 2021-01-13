@@ -377,24 +377,44 @@ export default {
       return polygons
     },
     /**
-     * Build and return an array of marker object
+     * Build and return an array of marker objects
      * based either on the  tempPlaces value
      * (used when a place was selected but a route was not calculated yet)
      * or based on the places defined on the localMapViewData
      * @returns {Array} of markers
      */
     markers () {
-      let tempMapViewData
+      let markersMapViewData
+      // temp places are markers shown on the map
+      // but not yet computed in routing or other calculations
+      // It exists to handle the case when the user selects
+      // one point on the map, but it has not yet been used
+      // to change the app state/route because it is waiting
+      // for a second place (for directions, for example)
       if (this.tempPlaces) {
-        tempMapViewData = new MapViewData()
-        tempMapViewData.places = this.tempPlaces
+        markersMapViewData = new MapViewData()
+        markersMapViewData.places = this.tempPlaces
       } else {
-        tempMapViewData = this.localMapViewData
+        markersMapViewData = this.localMapViewData
       }
-      if (tempMapViewData.places.length > 0) {
-        let markers = GeoUtils.buildMarkers(tempMapViewData, this.focusedPlace)
+      if (markersMapViewData.places.length > 0) {
+        let markers = GeoUtils.buildMarkers(markersMapViewData.places, markersMapViewData.hasRoutes(), this.focusedPlace)
         markers = this.$root.appHooks.run('markersCreated', markers)
         return markers
+      }
+    },
+    /**
+     * Build and return an array of marker objects
+     * based on the pois places
+     * @returns {Array} of markers
+     */
+    pois () {
+      if (this.localMapViewData.pois.length > 0) {
+        let poisMarkers = GeoUtils.buildMarkers(this.localMapViewData.pois)
+        poisMarkers = this.$root.appHooks.run('poisMarkersCreated', poisMarkers)
+        return poisMarkers
+      } else {
+        return []
       }
     },
     /**
@@ -801,7 +821,7 @@ export default {
       this.zoomLevel = event.sourceTarget._zoom
       if (!this.featuresJustFitted && !this.hasOnlyOneMarker) {
         this.storeMapBoundsAndSetMapAsReady()
-        this.$emit('zoomChanged', event.sourceTarget._zoom)
+        this.$emit('zoomChanged', {zoom: event.sourceTarget._zoom, map: this.map, context: this})
       } else {
         // If the zoom was changed programatically
         // reset the flag to false, as it has already
@@ -987,7 +1007,12 @@ export default {
       this.getMapObject().then((map) => {
         const bounds = map.getBounds()
         const mapBounds = buildBondaryes(bounds)
-        this.$store.commit('mapBounds', mapBounds)
+        let newBounds = JSON.stringify(bounds)
+        let oldBounds = JSON.stringify(this.$store.getters.mapBounds)
+        if (newBounds !== oldBounds) {
+          this.$store.commit('mapBounds', mapBounds)
+          this.$root.appHooks.run('mapBoundsChanged', {mapBounds, map: map, context: this})
+        }
         this.$emit('mapReady', map)
       })
     },
@@ -1178,29 +1203,31 @@ export default {
      * @param force - force the fit ignoring fit options
      */
     fitFeaturesBounds (force = false) {
-      const context = this
-
-      // get and use the fit bounds option to determine if the fit should be run
-      const maxFitBoundsZoom = this.hasOnlyOneMarker ? context.zoomLevel : this.maxZoom
-
-      return new Promise((resolve, reject) => {
-        context.buildAndSetBounds()
-        // If the map object is already defined
-        // then we can directly access it
-        if (context.map && context.isValidBounds(context.dataBounds)) {
-          context.fit(force, maxFitBoundsZoom)
-        } else {
-          // If not, it wil be available only in the next tick
-          context.$nextTick(() => {
-            context.buildAndSetBounds()
-            if (context.$refs.map && context.isValidBounds(context.dataBounds)) {
-              context.map = context.$refs.map.mapObject // work as expected when wrapped in a $nextTick
-              context.fit(force, maxFitBoundsZoom)
-            }
-            resolve()
-          })
-        }
-      })
+      if (this.fitBounds === true || force) {
+        const context = this
+  
+        // get and use the fit bounds option to determine if the fit should be run
+        const maxFitBoundsZoom = this.hasOnlyOneMarker ? context.zoomLevel : this.maxZoom
+  
+        return new Promise((resolve, reject) => {
+          context.buildAndSetBounds()
+          // If the map object is already defined
+          // then we can directly access it
+          if (context.map && context.isValidBounds(context.dataBounds)) {
+            context.fit(maxFitBoundsZoom)
+          } else {
+            // If not, it wil be available only in the next tick
+            context.$nextTick(() => {
+              context.buildAndSetBounds()
+              if (context.$refs.map && context.isValidBounds(context.dataBounds)) {
+                context.map = context.$refs.map.mapObject // work as expected when wrapped in a $nextTick
+                context.fit(force, maxFitBoundsZoom)
+              }
+              resolve()
+            })
+          }
+        })
+      }
     },
 
     /**
@@ -1224,8 +1251,8 @@ export default {
      * @param {Boolean} force
      * @param {Number} maxFitBoundsZoom integer
      */
-    fit (force, maxFitBoundsZoom) {
-      if (this.dataBounds && (this.fitBounds === true || force === true)) {
+    fit (maxFitBoundsZoom) {
+      if (this.dataBounds) {
         // we set the max zoom in level and then fit the bounds
         // Temporally disabled the zoomlevel seeting to check impacts (it seems not to be necessary anymore)
         // this.zoomLevel = this.initialMaxZoom

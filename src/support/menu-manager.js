@@ -37,7 +37,7 @@ const getMenu = (slug) => {
  */
 const addBaseExternalUrl = (item) => {
   if (!item.href.startsWith('http')) {
-    item.href = appConfig.baseMenuExternalUrl + item.href
+    item.href = appConfig.appMenu.baseMenuExternalUrl + item.href
   }
   if (item.items) {
     for (const key in item.items) {

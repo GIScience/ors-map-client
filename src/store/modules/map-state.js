@@ -31,7 +31,6 @@ const mutations = {
   },
   mapBounds: (state, mapBounds) => {
     state.mapBounds = mapBounds
-    main.getInstance().appHooks.run('mapBoundsChanged', mapBounds)
   },
   currentLocation: (state, currentLocation) => {
     main.getInstance().appHooks.run('beforeUseNewDeviceLocation', currentLocation)

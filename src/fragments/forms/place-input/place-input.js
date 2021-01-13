@@ -4,6 +4,7 @@ import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
 import utils from '@/support/utils'
+import appConfig from '@/config/app-config'
 
 export default {
   data: () => ({
@@ -218,26 +219,28 @@ export default {
      * @param {*} index
      */
     placeInputLabel () {
-      let label = ''
+      let label = null
       if (this.disabled) {
         return label
       }
       if (this.supportDirections) {
         if (this.isLast) {
           label = `(${this.index + 1}) ${this.$t('placeInput.routeDestination')}`
-        }
-        if (this.single) {
-          label = this.model.isEmpty() ? this.$t('placeInput.findAPlace') : this.$t('placeInput.place')
         } else {
-          if (this.index === 0) {
-            label = `(${this.index + 1}) ${this.$t('placeInput.startingPlace')}`
+          if (this.single) {
+            label = this.model.isEmpty() ? this.$t('placeInput.findAPlace') : this.$t('placeInput.place')
+          } else {
+            if (this.index === 0) {
+              label = `(${this.index + 1}) ${this.$t('placeInput.startingPlace')}`
+            } else {
+              label = this.model.isEmpty() ? `(${this.index + 1}) ${this.$t('placeInput.addRouteStop')}` : `(${this.index + 1}) ${this.$t('placeInput.routePlace')}`
+            }
           }
-          label = this.model.isEmpty() ? `(${this.index + 1}) ${this.$t('placeInput.addRouteStop')}` : `(${this.index + 1}) ${this.$t('placeInput.routePlace')}`
         }
       } else {
         label= `${this.$t('placeInput.findAPlace')}`
       }
-      let labelData = {label: label, supportDirections: this.supportDirections, single: this.single}
+      let labelData = {label: label, supportDirections: this.supportDirections, single: this.single, placeModel: this.model}
       this.$root.appHooks.run('placeInputLabelBuilt', labelData)
       return labelData.label
     },
@@ -269,7 +272,7 @@ export default {
      * Determines if the place input directions menu button is availabel for the current place input
      */
     directionsAvailable () {
-      if (!this.supportDirections) {
+      if (!this.supportDirections || !appConfig.supportsDirections) {
         return false
       } else {
         return this.single && this.index === 0
@@ -560,11 +563,24 @@ export default {
     },
 
     /**
-     * Emit the selected event
+     * Run the place selection hook and emit the selected event
      */
     selected () {
       this.focused = false
-      this.$emit('selected', { index: this.index, place: this.model })
+      let data =  { index: this.index, place: this.model, single: this.single }
+      
+      let expectedPromise = this.$root.appHooks.run('placeSelected', data)
+      let context = this
+      // If a promise is returned
+      if (expectedPromise instanceof Promise) {
+        expectedPromise.then(() => {
+          context.$emit('selected', data)
+        }).catch (err => {
+          console.log(err)
+        })
+      } else { // if nothing was returned, just proceed
+        context.$emit('selected', data)
+      }      
       this.$forceUpdate()
     },
 

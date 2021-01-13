@@ -1,11 +1,13 @@
 # ORS map client #
 
-This application implements a map client for the [openrouteservice API](https://openrouteservice.org/dev/#/api-docs/) as Single Page Application (SPA).
+This application implements a map client for the [openrouteservice API](https://openrouteservice.org/dev/#/api-docs/) as Single Page Application (SPA). It is a base application that can be used for multiple purposes, customized via configurarions and extended via plug-ins.
 
 The base application is built using VueJS, Vuetify and a set of custom components, directives and services. The structure uses a feature-by-folder design, allowing view, code and translation elements to be contained in a folder.
 
 This app uses single file components and others non-native javascript code that are transpiled to native javascript during the build process. That is way the app needs to be compiled before running it either in dev or production mode.
 The VueJS components allow a better code organization, weak and clear coupling between components and an easier code understanding.
+
+![ORS map client](docs/ors-map-client.png?raw=true "ORS map client")
 
 ## Sections ##
 
