@@ -256,7 +256,7 @@ export default {
         gestureHandling:this.$store.getters.embed
       }
     },
-    /**
+   /**
      * Build and return the map center
      * based either on the single visible marker
      * or the current map center defined/set in the store
