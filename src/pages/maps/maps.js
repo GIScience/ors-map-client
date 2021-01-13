@@ -140,33 +140,18 @@ export default {
     },
     /**
      * Determines if the bounds of the map
-     * must be fitted based on the route change, the app mode
+     * must be fitted based on differ of the last mapViewDta timestamp
      * and if it is the firs load
      * @returns {Boolean} fit
      * 
      */
     fitMapBounds () {
-      if (this.previousMapViewDataTimeStamp !== this.mapViewData.timestamp && this.$store.getters.mapSettings.alwaysFitBounds) {
+      if (this.mapViewData.timestamp && this.previousMapViewDataTimeStamp !== this.mapViewData.timestamp && this.$store.getters.mapSettings.alwaysFitBounds) {
         return true
       } else if (this.firstLoad) {
         return true
       }
       return false
-      // if (this.$route.fullPath === '/') {
-      //   return false
-      // }
-      // let fit = this.refreshingSearch ? false : true
-      // var routeChanged = false
-      // if(this.previousRoute) {
-      //   routeChanged = this.previousRoute.name !== this.$route.name
-      // } else {
-      //   routeChanged = true
-      // }
-      // const directionsMode = constants.modes.directions
-      // if (!this.firstLoad && !routeChanged && this.$store.getters.mode === directionsMode && !this.$store.getters.mapSettings.alwaysFitBounds) {
-      //   fit = false
-      // }
-      // return fit
     },
     /**
      * Returns the map center based on the app route data
