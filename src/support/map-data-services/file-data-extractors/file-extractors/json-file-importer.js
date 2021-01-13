@@ -80,7 +80,7 @@ class JsonImporter {
       } else {
         if (key === 'places') {
           mapViewData.places = this.parsePlaces(content)
-        } else {
+        } else if (content[key]) {
           mapViewData[key] = content[key]
         }
       }
