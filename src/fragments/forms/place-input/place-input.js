@@ -307,7 +307,7 @@ export default {
       return show
     },
     appendBtn () {
-      if (this.supportSearch) {
+      if (this.supportSearch && appConfig.supportsSearchMode) {
         return 'search'
       } else if (this.$lowResolution || this.localModel.isEmpty()) {
         return 'map'
@@ -496,7 +496,7 @@ export default {
 
           // Make sure that the changes in the input are debounced
           this.debounceTimeoutId = setTimeout(function () {
-            if (context.supportSearch && (event.key === 'Enter')) {
+            if (context.supportSearch && (event.key === 'Enter') && appConfig.supportsSearchMode) {
               context.focused = false
               context.sendToSearchMode()
             } else {
