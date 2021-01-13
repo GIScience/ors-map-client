@@ -22,15 +22,15 @@ selenium-debug.log
 ## and the built static app in a custom repo.
 
 # Ignore config file
-/src/config/
+#/src/config/
 !/src/config/.gitkeep
 
 # Ignore config file
-/src/plugins/
+#/src/plugins/
 !/src/plugins/plugin-example/
 
 # Built web app #
-/static/
+#/static/
 !/static/css/.gitkeep
 !/static/fonts/.gitkeep
 !/static/img/.gitkeep
