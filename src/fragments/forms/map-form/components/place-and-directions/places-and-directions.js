@@ -527,6 +527,7 @@ export default {
       this.mapViewData = this.mapViewData || new MapViewData()
       this.mapViewData.places = places
       this.mapViewData.routes = []
+      this.mapViewData.timestamp = Date.now()
       this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
     },
 
@@ -609,7 +610,7 @@ export default {
             data = context.$root.appHooks.run('beforeBuildDirectionsMapViewData', data)
             if (data) {
               MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
-                mapViewData.places = context.places
+                mapViewData.places = context.places // places from context have more fine data, so use it
                 context.mapViewData = mapViewData
                 context.eventBus.$emit('newInfoAvailable')
                 context.showSuccess(context.$t('placesAndDirections.routeReady'))

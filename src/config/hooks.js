@@ -42,7 +42,6 @@ appHooks.add('catchAll', (hookName, hookData) => {
     return hookData // this return is always necessary
   }
 }, 1)
-
 /*
 // #### INDIVIDUAL HOOKS DEFINITION ###
 
@@ -62,13 +61,20 @@ appHooks.add('mapReady', (hookData) => {
 
 appHooks.add('loadMenuItems', () => {
   // This hook is called if appConfig.appMenu.useORSMenu is not true
-  // A promise is expcted to be returned.
+  // A promise is expected to be returned.
   return new Promise((resolve, reject) => {
     let items = [] // `items` is expected to contain an array of menu items
     resolve(items)
   })
 }, 1)
 
+appHooks.add('placeSelected', (hookData) => {
+  // hookData has the following structure {index: Number, place: Place, single: Boolean}
+  // A promise is expected to be returned.
+  return new Promise((resolve, reject) => {
+    resolve(true) // if rejected the place selection will be stopped
+  })
+}, 1)
 
 // If the app is set not to use load and use ORS menu
 // then add two menu items mock p to show that menu  is working
@@ -158,7 +164,8 @@ appHooks.add('avoidPolygonEdited', (hookData) => {
   })
 }, 1)
 
-appHooks.add('mapBoundsChanged', (mapBounds) => {
+appHooks.add('mapBoundsChanged', (hookData) => {
+  // hookData  = {mapBounds, Object, map: Object, context: Object}
   // Do something
 }, 1)
 
@@ -170,6 +177,14 @@ appHooks.add('appModeChanged', (mode) => {
   // Do something
 }, 1)
 
+
+appHooks.add('poisMarkersCreated', (markers) => {
+  // Do something
+  return markers
+}, 1)
+
+// When markers that represent the 
+// routing places or searched places are created
 appHooks.add('markersCreated', (markers) => {
   // Do something
 
@@ -301,7 +316,7 @@ appHooks.add('avoidPolygonEditModeEnabled', (polygonLayer) => {
 }, 1)
 
 appHooks.add('placeInputLabelBuilt', (hookData) => {
-  // hookData has the following structure {label: String, supportDirections: Boolean, single: Boolean}
+  // hookData has the following structure {label: String, supportDirections: Boolean, single: Boolean, placeModel: Place}
   // Do something
 }, 1)
 
@@ -375,6 +390,11 @@ appHooks.add('beforeBuildDirectionsMapViewData', (responseData) => {
 })
 
 appHooks.add('avoidPolygonBtnTraslations', (translationsObject) => {
+  // Do something
+})
+
+appHooks.add('zoomChanged', (hookData) => {
+  // // hookData has the following structure { zoom: Object, map: Object, context: Object}
   // Do something
 })
 

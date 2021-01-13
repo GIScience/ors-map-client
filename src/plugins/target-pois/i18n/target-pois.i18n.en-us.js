@@ -17,7 +17,8 @@ export default {
     searchingClosestPoi: 'Searching for the closest vaccination center',
     notPoiFoundNearTheLocationSelected: 'No vaccination center found near the location selected',
     findPoiNear: 'Find vaccination near',
-    zoomInToLoadPOIs: 'Zoom in on a region to load vaccination centers'
+    zoomInToLoadPOIs: 'Zoom in on a region to load vaccination centers',
+    poisForTheCurrentViewCouldNotBeLoaded: 'Vaccine centers for the current map view could not be loaded'
   }
 }
 

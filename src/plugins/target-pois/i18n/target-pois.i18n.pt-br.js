@@ -17,7 +17,8 @@ export default {
     searchingClosestPoi: 'Buscando o centro de vacinaão mais próximo',
     notPoiFoundNearTheLocationSelected: 'Nenhum centro de vacinaçào encontrado próximo ao local selecionado',
     findPoiNear: 'Vacinação próxim a',
-    zoomInToLoadPOIs: 'Dê zoom em uma região para carregar os centros de vacinação'
+    zoomInToLoadPOIs: 'Dê zoom em uma região para carregar os centros de vacinação',
+    poisForTheCurrentViewCouldNotBeLoaded: 'Não foi possível carregar locais de vacinação para a região visível no map'
   }
 }
 

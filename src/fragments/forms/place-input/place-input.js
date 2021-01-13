@@ -4,6 +4,7 @@ import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
 import utils from '@/support/utils'
+import appConfig from '@/config/app-config'
 
 export default {
   data: () => ({
@@ -271,7 +272,7 @@ export default {
      * Determines if the place input directions menu button is availabel for the current place input
      */
     directionsAvailable () {
-      if (!this.supportDirections) {
+      if (!this.supportDirections || !appConfig.supportsDirections) {
         return false
       } else {
         return this.single && this.index === 0

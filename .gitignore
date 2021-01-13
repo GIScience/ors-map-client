@@ -23,14 +23,14 @@ selenium-debug.log
 
 # Ignore config file
 #/src/config/
-#!/src/config/.gitkeep
+!/src/config/.gitkeep
 
 # Ignore config file
 #/src/plugins/
-#!/src/plugins/plugin-example/
+!/src/plugins/plugin-example/
 
 # Built web app #
 #/static/
-#!/static/css/.gitkeep
-#!/static/fonts/.gitkeep
-#!/static/img/.gitkeep
+!/static/css/.gitkeep
+!/static/fonts/.gitkeep
+!/static/img/.gitkeep

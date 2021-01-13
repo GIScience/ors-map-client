@@ -22,4 +22,5 @@
 .map-view >>> .leaflet-popup-content {
   /*max-width: 170px;*/
   word-break: break-all;
+  min-width: 150px;
 }

@@ -8,12 +8,11 @@ const appConfig = {
   footerAppName: 'openrouteservice',
   baseAppUrl: '/', // could be, for example, '/map'
   dataServiceBaseUrl: 'https://openrouteservice.org/wp-json/',
-  dataServiceBaseUrl: 'https://openrouteservice.org/wp-json/',
   appMenu: {
     useORSMenu: true,
-    mainMenuId: 'primary_menu',
-    menuServiceEndpoint: 'wp-api-menus/v2/menus',
-    menuPrimaryKeyField: 'term_id',
+    mainMenuId: 'primary_menu',// only if useORSMenu is true
+    menuServiceEndpoint: 'wp-api-menus/v2/menus',// only if useORSMenu is true
+    menuPrimaryKeyField: 'term_id', // only if useORSMenu is true
     setCustomMenuIcons: true,
     baseMenuExternalUrl: 'https://openrouteservice.org'
   },
@@ -22,7 +21,6 @@ const appConfig = {
   orsApiKey: 'put-here-an-ors-api-key',
   useUserKey: false,
   publicApiKeyUrl: 'https://openrouteservice.org/wp-json/ors-api/v1/weathercheck',
-  baseMenuExternalUrl: 'https://openrouteservice.org',
   bitlyApiKey: 'put-the-bitly-api-key-here',
   bitlyLogin: 'put-the-bitly-login-here',
   maxPlaceInputs: 15, // Don't change this unless you know what your doing
@@ -31,9 +29,10 @@ const appConfig = {
   logoImgSrc: require('@/assets/img/logo@2x.png'),
   footerDevelopedByLink: 'https://www.heigit.org/',
 
-  supportsPlacesAndDirections: true, // If places and directions are supported/enabled in the application
-  supportsIsochrones: true, // If isochrones is supported/enabled in the application
+  supportsPlacesAndDirections: true, // If thw whole places and directions feature is supported/enabled in the application
+  supportsIsochrones: false, // If isochrones is supported/enabled in the application
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
+  supportsDirections: false, // If the directions funcionality is available
   sidebarStartsOpenInheighResolution: false, // if the sidebar must start open in heigh resolution
   defaultTileProvider: 'osm', // the default tipe provider
   supportsAvoidPolygonDrawing: true, // if the avoid polygon drawing tools must be available on the map view

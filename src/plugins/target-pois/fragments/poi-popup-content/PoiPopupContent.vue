@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="poi-popup-content">
     <div class="place-name" v-if="place.properties.name && showName">
       {{place.properties.name}}
       <br><br>

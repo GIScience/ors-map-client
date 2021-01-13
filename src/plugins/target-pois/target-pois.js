@@ -11,7 +11,7 @@ import Leaflet from 'leaflet'
 import {
   VBtn
 } from 'vuetify'
-import lodash from 'lodash'
+import lodash, { reject } from 'lodash'
 import Vue from 'vue'
 
 class TargetPois {
@@ -84,7 +84,7 @@ class TargetPois {
    * @returns {Promise}
    */
   getBboxPois() {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       let bbox = store.getters.mapBounds
       let bboxStr = `${bbox.rect.min_lat},${bbox.rect.min_lon},${bbox.rect.max_lat},${bbox.rect.max_lon}`
 
@@ -108,6 +108,8 @@ class TargetPois {
             })
           }
           resolve(poiPlaces)
+        }).catch(err => {
+          reject(err)
         })
       }
     })
@@ -200,21 +202,26 @@ class TargetPois {
    * @param {Object} hookData 
    */
   placeSelected(hookData) {
-    if (hookData.single) { // if the place was selected in a single input mode
-      let context = this
-      this.vueInstance.showInfo(this.vueInstance.$t('targetPois.searchingClosestPoi'))
-      this.getPoisByCenterLocation(hookData.place).then(poiPlaces => {
-        if (poiPlaces.length === 0) {
+    return new Promise((resolve) => {
+      if (hookData.single) { // if the place was selected in a single input mode
+        let context = this
+        this.vueInstance.showInfo(this.vueInstance.$t('targetPois.searchingClosestPoi'))
+        this.getPoisByCenterLocation(hookData.place).then(poiPlaces => {
+          if (poiPlaces.length === 0) {
+            context.vueInstance.showWarning(context.vueInstance.$t('targetPois.notPoiFoundNearTheLocationSelected'))
+            resolve(true) // resolve will tell the place selected action to continue its normal flow
+          } else {
+            context.goToDirectionsRoute(hookData.place, poiPlaces[0])
+          }
+        }).catch((err) => {
+          console.log(err)
           context.vueInstance.showWarning(context.vueInstance.$t('targetPois.notPoiFoundNearTheLocationSelected'))
-        } else {
-          context.goToDirectionsRoute(hookData.place, poiPlaces[0])
-        }
-        resolve(poiPlaces)
-      }).catch((err) => {
-        console.log(err)
-        context.vueInstance.showWarning(context.vueInstance.$t('targetPois.notPoiFoundNearTheLocationSelected'))
-      })
-    }
+          resolve(true) // resolve will tell the place selected action to continue its normal flow
+        })
+      } else {
+        resolve(true) // resolve will tell the place selected action to continue its normal flow
+      }
+    })
   }
 
   /**
@@ -295,37 +302,35 @@ class TargetPois {
    * @param {*} hideName 
    */
   changePopupContent(markerPopupContainerRef, poiPlace, addRouteBtn = false, hideName = true) {
-    var PoisComponentClass = Vue.extend(PoiPopupContent)
-    var poisPopupInstance = new PoisComponentClass({
-      propsData: {
-        place: poiPlace,
-        hideName: hideName
-      }
-    })
-    poisPopupInstance.$mount() // pass nothing
-    markerPopupContainerRef.appendChild(poisPopupInstance.$el)
+    let popup = markerPopupContainerRef.querySelectorAll('.poi-popup-content')
 
-    if (addRouteBtn) {
-      var BtnComponentClass = Vue.extend(VBtn) // don't forget to add 
-      var btnInstance = new BtnComponentClass({
-        propsData: {
-          color: 'primary'
-        }
-      })
-      let btnTitle = this.vueInstance.$t('targetPois.routeToThisPlace')
-      // let innerHtml = `<i class="material-icons">directions</i>${btnTitle}`
-      btnInstance.$slots.default = [btnTitle]
-
-      btnInstance.$on(['click'], e => {
-        this.vueInstance.eventBus.$emit('directionsToPoint', {
-          latlng: poiPlace.getLatLng(),
-          place: poiPlace
+    if (popup.length === 0) {
+      // TODO: avoid appending PoiPopupContent twice when the same marker is clicked a second time
+      var PoisComponentClass = Vue.extend(PoiPopupContent)
+      var poisPopupInstance = new PoisComponentClass({ propsData: { place: poiPlace, hideName: hideName} })
+      poisPopupInstance.$mount() // pass nothing
+      markerPopupContainerRef.appendChild(poisPopupInstance.$el)
+      // If the route to this location btn must be appended
+      if (addRouteBtn) {
+        var BtnComponentClass = Vue.extend(VBtn) // don't forget to add 
+        var btnInstance = new BtnComponentClass({
+          propsData: {
+            color: 'primary'
+          }
         })
-        this.vueInstance.$store.commit('setLeftSideBarIsOpen', true)
-      })
-      btnInstance.$mount() // pass nothing
-      btnInstance.$el.style.marginLeft = '0'
-      markerPopupContainerRef.appendChild(btnInstance.$el)
+        btnInstance.$slots.default = [this.vueInstance.$t('targetPois.routeToThisPlace')]
+  
+        btnInstance.$on(['click'], e => {
+          this.vueInstance.eventBus.$emit('directionsToPoint', {
+            latlng: poiPlace.getLatLng(),
+            place: poiPlace
+          })
+          this.vueInstance.$store.commit('setLeftSideBarIsOpen', true)
+        })
+        btnInstance.$mount() // pass nothing
+        btnInstance.$el.style.marginLeft = '0'
+        markerPopupContainerRef.appendChild(btnInstance.$el)
+      }
     }
   }
 
@@ -347,6 +352,8 @@ class TargetPois {
           context.appendDifferPois(poiPlaces, cloneddMapViewData)
           context.pois = cloneddMapViewData.pois
           context.vueInstance.eventBus.$emit('mapViewDataChanged', cloneddMapViewData)
+        }).catch(err => {
+          context.vueInstance.showWarning(context.vueInstance.$t('targetPois.poisForTheCurrentViewCouldNotBeLoaded'), {timeout: 0})
         })
       }, 1000)
     }
