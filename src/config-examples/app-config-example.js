@@ -28,9 +28,10 @@ const appConfig = {
   logoImgSrc: require('@/assets/img/logo@2x.png'),
   footerDevelopedByLink: 'https://www.heigit.org/',
 
-  supportsPlacesAndDirections: true, // If places and directions are supported/enabled in the application
+  supportsPlacesAndDirections: true, // If thw whole places and directions feature is supported/enabled in the application
   supportsIsochrones: true, // If isochrones is supported/enabled in the application
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
+  supportsDirections: true, // If the directions funcionality is available
   sidebarStartsOpenInheighResolution: false, // if the sidebar must start open in heigh resolution
   defaultTileProvider: 'osm', // the default tipe provider
   supportsAvoidPolygonDrawing: true, // if the avoid polygon drawing tools must be available on the map view
