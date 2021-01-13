@@ -32,6 +32,7 @@ const appConfig = {
   supportsIsochrones: true, // If isochrones is supported/enabled in the application
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
   supportsDirections: true, // If the directions funcionality is available
+  supportsSearchMode: true, // if search is supported
   sidebarStartsOpenInheighResolution: false, // if the sidebar must start open in heigh resolution
   defaultTileProvider: 'osm', // the default tipe provider
   supportsAvoidPolygonDrawing: true, // if the avoid polygon drawing tools must be available on the map view
