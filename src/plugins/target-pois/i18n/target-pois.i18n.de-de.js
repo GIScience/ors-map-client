@@ -17,7 +17,7 @@ export default {
     notPoisInThisRegion: 'Keine Impfzentren in dieser Region vorhanden. Bewegen Sie die Karte oder suchen Sie nach einem bestimmten Ort.',
     searchingClosestPoi: 'Suche nach dem nächsten Impfzentrum',
     notPoiFoundNearTheLocationSelected: 'Keim Impfzentrum in der Nähe des ausgewählten Ortes gefunden',
-    findPoiNear: 'nächstes Impfungszentrum finden',
+    findPoiNear: 'Ihr Standort',
     zoomInToLoadPOIs: 'In eine Region hineinzoomen um die Impfzentren zu laden',
     poisForTheCurrentViewCouldNotBeLoaded: 'Impfzentren konnten für den derzeitigen Kartenausschnitt nicht geladen werden'
   }
