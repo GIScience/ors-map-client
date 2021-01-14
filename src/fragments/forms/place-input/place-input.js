@@ -262,6 +262,10 @@ export default {
       const canSwitch = this.model.nameIsCoord()
       return canSwitch
     },
+    searchAvailable () {
+      let available = appConfig.supportsSearchMode
+      return available
+    },
     /**
      * Determines if the place input floating menu button is availabel for the current place input
      */
@@ -498,7 +502,11 @@ export default {
           this.debounceTimeoutId = setTimeout(function () {
             if (context.supportSearch && (event.key === 'Enter')) {
               context.focused = false
-              context.sendToSearchMode()
+              if (context.searchAvailable) {
+                context.sendToSearchMode()
+              } else {
+                context.autocompleteSearch()
+              }
             } else {
               context.autocompleteSearch()
             }

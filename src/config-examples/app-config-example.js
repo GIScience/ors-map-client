@@ -19,7 +19,8 @@ const appConfig = {
   setCustomMenuIcons: true,
   defaultLocale: 'en-us', // only set as default a locale that is present in the app. By default they are: 'en-us', 'de-de' and 'pt-br'
   orsApiKey: 'put-here-an-ors-api-key',
-  useUserKey: true,
+  useUserKey: false,
+  publicApiKeyUrl: 'https://openrouteservice.org/wp-json/ors-api/v1/weathercheck',
   bitlyApiKey: 'put-the-bitly-api-key-here',
   bitlyLogin: 'put-the-bitly-login-here',
   maxPlaceInputs: 15, // Don't change this unless you know what your doing
@@ -29,22 +30,22 @@ const appConfig = {
   footerDevelopedByLink: 'https://www.heigit.org/',
 
   supportsPlacesAndDirections: true, // If thw whole places and directions feature is supported/enabled in the application
-  supportsIsochrones: true, // If isochrones is supported/enabled in the application
+  supportsIsochrones: false, // If isochrones is supported/enabled in the application
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
-  supportsDirections: true, // If the directions funcionality is available
+  supportsDirections: false, // If the directions funcionality is available
   sidebarStartsOpenInheighResolution: false, // if the sidebar must start open in heigh resolution
   defaultTileProvider: 'osm', // the default tipe provider
   supportsAvoidPolygonDrawing: true, // if the avoid polygon drawing tools must be available on the map view
   distanceMeasureToolAvailable: true, // if the polyline distance measure tool must be available on the map view
   accessbilityToolAvailable: true, // if the accessibility tool must be available on the map view
   fitAllFeaturesToolAvailable: true, // if the fitAllFeatures to0l must be available on the map view
-  supportsClusteredMarkers: false, // if clusted markers is supported (then markers with `clustered=true` property will be clustered)
+  supportsClusteredMarkers: true, // if clusted markers is supported (then markers with `clustered=true` property will be clustered)
   supportsSearchBottomCarousel: true, // if the bottom carousel with the search results must be displayed or not.
 
   // The map tile providers available. At least one must be present
   mapTileProviders: [
     {
-      name: 'Open Street Maps',
+      name: 'OpenStreetMaps',
       id: 'osm',
       visible: false,
       attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',

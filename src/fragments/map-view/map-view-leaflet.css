@@ -20,7 +20,15 @@
 }
 
 .map-view >>> .leaflet-popup-content {
-  /*max-width: 170px;*/
+  max-width: 400px;
   word-break: break-all;
   min-width: 150px;
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.map-view.low-resolution >>> .leaflet-popup-content {
+  max-width: 200px;
+  max-height: 300px;
 }
