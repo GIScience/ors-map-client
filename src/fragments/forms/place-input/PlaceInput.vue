@@ -19,7 +19,7 @@
           @focus="inputFocused($event)"
           @keyup="changed($event)"
           @click:clear="() => placeCleared(index)">
-          <template v-slot:append>
+          <template v-slot:append v-if="searchAvailable">
             <v-btn v-if="appendBtn === 'search'" icon small flat class="append-input-btn" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
               @click="sendToSearchMode()">
               <v-icon left>search</v-icon>
