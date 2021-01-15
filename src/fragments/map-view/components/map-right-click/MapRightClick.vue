@@ -1,5 +1,5 @@
 <template>
-  <box class="right-click-box" background="white" closable @closed="closed" v-if="show" :style="{left: rightClickPopUpX, top: rightClickPopUpY}" customClass="right-context-menu" >
+  <box ref="rightClickBox" class="right-click-box" background="white" closable @closed="closed" v-if="show" :style="{left: rightClickPopUpX, top: rightClickPopUpY}" customClass="right-context-menu" >
     <div slot="header">{{$t('mapRightClick.options')}}</div>
     <div slot="content">
       <v-btn v-if="canAddStop" flat small :title="$t('mapRightClick.addDestinationToRoute')" @click="rightClickEvent('addDestinationToRoute')" class="right-click-btn" >{{$t('mapRightClick.addDestinationToRoute')}}</v-btn><br v-if="canAddStop">

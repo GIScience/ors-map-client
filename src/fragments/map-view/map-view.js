@@ -187,6 +187,14 @@ export default {
   },
   computed: {
     /**
+     * Determines if the my location btn is available
+     * @returns {Boolean}
+     */
+    supportsMyLocationBtn () {
+      let available = appConfig.supportsMyLocationBtn
+      return available
+    },
+    /**
      * Determines if the distance measure tool is available
      * @returns {Boolean}
      */

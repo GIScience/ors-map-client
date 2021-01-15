@@ -41,6 +41,8 @@ const appConfig = {
   fitAllFeaturesToolAvailable: true, // if the fitAllFeatures to0l must be available on the map view
   supportsClusteredMarkers: true, // if clusted markers is supported (then markers with `clustered=true` property will be clustered)
   supportsSearchBottomCarousel: true, // if the bottom carousel with the search results must be displayed or not.
+  supportsSearchMode: false, // if the search mode is supported
+  supportsMyLocationBtn: false, // if the my location btn is supported on the map view
 
   // The map tile providers available. At least one must be present
   mapTileProviders: [
