@@ -4,14 +4,14 @@
 
 // THE CODE BELOW IS COMMENTED out BECAUSE THEY ARE JUST EXAMPLES
 
-
+/*
 import main from '@/main'
-import TargetPois from '@/plugins/target-pois/target-pois.js'
+import PluginExample from '@/plugins/plugin-example/plugin-example.js'
 
 // Create a var that will have a reference to the
 // plugin instante when it is instantiated in 
 // appLoaded hook defined below.
-var targetPois
+var pluginExample
 
 const appHooks = main.getInstance().appHooks
 
@@ -24,7 +24,7 @@ const appHooks = main.getInstance().appHooks
 // parameter value that is passed when the hook is run.
 
 appHooks.add('appLoaded', (vueInstance) => {
-  targetPois = new TargetPois(vueInstance)
+  pluginExample = new PluginExample(vueInstance)
   // Do something when the app is loaded
 }, 1)
 
@@ -36,13 +36,13 @@ appHooks.add('appLoaded', (vueInstance) => {
 // these hooks call a plugin method/function.
 
 appHooks.add('catchAll', (hookName, hookData) => {
-  if (targetPois && typeof targetPois[hookName] === 'function') {
-    return targetPois[hookName](hookData)
+  if (pluginExample && typeof pluginExample[hookName] === 'function') {
+    return pluginExample[hookName](hookData)
   } else {
     return hookData // this return is always necessary
   }
 }, 1)
-/*
+
 // #### INDIVIDUAL HOOKS DEFINITION ###
 
 // If you want to define the hooks individually, 
@@ -55,7 +55,7 @@ appHooks.add('mapViewDataChanged', (mapViewData) => {
 appHooks.add('mapReady', (hookData) => {
   // hookData has the following structure {context: Object, map: Object}
   // custom map controls/components can be added via map objects 
-  // or via context.customMapControlsContainerRef (a vue ref for an emptyy container inside the map view)
+  // or via hookData.context.customMapControlsContainer (a vue ref for an emptyy container inside the map view)
   pluginExample.mapReady(hookData)
 }, 1)
 
@@ -394,7 +394,12 @@ appHooks.add('avoidPolygonBtnTraslations', (translationsObject) => {
 })
 
 appHooks.add('zoomChanged', (hookData) => {
-  // // hookData has the following structure { zoom: Object, map: Object, context: Object}
+  // hookData has the following structure { zoom: Object, map: Object, context: Object}
+  // Do something
+})
+
+appHooks.add('rightClickContentReady', (hookData) => {
+  // hookData has the following structure = {context: Object, containerRef: Object, latlng: Object}
   // Do something
 })
 

@@ -109,7 +109,7 @@
       <!-- highlight extra info polyline -->
       <extra-info-highlight v-if="extraInfo" @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" :extra-info="extraInfo" :polyline-data="activeRouteData.geometry.coordinates"/>
       <l-height-graph v-if="isAltitudeModalOpen" @closed="closeAltitudeInfo" lg8 sm11 :data="localMapViewData.rawData" :options="lHeightGraphOptions"/>
-      <my-location class="my-location-btn" :active="myLocationActive" @updateLocation="updateMyLocation"></my-location>
+      <my-location v-if="supportsMyLocationBtn" class="my-location-btn" :active="myLocationActive" @updateLocation="updateMyLocation"></my-location>
       <img class="over-brand" v-if="showBrand" src="@/assets/img/heigit-and-hd-uni.png" :alt="$t('global.brand')" :title="$t('global.brand')">
 
       <!-- the container below might be used to to programatically add controls/components -->
@@ -134,7 +134,3 @@
 <style src="./map-view-measurer.css"></style>
 <style src="./map-view-draw.css"></style>
 <style scoped src="./map-view-leaflet.css"></style>
-
-
-
-

@@ -599,7 +599,13 @@ export default {
     // telling it to update the page title
     this.eventBus.$emit('titleChanged', this.$t('maps.pageTitle'))
     this.$store.commit('setDisplayFooter', false)
-    this.$store.commit('setLeftSideBarIsOpen', false)
+
+    // Set sidebar initial state (open/closed)
+    let sidebarStartOpen = false
+    if (appConfig.sidebarStartsOpenInHeighResolution && this.$highResolution) {
+      sidebarStartOpen = true
+    }
+    this.$store.commit('setLeftSideBarIsOpen', sidebarStartOpen)
 
     const context = this
     // Listen to the mapViewDataChanged event and call the

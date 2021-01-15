@@ -9,30 +9,12 @@ import main from '@/main'
 
 const orsParamsParser = {
   /**
-   * Build the args object to be used in search places request
-   * @param {String} placeName
-   * @returns {Object} args
-   */
-  buildPlaceSearchArgs: (placeName) => {
-    // build the args object
-    const args = {
-      text: placeName,
-      size: 10,
-      focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng]
-    }
-
-    orsParamsParser.setFilters(args, OrsMapFilters, constants.filterTypes.geocodeSearch)
-    main.getInstance().appHooks.run('placeSearchArgsCreated', args)
-    return args
-  },
-
-  /**
    * Build the args object to be used in atocomplete places request
    * @param {*} placeName
    * @param {Boolean} restrictToBbox - restricct the search to stored bbox
    * @returns {Object} args
    */
-  buildAutocompleteArgs: (placeName, restrictToBbox = false) => {
+  buildPlaceSearchArgs: (placeName, restrictToBbox = false) => {
     // build the args object
     const args = {
       text: placeName,
@@ -53,7 +35,7 @@ const orsParamsParser = {
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
     orsParamsParser.setFilters(args, OrsMapFilters, constants.services.autocomplete)
-    main.getInstance().appHooks.run('autocompleteArgsCreated', args)
+    main.getInstance().appHooks.run('placeSearchArgsCreated', args)
     return args
   },
 

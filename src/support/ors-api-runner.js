@@ -57,9 +57,9 @@ const Geocode = (term, size = 10) => {
   const client = new OrsApiClient.Geocode({
     api_key: mapSettings.apiKey,
     host: mapSettings.apiBaseUrl,
-    service: mapSettings.endpoints.autocomplete // using autocomplete because it is faster
+    service: mapSettings.endpoints.geocodeSearch
   })
-  const args = OrsParamsParser.buildAutocompleteArgs(term)
+  const args = OrsParamsParser.buildPlaceSearchArgs(term)
   args.size = size
   return new Promise((resolve, reject) => {
     client.geocode(args).then((response) => {
@@ -120,18 +120,23 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
     
     let promises = []
 
-    // Build args to search for address only
-    let addressesArgs = OrsParamsParser.buildAutocompleteArgs(term, false)
+    // Build args to search for localities only
+    let localityArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
+    localityArgs.size = 1
+    localityArgs.layers = ['locality']
+    promises.push(client.geocode(localityArgs))   
+    main.getInstance().appHooks.run('placeSearchlocalityArgsDefined', localityArgs)
+
+    // Build args to search for address only (without locality)
+    let addressesArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
     addressesArgs.size = quantity
-    
-    // Priority administrative places and addresses
-    addressesArgs.layers = ['country', 'region', 'macrocounty', 'borough', 'macroregion', 'county', 'locality', 'neighbourhood', 'borough', 'street', 'address', 'localadmin']
+    addressesArgs.layers = ['country', 'region', 'macrocounty', 'borough', 'macroregion', 'county', 'neighbourhood', 'borough', 'street', 'address', 'localadmin']
     promises.push(client.geocode(addressesArgs))   
     main.getInstance().appHooks.run('placeSearchAddressArgsDefined', addressesArgs)
 
     // Build a second query that searchs for everything, including venues
     const restrictToBbox = restrictArea && mapSettings.prioritizeSearchingForNearbyPlaces
-    let poisArgs = OrsParamsParser.buildAutocompleteArgs(term, restrictToBbox)
+    let poisArgs = OrsParamsParser.buildPlaceSearchArgs(term, restrictToBbox)
     poisArgs.size = quantity
     poisArgs.layers = ['venue'] // venue = POI 
     promises.push(client.geocode(poisArgs)) 
@@ -155,21 +160,37 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
  */
 const buildPlacesSearchResult = (responses, quantity) => {
   let features = []
-  // By default, get all the features of the administrative places list
-  let adminFeatures = responses[0].features
 
-  // If there are administrative places and also places 
-  // from POIs (venues) then merge them into the collection
-  let poisFeatures = responses.length === 2 ? responses[1].features : []
+  // Get the locality from the list, if available
+  if (Array.isArray(responses) && responses.length > 0) {
+    let localityFeatures = responses[0].features
+    if(localityFeatures && localityFeatures.length > 0) {
+      quantity--
+    }
   
-  if (poisFeatures.length > 0) {
-    let amountTobGetFromPOIsList = (quantity / 2) > poisFeatures.length ? quantity / 2 : poisFeatures.length
-    let amountTobGetFromAdminList = quantity  - amountTobGetFromPOIsList
+    // By default, get all the features of the administrative places list
+    let adminFeatures = []
+    if (responses.length > 1) {
+      adminFeatures = responses[1].features
+    }
+  
+    // If there are administrative places and also places 
+    // from POIs (venues) then merge them into the collection
+    let poisFeatures = responses.length === 3 ? responses[2].features : []
 
-    features = adminFeatures.slice(0, amountTobGetFromAdminList)
-    features = features.concat(poisFeatures.slice(0, amountTobGetFromPOIsList))
-  } else {
-    features = adminFeatures
+    if (localityFeatures.length === 1) {
+      features.push(localityFeatures[0])
+    }  
+    
+    if (poisFeatures.length > 0) {          
+      let half = Math.round((quantity / 2))
+      let amountTobGetFromPOIsList = half > poisFeatures.length ? half : poisFeatures.length
+      let amountTobGetFromAdminList = quantity - amountTobGetFromPOIsList
+      features = features.concat(adminFeatures.slice(0, amountTobGetFromAdminList))
+      features = features.concat(poisFeatures.slice(0, amountTobGetFromPOIsList))
+    } else {
+      features = features.concat(adminFeatures)
+    }
   }
 
   features = sortFeatures(features)
@@ -188,8 +209,10 @@ const sortFeatures  = (features) => {
     return features
   }
   for (let key in features) {    
+    // Se the distance of each location considering the current map center
     let featureLatLng = GeoUtils.buildLatLong(features[key].geometry.coordinates[1], features[key].geometry.coordinates[0])
     features[key].distance = GeoUtils.calculateDistanceBetweenLocations(store.getters.mapSettings.mapCenter, featureLatLng, store.getters.mapSettings.unit)    
+    // Add a unique id for each feature
     features[key].properties.unique_id = features[key].properties.id || `osm_id_${features[key].properties.osm_id}`
   }
   // Get unique items

@@ -105,6 +105,18 @@ export default {
       this.rightClickPopUpY = `${y}px`
       this.clickLatlng = event.latlng
       this.showRightClickPopup = true
+      this.callHook()
+    },
+    callHook () {
+      setTimeout(() => {
+        let el = this.$el.querySelectorAll('.box-content')
+        if (!el || el.length === 0) {
+          this.callHook()
+        } else {
+          let hookData = {context: this, containerRef: el[0], latlng: this.clickLatlng}
+          this.$root.appHooks.run('rightClickContentReady', hookData)
+        }
+      }, 200)
     }
   },
   created () {
@@ -115,5 +127,5 @@ export default {
     this.eventBus.$on('mapLeftClicked', () => {
       context.showRightClickPopup = false
     })
-  }
+  },
 }

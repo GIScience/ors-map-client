@@ -1,13 +1,14 @@
 .map-form-btn {
-  width: 50px;
   float: left;
-  padding-right: 5px;
+  width: 54px;
 }
 
 .btn-legend {
   font-size: 9px;
   text-align: center;
   word-break: break-word;
+  max-width: 58px;
+  margin-left: -4px;
 }
 
 .map-form-btn .v-btn {

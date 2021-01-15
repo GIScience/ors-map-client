@@ -187,6 +187,9 @@ git remote rename origin ors-map-client-origin
 
 # Add your remote as the origin one
 git remote add origin <git-repo-url>
+
+# Set your new origin as the default upstream
+git branch --set-upstream-to=origin/master
 ```
 
 After doing this we recommend you to remove from gitignore the lines that makes git ignore the folders `/src/config`, `src/plugins` and eventually `/static` and run the initial push to a the just defined new origin repository, with the following command:
