@@ -184,7 +184,7 @@ const buildPlacesSearchResult = (responses, quantity) => {
     
     if (poisFeatures.length > 0) {          
       let half = Math.round((quantity / 2))
-      let amountTobGetFromPOIsList = half > poisFeatures.length ? half : poisFeatures.length
+      let amountTobGetFromPOIsList = poisFeatures.length > half ? half : poisFeatures.length
       let amountTobGetFromAdminList = quantity - amountTobGetFromPOIsList
       features = features.concat(adminFeatures.slice(0, amountTobGetFromAdminList))
       features = features.concat(poisFeatures.slice(0, amountTobGetFromPOIsList))
