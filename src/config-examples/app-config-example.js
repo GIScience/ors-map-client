@@ -19,8 +19,7 @@ const appConfig = {
   setCustomMenuIcons: true,
   defaultLocale: 'en-us', // only set as default a locale that is present in the app. By default they are: 'en-us', 'de-de' and 'pt-br'
   orsApiKey: 'put-here-an-ors-api-key',
-  useUserKey: false,
-  publicApiKeyUrl: 'https://openrouteservice.org/wp-json/ors-api/v1/weathercheck',
+  useUserKey: true,
   bitlyApiKey: 'put-the-bitly-api-key-here',
   bitlyLogin: 'put-the-bitly-login-here',
   maxPlaceInputs: 15, // Don't change this unless you know what your doing
@@ -30,10 +29,10 @@ const appConfig = {
   footerDevelopedByLink: 'https://www.heigit.org/',
 
   supportsPlacesAndDirections: true, // If thw whole places and directions feature is supported/enabled in the application
-  supportsIsochrones: false, // If isochrones is supported/enabled in the application
+  supportsIsochrones: true, // If isochrones is supported/enabled in the application
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
-  supportsDirections: false, // If the directions funcionality is available
-  sidebarStartsOpenInheighResolution: false, // if the sidebar must start open in heigh resolution
+  supportsDirections: true, // If the directions funcionality is available
+  sidebarStartsOpenInHeighResolution: false, // if the sidebar must start open in heigh resolution
   defaultTileProvider: 'osm', // the default tipe provider
   supportsAvoidPolygonDrawing: true, // if the avoid polygon drawing tools must be available on the map view
   distanceMeasureToolAvailable: true, // if the polyline distance measure tool must be available on the map view
@@ -41,8 +40,8 @@ const appConfig = {
   fitAllFeaturesToolAvailable: true, // if the fitAllFeatures to0l must be available on the map view
   supportsClusteredMarkers: true, // if clusted markers is supported (then markers with `clustered=true` property will be clustered)
   supportsSearchBottomCarousel: true, // if the bottom carousel with the search results must be displayed or not.
-  supportsSearchMode: false, // if the search mode is supported
-  supportsMyLocationBtn: false, // if the my location btn is supported on the map view
+  supportsSearchMode: true, // if the search mode is supported
+  supportsMyLocationBtn: true, // if the my location btn is supported on the map view
 
   // The map tile providers available. At least one must be present
   mapTileProviders: [
