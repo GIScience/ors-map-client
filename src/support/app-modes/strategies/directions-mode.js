@@ -4,6 +4,7 @@ import AppRouteData from '@/models/app-route-data'
 import constants from '@/resources/constants'
 import Utils from '@/support/utils'
 import RouteUtils from '@/support/route-utils'
+import appConfig from '@/config/app-config'
 import main from '@/main'
 
 /**
@@ -19,7 +20,7 @@ class DirectionsMode {
     // rendered as model in in its respective key
     OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
     appRouteData.options = options
-    appRouteData.options.zoom = constants.initialMapMaxZoom
+    appRouteData.options.zoom = appConfig.initialMapMaxZoom
     return appRouteData
   }
 

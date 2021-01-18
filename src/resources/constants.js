@@ -24,8 +24,6 @@ const constants = {
   profileFilterName: 'profile',
   vehicleTypeFilterName: 'vehicle_type',
   responseErrorCodePath: 'response.body.error.code',
-  initialMapMaxZoom: 18,
-  initialZoomLevel: 12,
   dataOrigins: {
     directions: '/directions',
     isochrones: '/isochrones',

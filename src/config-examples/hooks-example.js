@@ -26,6 +26,12 @@ const appHooks = main.getInstance().appHooks
 appHooks.add('appLoaded', (vueInstance) => {
   pluginExample = new PluginExample(vueInstance)
   // Do something when the app is loaded
+
+  // You can potentially change the translations value before they a rendered
+  let locale = vueInstance.$i18n.locale
+  let messages = vueInstance.$i18n.messages[locale]
+  messages.placeInput.findAPlace = 'Custom place input'
+  vueInstance.$i18n.setLocaleMessage(locale, messages) 
 }, 1)
 
 // The catch all hook allows, as the name says, cathing all

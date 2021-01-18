@@ -53,14 +53,28 @@ const fetchApiInitialData = () => {
  * @param {String} mapSettings 
  * @returns {String}
  */
-const findFittingLocale = (storedLocale) => {
-  let locale =  storedLocale || window.navigator.language || window.navigator.userLanguage
+const setFittingLocale = (storedLocale) => {
+  var deviceLocale = window.navigator.language || window.navigator.userLanguage
+  let locale =  storedLocale || deviceLocale
   if (locale) {
     locale = locale.toLowerCase()
   }
   let isLocaleValid = lodash.find(settingsOptions.appLocales, (l) => {
     return l.value === locale
   })
+  // If the exact locale of the device is not available, try at least to use the language 
+  if (!isLocaleValid) {
+    let language = locale
+    if (locale.length > 2 && locale.indexOf('-') > -1) {
+      language = locale.split('-')[0]
+    }
+    isLocaleValid = lodash.find(settingsOptions.appLocales, (l) => {
+      return l.value.split('-')[0] === language
+    })
+    if (isLocaleValid) {
+      locale = isLocaleValid.value
+    }    
+  }
   // If the selected locale is not supported, set the default
   if (!isLocaleValid) {
     locale = appConfig.defaultLocale
@@ -85,13 +99,14 @@ const saveApiData = (apiKey, endpoints) => {
   // Get map settings from local storage
   const serializedMapSettings = localStorage.getItem('mapSettings')
 
+  var locale = null
+
   // Restore settings stored in local storage, if available
   if (serializedMapSettings) {
     const storedMapSettings = JSON.parse(serializedMapSettings)
     for (const key in storedMapSettings) {
       if (key === 'locale') {
-        let fittingLocale = findFittingLocale(storedMapSettings.locale)
-        mapSettings.locale = fittingLocale
+        locale = storedMapSettings.locale
       } else {
         if (typeof storedMapSettings[key] === 'object') {
           mapSettings[key] = Object.assign({}, storedMapSettings[key])
@@ -106,10 +121,8 @@ const saveApiData = (apiKey, endpoints) => {
     // If the settings was saved in local storage
     // then this option is must start as true
     mapSettings.saveToLocalStorage = true
-  }
-
-  // Save the map settings
-  store.commit('mapSettings', mapSettings)
+  }  
+  storeLocale(mapSettings, locale)
 
   let mainVue = main
   if (mainVue) { // main maz be not available when app is loading
@@ -121,6 +134,33 @@ const saveApiData = (apiKey, endpoints) => {
 
   // Save the data acquired flag as true
   store.commit('dataAcquired', true)
+}
+
+/**
+ * Store the map settings locale and routing locale
+ * @param {*} mapSettings 
+ * @param {*} locale 
+ */
+const storeLocale = (mapSettings, locale = null) => {
+  let fittingLocale = setFittingLocale(locale)
+  mapSettings.locale = fittingLocale
+
+  let validroutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) => {
+    return l.value === fittingLocale
+  })
+  if (validroutingLocale) {
+    settingsOptions.routingInstructionsLocale = locale
+  } else {
+    validroutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) => {
+      return l.value === fittingLocale.split('-')[0]     
+    })
+    if (validroutingLocale) {
+      mapSettings.routingInstructionsLocale = validroutingLocale.value
+    }
+  }
+
+  // Save the map settings
+  store.commit('mapSettings', mapSettings)
 }
 /**
  * check if the embed is in the url params and set the embed state
@@ -136,14 +176,10 @@ const checkAndSetEmbedState = () => {
     let parts = location.href.split('/embed/')
     if (isEmbed && Array.isArray(parts) && parts.length > 1 && parts[1] ) {
       let locale = parts[1]
-      let validLocales = settingsOptions.appLocales
-      let localeSupported = lodash.find(validLocales, ['value', locale])
+      locale = setFittingLocale(locale)
 
-      if (lodash.isObject(localeSupported)) {
-        let settings = store.getters.mapSettings
-        settings.locale = locale
-        store.commit('mapSettings', settings)      
-      }
+      let settings = store.getters.mapSettings
+      storeLocale(settings, locale) 
     }
     resolve(isEmbed)
   })

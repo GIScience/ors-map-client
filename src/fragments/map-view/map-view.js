@@ -28,7 +28,7 @@
  * @emits setInputPlace
  */
 
-import { LMap, LTileLayer, LMarker, LLayerGroup, LTooltip, LPopup, LControlZoom, LControlAttribution, LControlScale, LControlLayers, LGeoJson, LPolygon, LCircle, LCircleMarker } from 'vue2-leaflet'
+import { LMap, LTileLayer, LLayerGroup, LTooltip, LPopup, LControlZoom, LControlAttribution, LControlScale, LControlLayers, LGeoJson, LPolygon, LCircle, LCircleMarker } from 'vue2-leaflet'
 
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
 import ExtraInfoHighlight from './components/extra-info-highlight/ExtraInfoHighlight'
@@ -155,9 +155,9 @@ export default {
       tileProviders: [], // list fo tiles provider that will be set via setProviders
       layersPosition: 'topright',
       map: null, // map object reference. it will will be defined later
-      zoomLevel: constants.initialZoomLevel,
+      zoomLevel: null,
       mapDataBuilder: null,
-      initialMaxZoom: constants.initialMapMaxZoom,
+      initialMaxZoom: appConfig.initialMapMaxZoom,
       localMapViewData: new MapViewData(), // we use a local copy of the mapViewData to be able to modify it
       mainRouteColor: theme.primary,
       alternativeRouteColor: constants.alternativeRouteColor,
@@ -1263,7 +1263,6 @@ export default {
       if (this.dataBounds) {
         // we set the max zoom in level and then fit the bounds
         // Temporally disabled the zoomlevel seeting to check impacts (it seems not to be necessary anymore)
-        // this.zoomLevel = this.initialMaxZoom
 
         // To make it work properly we have to wait a bit
         // before fitting the map bounds

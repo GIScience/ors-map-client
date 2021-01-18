@@ -17,7 +17,7 @@ class PluginExample {
    * to be called on the hooks.js the `appLoaded` hook
    */
   constructor (vueInstance) {
-    this.vueInstance = vueInstance
+    this.vueInstance = vueInstance     
   }
 
   /**

@@ -75,8 +75,9 @@ let VueInstance = null
 AppLoader.load().then(() => {
   let i18n = I18nBuilder.build()
 
+  let mapSettingsLocale = store.getters.mapSettings.locale
   // In some previous version of this app the `en` locale was stored as `en-us`
-  let locale = store.getters.mapSettings.locale === 'en' ? 'en-us' : store.getters.mapSettings.locale
+  let locale = mapSettingsLocale === 'en' ? 'en-us' : mapSettingsLocale
   // Set locale from store/local storage
   i18n.locale = locale
 

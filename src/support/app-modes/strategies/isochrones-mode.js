@@ -4,6 +4,7 @@ import AppRouteData from '@/models/app-route-data'
 import constants from '@/resources/constants'
 import Utils from '@/support/utils'
 import RouteUtils from '@/support/route-utils'
+import appConfig from '@/config/app-config'
 import store from '@/store/store'
 import main from '@/main'
 
@@ -17,7 +18,7 @@ class IsochronesMode {
 
     OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.isochrones)
     appRouteData.options = options
-    appRouteData.options.zoom = constants.initialMapMaxZoom
+    appRouteData.options.zoom = appConfig.initialMapMaxZoom
     return appRouteData
   }
 
