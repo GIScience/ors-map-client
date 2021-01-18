@@ -28,7 +28,7 @@ export default {
     toggleDirect: 'Direkter Weg (Luftlinie) zu nächstem Punkt an/aus',
     clickOnTheMapToSelectAPlace: 'Klicke auf die Karte um einen Ort auszuwählen',
     clickOnTheMapBtnToPickAPlace: 'Diesen Button klicken um einen Ort auf der Karte auszuwählen',
-    goToDirectionsMode: 'Klicke den {Directions translation} Button um zum Routing-Modus zu wechseln',
+    goToDirectionsMode: 'Klicke den Routenplaner button um zum Routing-Modus zu wechseln',
     clickToSearchAndShowResultsOnTheMap: 'Hier klicken um zu Suchen und die Ergebnisse auf der Karte anzuzeigen'
   }
 }
