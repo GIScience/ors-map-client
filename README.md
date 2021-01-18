@@ -235,7 +235,7 @@ Follow the steps below to add a language.
 
   - Inside the `build` method, add the new language placeholder object to the messages object. For this example you would add `, 'fr-fr': {}`
   
-  - Still inside the `build` method, add the result of the new language building to the previously created message object. In this example you would add: `i18n.messages['en-us'] = frFRTranslations.build()`
+  - Still inside the `build` method, add the result of the new language building to the previously created message object. In this example you would add: `i18n.messages['fr-fr'] = frFRTranslations.build()`
   
   - Save all the files changed and rebuild the application.
 
