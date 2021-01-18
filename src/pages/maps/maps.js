@@ -23,7 +23,7 @@ export default {
     isSettingsOpen: false,
     isAboutOpen: false,
     simpleMapSearcHeight: 65,
-    defaultZoom: 12,
+    defaultZoom: appConfig.initialZoomLevel,
     mapViewData: new MapViewData(),
     bottomNavActive: false,
     bottomNavHeight: 310,

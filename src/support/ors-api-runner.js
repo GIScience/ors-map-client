@@ -127,10 +127,10 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
     promises.push(client.geocode(localityArgs))   
     main.getInstance().appHooks.run('placeSearchlocalityArgsDefined', localityArgs)
 
-    // Build args to search for address only (without locality)
+    // Build args to search for addresses
     let addressesArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
     addressesArgs.size = quantity
-    addressesArgs.layers = ['country', 'region', 'macrocounty', 'borough', 'macroregion', 'county', 'neighbourhood', 'borough', 'street', 'address', 'localadmin']
+    addressesArgs.layers = ['country', 'region', 'macrocounty', 'locality', 'borough', 'macroregion', 'county', 'neighbourhood', 'borough', 'street', 'address', 'localadmin']
     promises.push(client.geocode(addressesArgs))   
     main.getInstance().appHooks.run('placeSearchAddressArgsDefined', addressesArgs)
 

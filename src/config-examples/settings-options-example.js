@@ -36,7 +36,7 @@ const settingsOptions = {
     { text: 'Português BR', value: 'pt-br' }
   ],
   tileServices: [
-    { text: 'Open Street Maps', value: 'osm' },
+    { text: 'OpenStreetMaps', value: 'osm' },
     { text: 'World Imagery', value: 'world-imagery' },
     { text: 'Topography', value: 'topography' },
     { text: 'Transport Dark', value: 'transport-dark' },
