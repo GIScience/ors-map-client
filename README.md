@@ -270,7 +270,7 @@ For a detailed explanation on how webpack works, check out the [guide](http://vu
 
 ### Contribute ###
 
-#### Branch's policy ####
+#### Branch policy ####
 
 The `develop` branch is used as the working branch. Anything new goes to develop and then it is tested, committed and finally merged into `master`. So, develop has always the latest version (latest but not necessarily the production one) while `master` has the production version. Considering this, any merge request must be tone targeting `develop`. If you want to work on a feature we recommend you to create a feature branch then when it is finished send a merge request to `develop`.
 
