@@ -7,7 +7,7 @@
           </div>
         <div slot="content" >
           <pretty-code-viewer v-if="textIsMarkdown" :source="infoText" max-height-minimized="100%"></pretty-code-viewer>
-          <div v-else>{{infoText}}</div>
+          <div v-else v-html="infoText"></div>
           <div class="code-container" v-if="code">
             <pretty-code-viewer :level="3" :source="code" max-height-minimized="100%"></pretty-code-viewer>
           </div>
