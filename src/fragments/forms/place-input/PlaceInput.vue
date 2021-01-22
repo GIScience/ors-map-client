@@ -115,15 +115,16 @@
             </v-flex>
           </v-layout>
           <v-list-tile @click.stop="suggestionClicked(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'
-            :title="placeSuggested.placeName">
+            :title="placeSuggested.placeName.trim()">
             <v-list-tile-action class="hidden-sm-and-down">
               <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city'">location_city</v-icon>
+              <img width="25px" v-else-if="placeSuggested.properties.layer === 'country'" src="@/assets/img/country-icon.png" height="auto" />
               <v-icon v-else>place</v-icon>              
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title :title="placeSuggested.placeName">
-                <v-btn flat small @click.stop="suggestionClicked(placeSuggested)" class="no-padding no-margin no-capitalize">
-                  {{ placeSuggested.placeName }}
+              <v-list-tile-title :title="placeSuggested.placeName.trim()">
+                <v-btn style="min-width: fit-content" flat small @click.stop="suggestionClicked(placeSuggested)" class="no-padding no-margin no-capitalize">
+                  {{ placeSuggested.placeName.trim() }}
                 </v-btn>
               </v-list-tile-title>
               <v-list-tile-sub-title>
