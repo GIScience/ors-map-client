@@ -71,6 +71,7 @@ export default {
     avoidPolygonRemoved: 'Avoid polygon removed',
     avoidPolygonNotRemoved: 'It was not possible to remove the avoid polygon',
     avoidPolygonNotSaved: 'It was not possible to save the avoid polygon',
-    polygonEditModeEnabled: 'When you finish editing, click anywhere to save the changes'
+    polygonEditModeEnabled: 'When you finish editing, click anywhere to save the changes',
+    customTileProvider: 'Custom tile provider defined by the user'
   }
 }

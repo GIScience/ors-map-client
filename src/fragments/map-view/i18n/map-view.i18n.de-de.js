@@ -71,6 +71,7 @@ export default {
     avoidPolygonRemoved: 'Polygon vermeiden entfernt',
     avoidPolygonNotRemoved: 'Es war nicht möglich, das Ausweichpolygon zu entfernen',
     avoidPolygonNotSaved: 'Es war nicht möglich, das Vermeidungspolygon zu speichern',
-    polygonEditModeEnabled: 'Wenn Sie die Bearbeitung abgeschlossen haben, klicken Sie auf eine beliebige Stelle, um die Änderungen zu speichern'
+    polygonEditModeEnabled: 'Wenn Sie die Bearbeitung abgeschlossen haben, klicken Sie auf eine beliebige Stelle, um die Änderungen zu speichern',
+    customTileProvider: 'Vom Benutzer definierter Kachelanbieter'
   }
 }

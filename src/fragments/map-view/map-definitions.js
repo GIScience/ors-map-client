@@ -1,5 +1,6 @@
 import store from '@/store/store'
 import appConfig from '@/config/app-config'
+import main from '@/main'
 
 const mapDefinitions = {
   /**
@@ -94,20 +95,22 @@ const mapDefinitions = {
    */
   getProviders () {
     const defaultTileProvider = store.getters.mapSettings.defaultTileProvider || 'osm'
-    const providers = appConfig.mapTileProviders
+    var providers = appConfig.mapTileProviders
 
     // Add custom tile servive if defined in settings
     const customTileProviderUrl = store.getters.mapSettings.customTileProviderUrl
+    let vueInstance = main.getInstance()
     if (customTileProviderUrl) {
       const customTileService = [
         {
           name: 'Custom',
-          visible: defaultTileProvider === 'custom',
-          attribution: 'Custom tile provider defined by the user',
+          id: 'custom',
+          visible: false,
+          attribution: vueInstance.$t('mapView.customTileProvider'),
           url: customTileProviderUrl.toString()
         }
       ]
-      return providers.concat(customTileService)
+      providers = providers.concat(customTileService)
     }
     // Se the tile provider that is visible by default
     for (let key in providers) {
