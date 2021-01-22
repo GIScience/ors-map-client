@@ -122,7 +122,7 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
 
     // Build args to search for localities only
     let localityArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
-    localityArgs.size = 1
+    localityArgs.size = 2
     localityArgs.layers = ['locality']
     promises.push(client.geocode(localityArgs))   
     main.getInstance().appHooks.run('placeSearchlocalityArgsDefined', localityArgs)
@@ -130,7 +130,7 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
     // Build args to search for addresses
     let addressesArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
     addressesArgs.size = quantity
-    addressesArgs.layers = ['country', 'region', 'macrocounty', 'locality', 'borough', 'macroregion', 'county', 'neighbourhood', 'borough', 'street', 'address', 'localadmin']
+    addressesArgs.layers = ['country', 'region', 'macrocounty', 'borough', 'macroregion', 'county', 'neighbourhood', 'borough', 'street', 'address']
     promises.push(client.geocode(addressesArgs))   
     main.getInstance().appHooks.run('placeSearchAddressArgsDefined', addressesArgs)
 
@@ -165,7 +165,8 @@ const buildPlacesSearchResult = (responses, quantity) => {
   if (Array.isArray(responses) && responses.length > 0) {
     let localityFeatures = responses[0].features
     if(localityFeatures && localityFeatures.length > 0) {
-      quantity--
+      quantity = quantity - localityFeatures.length
+      features = features.concat(localityFeatures)
     }
   
     // By default, get all the features of the administrative places list
@@ -176,11 +177,7 @@ const buildPlacesSearchResult = (responses, quantity) => {
   
     // If there are administrative places and also places 
     // from POIs (venues) then merge them into the collection
-    let poisFeatures = responses.length === 3 ? responses[2].features : []
-
-    if (localityFeatures.length === 1) {
-      features.push(localityFeatures[0])
-    }  
+    let poisFeatures = responses.length === 3 ? responses[2].features : []    
     
     if (poisFeatures.length > 0) {          
       let half = Math.round((quantity / 2))
@@ -223,6 +220,11 @@ const sortFeatures  = (features) => {
   if (closestCityIndex > -1) {
     // Move closest city to first postion
     features.splice(0, 0, features.splice(closestCityIndex, 1)[0])
+  }
+  let closestCountryIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'country'})
+  if (closestCountryIndex > -1) {
+    // Move closest city to first postion
+    features.splice(1, 0, features.splice(closestCountryIndex, 1)[0])
   }
   return features
 }
