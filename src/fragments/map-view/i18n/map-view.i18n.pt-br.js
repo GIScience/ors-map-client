@@ -71,6 +71,7 @@ export default {
     avoidPolygonRemoved: 'Polígono a evitar excluído',
     avoidPolygonNotRemoved: 'Não foi possível excluir o polígono a evitar',
     avoidPolygonNotSaved: 'Não foi possível salvar o polígono a evitar',
-    polygonEditModeEnabled: 'Quando terminar as alterações clicke em qualquer lugar para salvar'
+    polygonEditModeEnabled: 'Quando terminar as alterações clicke em qualquer lugar para salvar',
+    customTileProvider: 'Provedor de mapa definido pelo usuário'
   }
 }
