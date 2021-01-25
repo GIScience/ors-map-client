@@ -162,6 +162,7 @@ const orsParamsParser = {
       args.range = args.range_distance
       delete args.range_distance
     }
+    main.getInstance().appHooks.run('isochronesArgsCreated', args)
     return args
   },
 
