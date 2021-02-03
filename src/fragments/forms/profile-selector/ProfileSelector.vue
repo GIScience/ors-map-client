@@ -16,12 +16,12 @@
 
     <div v-if="activeVehicleType">
       <v-chip outline small disabled color="primary">
-        {{$t('global.profile')}}: {{($t('orsMapFilters.profiles.' + activeVehicleType)).toLowerCase()}}
+        {{$t('global.profile')}}: {{($t('orsMapFilters.profiles.' + activeVehicleType))}}
       </v-chip>
     </div>
     <div v-else-if="activeProfileSlug">
       <v-chip outline small disabled color="primary">
-        {{$t('global.profile')}}: {{($t('orsMapFilters.profiles.' + activeProfileSlug)).toLowerCase()}}
+        {{$t('global.profile')}}: {{($t('orsMapFilters.profiles.' + activeProfileSlug))}}
       </v-chip>
     </div>
   </div>
