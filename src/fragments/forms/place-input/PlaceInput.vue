@@ -118,7 +118,7 @@
             :title="placeSuggested.placeName.trim()">
             <v-list-tile-action class="hidden-sm-and-down">
               <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city'">location_city</v-icon>
-              <img width="25px" v-else-if="placeSuggested.properties.layer === 'country'" src="@/assets/img/country-icon.png" height="auto" />
+              <img width="25px" v-else-if="showAreaIcon(placeSuggested)" src="@/assets/img/country-icon.png" height="auto" />
               <v-icon v-else>place</v-icon>              
             </v-list-tile-action>
             <v-list-tile-content>
@@ -129,6 +129,7 @@
               </v-list-tile-title>
               <v-list-tile-sub-title>
                 {{ $t('global.layers.'+ placeSuggested.properties.layer) }}
+                <span v-if="placeSuggested.properties.county"> - {{ placeSuggested.properties.county }} </span>
                 <span v-if="placeSuggested.properties.country"> - {{ placeSuggested.properties.country }} </span>
                 <span class="approximate-distance" :title="$t('placeInput.approximateDistance')">
                   ~{{distance(placeSuggested)}}

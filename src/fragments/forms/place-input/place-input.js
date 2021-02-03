@@ -332,6 +332,10 @@ export default {
     }
   },
   methods: {
+    showAreaIcon (place) {
+      let show = place.properties.layer === 'country' || place.properties.layer === 'region'
+      return show
+    },
     inputFocused (event) {
       event.stopPropagation()
       event.preventDefault()
