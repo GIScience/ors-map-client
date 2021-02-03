@@ -69,7 +69,7 @@ const geoUtils = {
    * @param {Place|null} highlightedPlace - place to have a corresponding marker hightlighed (red)
    * @returns {Array} of markers
    */
-  buildMarkers: (places, isRoute = false,  highlightedPlace = null) => {
+  buildMarkers: (places, isRoute = false, highlightedPlace = null) => {
     const markers = []
     if (!places || places.length === 0) {
       return []
@@ -89,7 +89,13 @@ const geoUtils = {
 
       // Build the marker
       const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName)
-      const marker = { position: { lng: place.lng, lat: place.lat }, icon: markerIcon }
+      const marker = {
+        position: {
+          lng: place.lng,
+          lat: place.lat
+        },
+        icon: markerIcon
+      }
 
       // If the way point array has the third parameter, it is its label
       marker.label = place.placeName || `${place.lng},${place.lat}`
@@ -111,10 +117,10 @@ const geoUtils = {
    * @param {Object} geojson 
    * @returns {Boolean}
    */
-  geojsonIsARectangle (geojson) {
+  geojsonIsARectangle(geojson) {
     let coordinates = geojson.geometry.coordinates[0]
     let firstVortice = coordinates[0].toString()
-    let lastVortice = coordinates[coordinates.length -1].toString()
+    let lastVortice = coordinates[coordinates.length - 1].toString()
 
     // It is a four side closed polygon
     if (coordinates.length === 5 && firstVortice === lastVortice) {
@@ -122,7 +128,7 @@ const geoUtils = {
       let topRightVortice = coordinates[1]
       let bottomRightVortice = coordinates[2]
       let bottomLeftVortice = coordinates[3]
-      
+
       let topAndBottomParallel = (topLeftVortice[1] - bottomLeftVortice[1]) === (topRightVortice[1] - bottomRightVortice[1])
       let trightAndLeftParallel = (topLeftVortice[0] - bottomLeftVortice[0]) === (topRightVortice[0] - bottomRightVortice[0])
 
@@ -139,7 +145,7 @@ const geoUtils = {
    * @param {Object} geojson 
    * @returns {String|false}
    */
-  geojsonShapeType (geojson) {
+  geojsonShapeType(geojson) {
     let type = geojson.type
     if (geojson.geometry && geojson.geometry.type) {
       type = geojson.geometry.type
@@ -158,7 +164,7 @@ const geoUtils = {
    * Get marker coordinates
    * @param {*} marker
    */
-  getMarkerCordinates (marker) {
+  getMarkerCordinates(marker) {
     const markerCoordinates = lodash.get(marker, 'data.geometry.coordinates')
     return markerCoordinates
   },
@@ -167,23 +173,23 @@ const geoUtils = {
    * Calculate geodesic area
    * @param {Array} latlngs 
    */
-  geodesicArea (latlngs) {
+  geodesicArea(latlngs) {
     return Leaflet.GeometryUtil.geodesicArea(latlngs)
   },
 
-   /**
+  /**
    * Get readable area
    * @param {Number} area 
    * @param {String} unit 
    */
-  readableArea (latlngs, unit) {
+  readableArea(latlngs, unit) {
     let area = Leaflet.GeometryUtil.geodesicArea(latlngs)
     return Leaflet.GeometryUtil.readableArea(area, unit)
   },
 
 
 
-  
+
 
   /**
    * Build a marker icon based on the color specified
@@ -217,11 +223,17 @@ const geoUtils = {
     var maxLng = null
 
     places.forEach((place) => {
-      boundsCollection.push({ lat: place.lat, lng: place.lng })
+      boundsCollection.push({
+        lat: place.lat,
+        lng: place.lng
+      })
     })
     if (Array.isArray(polyline)) {
       polyline.forEach((lngLatArr) => {
-        boundsCollection.push({ lng: lngLatArr[0], lat: lngLatArr[1] })
+        boundsCollection.push({
+          lng: lngLatArr[0],
+          lat: lngLatArr[1]
+        })
       })
     }
 
@@ -231,17 +243,22 @@ const geoUtils = {
       minLng = maxLng = place.lng
     } else {
       for (let itemKey in boundsCollection) {
-        let lngLat = boundsCollection[itemKey] 
-        minLat = minLat ===  null || lngLat.lat < minLat ? lngLat.lat : minLat
-        minLng = minLng ===  null || lngLat.lng < minLng ? lngLat.lng : minLng
-        maxLat = maxLat ===  null || lngLat.lat > maxLat ? lngLat.lat : maxLat
-        maxLng = maxLng ===  null || lngLat.lng > maxLng ? lngLat.lng : maxLng
+        let lngLat = boundsCollection[itemKey]
+        minLat = minLat === null || lngLat.lat < minLat ? lngLat.lat : minLat
+        minLng = minLng === null || lngLat.lng < minLng ? lngLat.lng : minLng
+        maxLat = maxLat === null || lngLat.lat > maxLat ? lngLat.lat : maxLat
+        maxLng = maxLng === null || lngLat.lng > maxLng ? lngLat.lng : maxLng
       }
     }
 
-    return [
-      { lon: minLng, lat: minLat },
-      { lon: maxLng, lat: maxLat }
+    return [{
+        lon: minLng,
+        lat: minLat
+      },
+      {
+        lon: maxLng,
+        lat: maxLat
+      }
     ]
   },
 
@@ -308,7 +325,9 @@ const geoUtils = {
     const row = (Math.floor((lon + 180) / 360 * Math.pow(2, zoom)))
     const column = (Math.floor((1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom)))
     return {
-      z: zoom, x: row, y: column
+      z: zoom,
+      x: row,
+      y: column
     }
   },
 
@@ -319,13 +338,19 @@ const geoUtils = {
         reject(error)
       }
       const getPositionSuccess = (position) => {
-        const location = { lng: position.coords.longitude, lat: position.coords.latitude, accuracy: position.coords.accuracy }
+        const location = {
+          lng: position.coords.longitude,
+          lat: position.coords.latitude,
+          accuracy: position.coords.accuracy
+        }
         resolve(location)
       }
       const getPositionError = (error) => {
         reject(error)
       }
-      navigator.geolocation.getCurrentPosition(getPositionSuccess, getPositionError, { enableHighAccuracy: true })
+      navigator.geolocation.getCurrentPosition(getPositionSuccess, getPositionError, {
+        enableHighAccuracy: true
+      })
     })
   },
 
@@ -381,18 +406,24 @@ const geoUtils = {
    * @param {Integer} draggedFromIndex 
    * @returns {Integer} injectPlaceIndex
    */
-  getStopInjectIndexFromPolyline (targetLattng, places, polylineArr, draggedFromIndex) {
+  getStopInjectIndexFromPolyline(targetLattng, places, polylineArr, draggedFromIndex) {
     // the default inject is the one considering promixity
     let injectPlaceIndex = geoUtils.getClosestPlaceIndex(targetLattng, places)
-    let closestPlace = places[injectPlaceIndex]    
+    let closestPlace = places[injectPlaceIndex]
     var closestPlaceIndexOnPolyline
     var minDistance = null
 
     // Find an more appropriate inject index, it this is the case
     for (let pIndex = 0; pIndex < polylineArr.length; pIndex++) {
       const polylineCoords = polylineArr[pIndex]
-      const polylineCoordsLatlng = {lat: polylineCoords[0], lng: polylineCoords[1]}
-      const placeLatlng = {lat: closestPlace.lat, lng: closestPlace.lng}
+      const polylineCoordsLatlng = {
+        lat: polylineCoords[0],
+        lng: polylineCoords[1]
+      }
+      const placeLatlng = {
+        lat: closestPlace.lat,
+        lng: closestPlace.lng
+      }
 
       // Check the place that has the shortest distace to the polyline point
       let currentDistance = geoUtils.calculateDistanceBetweenLocations(polylineCoordsLatlng, placeLatlng, 'm')
@@ -406,7 +437,7 @@ const geoUtils = {
           // Get the closest polyline point index
           closestPlaceIndexOnPolyline = pIndex
         }
-      } 
+      }
     }
     // If the index of the point where the drag started from
     // if lowest than the corresponding index of the closest place 
@@ -437,7 +468,7 @@ const geoUtils = {
    * @param {String} unit km|mi|m
    * @returns {Number}
    */
-  calculateDistanceBetweenLocations (fromLatlng, toLatlng, unit = 'km') {
+  calculateDistanceBetweenLocations(fromLatlng, toLatlng, unit = 'km') {
     const toRadians = function (deg) {
       return deg * (Math.PI / 180)
     }
@@ -469,7 +500,7 @@ const geoUtils = {
    * @param {*} places
    * @returns {Place} place
    */
-  selectPlaceByZoomLevel (zoom, places) {
+  selectPlaceByZoomLevel(zoom, places) {
     let selectedPlace = null
     if (Array.isArray(places) && places.length > 0) {
       selectedPlace = places[0]
@@ -489,25 +520,21 @@ const geoUtils = {
     return selectedPlace
   },
 
-  /**
-   * Check if a point is inside a polygon
+   /**
+   * Tests if a point is left|on|right of an infinite line.
+   * This is a JavaScript and Leaflet port of the `isLeft()` C++ function by Dan Sunday.
+   * @param {LatLng} p0 Point the polyline point
+   * @param {LatLng} p1 Point The reference line is defined by the polyline LatLng to p1.
+   * @param {LatLng} p2 The point in question.
+   * @returns {Number} 
+   *  >0 for p2 left of the line through this point and p1, 
+   *  =0 for p2 on the line,
+   *  <0 for p2 right of the line through this point an p1.
+   * @see {@link http://geomalgorithms.com/a03-_inclusion.html Inclusion of a Point in a Polygon} by Dan Sunday.
    */
-  isPointInsidePolygon: (lat, lng, polyPoints) => {
-    const x = lat
-    const y = lng
-
-    var inside = false
-    for (var i = 0, j = polyPoints.length - 1; i < polyPoints.length; j = i++) {
-      const xi = polyPoints[i][1]
-      const yi = polyPoints[i][0]
-      const xj = polyPoints[j][1]
-      const yj = polyPoints[j][0]
-
-      const intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)
-      if (intersect) inside = !inside
-    }
-
-    return inside
+  isOverLine: (p0, p1, p2) => {
+    let val = ((p1.lng - p0.lng) * (p2.lat - p0.lat) - (p2.lng - p0.lng) * (p1.lat - p0.lat))
+    return val
   }
 }
 export default geoUtils

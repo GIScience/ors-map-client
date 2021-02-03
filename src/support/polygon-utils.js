@@ -1,5 +1,6 @@
 import htmlColors from 'html-colors'
 import GeoUtils from '@/support/geo-utils'
+import Leaflet from 'leaflet'
 
 const PolygonUtils = {
   /**
@@ -7,7 +8,7 @@ const PolygonUtils = {
    * @param {Number} index
    * @returns {String} color
    */
-  buildPolygonColor (index) {
+  buildPolygonColor(index) {
     index = Number(index)
     // We get a color from the color collection but we
     // skip the first 5 colors because they are not nice
@@ -20,7 +21,7 @@ const PolygonUtils = {
    * @param {Number} index
    * @returns {String} label
    */
-  buildPolygonLabel (polygon, translations) {
+  buildPolygonLabel(polygon, translations) {
     let label = ''
     if (polygon.properties.range_type === 'time') {
       const durationObj = GeoUtils.getDurationInSegments(polygon.properties.value, translations)
@@ -44,10 +45,11 @@ const PolygonUtils = {
    * @param {Array} polygons 
    * @returns {Object}
    */
-  mergePolygonsIntoMultiPolygon (polygons) {
-    const avoidPolygon = { type: 'MultiPolygon', coordinates: [] }
-
-    let coordinates = []
+  mergePolygonsIntoMultiPolygon(polygons) {
+    const avoidPolygon = {
+      type: 'MultiPolygon',
+      coordinates: []
+    }
     for (let key in polygons) {
       avoidPolygon.coordinates.push(polygons[key].geometry.coordinates)
     }
@@ -58,11 +60,11 @@ const PolygonUtils = {
    * @param {Object} multiPolygon 
    * @returns {Array} polygons
    */
-  splitMultiPolygonIntoPolygons (multiPolygon) {
+  splitMultiPolygonIntoPolygons(multiPolygon) {
     let polygons = []
     for (let cKey in multiPolygon.coordinates) {
       let polygon = {
-        type: 'Polygon', 
+        type: 'Polygon',
         geometry: {
           coordinates: multiPolygon.coordinates[cKey]
         }
@@ -70,6 +72,97 @@ const PolygonUtils = {
       polygons.push(polygon)
     }
     return polygons
+  },
+
+  /**
+   * Checks if a single point is contained in a polyline or polygon
+   * Note that L.Polygon, L.GeodesicPolygons, and L.GeodesicCircles are types of L.Polygon.
+   * @param {Leaflet.LatLng} point A geographical point
+   * @param {Array} of Latlng points
+   * @returns {boolean} True if the point is contained in the polygon or polyline; otherwise, 
+   *
+   */
+  isInsidePolygon: (point, polygonCoords) => {
+    var windingNumber
+    let polygon = Leaflet.polygon(polygonCoords)
+    let insideBounds = PolygonUtils.isInsidePolygonBounds(point, polygon)
+
+    if (insideBounds) {
+      let vertices = polygon.getLatLngs()
+      vertices = vertices.length === 1 ? vertices[0] : vertices
+      windingNumber = PolygonUtils.getWindingNumber(point, vertices)
+      return (windingNumber !== 0)
+    } else {
+      return false
+    }
+  },
+
+  /**
+   * Determines if a point is inside the polygon bounds
+   * @param {Leaflet.latlng} point 
+   * @param {Leaflet.Polygon} polygon 
+   * @returns {Boolean} insideBounds
+   */
+  isInsidePolygonBounds (point, polygon) {
+    let polygonBounds = polygon.getBounds()
+    let insideBounds = point.lng >= polygonBounds._southWest.lng && point.lng <= polygonBounds._northEast.lng && point.lat > polygonBounds._southWest.lat && point.lat < polygonBounds._northEast.lat
+    return insideBounds
+  },
+
+  /**
+   * Test for a point in a polygon or on the bounding lines of the polygon.  The
+   * coordinates (L.LatLngs) for a GeodesicPolygon are set to follow the earth's
+   * curvature when the GeodesicPolygon object is created.  Since L.Polygon
+   * extends Leaflet.Polyline we can use the same method for both.  Although, for
+   * L.Polyline, we only get points on the line even if a collection of lines
+   * appear to make a polygon.
+   * 
+   * This is a JavaScript and Leaflet port of the `wn_PnPoly()` C++ function by Dan Sunday.
+   * Unlike the C++ version, this implementation does include points on the line and vertices.
+   *
+   * @param p {Leaflet.LatLng} A point.
+   * @returns {Number} The winding number (=0 only when the point is outside)
+   *
+   * @see {@link http://geomalgorithms.com/a03-_inclusion.html Inclusion of a Point in a Polygon} by Dan Sunday.
+   * @see {@link https://github.com/Fragger/Leaflet.Geodesic Leaflet.Geodesc} for information about Leaflet.Geodesc by Fragger.
+   * @see {@link https://en.wikipedia.org/wiki/Winding_number} to understand winding number
+   */
+  getWindingNumber: (point, vertices) => {
+    var i, isLeftTest, n, wn // the winding number counter
+
+    n = vertices.length
+    // Note that per the algorithm, the vertices (V) must be "a vertex points of a polygon V[n+1] with V[n]=V[0]"
+    if (n > 0 && !(vertices[n - 1].lat === vertices[0].lat && vertices[n - 1].lng === vertices[0].lng)) {
+      vertices.push(vertices[0])
+    }
+    n = vertices.length - 1
+    wn = 0
+    for (i = 0; i < n; i++) {
+      isLeftTest = GeoUtils.isOverLine(vertices[i], vertices[i + 1], point)
+      if (isLeftTest === 0) { // If the point is on a line, we are done.
+        wn = 1
+        break
+      } else {
+        if (isLeftTest !== 0) { // If not a vertex or on line (the C++ version does not check for this)
+          if (vertices[i].lat <= point.lat) {
+            if (vertices[i + 1].lat > point.lat) { // An upward crossing
+              if (isLeftTest > 0) { // P left of edge
+                wn++ // have a valid up intersect
+              }
+            }
+          } else {
+            if (vertices[i + 1].lat <= point.lat) { // A downward crossing
+              if (isLeftTest < 0) { // P right of edge
+                wn-- // have a valid down intersect
+              }
+            }
+          }
+        } else {
+          wn++
+        }
+      }
+    }
+    return wn
   }
 }
 
