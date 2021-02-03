@@ -1303,7 +1303,7 @@ export default {
      */
     mapRightClick (event) {
       if (this.showClickPopups) {
-        const insidePolygon = this.isPointInsidePolygons(event.latlng.lat, event.latlng.lng)
+        const insidePolygon = this.isPointInsidePolygons(event.latlng)
         if (!insidePolygon) {
           const mapEl = this.$refs.map.$el
           const data = { event, mapEl, canAddStop: this.canAddStop }
@@ -1374,7 +1374,7 @@ export default {
       const drawPolygonToolbarActive = this.lodash.get(this.drawControlRef, '_toolbars.draw._activeMode')
       const clckedOverPolyline = event.originalEvent && event.originalEvent.clckedOverPolyline === true
       if (this.showClickPopups && !drawPolygonToolbarActive && !clckedOverPolyline) {
-        const insidePolygon = this.isPointInsidePolygons(event.latlng.lat, event.latlng.lng)
+        const insidePolygon = this.isPointInsidePolygons(event.latlng)
         const data = { event, insidePolygon }
         this.eventBus.$emit('mapLeftClicked', data)
         this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
@@ -1403,15 +1403,15 @@ export default {
     /**
      * Check if the a lat lng point is inside in one of the map polygons
      * If it is returnd the polygon points array
-     * @param {*} lat
+     * @param {Latlng} latlng
      * @param {*} lng
      * @returns {Boolean|Array}
      */
-    isPointInsidePolygons (lat, lng) {
+    isPointInsidePolygons (latlng) {
       for (const key in this.localAvoidPolygons) {
         let polygon = this.localAvoidPolygons[key]
-        const coords = polygon.geometry.coordinates[0]
-        const inside = GeoUtils.isPointInsidePolygon(lat, lng, coords)
+        const coords = GeoUtils.switchLatLonIndex(polygon.geometry.coordinates[0])
+        const inside = PolygonUtils.isInsidePolygon(latlng, coords)
         if (inside) {
           return coords
         }

@@ -122,7 +122,7 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
 
     // Build args to search for localities only
     let localityArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
-    localityArgs.size = 2
+    localityArgs.size = (quantity /100) * 20 // 20%
     localityArgs.layers = ['locality']
     promises.push(client.geocode(localityArgs))   
     main.getInstance().appHooks.run('placeSearchlocalityArgsDefined', localityArgs)
