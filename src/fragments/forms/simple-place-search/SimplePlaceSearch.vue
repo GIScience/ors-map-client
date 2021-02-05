@@ -7,8 +7,14 @@
           <v-btn 
             :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''" 
             class="open-menu" slot="default" flat @click="openMenu()"
-            v-smart-tooltip="{show: showRouteDetailsTooltip, text: $t('simplePlaceSearch.openSidebarToSeeRouteDetails'), position: 'bottom', dark: true, showOnce: true, name: 'openSidebarToSeeRouteDetails'}">
-            <v-icon>menu</v-icon>
+            v-smart-tooltip="{
+              show: showRouteDetailsTooltip, 
+              text: $t('simplePlaceSearch.openSidebarToSeeRouteDetails'), 
+              position: 'right', 
+              dark: true
+            }"
+          >
+          <v-icon>menu</v-icon>
           </v-btn>
         </v-badge>
       </v-flex>

@@ -37,6 +37,7 @@ import MapViewMarkers from './components/map-view-markers/MapViewMarkers'
 import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
 import MapLeftClick from './components/map-left-click/MapLeftClick'
 import OrsLPolyline from './components/ors-l-polyline/OrsLPolyline'
+import AdminAreaLoader from '@/support/admin-area-loader'
 import defaultMapSettings from '@/config/default-map-settings'
 import MyLocation from './components/my-location/MyLocation'
 import { GestureHandling } from 'leaflet-gesture-handling'
@@ -55,7 +56,7 @@ import theme from '@/config/theme'
 import Place from '@/models/place'
 import 'vue2-leaflet-draw-toolbar'
 import Leaflet from 'leaflet'
-import lodash from 'lodash'
+import lodash, { reject } from 'lodash'
 
 /**
  * Fix Vue leaflet issues:
@@ -372,13 +373,15 @@ export default {
 
         for (const key in toBeTransformedMapViewData.polygons) {
           const polygon = toBeTransformedMapViewData.polygons[key]
-          polygon.color = PolygonUtils.buildPolygonColor(key)
-          polygon.label = PolygonUtils.buildPolygonLabel(polygon, translations)
+          polygon.color = polygon.color || PolygonUtils.buildPolygonColor(key)
+          polygon.fillColor = polygon.fillColor || polygon.color          
+          polygon.label = polygon.label || PolygonUtils.buildPolygonLabel(polygon, translations)
 
           // Vue2-Leaflet, the component used to render data on the map, expect the coordinates in the [lat,lon] order,
           // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
           // So we invert them to provide what the component expectes
-          polygon.latlngs = GeoUtils.switchLatLonIndex(polygon.geometry.coordinates[0])
+          let flattencoords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
+          polygon.latlngs = GeoUtils.switchLatLonIndex(flattencoords)
           polygons.push(polygon)
         }
       }
@@ -1039,11 +1042,29 @@ export default {
       if (this.localMapViewData.hasPlaces()) {
         this.defineActiveRouteIndex()
         this.updateMarkersLabel()
-        this.fitFeaturesBounds()
         if (this.localMapViewData.places.length === 1 && !this.localMapViewData.places[0].isEmpty()) {
           this.setMapCenter(this.localMapViewData.places[0].getLatLng())
         }
+        if (this.hasOnlyOneMarker && appConfig.showadminAreaPolygon) {
+          this.loadAdminArea()         
+        } else {
+          this.fitFeaturesBounds()
+        }
       }
+    },
+    /**
+     * Load admin area for region, city and county
+     */
+    loadAdminArea () {
+      let place = this.markers[0].place
+      let adminAreaLoader = new AdminAreaLoader()
+      let context = this
+      adminAreaLoader.getAdminAreaPolygon(place).then(polygons => {
+        context.localMapViewData.polygons = context.localMapViewData.polygons.concat(polygons)
+        context.fitFeaturesBounds(true)
+      }).catch(err => {
+        console.log(err)
+      })
     },
     /**
      * Build and set bounds based on localMapViewData
@@ -1068,10 +1089,7 @@ export default {
         for (const pKey in this.localMapViewData.polygons) {
           const polygon = this.localMapViewData.polygons[pKey]
           if (polygon) {
-            var coords = polygon.geometry.coordinates
-            if (coords.length === 1 && Array.isArray(coords[0][0])) {
-              coords = coords[0]
-            }
+            var coords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
             polylineData = polylineData.concat(coords)
           }
         }

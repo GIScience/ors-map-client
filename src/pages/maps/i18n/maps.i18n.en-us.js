@@ -9,7 +9,7 @@ export default {
     altitude: 'Altitude variation',
     settings: 'Settings',
     turnOnAcessibleMode: 'Toggle acessible mode',
-    about: 'About ORS',
+    aboutTitle: 'About ORS',
     updateSearch: 'Search this area',
     updateSearchAfterZoomOrCenterChange: 'Update search after zoom or center change'
   }

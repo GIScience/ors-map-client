@@ -108,7 +108,7 @@ export default {
      * @returns {Boolean} show
      */
     showAltitudePreview () {
-      const show = this.mapViewData.hasRoutes() && this.$store.getters.mapSettings.elevationProfile === true
+      const show = this.mapViewData.hasRoutes() && this.$store.getters.mapSettings.elevationProfile === true && appConfig.showAltitudeOnSidebar
       return show
     }
   },

@@ -54,7 +54,7 @@ export default {
       return this.newInfoAvailable
     }, 
     showRouteDetailsTooltip () {
-      return this.showNewInfo && this.$store.getters.isSidebarVisible
+      return this.showNewInfo && !this.$store.getters.isSidebarVisible
     }
   },
 

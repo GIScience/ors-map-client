@@ -60,7 +60,7 @@
 
     <v-dialog v-model="isAboutOpen" max-width="600" class="about-modal" :persistent="true">
       <box background="white" v-if="isAboutOpen" resizable closable @closed="closeAboutModal()">
-        <h3 slot="header">{{$t('maps.about')}}</h3>
+        <h3 slot="header">{{$t('maps.aboutTitle')}}</h3>
         <about></about>
       </box>
     </v-dialog>

@@ -69,5 +69,10 @@ export default {
         }
       }
     }
+  },
+  computed: {
+    showTooltip () {
+      return this.menuOpen
+    },
   }
 }
