@@ -47,24 +47,29 @@ class AdminAreaLoader {
       // maek a copy of the original layer 
       // before updating the place via resolver
       let layer = place.properties.layer
-
-      // Define the zoom level used to resolve
-      let layerZoom = GeoUtils.zoomLevelByLayer(layer)
-
-      let context = this
-      place.resolve(layerZoom).then(() => {
-        let adminAreaFilter = context.buildAdminAreaFilter(place, layer)
-        NominatimService.query(adminAreaFilter).then((response) => {
-          let validPolygons = context.adjustAndValidateAdminArea(place, response.data)
-          if (validPolygons) {
-            resolve(validPolygons)
-          } else {
-            reject('not inside')
-          }
-        }).catch(err => {
-          reject(err)
+      let layersThatSupportAdminPolygon = ['locality', 'region', 'country']
+      
+      if (layersThatSupportAdminPolygon.includes(layer)) {
+        // Define the zoom level used to resolve
+        let layerZoom = GeoUtils.zoomLevelByLayer(layer)
+  
+        let context = this
+        place.resolve(layerZoom).then(() => {
+          let adminAreaFilter = context.buildAdminAreaFilter(place, layer)
+          NominatimService.query(adminAreaFilter).then((response) => {
+            let validPolygons = context.adjustAndValidateAdminArea(place, response.data)
+            if (validPolygons) {
+              resolve(validPolygons)
+            } else {
+              reject('not inside')
+            }
+          }).catch(err => {
+            reject(err)
+          })
         })
-      })
+      } else {
+        resolve([])
+      }
     })
   }
 
