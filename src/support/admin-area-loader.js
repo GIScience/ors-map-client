@@ -47,7 +47,7 @@ class AdminAreaLoader {
       // maek a copy of the original layer 
       // before updating the place via resolver
       let layer = place.properties.layer
-      let layersThatSupportAdminPolygon = ['locality', 'region', 'country']
+      let layersThatSupportAdminPolygon = ['county', 'locality', 'region', 'country']
       
       if (layersThatSupportAdminPolygon.includes(layer)) {
         // Define the zoom level used to resolve
