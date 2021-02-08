@@ -1,6 +1,7 @@
-import AdminAreaPolygonService from '@/support/admin-area-polygon-service'
+import NominatimService from '@/support/nominatim-service'
 import PolygonUtils from '@/support/polygon-utils'
 import GeoUtils from '@/support/geo-utils'
+import theme from '@/config/theme'
 
 /**
  * AdminAreaLoader class
@@ -53,7 +54,7 @@ class AdminAreaLoader {
       let context = this
       place.resolve(layerZoom).then(() => {
         let adminAreaFilter = context.buildAdminAreaFilter(place, layer)
-        AdminAreaPolygonService.query(adminAreaFilter).then((response) => {
+        NominatimService.query(adminAreaFilter).then((response) => {
           let validPolygons = context.adjustAndValidateAdminArea(place, response.data)
           if (validPolygons) {
             resolve(validPolygons)
@@ -126,7 +127,7 @@ class AdminAreaLoader {
     }
     polygon = {geometry: {coordinates: flattenCoordinates}, type: polygon.type}
     polygon.label = place.placeName
-    polygon.color = 'red'
+    polygon.color = theme.primary
     polygon.fillColor = 'transparent'
     return polygon
   }

@@ -1045,7 +1045,7 @@ export default {
         if (this.localMapViewData.places.length === 1 && !this.localMapViewData.places[0].isEmpty()) {
           this.setMapCenter(this.localMapViewData.places[0].getLatLng())
         }
-        if (this.hasOnlyOneMarker && appConfig.showadminAreaPolygon) {
+        if (this.mode === constants.modes.place && this.hasOnlyOneMarker && appConfig.showAdminAreaPolygon) {
           this.loadAdminArea()         
         } else {
           this.fitFeaturesBounds()
