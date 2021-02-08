@@ -42,7 +42,7 @@ class AdminAreaLoader {
   getAdminAreaPolygon(place) {
     return new Promise((resolve, reject) => {
       if (!place.placeName) {
-        reject('place-has-no-name')
+        resolve([])
       }
       // maek a copy of the original layer 
       // before updating the place via resolver
@@ -57,11 +57,11 @@ class AdminAreaLoader {
         place.resolve(layerZoom).then(() => {
           let adminAreaFilter = context.buildAdminAreaFilter(place, layer)
           NominatimService.query(adminAreaFilter).then((response) => {
-            let validPolygons = context.adjustAndValidateAdminArea(place, response.data)
+            let validPolygons = context.adjustAdminArea(place, response.data)            
             if (validPolygons) {
               resolve(validPolygons)
             } else {
-              reject('not inside')
+              resolve([])
             }
           }).catch(err => {
             reject(err)
@@ -74,12 +74,33 @@ class AdminAreaLoader {
   }
 
   /**
+   * check if a Place is inside of any of the polygons passed
+   * @param {*} polygons 
+   * @param {Place} place 
+   */
+  isPointInsidePolygons (polygons, place) {
+    let isInside = false
+
+    for (let key in polygons) {
+      // Adjust the order of lat lng
+      let polygonCoords = GeoUtils.switchLatLonIndex(polygons[key].geometry.coordinates)
+  
+      // Include the pois that are inside the area polygon
+      if (PolygonUtils.isInsidePolygon(place, polygonCoords)) {              
+        isInside = true
+        break
+      }
+    }
+    return isInside
+  }
+
+  /**
    * Adjust the area plygon and validate it
    * @param {*} place 
    * @param {*} polygon 
    * @returns {Object| false}
    */
-  adjustAndValidateAdminArea(place, data) {
+  adjustAdminArea(place, data) {
     let polygons = []
     for (let key in data) {
       let area = data[key]
@@ -105,7 +126,11 @@ class AdminAreaLoader {
         }
       }
     }
-    return polygons
+    let isInside = this.isPointInsidePolygons(polygons, place)
+    if (isInside) {
+      return polygons
+    }
+    return []
   }
   /**
    * Validate a polygon

@@ -117,9 +117,9 @@ export default {
       // side bar is not opend, notify visually that there
       // new data about the route calculated that can be seen
       // by openning the sidebar
-      this.eventBus.$on('newInfoAvailable', () => {
+      this.eventBus.$on('newInfoAvailable', (available) => {
         if (!context.$store.getters.leftSideBarOpen) {
-          context.newInfoAvailable = true
+          context.newInfoAvailable = available
         }
       })
 
@@ -132,6 +132,14 @@ export default {
 
       this.eventBus.$on('refreshSearch', () => {
         context.refreshSearch()
+      })
+
+      // When the user click on a marker to remove it
+      // and there is only one place
+      this.eventBus.$on('removePlace', () => {
+        if (context.$store.getters.mode === constants.modes.place) {
+          context.place = new Place()
+        }
       })
     },
 
