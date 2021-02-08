@@ -75,6 +75,22 @@ const PolygonUtils = {
   },
 
   /**
+   * Flat polygon coordinates
+   * @param {*} coordinates 
+   */
+  flatCoordinates (coordinates) {
+    let flatten = []
+    if (Array.isArray(coordinates[0]) && Array.isArray(coordinates[0][0])) {
+      for (let key in coordinates) {
+        flatten = flatten.concat(PolygonUtils.flatCoordinates(coordinates[key]))
+      }
+    } else {
+      flatten = coordinates
+    }
+    return flatten
+  },
+
+  /**
    * Checks if a single point is contained in a polyline or polygon
    * Note that L.Polygon, L.GeodesicPolygons, and L.GeodesicCircles are types of L.Polygon.
    * @param {Leaflet.LatLng} point A geographical point

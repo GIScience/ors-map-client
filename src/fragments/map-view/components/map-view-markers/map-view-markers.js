@@ -58,7 +58,7 @@ export default {
       if (this.isPoi) {
         return false
       }
-      let markerRemovableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]
+      let markerRemovableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones, constants.modes.place]
       let isRemovable = markerRemovableModes.includes(this.mode)
       return isRemovable
     },

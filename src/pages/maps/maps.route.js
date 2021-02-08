@@ -17,7 +17,7 @@ for (let index = 2; index <= 15; index++) {
   optionalplaceNamesPath += `/:placeName${index}?`  
 }
 
-export default [
+const mapRoutes = [
   {
     path: '/',
     name: 'Maps',
@@ -109,3 +109,5 @@ export default [
     }
   }
 ]
+
+export default mapRoutes

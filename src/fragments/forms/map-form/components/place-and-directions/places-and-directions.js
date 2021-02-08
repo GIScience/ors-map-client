@@ -108,7 +108,7 @@ export default {
      * @returns {Boolean} show
      */
     showAltitudePreview () {
-      const show = this.mapViewData.hasRoutes() && this.$store.getters.mapSettings.elevationProfile === true
+      const show = this.mapViewData.hasRoutes() && this.$store.getters.mapSettings.elevationProfile === true && appConfig.showAltitudeOnSidebar
       return show
     }
   },
@@ -612,7 +612,7 @@ export default {
               MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
                 mapViewData.places = context.places // places from context have more fine data, so use it
                 context.mapViewData = mapViewData
-                context.eventBus.$emit('newInfoAvailable')
+                context.eventBus.$emit('newInfoAvailable', true)
                 context.showSuccess(context.$t('placesAndDirections.routeReady'))
                 context.eventBus.$emit('mapViewDataChanged', mapViewData)
                 context.setSidebarIsOpen()
@@ -756,6 +756,7 @@ export default {
       // in order to allow the user to continue to
       // use the directions mode, readd a place input
       if (keepDirectionsMode && placeInputsBeforeRemoval === 2) {
+        this.eventBus.$emit('newInfoAvailable', false)
         setTimeout(() => {
           this.addInput()
           this.setViewMode(constants.modes.directions)

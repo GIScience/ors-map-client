@@ -1,4 +1,5 @@
 import { createPopper } from '@popperjs/core'
+import appConfig from '@/config/app-config'
 import utils from '@/support/utils'
 import store from '@/store/store'
 import main from '@/main'
@@ -98,6 +99,12 @@ const showToolTip = (el, options, vNode) => {
     if ((options.showOnce || options.saveClose) && options.name) {
       let mapSettings = store.getters.mapSettings      
       mustBeShown = !(mapSettings.shownOnceTooltips && mapSettings.shownOnceTooltips[options.name])
+    }
+    if (options.showOnce && !appConfig.showInstructionsTooltipsOnFirstLoad) {
+      mustBeShown = false
+    }
+    if (options.forceShow) {
+      mustBeShown = true
     }
 
     if (mustBeShown) {

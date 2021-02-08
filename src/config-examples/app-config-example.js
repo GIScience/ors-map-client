@@ -28,6 +28,10 @@ const appConfig = {
   logoImgSrc: require('@/assets/img/logo@2x.png'),
   footerDevelopedByLink: 'https://www.heigit.org/',
 
+  showAdminAreaPolygon: true, // show admin area polygon
+  showInstructionsTooltipsOnFirstLoad: true, // if the instructions tooltips must be shown on the app first load
+  showDefaultAboutContent: true, // show default about content
+  showAltitudeOnSidebar: true, // show altitude preview on sidebar
   supportsPlacesAndDirections: true, // If thw whole places and directions feature is supported/enabled in the application
   supportsIsochrones: true, // If isochrones is supported/enabled in the application
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
@@ -48,7 +52,7 @@ const appConfig = {
   // The map tile providers available. At least one must be present
   mapTileProviders: [
     {
-      name: 'OpenStreetMaps',
+      name: 'OpenStreetMap',
       id: 'osm',
       visible: false,
       attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',

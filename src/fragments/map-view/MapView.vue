@@ -41,7 +41,7 @@
           :key="index+'-polygon'"
           @click="isochroneClicked(index, polygon, $event)"
           :lat-lngs="polygon.latlngs"
-          :fillColor="polygon.color"
+          :fillColor="polygon.fillColor"
           :color="polygon.color">
           <l-popup v-if="polygon.label">
             <div :ref="'isochronePopupContainer' + index" >
