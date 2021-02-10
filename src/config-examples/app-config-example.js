@@ -1,7 +1,7 @@
 // This is an example file and is expected to be cloned 
 // without the -example on the same folder that it resides.
 
-// You can change the value of a property (a supported values), but shouldn't remove a property
+// You can change the value of a property (using a supported value), but you shouldn't remove a property
 
 const appConfig = {
   appName: 'Openrouteservice Maps',
@@ -28,10 +28,6 @@ const appConfig = {
   logoImgSrc: require('@/assets/img/logo@2x.png'),
   footerDevelopedByLink: 'https://www.heigit.org/',
 
-  showAdminAreaPolygon: true, // show admin area polygon
-  showInstructionsTooltipsOnFirstLoad: true, // if the instructions tooltips must be shown on the app first load
-  showDefaultAboutContent: true, // show default about content
-  showAltitudeOnSidebar: true, // show altitude preview on sidebar
   supportsPlacesAndDirections: true, // If thw whole places and directions feature is supported/enabled in the application
   supportsIsochrones: true, // If isochrones is supported/enabled in the application
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
@@ -52,7 +48,7 @@ const appConfig = {
   // The map tile providers available. At least one must be present
   mapTileProviders: [
     {
-      name: 'OpenStreetMap',
+      name: 'OpenStreetMaps',
       id: 'osm',
       visible: false,
       attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
