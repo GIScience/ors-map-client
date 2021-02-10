@@ -21,16 +21,16 @@ class PluginExample {
   }
 
   /**
-   * Load registered hooks defined in src/config/hooks.js
-   * @param {Object}
+   * Is called when the app is loaded and the map view is ready
+   * 
    * IMPORTANT: this method is expected to be called on
-   * hooks.js on the mapReady hook.
+   * hooks.js on the mapReady hook or automatically via catchAll
+   * @param {Object} hookData
    */
   mapReady (hookData) {
     // hookData has the following structure {context: Object, map: Object}
-    // The leaflet `map` object is passed 
-    // you could potentially change it
-    // like adding or removing controls
+    // The leaflet `map` object is passed and
+    // you can potentially change it by adding or removing controls
   }
 
   /**
