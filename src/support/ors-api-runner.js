@@ -6,7 +6,7 @@ import store from '@/store/store'
 import lodash from 'lodash'
 import main from '@/main'
 
-import OrsApiClient from 'openrouteservice-js'
+// import OrsApiClient from 'openrouteservice-js'
 
 // By default we use the openrouteservice-js npm package to query the API.
 // But, if it is needed to test and change the openrouteservice-js itself the lib source code
@@ -14,7 +14,7 @@ import OrsApiClient from 'openrouteservice-js'
 // these changes on the fly. This is only to developers who will work on
 // the openrouteservice-js project. If you want to do this, comment the OrsApiClient import above
 // and uncomment the import lline below to use a local and unpacked openrouteservice-js lib
-// import OrsApiClient from '@/ors-js/src'
+import OrsApiClient from '@/ors-js/src'
 
 /**
  * Get the Directions function accessor
@@ -120,21 +120,21 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
     
     let promises = []
 
-    // Build args to search for localities only
+    // Build a search localities only
     let localityArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
-    localityArgs.size = (quantity /100) * 20 // 20%
+    localityArgs.size = 2
     localityArgs.layers = ['locality']
     promises.push(client.geocode(localityArgs))   
-    main.getInstance().appHooks.run('placeSearchlocalityArgsDefined', localityArgs)
+    main.getInstance().appHooks.run('placeSearchLocalityArgsDefined', localityArgs)
 
-    // Build args to search for addresses
+    // Build a search for addresses
     let addressesArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
     addressesArgs.size = quantity
     addressesArgs.layers = ['country', 'region', 'macrocounty', 'borough', 'macroregion', 'county', 'neighbourhood', 'borough', 'street', 'address']
     promises.push(client.geocode(addressesArgs))   
     main.getInstance().appHooks.run('placeSearchAddressArgsDefined', addressesArgs)
 
-    // Build a second query that searchs for everything, including venues
+    // Build a search for venues
     const restrictToBbox = restrictArea && mapSettings.prioritizeSearchingForNearbyPlaces
     let poisArgs = OrsParamsParser.buildPlaceSearchArgs(term, restrictToBbox)
     poisArgs.size = quantity

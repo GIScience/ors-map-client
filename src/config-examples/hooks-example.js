@@ -351,6 +351,10 @@ appHooks.add('placeSearchPoisArgsDefined', (args) => {
   // Do something
 })
 
+appHooks.add('placeSearchLocalityArgsDefined', (args) => {
+  // Do something
+})
+
 appHooks.add('placeSearchResultPrepared', (places) => {
   // Do something
 
