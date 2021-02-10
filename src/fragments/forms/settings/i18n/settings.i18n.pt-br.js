@@ -39,7 +39,7 @@ export default {
     mapViewOptions: 'Opçoes de visualização do mapa',
     advancedSettingsWarning: 'Não altere as configurações abaixo se você não souber o que está fazendo!',
     customTileProviderUrl: 'URL do provedor personalizados de images do mapa (tiles provider)',
-    defaultTileProvider: 'Provedor padrão de images do mapa (tiles provider)',
+    defaultTilesProvider: 'Provedor padrão de images do mapa (tiles provider)',
     customTileProviderUrlHint: 'https://domain.tld/path/{z}/{x}/{y}.ext?chaveOpcional=valor',
     prioritizeSearchingForNearbyPlaces: 'Priorizar a busca de locais próximos',
     defaultProfile: 'Perfil padrão',

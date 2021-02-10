@@ -62,7 +62,7 @@ const runORSMenuCustomization = (menu) => {
     menuManager.replaceItemEndingWith(menu, '/signup', loginMenuItem.items[0])
   
     // we can control if the custom icons are applied in the app config
-    if (appConfig.setCustomMenuIcons === true) {
+    if (appConfig.appMenu.setCustomMenuIcons === true) {
        setORSMenuIcons(menu)
     }
   }

@@ -39,7 +39,7 @@ export default {
     mapViewOptions: 'Kartenansicht',
     advancedSettingsWarning: 'Nachfolgende Einstellungen bitte nur ändern, wenn Sie wissen was Sie tun.',
     customTileProviderUrl: 'Spezielle Kartenkachel-Provider URL',
-    defaultTileProvider: 'Standard Kartenkachel-Provider',
+    defaultTilesProvider: 'Standard Kartenkachel-Provider',
     customTileProviderUrlHint: 'https://domain.tld/pfad/{z}/{x}/{y}.ext?optionalerSchlüssel=Wert',
     prioritizeSearchingForNearbyPlaces: 'Ortssuche priorisiert nahe Orte',
     defaultProfile: 'Standard Profil',
