@@ -4,47 +4,46 @@
 // You can change the value of a property (using a supported value), but you shouldn't remove a property
 
 const appConfig = {
-  appName: 'Openrouteservice Maps',
-  footerAppName: 'openrouteservice',
-  baseAppUrl: '/', // could be, for example, '/map'
-  dataServiceBaseUrl: 'https://openrouteservice.org/wp-json/',
+  appName: 'Openrouteservice Maps', // The App name that is used as title for the logo
+  footerAppName: 'openrouteservice', // The App name that appears on the bottom
+  logoImgSrc: require('@/assets/img/logo@2x.png'), // The logo used on the top-right corner of the sidebar and on the header menu
+  footerDevelopedByLink: 'https://www.heigit.org/', // The url that is used on the footer developed by link
+  urlMode: 'hash', // The url mode for vue router: `hash` or `history`
+  baseAppUrl: '/', // Could be, for example, '/map' if your app is running in a folder under a domain
+  dataServiceBaseUrl: 'https://openrouteservice.org/wp-json/', // The base data url to retrive ORS data (Don't change this unless you know what your doing!)
+  maxPlaceInputs: 15, // Don't change this unless you know what your doing!
   appMenu: {
-    useORSMenu: true,
-    mainMenuId: 'primary_menu',// only if useORSMenu is true
-    menuServiceEndpoint: 'wp-api-menus/v2/menus',// only if useORSMenu is true
-    menuPrimaryKeyField: 'term_id', // only if useORSMenu is true
-    setCustomMenuIcons: true,
-    baseMenuExternalUrl: 'https://openrouteservice.org'
+    useORSMenu: true, // If the default ORS menu must be used
+    mainMenuId: 'primary_menu',// only necessary if useORSMenu is true
+    menuServiceEndpoint: 'wp-api-menus/v2/menus',// only necessary if useORSMenu is true
+    menuPrimaryKeyField: 'term_id', // Only necessary if useORSMenu is true
+    setCustomMenuIcons: true, // If the icons of the menu loaded must be customized via (only necessary if useORSMenu is true)
+    baseMenuExternalUrl: 'https://openrouteservice.org' // The base url to retrieve the menu items
   },
-  setCustomMenuIcons: true,
   defaultLocale: 'en-us', // only set as default a locale that is present in the app. By default they are: 'en-us', 'de-de' and 'pt-br'
-  orsApiKey: 'put-here-an-ors-api-key',
-  useUserKey: true,
-  bitlyApiKey: 'put-the-bitly-api-key-here',
-  bitlyLogin: 'put-the-bitly-login-here',
-  maxPlaceInputs: 15, // Don't change this unless you know what your doing
-  disabledActionsForIsochrones: ['roundtrip'], // possible values: addPlaceInput, clearPlaces, reverseRoute, roundtrip, routeImporter
-  disabledActionsForPlacesAndDirections: [], // // possible values: addPlaceInput, clearPlaces, reverseRoute, roundtrip, routeImporter
-  logoImgSrc: require('@/assets/img/logo@2x.png'),
-  footerDevelopedByLink: 'https://www.heigit.org/',
-  urlMode: 'hash', // the url mode for vue router: `hash` or `history`
+  orsApiKey: 'put-here-an-ors-api-key', // ORS API key to be used on the ORS requests. You can get one here: https://openrouteservice.org/dev/#/signup
+  useUserKey: true, // If the app is using a user ORS API key. // Don't change this unless you know what your doing!
+  bitlyApiKey: 'put-the-bitly-api-key-here', // Bit.ly key used to generate the short url
+  bitlyLogin: 'put-the-bitly-login-here', // Bit.ly login used to generate the short url
 
+  disabledActionsForIsochrones: ['roundtrip'], // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
+  disabledActionsForPlacesAndDirections: [], // // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
   supportsPlacesAndDirections: true, // If thw whole places and directions feature is supported/enabled in the application
   supportsIsochrones: true, // If isochrones is supported/enabled in the application
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
   supportsDirections: true, // If the directions funcionality is available
   sidebarStartsOpenInHeighResolution: false, // if the sidebar must start open in heigh resolution
-  defaultTileProvider: 'osm', // the default tipe provider
-  supportsAvoidPolygonDrawing: true, // if the avoid polygon drawing tools must be available on the map view
-  distanceMeasureToolAvailable: true, // if the polyline distance measure tool must be available on the map view
-  accessbilityToolAvailable: true, // if the accessibility tool must be available on the map view
-  fitAllFeaturesToolAvailable: true, // if the fitAllFeatures to0l must be available on the map view
-  supportsClusteredMarkers: true, // if clusted markers is supported (then markers with `clustered=true` property will be clustered)
-  supportsSearchBottomCarousel: true, // if the bottom carousel with the search results must be displayed or not.
-  supportsSearchMode: true, // if the search mode is supported
-  supportsMyLocationBtn: true, // if the my location btn is supported on the map view
-  initialMapMaxZoom: 18, // the initial max zoom
-  initialZoomLevel: 6, // the initial zoom level
+  defaultTilesProvider: 'osm', // The default tile provider  (valid values are the `id` property of one of the `mapTileProviders` array below)
+  supportsAvoidPolygonDrawing: true, // If the avoid polygon drawing tools must be available on the map view
+  distanceMeasureToolAvailable: true, // If the polyline distance measure tool must be available on the map view
+  accessbilityToolAvailable: true, // If the accessibility tool must be available on the map view
+  fitAllFeaturesToolAvailable: true, // If the fitAllFeatures to0l must be available on the map view
+  supportsClusteredMarkers: true, // If clusted markers is supported (then markers with `clustered=true` property will be clustered)
+  supportsSearchBottomCarousel: true, // If the bottom carousel with the search results must be displayed or not.
+  supportsSearchMode: true, // If the search mode is supported
+  supportsMyLocationBtn: true, // If the `my location` button is supported on the map view
+  initialZoomLevel: 6, // The initial map view zoom level
+  initialMapMaxZoom: 18, // The initial map view max zoom
 
   // The map tile providers available. At least one must be present
   mapTileProviders: [

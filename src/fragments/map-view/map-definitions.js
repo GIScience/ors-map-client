@@ -94,7 +94,7 @@ const mapDefinitions = {
    * Build map providers array
    */
   getProviders () {
-    const defaultTileProvider = store.getters.mapSettings.defaultTileProvider || 'osm'
+    const defaultTilesProvider = store.getters.mapSettings.defaultTilesProvider || 'osm'
     var providers = appConfig.mapTileProviders
 
     // Add custom tile servive if defined in settings
@@ -114,7 +114,7 @@ const mapDefinitions = {
     }
     // Se the tile provider that is visible by default
     for (let key in providers) {
-      providers[key].visible = providers[key].id === defaultTileProvider
+      providers[key].visible = providers[key].id === defaultTilesProvider
     }
     return providers
   }

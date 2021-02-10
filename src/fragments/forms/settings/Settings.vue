@@ -59,7 +59,7 @@
                   <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.alwaysFitBounds" :label="$t('settings.alwaysFitBounds')" ></v-checkbox>
                   <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.prioritizeSearchingForNearbyPlaces" :label="$t('settings.prioritizeSearchingForNearbyPlaces')" ></v-checkbox>
                   <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.autoFitHighlightedBounds" :label="$t('settings.autoFitHighlightedBounds')" ></v-checkbox>
-                  <v-select :label="$t('settings.defaultTileProvider')" :items="availableTileServices" v-model="mapSettingsTransient.defaultTileProvider"></v-select>
+                  <v-select :label="$t('settings.defaultTilesProvider')" :items="availableTileServices" v-model="mapSettingsTransient.defaultTilesProvider"></v-select>
                 </v-container>
               </v-list>
             </v-expansion-panel-content>

@@ -24,7 +24,7 @@ const defaultMapSettings = {
   unit: 'km',
   alwaysFitBounds: true,
   areaUnit: 'km',
-  defaultTileProvider: 'osm',
+  defaultTilesProvider: 'osm',
   customTileProviderUrl: '',
   prioritizeSearchingForNearbyPlaces: true,
   defaultProfile: 'cycling-regular',
