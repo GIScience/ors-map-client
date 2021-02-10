@@ -27,6 +27,7 @@ const appConfig = {
   disabledActionsForPlacesAndDirections: [], // // possible values: addPlaceInput, clearPlaces, reverseRoute, roundtrip, routeImporter
   logoImgSrc: require('@/assets/img/logo@2x.png'),
   footerDevelopedByLink: 'https://www.heigit.org/',
+  urlMode: 'hash', // the url mode for vue router: `hash` or `history`
 
   supportsPlacesAndDirections: true, // If thw whole places and directions feature is supported/enabled in the application
   supportsIsochrones: true, // If isochrones is supported/enabled in the application
