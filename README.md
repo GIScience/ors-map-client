@@ -192,7 +192,7 @@ git remote add origin <git-repo-url>
 git branch --set-upstream-to=origin/master
 ```
 
-After doing this we recommend you to remove from gitignore the lines that makes git ignore the folders `/src/config`, `src/plugins` and eventually `/static` and run the initial push to a the just defined new origin repository, with the following command:
+After doing this we recommend you to remove from `.gitignore` the lines that tell git to ignore the folders `/src/config`, `src/plugins` and eventually `/static`. Then  run the initial push to the just defined new origin repository, with the following command:
 
 ```sh
 git push -u origin master
@@ -200,14 +200,14 @@ git push -u origin master
 
 The ways to change/extend the app are:
 
-1. Define custom settings that will change the standard way that the app works.
+1. Define custom settings (see files in `src/config`) that will change the standard way that the app works.
 1. Add hook listeners in `src/config/hooks.js` and run custom code inside those hooks
-1. Create a plug-in that will have its methods linked to hooks called during the app flow (see the `ExamplePlugin`)
+1. Create a plug-in that will have its methods linked to hooks called during the app flow (see `src/plugins/example-plugin/`)
 
 #### Configuration ####
 
 It is possible to configure/disable some app features and behaviors by changing the values
-of the `src/config/app-config.js`. It is also possible to change the app theme/colors by changing the values of `src/config/theme.js`. The app logo can also be changed in the `app-config` file. The available filters/options to be used in the services are defined in the ors-map-filters. They can be adjusted according the needs. Other files can be used to adjust app configurations are the `layer-zoom-mapping.js`, `settings-options.js` and the `default-map-settings.js`.
+of the `src/config/app-config.js`. It is also possible to change the app theme/colors by changing the values of `src/config/theme.js`. The app logo can also be changed in the `src/config/app-config` file. The available filters/options to be used in the services are defined in the `src/config/ors-map-filters.js`. They can be adjusted according the needs. Other files can be used to adjust app configurations are the `layer-zoom-mapping.js`, `settings-options.js` and the `default-map-settings.js`.
 
 #### Plug-ins ####
 
