@@ -165,9 +165,9 @@ export default {
       }
       const summaryCopy = Object.assign({}, this.route.summary)
       const humanizedData = GeoUtils.getHumanizedTimeAndDistance(summaryCopy, this.$t('global.units'))
-      let tooltipInnerContent = `${this.$t('global.distance')} ${humanizedData.distance}`
+      let tooltipInnerContent = `${this.$t('global.distance')}: ${humanizedData.distance}`
       if (humanizedData.duration) {
-        tooltipInnerContent += `<br> ${this.$t('global.duration')} ${humanizedData.duration}`
+        tooltipInnerContent += `<br> ${this.$t('global.duration')}: ${humanizedData.duration}`
       }
       if (this.tooltipIcon) {
         let tooltip = `
