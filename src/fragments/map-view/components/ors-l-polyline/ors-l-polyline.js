@@ -75,8 +75,10 @@ export default {
     },
     'route': function () {
       this.active = false
+      let context = this
       setTimeout(() => {
-        this.active = true
+        context.active = true
+        context.updatePopup()
       }, 100)
     },
   },
@@ -91,6 +93,12 @@ export default {
       this.$nextTick(() => {
         event.target.openPopup()
       })
+    },
+    updatePopup () {
+      if (this.$refs.foregroundPolyline) {    
+        // Create and show popp
+        this.$refs.foregroundPolyline.mapObject.bindPopup(this.popupContent, {autoClose: true, closeOnClick: true}).openPopup()
+      }
     },
     /**
      * When the polyline is clicked
@@ -152,6 +160,9 @@ export default {
       }
     },
     popupContent () {
+      if (!this.active) {
+        return ''
+      }
       const summaryCopy = Object.assign({}, this.route.summary)
       const humanizedData = GeoUtils.getHumanizedTimeAndDistance(summaryCopy, this.$t('global.units'))
       let tooltipInnerContent = `${this.$t('global.distance')} ${humanizedData.distance}`
@@ -170,7 +181,7 @@ export default {
       } else {
         return `<div><div style='min-width:180px'>${tooltipInnerContent}</div></div>`
       }
-    }
+    },
   },
   created () {
     this.active = !this.notActive
@@ -188,5 +199,8 @@ export default {
       // This willa add custom behaviors to the vue2leaflet polyline
       this.orsExtendedPolyline = new OrsExtendedPolyline(this)
     }
-  }
+  },
+  mounted() {
+    this.updatePopup()
+  },
 }
