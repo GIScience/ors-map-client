@@ -1,4 +1,4 @@
-import axios from 'axios'
+import {HttpClient} from 'vue-rest-client'
 import appConfig from '@/config/app-config'
 import constants from '@/resources/constants'
 
@@ -103,7 +103,8 @@ export default {
       this.eventBus.$emit('showLoading', true)
 
       // Run the request and get the short url
-      axios.get(shortenerRequestUrl).then((response) => {
+      let httpclient = new HttpClient({getVueInstance: () => { return this }})
+      httpclient.http.get(shortenerRequestUrl).then((response) => {
         if (response.data.status_code === 200) {
           this.shareUrl = response.data.data.url
           this.isShortened = true
