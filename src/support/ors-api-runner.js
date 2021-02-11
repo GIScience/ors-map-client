@@ -6,7 +6,7 @@ import store from '@/store/store'
 import lodash from 'lodash'
 import main from '@/main'
 
-// import OrsApiClient from 'openrouteservice-js'
+import OrsApiClient from 'openrouteservice-js'
 
 // By default we use the openrouteservice-js npm package to query the API.
 // But, if it is needed to test and change the openrouteservice-js itself the lib source code
@@ -14,7 +14,7 @@ import main from '@/main'
 // these changes on the fly. This is only to developers who will work on
 // the openrouteservice-js project. If you want to do this, comment the OrsApiClient import above
 // and uncomment the import lline below to use a local and unpacked openrouteservice-js lib
-import OrsApiClient from '@/ors-js/src'
+// import OrsApiClient from '@/ors-js/src'
 
 /**
  * Get the Directions function accessor
