@@ -11,7 +11,7 @@
       :lat-lngs="latLngsCoordinates" 
       :weight="weight" 
       :color="color">
-      <l-popup v-if="active && popupContent" :content="popupContent" :options="{ autoClose: false, closeOnClick: true }"></l-popup>
+      <l-popup v-if="active && popupContent" :content="popupContent" :options="{ autoClose: true, closeOnClick: true }"></l-popup>
     </l-polyline>
   </div>
 </template>

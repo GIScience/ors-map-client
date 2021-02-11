@@ -18,7 +18,6 @@
   "dependencies": {
     "@babel/eslint-parser": "^7.11.3",
     "@popperjs/core": "^2.4.0",
-    "axios": "^0.18.1",
     "babel-plugin-prismjs": "^1.0.2",
     "chart.js": "2.7.2",
     "eslint-plugin-prettier": "^3.1.2",
@@ -45,7 +44,7 @@
     "vue-markdown": "^2.2.4",
     "vue-moment": "^4.0.0",
     "vue-resize": "^0.4.5",
-    "vue-rest-client": "^0.1.4",
+    "vue-rest-client": "^0.1.5",
     "vue-router": "^3.0.1",
     "vue-scrollto": "^2.11.0",
     "vue2-dropzone": "^3.6.0",
