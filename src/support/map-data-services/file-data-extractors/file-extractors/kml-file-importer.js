@@ -2,6 +2,7 @@ import { parseString } from 'xml2js'
 import MapViewData from '@/models/map-view-data'
 import Place from '@/models/place'
 import constants from '@/resources/constants'
+import appConfig from '@/config/app-config'
 import lodash from 'lodash'
 
 /**
@@ -61,7 +62,12 @@ class KmlImporter {
    * @param {*} fileObject
    */
   setPlaces = (mapViewData, fileObject) => {
-    mapViewData.places = this.getPlaces(fileObject)
+    let places = this.getPlaces(fileObject)
+    if (places.length > appConfig.maxPlaceInputs) {
+      mapViewData.pois = places
+    } else {
+      mapViewData.places = places
+    }
     if (mapViewData.places.length === 0) {
       mapViewData.places = this.buildPlaces(mapViewData.routes)
     }
@@ -74,7 +80,7 @@ class KmlImporter {
    */
   getPlaces = (fileObject) => {
     const places = []
-    const placeMarks = lodash.get(fileObject, 'kml.Document[0].Folder[0].Placemark') || lodash.get(fileObject, 'kml.Document[0].Placemark')
+    const placeMarks = lodash.get(fileObject, 'kml.Document[0].Placemark') || lodash.get(fileObject, 'kml.Document[0].Folder[0].Placemark')
 
     if (placeMarks) {
       for (const key in placeMarks) {
@@ -82,7 +88,10 @@ class KmlImporter {
           const coordinatesStr = placeMarks[key].Point[0].coordinates[0]
           const coordinatesaArr = coordinatesStr.split(',')
           const latlon = { lat: coordinatesaArr[0], lon: coordinatesaArr[1] }
-          const name = lodash.get(placeMarks[key], 'ExtendedData[0].Data[0].value[0]')
+          let name = placeMarks[key].name || lodash.get(placeMarks[key], 'ExtendedData[0].Data[0].value[0]')
+          if (Array.isArray(name) && name.length > 0) {
+            name = name[0]
+          }
           const place = new Place(latlon.lat, latlon.lon, name)
           places.push(place)
         }

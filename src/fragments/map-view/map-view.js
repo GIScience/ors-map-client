@@ -1202,8 +1202,7 @@ export default {
       this.$emit('directionsToPoint', data)
     },
     /**
-     * Emit the event that will trigger the Set the 
-     * directions to place contained in the data object
+     * Emit the event that will trigger the setInputPlace to place contained in the data object
      * @param {Number} placeIndex 
      * @param {Place} place
      * @emits setInputPlace

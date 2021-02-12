@@ -89,8 +89,8 @@ export default {
 
       let publicUrl = location.href
 
-      // The bit.ly service does not work with localhost
-      // so we always replace the current host by the public host
+      // The bit.ly service does not work with localhost.
+      // So we always replace the current host by the public host
       if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
         const baseUrl = `${location.protocol}//${location.host}`
         publicUrl = location.href.replace(baseUrl, constants.orsPublicHost)
@@ -99,26 +99,21 @@ export default {
       const longUrl = encodeURIComponent(publicUrl)
       const shortenerRequestUrl = `${bitlyBaseApiUrl}?login=${login}&apiKey=${apiKey}&longUrl=${longUrl}`
 
-      // Show the loading bar while the request runs
-      this.eventBus.$emit('showLoading', true)
-
       // Run the request and get the short url
       let httpclient = new HttpClient({getVueInstance: () => { return this }})
+      let context = this
       httpclient.http.get(shortenerRequestUrl).then((response) => {
         if (response.data.status_code === 200) {
-          this.shareUrl = response.data.data.url
-          this.isShortened = true
-          this.showSuccess(this.$t('share.urlShortened'), { timeout: 2000 })
+          context.shareUrl = response.data.data.url
+          context.isShortened = true
+          context.showSuccess(context.$t('share.urlShortened'), { timeout: 2000 })
         } else {
-          this.showError(this.$t('share.shorteningNotPossible'), { timeout: 2000 })
+          this.showError(context.$t('share.shorteningNotPossible'), { timeout: 2000 })
           console.log(response)
         }
       }).catch((error) => {
-        this.showError(this.$t('share.shorteningNotPossible'), { timeout: 2000 })
+        context.showError(context.$t('share.shorteningNotPossible'), { timeout: 2000 })
         console.log(error)
-      }).finally(() => {
-        // Hide the loading bar when the request is finished
-        this.eventBus.$emit('showLoading', false)
       })
     }
   }

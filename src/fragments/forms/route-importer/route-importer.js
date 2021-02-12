@@ -5,7 +5,8 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 export default {
   data: () => ({
-    isImportModalOpen: false
+    isImportModalOpen: false,
+    acceptedFiles: '.json,.kml,.gpx',
   }),
   computed: {
     dropzoneOptions () {
@@ -15,7 +16,7 @@ export default {
         uploadMultiple: false,
         maxFiles: 1,
         clickable: true,
-        acceptedFiles: '.json,.kml,.gpx',
+        acceptedFiles: this.acceptedFiles,
         dictDefaultMessage: this.$t('routeImporter.dictDefaultMessage'),
         dictFallbackMessage: this.$t('routeImporter.dictFallbackMessage'),
         dictFileTooBig: this.$t('routeImporter.dictFileTooBig'),
@@ -72,7 +73,11 @@ export default {
           fileType = 'json'
         }
       }
-      this.sendDataToMap(fileType, fileContent, timestamp)
+      let parseData = {fileType, fileContent, timestamp}
+
+      this.$root.appHooks.run('importedFileParsed', parseData)
+
+      this.sendDataToMap(parseData.fileType, parseData.fileContent, parseData.timestamp)
       this.closeImporter()
     },
 
@@ -103,5 +108,8 @@ export default {
     closeImporter () {
       this.isImportModalOpen = false
     }
-  }
+  },
+  created() {
+    this.acceptedFiles = this.$root.appHooks.run('importerAcceptedFilesDefined', this.acceptedFiles)
+  },
 }

@@ -92,6 +92,9 @@ export default {
      * @returns {Boolean} available
      */
     directIsAvailable (index) {
+      if (this.isPoi) {
+        return false
+      }
       let available = false
       if (this.mode === constants.modes.directions && index < (this.markers.length -1)) {
         available = true
