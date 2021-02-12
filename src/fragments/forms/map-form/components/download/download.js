@@ -89,7 +89,7 @@ export default {
         const link = document.createElement('a')
         link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(content)
 
-        // check if it has reached the max lenght
+        // Check if it has reached the max length
         if (link.href.length > 2097152) {
           this.showError(this.$t('download.fileTooBigToBeDownloaded'), { timeout: 2000 })
         } else {

@@ -413,4 +413,14 @@ appHooks.add('rightClickContentReady', (hookData) => {
   // Do something
 })
 
+appHooks.add('importedFileParsed', (hookData) => {
+  // hookData has the following structure = {fileType, fileContent, timestamp}
+  // Do something
+})
+
+appHooks.add('importerAcceptedFilesDefined', (acceptedFilesStr) => {
+  // acceptedFilesStr is a comma separated list of extensions, like `.json,.kml,.gpx`
+  // Do something
+  retusn acceptedFilesStr
+})
 */
