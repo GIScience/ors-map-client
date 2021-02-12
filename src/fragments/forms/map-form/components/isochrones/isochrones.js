@@ -100,6 +100,19 @@ export default {
         })
       }
     })
+
+    this.eventBus.$on('setInputPlace', (data) => {
+      if (context.active) {
+        context.places[data.pickPlaceIndex] = data.place
+        let filledPlaces = context.getFilledPlaces()
+        if (filledPlaces.length > 0) {
+          context.updateAppRoute()
+        } else {
+          context.setSidebarIsOpen(true)
+          context.$forceUpdate()
+        }
+      }
+    })
   },
   watch: {
     $route: function () {

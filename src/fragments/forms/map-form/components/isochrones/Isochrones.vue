@@ -17,6 +17,7 @@
                       :box="places.length === 1"
                       :index="index"
                       :model="places[index]"
+                      pick-place-supported
                       :single="places.length === 1"
                       :is-last="(places.length -1) === index && index !== 0"
                       @selected="selectPlace"
