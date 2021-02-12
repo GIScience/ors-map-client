@@ -3,6 +3,9 @@
   :style="{'margin-top': $vuetify.breakpoint.smAndDown ? '-' + $store.getters.footerMiniHeight + 'px': '-' + $store.getters.footerFullHeight + 'px'}"
   :height="$vuetify.breakpoint.smAndDown? $store.getters.footerMiniHeight : $store.getters.footerFullHeight" :class="{'small': $vuetify.breakpoint.smAndDown}">
       <p>
+        <strong>
+          <a target="_blank" href="https://github.com/GIScience/ors-map-client">v{{ appVersion }}</a>
+        </strong>
         <span>&nbsp;© {{currentYear}} <strong>{{footerMainSiteName}}</strong></span>
         <span class="hidden-sm-and-down"> | {{ $t('global.developedByIntro') }}
           <strong>
