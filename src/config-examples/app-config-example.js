@@ -26,6 +26,11 @@ const appConfig = {
   bitlyApiKey: 'put-the-bitly-api-key-here', // Bit.ly key used to generate the short url
   bitlyLogin: 'put-the-bitly-login-here', // Bit.ly login used to generate the short url
 
+  showAdminAreaPolygon: true, // show admin area polygon
+  showInstructionsTooltipsOnFirstLoad: true, // if the instructions tooltips must be shown on the app first load
+  showDefaultAboutContent: true, // show default about content
+  showAltitudeOnSidebar: true, // show altitude preview on sidebar
+  
   disabledActionsForIsochrones: ['roundtrip'], // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
   disabledActionsForPlacesAndDirections: [], // // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
   supportsPlacesAndDirections: true, // If thw whole places and directions feature is supported/enabled in the application
@@ -44,6 +49,7 @@ const appConfig = {
   supportsMyLocationBtn: true, // If the `my location` button is supported on the map view
   initialZoomLevel: 6, // The initial map view zoom level
   initialMapMaxZoom: 18, // The initial map view max zoom
+  
 
   // The map tile providers available. At least one must be present
   mapTileProviders: [
