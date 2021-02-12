@@ -173,6 +173,7 @@ const buildPlacesSearchResult = (responses, quantity) => {
     let adminFeatures = []
     if (responses.length > 1) {
       adminFeatures = responses[1].features
+      adminFeatures[0].bestMatch = true
     }
   
     // If there are administrative places and also places 
@@ -189,8 +190,8 @@ const buildPlacesSearchResult = (responses, quantity) => {
       features = features.concat(adminFeatures)
     }
   }
-
   features = sortFeatures(features)
+
   let places = Place.placesFromFeatures(features)
   places = main.getInstance().appHooks.run('placeSearchResultPrepared', places)
   return places
@@ -205,27 +206,33 @@ const sortFeatures  = (features) => {
   if (features.length < 2) {
     return features
   }
+  // Se the distance of each location considering the current map center
   for (let key in features) {    
-    // Se the distance of each location considering the current map center
     let featureLatLng = GeoUtils.buildLatLong(features[key].geometry.coordinates[1], features[key].geometry.coordinates[0])
     features[key].distance = GeoUtils.calculateDistanceBetweenLocations(store.getters.mapSettings.mapCenter, featureLatLng, store.getters.mapSettings.unit)    
     // Add a unique id for each feature
     features[key].properties.unique_id = features[key].properties.id || `osm_id_${features[key].properties.osm_id}`
   }
-  // Get unique items
-  features = lodash.uniqBy(features, function (f) { return f.properties.unique_id })
+  // Sort by distance
   features = lodash.sortBy(features, ['distance', 'asc'])
 
+  let bestMatchIndex = lodash.findIndex(features, function(f) { return f.bestMatch === true})
+  if (bestMatchIndex > -1) {
+    // Move best match to to first postion (duplicated items will be removed later)
+    features.splice(0, 0, features[bestMatchIndex])
+  }
   let closestCityIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'locality' || f.properties.layer === 'city' })
-  if (closestCityIndex > -1) {
-    // Move closest city to first postion
-    features.splice(0, 0, features.splice(closestCityIndex, 1)[0])
+  if (closestCityIndex > 1) {
+    // Move closest city to second postion (duplicated items will be removed later)
+    features.splice(1, 0, features[closestCityIndex])
   }
   let closestCountryIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'country'})
-  if (closestCountryIndex > -1) {
-    // Move closest city to first postion
-    features.splice(1, 0, features.splice(closestCountryIndex, 1)[0])
+  if (closestCountryIndex > 2) {
+    // Move closest city to third postion (duplicated items will be removed later)
+    features.splice(2, 0, features[closestCountryIndex])
   }
+  // remove duplicated
+  features = lodash.uniqBy(features, function (f) { return f.properties.unique_id })
   return features
 }
 
