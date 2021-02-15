@@ -418,7 +418,6 @@ export default {
 
     /**
      * Search fora place based on the place input value at the given index
-     * @param {*} index
      */
     autocompleteSearch () {
       // Make sure that the local model is up to date
@@ -435,8 +434,9 @@ export default {
     /**
      * Search a place by name
      *
+     * @param {Boolean} enterWasHit
      */
-    autocompleteByName () {
+    autocompleteByName (enterWasHit) {
       this.searching = true
       if (!this.localModel.placeName || this.model.placeName.length === 0) {
         this.localModel = new Place()
@@ -447,6 +447,9 @@ export default {
         // Run the place search
         this.eventBus.$emit('showLoading', true)
         PlacesSearch(this.localModel.placeName, 10).then(places => {
+          if (enterWasHit && places[0].properties.layer === 'address') {
+            console.log(places[0])
+          }
           context.localModel.setSuggestions(places)
           context.focused = true
           this.focusIsAutomatic = false
@@ -504,18 +507,62 @@ export default {
 
           // Make sure that the changes in the input are debounced
           this.debounceTimeoutId = setTimeout(function () {
-            if (context.supportSearch && (event.key === 'Enter')) {
+            if (event.key === 'Enter') {
               context.focused = false
-              if (context.searchAvailable) {
-                context.sendToSearchMode()
-              } else {
-                context.autocompleteSearch()
-              }
+              context.handleSearchInputEnter()
             } else {
               context.autocompleteSearch()
             }
           }, 1000)
         }
+      }
+    },
+
+    /**
+     * Handle the search input enter/return action to
+     * search and auto select the first result in case of
+     * and address exact match or to show the autocomplete
+     * suggetions for the other cases
+     */
+    handleSearchInputEnter () {
+      // We can only try yo auto select the first result 
+      // if the inputted text is not a coordinate
+      if (!this.localModel.nameIsCoord()) {
+        let context = this
+        if (appConfig.autoSelectFirstExactAddressMatchOnSearchEnter) {
+          this.eventBus.$emit('showLoading', true)
+          PlacesSearch(this.localModel.placeName, 10).then(places => {
+            // If the first result is an address and the match_type is exact, 
+            // then we auto select the first item on the enter/return action
+            if (places.length > 0 && places[0].properties.layer === 'address' && places[0].properties.match_type === 'exact') {
+              context.selectSuggestion(places[0])
+            } else { // if not call the search handler
+              context.handleGoToSearchMode()
+            }
+          }).catch(response => {
+            console.log(response)
+            // In case of any fail, call the search mode handler
+            context.handleGoToSearchMode()
+          }).finally(() => {
+            context.eventBus.$emit('showLoading', false)
+          })
+        } else {
+          context.handleGoToSearchMode()
+        }
+      } else { // If a coordinate was inputted, call the auto complete
+        this.autocompleteSearch()
+      }
+    },
+
+    /**
+     * Hnadle go to search mode
+     */
+    handleGoToSearchMode () {
+      // If search mode is supported and available
+      if (this.supportSearch && this.searchAvailable) {
+        this.sendToSearchMode()
+      } else { // if not just show the autocomplete suggestions
+        this.autocompleteSearch()
       }
     },
 
@@ -559,7 +606,7 @@ export default {
      * Set a suggestion item clicked as selected and emit the selected event
      * @param {Place} suggestedPlace
      */
-    suggestionClicked (suggestedPlace) {
+    selectSuggestion (suggestedPlace) {
       // Only proceeed if it is being selected
       // a place different from the current one
       if (!suggestedPlace.equals(this.model)) {
