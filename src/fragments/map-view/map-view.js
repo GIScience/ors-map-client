@@ -1046,6 +1046,10 @@ export default {
           this.setMapCenter(this.localMapViewData.places[0].getLatLng())
         }
         if (this.mode === constants.modes.place && this.hasOnlyOneMarker && appConfig.showAdminAreaPolygon) {
+          let layer = this.localMapViewData.places[0].layer || this.localMapViewData.places[0].properties.layer
+          if (layer) {
+            this.zoomLevel = GeoUtils.zoomLevelByLayer(layer)
+          }
           this.loadAdminArea()         
         } else {
           this.fitFeaturesBounds()

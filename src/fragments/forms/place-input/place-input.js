@@ -534,8 +534,12 @@ export default {
           PlacesSearch(this.localModel.placeName, 10).then(places => {
             // If the first result is an address and the match_type is exact, 
             // then we auto select the first item on the enter/return action
-            if (places.length > 0 && places[0].properties.layer === 'address' && places[0].properties.match_type === 'exact') {
-              context.selectSuggestion(places[0])
+            const addresses = this.lodash.filter(places, (p) => {
+              return p.properties.layer === 'address' && p.properties.match_type === 'exact'
+            })
+
+            if (addresses.length === 1) {
+              context.selectSuggestion(addresses[0])
             } else { // if not call the search handler
               context.handleGoToSearchMode()
             }
