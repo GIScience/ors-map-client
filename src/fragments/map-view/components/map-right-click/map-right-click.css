@@ -11,7 +11,7 @@
 }
 
 .right-click-btn >>> .v-btn__content {
-  padding-left:10px;
+  padding-left:0;
   display:block;
 }
 
