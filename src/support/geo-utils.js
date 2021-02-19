@@ -75,39 +75,42 @@ const geoUtils = {
       return []
     }
     lodash.each(places, (place, key) => {
-      // Define the marker color
-      const lastIndexKey = places.length - 1
-      let coloredMarkerName = geoUtils.getMarkerColor(key, lastIndexKey, isRoute)
-
-      if (highlightedPlace) {
-        if (place.equals(highlightedPlace)) {
+      if (place.lng && place.lat) {
+        // Define the marker color
+        const lastIndexKey = places.length - 1
+        let coloredMarkerName = geoUtils.getMarkerColor(key, lastIndexKey, isRoute)
+  
+        if (highlightedPlace) {
+          if (place.equals(highlightedPlace)) {
+            coloredMarkerName = 'red'
+          }
+        } else if (Number(key) === 0 && !isRoute) {
           coloredMarkerName = 'red'
         }
-      } else if (Number(key) === 0 && !isRoute) {
-        coloredMarkerName = 'red'
+  
+        // Build the marker
+        const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName)
+        const marker = {
+          position: {
+            lng: place.lng,
+            lat: place.lat
+          },
+          icon: markerIcon
+        }
+  
+        // If the way point array has the third parameter, it is its label
+        marker.label = place.placeName || `${place.lng},${place.lat}`
+        if (!isNaN(place.index) && isRoute) {
+          marker.label = `(${place.index}) ${marker.label}`
+        }
+  
+        // If the way point array has the fourth parameter, it is its way point json data
+        marker.place = place
+  
+        // Add the markers to the returning array
+        markers.push(marker)
+
       }
-
-      // Build the marker
-      const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName)
-      const marker = {
-        position: {
-          lng: place.lng,
-          lat: place.lat
-        },
-        icon: markerIcon
-      }
-
-      // If the way point array has the third parameter, it is its label
-      marker.label = place.placeName || `${place.lng},${place.lat}`
-      if (!isNaN(place.index) && isRoute) {
-        marker.label = `(${place.index}) ${marker.label}`
-      }
-
-      // If the way point array has the fourth parameter, it is its way point json data
-      marker.place = place
-
-      // Add the markers to the returning array
-      markers.push(marker)
     })
     return markers
   },

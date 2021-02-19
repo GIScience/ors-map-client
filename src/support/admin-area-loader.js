@@ -22,8 +22,10 @@ class AdminAreaLoader {
       if (place.properties.region) {
         adminAreaFilter.state  = place.properties.region.toLowerCase().replace(' region', '')
       }
-      let county = place.properties.county.toLowerCase().replace(' county', '')
-      adminAreaFilter.county  = county
+      if (place.properties.county) {
+        let county = place.properties.county.toLowerCase().replace(' county', '')
+        adminAreaFilter.county  = county
+      }
     }
     if (layer === 'locality') {
       if (place.properties.region && place.properties.region !== place.properties.locality) {

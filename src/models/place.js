@@ -3,15 +3,16 @@ import GeoUtils from '@/support/geo-utils'
 import lodash from 'lodash'
 /**
  * Place model class
- * @param {*} lat
- * @param {*} lng
- * @param {*} placeName
- * @param {*} options
+ * @param {Number} lat - default null
+ * @param {Number} lng - default null
+ * @param {String} placeName
+ * @param {Object} options
  */
 class Place {
-  constructor (lng = 0, lat = 0, placeName = '', options = {}) {
-    this.lng = Number(lng)
-    this.lat = Number(lat)
+  constructor (lng = null, lat = null, placeName = '', options = {}) {
+    this.lng = lng !== null ? Number(lng) : lng
+    this.lat = lat !== null ? Number(lat) : lat
+
     this.placeName = placeName
 
     // if the place must be resolved (do a request and convert the lng,lat to a qualified place name)
@@ -50,8 +51,8 @@ class Place {
     // If it is a POI
     this.isPoi = options.isPoi
 
-    if (lng !== 0 && lat !== 0) {
-      this.coordinates = [Number(lng), Number(lat)]
+    if (this.lng !== null && this.lat !== null) {
+      this.coordinates = [this.lng, this.lat]
 
       // Build a place name using coordinates
       if (this.placeName === '') {

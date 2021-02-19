@@ -30,6 +30,8 @@ const appConfig = {
   showInstructionsTooltipsOnFirstLoad: true, // if the instructions tooltips must be shown on the app first load
   showDefaultAboutContent: true, // show default about content
   showAltitudeOnSidebar: true, // show altitude preview on sidebar
+
+  autoSelectFirstExactAddressMatchOnSearchEnter: true, // If the first exact address match must be auto selected when the user type a text and in the place search and hit enter/return
   
   disabledActionsForIsochrones: ['roundtrip'], // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
   disabledActionsForPlacesAndDirections: [], // // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
