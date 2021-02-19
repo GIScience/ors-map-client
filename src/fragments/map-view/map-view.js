@@ -517,7 +517,7 @@ export default {
      */
     canFitFeatures () {
       let available = appConfig.fitAllFeaturesToolAvailable
-      if (available && (this.mapViewData.hasPlaces() || this.mapViewData.hasRoutes() || this.localAvoidPolygons.length > 0 )) {
+      if (available && (this.localMapViewData.hasPlaces() || this.localMapViewData.hasRoutes() || this.localAvoidPolygons.length > 0 )) {
         return true
       }
       return false
@@ -887,7 +887,7 @@ export default {
     addStopViaPolylineDrag (data) {
       data.latlng = data.event.target.getLatLng()
       const activeRouteDataPolyline = this.activeRouteData.geometry.coordinates
-      const closestPlaceIndex = GeoUtils.getStopInjectIndexFromPolyline(data.latlng, this.mapViewData.places, activeRouteDataPolyline, data.draggedFromIndex)
+      const closestPlaceIndex = GeoUtils.getStopInjectIndexFromPolyline(data.latlng, this.localMapViewData.places, activeRouteDataPolyline, data.draggedFromIndex)
       data.injectIndex = closestPlaceIndex
       this.$emit('addRouteStop', data)
     },

@@ -33,9 +33,6 @@ export default {
     ChartWrapper
   },
   created () {
-    if (this.mapViewData.hasRoutes()) {
-      this.localMapViewData = this.mapViewData
-    }
     this.build()
 
     // Rebuild altitude data when the active route index change
@@ -48,8 +45,8 @@ export default {
       return data
     },
     summary () {
-      if (this.mapViewData) {
-        const summary = this.mapViewData.routes[this.$store.getters.activeRouteIndex].summary
+      if (this.localMapViewData) {
+        const summary = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].summary
         return summary
       }
     },
@@ -74,7 +71,8 @@ export default {
   methods: {
     build () {
       if (this.mapViewData.hasRoutes()) {
-        this.parsedData = AltitudeDataParser.parse(this.mapViewData, this.$store.getters.activeRouteIndex)
+        this.localMapViewData = this.mapViewData.clone()
+        this.parsedData = AltitudeDataParser.parse(this.localMapViewData, this.$store.getters.activeRouteIndex)
       }
     },
     chartHoverIndexChanged (index) {

@@ -1,5 +1,5 @@
 const constants = {
-  clientVersion: '0.9.4', // If you change the version here you have to change on package.json too!
+  clientVersion: '0.9.5', // If you change the version here you have to change on package.json too!
   apiVersion: '5.0',
   orsPublicHost: 'https://openrouteservice.org',
   publicEndpoints: {

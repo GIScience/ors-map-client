@@ -17,6 +17,7 @@ import lodash from 'lodash'
 
 export default {
   data: () => ({
+    minimumMapViewHeight: 100,
     mapViewGuid: null,
     myLocation: false,
     isAltitudeModalOpen: false,
@@ -293,7 +294,7 @@ export default {
      */
     markerClicked (place) {
       // At least 100px height must be available for the map view
-      if ((window.innerHeight > this.bottomNavHeight + 100) && this.$store.getters.mode === constants.modes.search) {
+      if ((window.innerHeight > this.bottomNavHeight + this.minimumMapViewHeight) && this.$store.getters.mode === constants.modes.search) {
         const index = place.findIndex(this.mapViewData.places)
         this.activeplaceIndex = index
         this.bottomNavActive = true

@@ -6,4 +6,13 @@
 }
 .right-click-btn {
   text-transform: none !important;
+  padding-right: 0;
+  text-align:left;
 }
+
+.right-click-btn >>> .v-btn__content {
+  padding-left:10px;
+  display:block;
+}
+
+

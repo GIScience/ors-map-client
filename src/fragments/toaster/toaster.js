@@ -36,6 +36,11 @@ export default {
       } else {
         this.visible = true
       }
+    },
+    clicked (event) {
+      this.visible = false
+      event.preventDefault()
+      event.stopPropagation()
     }
   },
   computed: {

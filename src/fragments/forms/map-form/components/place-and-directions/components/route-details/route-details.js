@@ -39,11 +39,11 @@ export default {
   },
   computed: {
     hasRoutes () {
-      return this.mapViewData.isRouteData
+      return this.localMapViewData.isRouteData
     },
 
     startedPanelExtended () {
-      return this.mapViewData.routes.length === 1 ? 0 : null
+      return this.localMapViewData.routes.length === 1 ? 0 : null
     },
     /**
      * Builds and return route summary
