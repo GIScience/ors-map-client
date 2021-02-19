@@ -11,7 +11,7 @@
     :auto-height="true"
     v-model="visible">
     <div v-html="snackbarText"></div>
-    <v-btn :style="{color: snackbarTheme === 'warning'? 'black': 'white'}" flat @click.native="visible = false">{{ $t('global.close') }}</v-btn>
+    <v-btn :style="{color: snackbarTheme === 'warning'? 'black': 'white'}" flat @click.native="clicked($event)">{{ $t('global.close') }}</v-btn>
     </v-snackbar>
 </template>
 

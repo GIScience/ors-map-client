@@ -540,7 +540,7 @@ export default {
       if (this.$store.getters.mode !== constants.modes.search) {
         const isRoundTrip = this.$store.getters.mode === constants.modes.roundTrip
 
-        // Just emter here if we are dealing with directions round trip
+        // Just enter here if we are dealing with directions round trip
         // If there are more then 1 place, then it is directions
         // if there is only one place and it is round trip, then we are also
         // dealing with directions, but an special directions (a round trip directions!)
@@ -548,7 +548,10 @@ export default {
           if (!isRoundTrip) {
             this.setViewMode(constants.modes.directions)
           }
-          this.calculateDirections().then(this.updatePlaceView)
+          this.calculateDirections().then((mapViewData) => {
+            this.mapViewData = mapViewData
+            // this.updatePlaceView()
+          })
         } else if (this.places.length === 1) { // if it is not directions, then it is a single place case
           this.setViewMode(constants.modes.place)
           this.loadSinglePlace(0)
