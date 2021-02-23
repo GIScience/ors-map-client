@@ -743,7 +743,8 @@ export default {
 
     /**
      * Remove a place input at a given index
-     * @param {*} index
+     * @param {Object} data {index: Number, place: Place}
+     * @param {Boolean} keepDirectionsMode
      */
     removePlaceInput (data, keepDirectionsMode = false) {
       let placeInputsBeforeRemoval = this.places.length

@@ -1,0 +1,47 @@
+.custom-html-icon-div {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -15px 0 0 -15px;
+  border: 2px solid rgb(51, 51, 51);
+  box-shadow: 0px 2px 1px 2px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.custom-html-icon-img {
+  transform: rotate(+45deg);
+  margin-left: 7px;
+  margin-top: 4px;
+  height: 21px
+}
+
+.custom-html-icon-txt {
+  transform: rotate(+45deg);
+  margin-left: 7px;
+  margin-top: 7px;
+  height: 21px;
+  font-weight: 600;
+  color:white
+}
+
+.custom-html-icon-txt.double-digit-text {
+  margin-left: 4px;
+  margin-top: 6px;
+}
+
+.custom-html-icon-txt.triple-digit-text {
+  margin-left: 1px;
+  margin-top: 7px;
+  font-size: 10px;
+}
+
+.custom-html-icon-txt.four-digit-text {
+  margin-left: 1px;
+  margin-top: 5px;
+  font-size: 9px;
+}
+
+
