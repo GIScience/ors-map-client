@@ -2,7 +2,8 @@ import layerZoomMapping from '@/config/layer-zoom-mapping'
 import lodash from 'lodash'
 import Leaflet from 'leaflet'
 import moment from 'moment'
-import main from '@/main'
+import Vue from 'vue'
+import HtmlMarker from '@/fragments/html-marker/HtmlMarker'
 
 // The import below will add some methods to Leaflet.GeometryUtil 
 // Even if it is not been accessed within this class, it is being used!
@@ -54,10 +55,10 @@ const geoUtils = {
       } else if (lastIndexKey === index) {
         coloredMarkerName = 'red'
       } else {
-        coloredMarkerName = 'blue'
+        coloredMarkerName = '#206fe2'
       }
     } else {
-      coloredMarkerName = 'blue'
+      coloredMarkerName = '#206fe2'
     }
     return coloredMarkerName
   },
@@ -89,14 +90,8 @@ const geoUtils = {
         }
   
         // Build the marker
-        const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName)
-        const marker = {
-          position: {
-            lng: place.lng,
-            lat: place.lat
-          },
-          icon: markerIcon
-        }
+        const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName, place.index, isRoute)
+        const marker = { position: { lng: place.lng, lat: place.lat}, icon: markerIcon}
   
         // If the way point array has the third parameter, it is its label
         marker.label = place.placeName || `${place.lng},${place.lat}`
@@ -200,14 +195,21 @@ const geoUtils = {
    * @param {String} color
    * @returns {Object} markerIcon
    */
-  buildMarkerIcon: (color) => {
-    const markerIcon = Leaflet.icon({
-      iconUrl: require(`./static/${color}-marker.png`).default,
-      shadowUrl: require('leaflet/dist/images/marker-shadow.png').default,
-      iconAnchor: [14, 35],
-      shadowAnchor: [12, 41],
-      iconSize: [28, 36],
-      popupAnchor: [0, -32]
+  buildMarkerIcon: (color, index, isRoute) => {
+    let propsData = { color: color }
+    if (isRoute && index) {
+      propsData.iconNumber = index
+    }
+    var htmlMarkerClass = Vue.extend(HtmlMarker)
+    var htmlIconInstance = new htmlMarkerClass({ propsData })
+    htmlIconInstance.$mount()
+    let markerHtml = htmlIconInstance.$el.innerHTML
+
+    const markerIcon = Leaflet.divIcon({
+      className: 'custom-div-icon',
+      html: markerHtml,
+      iconSize: [30, 42],
+      iconAnchor: [15, 42]
     })
     return markerIcon
   },

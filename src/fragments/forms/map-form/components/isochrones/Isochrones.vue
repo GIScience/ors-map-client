@@ -21,7 +21,7 @@
                       :single="places.length === 1"
                       :is-last="(places.length -1) === index && index !== 0"
                       @selected="selectPlace"
-                      @delete="removePlaceInput"
+                      @removeInput="removePlaceInput"
                       @addInput="addPlaceInput"
                       @cleared="placeCleared">
                     </place-input>

@@ -35,7 +35,7 @@
         </v-text-field>
       </v-flex>
       <v-flex v-if="iconsBtnCounter > 0" v-bind="{[iconsColumns]: true}" class="input-btns">
-        <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="deleteAvailable && $mdAndUpResolution"  @click="deletePlace()">
+        <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="deleteAvailable && $mdAndUpResolution"  @click="removePlaceInput()">
           <v-icon :title="$t('placeInput.removeInput')" class="input-icon" >delete</v-icon>
         </v-btn>
         <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="directIsAvailable && $mdAndUpResolution"  @click="toggleDirect()">
@@ -61,7 +61,7 @@
             <v-icon  :title="$t('placeInput.openInputOptions')" style="font-size:29px" color="dark" large class="input-icon" >more_vert</v-icon>
           </v-btn>
           <v-list light style="background:white" class="input-pop-up-list">
-            <v-list-tile @click.stop="deletePlace()" v-if="deleteAvailable">
+            <v-list-tile @click.stop="removePlaceInput()" v-if="deleteAvailable">
               <v-list-tile-title>
                 <v-btn flat class="no-padding">
                   <v-icon :title="$t('placeInput.removeInput')" color="dark" large >delete</v-icon>

@@ -661,9 +661,9 @@ export default {
      * by hidden the floating menu (if visible)
      * and by emitting the corresponding event
      */
-    deletePlace () {
+    removePlaceInput () {
       this.placeInputFloatingMenu = false // When a place is removed we have to make sure that the floating menu is hidden
-      this.$emit('delete', this.index)
+      this.$emit('removeInput', {index: this.index})
     },
 
     /**
