@@ -198,7 +198,7 @@ const geoUtils = {
   buildMarkerIcon: (color, index, isRoute) => {
     let propsData = { color: color }
     if (isRoute && index) {
-      propsData.iconNumber = index
+      propsData.markerNumber = index
     }
     var htmlMarkerClass = Vue.extend(HtmlMarker)
     var htmlIconInstance = new htmlMarkerClass({ propsData })

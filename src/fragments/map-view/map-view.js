@@ -586,6 +586,18 @@ export default {
       }
       let options = { parser: 'ors', mappings: mappings, translation: heightGraphTranslations }
       return options
+    },
+    /**
+     * Build the map view data for leafletheight graph
+     * As leaflefheight graph does not support alternative routes
+     * we have to put the active feature (according the active route index)
+     * in the first index (0) where the component wil looks for
+     * @returns {Object} rawData
+     */
+    localMapViewDataRawData () {
+      let mapViewData = this.localMapViewData.clone()
+      mapViewData.rawData.features[0] = mapViewData.rawData.features[this.$store.getters.activeRouteIndex]  
+      return mapViewData.rawData
     }
   },
   watch: {
