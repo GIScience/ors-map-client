@@ -33,7 +33,8 @@ const settingsOptions = {
   appLocales: [
     { text: 'English US', value: 'en-us' },
     { text: 'Deutsch DE', value: 'de-de' },
-    { text: 'Português BR', value: 'pt-br' }
+    { text: 'Português BR', value: 'pt-br' },
+    { text: 'Italiano IT', value: 'it-it' }
   ],
   tileServices: [
     { text: 'OpenStreetMap', value: 'osm' },
