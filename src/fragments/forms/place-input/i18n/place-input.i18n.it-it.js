@@ -1,0 +1,33 @@
+export default {
+  placeInput: {
+    'findAPlace': 'Trova un luogo',
+    'place': 'Luogo',
+    'addRouteStop': 'Aggiungi un punto',
+    'routePlace': 'Punto',
+    'routeDestination': 'Destinatione',
+    'placeNameRequired': 'Nome di un luogo richiesto',
+    'yourLocation': 'La mia posizione',
+    'couldNotDetermineYourLocation': 'Non è stato possibile determinare la tua posizione. Assicurati di aver dato permesso d\'accesso alla tua posizione',
+    'useYourLocation': 'Usa la mia posizione attuale',
+    'removeInput': 'Rimuovi luogo/immissione',
+    'directions': 'Direzioni',
+    'fromYourBrowser': 'Dal tuo dispositivo',
+    'addStartingPlace': 'Aggiungi un luogo di partenza',
+    'startingPlace': 'Luogo di partenza',
+    'openInputOptions': 'Apri opzioni d\'inserimento',
+    'addInput': 'Immetti luogo',
+    'switchCoords': 'Inverti coordinate',
+    'rawCoordinate': 'Coordinate Lat.,Long.',
+    'fillOrRemoveInput': 'Cerca un luogo o usa il pulsante sulla destra della mappa',
+    'noPlaceFound': 'Nessun luogo trovato',
+    'unknownSearchPlaceError': 'Errore sconosciuto durante la ricerca',
+    'approximateDistance': 'Distanza approssimata in una linea retta dal centro della mappar',
+    'couldNotDetermineYourPreciseLocationUsingPreviousLocation': 'Non è stato possibile determinare la tua attuale posizione. Sarà usata la tua posizione precedente',
+    'pleaseTypeSomething': 'Inserisci qualcosa da cercare',
+    'toggleDirect': 'Attiva/Disattiva via diretta in linea d\'aria da qui al prossimo punto',
+    'clickOnTheMapToSelectAPlace': 'Clicca sulla mappa per selezionare un luogo',
+    'clickOnTheMapBtnToPickAPlace': 'Clicca su questo pulsante per scegliere un luogo sulla mappa',
+    'goToDirectionsMode': 'Clicca sul pulsante direzioni per passare alla modalità itinerario',
+    'clickToSearchAndShowResultsOnTheMap': 'Clicca per cercare e mostrare i risultati sulla mappa'
+  }
+}

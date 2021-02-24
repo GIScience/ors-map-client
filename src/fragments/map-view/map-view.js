@@ -192,7 +192,7 @@ export default {
      * @returns {Boolean}
      */
     supportsMyLocationBtn () {
-      let available = appConfig.supportsMyLocationBtn
+      let available = appConfig.supportsMyLocationBtn && !this.$store.getters.embed
       return available
     },
     /**
@@ -262,7 +262,7 @@ export default {
         zoomControl: this.showControls,
         attributionControl: true,
         measureControl: true,
-        gestureHandling:this.$store.getters.embed
+        gestureHandling: this.$store.getters.embed
       }
     },
    /**

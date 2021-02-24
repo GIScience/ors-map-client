@@ -2,7 +2,7 @@
   <div>
     <v-tabs class="tab app-tab map-search-tab" v-model="activeTab" slider-color="secondary">
       <v-tab ripple key="0" class="tab-title" v-if="hasPlacesAndDirectionsTab">
-        {{ $t('mapForm.PlacesAndDirections') }}
+        {{ $t('mapForm.placesAndDirections') }}
       </v-tab>
       <v-tab ripple key="1" class="tab-title" v-if="hasIsochronesTab">
         {{$t('mapForm.isochrones')}}

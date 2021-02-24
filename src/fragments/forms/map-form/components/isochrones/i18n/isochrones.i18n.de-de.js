@@ -1,7 +1,6 @@
 
 export default {
   isochrones: {
-    Places: 'Orte',
     isochrones: 'Isochronen',
     isochronesReady: 'Isochronen fertig',
     calculatingIsochrones: 'Berechne Isochronen ...',

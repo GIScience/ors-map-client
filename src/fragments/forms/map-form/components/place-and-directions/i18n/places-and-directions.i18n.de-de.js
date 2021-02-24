@@ -1,8 +1,6 @@
 
 export default {
   placesAndDirections: {
-    pageTitle: 'ORS Maps',
-    Places: 'Orte',
     isochrones: 'Isochronen',
     place: 'Ort',
     notRouteFound: 'Keine Route mit diesem Fahrzeugprofil für die gewählten Orte gefunden.',

@@ -1,7 +1,6 @@
 
 export default {
   settings: {
-    save: 'Salvar',
     endpointsSectionTitle: 'Pontos finais de serviço (URI ou URL completa)',
     language: 'Idioma',
     appLocale: 'Localizaçào da aplicaçào',

@@ -1,7 +1,6 @@
 
 export default {
   settings: {
-    save: 'Save',
     endpointsSectionTitle: 'Service endpoints (URI or full URL)',
     language: 'Language',
     appLocale: 'App locale',

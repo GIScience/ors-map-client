@@ -1,8 +1,6 @@
 
 export default {
   placesAndDirections: {
-    pageTitle: 'ORS Maps',
-    Places: 'Places',
     isochrones: 'Isochrones',
     place: 'place',
     notRouteFound: 'It was not possible to find a route connecting the places with the selected profile',

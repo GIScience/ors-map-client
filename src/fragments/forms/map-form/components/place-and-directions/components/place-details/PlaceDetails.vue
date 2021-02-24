@@ -11,7 +11,7 @@
       </template>
       <div>
         <div v-if="place.placeName">{{$t('placeDetails.placeName')}}: <b>{{place.placeName}}</b></div>
-        <div v-if="place.properties.country">{{$t('placeDetails.country')}}: <b>{{place.properties.country}}</b></div>
+        <div v-if="place.properties.country">{{$t('global.layers.country')}}: <b>{{place.properties.country}}</b></div>
         <div>{{$t('placeDetails.layer')}}: <b>{{ $t('global.layers.'+ place.properties.layer) }}</b></div>
         <div>{{$t('placeDetails.lon')}}: <b>{{place.lng}}</b></div>
         <div>{{$t('placeDetails.lat')}}: <b>{{place.lat}}</b></div>

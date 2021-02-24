@@ -1,7 +1,6 @@
 
 export default {
   placeDetails: {
-    country: 'Land',
     layer: 'Ebene',
     lat: 'Lat.',
     lon: 'Lon.',

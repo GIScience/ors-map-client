@@ -133,7 +133,7 @@
               <v-btn :block="$lowResolution" color="primary" :title="$t('settings.restoreDefaults')" @click="restoreDefaultMapSettings">{{$t('settings.restoreDefaults')}}</v-btn>
             </v-flex>
             <v-flex text-xs-right xs12 sm3 md3 :class="{'ml-2': $vuetify.breakpoint.smAndDown}">
-              <v-btn :block="$lowResolution" color="primary" :title="$t('settings.save')" @click="saveAll">{{$t('settings.save')}}</v-btn>
+              <v-btn :block="$lowResolution" color="primary" :title="$t('global.save')" @click="saveAll">{{$t('global.save')}}</v-btn>
             </v-flex>
           </v-layout>
           <br>
