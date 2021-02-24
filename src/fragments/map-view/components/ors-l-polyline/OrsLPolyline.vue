@@ -3,6 +3,7 @@
     <l-polyline :lat-lngs="latLngs" :weight="backgroundWeight" :color="backgroundColor"></l-polyline>
     <l-polyline ref="foregroundPolyline"
       @follow="followPolyline" 
+      @rightClicked="rightClicked"
       @click.exact="click($event)"
       @followMarkerClicked="click($event)"
       @addstop="addStopViaPolylineDrag"
