@@ -89,6 +89,12 @@ export default {
     followPolyline (data) {
       this.$emit('followPolyline', data)
     },
+    rightClicked (event) {
+      if (this.$refs.foregroundPolyline && this.$refs.foregroundPolyline.mapObject) {
+        this.$refs.foregroundPolyline.mapObject.closePopup()
+      }
+      this.$emit('rightClicked', event)
+    },
     openPopup(event) {
       this.$nextTick(() => {
         event.target.openPopup()
@@ -196,7 +202,7 @@ export default {
       if (this.draggable === true) {
         this.options.edit_with_drag = true
       }
-      // This willa add custom behaviors to the vue2leaflet polyline
+      // This will add custom behaviors to the vue2leaflet polyline
       this.orsExtendedPolyline = new OrsExtendedPolyline(this)
     }
   },

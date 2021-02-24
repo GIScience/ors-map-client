@@ -175,12 +175,15 @@ class OrsExtendedPolyline {
       if ((this.options.vertices.first === false && index == 0) || (this.options.vertices.last === false && index == maxIndex)) {
         return
       }
-      this._poly.spliceLatLngs(index, 1)
-      this._map.removeLayer(this._marker)
-      this._map.removeLayer(this._markerInfo)    
-      this._marker = null
-      this._markerInfo = null
+      if (index > -1) {
+        this._poly.spliceLatLngs(index, 1)
+        this._map.removeLayer(this._marker)
+        this._map.removeLayer(this._markerInfo)    
+        this._marker = null
+        this._markerInfo = null
+      }
     }
+    this._poly.fireEvent('rightClicked', event)
   }
   /**
    * Handle the mouse move over the map.
