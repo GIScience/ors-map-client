@@ -4,24 +4,24 @@ export default {
       Type: String,
       default: 'white'
     },
-    iconImg: {
+    markerImg: {
       type: String,
       required: false
     },
-    iconNumber: {
+    markerNumber: {
       type: Number,
-      default: ''
+      required: false
     }
   },
   computed: {
     doubleDigitText () {
-      return this.iconNumber && this.iconNumber > 9
+      return this.markerNumber && this.markerNumber > 9
     },
     tripleDigitText () {
-      return this.iconNumber && this.iconNumber > 99
+      return this.markerNumber && this.markerNumber > 99
     },
     fourDigitText () {
-      return this.iconNumber && this.iconNumber > 999
+      return this.markerNumber && this.markerNumber > 999
     }
   }
 }

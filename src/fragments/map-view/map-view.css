@@ -43,7 +43,7 @@
   position: absolute !important;
   bottom: 80px;
   right: 0px;
-  z-index: 500;
+  z-index: 502;
 }
 
 .accessibility-btn {
@@ -63,7 +63,7 @@
   position: absolute !important;
   top: 110px;
   right: 0px;
-  z-index: 500;
+  z-index: 502;
   background: white !important;
   color: black;
   border-radius: 3px;
