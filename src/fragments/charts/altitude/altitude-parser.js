@@ -19,9 +19,9 @@ const getColumns = (mapViewData, routeIndex) => {
  * Get the datasets from the mapviewdata @see src/models/map-view-data
  * @param {*} mapViewData
  */
-const getDatasets = (mapViewData, routeIndex) => {
+const getDatasets = (mapViewData, routeIndex, translations) => {
   const altitudeDataset = {
-    label: 'Meters',
+    label: translations.meters,
     borderColor: theme.info,
     borderWidth: 0,
     backgroundColor: '#A1C8DC',
@@ -45,10 +45,10 @@ const getDatasets = (mapViewData, routeIndex) => {
   return [altitudeDataset]
 }
 
-const parse = (mapViewData, routeIndex) => {
+const parse = (mapViewData, routeIndex, translations) => {
   const parsed = {
     labels: getColumns(mapViewData, routeIndex),
-    datasets: getDatasets(mapViewData, routeIndex)
+    datasets: getDatasets(mapViewData, routeIndex, translations)
   }
   return parsed
 }

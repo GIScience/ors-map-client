@@ -8,7 +8,7 @@ export default {
     placeNameRequired: 'Ortsangabe benötigt',
     altitude: 'Höhenänderung',
     settings: 'Einstellungen',
-    turnOnAcessibleMode: 'Barrierefreien Modus aktivieren/deaktivieren',
+    toggleAcessibleMode: 'Barrierefreien Modus aktivieren/deaktivieren',
     about: 'Über ors',
     updateSearch: 'Suche in dieser Gegend',
     updateSearchAfterZoomOrCenterChange: 'Suche nach Kartenbewegung aktualisieren'

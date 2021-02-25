@@ -21,14 +21,14 @@ const settingsOptions = {
     { text: 'GR', value: 'gr' }
   ],
   units: [
-    { text: 'Kilometers', value: 'km' },
-    { text: 'Meters', value: 'm' },
-    { text: 'Miles', value: 'mi' }
+    { text: 'Kilometers', value: 'km', slug: 'kilometers' },
+    { text: 'Meters', value: 'm', slug: 'meters' },
+    { text: 'Miles', value: 'mi', slug: 'miles' }
   ],
   areUnits: [
-    { text: 'Sq kms', value: 'km' },
-    { text: 'Hectare', value: 'ha' },
-    { text: 'Sq meters', value: 'm' }
+    { text: 'Sq kms', value: 'km', slug: 'sqKms' },
+    { text: 'Hectare', value: 'ha', slug: 'hectare' },
+    { text: 'Sq meters', value: 'm', slug: 'sqMeters' }
   ],
   appLocales: [
     { text: 'English US', value: 'en-us' },
