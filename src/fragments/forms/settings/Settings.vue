@@ -129,7 +129,7 @@
           </v-layout> 
           <v-layout row :wrap="$lowResolution">
             <v-spacer class="hidden-md-and-down"></v-spacer>
-            <v-flex text-xs-right xs12 sm4 md4 :class="{'ml-2': $vuetify.breakpoint.smAndDown, 'mb-2': $lowResolution}" >
+            <v-flex text-xs-right xs12 sm5 md5 :class="{'ml-2': $vuetify.breakpoint.smAndDown, 'mb-2': $lowResolution}" >
               <v-btn :block="$lowResolution" color="primary" :title="$t('settings.restoreDefaults')" @click="restoreDefaultMapSettings">{{$t('settings.restoreDefaults')}}</v-btn>
             </v-flex>
             <v-flex text-xs-right xs12 sm3 md3 :class="{'ml-2': $vuetify.breakpoint.smAndDown}">
