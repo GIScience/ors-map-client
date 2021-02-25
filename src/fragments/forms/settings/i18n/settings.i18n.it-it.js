@@ -45,6 +45,7 @@ export default {
     'autoFitHighlightedBounds': 'Autozoom su segmenti selezionati',
     'reloadToApplyLanguageChangeTitle': 'L\'applicazione deve essere ricaricata',
     'reloadToApplyLanguageChangeText': 'Al fine di eseguire il cambio della lingua è necessario ricaricare l\'applicazione. Ricarica adesso?',
-    'resetShownOnceTooltips': 'Mostra di nuovo indicazioni'
+    'resetShownOnceTooltips': 'Mostra di nuovo indicazioni',
+    convertStopAfterRouteEndingToDestination: 'Converti la fermata dopo la fine del percorso alla destinazione'
   }
 }

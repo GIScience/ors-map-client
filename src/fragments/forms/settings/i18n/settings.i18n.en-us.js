@@ -46,6 +46,7 @@ export default {
     autoFitHighlightedBounds: 'Auto fit highlighted bounds',
     reloadToApplyLanguageChangeTitle: 'It is necessary to reload the app',
     reloadToApplyLanguageChangeText: 'In order to fully apply the language change it is necessary to reload the app. Reload now?',
-    resetShownOnceTooltips: 'Show tooltips on app load again'
+    resetShownOnceTooltips: 'Show tooltips on app load again',
+    convertStopAfterRouteEndingToDestination: 'Convert stop after route ending to destination'
   }
 }

@@ -452,24 +452,27 @@ export default {
       if (this.places.length === 1) {
         this.directionsFromPoint(data)
       } else {
-        const closestPlaceIndex = data.injectIndex || GeoUtils.getClosestPlaceIndex(data.latlng, this.places)
-        // The selected point is after the last route point, so appent the place to the route ending
+        let closestPlaceIndex = data.injectIndex || GeoUtils.getClosestPlaceIndex(data.latlng, this.places)
+        // If the selected point is after the last route point
         if (closestPlaceIndex === this.places.length - 1) {
-          this.addDestinationToRoute(data)
-        } else {
-          // In the other cases, we have to 'inject' a route point between the exiting points
-          // To do that we add a place input, setits coordinates and then
-          // we change the app url so that the route will be recalculated
-          const injectedIndex = this.injectPlaceAndReturnIndex(data.latlng, closestPlaceIndex)
-          const context = this
-          this.resolvePlace(this.places[injectedIndex]).then(() => {
-            context.updateAppRoute()
-            context.setSidebarIsOpen()
-          }).catch((err) => {
-            console.log(err)
-            context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), { timeout: 0 })
-          })
-        }
+          // If `convertStopAfterRouteEndingToDestination`is not true, then the slot must
+          // be decreased so that the stops happen before the destination
+          if (!this.$store.getters.mapSettings.convertStopAfterRouteEndingToDestination) {
+            closestPlaceIndex--
+          }
+        } 
+        // In the other cases, we have to 'inject' a route point between the exiting points
+        // To do that we add a place input, setits coordinates and then
+        // we change the app url so that the route will be recalculated
+        const injectedIndex = this.injectPlaceAndReturnIndex(data.latlng, closestPlaceIndex)
+        const context = this
+        this.resolvePlace(this.places[injectedIndex]).then(() => {
+          context.updateAppRoute()
+          context.setSidebarIsOpen()
+        }).catch((err) => {
+          console.log(err)
+          context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), { timeout: 0 })
+        })        
       }
     },
 
