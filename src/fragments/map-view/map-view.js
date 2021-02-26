@@ -264,7 +264,8 @@ export default {
         measureControl: true,
         gestureHandling: this.$store.getters.embed,
         gestureHandlingOptions: {
-          text: this.$t('mapView.gestureHandling')
+          text: this.$t('mapView.gestureHandling'),
+          duration: 1000
         }
       }
       return options
@@ -1625,8 +1626,7 @@ export default {
 
         const context = this
 
-        // Add listeners to draw created,
-        // deleted and edited events
+        // Add listener to draw created,
         map.on('draw:created', function (e) {
           context.avoidPolygonCreated(e, map)
         })
