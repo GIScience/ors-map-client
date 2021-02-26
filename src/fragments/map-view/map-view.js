@@ -258,12 +258,16 @@ export default {
      * @returns {Object}
      */
     mapOptions () {
-      return {
+      let options = {
         zoomControl: this.showControls,
         attributionControl: true,
         measureControl: true,
-        gestureHandling: this.$store.getters.embed
+        gestureHandling: this.$store.getters.embed,
+        gestureHandlingOptions: {
+          text: this.$t('mapView.gestureHandling')
+        }
       }
+      return options
     },
    /**
      * Build and return the map center
