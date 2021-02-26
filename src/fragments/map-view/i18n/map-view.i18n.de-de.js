@@ -21,6 +21,7 @@ export default {
       bearingTextOut: 'Aus',
       tooltipTextDragAndDelete: 'Ziehen zum <b>bewegen</b><br>SHIFT-Klick zum <b>Löschen</b>',
       tooltipTextResume: '<br>CTRL-Klick um Linie <b>weiter zu zeichnen</b>',
+      tooltipTextDelete: 'Drücken Sie SHIFT und klicken Sie auf <b> Punkt löschen </ b>',
       tooltipTextAdd: 'CTRL-Klick um <b>Punkt hinzuzufügen</b>',
       clearControlTitle: 'Messung zurücksetzen',
       measureControlTitleOn: 'Entfernung messen AN',

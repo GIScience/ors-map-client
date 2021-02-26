@@ -20,6 +20,7 @@ export default {
       'bearingTextOut': 'Out',
       'tooltipTextDragAndDelete': 'Trascina per <b>muovere</b><br>Premi SHIFT e clicca per <b>cancellare</b>',
       'tooltipTextResume': '<br>Premi CTRL e clicca per <b>continuare la linea</b>',
+      'tooltipTextDelete': 'Premere SHIFT e fare clic per <b> eliminare il punto </b>',
       'tooltipTextAdd': 'Premi CTRL e clicca per <b>aggiungere un punto</b>',
       'clearControlTitle': 'Cancella misurazioni',
       'measureControlTitleOn': 'Attiva misurazione distanza',

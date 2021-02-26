@@ -74,7 +74,7 @@
         </ors-l-polyline>
       </template>
        <template v-if="showActivRouteData">
-        <ors-l-polyline :draggable="isInDirectionsMode"
+        <ors-l-polyline :draggable="isPolylineDraggable"
           @followPolyline="followPolyline" 
           @rightClicked="mapRightClick"
           :focused-poly-index="highlightedRoutePointIndex"

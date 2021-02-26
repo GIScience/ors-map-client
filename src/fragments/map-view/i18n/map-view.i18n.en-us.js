@@ -21,6 +21,7 @@ export default {
       bearingTextOut: 'Out',
       tooltipTextDragAndDelete: 'Click and drag to <b>move point</b><br>Press SHIFT-key and click to <b>delete point</b>',
       tooltipTextResume: '<br>Press CTRL-key and click to <b>resume line</b>',
+      tooltipTextDelete: 'Press SHIFT-key and click to <b>delete point</b>',
       tooltipTextAdd: 'Press CTRL-key and click to <b>add point</b>',
       clearControlTitle: 'Clear Measurements',
       measureControlTitleOn: 'Turn on distance measurement',
