@@ -55,13 +55,12 @@ export default {
       mi: 'M',
       m: 'm',
       meters: 'Meter',
-      seconds: 'sek',
+      seconds: 's',
       minutes: 'min',
-      hours: 's',
+      hours: 'h',
       days: 't',
-      minutes: 'min',
-      lat: 'lat',
-      lng: 'long'
+      lat: 'Breite',
+      lng: 'Länge'
     },
     layers: {
       macrocounty: 'Macro county',
