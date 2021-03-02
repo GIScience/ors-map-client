@@ -5,7 +5,7 @@ export default {
     'notRouteFound': 'Non è stato possibile trovare un percorso con i luoghi selezionati per questo mezzo di trasporto',
     'notRouteFoundWithFilters': 'Non è stato possibile trovare un percorso con le impostazioni e luoghi scelti per questo mezzo di trasporto',
     'noPlaceFound': 'Nessun luogo trovato con i dati indicati',
-    'routeReady': 'Route pronta',
+    'routeReady': 'Trova e va',
     'useLocation': 'GPS',
     'addPlaceInput': 'Aggiungi luogo',
     'clearRoute': 'Cancella itinerario',

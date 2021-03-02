@@ -2,7 +2,7 @@ export default {
   orsMapFilters: {
     profiles: {
       'cycling-regular': 'Bici',
-      'cycling-road': 'Pista ciclabile',
+      'cycling-road': 'Bici da corsa',
       'cycling-electric': 'E-bike',
       'cycling-mountain': 'Mountainbike',
       'cycling-safe': 'Sicuro per pedalare',
@@ -14,7 +14,7 @@ export default {
       'hgv': 'Veicolo pesante',
       'bus': 'Autobus',
       'agricultural': 'Veicolo agricolo',
-      'delivery': 'Autocarro da consegne',
+      'delivery': 'Veicolo da consegne',
       'forestry': 'Autocarro agricolo',
       'goods': 'Autocarro da beni'
     },
@@ -42,7 +42,7 @@ export default {
       },
       'interval': {
         'label': 'Intervallo',
-        'description': 'Intervallo in cui le isocrone deve essere calcolate'
+        'description': 'Intervallo in cui le isocrone devono essere calcolate'
       },
       'options': {
         'label': 'Opzioni itinerari'
@@ -114,7 +114,7 @@ export default {
         'label': 'Evitare confini',
         'description': 'Evita i confini',
         'enum': {
-          'all': 'tuti',
+          'all': 'tutti',
           'controlled': 'Controllati'
         }
       },

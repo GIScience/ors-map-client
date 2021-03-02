@@ -6,10 +6,10 @@ export default {
     'route': 'Itinerario',
     'segments': 'Segmenti',
     'segment': 'Segmento',
-    'instructions': 'Descrizioni',
-    'instruction': 'Descrizione',
+    'instructions': 'Indicazioni',
+    'instruction': 'Indicazione',
     'name': 'Nome',
-    'selectRoute': 'Seleziona l\'itinerario ',
+    'selectRoute': 'Seleziona l\'itinerario',
     'selectedRoute': 'Itinerario selezionato',
     'gotoSegment': 'Vai al segmento',
     'warningCodes': {

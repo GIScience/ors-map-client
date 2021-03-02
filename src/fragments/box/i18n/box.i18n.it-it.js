@@ -1,6 +1,6 @@
 export default {
   box: {
-    'maximize': 'Massimizza',
-    'minimize': 'Minimizza'
+    'maximize': 'Ingrandisci',
+    'minimize': 'Rimpicciolisci'
   }
 }

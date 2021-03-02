@@ -3,6 +3,6 @@ export default {
     'instruction': 'Istruzioni',
     'on': 'Su',
     'step': 'passo',
-    'gotoStep': 'Vai al passo'
+    'gotoStep': 'Visualizza questo passo'
   }
 }

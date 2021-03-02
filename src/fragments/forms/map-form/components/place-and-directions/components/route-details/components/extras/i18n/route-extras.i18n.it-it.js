@@ -3,7 +3,7 @@ export default {
     'extras': 'Opzioni extra per il percorso',
     'steepness': 'Ripidezza',
     'surface': 'Superficie',
-    'roadaccessrestrictions': 'Restrizioni d\'accesso alla strada ',
+    'roadaccessrestrictions': 'Restrizioni d\'accesso alla strada',
     'waytypes': 'Tipo di percorsi',
     'extraInfo': 'Informazioni extra',
     'value': 'Valore',

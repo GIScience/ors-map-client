@@ -14,7 +14,7 @@ export default {
     'noAndDonAskAgain': 'NO (non chiedere più)',
     'ok': 'OK',
     'polygon': 'poligono',
-    'developedByIntro': 'Servizio sviluppato da',
+    'developedByIntro': 'Servizio sviluppato dall',
     'developedBy': 'Heidelberg Institute for Geoinformation Technology',
     'duration': 'Durata',
     'distance': 'Distanza',
@@ -63,7 +63,7 @@ export default {
     },
     'layers': {
       'macrocounty': 'Macro county',
-      'country': 'Paese',
+      'country': 'Nazione',
       'region': 'Regione',
       'county': 'Provincia',
       'macroregion': 'Macro regione',

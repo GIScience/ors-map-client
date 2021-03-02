@@ -14,12 +14,12 @@ export default {
     mapSettings: 'Kartenansicht und extra Infos',
     defaultMapSettingsRestored: 'Standardeinstellungen wiederhergestellt.',
     endpointsTitle: {
-      directions: 'Directions',
-      isochrones: 'Isochrones',
+      directions: 'Direzioni',
+      isochrones: 'Isocrone',
       geocodeSearch: 'Geocode search',
-      autocomplete: 'Geocode autocomplete',
+      autocomplete: 'Autocompletamento geocodificazione',
       pois: 'POIs',
-      reverseGeocode: 'Geocode reverse'
+      reverseGeocode: 'Geocodificazione inversa'
     },
     apiKey: 'API Schlüssel',
     customApiKey: 'Benutzerdefinierter API Schlüssel',

@@ -1,5 +1,6 @@
 export default {
   mapView: {
+    'routeTo': 'Naviga fino a questo luogo',
     'polygonDetails': 'Dettagli poligono',
     'polygon': 'Poligono',
     'whatIsHere': 'Cosa c\'è qui?',
@@ -10,17 +11,17 @@ export default {
     'acquirePositionErrors': {
       'generic': 'Non è stato possibile acquisire la tua posizione perché non è stato autorizzato o il tuo browser/dispositivo non supporta la funzione.',
       'unavailable': 'Secondo il tuo browser/dispositivo, la tua posizione non è momentaneamente disponibile. Assicurati di aver configurato propriamente le impostazioni di geolocalizzazione.',
-      'permissionDenied': 'Non è stato possibile acquisire la tua posizione perché il tuo browser/dispositivo nega l\'accesso. Riprova cambiando le impostazioni del tuo browser/dispositivo e clicca di nuovo sul pulsante \'La mia posizione\'',
-      'timeout': 'Il tuo browser/dispositivo ha restituito un \'timeout\' acquisendo la tua posizione. Riprova cliccando sul pulsante \'La mia positione\''
+      'permissionDenied': 'Non è stato possibile acquisire la tua posizione perché il tuo browser/dispositivo nega l\'accesso. Riprova cambiando le impostazioni del tuo browser/dispositivo e clicca di nuovo sul pulsante "La mia posizione"',
+      'timeout': 'Il tuo browser/dispositivo ha restituito un "timeout" acquisendo la tua posizione. Riprova cliccando sul pulsante "La mia positione"'
     },
     'yourCurrentLocation': 'La mia posizione',
     'options': 'Opzioni',
     'polylineMeasure': {
-      'bearingTextIn': 'In',
-      'bearingTextOut': 'Out',
+      'bearingTextIn': 'Entrata',
+      'bearingTextOut': 'Uscita',
       'tooltipTextDragAndDelete': 'Trascina per <b>muovere</b><br>Premi SHIFT e clicca per <b>cancellare</b>',
       'tooltipTextResume': '<br>Premi CTRL e clicca per <b>continuare la linea</b>',
-      'tooltipTextDelete': 'Premere SHIFT e fare clic per <b> eliminare il punto </b>',
+      'tooltipTextDelete': 'Premi SHIFT e clicca per <b> eliminare il punto </b>',
       'tooltipTextAdd': 'Premi CTRL e clicca per <b>aggiungere un punto</b>',
       'clearControlTitle': 'Cancella misurazioni',
       'measureControlTitleOn': 'Attiva misurazione distanza',
@@ -46,18 +47,18 @@ export default {
     'defineAvoidRectangle': 'Definisci i rettangoli da evitare nel calcolo dell\'itinerario',
     'youCantIntersectPolygons': 'Non puoi intersecare poligoni',
     'polygonArea': 'Area poligono',
-    'highlighting': 'Evidenziare',
+    'highlighting': 'Evidenziazione',
     'accuracy': 'Accuratezza',
-    'youCanCenterAtYourLocationLater': 'Puoi centrare la mappa alla tua posizione attuale cliccando il pulsante \'La mia posizione\'',
+    'youCanCenterAtYourLocationLater': 'Puoi centrare la mappa alla tua posizione attuale cliccando il pulsante "La mia posizione"',
     'yourLocation': 'Usa la mia posizione',
     'setMyLocationasMapCenter': 'Vuoi centrare la mappa alla tua posizione attuale? Ciò migliorerà la precisione della ricerca. Dovrai autorizzare quando richiesto.',
     'removePlace': 'Rimuovi luogo',
     'viewOnORS': 'Vedi su ORS',
-    'moveMapPositionToLeft': 'Muovi il centro della mappa a sinistra',
-    'moveMapPositionToRight': 'Muovi il centro della mappa a destra',
-    'moveMapPositionToUp': 'Muovi il centro mappa verso l\'alto',
-    'moveMapPositionToDown': 'Muovi il centro della mappa verso il basso',
-    'toggleDirect': 'Attiva/disattiva via diretta (linea d\'aria) da qui al prossimo luogo',
+    'moveMapPositionToLeft': 'Muovi verso sinistra',
+    'moveMapPositionToRight': 'Muovi verso destra',
+    'moveMapPositionToUp': 'Muovi verso l\'alto',
+    'moveMapPositionToDown': 'Muovi verso il basso',
+    'toggleDirect': 'Attiva/disattiva via diretta in linea d\'aria da qui al prossimo luogo',
     'heightGraph': {
       'distance': 'Distanza',
       'elevation': 'Altitudine',
@@ -76,7 +77,7 @@ export default {
     'gestureHandling': {      
       'touch': 'Utilizza due dita per spostare la mappa',
       'scroll': 'Utilizza CTRL + scorrimento per eseguire lo zoom della mappa',
-      'scrollMac': 'Utilizza \u2318 + scorrimento per eseguire lo zoom della mappa'
+      'scrollMac': 'Utilizza ⌘ + scorrimento per eseguire lo zoom della mappa'
     }
   }
 }
