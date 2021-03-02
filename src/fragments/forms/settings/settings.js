@@ -112,9 +112,18 @@ export default {
   },
 
   created () {
+    let units = utils.clone(settingsOptions.units)
+    for (let key in units) {
+      units[key].text = this.$t('options.units.'+ units[key].slug)
+    }
+    let areUnits = utils.clone(settingsOptions.areUnits)
+    for (let key in units) {
+      areUnits[key].text = this.$t('options.areUnits.'+ areUnits[key].slug)
+    }
+
     this.appLocales = settingsOptions.appLocales
-    this.availableUnits = settingsOptions.units
-    this.availableAreaUnits = settingsOptions.areUnits
+    this.availableUnits = units
+    this.availableAreaUnits = areUnits
     this.mapSettingsTransient = utils.clone(this.$store.getters.mapSettings)
     this.mapSettingsTransient.apiKey = this.mapSettingsTransient.apiKey || defaultMapSettings.apiKey
     this.setIsCustomApiKey()

@@ -46,7 +46,6 @@
                     <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.surface" :label="$t('settings.surfaces')" ></v-checkbox>
                     <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.waytype" :label="$t('settings.waytypes')" ></v-checkbox>
                     <!-- options to be enabled when the features that use them are implemented. These options are already working (if uncommented), just not being used -->
-                    <!-- <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.randomizedIsochroneColors" :label="$t('settings.randomizedIsochroneColors')" ></v-checkbox> -->
                     <!-- <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.distanceMarkers" :label="$t('settings.distanceMarkers')" ></v-checkbox> -->
                     <!-- <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.suitabilityOfWays" :label="$t('settings.suitabilityOfWays')" ></v-checkbox> -->
                     <!-- <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.tollways" :label="$t('settings.tollways')" ></v-checkbox> -->
@@ -59,6 +58,7 @@
                   <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.alwaysFitBounds" :label="$t('settings.alwaysFitBounds')" ></v-checkbox>
                   <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.prioritizeSearchingForNearbyPlaces" :label="$t('settings.prioritizeSearchingForNearbyPlaces')" ></v-checkbox>
                   <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.autoFitHighlightedBounds" :label="$t('settings.autoFitHighlightedBounds')" ></v-checkbox>
+                  <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.convertStopAfterRouteEndingToDestination" :label="$t('settings.convertStopAfterRouteEndingToDestination')" ></v-checkbox>
                   <v-select :label="$t('settings.defaultTilesProvider')" :items="availableTileServices" v-model="mapSettingsTransient.defaultTilesProvider"></v-select>
                 </v-container>
               </v-list>
@@ -129,11 +129,11 @@
           </v-layout> 
           <v-layout row :wrap="$lowResolution">
             <v-spacer class="hidden-md-and-down"></v-spacer>
-            <v-flex text-xs-right xs12 sm4 md4 :class="{'ml-2': $vuetify.breakpoint.smAndDown, 'mb-2': $lowResolution}" >
+            <v-flex text-xs-right xs12 sm5 md5 :class="{'ml-2': $vuetify.breakpoint.smAndDown, 'mb-2': $lowResolution}" >
               <v-btn :block="$lowResolution" color="primary" :title="$t('settings.restoreDefaults')" @click="restoreDefaultMapSettings">{{$t('settings.restoreDefaults')}}</v-btn>
             </v-flex>
             <v-flex text-xs-right xs12 sm3 md3 :class="{'ml-2': $vuetify.breakpoint.smAndDown}">
-              <v-btn :block="$lowResolution" color="primary" :title="$t('settings.save')" @click="saveAll">{{$t('settings.save')}}</v-btn>
+              <v-btn :block="$lowResolution" color="primary" :title="$t('global.save')" @click="saveAll">{{$t('global.save')}}</v-btn>
             </v-flex>
           </v-layout>
           <br>

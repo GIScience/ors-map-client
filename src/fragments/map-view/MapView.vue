@@ -74,7 +74,7 @@
         </ors-l-polyline>
       </template>
        <template v-if="showActivRouteData">
-        <ors-l-polyline :draggable="isInDirectionsMode"
+        <ors-l-polyline :draggable="isPolylineDraggable"
           @followPolyline="followPolyline" 
           @rightClicked="mapRightClick"
           :focused-poly-index="highlightedRoutePointIndex"
@@ -94,7 +94,7 @@
           :token="tileProvider.token"
           layer-type="base"/>
       <v-btn fab small @click.stop="toggleAcessibleMode" v-if="accessbilityToolAvailable"
-        :title="$t('maps.turnOnAcessibleMode')" 
+        :title="$t('maps.toggleAcessibleMode')" 
         :class="{'extra-low-resolution': $xlResolution}"
         class="do-not-trigger-close-bottom-nav accessibility-btn" > 
         <v-icon large :color="$store.getters.mapSettings.acessibleModeActive? 'primary': 'default'" >accessibility</v-icon>

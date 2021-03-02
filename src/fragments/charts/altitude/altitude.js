@@ -72,7 +72,8 @@ export default {
     build () {
       if (this.mapViewData.hasRoutes()) {
         this.localMapViewData = this.mapViewData.clone()
-        this.parsedData = AltitudeDataParser.parse(this.localMapViewData, this.$store.getters.activeRouteIndex)
+        let translations = {meters: this.$t('global.units.meters')}
+        this.parsedData = AltitudeDataParser.parse(this.localMapViewData, this.$store.getters.activeRouteIndex, translations)
       }
     },
     chartHoverIndexChanged (index) {

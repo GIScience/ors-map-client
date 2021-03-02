@@ -53,7 +53,6 @@ export default {
       km: 'km(s)',
       mi: 'mi(s)',
       m: 'm',
-      meters: 'meter(s)',
       seconds: 'sec',
       minutes: 'min',
       hours: 'hour(s)',

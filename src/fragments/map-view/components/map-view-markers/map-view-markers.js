@@ -55,7 +55,7 @@ export default {
      * @returns {Boolean} isRemovable
      */
     markerIsRemovable () {
-      if (this.isPoi) {
+      if (this.isPoi || this.$store.getters.embed) {
         return false
       }
       let markerRemovableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones, constants.modes.place]
@@ -68,7 +68,7 @@ export default {
      * @returns {Boolean} isDraggable
      */
     markerIsDraggable () {
-      if (this.isPoi) {
+      if (this.isPoi || this.$store.getters.embed) {
         return false
       }
       const draggableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]

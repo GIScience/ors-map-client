@@ -1,7 +1,6 @@
 
 export default {
   placeDetails: {
-    country: 'País',
     layer: 'Camada',
     lat: 'Lat.',
     lon: 'Lon.',

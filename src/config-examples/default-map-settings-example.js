@@ -30,6 +30,7 @@ const defaultMapSettings = {
   defaultProfile: 'cycling-regular',
   compressDataUrlSegment: true,
   autoFitHighlightedBounds: true,
+  convertStopAfterRouteEndingToDestination: false,
   acessibleModeActive: false,
   shownOnceTooltips: {},
   mapCenter: {lat: 49.510944, lng: 8.76709}, // Default center is at Heidelberg, Germany
@@ -39,6 +40,7 @@ const defaultMapSettings = {
   randomizedIsochroneColors: false,
   suitabilityOfWays: false,
   distanceMarkers: false,
+
 }
 
 export default defaultMapSettings

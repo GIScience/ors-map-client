@@ -192,7 +192,7 @@ export default {
      * @returns {Boolean}
      */
     supportsMyLocationBtn () {
-      let available = appConfig.supportsMyLocationBtn
+      let available = appConfig.supportsMyLocationBtn && !this.$store.getters.embed
       return available
     },
     /**
@@ -258,12 +258,17 @@ export default {
      * @returns {Object}
      */
     mapOptions () {
-      return {
+      let options = {
         zoomControl: this.showControls,
         attributionControl: true,
         measureControl: true,
-        gestureHandling:this.$store.getters.embed
+        gestureHandling: this.$store.getters.embed,
+        gestureHandlingOptions: {
+          text: this.$t('mapView.gestureHandling'),
+          duration: 1000
+        }
       }
+      return options
     },
    /**
      * Build and return the map center
@@ -483,6 +488,9 @@ export default {
      */
     polylineMeasureOptions () {
       const options = mapDefinitions.polylineMeasureOptions(this.$t('mapView.polylineMeasure'))
+      // tooltipTextAdd: "Press CTRL-key and click to <b>add point</b>"
+      // tooltipTextDragAndDelete: "Click and drag to <b>move point</b><br>Press SHIFT-key and click to <b>delete point</b>"
+      // tooltipTextResume: "<br>Press CTRL-key and click to <b>resume line</b>"
       this.$root.appHooks.run('polylineMeasureOptionsBuilt', options)
       return options
     },
@@ -510,6 +518,14 @@ export default {
      */
     isInDirectionsMode () {
       return constants.modes.directions === this.mode
+    },
+
+    /**
+     * If polyline is draggable
+     * @returns {Boolean}
+     */
+    isPolylineDraggable () {
+      return this.isInDirectionsMode && !this.$store.getters.embed
     },
     /**
      * Determines if the fit features button is visible
@@ -1610,8 +1626,7 @@ export default {
 
         const context = this
 
-        // Add listeners to draw created,
-        // deleted and edited events
+        // Add listener to draw created,
         map.on('draw:created', function (e) {
           context.avoidPolygonCreated(e, map)
         })
@@ -1698,7 +1713,6 @@ export default {
     deleteAvoidPolygon (polygon) {
       let context = this
       this.getMapObject().then((map) => {
-        map.removeLayer(polygon)
         let expectedPromise = this.$root.appHooks.run('avoidPolygonRemoved', {polygon, map, context})
         // If a promise is returned
         if (expectedPromise instanceof Promise) {
@@ -1710,7 +1724,7 @@ export default {
         } else {
           map.removeLayer(polygon)
           context.notifyAvoidPolygonsChanged()
-          context.showError(context.$t('mapView.avoidPolygonNotRemoved'))
+          context.showSuccess(context.$t('mapView.avoidPolygonRemoved'))
         }
       })
     },

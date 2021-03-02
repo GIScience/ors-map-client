@@ -1,7 +1,6 @@
 
 export default {
   settings: {
-    save: 'Salvar',
     endpointsSectionTitle: 'Pontos finais de serviço (URI ou URL completa)',
     language: 'Idioma',
     appLocale: 'Localizaçào da aplicaçào',
@@ -47,6 +46,7 @@ export default {
     autoFitHighlightedBounds: 'Automaticamente enquadrar elemento(s) selecionad(o)',
     reloadToApplyLanguageChangeTitle: 'É necessário recarregar a aplicação',
     reloadToApplyLanguageChangeText: 'Para que a mudança de idioma seja totalmente aplicada é necessário recarregar a aplicação. Recarregar agora?',
-    resetShownOnceTooltips: 'Exibir dicas quando a aplicação é carregada'
+    resetShownOnceTooltips: 'Exibir dicas quando a aplicação é carregada',
+    convertStopAfterRouteEndingToDestination: 'Parada adicionada após o fim da rota vira destino final'
   }
 }

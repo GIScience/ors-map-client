@@ -21,6 +21,7 @@ export default {
       bearingTextOut: 'Fora',
       tooltipTextDragAndDelete: 'Clique e arraste para <b>mover um ponto</b>br>Pressione SHIFT-key e clique para <b>deletar um ponto</b>',
       tooltipTextResume: '<br>Pressione CTRL-key e clique para <b>continuar uma linha</b>',
+      tooltipTextDelete: 'Pressione  SHIFT e clique para <b>excluir um ponto</b>',
       tooltipTextAdd: 'Pressione CTRL-key e clique para <b>adicionar um ponto</b>',
       clearControlTitle: 'Limpar medidas',
       measureControlTitleOn: 'Ativar medida de distância',
@@ -72,6 +73,11 @@ export default {
     avoidPolygonNotRemoved: 'Não foi possível excluir o polígono a evitar',
     avoidPolygonNotSaved: 'Não foi possível salvar o polígono a evitar',
     polygonEditModeEnabled: 'Quando terminar as alterações clicke em qualquer lugar para salvar',
-    customTileProvider: 'Provedor de mapa definido pelo usuário'
+    customTileProvider: 'Provedor de mapa definido pelo usuário',
+    gestureHandling: {      
+      touch: "Use dois dedos para mover o mapa",
+      scroll: "Pressione Ctrl e role a tela simultaneamente para aplicar zoom no mapa",
+      scrollMac: "Use \u2318 e role a tela simultaneamente para aplicar zoom no mapa"      
+    }
   }
 }

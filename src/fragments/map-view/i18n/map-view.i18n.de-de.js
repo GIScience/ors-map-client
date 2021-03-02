@@ -21,6 +21,7 @@ export default {
       bearingTextOut: 'Aus',
       tooltipTextDragAndDelete: 'Ziehen zum <b>bewegen</b><br>SHIFT-Klick zum <b>Löschen</b>',
       tooltipTextResume: '<br>CTRL-Klick um Linie <b>weiter zu zeichnen</b>',
+      tooltipTextDelete: 'Drücken Sie SHIFT und klicken Sie auf <b> Punkt löschen </ b>',
       tooltipTextAdd: 'CTRL-Klick um <b>Punkt hinzuzufügen</b>',
       clearControlTitle: 'Messung zurücksetzen',
       measureControlTitleOn: 'Entfernung messen AN',
@@ -72,6 +73,11 @@ export default {
     avoidPolygonNotRemoved: 'Es war nicht möglich, das Ausweichpolygon zu entfernen',
     avoidPolygonNotSaved: 'Es war nicht möglich, das Vermeidungspolygon zu speichern',
     polygonEditModeEnabled: 'Wenn Sie die Bearbeitung abgeschlossen haben, klicken Sie auf eine beliebige Stelle, um die Änderungen zu speichern',
-    customTileProvider: 'Vom Benutzer definierter Kachelanbieter'
+    customTileProvider: 'Vom Benutzer definierter Kachelanbieter',
+    gestureHandling: {      
+      touch: "Verschieben der Karte mit zwei Fingern",
+      scroll: "Verwende Strg + Scrollen zum Zoomen der Karte",
+      scrollMac: "Verwenden Sie \u2318 + Scrollen, um die Karte zu zoomen"      
+    }
   }
 }

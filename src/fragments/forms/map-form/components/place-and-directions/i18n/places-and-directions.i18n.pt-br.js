@@ -1,8 +1,6 @@
 
 export default {
   placesAndDirections: {
-    pageTitle: 'ORS Maps',
-    Places: 'Locais',
     isochrones: 'Isócronos',
     place: 'local',
     notRouteFound: 'Não foi possível encontrar uma rota que conecte os locais usando o perfil selecionado',

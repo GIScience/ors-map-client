@@ -1,7 +1,6 @@
 
 export default {
   placeDetails: {
-    country: 'Country',
     layer: 'Layer',
     lat: 'Lat.',
     lon: 'Lon.',

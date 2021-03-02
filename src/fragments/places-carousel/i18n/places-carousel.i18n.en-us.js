@@ -1,7 +1,6 @@
 
 export default {
   placesCarousel: {
-    country: 'Country',
     layer: 'Layer',
     lat: 'Lat.',
     lon: 'Lon.',

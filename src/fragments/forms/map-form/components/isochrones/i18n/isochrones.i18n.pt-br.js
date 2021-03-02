@@ -1,7 +1,6 @@
 
 export default {
   isochrones: {
-    Places: 'Locais',
     isochrones: 'Isócronos',
     isochronesReady: 'Isócronos prontos',
     calculatingIsochrones: 'Calculando isócronos ...',

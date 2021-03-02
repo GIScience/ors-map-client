@@ -1,7 +1,6 @@
 
 export default {
   settings: {
-    save: 'Speichern',
     endpointsSectionTitle: 'Service Endpunkte (oder ganze URL)',
     language: 'Sprache (Language)',
     appLocale: 'App Sprache',
@@ -15,12 +14,12 @@ export default {
     mapSettings: 'Kartenansicht und extra Infos',
     defaultMapSettingsRestored: 'Standardeinstellungen wiederhergestellt.',
     endpointsTitle: {
-      directions: 'Directions',
-      isochrones: 'Isochrones',
+      directions: 'Direzioni',
+      isochrones: 'Isocrone',
       geocodeSearch: 'Geocode search',
-      autocomplete: 'Geocode autocomplete',
+      autocomplete: 'Autocompletamento geocodificazione',
       pois: 'POIs',
-      reverseGeocode: 'Geocode reverse'
+      reverseGeocode: 'Geocodificazione inversa'
     },
     apiKey: 'API Schlüssel',
     customApiKey: 'Benutzerdefinierter API Schlüssel',
@@ -47,6 +46,7 @@ export default {
     autoFitHighlightedBounds: 'Auto-Zoom zu selektiertem Wegabschnitt',
     reloadToApplyLanguageChangeTitle: 'App muss neu geladen werden',
     reloadToApplyLanguageChangeText: 'Um die Sprache komplett umzustellen, muss die App neu geladen werden. Jetzt neu laden?',
-    resetShownOnceTooltips: 'Hinweise erneut anzeigen'
+    resetShownOnceTooltips: 'Hinweise erneut anzeigen',
+    convertStopAfterRouteEndingToDestination: 'Konvertieren den Stopp nach dem Ende der Route zum Ziel'
   }
 }

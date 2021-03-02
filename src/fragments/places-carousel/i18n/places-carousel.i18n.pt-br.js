@@ -1,7 +1,6 @@
 
 export default {
   placesCarousel: {
-    country: 'País',
     layer: 'Camada',
     lat: 'Lat.',
     lon: 'Lon.',
