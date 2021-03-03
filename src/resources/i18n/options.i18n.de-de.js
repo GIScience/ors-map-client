@@ -6,9 +6,9 @@ export default {
       miles: 'Meilen'
     },
     areUnits: {
-      sqKms: 'qk',
+      sqKms: 'Quadratkilometer',
       hectare: 'Hektar',
-      sqMeters: 'qm'
+      sqMeters: 'Quadratmeter'
     }
   }
 }
