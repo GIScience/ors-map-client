@@ -100,6 +100,10 @@ export default {
      */
     sliderLabel (index) {
       if (this.formParameters[index].unit) {
+        let unitsTrans = this.$t('global.units')
+        if (unitsTrans[this.formParameters[index].unit]) {
+          return unitsTrans[this.formParameters[index].unit]
+        }
         return String(this.formParameters[index].unit)
       }
       return ''
@@ -313,11 +317,12 @@ export default {
         // The translation can be either in the ors map filters translation
         // or in the global ors dictionary translation
 
-        // try first the orsMapFilters
-        let translationObject = this.$t(`orsMapFilters.filters.${parameter.name}`)
+        // Try first the orsMapFilters resource
+        let translationKey = parameter.translation_key || parameter.name
+        let translationObject = this.$t(`orsMapFilters.filters.${translationKey}`)
         if (translationObject.enum && translationObject.enum[itemValue]) {
           translation = translationObject.enum[itemValue]
-        } else { // fall back to orsDictionary
+        } else { // Fall back to orsDictionary
           let dicObj = this.$t('orsDictionary')
           translation = dicObj[itemValue]
         }

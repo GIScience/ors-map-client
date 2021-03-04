@@ -32,7 +32,7 @@ export default {
       2010: 'Não foi possível encontrar um ponto adequado para processar a rota. Talvez um dos pontos selecionados não seja roteável ou o perfil selecionado não seja suportado nesta região.',
       2011: 'Ao utilizar a opção de rotas alternativas, não é possível definir paradas adicionais',
       2012: 'Foi especificado um parâmetro inválido. Certifique-se de que a URL esteja correta',
-      2099: 'Não foi possível encontrar um ponto válido após 3 tentativas'
+      2099: 'Não foi possível calcular a rota'
     },
     genericErrorMsg: 'Não foi possível calcular a rota',
     reorder: 'Reordenar'

@@ -83,7 +83,10 @@
             </template>
 
             <template v-else-if="parameter.type === constants.filterTypes.boolean" :ref="'field'+ index">
-              <v-checkbox class="pt-0 top-0" v-model="formParameters[index].value" :label="buildLabel(parameter)" ></v-checkbox>
+              <v-checkbox class="pt-0 top-0" 
+              v-model="formParameters[index].value" :label="buildLabel(parameter)" 
+              @change="fieldUpdated({index: index})">
+              </v-checkbox>
             </template>
 
             <v-switch class="form-switch" v-else-if="parameter.type === constants.filterTypes.switch"

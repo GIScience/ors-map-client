@@ -46,7 +46,6 @@ const getFilterValue = (filter, service) => {
   if (filterAvailable) {
     // Get rhe filter with value updated considering dependencies and filter rules
     const filterClone = FilterDependencyService.getFilterWithValueUpdated(filter)
-
     if (filterClone.type === constants.filterTypes.wrapper && filterClone.props) {
       // Proceed only if filter is available considering other filter's value
       if (FilterDependencyService.isAvailable(filterClone)) {
@@ -113,7 +112,7 @@ const buildAncestryAcessorString = (ancestry, itemIndex = null) => {
       // In case there is not recursive ancestry
       // just build the path using the immediate parent
       // and the target prop index
-      path = `[${ancestry[0]}].props[${ancestry[1]}]`
+      path = `[${ancestry[1]}].props[${ancestry[0]}]`
     }
   } else {
     // ancestry is jut an integer,

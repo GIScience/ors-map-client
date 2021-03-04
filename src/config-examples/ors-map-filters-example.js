@@ -175,13 +175,13 @@ const filters = [
         type: constants.filterTypes.wrapper,
         useInServices: [constants.services.directions],
         availableOnModes: [constants.modes.roundTrip, constants.modes.directions],
-        valueAsObject: true,
+        valueAsObject: true,     
         validWhen: [
           {
             ref: 'profile',
-            value: 'wheelchair'
+            value: ['driving-hgv', 'wheelchair']
           }
-        ],        
+        ],   
         props: [
           {
             name: 'restrictions',
@@ -191,9 +191,119 @@ const filters = [
             useInServices: [constants.services.directions, constants.services.roundTrip],
             props: [
               {
+                name: 'axleload',
+                unit: 't',
+                required: false,
+                type: constants.filterTypes.steps,
+                validWhen: [
+                  {
+                    ref: 'profile',
+                    value: 'driving-hgv'
+                  },
+                  {
+                    ref: 'self',
+                    min: 1
+                  }
+                ], 
+                value: 0,
+                min: 1,
+                max: 100,
+                step: 1
+              },
+              {
+                name: 'height',
+                unit: 'm',
+                required: false,
+                type: constants.filterTypes.steps,
+                validWhen: [
+                  {
+                    ref: 'profile',
+                    value: 'driving-hgv'
+                  },
+                  {
+                    ref: 'self',
+                    min: 2
+                  }
+                ], 
+                value: 0,
+                min: 2,
+                max: 5,
+                step: 0.1
+              },
+              {
+                name: 'length',
+                unit: 'm',
+                required: false,
+                type: constants.filterTypes.steps,
+                validWhen: [
+                  {
+                    ref: 'profile',
+                    value: 'driving-hgv'
+                  },
+                  {
+                    ref: 'self',
+                    min: 2
+                  }
+                ], 
+                value: 0,
+                min: 2,
+                max: 15,
+                step: 0.1
+              },
+              {
+                name: 'weight',
+                unit: 't',
+                required: false,
+                type: constants.filterTypes.steps,
+                validWhen: [
+                  {
+                    ref: 'profile',
+                    value: 'driving-hgv'
+                  }
+                ], 
+                value: 0,
+                min: 1,
+                max: 100,
+                step: 1
+              },
+              {
+                name: 'width',
+                unit: 'm',
+                required: false,
+                type: constants.filterTypes.steps,
+                validWhen: [
+                  {
+                    ref: 'profile',
+                    value: 'driving-hgv'
+                  }
+                ], 
+                value: 0,
+                min: 2,
+                max: 5,
+                step: 0.1
+              },
+              {
+                name: 'hazmat',
+                required: false,
+                type: constants.filterTypes.boolean,
+                validWhen: [
+                  {
+                    ref: 'profile',
+                    value: 'driving-hgv'
+                  }
+                ], 
+                value: false,
+              },
+              {
                 name: 'maximum_incline',
                 required: false,
                 type: constants.filterTypes.string,
+                validWhen: [
+                  {
+                    ref: 'profile',
+                    value: 'wheelchair'
+                  }
+                ], 
                 value: '6',
                 isEnum: true,
                 enum: [
@@ -207,6 +317,12 @@ const filters = [
                 name: 'maximum_sloped_kerb',
                 required: false,
                 type: constants.filterTypes.string,
+                validWhen: [
+                  {
+                    ref: 'profile',
+                    value: 'wheelchair'
+                  }
+                ], 
                 isEnum: true,
                 value: '0.06',
                 enum: [
@@ -217,9 +333,15 @@ const filters = [
               },
               {
                 name: 'minimum_width',
-                unit: 'meters',
+                unit: 'm',
                 required: false,
                 type: constants.filterTypes.steps,
+                validWhen: [
+                  {
+                    ref: 'profile',
+                    value: 'wheelchair'
+                  }
+                ], 
                 value: 1,
                 min: 0,
                 max: 30,
@@ -229,6 +351,12 @@ const filters = [
                 name: 'smoothness_type',
                 required: false,
                 type: constants.filterTypes.string,
+                validWhen: [
+                  {
+                    ref: 'profile',
+                    value: 'wheelchair'
+                  }
+                ], 
                 isEnum: true,
                 value: 'good',
                 items: routeSmoothnessList,                
@@ -238,6 +366,12 @@ const filters = [
                 name: 'surface_type',
                 required: false,
                 type: constants.filterTypes.string,
+                validWhen: [
+                  {
+                    ref: 'profile',
+                    value: 'wheelchair'
+                  }
+                ], 
                 isEnum: true,
                 value: 'cobblestone',
                 items: surfaceTypesList,                
@@ -247,6 +381,12 @@ const filters = [
                 name: 'track_type',
                 required: false,
                 type: constants.filterTypes.string,
+                validWhen: [
+                  {
+                    ref: 'profile',
+                    value: 'wheelchair'
+                  }
+                ], 
                 isEnum: true,
                 default: null,
                 value: 'grade1',                
@@ -267,6 +407,7 @@ const filters = [
         props: [
           {
             name: 'length',
+            translation_key: 'round_trip_length',
             unit: 'km',
             multiplyValueBy: 1000,
             required: false,
@@ -387,8 +528,7 @@ const filters = [
         default: false,
         apiDefault: false,
         isEnum: true,
-        separator: '|',
-        multiSelect: true,
+        multiSelect: false,
         enum: [
           'all',
           'controlled'
@@ -402,7 +542,7 @@ const filters = [
         itemValue: 'cid',
         apiDefault: false,
         isEnum: true,
-        separator: '|',
+        valueAsArray: true,
         multiSelect: true,
         items: countriesList
       }

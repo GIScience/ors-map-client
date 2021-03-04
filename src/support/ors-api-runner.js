@@ -173,7 +173,9 @@ const buildPlacesSearchResult = (responses, quantity) => {
     let adminFeatures = []
     if (responses.length > 1) {
       adminFeatures = responses[1].features
-      adminFeatures[0].bestMatch = true
+      if (adminFeatures.length > 0) {
+        adminFeatures[0].bestMatch = true
+      }
     }
   
     // If there are administrative places and also places 

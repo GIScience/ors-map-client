@@ -28,7 +28,7 @@ const setVisibility = (scopedParameters, key, globalParameters) => {
 }
 
 /**
- * Get the declared dependency expected value
+ * Determines if the parameter matches the expected value according the rule
  * @param {*} parameter
  * @param {*} globalParameters
  * @param {*} dependencyKey
@@ -73,20 +73,20 @@ const valueMatchesRule = (value, ruleValue) => {
  */
 const matchForExistingRuleValue = (paramValue, ruleValue, invertMatch = false) => {
   let match
-  if (Array.isArray(paramValue)) {
+  if (Array.isArray(paramValue)) { // if paramValue is an array, check if it contains the ruleValue
     match = lodash.includes(paramValue, ruleValue)
-    return invertMatch ? !match : match
-  } else if (Array.isArray(ruleValue)) {
+    return invertMatch ? !match : match // consider if the rule is inverted (not match value)
+  } else if (Array.isArray(ruleValue)) { // if ruleValue is an array, check if it contains the paramValue
     match = lodash.find(ruleValue, (element) => { return valueMatchesRule(paramValue, element) }) !== undefined
-    return invertMatch ? !match : match
+    return invertMatch ? !match : match // consider if the rule is inverted (not match value)
   } else {
     match = valueMatchesRule(paramValue, ruleValue)
-    return invertMatch ? !match : match
+    return invertMatch ? !match : match // consider if the rule is inverted (not match value)
   }
 }
 
 /**
- * Run a rule on a parameter to determine if it matches the role requirement or not
+ * Run a rule on a parameter to determine if it matches the rule requirement or not
  * @param {*} rule
  * @param {*} paramValue
  * @param {*} matchesRule

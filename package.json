@@ -1,7 +1,7 @@
 {
   "name": "ors-maps-client",
   "versionInstruction": "IMPORTANT: If you change the version below you have to change it on src/resources/constants.js too!",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "repository": "https://github.com/GIScience/ors-map-client",
   "license": "MIT",
   "description": "Openrouteservice Maps client",
@@ -30,7 +30,7 @@
     "leaflet-measure": "^3.1.0",
     "lodash": "^4.17.19",
     "lz-string": "^1.4.4",
-    "openrouteservice-js": "^0.1.16",
+    "openrouteservice-js": "^0.1.17",
     "prismjs": "^1.15.0",
     "tinycolor2": "^1.4.1",
     "togpx": "^0.5.4",

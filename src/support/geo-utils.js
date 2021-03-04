@@ -311,12 +311,13 @@ const geoUtils = {
    */
   getDurationInSegments: (seconds, translations) => {
     const durationObj = moment.duration(seconds, 'seconds') // the duration value is expected to be always in seconds
-    return {
+    let durationSegments = {
       days: durationObj._data.days > 0 ? durationObj._data.days + translations.days : '',
       hours: durationObj._data.hours > 0 ? durationObj._data.hours + ' ' + translations.hours : '',
-      minutes: durationObj._data.minutes > 0 ? durationObj._data.minutes + ' ' + translations.minutes : '',
-      seconds: durationObj._data.seconds > 0 ? durationObj._data.seconds + ' ' + translations.seconds : ''
+      minutes: durationObj._data.minutes > 0 ? durationObj._data.minutes + ' ' + translations.min : '',
+      seconds: durationObj._data.seconds > 0 ? durationObj._data.seconds + ' ' + translations.s : ''
     }
+    return durationSegments
   },
 
   /**

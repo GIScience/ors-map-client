@@ -14,7 +14,7 @@
         </div>
         <div slot="footer" class="text-right">
           <v-spacer></v-spacer>
-          <v-btn color="primary" flat @click.native="onOk">{{infoOk}}</v-btn>
+          <v-btn color="primary" flat @click.native="onOk($event)">{{infoOk}}</v-btn>
         </div>
       </box>
     </v-dialog>

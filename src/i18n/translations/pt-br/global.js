@@ -54,13 +54,16 @@ export default {
       mi: 'M',
       m: 'm',
       meters: 'metros',
-      seconds: 'seg',
-      minutes: 'min',
+      s: 's',
+      seconds: 'segundos',
+      minutes: 'minutos',
       hours: 'h',
       days: 'd',
-      minutes: 'min',
+      min: 'min',
       lat: 'lat',
-      lng: 'long'
+      lng: 'long',
+      tones: 'toneladas',
+      t: 't'
     },
     layers: {
       macrocounty: 'Macro condado',
