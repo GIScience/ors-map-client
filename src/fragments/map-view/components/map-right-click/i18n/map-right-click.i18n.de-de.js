@@ -1,12 +1,12 @@
 export default {
   mapRightClick: {
-    options: 'Optionen',
-    addDestinationToRoute: 'Hinzufügen als Ziel',
+    options: 'Aktionen',
+    addDestinationToRoute: 'Als Ziel hinzufügen',
     directionsFromHere: 'Route von hier',
     directionsToHere: 'Route hierher',
-    nonStopDirectionsToHere: 'Direkt hierher',
+    nonStopDirectionsToHere: 'Route verwerfen und hierher',
     addRouteStop: 'Als Wegpunkt hinzufügen',
-    centerHere: 'Als Kartenmittelpunkt',
-    addAsIsochroneCenter: 'Add as reach center'
+    centerHere: 'Als Kartenmittelpunkt verwenden',
+    addAsIsochroneCenter: 'Als Zentrum verwenden'
   }
 }
