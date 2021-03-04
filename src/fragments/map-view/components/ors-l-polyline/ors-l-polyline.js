@@ -103,7 +103,7 @@ export default {
     updatePopup () {
       if (this.$refs.foregroundPolyline) {    
         // Create and show popp
-        this.$refs.foregroundPolyline.mapObject.bindPopup(this.popupContent, {autoClose: true, closeOnClick: true}).openPopup()
+        this.$refs.foregroundPolyline.mapObject.bindPopup(this.popupContent, {autoClose: true, closeOnClick: true, autoPan: false}).openPopup()
       }
     },
     /**

@@ -4,7 +4,7 @@ export default {
     donate: 'Donate!',
     donateText: 'Please donate your geographic data to',
     info_I: 'Openrouteservice is being developed and provided by Heidelberg Institute for Geoinformation Technology (HeiGIT) and offers Routing services by using user-generated, collaboratively collected free geographic data from OpenStreetMap. Please donate your geographic data to openstreetmap.org!',
-    info_II: 'We use browser local storage to preserve information so you will not have to re-enter it during your visit or in subsequent visits. We do not collect or store any personal information about you or personally identifiable information about you, except what you voluntarily provide through direct contact. We do not share analytic data with any service providers or partners.',
+    info_II: 'We use the browser\'s local storage to preserve information so you will not have to re-enter it during your visit or in subsequent visits. We do not collect or store any personal information about you or personally identifiable information about you, except what you voluntarily provide through direct contact. Furthermore, we do not share analytic data with any service providers or partners.',
     sources: 'We use different open source libraries for this web application. These can be found within the corresponding package files on',
     feelFreeToReportBugs: 'Please feel free to report bugs on',
     orToFixThem: 'or fix them by yourself and make a pull request',

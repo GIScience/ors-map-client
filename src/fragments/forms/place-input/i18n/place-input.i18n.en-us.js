@@ -8,7 +8,7 @@ export default {
     routeDestination: 'Destination',
     placeNameRequired: 'Place name required',
     yourLocation: 'Your location',
-    couldNotDetermineYourLocation: 'Could not determine your location. Make sure granted the required permissions',
+    couldNotDetermineYourLocation: 'Your location could not be determined. Make sure granted the required permissions',
     useYourLocation: 'Use your current location',
     removeInput: 'Remove place/input',
     directions: 'Directions',
