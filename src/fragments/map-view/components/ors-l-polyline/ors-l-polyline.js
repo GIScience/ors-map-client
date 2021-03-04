@@ -101,9 +101,9 @@ export default {
       })
     },
     updatePopup () {
-      if (this.$refs.foregroundPolyline) {    
+      if (this.$refs.foregroundPolyline && this.popupContent) {    
         // Create and show popp
-        this.$refs.foregroundPolyline.mapObject.bindPopup(this.popupContent, {autoClose: true, closeOnClick: true}).openPopup()
+        this.$refs.foregroundPolyline.mapObject.bindPopup(this.popupContent, {autoClose: true, closeOnClick: true, autoPan: false}).openPopup()
       }
     },
     /**
@@ -169,23 +169,25 @@ export default {
       if (!this.active) {
         return ''
       }
-      const summaryCopy = Object.assign({}, this.route.summary)
-      const humanizedData = GeoUtils.getHumanizedTimeAndDistance(summaryCopy, this.$t('global.units'))
-      let tooltipInnerContent = `${this.$t('global.distance')}: ${humanizedData.distance}`
-      if (humanizedData.duration) {
-        tooltipInnerContent += `<br> ${this.$t('global.duration')}: ${humanizedData.duration}`
-      }
-      if (this.tooltipIcon) {
-        let tooltip = `
-        <div>
-          <div style='min-width:30px;width:20%;height:50px;float:left'>
-            <span class="material-icons">${this.tooltipIcon}</span>
-          </div>
-          <div style='min-width:180px'>${tooltipInnerContent}</div>
-        </div>`
-        return tooltip
-      } else {
-        return `<div><div style='min-width:180px'>${tooltipInnerContent}</div></div>`
+      if (this.route.summary) {
+        const summaryCopy = Object.assign({}, this.route.summary)
+        const humanizedData = GeoUtils.getHumanizedTimeAndDistance(summaryCopy, this.$t('global.units'))
+        let tooltipInnerContent = `${this.$t('global.distance')}: ${humanizedData.distance}`
+        if (humanizedData.duration) {
+          tooltipInnerContent += `<br> ${this.$t('global.duration')}: ${humanizedData.duration}`
+        }
+        if (this.tooltipIcon) {
+          let tooltip = `
+          <div>
+            <div style='min-width:30px;width:20%;height:50px;float:left'>
+              <span class="material-icons">${this.tooltipIcon}</span>
+            </div>
+            <div style='min-width:180px'>${tooltipInnerContent}</div>
+          </div>`
+          return tooltip
+        } else {
+          return `<div><div style='min-width:180px'>${tooltipInnerContent}</div></div>`
+        }
       }
     },
   },

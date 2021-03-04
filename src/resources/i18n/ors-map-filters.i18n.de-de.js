@@ -82,7 +82,7 @@ export default {
       round_trip: {
         label: 'Rundweg'
       },
-      length: {
+      round_trip_length: {
         label: 'Länge des Rundweges',
         description: 'Die Längenvorgabe für den Rundweg (Dies ist ein Richtwert. Die resultierende Länge kann abweichen.).'
       },

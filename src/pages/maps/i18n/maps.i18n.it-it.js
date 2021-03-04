@@ -3,7 +3,6 @@ export default {
     'pageTitle': 'ORS Maps',
     'Places': 'Luoghi',
     'isochrones': 'Isocrone',
-    'searchPlace': 'Cerca un luogo su ORS',
     'placeNameRequired': 'Nome del luogo richiesto',
     'altitude': 'Variazioni dell\'altitudine',
     'settings': 'Impostazioni',

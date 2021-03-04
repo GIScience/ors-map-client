@@ -5,7 +5,7 @@ export default {
     place: 'place',
     notRouteFound: 'It was not possible to find a route connecting the places with the selected profile',
     notRouteFoundWithFilters: 'It was not possible to find a route connecting the places with the selected profile and filters',
-    noPlaceFound: 'No place found with the imputed content',
+    noPlaceFound: 'No place found with the inputted content',
     routeReady: 'Route ready',
     useLocation: 'GPS',
     addPlaceInput: 'Add place',
@@ -27,12 +27,12 @@ export default {
       2004: 'By using certain filters and/or avoidables the distance of a route segment must not be greater than 3000 km. When using alternative routes the distance must be at most 100 km.',
       2006: 'Unable to parse the request to the export handler',
       2007: 'Unsupported export format',
-      2008: 'Empty Element',
+      2008: 'Empty element',
       2009: 'Unable to find a suitable route for the places and criteria specified. Maybe the profile specified is not supported in this area/region with the filter(s) applied.',
       2010: 'It was not possible to find a suitable point that is part of the route. Maybe one of the points selected is not routable or the selected profile is not supported in this region',
       2011: 'When using alternative routes option it is not possible to define route stops',
       2012: 'An invalid parameter was specified. Make sure the URL is correct',
-      2099: 'Could not find a valid point after 3 tries'
+      2099: 'Unable to compute a route connecting connecting the places selected'
     },
     genericErrorMsg: 'It was not possible to calculate the route',
     reorder: 'Reorder'

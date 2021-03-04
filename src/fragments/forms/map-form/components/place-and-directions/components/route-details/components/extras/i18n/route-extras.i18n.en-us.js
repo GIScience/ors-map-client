@@ -8,7 +8,7 @@ export default {
     waytypes: 'Way types',
     extraInfo: 'Extra info',
     value: 'Value',
-    clickToHighlightOnMap: 'Click to highlight on map',
+    clickToHighlightOnMap: 'Click to highlight it on map',
     showAllOnMap: 'Show all on map'
   }
 }

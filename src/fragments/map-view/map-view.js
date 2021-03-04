@@ -995,9 +995,8 @@ export default {
       if (latlng) {
         let mapSettings = this.$store.getters.mapSettings
         const previousCenter = utils.clone(mapSettings.mapCenter)
-        mapSettings.mapCenter = latlng
 
-        if (defaultMapSettings.mapCenter.toString() !== latlng.toString()) {
+        if (previousCenter.toString() !== latlng.toString()) {
           this.$emit('mapCenterChanged', latlng)
         }        
       } else {

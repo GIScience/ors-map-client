@@ -32,7 +32,9 @@ export default {
       this.zIndex = info.zIndex || 3
       this.persistent = info.persistent || this.persistent
     },
-    onOk () {
+    onOk (event) {
+      event.preventDefault()
+      event.stopPropagation()
       this.show = false
       this.eventBus.$emit('infoOk', { event: 'ok', guid: this.guid })
     }

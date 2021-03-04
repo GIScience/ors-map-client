@@ -9,7 +9,7 @@ export default {
     preparingDownload: 'Preparing download ...',
     fileReady: 'File ready',
     errorPreparingFile: 'Error preparing file',
-    fileTooBigToBeDownloaded: 'File to big to be downloaded',
+    fileTooBigToBeDownloaded: 'File too big to be downloaded',
     standard: 'Standard'
   }
 }

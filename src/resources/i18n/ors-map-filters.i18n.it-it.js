@@ -80,7 +80,7 @@ export default {
       'round_trip': {
         'label': 'Andata e ritorno'
       },
-      'length': {
+      'round_trip_length': {
         'label': 'Lunghezza del viaggio di andata e ritorno',
         'description': 'Valore predefinito di lunghezza del percorso di andata e ritorno (nota che questo è un valore di preferenza, la lunghezza risultata potrebbe essere diversa).'
       },

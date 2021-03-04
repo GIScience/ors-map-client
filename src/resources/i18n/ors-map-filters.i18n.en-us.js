@@ -54,6 +54,30 @@ export default {
       restrictions: {
         label: 'Restrictions'
       },
+      axleload: {
+        label: 'Axle load',
+        description: 'The maximum axel load in tones'
+      },
+      height: {
+        label: 'Height',
+        description: 'The maximum height in meters'
+      },
+      length: {
+        label: 'Length',
+        description: 'The maximum length in meters'
+      },
+      weight: {
+        label: 'Weight',
+        description: 'The maximum weight in tones'
+      },
+      width: {
+        label: 'Width',
+        description: 'The maximum width in meters'
+      },
+      hazmat: {
+        label: 'Hazardous Goods',
+        description: 'Transporting hazardous Goods'
+      },
       maximum_incline: {
         label: 'Max inclination',
         description: 'The maximum inclination in percentage'
@@ -81,7 +105,7 @@ export default {
       round_trip: {
         label: 'Round trip'
       },
-      length: {
+      round_trip_length: {
         label: 'Length of the round trip',
         description: 'The target length of the route (note that this is a preferred value, but results may be different).'
       },

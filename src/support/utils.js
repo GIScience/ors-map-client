@@ -141,6 +141,7 @@ const utils = {
       }
     }
     for (const key in obj) {
+      if (!obj.hasOwnProperty(key)) continue
       if (typeof obj[key] === 'object') {
         const prop = clone[key]
         if (prop !== undefined) {

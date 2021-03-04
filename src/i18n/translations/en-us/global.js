@@ -53,16 +53,18 @@ export default {
       km: 'km(s)',
       mi: 'mi(s)',
       m: 'm',
-      seconds: 'sec',
-      minutes: 'min',
+      seconds: 'seconds',
+      s: 's',
+      minutes: 'minutes',
       hours: 'hour(s)',
       days: 'd',
       hours: 'h',
-      minutes: 'min',
-      seconds: 'sec',
+      min: 'min',
       meters: 'meters',
       lat: 'lat',
-      lng: 'long'
+      lng: 'long',
+      tones: 'tones',
+      t: 't'
     },
     layers: {
       macrocounty: 'Macro county',

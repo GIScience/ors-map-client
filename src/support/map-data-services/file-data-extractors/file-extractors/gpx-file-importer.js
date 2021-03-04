@@ -79,8 +79,8 @@ class GpxImporter {
       if (routes[0].length < 16) {
         for (const key in routes[0]) {
           const latlng = routes[0][key].geometry.coordinates
-          const lng = latlng[1]
-          const lat = latlng[0]
+          const lng = latlng[0]
+          const lat = latlng[1]
           const place = new Place(lng, lat)
           places.push(place)
         }
@@ -88,13 +88,13 @@ class GpxImporter {
         const firstCoords = routes[0].geometry.coordinates[0]
         const lastCoords = (routes[0].geometry.coordinates[routes[0].geometry.coordinates.length - 1])
 
-        const firstLng = firstCoords[1]
-        const firstLat = firstCoords[0]
+        const firstLng = firstCoords[0]
+        const firstLat = firstCoords[1]
         const firstPlace = new Place(firstLng, firstLat, '', { resolve: true })
         places.push(firstPlace)
 
-        const lastLng = lastCoords[1]
-        const lastLat = lastCoords[0]
+        const lastLng = lastCoords[0]
+        const lastLat = lastCoords[1]
         const lastPlace = new Place(lastLng, lastLat, '', { resolve: true })
         places.push(lastPlace)
       }
@@ -121,7 +121,7 @@ class GpxImporter {
         if (name.indexOf('=') > 0) {
           name = name.split('=')[1]
         }
-        const place = new Place(latlon.lat, latlon.lon, name)
+        const place = new Place(latlon.lon, latlon.lat, name)
         places.push(place)
       }
     }

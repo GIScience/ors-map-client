@@ -81,7 +81,7 @@ export default {
       round_trip: {
         label: 'Rota circular'
       },
-      length: {
+      round_trip_length: {
         label: 'Distância da rota circular',
         description: 'A distância alvo para a rota circular (note que este é um valor desejado, mas os resultados podem ser diferentes).'
       },

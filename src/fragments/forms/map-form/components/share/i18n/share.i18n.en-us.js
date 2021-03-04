@@ -9,7 +9,7 @@ export default {
     shareLink: 'Share link',
     short: 'Short URL',
     copyUrlInfo: 'You can also copy the link from your browser`s address bar.',
-    urlShortened: 'URL shortened',
+    urlShortened: 'Shortened URL',
     shorteningNotPossible: 'It was not possible to generate a short URL. Please use the full URL',
     embedCodeCopied: 'Embedding code copied',
     embed: 'Embedding (click to copy)',

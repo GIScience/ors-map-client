@@ -4,7 +4,6 @@ export default {
     pageTitle: 'ORS Maps',
     Places: 'Places',
     isochrones: 'Isochrones',
-    searchPlace: 'Find a place on ORS',
     placeNameRequired: 'Place name required',
     altitude: 'Altitude variation',
     settings: 'Settings',
