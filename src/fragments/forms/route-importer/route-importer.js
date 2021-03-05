@@ -45,7 +45,7 @@ export default {
         if (!content || content === 'null') {
           context.showError(context.$t('routeImporter.failedToLoadFile'), 20000)
         } else {
-          context.catchAndParseFile(content, file.type, file.lastModified)
+          context.catchAndParseFile(content, file.type, new Date().getTime())
           context.isImportModalOpen = false
         }
       })
