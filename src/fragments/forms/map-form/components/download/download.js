@@ -9,7 +9,8 @@ export default {
   data: () => ({
     isDownloadModalOpen: false,
     downloadFileName: null,
-    dowloadFormat: null
+    dowloadFormat: null,
+    defaultDownloadName: 'ors-route'
   }),
   props: {
     mapViewData: {
@@ -66,7 +67,7 @@ export default {
      * Set the default filename and format and open the dowload modal
      */
     openDownload () {
-      this.downloadFileName = 'ors-route'
+      this.downloadFileName = this.defaultDownloadName
       this.dowloadFormat = this.downloadFormats[0].value
       this.isDownloadModalOpen = true
     },
@@ -96,7 +97,12 @@ export default {
           // Set the filename
           const timestamp = new Date().getTime()
           const format = context.lodash.find(context.downloadFormats, (df) => { return df.value === context.dowloadFormat })
-          link.download = `${context.downloadFileName}_${timestamp}.${format.ext}`
+          // If the file has the default name, add a unique timestamp
+          if (this.downloadFileName === this.defaultDownloadName) {
+            link.download = `${context.downloadFileName}_${timestamp}.${format.ext}`
+          } else {
+            link.download = `${context.downloadFileName}.${format.ext}`
+          }
 
           // Fire the download by triggering a click on the hidden anchor
           document.body.appendChild(link)
