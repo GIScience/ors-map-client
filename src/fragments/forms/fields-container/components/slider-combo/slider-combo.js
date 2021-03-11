@@ -22,7 +22,6 @@ export default {
   methods: {
     /**
      * Run a fieldupdate with a debounce
-     * @param {*} index
      */
     debounceTextFieldChange () {
       const context = this
@@ -48,6 +47,9 @@ export default {
       }, 1000)
     },
 
+    /**
+     * Update filter value and both models when the slider is changed and call the fieldUpdated
+     */
     sliderValueChanged () {
       this.filter.value = this.textLocalModel = this.localModel
       this.fieldUpdated()
@@ -55,7 +57,6 @@ export default {
     
     /**
      * Build slider componet label
-     * @param {*} index
      * @returns {String} unit
      */
     buildUnit () {

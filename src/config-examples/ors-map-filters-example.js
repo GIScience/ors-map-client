@@ -26,8 +26,6 @@ const filters = [
       'foot-hiking',
       'wheelchair'
     ],
-    default: 'cycling-regular',
-    value: 'cycling-regular',
     mapping: {
       'cycling-regular': {
         slug: 'cycling-regular',
@@ -69,6 +67,24 @@ const filters = [
     value: 'recommended'
   },
   {
+    name: 'maximum_speed',
+    unit: 'kmh',
+    required: false,
+    type: constants.filterTypes.steps,
+    value: null,
+    min: 80,
+    max: 120,
+    step: 1,
+    validWhen: [
+      {
+        ref: 'profile',
+        value: 'driving-car'
+      }
+    ],
+    availableOnModes: [constants.modes.directions],
+    useInServices: [constants.services.directions]
+  },
+  {
     availableOnModes: [constants.modes.isochrones],
     useInServices: [constants.services.isochrones],
     name: 'range_type',
@@ -83,7 +99,6 @@ const filters = [
     unit: 'min',
     required: false,
     type: constants.filterTypes.steps,
-    label: 'Time',
     value: 5,
     min: 1,
     max: 300,
