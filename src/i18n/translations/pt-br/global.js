@@ -63,7 +63,8 @@ export default {
       lat: 'lat',
       lng: 'long',
       tones: 'toneladas',
-      t: 't'
+      t: 't',
+      kmh: 'km/h'
     },
     layers: {
       macrocounty: 'Macro condado',

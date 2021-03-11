@@ -137,7 +137,11 @@ export default {
       weight_factor: {
         label: 'Fator de peso',
         description: 'O fator máximo pelo qual o peso da rota pode divergir da rota ideal. O valor padrão de 1,4 significa que as alternativas podem ser até 1,4 vezes mais longas do que a rota ideal.'
-      }
+      },
+      maximum_speed: {
+        label: 'Velocidade máxima',
+        description: 'Uma velocidade máxima que deve ser aplicada',
+      },
     }
   }
 }
