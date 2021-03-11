@@ -138,7 +138,11 @@ export default {
       weight_factor: {
         label: 'Gewichtungsfaktor',
         description: 'Faktor um den die Alternativroute länger sein darf. Der Standardwert von 1,4 bedeutet, dass Alternativen maximal 1,4-mal so lang wie die optimale Route sein darf.'
-      }
+      },
+      maximum_speed: {
+        label: 'Max Geschwindigkeit',
+        description: 'Eine maximale Geschwindigkeitsbegrenzung, die angewendet werden muss',
+      },
     }
   }
 }

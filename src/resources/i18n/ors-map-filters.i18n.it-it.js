@@ -136,7 +136,11 @@ export default {
       'weight_factor': {
         'label': 'Fattore di lunghezza',
         'description': 'Fattore massimo secondo il quale il percorso diverge dal percorso ottimale. Il valore predefinito di 1.4 significa che i percorsi alternativi possono essere fino a 1.4 volte più lunghi del percorso ottimale.'
-      }
+      },
+      maximum_speed: {
+        label: 'Velocità massima',
+        description: 'Un limite di velocità massima che deve essere applicato',
+      },
     }
   }
 }

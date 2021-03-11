@@ -11,7 +11,7 @@ const appConfig = {
   urlMode: 'hash', // The url mode for vue router: `hash` or `history`
   baseAppUrl: '/', // Could be, for example, '/map' if your app is running in a folder under a domain
   dataServiceBaseUrl: 'https://openrouteservice.org/wp-json/', // The base data url to retrive ORS data (Don't change this unless you know what your doing!)
-  maxPlaceInputs: 15, // Don't change this unless you know what your doing!
+  maxPlaceInputs: 50, // The ORS API support max 50 points
   appMenu: {
     useORSMenu: true, // If the default ORS menu must be used
     mainMenuId: 'primary_menu',// only necessary if useORSMenu is true

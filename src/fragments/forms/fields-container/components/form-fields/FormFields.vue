@@ -7,7 +7,7 @@
             <v-autocomplete v-if="parameter.isEnum || parameter.items" :ref="'field'+ index"
               class="field-input no-input-details form-fields-autocomplete"
               :required="parameter.required"
-              @change="isModalMultiSelect(parameter) ? () => {} : fieldUpdated({index: index, value: $event})"
+              @change="isModalMultiSelect(parameter) ? () => {} : fieldUpdated({index: index, value: $event, parameter: parameter})"
               :items="getSelectableItems(parameter)"
               v-model="formParameters[index].value"
               item-text="itemText"
@@ -53,44 +53,18 @@
             </v-text-field>
 
             <template v-else-if="parameter.type === constants.filterTypes.steps" :ref="'field'+ index">
-              <p>{{buildLabel(parameter)}}</p>
-              <div>
-                <v-text-field :ref="'field-text'+ index"
-                  class="field-input form-felds-slider-text-input no-input-details"
-                  type="number"
-                  :step="parameter.step"
-                  :min="parameter.min"
-                  :max="parameter.max"
-                  box
-                  height="40px"
-                  label=""
-                  title=""
-                  v-model="formParameters[index].value"
-                  @keyup="debounceTextFieldChange(index)"
-                  :required="parameter.required">
-                </v-text-field>
-                <v-slider class="form-felds-slider"
-                  :min="parameter.min"
-                  :max="parameter.max"
-                  inverse-label
-                  v-model="formParameters[index].value"
-                  :title="buildLabel(parameter)"
-                  :label="sliderLabel(index)"
-                  @change="fieldUpdated({index: index, value: formParameters[index].value})"
-                  :step="parameter.step"
-                ></v-slider>
-              </div>
+              <slider-combo @change="(newVal) => sliderComboUpdated(index, newVal)" :filter="formParameters[index]" :label="buildLabel(parameter)" ></slider-combo>
             </template>
 
             <template v-else-if="parameter.type === constants.filterTypes.boolean" :ref="'field'+ index">
-              <v-checkbox class="pt-0 top-0" 
+              <v-checkbox class="pt-0 top-0 form-felds-checkbox" 
               v-model="formParameters[index].value" :label="buildLabel(parameter)" 
-              @change="fieldUpdated({index: index})">
+              @change="fieldUpdated({index: index, parameter: parameter})">
               </v-checkbox>
             </template>
 
             <v-switch class="form-switch" v-else-if="parameter.type === constants.filterTypes.switch"
-              :label="buildLabel(parameter)" @change="fieldUpdated({index: index})" v-model="formParameters[index].value"
+              :label="buildLabel(parameter)" @change="fieldUpdated({index: index, parameter: parameter})" v-model="formParameters[index].value"
             ></v-switch>
 
             <v-expansion-panel v-else-if="parameter.type === constants.filterTypes.wrapper" :value="showPanelExpanded(parameter)" class="fields-panel">

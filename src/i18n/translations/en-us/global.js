@@ -64,7 +64,8 @@ export default {
       lat: 'lat',
       lng: 'long',
       tones: 'tones',
-      t: 't'
+      t: 't',
+      kmh: 'km/h'
     },
     layers: {
       macrocounty: 'Macro county',

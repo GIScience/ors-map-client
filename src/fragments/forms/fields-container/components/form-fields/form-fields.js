@@ -1,6 +1,7 @@
 
 import dependencyService from '@/support/dependency-service.js'
 import defaultMapSettings from '@/config/default-map-settings'
+import SliderCombo from '../slider-combo/SliderCombo.vue'
 
 export default {
   props: {
@@ -29,8 +30,7 @@ export default {
       subPropsModalTitle: null,
       subPropsModalIndex: null,
       manualEditModalActive: false,
-      manualEditingParameter: null,
-      debounceTimeoutIds: []
+      manualEditingParameter: null
     }
   },
   created () {
@@ -49,7 +49,20 @@ export default {
   computed: {
     formParameters () {
       return this.parameters
-    }
+    },
+    isSideBarOpen: {
+      get () {
+        return this.$store.getters.leftSideBarOpen && !this.$store.getters.embed
+      },
+      set (open) {
+        this.$store.commit('setLeftSideBarIsOpen', open)
+        // If the side bar is closed by a user's action, then
+        // we can set the sidebar pined status as false
+        if (open === false) {
+          this.$store.commit('setLeftSideBarIsPinned', open)
+        }
+      }
+    },
   },
   methods: {
     /**
@@ -61,28 +74,6 @@ export default {
       return show
     },
     /**
-     * Run a fieldupdate with a debounce
-     * @param {*} index
-     */
-    debounceTextFieldChange (index) {
-      const context = this
-      if (this.debounceTimeoutIds[index]) {
-        clearTimeout(this.debounceTimeoutIds[index])
-      }
-      this.debounceTimeoutIds[index] = setTimeout(function () {
-        const param = context.formParameters[index]
-        // Make sure the filter has
-        if (param.max && param.value > param.max) {
-          context.formParameters[index].value = param.max
-        }
-        if (param.min && param.value < param.min) {
-          context.formParameters[index].value = param.min
-        }
-        context.fieldUpdated({ index: index })
-      }, 1000)
-    },
-
-    /**
      * Set a ne random value for the randon component
      * @param {*} index
      */
@@ -92,21 +83,6 @@ export default {
       const ramdon = Math.floor(Math.random() * (max - min + 1) + min)
       this.formParameters[index].value = ramdon
       this.fieldUpdated({ index: index })
-    },
-    /**
-     * Build slider componet label
-     * @param {*} index
-     * @returns {String} value
-     */
-    sliderLabel (index) {
-      if (this.formParameters[index].unit) {
-        let unitsTrans = this.$t('global.units')
-        if (unitsTrans[this.formParameters[index].unit]) {
-          return unitsTrans[this.formParameters[index].unit]
-        }
-        return String(this.formParameters[index].unit)
-      }
-      return ''
     },
     /**
      * Get a new value for a random parameter
@@ -167,7 +143,7 @@ export default {
         // it will be emitted the event at `onModalFieldAssistedConfirm`
         return
       }
-      let passingData = { index: data.index, value: data.value }
+      let passingData = { index: data.index, value: data.value, parameter:  data.parameter}
 
       // There may be nested levels of paternity and these levels
       // must be represented in the parent index property.
@@ -188,6 +164,11 @@ export default {
 
       this.updateFieldsStatus()
       this.$forceUpdate()
+    },
+
+    sliderComboUpdated (index, newval) {
+      let parameter = this.parameters[index]
+      this.fieldUpdated({index: index, parameter: parameter})
     },
 
     /**
@@ -359,6 +340,9 @@ export default {
       }
       let filterKey = `orsMapFilters.filters.${parameter.name}.label`
       let label = this.$t(filterKey)
+      if (label === filterKey) {
+        label = parameter.name
+      }
 
       if (parameter.apiDefault) {
         label += (' ' + this.$t('formFields.defaultAbbreviation') + ' ' + parameter.apiDefault)
@@ -519,6 +503,7 @@ export default {
     }
   },
   components: {
+    SliderCombo,
     // Avoid cyclic dependency by loading components assinchronously
     'dialog-fields': () => import('../dialog-fields/DialogFields.vue'),
     'form-fields': () => import('./FormFields.vue')
