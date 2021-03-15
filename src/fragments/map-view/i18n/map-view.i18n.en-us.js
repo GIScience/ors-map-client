@@ -23,11 +23,11 @@ export default {
       tooltipTextResume: '<br>Press CTRL-key and click to <b>resume line</b>',
       tooltipTextDelete: 'Press SHIFT-key and click to <b>delete point</b>',
       tooltipTextAdd: 'Press CTRL-key and click to <b>add point</b>',
-      clearControlTitle: 'Clear Measurements',
+      clearControlTitle: 'Clear measurements',
       measureControlTitleOn: 'Turn on distance measurement',
       measureControlTitleOff: 'Turn off distance measurement',
       unitControlTitle: {
-        text: 'Change Units',
+        text: 'Change units',
         metres: 'meters',
         landmiles: 'land miles',
         nauticalmiles: 'nautical miles'

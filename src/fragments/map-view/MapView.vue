@@ -11,6 +11,7 @@
       @click.exact="mapLeftClick"
       @dragend="mapMoved"
       :max-zoom="maxZoom"
+      :min-zoom="2"
       :center="mapCenter"
       :zoom="zoom"
       :options="mapOptions"
