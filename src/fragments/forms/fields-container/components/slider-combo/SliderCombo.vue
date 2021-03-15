@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{label}} ({{filter.min}} - {{filter.max}} )</p>
+    <p>{{label}} (<b>{{filter.min}}</b> - <b>{{filter.max}}</b>)</p>
     <v-layout>
       <v-flex xs4 sm3>        
         <v-text-field hide-details class="field-input form-felds-slider-text-input no-input-details"
