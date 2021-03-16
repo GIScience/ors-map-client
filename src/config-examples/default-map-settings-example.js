@@ -14,9 +14,6 @@ const defaultMapSettings = {
   apiBaseUrl: 'https://api.openrouteservice.org',
   saveToLocalStorage: true,
   elevationProfile: true,
-  steepness: true,
-  surface: true,
-  waytype: true,
   apiKey: null,
   endpoints: null,
   locale: 'en-us',
@@ -34,13 +31,22 @@ const defaultMapSettings = {
   acessibleModeActive: false,
   shownOnceTooltips: {},
   mapCenter: {lat: 49.510944, lng: 8.76709}, // Default center is at Heidelberg, Germany
-
-  // Settings not being used yet:
-  tollways: false,
   randomizedIsochroneColors: false,
-  suitabilityOfWays: false,
   distanceMarkers: false,
 
+  steepness: true,
+  surface: true,
+  waytype: true,
+  
+  tollways: false,  
+  waycategory: false,
+  traildifficulty: false, 
+  roadaccessrestrictions: false,
+
+  // Extra settings not being used yet
+  suitability: false,
+  green: false,
+  noise: false,
 }
 
 export default defaultMapSettings

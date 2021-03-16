@@ -105,6 +105,7 @@ export default {
           'highways': 'Autobahn',
           'tollways': 'Mautstraßen',
           'ferries': 'Fähren',
+          'hills': 'Hügel',
           'tunnels': 'Tunnel',
           'fords': 'Furten',
           'steps': 'Stufen',

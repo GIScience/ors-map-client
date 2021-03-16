@@ -265,13 +265,15 @@ export default {
         if (typeof item !== 'object' || !item.itemText) {
           if (typeof item === 'object') {
             for (const itemKey in item) {
+              // Convert each defined property to string
               if (item[itemKey]) {
                 item[itemKey] = item[itemKey].toString()
               }
             }
+            // If the item object has texts for the current locale, get it and then set it as the itemtext
             var itemText = item[this.$store.getters.mapSettings.locale] || item[defaultMapSettings.locale]  
-            item.itemText = itemText
             item.itemValue = item[parameter.itemValue]
+            item.itemText = itemText || item.itemValue
           } else { // item is not an object, but a simple value
             let itemObj = {
               itemValue: item,

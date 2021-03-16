@@ -60,5 +60,15 @@ export default {
     grade3: 'Nota 3',
     grade4: 'Nota 4',
     grade5: 'Nota 5',
+
+    no_tollway: 'Não Pedagiada',
+    is_tollway: 'Pedagiada',
+    no_category: 'Sem categoria',
+    highway: 'Via rápida',
+    unpaved_road: 'Não asfaltada',
+    tunnel:	'Túnel',
+    paved_road:	'Asfaltada',
+    ford: 'Passo de rio',
+    no_data: 'Sem dados'
   }
 }

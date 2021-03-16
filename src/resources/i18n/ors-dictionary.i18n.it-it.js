@@ -55,6 +55,16 @@ export default {
     'grade2': 'Grado 2',
     'grade3': 'Grado 3',
     'grade4': 'Grado 4',
-    'grade5': 'Grado 5'
+    'grade5': 'Grado 5',
+
+    'no_tollway': 'Senza pedaggio',
+    'is_tollway': 'Pedaggio',
+    'no_category': 'Nessuna categoria',
+    'highway': 'Autostrada',
+    'unpaved_road': 'Non asfaltata',
+    'tunnel':	'Tunnel',
+    'paved_road':	'Asfaltata',
+    'ford': 'Guado',
+    'no_data': 'Nessun dato'
   }
 }

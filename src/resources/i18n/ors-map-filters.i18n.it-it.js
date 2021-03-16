@@ -103,6 +103,7 @@ export default {
           'highways': 'Autostrade',
           'tollways': 'Strade a pedaggio',
           'ferries': 'Traghetti',
+          'hills': 'Colline',
           'tunnels': 'Tunnel',
           'fords': 'Guadi',
           'steps': 'Gradini',

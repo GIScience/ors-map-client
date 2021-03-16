@@ -63,5 +63,15 @@ export default {
     grade3: 'Grade 3',
     grade4: 'Grade 4',
     grade5: 'Grade 5',
+
+    no_tollway: 'No tollway',
+    is_tollway: 'Is tollway',
+    no_category: 'No category',
+    highway: 'Highway',
+    unpaved_road: 'Unpaved road',
+    tunnel:	'Tunnel',
+    paved_road:	'Paved road',
+    ford: 'Ford',
+    no_data: 'No data'
   }
 }

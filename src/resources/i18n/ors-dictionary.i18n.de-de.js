@@ -60,5 +60,15 @@ export default {
     grade3: 'Befestigter oder ausgebesserter Weg',
     grade4: 'Einfacher Weg',
     grade5: 'Unbefestigter Weg',
+
+    no_tollway: 'Keine Mautstraße',
+    is_tollway: 'Ist mautpflichtig',
+    no_category: 'Keine Kategorie',
+    highway: 'Autobahn',
+    unpaved_road: 'Nicht asphaltierte',
+    tunnel:	'Tunnel',
+    paved_road:	'Asphaltierte',
+    ford: 'Furt',
+    no_data: 'Keine Daten'
   }
 }
