@@ -30,21 +30,27 @@ const filters = [
       'cycling-regular': {
         slug: 'cycling-regular',
         icon: 'directions_bike',
-        nestedProfiles: ['cycling-regular', 'cycling-road', 'cycling-electric', 'cycling-mountain']
+        nestedProfiles: ['cycling-regular', 'cycling-road', 'cycling-electric', 'cycling-mountain'],
+        supportsTraildifficulty: true
       },
       'foot-walking': {
         slug: 'foot-walking',
         icon: 'directions_walk',
-        nestedProfiles: ['foot-walking', 'foot-hiking']
+        nestedProfiles: ['foot-walking', 'foot-hiking'],
+        supportsTraildifficulty: true
       },
       'driving-car': {
         slug: 'driving-car',
-        icon: 'directions_car'  
+        icon: 'directions_car',
+        supportsRoadaccessrestrictions: true,
+        supportsTollways: true
       },
       'driving-hgv': {
         slug: 'driving-hgv',
         icon: 'directions_bus',
-        vehicleTypes: ['bus', 'hgv', 'agricultural', 'delivery', 'forestry', 'goods']
+        vehicleTypes: ['bus', 'hgv', 'agricultural', 'delivery', 'forestry', 'goods'],
+        supportsRoadaccessrestrictions: true,
+        supportsTollways: true
       },
       wheelchair: {
         slug: 'wheelchair',
