@@ -217,8 +217,6 @@ const orsParamsParser = {
    * @returns {Array} extraInfo
    */
   buildExtraInfoOptions (mapSettings) {
-    // Define the extra info that must be be requested
-    // based on the map settings
     const extraInfo = []
 
     const profileFilterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)

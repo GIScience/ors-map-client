@@ -51,10 +51,8 @@
                     <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.traildifficulty" :label="$t('settings.traildifficulty')" ></v-checkbox>
                     <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.roadaccessrestrictions" :label="$t('settings.roadaccessrestrictions')" ></v-checkbox>
 
-                    <!-- options to be enabled when the features that use them are implemented. These options are already working (if uncommented), just not being used -->
+                    <!-- options to be enabled when the features that use them are implemented -->
                     <!-- <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.distanceMarkers" :label="$t('settings.distanceMarkers')" ></v-checkbox> -->
-                    <!-- <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.suitabilityOfWays" :label="$t('settings.suitabilityOfWays')" ></v-checkbox> -->
-                    <!-- <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.tollways" :label="$t('settings.tollways')" ></v-checkbox> -->
                   </v-container>
                 </v-list>
               </v-list>

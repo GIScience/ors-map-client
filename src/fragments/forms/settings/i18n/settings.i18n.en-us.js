@@ -31,7 +31,6 @@ export default {
     steepness: 'Steepness',
     surfaces: 'Surfaces',
     waytypes: 'Way types',
-    suitabilityOfWays: 'Suitability of ways',
     tollways: 'Tollways',
     waycategory: 'Way category',    
     traildifficulty: 'Trail difficulty',

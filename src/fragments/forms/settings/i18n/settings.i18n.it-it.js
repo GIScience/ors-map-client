@@ -30,7 +30,6 @@ export default {
     'steepness': 'Ripidità',
     'surfaces': 'Superficie',
     'waytypes': 'Tipi di percorso',
-    'suitabilityOfWays': 'Idoneità dei tipi di percorso',
     'tollways': 'Strade a pedaggio',
     'waycategory': 'Categoria di via',    
     'traildifficulty': 'Difficoltà del sentiero',

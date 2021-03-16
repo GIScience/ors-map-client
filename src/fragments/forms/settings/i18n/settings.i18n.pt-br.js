@@ -31,7 +31,6 @@ export default {
     steepness: 'Inclinação',
     surfaces: 'Superfícies',
     waytypes: 'Tipos de caminho',
-    suitabilityOfWays: 'Adequação da rota',
     tollways: 'Pedagiado',
     waycategory: 'Categoria do percurso',    
     traildifficulty: 'Dificuldade da trilha',

@@ -31,7 +31,6 @@ export default {
     steepness: 'Steilheit',
     surfaces: 'Oberflächen',
     waytypes: 'Wegtypen',
-    suitabilityOfWays: 'Eignung von Wegen (für gewähltes Profil)',
     tollways: 'Mautstraßen',
     waycategory: 'Wegkategorie',    
     traildifficulty: 'Trail Schwierigkeit',
