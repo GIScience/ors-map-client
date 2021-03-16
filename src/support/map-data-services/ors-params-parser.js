@@ -177,15 +177,9 @@ const orsParamsParser = {
     })
     const mapSettings = store.getters.mapSettings
 
-    // Define the extra info that musbe be requested
+    // Define the extra info that must be be requested
     // based on the map settings
-    const extraInfo = []
-
-    for (const key in constants.extraInfos) {
-      if (mapSettings[key]) {
-        extraInfo.push(constants.extraInfos[key])
-      }
-    }
+    const extraInfo = orsParamsParser.buildExtraInfoOptions(mapSettings)    
 
     // Set args object
     const args = {
@@ -193,7 +187,6 @@ const orsParamsParser = {
       format: 'geojson',
       elevation: mapSettings.elevationProfile,
       instructions_format: 'html',
-      api_version: 'v2',
       extra_info: extraInfo,
       language: mapSettings.routingInstructionsLocale,
       units: mapSettings.unit
@@ -216,6 +209,43 @@ const orsParamsParser = {
     orsParamsParser.setFilters(args, OrsMapFilters, constants.services.directions)
     main.getInstance().appHooks.run('routingArgsCreated', args)
     return args
+  },
+
+  /**
+   * Define the extra info that must be be requested
+   * @param {Object} mapSettings 
+   * @returns {Array} extraInfo
+   */
+  buildExtraInfoOptions (mapSettings) {
+    // Define the extra info that must be be requested
+    // based on the map settings
+    const extraInfo = []
+
+    const profileFilterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
+    let profileMapping = profileFilterRef.mapping[profileFilterRef.value]
+
+    // Add the extra info that are supported by each profile
+    // according to what is defined in the ors-map-filter.js
+    for (const key in constants.extraInfos) {
+      if (mapSettings[key]) {
+        if (key === constants.extraInfos.roadaccessrestrictions) {
+          if (profileMapping.supportsRoadaccessrestrictions) {
+            extraInfo.push(constants.extraInfos[key])
+          } 
+        } else if (key === constants.extraInfos.traildifficulty) {
+          if (profileMapping.supportsTraildifficulty) {
+            extraInfo.push(constants.extraInfos[key])
+          } 
+        } else if (key === constants.extraInfos.tollways) {
+          if (profileMapping.supportsTollways) {
+            extraInfo.push(constants.extraInfos[key])
+          } 
+        } else {
+          extraInfo.push(constants.extraInfos[key])
+        }     
+      }
+    }
+    return extraInfo
   },
 
   /**

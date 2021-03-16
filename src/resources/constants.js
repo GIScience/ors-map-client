@@ -61,7 +61,17 @@ const constants = {
   extraInfos: {
     surface: 'surface',
     steepness: 'steepness',
-    waytype: 'waytype'
+    waytype: 'waytype',
+
+    suitability: 'suitability',
+    waycategory: 'waycategory',
+    tollways: 'tollways',
+    traildifficulty: 'traildifficulty',
+    osmid: 'osmid',
+    roadaccessrestrictions: 'roadaccessrestrictions',
+    countryinfo: 'countryinfo',
+    green: 'green',
+    noise: 'noise'
   },
   orsKmlDocumentDescription: 'ORS route file',
   segmentHightlightColor: '#9ACD32',

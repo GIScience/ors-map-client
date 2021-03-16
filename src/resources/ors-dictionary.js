@@ -55,6 +55,46 @@ const orsDictionary = {
     16: 'private',
     32: 'permissive'
   },
+  tollways: {
+    '0': 'no_tollway',
+    '1': 'is_tollway'
+  },
+  waycategory: {
+    '0': 'no_category',
+    '1': 'highway',
+    '2': 'steps',
+    '4': 'ferry',
+    '8': 'unpaved_road',
+    '16':	'track',
+    '32':	'tunnel',
+    '64':	'paved_road',
+    '128': 'ford',
+  },  
+  traildifficulty: {
+    '0': 'no_data',	// no tag 	no tag
+    '1': '0', // sac_scale=hiking 	mtb:scale=0
+    '2': '1', // sac_scale=mountain_hiking 	mtb:scale=1
+    '3': '2', // sac_scale=demanding_mountain_hiking 	mtb:scale=2
+    '4': '3', // sac_scale=alpine_hiking 	mtb:scale=3
+    '5': '4', //	sac_scale=demanding_alpine_hiking 	mtb:scale=4
+    '6': '5', //	sac_scale=difficult_alpine_hiking 	mtb:scale=5
+    '7': '6', // --- 	mtb:scale=6
+  },
+  // green: [
+
+  // ],
+  // noise: [
+
+  // ],
+  roadaccessrestrictions: {
+    '0': 'none', //	None (there are no restriction data)
+    '1': 'no',
+    '2': 'customers',
+    '4': 'destination',
+    '8': 'Delivery',
+    '16': 'private',
+    '32': 'permissive'
+  },
   colors: {
     waytypes: [
       // 11 colors accessed by index
@@ -106,16 +146,41 @@ const orsDictionary = {
       '#A52A2A',
       '#800000'
     ],
-    roadaccessrestrictions: [
-      // 7 colors accessed by index
-      '#FFFACD',
-      '#696969',
-      '#FFEFD5',
-      '#2F4F4F',
-      '#FFDAB9',
-      '#000000',
-      '#FFFF00'
-    ]
+    // deifile colors below   
+    roadaccessrestrictions: {
+      0: 'gray',
+      1: 'green',
+      2: '#FFFF66',
+      4: '#FFFF33',
+      8: '#FFFF00',
+      16: '#CCCC00',
+      32: '#333300'
+    },
+    tollways: {
+      '0': '#708090',
+      '1': '#2F4F4F'
+    },
+    waycategory: {
+      '0': '#FF7F50',
+      '1': '#FFE4B5',
+      '2': '#FF4500',
+      '4': '#FFD700',
+      '8': '#FFA500',
+      '16':	'#FF8C00',
+      '32':	'#BDB76B',
+      '64':	'#FFFF00',
+      '128': '#808000',
+    },  
+    traildifficulty: {
+      '0': 'gray',	// no tag 	no tag
+      '1': '#F4A460', // sac_scale=hiking 	mtb:scale=0
+      '2': '#DAA520', // sac_scale=mountain_hiking 	mtb:scale=1
+      '3': '#CD853F', // sac_scale=demanding_mountain_hiking 	mtb:scale=2
+      '4': '#D2691E', // sac_scale=alpine_hiking 	mtb:scale=3
+      '5': '#8B4513', //	sac_scale=demanding_alpine_hiking 	mtb:scale=4
+      '6': '#A0522D', //	sac_scale=difficult_alpine_hiking 	mtb:scale=5
+      '7': '#A52A2A', // --- 	mtb:scale=6
+    },
   }
 }
 

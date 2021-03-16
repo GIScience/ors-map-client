@@ -104,8 +104,9 @@ export default {
           'highways': 'Auto-estradas',
           'tollways': 'Pedágios',
           'ferries': 'Ferries',
+          'hills': 'Colinas',
           'tunnels': 'Túneis',
-          'fords': 'Vau',
+          'fords': 'Passo de rio',
           'steps': 'Escadaria',
           'pavedroads': 'Rodovias pavimentadas',
           'unpavedroads': 'Rodovias não pavimentadas'

@@ -56,7 +56,8 @@ export default {
      * @param {*} index 
      */
     colorValue (extraKey, index) {
-      const color = orsDictionary.colors[extraKey][index]
+      let dict = orsDictionary
+      const color = dict.colors[extraKey][index]
       return color
     },
     /**
@@ -81,8 +82,9 @@ export default {
      * @returns {Integer} value
      */
     getExtraValueLabel (extraKey, value) {
-      if (orsDictionary[extraKey] && orsDictionary[extraKey][value]) {
-        const key = orsDictionary[extraKey][value]
+      let dict = orsDictionary
+      if (dict[extraKey] && dict[extraKey][value]) {
+        const key = dict[extraKey][value]
         const labels = this.$t('orsDictionary')
         if (labels[key]) {
           return labels[key]

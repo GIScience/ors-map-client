@@ -452,7 +452,10 @@ export default {
       if (this.places.length === 1) {
         this.directionsFromPoint(data)
       } else {
-        let closestPlaceIndex = data.injectIndex || GeoUtils.getClosestPlaceIndex(data.latlng, this.places)
+        let closestPlaceIndex = data.injectIndex
+        if (closestPlaceIndex === null || closestPlaceIndex === undefined) {
+          closestPlaceIndex = GeoUtils.getClosestPlaceIndex(data.latlng, this.places)
+        }
         // If the selected point is after the last route point
         if (closestPlaceIndex === this.places.length - 1) {
           // If `convertStopAfterRouteEndingToDestination`is not true, then the slot must

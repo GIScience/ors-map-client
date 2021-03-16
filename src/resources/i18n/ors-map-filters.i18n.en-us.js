@@ -128,6 +128,7 @@ export default {
           'highways': 'Highways',
           'tollways': 'Tollways',
           'ferries': 'Ferries',
+          'hills': 'Hills',
           'tunnels': 'Tunnels',
           'fords': 'Fords',
           'steps': 'Steps',
