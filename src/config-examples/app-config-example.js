@@ -56,7 +56,7 @@ const appConfig = {
   // The map tile providers available. At least one must be present
   mapTileProviders: [
     {
-      name: 'OpenStreetMaps',
+      name: 'OpenStreetMap',
       id: 'osm',
       visible: false,
       attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
