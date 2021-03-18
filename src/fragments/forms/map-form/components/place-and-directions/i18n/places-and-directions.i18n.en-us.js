@@ -23,7 +23,7 @@ export default {
       2000: 'Unable to parse JSON request',
       2001: 'Required parameter is missing',
       2002: 'Invalid parameter format',
-      2003: 'Invalid parameter. Please remember that some avoidables have limits, like the area of a polygon that must not exceed 200000 square kilometers',
+      2003: 'Invalid parameter. Please remember that some avoidables have limits, like the route lenght and the area of an avoid polygon that must not exceed 200000 square kilometers',
       2004: 'By using certain filters and/or avoidables the distance of a route segment must not be greater than 3000 km. When using alternative routes the distance must be at most 100 km.',
       2006: 'Unable to parse the request to the export handler',
       2007: 'Unsupported export format',

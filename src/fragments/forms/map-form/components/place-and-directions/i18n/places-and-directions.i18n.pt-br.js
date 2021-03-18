@@ -23,7 +23,7 @@ export default {
       2000: 'Não foi possível processar a requisição JSON',
       2001: 'Parâmetro obrigatório faltando',
       2002: 'Formato de parâmetro incorreto',
-      2003: 'Parâmetro inválido. Lembre-se que alguns elementos a evitar têm limites, como a área de um polígono que não deve exceder 200.000 quilômetros quadrados.',
+      2003: 'Parâmetro inválido. Lembre-se que alguns elementos a evitar têm limites, como a distância da rota e a área de um polígono a evitar que não deve exceder 200.000 quilômetros quadrados.',
       2004: 'Usando certos filtros e/ou elementos a evitar, a distância de um segmento de rota não deve ser maior do que 3000 km. Ao utilizar rotas alternativas, a distância deve ser de no máximo 100 km.',
       2006: 'Não foi possível analisar o pedido e processar a resposta',
       2007: 'Formato de resposta não suportado',
