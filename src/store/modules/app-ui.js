@@ -8,7 +8,7 @@ const state = {
   pickPlaceIndex: null,
   pickPlaceId: null,
   mainMenu: [],
-  footerFullHeight: 74,
+  footerFullHeight: 89,
   footerMiniHeight: 140,
   sidebarFullWidth: 400,
   sidebarShrinkeWidth: 290,

@@ -3,7 +3,7 @@ export default {
   "about": {
     "donate": "Faire un don!",
     "donateText": "Veuillez faire don de vos données géographiques à",
-    "info_I": "Openrouteservice est développé et fourni par l'Institut Heidelberg pour la technologie de géoinformation (HeiGIT) et offre des services de routage en utilisant des données géographiques gratuites générées par les utilisateurs et collectées en collaboration à partir d'OpenStreetMap. Merci de faire don de vos données géographiques à openstreetmap.org!",
+    "info_I": "Openrouteservice est développé et fourni par l'Heidelberg Institute for Geoinformation Technology (HeiGIT) et offre des services de routage en utilisant des données géographiques gratuites générées par les utilisateurs et collectées en collaboration à partir d'OpenStreetMap. Merci de faire don de vos données géographiques à openstreetmap.org!",
     "info_II": "Nous utilisons le stockage local du navigateur pour conserver les informations afin que vous n'ayez pas à les saisir à nouveau lors de votre visite ou lors de visites ultérieures. Nous ne collectons ni ne stockons aucune information personnelle sur vous ou des informations personnellement identifiables à votre sujet, à l'exception de ce que vous fournissez volontairement par contact direct. De plus, nous ne partageons pas de données analytiques avec des fournisseurs de services ou des partenaires.",
     "sources": "Nous utilisons différentes bibliothèques open source pour cette application Web. Ceux-ci peuvent être trouvés dans les fichiers de package correspondants sur",
     "feelFreeToReportBugs": "N'hésitez pas à signaler les bugs sur",
