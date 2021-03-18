@@ -504,8 +504,6 @@ const filters = [
           'tollways',
           'ferries',
           'tunnels',
-          'pavedroads',
-          'unpavedroads',
           'tracks',
           'fords',
           'steps',
@@ -519,9 +517,7 @@ const filters = [
                 'highways',
                 'tollways',
                 'ferries',
-                'tunnels',
-                'pavedroads',
-                'unpavedroads'
+                'tunnels'
               ],
               'cycling-*': [
                 'ferries',

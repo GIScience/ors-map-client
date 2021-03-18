@@ -43,6 +43,13 @@ export default {
             context.filter.value = context.localModel = context.textLocalModel = value
             context.fieldUpdated()
           }
+        } else {
+          let defaultvalue = null
+          if (context.filter.default !== undefined) {
+            defaultvalue = context.filter.default
+          }
+          context.localModel = context.filter.value = defaultvalue
+          context.fieldUpdated()
         }
       }, 1000)
     },
@@ -66,7 +73,7 @@ export default {
         if (unitsTrans[this.filter.unit]) {
           unit = unitsTrans[this.filter.unit]
         }
-        unit = String(this.filter.unit)
+        unit = String(unit)
       }
       return unit
     },   

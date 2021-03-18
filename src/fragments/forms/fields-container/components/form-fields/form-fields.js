@@ -271,9 +271,7 @@ export default {
               }
             }
             // If the item object has texts for the current locale, get it and then set it as the itemtext
-            var itemText = item[this.$store.getters.mapSettings.locale] || item[defaultMapSettings.locale]  
-            item.itemValue = item[parameter.itemValue]
-            item.itemText = itemText || item.itemValue
+            item.itemText = item[this.$store.getters.mapSettings.locale] || item[defaultMapSettings.locale] || item.itemValue
           } else { // item is not an object, but a simple value
             let itemObj = {
               itemValue: item,
