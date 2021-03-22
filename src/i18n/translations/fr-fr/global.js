@@ -81,6 +81,7 @@ export default {
         "venue": "Lieu",
         "rawCoordinate": "Brutes lon. et lat. coordonnées",
         "notAvailable": "Pas disponible",
+        "postalcode": 'Code postal',
         "undefined": "Non défini"
     }
   }

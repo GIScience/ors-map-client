@@ -82,6 +82,7 @@ export default {
       venue: 'Venue',
       rawCoordinate: 'Raw lng,lat coordinates',
       notAvailable: 'Not available',
+      postalcode: 'Postal code',
       'undefined': 'Not defined'
     }
   }

@@ -81,6 +81,7 @@ export default {
       'venue': 'Sede',
       'rawCoordinate': 'Coordinate long. lat.',
       'notAvailable': 'Non avviabile',
+      "postalcode": 'Codice postale',
       'undefined': 'Non definito'
     }
   }

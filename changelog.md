@@ -36,6 +36,17 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.0.2] - 2021-03-22 ##
+
+### Added ###
+
+- Support to search by postal code
+
+### Changed ###
+
+- Auto select by hit enter/return also in the case of a single postal code layer result
+- Template/example file `layer-zoom-mapping-example` was changed to include postal code (please update your config file to reflect this)
+
 ## [v1.0.1] - 2021-03-18 ##
 
 ### Changed ###
