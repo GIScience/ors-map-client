@@ -447,9 +447,6 @@ export default {
         // Run the place search
         this.eventBus.$emit('showLoading', true)
         PlacesSearch(this.localModel.placeName, 10).then(places => {
-          if (enterWasHit && places[0].properties.layer === 'address') {
-            console.log(places[0])
-          }
           context.localModel.setSuggestions(places)
           context.focused = true
           this.focusIsAutomatic = false
@@ -535,7 +532,7 @@ export default {
             // If the first result is an address and the match_type is exact, 
             // then we auto select the first item on the enter/return action
             const addresses = this.lodash.filter(places, (p) => {
-              return p.properties.layer === 'address' && p.properties.match_type === 'exact'
+              return (p.properties.layer === 'address' || p.properties.layer === 'postalcode') && p.properties.match_type === 'exact'
             })
 
             if (addresses.length === 1) {

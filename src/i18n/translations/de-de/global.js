@@ -82,6 +82,7 @@ export default {
       venue: 'Tagungsort',
       rawCoordinate: 'Long,Lat Koordinaten',
       notAvailable: 'Nicht verfügbar',
+      postalcode: 'Postleitzahl',
       'undefined': 'Nicht definiert'
     }
   }

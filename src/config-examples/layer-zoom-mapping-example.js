@@ -15,6 +15,7 @@ const layerZoomMapping = {
   borough: 10,
   localadmin: 13,
   street: 14,
+  postalcode: 15,
   address: 16,
   venue: 16
 }

@@ -130,7 +130,7 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
     // Build a search for addresses
     let addressesArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
     addressesArgs.size = quantity
-    addressesArgs.layers = ['country', 'region', 'macrocounty', 'borough', 'macroregion', 'county', 'neighbourhood', 'borough', 'street', 'address']
+    addressesArgs.layers = ['country', 'region', 'macrocounty', 'borough', 'macroregion', 'county', 'neighbourhood', 'borough', 'street', 'address', 'coarse'] // `coarse` will bring places by postal code
     promises.push(client.geocode(addressesArgs))   
     main.getInstance().appHooks.run('placeSearchAddressArgsDefined', addressesArgs)
 

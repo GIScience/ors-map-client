@@ -81,6 +81,7 @@ export default {
       venue: 'Local',
       rawCoordinate: 'Coordenadas simples lng,lat',
       notAvailable: 'Não disponível',
+      postalcode: 'Código postal',
       'undefined': 'Não definido'
     }
   }
