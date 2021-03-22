@@ -36,6 +36,12 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+ ## [v1.0.3] - 2021-03-22 ##
+
+### Fixed ###
+
+- Fixed admin area loader filter for cases when no locality is available
+
 ## [v1.0.2] - 2021-03-22 ##
 
 ### Added ###
