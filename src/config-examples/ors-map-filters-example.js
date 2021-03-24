@@ -502,12 +502,9 @@ const filters = [
         enum: [
           'highways',
           'tollways',
-          'ferries',
-          'tunnels',
-          'tracks',
-          'fords',
           'steps',
-          'hills'
+          'ferries',
+          'fords'
         ],
         itemRestrictions: [
           {
@@ -516,8 +513,7 @@ const filters = [
               'driving-*': [
                 'highways',
                 'tollways',
-                'ferries',
-                'tunnels'
+                'ferries'
               ],
               'cycling-*': [
                 'ferries',
@@ -527,11 +523,11 @@ const filters = [
               'foot-*': [
                 'ferries',
                 'fords',
-                'steps',
-                'hills'
+                'steps'
               ],
               wheelchair: [
                 'ferries',
+                'fords',
                 'steps'
               ]
             }

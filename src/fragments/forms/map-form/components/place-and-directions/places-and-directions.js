@@ -610,7 +610,7 @@ export default {
         const places = context.getFilledPlaces()
 
         if (places.length > 1 || context.$store.getters.mode === constants.modes.roundTrip) {
-          context.showInfo(context.$t('placesAndDirections.calculatingRoute', { timeout: 0 }))
+          context.showInfo(context.$t('placesAndDirections.calculatingRoute'), { timeout: 0 })
           context.eventBus.$emit('showLoading', true)
 
           // Calculate the route
@@ -630,6 +630,9 @@ export default {
             }
           }).catch(result => {
             context.handleCalculateDirectionsError(result)
+            context.mapViewData.places = context.places // i case of failure, use the places on the app context
+            context.mapViewData.timestamp = new Date().getTime()
+            context.eventBus.$emit('mapViewDataChanged', context.mapViewData)
           }).finally(() => {
             context.eventBus.$emit('showLoading', false)
           })

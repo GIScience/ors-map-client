@@ -61,6 +61,7 @@
         <br/>
       </box>
       <template v-if="showAltitudePreview">
+        <br>
         <altitude-preview :map-view-data="mapViewData" ></altitude-preview>
         <br/>
       </template>
