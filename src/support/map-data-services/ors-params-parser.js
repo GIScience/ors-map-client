@@ -212,6 +212,34 @@ const orsParamsParser = {
   },
 
   /**
+   * Get active profile form OrsMapFilter
+   * @returns {Object}
+   */
+  getActiveProfileObj () {
+    const profileFilterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
+    let activeProfileObj = profileFilterRef.mapping[profileFilterRef.value]
+
+    if (!activeProfileObj) {
+      for (let key in profileFilterRef.mapping) {
+        let profile = profileFilterRef.mapping[key]
+        if (profile.nestedProfiles) {
+          for (let nestedKey in profile.nestedProfiles) {
+            let nestedProfile = profile.nestedProfiles[nestedKey]
+            if (nestedProfile === profileFilterRef.value) {
+              activeProfileObj = profile
+              break
+            }
+          }
+        }
+        if (activeProfileObj) {
+          break
+        }
+      }
+    }
+    return activeProfileObj
+  },
+
+  /**
    * Define the extra info that must be be requested
    * @param {Object} mapSettings 
    * @returns {Array} extraInfo
@@ -219,23 +247,22 @@ const orsParamsParser = {
   buildExtraInfoOptions (mapSettings) {
     const extraInfo = []
 
-    const profileFilterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
-    let profileMapping = profileFilterRef.mapping[profileFilterRef.value]
+    let profileObj = orsParamsParser.getActiveProfileObj()
 
     // Add the extra info that are supported by each profile
     // according to what is defined in the ors-map-filter.js
     for (const key in constants.extraInfos) {
       if (mapSettings[key]) {
         if (key === constants.extraInfos.roadaccessrestrictions) {
-          if (profileMapping.supportsRoadaccessrestrictions) {
+          if (profileObj.supportsRoadaccessrestrictions) {
             extraInfo.push(constants.extraInfos[key])
           } 
         } else if (key === constants.extraInfos.traildifficulty) {
-          if (profileMapping.supportsTraildifficulty) {
+          if (profileObj.supportsTraildifficulty) {
             extraInfo.push(constants.extraInfos[key])
           } 
         } else if (key === constants.extraInfos.tollways) {
-          if (profileMapping.supportsTollways) {
+          if (profileObj.supportsTollways) {
             extraInfo.push(constants.extraInfos[key])
           } 
         } else {

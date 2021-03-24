@@ -36,7 +36,20 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
- ## [v1.0.3] - 2021-03-22 ##
+
+## [v1.0.4] - 2021-03-24 ##
+
+### Fixed ###
+
+- Show place markers when the could can not be calculated
+- Show calculating toaster indefinitely (until an error or success toaster replace it)
+- Fix the adding of extra info to the request when a nested profile is active, like foot-hiking
+
+### Changed ###
+
+- Remove avoid_feature filters that are not support anymore (update your local ors-map-filters.js)
+
+## [v1.0.3] - 2021-03-22 ##
 
 ### Fixed ###
 
