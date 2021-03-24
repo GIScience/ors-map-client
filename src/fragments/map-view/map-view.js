@@ -414,7 +414,8 @@ export default {
         markersMapViewData = this.localMapViewData
       }
       if (markersMapViewData.places.length > 0) {
-        let markers = GeoUtils.buildMarkers(markersMapViewData.places, markersMapViewData.hasRoutes(), this.focusedPlace)
+        let isRoute = markersMapViewData.hasRoutes() || this.mode === constants.modes.directions
+        let markers = GeoUtils.buildMarkers(markersMapViewData.places, isRoute, this.focusedPlace)
         markers = this.$root.appHooks.run('markersCreated', markers)
         return markers
       }
