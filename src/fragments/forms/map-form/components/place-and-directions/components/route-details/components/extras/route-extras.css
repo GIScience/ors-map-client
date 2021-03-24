@@ -22,7 +22,7 @@
 }
 
 .extra-bar {
-  width: calc(100% - 6px);
+  width: calc(100% - 5px);
   cursor: pointer;
   border: 1px solid #cbced1;
   height: 32px;
