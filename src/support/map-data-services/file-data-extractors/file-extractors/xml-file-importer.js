@@ -147,22 +147,27 @@ class XmlImporter {
       for (const key in rtes) {
         const rte = rtes[key]
         const coordinatesParsed = []
-        let ptsCollection = rte.rtept ||  lodash.get(rte, 'trkseg[0].trkpt')
-        if (ptsCollection) {
-          for (const ptKey in ptsCollection) {
-            const latlon = ptsCollection[ptKey].$
-            const point = [latlon.lon, latlon.lat]
-            const elev = ptsCollection[ptKey].ele
-            if (elev && elev.length > 0) {
-              point.push(elev[0])
+
+        let segments = rte.trkseg || [rte.rtept]
+
+        for (let key in segments) {
+          let ptsCollection = segments[key].trkpt || segments[key]
+          if (ptsCollection) {
+            for (const ptKey in ptsCollection) {
+              const latlon = ptsCollection[ptKey].$
+              const point = [latlon.lon, latlon.lat]
+              const elev = ptsCollection[ptKey].ele
+              if (elev && elev.length > 0) {
+                point.push(elev[0])
+              }
+              coordinatesParsed.push(point)
             }
-            coordinatesParsed.push(point)
+            routes.push({
+              geometry: {
+                coordinates: coordinatesParsed
+              }
+            })
           }
-          routes.push({
-            geometry: {
-              coordinates: coordinatesParsed
-            }
-          })
         }
       }
     }

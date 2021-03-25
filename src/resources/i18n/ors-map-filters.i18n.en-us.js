@@ -56,7 +56,7 @@ export default {
       },
       axleload: {
         label: 'Axle load',
-        description: 'The maximum axel load in tones'
+        description: 'The maximum axle load in tons'
       },
       height: {
         label: 'Height',
@@ -68,15 +68,15 @@ export default {
       },
       weight: {
         label: 'Weight',
-        description: 'The maximum weight in tones'
+        description: 'The maximum weight in tons'
       },
       width: {
         label: 'Width',
         description: 'The maximum width in meters'
       },
       hazmat: {
-        label: 'Hazardous Goods',
-        description: 'Transporting hazardous Goods'
+        label: 'Hazardous goods',
+        description: 'Transporting hazardous goods'
       },
       maximum_incline: {
         label: 'Max inclination',

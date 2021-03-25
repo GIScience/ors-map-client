@@ -55,6 +55,30 @@ export default {
       restrictions: {
         label: 'Einschränkungen'
       },
+      axleload: {
+        label: 'Achslast',
+        description: 'Die maximale Achslast in Tonnen'
+      },
+      height: {
+        label: 'Höhe',
+        description: 'Die maximale Höhe in Metern'
+      },
+      length: {
+        label: 'Länge',
+        description: 'Die maximale Länge in Metern'
+      },
+      weight: {
+        label: 'Gewicht',
+        description: 'Das maximale Gewicht in Tonnen'
+      },
+      width: {
+        label: 'Breite',
+        description: 'Die maximale Breite in Metern'
+      },
+      hazmat: {
+        label: 'Gefahrgut',
+        description: 'Transport gefährlicher Güter'
+      },
       maximum_incline: {
         label: 'Maximale Steigung',
         description: 'Die maximale Steigung/Gefälle des Weges in Prozent'
