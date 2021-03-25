@@ -73,14 +73,17 @@ export default {
         this.showPolylinePointByIndex(newVal)
       }
     },
-    'route': function () {
-      this.active = false
-      let context = this
-      setTimeout(() => {
-        context.active = true
-        context.updatePopup()
-      }, 100)
-    },
+    route: {
+      handler: function (newVal, oldVal) {
+        this.active = false
+        let context = this
+        setTimeout(() => {
+          context.active = true
+          context.updatePopup()
+        }, 100)
+      },
+      deep: true
+    }
   },
   methods: {
     addStopViaPolylineDrag (data) {

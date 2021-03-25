@@ -53,11 +53,12 @@ export default {
      * Get the color from the ors dictionary 
      * based on the extra key and index
      * @param {*} extraKey 
-     * @param {*} index 
+     * @param {*} index
+     * @param {*} value 
      */
-    colorValue (extraKey, index) {
+    colorValue (extraKey, index, value) {
       let dict = orsDictionary
-      const color = dict.colors[extraKey][index]
+      const color = dict.colors[extraKey][index] || dict.colors[extraKey][value]
       return color
     },
     /**
@@ -143,7 +144,7 @@ export default {
      * @returns {Object} {intervals: Array, color: string, label: String}
      */
     buildExtraHighlighPolylineData (extraKey, index, value) {
-      const color = this.colorValue(extraKey, index)
+      const color = this.colorValue(extraKey, index, value)
       const label = this.getExtraValueLabel(extraKey, value).toLowerCase()
       // Values contains an array with the following data: 
       // a) position `zero` - the starting index on the route polyline array of

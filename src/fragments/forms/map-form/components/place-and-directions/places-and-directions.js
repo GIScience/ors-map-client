@@ -631,6 +631,7 @@ export default {
           }).catch(result => {
             context.handleCalculateDirectionsError(result)
             context.mapViewData.places = context.places // in case of failure, use the places on the app context
+            context.mapViewData.routes = []
             context.mapViewData.timestamp = new Date().getTime()
             context.eventBus.$emit('mapViewDataChanged', context.mapViewData)
           }).finally(() => {
