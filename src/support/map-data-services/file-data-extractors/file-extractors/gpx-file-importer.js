@@ -137,15 +137,15 @@ class GpxImporter {
     const tracks = lodash.get(fileObject, 'gpx.trk') || lodash.get(fileObject, 'gpx.rte')
     const creator = lodash.get(fileObject, 'gpx.$.creator')
     if (tracks) {
+      const coordinatesParsed = []
       for (const key in tracks) {
         const track = tracks[key]
         let segments = track.trkseg || [track.rtept]
-
         for (let key in segments) {
           let points = segments[key].trkpt || segments[key]
 
           if (points) {
-            const coordinatesParsed = []
+            
             for (const ptKey in points) {
               const latlon = points[ptKey].$
               const point = creator === 'openrouteservice' ? [latlon.lat, latlon.lon] : [latlon.lon, latlon.lat]
@@ -154,14 +154,14 @@ class GpxImporter {
                 point.push(elev[0])
               }
               coordinatesParsed.push(point)
-            }
-            routes.push({
-              geometry: {
-                coordinates: coordinatesParsed
-              }
-            })
+            }            
           }
         }
+        routes.push({
+          geometry: {
+            coordinates: coordinatesParsed
+          }
+        })
       }
     }
     return routes
