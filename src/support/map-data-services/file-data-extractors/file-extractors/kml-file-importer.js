@@ -145,10 +145,10 @@ class KmlImporter {
     const description = lodash.get(fileObject, 'kml.Document[0].description[0]')
 
     if (placeMarks) {
+      const coordinatesParsed = []
       for (const rKey in placeMarks) {
         const placeMark = placeMarks[rKey]
         if (placeMark.LineString) {
-          const coordinatesParsed = []
           for (let segmKey in placeMark.LineString) {
             let segment = placeMark.LineString[segmKey]
             for (const cKey in segment.coordinates) {
@@ -168,14 +168,14 @@ class KmlImporter {
                 }
               }
             }
-            routes.push({
-              geometry: {
-                coordinates: coordinatesParsed
-              }
-            })
           }
         }
       }
+      routes.push({
+        geometry: {
+          coordinates: coordinatesParsed
+        }
+      })
     }
     return routes
   }
