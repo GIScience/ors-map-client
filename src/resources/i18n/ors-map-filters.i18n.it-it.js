@@ -53,6 +53,30 @@ export default {
       'restrictions': {
         'label': 'Restrizioni'
       },
+      axleload: {
+        label: 'Carico sull\'asse',
+        description: 'Il carico massimo per asse in tonnellate'
+      },
+      height: {
+        label: 'Altezza',
+        description: 'L\'altezza massima in metri'
+      },
+      length: {
+        label: 'Lunghezza',
+        description: 'La lunghezza massima in metri'
+      },
+      weight: {
+        label: 'Peso',
+        description: 'Il peso massimo in tonnellate'
+      },
+      width: {
+        label: 'Larghezza',
+        description: 'La larghezza massima in metri'
+      },
+      hazmat: {
+        label: 'Merci pericolose',
+        description: 'Trasporto di merci pericolose'
+      },
       'maximum_incline': {
         'label': 'Inclinazione Massimale',
         'description': 'Inclinazione Massimale in percentuale'

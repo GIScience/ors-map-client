@@ -139,22 +139,29 @@ class GpxImporter {
     if (tracks) {
       for (const key in tracks) {
         const track = tracks[key]
-        const points = lodash.get(track, 'trkseg[0].trkpt') || track.rtept
-        const coordinatesParsed = []
-        for (const ptKey in points) {
-          const latlon = points[ptKey].$
-          const point = creator === 'openrouteservice' ? [latlon.lat, latlon.lon] : [latlon.lon, latlon.lat]
-          const elev = points[ptKey].ele
-          if (elev && elev.length > 0) {
-            point.push(elev[0])
+        let segments = track.trkseg || [track.rtept]
+
+        for (let key in segments) {
+          let points = segments[key].trkpt || segments[key]
+
+          if (points) {
+            const coordinatesParsed = []
+            for (const ptKey in points) {
+              const latlon = points[ptKey].$
+              const point = creator === 'openrouteservice' ? [latlon.lat, latlon.lon] : [latlon.lon, latlon.lat]
+              const elev = points[ptKey].ele
+              if (elev && elev.length > 0) {
+                point.push(elev[0])
+              }
+              coordinatesParsed.push(point)
+            }
+            routes.push({
+              geometry: {
+                coordinates: coordinatesParsed
+              }
+            })
           }
-          coordinatesParsed.push(point)
         }
-        routes.push({
-          geometry: {
-            coordinates: coordinatesParsed
-          }
-        })
       }
     }
     return routes
