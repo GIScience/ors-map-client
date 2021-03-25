@@ -36,6 +36,12 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.0.5] - 2021-03-25 ##
+
+### Fixed ###
+
+- Stop displaying old route when the route way points change and a new route can not be calculated
+- Build extra info highlight color based on item index or value
 
 ## [v1.0.4] - 2021-03-24 ##
 
