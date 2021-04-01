@@ -7,11 +7,11 @@
       <h3>{{$t('routeDetails.routeSummary')}}</h3>
     </div>
     <v-expansion-panel slot="content" class="no-shadow" v-if="hasRoutes" :value="startedPanelExtended">
-      <v-expansion-panel-content style="background: transparent;" class="routes-header" :key="index" v-for="(route, index) in parsedRoutes">
+      <v-expansion-panel-content style="background: transparent;" class="routes-header" :key="routeIndex" v-for="(route, routeIndex) in parsedRoutes">
         <div slot="header">
-          <h4 >{{$t('routeDetails.route')}} {{index + 1}} ({{route.summary.distance}})
-            <v-btn icon @click="changeActiveRouteIndex(index)" v-if="parsedRoutes.length > 1" :title="index === $store.getters.activeRouteIndex? $t('routeDetails.selectedRoute') : $t('routeDetails.selectRoute')">
-              <v-icon :color="index === $store.getters.activeRouteIndex? 'primary' : 'dark' " >done</v-icon>
+          <h4 >{{$t('routeDetails.route')}} {{routeIndex + 1}} ({{route.summary.distance}})
+            <v-btn icon @click="changeActiveRouteIndex(routeIndex)" v-if="parsedRoutes.length > 1" :title="routeIndex === $store.getters.activeRouteIndex? $t('routeDetails.selectedRoute') : $t('routeDetails.selectRoute')">
+              <v-icon :color="routeIndex === $store.getters.activeRouteIndex? 'primary' : 'dark' " >done</v-icon>
             </v-btn>
           </h4>
         </div>
@@ -26,21 +26,29 @@
               <h4 >{{$t('routeDetails.warnings')}}:</h4>
               <v-alert :key="warning.code" v-for="warning in route.properties.warnings" :value="getWarningTranslated(warning)"  type="warning" style="color:black" >{{ getWarningTranslated(warning) }}</v-alert>
             </div>
-            <div v-if="route.properties.segments.length > 1 && index === $store.getters.activeRouteIndex">
+            <div v-if="route.properties.segments.length > 1 && routeIndex === $store.getters.activeRouteIndex">
               <v-expansion-panel class="no-shadow" v-if="hasRoutes" :value="route.properties.segments.length === 1 ? 0 : null">
-                <v-expansion-panel-content class="route-panel"  v-for="(segment, index) in route.properties.segments" :key="index">
-                  <div slot="header"><h4 >{{$t('routeDetails.segment')}} {{index + 1}}</h4></div>
+                <v-expansion-panel-content class="route-panel"  v-for="(segment, segmentIndex) in route.properties.segments" :key="segmentIndex">
+                  <div slot="header"><h4 >{{$t('routeDetails.segment')}} {{segmentIndex + 1}}</h4></div>
                   <v-list>
                     <v-divider></v-divider>
                     <v-list dense class="instructions-scroll">
                       <div style="padding:0 0 0 0px">
                         <div>
                           {{$t('global.distance')}}:  <b>{{segment.distance}} </b>
-                          <v-btn :max-width="30" fab icon small @click="segmentClicked(segment, index)" :title="$t('routeDetails.gotoSegment')">
+                          <v-btn :max-width="30" style="height:15px" fab icon small @click="segmentClicked(segment, segmentIndex)" :title="$t('routeDetails.gotoSegment')">
                             <v-icon>remove_red_eye</v-icon>
                           </v-btn>
                         </div>
                         <div>{{$t('global.duration')}}:  <b>{{segment.duration}} </b></div>
+                        <v-layout>
+                        <v-flex sm6 v-if="segment.ascent">
+                          <p><v-icon>arrow_upward</v-icon> {{formatElevation(segment.ascent)}} {{$t('global.units.m')}}</p>
+                        </v-flex>
+                        <v-flex sm6 v-if="segment.descent">
+                          <p><v-icon>arrow_downward</v-icon> {{formatElevation(segment.descent)}} {{$t('global.units.m')}}</p>
+                        </v-flex>
+                      </v-layout>                      
                       </div>
                       <div style="padding:0 0 0 0px">
                         <h4 >{{$t('routeDetails.instructions')}}:</h4>
@@ -53,7 +61,7 @@
               </v-expansion-panel>
               <route-extras :route="route"></route-extras>
             </div>
-            <div v-else-if="index === $store.getters.activeRouteIndex">
+            <div v-else-if="routeIndex === $store.getters.activeRouteIndex">
               <div style="padding:0 0 0 5px">
                 <v-expansion-panel class="no-shadow" v-if="hasRoutes" :value="null">
                   <v-expansion-panel-content style="background: transparent;" >

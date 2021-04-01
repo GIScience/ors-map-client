@@ -1,4 +1,3 @@
-import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
 import Download from '@/fragments/forms/map-form/components/download/Download'
 import Share from '@/fragments/forms/map-form/components/share/Share'
 import RouteExtras from './components/extras/RouteExtras'
@@ -41,7 +40,6 @@ export default {
     hasRoutes () {
       return this.localMapViewData.isRouteData
     },
-
     startedPanelExtended () {
       return this.localMapViewData.routes.length === 1 ? 0 : null
     },
@@ -83,6 +81,10 @@ export default {
     }
   },
   methods: {
+    formatElevation (elevation) {
+      const value = Math.abs(elevation).toFixed(1)
+      return value
+    },
     /**
      * Get the route summary with humanized 
      * distance and duration data
