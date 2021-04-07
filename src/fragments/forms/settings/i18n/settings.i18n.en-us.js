@@ -39,6 +39,7 @@ export default {
     routeExtraInfo: 'Route extra info',
     mapViewOptions: 'Map view options',
     advancedSettingsWarning: 'Do not change the settings below if you do not know what you are doing!',
+    customOverlayerTileProviderUrl: 'Custom overlayer provider URL',
     customTileProviderUrl: 'Custom tiles provider URL',
     defaultTilesProvider: 'Default tiles provider',
     customTileProviderUrlHint: 'https://domain.tld/path/{z}/{x}/{y}.ext?optionalKey=value',
@@ -49,6 +50,8 @@ export default {
     reloadToApplyLanguageChangeTitle: 'It is necessary to reload the app',
     reloadToApplyLanguageChangeText: 'In order to fully apply the language change it is necessary to reload the app. Reload now?',
     resetShownOnceTooltips: 'Show tooltips on app load again',
-    convertStopAfterRouteEndingToDestination: 'Convert stop after route ending to destination'
+    convertStopAfterRouteEndingToDestination: 'Convert stop after route ending to destination',
+    forNauticalRoutes: 'For nautical route, for example',
+    skipAllSegments: 'straight route for all segments'
   }
 }

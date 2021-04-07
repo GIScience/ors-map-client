@@ -21,7 +21,7 @@
     </div>
     <div v-else-if="activeProfileSlug">
       <v-chip outline small disabled color="primary">
-        {{$t('global.profile')}}: {{($t('orsMapFilters.profiles.' + activeProfileSlug))}}
+        {{$t('global.profile')}}: <span v-if="$store.getters.mapSettings.skipAllSegments">{{($t('global.rawRouting'))}}</span><span v-else>{{($t('orsMapFilters.profiles.' + activeProfileSlug))}}</span>
       </v-chip>
     </div>
   </div>

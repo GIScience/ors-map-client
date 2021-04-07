@@ -863,6 +863,7 @@ export default {
      * @param {*} data 
      */
     changedDirectPlace (data) {
+      this.places[data.index].direct = data.place.direct
       const filledPlaces = this.getFilledPlaces()
       if (this.places.length === filledPlaces.length && this.places.length > 1) {
         this.updateAppRoute()

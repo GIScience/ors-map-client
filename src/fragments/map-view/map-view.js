@@ -152,7 +152,8 @@ export default {
   },
   data () {
     return {
-      tileProviders: [], // list fo tiles provider that will be set via setProviders
+      tileProviders: [], // list of tiles provider that will be set via setProviders
+      overlayerTileProviders: [], // list of overlaye tiles provider that will be set via setProviders
       layersPosition: 'topright',
       map: null, // map object reference. it will will be defined later
       zoomLevel: null,
@@ -673,12 +674,6 @@ export default {
       this.showClickPopups = newVal
     },
     /**
-     * Rebuild providers when a custom one is set
-     */
-    customTileProviderUrl () {
-      this.setProviders()
-    },
-    /**
      * When the prop height changes
      * run the adjust map method
      * to make sure that it fits the
@@ -874,6 +869,7 @@ export default {
      */
     setProviders () {
       this.tileProviders = mapDefinitions.getProviders()
+      this.overlayerTileProviders = mapDefinitions.getOverlayerProviders()
     },
     /**
     * Update markers label
@@ -1972,6 +1968,10 @@ export default {
       this.eventBus.$on('showAltitudeModal', function () {
         context.isAltitudeModalOpen = true
       })
+
+      this.eventBus.$on('mapSettingsChanged', function () {
+        context.setProviders()
+      })      
 
       this.eventBus.$on('highlightPolylineSections', (extraInfo) => {
         context.extraInfo = extraInfo

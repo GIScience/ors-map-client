@@ -40,6 +40,7 @@ export default {
     routeExtraInfo: 'Informações adicionais da rota',
     mapViewOptions: 'Opçoes de visualização do mapa',
     advancedSettingsWarning: 'Não altere as configurações abaixo se você não souber o que está fazendo!',
+    customOverlayerTileProviderUrl: 'URL de provedor de camada personalizada',
     customTileProviderUrl: 'URL do provedor personalizados de images do mapa (tiles provider)',
     defaultTilesProvider: 'Provedor padrão de images do mapa (tiles provider)',
     customTileProviderUrlHint: 'https://domain.tld/path/{z}/{x}/{y}.ext?chaveOpcional=valor',
@@ -50,6 +51,8 @@ export default {
     reloadToApplyLanguageChangeTitle: 'É necessário recarregar a aplicação',
     reloadToApplyLanguageChangeText: 'Para que a mudança de idioma seja totalmente aplicada é necessário recarregar a aplicação. Recarregar agora?',
     resetShownOnceTooltips: 'Exibir dicas quando a aplicação é carregada',
-    convertStopAfterRouteEndingToDestination: 'Parada adicionada após o fim da rota vira destino final'
+    convertStopAfterRouteEndingToDestination: 'Parada adicionada após o fim da rota vira destino final',
+    forNauticalRoutes: 'Para rotas náuticas, por examplo',
+    skipAllSegments: 'Rota reta para todos os segmentos'
   }
 }

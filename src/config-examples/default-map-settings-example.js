@@ -23,6 +23,7 @@ const defaultMapSettings = {
   areaUnit: 'km',
   defaultTilesProvider: 'osm',
   customTileProviderUrl: '',
+  customOverlayerTileProviderUrl: '',
   prioritizeSearchingForNearbyPlaces: true,
   defaultProfile: 'cycling-regular',
   compressDataUrlSegment: true,
@@ -33,6 +34,7 @@ const defaultMapSettings = {
   mapCenter: {lat: 49.510944, lng: 8.76709}, // Default center is at Heidelberg, Germany
   randomizedIsochroneColors: false,
   distanceMarkers: false,
+  skipAllSegments: false,
 
   steepness: true,
   surface: true,

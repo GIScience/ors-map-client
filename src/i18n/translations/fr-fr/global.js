@@ -21,6 +21,9 @@ export default {
     "elevation": "Élévation",
     "profile": "Profil",
     "options": "Options",
+    "custom": "Personnalisé",
+    "customOverlayer": "Superposition personnalisée",
+    "rawRouting": "Routage brut",
     "months": {
         "january": "Janvier",
         "february": "février",

@@ -103,7 +103,7 @@ const mapDefinitions = {
     if (customTileProviderUrl) {
       const customTileService = [
         {
-          name: 'Custom',
+          name: vueInstance.$t('global.custom'),
           id: 'custom',
           visible: false,
           attribution: vueInstance.$t('mapView.customTileProvider'),
@@ -115,6 +115,25 @@ const mapDefinitions = {
     // Se the tile provider that is visible by default
     for (let key in providers) {
       providers[key].visible = providers[key].id === defaultTilesProvider
+    }
+    return providers
+  },
+  getOverlayerProviders () {
+    let providers = []
+    // Add custom over layer tile servive if defined in settings
+    const customOverlayerTileProviderUrl = store.getters.mapSettings.customOverlayerTileProviderUrl
+    let vueInstance = main.getInstance()
+    if (customOverlayerTileProviderUrl) {
+      const overlayerTileService = 
+      {
+        name: vueInstance.$t('global.customOverlayer'),
+        id: 'custom-overlayer',
+        visible: true,
+        attribution: vueInstance.$t('mapView.customTileProvider'),
+        url: customOverlayerTileProviderUrl.toString()
+      }
+      
+      providers.push(overlayerTileService)
     }
     return providers
   }

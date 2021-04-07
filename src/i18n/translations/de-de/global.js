@@ -22,6 +22,9 @@ export default {
     elevation: 'Höhe',
     profile: 'Profil',
     options: 'Optionen',
+    custom: 'Benutzerdefiniert',
+    customOverlayer: 'Benutzerdefinierte Überschicht',
+    rawRouting: 'Rohes Routing',
     months: {
       january: 'Januar',
       february: 'Februar',

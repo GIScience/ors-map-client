@@ -3,6 +3,7 @@ import { LPolyline, LTooltip, LPopup} from 'vue2-leaflet'
 import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
 import theme from '@/config/theme'
+import store from '@/store/store'
 import lodash from 'lodash'
 
 export default {
@@ -179,11 +180,17 @@ export default {
         if (humanizedData.duration) {
           tooltipInnerContent += `<br> ${this.$t('global.duration')}: ${humanizedData.duration}`
         }
-        if (this.tooltipIcon) {
+        let tooltipIcon = this.tooltipIcon
+        let iconStyle = ''
+        if (store.getters.mapSettings.skipAllSegments) {
+          tooltipIcon = 'near_me'
+          iconStyle = 'transform: scaleY(-1) rotate(45deg)'
+        }
+        if (tooltipIcon) {
           let tooltip = `
           <div>
             <div style='min-width:30px;width:20%;height:50px;float:left'>
-              <span class="material-icons">${this.tooltipIcon}</span>
+              <span style='${iconStyle}' class="material-icons">${tooltipIcon}</span>
             </div>
             <div style='min-width:180px'>${tooltipInnerContent}</div>
           </div>`

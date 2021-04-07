@@ -46,7 +46,7 @@ class Place {
     this.index = null
 
     // The if a route should be routed directly to this Place
-    this.direct = false
+    this.direct = options.direct || false
 
     // If it is a POI
     this.isPoi = options.isPoi

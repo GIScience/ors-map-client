@@ -57,7 +57,8 @@ const RouteUtils = {
       params[placeKey] = p.placeName.replace(/, /g, ',')
       // save the index of the places marked as `direct` point
       coordinates.push(`${p.lng},${p.lat}`)
-      if (p.direct === true) {
+      let isLast = index === (appRouteData.places.length - 1)
+      if (p.direct === true || (store.getters.mapSettings.skipAllSegments && !isLast)) {
         directPlaces.push(index)
       }
       if (p.isPoi === true) {

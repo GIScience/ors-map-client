@@ -39,6 +39,7 @@ export default {
     routeExtraInfo: 'Extra Infos',
     mapViewOptions: 'Kartenansicht',
     advancedSettingsWarning: 'Nachfolgende Einstellungen bitte nur ändern, wenn Sie wissen was Sie tun.',
+    customOverlayerTileProviderUrl: 'Benutzerdefinierte Overlayer-Anbieter-URL',
     customTileProviderUrl: 'Spezielle Kartenkachel-Provider URL',
     defaultTilesProvider: 'Standard Kartenkachel-Provider',
     customTileProviderUrlHint: 'https://domain.tld/pfad/{z}/{x}/{y}.ext?optionalerSchlüssel=Wert',
@@ -49,6 +50,8 @@ export default {
     reloadToApplyLanguageChangeTitle: 'App muss neu geladen werden',
     reloadToApplyLanguageChangeText: 'Um die Sprache komplett umzustellen, muss die App neu geladen werden. Jetzt neu laden?',
     resetShownOnceTooltips: 'Hinweise erneut anzeigen',
-    convertStopAfterRouteEndingToDestination: 'Konvertieren den Stopp nach dem Ende der Route zum Ziel'
+    convertStopAfterRouteEndingToDestination: 'Konvertieren den Stopp nach dem Ende der Route zum Ziel',
+    forNauticalRoutes: 'Zum Beispiel für die Seeroute',
+    skipAllSegments: 'gerade Route für alle Segmente'
   }
 }

@@ -39,6 +39,7 @@ export default {
     "routeExtraInfo": "Informations supplémentaires sur l'itinéraire",
     "mapViewOptions": "Options d'affichage de la carte",
     "advancedSettingsWarning": "Ne modifiez pas les paramètres ci-dessous si vous ne savez pas ce que vous faites!",
+    "customOverlayerTileProviderUrl": 'URL du fournisseur de superposition personnalisé',
     "customTileProviderUrl": "URL du fournisseur de tuiles personnalisées",
     "defaultTilesProvider": "Fournisseur de tuiles par défaut",
     "customTileProviderUrlHint": "https://domain.tld/chemin/{z}/{x}/{y}.ext?cleOptionnelle=valeur",
@@ -49,6 +50,9 @@ export default {
     "reloadToApplyLanguageChangeTitle": "Il est nécessaire de recharger l'application",
     "reloadToApplyLanguageChangeText": "Afin d'appliquer pleinement le changement de langue, il est nécessaire de recharger l'application. Recharger maintenant?",
     "resetShownOnceTooltips": "Afficher à nouveau les info-bulles lors du chargement de l'application",
-    "convertStopAfterRouteEndingToDestination": "Convertir l'arrêt après la fin de l'itinéraire vers la destination"
+    "convertStopAfterRouteEndingToDestination": "Convertir l'arrêt après la fin de l'itinéraire vers la destination",
+    "forNauticalRoutes": "Pour l'itinéraire nautique, par exemple",
+    "skipAllSegments": "itinéraire droit pour tous les segments",
+    
   }
 }

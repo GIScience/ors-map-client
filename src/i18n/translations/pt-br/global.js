@@ -21,6 +21,9 @@ export default {
     elevation: 'Elevação',
     profile: 'Perfil',
     options: 'Opções',
+    custom: "Personalizado",
+    customOverlayer: 'Camada adicional personalizada',
+    rawRouting: 'Roteamento bruto',    
     months: {
       january: 'Janeiro',
       february: 'Fevereiro',
