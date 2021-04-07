@@ -94,6 +94,15 @@
           :attribution="tileProvider.attribution"
           :token="tileProvider.token"
           layer-type="base"/>
+        <l-tile-layer
+          v-for="overlayerTileProvider in overlayerTileProviders"
+          :key="overlayerTileProvider.name"
+          :name="overlayerTileProvider.name"
+          :visible="overlayerTileProvider.visible"
+          :url="overlayerTileProvider.url"
+          :attribution="overlayerTileProvider.attribution"
+          :token="overlayerTileProvider.token"
+          layer-type="overlay"/>
       <v-btn fab small @click.stop="toggleAcessibleMode" v-if="accessbilityToolAvailable"
         :title="$t('maps.toggleAcessibleMode')" 
         :class="{'extra-low-resolution': $xlResolution}"

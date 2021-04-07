@@ -82,9 +82,7 @@ export default {
 
   },
   created () {
-    // Create a local clone of the model passed via props (so we can modify if when necessary)
-    const placeClone = new Place()
-    this.localModel = Object.assign(placeClone, this.model)
+    this.localModel = this.model.clone()
 
     const context = this
 
@@ -255,7 +253,7 @@ export default {
      * If a place input can have the direct option
      */
     directIsAvailable () {
-      return this.supportDirectRouting && !this.isLast && (this.index > 0 || (!this.single && !this.model.isEmpty()))
+      return this.supportDirectRouting && !this.$store.getters.mapSettings.skipAllSegments && !this.isLast && (this.index > 0 || (!this.single && !this.model.isEmpty()))
     },
     // Switch the coordinates position ([lat, long] -> [long, lat] and [long, lat] -> [lat, long])
     switchCoordsAvailable () {
@@ -322,6 +320,9 @@ export default {
     // Update local model when the model prop change outside
     model: {
       handler: function (newVal) {
+        if (this.directIsAvailable && this.$store.getters.mapSettings.skipAllSegments) {
+          newVal.direct = true
+        }
         this.localModel = newVal.clone()
         this.resolveModel()
       },

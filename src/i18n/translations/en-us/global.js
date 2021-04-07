@@ -21,6 +21,9 @@ export default {
     elevation: 'Elevation',
     profile: 'Profile',
     options: 'Options',
+    custom: 'Custom',
+    customOverlayer: 'Custom overlayer',
+    rawRouting: 'Raw routing',
     months: {
       january: 'January',
       february: 'February',

@@ -38,6 +38,7 @@ export default {
     'routeExtraInfo': 'Informazioni extra',
     'mapViewOptions': 'Opzioni visualizzazione mappa',
     'advancedSettingsWarning': 'Non cambiare le impostazioni sotto se non sai cosa stai facendo!',
+    "customOverlayerTileProviderUrl": 'URL del provider strato personalizzato',
     'customTileProviderUrl': 'URL del provider delle mattonelle (tiles) personalizzate',
     'defaultTilesProvider': 'Provider predefinito delle mattonelle (tiles)',
     'customTileProviderUrlHint': 'https://dominio.tld/path/{z}/{x}/{y}.ext?chiaveOpzionale=valore',
@@ -48,6 +49,8 @@ export default {
     'reloadToApplyLanguageChangeTitle': 'L\'applicazione deve essere ricaricata',
     'reloadToApplyLanguageChangeText': 'Al fine di eseguire il cambio della lingua è necessario ricaricare l\'applicazione. Ricarica adesso?',
     'resetShownOnceTooltips': 'Mostra di nuovo indicazioni',
-    convertStopAfterRouteEndingToDestination: 'Converti in destinazione la fermata dopo la fine del percorso'
+    'convertStopAfterRouteEndingToDestination': 'Converti in destinazione la fermata dopo la fine del percorso',
+    "forNauticalRoutes": 'Per le rotte nautiche, ad esempio',
+    "skipAllSegments": 'percorso rettilineo per tutti i segmenti'
   }
 }

@@ -116,7 +116,18 @@
                       :placeholder="$t('settings.customTileProviderUrlHint')"
                       :label="$t('settings.customTileProviderUrl')">
                     </v-text-field>
+
+                    <v-text-field clearable flat
+                      v-model="mapSettingsTransient.customOverlayerTileProviderUrl"
+                      :style="{'margin-bottom':'10px'}"
+                      :hint="$t('settings.customTileProviderUrlHint')"
+                      :placeholder="$t('settings.customTileProviderUrlHint')"
+                      :label="$t('settings.customOverlayerTileProviderUrl')">
+                    </v-text-field>
                     <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.compressDataUrlSegment" :label="$t('settings.compressDataUrlSegment')" ></v-checkbox>
+
+                    <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.skipAllSegments" :label="$t('global.rawRouting') + ' - ' + $t('settings.skipAllSegments')" ></v-checkbox>
+
                   </div>
                 </v-list>
               </v-list>

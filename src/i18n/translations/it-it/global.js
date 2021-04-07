@@ -21,6 +21,9 @@ export default {
     'elevation': 'Altitudine',
     'profile': 'Profilo',
     'options': 'Opzioni',
+    "custom": "Personalizzato",
+    "customOverlayer": "Strato personalizzato",
+    "rawRouting": "Routing grezzo",
     'months': {
       'january': 'Gennaio',
       'february': 'Febbraio',
@@ -64,7 +67,7 @@ export default {
       'lng': 'long.',
       'tones': 'toni',
       't': 't',
-      kmh: 'km/h'
+      "kmh": 'km/h'
     },
     'layers': {
       'macrocounty': 'Macro county',

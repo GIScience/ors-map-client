@@ -63,7 +63,8 @@ export default {
                 window.location.reload()
               }
             })
-          }          
+          }
+          this.eventBus.$emit('mapSettingsChanged', savingSettings)        
         })        
       }
       // Dispatch an event about the locale change
@@ -95,10 +96,6 @@ export default {
         }
       }
       return valid
-    },
-    saveMapSettings () {
-      this.$store.commit('mapSettings', this.mapSettingsTransient)
-      this.showSuccess(this.$t('settings.mapSettingsSaved'))
     },
     setIsCustomApiKey () {
       const savingSettings = utils.clone(this.mapSettingsTransient)

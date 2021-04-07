@@ -30,6 +30,9 @@ export default {
   },
   computed: {
     rootProfileActive () {
+      if (this.$store.getters.mapSettings.skipAllSegments) {
+        return false
+      }
       if (this.localActiveProfileSlug === this.profile.slug) {
         return true
       } else {

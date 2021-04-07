@@ -39,7 +39,7 @@
           <v-icon :title="$t('placeInput.removeInput')" class="input-icon" >delete</v-icon>
         </v-btn>
         <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="directIsAvailable && $mdAndUpResolution"  @click="toggleDirect()">
-          <v-icon :color="this.model.direct? 'primary': 'dark'" :title="$t('placeInput.toggleDirect')" class="input-icon" >settings_ethernet</v-icon>
+          <v-icon :color="localModel.direct? 'primary': 'dark'" :title="$t('placeInput.toggleDirect')" class="input-icon" >settings_ethernet</v-icon>
         </v-btn>
 
         <v-btn flat class="input-btn" :id="getNewGuid('directions')" :class="{small: $mdAndUpResolution}" 
