@@ -36,6 +36,15 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.0.8] - 2021-04-07 ##
+
+### Changed ###
+
+- Add raw routing (skip all segments) option in advanced settings
+- Add field for custom over layer in settings
+
+The config example src/config-examples/default-map-settings-example.js file was changed. Updated your corresponding config file
+
 ## [v1.0.7] - 2021-04-01 ##
 
 ### Changed ###
