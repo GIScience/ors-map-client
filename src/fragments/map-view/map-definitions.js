@@ -119,13 +119,16 @@ const mapDefinitions = {
     return providers
   },
   getOverlayerProviders () {
-    let providers = [{
-      name: 'OpenSeeMap',
-      id: 'openeeemap-overlayer',
-      visible: false,
-      attribution: '&copy; <a target="_blank" href="http://openseemap.org.org/">OpenSeeMap</a> contributors',
-      url: 'https://t1.openseamap.org/seamark/{z}/{x}/{y}.png'
-    }]
+    let providers = [
+      // The code below add the OpenSeeMap layer to the overlayer list
+      // {
+      //   name: 'OpenSeeMap',
+      //   id: 'openeeemap-overlayer',
+      //   visible: false,
+      //   attribution: '&copy; <a target="_blank" href="http://openseemap.org.org/">OpenSeeMap</a> contributors',
+      //   url: 'https://t1.openseamap.org/seamark/{z}/{x}/{y}.png'
+      // }
+    ]
     // Add custom over layer tile servive if defined in settings
     const customOverlayerTileProviderUrl = store.getters.mapSettings.customOverlayerTileProviderUrl
     let vueInstance = main.getInstance()
