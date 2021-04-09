@@ -55,7 +55,7 @@ import theme from '@/config/theme'
 import Place from '@/models/place'
 import 'vue2-leaflet-draw-toolbar'
 import Leaflet from 'leaflet'
-import lodash, { reject } from 'lodash'
+import lodash from 'lodash'
 
 /**
  * Fix Vue leaflet issues:
@@ -183,7 +183,8 @@ export default {
       tempPlaces: null, // a place selected by the user on the map but not yet used for computing directions,
       polylineIsEdibale: false,
       featuresJustFitted: false,
-      localAvoidPolygons: null
+      localAvoidPolygons: null,
+      mapDataViewChangeDebounceTimeoutId: null
     }
   },
   computed: {
@@ -625,14 +626,7 @@ export default {
      */
     mapViewData: {
       handler: function () {
-        // When the mapViewData prop changes, we copy its value to a
-        // local instance so that we can modify it when necessary
-
-        // Create a new instace of MapViewData and set all the props into the local instance
-        this.localMapViewData = this.mapViewData.clone()
-        this.tempPlaces = null
-        this.loadMapData()
-        this.isAltitudeModalOpen = false
+        this.refreshMapViewData()      
       },
       deep: true
     },
@@ -706,6 +700,37 @@ export default {
     }
   },
   methods: {
+    /**
+     * Refresh map view data after the prop mapViewData has changed
+     * We use a debouncer in order to apply only the last change
+     */
+    refreshMapViewData () {
+      // When the mapViewData prop changes, we copy its value to a
+      // local instance so that we can modify it when necessary
+      const context = this
+      if (this.mapDataViewChangeDebounceTimeoutId) {
+        clearTimeout(this.mapDataViewChangeDebounceTimeoutId)
+      }
+      this.mapDataViewChangeDebounceTimeoutId = setTimeout(function () {
+        // Create a new instace of MapViewData and set all the props into the local instance
+        context.localMapViewData = context.mapViewData.clone()
+        context.tempPlaces = null
+        context.loadMapData()
+        context.refreshAltitudeModal()            
+      }, 500)  
+    },
+    /**
+     * Refresh the altitude modal (force a destroy and a rebuild)
+     * with the new data
+     */
+    refreshAltitudeModal () {
+      let previousAltitudeModalState = this.isAltitudeModalOpen
+      this.isAltitudeModalOpen = false
+      const context = this
+      setTimeout(() => {
+        context.isAltitudeModalOpen = previousAltitudeModalState
+      }, 100)
+    },
     /**
      * Move the map center according the direction
      * @param {String} direction

@@ -7,6 +7,7 @@ export default {
     nonStopDirectionsToHere: 'Direct to here',
     addRouteStop: 'Add stop here',
     centerHere: 'Center here',
-    addAsIsochroneCenter: 'Add as reach center'
+    addAsIsochroneCenter: 'Add as reach center',
+    inspectDataOnOSM: 'Inspect data on OSM'
   }
 }

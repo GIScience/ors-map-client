@@ -6,8 +6,9 @@
       <v-btn v-if="canRoute" flat small block  :title="$t('mapRightClick.directionsFromHere')" @click="rightClickEvent('directionsFromPoint')" class="right-click-btn" >{{$t('mapRightClick.directionsFromHere')}}</v-btn>
       <v-btn v-if="canRoute" flat small block :title="directionsToHereText" @click="rightClickEvent('directionsToPoint')" class="right-click-btn" >{{directionsToHereText}}</v-btn>
       <v-btn v-if="canAddStop" flat small block :title="$t('mapRightClick.addRouteStop')" @click="rightClickEvent('addRouteStop')" class="right-click-btn" >{{$t('mapRightClick.addRouteStop')}}</v-btn>
-      <v-btn v-if="!canAddStop" flat small block :title="$t('mapRightClick.centerHere')" @click="rightClickEvent('centerHere')" class="right-click-btn" >{{$t('mapRightClick.centerHere')}}</v-btn>
+      <!-- <v-btn v-if="!canAddStop" flat small block :title="$t('mapRightClick.centerHere')" @click="rightClickEvent('centerHere')" class="right-click-btn" >{{$t('mapRightClick.centerHere')}}</v-btn> -->
       <v-btn v-if="canAddIsochroneCenter" block flat small :title="$t('mapRightClick.addAsIsochroneCenter')" @click="rightClickEvent('addAsIsochroneCenter')" class="right-click-btn" >{{$t('mapRightClick.addAsIsochroneCenter')}}</v-btn>
+      <v-btn v-if="canShowInspector" block flat small :title="$t('mapRightClick.inspectDataOnOSM')" @click="inspectDataOnOSM()" class="right-click-btn" >{{$t('mapRightClick.inspectDataOnOSM')}}</v-btn>
     </div>
   </box>
 </template>

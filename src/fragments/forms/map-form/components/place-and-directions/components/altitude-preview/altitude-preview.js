@@ -22,7 +22,7 @@ export default {
       if (this.$lowResolution) {
         this.$store.commit('setLeftSideBarIsOpen', false)
       }
-      this.eventBus.$emit('showAltitudeModal', this.mapViewData)
+      this.eventBus.$emit('showAltitudeModal')
     }
   }
 }

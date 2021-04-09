@@ -7,6 +7,7 @@ export default {
     "nonStopDirectionsToHere": "Direct vers ici",
     "addRouteStop": "Ajouter un arrêt ici",
     "centerHere": "Centrez ici",
-    "addAsIsochroneCenter": "Ajouter centre de portée"
+    "addAsIsochroneCenter": "Ajouter centre de portée",
+    "inspectDataOnOSM": 'Voir les données sur OSM'
   }
 }
