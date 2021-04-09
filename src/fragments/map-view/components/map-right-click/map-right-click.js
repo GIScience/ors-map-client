@@ -1,5 +1,7 @@
 import constants from '@/resources/constants'
 import MapViewData from '@/models/map-view-data'
+import appConfig from '@/config/app-config'
+import lodash from 'lodash'
 
 /**
  * Render and deals with right click events
@@ -46,9 +48,20 @@ export default {
     },
     canRoute () {
       return this.$store.getters.mode !== constants.modes.isochrones
+    },
+    canShowInspector () {
+      return true
     }
   },
   methods: {
+    inspectDataOnOSM () {
+      let zoom = lodash.get(this, '$store.getters.appRouteData.options.zoom')
+      if (!zoom) {
+        zoom = appConfig.initialZoomLevel
+      }
+      let url = `https://www.openstreetmap.org/query?lat=${this.clickLatlng.lat}&lon=${this.clickLatlng.lng}#map=${zoom}/${this.clickLatlng.lat}/${this.clickLatlng.lng}`
+      window.open(url, '_blank')
+    },
     /**
      * Deal with close event by hidding the right click pop up
      * and by emitting close event

@@ -515,12 +515,6 @@ export default {
       this.eventBus.$emit('addDestinationToRoute', data)
     },
     /**
-     * Set the altitude modal open flag as false
-     */
-    closeAltitudeModal () {
-      this.isAltitudeModalOpen = false
-    },
-    /**
      * Set the `settings` open flag as false
      * and if the current route is MapSettings
      * clear the map and redirect the app the the

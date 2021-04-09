@@ -49,7 +49,7 @@
       </v-layout>
       <br/>
       <template  v-if="showRouteDetails" >
-        <route-details  :map-view-data="mapViewData"></route-details>
+        <route-details :map-view-data="mapViewData"></route-details>
         <br/>
       </template>
       <round-trip v-if="$store.getters.mode === constants.modes.roundTrip" @changed="roundTripFilterChanged"></round-trip>

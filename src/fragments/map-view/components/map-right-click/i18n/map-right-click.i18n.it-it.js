@@ -7,6 +7,7 @@ export default {
     'nonStopDirectionsToHere': 'Navigazione diretta fino a qui',
     'addRouteStop': 'Aggiungi uno stop qui',
     'centerHere': 'Centra qui',
-    'addAsIsochroneCenter': 'Aggiungi come centro dell\'isocrona'
+    'addAsIsochroneCenter': 'Aggiungi come centro dell\'isocrona',
+    "inspectDataOnOSM": 'Visualizza i dati in OSM'
   }
 }

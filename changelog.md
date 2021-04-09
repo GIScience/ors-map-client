@@ -36,6 +36,13 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.0.9] - 2021-04-09 ##
+
+### Changed ###
+
+- Keep altitude chart/graph open when route changes
+- Add right click context menu 'Inspect data on OSM'
+
 ## [v1.0.8] - 2021-04-07 ##
 
 ### Changed ###
