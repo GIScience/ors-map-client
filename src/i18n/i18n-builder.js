@@ -22,11 +22,13 @@ const build = () => {
   i18n.messages['it-it'] = itITTranslations.build()
   i18n.messages['fr-fr'] = frFRTranslations.build()  
 
-  /* Uncomment the line below to output via console 
-  when the application is run. A merged version of 
-  the translation source file. If necessary, you can 
-  replace 'en-us' below by any of the supported language, 
-  like 'de-de' or 'fr-fr'.*/
+  /* 
+    Uncomment the line below to output, via browser 
+    console, a merged version of the translation source 
+    file when the application runs. If necessary, you can 
+    replace 'en-us' below by any of the supported 
+    language, like 'de-de' or 'fr-fr'.
+  */
   // console.log(JSON.stringify(i18n.messages['en-us']))
 
   Vue.use(VueI18n)
