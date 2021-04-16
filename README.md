@@ -224,7 +224,7 @@ If you just want to translate the application strings for a certain language, bu
 
 #### - Add a language to the app ####
 
-The app uses a feature-by-folder design, so each component might have its own translation strings. that is why there is no one single translation file. If you want to add a translation and `"implement"` it into the app, follow the steps below.
+The app uses a feature-by-folder design, so each component might have its own translation strings. That is why there is no single translation file. If you want to add a translation and `"implement"` it into the app, follow the steps below.
 
 - Create a copy of the /src/i18n/translations/`en-us` folder giving it the identification of the target language. For example: if you are adding the French from France, then the folder should be called `fr-fr`.
 
