@@ -216,7 +216,15 @@ Please check the `src/plugins` folder, the [plug-ins readme](src/plugins/readme.
 
 ### Add language ###
 
-Follow the steps below to add a language.
+#### - Generate a translation file ####
+
+If you just want to translate the application strings for a certain language, but you don't have the skills to `"code"` it into the app, just download the [en-translation-source-merged.json](/docs/en-translation-source-merged.json), translate it, and contact us.
+
+**Check the file [src/i18n/i18n-builder.js](src/i18n/i18n-builder.js) to see how to generate merged translation sources*
+
+#### - Add a language to the app ####
+
+The app uses a feature-by-folder design, so each component might have its own translation strings. That is why there is no single translation file. If you want to add a translation and `"implement"` it into the app, follow the steps below.
 
 - Create a copy of the /src/i18n/translations/`en-us` folder giving it the identification of the target language. For example: if you are adding the French from France, then the folder should be called `fr-fr`.
 
