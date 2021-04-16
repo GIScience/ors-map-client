@@ -1,0 +1,800 @@
+{
+  "global": {
+    "send": "Send",
+    "save": "Save",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "brand": "HeiGIT - Heidelberg University",
+    "close": "Close",
+    "closeAndDoNotShowAgain": "Close and do not show again",
+    "select": "Select",
+    "yes": "Yes",
+    "no": "No",
+    "and": "and",
+    "noAndDonAskAgain": "NO (don`t ask again)",
+    "ok": "OK",
+    "polygon": "polygon",
+    "developedByIntro": "Services developed by",
+    "developedBy": "Heidelberg Institute for Geoinformation Technology",
+    "duration": "Duration",
+    "distance": "Distance",
+    "elevation": "Elevation",
+    "profile": "Profile",
+    "options": "Options",
+    "custom": "Custom",
+    "customOverlayer": "Custom overlayer",
+    "rawRouting": "Raw routing",
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    },
+    "monthsShort": {
+      "january": "Jan",
+      "february": "Feb",
+      "march": "Mar",
+      "april": "Apr",
+      "may": "May",
+      "june": "Jun",
+      "july": "Jul",
+      "august": "Aug",
+      "september": "Sep",
+      "october": "Oct",
+      "november": "Nov",
+      "december": "Dec"
+    },
+    "units": {
+      "km": "km(s)",
+      "mi": "mi(s)",
+      "m": "m",
+      "seconds": "seconds",
+      "s": "s",
+      "minutes": "minutes",
+      "hours": "h",
+      "days": "d",
+      "min": "min",
+      "meters": "meters",
+      "lat": "lat",
+      "lng": "long",
+      "tones": "tones",
+      "t": "t",
+      "kmh": "km/h"
+    },
+    "layers": {
+      "macrocounty": "Macro county",
+      "country": "Country",
+      "region": "Region",
+      "county": "County",
+      "macroregion": "Macro region",
+      "neighbourhood": "Neighbourhood",
+      "locality": "Locality",
+      "borough": "Borough",
+      "localadmin": "Local admin",
+      "address": "Address",
+      "street": "Street",
+      "venue": "Venue",
+      "rawCoordinate": "Raw lng,lat coordinates",
+      "notAvailable": "Not available",
+      "postalcode": "Postal code",
+      "undefined": "Not defined"
+    }
+  },
+  "maps": {
+    "pageTitle": "ORS Maps",
+    "Places": "Places",
+    "isochrones": "Isochrones",
+    "placeNameRequired": "Place name required",
+    "altitude": "Altitude variation",
+    "settings": "Settings",
+    "toggleAcessibleMode": "Toggle accessible mode",
+    "aboutTitle": "About ORS",
+    "updateSearch": "Search this area",
+    "updateSearchAfterZoomOrCenterChange": "Update search after zoom or center change"
+  },
+  "about": {
+    "donate": "Donate!",
+    "donateText": "Please donate your geographic data to",
+    "info_I": "Openrouteservice is being developed and provided by Heidelberg Institute for Geoinformation Technology (HeiGIT) and offers Routing services by using user-generated, collaboratively collected free geographic data from OpenStreetMap. Please donate your geographic data to openstreetmap.org!",
+    "info_II": "We use the browser's local storage to preserve information so you will not have to re-enter it during your visit or in subsequent visits. We do not collect or store any personal information about you or personally identifiable information about you, except what you voluntarily provide through direct contact. Furthermore, we do not share analytic data with any service providers or partners.",
+    "sources": "We use different open source libraries for this web application. These can be found within the corresponding package files on",
+    "feelFreeToReportBugs": "Please feel free to report bugs on",
+    "orToFixThem": "or fix them by yourself and make a pull request",
+    "info_III": "Users are prohibited from any commercial, non-free resale, or redistribution without explicit written permission from CIAT. Original data by Jarvis A., H.I. Reuter, A. Nelson, E. Guevara, 2008, Hole-filled seamless SRTM data V4, International Centre for Tropical Agriculture (CIAT)",
+    "info_IV": "In case you have any further questions, concerns or feedback, please contact us via:",
+    "info_V": "Openrouteservice cares about your inquiries, problems, questions etc. As there will always be a stream of inquiries, we take strong responsibility to respond to you in short time. After you have received our automatic response email to let you know we have received your inquiry, we will usually respond shortly. Please give us time to look into your reported issue properly before getting back.",
+    "CIAT_CSI_SRTM": "CIAT-CSI SRTM",
+    "dataProvided": "Population data provided by",
+    "ghsFramework": "The Global Human Settlement (GHS) frameworks",
+    "askOpenrouteservice": "Ask Openrouteservice",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "openStreetMapOrg": "OpenStreetMap.org",
+    "infoSupport": "Please support openrouteservice.org",
+    "supportText": "Openrouteservice offers free services and relies on donations for a majority of its funding. If you would like to support the further development of features and server infrastructure donations are very welcome.",
+    "softwareAndLibraries": "Software & Libraries"
+  },
+  "box": {
+    "maximize": "Maximize",
+    "minimize": "Minimize"
+  },
+  "formFields": {
+    "fieldHelp": "Click to open the description",
+    "defaultAbbreviation": "df.: ",
+    "paramJSONContent": "JSON content",
+    "wrongInputValue": "Wrong input value for this parameter.",
+    "notValidJsonString": "No valid Json for :fieldName"
+  },
+  "download": {
+    "documentTitle": "ORS route",
+    "download": "Download",
+    "downloadFileName": "Download file name",
+    "downloadFormat": "Download format",
+    "downloadRoute": "Download route",
+    "preparingDownload": "Preparing download ...",
+    "fileReady": "File ready",
+    "errorPreparingFile": "Error preparing file",
+    "fileTooBigToBeDownloaded": "File too big to be downloaded",
+    "standard": "Standard"
+  },
+  "formActions": {
+    "addPlaceInput": "Add place input",
+    "clearRoute": "Clear route",
+    "reverseRoute": "Reverse route",
+    "roundTrip": "Round trip",
+    "toggleRoundTrip": "Toggle round trip"
+  },
+  "isochronesDetails": {
+    "polygons": "Polygons",
+    "center": "Center"
+  },
+  "isochrones": {
+    "isochrones": "Isochrones",
+    "isochronesReady": "Isochrones ready",
+    "calculatingIsochrones": "Calculating isochrones ...",
+    "itWasNotPossibleToCalculateIsochronesWithTheDefinedOptions": "It was not possible to calculate isochrones with the defined options. Try to define smaller isochrone(s).",
+    "couldResolveTheSelectedPlaceAsASuitableCenter": "It was not possible to resolve the selected point as a suitable center.",
+    "apiError": {
+      "2003": "The area of a polygon to avoid must not exceed 20.0000 square kilometers.",
+      "3001": "One or more parameters have an incorrect value or format.",
+      "3004": "The combination of profile, interval and time or distance selected exceeds the maximum supported. Please adjust the values.",
+      "3099": "Unable to build an isochrone map for the selected point(s) and profile."
+    },
+    "genericErrorMsg": "It was not possible to calculate the isochrones."
+  },
+  "altitudePreview": {
+    "expandAltitudeChart": "Expand chart",
+    "altitude": "Altitude"
+  },
+  "placeDetails": {
+    "layer": "Layer",
+    "lat": "Lat.",
+    "lon": "Lon.",
+    "notAvailable": "Not available",
+    "placeDetails": "Place details",
+    "placeName": "Name",
+    "latlngCopied": "Latitude and longitude copied",
+    "lnglatCopied": "Longitude and latitude copied",
+    "copyLatlng": "Copy in latitude,longitude format",
+    "copyLnglat": "Copy in longitude,latitude format",
+    "satelliteView": "satellite view"
+  },
+  "roundtrip": {
+    "roundtripOptions": "Round trip options"
+  },
+  "routeExtras": {
+    "extras": "Route extras",
+    "extraInfo": "Extra info",
+    "value": "Value",
+    "clickToHighlightOnMap": "Click to highlight it on map",
+    "showAllOnMap": "Show all on map",
+    "steepness": "Steepness",
+    "surface": "Surface",
+    "roadaccessrestrictions": "Road access restrictions",
+    "waytypes": "Way types",
+    "suitability": "Suitability",
+    "waycategory": "Way category",
+    "tollways": "Tollways",
+    "traildifficulty": "Trail difficulty",
+    "osmid": "OSM ID",
+    "countryinfo": "Country info",
+    "green": "Green",
+    "noise": "Noise"
+  },
+  "steps": {
+    "instruction": "Instruction",
+    "on": "On",
+    "step": "step",
+    "gotoStep": "Go to step"
+  },
+  "routeDetails": {
+    "routeSummary": "Route summary",
+    "warnings": "Warnings",
+    "routes": "Routes",
+    "route": "Route",
+    "segments": "Segments",
+    "segment": "Segment",
+    "instructions": "Instructions",
+    "instruction": "Instruction",
+    "name": "Name",
+    "selectRoute": "Select this route",
+    "selectedRoute": "Selected route",
+    "gotoSegment": "Go to segment",
+    "warningCodes": {
+      "1": "There may be restrictions on some roads",
+      "2": "There are tollways along the route",
+      "3": "There are skipped segments along the route. Durations and accessibility may not be correct",
+      "4": "At least one extra info requested but it is not available"
+    }
+  },
+  "placesAndDirections": {
+    "isochrones": "Isochrones",
+    "place": "place",
+    "notRouteFound": "It was not possible to find a route connecting the places with the selected profile",
+    "notRouteFoundWithFilters": "It was not possible to find a route connecting the places with the selected profile and filters",
+    "noPlaceFound": "No place found with the inputted content",
+    "routeReady": "Route ready",
+    "useLocation": "GPS",
+    "addPlaceInput": "Add place",
+    "clearRoute": "Clear route",
+    "reverseRoute": "Reverse",
+    "orderByClosestPlaces": "Order by places closer to your location",
+    "calculatingRoute": "Calculating route...",
+    "yourLocation": "Your location",
+    "expandAltitudeChart": "Expand chart",
+    "errorRenderingContentUploaded": "Error while rendering the content uploaded. Check the file format and content",
+    "roundTrip": "Round trip",
+    "notPossibleToCalculateRoute": "A route could not be calculated using one of the selected places",
+    "for": "for",
+    "apiError": {
+      "2000": "Unable to parse JSON request",
+      "2001": "Required parameter is missing",
+      "2002": "Invalid parameter format",
+      "2003": "Invalid parameter. Please remember that some avoidables have limits, like the route lenght and the area of an avoid polygon that must not exceed 200000 square kilometers",
+      "2004": "By using certain filters and/or avoidables the distance of a route segment must not be greater than 3000 km. When using alternative routes the distance must be at most 100 km.",
+      "2006": "Unable to parse the request to the export handler",
+      "2007": "Unsupported export format",
+      "2008": "Empty element",
+      "2009": "Unable to find a suitable route for the places and criteria specified. Maybe the profile specified is not supported in this area/region with the filter(s) applied.",
+      "2010": "It was not possible to find a suitable point that is part of the route. Maybe one of the points selected is not routable or the selected profile is not supported in this region",
+      "2011": "When using alternative routes option it is not possible to define route stops",
+      "2012": "An invalid parameter was specified. Make sure the URL is correct",
+      "2099": "Unable to compute a route connecting connecting the places selected"
+    },
+    "genericErrorMsg": "It was not possible to calculate the route",
+    "reorder": "Reorder"
+  },
+  "share": {
+    "fullUrl": "Full",
+    "shortUrl": "Short",
+    "urlCopied": "URL copied to clipboard.",
+    "clickToCopy": "Click to copy the URL",
+    "share": "Share (click to copy)",
+    "shareLink": "Share link",
+    "short": "Short URL",
+    "copyUrlInfo": "You can also copy the link from your browser`s address bar.",
+    "urlShortened": "Shortened URL",
+    "shorteningNotPossible": "It was not possible to generate a short URL. Please use the full URL",
+    "embedCodeCopied": "Embedding code copied",
+    "embed": "Embedding (click to copy)",
+    "emdedInstructions": "Use this code to embed ORS map in your website"
+  },
+  "mapForm": {
+    "placesAndDirections": "Find & go",
+    "isochrones": "Reach",
+    "uploadedContentRendered": "Uploaded content rendered",
+    "errorRenderingContentUploaded": "Error while rendering the content uploaded. Check the file format and content"
+  },
+  "placeInput": {
+    "findAPlace": "Find a place",
+    "place": "Place",
+    "addRouteStop": "Add a route stop",
+    "routePlace": "Route stop",
+    "routeDestination": "Destination",
+    "placeNameRequired": "Place name required",
+    "yourLocation": "Your location",
+    "couldNotDetermineYourLocation": "Your location could not be determined. Make sure granted the required permissions",
+    "useYourLocation": "Use your current location",
+    "removeInput": "Remove place/input",
+    "directions": "Directions",
+    "fromYourBrowser": "From your device",
+    "addStartingPlace": "Add a starting place",
+    "startingPlace": "Starting place",
+    "openInputOptions": "Open input options",
+    "addInput": "Add place input",
+    "switchCoords": "Switch coordinates",
+    "rawCoordinate": "Lat,lng raw coordinate",
+    "fillOrRemoveInput": "Search a place or use the map button on the right",
+    "noPlaceFound": "No results returned",
+    "unknownSearchPlaceError": "Unknown place search error",
+    "approximateDistance": "Approximate distance in a straight line from current map center",
+    "couldNotDetermineYourPreciseLocationUsingPreviousLocation": "It was not possible to determine your precise location. Your previous location will be used instead",
+    "pleaseTypeSomething": "Please type something to search",
+    "toggleDirect": "Toggle direct from here until next place",
+    "clickOnTheMapToSelectAPlace": "Pick a place by clicking on a map location",
+    "clickOnTheMapBtnToPickAPlace": "Click on this button to pick a place on the map for this input",
+    "goToDirectionsMode": "Click the directions button to switch to routing mode",
+    "clickToSearchAndShowResultsOnTheMap": "Click to search and show results on the map"
+  },
+  "profileSelector": {
+    "activeProfile": "Active"
+  },
+  "routeImporter": {
+    "loadRouteFile": "Import file",
+    "failedToLoadFile": "Failed to load file selected. Make sure the file is not corrupted and in one of the accepted formats",
+    "acceptedImportTypes": "Accepted import types",
+    "dictDefaultMessage": "Drop a route file to import or click here",
+    "dictFallbackMessage": "Browser not supported",
+    "dictFileTooBig": "File too big",
+    "dictInvalidFileType": "Invalid file type",
+    "dictCancelUpload": "Cancel upload",
+    "dictUploadCanceled": "Upload Canceled",
+    "dictRemoveFile": "Remove file"
+  },
+  "settings": {
+    "endpointsSectionTitle": "Service endpoints (URI or full URL)",
+    "language": "Language",
+    "appLocale": "App locale",
+    "unit": "Unit",
+    "areaUnit": "Area unit",
+    "saveToLocalStorage": "Save in my browser",
+    "routeInstructions": "Routing instructions",
+    "randomizedIsochroneColors": "Randomized isochrone colors",
+    "distanceMarkers": "Distance markers",
+    "elevationProfile": "Elevation profile",
+    "mapSettings": "Map view and extra information",
+    "defaultMapSettingsRestored": "Default map settings restored and saved",
+    "endpointsTitle": {
+      "directions": "Directions",
+      "isochrones": "Isochrones",
+      "geocodeSearch": "Geocode search",
+      "autocomplete": "Geocode autocomplete",
+      "pois": "POIs",
+      "reverseGeocode": "Geocode reverse"
+    },
+    "apiKey": "API key",
+    "customApiKey": "Custom API key",
+    "apiBaseUrl": "API base URL",
+    "invalidSettingsValue": "Invalid settings value(s). Please check the fields or restore default values",
+    "restoreDefaults": "Restore defaults",
+    "advanced": "Advanced",
+    "mapSettingsSaved": "Map settings saved",
+    "steepness": "Steepness",
+    "surfaces": "Surfaces",
+    "waytypes": "Way types",
+    "tollways": "Tollways",
+    "waycategory": "Way category",
+    "traildifficulty": "Trail difficulty",
+    "roadaccessrestrictions": "Road access restrictions",
+    "alwaysFitBounds": "Always fit bounds when route changes",
+    "routeExtraInfo": "Route extra info",
+    "mapViewOptions": "Map view options",
+    "advancedSettingsWarning": "Do not change the settings below if you do not know what you are doing!",
+    "customOverlayerTileProviderUrl": "Custom overlayer provider URL",
+    "customTileProviderUrl": "Custom tiles provider URL",
+    "defaultTilesProvider": "Default tiles provider",
+    "customTileProviderUrlHint": "https://domain.tld/path/{z}/{x}/{y}.ext?optionalKey=value",
+    "prioritizeSearchingForNearbyPlaces": "Prioritize searching for nearby places",
+    "defaultProfile": "Default profile",
+    "compressDataUrlSegment": "Compress URL segment after /data/",
+    "autoFitHighlightedBounds": "Auto fit highlighted bounds",
+    "reloadToApplyLanguageChangeTitle": "It is necessary to reload the app",
+    "reloadToApplyLanguageChangeText": "In order to fully apply the language change it is necessary to reload the app. Reload now?",
+    "resetShownOnceTooltips": "Show tooltips on app load again",
+    "convertStopAfterRouteEndingToDestination": "Convert stop after route ending to destination",
+    "forNauticalRoutes": "For nautical route, for example",
+    "skipAllSegments": "straight route for all segments"
+  },
+  "simplePlaceSearch": {
+    "noPlaceFound": "No place found with the imputed content",
+    "openSidebarToSeeRouteDetails": "Open the sidebar to see route details",
+    "unknownSearchPlaceError": "Unknown search place error"
+  },
+  "header": {
+    "hideMenuBar": "Hide menu bar",
+    "showMenuBar": "Show menu bar"
+  },
+  "mapLeftClick": {
+    "placeInfo": "Place info",
+    "placeInsidePolygon": "Place inside polygon",
+    "polygonArea": "Polygon area",
+    "copyLnglat": "Copy lng, lat",
+    "copyLatlng": "Copy lat, lng",
+    "directionsToClickedPoint": "Click this directions button to start a route to the clicked point on the map",
+    "lnglatCopied": "Longitude and latitude copied",
+    "latlngCopied": "Latitude and longitude copied"
+  },
+  "mapRightClick": {
+    "options": "Options",
+    "addDestinationToRoute": "Append as destination",
+    "directionsFromHere": "Directions from here",
+    "directionsToHere": "Directions to here",
+    "nonStopDirectionsToHere": "Direct to here",
+    "addRouteStop": "Add stop here",
+    "centerHere": "Center here",
+    "addAsIsochroneCenter": "Add as reach center",
+    "inspectDataOnOSM": "Inspect data on OSM"
+  },
+  "myLocation": {
+    "stopShowingCurrentLocation": "Click to stop showing your current location",
+    "showCurrentLocation": "Click to show your current location",
+    "yourCurrentLocation": "Your current location",
+    "continuously": "Continuously",
+    "onlyOnce": "Only once",
+    "continuouslyLocation": "Refresh your position every 2 seconds",
+    "onlyOnceLocation": "Acquire your position only once",
+    "myPositionToolTip": "Activate location to show your position and find nearby places more easily"
+  },
+  "orsLPolyline": {
+    "type": "Type",
+    "surface": "Surface",
+    "unknownSurfaceType": "Unknown"
+  },
+  "mapView": {
+    "routeTo": "Route to this place",
+    "polygonDetails": "Polygon details",
+    "polygon": "Polygon",
+    "whatIsHere": "What is here ?",
+    "directionsFromHere": "Directions from here",
+    "fitAllFeatures": "Show all features",
+    "addRouteStop": "Add a route stop here",
+    "addDestinationToRoute": "Add destination to route",
+    "acquirePositionErrors": {
+      "generic": "It was not possible to acquire your location because it was not authorized or the browser/device does not support it.",
+      "unavailable": "According to your browser/device your location is currently not available. Make sure the positioning option/service is properly configured.",
+      "permissionDenied": "Your position could not be acquired because the browser/device denied access to it. You can retry it by changing the browser/device settings and then click again on the \"my position button\"",
+      "timeout": "Your browser/device returned \"timeout\" while trying to acquire a position. You can retry it by clicking on the \"my position button\""
+    },
+    "yourCurrentLocation": "Your current location",
+    "options": "Options",
+    "polylineMeasure": {
+      "bearingTextIn": "In",
+      "bearingTextOut": "Out",
+      "tooltipTextDragAndDelete": "Click and drag to <b>move point</b><br>Press SHIFT-key and click to <b>delete point</b>",
+      "tooltipTextResume": "<br>Press CTRL-key and click to <b>resume line</b>",
+      "tooltipTextDelete": "Press SHIFT-key and click to <b>delete point</b>",
+      "tooltipTextAdd": "Press CTRL-key and click to <b>add point</b>",
+      "clearControlTitle": "Clear measurements",
+      "measureControlTitleOn": "Turn on distance measurement",
+      "measureControlTitleOff": "Turn off distance measurement",
+      "unitControlTitle": {
+        "text": "Change units",
+        "metres": "meters",
+        "landmiles": "land miles",
+        "nauticalmiles": "nautical miles"
+      },
+      "clearControlLabel": "&times",
+      "measureControlLabel": "&#8614;",
+      "measureControlClasses": [],
+      "unitControlLabel": {
+        "metres": "m",
+        "kilometres": "km",
+        "feet": "ft",
+        "landmiles": "M",
+        "nauticalmiles": "NM"
+      }
+    },
+    "defineAvoidPolygon": "Define avoid polygons to route calculation",
+    "defineAvoidRectangle": "Define avoid rectangles to route calculation",
+    "youCantIntersectPolygons": "You can`t intersect polygons",
+    "polygonArea": "Polygon area",
+    "highlighting": "Highlighting",
+    "accuracy": "Accuracy",
+    "youCanCenterAtYourLocationLater": "You can center the map at your current location at any time by clicking on \"my location\" button",
+    "yourLocation": "Use your location",
+    "setMyLocationasMapCenter": "Do you want to center the map at your current location? This will improve place search precision. You will have to authorize it if prompted.",
+    "removePlace": "Remove place",
+    "viewOnORS": "View on ORS",
+    "moveMapPositionToLeft": "Move map center to the left",
+    "moveMapPositionToRight": "Move map center to the right",
+    "moveMapPositionToUp": "Move map center up",
+    "moveMapPositionToDown": "Move map center down",
+    "toggleDirect": "Toggle direct from here until next place",
+    "heightGraph": {
+      "distance": "Distance",
+      "elevation": "Elevation",
+      "segment_length": "Segment length",
+      "type": "Type",
+      "legend": "Legend"
+    },
+    "editShape": "Edit shape",
+    "remove": "Remove",
+    "avoidPolygonSaved": "Avoid polygon saved",
+    "avoidPolygonRemoved": "Avoid polygon removed",
+    "avoidPolygonNotRemoved": "It was not possible to remove the avoid polygon",
+    "avoidPolygonNotSaved": "It was not possible to save the avoid polygon",
+    "polygonEditModeEnabled": "When you finish editing, click anywhere to save the changes",
+    "customTileProvider": "Custom tile provider defined by the user",
+    "gestureHandling": {
+      "touch": "Use two fingers to move the map",
+      "scroll": "Use ctrl + scroll to zoom the map",
+      "scrollMac": "Use ⌘ + scroll to zoom the map"
+    }
+  },
+  "placesCarousel": {
+    "layer": "Layer",
+    "lat": "Lat.",
+    "lon": "Lon.",
+    "notAvailable": "Not available",
+    "placeDetails": "Place details",
+    "next": "Next block",
+    "prev": "Previous block",
+    "directionsTo": "Directions to",
+    "distance": "Distance",
+    "distanceFromLocationMarkedOnTheMap": "Approximate distance from location marked on the map",
+    "selectPlace": "Select"
+  },
+  "floatingTopMenu": {
+    "openSettings": "Settings",
+    "showAbout": "Show general information",
+    "about": "About ORS",
+    "openrouteserviceAPI": "Openrouteservice API",
+    "openrouteserviceForDisasters": "Openrouteservice for disasters",
+    "askOpenrouteservice": "Ask openrouteservice",
+    "settingsTooltip": "Click here if you want to adjust app settings and see other options"
+  },
+  "topMenu": {
+    "openSettings": "Open settings",
+    "showAbout": "Show general information",
+    "about": "About ORS",
+    "pinSidebar": "Pin sidebar",
+    "settingsTooltip": "Click here if you want to adjust app settings"
+  },
+  "sidebar": {
+    "switchSide": "Switch side",
+    "showSidebar": "Show sidebar",
+    "hideSidebar": "Hide sidebar"
+  },
+  "options": {
+    "units": {
+      "kilometers": "kilometers",
+      "meters": "Meters",
+      "miles": "Miles"
+    },
+    "areUnits": {
+      "sqKms": "km²",
+      "hectare": "Hectare",
+      "sqMeters": "m²"
+    }
+  },
+  "orsDictionary": {
+    "unknown": "Unknown",
+    "paved": "Paved",
+    "unpaved": "Unpaved",
+    "asphalt": "Asphalt",
+    "concrete": "Concrete",
+    "cobblestone": "Cobblestone",
+    "metal": "Metal",
+    "wood": "Wood",
+    "compactedGravel": "Compacted Gravel",
+    "fineGravel": "Fine Gravel",
+    "gravel": "Gravel",
+    "dirt": "Dirt",
+    "ground": "Ground",
+    "ice": "Ice",
+    "pavingStones": "Paving Stones",
+    "sand": "Sand",
+    "woodchips": "Woodchips",
+    "grass": "Grass",
+    "grassPaver": "Grass Paver",
+    "none": "None",
+    "no": "No",
+    "customers": "Customers",
+    "destination": "Destination",
+    "delivery": "Delivery",
+    "private": "Private",
+    "permissive": "Permissive",
+    "stateRoad": "State Road",
+    "road": "Road",
+    "street": "Street",
+    "path": "Path",
+    "track": "Track",
+    "cycleway": "Cycleway",
+    "footway": "Footway",
+    "steps": "Steps",
+    "ferry": "Ferry",
+    "construction": "Construction",
+    "concrete:lanes": "concrete lanes",
+    "paving_stones": "paving stones",
+    "sett": "Sett",
+    "unhewn_cobblestone": "Unhewn cobblestone",
+    "compacted": "Compacted",
+    "fine_gravel": "Fine gravel",
+    "pebblestone": "Pebblestone",
+    "impassable": "Impassable",
+    "very_horrible": "Very horrible",
+    "horrible": "Horrible",
+    "very_bad": "Very bad",
+    "bad": "Bad",
+    "intermediate": "Intermediate",
+    "good": "Good",
+    "excellent": "Excellent",
+    "grade1": "Grade 1",
+    "grade2": "Grade 2",
+    "grade3": "Grade 3",
+    "grade4": "Grade 4",
+    "grade5": "Grade 5",
+    "no_tollway": "No tollway",
+    "is_tollway": "Is tollway",
+    "no_category": "No category",
+    "highway": "Highway",
+    "unpaved_road": "Unpaved road",
+    "tunnel": "Tunnel",
+    "paved_road": "Paved road",
+    "ford": "Ford",
+    "no_data": "No data"
+  },
+  "orsMapFilters": {
+    "profiles": {
+      "cycling-regular": "Bike",
+      "cycling-road": "Road bike",
+      "cycling-electric": "E-bike",
+      "cycling-mountain": "Mountainbike",
+      "cycling-safe": "Cycling safe",
+      "foot-walking": "Foot walking",
+      "foot-hiking": "Foot hiking",
+      "driving-car": "Car",
+      "driving-hgv": "Heavy vehicle",
+      "wheelchair": "Wheelchair",
+      "hgv": "Heavy vehicle",
+      "bus": "Bus",
+      "agricultural": "Agricultural vehicle",
+      "delivery": "Delivery truck",
+      "forestry": "Forestry truck",
+      "goods": "Goods truck"
+    },
+    "filters": {
+      "preference": {
+        "label": "Route preference",
+        "description": "The preferred factor to be considered when calculating routes",
+        "enum": {
+          "fastest": "Fastest",
+          "shortest": "Shortest",
+          "recommended": "Recommended"
+        }
+      },
+      "range_type": {
+        "label": "Isochrone method",
+        "description": "Method used to calculate the isochrone",
+        "enum": {
+          "time": "Time",
+          "distance": "Distance"
+        }
+      },
+      "range": {
+        "label": "Range",
+        "description": "The max range of the isochrones to be calculated"
+      },
+      "interval": {
+        "label": "Interval",
+        "description": "The interval of the isochrones to be calculated"
+      },
+      "options": {
+        "label": "Route options"
+      },
+      "profile_params": {
+        "label": "Profile parameters"
+      },
+      "restrictions": {
+        "label": "Restrictions"
+      },
+      "axleload": {
+        "label": "Axle load",
+        "description": "The maximum axle load in tons"
+      },
+      "height": {
+        "label": "Height",
+        "description": "The maximum height in meters"
+      },
+      "length": {
+        "label": "Length",
+        "description": "The maximum length in meters"
+      },
+      "weight": {
+        "label": "Weight",
+        "description": "The maximum weight in tons"
+      },
+      "width": {
+        "label": "Width",
+        "description": "The maximum width in meters"
+      },
+      "hazmat": {
+        "label": "Hazardous goods",
+        "description": "Transporting hazardous goods"
+      },
+      "maximum_incline": {
+        "label": "Max inclination",
+        "description": "The maximum inclination in percentage"
+      },
+      "maximum_sloped_kerb": {
+        "label": "Max kerb height",
+        "description": "Specifies the maximum height of the sloped curb in meters"
+      },
+      "minimum_width": {
+        "label": "Footway minimum width",
+        "description": "Specifies the minimum width of the footway in metres"
+      },
+      "smoothness_type": {
+        "label": "Route smoothness",
+        "description": "Specifies the minimum smoothness of the route. Further infos: https://wiki.openstreetmap.org/wiki/Key:smoothness"
+      },
+      "surface_type": {
+        "label": "Min. surface type",
+        "description": "Specifies the minimum surface type. Type order: https://wiki.openstreetmap.org/wiki/Key:surface"
+      },
+      "track_type": {
+        "label": "Minimum route grade",
+        "description": "Specifies the minimum grade of the route. Grade values: https://wiki.openstreetmap.org/wiki/Key:tracktype"
+      },
+      "round_trip": {
+        "label": "Round trip"
+      },
+      "round_trip_length": {
+        "label": "Length of the round trip",
+        "description": "The target length of the route (note that this is a preferred value, but results may be different)."
+      },
+      "points": {
+        "label": "Points",
+        "description": "The number of points to use on the route. Larger values create more circular routes."
+      },
+      "seed": {
+        "label": "Random seed",
+        "description": "A random seed to use for adding randomisation to the generated route (min:0, max: 90)"
+      },
+      "avoid_polygons": {
+        "label": "Avoid polygons",
+        "description": "Avoid polygons"
+      },
+      "avoid_features": {
+        "label": "Avoid features",
+        "description": "Avoid features",
+        "enum": {
+          "highways": "Highways",
+          "tollways": "Tollways",
+          "ferries": "Ferries",
+          "hills": "Hills",
+          "tunnels": "Tunnels",
+          "fords": "Fords",
+          "steps": "Steps",
+          "pavedroads": "Paved roads",
+          "unpavedroads": "Unpaved roads"
+        }
+      },
+      "avoid_borders": {
+        "label": "Avoid borders",
+        "description": "Avoid borders",
+        "enum": {
+          "all": "All",
+          "controlled": "Controlled"
+        }
+      },
+      "avoid_countries": {
+        "label": "Avoid countries",
+        "description": "Avoid countries"
+      },
+      "alternative_routes": {
+        "label": "Alternative routes"
+      },
+      "target_count": {
+        "label": "Number of routes",
+        "description": "Target number of alternative routes to compute. Service returns up to this number of routes that fulfill the share-factor and weight-factor constraints."
+      },
+      "share_factor": {
+        "label": "Share factor",
+        "description": "Maximum fraction of the route that alternatives may share with the optimal route. The default value of 0.6 means alternatives can share up to 60% of path segments with the optimal route."
+      },
+      "weight_factor": {
+        "label": "Weight factor",
+        "description": "Maximum factor by which route weight may diverge from the optimal route. The default value of 1.4 means alternatives can be up to 1.4 times longer (costly) than the optimal route."
+      }
+    }
+  }
+}
