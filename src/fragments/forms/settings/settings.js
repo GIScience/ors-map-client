@@ -64,7 +64,8 @@ export default {
               }
             })
           }
-          this.eventBus.$emit('mapSettingsChanged', savingSettings)        
+          this.eventBus.$emit('mapSettingsChanged', savingSettings)
+          this.$emit('saved')    
         })        
       }
       // Dispatch an event about the locale change

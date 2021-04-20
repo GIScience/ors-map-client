@@ -109,6 +109,7 @@ export default {
           link.click()
           link.remove()
           this.showSuccess(this.$t('download.fileReady'), { timeout: 2000 })
+          this.closeDownload()
         }
       }).catch(error => {
         console.error(error)

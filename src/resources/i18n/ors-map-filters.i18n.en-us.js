@@ -162,7 +162,11 @@ export default {
       weight_factor: {
         label: 'Weight factor',
         description: 'Maximum factor by which route weight may diverge from the optimal route. The default value of 1.4 means alternatives can be up to 1.4 times longer (costly) than the optimal route.'
-      }
+      },
+      maximum_speed: {
+        label: 'Maximum speed',
+        description: 'The maximum speed that must be applied',
+      },
     }
   }
 }

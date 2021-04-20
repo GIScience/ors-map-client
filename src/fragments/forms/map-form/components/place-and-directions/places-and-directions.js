@@ -454,15 +454,14 @@ export default {
       } else {
         let closestPlaceIndex = data.injectIndex
         if (closestPlaceIndex === null || closestPlaceIndex === undefined) {
-          closestPlaceIndex = GeoUtils.getClosestPlaceIndex(data.latlng, this.places)
+          closestPlaceIndex = GeoUtils.getClosestPlaceIndex(data.latlng, this.places, optimzedOrder)
         }
-        // If the selected point is after the last route point
-        if (closestPlaceIndex === this.places.length - 1) {
-          // If `convertStopAfterRouteEndingToDestination`is not true, then the slot must
-          // be decreased so that the stops happen before the destination
-          if (!this.$store.getters.mapSettings.convertStopAfterRouteEndingToDestination) {
-            closestPlaceIndex--
-          }
+        let convertStopAfterRouteEndingToDestination = this.$store.getters.mapSettings.convertStopAfterRouteEndingToDestination
+        // If the selected point is after the last route point and
+        // If `convertStopAfterRouteEndingToDestination`is not true, then the slot must
+        // be decreased so that the stops happen before the destination
+        if (closestPlaceIndex === this.places.length - 1 && !convertStopAfterRouteEndingToDestination) {
+          closestPlaceIndex--
         } 
         // In the other cases, we have to 'inject' a route point between the exiting points
         // To do that we add a place input, setits coordinates and then
@@ -852,6 +851,9 @@ export default {
       const filledPlaces = this.getFilledPlaces()
       if (this.places.length === filledPlaces.length) {
         this.updateAppRoute()
+      } else if (filledPlaces.length > 0) {
+        this.mapViewData.places = filledPlaces
+        this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
       }
       this.searching = false
     },

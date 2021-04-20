@@ -54,7 +54,7 @@
     <v-dialog v-model="isSettingsOpen" max-width="600" class="settings-modal" :persistent="true">
       <box background="white" v-if="isSettingsOpen" resizable closable @closed="closeSettingsModal()">
         <h3 slot="header">{{$t('maps.settings')}}</h3>
-        <settings></settings>
+        <settings @saved="closeSettingsModal"></settings>
       </box>
     </v-dialog>
 

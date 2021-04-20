@@ -934,9 +934,15 @@ export default {
      * @emits addRouteStop
      */
     addStopViaPolylineDrag (data) {
-      data.latlng = data.event.target.getLatLng()
+      let optimzedOrder = this.$store.getters.mapSettings.useStopOptimization
       const activeRouteDataPolyline = this.activeRouteData.geometry.coordinates
-      const closestPlaceIndex = GeoUtils.getStopInjectIndexFromPolyline(data.latlng, this.localMapViewData.places, activeRouteDataPolyline, data.draggedFromIndex)
+      data.latlng = data.event.target.getLatLng()
+      let closestPlaceIndex
+      if (optimzedOrder) {
+        closestPlaceIndex = GeoUtils.getOptimzedStopInjectIndex(data.latlng, this.localMapViewData.places, activeRouteDataPolyline, data.draggedFromIndex)
+      } else {
+        closestPlaceIndex = GeoUtils.getStopIndexFromSourcePoint(this.localMapViewData.places, activeRouteDataPolyline, data.draggedFromIndex)
+      }
       data.injectIndex = closestPlaceIndex
       this.$emit('addRouteStop', data)
     },
