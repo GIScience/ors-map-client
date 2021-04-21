@@ -455,7 +455,7 @@ export default {
       } else {
         let closestPlaceIndex = data.injectIndex
         if (closestPlaceIndex === null || closestPlaceIndex === undefined) {
-          closestPlaceIndex = GeoUtils.getClosestPlaceIndex(data.latlng, this.places, optimzedOrder)
+          closestPlaceIndex = GeoUtils.getClosestPlaceIndex(data.latlng, this.places)
         }
         let convertStopAfterRouteEndingToDestination = this.$store.getters.mapSettings.convertStopAfterRouteEndingToDestination
         // If the selected point is after the last route point and
