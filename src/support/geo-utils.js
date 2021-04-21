@@ -367,7 +367,7 @@ const geoUtils = {
    * @param {*} latlng
    * @param {Array} places
    */
-  getClosestPlaceIndex: (latlng, places, optimzedOrder = false) => {
+  getClosestPlaceIndex: (latlng, places) => {
     let shorterDistance = null
     let closestPlaceIndex = 0
 
@@ -411,10 +411,9 @@ const geoUtils = {
    * Getthe index of a place on the polyline arrray
    * @param {Place} place 
    * @param {Array} polylineArr 
-   * @param {Number} tolerance 
    * @returns  {Integer|null} indexOnPolyline
    */
-  getPlaceIdexOnPolylineArray (place, polylineArr, tolerance = null) {
+  getPlaceIndexOnPolylineArray (place, polylineArr) {
     let indexOnPolyline = null
     var minDistance = null
     // Find an more appropriate inject index, it this is the case
@@ -435,39 +434,12 @@ const geoUtils = {
         if (minDistance === null || currentDistance < minDistance) {
           minDistance = currentDistance
           // Get the closest polyline point index
-          if (!tolerance || currentDistance <= tolerance) {
-            indexOnPolyline = pIndex
-          }
+          indexOnPolyline = pIndex
         }
       }
     }
     return indexOnPolyline
   },
-  /**
-   * Get the appropriate place index to inject a stop considering the polyline path
-   * @param {Object} targetLatLng 
-   * @param {Array} places 
-   * @param {Array} polylineArr 
-   * @param {Integer} draggedFromIndex 
-   * @returns {Integer} injectPlaceIndex
-   */
-  getOptimzedStopInjectIndex(targetLatLng, places, polylineArr, draggedFromIndex) {
-    // The default inject is the one considering promixity
-    let injectPlaceIndex = geoUtils.getClosestPlaceIndex(targetLatLng, places)
-    let closestPlace = places[injectPlaceIndex]
-
-    var closestPlaceIndexOnPolyline = geoUtils.getPlaceIdexOnPolylineArray(closestPlace, polylineArr)
-        
-    // If the index of the point where the drag started from
-    // is lower than the corresponding index of the closest place 
-    // over the polyline, then we must put the stop before the
-    // closest place index
-    if (draggedFromIndex < closestPlaceIndexOnPolyline) {
-      injectPlaceIndex--
-    }
-    return injectPlaceIndex
-  },
-
   /**
    * Get the inject index considering the source polyline point
    * @param {Array} places 
@@ -480,7 +452,7 @@ const geoUtils = {
     let placePolylineIndexMap = []
 
     for (let placeKey in places) {
-      var placeIndexOnPolyline = geoUtils.getPlaceIdexOnPolylineArray(places[placeKey], polylineArr)
+      var placeIndexOnPolyline = geoUtils.getPlaceIndexOnPolylineArray(places[placeKey], polylineArr)
       if (placeIndexOnPolyline !== null) {
         let map = {
           polylineIndex: placeIndexOnPolyline,

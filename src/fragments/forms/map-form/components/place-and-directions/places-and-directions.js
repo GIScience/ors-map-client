@@ -10,6 +10,7 @@ import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import appConfig from '@/config/app-config'
 import GeoUtils from '@/support/geo-utils'
+import utils from '@/support/utils'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
 import lodash from 'lodash'
@@ -621,7 +622,7 @@ export default {
                 mapViewData.places = context.places // places from context have more fine data, so use it
                 context.mapViewData = mapViewData
                 context.eventBus.$emit('newInfoAvailable', true)
-                context.showSuccess(context.$t('placesAndDirections.routeReady'))
+                context.showSuccess(context.$t('placesAndDirections.routeReady'), {timeout: 3})
                 context.eventBus.$emit('mapViewDataChanged', mapViewData)
                 context.setSidebarIsOpen()
                 resolve(mapViewData)
