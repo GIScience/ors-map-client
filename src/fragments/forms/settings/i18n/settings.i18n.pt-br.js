@@ -52,7 +52,6 @@ export default {
     reloadToApplyLanguageChangeText: 'Para que a mudança de idioma seja totalmente aplicada é necessário recarregar a aplicação. Recarregar agora?',
     resetShownOnceTooltips: 'Exibir dicas quando a aplicação é carregada',
     convertStopAfterRouteEndingToDestination: 'Parada adicionada após o fim da rota vira destino final',
-    forNauticalRoutes: 'Para rotas náuticas, por examplo',
     skipAllSegments: 'Rota reta para todos os segmentos',
     useStopOptimization: 'Otimizar a rota quando uma parada é criada via arrastar/saltar'
   }
