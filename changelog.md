@@ -36,6 +36,17 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+ ## [v1.0.10] - 2021-04-20 ##
+
+### Changed ###
+
+- Fix typos in places-and-directions
+- Auto close download and settings modal after main action is executed
+- Remove invalid filter values when profile changes
+- Update map view when in directions mode, a place changes, but there is no valid route yet
+- Only show marker with number inside if a route is being displayed
+- the file `src/config-examples/default-map-settings-example.js` changed. Update your config file based on that.
+
 ## [v1.0.9] - 2021-04-09 ##
 
 ### Changed ###

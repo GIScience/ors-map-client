@@ -18,7 +18,6 @@ export default {
     "errorRenderingContentUploaded": "Erreur lors du rendu du contenu téléchargé. Vérifiez le format et le contenu du fichier",
     "roundTrip": "Route circulaire",
     "notPossibleToCalculateRoute": "Un itinéraire n'a pas pu être calculé en utilisant l'un des lieux sélectionnés",
-    "for": "pour",
     "apiError": {
         "2000": "Impossible d'analyser la demande JSON",
         "2001": "Le paramètre requis est manquant",

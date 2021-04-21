@@ -313,11 +313,15 @@ const orsParamsParser = {
       // Check if the filter matches the conditions to be used
       if (available && !filter.onlyInFront && (!filter.useInServices || filter.useInServices.includes(service))) {
 
+        // Update filter value and children's value based on their depedencies
+        if (filter.props) {
+          DependencyService.updateFieldsStatus(filter.props)
+        }
         // Build the value for the current filter (if it has child filters, they are gonna be built too)
         const filterValue = OrsFilterUtil.getFilterValue(filter, service)
 
         // If the value of the filter is valid, add in the intoArgs array
-        if (orsParamsParser.isFilterValueValid(filterValue)) {
+        if (orsParamsParser.isFilterValueValid(filter, filterValue)) {
           orsParamsParser.setFilterVal(filter, filterValue, intoArgs)
         } else if (intoArgs[filter.name] && !orsParamsParser.isFilterValueValid(intoArgs[filter.name])) {
           delete intoArgs[filter.name]
@@ -354,7 +358,7 @@ const orsParamsParser = {
    * @param {*} filterValue
    * @returns {Boolean}
    */
-  isFilterValueValid (filterValue) {
+  isFilterValueValid (filter, filterValue) {
     const isValid = filterValue !== '' && filterValue !== undefined && filterValue !== null && filterValue !== '{}' && (typeof filterValue !== 'object' || Object.keys(filterValue).length > 0)
     return isValid
   },

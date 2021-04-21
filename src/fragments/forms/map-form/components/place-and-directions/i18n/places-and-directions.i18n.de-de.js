@@ -18,7 +18,6 @@ export default {
     errorRenderingContentUploaded: 'Fehler beim anzeigen des hochgeladenen Objekts. Bitte Format und Inhalt überprüfen.',
     roundTrip: 'Rundweg',
     notPossibleToCalculateRoute: 'Keine Route zwischen den gewählten Orten gefunden.',
-    for: 'für',
     apiError: {
       2000: 'Umwandlung der JSON Anfrage nicht möglich.',
       2001: 'Pflichtparameter fehlt',

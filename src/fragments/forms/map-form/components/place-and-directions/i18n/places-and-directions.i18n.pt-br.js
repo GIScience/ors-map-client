@@ -18,7 +18,6 @@ export default {
     errorRenderingContentUploaded: 'Erro ao exibir o conteúdo carregado. Verificar o formato e o conteúdo do arquivo',
     roundTrip: 'Rota circular',
     notPossibleToCalculateRoute: 'Uma rota não pôde ser calculada usando um dos locais selecionados',
-    for: 'para',
     apiError: {
       2000: 'Não foi possível processar a requisição JSON',
       2001: 'Parâmetro obrigatório faltando',

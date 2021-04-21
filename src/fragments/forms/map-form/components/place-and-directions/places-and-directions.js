@@ -10,6 +10,7 @@ import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import appConfig from '@/config/app-config'
 import GeoUtils from '@/support/geo-utils'
+import utils from '@/support/utils'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
 import lodash from 'lodash'
@@ -456,13 +457,12 @@ export default {
         if (closestPlaceIndex === null || closestPlaceIndex === undefined) {
           closestPlaceIndex = GeoUtils.getClosestPlaceIndex(data.latlng, this.places)
         }
-        // If the selected point is after the last route point
-        if (closestPlaceIndex === this.places.length - 1) {
-          // If `convertStopAfterRouteEndingToDestination`is not true, then the slot must
-          // be decreased so that the stops happen before the destination
-          if (!this.$store.getters.mapSettings.convertStopAfterRouteEndingToDestination) {
-            closestPlaceIndex--
-          }
+        let convertStopAfterRouteEndingToDestination = this.$store.getters.mapSettings.convertStopAfterRouteEndingToDestination
+        // If the selected point is after the last route point and
+        // If `convertStopAfterRouteEndingToDestination`is not true, then the slot must
+        // be decreased so that the stops happen before the destination
+        if (closestPlaceIndex === this.places.length - 1 && !convertStopAfterRouteEndingToDestination) {
+          closestPlaceIndex--
         } 
         // In the other cases, we have to 'inject' a route point between the exiting points
         // To do that we add a place input, setits coordinates and then
@@ -622,7 +622,7 @@ export default {
                 mapViewData.places = context.places // places from context have more fine data, so use it
                 context.mapViewData = mapViewData
                 context.eventBus.$emit('newInfoAvailable', true)
-                context.showSuccess(context.$t('placesAndDirections.routeReady'))
+                context.showSuccess(context.$t('placesAndDirections.routeReady'), {timeout: 3})
                 context.eventBus.$emit('mapViewDataChanged', mapViewData)
                 context.setSidebarIsOpen()
                 resolve(mapViewData)
@@ -852,6 +852,9 @@ export default {
       const filledPlaces = this.getFilledPlaces()
       if (this.places.length === filledPlaces.length) {
         this.updateAppRoute()
+      } else if (filledPlaces.length > 0) {
+        this.mapViewData.places = filledPlaces
+        this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
       }
       this.searching = false
     },

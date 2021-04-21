@@ -85,12 +85,14 @@ const geoUtils = {
           if (place.equals(highlightedPlace)) {
             coloredMarkerName = 'red'
           }
-        } else if (Number(key) === 0 && !isRoute) {
+        } else if (Number(key) === 0 && !isRoute || places.length === 1) {
           coloredMarkerName = 'red'
         }
+
+        let buildAsRoute = isRoute && places.length > 1
   
         // Build the marker
-        const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName, place.index, isRoute)
+        const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName, place.index, buildAsRoute)
         const marker = { position: { lng: place.lng, lat: place.lat}, icon: markerIcon}
   
         // If the way point array has the third parameter, it is its label
@@ -404,21 +406,16 @@ const geoUtils = {
 
     return closestPlaceIndex
   },
-  /**
-   * Get the appropriate place index to inject a stop considering the polyline path
-   * @param {Object} targetLattng 
-   * @param {Array} places 
-   * @param {Array} polylineArr 
-   * @param {Integer} draggedFromIndex 
-   * @returns {Integer} injectPlaceIndex
-   */
-  getStopInjectIndexFromPolyline(targetLattng, places, polylineArr, draggedFromIndex) {
-    // the default inject is the one considering promixity
-    let injectPlaceIndex = geoUtils.getClosestPlaceIndex(targetLattng, places)
-    let closestPlace = places[injectPlaceIndex]
-    var closestPlaceIndexOnPolyline
-    var minDistance = null
 
+  /**
+   * Getthe index of a place on the polyline arrray
+   * @param {Place} place 
+   * @param {Array} polylineArr 
+   * @returns  {Integer|null} indexOnPolyline
+   */
+  getPlaceIndexOnPolylineArray (place, polylineArr) {
+    let indexOnPolyline = null
+    var minDistance = null
     // Find an more appropriate inject index, it this is the case
     for (let pIndex = 0; pIndex < polylineArr.length; pIndex++) {
       const polylineCoords = polylineArr[pIndex]
@@ -426,33 +423,54 @@ const geoUtils = {
         lat: polylineCoords[0],
         lng: polylineCoords[1]
       }
-      const placeLatlng = {
-        lat: closestPlace.lat,
-        lng: closestPlace.lng
-      }
 
       // Check the place that has the shortest distace to the polyline point
-      let currentDistance = geoUtils.calculateDistanceBetweenLocations(polylineCoordsLatlng, placeLatlng, 'm')
+      let currentDistance = geoUtils.calculateDistanceBetweenLocations(polylineCoordsLatlng, place, 'm')
       if (currentDistance === 0) {
         // Get the closest polyline point index
-        closestPlaceIndexOnPolyline = pIndex
+        indexOnPolyline = pIndex
         break
       } else {
         if (minDistance === null || currentDistance < minDistance) {
           minDistance = currentDistance
           // Get the closest polyline point index
-          closestPlaceIndexOnPolyline = pIndex
+          indexOnPolyline = pIndex
         }
       }
     }
-    // If the index of the point where the drag started from
-    // if lowest than the corresponding index of the closest place 
-    // over the polyline, then we must indext the stop before the
-    // closest place index
-    if (draggedFromIndex < closestPlaceIndexOnPolyline) {
-      injectPlaceIndex--
+    return indexOnPolyline
+  },
+  /**
+   * Get the inject index considering the source polyline point
+   * @param {Array} places 
+   * @param {Array} polylineArr 
+   * @param {Integer} sourceIndex 
+   * @returns {Integer} injectIndex
+   */
+  getStopIndexFromSourcePoint(places, polylineArr, sourceIndex) {
+    let injectIndex = null
+    let placePolylineIndexMap = []
+
+    for (let placeKey in places) {
+      var placeIndexOnPolyline = geoUtils.getPlaceIndexOnPolylineArray(places[placeKey], polylineArr)
+      if (placeIndexOnPolyline !== null) {
+        let map = {
+          polylineIndex: placeIndexOnPolyline,
+          placeIndex: placeKey
+        }
+        placePolylineIndexMap.push(map)
+      }
     }
-    return injectPlaceIndex
+
+    for (let mIndex = 0; mIndex < placePolylineIndexMap.length; mIndex++) {
+      let indexMap = placePolylineIndexMap[mIndex]
+      let nextIndexMap = placePolylineIndexMap[mIndex +1]
+      if (indexMap.polylineIndex <= sourceIndex && nextIndexMap && sourceIndex <= nextIndexMap.polylineIndex) {
+        injectIndex = Number(indexMap.placeIndex)
+        break
+      }
+    }
+    return injectIndex
   },
 
   /**

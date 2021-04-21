@@ -17,7 +17,6 @@ export default {
     'errorRenderingContentUploaded': 'Errore nel mostrare il contenuto scaricato. Verifica formato e contenuto',
     'roundTrip': 'Andata e ritorno',
     'notPossibleToCalculateRoute': 'Nessun itinerario trovato per i luoghi selezionati',
-    'for': 'per',
     'apiError': {
       '2000': 'Parse della richiesta JSON non possibile',
       '2001': 'Parametri obbligatori mancanti',

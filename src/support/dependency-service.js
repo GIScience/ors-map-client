@@ -133,7 +133,7 @@ const applyConditionRule = (rule, paramValue, matchesRule) => {
 }
 
 /**
- * apply the filter rules
+ * Apply the filter rules
  * @param {*} scopedParameters
  * @param {*} key
  * @param {*} globalParameters
@@ -147,11 +147,36 @@ const applyItemsFilter = (scopedParameters, key, globalParameters) => {
       if (validWhen) {
         setFilteredItems(scopedParameters, key, validWhen, rule)
         setFilteredItemsForNullAndUndefined(scopedParameters, key, validWhen, rule)
+        removeInvalidValue(scopedParameters[key])
       }
     }
   } else if (parameter.props) {
     for (const propKey in parameter.props) {
       applyItemsFilter(parameter.props, propKey, globalParameters)
+    }
+  }
+}
+
+/**
+ * Remove invalid values from filter
+ * @param {Object} filter
+ */
+const removeInvalidValue = (filter) => {
+  if (filter.filteredItems) {
+    if (Array.isArray(filter.value)) {
+      for (let arrKey in filter.value) {
+        let val = filter.value[arrKey]
+        var valudindex = filter.filteredItems.findIndex(function(v) {
+          return val === v
+        })
+        if (valudindex === -1) {
+          filter.value.splice(Number(arrKey), 1)
+        }
+      }
+    } else {
+      if (!filter.filteredItems.includes(filter.value)) {
+        filter.value = null
+      }
     }
   }
 }

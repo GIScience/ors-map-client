@@ -50,8 +50,9 @@ export default {
     reloadToApplyLanguageChangeTitle: 'It is necessary to reload the app',
     reloadToApplyLanguageChangeText: 'In order to fully apply the language change it is necessary to reload the app. Reload now?',
     resetShownOnceTooltips: 'Show tooltips on app load again',
-    convertStopAfterRouteEndingToDestination: 'Convert stop after route ending to destination',
+    convertStopAfterRouteEndingToDestination: 'Convert stop added at the end of the route to final destination',
     forNauticalRoutes: 'For nautical route, for example',
-    skipAllSegments: 'straight route for all segments'
+    skipAllSegments: 'straight route for all segments',
+    useStopOptimization: 'Optimize the route when a stop is created via drag-and-drop'
   }
 }

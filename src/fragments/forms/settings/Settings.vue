@@ -62,7 +62,6 @@
                   <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.alwaysFitBounds" :label="$t('settings.alwaysFitBounds')" ></v-checkbox>
                   <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.prioritizeSearchingForNearbyPlaces" :label="$t('settings.prioritizeSearchingForNearbyPlaces')" ></v-checkbox>
                   <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.autoFitHighlightedBounds" :label="$t('settings.autoFitHighlightedBounds')" ></v-checkbox>
-                  <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.convertStopAfterRouteEndingToDestination" :label="$t('settings.convertStopAfterRouteEndingToDestination')" ></v-checkbox>
                   <v-select :label="$t('settings.defaultTilesProvider')" :items="availableTileServices" v-model="mapSettingsTransient.defaultTilesProvider"></v-select>
                 </v-container>
               </v-list>
@@ -124,8 +123,9 @@
                       :placeholder="$t('settings.customTileProviderUrlHint')"
                       :label="$t('settings.customOverlayerTileProviderUrl')">
                     </v-text-field>
+                    <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.useStopOptimization" :label="$t('settings.useStopOptimization')" ></v-checkbox>
+                    <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.convertStopAfterRouteEndingToDestination" :label="$t('settings.convertStopAfterRouteEndingToDestination')" ></v-checkbox>
                     <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.compressDataUrlSegment" :label="$t('settings.compressDataUrlSegment')" ></v-checkbox>
-
                     <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.skipAllSegments" :label="$t('global.rawRouting') + ' - ' + $t('settings.skipAllSegments')" ></v-checkbox>
 
                   </div>

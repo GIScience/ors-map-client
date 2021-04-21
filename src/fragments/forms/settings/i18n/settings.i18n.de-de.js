@@ -52,6 +52,7 @@ export default {
     resetShownOnceTooltips: 'Hinweise erneut anzeigen',
     convertStopAfterRouteEndingToDestination: 'Konvertieren den Stopp nach dem Ende der Route zum Ziel',
     forNauticalRoutes: 'Zum Beispiel für die Seeroute',
-    skipAllSegments: 'gerade Route für alle Segmente'
+    skipAllSegments: 'gerade Route für alle Segmente',
+    useStopOptimization: 'Optimize the route when a stop is created using drag and drop'
   }
 }

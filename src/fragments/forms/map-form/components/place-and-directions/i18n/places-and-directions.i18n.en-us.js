@@ -18,12 +18,11 @@ export default {
     errorRenderingContentUploaded: 'Error while rendering the content uploaded. Check the file format and content',
     roundTrip: 'Round trip',
     notPossibleToCalculateRoute: 'A route could not be calculated using one of the selected places',
-    for: 'for',
     apiError: {
       2000: 'Unable to parse JSON request',
       2001: 'Required parameter is missing',
       2002: 'Invalid parameter format',
-      2003: 'Invalid parameter. Please remember that some avoidables have limits, like the route lenght and the area of an avoid polygon that must not exceed 200000 square kilometers',
+      2003: 'Invalid parameter. Please remember that some avoidables have limits, like the route length and the area of an avoid polygon that must not exceed 20000 square kilometers',
       2004: 'By using certain filters and/or avoidables the distance of a route segment must not be greater than 3000 km. When using alternative routes the distance must be at most 100 km.',
       2006: 'Unable to parse the request to the export handler',
       2007: 'Unsupported export format',
