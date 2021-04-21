@@ -50,7 +50,6 @@ export default {
     'reloadToApplyLanguageChangeText': 'Al fine di eseguire il cambio della lingua è necessario ricaricare l\'applicazione. Ricarica adesso?',
     'resetShownOnceTooltips': 'Mostra di nuovo indicazioni',
     'convertStopAfterRouteEndingToDestination': 'Converti in destinazione la fermata dopo la fine del percorso',
-    "forNauticalRoutes": 'Per le rotte nautiche, ad esempio',
     "skipAllSegments": 'percorso rettilineo per tutti i segmenti',
     "useStopOptimization": 'Ottimizza il percorso quando viene creata una sosta tramite trascinamento / salto'
   }

@@ -389,7 +389,6 @@
     "reloadToApplyLanguageChangeText": "In order to fully apply the language change it is necessary to reload the app. Reload now?",
     "resetShownOnceTooltips": "Show tooltips on app load again",
     "convertStopAfterRouteEndingToDestination": "Convert stop added at the end of the route to final destination",
-    "forNauticalRoutes": "For nautical route, for example",
     "skipAllSegments": "straight route for all segments",
     "useStopOptimization": "Optimize the route when a stop is created via drag-and-drop"
   },

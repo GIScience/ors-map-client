@@ -51,7 +51,6 @@ export default {
     "reloadToApplyLanguageChangeText": "Afin d'appliquer pleinement le changement de langue, il est nécessaire de recharger l'application. Recharger maintenant?",
     "resetShownOnceTooltips": "Afficher à nouveau les info-bulles lors du chargement de l'application",
     "convertStopAfterRouteEndingToDestination": "Convertir l'arrêt après la fin de l'itinéraire vers la destination",
-    "forNauticalRoutes": "Pour l'itinéraire nautique, par exemple",
     "skipAllSegments": "itinéraire droit pour tous les segments",
     "useStopOptimization": "Optimiser l'itinéraire lorsqu'un arrêt est créé par glisser / sauter"
     
