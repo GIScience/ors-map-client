@@ -1,4 +1,5 @@
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
+import FilterDependencyService from './filter-dependency-service'
 import DependencyService from '@/support/dependency-service.js'
 import OrsMapFilters from '@/config/ors-map-filters'
 import constants from '@/resources/constants'
@@ -306,7 +307,6 @@ const orsParamsParser = {
   setFilters (intoArgs, sourceFilters, service) {
     for (const key in sourceFilters) {
       const filter = sourceFilters[key]
-
       // Define if the current filter is available fot the current app mode
       const available = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
 
@@ -324,7 +324,10 @@ const orsParamsParser = {
         if (orsParamsParser.isFilterValueValid(filter, filterValue)) {
           orsParamsParser.setFilterVal(filter, filterValue, intoArgs)
         } else if (intoArgs[filter.name] && !orsParamsParser.isFilterValueValid(intoArgs[filter.name])) {
-          delete intoArgs[filter.name]
+          // If the filter is available and has not a valud value, remove it
+          if (FilterDependencyService.isAvailable(filter)) {
+            delete intoArgs[filter.name]
+          }
         }
       }
     }

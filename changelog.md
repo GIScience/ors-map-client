@@ -36,7 +36,13 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
- ## [v1.0.10] - 2021-04-20 ##
+## [v1.0.11] - 2021-04-23 ##
+
+### Changed ###
+
+- Fix the processing of filter values that are invalid that were affecting some valid filters
+
+## [v1.0.10] - 2021-04-20 ##
 
 ### Changed ###
 

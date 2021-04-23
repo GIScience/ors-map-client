@@ -27,7 +27,7 @@ const build = () => {
     console, a merged version of the translation source 
     file when the application runs. If necessary, you can 
     replace 'en-us' below by any of the supported 
-    language, like 'de-de' or 'fr-fr'.
+    locale, like 'de-de' or 'fr-fr'.
   */
   // console.log(JSON.stringify(i18n.messages['en-us']))
 
