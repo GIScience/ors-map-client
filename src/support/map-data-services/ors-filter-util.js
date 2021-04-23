@@ -43,28 +43,51 @@ const getFilterRefByName = (filterName, OrsMapFiltersAccessor = null, onlyIfEnab
 const getFilterValue = (filter, service) => {
   let filterValue = null
   const filterAvailable = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
-  if (filterAvailable) {
-    // Get rhe filter with value updated considering dependencies and filter rules
-    const filterClone = FilterDependencyService.getFilterWithValueUpdated(filter)
-    if (filterClone.type === constants.filterTypes.wrapper && filterClone.props) {
-      // Proceed only if filter is available considering other filter's value
-      if (FilterDependencyService.isAvailable(filterClone)) {
-        filterValue = getChildrenFilterValue(filterClone, service)
-        filterValue = filterClone.valueAsObject ? filterValue : JSON.stringify(filterValue)
-      }
+  const filterClone = FilterDependencyService.getFilterWithValueUpdated(filter)
+  // Proceed only if filter is available considering other filter's value
+  if (filterAvailable && FilterDependencyService.isAvailable(filterClone)) {
+    // Get the filter with value updated considering dependencies and filter rules
+    if (filterClone.type === constants.filterTypes.wrapper && filterClone.props) {      
+      filterValue = getChildrenFilterValue(filterClone, service)
+      filterValue = filterClone.valueAsObject ? filterValue : JSON.stringify(filterValue)
+      // Apply filter conditions like min, multiplier etc
+      filterValue = applyFilterValueConditions(filterClone, filterValue)
     } else {
-      // Check if the filter value must be extracted as an array and do it if so
-      if (filterClone.type === constants.filterTypes.array && Array.isArray(filterClone.value) && !filterClone.valueAsArray) {
-        const separator = filterClone.separator || ','
-        filterValue = filterClone.value.join(separator)
-      } else { // In the other cases, just get the filter raw value
-        filterValue = filterClone.value
-      }
+      filterValue = adjustdFilterValue(filterClone, filterValue)
     }
-    // Apply filter conditions like min, multiplier etc
-    filterValue = applyFilterValueConditions(filterClone, filterValue)
   }
 
+  return filterValue
+}
+
+/**
+ * Adjust filter value
+ * @param {Object} filter
+ * @param {*} filterValue
+ * @returns {*} filterValue
+ */
+const adjustdFilterValue = (filter, filterValue) => {
+  if (filter.name === 'range') {
+    console.log(filter)
+  }
+  // Check if the filter value must be extracted as an array and do it if so
+  if (filter.type === constants.filterTypes.array && Array.isArray(filter.value) && !filter.valueAsArray) {
+    const separator = filter.separator || ','
+    filterValue = filter.value.join(separator)
+  } else if (filter.valueAsArray && !Array.isArray(filter.value)) {
+    let val = filter.value
+    if (val === undefined || val === null) {
+      val = filter.min
+    }
+    if (val !== undefined && val !== null) {
+      val = applyFilterValueConditions(filter, val)
+      filterValue = [val]
+    }
+  } else { // In the other cases, just get the filter raw value
+    filterValue = filter.value
+    // Apply filter conditions like min, multiplier etc
+    filterValue = applyFilterValueConditions(filter, filterValue)
+  }
   return filterValue
 }
 
@@ -134,14 +157,16 @@ const buildAncestryAcessorString = (ancestry, itemIndex = null) => {
  * @returns {*} filterValue
  */
 const applyFilterValueConditions = (filterClone, filterValue) => {
-  if (filterClone.offset && filterClone.step && filterClone.value > filterClone.step) {
-    filterValue = filterValue - filterClone.offset
-  }
-  if (filterClone.min !== null && filterClone.min !== undefined && filterValue < filterClone.min) {
-    filterValue = null
-  }
-  if (filterValue && filterClone.multiplyValueBy) {
-    filterValue = filterValue * filterClone.multiplyValueBy
+  if (!Object.is(filterValue) && !Array.isArray(filterValue)) {
+    if (filterClone.offset && filterClone.step && filterClone.value > filterClone.step) {
+      filterValue = filterValue - filterClone.offset
+    }
+    if (filterClone.min !== null && filterClone.min !== undefined && filterValue < filterClone.min) {
+      filterValue = null
+    }
+    if (filterValue && filterClone.multiplyValueBy) {
+      filterValue = filterValue * filterClone.multiplyValueBy
+    }
   }
   return filterValue
 }

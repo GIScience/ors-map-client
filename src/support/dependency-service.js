@@ -162,12 +162,12 @@ const applyItemsFilter = (scopedParameters, key, globalParameters) => {
  * @param {Object} filter
  */
 const removeInvalidValue = (filter) => {
-  if (filter.filteredItems) {
+  if (filter.value !== null && filter.value !== undefined && filter.filteredItems) {
     if (Array.isArray(filter.value)) {
       for (let arrKey in filter.value) {
         let val = filter.value[arrKey]
         var valudindex = filter.filteredItems.findIndex(function(v) {
-          return val === v
+          return val === v || val === v.itemValue
         })
         if (valudindex === -1) {
           filter.value.splice(Number(arrKey), 1)
