@@ -5,6 +5,7 @@ import deDETranslations from './translations/de-de/builder'
 import ptBRTranslations from './translations/pt-br/builder'
 import itITTranslations from './translations/it-it/builder'
 import frFRTranslations from './translations/fr-fr/builder'
+import huHUTranslations from './translations/hu-hu/builder'
 import appConfig from '@/config/app-config'
 
 Vue.use(VueI18n)
@@ -12,7 +13,7 @@ Vue.use(VueI18n)
 const build = () => {
   const i18n = {
     locale: appConfig.defaultLocale,
-    messages: { 'de-de': {}, 'en-us': {}, 'pt-br': {}, 'it-it': {}, 'fr-fr': {}},
+    messages: { 'de-de': {}, 'en-us': {}, 'pt-br': {}, 'it-it': {}, 'fr-fr': {}, 'hu-hu': {}},
     fallbackLocale: appConfig.defaultLocale
   }
 
@@ -21,6 +22,7 @@ const build = () => {
   i18n.messages['pt-br'] = ptBRTranslations.build()
   i18n.messages['it-it'] = itITTranslations.build()
   i18n.messages['fr-fr'] = frFRTranslations.build()  
+  i18n.messages['hu-hu'] = huHUTranslations.build()  
 
   /* 
     Uncomment the line below to output, via browser 
