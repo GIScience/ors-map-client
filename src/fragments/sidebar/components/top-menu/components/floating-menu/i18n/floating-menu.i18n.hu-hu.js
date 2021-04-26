@@ -1,11 +1,11 @@
 export default {
   floatingTopMenu: {
-    openSettings: 'Settings',
-    showAbout: 'Show general information',
-    about: 'About ORS',
-    openrouteserviceAPI: 'Openrouteservice API',
-    openrouteserviceForDisasters: 'Openrouteservice for disasters',
-    askOpenrouteservice: 'Ask openrouteservice',
-    settingsTooltip: 'Click here if you want to adjust app settings and see other options'
+    "openSettings": "Beállítások",
+    "showAbout": "Általános információk megjelenítése",
+    "about": "Az ORS névjegye",
+    "openrouteserviceAPI": "Az Openrouteservice API",
+    "openrouteserviceForDisasters": "Az Openrouteservice katasztrófahelyzetekben",
+    "askOpenrouteservice": "Kérdezzen az Openrouteservice-től",
+    "settingsTooltip": "Kattintson ide, ha szeretne módosítani az alkalmazás beállításain és megtekinteni más opciókat is"
   }
 }

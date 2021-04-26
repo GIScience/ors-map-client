@@ -1,16 +1,16 @@
 
 export default {
   placeDetails: {
-    layer: 'Layer',
-    lat: 'Lat.',
-    lon: 'Lon.',
-    notAvailable: 'Not available',
-    placeDetails: 'Place details',
-    placeName: 'Name',
-    latlngCopied: 'Latitude and longitude copied',
-    lnglatCopied: 'Longitude and latitude copied',
-    copyLatlng: 'Copy in latitude,longitude format',
-    copyLnglat: 'Copy in longitude,latitude format',
-    satelliteView: 'satellite view'
+    "layer": "Réteg",
+    "lat": "Szél.",
+    "lon": "Hossz.",
+    "notAvailable": "Nem elérhető",
+    "placeDetails": "Hely adatai",
+    "placeName": "Név",
+    "latlngCopied": "Szélesség és hosszúság másolva",
+    "lnglatCopied": "Hosszúság és szélesség másolva",
+    "copyLatlng": "Másolás szélesség-hosszúság formátumban",
+    "copyLnglat": "Másolás hosszúság-szélesség formátumban",
+    "satelliteView": "műholdas nézet"
   }
 }

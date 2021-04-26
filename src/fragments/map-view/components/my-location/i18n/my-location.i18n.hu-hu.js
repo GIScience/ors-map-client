@@ -1,12 +1,12 @@
 export default {
   myLocation: {
-    stopShowingCurrentLocation: 'Click to stop showing your current location',
-    showCurrentLocation: 'Click to show your current location',
-    yourCurrentLocation: 'Your current location',
-    continuously: 'Continuously',
-    onlyOnce: 'Only once',
-    continuouslyLocation: 'Refresh your position every 2 seconds',
-    onlyOnceLocation: 'Acquire your position only once',
-    myPositionToolTip: 'Activate location to show your position and find nearby places more easily'
+    "stopShowingCurrentLocation": "Kattintson az aktuális tartózkodási hely megjelenítésének leállításához",
+    "showCurrentLocation": "Kattintson az aktuális tartózkodási helyének megjelenítéséhez",
+    "yourCurrentLocation": "Az ön jelenlegi tartózkodási helye",
+    "continuously": "Folyamatosan",
+    "onlyOnce": "Csak egyszer",
+    "continuouslyLocation": "Tartózkodási helyének frissítése 2 másodpercenként",
+    "onlyOnceLocation": "Csak egyszer szerezze be a tartózkodási helyének pozícióját",
+    "myPositionToolTip": "Aktiválja a tartózkodási helyét, hogy a térképen megjelenjék pozíciója, és könnyebben megtaláljon közeli helyeket"
   }
 }

@@ -1,23 +1,23 @@
 
 export default {
   routeDetails: {
-    routeSummary: 'Route summary',
-    warnings: 'Warnings',
-    routes: 'Routes',
-    route: 'Route',
-    segments: 'Segments',
-    segment: 'Segment',
-    instructions: 'Instructions',
-    instruction: 'Instruction',
-    name: 'Name',
-    selectRoute: 'Select this route',
-    selectedRoute: 'Selected route',
-    gotoSegment: 'Go to segment',
-    warningCodes: {
-      1: 'There may be restrictions on some roads',
-      2: 'There are tollways along the route',
-      3: 'There are skipped segments along the route. Durations and accessibility may not be correct',
-      4: 'At least one extra info requested but it is not available',
+    "routeSummary": "Útvonal összefoglalása",
+    "warnings": "Figyelmeztetések",
+    "routes": "Útvonalak",
+    "route": "Útvonal",
+    "segments": "Szakaszok",
+    "segment": "Szakasz",
+    "instructions": "Utasítások",
+    "instruction": "Utasítás",
+    "name": "Név",
+    "selectRoute": "Útvonal kiválasztása",
+    "selectedRoute": "Kiválasztott útvonal",
+    "gotoSegment": "Ugrás erre a szakaszra:",
+    "warningCodes": {
+      "1": "Egyes utakon korlátozások lehetnek",
+      "2": "Az útvonalon fizetős szakasz is van",
+      "3": "Az útvonal mentén kihagyott szakaszok is vannak. Előfordulhat, hogy az időtartamok és a behajtási korlátozások pontatlanok",
+      "4": "Legalább egy kiegészítő adat le lett kérve, de nem áll rendelkezésre"
     }
   }
 }

@@ -1,23 +1,22 @@
 
 export default {
   routeExtras: {
-    extras: 'Route extras',
-    extraInfo: 'Extra info',
-    value: 'Value',
-    clickToHighlightOnMap: 'Click to highlight it on map',
-    showAllOnMap: 'Show all on map',
-
-    steepness: 'Steepness',
-    surface: 'Surface',
-    roadaccessrestrictions: 'Road access restrictions',
-    waytypes: 'Way types',
-    suitability: 'Suitability',
-    waycategory: 'Way category',
-    tollways: 'Tollways',
-    traildifficulty: 'Trail difficulty',
-    osmid: 'OSM ID',
-    countryinfo: 'Country info',
-    green: 'Green',
-    noise: 'Noise'    
+    "extras": "További információk az útvonalról",
+    "extraInfo": "További információk",
+    "value": "Érték",
+    "clickToHighlightOnMap": "Kattintson a térképen való megjelenítéshez",
+    "showAllOnMap": "Az összes megjelenítése az térképen",
+    "steepness": "Meredekség",
+    "surface": "Felszín",
+    "roadaccessrestrictions": "Behajtási korlátozások",
+    "waytypes": "Úttípusok",
+    "suitability": "Alkalmasság",
+    "waycategory": "Útkategória",
+    "tollways": "Fizetős utak",
+    "traildifficulty": "Út nehézsége",
+    "osmid": "OSM ID",
+    "countryinfo": "Országinformációk",
+    "green": "Zöld",
+    "noise": "Zaj"    
   }
 }

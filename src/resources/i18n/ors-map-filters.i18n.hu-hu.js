@@ -1,167 +1,171 @@
 
 export default {
   orsMapFilters: {
-    profiles: {
-      'cycling-regular': 'Bike',
-      'cycling-road': 'Road bike',
-      'cycling-electric': 'E-bike',
-      'cycling-mountain': 'Mountainbike',
-      'cycling-safe': 'Cycling safe',
-      'foot-walking': 'Foot walking',
-      'foot-hiking': 'Foot hiking',
-      'driving-car': 'Car',
-      'driving-hgv': 'Heavy vehicle',
-      'wheelchair': 'Wheelchair',      
-      'hgv': 'Heavy vehicle',
-      'bus': 'Bus',
-      'agricultural': 'Agricultural vehicle',
-      'delivery': 'Delivery truck',
-      'forestry': 'Forestry truck',
-      'goods': 'Goods truck'
+    "profiles": {
+      "cycling-regular": "Kerékpár",
+      "cycling-road": "Országúti kerékpár",
+      "cycling-electric": "E-kerékpár",
+      "cycling-mountain": "Hegyi kerékpár",
+      "cycling-safe": "Biztonságos kerékpározás",
+      "foot-walking": "Séta",
+      "foot-hiking": "Túrázás",
+      "driving-car": "Személyautó",
+      "driving-hgv": "Nehéz jármű",
+      "wheelchair": "Kerekesszék",
+      "hgv": "Nehéz tgk.",
+      "bus": "Busz",
+      "agricultural": "Mezőgazdasági jármű",
+      "delivery": "Kisteherautó",
+      "forestry": "Erdészeti teherautó",
+      "goods": "Teherautó"
     },
-    filters: {
-      preference: {
-        label: 'Route preference',
-        description: 'The preferred factor to be considered when calculating routes',
-        enum: {
-          'fastest': 'Fastest',
-          'shortest': 'Shortest',
-          'recommended': 'Recommended'
+    "filters": {
+      "preference": {
+        "label": "Útvonaltervezési preferencia",
+        "description": "Az útvonal tervezésénél előnyben részesített tényező",
+        "enum": {
+          "fastest": "Leggyorsabb",
+          "shortest": "Legrövidebb",
+          "recommended": "Ajánlott"
         }
       },
-      range_type: {
-        label: 'Isochrone method',
-        description: 'Method used to calculate the isochrone',
-        enum: {
-          'time': 'Time',
-          'distance': 'Distance'
+      "range_type": {
+        "label": "Izokróna típusa",
+        "description": "Az izokron vonalak kiszámításának módja",
+        "enum": {
+          "time": "Idő",
+          "distance": "Távolság"
         }
       },
-      range: {
-        label: 'Range',
-        description: 'The max range of the isochrones to be calculated'
+      "range": {
+        "label": "Hatótávolság",
+        "description": "A legmesszebbi izokron vonalak távolsága"
       },
-      interval: {
-        label: 'Interval',
-        description: 'The interval of the isochrones to be calculated'
+      "interval": {
+        "label": "Intervallum",
+        "description": "Az izokron vonalak közötti idő- vagy térköz"
       },
-      options: {
-        label: 'Route options'
+      "options": {
+        "label": "Útvonaltervezési beállítások"
       },
-      profile_params: {
-        label: 'Profile parameters'
+      "profile_params": {
+        "label": "Profil paraméterei"
       },
-      restrictions: {
-        label: 'Restrictions'
+      "restrictions": {
+        "label": "Korlátozások"
       },
-      axleload: {
-        label: 'Axle load',
-        description: 'The maximum axle load in tons'
+      "axleload": {
+        "label": "Tengelyterhelés",
+        "description": "Az engedélyezett legnagyobb tengelyterhelés (tonna)"
       },
-      height: {
-        label: 'Height',
-        description: 'The maximum height in meters'
+      "height": {
+        "label": "Magasság",
+        "description": "Az engedélyezett legnagyobb magasság (méter)"
       },
-      length: {
-        label: 'Length',
-        description: 'The maximum length in meters'
+      "length": {
+        "label": "Hosszúság",
+        "description": "Az engedélyezett legnagyobb hosszúság (méter)"
       },
-      weight: {
-        label: 'Weight',
-        description: 'The maximum weight in tons'
+      "weight": {
+        "label": "Súly",
+        "description": "Az engedélyezett legnagyobb tömeg (tonna)"
       },
-      width: {
-        label: 'Width',
-        description: 'The maximum width in meters'
+      "width": {
+        "label": "Szélesség",
+        "description": "Az engedélyezett legnagyobb szélesség (méter)"
       },
-      hazmat: {
-        label: 'Hazardous goods',
-        description: 'Transporting hazardous goods'
+      "hazmat": {
+        "label": "Veszélyes áru",
+        "description": "Veszélyes áru szállítása"
       },
-      maximum_incline: {
-        label: 'Max inclination',
-        description: 'The maximum inclination in percentage'
+      "maximum_incline": {
+        "label": "Lejtés",
+        "description": "A legnagyobb lejtésszög (százalék)"
       },
-      maximum_sloped_kerb: {
-        label: 'Max kerb height',
-        description: 'Specifies the maximum height of the sloped curb in meters'
+      "maximum_sloped_kerb": {
+        "label": "Járdaszegély-magasság",
+        "description": "A süllyesztett járdaszegélyek legnagyobb magassága (méter)"
       },
-      minimum_width: {
-        label: 'Footway minimum width',
-        description: 'Specifies the minimum width of the footway in metres'
+      "minimum_width": {
+        "label": "Gyalogút szélességes",
+        "description": "A gyalogút legkisebb szélessége (méter)"
       },
-      smoothness_type: {
-        label: 'Route smoothness',
-        description: 'Specifies the minimum smoothness of the route. Further infos: https://wiki.openstreetmap.org/wiki/Key:smoothness'
+      "smoothness_type": {
+        "label": "Út simasága",
+        "description": "Az útvonal minimális simasága. További információ: https://wiki.openstreetmap.org/wiki/Key:smoothness"
       },
-      surface_type: {
-        label: 'Min. surface type',
-        description: 'Specifies the minimum surface type. Type order: https://wiki.openstreetmap.org/wiki/Key:surface'
+      "surface_type": {
+        "label": "Legrosszabb felszín",
+        "description": "Az útvonalon előforduló legkevésbé jó útfelszín. Sorrend: https://wiki.openstreetmap.org/wiki/Key:surface"
       },
-      track_type: {
-        label: 'Minimum route grade',
-        description: 'Specifies the minimum grade of the route. Grade values: https://wiki.openstreetmap.org/wiki/Key:tracktype'
+      "track_type": {
+        "label": "Legrosszabb úttípus",
+        "description": "Mezőgazdasági/erdészeti utak legrosszabb típusa. Értékek: https://wiki.openstreetmap.org/wiki/Key:tracktype"
       },
-      round_trip: {
-        label: 'Round trip'
+      "round_trip": {
+        "label": "Körutazás"
       },
-      round_trip_length: {
-        label: 'Length of the round trip',
-        description: 'The target length of the route (note that this is a preferred value, but results may be different).'
+      "round_trip_length": {
+        "label": "Körutazás hossza",
+        "description": "Az útvonal kívánt hossza (ez csupán egy előnyben részesített érték, az eredmény azonban ettől eltérhet)."
       },
-      points: {
-        label: 'Points',
-        description: 'The number of points to use on the route. Larger values create more circular routes.'
+      "points": {
+        "label": "Pontok",
+        "description": "Az útvonal kitűzéséhez használt pontok száma. Minél több a pont, annál jobban hasonlít az út egy körre."
       },
-      seed: {
-        label: 'Random seed',
-        description: 'A random seed to use for adding randomisation to the generated route (min:0, max: 90)'
+      "seed": {
+        "label": "Véletlenszerűségi tényező",
+        "description": "Véletlenszerűségi tényező (random seed) a létrehozott útvonal véletlenszerűségének meghatásozásához (érték: 0–90)"
       },
-      avoid_polygons: {
-        label: 'Avoid polygons',
-        description: 'Avoid polygons'
+      "avoid_polygons": {
+        "label": "Elkerülendő sokszögek",
+        "description": "Elkerülendő sokszögek"
       },
-      avoid_features: {
-        label: 'Avoid features',
-        description: 'Avoid features',
-        enum: {
-          'highways': 'Highways',
-          'tollways': 'Tollways',
-          'ferries': 'Ferries',
-          'hills': 'Hills',
-          'tunnels': 'Tunnels',
-          'fords': 'Fords',
-          'steps': 'Steps',
-          'pavedroads': 'Paved roads',
-          'unpavedroads': 'Unpaved roads'
+      "avoid_features": {
+        "label": "Elkerülendő objektumok",
+        "description": "Elkerülendő objektumok",
+        "enum": {
+          "highways": "Autópályák",
+          "tollways": "Fizetős utak",
+          "ferries": "Kompok",
+          "hills": "Hegyek",
+          "tunnels": "Alagutak",
+          "fords": "Gázlók",
+          "steps": "Lépcsők",
+          "pavedroads": "Burkolt utak",
+          "unpavedroads": "Burkolatlan utak"
         }
       },
-      avoid_borders: {
-        label: 'Avoid borders',
-        description: 'Avoid borders',
-        enum: {
-          'all': 'All',
-          'controlled': 'Controlled'
+      "avoid_borders": {
+        "label": "Elkerülendő határok",
+        "description": "Elkerülendő országhatárok",
+        "enum": {
+          "all": "Összes",
+          "controlled": "Ellenőrzöttek"
         }
       },
-      avoid_countries: {
-        label: 'Avoid countries',
-        description: 'Avoid countries'
+      "avoid_countries": {
+        "label": "Elkerülendő országok",
+        "description": "Elkerülendő országok"
       },
-      alternative_routes: {
-        label: 'Alternative routes'
+      "alternative_routes": {
+        "label": "Alternatív útvonalak"
       },
-      target_count: {
-        label: 'Number of routes',
-        description: 'Target number of alternative routes to compute. Service returns up to this number of routes that fulfill the share-factor and weight-factor constraints.'
+      "target_count": {
+        "label": "Útvonalak száma",
+        "description": "A megtervezendő alternatív útvonalak száma. A szolgáltatás legfeljebb ennyi útvonalat ad meg, amelyek megfelelnek az egyezőségi és a súlyozási tényező korlátozásainak."
       },
-      share_factor: {
-        label: 'Share factor',
-        description: 'Maximum fraction of the route that alternatives may share with the optimal route. The default value of 0.6 means alternatives can share up to 60% of path segments with the optimal route.'
+      "share_factor": {
+        "label": "Egyezőségi tényező",
+        "description": "Az útvonalnak az a maximális hányada, amennyi az alternatívák és az optimális útvonal esetében közös lehet. Az alapértelmezett 0,6-os érték azt jelenti, hogy az alternatíváknak legfeljebb 60%-a lehet azonos az optimális útvonallal."
       },
-      weight_factor: {
-        label: 'Weight factor',
-        description: 'Maximum factor by which route weight may diverge from the optimal route. The default value of 1.4 means alternatives can be up to 1.4 times longer (costly) than the optimal route.'
+      "weight_factor": {
+        "label": "Súlyozási tényező",
+        "description": "Az a maximális tényező, amellyel az útvonal súlya eltérhet az optimális úttól. Az alapértelmezett 1,4-es érték azt jelenti, hogy az alternatívák legfeljebb 1,4-szer lehetnek hosszabbak (költségesebbek), mint az optimális útvonal."
+      },
+      "maximum_speed": {
+        "label": "Legnagyobb sebesség",
+        "description": "Az útvonaltervezés során alkalmazott legnagyobb sebesség"
       }
     }
   }

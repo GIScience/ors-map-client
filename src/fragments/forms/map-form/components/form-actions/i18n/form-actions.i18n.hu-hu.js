@@ -1,10 +1,10 @@
 
 export default {
   formActions: {
-    addPlaceInput: 'Add place input',
-    clearRoute: 'Clear route',
-    reverseRoute: 'Reverse route',
-    roundTrip: 'Round trip',
-    toggleRoundTrip: 'Toggle round trip'
+    "addPlaceInput": "Hely megadása",
+    "clearRoute": "Útvonal törlése",
+    "reverseRoute": "Útvonal megfordítása",
+    "roundTrip": "Körutazás",
+    "toggleRoundTrip": "Körutazás be-/kikapcsolása"
   }
 }

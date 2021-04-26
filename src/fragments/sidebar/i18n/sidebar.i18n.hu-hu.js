@@ -1,7 +1,7 @@
 export default {
   sidebar: {
-    switchSide: 'Switch side',
-    showSidebar: 'Show sidebar',
-    hideSidebar: 'Hide sidebar'
+    "switchSide": "Oldal váltása",
+    "showSidebar": "Oldalsáv megjelenítése",
+    "hideSidebar": "Oldalsáv elrejtése"
   }
 }

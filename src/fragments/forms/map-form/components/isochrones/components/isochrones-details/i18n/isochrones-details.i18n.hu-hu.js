@@ -1,7 +1,7 @@
 
 export default {
   isochronesDetails: {
-    polygons: 'Polygons',
-    center: 'Center'
+    "polygons": "Sokszögek",
+    "center": "Középpont"
   }
 }

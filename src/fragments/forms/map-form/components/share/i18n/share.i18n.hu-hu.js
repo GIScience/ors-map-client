@@ -1,18 +1,18 @@
 
 export default {
   share: {
-    fullUrl: 'Full',
-    shortUrl: 'Short',
-    urlCopied: 'URL copied to clipboard.',
-    clickToCopy: 'Click to copy the URL',
-    share: 'Share (click to copy)',
-    shareLink: 'Share link',
-    short: 'Short URL',
-    copyUrlInfo: 'You can also copy the link from your browser`s address bar.',
-    urlShortened: 'Shortened URL',
-    shorteningNotPossible: 'It was not possible to generate a short URL. Please use the full URL',
-    embedCodeCopied: 'Embedding code copied',
-    embed: 'Embedding (click to copy)',
-    emdedInstructions: 'Use this code to embed ORS map in your website'
+    "fullUrl": "Teljes",
+    "shortUrl": "Rövid",
+    "urlCopied": "URL a vágólapra másolva.",
+    "clickToCopy": "Kattintson az URL másolásához",
+    "share": "Megosztás (kattintson a másoláshoz)",
+    "shareLink": "Link megosztása",
+    "short": "Rövid URL",
+    "copyUrlInfo": "A linket a böngésző címsorából is kimásolhatja.",
+    "urlShortened": "Rövidített URL",
+    "shorteningNotPossible": "Nem lehetett rövid URL-t generálni. Kérjük, használja a teljes URL-t",
+    "embedCodeCopied": "Beágyazási kód kimásolva",
+    "embed": "Beágyazás (kattintson a másoláshoz)",
+    "emdedInstructions": "Ezzel a kóddal beágyazhatja az ORS-térképet a saját webhelyére"
   }
 }

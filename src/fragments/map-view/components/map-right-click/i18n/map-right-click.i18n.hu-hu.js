@@ -1,13 +1,13 @@
 export default {
   mapRightClick: {
-    options: 'Options',
-    addDestinationToRoute: 'Append as destination',
-    directionsFromHere: 'Directions from here',
-    directionsToHere: 'Directions to here',
-    nonStopDirectionsToHere: 'Direct to here',
-    addRouteStop: 'Add stop here',
-    centerHere: 'Center here',
-    addAsIsochroneCenter: 'Add as reach center',
-    inspectDataOnOSM: 'Inspect data on OSM'
+    "options": "Beállítások",
+    "addDestinationToRoute": "Hozzáadás további úticélként",
+    "directionsFromHere": "Hozzáadás kiindulási pontként",
+    "directionsToHere": "Hozzáadás úticélként",
+    "nonStopDirectionsToHere": "Hozzáadás közvetlen úticélként",
+    "addRouteStop": "Hozzáadás megállóként",
+    "centerHere": "Legyen itt a középpont",
+    "addAsIsochroneCenter": "Hozzáadás elérhetőségi középpontként",
+    "inspectDataOnOSM": "Adatok megtekintése az OSM"
   }
 }

@@ -1,9 +1,9 @@
 
 export default {
   steps: {
-    instruction: 'Instruction',
-    on: 'On',
-    step: 'step',
-    gotoStep: 'Go to step'
+    "instruction": "Utasítás",
+    "on": "Ezen:",
+    "step": "lépés",
+    "gotoStep": "Ugrás erre a lépésre:"
   }
 }

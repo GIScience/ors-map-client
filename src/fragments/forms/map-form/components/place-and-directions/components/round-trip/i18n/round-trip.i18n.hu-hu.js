@@ -1,5 +1,5 @@
 export default {
   roundtrip: {
-    roundtripOptions: 'Round trip options'
+    "roundtripOptions": "Körutazás beállításai"
   }
 }

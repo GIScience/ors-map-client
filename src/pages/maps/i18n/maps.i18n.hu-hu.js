@@ -1,15 +1,15 @@
 
 export default {
   maps: {
-    pageTitle: 'ORS Maps',
-    Places: 'Places',
-    isochrones: 'Isochrones',
-    placeNameRequired: 'Place name required',
-    altitude: 'Altitude variation',
-    settings: 'Settings',
-    toggleAcessibleMode: 'Toggle accessible mode',
-    aboutTitle: 'About ORS',
-    updateSearch: 'Search this area',
-    updateSearchAfterZoomOrCenterChange: 'Update search after zoom or center change'
+    "pageTitle": "OpenRouteService térképek",
+    "Places": "Helyek",
+    "isochrones": "Izokron vonalak",
+    "placeNameRequired": "Meg kell adni egy helynevet",
+    "altitude": "Magasságváltozás",
+    "settings": "Beállítások",
+    "toggleAcessibleMode": "Kisegítő lehetőségek bekapcsolása",
+    "aboutTitle": "Az OpenRouteService (ORS) névjegye",
+    "updateSearch": "Keresés ezen a területen",
+    "updateSearchAfterZoomOrCenterChange": "Keresés frissítése nagyítás vagy a középpont módosítása után"
   }
 }

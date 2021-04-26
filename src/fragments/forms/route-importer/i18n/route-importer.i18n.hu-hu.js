@@ -1,15 +1,15 @@
 
 export default {
   routeImporter: {
-    loadRouteFile: 'Import file',
-    failedToLoadFile: 'Failed to load file selected. Make sure the file is not corrupted and in one of the accepted formats',
-    acceptedImportTypes: 'Accepted import types',
-    dictDefaultMessage: 'Drop a route file to import or click here',
-    dictFallbackMessage: 'Browser not supported',
-    dictFileTooBig: 'File too big',
-    dictInvalidFileType: 'Invalid file type',
-    dictCancelUpload: 'Cancel upload',
-    dictUploadCanceled: 'Upload Canceled',
-    dictRemoveFile: 'Remove file'
+    "loadRouteFile": "Fájl importálása",
+    "failedToLoadFile": "Nem sikerült betölteni a kiválasztott fájlt. Győződjék meg arról, hogy a fájl nem sérült és az elfogadott formátumok egyikében van",
+    "acceptedImportTypes": "Elfogadott importálható fájltípusok",
+    "dictDefaultMessage": "Az importáláshoz húzzon ide egy útvonalfájlt, vagy kattintson ide",
+    "dictFallbackMessage": "A böngésző nem támogatott",
+    "dictFileTooBig": "Túl nagy a fájl",
+    "dictInvalidFileType": "Érvénytelen fájltípus",
+    "dictCancelUpload": "Feltöltés megszakítása",
+    "dictUploadCanceled": "Feltöltés megszakítva",
+    "dictRemoveFile": "Fájl eltávolítása"
   }
 }

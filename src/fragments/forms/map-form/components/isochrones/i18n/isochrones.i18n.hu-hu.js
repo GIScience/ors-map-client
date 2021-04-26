@@ -1,17 +1,17 @@
 
 export default {
   isochrones: {
-    isochrones: 'Isochrones',
-    isochronesReady: 'Isochrones ready',
-    calculatingIsochrones: 'Calculating isochrones ...',
-    itWasNotPossibleToCalculateIsochronesWithTheDefinedOptions: 'It was not possible to calculate isochrones with the defined options. Try to define smaller isochrone(s).',
-    couldResolveTheSelectedPlaceAsASuitableCenter: 'It was not possible to resolve the selected point as a suitable center.',
-    apiError: {
-      2003: 'The area of a polygon to avoid must not exceed 20.0000 square kilometers.',
-      3001: 'One or more parameters have an incorrect value or format.',
-      3004: 'The combination of profile, interval and time or distance selected exceeds the maximum supported. Please adjust the values.',
-      3099: 'Unable to build an isochrone map for the selected point(s) and profile.'
+    "isochrones": "Izokron vonalak",
+    "isochronesReady": "Az izokron vonalak elkészültek",
+    "calculatingIsochrones": "Izokron vonalak kiszámítása…",
+    "itWasNotPossibleToCalculateIsochronesWithTheDefinedOptions": "A megadott beállításokkal nem lehetett kiszámítani az izokron vonalakat. Tegyen egy próbát kisebb izokron vonalakkal.",
+    "couldResolveTheSelectedPlaceAsASuitableCenter": "A kiválasztott pontot nem lehetett megfelelő középpontként beállítani.",
+    "apiError": {
+      "2003": "Egy elkerülendő sokszög területe legfeljebb 20.000 négyzetkilométer lehet.",
+      "3001": "Legalább egy paraméter értéke vagy formátuma hibás.",
+      "3004": "A kiválasztott profil, intervallum és idő vagy távolság kombinációja meghaladja a legnagyobb támogatott értéket. Kérjük, korrigálja az értékeket.",
+      "3099": "A kiválasztott pont(ok)hoz és profilhoz nem lehet izokron térképet készíteni."
     },
-    genericErrorMsg: 'It was not possible to calculate the isochrones.'
+    "genericErrorMsg": "Nem lehetett kiszámítani az izokron vonalakat."
   }
 }

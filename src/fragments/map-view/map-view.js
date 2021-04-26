@@ -1623,7 +1623,13 @@ export default {
         // Tell the leaflet drawing locale to use the current app locale
         // check the locales supported here: https://github.com/DenisCarriere/Leaflet.draw.locales
         let shortLocale = I18nBuilder.getShortLocale(this.$i18n.locale)
-        const locale = drawLocales(shortLocale)
+        let locale
+        try {
+          locale = drawLocales(shortLocale)
+        } catch (error) {
+          shortLocale = I18nBuilder.getShortLocale(this.$i18n.fallbackLocale)
+          locale = drawLocales(shortLocale)
+        }
 
         // Override the tooltip message
         let avoidPolygonBtnTranslations = {
