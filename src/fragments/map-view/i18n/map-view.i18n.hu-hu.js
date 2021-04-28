@@ -29,7 +29,7 @@ export default {
       "unitControlTitle": {
         "text": "Mértékegység módosítása",
         "metres": "méter",
-        "landmiles": "szárazföldi mérföld",
+        "landmiles": "mérföld",
         "nauticalmiles": "tengeri mérföld"
       },
       "clearControlLabel": "&times",
@@ -39,15 +39,15 @@ export default {
         "metres": "m",
         "kilometres": "km",
         "feet": "láb",
-        "landmiles": "mérföld",
-        "nauticalmiles": "tengeri mérföld"
+        "landmiles": "mérf.",
+        "nauticalmiles": "t. mf."
       }
     },
-    "defineAvoidPolygon": "Útvonaltervezésnél elkerülendő sokszög meghatározása",
-    "defineAvoidRectangle": "Útvonaltervezésnél elkerülendő téglalap meghatározása",
+    "defineAvoidPolygon": "Elkerülendő sokszög rajzolása",
+    "defineAvoidRectangle": "Elkerülendő téglalap rajzolása",
     "youCantIntersectPolygons": "Az útvonal nem metszhet sokszöget",
     "polygonArea": "Sokszög területe",
-    "highlighting": "Megjelenítve:",
+    "highlighting": "Megjelenítve a(z):",
     "accuracy": "Pontosság",
     "youCanCenterAtYourLocationLater": "Bármikor térkép középpontjába állíthatja a saját jelenlegi tartózkodási helyét, ha ráklikkel a \"Tartózkodási helyem\" gombra",
     "yourLocation": "Tartózkodási helyének felhasználása",
@@ -73,7 +73,7 @@ export default {
     "avoidPolygonNotRemoved": "Nem lehetett eltávolítani az elkerülendő sokszöget",
     "avoidPolygonNotSaved": "Nem lehetett menteni az elkerülendő sokszöget",
     "polygonEditModeEnabled": "Ha végzett a szerkesztéssel, kattintson bárhová a módosítások mentéséhez",
-    "customTileProvider": "Felhasználó által meghatározott egyedi mozaikszolgáltató",
+    "customTileProvider": "Felhasználó által meghatározott egyedi térképmozaik-szolgáltató",
     "gestureHandling": {
       "touch": "Két ujjal mozgassa a térképet",
       "scroll": "A térkép nagyításához használja a Ctrl + egérgörgetőt",

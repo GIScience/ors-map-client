@@ -16,7 +16,7 @@ export default {
     "warningCodes": {
       "1": "Egyes utakon korlátozások lehetnek",
       "2": "Az útvonalon fizetős szakasz is van",
-      "3": "Az útvonal mentén kihagyott szakaszok is vannak. Előfordulhat, hogy az időtartamok és a behajtási korlátozások pontatlanok",
+      "3": "Az útvonalon kihagyott szakaszok is vannak. Előfordulhat, hogy az időtartamok és a behajtási korlátozások pontatlanok",
       "4": "Legalább egy kiegészítő adat le lett kérve, de nem áll rendelkezésre"
     }
   }

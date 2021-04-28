@@ -10,7 +10,7 @@
       </v-flex >
       <v-flex sm8>
         <v-slider class="form-felds-slider" :min="filter.min" :max="filter.max" inverse-label v-model="localModel"
-          :label="buildUnit()" :title="label" @change="sliderValueChanged()" :step="filter.step"></v-slider>
+          :label="localModel + ' ' + buildUnit() " :title="label" @change="sliderValueChanged()" :step="filter.step"></v-slider>
       </v-flex>
     </v-layout>    
   </div>

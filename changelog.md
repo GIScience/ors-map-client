@@ -36,6 +36,16 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.0.12] - 2021-04-28 ##
+
+### Added ###
+
+- Added Hungarian language
+
+### Changed ###
+
+- Show slider current value as user moves the slider
+
 ## [v1.0.11] - 2021-04-23 ##
 
 ### Changed ###

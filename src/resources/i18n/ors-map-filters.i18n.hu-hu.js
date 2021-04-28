@@ -39,7 +39,7 @@ export default {
       },
       "range": {
         "label": "Hatótávolság",
-        "description": "A legmesszebbi izokron vonalak távolsága"
+        "description": "A legtávolabbi izokron vonal távolsága"
       },
       "interval": {
         "label": "Intervallum",
@@ -157,7 +157,7 @@ export default {
       },
       "share_factor": {
         "label": "Egyezőségi tényező",
-        "description": "Az útvonalnak az a maximális hányada, amennyi az alternatívák és az optimális útvonal esetében közös lehet. Az alapértelmezett 0,6-os érték azt jelenti, hogy az alternatíváknak legfeljebb 60%-a lehet azonos az optimális útvonallal."
+        "description": "Az útvonalnak az a maximális része, amennyi az alternatívák és az optimális útvonal esetében közös lehet. Az alapértelmezett 0,6-os érték azt jelenti, hogy az alternatív útvonalak akár 60%-a is azonos lehet az optimális útvonallal."
       },
       "weight_factor": {
         "label": "Súlyozási tényező",

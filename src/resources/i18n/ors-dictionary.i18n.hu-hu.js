@@ -59,7 +59,7 @@ export default {
     "grade5": "5 – laza",
     "no_tollway": "Nem fizetős",
     "is_tollway": "Fizetős",
-    "no_category": "Kategória nélküli",
+    "no_category": "Besorolatlan",
     "highway": "Autópálya",
     "unpaved_road": "Burkolatlan út",
     "tunnel": "Alagút",
