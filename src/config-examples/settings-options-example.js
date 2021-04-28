@@ -18,7 +18,8 @@ const settingsOptions = {
     { text: 'PT BR', value: 'pt' },
     { text: 'SE', value: 'se' },
     { text: 'TR', value: 'tr' },
-    { text: 'GR', value: 'gr' }
+    { text: 'GR', value: 'gr' },
+    { text: 'HU', value: 'hu' }
   ],
   units: [
     { text: 'Kilometers', value: 'km', slug: 'kilometers' },
