@@ -19,6 +19,14 @@ export default {
   created () {
     this.localModel = this.textLocalModel = this.filter.value
   },
+  computed: {
+    sliderValue () {
+      if (this.localModel !== null && this.localModel !== undefined) {
+        return this.localModel
+      }
+      return ''
+    }
+  },
   methods: {
     /**
      * Run a fieldupdate with a debounce
