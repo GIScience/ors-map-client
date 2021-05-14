@@ -12,7 +12,7 @@ const routeData = {
       const polylinesHighlighted = []
 
       // Build the sections
-      // Each section contains a label, a color and 
+      // Each section contains a label, a color and
       // may contain multiple polylines
       for (const key in extraInfo.sections) {
         const section = extraInfo.sections[key]
@@ -21,12 +21,12 @@ const routeData = {
           color: section.color,
           polylines: [] // It starts empty and will be populated below
         }
-        // Use the intervals data to extract the 
+        // Use the intervals data to extract the
         // polyline data for the given interval
         for (const intervalKey in section.intervals) {
           const interval = section.intervals[intervalKey]
           // since we are getting items from an array
-          // starting with the index 0, the amout of
+          // starting with the index 0, the amount of
           // items is the final position + 1
           const amoundOfItems = interval[1] +1
           const segment = polyLineData.slice(interval[0], amoundOfItems)
@@ -39,7 +39,7 @@ const routeData = {
       return polylinesHighlighted
     }
   },
-  
+
   /**
    * Get the response data source type based on the endpoint and the type of responseData
    * @param {String} endpoint
@@ -47,7 +47,7 @@ const routeData = {
    * @returns {String}  response source type
    */
   getSourceType (endpoint, responseData) {
-    // In the case of directions andpoint, there are
+    // In the case of directions and pois, there are
     // two possibilities. If the response is an object (json) or a gpx (xml)
     if (endpoint === '/directions') {
       if (typeof responseData === 'object') {

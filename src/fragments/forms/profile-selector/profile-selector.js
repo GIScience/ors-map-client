@@ -94,24 +94,24 @@ export default {
         this.activeProfileSlug = profileSlug
         this.activeVehicleType = vehicleTypeSlug
 
-        // Update the values in map filtes object
-        OrsFilterUtil.setFilterValue(constants.profileFilterName, profileSlug) 
-        OrsFilterUtil.setFilterValue(constants.vehicleTypeFilterName, vehicleTypeSlug)  
+        // Update the values in map filters object
+        OrsFilterUtil.setFilterValue(constants.profileFilterName, profileSlug)
+        OrsFilterUtil.setFilterValue(constants.vehicleTypeFilterName, vehicleTypeSlug)
 
         // Store the selected profile as default profile
         // so the next time the ap is loaded, it will be selected by default
         let mapSettings = this.$store.getters.mapSettings
         mapSettings.defaultProfile = profileSlug
         mapSettings.defaultVehicleType = vehicleTypeSlug
-        
+
         this.$store.dispatch('saveSettings', mapSettings).then(() => {
-          let context = this          
+          let context = this
           setTimeout(() => {
             context.extraProfilesOpen = false
             resolve(profileSlug)
           }, 200)
         })
-      })        
+      })
     },
     /**
      * Change the value of local profile and vehicle type
@@ -126,7 +126,7 @@ export default {
 
       if (this.activeProfileSlug !== profile || this.activeVehicleType !== vehicleType) {
         this.setProfile(profile, vehicleType)
-      }      
+      }
     }
   }
 }

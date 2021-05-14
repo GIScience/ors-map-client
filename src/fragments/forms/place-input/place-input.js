@@ -107,7 +107,7 @@ export default {
      */
     hasAutomaticFocus () {
       // If is a mobile device, do not use automatic
-      // focus to avoid openning the keyboard
+      // focus to avoid opening the keyboard
       if (this.isMobile) {
         return false
       }
@@ -176,7 +176,7 @@ export default {
     },
 
     /**
-     * Defines the input colums factor based on the current resolution
+     * Defines the input columns factor based on the current resolution
      * @returns {Integer}
      */
     inputColumnFactor () {
@@ -244,7 +244,7 @@ export default {
     },
 
     /**
-     * Determines if the delete button is availabel for the current place input
+     * Determines if the delete button is available for the current place input
      */
     deleteAvailable () {
       return this.index !== 0
@@ -265,13 +265,13 @@ export default {
       return available
     },
     /**
-     * Determines if the place input floating menu button is availabel for the current place input
+     * Determines if the place input floating menu button is available for the current place input
      */
     placeMenuAvailable () {
       return this.$lowResolution && !this.single && (this.index > 0 || this.directIsAvailable || this.switchCoordsAvailable)
     },
     /**
-     * Determines if the place input directions menu button is availabel for the current place input
+     * Determines if the place input directions menu button is available for the current place input
      */
     directionsAvailable () {
       if (!this.supportDirections || !appConfig.supportsDirections) {
@@ -361,7 +361,7 @@ export default {
     },
     /**
      * Set the pick place input source
-     * @uses index 
+     * @uses index
      * @uses predictableIda
      */
     setPickPlaceSource () {
@@ -375,7 +375,7 @@ export default {
      */
     emptyPickPlaceSource () {
       this.$store.commit('pickPlaceIndex', null)
-      this.$store.commit('pickPlaceId', null)   
+      this.$store.commit('pickPlaceId', null)
     },
     /**
      * Run search if in search mode or resolve place if model is unresolved
@@ -495,7 +495,7 @@ export default {
         const isPasteEvent = event instanceof ClipboardEvent
         // In case of a ClipboardEvent (ctr + v)
         // we must just ignore, since the input
-        // model  has not changed yet and it will 
+        // model  has not changed yet and it will
         // trigger another change event when it changes
         if (!isPasteEvent) {
           event.preventDefault()
@@ -523,14 +523,14 @@ export default {
      * suggetions for the other cases
      */
     handleSearchInputEnter () {
-      // We can only try yo auto select the first result 
+      // We can only try yo auto select the first result
       // if the inputted text is not a coordinate
       if (!this.localModel.nameIsCoord()) {
         let context = this
         if (appConfig.autoSelectFirstExactAddressMatchOnSearchEnter) {
           this.eventBus.$emit('showLoading', true)
           PlacesSearch(this.localModel.placeName, 10).then(places => {
-            // If the first result is an address and the match_type is exact, 
+            // If the first result is an address and the match_type is exact,
             // then we auto select the first item on the enter/return action
             const addresses = this.lodash.filter(places, (p) => {
               return (p.properties.layer === 'address' || p.properties.layer === 'postalcode') && p.properties.match_type === 'exact'
@@ -629,7 +629,7 @@ export default {
     selected () {
       this.focused = false
       let data =  { index: this.index, place: this.model, single: this.single }
-      
+
       let expectedPromise = this.$root.appHooks.run('placeSelected', data)
       let context = this
       // If a promise is returned
@@ -641,7 +641,7 @@ export default {
         })
       } else { // if nothing was returned, just proceed
         context.$emit('selected', data)
-      }      
+      }
       this.$forceUpdate()
     },
 
@@ -655,7 +655,7 @@ export default {
     },
 
     /**
-     * Deal with the remove a place input click 
+     * Deal with the remove a place input click
      * by hidden the floating menu (if visible)
      * and by emitting the corresponding event
      */
@@ -665,7 +665,7 @@ export default {
     },
 
     /**
-     * Deal with the start directions button click 
+     * Deal with the start directions button click
      * by emitting the corresponsing event
      */
     startDirections () {
@@ -685,10 +685,10 @@ export default {
     },
     /**
      * Set the current input as having the focus
-     * @param {*} data can be a boolean value or an Event. 
+     * @param {*} data can be a boolean value or an Event.
      * If it is the second case, we consider it as false
      */
-    setFocus (data) {      
+    setFocus (data) {
       // When the user clicks outside an input
       // this method is called and is intended to
       // set the focus as false in rhis case.
@@ -697,13 +697,13 @@ export default {
       // is expected to be MouseEvent object and no a boolean.
       if (typeof data === 'object' && data.clickedOutside) {
         if (this.inputWasActiveAndLostFocus(data)) {
-          this.emptyPickPlaceSource()          
+          this.emptyPickPlaceSource()
           this.focused = false
         }
       } else {
         this.focused = data // data is boolean in this case
-        // If the input is focused, set the pick place source 
-        this.setPickPlaceSource()  
+        // If the input is focused, set the pick place source
+        this.setPickPlaceSource()
       }
       // Once the focused was set to true based on a user
       // interaction event then it is not anymore in automatic mode

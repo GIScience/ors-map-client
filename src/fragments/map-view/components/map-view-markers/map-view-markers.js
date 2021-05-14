@@ -44,7 +44,7 @@ export default {
      */
     markersClusterOptions () {
       let options = {}
-      // If the options objext is modified in the hook, the changes
+      // If the options object is modified in the hook, the changes
       // will reflect here and the returned object will incorporate the changes
       this.$root.appHooks.run('beforeUseMarkerClusterOptions', options)
       return options
@@ -75,7 +75,7 @@ export default {
       const isDraggable = draggableModes.includes(this.mode)
       return isDraggable
     },
-    
+
      /**
      * Show the marker popup
      */

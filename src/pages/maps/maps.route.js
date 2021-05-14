@@ -14,7 +14,7 @@ const embedParameters = '/:embed?/:locale?'
 // Build the optional placesNames Path
 var optionalplaceNamesPath = ''
 for (let index = 2; index <= 15; index++) {
-  optionalplaceNamesPath += `/:placeName${index}?`  
+  optionalplaceNamesPath += `/:placeName${index}?`
 }
 
 const mapRoutes = [
@@ -28,7 +28,7 @@ const mapRoutes = [
       // As this was causing a weird redirection we had to tell vue router to
       // go the target route in this case
       const currentPath = location.hash.replace('#', '')
-      // Only laod the root route if the cleanMap flag is true
+      // Only load the root route if the cleanMap flag is true
       if (currentPath !== '' && currentPath !== '/' && currentPath !== rootPath && !store.getters.cleanMap) {
         // In case of loading root route, set the
         // default mode as place mode
@@ -51,8 +51,9 @@ const mapRoutes = [
     }
   },
   {
-    // The maximum number of places/points of a route is 15. so, we can have 15 places more the data parameter that contains the coordinates for all the palces in que query encoded in base64 format
-    // The minimum is one (becaue of round trip needs only one place)
+    // The maximum number of places/points of a route is 15. so, we can have 15 places more the data parameter that
+    // contains the coordinates for all the places in que query encoded in base64 format
+    // The minimum is one (because of round trip needs only one place)
     path: `${directionsPath}:placeName1${optionalplaceNamesPath}/data/:data${embedParameters}`,
     name: 'MapDirections',
     component: Maps,

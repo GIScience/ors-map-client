@@ -65,7 +65,7 @@ const RouteUtils = {
         poiPlaces.push(index)
       }
     })
-    // If there are direct waipoints
+    // If there are direct waypoints
     // add their indexes to the options
     if (directPlaces.length > 0) {
       appRouteData.options.directPlaces = directPlaces

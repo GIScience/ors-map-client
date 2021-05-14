@@ -52,7 +52,7 @@ export default {
     },
     showNewInfo () {
       return this.newInfoAvailable
-    }, 
+    },
     showRouteDetailsTooltip () {
       return this.showNewInfo && !this.$store.getters.isSidebarVisible
     }
@@ -78,7 +78,7 @@ export default {
      * Every time the appRouteData changes
      * and it has at least one place defined
      * the map data is reloaded, so we keep the
-     * the map serach and synchronized with the url
+     * the map search and synchronized with the url
      */
     reloadAfterAppRouteDataChanged (appRouteData) {
       if (appRouteData && appRouteData.places.length > 0) {
@@ -114,9 +114,9 @@ export default {
       })
 
       // When there are changes in the route and and the
-      // side bar is not opend, notify visually that there
+      // side bar is not opened, notify visually that there
       // new data about the route calculated that can be seen
-      // by openning the sidebar
+      // by opening the sidebar
       this.eventBus.$on('newInfoAvailable', (available) => {
         if (!context.$store.getters.leftSideBarOpen) {
           context.newInfoAvailable = available
@@ -147,7 +147,7 @@ export default {
       const appMode = new AppMode(this.$store.getters.mode)
       const newRoute = appMode.getRoute([this.place])
 
-      // Only navigate to a new route if params has changed     
+      // Only navigate to a new route if params has changed
       const zoomChanged =  Number(newRoute.params.zoom) !== Number(this.$route.params.zoom)
       const centerChanged = newRoute.params.center !== this.$route.params.center
       const termchanged = newRoute.params.term !== this.$route.params.term
@@ -172,14 +172,14 @@ export default {
           let mapSettings = this.$store.getters.mapSettings
           mapSettings.mapCenter = this.$store.getters.appRouteData.options.center
           this.$store.dispatch('saveSettings', mapSettings).then(() => {
-            this.search()    
-            this.$forceUpdate()        
-          })          
+            this.search()
+            this.$forceUpdate()
+          })
         }
       } else {
         this.$forceUpdate()
       }
-      
+
     },
     /**
      * When the menu btn is clicked, open the main
@@ -209,7 +209,7 @@ export default {
       } else {
         if (this.place.isEmpty()) { // place has no lat and lng
           // Make sure that the place will
-          // not be resolved using its name 
+          // not be resolved using its name
           // if it is empty when switching to directions
           // It must be resolved using its coordinates
           this.place.placeName = ''
@@ -252,7 +252,7 @@ export default {
 
     /**
      * Set a a suggested place as the selected one for a given place input
-     * @param {*} data - can be the palce object or an object containing the place
+     * @param {*} data - can be the place object or an object containing the place
      */
     selectPlace (data) {
       if (data.place) {

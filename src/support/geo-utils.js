@@ -5,7 +5,7 @@ import moment from 'moment'
 import Vue from 'vue'
 import HtmlMarker from '@/fragments/html-marker/HtmlMarker'
 
-// The import below will add some methods to Leaflet.GeometryUtil 
+// The import below will add some methods to Leaflet.GeometryUtil
 // Even if it is not been accessed within this class, it is being used!
 import 'leaflet-geometryutil'
 
@@ -67,7 +67,7 @@ const geoUtils = {
    * Build the markers based in an array of coordinates
    * @param {Array} places - coordinates of the marker
    * @param {Boolean} isRoute - default true
-   * @param {Place|null} highlightedPlace - place to have a corresponding marker hightlighed (red)
+   * @param {Place|null} highlightedPlace - place to have a corresponding marker highlighted (red)
    * @returns {Array} of markers
    */
   buildMarkers: (places, isRoute = false, highlightedPlace = null) => {
@@ -80,7 +80,7 @@ const geoUtils = {
         // Define the marker color
         const lastIndexKey = places.length - 1
         let coloredMarkerName = geoUtils.getMarkerColor(key, lastIndexKey, isRoute)
-  
+
         if (highlightedPlace) {
           if (place.equals(highlightedPlace)) {
             coloredMarkerName = 'red'
@@ -90,20 +90,20 @@ const geoUtils = {
         }
 
         let buildAsRoute = isRoute && places.length > 1
-  
+
         // Build the marker
         const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName, place.index, buildAsRoute)
         const marker = { position: { lng: place.lng, lat: place.lat}, icon: markerIcon}
-  
+
         // If the way point array has the third parameter, it is its label
         marker.label = place.placeName || `${place.lng},${place.lat}`
         if (!isNaN(place.index) && isRoute) {
           marker.label = `(${place.index}) ${marker.label}`
         }
-  
+
         // If the way point array has the fourth parameter, it is its way point json data
         marker.place = place
-  
+
         // Add the markers to the returning array
         markers.push(marker)
 
@@ -114,7 +114,7 @@ const geoUtils = {
 
   /**
    * Determines if a geojson is a rectangle
-   * @param {Object} geojson 
+   * @param {Object} geojson
    * @returns {Boolean}
    */
   geojsonIsARectangle(geojson) {
@@ -140,9 +140,9 @@ const geoUtils = {
   },
 
   /**
-   * Determines the type of polygon a geojson has. 
-   * If the geojson is of the type  Polygon it retirns false.
-   * @param {Object} geojson 
+   * Determines the type of polygon a geojson has.
+   * If the geojson is of the type  Polygon it returns false.
+   * @param {Object} geojson
    * @returns {String|false}
    */
   geojsonShapeType(geojson) {
@@ -171,7 +171,7 @@ const geoUtils = {
 
   /**
    * Calculate geodesic area
-   * @param {Array} latlngs 
+   * @param {Array} latlngs
    */
   geodesicArea(latlngs) {
     return Leaflet.GeometryUtil.geodesicArea(latlngs)
@@ -179,8 +179,8 @@ const geoUtils = {
 
   /**
    * Get readable area
-   * @param {Number} area 
-   * @param {String} unit 
+   * @param {Number} area
+   * @param {String} unit
    */
   readableArea(latlngs, unit) {
     let area = Leaflet.GeometryUtil.geodesicArea(latlngs)
@@ -217,7 +217,7 @@ const geoUtils = {
   },
 
   /**
-   * Build a bounding box the also includes the plaes and the polyline
+   * Build a bounding box the also includes the places and the polyline
    * @param {Array} places
    * @param {Array} polyline containing arrays where index 0 is lng and index 1 is lat
    * @returns {Array} of 2 objects {lon:..., lat:...}
@@ -408,9 +408,9 @@ const geoUtils = {
   },
 
   /**
-   * Getthe index of a place on the polyline arrray
-   * @param {Place} place 
-   * @param {Array} polylineArr 
+   * Get the index of a place on the polyline array
+   * @param {Place} place
+   * @param {Array} polylineArr
    * @returns  {Integer|null} indexOnPolyline
    */
   getPlaceIndexOnPolylineArray (place, polylineArr) {
@@ -424,7 +424,7 @@ const geoUtils = {
         lng: polylineCoords[1]
       }
 
-      // Check the place that has the shortest distace to the polyline point
+      // Check the place that has the shortest distance to the polyline point
       let currentDistance = geoUtils.calculateDistanceBetweenLocations(polylineCoordsLatlng, place, 'm')
       if (currentDistance === 0) {
         // Get the closest polyline point index
@@ -442,9 +442,9 @@ const geoUtils = {
   },
   /**
    * Get the inject index considering the source polyline point
-   * @param {Array} places 
-   * @param {Array} polylineArr 
-   * @param {Integer} sourceIndex 
+   * @param {Array} places
+   * @param {Array} polylineArr
+   * @param {Integer} sourceIndex
    * @returns {Integer} injectIndex
    */
   getStopIndexFromSourcePoint(places, polylineArr, sourceIndex) {
@@ -474,7 +474,7 @@ const geoUtils = {
   },
 
   /**
-   * Return the zoom level accoding the layer
+   * Return the zoom level according to the layer
    */
   zoomLevelByLayer: (layer) => {
     const map = layerZoomMapping
@@ -518,8 +518,8 @@ const geoUtils = {
 
   /**
    * Select a feature from a feature list by a give zoom
-   * the feature with the zomm level (according the layer type)
-   * being closest to the givn zoom level will be selected
+   * the feature with the zoom level (according the layer type)
+   * being closest to the given zoom level will be selected
    * @param {*} zoom
    * @param {*} places
    * @returns {Place} place
@@ -532,9 +532,9 @@ const geoUtils = {
         const featureZoom = geoUtils.zoomLevelByLayer(places[key].properties.layer)
         const selectedFeatureZoom = geoUtils.zoomLevelByLayer(selectedPlace.properties.layer)
 
-        // If the difference betwen the reference zoom and
+        // If the difference between the reference zoom and
         // the current feature zoom is smaller than the
-        // the difference betwen the previously selected feature
+        // the difference between the previously selected feature
         // then replace the current selected feature bt the current feature
         if (featureZoom % zoom < selectedFeatureZoom % zoom) {
           selectedPlace = places[key]
@@ -550,8 +550,8 @@ const geoUtils = {
    * @param {LatLng} p0 Point the polyline point
    * @param {LatLng} p1 Point The reference line is defined by the polyline LatLng to p1.
    * @param {LatLng} p2 The point in question.
-   * @returns {Number} 
-   *  >0 for p2 left of the line through this point and p1, 
+   * @returns {Number}
+   *  >0 for p2 left of the line through this point and p1,
    *  =0 for p2 on the line,
    *  <0 for p2 right of the line through this point an p1.
    * @see {@link http://geomalgorithms.com/a03-_inclusion.html Inclusion of a Point in a Polygon} by Dan Sunday.

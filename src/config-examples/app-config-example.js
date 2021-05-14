@@ -1,4 +1,4 @@
-// This is an example file and is expected to be cloned 
+// This is an example file and is expected to be cloned
 // without the -example on the same folder that it resides.
 
 // You can change the value of a property (using a supported value), but you shouldn't remove a property
@@ -10,7 +10,7 @@ const appConfig = {
   footerDevelopedByLink: 'https://www.heigit.org/', // The url that is used on the footer developed by link
   urlMode: 'hash', // The url mode for vue router: `hash` or `history`
   baseAppUrl: '/', // Could be, for example, '/map' if your app is running in a folder under a domain
-  dataServiceBaseUrl: 'https://openrouteservice.org/wp-json/', // The base data url to retrive ORS data (Don't change this unless you know what your doing!)
+  dataServiceBaseUrl: 'https://openrouteservice.org/wp-json/', // The base data url to retrieve ORS data (Don't change this unless you know what your doing!)
   maxPlaceInputs: 50, // The ORS API support max 50 points
   appMenu: {
     useORSMenu: true, // If the default ORS menu must be used
@@ -32,26 +32,26 @@ const appConfig = {
   showAltitudeOnSidebar: true, // show altitude preview on sidebar
 
   autoSelectFirstExactAddressMatchOnSearchEnter: true, // If the first exact address match must be auto selected when the user type a text and in the place search and hit enter/return
-  
+
   disabledActionsForIsochrones: ['roundtrip'], // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
   disabledActionsForPlacesAndDirections: [], // // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
   supportsPlacesAndDirections: true, // If thw whole places and directions feature is supported/enabled in the application
   supportsIsochrones: true, // If isochrones is supported/enabled in the application
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
-  supportsDirections: true, // If the directions funcionality is available
-  sidebarStartsOpenInHeighResolution: false, // if the sidebar must start open in heigh resolution
+  supportsDirections: true, // If the directions functionality is available
+  sidebarStartsOpenInHighResolution: false, // if the sidebar must start open in high resolution
   defaultTilesProvider: 'osm', // The default tile provider  (valid values are the `id` property of one of the `mapTileProviders` array below)
   supportsAvoidPolygonDrawing: true, // If the avoid polygon drawing tools must be available on the map view
   distanceMeasureToolAvailable: true, // If the polyline distance measure tool must be available on the map view
-  accessbilityToolAvailable: true, // If the accessibility tool must be available on the map view
+  accessibilityToolAvailable: true, // If the accessibility tool must be available on the map view
   fitAllFeaturesToolAvailable: true, // If the fitAllFeatures to0l must be available on the map view
-  supportsClusteredMarkers: true, // If clusted markers is supported (then markers with `clustered=true` property will be clustered)
+  supportsClusteredMarkers: true, // If clustered markers is supported (then markers with `clustered=true` property will be clustered)
   supportsSearchBottomCarousel: true, // If the bottom carousel with the search results must be displayed or not.
   supportsSearchMode: true, // If the search mode is supported
   supportsMyLocationBtn: true, // If the `my location` button is supported on the map view
   initialZoomLevel: 6, // The initial map view zoom level
   initialMapMaxZoom: 18, // The initial map view max zoom
-  
+
 
   // The map tile providers available. At least one must be present
   mapTileProviders: [

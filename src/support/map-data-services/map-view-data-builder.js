@@ -34,8 +34,8 @@ class MapViewDataBuilder {
 
   /**
    * Get the response type, considering the endpoint and the response formart
-   * It is used to determin the map data extractor that is gonna be used
-   * to extract the data from the rsponse and render it
+   * It is used to determine the map data extractor that is gonna be used
+   * to extract the data from the response and render it
    */
   getSourceType = () => {
     let sourceType
