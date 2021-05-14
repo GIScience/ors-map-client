@@ -36,6 +36,11 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [Unreleased]
+
+### Fixed
+- Spelling, formatting and grammar issues in the README.md, documentation, changelog and comments
+
 ## [v1.0.12] - 2021-04-28 ##
 
 ### Added ###
