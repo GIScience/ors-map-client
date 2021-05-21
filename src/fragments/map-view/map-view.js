@@ -1,6 +1,6 @@
 /**
  * MapView component.
- * Renders an leaflet map based on the mapViewData passed via props. Capture the map events, dealing with them or emitting events
+ * Renders an leaflet/vue2leaflet map based on the mapViewData passed via props. Capture the map events, dealing with them or emitting events.
  * @uses storage defined in @see /src/store/modules/map-state
  *
  * Events that this component listens to:
@@ -56,21 +56,7 @@ import 'vue2-leaflet-draw-toolbar'
 import Leaflet from 'leaflet'
 import lodash from 'lodash'
 
-/**
- * Fix Vue leaflet issues:
- * - import leaflet styles for proper map rendering
- * - edit marker image path
- */
-
-delete Leaflet.Icon.Default.prototype._getIconUrl
-
-Leaflet.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-})
-
-// imported styles
+// Import leaflet-related styles
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import 'leaflet-measure/dist/leaflet-measure.css'
 import 'vue-resize/dist/vue-resize.css'
@@ -180,7 +166,6 @@ export default {
       isAltitudeModalOpen: false,
       extraInfo: null, // Extra route info (waytypes, surface, steepness etc)
       tempPlaces: null, // a place selected by the user on the map but not yet used for computing directions,
-      polylineIsEdibale: false,
       featuresJustFitted: false,
       localAvoidPolygons: null,
       mapDataViewChangeDebounceTimeoutId: null
