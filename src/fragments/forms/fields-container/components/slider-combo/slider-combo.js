@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     /**
-     * Run a fieldupdate with a debounce
+     * Run a field update with a debounce
      */
     debounceTextFieldChange () {
       const context = this
@@ -69,9 +69,9 @@ export default {
       this.filter.value = this.textLocalModel = this.localModel
       this.fieldUpdated()
     },
-    
+
     /**
-     * Build slider componet label
+     * Build slider component label
      * @returns {String} unit
      */
     buildUnit () {
@@ -84,7 +84,7 @@ export default {
         unit = String(unit)
       }
       return unit
-    },   
+    },
 
     /**
      * Emit the field update event
@@ -93,6 +93,6 @@ export default {
      */
     fieldUpdated () {
       this.$emit('change', this.localModel)
-    }    
+    }
   }
 }

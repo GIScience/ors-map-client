@@ -45,7 +45,7 @@ export default {
   methods: {
     /**
      * If the active state changes
-     * reset the palces array
+     * reset the places array
      * @param {Boolean} isActive
      */
     activeChanged (isActive) {
@@ -89,7 +89,7 @@ export default {
     */
    removePlace (data) {
     if (this.places[data.index]) {
-      // call the specilized script method
+      // call the specialized script method
       this.removePlaceInput(data.index)
       this.updatePlaceView(data.index)
     }

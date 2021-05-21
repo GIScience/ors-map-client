@@ -20,10 +20,10 @@ export default {
   methods: {
     /**
      * Determines if a given
-     * extra must be shown by 
+     * extra must be shown by
      * checking if it is enabled
      * in the app settings
-     * @param {*} extraKey 
+     * @param {*} extraKey
      * @returns {Boolean}
      */
     showExtra (extraKey) {
@@ -50,11 +50,11 @@ export default {
       return extras > 0
     },
     /**
-     * Get the color from the ors dictionary 
+     * Get the color from the ors dictionary
      * based on the extra key and index
-     * @param {*} extraKey 
+     * @param {*} extraKey
      * @param {*} index
-     * @param {*} value 
+     * @param {*} value
      */
     colorValue (extraKey, index, value) {
       let dict = orsDictionary
@@ -62,11 +62,11 @@ export default {
       return color
     },
     /**
-     * Build and return 
+     * Build and return
      * the segment style object
-     * @param {String} extraKey 
-     * @param {Number} amount 
-     * @param {Integer} index 
+     * @param {String} extraKey
+     * @param {Number} amount
+     * @param {Integer} index
      * @returns {Object}
      */
     segmentStyle (extraKey, amount, index) {
@@ -78,8 +78,8 @@ export default {
     },
     /**
      * Get the label of an extra value
-     * @param {String} extraKey 
-     * @param {Integer} value 
+     * @param {String} extraKey
+     * @param {Integer} value
      * @returns {Integer} value
      */
     getExtraValueLabel (extraKey, value) {
@@ -95,12 +95,12 @@ export default {
       return value
     },
     /**
-     * Handle the show section click by 
+     * Handle the show section click by
      * building the object and emitting a
-     * highlightPolylineSections event 
+     * highlightPolylineSections event
      * that will be catch by the map view
      * to highlight a given section of a given extra key
-     * @param {String} extraKey 
+     * @param {String} extraKey
      * @param {Integer} value
      * @param {Integer} index
      * @emits highlightPolylineSections (via eventBus)
@@ -115,12 +115,12 @@ export default {
       this.eventBus.$emit('highlightPolylineSections', heighlighData)
     },
     /**
-     * Handle the show all sections click by 
+     * Handle the show all sections click by
      * building the object and emitting a
-     * highlightPolylineSections event 
+     * highlightPolylineSections event
      * that will be catch by the map view
      * to highlight all sections of a given extra key
-     * @param {String} extraKey 
+     * @param {String} extraKey
      * @emits highlightPolylineSections (via eventBus)
      */
     showAllSections (extraKey) {
@@ -138,27 +138,27 @@ export default {
     },
     /**
      * Build the the extra info highlighting data
-     * @param {String} extraKey 
-     * @param {Integer} index 
+     * @param {String} extraKey
+     * @param {Integer} index
      * @param {Integer} value
      * @returns {Object} {intervals: Array, color: string, label: String}
      */
     buildExtraHighlighPolylineData (extraKey, index, value) {
       const color = this.colorValue(extraKey, index, value)
       const label = this.getExtraValueLabel(extraKey, value).toLowerCase()
-      // Values contains an array with the following data: 
+      // Values contains an array with the following data:
       // a) position `zero` - the starting index on the route polyline array of
       // where the given extra info starts
       // b) position `1` - the final index on the route polyline array where the
       // given extra info ends.
-      // c) position 2 - the value that represents the extra info to be 
-      // swhown on over the route. For example, steepness
+      // c) position 2 - the value that represents the extra info to be
+      // shown on over the route. For example, steepness
       const values = this.routeExtras[extraKey].values
 
-      
+
       // As some extra info may be present in several non-continuous
       // segments we must get the intervals where the value matches
-      // so that we show onlt the extra info wth the value selected by the user
+      // so that we show only the extra info wth the value selected by the user
       const intervals = this.lodash.filter(values, (v) => {
         return v[2] === value
       })

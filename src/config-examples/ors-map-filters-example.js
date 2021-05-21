@@ -1,4 +1,4 @@
-// This is an example file and is expected to be cloned 
+// This is an example file and is expected to be cloned
 // without the -example on the same folder that it resides.
 
 import routeSmoothnessList from '@/resources/lists/route-smoothness'
@@ -8,7 +8,7 @@ import gradesList from '@/resources/lists/grades'
 import constants from '@/resources/constants'
 
 const filters = [
-  { // Profile filter is required. What you can change is the avaialble items in the enum and mapping
+  { // Profile filter is required. What you can change is the available items in the enum and mapping
     name: 'profile',
     useInServices: [constants.services.directions, constants.services.isochrones],
     hidden: true,
@@ -196,13 +196,13 @@ const filters = [
         type: constants.filterTypes.wrapper,
         useInServices: [constants.services.directions],
         availableOnModes: [constants.modes.roundTrip, constants.modes.directions],
-        valueAsObject: true,     
+        valueAsObject: true,
         validWhen: [
           {
             ref: 'profile',
             value: ['driving-hgv', 'wheelchair']
           }
-        ],   
+        ],
         props: [
           {
             name: 'restrictions',
@@ -225,7 +225,7 @@ const filters = [
                     ref: 'self',
                     min: 1
                   }
-                ], 
+                ],
                 value: 0,
                 min: 1,
                 max: 100,
@@ -245,7 +245,7 @@ const filters = [
                     ref: 'self',
                     min: 2
                   }
-                ], 
+                ],
                 value: 0,
                 min: 2,
                 max: 5,
@@ -265,7 +265,7 @@ const filters = [
                     ref: 'self',
                     min: 2
                   }
-                ], 
+                ],
                 value: 0,
                 min: 2,
                 max: 15,
@@ -281,7 +281,7 @@ const filters = [
                     ref: 'profile',
                     value: 'driving-hgv'
                   }
-                ], 
+                ],
                 value: 0,
                 min: 1,
                 max: 100,
@@ -297,7 +297,7 @@ const filters = [
                     ref: 'profile',
                     value: 'driving-hgv'
                   }
-                ], 
+                ],
                 value: 0,
                 min: 2,
                 max: 5,
@@ -312,7 +312,7 @@ const filters = [
                     ref: 'profile',
                     value: 'driving-hgv'
                   }
-                ], 
+                ],
                 value: false,
               },
               {
@@ -324,7 +324,7 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ], 
+                ],
                 value: '6',
                 isEnum: true,
                 enum: [
@@ -343,7 +343,7 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ], 
+                ],
                 isEnum: true,
                 value: '0.06',
                 enum: [
@@ -362,7 +362,7 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ], 
+                ],
                 value: 1,
                 min: 0,
                 max: 30,
@@ -377,10 +377,10 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ], 
+                ],
                 isEnum: true,
                 value: 'good',
-                items: routeSmoothnessList,                
+                items: routeSmoothnessList,
                 itemValue: 'value'
               },
               {
@@ -392,10 +392,10 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ], 
+                ],
                 isEnum: true,
                 value: 'cobblestone',
-                items: surfaceTypesList,                
+                items: surfaceTypesList,
                 itemValue: 'value'
               },
               {
@@ -407,10 +407,10 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ], 
+                ],
                 isEnum: true,
                 default: null,
-                value: 'grade1',                
+                value: 'grade1',
                 itemValue: 'value',
                 items: gradesList
               }
@@ -551,7 +551,7 @@ const filters = [
         name: 'avoid_countries',
         required: false,
         type: constants.filterTypes.array,
-        default: false,        
+        default: false,
         itemValue: 'cid',
         apiDefault: false,
         isEnum: true,

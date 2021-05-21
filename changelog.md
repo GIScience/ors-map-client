@@ -36,103 +36,106 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [Unreleased]
+
+### Fixed
+- Spelling, formatting and grammar issues in the README.md, documentation, changelog and comments
+
 ## [v1.0.12] - 2021-04-28 ##
 
 ### Added ###
-
-- Added Hungarian language
+- Hungarian language
 
 ### Changed ###
-
 - Show slider current value as user moves the slider
 
 ## [v1.0.11] - 2021-04-23 ##
 
-### Changed ###
-
-- Fix the processing of filter values that are invalid that were affecting some valid filters
+### Fixed ###
+- the processing of filter values that are invalid and were affecting some valid filters
 
 ## [v1.0.10] - 2021-04-20 ##
 
 ### Changed ###
-
-- Fix typos in places-and-directions
-- Auto close download and settings modal after main action is executed
-- Remove invalid filter values when profile changes
+- Auto close download and settings modal after executing the main action
 - Update map view when in directions mode, a place changes, but there is no valid route yet
-- Only show marker with number inside if a route is being displayed
-- the file `src/config-examples/default-map-settings-example.js` changed. Update your config file based on that.
+- Only show marker with number inside when displaying a route
+- file `src/config-examples/default-map-settings-example.js` (Update your config)
+
+### Fixed
+- typos in places-and-directions
+
+### Removed
+- invalid filter values when profile changes
 
 ## [v1.0.9] - 2021-04-09 ##
 
-### Changed ###
+### Added
+- right click context menu 'Inspect data on OSM'
 
+### Changed ###
 - Keep altitude chart/graph open when route changes
-- Add right click context menu 'Inspect data on OSM'
 
 ## [v1.0.8] - 2021-04-07 ##
 
-### Changed ###
+### Added
+- raw routing (skip all segments) option in advanced settings
+- a field for custom over layer in settings
 
-- Add raw routing (skip all segments) option in advanced settings
-- Add field for custom over layer in settings
-
-The config example src/config-examples/default-map-settings-example.js file was changed. Updated your corresponding config file
+### Changed
+- file `src/config-examples/default-map-settings-example.js` (Update your config)
 
 ## [v1.0.7] - 2021-04-01 ##
 
 ### Changed ###
-
 - Show ascent and descent for each segment on route details component
-- Remove altitude component i18n files, since it is not been used anymore
+
+### Removed
+- altitude component i18n files, since it is not been used anymore
 
 ## [v1.0.6] - 2021-03-25 ##
 
-### Fixed ###
+### Added
+- support for gpx, xml and kml multi segment routes
 
+### Fixed ###
 - Fix building routes as alternative routes in file importer
-- Add support for gpx, xml and kml multi segment routes
 
 ## [v1.0.5] - 2021-03-25 ##
 
 ### Fixed ###
-
-- Stop displaying old route when the route way points change and a new route can not be calculated
-- Build extra info highlight color based on item index or value
+- Stop displaying old route when the route way points changed, and a new route cannot be calculated
+- Build extra info highlight color based on an item index or value
 
 ## [v1.0.4] - 2021-03-24 ##
 
 ### Fixed ###
-
-- Show place markers when the could can not be calculated
+- Show place markers when the route cannot be calculated
 - Show calculating toaster indefinitely (until an error or success toaster replace it)
-- Fix the adding of extra info to the request when a nested profile is active, like foot-hiking
+- the adding of extra info to the request when a nested profile is active, like foot-hiking
 
-### Changed ###
-
-- Remove avoid_feature filters that are not support anymore (update your local ors-map-filters.js)
+### Removed ###
+- avoid_feature filters that are not supported anymore (update your local `ors-map-filters.js`)
 
 ## [v1.0.3] - 2021-03-22 ##
 
 ### Fixed ###
-
 - Fixed admin area loader filter for cases when no locality is available
 
 ## [v1.0.2] - 2021-03-22 ##
 
 ### Added ###
-
 - Support to search by postal code
 
 ### Changed ###
-
-- Auto select by hit enter/return also in the case of a single postal code layer result
-- Template/example file `layer-zoom-mapping-example` was changed to include postal code (please update your config file to reflect this)
+- Auto-select by pressing enter/return also in the case of a single postal code layer result
+- Template/example file `layer-zoom-mapping-example` to include postal code (update your config)
 
 ## [v1.0.1] - 2021-03-18 ##
 
-### Changed ###
+## Added
+- allowing to save default locale as preferred locale
 
+### Changed ###
 - Sidebar foot height
 - About translation in French
-- Allow saving default locale as preferred locale

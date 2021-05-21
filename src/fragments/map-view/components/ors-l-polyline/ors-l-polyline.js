@@ -10,7 +10,7 @@ export default {
   data () {
     return {
       orsExtendedPolyline: null,
-      backgroundWeight: 11, // will automaticaly be changed based on the weight value on `created`,
+      backgroundWeight: 11, // will automatically be changed based on the weight value on `created`,
       active: true
     }
   },
@@ -105,8 +105,8 @@ export default {
       })
     },
     updatePopup () {
-      if (this.$refs.foregroundPolyline && this.popupContent) {    
-        // Create and show popp
+      if (this.$refs.foregroundPolyline && this.popupContent) {
+        // Create and show popup
         this.$refs.foregroundPolyline.mapObject.bindPopup(this.popupContent, {autoClose: true, closeOnClick: true, autoPan: false}).openPopup()
       }
     },
@@ -114,21 +114,21 @@ export default {
      * When the polyline is clicked
      * check if it is active. If so, show clicked point
      * the polyline details. If not active, just
-     * forward the event by emitting a vuejs `click` event
-     * @param {*} event 
+     * forward the event by emitting a Vue.js `click` event
+     * @param {*} event
      * @emits click
      */
     click (event) {
       if (!this.notActive && this.$refs.foregroundPolyline.mapObject) {
         this.openPopup(event)
-      } else {        
+      } else {
         this.$emit('click', event)
       }
     },
     /**
      * Show the details of a polyline point
      * by firing the polylineClicked event
-     * @param {Event} event 
+     * @param {Event} event
      * @fire polylineClicked
      */
     showPolylinePointDetails (event) {
@@ -141,7 +141,7 @@ export default {
     },
     /**
      * Show the polyline point by index
-     * @param {Number} polylineCoordsIndex 
+     * @param {Number} polylineCoordsIndex
      */
     showPolylinePointByIndex (polylineCoordsIndex) {
       const customEvent = new Event('showPolylinePointByIndex')
@@ -152,7 +152,7 @@ export default {
   },
   computed: {
     /**
-     * Get the latlngs coodinate array
+     * Get the latlngs coordinate array
      * from the latLngs prop or from the route
      * coordinates or return an empty array
      * @returns {Array}
@@ -207,7 +207,7 @@ export default {
       console.error('Latlngs or route object must be passed with valid values')
     } else {
       this.backgroundWeight = this.weight + 4
-    
+
       // If draggable is defined via prop as true
       // then add the necessary attribute on the
       // options object

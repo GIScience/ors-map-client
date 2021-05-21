@@ -30,9 +30,9 @@ const fetchApiInitialData = () => {
           saveApiData(appConfig.orsApiKey, constants.endpoints)
           resolve()
         } else {
-          let httpClient = new HttpClient({baseURL: appConfig.dataServiceBaseUrl})          
-          // Request the public API key from the remote service 
-          // (only works when runing the app on valid ORS domains).
+          let httpClient = new HttpClient({baseURL: appConfig.dataServiceBaseUrl})
+          // Request the public API key from the remote service
+          // (only works when running the app on valid ORS domains).
           // If the request fails, use the local user key instead
           httpClient.http.get(appConfig.publicApiKeyUrl).then(response => {
             saveApiData(response.data, constants.publicEndpoints)
@@ -50,8 +50,8 @@ const fetchApiInitialData = () => {
 
 /**
  * Find the fitting locale
- * @param {String} mapSettings 
  * @returns {String}
+ * @param storedLocale
  */
 const setFittingLocale = (storedLocale) => {
   var deviceLocale = window.navigator.language || window.navigator.userLanguage
@@ -62,7 +62,7 @@ const setFittingLocale = (storedLocale) => {
   let isLocaleValid = lodash.find(settingsOptions.appLocales, (l) => {
     return l.value === locale
   })
-  // If the exact locale of the device is not available, try at least to use the language 
+  // If the exact locale of the device is not available, try at least to use the language
   if (!isLocaleValid) {
     let language = locale
     if (locale.length > 2 && locale.indexOf('-') > -1) {
@@ -73,7 +73,7 @@ const setFittingLocale = (storedLocale) => {
     })
     if (isLocaleValid) {
       locale = isLocaleValid.value
-    }    
+    }
   }
   // If the selected locale is not supported, set the default
   if (!isLocaleValid) {
@@ -83,9 +83,8 @@ const setFittingLocale = (storedLocale) => {
 }
 /**
  * Save the API data
- * @param {*} commit 
- * @param {*} apiKey 
- * @param {*} endpoints 
+ * @param {*} apiKey
+ * @param {*} endpoints
  */
 const saveApiData = (apiKey, endpoints) => {
   // Save the api key and the endpoints to the default settings object
@@ -121,7 +120,7 @@ const saveApiData = (apiKey, endpoints) => {
     // If the settings was saved in local storage
     // then this option is must start as true
     mapSettings.saveToLocalStorage = true
-  }  
+  }
   storeLocale(mapSettings, locale)
 
   let mainVue = main
@@ -138,8 +137,8 @@ const saveApiData = (apiKey, endpoints) => {
 
 /**
  * Store the map settings locale and routing locale
- * @param {*} mapSettings 
- * @param {*} locale 
+ * @param {*} mapSettings
+ * @param {*} locale
  */
 const storeLocale = (mapSettings, locale = null) => {
   let fittingLocale = setFittingLocale(locale)
@@ -152,7 +151,7 @@ const storeLocale = (mapSettings, locale = null) => {
     settingsOptions.routingInstructionsLocale = locale
   } else {
     validroutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) => {
-      return l.value === fittingLocale.split('-')[0]     
+      return l.value === fittingLocale.split('-')[0]
     })
     if (validroutingLocale) {
       mapSettings.routingInstructionsLocale = validroutingLocale.value
@@ -164,9 +163,6 @@ const storeLocale = (mapSettings, locale = null) => {
 }
 /**
  * check if the embed is in the url params and set the embed state
- * @param {*} getters 
- * @param {*} commit 
- * @param {*} routeTo 
  */
 const checkAndSetEmbedState = () => {
   return new Promise((resolve) => {
@@ -179,7 +175,7 @@ const checkAndSetEmbedState = () => {
       locale = setFittingLocale(locale)
 
       let settings = store.getters.mapSettings
-      storeLocale(settings, locale) 
+      storeLocale(settings, locale)
     }
     resolve(isEmbed)
   })

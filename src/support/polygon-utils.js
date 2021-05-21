@@ -42,7 +42,7 @@ const PolygonUtils = {
 
   /**
    * Merge polygons into one multipolygon
-   * @param {Array} polygons 
+   * @param {Array} polygons
    * @returns {Object}
    */
   mergePolygonsIntoMultiPolygon(polygons) {
@@ -57,7 +57,7 @@ const PolygonUtils = {
   },
   /**
    * Merge polygons into one multipolygon
-   * @param {Object} multiPolygon 
+   * @param {Object} multiPolygon
    * @returns {Array} polygons
    */
   splitMultiPolygonIntoPolygons(multiPolygon) {
@@ -76,7 +76,7 @@ const PolygonUtils = {
 
   /**
    * Flat polygon coordinates
-   * @param {*} coordinates 
+   * @param {*} coordinates
    */
   flatCoordinates (coordinates) {
     let flatten = []
@@ -94,8 +94,8 @@ const PolygonUtils = {
    * Checks if a single point is contained in a polyline or polygon
    * Note that L.Polygon, L.GeodesicPolygons, and L.GeodesicCircles are types of L.Polygon.
    * @param {Leaflet.LatLng} point A geographical point
-   * @param {Array} of Latlng points
-   * @returns {boolean} True if the point is contained in the polygon or polyline; otherwise, 
+   * @param {Array} polygonCoords: array of LatLng points
+   * @returns {boolean} True if the point is contained in the polygon or polyline; otherwise,
    *
    */
   isInsidePolygon: (point, polygonCoords) => {
@@ -115,8 +115,8 @@ const PolygonUtils = {
 
   /**
    * Determines if a point is inside the polygon bounds
-   * @param {Leaflet.latlng} point 
-   * @param {Leaflet.Polygon} polygon 
+   * @param {Leaflet.latlng} point
+   * @param {Leaflet.Polygon} polygon
    * @returns {Boolean} insideBounds
    */
   isInsidePolygonBounds (point, polygon) {
@@ -127,12 +127,12 @@ const PolygonUtils = {
 
   /**
    * Test for a point in a polygon or on the bounding lines of the polygon.  The
-   * coordinates (L.LatLngs) for a GeodesicPolygon are set to follow the earth's
+   * coordinates (L.LatLng) for a GeodesicPolygon are set to follow the earth's
    * curvature when the GeodesicPolygon object is created.  Since L.Polygon
    * extends Leaflet.Polyline we can use the same method for both.  Although, for
    * L.Polyline, we only get points on the line even if a collection of lines
    * appear to make a polygon.
-   * 
+   *
    * This is a JavaScript and Leaflet port of the `wn_PnPoly()` C++ function by Dan Sunday.
    * Unlike the C++ version, this implementation does include points on the line and vertices.
    *
@@ -140,7 +140,7 @@ const PolygonUtils = {
    * @returns {Number} The winding number (=0 only when the point is outside)
    *
    * @see {@link http://geomalgorithms.com/a03-_inclusion.html Inclusion of a Point in a Polygon} by Dan Sunday.
-   * @see {@link https://github.com/Fragger/Leaflet.Geodesic Leaflet.Geodesc} for information about Leaflet.Geodesc by Fragger.
+   * @see {@link https://github.com/Fragger/Leaflet.Geodesic Leaflet.Geodesic} for information about Leaflet.Geodesic by Fragger.
    * @see {@link https://en.wikipedia.org/wiki/Winding_number} to understand winding number
    */
   getWindingNumber: (point, vertices) => {

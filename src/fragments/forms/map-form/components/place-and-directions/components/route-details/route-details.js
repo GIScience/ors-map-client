@@ -24,7 +24,7 @@ export default {
   watch: {
     /**
      * Every time the response data changes
-     * the map builder is reseted and the
+     * the map builder is reset and the
      * map data is reloaded
      */
     mapViewData: {
@@ -55,8 +55,8 @@ export default {
       }
     },
     /**
-     * Builds and return the routes 
-     * parsed, with translations and 
+     * Builds and return the routes
+     * parsed, with translations and
      * humanized content
      * @returns {Array} of route objects
      */
@@ -86,10 +86,10 @@ export default {
       return value
     },
     /**
-     * Get the route summary with humanized 
+     * Get the route summary with humanized
      * distance and duration data
-     * @param {*} summary 
-     * @param {*} unit 
+     * @param {*} summary
+     * @param {*} unit
      * @return {Object} summary
      */
     getHumanizedSummary (summary, unit = null) {
@@ -108,7 +108,7 @@ export default {
     /**
      * get the parsed segments by
      * humanizing the duration and distances
-     * @param {*} segments 
+     * @param {*} segments
      * @returns {Object} segments
      */
     parseSegments (segments) {
@@ -131,7 +131,7 @@ export default {
      * Handle the active route index change
      * by emitting a changeActiveRouteIndex
      * event via eventBus
-     * @param {*} index 
+     * @param {*} index
      * @emits changeActiveRouteIndex
      */
     changeActiveRouteIndex (index) {
@@ -142,8 +142,8 @@ export default {
      * prepare the data and emit
      * and event targeting the highlight
      * of this segment
-     * @param {*} segment 
-     * @param {*} index 
+     * @param {*} segment
+     * @param {*} index
      * @emits highlightPolylineSections
      */
     segmentClicked (segment, index) {
@@ -155,8 +155,8 @@ export default {
     },
     /**
      * Build the the extra info highlighting data
-     * @param {*} segment 
-     * @param {*} index 
+     * @param {*} segment
+     * @param {*} index
      * @returns {Object}
      */
     buildExtraHighlighPolylineData (segment, index) {

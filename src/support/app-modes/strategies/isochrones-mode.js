@@ -49,7 +49,7 @@ class IsochronesMode {
 
     // In the directions mode, the options parameter may contains an options object
     // that is expected to be used as the ORS API request options (avoid_polygons, avoid_features etc)
-    // So, as they are stringfied on the url, we try to parse them back to an object
+    // So, as they are stringified on the url, we try to parse them back to an object
     if (appRouteData.options && appRouteData.options.options) {
       appRouteData.options.options = Utils.tryParseJson(appRouteData.options.options) || appRouteData.options.options
     }

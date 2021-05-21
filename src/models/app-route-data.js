@@ -4,7 +4,7 @@ import utils from '@/support/utils'
  */
 class AppRouteData {
   /**
-   * Contructor
+   * Constructor
    * @param {*} places
    * @param {*} options
    */
@@ -28,5 +28,5 @@ class AppRouteData {
     return clone
   }
 }
-// export the AppRouteDatar class
+// export the AppRouteData class
 export default AppRouteData

@@ -1,4 +1,4 @@
-// List of route smothness
+// List of route smoothness
 const routeSmothness = [
   'impassable',
   'very_horrible',

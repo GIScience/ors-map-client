@@ -19,7 +19,7 @@ import isochronesMode from './strategies/isochrones-mode'
  */
 class AppMode {
   /**
-   * Contructor
+   * Constructor
    * @param {String} modeTo - constants.modes
    */
   constructor (modeTo) {

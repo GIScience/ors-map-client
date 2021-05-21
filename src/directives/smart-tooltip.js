@@ -5,7 +5,7 @@ import store from '@/store/store'
 import main from '@/main'
 
 /**
- * Popper tooltip cdirective hanlder
+ * Popper tooltip directive handler
  */
 const smartTooltip = {
   bind (el, binding, vNode) {
@@ -15,7 +15,7 @@ const smartTooltip = {
     if (vNode.context.popperTooltipGuid) {
       closeTooltip(vNode.context.popperTooltipGuid)
     }
-  }, 
+  },
   update (el, binding, vNode) {
     render(el, binding, vNode, true)
   },
@@ -28,7 +28,7 @@ const smartTooltip = {
  * Render the tooltip component
  * @param {*} el - DOM the element which the tooltip will be attached to
  * @param {*} binding - parameters
- * @param {*} vNode - vuejs element which the tooltip will be attached to
+ * @param {*} vNode - vue element which the tooltip will be attached to
  * @param {*} rerendering - if the tooltip is being updated
  */
 const render = (el, binding, vNode, rerendering = false) => {
@@ -48,9 +48,9 @@ const render = (el, binding, vNode, rerendering = false) => {
 
 /**
  * Handle the close tooltip click
- * @param {*} tooltipGuid 
- * @param {*} hidePermantely 
- * @param {*} name 
+ * @param {*} tooltipGuid
+ * @param {*} hidePermantely
+ * @param {*} name
  */
 const closeTooltip = (tooltipGuid, hidePermantely, name) => {
   removeTooltipEl(tooltipGuid)
@@ -62,11 +62,11 @@ const closeTooltip = (tooltipGuid, hidePermantely, name) => {
 
 /**
  * Remove tooltip rom DOM
- * @param {*} tooltipGuid 
+ * @param {*} tooltipGuid
  */
 const removeTooltipEl = (tooltipGuid) => {
   if (tooltipGuid) {
-    let tooltipEl = document.getElementById(tooltipGuid)  
+    let tooltipEl = document.getElementById(tooltipGuid)
     if (tooltipEl) {
       document.body.removeChild(tooltipEl)
     }
@@ -75,7 +75,7 @@ const removeTooltipEl = (tooltipGuid) => {
 
 /**
  * Store in browser's local storage that the the tooltip has already been shown
- * @param {*} tooltipName 
+ * @param {*} tooltipName
  */
 const storeTooltipAlreadyShown = (tooltipName) => {
   let mapSettings = store.getters.mapSettings
@@ -90,14 +90,14 @@ const storeTooltipAlreadyShown = (tooltipName) => {
  * Show tooltip
  * @param {*} el - DOM the element which the tooltip will be attached to
  * @param {*} options tool tip options object
- * @param {*} vNode - vuejs element which the tooltip will be attached to
+ * @param {*} vNode - vue element which the tooltip will be attached to
  */
 const showToolTip = (el, options, vNode) => {
-  vNode.context.$nextTick(() => {    
+  vNode.context.$nextTick(() => {
     var mustBeShown = true
-    // Check if tool tip was already showm
+    // Check if tool tip was already shown
     if ((options.showOnce || options.saveClose) && options.name) {
-      let mapSettings = store.getters.mapSettings      
+      let mapSettings = store.getters.mapSettings
       mustBeShown = !(mapSettings.shownOnceTooltips && mapSettings.shownOnceTooltips[options.name])
     }
     if (options.showOnce && !appConfig.showInstructionsTooltipsOnFirstLoad) {
@@ -122,16 +122,16 @@ const showToolTip = (el, options, vNode) => {
       let toolTipEl = buildTooltipEl(guid, options)
       document.body.appendChild(toolTipEl)
       setArrowPseudoStyles(guid, options)
-      
+
       // Build tooltip popper options
       let popperOptions = { placement: options.position, modifiers: [{ name: 'offset', options: { offset: [0, 8] } } ]  }
-      
-      // Store the tooltip unique id in the vuejs component
+
+      // Store the tooltip unique id in the vue component
       vNode.context.popperTooltipGuid = guid
 
       // Create the popper tooltip
-      createPopper(el, toolTipEl, popperOptions) 
-      
+      createPopper(el, toolTipEl, popperOptions)
+
       // Ir the tooltip must be shown only once
       // then store that it was already shown
       if (options.showOnce) {
@@ -143,8 +143,8 @@ const showToolTip = (el, options, vNode) => {
 
 /**
  * Build tooltip el html fragment
- * @param {*} guid 
- * @param {*} options 
+ * @param {*} guid
+ * @param {*} options
  * @returns {HtmlFragment}
  */
 const buildTooltipEl = (guid, options) => {
@@ -166,13 +166,13 @@ const buildTooltipEl = (guid, options) => {
   toolTipContentEl.className = 'popper-tooltip-content'
 
   let style = `
-    z-index:4; 
-    background-color: ${background}; 
-    color: ${contentColor}; 
-    padding: 5px 10px; 
-    border-radius: 4px; 
-    font-size: 13px; 
-    max-width: 200px; 
+    z-index:4;
+    background-color: ${background};
+    color: ${contentColor};
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    max-width: 200px;
     box-shadow: 0px 2px 1px 2px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);`
 
   let toolTipEl = document.createElement('div')
@@ -180,35 +180,35 @@ const buildTooltipEl = (guid, options) => {
   toolTipEl.setAttribute("style", style)
   toolTipEl.setAttribute("role", 'tooltip')
   toolTipEl.className = 'popper-tooltip'
-  
+
   toolTipEl.innerHTML = `<div id="arrow-${guid}" data-popper-arrow></div>`
   toolTipEl.appendChild(toolTipCloseEl)
   toolTipEl.appendChild(toolTipContentEl)
-  
+
   return toolTipEl
 }
 
 /**
  * Set the tooltip pseudo style by adding an style element to the DOM
- * @param {*} guid 
- * @param {*} options 
+ * @param {*} guid
+ * @param {*} options
  */
 const setArrowPseudoStyles = (guid, options) => {
   let arrowDivId = `arrow-${guid}`
   let styleElem = document.head.appendChild(document.createElement("style"));
   let positionStyle = buildArrowPosition(options)
   let arrowColor = options.dark === true ? '#333;' : 'white'
-  
+
   styleElem.innerHTML = `
     #${arrowDivId} {${positionStyle}}
     #${arrowDivId}, #${arrowDivId}::before {position: absolute;width: 8px;height: 8px;z-index: -1; background: transparent;}
-    #${arrowDivId}:before {content: ''; transform: rotate(45deg); background: ${arrowColor};}    
+    #${arrowDivId}:before {content: ''; transform: rotate(45deg); background: ${arrowColor};}
     `
 }
 
 /**
  * Build the tooltip arrow position style
- * @param {String} options 
+ * @param {String} options
  * @returns {string} arrowPosition
  */
 const buildArrowPosition = (options) => {

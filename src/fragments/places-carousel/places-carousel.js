@@ -108,7 +108,7 @@ export default {
       }
     },
     /**
-     * REtrieves the place layer
+     * Retrieves the place layer
      * @param {*} place
      */
     placeLayer (place) {
@@ -146,13 +146,13 @@ export default {
       this.$emit('placeSelected', index)
     },
     /**
-     * Hanles the click outside event
+     * Handles the click outside event
      * emitting the closed event
      * @emits close
      */
     clickOutside (event) {
       const source = event.currentTarget.activeElement
-      // If the accessibility buttom is hit
+      // If the accessibility button is hit
       // we don't have to emit the closed
       if (!source.classList.contains('do-not-trigger-close-bottom-nav')) {
         this.$emit('close')
@@ -181,7 +181,7 @@ export default {
       }
     },
     /**
-     * Emmit the directions to latlg
+     * Emmit the directions to latlng
      * @param {*} place
      */
     directionsTo (place) {
@@ -189,7 +189,7 @@ export default {
       this.$emit('closed')
     },
     /**
-     * Emmit the directions to latlg
+     * Emmit the directions to latlng
      * @param {*} place
      */
     gotToPlace (place) {

@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     /**
-     * Determines if a place input can be aded to the view
+     * Determines if a place input can be added to the view
      * @returns boolean
      */
     canAddPlaceInput () {

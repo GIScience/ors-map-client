@@ -41,7 +41,7 @@ const isANewResponse = (newResponse, oldResponse) => {
 }
 
 /**
- * Determines if the new mapviewdata is really different from the old one
+ * Determines if the new map-view-data is really different from the old one
  * using the response timestamp metadata as reference
  * @param {*} newResponse
  * @param {*} oldResponse

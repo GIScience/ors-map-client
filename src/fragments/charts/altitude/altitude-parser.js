@@ -2,7 +2,7 @@ import theme from '@/config/theme'
 import lodash from 'lodash'
 
 /**
- * Get the  colums from the the mapviewdata @see src/models/map-view-data
+ * Get the  columns from the the mapViewData @see src/models/map-view-data
  * @param {*} mapViewData
  */
 const getColumns = (mapViewData, routeIndex) => {
@@ -16,7 +16,7 @@ const getColumns = (mapViewData, routeIndex) => {
 }
 
 /**
- * Get the datasets from the mapviewdata @see src/models/map-view-data
+ * Get the datasets from the mapViewData @see src/models/map-view-data
  * @param {*} mapViewData
  */
 const getDatasets = (mapViewData, routeIndex, translations) => {

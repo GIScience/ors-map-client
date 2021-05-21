@@ -159,7 +159,7 @@ export default {
     },
     /**
      * Set a a suggested place as the selected one for a given place input
-     * @param {*} data - can be the palce object or an object containing the place
+     * @param {*} data - can be the place object or an object containing the place
      */
     selectPlace (data) {
       if (data.place) {
@@ -271,7 +271,7 @@ export default {
      */
     handleCalculateIsochronesError (result) {
       this.$root.appHooks.run('beforeHandleIsochronesError', result)
-      
+
       const errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
       if (errorCode) {
         const errorKey = `isochrones.apiError.${errorCode}`
@@ -294,7 +294,7 @@ export default {
      */
     loadData () {
       if (this.$store.getters.mode === constants.modes.isochrones) {
-        // Emtpy the array and populate it with the
+        // Empty the array and populate it with the
         // places from the appRoute without changing the
         // object reference because it is a prop
         this.places = this.$store.getters.appRouteData.places

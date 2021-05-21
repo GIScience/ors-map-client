@@ -10,9 +10,9 @@ import main from '@/main'
 
 const orsParamsParser = {
   /**
-   * Build the args object to be used in atocomplete places request
+   * Build the args object to be used in autocomplete places request
    * @param {*} placeName
-   * @param {Boolean} restrictToBbox - restricct the search to stored bbox
+   * @param {Boolean} restrictToBbox - restrict the search to stored bbox
    * @returns {Object} args
    */
   buildPlaceSearchArgs: (placeName, restrictToBbox = false) => {
@@ -22,14 +22,14 @@ const orsParamsParser = {
       size: 8,
       focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng]
     }
-    // If is set to restrict the search to currrent mapBounds,
+    // If is set to restrict the search to current mapBounds,
     // then apply the restriction
     if (restrictToBbox) {
       let bbox = orsParamsParser.getCurrentBbox()
       // If the bounding box is valid, then add it to the args
       if (bbox) {
         args.boundary_bbox = bbox
-        delete args.focus_point // if we restrict by bounday bbox focus point is not necessary
+        delete args.focus_point // if we restrict by boundary bbox focus point is not necessary
       }
     }
 
@@ -73,20 +73,20 @@ const orsParamsParser = {
         [mapBounds.rect.min_lat, mapBounds.rect.min_lon],
         [mapBounds.rect.max_lat, mapBounds.rect.max_lon]
       ]
-      return bbox  
+      return bbox
     } else {
       return false
-    }    
+    }
   },
 
   /**
    * Build the args object to be used in search POIs request
    * @param {Object} filters {
-   *  category_group_ids: Array, 
-   *  category_ids: Array, 
-   *  name: Array [String], 
-   *  wheelchair: Array ["yes","no","limited","designated"], 
-   *  smoking: Array ['dedicated','yes','no','separated','isolated','outside'], 
+   *  category_group_ids: Array,
+   *  category_ids: Array,
+   *  name: Array [String],
+   *  wheelchair: Array ["yes","no","limited","designated"],
+   *  smoking: Array ['dedicated','yes','no','separated','isolated','outside'],
    *  fee: Array ['yes', 'no']
    * } @see https://openrouteservice.org/dev/#/api-docs/pois/post
    * @param {Number} limit
@@ -180,7 +180,7 @@ const orsParamsParser = {
 
     // Define the extra info that must be be requested
     // based on the map settings
-    const extraInfo = orsParamsParser.buildExtraInfoOptions(mapSettings)    
+    const extraInfo = orsParamsParser.buildExtraInfoOptions(mapSettings)
 
     // Set args object
     const args = {
@@ -242,7 +242,7 @@ const orsParamsParser = {
 
   /**
    * Define the extra info that must be be requested
-   * @param {Object} mapSettings 
+   * @param {Object} mapSettings
    * @returns {Array} extraInfo
    */
   buildExtraInfoOptions (mapSettings) {
@@ -257,18 +257,18 @@ const orsParamsParser = {
         if (key === constants.extraInfos.roadaccessrestrictions) {
           if (profileObj.supportsRoadaccessrestrictions) {
             extraInfo.push(constants.extraInfos[key])
-          } 
+          }
         } else if (key === constants.extraInfos.traildifficulty) {
           if (profileObj.supportsTraildifficulty) {
             extraInfo.push(constants.extraInfos[key])
-          } 
+          }
         } else if (key === constants.extraInfos.tollways) {
           if (profileObj.supportsTollways) {
             extraInfo.push(constants.extraInfos[key])
-          } 
+          }
         } else {
           extraInfo.push(constants.extraInfos[key])
-        }     
+        }
       }
     }
     return extraInfo
@@ -298,7 +298,7 @@ const orsParamsParser = {
 
   /**
    * Add OrsMapFilters to intoArgs object to a given service
-   * @param {Object} intoArgs - taget object to the filters that will be extracted from sourceFilters
+   * @param {Object} intoArgs - target object to the filters that will be extracted from sourceFilters
    * @param {Object} orsFilters
    * @param {String} service
    * @returns {Array} intoArgs
@@ -313,7 +313,7 @@ const orsParamsParser = {
       // Check if the filter matches the conditions to be used
       if (available && !filter.onlyInFront && (!filter.useInServices || filter.useInServices.includes(service))) {
 
-        // Update filter value and children's value based on their depedencies
+        // Update filter value and children's value based on their dependencies
         if (filter.props) {
           DependencyService.updateFieldsStatus(filter.props)
         }
@@ -324,7 +324,7 @@ const orsParamsParser = {
         if (orsParamsParser.isFilterValueValid(filter, filterValue)) {
           orsParamsParser.setFilterVal(filter, filterValue, intoArgs)
         } else if (intoArgs[filter.name] && !orsParamsParser.isFilterValueValid(intoArgs[filter.name])) {
-          // If the filter is available and has not a valud value, remove it
+          // If the filter is available and has not a valid value, remove it
           if (FilterDependencyService.isAvailable(filter)) {
             delete intoArgs[filter.name]
           }
@@ -336,16 +336,16 @@ const orsParamsParser = {
 
   /**
    * Set the filter value into an args object
-   * @param {*} filter 
-   * @param {*} filterValue 
-   * @param {*} intoArgs 
+   * @param {*} filter
+   * @param {*} filterValue
+   * @param {*} intoArgs
    * @hook mapFilterAdded
    */
   setFilterVal (filter, filterValue, intoArgs) {
     // If the parent is a wrapping object and it is already defined in intoArgs, add it to the object
     if (filter.type === constants.filterTypes.wrapper && typeof intoArgs[filter.name] !== 'undefined') {
       intoArgs[filter.name] = orsParamsParser.getMergedParameterValues(intoArgs[filter.name], filterValue)
-    } else { // if not 
+    } else { // if not
       if (filter.valueAsObject && typeof filterValue === 'string') {
         const parsed = Utils.tryParseJson(filterValue)
         intoArgs[filter.name] = parsed || filterValue
@@ -379,7 +379,7 @@ const orsParamsParser = {
   getMergedParameterValues (current, adding) {
     const addingParsedJson = typeof adding === 'string' ? Utils.tryParseJson(adding) : adding
 
-    // If what we wanna add was an object stringfied
+    // If what we wanna add was an object stringified
     // that was successfully parsed, continue this way
     if (addingParsedJson) {
       let newObj = null

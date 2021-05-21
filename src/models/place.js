@@ -25,12 +25,12 @@ class Place {
     this.coordinates = null
 
     // place properties
-    this.properties = options.properties || {} // objct properties, including layer
+    this.properties = options.properties || {} // object properties, including layer
 
     // If the place was valid before be cleared
     this.wasValidBeforeCleared = options.wasValidBeforeCleared !== undefined ? options.wasValidBeforeCleared : false
 
-    // The indx of the input associated to the Place object
+    // The index of the input associated to the Place object
     this.inputIndex = options.inputIndex
 
     // The id of the place returned by the API

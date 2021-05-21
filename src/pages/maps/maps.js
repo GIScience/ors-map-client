@@ -65,7 +65,7 @@ export default {
     },
     /**
      * Determines if the simple search component is visible
-     * based on the embed mode value, the mapready and the sidebar visibility
+     * based on the embed mode value, the mapReady state and the sidebar visibility state
      * @returns {Boolean} isVisible
      */
     simpleSearchIsVisible () {
@@ -106,7 +106,7 @@ export default {
       return height
     },
     /**
-     * Returns the zoom level tha must be used based on 
+     * Returns the zoom level tha must be used based on
      * the app route options and the default zoom level
      * @returns {Number} zoom
      */
@@ -144,7 +144,7 @@ export default {
      * must be fitted based on differ of the last mapViewDta timestamp
      * and if it is the firs load
      * @returns {Boolean} fit
-     * 
+     *
      */
     fitMapBounds () {
       if (this.mapViewData.timestamp && this.previousMapViewDataTimeStamp !== this.mapViewData.timestamp && this.$store.getters.mapSettings.alwaysFitBounds) {
@@ -181,10 +181,10 @@ export default {
     }
   },
   beforeRouteUpdate (to, from, next) {
-    // Altough the mode is defined in the beforeEnter route event
+    // Although the mode is defined in the beforeEnter route event
     // when te browser back button is pressed and we are changing from
     // similar types of route - like directions with two places and
-    // directins with one (for round trip), then the beforeEnter is not trigered
+    // directions with one (for round trip), then the beforeEnter is not triggered
     if (to.fullPath.startsWith(resolver.directions())) {
       RouteUtils.setDirectionsModeBasedOnRoute(to)
     }
@@ -207,12 +207,12 @@ export default {
       }
     },
     /**
-     * Stores the new zomm value and set the
+     * Stores the new zoom value and set the
      * searchBtnAvailable flag as true, since
      * once the map has been moved, the user may wants to
      * refresh the search to get features within the
      * visible map view
-     * @param {Object} { zoom: Object, map: Object, context: Object} 
+     * @param {Object} { zoom: Object, map: Object, context: Object}
      */
     zoomChanged (data) {
       this.$root.appHooks.run('zoomChanged', data)
@@ -240,9 +240,9 @@ export default {
       this.eventBus.$emit('refreshSearch')
     },
     /**
-     * Defines if the searchBtnAvailable based on 
+     * Defines if the searchBtnAvailable based on
      * how much the map has been moved
-     * @param {Object} data 
+     * @param {Object} data
      */
     mapCenterMoved (data) {
       // Only enables the refresh search btn
@@ -253,7 +253,7 @@ export default {
     },
     /**
      * Save the new map center in mapSettings when it changes
-     * and emit a mapcenterchanged event via eventBus
+     * and emit a mapCenterChanged event via eventBus
      * @param {*} latlng
      * @emits mapCenterChanged [via eventBus]
      */
@@ -264,10 +264,10 @@ export default {
       this.$store.dispatch('saveSettings', mapSettings).then(() => {
         context.$root.appHooks.run('mapCenterChanged', mapSettings.mapCenter)
         context.eventBus.$emit('mapCenterChanged', mapSettings.mapCenter)
-      })      
+      })
     },
     /**
-     * Set the view height using the iner height
+     * Set the view height using the inner height
      */
     setViewHeight () {
       this.viewHeight = window.innerHeight
@@ -275,7 +275,7 @@ export default {
     /**
      * Refresh the view size using a debounce
      * it respond to touch event, so we just want
-     * to aply the new size when the event ends
+     * to apply the new size when the event ends
      */
     refreshViewSizeAfterTouchMode () {
       clearTimeout(this.touchmoveDebounceTimeoutId)
@@ -288,7 +288,7 @@ export default {
     },
     /**
      * Deal with the marker click event
-     * by opennning the bottom nav, setting the active place
+     * by opening the bottom nav, setting the active place
      * and running the setViewHeight
      * @param {*} place
      */
@@ -323,7 +323,7 @@ export default {
       this.setViewHeight()
     },
     /**
-     * Handle place index selected and emitts event via evetBus
+     * Handle place index selected and emits event via eventBus
      * @param {*} index
      * @emits placeFocusChanged [via eventBus]
      */
@@ -350,7 +350,7 @@ export default {
       // The mapViewData is watched by the map
       // component and the content re-rendered
       // when it changes. So, by changing it here
-      // the map component is refresed
+      // the map component is refreshed
       this.mapViewData = mapViewData
 
       // once the mapViewData is changed, the
@@ -410,7 +410,7 @@ export default {
      * in a local property. so in case
      * there are more then one map (future)
      * we can check which map must be accessed
-     * @param {*} mapViewGuid 
+     * @param {*} mapViewGuid
      */
     orsMapCreated (mapViewGuid) {
       this.mapViewGuid = mapViewGuid
@@ -418,7 +418,7 @@ export default {
     /**
      * When a marker has been dragged
      * emits the markerDragged event (via eventbus)
-     * @param {Object} marker 
+     * @param {Object} marker
      * @emits markerDragged via eventbus
      */
     markerDragged (marker) {
@@ -426,11 +426,11 @@ export default {
     },
 
     /**
-     * When a directions from point is hit, 
+     * When a directions from point is hit,
      * emit a directionsFromPoint event via eventbus.
      * The map-view component does not emit events via
      * eventBus, only local events to its container (this component)
-     * @param {Object} data 
+     * @param {Object} data
      * @emits directionsFromPoint via eventbus
      */
     directionsFromPoint (data) {
@@ -439,10 +439,10 @@ export default {
     /**
      * Trigger directions based on the data passed
      * that includes a Place by clearing the map
-     * and by emitting the directionsToPoint evet (via eventBus)
+     * and by emitting the directionsToPoint event (via eventBus)
      * The map-view component does not emit events via
      * eventBus, only local events to its container (this component)
-     * @param {Objet} data {place: Place}
+     * @param {Object} data {place: Place}
      */
     directionsToPoint (data) {
       let context = this
@@ -455,9 +455,9 @@ export default {
     },
 
     /**
-     * Check if the data contaisn the pick place index
+     * Check if the data contains the pick place index
      * and emits the setInputPlace via eventBus
-     * @param {*} data 
+     * @param {*} data
      * @emits setInputPlace
      */
     setInputPlace (data) {
@@ -467,7 +467,7 @@ export default {
     },
     /**
      * Navigate the app to the single place mode
-     * @param {Place} place 
+     * @param {Place} place
      */
     gotToPlace (place) {
       this.$store.commit('mode', constants.modes.place)
@@ -481,11 +481,11 @@ export default {
       this.bottomNavActive = false
     },
      /**
-     * When an `add isochrones center` option is hit, 
+     * When an `add isochrones center` option is hit,
      * emits an addAsIsochroneCenter event via eventbus.
      * The map-view component does not emit events via
      * eventBus, only local events to its container (this component)
-     * @param {Object} data 
+     * @param {Object} data
      * @emits addAsIsochroneCenter via eventbus
      */
     addAsIsochroneCenter (data) {
@@ -493,22 +493,22 @@ export default {
     },
 
     /**
-     * When an `add route stop` option is hit, 
+     * When an `add route stop` option is hit,
      * emits an addRouteStop event via eventbus.
      * The map-view component does not emit events via
      * eventBus, only local events to its container (this component)
-     * @param {Object} data 
+     * @param {Object} data
      * @emits addRouteStop via eventbus
      */
     addRouteStop (data) {
       this.eventBus.$emit('addRouteStop', data)
     },
     /**
-     * When an `add destination to route` option is hit, 
+     * When an `add destination to route` option is hit,
      * emits an addDestinationToRoute event via eventbus.
      * The map-view component does not emit events via
      * eventBus, only local events to its container (this component)
-     * @param {Object} data 
+     * @param {Object} data
      * @emits addDestinationToRoute via eventbus
      */
     addDestinationToRoute (data) {
@@ -541,10 +541,10 @@ export default {
       }
     },
     /**
-     * When an avoid polygons option changes, 
+     * When an avoid polygons option changes,
      * merge the avoid polygons array into a multipolygon and
      * emits an avoidPolygonsChanged event via eventbus.
-     * @param {Array} polygons 
+     * @param {Array} polygons
      * @emits avoidPolygonsChanged via eventbus
      */
     avoidPolygonsChanged (polygons) {
@@ -597,21 +597,21 @@ export default {
 
     // Set sidebar initial state (open/closed)
     let sidebarStartOpen = false
-    if (appConfig.sidebarStartsOpenInHeighResolution && this.$highResolution) {
+    if (appConfig.sidebarStartsOpenInHighResolution && this.$highResolution) {
       sidebarStartOpen = true
     }
     this.$store.commit('setLeftSideBarIsOpen', sidebarStartOpen)
 
     const context = this
     // Listen to the mapViewDataChanged event and call the
-    // necessary methods when it happes
+    // necessary methods when it happens
     this.eventBus.$on('mapViewDataChanged', function (mapViewData) {
       context.$root.appHooks.run('mapViewDataChanged', mapViewData)
       context.setMapDataAndUpdateMapView(mapViewData)
       context.setViewHeightAndBottomNav()
     })
 
-    // Set the modal open falgs to true when
+    // Set the modal open flags to true when
     // a show-<something> events happen
     this.eventBus.$on('showAltitudeModal', () => {
       context.isAltitudeModalOpen = true
@@ -625,15 +625,15 @@ export default {
     this.eventBus.$on('loadAvoidPolygons', (avoidPolygons) => {
       context.localAvoidPolygons = avoidPolygons
     })
-  
-    // When the touch move event occours
+
+    // When the touch move event occurs
     // the view size may change (mobile devices)
     // due to the url bar visibility
     document.addEventListener('touchmove', () => {
       this.refreshViewSizeAfterTouchMode()
     })
 
-    // Run the init methods whe 
+    // Run the init methods whe
     // this component is created
     this.loadRoute()
     this.setModalState()

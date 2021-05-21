@@ -97,7 +97,7 @@ const mapDefinitions = {
     const defaultTilesProvider = store.getters.mapSettings.defaultTilesProvider || 'osm'
     var providers = appConfig.mapTileProviders
 
-    // Add custom tile servive if defined in settings
+    // Add custom tile service if defined in settings
     const customTileProviderUrl = store.getters.mapSettings.customTileProviderUrl
     let vueInstance = main.getInstance()
     if (customTileProviderUrl) {
@@ -120,11 +120,11 @@ const mapDefinitions = {
   },
   getOverlayerProviders () {
     let providers = []
-    // Add custom over layer tile servive if defined in settings
+    // Add custom over layer tile service if defined in settings
     const customOverlayerTileProviderUrl = store.getters.mapSettings.customOverlayerTileProviderUrl
     let vueInstance = main.getInstance()
     if (customOverlayerTileProviderUrl) {
-      const overlayerTileService = 
+      const overlayerTileService =
       {
         name: vueInstance.$t('global.customOverlayer'),
         id: 'custom-overlayer',
@@ -132,7 +132,7 @@ const mapDefinitions = {
         attribution: vueInstance.$t('mapView.customTileProvider'),
         url: customOverlayerTileProviderUrl.toString()
       }
-      
+
       providers.push(overlayerTileService)
     }
     return providers

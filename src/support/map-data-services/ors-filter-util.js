@@ -47,7 +47,7 @@ const getFilterValue = (filter, service) => {
   // Proceed only if filter is available considering other filter's value
   if (filterAvailable && FilterDependencyService.isAvailable(filterClone)) {
     // Get the filter with value updated considering dependencies and filter rules
-    if (filterClone.type === constants.filterTypes.wrapper && filterClone.props) {      
+    if (filterClone.type === constants.filterTypes.wrapper && filterClone.props) {
       filterValue = getChildrenFilterValue(filterClone, service)
       filterValue = filterClone.valueAsObject ? filterValue : JSON.stringify(filterValue)
       // Apply filter conditions like min, multiplier etc
@@ -92,7 +92,7 @@ const adjustdFilterValue = (filter, filterValue) => {
 }
 
 /**
- * Get a filter by acestry and item index
+ * Get a filter by ancestry and item index
  * @param {*} ancestry
  * @param {*} itemIndex
  * @returns {Object} accessor
@@ -106,13 +106,13 @@ const getFilterByAncestryAndItemIndex = (ancestry, itemIndex = null) => {
 
 /**
  * Build the ancestry accessor string as a goal to build a string
- * that represents the path to retrive a target item present in
+ * that represents the path to retrieve a target item present in
  * @see /resources/ors-map-filter.js.
  * The map filters is a array of objects that may contains
- * child objects under the `props` prperty, that, if defined,
+ * child objects under the `props` property, that, if defined,
  * also contains an array of child objects. Many levels of objects
  * with props and child objets is possible. This method creates
- * a string that represets the navigation required to access a target
+ * a string that represents the navigation required to access a target
  * object considering the index of each step
  * @param {*} ancestry
  * @param {*} itemIndex
@@ -120,7 +120,7 @@ const getFilterByAncestryAndItemIndex = (ancestry, itemIndex = null) => {
  */
 const buildAncestryAcessorString = (ancestry, itemIndex = null) => {
   let path
-  // Multiple levels of ancestry is suppported.
+  // Multiple levels of ancestry is supported.
   // So, if ancestry is an array, then the first value
   // is the parent level of ancestry and we have to
   // resolve it recursively
@@ -129,7 +129,7 @@ const buildAncestryAcessorString = (ancestry, itemIndex = null) => {
       let subPath = buildAncestryAcessorString(ancestry[0])
       // In case of recursive ancestry, the value in
       // position 1 is the immediate parent and we must
-      // assembly this with the subpath generated
+      // assembly this with the sub-path generated
       path = `[${ancestry[1]}].props${subPath}`
     } else {
       // In case there is not recursive ancestry
@@ -151,7 +151,7 @@ const buildAncestryAcessorString = (ancestry, itemIndex = null) => {
 }
 
 /**
- * Apply filtervalue conditions
+ * Apply filter value conditions
  * @param {*} filterClone
  * @param {*} filterValue
  * @returns {*} filterValue
@@ -172,7 +172,7 @@ const applyFilterValueConditions = (filterClone, filterValue) => {
 }
 
 /**
- * Get filter children value stringfied
+ * Get filter children value stringified
  * @param {*} filter
  * @param {*} service
  * @returns {String}
@@ -194,7 +194,7 @@ const getChildrenFilterValue = (filter, service) => {
 }
 
 /**
- * Set filter value by specifiing filter name
+ * Set filter value by specified filter name
  * @param {*} filterName
  * @param {*} filterValue
  * @param {*} OrsMapFiltersAccessor

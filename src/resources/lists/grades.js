@@ -1,4 +1,4 @@
-// List of route sgrades
+// List of route grades
 
 const grades = [
   'grade1',

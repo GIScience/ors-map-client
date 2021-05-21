@@ -1,11 +1,17 @@
 # ORS map client #
 
-This application implements a map client for the [openrouteservice API](https://openrouteservice.org/dev/#/api-docs/) as Single Page Application (SPA). It is a base application that can be used for multiple purposes, customized via configurarions and extended via plug-ins.
+This application implements a map client for the [openrouteservice API](https://openrouteservice.org/dev/#/api-docs/) as
+Single Page Application (SPA). It is a base application that can be used for multiple purposes,
+customized via configurations and extended via plug-ins.
 
-The base application is built using VueJS, Vuetify and a set of custom components, directives and services. The structure uses a feature-by-folder design, allowing view, code and translation elements to be contained in a folder.
+The base application is using VueJS, Vuetify and a set of custom components, directives and services.
+The structure uses a feature-by-folder design, allowing view, code and translation elements to be contained in a folder.
 
-This app uses single file components and others non-native javascript code that are transpiled to native javascript during the build process. That is way the app needs to be compiled before running it either in dev or production mode.
-The VueJS components allow a better code organization, weak and clear coupling between components and an easier code understanding.
+This app uses single file components and others non-native javascript code that are transpiled to native javascript
+during the build process.
+Therefore, the app needs to be compiled before running it either in dev or production mode.
+The VueJS components allow a better code organization, weak and clear coupling between components and an easier
+code understanding.
 
 ![ORS map client](docs/ors-map-client.png?raw=true "ORS map client")
 
@@ -17,7 +23,7 @@ The VueJS components allow a better code organization, weak and clear coupling b
 - [Feature-by-folder design](#feature-by-folder-design)
 - [Reserved methods and accessors](#reserved-methods-and-accessors)
 - [pages](#pages)
-- [Configuration, theming, customization and extension](#Configuration-theming-customization-and-extension)
+- [Configuration, theming, customization and extension](#configuration-theming-customization-and-extension)
 - [Add language](#add-language)
 - [Menu](#menu)
 - [Debug](#debug)
@@ -28,7 +34,9 @@ The VueJS components allow a better code organization, weak and clear coupling b
 
 Run the app locally in three steps: set the environment up, get the code and define a configuration file.
 
-1. To manage dependencies and pack the app it is necessary to have Node version 12. If you already have it, skip this step. If you don't, please install it by running:
+1. To manage dependencies and pack the app it is necessary to have Node version 12.
+If you already have it, skip this step.
+If you don't, please install it by running:
 
 ```sh
 curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
@@ -63,12 +71,12 @@ npm install
 4. Set the app-config.js values for:
 
 - `orsApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
-- `bitlyApiKey` - the bitly key that will be used to shorten the share URL
-- `bitlyLogin` - the bitly login that will be used to shorten the share URL
+- `bitlyApiKey` - the Bitly key (used to shorten the share URL)
+- `bitlyLogin` - the Bitly login (used to shorten the share URL)
 
-5. The ORS menu is loaded/used by default. If you want to use a custom menu, have a look in the hooks-example.js
+5. The ORS menu is loaded/used by default. If you want to use a custom menu, have a look in the `hooks-example.js`.
 
-The map client filters, the theme and the hooks can be customized, if you need.
+The filters, theme and hooks of the map client can be customized if needed.
 
 At this point the app is ready to run in `dev` mode. Do it by executing the following command in the app root folder:
 
@@ -81,15 +89,15 @@ npm run dev
 
 App folder structure under `src`:
 
-- `assets` - where the images and icon sare stored
+- `assets` - images and icons storage
 - `common` - available mixins, http client, main menu, Vue with Vuetify and theme
 - `directives` - custom directives
 - `filters` - custom filters
 - `fragments` - all app fragments used by pages
 - `i18n` - internationalization resources
 - `models` - models used to deal transport ors response data and deals with app state and transitions
-- `pages` - app pages. currently only the `maps` page is available
-- `resoures` - where support files like the loader lib, definitions and options used to process requests, responses are placed
+- `pages` - app pages (currently only the `maps` page is available)
+- `resoures` - support files like the loader lib, definitions and options used to process requests and responses
 - `router` - router component based on vue-router
 - `shared-services` - shared services that can be used by various components
 - `store` - app store definitions
@@ -97,33 +105,51 @@ App folder structure under `src`:
 
 ### App flow overview ###
 
-This is a Single Page Application (SPA). This means that the client app is loaded on the browser and defines which components and pages are processed based on the browser URL. The app watches every change in the browser URL and updates its state based on that. These URL changes don't trigger a request to the back-end directly, but the components loaded/updated will decide which RESTfull requests must be run to load the required data. In other words, it means that the front-end (this app) is decoupled from the back-ends (ORS API and ORS website)
+This is a Single Page Application (SPA). This means that the client app is loaded in the browser and defines which
+components and pages are processed based on the browser URL.
+The app watches every change in the browser URL and updates its state based on that.
+These URL changes don't trigger a request to the back-end directly, but the components loaded/updated will decide which
+requests must be run to load the required data.
+Meaning, that the front-end (this app) is decoupled from the back-ends (ORS API and ORS website)
 
 The app load cycle follows these steps:
 
 1. Execute the `main.js` file and add global extensions, mixins components and external libs.
 2. The registered hooks are loaded and the `appLoaded` hook is run.
-3. The `main.js` also includes the main router script, the main vuex store and the main i18n file, that will internally, each one, load all the additional `.router.js` files, `.store.js` files and `.i18n.js` files.
-4. `main.js` file will create a VueJS app instance and load the `App.vue`. At this point `AppHooks` is set up and attached to the main VueJS instance and the hook `appLoaded` is run.
-5. `App.vue` includes all basic navigation components, like menu, sidebar, footer and etc.
-6. As soon as all the routes are loaded, including the ones in the `pages` sub folder, the page with the `/` route will also be rendered in the `<router-view></router-view>` in `App.vue` component.
+3. The `main.js` also includes the main files for the router, vuex-store and i18n-translations, which will internally
+load all `.router.js` ,`.store.js` and `.i18n.js` files from sub-folders.
+4. `main.js` file will create a VueJS app instance and load the `App.vue`.
+At this point `AppHooks` is set up and attached to the main VueJS instance and the hook `appLoaded` is run.
+5. `App.vue` includes all basic navigation components, like menu, sidebar, footer etc.
+6. After loading all routes (including the ones in the `pages` sub folder) the page with the `/` route will
+ also be rendered in the `<router-view></router-view>` in `App.vue` component.
 
 Data flow, state and requests to services, in a simplified view, happens as follows:
 
 - The app is loaded
-  1. the API data are fetched from ORS website service and if `appConfig.appMenu.useORSMenu` is **true**, the menu items are loaded in `src/main.js` using `src/app-loader.js`.
+  1. the API data are fetched from ORS website service and if `appConfig.appMenu.useORSMenu` is **true**, the menu items
+   are loaded in `src/main.js` using `src/app-loader.js`.
   2. the app `mode` is defined based on the matching URL in the `maps.route.js`
-  3. the `maps` page, uses the app mode utility to define the app state using the current `mode`. This utility will also populate the values of the `ors-map-filters` based on the URL and build the `AppRouteData` (in src/models/app-route-data.js).
+  3. the `maps` page, uses the app mode utility to define the app state using the current `mode`.
+   This utility will also populate the values of the `ors-map-filters` based on the URL and build the `AppRouteData`
+   (in src/models/app-route-data.js).
   4. based on the app mode/state certain components are activated/displayed
-  5. Every component, once activated, may use the data in `src/config/ors-map-filters` to render its elements and  may run requests to the ORS api using the `src/support/ors-api-runner`. Once the request succeed, the response data will be used to fill the `MapViewData` object.
+  5. Every component, once activated, may use the data in `src/config/ors-map-filters` to render its elements and may
+   run requests to the ORS api using the `src/support/ors-api-runner`.
+   Once the request succeed, the response data will be used to fill the `MapViewData` object.
   6. Once an input is changed the app goes to a new URL and this makes the flow restart at the step 2.
-  7. If a component changes the `MapViewData` model, it emits an event to the `maps` page, that passes the current `MapViewData` object to the `MapView` component.
-  8. Interactions via `MapView` may result in events sent back to `maps` page, that may notify other child components, that in their turn may change the URL and trigger the step 2 again.
-  9. Several app hooks are called during the app flow and and it is possible to listen to these hooks and run custom code to modify some of the app behavior. The available hooks are listed in `src/config/hook-example.js` and must be coded in `src/config/hooks.js`.
+  7. If a component changes the `MapViewData` model, it emits an event to the `maps` page, that passes the current
+   `MapViewData` object to the `MapView` component.
+  8. Interactions via `MapView` may result in events sent back to `maps` page, that may notify other child components,
+   that in their turn may change the URL and trigger the step 2 again.
+  9. Several app hooks are called during the app flow, and it is possible to listen to these hooks and run custom code
+   to modify some app behavior.
+    The available hooks are listed in `src/config/hook-example.js` and must be coded in `src/config/hooks.js`.
 
 ### Feature-by-folder design ###
 
-This app uses feature by folder components and predefined folders where the business code should be placed in. Example of this design usage:
+This app uses feature by folder components and predefined folders where the business code should be placed in.
+Example of this design usage:
 
 Page:
 
@@ -153,7 +179,8 @@ The app will automatically load:
 
 ### Reserved methods and accessors ###
 
-All the VueJS components created (including the fragments) will have, by default, the following methods/accessors define din the main vue instance app:
+All the VueJS components created (including the fragments) will have, by default, the following methods/accessors
+ defined in the main vue instance app:
 
 - `showMessage (msg, theme, options)` - shows a message using the toaster with specified theme and options
 
@@ -165,11 +192,12 @@ All the VueJS components created (including the fragments) will have, by default
 
 - `showSuccess (msg, options)` - shows a success message using the toaster with the specified options
 
-- `confirmDialog (title, text, options)` - shows a confirm dialog with the specified title, text and options and returns a promise. If the user clicks `yes`, the promise will be resolved, if s/he clicks on `no`, the promise will be rejected.
+- `confirmDialog (title, text, options)` - shows a confirm-dialog with the specified title, text and options and returns
+a promise. If the user clicks `yes`, the promise will be resolved, if s/he clicks on `no`, the promise will be rejected.
 
-- `eventBus` - accessor to global event bus object, that allows to broadcast and get events in all components
+- `eventBus` - accessor to global event bus object, that allows broadcasting and getting events in all components
 
-- `$store` - accessor to app store that used vuex
+- `$store` - accessor to app vuex-store
 
 ### Pages ###
 
@@ -177,9 +205,14 @@ All the VueJS components created (including the fragments) will have, by default
 
 ### Configuration, theming, customization and extension ###
 
-The map client app can be configured, customized and extended. Several aspects can be defined/changed in order to disable features, customize visual identity and change/extend its features/behaviors. It is also possible to add plug-ins to the app and subscribe to hooks, listen and emit evens that will make the app respond to specific needs. The items of the menu can also be customized via hooks.
+The map client app can be configured, customized and extended. Several aspects can be defined/changed in order to
+disable features, customize visual identity and change/extend its features/behaviors.
+It is also possible to add custom plug-ins to the app and subscribe to hooks, listen and emit events.
+The items of the menu can also be customized via hooks.
 
-It is possible to define your custom settings and plug-ins and keep getting updates from the ORS repository because the `src/plugins` and `src/config` folders are not vesioned. To keep the original ors-map-client as a secondary repository, do the following:
+It is possible to define your custom settings and plug-ins and keep getting updates from the ORS repository because
+the `src/plugins` and `src/config` folders are not versioned.
+To keep the original ors-map-client as a secondary repository, do the following:
 
 ```sh
 # Rename the original remote
@@ -192,7 +225,9 @@ git remote add origin <git-repo-url>
 git branch --set-upstream-to=origin/master
 ```
 
-After doing this we recommend you to remove from `.gitignore` the lines that tell git to ignore the folders `/src/config`, `src/plugins` and eventually `/static`. Then  run the initial push to the just defined new origin repository, with the following command:
+After doing this we recommend you to remove from `.gitignore` the lines that tell git to ignore the folders
+`/src/config`, `src/plugins` and eventually `/static`.
+Then, run the initial push to the just defined new origin repository, with the following command:
 
 ```sh
 git push -u origin master
@@ -202,66 +237,95 @@ The ways to change/extend the app are:
 
 1. Define custom settings (see files in `src/config`) that will change the standard way that the app works.
 1. Add hook listeners in `src/config/hooks.js` and run custom code inside those hooks
-1. Create a plug-in that will have its methods linked to hooks called during the app flow (see `src/plugins/example-plugin/`)
+1. Create a plug-in that has its methods linked to hooks called during the app flow
+(see `src/plugins/example-plugin/`)
 
 #### Configuration ####
 
 It is possible to configure/disable some app features and behaviors by changing the values
-of the `src/config/app-config.js`. It is also possible to change the app theme/colors by changing the values of `src/config/theme.js`. The app logo can also be changed in the `src/config/app-config` file. The available filters/options to be used in the services are defined in the `src/config/ors-map-filters.js`. They can be adjusted according the needs. Other files can be used to adjust app configurations are the `layer-zoom-mapping.js`, `settings-options.js` and the `default-map-settings.js`.
+of the `src/config/app-config.js`. It is also possible to change the app theme/colors by changing the values of
+`src/config/theme.js`.
+The app logo can also be changed in the `src/config/app-config` file.
+The available filters/options to be used in the services are defined in the `src/config/ors-map-filters.js`.
+They can be adjusted according the needs. Other files can be used to adjust app configurations are the
+`layer-zoom-mapping.js`, `settings-options.js` and the `default-map-settings.js`.
 
 #### Plug-ins ####
 
 It is possible to add plug-ins to the application in order to change its behavior or extend it.
-Please check the `src/plugins` folder, the [plug-ins readme](src/plugins/readme.md) and the [plugin example](src/plugins/plugin-example/plugin-example.js) for more details.
+Please check the `src/plugins` folder, the [plug-ins readme](src/plugins/readme.md) and the
+[plugin example](src/plugins/plugin-example/plugin-example.js) for more details.
 
 ### Add language ###
 
 #### - Generate a translation file ####
 
-If you just want to translate the application strings for a certain language, but you don't have the skills to `"code"` it into the app, just download the [en-translation-source-merged.json](/docs/en-translation-source-merged.json), translate it, and contact us.
+If you just want to translate the application strings for a certain language, but you don't have the skills to `"code"`
+it into the app, just download the [en-translation-source-merged.json](/docs/en-translation-source-merged.json),
+translate it, and contact us.
 
 **Check the file [src/i18n/i18n-builder.js](src/i18n/i18n-builder.js) to see how to generate merged translation sources*
 
 #### - Add a language to the app ####
 
-The app uses a feature-by-folder design, so each component might have its own translation strings. That is why there is no single translation file. If you want to add a translation and `"implement"` it into the app, follow the steps below.
+The app uses a feature-by-folder design, so each component might have its own translation strings.
+That is why there is no single translation file. If you want to add a translation and `"implement"` it into the app,
+follow the steps below.
 
-- Create a copy of the /src/i18n/translations/`en-us` folder giving it the identification of the target language. For example: if you are adding the French from France, then the folder should be called `fr-fr`.
+- Create a copy of the /src/i18n/translations/`en-us` folder giving it the identification of the target language.
+For example: if you are adding the French from France, then the folder should be called `fr-fr`.
 
-- Edit the builder.js file inside the just created folder in order to replace the language pattern to the one you are creating. For example, where is /\.i18n\.`en-us\`.js$, put /\.i18n\.`fr-fr`\.js$
+- Edit the builder.js file inside the just created folder in order to replace the language pattern to the one you are
+creating.
+For example, similar to `/\.i18n\.en-us\.js$` add `/\.i18n\.fr-fr\.js$`.
 
 - Translate the language strings for each key in the `global.js` file
 
-- Search for each file inside the `/src` folder that ends with `i18n.en-en.js` and create a copy of it and each one so that each new created file now ends with `i18n.fr-fr.js`
+- Search for each file inside the `/src` folder that ends with `i18n.en-en.js` and create a copy of it and each one so
+that each new created file now ends with `i18n.fr-fr.js`
 
 - Translate the language strings for each key in all the files created in the previous step.
 
-- Edit the /src/config/`settings-options.js`and add the new locale object to the `appLocales` array. For this example, you would add { text: 'Français FR', value: 'fr-fr' }
+- Edit `/src/config/settings-options.js` and add the new locale object to the `appLocales` array (e.g.
+ `{ text: 'Français FR', value: 'fr-fr' }`).
 
 - Open the src/i18n/`i18n-builder.js` file and apply the following changes:
-  - Import the object from the new language builder that you just created. For this example it would be `import frFRTranslations from './translations/fr-fr/builder`'
+  - Import the object from the new language builder that you just created
+  (e.g. `import frFRTranslations from './translations/fr-fr/builder'`)
 
-  - Inside the `build` method, add the new language placeholder object to the messages object. For this example you would add `, 'fr-fr': {}`
-  
-  - Still inside the `build` method, add the result of the new language building to the previously created message object. In this example you would add: `i18n.messages['fr-fr'] = frFRTranslations.build()`
-  
+  - Inside the `build` method, add:
+
+    - the new language placeholder object to the messages object (e.g. `, 'fr-fr': {}`).
+
+    - the result of the new language building to the previously created message object
+     (e.g. `i18n.messages['fr-fr'] = frFRTranslations.build()`.
+
   - Save all the files changed and rebuild the application.
 
 ### Menu ###
 
-The menu displayed in the header and in the sidebar (low resolution and mobile devices) is loaded from the ORS website back-end and adjusted to be shown according the resolution.
+The menu displayed in the header and in the sidebar (low resolution and mobile devices) is loaded from the ORS website
+back-end and adjusted to be shown according the resolution.
 
-The menu items are fetched on the app load (`src/app-loader.js`). It dispatches the store `fetchMainMenu` and the menu is retrieved by `@/common/main-menu.js` that internally uses `@/support/menu-manager.js` and `@/support/model-service.js`.
-Once the items from the back-end are loaded, `MenuManager` is used to add/remove custom items and define sidebar item icons. The items displayed on the menu can be changed by running custom code on the `loadMenuItems`  and/or the `modifyMenu` hooks. Check the `/src/config-example/hooks-example.js` to see more details.
+The menu items are fetched on the app load (`src/app-loader.js`).
+It dispatches the store `fetchMainMenu` and `@/common/main-menu.js` retrieves the menu that uses
+`@/support/menu-manager.js` and `@/support/model-service.js`.
+Once the items from the back-end are loaded, `MenuManager` adds or removes custom items and defines icons for sidebar
+items.
+The items displayed on the menu can be changed by running custom code on the `loadMenuItems`  and/or the
+`modifyMenu` hooks. Check the `/src/config-example/hooks-example.js` to see more details.
 
 ### Debug ###
 
 If you are using [WebStorm](https://www.jetbrains.com/webstorm/download) you should set the
-_webpack config_ (settings -> Languages & Frameworks -> JavaScript -> Webpack) to `{path to ors-map-client}/build/webpack.base.conf.js` so the file paths are resolved correctly.
+_webpack config_ (settings -> Languages & Frameworks -> JavaScript -> Webpack) to
+`{path to ors-map-client}/build/webpack.base.conf.js` to resolve file paths correctly.
 
 To debug the application you must run it in [`dev` mode](#set-up-and-run-locally).
-For better debugging in your browser install the [VueJS devtools](https://github.com/vuejs/vue-devtools#installation) extension.
-After doing that, open the application in the browser and press F12 and select the tab `Console`, `Vue` or `Sources` (and then expand e.g.: `webpack://src`).
+For better debugging in your browser install the [VueJS devtools](https://github.com/vuejs/vue-devtools#installation)
+extension.
+After doing that, open the application in the browser and press F12 and select the tab `Console`, `Vue` or `Sources`
+(and then expand e.g.: `webpack://src`).
 
 ### Build and deploy ###
 
@@ -272,29 +336,52 @@ cd <project-root-folder>/
 npm run build
 ```
 
-*Important:* to run the built application you must to set up a web server and put this repository (after the build) there. The `index.html` at the root of this repository is expected to load the app.
+*Important:* to run the built application you have to set up a web server and put this repository (after the build)
+there.
+The `index.html` at the root of this repository will load the app.
 
-For a detailed explanation on how webpack works, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+For a detailed explanation on how webpack works, check out the [guide](http://vuejs-templates.github.io/webpack/) and
+[docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ### Contribute ###
 
 #### Branch policy ####
 
-The `develop` branch is used as the working branch. Anything new goes to develop and then it is tested, committed and finally merged into `master`. So, develop has always the latest version (latest but not necessarily the production one) while `master` has the production version. Considering this, any merge request must be tone targeting `develop`. If you want to work on a feature we recommend you to create a feature branch then when it is finished send a merge request to `develop`.
+The `develop` branch is used as the working branch. Anything new goes to develop and then it is tested, committed and
+finally merged into `master`.
+So, develop has always the latest version (latest but not necessarily the production one) while `master` has the
+production version.
+Considering this, any merge request must be tone targeting `develop`.
+If you want to work on a feature we recommend you to create a feature branch then when it is finished send a merge
+request to `develop`.
 
-Like almost every team, we have limited workforce and we have to define priorities.
+Like almost every team, we have limited workforce, and we have to define priorities.
 
 `Bugs`:
-If you have identified any bug and think that you can help fixing it, please create an issue first, instead of directly submitting a push request. So the people involved will have the opportunity to discuss it.
+If you have identified any bug and think that you can help to fix it, please create an issue first, instead of directly
+submitting a push request.
+So the people involved will have the opportunity to discuss it.
 
 `New festures`:
-If you want to contribute by adding a new feature or improve an existing one, please also create an issue. We do want contributions and the community effort is very important to us, but features may add complexity and future maintenance effort. Because of this, we have also to analyze the trade off of such contributions. We just have to decide about them together before the hands on. This approach is intended to create cohesion and keep the project sustainable.
+If you want to contribute by adding a new feature or improve an existing one, please also create an issue.
+We do want contributions, and the community effort is very important to us, but features may add complexity and future
+maintenance effort.
+Because of this, we have also to analyze the trade off of such contributions.
+We just have to decide about them together before the hands on.
+This approach is intended to create cohesion and keep the project sustainable.
 
 #### Current needs ####
 
-As you may notice, this project is an on going project and thus, there is a lot of room for improvement. We already have in mind some of these possible improvements and some of them are listed below:
+As you may notice, this project is an ongoing project and thus, there is a lot of room for improvement.
+Some are listed below (ordered by priority):
 
-- `Tests` (unit, e2e) - we need it, but we were not able to implement it yet. It is one of the priorities of our list. So, if you can contribute with it, please let us know.
-- `Rendering performance` - we are continuously looking for performance improvement. If you think you can suggest a better way to deal with the rendering phase in a way that it improves the speed, please tell us. We are relying on [Vue2leaflet](https://github.com/vue-leaflet/Vue2Leaflet) for this.
+- `Tests` (unit, e2e) - we need it, but we were not able to implement it yet.
+ It is one of the priorities of our list.
+ So, if you can contribute with it, please let us know.
+- `Rendering performance` - we are continuously looking for performance improvement.
+ If you think you can suggest a better way to deal with the rendering phase in a way that it improves the speed,
+ please tell us.
+ We are relying on [Vue2leaflet](https://github.com/vue-leaflet/Vue2Leaflet) for this.
 - `Accessibility` of the app for people with special needs
-- `User test` to check that the app works in multiple browsers, resolutions and devices (versions of Mac, Windows, Linux, Android and Iphone) and their multiple possible browsers
+- `User test` to check that the app works in multiple browsers, resolutions and devices (versions of Mac, Windows,
+ Linux, Android and Iphone) and their multiple possible browsers

@@ -3,7 +3,7 @@ import GeoUtils from '@/support/geo-utils'
 import orsDictionary from '@/resources/ors-dictionary'
 import lodash from 'lodash'
 
-// The import below will add some methods to Leaflet.GeometryUtil 
+// The import below will add some methods to Leaflet.GeometryUtil
 // Even if it is not been accessed within this class, it is being used!
 import 'leaflet-geometryutil'
 
@@ -12,7 +12,7 @@ import 'leaflet-geometryutil'
  * to create an stop point.
  * @emits followMarkerClicked - when the marker created over the polyline to show current cursor position is clicked
  * @emits follow - when a point of the polyline is focused with the mouse
- * @emits addstop - when the user drag the new polyline vertice into a location
+ * @emits addstop - when the user drag the new polyline vertex into a location
  */
 class OrsExtendedPolyline {
   constructor (context, showPointInfo = false) {
@@ -20,12 +20,12 @@ class OrsExtendedPolyline {
     const options = {
       options: {
         distance: 20,   //distance from pointer to the polyline
-        tollerance: 5,  //tollerance for snap effect to vertex
+        tollerance: 5,  //tolerance for snap effect to vertex
         vertices: {
           //first: true,  //first vertex is draggable
-          //middle: true, //middle vertices are draggables
+          //middle: true, //middle vertices are draggable
           //last: true,   //last vertex draggable
-          //insert: true, //define if the number of polyline's vertices can change
+          //insert: true, //define if the number of polyline vertices can change
         },
         icon: new Leaflet.DivIcon({
           iconSize: new Leaflet.Point(8, 8),
@@ -34,29 +34,29 @@ class OrsExtendedPolyline {
       },
       tempPolylineDraggingMarkerRef: null,
       tempPolylineDraggingMarkerInfoRef: null,
-      
-      initialize: this.initialize,    
-      addHooks: this.addHooks,    
+
+      initialize: this.initialize,
+      addHooks: this.addHooks,
       removeHooks: this.removeHooks,
-      
+
       _showPointInfo: this.showPointInfo,
-      _processDrag: this.processDrag,    
-      _getClosestPointAndSegment: this.getClosestPointAndSegment,    
-      _mouseContextClick: this.mouseContextClick,    
-      _mouseMove: this.mouseMove,    
+      _processDrag: this.processDrag,
+      _getClosestPointAndSegment: this.getClosestPointAndSegment,
+      _mouseContextClick: this.mouseContextClick,
+      _mouseMove: this.mouseMove,
       _getClosestIndex: this.getClosestIndex,
       _getInjectAfterIndex: this.getInjectAfterIndex,
-      _isInvalidDrag: this.isInvalidDrag,    
-      _markerDragStart: this.markerDragStart,    
-      _markerDrag: this.markerDrag,    
+      _isInvalidDrag: this.isInvalidDrag,
+      _markerDragStart: this.markerDragStart,
+      _markerDrag: this.markerDrag,
       _markerDragEnd: this.markerDragEnd,
       _buildInfoIcon: this.buildInfoIcon,
       _createOrUpdateCustomMarkers: this.createOrUpdateCustomMarkers,
       _polylineClicked: this.showCustomMarkers,
       _updateCustomMarkers: this.updateCustomMarkers,
       _createCustomMarkers: this.createCustomMarkers,
-      
-      // The `this`context inside the methods above 
+
+      // The `this`context inside the methods above
       // refers to the leaflet component context.
       // so to have access to the external world
       // we have to bind the context passed via
@@ -64,11 +64,11 @@ class OrsExtendedPolyline {
       // it via method
       _getOuterContext: this.getContext.bind(context)
     }
-    this.addPolylineCustomBehaviour(options)    
+    this.addPolylineCustomBehaviour(options)
   }
 
   /**
-   * Get the vuejs component context provided via constructor
+   * Get the Vue component context provided via constructor
    * @returns {Object} Vue instance
    */
   getContext () {
@@ -79,28 +79,28 @@ class OrsExtendedPolyline {
    * Extends the polyline by adding the editingDrag
    */
   addPolylineCustomBehaviour (options) {
-    Leaflet.EditDrag = Leaflet.EditDrag || {};    
-    Leaflet.EditDrag.Polyline = Leaflet.Handler.extend(options);    
-    
+    Leaflet.EditDrag = Leaflet.EditDrag || {};
+    Leaflet.EditDrag.Polyline = Leaflet.Handler.extend(options);
+
     Leaflet.Polyline.addInitHook(function() {
       if (this.edit_with_drag) {
         return
       }
-    
+
       if (Leaflet.EditDrag.Polyline) {
         this.editingDrag = new Leaflet.EditDrag.Polyline(this);
-    
+
         if (this.options.edit_with_drag) {
           this.editingDrag.enable()
         }
       }
-    
+
       this.on('add', function () {
         if (this.editingDrag && this.editingDrag.enabled()) {
           this.editingDrag.addHooks()
         }
       })
-    
+
       this.on('remove', function () {
         if (this.editingDrag && this.editingDrag.enabled()) {
           this.editingDrag.removeHooks()
@@ -116,7 +116,7 @@ class OrsExtendedPolyline {
   /**
    * Initialize the draggable polyline
    * by setting references to objects and options
-   * @param {*} poly 
+   * @param {*} poly
    */
   initialize (poly) {
     this._poly = poly
@@ -164,7 +164,7 @@ class OrsExtendedPolyline {
 
   /**
    * When a click is done ends the dragging event
-   * @param {Event} event 
+   * @param {Event} event
    */
   mouseContextClick (event) {
     var closest = Leaflet.GeometryUtil.closest(this._map, this._poly, event.latlng, true)
@@ -178,7 +178,7 @@ class OrsExtendedPolyline {
       if (index > -1) {
         this._poly.spliceLatLngs(index, 1)
         this._map.removeLayer(this._marker)
-        this._map.removeLayer(this._markerInfo)    
+        this._map.removeLayer(this._markerInfo)
         this._marker = null
         this._markerInfo = null
       }
@@ -197,7 +197,7 @@ class OrsExtendedPolyline {
 
   /**
    * Show custom markers that appears over the polyline
-   * @param {*} event 
+   * @param {*} event
    */
   showCustomMarkers (event) {
     if (this.options.edit_with_drag) {
@@ -213,12 +213,12 @@ class OrsExtendedPolyline {
   }
 
   /**
-   * Create or update the custom markers 
+   * Create or update the custom markers
    * when the mouse move over the map.
    * If the mouse is over the polyline
    * creates a marker that follows the polyline
    * and can be used to create the drag effect
-   * @param {*} e 
+   * @param {*} e
    */
   createOrUpdateCustomMarkers (e) {
     if (this._dragging) return
@@ -241,7 +241,7 @@ class OrsExtendedPolyline {
       }
       if (this._markerInfo) {
         this._map.removeLayer(this._markerInfo)
-      }    
+      }
       this._marker = null
       this._markerInfo = null
     }
@@ -249,7 +249,7 @@ class OrsExtendedPolyline {
 
   /**
    * Update custom markers when the mouse moves over the polyline
-   * @param {*} closest 
+   * @param {*} closest
    */
   updateCustomMarkers (closest) {
     this.tempPolylineDraggingMarkerRef = this._marker.addTo(this._map)
@@ -268,7 +268,7 @@ class OrsExtendedPolyline {
   }
   /**
    * Create custom markers when the mouse is over the polyline
-   * @param {*} closest 
+   * @param {*} closest
    */
   createCustomMarkers (closest) {
     this.closest = closest
@@ -283,7 +283,7 @@ class OrsExtendedPolyline {
     })
 
     let closestIndex = this._getClosestIndex()
-    
+
     // The hover polyline route info pop up is disabled for now
     if (this._showPointInfo) {
       const infoIcon = this._buildInfoIcon(closestIndex)
@@ -303,7 +303,7 @@ class OrsExtendedPolyline {
     if (coordinates && coordinatePolylineIndex !== null) {
       const route = context.route
       const altitude = coordinates[coordinatePolylineIndex][2].toFixed(2)
-      
+
       // calculate the distance of the point
       const totaldistance = route.summary.distance.toFixed(1)
       const currentStep = (route.geometry.coordinates.length / (coordinatePolylineIndex + 1))
@@ -312,7 +312,7 @@ class OrsExtendedPolyline {
       const orsPolylineTranslations = context.$t('orsLPolyline')
       const orsDictionaryTranslations = context.$t('orsDictionary')
       var surfaceType = null
-      
+
       // Get the surface type for the given point
       if (route.properties.extras.surface) {
         for (let key in route.properties.extras.surface.values) {
@@ -327,12 +327,12 @@ class OrsExtendedPolyline {
           surfaceType = translations.unknownSurfaceType
         }
       }
-  
+
       const infoIcon = Leaflet.divIcon({
         className: 'ors-l-polyline-custom-div-icon',
-        html: 
+        html:
         `<div class='ors-l-polyline-info-wrapper'>
-          <div class='ors-l-polyline-vertical-bar'></div>          
+          <div class='ors-l-polyline-vertical-bar'></div>
           <div class='ors-l-polyline-content-block'>
             <div class='ors-l-polyline-top-block-info'>
               <b>${globalTranslations.distance}</b>: ${currentDistance} / ${totaldistance} ${route.summary.unit}<br/>
@@ -351,7 +351,7 @@ class OrsExtendedPolyline {
 
   /**
    * Check whether the drag is valid
-   * @param {*} index 
+   * @param {*} index
    * @returns {Boolean}
    */
   isInvalidDrag (index) {
@@ -374,10 +374,10 @@ class OrsExtendedPolyline {
 
   /**
    * When the marker drag starts
-   * set the closest property and 
-   * set the flag _draggging as true
+   * set the closest property and
+   * set the flag _dragging as true
    * and process the drag
-   * @param {*} event 
+   * @param {*} event
    */
   markerDragStart (event) {
     var latlng = event.target.getLatLng()
@@ -385,13 +385,13 @@ class OrsExtendedPolyline {
     this.closest = Leaflet.GeometryUtil.closest(this._map, this._poly, latlng, true)
     this.startingDragPoint = latlng
     this._dragging = true
-    
-    // Check the tollerance
+
+    // Check the tolerance
     if (this.closest.distance < this.options.tollerance) {
-      this._processDrag()    
+      this._processDrag()
     } else {
       this.closest = this._getClosestPointAndSegment(latlng)
-      this._processDrag() 
+      this._processDrag()
     }
   }
 
@@ -405,11 +405,11 @@ class OrsExtendedPolyline {
     if (this.closest) {
       for (let index = 0; index < this._poly._latlngs.length; index++) {
         let latlng = this._poly._latlngs[index]
-        
+
         if (latlng) {
           let closestLatLng = this.closest.point || this.closest
           closestLatLng = closestLatLng.latlng || closestLatLng
-          
+
           let currentDistance = GeoUtils.calculateDistanceBetweenLocations(latlng, closestLatLng, 'm')
           if (currentDistance === 0) {
             closestIndex = index
@@ -420,7 +420,7 @@ class OrsExtendedPolyline {
               closestIndex = index
             }
           }
-        }            
+        }
       }
     }
     return closestIndex
@@ -446,15 +446,15 @@ class OrsExtendedPolyline {
             injectIndex = index
           }
         }
-      }      
+      }
     }
     return injectIndex
   }
 
   /**
-   * Process the polyline drag by adding a temporary 
+   * Process the polyline drag by adding a temporary
    * vertex to represent user drag action
-   * @param {*} event 
+   * @param {*} event
    */
   processDrag () {
     var closestIndex = this._getClosestIndex()
@@ -483,21 +483,21 @@ class OrsExtendedPolyline {
   }
 
   /**
-   * When the drag event ends, fire the addstop event
-   * set the flat _drgging boolean as false and remove the 
-   * temp marker that follows the curor over the polyline
-   * @param {*} event 
+   * When the drag event ends, fire the addStop event
+   * set the flat _dragging boolean as false and remove the
+   * temp marker that follows the cursor over the polyline
+   * @param {*} event
    */
   markerDragEnd (event) {
     var draggedFromIndex = this._getInjectAfterIndex()
     const data = {event, closest: this.closest, draggedFromIndex}
     this._poly.fireEvent('addstop', data)
     this._dragging = false
-    this._map.removeLayer(this.tempPolylineDraggingMarkerRef) 
+    this._map.removeLayer(this.tempPolylineDraggingMarkerRef)
     if (this.tempPolylineDraggingMarkerInfoRef) {
       this._map.removeLayer(this.tempPolylineDraggingMarkerInfoRef)
-    }  
-    this.startingDragPoint = null   
+    }
+    this.startingDragPoint = null
   }
 }
 

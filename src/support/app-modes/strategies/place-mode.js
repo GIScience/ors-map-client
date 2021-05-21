@@ -22,7 +22,7 @@ class PlaceMode {
       appRouteData.options.layer = appRouteData.places[0].properties.layer || appRouteData.options.layer
       appRouteData.options.country = appRouteData.places[0].properties.country || appRouteData.options.country
 
-      // Update the zoom acording the place type/layer
+      // Update the zoom according to the place type/layer
       appRouteData.options.zoom = GeoUtils.zoomLevelByLayer(appRouteData.options.layer)
     }
     return appRouteData

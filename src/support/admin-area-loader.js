@@ -9,7 +9,7 @@ import theme from '@/config/theme'
 class AdminAreaLoader {
   /**
    * Build the admin area query filter based on place properties
-   * @param {*} place 
+   * @param {*} place
    * @returns {Object} adminAreaFilter
    */
   buildAdminAreaFilter(place, layer) {
@@ -41,7 +41,7 @@ class AdminAreaLoader {
 
   /**
    * Get the admin area polygon for a given place
-   * @param {Place} place 
+   * @param {Place} place
    * @return {Promise}
    */
   getAdminAreaPolygon(place) {
@@ -49,20 +49,20 @@ class AdminAreaLoader {
       if (!place.placeName) {
         resolve([])
       }
-      // maek a copy of the original layer 
+      // make a copy of the original layer
       // before updating the place via resolver
       let layer = place.properties.layer
       let layersThatSupportAdminPolygon = ['county', 'locality', 'region', 'country']
-      
+
       if (layersThatSupportAdminPolygon.includes(layer)) {
         // Define the zoom level used to resolve
         let layerZoom = GeoUtils.zoomLevelByLayer(layer)
-  
+
         let context = this
         place.resolve(layerZoom).then(() => {
           let adminAreaFilter = context.buildAdminAreaFilter(place, layer)
           NominatimService.query(adminAreaFilter).then((response) => {
-            let validPolygons = context.adjustAdminArea(place, response.data)            
+            let validPolygons = context.adjustAdminArea(place, response.data)
             if (validPolygons) {
               resolve(validPolygons)
             } else {
@@ -80,8 +80,8 @@ class AdminAreaLoader {
 
   /**
    * check if a Place is inside of any of the polygons passed
-   * @param {*} polygons 
-   * @param {Place} place 
+   * @param {*} polygons
+   * @param {Place} place
    */
   isPointInsidePolygons (polygons, place) {
     let isInside = false
@@ -89,9 +89,9 @@ class AdminAreaLoader {
     for (let key in polygons) {
       // Adjust the order of lat lng
       let polygonCoords = GeoUtils.switchLatLonIndex(polygons[key].geometry.coordinates)
-  
-      // Include the pois that are inside the area polygon
-      if (PolygonUtils.isInsidePolygon(place, polygonCoords)) {              
+
+      // Include the POIs that are inside the area polygon
+      if (PolygonUtils.isInsidePolygon(place, polygonCoords)) {
         isInside = true
         break
       }
@@ -100,9 +100,9 @@ class AdminAreaLoader {
   }
 
   /**
-   * Adjust the area plygon and validate it
-   * @param {*} place 
-   * @param {*} polygon 
+   * Adjust the area polygon and validate it
+   * @param {*} place
+   * @param {*} polygon
    * @returns {Object| false}
    */
   adjustAdminArea(place, data) {
@@ -111,7 +111,7 @@ class AdminAreaLoader {
       let area = data[key]
       if (area.geojson.type !== 'Point') {
         let hasCoordinatesAsMultyPolygon = Array.isArray(area.geojson.coordinates[0]) && Array.isArray(area.geojson.coordinates[0][0])
-        
+
         // Treat as multipolygon in both cases
         if (area.geojson.type === 'MultiPolygon' || hasCoordinatesAsMultyPolygon ) {
           let splitPolygons = PolygonUtils.splitMultiPolygonIntoPolygons(area.geojson)
@@ -139,8 +139,8 @@ class AdminAreaLoader {
   }
   /**
    * Validate a polygon
-   * @param {*} polygon 
-   * @param {*} place 
+   * @param {*} polygon
+   * @param {*} place
    * @returns {Object|false} polygon
    */
 

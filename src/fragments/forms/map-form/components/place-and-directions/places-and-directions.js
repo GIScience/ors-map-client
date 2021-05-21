@@ -97,7 +97,7 @@ export default {
     },
 
     /**
-     * Determines if the inputs support diretions mode
+     * Determines if the inputs support directions mode
      */
     inputsupportsDirections () {
       let supports = this.$store.getters.mode === constants.modes.place || this.$store.getters.mode === constants.modes.directions
@@ -126,7 +126,7 @@ export default {
      * Every time the appRouteData changes
      * and it has at least one place defined
      * the map data is reloaded, so we keep the
-     * the map serach and synchronized with the url
+     * the map search and synchronized with the url
      */
     reloadAfterAppRouteDataChanged (appRouteData) {
       if (appRouteData && appRouteData.places.length > 0) {
@@ -156,12 +156,12 @@ export default {
 
     /**
      * Set the place focus index
-     * @param {*} index 
+     * @param {*} index
      */
     setfocusedPlaceInput(index) {
       this.placeFocusIndex = index
       setTimeout(() => {
-        this.$forceUpdate()        
+        this.$forceUpdate()
       }, 200)
     },
 
@@ -183,7 +183,7 @@ export default {
       this.eventBus.$on('switchToDirections', () => {
         if (context.places.length === 1) {
           context.addPlaceInput()
-        } 
+        }
         if (context.places[0].isEmpty()) {
           context.setfocusedPlaceInput(0)
         } else {
@@ -221,16 +221,16 @@ export default {
       this.eventBus.$on('filtersChangedExternally', () => {
         // get the info if all the inputs are filled
         let allPlacesAreFilled = this.getFilledPlaces().length === this.places.length
-        
+
         // Filters are only used to calculate route (directions or round trip)
-        // so we must update the app route if we are already 
-        // in directions/round trip mode if all the place inputs are filled 
-        // and. If the app is, for example in place mode 
+        // so we must update the app route if we are already
+        // in directions/round trip mode if all the place inputs are filled
+        // and. If the app is, for example in place mode
         // there is nothing to be done
         let readyToDirections = (context.$store.getters.mode === constants.modes.directions && allPlacesAreFilled)
         let hasRoundTripInAppRoute = lodash.get(context, '$store.getters.appRouteData.options.options.round_trip')
         let readyToRoundTrip = (context.$store.getters.mode === constants.modes.roundTrip && hasRoundTripInAppRoute)
-        
+
         if (context.active && (readyToDirections || readyToRoundTrip)) {
           context.updateAppRoute()
         }
@@ -275,7 +275,7 @@ export default {
       })
 
       // If the app is in a low resolution mode
-      // hidde the sidebar when route sections are highlighted
+      // hide the sidebar when route sections are highlighted
       this.eventBus.$on('highlightPolylineSections', () => {
         const sidebarVisible = !context.$lowResolution
         context.setSidebarIsOpen(sidebarVisible)
@@ -325,7 +325,7 @@ export default {
     directionsFromPoint (data) {
       // If there is already a place selected and
       // directions from a selected point is triggered
-      // then we consider that the existing point is 
+      // then we consider that the existing point is
       // the destination, and then goes to position 1
       let filledPlaces = this.getFilledPlaces()
       if (filledPlaces.length === 1) {
@@ -385,8 +385,8 @@ export default {
      * @param {*} data
      */
     directionsToPoint (data) {
-      const toPlace = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })  
-      let filledPlaces = this.getFilledPlaces().length     
+      const toPlace = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })
+      let filledPlaces = this.getFilledPlaces().length
       const placeIndex = filledPlaces === 0 ? 0 : 1
       this.places[placeIndex] = toPlace
 
@@ -408,8 +408,8 @@ export default {
         setTimeout(() => {
           if (context.places.length === 1) {
             context.addPlaceInput()
-            
-            // After addging a place input it
+
+            // After adding a place input it
             // is necessary to wait a bit
             // before reordering the places
             setTimeout(() => {
@@ -449,7 +449,7 @@ export default {
      * @param {*} data {latlng: ..., place:...}
      */
     addRouteStop (data) {
-      // Only one placeinput, so the selected point will be the 'from'
+      // Only one place input, so the selected point will be the 'from'
       if (this.places.length === 1) {
         this.directionsFromPoint(data)
       } else {
@@ -463,9 +463,9 @@ export default {
         // be decreased so that the stops happen before the destination
         if (closestPlaceIndex === this.places.length - 1 && !convertStopAfterRouteEndingToDestination) {
           closestPlaceIndex--
-        } 
+        }
         // In the other cases, we have to 'inject' a route point between the exiting points
-        // To do that we add a place input, setits coordinates and then
+        // To do that we add a place input, set its coordinates and then
         // we change the app url so that the route will be recalculated
         const injectedIndex = this.injectPlaceAndReturnIndex(data.latlng, closestPlaceIndex)
         const context = this
@@ -475,7 +475,7 @@ export default {
         }).catch((err) => {
           console.log(err)
           context.showError(this.$t('placesAndDirections.notPossibleToCalculateRoute'), { timeout: 0 })
-        })        
+        })
       }
     },
 
@@ -541,7 +541,7 @@ export default {
      * Update map data by setting the view mode, and calculating the directions or seeing a sigle place state
      */
     updateMapData () {
-      // This method does not deal with search mode, becouse when in search mode
+      // This method does not deal with search mode, because when in search mode
       // th SimplePlaceSearch component will catch this case and list the results
       if (this.$store.getters.mode !== constants.modes.search) {
         const isRoundTrip = this.$store.getters.mode === constants.modes.roundTrip
@@ -626,7 +626,7 @@ export default {
                 context.eventBus.$emit('mapViewDataChanged', mapViewData)
                 context.setSidebarIsOpen()
                 resolve(mapViewData)
-              })             
+              })
             }
           }).catch(result => {
             context.handleCalculateDirectionsError(result)
@@ -768,7 +768,7 @@ export default {
       // updateAppRoute will switch to place
       // mode. To keep two place inputs
       // in order to allow the user to continue to
-      // use the directions mode, readd a place input
+      // use the directions mode, add a place input
       if (keepDirectionsMode && placeInputsBeforeRemoval === 2) {
         this.eventBus.$emit('newInfoAvailable', false)
         setTimeout(() => {
@@ -863,7 +863,7 @@ export default {
      * When the direct property of a place changes
      * updates the app route so that a new route is
      * calculated
-     * @param {*} data 
+     * @param {*} data
      */
     changedDirectPlace (data) {
       this.places[data.index].direct = data.place.direct
@@ -947,7 +947,7 @@ export default {
 
     /**
      * Determines if a place input at a given index must be focused
-     * @param {*} index 
+     * @param {*} index
      * @returns {Boolean}
      */
     autofocusEnabled (index) {

@@ -8,7 +8,7 @@ import lodash from 'lodash'
  * @emits closed
  * @emits rightClickEvent
  * @listens mapRightClicked
- * @listens mapLeftClicked (to close the righ click pop up)
+ * @listens mapLeftClicked (to close the right click pop up)
  */
 export default {
   data () {
@@ -63,7 +63,7 @@ export default {
       window.open(url, '_blank')
     },
     /**
-     * Deal with close event by hidding the right click pop up
+     * Deal with close event by hiding the right click pop up
      * and by emitting close event
      * @emits closed
      */
@@ -84,7 +84,7 @@ export default {
       this.clickLatlng = null
     },
     /**
-     * Deal wth the map rigt click, preparing the data and displaying the modal
+     * Deal wth the map right click, preparing the data and displaying the modal
      * @param {*} data
      */
     mapRightClick (data) {

@@ -4,7 +4,7 @@
  * @emits showLoading [via eventBus] (when resolving place info)
  * @emits directionsToPoint
  * @listens mapRightClicked
- * @listens mapLeftClicked (to close the righ click pop up)
+ * @listens mapLeftClicked (to close the right click pop up)
  */
 import GeoUtils from '@/support/geo-utils'
 import { ReverseGeocode } from '@/support/ors-api-runner'
@@ -152,9 +152,9 @@ export default {
       return result
     },
     /**
-     * Build a place and emits an event to set the 
+     * Build a place and emits an event to set the
      * app in directions mode to the clicked place
-     * @param {*} placeInfo 
+     * @param {*} placeInfo
      * @emits directionsToPoint
      */
     directionstoPoint (placeInfo) {

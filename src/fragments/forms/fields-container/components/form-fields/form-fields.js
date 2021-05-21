@@ -74,7 +74,7 @@ export default {
       return show
     },
     /**
-     * Set a ne random value for the randon component
+     * Set a ne random value for the random component
      * @param {*} index
      */
     setNewRandomValue (index) {
@@ -148,8 +148,8 @@ export default {
       // There may be nested levels of paternity and these levels
       // must be represented in the parent index property.
       // When the passing data already has a parent index, then
-      // parentIndex will be an array containing the imediate parent
-      // at index 0 and all the acentry at the position 1.
+      // parentIndex will be an array containing the direct parent
+      // at index 0 and all the ancestry at the position 1.
       if ((Array.isArray(data.parentIndex) || data.parentIndex >= 0) && this.parentIndex >= 0) {
         passingData.parentIndex = [data.parentIndex, this.parentIndex]
       } else { // if it is a single level paternity, just set the immediate parent
@@ -250,14 +250,14 @@ export default {
       } else {
         items = parameter.enum
       }
-      
+
       return this.adjustItems(items, parameter)
     },
 
     /**
      * Set item option structure and translation
-     * @param {Array} items 
-     * @return {Array} items 
+     * @param {Array} items
+     * @return {Array} items
      */
     adjustItems (items, parameter) {
       for (let key in items) {
@@ -270,14 +270,14 @@ export default {
                 item[itemKey] = item[itemKey].toString()
               }
             }
-            // If the item object has texts for the current locale, get it and then set it as the itemtext
+            // If the item object has texts for the current locale, get it and then set it as the item text
             item.itemText = item[this.$store.getters.mapSettings.locale] || item[defaultMapSettings.locale] || item.itemValue
           } else { // item is not an object, but a simple value
             let itemObj = {
               itemValue: item,
               itemText: this.getItemTranslation(item, parameter)
             }
-            items[key] = itemObj          
+            items[key] = itemObj
           }
         }
       }
@@ -286,7 +286,7 @@ export default {
 
     /**
      * Get item translation by item value
-     * @param {String} itemValue 
+     * @param {String} itemValue
      * @returns {String}
      */
     getItemTranslation (itemValue, parameter) {
@@ -497,14 +497,14 @@ export default {
           break
         }
       }
-      // By returning O, it is kept open and 
+      // By returning O, it is kept open and
       // by returning null it is kept collapsed
       return childHascontent ? 0 : null
     }
   },
   components: {
     SliderCombo,
-    // Avoid cyclic dependency by loading components assinchronously
+    // Avoid cyclic dependency by loading components asynchronously
     'dialog-fields': () => import('../dialog-fields/DialogFields.vue'),
     'form-fields': () => import('./FormFields.vue')
   }
