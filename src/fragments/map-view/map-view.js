@@ -207,7 +207,7 @@ export default {
      * Determines if the accessibility tool is available
      * @returns {Boolean}
      */
-    accessbilityToolAvailable () {
+    accessibilityToolAvailable () {
       let available = appConfig.accessibilityToolAvailable
       return available
     },
@@ -229,7 +229,7 @@ export default {
       return url
     },
     /**
-     * Return the current applicable zoom leve
+     * Return the current applicable zoom level
      * based either on the zoomLevel attribute or
      * on the maxZoom
      * @returns {Number} zoom
@@ -281,7 +281,7 @@ export default {
       return latlng
     },
     /**
-     * Determines if only one markes if on the map view
+     * Determines if only one marker if on the map view
      * @returns {Boolean}
      */
     hasOnlyOneMarker () {
@@ -385,8 +385,8 @@ export default {
           // Vue2-Leaflet, the component used to render data on the map, expect the coordinates in the [lat,lon] order,
           // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
           // So we invert them to provide what the component expects
-          let flattencoords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
-          polygon.latlngs = GeoUtils.switchLatLonIndex(flattencoords)
+          let flattenCoords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
+          polygon.latlngs = GeoUtils.switchLatLonIndex(flattenCoords)
           polygons.push(polygon)
         }
       }
@@ -422,7 +422,7 @@ export default {
     },
     /**
      * Build and return an array of marker objects
-     * based on the pois places
+     * based on the POIs places
      * @returns {Array} of markers
      */
     pois () {
@@ -543,7 +543,7 @@ export default {
      * If an active route data must be shown
      * @returns {Boolean} show
      */
-    showActivRouteData () {
+    displayActiveRouteData () {
       const show = this.activeRouteData && this.showActiveRouteData
       return show
     },
@@ -562,7 +562,7 @@ export default {
      * based on the current map view height
      * @returns {String} height
      */
-    acessibilityBtnTopPosition () {
+    accessibilityBtnTopPosition () {
       const height = `${this.height - 60}px`
       return height
     },
@@ -572,14 +572,14 @@ export default {
      */
     lHeightGraphOptions () {
       let mappings = undefined
-      let activRoute = this.localMapViewData.routes[this.$store.getters.activeRouteIndex]
+      let activeRoute = this.localMapViewData.routes[this.$store.getters.activeRouteIndex]
       let heightGraphTranslations = this.$t('mapView.heightGraph')
 
       // Build the mapping for the extra info
       // that will be displayed in the graph
       // including the translation and the color
       // associated to each extra value
-      let extras = lodash.get(activRoute, 'properties.extras')
+      let extras = lodash.get(activeRoute, 'properties.extras')
       if (extras) {
         let dict = orsDictionary
         let translations = this.$t('orsDictionary')
@@ -689,7 +689,7 @@ export default {
     /**
      * When the center prop value changes
      * run the centerChanged method that will
-     * store the current location on localstorage
+     * store the current location on localStorage
      */
     center: {
       handler: function () {
@@ -972,7 +972,7 @@ export default {
      * @param {*} markerIndex
      * @emits directChanged
      */
-    markAsDirectfromHere (markerIndex) {
+    markAsDirectFromHere (markerIndex) {
       if (this.markers[markerIndex]) {
         this.markers[markerIndex].place.direct = !this.markers[markerIndex].place.direct
         let place = this.markers[markerIndex].place
@@ -1056,7 +1056,7 @@ export default {
      * @stores mapBounds
      */
     storeMapBoundsAndSetMapAsReady () {
-      const buildBondaryes = (bounds) => {
+      const buildBoundaries = (bounds) => {
         const boundary = {
           rect: {
             min_lon: bounds._southWest.lng,
@@ -1070,7 +1070,7 @@ export default {
       }
       this.getMapObject().then((map) => {
         const bounds = map.getBounds()
-        const mapBounds = buildBondaryes(bounds)
+        const mapBounds = buildBoundaries(bounds)
         let newBounds = JSON.stringify(bounds)
         let oldBounds = JSON.stringify(this.$store.getters.mapBounds)
         if (newBounds !== oldBounds) {
@@ -1446,8 +1446,8 @@ export default {
      */
     handleShowLeftClickPlaceInfo (event) {
       const drawPolygonToolbarActive = this.lodash.get(this.drawControlRef, '_toolbars.draw._activeMode')
-      const clckedOverPolyline = event.originalEvent && event.originalEvent.clckedOverPolyline === true
-      if (this.showClickPopups && !drawPolygonToolbarActive && !clckedOverPolyline) {
+      const clickedOverPolyline = event.originalEvent && event.originalEvent.clickedOverPolyline === true
+      if (this.showClickPopups && !drawPolygonToolbarActive && !clickedOverPolyline) {
         const insidePolygon = this.isPointInsidePolygons(event.latlng)
         const data = { event, insidePolygon }
         this.eventBus.$emit('mapLeftClicked', data)
@@ -1641,7 +1641,7 @@ export default {
           avoidRectangle: this.$t('mapView.defineAvoidRectangle')
         }
         // Run the hook that mey modify the translations
-        this.$root.appHooks.run('avoidPolygonBtnTraslations', avoidPolygonBtnTranslations)
+        this.$root.appHooks.run('avoidPolygonBtnTranslations', avoidPolygonBtnTranslations)
 
         // Set the translations to the buttons
         locale.draw.toolbar.buttons.polygon = avoidPolygonBtnTranslations.avoidPolygon
@@ -1668,7 +1668,7 @@ export default {
      * @param {Object} polygon
      * @param {Object} polygonData
      */
-    setAvoidPolygonPropreties (polygon, polygonData = null) {
+    setAvoidPolygonProperties (polygon, polygonData = null) {
      // define polygon feature prop.
      // It will be returned when we get the geojson
      // representation of the polygon
@@ -1692,7 +1692,7 @@ export default {
      */
     avoidPolygonCreated (event, map) {
       var polygon = event.layer
-      this.setAvoidPolygonPropreties(polygon)
+      this.setAvoidPolygonProperties(polygon)
       polygon.feature.properties.type = event.layerType
       let context = this
       polygon.addTo(map)
@@ -1819,7 +1819,7 @@ export default {
           } else {
             polygon = Leaflet.polygon(coordinates, polygonOptions)
           }
-          context.setAvoidPolygonPropreties(polygon, polygonData)
+          context.setAvoidPolygonProperties(polygon, polygonData)
           polygon.addTo(map)
 
           // Add handler for the polygon click event
@@ -1913,7 +1913,7 @@ export default {
      * Highlight a route point on the active route index
      * @param {*} routePointIndex
      */
-    hightlightRoutePoint (routePointIndex) {
+     highlightRoutePoint (routePointIndex) {
       const activeRouteCoordinates = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
       if (activeRouteCoordinates[routePointIndex]) {
         this.highlightedRoutePointIndex = routePointIndex
@@ -1996,7 +1996,7 @@ export default {
 
       this.eventBus.$on('changeActiveRouteIndex', this.setActiveRouteIndex)
 
-      this.eventBus.$on('altitudeChartHoverIndexChanged', this.hightlightRoutePoint)
+      this.eventBus.$on('altitudeChartHoverIndexChanged', this.highlightRoutePoint)
 
       this.eventBus.$on('mouseLeftChartAltitudeChart', this.removeRoutePoint)
 
@@ -2024,9 +2024,9 @@ export default {
      * save it to the browsers local storage
      * @uses localStorage
      */
-    toggleAcessibleMode () {
+    toggleAccessibleMode () {
       let mapSettings = this.$store.getters.mapSettings
-      mapSettings.acessibleModeActive = !mapSettings.acessibleModeActive
+      mapSettings.accessibleModeActive = !mapSettings.accessibleModeActive
 
       this.$store.dispatch('saveSettings', mapSettings).then(() => {
         console.log('Settings saved')

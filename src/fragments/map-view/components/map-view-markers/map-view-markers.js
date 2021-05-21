@@ -124,8 +124,8 @@ export default {
     removePlace(index) {
       this.$emit('removePlace', index)
     },
-    markAsDirectfromHere (index) {
-      this.$emit('markAsDirectfromHere', index)
+    markAsDirectFromHere (index) {
+      this.$emit('markAsDirectFromHere', index)
     }
   },
 }

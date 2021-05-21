@@ -10,7 +10,6 @@ import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import appConfig from '@/config/app-config'
 import GeoUtils from '@/support/geo-utils'
-import utils from '@/support/utils'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
 import lodash from 'lodash'
@@ -49,7 +48,7 @@ export default {
   watch: {
     '$store.getters.leftSideBarOpen': function (newVal) {
       if (newVal === true && this.places.length === 1) {
-        this.setfocusedPlaceInput(0)
+        this.setFocusedPlaceInput(0)
       }
     }
   },
@@ -99,7 +98,7 @@ export default {
     /**
      * Determines if the inputs support directions mode
      */
-    inputsupportsDirections () {
+    inputSupportsDirections () {
       let supports = this.$store.getters.mode === constants.modes.place || this.$store.getters.mode === constants.modes.directions
       return supports
     },
@@ -120,7 +119,7 @@ export default {
      */
     addInput () {
       this.addPlaceInput()
-      this.setfocusedPlaceInput(this.places.length - 1)
+      this.setFocusedPlaceInput(this.places.length - 1)
     },
     /**
      * Every time the appRouteData changes
@@ -143,22 +142,25 @@ export default {
      * @param {*} data
      */
     filterUpdated (data) {
-      if (data.value !== undefined) {
-        if (data.parentIndex !== undefined) {
-          let parent = OrsFilterUtil.getFilterByAncestryAndItemIndex(data.parentIndex, data.index)
-          parent.value = data.value
-        } else {
-          this.OrsMapFiltersAccessor[data.index].value = data.value
+      if (this.getFilledPlaces().length === this.places.length) {
+        // Make sure that the OrsMapFilter object has the ost updated value
+        if (data.value !== undefined) {
+          if (data.parentIndex !== undefined) {
+            let parent = OrsFilterUtil.getFilterByAncestryAndItemIndex(data.parentIndex, data.index)
+            parent.value = data.value
+          } else {
+            this.OrsMapFiltersAccessor[data.index].value = data.value
+          }
         }
+        this.updateAppRoute()
       }
-      this.updateAppRoute()
     },
 
     /**
      * Set the place focus index
      * @param {*} index
      */
-    setfocusedPlaceInput(index) {
+    setFocusedPlaceInput(index) {
       this.placeFocusIndex = index
       setTimeout(() => {
         this.$forceUpdate()
@@ -185,9 +187,9 @@ export default {
           context.addPlaceInput()
         }
         if (context.places[0].isEmpty()) {
-          context.setfocusedPlaceInput(0)
+          context.setFocusedPlaceInput(0)
         } else {
-          context.setfocusedPlaceInput(context.places.length - 1)
+          context.setFocusedPlaceInput(context.places.length - 1)
         }
       })
 
@@ -341,7 +343,7 @@ export default {
         if (context.places.length === 1) {
           setTimeout(() => {
             context.addPlaceInput()
-            context.setfocusedPlaceInput(this.places.length - 1)
+            context.setFocusedPlaceInput(this.places.length - 1)
             if (context.$highResolution) {
               context.setSidebarIsOpen(true)
             }
@@ -414,7 +416,7 @@ export default {
             // before reordering the places
             setTimeout(() => {
               context.places.reverse()
-              context.setfocusedPlaceInput(0)
+              context.setFocusedPlaceInput(0)
               if (context.$highResolution) {
                 context.setSidebarIsOpen(true)
               }
@@ -725,7 +727,7 @@ export default {
      */
     startDirections () {
       this.addPlaceInput()
-      this.setfocusedPlaceInput(this.places.length - 1)
+      this.setFocusedPlaceInput(this.places.length - 1)
       this.switchPlaceInputsValues()
       this.setViewMode(constants.modes.directions)
       this.eventBus.$emit('clearMap')
@@ -741,7 +743,7 @@ export default {
 
       if (!place.isEmpty()) {
         this.places[0] = place
-        this.setfocusedPlaceInput(0)
+        this.setFocusedPlaceInput(0)
         this.propagatePlaceChange(0)
         if (this.places.length === 1) {
           this.addPlaceInput()
@@ -785,7 +787,7 @@ export default {
      */
     updateAppRoute () {
       // It the app is tin the search mode but the only place name is
-      // empty then stwitch to the default `place` mode
+      // empty then switch to the default `place` mode
       if (this.$store.getters.mode === constants.modes.search && this.places[0].placeName === '') {
         this.setViewMode(constants.modes.place)
       }
@@ -813,13 +815,13 @@ export default {
       // save current options in a temp object
       const options = this.mapViewData.options || {}
 
-      // Create a MapViewData from srcatch and set
+      // Create a MapViewData from scratch and set
       // places and options
       this.mapViewData = new MapViewData()
       this.mapViewData.places = [filledPlaces[index]]
       this.mapViewData.options = options
 
-      // Nofify the listeners that the MapViewData has changed
+      // Notify the listeners that the MapViewData has changed
       this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
 
       // Update the place view for the place input
@@ -874,7 +876,7 @@ export default {
     },
 
     /**
-     * Reset state to sigle place
+     * Reset state to single place
      */
     resetStateToSinglePlace () {
       const appRouteData = this.$store.getters.appRouteData
@@ -937,7 +939,7 @@ export default {
 
     /**
      * Handles the round trip filter change
-     * If only one palce is filled, update the app route
+     * If only one place is filled, update the app route
      */
     roundTripFilterChanged () {
       if (this.places.length === 1 && !this.places[0].isEmpty()) {

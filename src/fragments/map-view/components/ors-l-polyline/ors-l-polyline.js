@@ -136,7 +136,7 @@ export default {
       let originalEvent = event.originalEvent || event
       originalEvent.stopPropagation()
       originalEvent.preventDefault()
-      originalEvent.clckedOverPolyline = true
+      originalEvent.clickedOverPolyline = true
       leafletPolylineObject.fire('polylineClicked', event)
     },
     /**

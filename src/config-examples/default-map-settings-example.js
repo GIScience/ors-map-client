@@ -30,7 +30,7 @@ const defaultMapSettings = {
   autoFitHighlightedBounds: true,
   convertStopAfterRouteEndingToDestination: false,
   useStopOptimization: false,
-  acessibleModeActive: false,
+  accessibleModeActive: false,
   shownOnceTooltips: {},
   mapCenter: {lat: 49.510944, lng: 8.76709}, // Default center is at Heidelberg, Germany
   randomizedIsochroneColors: false,

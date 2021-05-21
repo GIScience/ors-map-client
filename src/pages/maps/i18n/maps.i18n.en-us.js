@@ -7,7 +7,7 @@ export default {
     placeNameRequired: 'Place name required',
     altitude: 'Altitude variation',
     settings: 'Settings',
-    toggleAcessibleMode: 'Toggle accessible mode',
+    toggleAccessibleMode: 'Toggle accessible mode',
     aboutTitle: 'About ORS',
     updateSearch: 'Search this area',
     updateSearchAfterZoomOrCenterChange: 'Update search after zoom or center change'

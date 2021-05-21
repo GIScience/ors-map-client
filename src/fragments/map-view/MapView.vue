@@ -26,7 +26,7 @@
         @markerMoved="markerMoved"
         @markerClicked="markerClicked"
         @removePlace="removePlace"
-        @markAsDirectfromHere="markAsDirectfromHere">
+        @markAsDirectFromHere="markAsDirectFromHere">
       </map-view-markers>
 
        <map-view-markers
@@ -74,7 +74,7 @@
           :lat-lngs="alternativeRoute.polyline" >
         </ors-l-polyline>
       </template>
-       <template v-if="showActivRouteData">
+       <template v-if="displayActiveRouteData">
         <ors-l-polyline :draggable="isPolylineDraggable"
           @followPolyline="followPolyline"
           @rightClicked="mapRightClick"
@@ -103,11 +103,11 @@
           :attribution="overlayerTileProvider.attribution"
           :token="overlayerTileProvider.token"
           layer-type="overlay"/>
-      <v-btn fab small @click.stop="toggleAcessibleMode" v-if="accessibilityToolAvailable"
-        :title="$t('maps.toggleAcessibleMode')"
+      <v-btn fab small @click.stop="toggleAccessibleMode" v-if="accessibilityToolAvailable"
+        :title="$t('maps.toggleAccessibleMode')"
         :class="{'extra-low-resolution': $xlResolution}"
         class="do-not-trigger-close-bottom-nav accessibility-btn" >
-        <v-icon large :color="$store.getters.mapSettings.acessibleModeActive? 'primary': 'default'" >accessibility</v-icon>
+        <v-icon large :color="$store.getters.mapSettings.accessibleModeActive? 'primary': 'default'" >accessibility</v-icon>
       </v-btn>
       <v-btn fab small v-if="canFitFeatures && showControls"
         class="fit-all-features"
@@ -130,11 +130,11 @@
     <map-right-click v-if="!$store.getters.embed" :map-view-data="mapViewData" @closed="clickLatlng = null" @rightClickEvent="handleRightClickEvent"></map-right-click>
     <map-left-click :current-zoom="zoom" @closed="clickLatlng = null" @directionsToPoint="directionsToPoint"></map-left-click>
 
-    <div v-if="$store.getters.mapSettings.acessibleModeActive">
+    <div v-if="$store.getters.mapSettings.accessibleModeActive">
       <v-btn fab small @click="moveMapCenter('left')" :title="$t('mapView.moveMapPositionToLeft')" class="move-map-arrow left do-not-trigger-close-bottom-nav" > <v-icon large color="primary" >arrow_back</v-icon> </v-btn>
       <v-btn fab small @click="moveMapCenter('up')" :title="$t('mapView.moveMapPositionToUp')" class="move-map-arrow up do-not-trigger-close-bottom-nav" > <v-icon large color="primary" >arrow_upward</v-icon> </v-btn>
       <v-btn fab small @click="moveMapCenter('right')" :title="$t('mapView.moveMapPositionToRight')" class="move-map-arrow right do-not-trigger-close-bottom-nav" > <v-icon large color="primary" >arrow_forward</v-icon> </v-btn>
-      <v-btn fab small @click="moveMapCenter('down')" :title="$t('mapView.moveMapPositionToDown')" class="move-map-arrow down do-not-trigger-close-bottom-nav" :style="{top: acessibilityBtnTopPosition}" > <v-icon large color="primary" >arrow_downward</v-icon> </v-btn>
+      <v-btn fab small @click="moveMapCenter('down')" :title="$t('mapView.moveMapPositionToDown')" class="move-map-arrow down do-not-trigger-close-bottom-nav" :style="{top: accessibilityBtnTopPosition}" > <v-icon large color="primary" >arrow_downward</v-icon> </v-btn>
     </div>
   </div>
 </template>

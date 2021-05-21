@@ -13,7 +13,7 @@
                 <v-icon>delete</v-icon>
               </v-btn>
               <v-btn outline small fab v-if="directIsAvailable(index)" :title="$t('mapView.toggleDirect')"
-                @click="markAsDirectfromHere(index)">
+                @click="markAsDirectFromHere(index)">
                 <v-icon :color="marker.place.direct? 'primary' : 'dark'">settings_ethernet</v-icon>
               </v-btn>
             </div>
@@ -33,7 +33,7 @@
               <v-icon>delete</v-icon>
             </v-btn>
             <v-btn outline small fab v-if="directIsAvailable(index)" :title="$t('mapView.toggleDirect')"
-              @click="markAsDirectfromHere(index)">
+              @click="markAsDirectFromHere(index)">
               <v-icon :color="marker.place.direct? 'primary' : 'dark'">settings_ethernet</v-icon>
             </v-btn>
           </div>
