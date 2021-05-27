@@ -8,6 +8,6 @@ export default {
     "addRouteStop": "Hozzáadás megállóként",
     "centerHere": "Legyen itt a középpont",
     "addAsIsochroneCenter": "Hozzáadás elérhetőségi középpontként",
-    "inspectDataOnOSM": "Adatok megtekintése az OSM"
+    "inspectDataOnOSM": "Adatok megtekintése az OSM-en"
   }
 }

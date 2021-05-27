@@ -31,7 +31,7 @@ export default {
      * @returns {Object}
      */
     avoidPolygonsFilterAcessor () {
-      const filterRef = OrsFilterUtil.getFilterRefByName(constants.avoidPpolygonsFilterName)
+      const filterRef = OrsFilterUtil.getFilterRefByName(constants.avoidPolygonsFilterName)
       return filterRef
     },
     /**

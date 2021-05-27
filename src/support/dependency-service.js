@@ -1,4 +1,5 @@
 import OrsMapFilters from '@/config/ors-map-filters'
+import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import lodash from 'lodash'
 
 /**
@@ -8,8 +9,8 @@ import lodash from 'lodash'
 const updateFieldsStatus = (scopedParameters) => {
   const globalParameters = OrsMapFilters
   for (const key in scopedParameters) {
-    setVisibility(scopedParameters, key, globalParameters)
-    applyItemsFilter(scopedParameters, key, globalParameters)
+    setVisibility(scopedParameters, key)
+    applyFilterRestrictions(scopedParameters, key, globalParameters)
   }
 }
 
@@ -19,10 +20,10 @@ const updateFieldsStatus = (scopedParameters) => {
  * @param {*} key
  * @param {*} globalParameters
  */
-const setVisibility = (scopedParameters, key, globalParameters) => {
+const setVisibility = (scopedParameters, key) => {
   const parameter = scopedParameters[key]
   if (parameter.validWhen) {
-    const matchesRules = getMatchesDependencyRules(parameter, globalParameters, 'validWhen')
+    const matchesRules = getMatchesDependencyRules(parameter, 'validWhen')
     scopedParameters[key].disabled = !matchesRules
   }
 }
@@ -34,19 +35,19 @@ const setVisibility = (scopedParameters, key, globalParameters) => {
  * @param {*} dependencyKey
  * @returns {boolean} matchRule
  */
-const getMatchesDependencyRules = (parameter, globalParameters, dependencyKey) => {
-  let matchRule = true
+const getMatchesDependencyRules = (parameter, dependencyKey) => {
+  let matchesRule = true
   for (const ruleKey in parameter[dependencyKey]) {
     const rule = parameter[dependencyKey][ruleKey]
-    const dependsOn = getDependencyRelationTargetObj(globalParameters, rule)
+    const dependsOn = getDependencyRelationTargetObj(rule.ref, rule.skipRootPathLookup)
     if (dependsOn) {
       const value = getParsedValue(dependsOn.value, dependsOn.apiDefault)
-      matchRule = applyValueRule(rule, value, matchRule)
-      matchRule = applyConditionRule(rule, value, matchRule)
+      matchesRule = applyValueRule(rule, value, matchesRule)
+      matchesRule = applyConditionRule(rule, value, matchesRule)
     }
-    if (!matchRule) break
+    if (!matchesRule) break
   }
-  return matchRule
+  return matchesRule
 }
 
 /**
@@ -138,24 +139,113 @@ const applyConditionRule = (rule, paramValue, matchesRule) => {
  * @param {*} key
  * @param {*} globalParameters
  */
-const applyItemsFilter = (scopedParameters, key, globalParameters) => {
+const applyFilterRestrictions = (scopedParameters, key, globalParameters) => {
   const parameter = scopedParameters[key]
   if (parameter.itemRestrictions) {
-    for (const ruleKey in parameter.itemRestrictions) {
-      const rule = parameter.itemRestrictions[ruleKey]
-      const validWhen = getDependencyRelationTargetObj(globalParameters, rule)
-      if (validWhen) {
-        setFilteredItems(scopedParameters, key, validWhen, rule)
-        setFilteredItemsForNullAndUndefined(scopedParameters, key, validWhen, rule)
-        removeInvalidValue(scopedParameters[key])
-      }
-    }
+    applyItemRestrictions(scopedParameters, key)
+  } else if (parameter.valuesRestrictions) {
+    applyValuesRestrictions(scopedParameters, key)
   } else if (parameter.props) {
     for (const propKey in parameter.props) {
-      applyItemsFilter(parameter.props, propKey, globalParameters)
+      applyFilterRestrictions(parameter.props, propKey, globalParameters)
+    } 
+  }
+}
+
+/**
+ * Apply items restriction based on rules defined in filter object
+ * @param {*} scopedParameters 
+ * @param {*} key 
+ * @param {*} globalParameters 
+ */
+const applyItemRestrictions = (scopedParameters, key) => {
+  const parameter = scopedParameters[key]
+  for (const ruleKey in parameter.itemRestrictions) {
+    const rule = parameter.itemRestrictions[ruleKey]
+    const validWhen = getDependencyRelationTargetObj(rule.ref, rule.skipRootPathLookup)
+    if (validWhen) {
+      setFilteredItems(scopedParameters, key, validWhen, rule)
+      setFilteredItemsForNullAndUndefined(scopedParameters, key, validWhen, rule)
+      removeInvalidValue(scopedParameters[key])
     }
   }
 }
+
+/**
+ * Apply values restrictions based on rules defined in filter object
+ * @param {*} scopedParameters 
+ * @param {*} key 
+ * @param {*} globalParameters 
+ */
+const applyValuesRestrictions = (scopedParameters, key) => {
+  const parameter = scopedParameters[key]
+  for (const ruleKey in parameter.valuesRestrictions) {
+    const rule = parameter.valuesRestrictions[ruleKey]
+    const validWhen = getDependencyRelationTargetObj(rule.ref, rule.skipRootPathLookup)
+    if (validWhen) {
+      setFilteredValues(scopedParameters, key, validWhen, rule)
+    }
+  }
+}
+
+/**
+ * Set the filter values based on the dependencies rules
+ * @param {*} scopedParameters
+ * @param {*} key
+ * @param {*} validWhen
+ * @param {*} rule
+ */
+ const setFilteredValues = (scopedParameters, key, validWhen, rule) => {
+  if (rule.valuesWhen && scopedParameters[key]) {    
+    Object.keys(rule.valuesWhen).forEach(function (ruleKey) {
+      if ((validWhen.value === ruleKey) || (ruleKey.endsWith('*') && validWhen.value.startsWith(ruleKey.replace('*', '')))) {
+        if (rule.valuesWhen[ruleKey].value !== undefined) {
+          scopedParameters[key].value = getRuleValue(rule, ruleKey, "value")
+        }
+        if (rule.valuesWhen[ruleKey].min !== undefined) {
+          scopedParameters[key].min = getRuleValue(rule, ruleKey, "min")
+        }
+        if (rule.valuesWhen[ruleKey].max !== undefined) {
+          scopedParameters[key].max = getRuleValue(rule, ruleKey, "max")
+          if (scopedParameters[key].min > scopedParameters[key].max) {
+            scopedParameters[key].min = scopedParameters[key].max
+          }
+        }
+        if (rule.valuesWhen[ruleKey].multiplyValueBy !== undefined) {
+          scopedParameters[key].multiplyValueBy = getRuleValue(rule, ruleKey, "multiplyValueBy")
+        }
+        if (rule.valuesWhen[ruleKey].step !== undefined) {
+          scopedParameters[key].step = getRuleValue(rule, ruleKey, "step")
+        }
+        return false
+      }
+    })
+  }
+}
+
+/**
+ * Get a rule value based on routeKey and valueName
+ */
+const getRuleValue = (rule, ruleKey, valueName) => {
+  let value = null
+  let valueProp = rule.valuesWhen[ruleKey][valueName]
+  if (valueProp !== undefined) {
+    if (Array.isArray(valueProp)) {
+      let valueRule = valueProp[0]
+      const globalParameters = OrsMapFilters      
+      let filter = OrsFilterUtil.getFilterRefByName(valueRule.ref, globalParameters, true)
+      if ((!filter || filter.value === undefined) && valueProp.length === 2) {
+        value = valueProp[1]
+      } else {
+        value = filter.value
+      }
+    } else {
+      value = rule.valuesWhen[ruleKey][valueName]
+    }
+  }
+  return value
+}
+
 
 /**
  * Remove invalid values from filter
@@ -166,10 +256,10 @@ const removeInvalidValue = (filter) => {
     if (Array.isArray(filter.value)) {
       for (let arrKey in filter.value) {
         let val = filter.value[arrKey]
-        var valudindex = filter.filteredItems.findIndex(function(v) {
+        var valueIndex = filter.filteredItems.findIndex(function(v) {
           return val === v || val === v.itemValue
         })
-        if (valudindex === -1) {
+        if (valueIndex === -1) {
           filter.value.splice(Number(arrKey), 1)
         }
       }
@@ -262,16 +352,17 @@ const getParsedValue = (value, defaultValue = null) => {
  * Get the parameter object that is the target of a dependency relation
  * It will use the dependency declaration ref to navigate thought the globalParameters
  * and get the target parameter object
- * @param {*} globalParameters
- * @param {*} rule
+ * @param {*} ref
+ * @param {*} skipRootPathLookup
  * @returns {*} rootTargetObject
  */
-const getDependencyRelationTargetObj = (globalParameters, rule) => {
-  let rootParameterName = rule.ref
+const getDependencyRelationTargetObj = (ref, skipRootPathLookup = false) => {
+  const globalParameters = OrsMapFilters
+  let rootParameterName = ref
   let childPath = null
-  if (!rule.skipRootPathLookup && rule.ref.includes('.')) {
-    rootParameterName = rule.ref.split('.')[0]
-    childPath = rule.ref.replace(`${rootParameterName}.`, '')
+  if (!skipRootPathLookup && ref.includes('.')) {
+    rootParameterName = ref.split('.')[0]
+    childPath = ref.replace(`${rootParameterName}.`, '')
   }
 
   // First get the object in the root node of global parameters where the dependency ref points to

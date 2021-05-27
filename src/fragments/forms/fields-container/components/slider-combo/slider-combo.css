@@ -1,6 +1,6 @@
 
 
-.form-felds-slider-text-input {
+.form-fields-slider-text-input {
   float: left;
   width: 50px;
   padding-right: 5px;
@@ -8,12 +8,20 @@
   height: 40px;
 }
 
-.form-felds-slider-text-input >>> .v-input__slot {
+.form-fields-slider-text-input >>> input {
+  -webkit-appearance: none;
+  margin: 0;
+  -moz-appearance: textfield;
+}
+
+
+
+.form-fields-slider-text-input >>> .v-input__slot {
   padding: 2px !important;
   min-height: 40px !important;
 }
 
-.form-felds-slider-text-input >>> input::-webkit-inner-spin-button, .form-felds-slider-text-input >>>
+.form-fields-slider-text-input >>> input::-webkit-inner-spin-button, .form-fields-slider-text-input >>>
 input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   -moz-appearance: textfield;
@@ -21,12 +29,12 @@ input::-webkit-outer-spin-button {
 }
 
 
-.form-felds-slider-text-input >>> input {
+.form-fields-slider-text-input >>> input {
   margin-top: 5px;
 }
 
 
-.form-felds-slider {
+.form-fields-slider {
   float: left;
   width: 100%
 }

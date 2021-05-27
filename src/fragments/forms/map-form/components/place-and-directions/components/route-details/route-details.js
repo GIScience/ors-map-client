@@ -160,7 +160,7 @@ export default {
      * @returns {Object}
      */
     buildExtraHighlighPolylineData (segment, index) {
-      const color = constants.segmentHightlightColor
+      const color = constants.segmentHighlightColor
       const label = `${this.$t('routeDetails.segment')} ${index+1}`
       const intervals = []
       for (let key in segment.steps) {

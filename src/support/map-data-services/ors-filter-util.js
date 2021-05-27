@@ -53,7 +53,7 @@ const getFilterValue = (filter, service) => {
       // Apply filter conditions like min, multiplier etc
       filterValue = applyFilterValueConditions(filterClone, filterValue)
     } else {
-      filterValue = adjustdFilterValue(filterClone, filterValue)
+      filterValue = adjustFilterValue(filterClone, filterValue)
     }
   }
 
@@ -66,10 +66,7 @@ const getFilterValue = (filter, service) => {
  * @param {*} filterValue
  * @returns {*} filterValue
  */
-const adjustdFilterValue = (filter, filterValue) => {
-  if (filter.name === 'range') {
-    console.log(filter)
-  }
+const adjustFilterValue = (filter, filterValue) => {
   // Check if the filter value must be extracted as an array and do it if so
   if (filter.type === constants.filterTypes.array && Array.isArray(filter.value) && !filter.valueAsArray) {
     const separator = filter.separator || ','
@@ -98,7 +95,7 @@ const adjustdFilterValue = (filter, filterValue) => {
  * @returns {Object} accessor
  */
 const getFilterByAncestryAndItemIndex = (ancestry, itemIndex = null) => {
-  let path = buildAncestryAcessorString(ancestry, itemIndex)
+  let path = buildAncestryAccessorString(ancestry, itemIndex)
   let OrsMapFiltersAccessor = OrsMapFilters
   let accessor = lodash.get(OrsMapFiltersAccessor, path)
   return accessor
@@ -111,14 +108,14 @@ const getFilterByAncestryAndItemIndex = (ancestry, itemIndex = null) => {
  * The map filters is a array of objects that may contains
  * child objects under the `props` property, that, if defined,
  * also contains an array of child objects. Many levels of objects
- * with props and child objets is possible. This method creates
+ * with props and child objects is possible. This method creates
  * a string that represents the navigation required to access a target
  * object considering the index of each step
  * @param {*} ancestry
  * @param {*} itemIndex
  * @returns {String} path
  */
-const buildAncestryAcessorString = (ancestry, itemIndex = null) => {
+const buildAncestryAccessorString = (ancestry, itemIndex = null) => {
   let path
   // Multiple levels of ancestry is supported.
   // So, if ancestry is an array, then the first value
@@ -126,7 +123,7 @@ const buildAncestryAcessorString = (ancestry, itemIndex = null) => {
   // resolve it recursively
   if (Array.isArray(ancestry) && ancestry.length > 1) {
     if (Array.isArray(ancestry[0])) {
-      let subPath = buildAncestryAcessorString(ancestry[0])
+      let subPath = buildAncestryAccessorString(ancestry[0])
       // In case of recursive ancestry, the value in
       // position 1 is the immediate parent and we must
       // assembly this with the sub-path generated

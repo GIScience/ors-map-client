@@ -2,6 +2,7 @@ const constants = {
   clientVersion: '1.0.12', // If you change the version here you have to change on package.json too!
   apiVersion: '5.0',
   orsPublicHost: 'https://openrouteservice.org',
+  orsApiRequestTimeout: 30000,
   publicEndpoints: {
     directions: 'pdirections',
     isochrones: 'pisochrones',
@@ -19,7 +20,7 @@ const constants = {
     reverseGeocode: 'geocode/reverse'
   },
   roundTripFilterName: 'round_trip',
-  avoidPpolygonsFilterName: 'avoid_polygons',
+  avoidPolygonsFilterName: 'avoid_polygons',
   roundTripOptionsPath: 'options.round_trip',
   avoidPolygonsOptionsPath: 'options.options.avoid_polygons',
   profileFilterName: 'profile',
@@ -62,7 +63,6 @@ const constants = {
     surface: 'surface',
     steepness: 'steepness',
     waytype: 'waytype',
-
     suitability: 'suitability',
     waycategory: 'waycategory',
     tollways: 'tollways',
@@ -74,7 +74,7 @@ const constants = {
     noise: 'noise'
   },
   orsKmlDocumentDescription: 'ORS route file',
-  segmentHightlightColor: '#9ACD32',
+  segmentHighlightColor: '#9ACD32',
   alternativeRouteColor: '#6E6E6E',
   routeBackgroundColor: '#fff'
 }

@@ -236,7 +236,7 @@ export default {
         const places = context.getFilledPlaces()
 
         if (places.length > 0) {
-          context.showInfo(context.$t('isochrones.calculatingIsochrones', { timeout: 0 }))
+          context.showInfo(context.$t('isochrones.calculatingIsochrones'), { timeout: 0 })
           context.eventBus.$emit('showLoading', true)
 
           // Calculate the route

@@ -49,14 +49,14 @@ const orsParamsParser = {
       return false
     }
     const mapBounds = store.getters.mapBounds
-    let valideBbox = true
+    let validBbox = true
 
     // Make sure that min and max lat are valid
     const lats = ['min_lat', 'max_lat']
     for (const key in lats) {
       const prop = lats[key]
       if (mapBounds.rect[prop] > 90 || mapBounds.rect[prop] < -90) {
-        valideBbox = false
+        validBbox = false
       }
     }
     // Make sure that min and max lng are valid
@@ -64,11 +64,11 @@ const orsParamsParser = {
     for (const key in lngs) {
       const prop = lngs[key]
       if (mapBounds.rect[prop] > 180 || mapBounds.rect[prop] < -180) {
-        valideBbox = false
+        validBbox = false
       }
     }
     // If the bounding box is valid, then add it to the args
-    if (valideBbox) {
+    if (validBbox) {
       let bbox = [
         [mapBounds.rect.min_lat, mapBounds.rect.min_lon],
         [mapBounds.rect.max_lat, mapBounds.rect.max_lon]
@@ -147,11 +147,14 @@ const orsParamsParser = {
     }
     const args = {
       locations: locations,
-      area_units: store.getters.mapSettings.unit
+      area_units: store.getters.mapSettings.unit,
+      timeout: constants.orsApiRequestTimeout
     }
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
     orsParamsParser.setFilters(args, OrsMapFilters, constants.services.isochrones)
+
+    // Adjust specific args
     if (args.range && !Array.isArray(args.range)) {
       args.range = [args.range]
     }
@@ -190,7 +193,8 @@ const orsParamsParser = {
       instructions_format: 'html',
       extra_info: extraInfo,
       language: mapSettings.routingInstructionsLocale,
-      units: mapSettings.unit
+      units: mapSettings.unit,
+      timeout: constants.orsApiRequestTimeout
     }
 
     let skipSegments = []
@@ -255,11 +259,11 @@ const orsParamsParser = {
     for (const key in constants.extraInfos) {
       if (mapSettings[key]) {
         if (key === constants.extraInfos.roadaccessrestrictions) {
-          if (profileObj.supportsRoadaccessrestrictions) {
+          if (profileObj.supportsRoadAccessRestrictions) {
             extraInfo.push(constants.extraInfos[key])
           }
         } else if (key === constants.extraInfos.traildifficulty) {
-          if (profileObj.supportsTraildifficulty) {
+          if (profileObj.supportsTrailDifficulty) {
             extraInfo.push(constants.extraInfos[key])
           }
         } else if (key === constants.extraInfos.tollways) {

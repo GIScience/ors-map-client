@@ -53,7 +53,7 @@
             </v-text-field>
 
             <template v-else-if="parameter.type === constants.filterTypes.steps" :ref="'field'+ index">
-              <slider-combo @change="(newVal) => sliderComboUpdated(index, newVal)" :filter="formParameters[index]" :label="buildLabel(parameter)" ></slider-combo>
+              <slider-combo @change="(newVal) => sliderComboUpdated(index, newVal)" :filter="comboFilterParameter(index)" :label="buildLabel(parameter)" ></slider-combo>
             </template>
 
             <template v-else-if="parameter.type === constants.filterTypes.boolean" :ref="'field'+ index">

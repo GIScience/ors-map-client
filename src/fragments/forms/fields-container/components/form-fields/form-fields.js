@@ -34,6 +34,7 @@ export default {
     }
   },
   created () {
+    let context = this
     if (this.subPropsIndex) {
       this.subPropsModalIndex = this.subPropsIndex
     }
@@ -42,8 +43,8 @@ export default {
     // Every time the active console tab changes
     // we refresh the single parameter model
     this.eventBus.$on('filtersChangedExternally', () => {
-      this.updateFieldsStatus()
-      this.$forceUpdate()
+      context.updateFieldsStatus()
+      context.$forceUpdate()
     })
   },
   computed: {
@@ -65,6 +66,9 @@ export default {
     },
   },
   methods: {
+    comboFilterParameter (index) {
+      return this.formParameters[index]
+    },
     /**
      * Determines f a field must be shown
      * @param {*} parameter
@@ -80,8 +84,8 @@ export default {
     setNewRandomValue (index) {
       const min = this.formParameters[index].min || 0
       const max = this.formParameters[index].max || 100
-      const ramdon = Math.floor(Math.random() * (max - min + 1) + min)
-      this.formParameters[index].value = ramdon
+      const random = Math.floor(Math.random() * (max - min + 1) + min)
+      this.formParameters[index].value = random
       this.fieldUpdated({ index: index })
     },
     /**
@@ -100,7 +104,9 @@ export default {
      *
      */
     updateFieldsStatus () {
-      dependencyService.updateFieldsStatus(this.formParameters)
+      let service = dependencyService
+      service.updateFieldsStatus(this.formParameters)
+      console.log(this.formParameters[4])
     },
 
     /**
@@ -166,7 +172,12 @@ export default {
       this.$forceUpdate()
     },
 
-    sliderComboUpdated (index, newval) {
+    /**
+     * Update filed modal when the combo component triggers an update
+     * @param {*} index 
+     * @param {*} newVal 
+     */
+    sliderComboUpdated (index, newVal) {
       let parameter = this.parameters[index]
       this.fieldUpdated({index: index, parameter: parameter})
     },
@@ -486,20 +497,20 @@ export default {
      * @returns {boolean}
      */
     showPanelExpanded (parameter) {
-      let childHascontent = false
+      let childHasContent = false
       for (const key in parameter.props) {
         let hasValue = parameter.props[key].value !== undefined && parameter.props[key].value !== null
         let valueIsValid = parameter.props[key].value !== parameter.props[key].default
         // Only consider that a child has a keep ope value if
         // the value is valid and the component is not a hidden one
         if (hasValue && valueIsValid && !parameter.props[key].hidden) {
-          childHascontent = true
+          childHasContent = true
           break
         }
       }
       // By returning O, it is kept open and
       // by returning null it is kept collapsed
-      return childHascontent ? 0 : null
+      return childHasContent ? 0 : null
     }
   },
   components: {

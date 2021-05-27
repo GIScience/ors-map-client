@@ -11,15 +11,32 @@ export default {
   },
   data () {
     return {
+      localFilter: null,
       localModel: null,
       textLocalModel: null,
       debounceTimeoutId: null
     }
   },
   created () {
-    this.localModel = this.textLocalModel = this.filter.value
+    this.setLocalData()
+  },
+  watch: {
+    filter: {
+      handler: function () {
+        this.setLocalData()
+      },
+      deep: true
+    }
   },
   computed: {
+    filterMin () {
+      let min = this.filter.min
+      return min
+    },
+    filterMax () {
+      let max = this.filter.max
+      return max
+    },
     sliderValue () {
       if (this.localModel !== null && this.localModel !== undefined) {
         return this.localModel
@@ -28,6 +45,16 @@ export default {
     }
   },
   methods: {
+    setLocalData () {
+      this.localFilter = this.filter
+      this.localModel = this.textLocalModel = this.filter.value
+      if (this.localModel > this.filterMax) {
+        this.localModel = this.textLocalModel = this.filterMax
+      }
+      if (this.localModel < this.filterMin) {
+        this.localModel = this.textLocalModel = this.filterMin
+      }
+    },
     /**
      * Run a field update with a debounce
      */
