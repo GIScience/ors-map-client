@@ -36,10 +36,21 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
-## [Unreleased]
-
+## [1.0.13]
 ### Fixed
 - Spelling, formatting and grammar issues in the README.md, documentation, changelog and comments
+- Spelling of variables and properties
+- Hungarian typo
+- Isochrones calculating msg duration
+- Variables typo
+
+### Changed
+- Update ors-js lib to version 1.0.13 with timeout param support
+- Hook event name from `avoidPolygonBtnTraslations` to `avoidPolygonBtnTranslations`
+
+### Added
+- Support to filter value conditions dependency
+- Define isochrone rages by profile and dynamic intervals based on range value
 
 ## [v1.0.12] - 2021-04-28 ##
 

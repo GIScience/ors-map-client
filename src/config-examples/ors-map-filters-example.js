@@ -1,4 +1,4 @@
-// This is an example file and is expected to be cloned
+// This is an example file and is expected to be cloned 
 // without the -example on the same folder that it resides.
 
 import routeSmoothnessList from '@/resources/lists/route-smoothness'
@@ -105,6 +105,7 @@ const filters = [
     unit: 'min',
     required: false,
     type: constants.filterTypes.steps,
+    valueAsArray: true,
     value: 5,
     min: 1,
     max: 300,
@@ -117,7 +118,26 @@ const filters = [
       }
     ],
     availableOnModes: [constants.modes.isochrones],
-    useInServices: [constants.services.isochrones]
+    useInServices: [constants.services.isochrones],
+    valuesRestrictions: [
+      {
+        ref: 'profile',
+        valuesWhen: {
+          'driving-*': {
+            max: 60
+          },
+          'cycling-*': {
+            max: 30
+          },
+          'foot-*': {
+            max: 1200
+          },
+          wheelchair: {
+            max: 1200,
+          },
+        }
+      }
+    ]
   },
   {
     name: 'interval',
@@ -136,7 +156,30 @@ const filters = [
       }
     ],
     availableOnModes: [constants.modes.isochrones],
-    useInServices: [constants.services.isochrones]
+    useInServices: [constants.services.isochrones],
+    valuesRestrictions: [
+      {
+        ref: 'profile',
+        valuesWhen: {
+          'driving-*': {
+            max: [{ref: 'range'}, 60], // the max value of range or 60
+            min: 6
+          },
+          'cycling-*': {
+            max: [{ref: 'range'}, 30], // the max value of range or 30,
+            min: 3
+          },
+          'foot-*': {
+            max: [{ref: 'range'}, 1200], // the max value of range or 1200,
+            min: 12
+          },
+          wheelchair: {
+            max: [{ref: 'range'}, 1200], // the max value of range or 1200,
+            min: 12
+          },
+        }
+      }
+    ]
   },
   {
     name: 'range',
@@ -147,6 +190,7 @@ const filters = [
     min: 1,
     max: 115,
     multiplyValueBy: 1000,
+    valueAsArray: true,
     step: 1,
     validWhen: [
       {
@@ -155,7 +199,26 @@ const filters = [
       }
     ],
     availableOnModes: [constants.modes.isochrones],
-    useInServices: [constants.services.isochrones]
+    useInServices: [constants.services.isochrones],
+    valuesRestrictions: [
+      {
+        ref: 'profile',
+        valuesWhen: {
+          'driving-*': {
+            max: 120
+          },
+          'cycling-*': {
+            max: 120
+          },
+          'foot-*': {
+            max: 120
+          },
+          wheelchair: {
+            max: 120,
+          },
+        }
+      }
+    ]
   },
   {
     name: 'interval',
@@ -174,7 +237,30 @@ const filters = [
       }
     ],
     availableOnModes: [constants.modes.isochrones],
-    useInServices: [constants.services.isochrones]
+    useInServices: [constants.services.isochrones],
+    valuesRestrictions: [
+      {
+        ref: 'profile',
+        valuesWhen: {
+          'driving-*': {
+            max: [{ref: 'range'}, 120], // the max value of range or 120
+            min: 12
+          },
+          'cycling-*': {
+            max: [{ref: 'range'}, 120], // the max value of range or 120
+            min: 12
+          },
+          'foot-*': {
+            max: [{ref: 'range'}, 120], // the max value of range or 120
+            min: 12
+          },
+          wheelchair: {
+            max: [{ref: 'range'}, 120], // the max value of range or 120
+            min: 12
+          },
+        }
+      }
+    ]
   },
   {
     name: 'options',
@@ -196,13 +282,13 @@ const filters = [
         type: constants.filterTypes.wrapper,
         useInServices: [constants.services.directions],
         availableOnModes: [constants.modes.roundTrip, constants.modes.directions],
-        valueAsObject: true,
+        valueAsObject: true,     
         validWhen: [
           {
             ref: 'profile',
             value: ['driving-hgv', 'wheelchair']
           }
-        ],
+        ],   
         props: [
           {
             name: 'restrictions',
@@ -225,7 +311,7 @@ const filters = [
                     ref: 'self',
                     min: 1
                   }
-                ],
+                ], 
                 value: 0,
                 min: 1,
                 max: 100,
@@ -245,7 +331,7 @@ const filters = [
                     ref: 'self',
                     min: 2
                   }
-                ],
+                ], 
                 value: 0,
                 min: 2,
                 max: 5,
@@ -265,7 +351,7 @@ const filters = [
                     ref: 'self',
                     min: 2
                   }
-                ],
+                ], 
                 value: 0,
                 min: 2,
                 max: 15,
@@ -281,7 +367,7 @@ const filters = [
                     ref: 'profile',
                     value: 'driving-hgv'
                   }
-                ],
+                ], 
                 value: 0,
                 min: 1,
                 max: 100,
@@ -297,7 +383,7 @@ const filters = [
                     ref: 'profile',
                     value: 'driving-hgv'
                   }
-                ],
+                ], 
                 value: 0,
                 min: 2,
                 max: 5,
@@ -312,7 +398,7 @@ const filters = [
                     ref: 'profile',
                     value: 'driving-hgv'
                   }
-                ],
+                ], 
                 value: false,
               },
               {
@@ -324,7 +410,7 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ],
+                ], 
                 value: '6',
                 isEnum: true,
                 enum: [
@@ -343,7 +429,7 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ],
+                ], 
                 isEnum: true,
                 value: '0.06',
                 enum: [
@@ -362,7 +448,7 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ],
+                ], 
                 value: 1,
                 min: 0,
                 max: 30,
@@ -377,10 +463,10 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ],
+                ], 
                 isEnum: true,
                 value: 'good',
-                items: routeSmoothnessList,
+                items: routeSmoothnessList,                
                 itemValue: 'value'
               },
               {
@@ -392,10 +478,10 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ],
+                ], 
                 isEnum: true,
                 value: 'cobblestone',
-                items: surfaceTypesList,
+                items: surfaceTypesList,                
                 itemValue: 'value'
               },
               {
@@ -407,10 +493,10 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ],
+                ], 
                 isEnum: true,
                 default: null,
-                value: 'grade1',
+                value: 'grade1',                
                 itemValue: 'value',
                 items: gradesList
               }
@@ -551,7 +637,7 @@ const filters = [
         name: 'avoid_countries',
         required: false,
         type: constants.filterTypes.array,
-        default: false,
+        default: false,        
         itemValue: 'cid',
         apiDefault: false,
         isEnum: true,
