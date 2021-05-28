@@ -37,11 +37,19 @@ export default {
           'distance': 'Distance'
         }
       },
-      range: {
+      time_range: {
         label: 'Range',
         description: 'The max range of the isochrones to be calculated'
       },
-      interval: {
+      distance_range: {
+        label: 'Range',
+        description: 'The max range of the isochrones to be calculated'
+      },
+      time_interval: {
+        label: 'Interval',
+        description: 'The interval of the isochrones to be calculated'
+      },
+      distance_interval: {
         label: 'Interval',
         description: 'The interval of the isochrones to be calculated'
       },

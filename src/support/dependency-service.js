@@ -1,62 +1,159 @@
-import OrsMapFilters from '@/config/ors-map-filters'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
+import OrsMapFilters from '@/config/ors-map-filters'
+import constants from '@/resources/constants'
+import utils from '@/support/utils'
+import store from '@/store/store'
 import lodash from 'lodash'
 
 /**
  * Update the status and data of the parameters based on the dependencies declared
- * @param {*} scopedParameters
+ * @param {*} scopedFilters
  */
-const updateFieldsStatus = (scopedParameters) => {
-  const globalParameters = OrsMapFilters
-  for (const key in scopedParameters) {
-    setVisibility(scopedParameters, key)
-    applyFilterRestrictions(scopedParameters, key, globalParameters)
+const updateFieldsStatus = (scopedFilters) => {
+  for (const key in scopedFilters) {
+    setVisibility(scopedFilters, key)
+    applyFilterRestrictions(scopedFilters, key)
   }
+}
+/**
+ * Get the filter value considering its attributes and dependencies
+ * @param {*} filter
+ * @param {*} service
+ * @returns {*} filterValue
+ */
+ const getFilterValue = (filter, service) => {
+  let filterValue = null
+  const filterAvailable = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
+  const filterClone = getFilterWithValueUpdated(filter)
+  // Proceed only if filter is available considering other filter's value
+  if (filterAvailable && isAvailable(filterClone)) {
+    // Get the filter with value updated considering dependencies and filter rules
+    if (filterClone.type === constants.filterTypes.wrapper && filterClone.props) {
+      filterValue = getChildrenFilterValue(filterClone, service)
+      filterValue = filterClone.valueAsObject ? filterValue : JSON.stringify(filterValue)
+      // Apply filter conditions like min, multiplier etc
+      filterValue = applyFilterValueConditions(filterClone, filterValue)
+    } else {
+      // adjustFilterValue internally use applyFilterValueConditions
+      filterValue = adjustFilterValue(filterClone, filterValue)
+    }    
+  }
+
+  return filterValue
 }
 
 /**
- * Set the parameter disabled attribute at the specified key, which will define its visibility
- * @param {*} scopedParameters
- * @param {*} key
- * @param {*} globalParameters
+ * Apply filter value conditions
+ * @param {*} filterClone
+ * @param {*} filterValue
+ * @returns {*} filterValue
  */
-const setVisibility = (scopedParameters, key) => {
-  const parameter = scopedParameters[key]
-  if (parameter.validWhen) {
-    const matchesRules = getMatchesDependencyRules(parameter, 'validWhen')
-    scopedParameters[key].disabled = !matchesRules
-  }
-}
-
-/**
- * Determines if the parameter matches the expected value according the rule
- * @param {*} parameter
- * @param {*} globalParameters
- * @param {*} dependencyKey
- * @returns {boolean} matchRule
- */
-const getMatchesDependencyRules = (parameter, dependencyKey) => {
-  let matchesRule = true
-  for (const ruleKey in parameter[dependencyKey]) {
-    const rule = parameter[dependencyKey][ruleKey]
-    const dependsOn = getDependencyRelationTargetObj(rule.ref, rule.skipRootPathLookup)
-    if (dependsOn) {
-      const value = getParsedValue(dependsOn.value, dependsOn.apiDefault)
-      matchesRule = applyValueRule(rule, value, matchesRule)
-      matchesRule = applyConditionRule(rule, value, matchesRule)
+ const applyFilterValueConditions = (filterClone, filterValue) => {
+  if (!Object.is(filterValue) && !Array.isArray(filterValue)) {
+    if (filterClone.offset && filterClone.step && filterClone.value > filterClone.step) {
+      filterValue = filterValue - filterClone.offset
     }
-    if (!matchesRule) break
+    if (filterClone.min !== null && filterClone.min !== undefined && filterValue < filterClone.min) {
+      filterValue = null
+    }
+    if (filterValue && filterClone.multiplyValueBy) {
+      filterValue = filterValue * filterClone.multiplyValueBy
+    }
   }
-  return matchesRule
+  return filterValue
 }
 
 /**
- * Checks if a given value matches a rule
+ * Get filter children value
+ * @param {*} filter
+ * @param {*} service
+ * @returns {*}
+ */
+ const getChildrenFilterValue = (filter, service) => {
+  var childFilter = {}
+  for (let propKey in filter.props) {
+    const prop = filter.props[propKey]
+    // Filter may have dependency and only be available
+    // if other filters have a certain value.
+    if (isAvailable(prop)) {
+      const childValue = getFilterValue(prop, service)
+      if (childValue !== undefined && childValue !== null) {
+        childFilter[prop.name] = childValue
+      }
+    }
+  }
+  return Object.keys(childFilter).length > 0 ? childFilter : null
+}
+
+/**
+ * Determines if the round trip filter is active
+ * @returns {Boolean} isRoundTrip
+ */
+ const isRoundTripFilterActive = () => {
+  const roundTripFilter = OrsFilterUtil.getFilterRefByName(constants.roundTripFilterName)
+  const roundTripValue = getFilterValue(roundTripFilter, constants.services.directions)
+  const isRoundTrip = roundTripValue !== null
+  return isRoundTrip
+}
+
+
+/**
+ * Adjust filter value
+ * @param {Object} filter
+ * @param {*} filterValue
+ * @returns {*} filterValue
+ */
+ const adjustFilterValue = (filter, filterValue) => {
+  // Check if the filter value must be extracted as an array and do it if so
+  if (filter.type === constants.filterTypes.array && Array.isArray(filter.value) && !filter.valueAsArray) {
+    const separator = filter.separator || ','
+    filterValue = filter.value.join(separator)
+  } else if (filter.valueAsArray && !Array.isArray(filter.value)) {
+    let val = filter.value
+    if (val === undefined || val === null) {
+      val = filter.min
+    }
+    if (val !== undefined && val !== null) {
+      val = applyFilterValueConditions(filter, val)
+      filterValue = [val]
+    }
+  } else { // In the other cases, just get the filter raw value
+    filterValue = filter.value
+    // Apply filter conditions like min, multiplier etc
+    filterValue = applyFilterValueConditions(filter, filterValue)
+  }
+  return filterValue
+}
+
+
+/**
+ * Checks whenever the param value matches a dependency required value
+ * @param {*} filterValue
+ * @param {*} ruleValue
+ * @param {Boolean} invertedMatch
+ * @returns {Boolean}
+ */
+ const matchForExistingRuleValue = (filterValue, ruleValue, invertedMatch = false) => {
+  let match
+  if (Array.isArray(filterValue)) {
+    match = lodash.includes(filterValue, ruleValue)
+    return invertedMatch ? !match : match
+  } else if (Array.isArray(ruleValue)) {
+    match = lodash.find(ruleValue, (element) => { return valueMatchesRule(filterValue, element) }) !== undefined
+    return invertedMatch ? !match : match
+  } else {
+    match = valueMatchesRule(filterValue, ruleValue)
+    return invertedMatch ? !match : match
+  }
+}
+
+/**
+ * Determines if a given value matches a given rule
  * @param {*} value
  * @param {*} ruleValue
  * @returns {boolean}
  */
-const valueMatchesRule = (value, ruleValue) => {
+ const valueMatchesRule = (value, ruleValue) => {
   // Check for collection Values like "cycling-*"
   if (typeof ruleValue === 'string' && ruleValue.endsWith('*')) {
     return value.startsWith(ruleValue.replace('*', ''))
@@ -66,34 +163,67 @@ const valueMatchesRule = (value, ruleValue) => {
 }
 
 /**
- * Checks whenever the param value matches a dependency required value
- * @param {*} paramValue
- * @param {*} ruleValue
- * @param {*} invertMatch
- * @returns {Boolean}
+ * Get the declared dependency expected value
+ * @param {Object} filter
+ * @param {String} dependencyKey
+ * @returns {boolean} matchRule
  */
-const matchForExistingRuleValue = (paramValue, ruleValue, invertMatch = false) => {
-  let match
-  if (Array.isArray(paramValue)) { // if paramValue is an array, check if it contains the ruleValue
-    match = lodash.includes(paramValue, ruleValue)
-    return invertMatch ? !match : match // consider if the rule is inverted (not match value)
-  } else if (Array.isArray(ruleValue)) { // if ruleValue is an array, check if it contains the paramValue
-    match = lodash.find(ruleValue, (element) => { return valueMatchesRule(paramValue, element) }) !== undefined
-    return invertMatch ? !match : match // consider if the rule is inverted (not match value)
-  } else {
-    match = valueMatchesRule(paramValue, ruleValue)
-    return invertMatch ? !match : match // consider if the rule is inverted (not match value)
+ const getMatchesDependencyRules = (filter, dependencyKey) => {
+  let matchRule = true  
+
+  for (const ruleKey in filter[dependencyKey]) {
+    const rule = filter[dependencyKey][ruleKey]
+    let dependsOn = null
+    if (rule.ref === 'self') {
+      dependsOn = filter
+    } else {
+      dependsOn = getDependencyRelationTargetObj(rule.ref)
+    }
+    if (dependsOn) {
+      const value = getParsedValue(dependsOn.value, dependsOn.apiDefault)
+      matchRule = applyValueRule(rule, value, matchRule)
+      matchRule = applyConditionRule(rule, value, matchRule)
+    }
+    if (!matchRule) break
   }
+  return matchRule
 }
 
 /**
- * Run a rule on a parameter to determine if it matches the rule requirement or not
- * @param {*} rule
+ * Apply conditional values based on items length and contains
+ * @param {Object} rule
+ * @param {*} paramValue
+ * @param {Boolean} matchesRule
+ * @returns {boolean}
+ */
+ const applyConditionRule = (rule, paramValue, matchesRule) => {
+  if (rule.length !== undefined && paramValue.length !== rule.length) {
+    matchesRule = false
+  }
+
+  if (rule.contains !== undefined && paramValue !== undefined && !paramValue.includes(rule.value)) {
+    matchesRule = false
+  }
+
+  if (rule.min !== undefined && paramValue < rule.min) {
+    matchesRule = false
+  }
+
+  if (rule.max !== undefined && paramValue < rule.max) {
+    matchesRule = false
+  }
+
+  return matchesRule
+}
+
+/**
+ * Run a rule on a parameter to determine if it matches the role requirement or not
+ * @param {Object} rule
  * @param {*} paramValue
  * @param {*} matchesRule
  * @returns {boolean}
  */
-const applyValueRule = (rule, paramValue, matchesRule) => {
+ const applyValueRule = (rule, paramValue, matchesRule) => {
   // If the the rule requires a value and the object does not have this value
   // then the dependent object matchesRule is set to false
   let ruleValue = rule.value || rule.valueNot
@@ -115,107 +245,130 @@ const applyValueRule = (rule, paramValue, matchesRule) => {
 }
 
 /**
- * Apply conditional values based on items length and contains
- * @param {*} rule
- * @param {*} paramValue
- * @param {*} matchesRule
- * @returns {boolean}
+ * Update the status and data of the parameters based on the dependencies declared
+ * @param {Object} filter
+ * @returns {Object} filterClone
  */
-const applyConditionRule = (rule, paramValue, matchesRule) => {
-  if (rule.length !== undefined && paramValue.length !== rule.length) {
-    matchesRule = false
+ const getFilterWithValueUpdated = (filter) => {
+  const filterClone = utils.clone(filter)
+  if (filterClone.dependsOnFilter) {
+    const matchRules = getMatchesDependencyRules(filter, 'validWhen')
+    if (!matchRules) {
+      filter.value = null
+    }
   }
+  return filterClone
+}
 
-  if (rule.contains !== undefined && paramValue !== undefined && !paramValue.includes(rule.value)) {
-    matchesRule = false
+/**
+ * Set the parameter disabled attribute at the specified key, which will define its visibility
+ * @param {*} scopedFilters
+ * @param {*} key
+ */
+const setVisibility = (scopedFilters, key) => {
+  const parameter = scopedFilters[key]
+  if (parameter.validWhen) {
+    const matchesRules = getMatchesDependencyRules(parameter, 'validWhen')
+    scopedFilters[key].disabled = !matchesRules
   }
+}
 
-  return matchesRule
+
+/**
+ * Determines if the filter is available based on dependency rules
+ * @param {*} filter
+ * @returns {Boolean}
+ */
+ const isAvailable = (filter) => {
+  if (filter.validWhen) {
+    let matchesRules = getMatchesDependencyRules(filter, 'validWhen', false)
+    if (!matchesRules) {
+      return false
+    }
+  }
+  return true
 }
 
 /**
  * Apply the filter rules
- * @param {*} scopedParameters
+ * @param {*} scopedFilters
  * @param {*} key
- * @param {*} globalParameters
  */
-const applyFilterRestrictions = (scopedParameters, key, globalParameters) => {
-  const parameter = scopedParameters[key]
+const applyFilterRestrictions = (scopedFilters, key) => {
+  const parameter = scopedFilters[key]
   if (parameter.itemRestrictions) {
-    applyItemRestrictions(scopedParameters, key)
+    applyItemRestrictions(scopedFilters, key)
   } else if (parameter.valuesRestrictions) {
-    applyValuesRestrictions(scopedParameters, key)
+    applyValuesRestrictions(scopedFilters, key)
   } else if (parameter.props) {
     for (const propKey in parameter.props) {
-      applyFilterRestrictions(parameter.props, propKey, globalParameters)
+      applyFilterRestrictions(parameter.props, propKey)
     } 
   }
 }
 
 /**
  * Apply items restriction based on rules defined in filter object
- * @param {*} scopedParameters 
+ * @param {*} scopedFilters 
  * @param {*} key 
- * @param {*} globalParameters 
  */
-const applyItemRestrictions = (scopedParameters, key) => {
-  const parameter = scopedParameters[key]
-  for (const ruleKey in parameter.itemRestrictions) {
-    const rule = parameter.itemRestrictions[ruleKey]
-    const validWhen = getDependencyRelationTargetObj(rule.ref, rule.skipRootPathLookup)
-    if (validWhen) {
-      setFilteredItems(scopedParameters, key, validWhen, rule)
-      setFilteredItemsForNullAndUndefined(scopedParameters, key, validWhen, rule)
-      removeInvalidValue(scopedParameters[key])
+const applyItemRestrictions = (scopedFilters, key) => {
+  const filter = scopedFilters[key]
+  for (const ruleKey in filter.itemRestrictions) {
+    const rule = filter.itemRestrictions[ruleKey]
+    const dependsOnFilter = getDependencyRelationTargetObj(rule.ref)
+    if (filter) {
+      setFilteredItems(scopedFilters, key, dependsOnFilter, rule)
+      setFilteredItemsForNullAndUndefined(scopedFilters, key, dependsOnFilter, rule)
+      removeInvalidValue(scopedFilters[key])
     }
   }
 }
 
 /**
  * Apply values restrictions based on rules defined in filter object
- * @param {*} scopedParameters 
+ * @param {*} scopedFilters 
  * @param {*} key 
- * @param {*} globalParameters 
  */
-const applyValuesRestrictions = (scopedParameters, key) => {
-  const parameter = scopedParameters[key]
-  for (const ruleKey in parameter.valuesRestrictions) {
-    const rule = parameter.valuesRestrictions[ruleKey]
-    const validWhen = getDependencyRelationTargetObj(rule.ref, rule.skipRootPathLookup)
-    if (validWhen) {
-      setFilteredValues(scopedParameters, key, validWhen, rule)
+const applyValuesRestrictions = (scopedFilters, key) => {
+  const filter = scopedFilters[key]
+  for (const ruleKey in filter.valuesRestrictions) {
+    const rule = filter.valuesRestrictions[ruleKey]
+    const dependsOnFilter = getDependencyRelationTargetObj(rule.ref)
+    if (dependsOnFilter) {
+      setFilteredValues(scopedFilters, key, dependsOnFilter, rule)
     }
   }
 }
 
 /**
- * Set the filter values based on the dependencies rules
- * @param {*} scopedParameters
+ * Set the filter values based on the dependence rules
+ * @param {*} scopedFilters
  * @param {*} key
  * @param {*} validWhen
  * @param {*} rule
  */
- const setFilteredValues = (scopedParameters, key, validWhen, rule) => {
-  if (rule.valuesWhen && scopedParameters[key]) {    
+ const setFilteredValues = (scopedFilters, key, dependsOnFilter, rule) => {
+  if (rule.valuesWhen && scopedFilters[key]) {    
     Object.keys(rule.valuesWhen).forEach(function (ruleKey) {
-      if ((validWhen.value === ruleKey) || (ruleKey.endsWith('*') && validWhen.value.startsWith(ruleKey.replace('*', '')))) {
+      if ((dependsOnFilter.value === ruleKey) || (ruleKey.endsWith('*') && dependsOnFilter.value.startsWith(ruleKey.replace('*', '')))) {
         if (rule.valuesWhen[ruleKey].value !== undefined) {
-          scopedParameters[key].value = getRuleValue(rule, ruleKey, "value")
+          scopedFilters[key].value = getRuleValue(rule, ruleKey, "value")
         }
         if (rule.valuesWhen[ruleKey].min !== undefined) {
-          scopedParameters[key].min = getRuleValue(rule, ruleKey, "min")
+          scopedFilters[key].min = getRuleValue(rule, ruleKey, "min")
         }
         if (rule.valuesWhen[ruleKey].max !== undefined) {
-          scopedParameters[key].max = getRuleValue(rule, ruleKey, "max")
-          if (scopedParameters[key].min > scopedParameters[key].max) {
-            scopedParameters[key].min = scopedParameters[key].max
+          scopedFilters[key].max = getRuleValue(rule, ruleKey, "max")
+          if (scopedFilters[key].min > scopedFilters[key].max) {
+            scopedFilters[key].min = scopedFilters[key].max
           }
         }
         if (rule.valuesWhen[ruleKey].multiplyValueBy !== undefined) {
-          scopedParameters[key].multiplyValueBy = getRuleValue(rule, ruleKey, "multiplyValueBy")
+          scopedFilters[key].multiplyValueBy = getRuleValue(rule, ruleKey, "multiplyValueBy")
         }
         if (rule.valuesWhen[ruleKey].step !== undefined) {
-          scopedParameters[key].step = getRuleValue(rule, ruleKey, "step")
+          scopedFilters[key].step = getRuleValue(rule, ruleKey, "step")
         }
         return false
       }
@@ -224,23 +377,26 @@ const applyValuesRestrictions = (scopedParameters, key) => {
 }
 
 /**
- * Get a rule value based on routeKey and valueName
+ * Get a rule value based on routeKey, propName and value rule dependencies
+ * @param {Object} rule 
+ * @param {String} ruleKey 
+ * @param {String} propName 
+ * @returns {*} value
  */
-const getRuleValue = (rule, ruleKey, valueName) => {
+const getRuleValue = (rule, ruleKey, propName) => {
   let value = null
-  let valueProp = rule.valuesWhen[ruleKey][valueName]
-  if (valueProp !== undefined) {
-    if (Array.isArray(valueProp)) {
-      let valueRule = valueProp[0]
-      const globalParameters = OrsMapFilters      
-      let filter = OrsFilterUtil.getFilterRefByName(valueRule.ref, globalParameters, true)
-      if ((!filter || filter.value === undefined) && valueProp.length === 2) {
-        value = valueProp[1]
+  let propValue = rule.valuesWhen[ruleKey][propName]
+  if (propValue !== undefined) {
+    if (Array.isArray(propValue)) {
+      let valueRule = propValue[0]
+      let dependsOnFilter = getDependencyRelationTargetObj(valueRule.ref)
+      if ((!dependsOnFilter || dependsOnFilter.value === undefined) && propValue.length === 2) {
+        value = propValue[1] // if the first option doe not have a valid value, gets the second
       } else {
-        value = filter.value
+        value = dependsOnFilter.value
       }
     } else {
-      value = rule.valuesWhen[ruleKey][valueName]
+      value = propValue
     }
   }
   return value
@@ -248,7 +404,7 @@ const getRuleValue = (rule, ruleKey, valueName) => {
 
 
 /**
- * Remove invalid values from filter
+ * Remove invalid values from a filter object
  * @param {Object} filter
  */
 const removeInvalidValue = (filter) => {
@@ -273,62 +429,61 @@ const removeInvalidValue = (filter) => {
 
 /**
  * Set the field items based on the dependencies rules
- * @param {*} scopedParameters
+ * @param {*} scopedFilters
  * @param {*} key
- * @param {*} validWhen
+ * @param {*} filter
  * @param {*} rule
  */
-const setFilteredItems = (scopedParameters, key, validWhen, rule) => {
+const setFilteredItems = (scopedFilters, key, filter, rule) => {
   if (rule.itemsWhen) {
-    if (validWhen.multiSelect && Array.isArray(validWhen.value)) {
+    if (filter.multiSelect && Array.isArray(filter.value)) {
       let filteredItems = []
-      for (const valueKey in validWhen.value) {
-        const value = validWhen.value[valueKey]
+      for (const valueKey in filter.value) {
+        const value = filter.value[valueKey]
         filteredItems = filteredItems.concat(rule.itemsWhen[value])
       }
-      scopedParameters[key].filteredItems = filteredItems
+      scopedFilters[key].filteredItems = filteredItems
     } else {
-      if (validWhen.value !== undefined && validWhen.value !== null) {
-        let items = rule.itemsWhen[validWhen.value]
+      if (filter.value !== undefined && filter.value !== null) {
+        let items = rule.itemsWhen[filter.value]
 
         if (!items) {
           Object.keys(rule.itemsWhen).forEach(function (key) {
-            if (key.endsWith('*') && validWhen.value.startsWith(key.replace('*', ''))) {
+            if (key.endsWith('*') && filter.value.startsWith(key.replace('*', ''))) {
               items = rule.itemsWhen[key]
               return false
             }
           })
         }
 
-        scopedParameters[key].filteredItems = items || []
+        scopedFilters[key].filteredItems = items || []
       }
-      setFilteredItemsForNullAndUndefined(scopedParameters, key, validWhen, rule)
+      setFilteredItemsForNullAndUndefined(scopedFilters, key, filter, rule)
     }
   }
 }
 
 /**
  * Set the field items based on the dependency field value
- * @param {*} scopedParameters
+ * @param {*} scopedFilters
  * @param {*} key
- * @param {*} validWhen
+ * @param {*} filter
  * @param {*} rule
  */
-const setFilteredItemsForNullAndUndefined = (scopedParameters, key, validWhen, rule) => {
-  if (validWhen.value === undefined && rule.itemsWhen.undefined) {
-    scopedParameters[key].filteredItems = rule.itemsWhen.undefined
+const setFilteredItemsForNullAndUndefined = (scopedFilters, key, filter, rule) => {
+  if (filter.value === undefined && rule.itemsWhen.undefined) {
+    scopedFilters[key].filteredItems = rule.itemsWhen.undefined
   }
-  if (validWhen.value === null && rule.itemsWhen.null) {
-    scopedParameters[key].filteredItems = rule.itemsWhen.null
+  if (filter.value === null && rule.itemsWhen.null) {
+    scopedFilters[key].filteredItems = rule.itemsWhen.null
   }
 }
 
 /**
  * Get the dependency target object value parsed
- * @returns {*} value
  * @param value
  * @param defaultValue
- * @returns {*}
+ * @returns {*} value
  */
 const getParsedValue = (value, defaultValue = null) => {
   if (value === undefined || value === null || value === '') {
@@ -339,7 +494,6 @@ const getParsedValue = (value, defaultValue = null) => {
     if (typeof value !== 'boolean') {
       value = value === 'true'
     }
-  //  as isNaN(null) results in false -> conversion to undefined
   } else if (value === null) {
     value = undefined
   } else {
@@ -348,93 +502,57 @@ const getParsedValue = (value, defaultValue = null) => {
   return value
 }
 
+
 /**
  * Get the parameter object that is the target of a dependency relation
  * It will use the dependency declaration ref to navigate thought the globalParameters
  * and get the target parameter object
- * @param {*} ref
- * @param {*} skipRootPathLookup
+ * @param {String} path
+ * @param {Array} filters
+ * @param {Boolean} checkAvailability
  * @returns {*} rootTargetObject
  */
-const getDependencyRelationTargetObj = (ref, skipRootPathLookup = false) => {
-  const globalParameters = OrsMapFilters
-  let rootParameterName = ref
+ const getDependencyRelationTargetObj = (path, filters) => {
+  const globalFilters = filters || OrsMapFilters
+  let rootFilterName = path
   let childPath = null
-  if (!skipRootPathLookup && ref.includes('.')) {
-    rootParameterName = ref.split('.')[0]
-    childPath = ref.replace(`${rootParameterName}.`, '')
+  if (path.includes('.')) {
+    rootFilterName = path.split('.')[0]
+    childPath = path.replace(`${rootFilterName}.`, '')
   }
-
-  // First get the object in the root node of global parameters where the dependency ref points to
-  const rootTargetObject = lodash.find(globalParameters, function (p) { return p.name === rootParameterName })
+  const rootTargetObject = lodash.find(globalFilters, function (filter) { 
+    return filter.name === rootFilterName
+  })
 
   // If the target has a child path find it inside
   // the root target parameter object and return it
-  if (childPath) {
-    return lodash.get(rootTargetObject, childPath)
+  if (rootTargetObject && childPath) {
+    return getChildProp(rootTargetObject, childPath)
   }
   // If no child path is defined, return the root target parameter
   return rootTargetObject
 }
 
 /**
- * Return html string of required parameter settings for this parameter
- * @param parameter
- * @param translations
- * @returns {*}
+ * Get filter child prop based on a string path
+ * @param {*} rootObject 
+ * @param {*} propPath 
+ * @returns {Object}
  */
-const buildHtmlDisabledTooltip = (parameter, translations) => {
-  let tooltip = translations.requires
-
-  const buildTooltipRuleValueArray = (ruleValue) => {
-    let valueCount = ruleValue.length
-    for (const valueKey in ruleValue) {
-      const value = ruleValue[valueKey]
-      tooltip += ' <b>' + value + '</b>'
-      tooltip += valueCount === 1 ? '' : ' <i>' + translations.or + '</i> '
-      valueCount--
-    }
-  }
-
-  const buildTooltipRuleValue = (rule) => {
-    const ruleValue = rule.value || rule.valueNot
-    tooltip += ' <b>' + rule.ref + '</b> '
-    if (Object.prototype.hasOwnProperty.call(rule, 'value') && rule.value !== undefined) {
-      tooltip += translations.toBe + ' '
-    } else if (Object.prototype.hasOwnProperty.call(rule, 'valueNot')) {
-      tooltip += translations.notToBe + ' '
-    }
-    if (Array.isArray(ruleValue)) {
-      buildTooltipRuleValueArray.call(this, ruleValue)
+const getChildProp = (rootObject, propPath) => {
+  if (propPath.indexOf('props.') !== -1 && Array.isArray(rootObject.props)) {
+    const childPath = propPath.replace('props.', '')
+    if (childPath.indexOf('props.') > -1) {
+      const subRootName = childPath.split('.')[0]
+      const subRoot = lodash.find(rootObject.props, function (p) { return p.name === subRootName })
+      return getChildProp(subRoot, childPath.replace(`${subRootName}.`, ''))
     } else {
-      tooltip += '<b>' + ruleValue + '</b>'
+      const childTargetObject = lodash.find(rootObject.props, function (p) { return p.name === childPath })
+      return childTargetObject
     }
-  }
-
-  const buildTooltipRule = (key, counter) => {
-    const rule = parameter.validWhen[key]
-    if (Object.prototype.hasOwnProperty.call(rule, 'value') || rule.value === undefined) {
-      rule.value = typeof rule.value === 'boolean' ? rule.value.toString() : rule.value
-    } else if (Object.prototype.hasOwnProperty.call(rule, 'valueNot')) {
-      rule.valueNot = typeof rule.valueNot === 'boolean' ? rule.valueNot.toString() : rule.valueNot
-    }
-    if (rule.value || rule.valueNot) {
-      buildTooltipRuleValue.call(this, rule)
-    } else {
-      tooltip += ' <b>' + rule.ref + '</b>'
-    }
-    if (counter < parameter.validWhen.length) {
-      tooltip += '<br><i>' + translations.and + '</i>'
-    }
-  }
-
-  if (parameter.validWhen) {
-    let counter = 1
-    for (const key in parameter.validWhen) {
-      buildTooltipRule.call(this, key, counter)
-      counter++
-    }
-    return tooltip
+  } else {
+    const child = lodash.get(rootObject, propPath)
+    return child
   }
 }
 
@@ -444,7 +562,11 @@ const buildHtmlDisabledTooltip = (parameter, translations) => {
 const dependencyService = {
   updateFieldsStatus,
   setVisibility,
-  buildHtmlDisabledTooltip
+  getFilterValue,
+  isRoundTripFilterActive,
+  getFilterWithValueUpdated,
+  isAvailable,
+  getDependencyRelationTargetObj
 }
 
 export default dependencyService

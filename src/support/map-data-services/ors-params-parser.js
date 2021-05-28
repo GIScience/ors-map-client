@@ -1,5 +1,4 @@
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
-import FilterDependencyService from './filter-dependency-service'
 import DependencyService from '@/support/dependency-service.js'
 import OrsMapFilters from '@/config/ors-map-filters'
 import constants from '@/resources/constants'
@@ -106,7 +105,7 @@ const orsParamsParser = {
         buffer: distanceBuffer
       }
     }
-    // orsParamsParser.setFilters(args, OrsMapFilters, constants.filterTypes.geocodeSearch)
+    orsParamsParser.setFilters(args, OrsMapFilters, constants.filterTypes.geocodeSearch)
     main.getInstance().appHooks.run('poisSearchArgsCreated', args)
     return args
   },
@@ -322,14 +321,14 @@ const orsParamsParser = {
           DependencyService.updateFieldsStatus(filter.props)
         }
         // Build the value for the current filter (if it has child filters, they are gonna be built too)
-        const filterValue = OrsFilterUtil.getFilterValue(filter, service)
+        const filterValue = DependencyService.getFilterValue(filter, service)
 
         // If the value of the filter is valid, add in the intoArgs array
         if (orsParamsParser.isFilterValueValid(filter, filterValue)) {
           orsParamsParser.setFilterVal(filter, filterValue, intoArgs)
         } else if (intoArgs[filter.name] && !orsParamsParser.isFilterValueValid(intoArgs[filter.name])) {
           // If the filter is available and has not a valid value, remove it
-          if (FilterDependencyService.isAvailable(filter)) {
+          if (DependencyService.isAvailable(filter)) {
             delete intoArgs[filter.name]
           }
         }
@@ -346,15 +345,16 @@ const orsParamsParser = {
    * @hook mapFilterAdded
    */
   setFilterVal (filter, filterValue, intoArgs) {
+    let filterName = filter.internalName || filter.name
     // If the parent is a wrapping object and it is already defined in intoArgs, add it to the object
-    if (filter.type === constants.filterTypes.wrapper && typeof intoArgs[filter.name] !== 'undefined') {
-      intoArgs[filter.name] = orsParamsParser.getMergedParameterValues(intoArgs[filter.name], filterValue)
+    if (filter.type === constants.filterTypes.wrapper && typeof intoArgs[filterName] !== 'undefined') {
+      intoArgs[filterName] = orsParamsParser.getMergedParameterValues(intoArgs[filterName], filterValue)
     } else { // if not
       if (filter.valueAsObject && typeof filterValue === 'string') {
         const parsed = Utils.tryParseJson(filterValue)
-        intoArgs[filter.name] = parsed || filterValue
+        intoArgs[filterName] = parsed || filterValue
       } else {
-        intoArgs[filter.name] = filterValue
+        intoArgs[filterName] = filterValue
       }
     }
     let appHooks = main.getInstance().appHooks

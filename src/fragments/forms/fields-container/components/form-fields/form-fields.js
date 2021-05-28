@@ -106,7 +106,6 @@ export default {
     updateFieldsStatus () {
       let service = dependencyService
       service.updateFieldsStatus(this.formParameters)
-      console.log(this.formParameters[4])
     },
 
     /**
@@ -375,15 +374,6 @@ export default {
       let filterKey = `orsMapFilters.filters.${parameter.name}.description`
       let description = this.$t(filterKey)
       return description
-    },
-
-    /**
-     * Return html string of required parameter settings for this parameter
-     * @param parameter
-     * @returns {*}
-     */
-    buildHtmlDisabledTooltip (parameter) {
-      return dependencyService.buildHtmlDisabledTooltip(parameter, this.$t('formFields'))
     },
 
     /**

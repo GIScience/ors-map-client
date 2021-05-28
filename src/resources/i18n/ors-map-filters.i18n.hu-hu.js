@@ -37,11 +37,19 @@ export default {
           "distance": "Távolság"
         }
       },
-      "range": {
+      "time_range": {
         "label": "Hatótávolság",
         "description": "A legtávolabbi izokron vonal távolsága"
       },
-      "interval": {
+      "distance_range": {
+        "label": "Hatótávolság",
+        "description": "A legtávolabbi izokron vonal távolsága"
+      },
+      "time_interval": {
+        "label": "Intervallum",
+        "description": "Az izokron vonalak közötti idő- vagy térköz"
+      },
+      "distance_interval": {
         "label": "Intervallum",
         "description": "Az izokron vonalak közötti idő- vagy térköz"
       },

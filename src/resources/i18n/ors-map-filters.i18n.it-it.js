@@ -36,11 +36,19 @@ export default {
           'distance': 'Distanza'
         }
       },
-      'range': {
+      'time_range': {
         'label': 'Raggio d\'azione',
         'description': 'Massimo raggio d\'azione delle isocrone'
       },
-      'interval': {
+      'distance_range': {
+        'label': 'Raggio d\'azione',
+        'description': 'Massimo raggio d\'azione delle isocrone'
+      },
+      'time_interval': {
+        'label': 'Intervallo',
+        'description': 'Intervallo in cui le isocrone devono essere calcolate'
+      },
+      'distance_interval': {
         'label': 'Intervallo',
         'description': 'Intervallo in cui le isocrone devono essere calcolate'
       },

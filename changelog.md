@@ -36,117 +36,145 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
-## [1.0.13]
-### Fixed
+## [v1.0.13] -  2021-05-28 ##
+
+### Fixed ###
+
 - Spelling, formatting and grammar issues in the README.md, documentation, changelog and comments
 - Spelling of variables and properties
 - Hungarian typo
 - Isochrones calculating msg duration
 - Variables typo
+- Automatically calculate a roundtrip when one place is defined and an option is changed
 
-### Changed
+### Changed ###
+
 - Update ors-js lib to version 1.0.13 with timeout param support
 - Hook event name from `avoidPolygonBtnTraslations` to `avoidPolygonBtnTranslations`
+- Removed filter-dependency-service.js (merged with dependency-service.js)
 
-### Added
+### Added ###
+
 - Support to filter value conditions dependency
 - Define isochrone rages by profile and dynamic intervals based on range value
 
 ## [v1.0.12] - 2021-04-28 ##
 
 ### Added ###
+
 - Hungarian language
 
 ### Changed ###
+
 - Show slider current value as user moves the slider
 
 ## [v1.0.11] - 2021-04-23 ##
 
 ### Fixed ###
+
 - the processing of filter values that are invalid and were affecting some valid filters
 
 ## [v1.0.10] - 2021-04-20 ##
 
 ### Changed ###
+
 - Auto close download and settings modal after executing the main action
 - Update map view when in directions mode, a place changes, but there is no valid route yet
 - Only show marker with number inside when displaying a route
 - file `src/config-examples/default-map-settings-example.js` (Update your config)
 
 ### Fixed
+
 - typos in places-and-directions
 
 ### Removed
+
 - invalid filter values when profile changes
 
 ## [v1.0.9] - 2021-04-09 ##
 
 ### Added
+
 - right click context menu 'Inspect data on OSM'
 
 ### Changed ###
+
 - Keep altitude chart/graph open when route changes
 
 ## [v1.0.8] - 2021-04-07 ##
 
 ### Added
+
 - raw routing (skip all segments) option in advanced settings
 - a field for custom over layer in settings
 
 ### Changed
+
 - file `src/config-examples/default-map-settings-example.js` (Update your config)
 
 ## [v1.0.7] - 2021-04-01 ##
 
 ### Changed ###
+
 - Show ascent and descent for each segment on route details component
 
 ### Removed
+
 - altitude component i18n files, since it is not been used anymore
 
 ## [v1.0.6] - 2021-03-25 ##
 
 ### Added
+
 - support for gpx, xml and kml multi segment routes
 
 ### Fixed ###
+
 - Fix building routes as alternative routes in file importer
 
 ## [v1.0.5] - 2021-03-25 ##
 
 ### Fixed ###
+
 - Stop displaying old route when the route way points changed, and a new route cannot be calculated
 - Build extra info highlight color based on an item index or value
 
 ## [v1.0.4] - 2021-03-24 ##
 
 ### Fixed ###
+
 - Show place markers when the route cannot be calculated
 - Show calculating toaster indefinitely (until an error or success toaster replace it)
 - the adding of extra info to the request when a nested profile is active, like foot-hiking
 
 ### Removed ###
+
 - avoid_feature filters that are not supported anymore (update your local `ors-map-filters.js`)
 
 ## [v1.0.3] - 2021-03-22 ##
 
 ### Fixed ###
+
 - Fixed admin area loader filter for cases when no locality is available
 
 ## [v1.0.2] - 2021-03-22 ##
 
 ### Added ###
+
 - Support to search by postal code
 
 ### Changed ###
+
 - Auto-select by pressing enter/return also in the case of a single postal code layer result
 - Template/example file `layer-zoom-mapping-example` to include postal code (update your config)
 
 ## [v1.0.1] - 2021-03-18 ##
 
 ## Added
+
 - allowing to save default locale as preferred locale
 
 ### Changed ###
+
 - Sidebar foot height
 - About translation in French

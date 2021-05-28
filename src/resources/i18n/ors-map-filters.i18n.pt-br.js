@@ -37,11 +37,19 @@ export default {
           'distance': 'Distância'
         }
       },
-      range: {
+      time_range: {
         label: 'Faixa',
         description: 'A faixa máxima dos isócronos a serem calculados'
       },
-      interval: {
+      distance_range: {
+        label: 'Faixa',
+        description: 'A faixa máxima dos isócronos a serem calculados'
+      },
+      time_interval: {
+        label: 'Intervalo',
+        description: 'O intervalo a ser usado no cáculo de isócronos'
+      },
+      distance_interval: {
         label: 'Intervalo',
         description: 'O intervalo a ser usado no cáculo de isócronos'
       },

@@ -1,7 +1,5 @@
 
 import OrsMapFilters from '@/config/ors-map-filters'
-import FilterDependencyService from './filter-dependency-service'
-import store from '@/store/store'
 import constants from '@/resources/constants'
 import lodash from 'lodash'
 
@@ -32,60 +30,6 @@ const getFilterRefByName = (filterName, OrsMapFiltersAccessor = null, onlyIfEnab
     }
   }
   return filter || false
-}
-
-/**
- * Get the filter value considering its attributes and dependencies
- * @param {*} filter
- * @param {*} service
- * @returns {*} filterValue
- */
-const getFilterValue = (filter, service) => {
-  let filterValue = null
-  const filterAvailable = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
-  const filterClone = FilterDependencyService.getFilterWithValueUpdated(filter)
-  // Proceed only if filter is available considering other filter's value
-  if (filterAvailable && FilterDependencyService.isAvailable(filterClone)) {
-    // Get the filter with value updated considering dependencies and filter rules
-    if (filterClone.type === constants.filterTypes.wrapper && filterClone.props) {
-      filterValue = getChildrenFilterValue(filterClone, service)
-      filterValue = filterClone.valueAsObject ? filterValue : JSON.stringify(filterValue)
-      // Apply filter conditions like min, multiplier etc
-      filterValue = applyFilterValueConditions(filterClone, filterValue)
-    } else {
-      filterValue = adjustFilterValue(filterClone, filterValue)
-    }
-  }
-
-  return filterValue
-}
-
-/**
- * Adjust filter value
- * @param {Object} filter
- * @param {*} filterValue
- * @returns {*} filterValue
- */
-const adjustFilterValue = (filter, filterValue) => {
-  // Check if the filter value must be extracted as an array and do it if so
-  if (filter.type === constants.filterTypes.array && Array.isArray(filter.value) && !filter.valueAsArray) {
-    const separator = filter.separator || ','
-    filterValue = filter.value.join(separator)
-  } else if (filter.valueAsArray && !Array.isArray(filter.value)) {
-    let val = filter.value
-    if (val === undefined || val === null) {
-      val = filter.min
-    }
-    if (val !== undefined && val !== null) {
-      val = applyFilterValueConditions(filter, val)
-      filterValue = [val]
-    }
-  } else { // In the other cases, just get the filter raw value
-    filterValue = filter.value
-    // Apply filter conditions like min, multiplier etc
-    filterValue = applyFilterValueConditions(filter, filterValue)
-  }
-  return filterValue
 }
 
 /**
@@ -148,49 +92,6 @@ const buildAncestryAccessorString = (ancestry, itemIndex = null) => {
 }
 
 /**
- * Apply filter value conditions
- * @param {*} filterClone
- * @param {*} filterValue
- * @returns {*} filterValue
- */
-const applyFilterValueConditions = (filterClone, filterValue) => {
-  if (!Object.is(filterValue) && !Array.isArray(filterValue)) {
-    if (filterClone.offset && filterClone.step && filterClone.value > filterClone.step) {
-      filterValue = filterValue - filterClone.offset
-    }
-    if (filterClone.min !== null && filterClone.min !== undefined && filterValue < filterClone.min) {
-      filterValue = null
-    }
-    if (filterValue && filterClone.multiplyValueBy) {
-      filterValue = filterValue * filterClone.multiplyValueBy
-    }
-  }
-  return filterValue
-}
-
-/**
- * Get filter children value stringified
- * @param {*} filter
- * @param {*} service
- * @returns {String}
- */
-const getChildrenFilterValue = (filter, service) => {
-  var childFilter = {}
-  for (let propKey in filter.props) {
-    const prop = filter.props[propKey]
-    // Filter may have dependency and only be available
-    // if other filters have a certain value.
-    if (FilterDependencyService.isAvailable(prop)) {
-      const childValue = getFilterValue(prop, service)
-      if (childValue !== undefined && childValue !== null) {
-        childFilter[prop.name] = childValue
-      }
-    }
-  }
-  return Object.keys(childFilter).length > 0 ? childFilter : null
-}
-
-/**
  * Set filter value by specified filter name
  * @param {*} filterName
  * @param {*} filterValue
@@ -210,9 +111,8 @@ const setFilterValue = (filterName, filterValue, OrsMapFiltersAccessor = null) =
         setFilterValue(propName, filterValue[propName])
       }
     } else {
-      // we are populating the filter value
-      // so, if has a multiplier that must be used when extracting the value
-      // we must use this multiplier in reversed mode to set the value correctly
+      // If the filter value has a multiplier that must be used when extracting the value
+      // we use this multiplier in reversed mode to set the value correctly
       if (filter.multiplyValueBy) {
         filter.value = value / filter.multiplyValueBy
       } else {
@@ -251,24 +151,13 @@ const getFilterIndexByName = (name, OrsMapFiltersAccessor = null) => {
   return filterIndex
 }
 
-/**
- * Determines if the round trip filter is active
- * @returns {Boolean} isRoundTrip
- */
-const isRoundTripFilterActive = () => {
-  const roundTripFilter = getFilterRefByName(constants.roundTripFilterName)
-  const roundTripValue = getFilterValue(roundTripFilter, constants.services.directions)
-  const isRoundTrip = roundTripValue !== null
-  return isRoundTrip
-}
+
 
 const filterUtil = {
   getFilterRefByName,
   getFilterIndexByName,
   getFilterRefByRootIndex,
   setFilterValue,
-  getFilterValue,
-  isRoundTripFilterActive,
   getFilterByAncestryAndItemIndex
 }
 

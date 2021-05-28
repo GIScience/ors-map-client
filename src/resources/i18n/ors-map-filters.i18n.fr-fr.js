@@ -36,11 +36,19 @@ export default {
           "distance": "Distance"
         }
       },
-      "range": {
+      "time_range": {
         "label": "Gamme",
         "description": "La gamme maximale des isochrones à calculer"
       },
-      "interval": {
+      "distance_range": {
+        "label": "Gamme",
+        "description": "La gamme maximale des isochrones à calculer"
+      },
+      "time_interval": {
+        "label": "Intervalle",
+        "description": "L'intervalle des isochrones à calculer"
+      },
+      "distance_interval": {
         "label": "Intervalle",
         "description": "L'intervalle des isochrones à calculer"
       },

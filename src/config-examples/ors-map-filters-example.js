@@ -8,7 +8,7 @@ import gradesList from '@/resources/lists/grades'
 import constants from '@/resources/constants'
 
 const filters = [
-  { // Profile filter is required. What you can change is the available items in the enum and mapping
+  { // Profile filter is required. What you can change is the avaialble items in the enum and mapping
     name: 'profile',
     useInServices: [constants.services.directions, constants.services.isochrones],
     hidden: true,
@@ -101,7 +101,8 @@ const filters = [
     value: 'distance'
   },
   {
-    name: 'range',
+    name: 'time_range',
+    internalName: 'range',
     unit: 'min',
     required: false,
     type: constants.filterTypes.steps,
@@ -140,7 +141,8 @@ const filters = [
     ]
   },
   {
-    name: 'interval',
+    name: 'time_interval',
+    internalName: 'interval',
     unit: 'min',
     required: false,
     type: constants.filterTypes.steps,
@@ -162,19 +164,19 @@ const filters = [
         ref: 'profile',
         valuesWhen: {
           'driving-*': {
-            max: [{ref: 'range'}, 60], // the max value of range or 60
+            max: [{ref: 'time_range'}, 60], // the max value of range or 60
             min: 6
           },
           'cycling-*': {
-            max: [{ref: 'range'}, 30], // the max value of range or 30,
+            max: [{ref: 'time_range'}, 30], // the max value of range or 30,
             min: 3
           },
           'foot-*': {
-            max: [{ref: 'range'}, 1200], // the max value of range or 1200,
+            max: [{ref: 'time_range'}, 1200], // the max value of range or 1200,
             min: 12
           },
           wheelchair: {
-            max: [{ref: 'range'}, 1200], // the max value of range or 1200,
+            max: [{ref: 'time_range'}, 1200], // the max value of range or 1200,
             min: 12
           },
         }
@@ -182,13 +184,14 @@ const filters = [
     ]
   },
   {
-    name: 'range',
+    name: 'distance_range',
+    internalName: 'range',
     unit: 'km',
     required: false,
     type: constants.filterTypes.steps,
     value: 1,
     min: 1,
-    max: 115,
+    max: 120,
     multiplyValueBy: 1000,
     valueAsArray: true,
     step: 1,
@@ -199,29 +202,11 @@ const filters = [
       }
     ],
     availableOnModes: [constants.modes.isochrones],
-    useInServices: [constants.services.isochrones],
-    valuesRestrictions: [
-      {
-        ref: 'profile',
-        valuesWhen: {
-          'driving-*': {
-            max: 120
-          },
-          'cycling-*': {
-            max: 120
-          },
-          'foot-*': {
-            max: 120
-          },
-          wheelchair: {
-            max: 120,
-          },
-        }
-      }
-    ]
+    useInServices: [constants.services.isochrones]
   },
   {
-    name: 'interval',
+    name: 'distance_interval',
+    internalName: 'interval',
     unit: 'km',
     required: false,
     type: constants.filterTypes.steps,
@@ -243,19 +228,19 @@ const filters = [
         ref: 'profile',
         valuesWhen: {
           'driving-*': {
-            max: [{ref: 'range'}, 120], // the max value of range or 120
+            max: [{ref: 'distance_range'}, 120], // the max value of range or 120
             min: 12
           },
           'cycling-*': {
-            max: [{ref: 'range'}, 120], // the max value of range or 120
+            max: [{ref: 'distance_range'}, 120], // the max value of range or 120
             min: 12
           },
           'foot-*': {
-            max: [{ref: 'range'}, 120], // the max value of range or 120
+            max: [{ref: 'distance_range'}, 120], // the max value of range or 120
             min: 12
           },
           wheelchair: {
-            max: [{ref: 'range'}, 120], // the max value of range or 120
+            max: [{ref: 'distance_range'}, 120], // the max value of range or 120
             min: 12
           },
         }

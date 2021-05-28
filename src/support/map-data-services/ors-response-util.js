@@ -54,19 +54,6 @@ const isANewMapViewData = (newMapData, oldMapData) => {
 }
 
 /**
- * Get filter object reference by filter name
- * @param {*} OrsMapFiltersAccessor
- * @param {*} name
- * @returns {*} filter object
- */
-const getFilterRefByName = (OrsMapFiltersAccessor, name) => {
-  const filter = lodash.find(OrsMapFiltersAccessor, (f) => {
-    return f.name === name
-  })
-  return filter
-}
-
-/**
  * Get filter index by filter name
  * @param {*} OrsMapFiltersAccessor
  * @param {*} name
@@ -84,7 +71,6 @@ const responseUtils = {
   getFilteredFeatureResponse,
   isANewResponse,
   isANewMapViewData,
-  getFilterRefByName,
   getFilterIndexByName
 }
 

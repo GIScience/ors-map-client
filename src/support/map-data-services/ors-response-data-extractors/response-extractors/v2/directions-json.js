@@ -1,5 +1,4 @@
 import lodash from 'lodash'
-import OrsResponseUtil from '@/support/map-data-services/ors-response-util'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import Place from '@/models/place'
