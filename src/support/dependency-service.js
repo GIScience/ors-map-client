@@ -11,6 +11,7 @@ import lodash from 'lodash'
  */
 const updateFieldsStatus = (scopedFilters) => {
   for (const key in scopedFilters) {
+    setAvailability(scopedFilters, key)
     setVisibility(scopedFilters, key)
     applyFilterRestrictions(scopedFilters, key)
   }
@@ -265,13 +266,27 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {*} scopedFilters
  * @param {*} key
  */
-const setVisibility = (scopedFilters, key) => {
+const setAvailability = (scopedFilters, key) => {
   const parameter = scopedFilters[key]
   if (parameter.validWhen) {
     const matchesRules = getMatchesDependencyRules(parameter, 'validWhen')
     scopedFilters[key].disabled = !matchesRules
   }
 }
+
+/**
+ * Set the parameter disabled attribute at the specified key, which will define its visibility
+ * @param {*} scopedFilters
+ * @param {*} key
+ */
+ const setVisibility = (scopedFilters, key) => {
+  const parameter = scopedFilters[key]
+  if (parameter.visibleWhen) {
+    const matchesRules = getMatchesDependencyRules(parameter, 'visibleWhen')
+    scopedFilters[key].hidden = !matchesRules
+  }
+}
+
 
 
 /**
@@ -561,7 +576,7 @@ const getChildProp = (rootObject, propPath) => {
  */
 const dependencyService = {
   updateFieldsStatus,
-  setVisibility,
+  setAvailability,
   getFilterValue,
   isRoundTripFilterActive,
   getFilterWithValueUpdated,

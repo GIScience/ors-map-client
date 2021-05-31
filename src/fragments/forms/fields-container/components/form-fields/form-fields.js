@@ -74,7 +74,7 @@ export default {
      * @param {*} parameter
      */
     showField (parameter) {
-      const show = !parameter.disabled && !parameter.hidden && (!parameter.availableOnModes || parameter.availableOnModes.indexOf(this.$store.getters.mode) > -1)
+      const show = !parameter.hidden && (!parameter.availableOnModes || parameter.availableOnModes.indexOf(this.$store.getters.mode) > -1)
       return show
     },
     /**

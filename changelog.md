@@ -36,6 +36,13 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.0.14] -  2021-05-31 ##
+
+### Fixed ###
+
+- Added support to the `visibleWhen` attribute to ors-map-filters
+- Fixed the displaying of alternative routes using the visibleWhen attribute
+
 ## [v1.0.13] -  2021-05-28 ##
 
 ### Fixed ###

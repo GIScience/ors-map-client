@@ -419,11 +419,11 @@ const orsParamsParser = {
           // make sure that the visibility of the filter
           // is defined before checking its availability
           if (filter.validWhen) {
-            DependencyService.setVisibility(filtersInto, filtersKey, filtersInto)
+            DependencyService.setAvailability(filtersInto, filtersKey, filtersInto)
           }
           const available = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
 
-          // If the filter is available, it not intented to be used only
+          // If the filter is available, it not intended to be used only
           // in the interface and is not disabled, set its value
           if (available && !filter.onlyInFront && !filter.disabled) {
             const value = options[key]
