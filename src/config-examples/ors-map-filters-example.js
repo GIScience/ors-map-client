@@ -112,7 +112,7 @@ const filters = [
     max: 300,
     multiplyValueBy: 60,
     step: 1,
-    validWhen: [
+    visibleWhen: [
       {
         ref: 'range_type',
         value: 'time'
@@ -151,7 +151,7 @@ const filters = [
     max: 30,
     step: 1,
     multiplyValueBy: 60,
-    validWhen: [
+    visibleWhen: [
       {
         ref: 'range_type',
         value: 'time'
@@ -195,7 +195,7 @@ const filters = [
     multiplyValueBy: 1000,
     valueAsArray: true,
     step: 1,
-    validWhen: [
+    visibleWhen: [
       {
         ref: 'range_type',
         value: 'distance'
@@ -215,7 +215,7 @@ const filters = [
     max: 30,
     multiplyValueBy: 1000,
     step: 1,
-    validWhen: [
+    visibleWhen: [
       {
         ref: 'range_type',
         value: 'distance'
