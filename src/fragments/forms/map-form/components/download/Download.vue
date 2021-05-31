@@ -5,7 +5,7 @@
       <box v-model="isDownloadModalOpen" background="white" closable @closed="closeDownload()">
         <h3 slot="header">{{$t('download.downloadRoute')}}</h3>
         <v-text-field :label="$t('download.downloadFileName')" v-model="downloadFileName" :required="true"></v-text-field>
-        <v-select :label="$t('download.downloadFormat')" :items="availableDownloadFormats" v-model="dowloadFormat"></v-select>
+        <v-select :label="$t('download.downloadFormat')" :items="availableDownloadFormats" v-model="downloadFormat"></v-select>
         <v-layout row wrap>
           <v-spacer></v-spacer>
           <v-flex xs12 sm6>
