@@ -60,7 +60,7 @@ export default {
     }
   },
   watch: {
-    mapViewData: {
+    'mapViewData.routes': {
       handler: function () {
         this.build()
       },

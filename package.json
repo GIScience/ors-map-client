@@ -1,7 +1,7 @@
 {
   "name": "ors-maps-client",
   "versionInstruction": "IMPORTANT: If you change the version below you have to change it on src/resources/constants.js too!",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "repository": "https://github.com/GIScience/ors-map-client",
   "license": "MIT",
   "description": "Openrouteservice Maps client",
