@@ -9,6 +9,7 @@ import appConfig from '@/config/app-config'
 export default {
   data: () => ({
     debounceTimeoutId: null,
+    modelDebounceTimeoutId: null,
     searching: false,
     focused: false,
     localModel: null,
@@ -320,11 +321,7 @@ export default {
     // Update local model when the model prop change outside
     model: {
       handler: function (newVal) {
-        if (this.directIsAvailable && this.$store.getters.mapSettings.skipAllSegments) {
-          newVal.direct = true
-        }
-        this.localModel = newVal.clone()
-        this.resolveModel()
+        this.resolveModelWithDebouncing(newVal)        
       },
       deep: true
     },
@@ -333,6 +330,21 @@ export default {
     }
   },
   methods: {
+    /**
+     * Resolve the model using a debounce to avoid multiple requests
+     * @param {*} newVal 
+     */
+    resolveModelWithDebouncing (newVal) {
+      let context = this
+      clearTimeout(this.modelDebounceTimeoutId)
+        this.modelDebounceTimeoutId = setTimeout(function () {
+          if (context.directIsAvailable && context.$store.getters.mapSettings.skipAllSegments) {
+            newVal.direct = true
+          }
+          context.localModel = newVal.clone()
+          context.resolveModel()
+        }, 1000)
+    },
     showAreaIcon (place) {
       let show = place.properties.layer === 'country' || place.properties.layer === 'region'
       return show
@@ -435,9 +447,8 @@ export default {
     /**
      * Search a place by name
      *
-     * @param {Boolean} enterWasHit
      */
-    autocompleteByName (enterWasHit) {
+    autocompleteByName () {
       this.searching = true
       if (!this.localModel.placeName || this.model.placeName.length === 0) {
         this.localModel = new Place()
@@ -465,7 +476,7 @@ export default {
     },
 
     /**
-     * Automplete input by coordinates
+     * Autocomplete input by coordinates
      *
      */
     autocompleteByCoords () {
@@ -520,7 +531,7 @@ export default {
      * Handle the search input enter/return action to
      * search and auto select the first result in case of
      * and address exact match or to show the autocomplete
-     * suggetions for the other cases
+     * suggestions for the other cases
      */
     handleSearchInputEnter () {
       // We can only try yo auto select the first result
