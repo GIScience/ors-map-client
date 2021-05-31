@@ -27,7 +27,7 @@ export default {
      * the map builder is reset and the
      * map data is reloaded
      */
-    mapViewData: {
+     'mapViewData.routes': {
       handler: function () {
         // When the mapViewData prop changes, we copy its value to a
         // local instance so that we can modify it when necessary
@@ -148,10 +148,10 @@ export default {
      */
     segmentClicked (segment, index) {
       const sectionTitle = ''
-      const heighlighData = {sectionTitle, sections: [] }
+      const highlighData = {sectionTitle, sections: [] }
       const segmentData = this.buildExtraHighlighPolylineData(segment, index)
-      heighlighData.sections.push(segmentData)
-      this.eventBus.$emit('highlightPolylineSections', heighlighData)
+      highlighData.sections.push(segmentData)
+      this.eventBus.$emit('highlightPolylineSections', highlighData)
     },
     /**
      * Build the the extra info highlighting data

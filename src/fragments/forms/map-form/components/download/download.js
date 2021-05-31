@@ -9,7 +9,7 @@ export default {
   data: () => ({
     isDownloadModalOpen: false,
     downloadFileName: null,
-    dowloadFormat: null,
+    downloadFormat: null,
     defaultDownloadName: 'ors-route'
   }),
   props: {
@@ -68,7 +68,7 @@ export default {
      */
     openDownload () {
       this.downloadFileName = this.defaultDownloadName
-      this.dowloadFormat = this.downloadFormats[0].value
+      this.downloadFormat = this.downloadFormats[0].value
       this.isDownloadModalOpen = true
     },
     /**
@@ -96,7 +96,7 @@ export default {
         } else {
           // Set the filename
           const timestamp = new Date().getTime()
-          const format = context.lodash.find(context.downloadFormats, (df) => { return df.value === context.dowloadFormat })
+          const format = context.lodash.find(context.downloadFormats, (df) => { return df.value === context.downloadFormat })
           // If the file has the default name, add a unique timestamp
           if (this.downloadFileName === this.defaultDownloadName) {
             link.download = `${context.downloadFileName}_${timestamp}.${format.ext}`
@@ -117,9 +117,9 @@ export default {
       })
     },
     /**
-     * Build the content to be dowloaded according the format selected
+     * Build the content to be downloaded according the format selected
      * When the format is ors-gpx a new request is made using the same
-     * args object but changint the format to gpx
+     * args object but changing the format to gpx
      * @returns {Promise}
      */
     buildContent () {
@@ -127,27 +127,27 @@ export default {
       const context = this
       return new Promise((resolve, reject) => {
         try {
-          if (context.dowloadFormat === 'json') {
-            // Get the ORS mapViewData model and stringfy it
+          if (context.downloadFormat === 'json') {
+            // Get the ORS mapViewData model and stringify it
             const orsJSONStr = JSON.stringify(this.mapViewData)
             resolve(orsJSONStr)
-          } else if (context.dowloadFormat === 'ors-gpx') {
+          } else if (context.downloadFormat === 'ors-gpx') {
             // If the format is ors-gpx, run anew request with the format being 'gpx'
             context.getORSGpx().then((orsGpx) => {
               resolve(orsGpx)
             }).catch(error => {
               reject(error)
             })
-          } else if (context.dowloadFormat === 'to-gpx') {
+          } else if (context.downloadFormat === 'to-gpx') {
             const geoJSON = context.mapViewData.getGeoJson()
             // Use the third party utility to convert geojson to gpx
-            const togpx = toGpx(geoJSON)
-            resolve(togpx)
-          } else if (context.dowloadFormat === 'geojson') {
+            const toGPX = toGpx(geoJSON)
+            resolve(toGPX)
+          } else if (context.downloadFormat === 'geojson') {
             jsonData = context.mapViewData.getGeoJson()
             const jsonStr = JSON.stringify(jsonData)
             resolve(jsonStr)
-          } else if (context.dowloadFormat === 'kml') {
+          } else if (context.downloadFormat === 'kml') {
             const routeTitle = context.originName.length > 0 ? `${context.originName} -> ${context.destinationName}` : context.$t('download.documentTitle')
             const kmlOptions = {
               documentName: routeTitle,
@@ -155,8 +155,8 @@ export default {
             }
             jsonData = context.mapViewData.getGeoJson()
             // Use the third party utility to convert geojson to kml
-            const tokml = toKml(jsonData, kmlOptions)
-            resolve(tokml)
+            const toKML = toKml(jsonData, kmlOptions)
+            resolve(toKML)
           }
         } catch (error) {
           reject(error)
@@ -189,7 +189,7 @@ export default {
         // merge the args with the ones applied in the user request
         args = Object.assign(args, context.mapViewData.rawData.metadata.query)
 
-        // Make sure a gpx format will be returnned
+        // Make sure a gpx format will be returned
         args.format = 'gpx'
 
         Directions(context.mapViewData.places, args).then(response => {

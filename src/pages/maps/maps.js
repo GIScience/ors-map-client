@@ -29,7 +29,7 @@ export default {
     bottomNavActive: false,
     bottomNavHeight: 310,
     mapHeightOffset: 60,
-    activeplaceIndex: 0,
+    activePlaceIndex: 0,
     viewHeight: null,
     touchmoveDebounceTimeoutId: null,
     searchBtnAvailable: false,
@@ -167,7 +167,7 @@ export default {
       return center
     },
     /**
-     * Retursn a boolean determining if the drawing tool
+     * Returns a boolean determining if the drawing tool
      * is available based on the app mode
      * @returns {Boolean}
      */
@@ -296,7 +296,7 @@ export default {
       // At least 100px height must be available for the map view
       if ((window.innerHeight > this.bottomNavHeight + this.minimumMapViewHeight) && this.$store.getters.mode === constants.modes.search) {
         const index = place.findIndex(this.mapViewData.places)
-        this.activeplaceIndex = index
+        this.activePlaceIndex = index
         this.bottomNavActive = true
         this.setViewHeight()
       }
@@ -367,7 +367,7 @@ export default {
       // At list 100px must available for the map view
       if (this.$store.getters.mode === constants.modes.search && window.innerHeight > this.bottomNavHeight + 100) {
         this.bottomNavActive = true
-        this.activeplaceIndex = this.activeplaceIndex || 0
+        this.activePlaceIndex = this.activePlaceIndex || 0
         this.setViewHeight()
       } else {
         this.closedBottomNav()
@@ -417,9 +417,9 @@ export default {
     },
     /**
      * When a marker has been dragged
-     * emits the markerDragged event (via eventbus)
+     * emits the markerDragged event (via eventBus)
      * @param {Object} marker
-     * @emits markerDragged via eventbus
+     * @emits markerDragged via eventBus
      */
     markerDragged (marker) {
       this.eventBus.$emit('markerDragged', marker)
@@ -427,11 +427,11 @@ export default {
 
     /**
      * When a directions from point is hit,
-     * emit a directionsFromPoint event via eventbus.
+     * emit a directionsFromPoint event via eventBus.
      * The map-view component does not emit events via
      * eventBus, only local events to its container (this component)
      * @param {Object} data
-     * @emits directionsFromPoint via eventbus
+     * @emits directionsFromPoint via eventBus
      */
     directionsFromPoint (data) {
       this.eventBus.$emit('directionsFromPoint', data)
@@ -482,11 +482,11 @@ export default {
     },
      /**
      * When an `add isochrones center` option is hit,
-     * emits an addAsIsochroneCenter event via eventbus.
+     * emits an addAsIsochroneCenter event via eventBus.
      * The map-view component does not emit events via
      * eventBus, only local events to its container (this component)
      * @param {Object} data
-     * @emits addAsIsochroneCenter via eventbus
+     * @emits addAsIsochroneCenter via eventBus
      */
     addAsIsochroneCenter (data) {
       this.eventBus.$emit('addAsIsochroneCenter', data)
@@ -494,22 +494,22 @@ export default {
 
     /**
      * When an `add route stop` option is hit,
-     * emits an addRouteStop event via eventbus.
+     * emits an addRouteStop event via eventBus.
      * The map-view component does not emit events via
      * eventBus, only local events to its container (this component)
      * @param {Object} data
-     * @emits addRouteStop via eventbus
+     * @emits addRouteStop via eventBus
      */
     addRouteStop (data) {
       this.eventBus.$emit('addRouteStop', data)
     },
     /**
      * When an `add destination to route` option is hit,
-     * emits an addDestinationToRoute event via eventbus.
+     * emits an addDestinationToRoute event via eventBus.
      * The map-view component does not emit events via
      * eventBus, only local events to its container (this component)
      * @param {Object} data
-     * @emits addDestinationToRoute via eventbus
+     * @emits addDestinationToRoute via eventBus
      */
     addDestinationToRoute (data) {
       this.eventBus.$emit('addDestinationToRoute', data)
@@ -542,15 +542,15 @@ export default {
     },
     /**
      * When an avoid polygons option changes,
-     * merge the avoid polygons array into a multipolygon and
-     * emits an avoidPolygonsChanged event via eventbus.
+     * merge the avoid polygons array into a multiPolygon and
+     * emits an avoidPolygonsChanged event via eventBus.
      * @param {Array} polygons
-     * @emits avoidPolygonsChanged via eventbus
+     * @emits avoidPolygonsChanged via eventBus
      */
     avoidPolygonsChanged (polygons) {
       if (polygons) {
         // As it is possible to have several polygons, we merge them into
-        // a multipolygon so that all them are considered (array of polygons is not supported)
+        // a multiPolygon so that all them are considered (array of polygons is not supported)
         let multiPolygon = PolygonUtils.mergePolygonsIntoMultiPolygon(polygons)
         this.eventBus.$emit('avoidPolygonsChanged', multiPolygon)
       }
