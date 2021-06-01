@@ -36,13 +36,17 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.0.17] -  2021-06-01 ##
+
+### Fixed ###
+
+- Condition to apply isochrones time/distance range (ors-map-filter-example.js changed)
+
 ## [v1.0.16] -  2021-05-31 ##
 
 ### Fixed ###
 
 - Slow performance due to inadequate object watch in route-details.js
-
-## [v1.0.14] -  2021-05-31 ##
 
 ## [v1.0.15] -  2021-05-31 ##
 

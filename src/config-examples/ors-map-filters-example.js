@@ -118,6 +118,12 @@ const filters = [
         value: 'time'
       }
     ],
+    validWhen: [
+      {
+        ref: 'range_type',
+        value: 'time'
+      }
+    ],
     availableOnModes: [constants.modes.isochrones],
     useInServices: [constants.services.isochrones],
     valuesRestrictions: [
@@ -196,6 +202,12 @@ const filters = [
     valueAsArray: true,
     step: 1,
     visibleWhen: [
+      {
+        ref: 'range_type',
+        value: 'distance'
+      }
+    ],
+    validWhen: [
       {
         ref: 'range_type',
         value: 'distance'
