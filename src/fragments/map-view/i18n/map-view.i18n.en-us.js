@@ -9,10 +9,10 @@ export default {
     addRouteStop: 'Add a route stop here',
     addDestinationToRoute: 'Add destination to route',
     acquirePositionErrors: {
-      generic: 'It was not possible to acquire your location because it was not authorized or the browser/device does not support it.',
-      unavailable: 'According to your browser/device your location is currently not available. Make sure the positioning option/service is properly configured.',
-      permissionDenied: 'Your position could not be acquired because the browser/device denied access to it. You can retry it by changing the browser/device settings and then click again on the "my position button"',
-      timeout: 'Your browser/device returned "timeout" while trying to acquire a position. You can retry it by clicking on the "my position button"'
+      generic: 'It was not possible to acquire your location because it was not authorized or the device does not support it.',
+      unavailable: 'According to your device your location is currently not available. Make sure the positioning option/service is properly configured.',
+      permissionDenied: 'Your position could not be acquired because the device denied access to it. You can retry it by changing the device settings and then click again on the "my position button"',
+      timeout: 'Your device returned "timeout" while trying to acquire a position. You can retry it by clicking on the "my position button"'
     },
     yourCurrentLocation: 'Your current location',
     options: 'Options',

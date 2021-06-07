@@ -34,9 +34,10 @@ const settingsOptions = {
   appLocales: [
     { text: 'English US', value: 'en-us' },
     { text: 'Deutsch DE', value: 'de-de' },
+    { text: 'Español ES', value: 'es-es' },
+    { text: 'Français FR', value: 'fr-fr' },
     { text: 'Português BR', value: 'pt-br' },
     { text: 'Italiano IT', value: 'it-it' },
-    { text: 'Français FR', value: 'fr-fr' },
     { text: 'Magyar HU', value: 'hu-hu' }
   ],
   tileServices: [

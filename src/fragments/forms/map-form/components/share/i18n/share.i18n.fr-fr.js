@@ -13,6 +13,6 @@ export default {
     "shorteningNotPossible": "Il n'a pas été possible de générer une URL courte. Veuillez utiliser l'URL complète",
     "embedCodeCopied": "Code d'incorporation copié",
     "embed": "Incorporation (cliquez pour copier)",
-    "emdedInstructions": "Utilisez ce code pour intégrer la carte ORS dans votre site web"
+    "embedInstructions": "Utilisez ce code pour intégrer la carte ORS dans votre site web"
   }
 }

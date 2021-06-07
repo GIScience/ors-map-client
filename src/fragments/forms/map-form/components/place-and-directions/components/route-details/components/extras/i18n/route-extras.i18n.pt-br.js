@@ -8,7 +8,7 @@ export default {
     showAllOnMap: 'Mostrar tudo no mapa',
 
     steepness: 'Inclinação',
-    surface: 'Superf[icie',
+    surface: 'Superfície',
     roadaccessrestrictions: 'Road access restrictions',
     waytypes: 'tipos de caminho',
     suitability: 'Adequação',

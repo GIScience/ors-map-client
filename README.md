@@ -281,8 +281,9 @@ For example, similar to `/\.i18n\.en-us\.js$` add `/\.i18n\.fr-fr\.js$`.
 
 - Translate the language strings for each key in the `global.js` file
 
-- Search for each file inside the `/src` folder that ends with `i18n.en-en.js` and create a copy of it and each one so
-that each new created file now ends with `i18n.fr-fr.js`
+- Search for each file inside the `/src` folder that ends with `i18n.en-us.js` and create a copy of it and each one so
+that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux compatible terminal, you can do that by running:
+**find . -name "\*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \;**
 
 - Translate the language strings for each key in all the files created in the previous step.
 

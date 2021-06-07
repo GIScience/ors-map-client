@@ -36,6 +36,17 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+
+## [v1.1.0] -  2021-06-07 ##
+
+### Added ###
+
+- Support to Spanish language
+
+### Fixed ###
+
+- Some translation typos in Portuguese language
+
 ## [v1.0.17] -  2021-06-01 ##
 
 ### Fixed ###

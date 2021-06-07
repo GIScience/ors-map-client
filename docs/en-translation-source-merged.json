@@ -165,6 +165,7 @@
     "apiError": {
       "2003": "The area of a polygon to avoid must not exceed 20.0000 square kilometers.",
       "3001": "One or more parameters have an incorrect value or format.",
+      "3003": "Parameter 'avoid_features' has incorrect value of 'null'",
       "3004": "The combination of profile, interval and time or distance selected exceeds the maximum supported. Please adjust the values.",
       "3099": "Unable to build an isochrone map for the selected point(s) and profile."
     },
@@ -284,7 +285,7 @@
     "shorteningNotPossible": "It was not possible to generate a short URL. Please use the full URL",
     "embedCodeCopied": "Embedding code copied",
     "embed": "Embedding (click to copy)",
-    "emdedInstructions": "Use this code to embed ORS map in your website"
+    "embedInstructions": "Use this code to embed ORS map in your website"
   },
   "mapForm": {
     "placesAndDirections": "Find & go",
@@ -447,10 +448,10 @@
     "addRouteStop": "Add a route stop here",
     "addDestinationToRoute": "Add destination to route",
     "acquirePositionErrors": {
-      "generic": "It was not possible to acquire your location because it was not authorized or the browser/device does not support it.",
-      "unavailable": "According to your browser/device your location is currently not available. Make sure the positioning option/service is properly configured.",
-      "permissionDenied": "Your position could not be acquired because the browser/device denied access to it. You can retry it by changing the browser/device settings and then click again on the \"my position button\"",
-      "timeout": "Your browser/device returned \"timeout\" while trying to acquire a position. You can retry it by clicking on the \"my position button\""
+      "generic": "It was not possible to acquire your location because it was not authorized or the device does not support it.",
+      "unavailable": "According to your device your location is currently not available. Make sure the positioning option/service is properly configured.",
+      "permissionDenied": "Your position could not be acquired because the device denied access to it. You can retry it by changing the device settings and then click again on the \"my position button\"",
+      "timeout": "Your device returned \"timeout\" while trying to acquire a position. You can retry it by clicking on the \"my position button\""
     },
     "yourCurrentLocation": "Your current location",
     "options": "Options",
@@ -668,11 +669,19 @@
           "distance": "Distance"
         }
       },
-      "range": {
+      "time_range": {
         "label": "Range",
         "description": "The max range of the isochrones to be calculated"
       },
-      "interval": {
+      "distance_range": {
+        "label": "Range",
+        "description": "The max range of the isochrones to be calculated"
+      },
+      "time_interval": {
+        "label": "Interval",
+        "description": "The interval of the isochrones to be calculated"
+      },
+      "distance_interval": {
         "label": "Interval",
         "description": "The interval of the isochrones to be calculated"
       },

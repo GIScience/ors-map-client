@@ -11,7 +11,7 @@ export default {
     addPlaceInput: 'Adicionar local',
     clearRoute: 'Remover rota',
     reverseRoute: 'Reverter',
-    orderByClosestPlaces: 'Ordene por locais mais próximos de seu local',
+    orderByClosestPlaces: 'Ordear por locais mais próximos',
     calculatingRoute: 'Calculando rota...',
     yourLocation: 'Sua localização',
     expandAltitudeChart: 'Ampliar gráfico',

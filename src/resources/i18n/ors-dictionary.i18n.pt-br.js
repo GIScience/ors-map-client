@@ -54,7 +54,7 @@ export default {
     bad: 'Ruim',
     intermediate: 'Intermediário',
     good: 'Bom',
-    excellent: 'Excelent',
+    excellent: 'Excelente',
     grade1: 'Nota 1',
     grade2: 'Nota 2',
     grade3: 'Nota 3',

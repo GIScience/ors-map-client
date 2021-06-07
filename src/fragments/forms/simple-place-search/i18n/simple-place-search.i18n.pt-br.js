@@ -1,8 +1,8 @@
 
 export default {
   simplePlaceSearch: {
-    noPlaceFound: 'No place found with the imputed content',
-    openSidebarToSeeRouteDetails: 'Open the sidebar to see route details',
-    unknownSearchPlaceError: 'Unknown search place error'
+    noPlaceFound: 'Nenhum local encontrado para o conteúdo inserido',
+    openSidebarToSeeRouteDetails: 'Abrir a barra lateral para exibir os detalhes',
+    unknownSearchPlaceError: 'Erro desconhecido ao buscar local'
   }
 }

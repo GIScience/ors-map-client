@@ -13,6 +13,6 @@ export default {
     "shorteningNotPossible": "Nem lehetett rövid URL-t generálni. Kérjük, használja a teljes URL-t",
     "embedCodeCopied": "Beágyazási kód kimásolva",
     "embed": "Beágyazás (kattintson a másoláshoz)",
-    "emdedInstructions": "Ezzel a kóddal beágyazhatja az ORS-térképet a saját webhelyére"
+    "embedInstructions": "Ezzel a kóddal beágyazhatja az ORS-térképet a saját webhelyére"
   }
 }

@@ -12,6 +12,6 @@ export default {
     'shorteningNotPossible': 'Non è stato possibile accorciare la URL. Usa la URL completa',
     'embedCodeCopied': 'Codice per l\'integrazione copiato',
     'embed': 'Integrazione in altri siti internet (clicca per copiare)',
-    'emdedInstructions': 'Usa questo codice per integrare ORS map nel tuo sito internet'
+    'embedInstructions': 'Usa questo codice per integrare ORS map nel tuo sito internet'
   }
 }

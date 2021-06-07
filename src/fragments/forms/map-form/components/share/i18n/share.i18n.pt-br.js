@@ -13,6 +13,6 @@ export default {
     shorteningNotPossible: 'Não foi possível gerar uma URL curta. Por favor, use a URL completa.',
     embedCodeCopied: 'Código para incorporação de mapa copiado',
     embed: 'Código para incorporar (clique para copiar)',
-    emdedInstructions: 'Use este código para incorporar o mapa ORS em um website'
+    embedInstructions: 'Use este código para incorporar o mapa ORS em um website'
   }
 }
