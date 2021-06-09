@@ -24,7 +24,7 @@ export default {
     "customApiKey": "Clave da API personalizada",
     "apiBaseUrl": "URL base de la API",
     "invalidSettingsValue": "Valor(es) de configuración no válido(s). Por favor, compruebe los campos o restaure los valores por defecto",
-    "restoreDefaults": "Restablecer los valores predeterminados",
+    "restoreDefaults": "Valores predeterminados",
     "advanced": "Avanzado",
     "mapSettingsSaved": "Configuraciones guardadas",
     "steepness": "Inclinación",

@@ -1,4 +1,3 @@
-
 export default {
   orsMapFilters: {
     profiles: {
@@ -18,7 +17,7 @@ export default {
       'agricultural': 'Forstwirtschaftliches Fahrzeug',
       'delivery': 'Lieferwagen',
       'forestry': 'Forstwirtschaftlicher Lkw',
-      'goods': 'Güter-Lkwk'
+      'goods': 'Güter-Lkw'
     },
     filters: {
       preference: {
