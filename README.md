@@ -68,6 +68,13 @@ npm install
 - default-map-settings`-example`.js => **default-map-settings.js**
 - settings-options`-example`.js => **settings-options.js**
 
+   If you are using a linux/unix compatible terminal, you can do that by running:
+
+   ```sh
+  cd src && cp config-examples/* config
+  cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
+   ```
+
 4. Set the app-config.js values for:
 
 - `orsApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
@@ -275,15 +282,18 @@ follow the steps below.
 - Create a copy of the /src/i18n/translations/`en-us` folder giving it the identification of the target language.
 For example: if you are adding the French from France, then the folder should be called `fr-fr`.
 
-- Edit the builder.js file inside the just created folder in order to replace the language pattern to the one you are
+- Edit the `builder.js` file inside the just created folder in order to replace the language pattern to the one you are
 creating.
 For example, similar to `/\.i18n\.en-us\.js$` add `/\.i18n\.fr-fr\.js$`.
 
 - Translate the language strings for each key in the `global.js` file
 
 - Search for each file inside the `/src` folder that ends with `i18n.en-us.js` and create a copy of it and each one so
-that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux compatible terminal, you can do that by running:
-**find . -name "\*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \;**
+that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux/unix compatible terminal, you can do that by running:
+
+  ```sh
+  find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \; # where the last occurrence of locale id (in this case `fr-fr`) is the one you are creating
+   ```
 
 - Translate the language strings for each key in all the files created in the previous step.
 
