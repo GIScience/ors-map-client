@@ -121,15 +121,11 @@ Meaning, that the front-end (this app) is decoupled from the back-ends (ORS API 
 
 The app load cycle follows these steps:
 
-1. Execute the `main.js` file and add global extensions, mixins components and external libs.
-2. The registered hooks are loaded and the `appLoaded` hook is run.
-3. The `main.js` also includes the main files for the router, vuex-store and i18n-translations, which will internally
-load all `.router.js` ,`.store.js` and `.i18n.js` files from sub-folders.
-4. `main.js` file will create a VueJS app instance and load the `App.vue`.
-At this point `AppHooks` is set up and attached to the main VueJS instance and the hook `appLoaded` is run.
-5. `App.vue` includes all basic navigation components, like menu, sidebar, footer etc.
-6. After loading all routes (including the ones in the `pages` sub folder) the page with the `/` route will
- also be rendered in the `<router-view></router-view>` in `App.vue` component.
+1. Execute the `main.js` file and add global extensions, mixins components and external libs. The file `main.js` also includes the main files of the router, vuex-store and i18n-translations, which will internally load all `.router.js` ,`.store.js` and `.i18n.js` files from sub-folders.
+2. `main.js` will run a request to get necessary data from a service and then create a VueJS app instance and load the `App.vue`. At this point `AppHooks` is set up and attached to the main VueJS instance and then the `appLoaded` hook is called.
+3. `App.vue` includes all basic navigation components, like menu, sidebar, footer etc.
+4. After loading all routes (including the ones in the `pages` sub folder) the page with the `/` route (`Maps.vue`) will
+ also be rendered in the `<router-view></router-view>` slot in `App.vue` component.
 
 Data flow, state and requests to services, in a simplified view, happens as follows:
 
