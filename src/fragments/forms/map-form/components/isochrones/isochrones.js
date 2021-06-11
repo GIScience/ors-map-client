@@ -77,7 +77,7 @@ export default {
     this.eventBus.$on('avoidPolygonsChanged', (polygons) => {
       if (context.active) {
         context.$root.appHooks.run('avoidPolygonsChangedInIsochrones', polygons)
-        context.avoidPolygonsFilterAcessor.value = polygons
+        context.avoidPolygonsFilterAccessor.value = polygons
 
         if (context.getFilledPlaces().length > 0) {
           context.updateAppRoute()

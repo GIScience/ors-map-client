@@ -30,7 +30,7 @@ export default {
      * Get the the avoid_polygons filter on the ors-filters array
      * @returns {Object}
      */
-    avoidPolygonsFilterAcessor () {
+    avoidPolygonsFilterAccessor () {
       const filterRef = OrsFilterUtil.getFilterRefByName(constants.avoidPolygonsFilterName)
       return filterRef
     },

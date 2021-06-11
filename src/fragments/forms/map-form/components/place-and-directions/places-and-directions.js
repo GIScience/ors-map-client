@@ -268,8 +268,8 @@ export default {
       // Avoid polygons changed, so recalculate the route
       this.eventBus.$on('avoidPolygonsChanged', (polygons) => {
         if (context.active) {
-          context.$root.appHooks.run('avoidPolygonsChangedInDrections', polygons)
-          context.avoidPolygonsFilterAcessor.value = polygons
+          context.$root.appHooks.run('avoidPolygonsChangedInDirections', polygons)
+          context.avoidPolygonsFilterAccessor.value = polygons
           if (context.getFilledPlaces().length > 1) {
             context.updateAppRoute()
           }

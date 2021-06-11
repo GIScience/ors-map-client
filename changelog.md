@@ -36,7 +36,13 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
-v
+## [v1.1.2] -  2021-06-10 ##
+
+### Fixed ###
+
+- Typo in avoidPolygonsChangedInDirections hook name
+- Typo in map-form-mixin avoidPolygonsFilterAccessor
+
 ## [v1.1.1] -  2021-06-09 ##
 
 ### Fixed ###

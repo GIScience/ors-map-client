@@ -141,7 +141,7 @@ appHooks.add('avoidPolygonsChangedInIsochrones', (polygons) => {
   // Do something
 }, 1)
 
-appHooks.add('avoidPolygonsChangedInDrections', (polygons) => {
+appHooks.add('avoidPolygonsChangedInDirections', (polygons) => {
   // Do something
 }, 1)
 
@@ -421,6 +421,6 @@ appHooks.add('importedFileParsed', (hookData) => {
 appHooks.add('importerAcceptedFilesDefined', (acceptedFilesStr) => {
   // acceptedFilesStr is a comma separated list of extensions, like `.json,.kml,.gpx`
   // Do something
-  retusn acceptedFilesStr
+  return acceptedFilesStr
 })
 */
