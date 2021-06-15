@@ -70,22 +70,22 @@ export default {
       "kmh": "km/h"
     },
     "layers": {
-      "macrocounty": "Makroország",
+      "macrocounty": "Makrotérség",
       "country": "Ország",
-      "region": "Tartomány",
+      "region": "Régió",
       "county": "Megye",
       "macroregion": "Makrorégió",
-      "neighbourhood": "Környék",
-      "locality": "Dűlő, lakatlan hely",
+      "neighbourhood": "Városrész",
+      "locality": "Település",
       "borough": "Kisváros",
       "localadmin": "Helyi közigazgatás",
       "address": "Cím",
       "street": "Utca",
-      "venue": "Helyszín",
+      "venue": "Létesítmény",
       "rawCoordinate": "Nyers hossz., szél. koordináták",
-      "notAvailable": "Nem elérhető",
+      "notAvailable": "Elérhetetlen",
       "postalcode": "Irányítószám",
-      "undefined": "Nincs meghatározva"
+      "undefined": "Meghatározatlan"
     }
   }
 }
