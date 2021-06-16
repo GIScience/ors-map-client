@@ -4,23 +4,41 @@ import AppRouteData from '@/models/app-route-data'
 import constants from '@/resources/constants'
 import Utils from '@/support/utils'
 import RouteUtils from '@/support/route-utils'
+import GeoUtils from '@/support/geo-utils'
 import appConfig from '@/config/app-config'
+import Place from '@/models/place'
+import store from '@/store/store'
 import main from '@/main'
 
 /**
  * DirectionsMode class
  */
 class DirectionsMode {
-  buildAppRouteData (places, options = {}) {
-    const appRouteData = new AppRouteData()
+  buildAppRouteData (places) {
+    
+    const appRouteData = store.getters.appRouteData || new AppRouteData()
     appRouteData.places = places
-
+    
     // All directions request filters will be extracted from the OrsMapFilters
     // object that is an in memory object used by all the filters
     // rendered as model in in its respective key
+    let options = {zoom: appRouteData.options.zoom}
     OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
     appRouteData.options = options
-    appRouteData.options.zoom = appConfig.initialMapMaxZoom
+    let layer = appRouteData.options.layer
+
+    // If only one place is defined, then 
+    // define the zoom level by the place layer
+    let filledPlaces = Place.getFilledPlaces(appRouteData.places)
+    if (filledPlaces.length === 1) {
+      layer = filledPlaces[0].properties.layer
+    }
+    if (layer) {
+      appRouteData.options.zoom = GeoUtils.zoomLevelByLayer(layer)
+    }
+    if (!appRouteData.options.zoom) {
+      appRouteData.options.zoom = appConfig.initialMapMaxZoom
+    }
     return appRouteData
   }
 

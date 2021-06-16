@@ -114,7 +114,7 @@ export default {
       type: String,
       required: false
     },
-    shrinked: {
+    shrunk: {
       type: Boolean,
       default: false
     },
@@ -165,7 +165,6 @@ export default {
       highlightedRoutePointIndex: null, // a point on the route that must be highlighted (a Leaflet latLng)
       isAltitudeModalOpen: false,
       extraInfo: null, // Extra route info (waytypes, surface, steepness etc)
-      tempPlaces: null, // a place selected by the user on the map but not yet used for computing directions,
       featuresJustFitted: false,
       localAvoidPolygons: null,
       mapDataViewChangeDebounceTimeoutId: null
@@ -231,7 +230,7 @@ export default {
      */
     showControls () {
       let show = true
-      if (this.shrinked && this.$lowResolution) {
+      if (this.shrunk && this.$lowResolution) {
         show = false
       }
       return show
@@ -257,8 +256,7 @@ export default {
     },
    /**
      * Build and return the map center
-     * based either on the single visible marker
-     * or the current map center defined/set in the store
+     * based on the the current map center defined/set in the store
      * @returns {Latlng}
      */
     mapCenter () {
@@ -379,25 +377,11 @@ export default {
     },
     /**
      * Build and return an array of marker objects
-     * based either on the  tempPlaces value
-     * (used when a place was selected but a route was not calculated yet)
-     * or based on the places defined on the localMapViewData
+     * based on the on the places defined on the localMapViewData
      * @returns {Array} of markers
      */
     markers () {
-      let markersMapViewData
-      // temp places are markers shown on the map
-      // but not yet computed in routing or other calculations
-      // It exists to handle the case when the user selects
-      // one point on the map, but it has not yet been used
-      // to change the app state/route because it is waiting
-      // for a second place (for directions, for example)
-      if (this.tempPlaces) {
-        markersMapViewData = new MapViewData()
-        markersMapViewData.places = this.tempPlaces
-      } else {
-        markersMapViewData = this.localMapViewData
-      }
+      let markersMapViewData = this.localMapViewData.clone()
       if (markersMapViewData.places.length > 0) {
         let isRoute = markersMapViewData.hasRoutes() || this.mode === constants.modes.directions
         let markers = GeoUtils.buildMarkers(markersMapViewData.places, isRoute, this.focusedPlace)
@@ -639,7 +623,7 @@ export default {
      * we have to run the setDrawingTool
      * utility again
      */
-    shrinked () {
+    shrunk () {
       this.setDrawingTool()
     },
     /**
@@ -698,7 +682,6 @@ export default {
       this.mapDataViewChangeDebounceTimeoutId = setTimeout(function () {
         // Create a new instance of MapViewData and set all the props into the local instance
         context.localMapViewData = context.mapViewData.clone()
-        context.tempPlaces = null
         context.loadMapData()
         context.refreshAltitudeModal()
       }, 500)
@@ -1011,8 +994,8 @@ export default {
           this.$emit('mapCenterChanged', latlng)
         }
       } else {
-        const routePlaces = this.$store.getters.appRouteData.places
         // TODO: stop using appRouteData, receive places as a prop?
+        const routePlaces = this.$store.getters.appRouteData.places
         if (routePlaces.length === 0 || routePlaces[0].isEmpty()) {
           if (this.center) {
             this.setMapCenter(this.center)
@@ -1138,7 +1121,8 @@ export default {
         // Build the all features bounds taking into consideration
         // the places and the roues/polygons polyline
         if (this.localMapViewData.hasPlaces() || polylineData.length > 0) {
-          this.dataBounds = GeoUtils.getBounds(this.localMapViewData.places, polylineData)
+          let places = Place.getFilledPlaces(this.localMapViewData.places)
+          this.dataBounds = GeoUtils.getBounds(places, polylineData)
         } else {
           this.dataBounds = null
         }
@@ -1217,18 +1201,6 @@ export default {
     prepareDataAndEmitRightClickEvent (data) {
       let place = new Place(data.clickLatlng.lng, data.clickLatlng.lat)
       place.resolve().then(() =>{
-        // If the app is in the place mode (no route yet drawn on the map)
-        // and the user is selecting points to calculate a route, then
-        // show this points as markers on the map view. These points will
-        // not be synchronized with the app url, so we just add them in the
-        // localMapViewData and we do not emit a mapViewDataChanged event.
-        // This will only happens when two points are selected (then the app
-        // goes to the directions mode)
-        if (this.mode === constants.modes.place && data.eventName === 'directionsToPoint' || data.eventName === 'directionsFromPoint') {
-          let placesCopy = [... this.localMapViewData.places]
-          placesCopy.push(place)
-          this.tempPlaces = placesCopy
-        }
         const dataPassed = { latlng: data.clickLatlng, place}
         this.$emit(data.eventName, dataPassed)
       })

@@ -10,12 +10,12 @@ import lodash from 'lodash'
  */
 class Place {
   constructor (lng = null, lat = null, placeName = '', options = {}) {
-    this.lng = lng !== null ? Number(lng) : lng
-    this.lat = lat !== null ? Number(lat) : lat
+    this.lng = lng !== null && lng !== 'null' ? Number(lng) : null
+    this.lat = lat !== null && lat !== 'null' ? Number(lat) : null
 
     this.placeName = placeName
 
-    // if the place must be resolved (do a request and convert the lng,lat to a qualified place name)
+    // If the place must be resolved (do a request and convert the lng,lat to a qualified place name)
     this.unresolved = options.resolve
 
     // suggestion places listed to be selected when the user input a place name in a place input
@@ -27,20 +27,11 @@ class Place {
     // place properties
     this.properties = options.properties || {} // object properties, including layer
 
-    // If the place was valid before be cleared
-    this.wasValidBeforeCleared = options.wasValidBeforeCleared !== undefined ? options.wasValidBeforeCleared : false
-
     // The index of the input associated to the Place object
     this.inputIndex = options.inputIndex
 
     // The id of the place returned by the API
     this.placeId = options.placeId
-
-    // if the place was generated based acquired via a browser location api
-    this.fromBrowser = options.fromBrowser !== undefined ? options.fromBrowser : false
-
-    // if the place data shall be shown when the user interact with it on the view
-    this.skipShowData = options.skipShowData !== undefined ? options.skipShowData : false
 
     // The index of the Place
     this.index = null
@@ -55,7 +46,7 @@ class Place {
       this.coordinates = [this.lng, this.lat]
 
       // Build a place name using coordinates
-      if (this.placeName === '') {
+      if (this.placeName === '' && lat && lng) {
         this.placeName = `${lat},${lng}`
       }
     }
@@ -113,30 +104,6 @@ class Place {
   }
 
   /**
-   * Set the input index
-   * @param {*} index
-   */
-  setIputIndex (index) {
-    this.inputIndex = index
-  }
-
-  /**
-   * Set skipShowData
-   * @param {*} index
-   */
-  setSkipShowData (skip) {
-    this.skipShowData = skip
-  }
-
-  /**
-   * Set fromBroser
-   * @param {*} index
-   */
-  setFromBrowser (fromBroser) {
-    this.fromBrowser = fromBroser
-  }
-
-  /**
    * Set the suggestions
    * @param {Array} places
    */
@@ -180,11 +147,8 @@ class Place {
       'suggestions',
       'coordinates',
       'properties',
-      'wasValidBeforeCleared',
       'inputIndex',
       'placeId',
-      'fromBrowser',
-      'skipShowData',
       'index',
       'direct',
       'isPoi'
@@ -238,9 +202,10 @@ class Place {
    * Set the place coordinates as place name
    */
   setCoordsAsName () {
-    const parts = this.placeName.split(',')
-    const coords = `${parts[1]},${parts[0]}`
-    this.placeName = coords
+    if (this.lat && this.lng) {
+      const coords = `${this.lat},${this.lng}`
+      this.placeName = coords
+    }
   }
 
   /**
@@ -275,9 +240,22 @@ class Place {
   }
 
   /**
+   * Get place models that are filled
+   * @returns {Array} of filled places
+   */
+   static getFilledPlaces (places) {
+    const filledPlaces = lodash.filter(places, (p) => {
+      if (!p.isEmpty()) {
+        return p
+      }
+    })
+    return filledPlaces
+  }
+
+  /**
    * Select a feature from a feature list by a give zoom
-   * the feature with the zomm level (according the layer type)
-   * being closest to the givn zoom level will be selected
+   * the feature with the zoom level (according the layer type)
+   * being closest to the given zoom level will be selected
    * @param {*} zoom
    * @param {*} places
    * @returns {Place} place
@@ -290,9 +268,9 @@ class Place {
         const placeZoom = GeoUtils.zoomLevelByLayer(places[key].properties.layer)
         const selectedPlaceZoom = GeoUtils.zoomLevelByLayer(selectedPlace.properties.layer)
 
-        // If the difference betwen the reference zoom and
+        // If the difference between the reference zoom and
         // the current feature zoom is smaller than the
-        // the difference betwen the previously selected feature
+        // the difference between the previously selected feature
         // then replace the current selected feature bt the current feature
         if (placeZoom % zoom < selectedPlaceZoom % zoom) {
           selectedPlace = places[key]
@@ -321,7 +299,6 @@ class Place {
       const place = new Place(feature.geometry.coordinates[0], feature.geometry.coordinates[1], placeName)
       place.properties = feature.properties
       place.inputIndex = key
-      place.skipShowData = true
       places.push(place)
     }
     return places

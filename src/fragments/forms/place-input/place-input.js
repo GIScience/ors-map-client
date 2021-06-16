@@ -331,7 +331,7 @@ export default {
   },
   methods: {
     /**
-     * Resolve the model using a debounce to avoid multiple requests
+     * Resolve the model using a debounce to avoid unnecessary sequential requests
      * @param {*} newVal 
      */
     resolveModelWithDebouncing (newVal) {
@@ -430,11 +430,11 @@ export default {
     },
 
     /**
-     * Search fora place based on the place input value at the given index
+     * Search for a place based on the place input value
      */
     autocompleteSearch () {
       // Make sure that the local model is up to date
-      if (this.localModel.placeName.length === 0) {
+      if (!this.localModel || this.localModel.placeName.length === 0) {
         this.localModel = this.model.clone()
       }
       if (this.localModel.nameIsCoord()) {
@@ -568,7 +568,7 @@ export default {
     },
 
     /**
-     * Hnadle go to search mode
+     * Handle go to search mode
      */
     handleGoToSearchMode () {
       // If search mode is supported and available
@@ -620,7 +620,7 @@ export default {
      * @param {Place} suggestedPlace
      */
     selectSuggestion (suggestedPlace) {
-      // Only proceeed if it is being selected
+      // Only proceed if it is being selected
       // a place different from the current one
       if (!suggestedPlace.equals(this.model)) {
         // If the suggested place is a ra coordinate, remove the layer attribute
@@ -677,7 +677,7 @@ export default {
 
     /**
      * Deal with the start directions button click
-     * by emitting the corresponsing event
+     * by emitting the corresponding event
      */
     startDirections () {
       this.$emit('startDirections')
@@ -702,7 +702,7 @@ export default {
     setFocus (data) {
       // When the user clicks outside an input
       // this method is called and is intended to
-      // set the focus as false in rhis case.
+      // set the focus as false in this case.
       // To do so, we check if the was previously focused
       // The parameters passed (automatically) by the click-outside
       // is expected to be MouseEvent object and no a boolean.
@@ -733,9 +733,9 @@ export default {
      */
     inputWasActiveAndLostFocus (event) {
       let isThisInputStored = this.$store.getters.pickPlaceIndex === this.index && this.$store.getters.pickPlaceId === this.predictableId
-      let thisElIdWasOutsided = event.outsideEl.id === this.predictableId
+      let thisElIdWasOutSided = event.outsideEl.id === this.predictableId
       // Check if it matches the conditions
-      if (thisElIdWasOutsided && isThisInputStored) {
+      if (thisElIdWasOutSided && isThisInputStored) {
         return true
       }
     },
@@ -749,9 +749,9 @@ export default {
       this.focused = false
       const context = this
 
-      // Se place function that receives
+      // Set place function that receives
       // a location and builds a selectable place
-      // and run functions to upate the view
+      // and run functions to update the view
       const setPlace = (location) => {
         let place = new Place(location.lng, location.lat, context.$t('placeInput.yourLocation'), {properties: {layer: 'venue'}})
         context.selectPlace(place)
@@ -763,8 +763,8 @@ export default {
       GeoUtils.getBrowserLocation().then((location) => {
         setPlace(location)
       }).catch(error => {
-        // Check if there is a location already determined by yhe ip addres
-        // if so, use the ip based location to resolve the broser location
+        // Check if there is a location already determined by yhe ip address
+        // if so, use the ip based location to resolve the browser location
         if (context.$store.getters.currentLocation) {
           setPlace(context.$store.getters.currentLocation)
           context.showWarning(context.$t('placeInput.couldNotDetermineYourPreciseLocationUsingPreviousLocation'))

@@ -83,6 +83,15 @@ export default {
     },
 
     /**
+     * Get place input objects from place inputs that are filled
+     * @returns {Array} of filled places
+     */
+     getFilledPlaces () {
+      let filledPlaces = Place.getFilledPlaces(this.places)
+      return filledPlaces
+    },
+
+    /**
     * When the user click on a mpa view marker and click to remove it
     *
     * @param {*} data {index: ..., place:...}

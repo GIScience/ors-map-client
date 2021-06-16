@@ -12,9 +12,9 @@ const isochronesPath = RoutesResolver.isochronesPath()
 const embedParameters = '/:embed?/:locale?'
 
 // Build the optional placesNames Path
-var optionalplaceNamesPath = ''
+var optionalPlaceNamesPath = ''
 for (let index = 2; index <= 15; index++) {
-  optionalplaceNamesPath += `/:placeName${index}?`
+  optionalPlaceNamesPath += `/:placeName${index}?`
 }
 
 const mapRoutes = [
@@ -54,7 +54,7 @@ const mapRoutes = [
     // The maximum number of places/points of a route is 15. so, we can have 15 places more the data parameter that
     // contains the coordinates for all the places in que query encoded in base64 format
     // The minimum is one (because of round trip needs only one place)
-    path: `${directionsPath}:placeName1${optionalplaceNamesPath}/data/:data${embedParameters}`,
+    path: `${directionsPath}:placeName1${optionalPlaceNamesPath}/data/:data${embedParameters}`,
     name: 'MapDirections',
     component: Maps,
     beforeEnter: (to, from, next) => {
@@ -72,7 +72,7 @@ const mapRoutes = [
     }
   },
   {
-    path: `${isochronesPath}:placeName1${optionalplaceNamesPath}/data/:data${embedParameters}`,
+    path: `${isochronesPath}:placeName1${optionalPlaceNamesPath}/data/:data${embedParameters}`,
     name: 'MapIsochrones',
     component: Maps,
     beforeEnter: (to, from, next) => {

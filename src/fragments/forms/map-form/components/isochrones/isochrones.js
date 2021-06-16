@@ -10,7 +10,6 @@ import constants from '@/resources/constants'
 import appConfig from '@/config/app-config'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
-import main from '@/main'
 
 // Local components
 import IschronesDetails from './components/isochrones-details/IsochronesDetails'
@@ -145,18 +144,7 @@ export default {
     toggleRoundTrip () {
       this.roundTripActive = !this.roundTripActive
     },
-    /**
-     * Get place input objects from place inputs that are filled
-     * @returns {Array} of filled places
-     */
-    getFilledPlaces () {
-      const filledPlaces = this.lodash.filter(this.places, (p) => {
-        if (!p.isEmpty()) {
-          return p
-        }
-      })
-      return filledPlaces
-    },
+  
     /**
      * Set a a suggested place as the selected one for a given place input
      * @param {*} data - can be the place object or an object containing the place

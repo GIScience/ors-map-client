@@ -28,11 +28,15 @@ const RouteUtils = {
     // Build each place object and add then to the places array
     let counter = 0
     for (const key in placeNameParameters) {
-      const lnglat = coordinates[counter].split(',')
+      const lngLat = coordinates[counter].split(',')
 
       // Add a new place
       const placeName = route.params[key].replace(',', ', ')
-      places.push(new Place(lnglat[0], lnglat[1], placeName, { resolve: false, inputIndex: counter }))
+      // If a place has as placeName `null` it is a placeholder, so we remove it
+      if (placeName === 'null') {
+        placeName = ''
+      }
+      places.push(new Place(lngLat[0], lngLat[1], placeName, { resolve: false, inputIndex: counter }))
       counter++
     }
     return places
@@ -54,7 +58,10 @@ const RouteUtils = {
     // For each place, create a param that starts with `placeName` and ends with an index, like `placeName1`, `placeName2`...
     appRouteData.places.forEach((p, index) => {
       const placeKey = 'placeName' + (index + 1)
-      params[placeKey] = p.placeName.replace(/, /g, ',')
+      // A place name defined as `null` works as a placeholder for directions/routing mode
+      let placeName = p.placeName || 'null'
+      params[placeKey] = placeName.replace(/, /g, ',')
+
       // save the index of the places marked as `direct` point
       coordinates.push(`${p.lng},${p.lat}`)
       let isLast = index === (appRouteData.places.length - 1)

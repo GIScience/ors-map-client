@@ -18,7 +18,7 @@
       :height="mapHeight"
       :fit-bounds="fitMapBounds"
       :custom-tile-provider-url="$store.getters.mapSettings.customTileProviderUrl"
-      :shrinked="$store.getters.leftSideBarPinned"
+      :shrunk="$store.getters.leftSideBarPinned"
       :mode="$store.getters.mode"
       :supports-drawing-tool="supportsDrawingTool"
       :routing-profile-icon="currentProfileIcon"

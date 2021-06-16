@@ -36,6 +36,25 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.1.3] -  2021-06-16 ##
+
+### Fixed ###
+
+- Visibility condition to max_speed filter in ors-map-filter.js
+- Typos in variables and in internal documentation
+
+### Removed ###
+
+- Properties that are not used anymore in Place model
+- Temp places for directions in MapView.js
+
+### Added ###
+
+- Allow going to direction mode with only on place defined/filled
+- Support for origin/destination placeholder in app URL
+- Support for zoom level based on the only place defined when in directions
+- Static method getFilledPlaces in Place model
+
 ## [v1.1.2] -  2021-06-10 ##
 
 ### Fixed ###

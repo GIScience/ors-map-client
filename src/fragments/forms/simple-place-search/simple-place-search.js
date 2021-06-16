@@ -150,8 +150,8 @@ export default {
       // Only navigate to a new route if params has changed
       const zoomChanged =  Number(newRoute.params.zoom) !== Number(this.$route.params.zoom)
       const centerChanged = newRoute.params.center !== this.$route.params.center
-      const termchanged = newRoute.params.term !== this.$route.params.term
-      if (zoomChanged || termchanged || centerChanged) {
+      const termChanged = newRoute.params.term !== this.$route.params.term
+      if (zoomChanged || termChanged || centerChanged) {
         this.$router.push(newRoute)
       }
     },
@@ -201,7 +201,7 @@ export default {
     openDirectionsMode () {
       this.$store.commit('setLeftSideBarIsOpen', true)
       // If the app is in search mode and the search has returned only one
-      // place, then it is assumed that whe the directions button is hit
+      // place, then it is assumed that the directions button was hit and then
       // the only search result place must auto selected as target
       if (this.$store.getters.mode === constants.modes.search && this.mapViewData.places.length === 1) {
         this.place = this.mapViewData.places[0]

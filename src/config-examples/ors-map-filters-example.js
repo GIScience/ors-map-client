@@ -87,6 +87,12 @@ const filters = [
         value: 'driving-car'
       }
     ],
+    visibleWhen: [
+      {
+        ref: 'profile',
+        value: 'driving-car'
+      }
+    ],
     availableOnModes: [constants.modes.directions],
     useInServices: [constants.services.directions]
   },
