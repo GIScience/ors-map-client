@@ -111,7 +111,7 @@ const updateFieldsStatus = (scopedFilters) => {
     filterValue = filter.value.join(separator)
   } else if (filter.valueAsArray && !Array.isArray(filter.value)) {
     let val = filter.value
-    if (val === undefined || val === null) {
+    if ((val === undefined || val === null) && filter.min !== undefined) {
       val = filter.min
     }
     if (val !== undefined && val !== null) {

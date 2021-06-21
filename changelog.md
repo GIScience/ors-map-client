@@ -36,6 +36,12 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.1.4] -  2021-06-21 ##
+
+### Fixed ###
+
+- slider-combo reset action (remove any value)
+
 ## [v1.1.3] -  2021-06-16 ##
 
 ### Fixed ###

@@ -1,4 +1,10 @@
+
+import customSlider from './custom-slider'
+
 export default {
+  components: {
+    customSlider
+  },
   props: {
     filter: {
       type: Object,
@@ -22,16 +28,17 @@ export default {
   },
   watch: {
     filter: {
-      handler: function () {
-        this.setLocalData()
+      handler: function (newFilter, oldFilter) {
+        if (newFilter.value !== this.localModel) {
+          this.setLocalData()
+        }
       },
       deep: true
     }
   },
   computed: {
     filterMin () {
-      let min = this.filter.min
-      return min
+      return this.filter.min
     },
     filterMax () {
       let max = this.filter.max
@@ -51,7 +58,7 @@ export default {
       if (this.localModel > this.filterMax) {
         this.localModel = this.textLocalModel = this.filterMax
       }
-      if (this.localModel < this.filterMin) {
+      if (this.localModel && this.localModel < this.filterMin) {
         this.localModel = this.textLocalModel = this.filterMin
       }
     },
@@ -75,15 +82,16 @@ export default {
             value = context.filter.min
           }
           if (context.localModel !== value) {
+            // here!
             context.filter.value = context.localModel = context.textLocalModel = value
             context.fieldUpdated()
           }
         } else {
-          let defaultvalue = null
+          let defaultValue = null
           if (context.filter.default !== undefined) {
-            defaultvalue = context.filter.default
+            defaultValue = context.filter.default
           }
-          context.localModel = context.filter.value = defaultvalue
+          context.localModel = context.filter.value = defaultValue
           context.fieldUpdated()
         }
       }, 1000)
@@ -98,7 +106,7 @@ export default {
     },
 
     /**
-     * Build slider component label
+     * Build slider component unit label
      * @returns {String} unit
      */
     buildUnit () {
