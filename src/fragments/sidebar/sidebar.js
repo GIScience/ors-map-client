@@ -1,9 +1,10 @@
-import MapForm from '@/fragments/forms/map-form/MapForm'
-import Footer from '@/fragments/footer/Footer'
 import ProfileSelector from '@/fragments/forms/profile-selector/ProfileSelector.vue'
-import resolver from '@/support/routes-resolver'
+import MapForm from '@/fragments/forms/map-form/MapForm'
 import TopMenu from './components/top-menu/TopMenu'
+import resolver from '@/support/routes-resolver'
+import Footer from '@/fragments/footer/Footer'
 import appConfig from '@/config/app-config'
+import utils from '@/support/utils'
 
 export default {
   data () {
@@ -28,6 +29,11 @@ export default {
         // we can set the sidebar pined status as false
         if (open === false) {
           this.$store.commit('setLeftSideBarIsPinned', open)
+          // Close the mobile virtual keyboard if 
+          // if was open when the sidebar is closed
+          if (utils.isMobile() && document.activeElement) {
+            document.activeElement.blur()
+          }
         }
       }
     },
