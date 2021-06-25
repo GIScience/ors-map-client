@@ -36,6 +36,27 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.1.5] -  2021-06-25 ##
+
+### Added ###
+
+- Prefer green routes filter (only for Germany)
+- Prefer quiet routes filter (only for Germany)
+- Print route instructions
+- Toggle isochrone visibility individually
+- Adjust isochrone opacity individually
+- Adjust route polyline opacity (to see street names covered by it)
+
+### Fixed ###
+
+- Nested filters start open at page load when they have non default values
+- Route polyline background (white)
+- Typos in variables/methods and in comments
+
+### Changed ###
+
+- Improved slider UI
+
 ## [v1.1.4] -  2021-06-21 ##
 
 ### Fixed ###

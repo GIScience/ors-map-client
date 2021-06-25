@@ -1,8 +1,45 @@
 import htmlColors from 'html-colors'
 import GeoUtils from '@/support/geo-utils'
 import Leaflet from 'leaflet'
+import store from '@/store/store'
 
 const PolygonUtils = {
+
+  /**
+   * Prepare polygon for view
+   * @param {*} polygon 
+   * @param {*} translations
+   * @param {*} index
+   */
+  preparePolygonForView (polygon, translations, index) {
+    polygon.properties = polygon.properties || {}
+    polygon.properties.color = polygon.properties.color || PolygonUtils.buildPolygonColor(index)
+    polygon.properties.fillColor = polygon.properties.fillColor || polygon.properties.color
+    polygon.properties.label = polygon.properties.label || PolygonUtils.buildPolygonLabel(polygon, translations)
+    polygon.properties.area = PolygonUtils.calcPolygonArea(polygon)
+
+    polygon.properties.opacity = polygon.properties.opacity || 1
+    polygon.properties.fillOpacity = polygon.properties.fillOpacity || 0.2
+    if (polygon.properties.visible === undefined) {
+      polygon.properties.visible = true
+    }
+  },
+
+  /**
+   * Calculate polygon area
+   * @param {Object} polygon 
+   * @returns {String} polygon area + unit
+   */
+  calcPolygonArea (polygon) {
+    const latlngs = []
+    const coordinates = polygon.geometry.coordinates.length === 1 ? polygon.geometry.coordinates[0] : polygon.geometry.coordinates
+    for (const key in coordinates) {
+      const coordinate = coordinates[key]
+      latlngs.push(GeoUtils.buildLatLong(coordinate[1], coordinate[0]))
+    }
+    const polygonArea = GeoUtils.readableArea(latlngs, store.getters.mapSettings.areaUnit)
+    return polygonArea
+  },
   /**
    * Get polygon color
    * @param {Number} index
@@ -26,13 +63,13 @@ const PolygonUtils = {
     if (polygon.properties.range_type === 'time') {
       const durationObj = GeoUtils.getDurationInSegments(polygon.properties.value, translations)
       const humanizedDuration = `${durationObj.days} ${durationObj.hours} ${durationObj.minutes} ${durationObj.seconds}`
-      label = `${humanizedDuration} ${translations.polygon}`
+      label = humanizedDuration
     } else { // the range_type is distance
       let distance = parseFloat(polygon.properties.value)
       if (distance >= 1000) {
         // when the unit is in meters and very big, we convert it to kilometers
         distance = (distance / 1000).toFixed(1)
-        label = `${distance} ${translations.km} ${translations.polygon}`
+        label = `${distance} ${translations.km}`
       } else {
         label = `${polygon.properties.value} ${translations.meters} ${translations.polygon}`
       }
@@ -41,7 +78,7 @@ const PolygonUtils = {
   },
 
   /**
-   * Merge polygons into one multipolygon
+   * Merge polygons into one MultiPolygon
    * @param {Array} polygons
    * @returns {Object}
    */
@@ -56,7 +93,7 @@ const PolygonUtils = {
     return avoidPolygon
   },
   /**
-   * Merge polygons into one multipolygon
+   * Merge polygons into one MultiPolygon
    * @param {Object} multiPolygon
    * @returns {Array} polygons
    */

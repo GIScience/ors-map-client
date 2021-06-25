@@ -174,6 +174,17 @@ export default {
       "maximum_speed": {
         "label": "Legnagyobb sebesség",
         "description": "Az útvonaltervezés során alkalmazott legnagyobb sebesség"
+      },
+      "weightings": {
+        "label": 'További paraméterek'
+      },
+      "green": {
+        "label": 'Zöld (csak Németországban)',
+        "description": 'A zöldterületeket részesítse előnyben (csak Németországban érhető el)',
+      },
+      "quiet": {
+        "label": 'Csendes (csak Németországban)',
+        "description": 'A csendes területeket részesíti előnyben (csak Németországban érhető el)',
       }
     }
   }

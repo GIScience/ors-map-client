@@ -483,21 +483,12 @@ export default {
     /**
      * Determines if an expansion panel wrapper parameter should be displayed expanded
      *
-     * @param {Object} parameter
+     * @param {Object} filter
      * @returns {boolean}
      */
-    showPanelExpanded (parameter) {
-      let childHasContent = false
-      for (const key in parameter.props) {
-        let hasValue = parameter.props[key].value !== undefined && parameter.props[key].value !== null
-        let valueIsValid = parameter.props[key].value !== parameter.props[key].default
-        // Only consider that a child has a keep ope value if
-        // the value is valid and the component is not a hidden one
-        if (hasValue && valueIsValid && !parameter.props[key].hidden) {
-          childHasContent = true
-          break
-        }
-      }
+    showPanelExpanded (filter) {
+      dependencyService.updateFieldsStatus(filter.props)
+      const childHasContent = dependencyService.getChildrenFilterValue(filter)
       // By returning O, it is kept open and
       // by returning null it is kept collapsed
       return childHasContent ? 0 : null

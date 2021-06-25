@@ -54,7 +54,7 @@ export default {
         description: 'The interval of the isochrones to be calculated'
       },
       options: {
-        label: 'Route options'
+        label: 'Options'
       },
       profile_params: {
         label: 'Profile parameters'
@@ -175,6 +175,17 @@ export default {
         label: 'Maximum speed',
         description: 'The maximum speed that must be applied',
       },
-    }
+      weightings: {
+        label: 'Additional settings'
+      },
+      green: {
+        label: 'Green (Germany only)',
+        description: 'Prefer green areas (only available for Germany)',
+      },
+      quiet: {
+        label: 'Quiet (Germany only)',
+        description: 'Prefer quiet areas (only available for Germany)',
+      }
+    }  
   }
 }

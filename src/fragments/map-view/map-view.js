@@ -49,7 +49,7 @@ import constants from '@/resources/constants'
 import I18nBuilder from '@/i18n/i18n-builder'
 import appConfig from '@/config/app-config'
 import GeoUtils from '@/support/geo-utils'
-import utils from '@/support/utils'
+import Utils from '@/support/utils'
 import theme from '@/config/theme'
 import Place from '@/models/place'
 import 'vue2-leaflet-draw-toolbar'
@@ -357,13 +357,10 @@ export default {
         const translations = this.$t('global.units')
         translations.polygon = this.$t('global.polygon')
         // We must not change the original object
-        const toBeTransformedMapViewData = this.localMapViewData.clone()
+        const mapViewDataToBeTransformed = this.localMapViewData.clone()
 
-        for (const key in toBeTransformedMapViewData.polygons) {
-          const polygon = toBeTransformedMapViewData.polygons[key]
-          polygon.color = polygon.color || PolygonUtils.buildPolygonColor(key)
-          polygon.fillColor = polygon.fillColor || polygon.color
-          polygon.label = polygon.label || PolygonUtils.buildPolygonLabel(polygon, translations)
+        for (const key in mapViewDataToBeTransformed.polygons) {
+          const polygon = mapViewDataToBeTransformed.polygons[key]
 
           // Vue2-Leaflet, the component used to render data on the map, expect the coordinates in the [lat,lon] order,
           // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
@@ -602,7 +599,7 @@ export default {
       handler: function () {
         // When the avoidPolygons prop changes, we copy its value to a
         // local instance so that we can modify it when necessary
-        this.localAvoidPolygons = utils.clone(this.avoidPolygons)
+        this.localAvoidPolygons = Utils.clone(this.avoidPolygons)
         this.loadAvoidPolygons()
       },
       deep: true
@@ -681,9 +678,16 @@ export default {
       }
       this.mapDataViewChangeDebounceTimeoutId = setTimeout(function () {
         // Create a new instance of MapViewData and set all the props into the local instance
-        context.localMapViewData = context.mapViewData.clone()
-        context.loadMapData()
-        context.refreshAltitudeModal()
+        context.localMapViewData = context.mapViewData.clone()        
+
+        let changes = Utils.getObjectsDiff(context.localMapViewData, context.mapViewData)
+        let different = changes.different
+        // Only refresh local data if the change was not only the opacity
+        if (different.length !== 1 || (different.length === 1 && different[0].indexOf('.opacity') > 0)) {
+          context.loadMapData()
+          context.refreshAltitudeModal()
+        }
+        
       }, 500)
     },
     /**
@@ -988,7 +992,7 @@ export default {
     setMapCenter (latlng) {
       if (latlng) {
         let mapSettings = this.$store.getters.mapSettings
-        const previousCenter = utils.clone(mapSettings.mapCenter)
+        const previousCenter = Utils.clone(mapSettings.mapCenter)
 
         if (previousCenter.toString() !== latlng.toString()) {
           this.$emit('mapCenterChanged', latlng)
@@ -2001,7 +2005,7 @@ export default {
     this.zoomLevel = this.initialZoom
 
     // Define a unique identifier to the map component instance
-    this.guid = utils.guid()
+    this.guid = Utils.guid()
 
     // When the box is created, it emit
     // an event to its parent telling the parent its guid

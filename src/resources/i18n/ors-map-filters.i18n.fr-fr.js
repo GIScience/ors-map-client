@@ -53,7 +53,7 @@ export default {
         "description": "L'intervalle des isochrones à calculer"
       },
       "options": {
-        "label": "Options d'itinéraire"
+        "label": "Options"
       },
       "profile_params": {
         "label": "Paramètres de profil"
@@ -61,29 +61,29 @@ export default {
       "restrictions": {
         "label": "Restrictions"
       },
-      axleload: {
-        label: 'Charge de l\'essieu',
-        description: 'La charge maximale par essieu en tonnes'
+      "axleload": {
+        "label": 'Charge de l\'essieu',
+        "description": 'La charge maximale par essieu en tonnes'
       },
-      height: {
-        label: 'Hauteur',
-        description: 'La hauteur maximale en mètres'
+      "height": {
+        "label": 'Hauteur',
+        "description": 'La hauteur maximale en mètres'
       },
-      length: {
-        label: 'Longueur',
-        description: 'La longueur maximale en mètres'
+      "length": {
+        "label": 'Longueur',
+        "description": 'La longueur maximale en mètres'
       },
-      weight: {
-        label: 'Poids',
-        description: 'Le poids maximum en tonnes'
+      "weight": {
+        "label": 'Poids',
+        "description": 'Le poids maximum en tonnes'
       },
-      width: {
-        label: 'Largeur',
-        description: 'La largeur maximale en mètres'
+      "width": {
+        "label": 'Largeur',
+        "description": 'La largeur maximale en mètres'
       },
-      hazmat: {
-        label: 'Produits dangereux',
-        description: 'Transport de produits dangereuses'
+      "hazmat": {
+        "label": 'Produits dangereux',
+        "description": 'Transport de produits dangereuses'
       },
       "maximum_incline": {
         "label": "Inclinaison maximale",
@@ -174,6 +174,17 @@ export default {
         "label": 'Vitesse maximum',
         "description": 'Une limite de vitesse maximale qui doit être appliquée',
       },
+      "weightings": {
+        "label": 'Paramètres additionnels'
+      },
+      "green": {
+        "label": 'Vert (uniquement en Allemagne)',
+        "description": 'Préférez les espaces verts (disponible uniquement pour l\'Allemagne)',
+      },
+      "quiet": {
+        "label": 'Calme (Allemagne uniquement)',
+        "description": 'Préfère les zones calmes (uniquement disponible pour l\'Allemagne)',
+      }
     }
   }
 }

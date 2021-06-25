@@ -301,9 +301,15 @@ const filters = [
         validWhen: [
           {
             ref: 'profile',
-            value: ['driving-hgv', 'wheelchair']
+            value: ['driving-hgv', 'wheelchair', 'foot-walking', 'foot-hiking']
           }
-        ],   
+        ],  
+        visibleWhen: [
+          {
+            ref: 'profile',
+            value: ['driving-hgv', 'wheelchair', 'foot-walking', 'foot-hiking']
+          }
+        ],  
         props: [
           {
             name: 'restrictions',
@@ -311,6 +317,18 @@ const filters = [
             valueAsObject: true,
             availableOnModes: [constants.modes.roundTrip, constants.modes.directions],
             useInServices: [constants.services.directions, constants.services.roundTrip],
+            validWhen: [
+              {
+                ref: 'profile',
+                value: ['driving-hgv', 'wheelchair']
+              }
+            ],  
+            visibleWhen: [
+              {
+                ref: 'profile',
+                value: ['driving-hgv', 'wheelchair']
+              }
+            ], 
             props: [
               {
                 name: 'axleload',
@@ -514,8 +532,50 @@ const filters = [
                 value: 'grade1',                
                 itemValue: 'value',
                 items: gradesList
-              }
+              },
             ]
+          },
+          {
+            name: 'weightings',
+            type: constants.filterTypes.wrapper,
+            valueAsObject: true,
+            hidden: true,
+            availableOnModes: [constants.modes.directions],
+            useInServices: [constants.services.directions],            
+            validWhen: [ { ref: 'profile', value: 'foot-*' }], 
+            visibleWhen: [ { ref: 'profile', value: 'foot-*' } ], 
+            props: [
+              {
+                name: 'green',
+                type: constants.filterTypes.steps,
+                min: 0,
+                max: 1,
+                step: 0.1,                    
+                default: null,
+                value: 0, 
+                validWhen: [
+                  {
+                    ref: 'self',
+                    min: 0.1
+                  }
+                ], 
+              },
+              {
+                name: 'quiet',
+                type: constants.filterTypes.steps,
+                min: 0,
+                max: 1,
+                step: 0.1,                    
+                default: null,
+                value: 0, 
+                validWhen: [
+                  {
+                    ref: 'self',
+                    min: 0.1
+                  }
+                ], 
+              }
+            ]                               
           }
         ]
       },

@@ -21,6 +21,7 @@ export default {
     "elevation": "Élévation",
     "profile": "Profil",
     "options": "Options",
+    "parameters": 'Paramètres',
     "custom": "Personnalisé",
     "customOverlayer": "Superposition personnalisée",
     "rawRouting": "Routage brut",
@@ -85,7 +86,8 @@ export default {
         "rawCoordinate": "Brutes lon. et lat. coordonnées",
         "notAvailable": "Pas disponible",
         "postalcode": 'Code postal',
-        "undefined": "Non défini"
+        "undefined": "Non défini",
+        ocean: 'Océan'
     }
   }
 }

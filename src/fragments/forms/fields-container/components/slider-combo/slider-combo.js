@@ -43,12 +43,6 @@ export default {
     filterMax () {
       let max = this.filter.max
       return max
-    },
-    sliderValue () {
-      if (this.localModel !== null && this.localModel !== undefined) {
-        return this.localModel
-      }
-      return ''
     }
   },
   methods: {

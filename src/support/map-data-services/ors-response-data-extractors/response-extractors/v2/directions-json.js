@@ -3,6 +3,7 @@ import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import Place from '@/models/place'
 import store from '@/store/store'
+import Utils from '@/support/utils'
 
 /**
  * DirectionsJSONBuilder Map data Builder class
@@ -23,13 +24,20 @@ class DirectionsJSONBuilder {
     return new Promise((resolve) => {
       mapViewData.places = context.buildPlaces()
       context.setRoutesSummaryData()
-      mapViewData.routes = context.responseData.features
+      mapViewData.rawData = Utils.clone(context.responseData)
+      mapViewData.routes = context.buildRoutes()
       mapViewData.isRouteData = mapViewData.hasRoutes()
-      mapViewData.rawData = context.responseData
       mapViewData.timestamp = context.responseData.metadata.timestamp
       mapViewData.mode = mapViewData.places.length > 1 ? constants.modes.directions : constants.modes.roundTrip
       resolve(mapViewData)
     })
+  }
+
+  buildRoutes = () => {
+    for (const key in this.responseData.features) {
+      this.responseData.features[key].properties.opacity = 0.9 
+    }
+    return this.responseData.features
   }
 
   /**

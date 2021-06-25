@@ -22,6 +22,7 @@ export default {
     elevation: 'Höhe',
     profile: 'Profil',
     options: 'Optionen',
+    parameters: 'Parameter',
     custom: 'Benutzerdefiniert',
     customOverlayer: 'Benutzerdefinierte Überschicht',
     rawRouting: 'Rohes Routing',
@@ -86,7 +87,8 @@ export default {
       rawCoordinate: 'Long,Lat Koordinaten',
       notAvailable: 'Nicht verfügbar',
       postalcode: 'Postleitzahl',
-      'undefined': 'Nicht definiert'
+      'undefined': 'Nicht definiert',
+      ocean: 'Ozean'
     }
   }
 }

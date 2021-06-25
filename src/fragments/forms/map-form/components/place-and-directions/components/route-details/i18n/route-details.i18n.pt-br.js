@@ -1,7 +1,7 @@
 
 export default {
   routeDetails: {
-    routeSummary: 'Resumo da rota',
+    routeDetails: 'Detalhes da rota',
     warnings: 'Avisos',
     routes: 'Rotas',
     route: 'Rota',
@@ -18,6 +18,7 @@ export default {
       2: 'Há pedágios ao longo da rota',
       3: 'Há um ou mais segmentos que foram traçados como uma linha reta ao longo do percurso. Durações e acessibilidade podem não estar corretas',
       4: 'Pelo menos uma informação extra solicitada não está disponível',
-    }
+    },
+    routeOpacity: 'Route opacity'
   }
 }

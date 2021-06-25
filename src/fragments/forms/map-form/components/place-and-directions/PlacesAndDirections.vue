@@ -55,7 +55,7 @@
       <round-trip v-if="$store.getters.mode === constants.modes.roundTrip" @changed="roundTripFilterChanged"></round-trip>
       <box v-if="$store.getters.mode === constants.modes.directions" background="white" no-shadow>
         <div slot="header">
-          <h3>{{$t('global.options')}}</h3>
+          <h3>{{$t('global.parameters')}}</h3>
         </div>
         <fields-container @fieldUpdated="filterUpdated" :parameters="OrsMapFiltersAccessor"></fields-container>
         <br/>

@@ -1,7 +1,7 @@
 
 export default {
   routeDetails: {
-    routeSummary: 'Route summary',
+    routeDetails: 'Route details',
     warnings: 'Warnings',
     routes: 'Routes',
     route: 'Route',
@@ -18,6 +18,7 @@ export default {
       2: 'There are tollways along the route',
       3: 'There are skipped segments along the route. Durations and accessibility may not be correct',
       4: 'At least one extra info requested but it is not available',
-    }
+    },
+    routeOpacity: 'Route opacity'
   }
 }

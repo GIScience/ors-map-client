@@ -1,3 +1,4 @@
+import PolygonUtils from '@/support/polygon-utils'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import Place from '@/models/place'
@@ -27,6 +28,7 @@ class IsochronesBuilder {
       mapViewData.rawData = context.responseData
       mapViewData.isRouteData = false
       mapViewData.mode = constants.modes.isochrones
+      
       resolve(mapViewData)
     })
   }
@@ -62,6 +64,9 @@ class IsochronesBuilder {
       this.responseData.features.forEach((feature, index) => {
         const polygon = { geometry: feature.geometry, properties: feature.properties }
         polygon.properties.range_type = this.responseData.metadata.query.range_type
+
+        PolygonUtils.preparePolygonForView(polygon, this.translations, index)
+
         polygons.push(polygon)
       })
     }

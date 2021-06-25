@@ -100,9 +100,9 @@ export default {
       const shortenerRequestUrl = `${bitlyBaseApiUrl}?login=${login}&apiKey=${apiKey}&longUrl=${longUrl}`
 
       // Run the request and get the short url
-      let httpclient = new HttpClient({getVueInstance: () => { return this }})
+      let httpClient = new HttpClient({getVueInstance: () => { return this }})
       let context = this
-      httpclient.http.get(shortenerRequestUrl).then((response) => {
+      httpClient.http.get(shortenerRequestUrl).then((response) => {
         if (response.data.status_code === 200) {
           context.shareUrl = response.data.data.url
           context.isShortened = true

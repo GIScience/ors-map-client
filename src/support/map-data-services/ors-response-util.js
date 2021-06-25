@@ -7,7 +7,7 @@ import lodash from 'lodash'
  * @returns {*}
  */
 const buildSinglePlaceResponse = (place) => {
-  const responseLikeLData = { features: [{ properties: { label: place.placeName, id: place.placeId }, geometry: { coordinates: place.coordinates }, inputIndex: 0 }] }
+  const responseLikeLData = { features: [{ properties: { label: place.placeName, id: place.placeId }, geometry: { coordinates: place.coordinates } }] }
   return responseLikeLData
 }
 

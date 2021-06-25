@@ -22,7 +22,6 @@ export default {
   props: {
     options: {
       type: Object,
-      Type: Array,
       default: function () {
         return {}
       }
@@ -78,10 +77,12 @@ export default {
       handler: function (newVal, oldVal) {
         this.active = false
         let context = this
-        setTimeout(() => {
-          context.active = true
-          context.updatePopup()
-        }, 100)
+        if (JSON.stringify(newVal.geometry.coordinates) !== JSON.stringify(oldVal.geometry.coordinates)) {
+          setTimeout(() => {
+            context.active = true
+            context.updatePopup()
+          }, 100)
+        }
       },
       deep: true
     }
@@ -151,6 +152,14 @@ export default {
     }
   },
   computed: {
+    routeOpacity () {
+      let opacity = lodash.get(this.route, 'properties.opacity')
+      if (opacity) {
+        return opacity
+      } else {
+        return 0.2
+      }
+    },
     /**
      * Get the latlngs coordinate array
      * from the latLngs prop or from the route

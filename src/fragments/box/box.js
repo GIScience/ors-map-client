@@ -303,16 +303,18 @@ export default {
      * @return string | false
      */
     topBorderColor () {
-      // if not color must be applied
-      if (this.noTopBorder) {
-        if (this.noBorder) {
-          return false
-        } else {
-          return '#cbced1'
-        }
+      if (this.noBorder && this.noTopBorder) {
+        return false
       }
+      // if no color must be applied
+      if (this.noTopBorder) {
+        return {
+          color: '#cbced1',
+          thickness: '1px'
+        }
+      } 
       // the initial color the the defined as primary at @/common/theme.js
-      var color = theme.primary
+      var color = theme.primary || '#cbced1'
 
       // if the topBorderPalette prop is defined, use it to define the color
       if (this.topBorderPalette) {

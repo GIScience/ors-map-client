@@ -92,13 +92,14 @@ const geoUtils = {
         let buildAsRoute = isRoute && places.length > 1
 
         // Build the marker
-        const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName, place.index, buildAsRoute)
+        const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName, key, buildAsRoute)
         const marker = { position: { lng: place.lng, lat: place.lat}, icon: markerIcon}
 
         // If the way point array has the third parameter, it is its label
         marker.label = place.placeName || `${place.lng},${place.lat}`
-        if (!isNaN(place.index) && isRoute) {
-          marker.label = `(${place.index}) ${marker.label}`
+        if (isRoute) {
+          let markerDisplayIndex = Number(key) + 1
+          marker.label = `(${markerDisplayIndex}) ${marker.label}`
         }
 
         // If the way point array has the fourth parameter, it is its way point json data
@@ -199,8 +200,8 @@ const geoUtils = {
    */
   buildMarkerIcon: (color, index, isRoute) => {
     let propsData = { color: color }
-    if (isRoute && index) {
-      propsData.markerNumber = index
+    if (isRoute && index !== null) {
+      propsData.markerNumber = Number(index) + 1
     }
     var htmlMarkerClass = Vue.extend(HtmlMarker)
     var htmlIconInstance = new htmlMarkerClass({ propsData })

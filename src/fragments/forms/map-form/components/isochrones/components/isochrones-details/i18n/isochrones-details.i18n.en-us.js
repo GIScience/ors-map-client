@@ -2,6 +2,9 @@
 export default {
   isochronesDetails: {
     polygons: 'Polygons',
-    center: 'Center'
+    center: 'Center',
+    reachCenters: 'Reach centers',
+    toggleVisibility: 'Toggle visibility',
+    opacity: 'Opacity'
   }
 }

@@ -36,7 +36,7 @@ const RouteUtils = {
       if (placeName === 'null') {
         placeName = ''
       }
-      places.push(new Place(lngLat[0], lngLat[1], placeName, { resolve: false, inputIndex: counter }))
+      places.push(new Place(lngLat[0], lngLat[1], placeName, { resolve: false }))
       counter++
     }
     return places

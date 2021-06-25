@@ -46,7 +46,7 @@ export default {
         description: 'Intervall in dem Isochronen erzeugt werden sollen'
       },
       options: {
-        label: 'Routen Einstellungen'
+        label: 'Einstellungen'
       },
       profile_params: {
         label: 'Profil Eigenschaften'
@@ -167,6 +167,17 @@ export default {
         label: 'Max Geschwindigkeit',
         description: 'Eine maximale Geschwindigkeitsbegrenzung, die angewendet werden muss',
       },
+      weightings: {
+        label: 'Zusätzliche Einstellungen'
+      },
+      green: {
+        label: 'Grün (nur Deutschland)',
+        description: 'Grünflächen bevorzugen (nur für Deutschland verfügbar)',
+      },
+      quiet: {
+        label: 'Ruhig',
+        description: 'Ruhige Gebiete bevorzugen (nur für Deutschland verfügbar)',
+      }
     }
   }
 }

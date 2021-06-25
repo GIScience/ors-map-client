@@ -2,6 +2,9 @@
 export default {
   isochronesDetails: {
     polygons: 'Polygone',
-    center: 'Zentrum'
+    center: 'Zentrum',
+    reachCenters: 'Zentren erreichen',
+    toggleVisibility: 'Sichtbarkeit umschalten',
+    opacity: 'Opazität'
   }
 }

@@ -108,7 +108,9 @@ const setFilterValue = (filterName, filterValue, OrsMapFiltersAccessor = null) =
     } else if (filter.type === constants.filterTypes.wrapper) {
       for (const key in filter.props) {
         const propName = filter.props[key].name
-        setFilterValue(propName, filterValue[propName])
+        if (filterValue[propName]) {
+          setFilterValue(propName, filterValue[propName])
+        }
       }
     } else {
       // If the filter value has a multiplier that must be used when extracting the value

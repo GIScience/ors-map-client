@@ -38,18 +38,22 @@
 
       <!--render isochrones polygons -->
       <template v-if="polygons">
-        <l-polygon v-for="(polygon, index) in polygons"
-          :key="index+'-polygon'"
-          @click="isochroneClicked(index, polygon, $event)"
-          :lat-lngs="polygon.latlngs"
-          :fillColor="polygon.fillColor"
-          :color="polygon.color">
-          <l-popup v-if="polygon.label">
-            <div :ref="'isochronePopupContainer' + index" >
-              {{polygon.label}}
-            </div>
-          </l-popup>
-        </l-polygon>
+        <template v-for="(polygon, index) in polygons">
+          <l-polygon v-if="polygon.properties.visible"
+            :key="index+'-polygon'"
+            @click="isochroneClicked(index, polygon, $event)"
+            :lat-lngs="polygon.latlngs"
+            :opacity="polygon.properties.opacity"
+            :fillOpacity="polygon.properties.fillOpacity"
+            :fillColor="polygon.properties.fillColor"
+            :color="polygon.properties.color">
+            <l-popup v-if="polygon.properties.label">
+              <div :ref="'isochronePopupContainer' + index" >
+                {{polygon.properties.label}} {{$t('mapView.polygon')}} - {{polygon.properties.area}} 
+              </div>
+            </l-popup>
+          </l-polygon>         
+        </template>
       </template>
 
       <l-circle-marker v-if="circleMarker" :weight="2" color="#1D1D1E" :fill="true" fillColor="#fff" :fillOpacity="0.9"
@@ -74,7 +78,7 @@
           :lat-lngs="alternativeRoute.polyline" >
         </ors-l-polyline>
       </template>
-       <template v-if="displayActiveRouteData">
+      <template v-if="displayActiveRouteData">
         <ors-l-polyline :draggable="isPolylineDraggable"
           @followPolyline="followPolyline"
           @rightClicked="mapRightClick"
@@ -119,6 +123,7 @@
 
       <!-- highlight extra info polyline -->
       <extra-info-highlight v-if="extraInfo" @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" :extra-info="extraInfo" :polyline-data="activeRouteData.geometry.coordinates"/>
+      
       <l-height-graph v-if="isAltitudeModalOpen" @closed="closeAltitudeInfo" lg8 sm11 :data="localMapViewDataRawData" :options="lHeightGraphOptions"/>
       <my-location v-if="supportsMyLocationBtn" class="my-location-btn" :active="myLocationActive" @updateLocation="updateMyLocation"></my-location>
       <img class="over-brand" v-if="showBrand" src="@/assets/img/heigit-and-hd-uni.png" :alt="$t('global.brand')" :title="$t('global.brand')">

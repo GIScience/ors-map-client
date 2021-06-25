@@ -21,6 +21,7 @@ export default {
     "elevation": "Magasság",
     "profile": "Profil",
     "options": "Beállítások",
+    "parameters": 'paraméterek',
     "custom": "Egyedi",
     "customOverlayer": "Egyedi fedőréteg",
     "rawRouting": "Nyers útvonaltervezés",
@@ -85,7 +86,8 @@ export default {
       "rawCoordinate": "Nyers hossz., szél. koordináták",
       "notAvailable": "Elérhetetlen",
       "postalcode": "Irányítószám",
-      "undefined": "Meghatározatlan"
+      "undefined": "Meghatározatlan",
+      "ocean": "Óceán"
     }
   }
 }

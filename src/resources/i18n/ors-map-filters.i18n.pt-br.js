@@ -54,7 +54,7 @@ export default {
         description: 'O intervalo a ser usado no cáculo de isócronos'
       },
       options: {
-        label: 'Opções da rota'
+        label: 'Opções'
       },
       profile_params: {
         label: 'Parâmetros de perfil'
@@ -175,6 +175,17 @@ export default {
         label: 'Velocidade máxima',
         description: 'Uma velocidade máxima que deve ser aplicada',
       },
+      weightings: {
+        label: 'Parâmetros adicionais'
+      },
+      green: {
+        label: 'Verde (somente na Alemanha)',
+        description: 'Prefira áreas verdes (disponível apenas para Alemanha)',
+      },
+      quiet: {
+        label: 'Silencioso (apenas Alemanha)',
+        description: 'Prefere áreas tranquilas (disponível apenas para Alemanha)',
+      }
     }
   }
 }

@@ -353,12 +353,12 @@ export default {
       this.previousMapViewDataTimeStamp = this.mapViewData.timestamp
 
       // The mapViewData is watched by the map
-      // component and the content re-rendered
+      // component and its content re-rendered
       // when it changes. So, by changing it here
       // the map component is refreshed
       this.mapViewData = mapViewData
 
-      // once the mapViewData is changed, the
+      // Once the mapViewData is changed, the
       // possible refreshing search event
       // cycle is concluded
       this.refreshingSearch = false
@@ -629,6 +629,24 @@ export default {
     })
     this.eventBus.$on('loadAvoidPolygons', (avoidPolygons) => {
       context.localAvoidPolygons = avoidPolygons
+    })
+
+    this.eventBus.$on('togglePolygonVisibility', (polygonIndex) => {
+      if (context.mapViewData.polygons[polygonIndex]) {
+        context.mapViewData.polygons[polygonIndex].properties.visible = !context.mapViewData.polygons[polygonIndex].properties.visible
+      }
+    })
+
+    this.eventBus.$on('setPolygonOpacity', (data) => {
+      if (context.mapViewData.polygons[data.polygonIndex]) {
+        context.mapViewData.polygons[data.polygonIndex].properties.fillOpacity = data.fillOpacity
+      }
+    })
+
+    this.eventBus.$on('setRouteOpacity', (data) => {
+      if (context.mapViewData.routes[data.routeIndex]) {
+        context.mapViewData.routes[data.routeIndex].properties.opacity = data.opacity
+      }
     })
 
     // When the touch move event occurs

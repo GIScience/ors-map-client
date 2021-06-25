@@ -5,6 +5,7 @@ import MapViewData from '@/models/map-view-data'
 import Steps from './components/steps/Steps'
 import constants from '@/resources/constants'
 import geoUtils from '@/support/geo-utils'
+import MapViewExporter from '@/support/map-view-exporter'
 
 export default {
   props: {
@@ -15,7 +16,7 @@ export default {
   },
   data () {
     return {
-      localMapViewData: new MapViewData() // we use a local copy of the mapViewData to be able to modify it
+      localMapViewData: new MapViewData() // We use a local copy of the mapViewData in order to be able to modify it
     }
   },
   created () {
@@ -81,9 +82,23 @@ export default {
     }
   },
   methods: {
+    /**
+     * Prepare and print route instructions
+     */
+    prepareAndPrintInstructions() {
+      let mapView = document.getElementById('map-view')
+      let route = this.parsedRoutes[this.$store.getters.activeRouteIndex]
+      let places = this.mapViewData.places
+      MapViewExporter.printRouteInstructions(route, places, mapView, this.$t('routeDetails'))
+    },
+
     formatElevation (elevation) {
       const value = Math.abs(elevation).toFixed(1)
       return value
+    },
+    routeOpacityChanged (routeIndex) {      
+      let opacity = this.localMapViewData.routes[routeIndex].properties.opacity
+      this.eventBus.$emit('setRouteOpacity', {routeIndex, opacity })
     },
     /**
      * Get the route summary with humanized

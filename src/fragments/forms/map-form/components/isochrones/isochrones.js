@@ -189,7 +189,7 @@ export default {
     filterUpdated (data) {
       if (data.value !== undefined) {
         if (data.parentIndex !== undefined) {
-          const parent = OrsFilterUtil.getFilterByAcestryAndItemIndex(data.parentIndex, data.index)
+          const parent = OrsFilterUtil.getFilterByAncestryAndItemIndex(data.parentIndex, data.index)
           parent.value = data.value
         } else {
           this.OrsMapFiltersAccessor[data.index].value = data.value
@@ -230,6 +230,8 @@ export default {
           // Calculate the route
           Isochrones(places).then(data => {
             data.options.translations = context.$t('global.units')
+            data.options.translations.polygon = this.$t('global.polygon')
+
             data = context.$root.appHooks.run('beforeBuildIsochronesMapViewData', data)
             if (data) {
               MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {

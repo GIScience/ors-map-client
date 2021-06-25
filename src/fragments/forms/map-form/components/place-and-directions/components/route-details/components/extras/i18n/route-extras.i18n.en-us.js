@@ -18,6 +18,7 @@ export default {
     osmid: 'OSM ID',
     countryinfo: 'Country info',
     green: 'Green',
-    noise: 'Noise'    
+    noise: 'Noise',
+    opacity: 'Opacity'
   }
 }

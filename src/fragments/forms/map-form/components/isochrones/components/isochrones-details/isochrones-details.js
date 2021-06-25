@@ -3,10 +3,11 @@ import Download from '@/fragments/forms/map-form/components/download/Download'
 import PolygonUtils from '@/support/polygon-utils'
 import MapViewData from '@/models/map-view-data'
 import GeoUtils from '@/support/geo-utils'
-import tinycolor2 from 'tinycolor2'
+import tinyColor2 from 'tinycolor2'
 
 export default {
   data: () => ({
+    localMapViewData: null
   }),
   props: {
     mapViewData: {
@@ -17,6 +18,9 @@ export default {
   components: {
     Share,
     Download
+  },
+  created() {
+    this.localMapViewData = this.mapViewData.clone()
   },
   methods: {
     calcArea (polygon) {
@@ -30,29 +34,34 @@ export default {
       return polygonArea
     },
     polygonAreaTextColor (backgroundColor) {
-      const foreGroundColor = tinycolor2(backgroundColor).isLight() ? 'black' : 'white'
+      const foreGroundColor = tinyColor2(backgroundColor).isLight() ? 'black' : 'white'
       return foreGroundColor
     },
     hasAsCenter (place, polygon) {
       if (polygon.properties.center && place.coordinates && polygon.properties.center.toString() === place.coordinates.toString()) {
         return true
       }
+    },
+    toggleVisibility (polygonIndex) {
+      this.eventBus.$emit('togglePolygonVisibility', polygonIndex)
+    },
+
+    polygonOpacityChanged (polygonIndex) {      
+      let fillOpacity = this.localMapViewData.polygons[polygonIndex].properties.fillOpacity
+      this.eventBus.$emit('setPolygonOpacity', {polygonIndex, fillOpacity })
     }
   },
-  computed: {
-    polygons () {
-      const polygons = []
-      if (this.mapViewData) {
-        const translations = this.$t('global.units')
-        translations.polygon = this.$t('global.polygon')
-        for (const key in this.mapViewData.polygons) {
-          const polygon = this.mapViewData.polygons[key]
-          polygon.color = PolygonUtils.buildPolygonColor(key)
-          polygon.label = PolygonUtils.buildPolygonLabel(polygon, translations)
-          polygons.push(polygon)
-        }
-      }
-      return polygons
-    }
+  watch: {
+    /**
+     * Every time the response data changes
+     * the map builder is reset and the
+     * map data is reloaded
+     */
+    mapViewData: {
+      handler: function () {
+        this.localMapViewData = this.mapViewData.clone()
+      },
+      deep: true
+    },
   }
 }

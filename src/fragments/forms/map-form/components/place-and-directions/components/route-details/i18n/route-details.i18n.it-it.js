@@ -1,6 +1,6 @@
 export default {
   routeDetails: {
-    'routeSummary': 'Sommario itinerario',
+    'routeDetails': 'Dettagli percorso',
     'warnings': 'Allerta',
     'routes': 'Itinerari',
     'route': 'Itinerario',
@@ -17,6 +17,7 @@ export default {
       '2': 'Ci sono delle strade a pedaggio lungo il percorso',
       '3': 'Questo itinerario si basa su vie dirette. Durata e restrizioni sulle strade potrebbero non essere corrette.',
       '4': 'Almeno un\'opzione extra richiesta non è disponibile.'
-    }
+    },
+    "routeOpacity": 'Opacità del percorso'
   }
 }

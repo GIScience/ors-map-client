@@ -96,7 +96,7 @@ export default {
       this.eventBus.$on('markerClicked', (marker) => {
         const lat = marker.data.geometry.coordinates[1]
         const lng = marker.data.geometry.coordinates[0]
-        const placeOptions = { resolve: false, inputIndex: null, id: marker.data.properties.id }
+        const placeOptions = { resolve: false, id: marker.data.properties.id }
         const place = new Place(lng, lat, marker.label, placeOptions)
         this.selectPlace(place)
       })

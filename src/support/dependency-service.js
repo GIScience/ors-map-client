@@ -22,7 +22,7 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {*} service
  * @returns {*} filterValue
  */
- const getFilterValue = (filter, service) => {
+ const getFilterValue = (filter) => {
   let filterValue = null
   const filterAvailable = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
   const filterClone = getFilterWithValueUpdated(filter)
@@ -30,7 +30,7 @@ const updateFieldsStatus = (scopedFilters) => {
   if (filterAvailable && isAvailable(filterClone)) {
     // Get the filter with value updated considering dependencies and filter rules
     if (filterClone.type === constants.filterTypes.wrapper && filterClone.props) {
-      filterValue = getChildrenFilterValue(filterClone, service)
+      filterValue = getChildrenFilterValue(filterClone)
       filterValue = filterClone.valueAsObject ? filterValue : JSON.stringify(filterValue)
       // Apply filter conditions like min, multiplier etc
       filterValue = applyFilterValueConditions(filterClone, filterValue)
@@ -70,14 +70,14 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {*} service
  * @returns {*}
  */
- const getChildrenFilterValue = (filter, service) => {
+ const getChildrenFilterValue = (filter) => {
   var childFilter = {}
   for (let propKey in filter.props) {
     const prop = filter.props[propKey]
     // Filter may have dependency and only be available
     // if other filters have a certain value.
     if (isAvailable(prop)) {
-      const childValue = getFilterValue(prop, service)
+      const childValue = getFilterValue(prop)
       if (childValue !== undefined && childValue !== null) {
         childFilter[prop.name] = childValue
       }
@@ -512,7 +512,7 @@ const getParsedValue = (value, defaultValue = null) => {
   } else if (value === null) {
     value = undefined
   } else {
-    value = isNaN(value) ? value : parseInt(value)
+    value = isNaN(value) ? value : parseFloat(value)
   }
   return value
 }
@@ -578,6 +578,7 @@ const dependencyService = {
   updateFieldsStatus,
   setAvailability,
   getFilterValue,
+  getChildrenFilterValue,
   isRoundTripFilterActive,
   getFilterWithValueUpdated,
   isAvailable,

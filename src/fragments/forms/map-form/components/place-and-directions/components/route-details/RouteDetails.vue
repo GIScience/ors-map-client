@@ -1,10 +1,13 @@
 <template>
 <div>
-  <box background="white" v-if="hasRoutes" custom-class="expansion-box" noShadow>
+  <box background="white" v-if="hasRoutes" custom-class="expansion-box" no-shadow>
     <div slot="header">
       <download :map-view-data="mapViewData" ></download>
       <share></share>
-      <h3>{{$t('routeDetails.routeSummary')}}</h3>
+      <v-btn style="float:right; margin-top:0" small icon @click="prepareAndPrintInstructions()" :title="$t('routeDetails.selectRoute')">
+        <v-icon color="dark" >print</v-icon>
+      </v-btn>
+      <h3>{{$t('routeDetails.routeDetails')}}</h3>
     </div>
     <v-expansion-panel slot="content" class="no-shadow" v-if="hasRoutes" :value="startedPanelExtended">
       <v-expansion-panel-content style="background: transparent;" class="routes-header" :key="routeIndex" v-for="(route, routeIndex) in parsedRoutes">
@@ -17,7 +20,7 @@
         </div>
         <v-list>
           <v-divider></v-divider>
-          <v-list dense>
+          <v-list dense class="route-details">
             <div style="padding:0 0 0 10px">
               <div>{{$t('global.distance')}}:  <b>{{route.summary.distance}} </b></div>
               <div v-if="route.summary.duration" >{{$t('global.duration')}}:  <b>{{route.summary.duration}} </b></div>
@@ -26,7 +29,7 @@
               <h4 >{{$t('routeDetails.warnings')}}:</h4>
               <v-alert :key="warning.code" v-for="warning in route.properties.warnings" :value="getWarningTranslated(warning)"  type="warning" style="color:black" >{{ getWarningTranslated(warning) }}</v-alert>
             </div>
-            <div v-if="route.properties.segments.length > 1 && routeIndex === $store.getters.activeRouteIndex">
+            <div v-if="route.properties.segments.length > 1 && routeIndex === $store.getters.activeRouteIndex" class="route-container">
               <v-expansion-panel class="no-shadow" v-if="hasRoutes" :value="route.properties.segments.length === 1 ? 0 : null">
                 <v-expansion-panel-content class="route-panel"  v-for="(segment, segmentIndex) in route.properties.segments" :key="segmentIndex">
                   <div slot="header"><h4 >{{$t('routeDetails.segment')}} {{segmentIndex + 1}}</h4></div>
@@ -59,12 +62,22 @@
                   </v-list>
                 </v-expansion-panel-content>
               </v-expansion-panel>
-              <route-extras :route="route"></route-extras>
+              <route-extras :route="route"></route-extras>              
+              <div style="padding-left: 5px; padding-right:30px; padding-top:10px">
+                <b>{{$t('routeDetails.routeOpacity')}}</b>
+                <v-slider class="route-opacity-slider" :min="0" :max="1" 
+                  append-icon="opacity"
+                  :thumb-size="24"
+                  thumb-label="always"
+                  v-model="route.properties.opacity" :title="$t('routeDetails.routeOpacity')"
+                  @change="routeOpacityChanged(routeIndex)" :step="0.1">
+                </v-slider>
+              </div>
             </div>
-            <div v-else-if="routeIndex === $store.getters.activeRouteIndex">
+            <div v-else-if="routeIndex === $store.getters.activeRouteIndex" class="route-container">
               <div style="padding:0 0 0 5px">
                 <v-expansion-panel class="no-shadow" v-if="hasRoutes" :value="null">
-                  <v-expansion-panel-content style="background: transparent;" >
+                  <v-expansion-panel-content class="route-panel" style="background: transparent;" >
                     <div slot="header"><h4 >{{$t('routeDetails.instructions')}}</h4></div>
                     <v-list class="instructions-scroll">
                       <v-divider></v-divider>
@@ -75,6 +88,15 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <route-extras :route="route"></route-extras>
+                <div style="padding-left: 5px; padding-right:30px; padding-top:10px">
+                  <v-slider class="route-opacity-slider" :min="0" :max="1" 
+                    append-icon="opacity"
+                    :thumb-size="24"
+                    thumb-label="always"
+                    v-model="route.properties.opacity" :title="$t('routeDetails.routeOpacity')"
+                    @change="routeOpacityChanged(routeIndex)" :step="0.1">
+                  </v-slider>
+                </div>
               </div>
             </div>
           </v-list>

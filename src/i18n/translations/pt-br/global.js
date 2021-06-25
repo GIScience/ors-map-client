@@ -21,6 +21,7 @@ export default {
     elevation: 'Elevação',
     profile: 'Perfil',
     options: 'Opções',
+    parameters: 'Parâmetros',
     custom: "Personalizado",
     customOverlayer: 'Camada adicional personalizada',
     rawRouting: 'Roteamento bruto',    
@@ -85,7 +86,8 @@ export default {
       rawCoordinate: 'Coordenadas simples lng,lat',
       notAvailable: 'Não disponível',
       postalcode: 'Código postal',
-      'undefined': 'Não definido'
+      'undefined': 'Não definido',
+      ocean: 'Oceano'
     }
   }
 }

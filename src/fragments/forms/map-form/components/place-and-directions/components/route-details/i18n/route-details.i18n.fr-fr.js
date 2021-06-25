@@ -1,7 +1,7 @@
 
 export default {
   "routeDetails": {
-    "routeSummary": "Résumé de l'itinéraire",
+    "routeDetails": "Détails de l'itinéraire",
     "warnings": "Mises en garde",
     "routes": "Itinéraires",
     "route": "Itinéraire",
@@ -18,6 +18,7 @@ export default {
         "2": "Il y a des péages le long de l'itinéraire",
         "3": "Il y a des segments ignorés le long de l'itinéraire. Les durées et l'accessibilité peuvent ne pas être correctes",
         "4": "Au moins une information supplémentaire demandée mais non disponible"
-    }
+    },
+    "routeOpacity": 'Opacité de l\'itinéraire'
   }
 }

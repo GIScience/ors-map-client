@@ -321,7 +321,7 @@ const orsParamsParser = {
           DependencyService.updateFieldsStatus(filter.props)
         }
         // Build the value for the current filter (if it has child filters, they are gonna be built too)
-        const filterValue = DependencyService.getFilterValue(filter, service)
+        const filterValue = DependencyService.getFilterValue(filter)
 
         // If the value of the filter is valid, add in the intoArgs array
         if (orsParamsParser.isFilterValueValid(filter, filterValue)) {

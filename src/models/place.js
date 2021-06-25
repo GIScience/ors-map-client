@@ -27,14 +27,8 @@ class Place {
     // place properties
     this.properties = options.properties || {} // object properties, including layer
 
-    // The index of the input associated to the Place object
-    this.inputIndex = options.inputIndex
-
     // The id of the place returned by the API
     this.placeId = options.placeId
-
-    // The index of the Place
-    this.index = null
 
     // The if a route should be routed directly to this Place
     this.direct = options.direct || false
@@ -147,9 +141,7 @@ class Place {
       'suggestions',
       'coordinates',
       'properties',
-      'inputIndex',
       'placeId',
-      'index',
       'direct',
       'isPoi'
     ]
@@ -298,7 +290,6 @@ class Place {
       }
       const place = new Place(feature.geometry.coordinates[0], feature.geometry.coordinates[1], placeName)
       place.properties = feature.properties
-      place.inputIndex = key
       places.push(place)
     }
     return places

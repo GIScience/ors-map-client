@@ -21,6 +21,7 @@ export default {
     'elevation': 'Altitudine',
     'profile': 'Profilo',
     'options': 'Opzioni',
+    "parameters": 'Parametri',
     "custom": "Personalizzato",
     "customOverlayer": "Strato personalizzato",
     "rawRouting": "Routing grezzo",
@@ -85,7 +86,8 @@ export default {
       'rawCoordinate': 'Coordinate long. lat.',
       'notAvailable': 'Non avviabile',
       "postalcode": 'Codice postale',
-      'undefined': 'Non definito'
+      'undefined': 'Non definito',
+      "ocean": 'Oceano'
     }
   }
 }

@@ -21,6 +21,7 @@ export default {
     elevation: 'Elevation',
     profile: 'Profile',
     options: 'Options',
+    parameters: 'Parameters',
     custom: 'Custom',
     customOverlayer: 'Custom overlayer',
     rawRouting: 'Raw routing',
@@ -86,7 +87,8 @@ export default {
       rawCoordinate: 'Raw lng,lat coordinates',
       notAvailable: 'Not available',
       postalcode: 'Postal code',
-      'undefined': 'Not defined'
+      'undefined': 'Not defined',
+      ocean: 'Ocean'
     }
   }
 }

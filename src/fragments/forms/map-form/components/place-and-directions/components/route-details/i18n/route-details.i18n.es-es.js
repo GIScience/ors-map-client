@@ -1,6 +1,6 @@
 export default {
   routeDetails: {
-    "routeSummary": "Resumen de la ruta",
+    "routeDetails": "Detalles de la ruta",
     "warnings": "Avisos",
     "routes": "Rutas",
     "route": "Ruta",
@@ -17,6 +17,7 @@ export default {
       "2": "Hay peajes a lo largo de la ruta",
       "3": "Hay uno o más segmentos que se han dibujado como una línea recta a lo largo de la ruta. Las duraciones y la accesibilidad pueden no ser correctas",
       "4": "No se dispone de al menos un dato adicional solicitado"
-    }
+    },
+    "routeOpacity": 'Opacidad de ruta'
   }
 }

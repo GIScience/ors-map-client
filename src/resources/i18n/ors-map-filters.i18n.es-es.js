@@ -54,7 +54,7 @@ export default {
         "description": "O intervalo a ser usado no cáculo de isócronas"
       },
       "options": {
-        "label": "Opciones de ruta"
+        "label": "Opciones"
       },
       "profile_params": {
         "label": "Parámetros del perfil"
@@ -174,6 +174,17 @@ export default {
       "maximum_speed": {
         "label": "Velocidad máxima",
         "description": "Una velocidad máxima que debe aplicarse"
+      },
+      "weightings": {
+        "label": 'Ajustes adicionales'
+      },
+      "green": {
+        "label": 'Verde (solo en Alemania)',
+        "description": 'Preferir áreas verdes (solo disponible para Alemania)',
+      },
+      "quiet": {
+        "label": 'Tranquilo (solo Alemania)',
+        "description": 'Prefiere zonas tranquilas (solo disponible para Alemania)',
       }
     }
   }

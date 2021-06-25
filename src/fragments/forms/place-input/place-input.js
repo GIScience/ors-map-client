@@ -331,6 +331,21 @@ export default {
   },
   methods: {
     /**
+     * Get layer translation based on the layer name
+     * or fall back to a default one if not available
+     * @param {String} layer 
+     * @returns {String}
+     */
+    getLayerTranslation (layer) {
+      let transKey = 'global.layers.'+ layer
+      let translation = this.$t(transKey) 
+      if (translation !== transKey) {
+        return translation
+      } else {
+        return this.$t('global.layers.notAvailable') 
+      }
+    },
+    /**
      * Resolve the model using a debounce to avoid unnecessary sequential requests
      * @param {*} newVal 
      */
