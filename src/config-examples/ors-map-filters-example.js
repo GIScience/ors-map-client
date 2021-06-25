@@ -768,6 +768,12 @@ const filters = [
             ref: 'alternative_routes.props.target_count',
             min: 2
           }
+        ],
+        visibleWhen: [
+          {
+            ref: 'alternative_routes.props.target_count',
+            min: 2
+          }
         ]
       },
       {
@@ -781,6 +787,12 @@ const filters = [
         step: 0.1,
         useInServices: [constants.services.directions],
         validWhen: [
+          {
+            ref: 'alternative_routes.props.target_count',
+            min: 2
+          }
+        ],
+        visibleWhen: [
           {
             ref: 'alternative_routes.props.target_count',
             min: 2
