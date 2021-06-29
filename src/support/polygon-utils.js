@@ -24,7 +24,11 @@ const PolygonUtils = {
       polygon.properties.visible = true
     }
   },
-
+  hasPlaceAsCenter (place, polygon) {
+    if (polygon.properties.center && place.coordinates && polygon.properties.center.toString() === place.coordinates.toString()) {
+      return true
+    }
+  },
   /**
    * Calculate polygon area
    * @param {Object} polygon 

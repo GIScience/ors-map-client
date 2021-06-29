@@ -45,7 +45,7 @@ export default {
   computed: {
     visible () {
       let isVisible = this.$lowResolution
-      if (this.$store.getters.leftSideBarOpen || this.$store.getters.leftSideBarPinned) {
+      if (this.$store.getters.isSidebarVisible) {
         isVisible = false
       }
       return isVisible
@@ -118,13 +118,13 @@ export default {
       // new data about the route calculated that can be seen
       // by opening the sidebar
       this.eventBus.$on('newInfoAvailable', (available) => {
-        if (!context.$store.getters.leftSideBarOpen) {
+        if (!context.$store.getters.isSidebarVisible) {
           context.newInfoAvailable = available
         }
       })
 
       this.eventBus.$on('searched', () => {
-        if (!context.$store.getters.leftSideBarOpen) {
+        if (!context.$store.getters.isSidebarVisible) {
           context.newInfoAvailable = true
         }
         context.$emit('searched')

@@ -4,31 +4,25 @@ const state = {
   leftSideBarOpen: false,
   leftSideBarPinned: false,
   topBarOpen: true,
-  displayFooter: true,
   pickPlaceIndex: null,
   pickPlaceId: null,
   mainMenu: [],
   footerFullHeight: 89,
   footerMiniHeight: 140,
   sidebarFullWidth: 400,
-  sidebarShrinkeWidth: 290,
+  sidebarShrunkWidth: 290,
   sidebarHeaderHeight: 175
 }
 
 const getters = {
   leftSideBarOpen: state => {
-    // if the sidebar is pinned it is not 
-    // considered open but pinned!
-    return !state.leftSideBarPinned && state.leftSideBarOpen
+    return state.leftSideBarOpen
   },
   leftSideBarPinned: state => {
     return state.leftSideBarPinned
   },
   topBarOpen: state => {
     return state.topBarOpen
-  },
-  displayFooter: state => {
-    return state.displayFooter
   },
   mainMenu: state => {
     return state.mainMenu
@@ -45,8 +39,8 @@ const getters = {
   sidebarFullWidth: state => {
     return state.sidebarFullWidth
   },
-  sidebarShrinkeWidth: state => {
-    return state.sidebarShrinkeWidth
+  sidebarShrunkWidth: state => {
+    return state.sidebarShrunkWidth
   },
   isSidebarVisible: state => {
     return state.leftSideBarOpen || state.leftSideBarPinned
@@ -73,9 +67,6 @@ const mutations = {
   },
   setTopBarIsOpen: (state, isOpen) => {
     state.topBarOpen = isOpen
-  },
-  setDisplayFooter: (state, display) => {
-    state.displayFooter = display
   },
   pickPlaceIndex: (state, index) => {
     state.pickPlaceIndex = index

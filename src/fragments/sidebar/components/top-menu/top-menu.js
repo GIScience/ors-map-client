@@ -21,7 +21,14 @@ export default {
       this.$store.commit('setLeftSideBarIsPinned', !this.$store.getters.leftSideBarPinned)
     },
     toggleSidebar () {
-      this.$store.commit('setLeftSideBarIsOpen', !this.$store.getters.leftSideBarOpen)
+      let newOpenState = !this.$store.getters.leftSideBarOpen
+      this.$store.commit('setLeftSideBarIsOpen', newOpenState)
+      
+      // If the new state is closed, the pinned 
+      // state must be set to false too
+      if (!newOpenState) {
+        this.$store.commit('setLeftSideBarIsPinned', newOpenState)
+      }
     },
     settingsClicked () {
       this.settingsTooltipClicked = true

@@ -21,6 +21,7 @@
     "elevation": "Elevation",
     "profile": "Profile",
     "options": "Options",
+    "parameters": "Parameters",
     "custom": "Custom",
     "customOverlayer": "Custom overlayer",
     "rawRouting": "Raw routing",
@@ -85,7 +86,8 @@
       "rawCoordinate": "Raw lng,lat coordinates",
       "notAvailable": "Not available",
       "postalcode": "Postal code",
-      "undefined": "Not defined"
+      "undefined": "Not defined",
+      "ocean": "Ocean"
     }
   },
   "maps": {
@@ -154,7 +156,10 @@
   },
   "isochronesDetails": {
     "polygons": "Polygons",
-    "center": "Center"
+    "center": "Center",
+    "reachCenters": "Reach centers",
+    "toggleVisibility": "Toggle visibility",
+    "opacity": "Opacity"
   },
   "isochrones": {
     "isochrones": "Isochrones",
@@ -208,7 +213,8 @@
     "osmid": "OSM ID",
     "countryinfo": "Country info",
     "green": "Green",
-    "noise": "Noise"
+    "noise": "Noise",
+    "opacity": "Opacity"
   },
   "steps": {
     "instruction": "Instruction",
@@ -217,7 +223,7 @@
     "gotoStep": "Go to step"
   },
   "routeDetails": {
-    "routeSummary": "Route summary",
+    "routeDetails": "Route details",
     "warnings": "Warnings",
     "routes": "Routes",
     "route": "Route",
@@ -234,7 +240,8 @@
       "2": "There are tollways along the route",
       "3": "There are skipped segments along the route. Durations and accessibility may not be correct",
       "4": "At least one extra info requested but it is not available"
-    }
+    },
+    "routeOpacity": "Route opacity"
   },
   "placesAndDirections": {
     "isochrones": "Isochrones",
@@ -271,6 +278,12 @@
     },
     "genericErrorMsg": "It was not possible to calculate the route",
     "reorder": "Reorder"
+  },
+  "print": {
+    "print": "Print",
+    "segment": "Segment",
+    "preparingPrinting": "Preparing printing",
+    "readyToPrint": "Ready to print"
   },
   "share": {
     "fullUrl": "Full",
@@ -686,7 +699,7 @@
         "description": "The interval of the isochrones to be calculated"
       },
       "options": {
-        "label": "Route options"
+        "label": "Options"
       },
       "profile_params": {
         "label": "Profile parameters"
@@ -806,6 +819,17 @@
       "maximum_speed": {
         "label": "Maximum speed",
         "description": "The maximum speed that must be applied"
+      },
+      "weightings": {
+        "label": "Additional settings"
+      },
+      "green": {
+        "label": "Green (Germany only)",
+        "description": "Prefer green areas (only available for Germany)"
+      },
+      "quiet": {
+        "label": "Quiet (Germany only)",
+        "description": "Prefer quiet areas (only available for Germany)"
       }
     }
   }

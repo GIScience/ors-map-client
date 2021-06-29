@@ -21,7 +21,7 @@ export default {
   computed: {
     isSideBarOpen: {
       get () {
-        return this.$store.getters.leftSideBarOpen && !this.$store.getters.embed
+        return this.$store.getters.isSidebarVisible && !this.$store.getters.embed
       },
       set (open) {
         this.$store.commit('setLeftSideBarIsOpen', open)

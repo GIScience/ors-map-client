@@ -598,7 +598,6 @@ export default {
     // Emit the an event catch by root App component
     // telling it to update the page title
     this.eventBus.$emit('titleChanged', this.$t('maps.pageTitle'))
-    this.$store.commit('setDisplayFooter', false)
 
     // Set sidebar initial state (open/closed)
     let sidebarStartOpen = false

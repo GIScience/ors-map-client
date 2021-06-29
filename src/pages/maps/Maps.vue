@@ -14,7 +14,7 @@
       :avoid-polygons="avoidPolygons"
       :map-view-data="mapViewData"
       :center="mapViewCenter"
-      :show-popups="(!$store.getters.leftSideBarOpen || $highResolution) && !showBottomNav"
+      :show-popups="(!$store.getters.isSidebarVisible || $highResolution) && !showBottomNav"
       :height="mapHeight"
       :fit-bounds="fitMapBounds"
       :custom-tile-provider-url="$store.getters.mapSettings.customTileProviderUrl"

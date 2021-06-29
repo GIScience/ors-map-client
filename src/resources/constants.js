@@ -1,5 +1,5 @@
 const constants = {
-  clientVersion: '1.1.5', // If you change the version here you have to change on package.json too!
+  clientVersion: '1.1.6', // If you change the version here you have to change on package.json too!
   apiVersion: '5.0',
   orsPublicHost: 'https://openrouteservice.org',
   orsApiRequestTimeout: 40000,
@@ -76,7 +76,9 @@ const constants = {
   orsKmlDocumentDescription: 'ORS route file',
   segmentHighlightColor: '#9ACD32',
   alternativeRouteColor: '#6E6E6E',
-  routeBackgroundColor: '#fff'
+  routeBackgroundColor: '#fff',
+  mapViewElementId: 'map-view',
+  worldImageryTileProviderBaseUrl: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile',
 }
 
 export default constants

@@ -36,6 +36,26 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.1.6] -  2021-06-29 ##
+
+### Added ###
+
+- Implemented printing template strategy
+- Printing for Place
+- Printing for Isochrones
+- Printing for round trip
+
+### Fixed ###
+
+- Profile params parameters only for certain profiles (wheelchair and hgv)
+
+### Changed ###
+
+- Link for ask forum goes direct to maps category
+- removed unused store related to sidebar UI
+- removed unused data from App.js
+- Removed logic for setting footer visibility (not used anymore)
+
 ## [v1.1.5] -  2021-06-25 ##
 
 ### Added ###
