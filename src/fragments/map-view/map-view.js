@@ -333,9 +333,9 @@ export default {
             // Vue2-Leaflet, the component used to render data on the map, expect the coordinates in the [lat,lon] order,
             // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
             // So we invert them to provide what the component expects
-            const coords = GeoUtils.switchLatLonIndex(toBeTransformedMapViewData.routes[key].geometry.coordinates)
-            const alternativeRoute = { polyline: coords, index: index }
-            alternativeRoutesData.push(alternativeRoute)
+            toBeTransformedMapViewData.routes[key].geometry.coordinates = GeoUtils.switchLatLonIndex(toBeTransformedMapViewData.routes[key].geometry.coordinates)
+            toBeTransformedMapViewData.routes[key].properties.index = index
+            alternativeRoutesData.push(toBeTransformedMapViewData.routes[key])
           }
         }
       }
