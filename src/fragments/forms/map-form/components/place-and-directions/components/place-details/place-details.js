@@ -1,7 +1,9 @@
 import Share from '@/fragments/forms/map-form/components/share/Share'
-import geoUtils from '@/support/geo-utils'
+import Print from '@/fragments/forms/map-form/components/print/Print'
 import resolver from '@/support/routes-resolver'
 import MapViewData from '@/models/map-view-data'
+import geoUtils from '@/support/geo-utils'
+import constants from '@/resources/constants'
 
 export default {
   props: {
@@ -12,7 +14,7 @@ export default {
   },
   data: () => ({
     imageUrlFallBack: (resolver.homeUrl() + '/static/img/map-pin-600x400.jpg').replace('//', '/'),
-    worldImageryTileProviderBaseUrl: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile'
+    worldImageryTileProviderBaseUrl: constants.worldImageryTileProviderBaseUrl,
   }),
   methods: {
     /**
@@ -81,6 +83,7 @@ export default {
     }
   },
   components: {
-    Share
+    Share,
+    Print
   }
 }

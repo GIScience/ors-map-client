@@ -1,6 +1,6 @@
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
-import tinycolor2 from 'tinycolor2'
 import { LPolyline, LTooltip } from 'vue2-leaflet'
+import Utils from '@/support/utils'
 
 export default {
   props: {
@@ -36,13 +36,13 @@ export default {
         this.highlightedPolyline = routeData.buildHighlightedPolylines(this.polylineData, this.extraInfo)
       }
     },
-    removeHightlightedSegments () {
+    removeHighlightedSegments () {
       this.highlightedPolyline = null
       this.highlightedPolylineSnack = false
       this.$emit('closed')
     },
     highlightedSectionStyle (backgroundColor) {
-      const foreGroundColor = tinycolor2(backgroundColor).isLight() ? 'black' : 'white'
+      const foreGroundColor = Utils.contrastingTextColor(backgroundColor)
       return { backgroundColor, color: foreGroundColor }
     }
   },
@@ -54,7 +54,7 @@ export default {
       deep: true
     },
     '$route' () {
-      this.removeHightlightedSegments()
+      this.removeHighlightedSegments()
     }
   },
   

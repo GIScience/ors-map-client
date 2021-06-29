@@ -1,9 +1,9 @@
-import Share from '@/fragments/forms/map-form/components/share/Share'
 import Download from '@/fragments/forms/map-form/components/download/Download'
+import Share from '@/fragments/forms/map-form/components/share/Share'
+import Print from '@/fragments/forms/map-form/components/print/Print'
 import PolygonUtils from '@/support/polygon-utils'
 import MapViewData from '@/models/map-view-data'
-import GeoUtils from '@/support/geo-utils'
-import tinyColor2 from 'tinycolor2'
+import Utils from '@/support/utils'
 
 export default {
   data: () => ({
@@ -17,30 +17,21 @@ export default {
   },
   components: {
     Share,
-    Download
+    Download,
+    Print
   },
   created() {
     this.localMapViewData = this.mapViewData.clone()
   },
   methods: {
     calcArea (polygon) {
-      const latlngs = []
-      const coordinates = polygon.geometry.coordinates.length === 1 ? polygon.geometry.coordinates[0] : polygon.geometry.coordinates
-      for (const key in coordinates) {
-        const coordinate = coordinates[key]
-        latlngs.push(GeoUtils.buildLatLong(coordinate[1], coordinate[0]))
-      }
-      const polygonArea = GeoUtils.readableArea(latlngs, this.$store.getters.mapSettings.areaUnit)
-      return polygonArea
+      return PolygonUtils.calcPolygonArea(polygon)
     },
     polygonAreaTextColor (backgroundColor) {
-      const foreGroundColor = tinyColor2(backgroundColor).isLight() ? 'black' : 'white'
-      return foreGroundColor
+      return Utils.contrastingTextColor(backgroundColor)
     },
     hasAsCenter (place, polygon) {
-      if (polygon.properties.center && place.coordinates && polygon.properties.center.toString() === place.coordinates.toString()) {
-        return true
-      }
+      return PolygonUtils.hasPlaceAsCenter(place, polygon)
     },
     toggleVisibility (polygonIndex) {
       this.eventBus.$emit('togglePolygonVisibility', polygonIndex)

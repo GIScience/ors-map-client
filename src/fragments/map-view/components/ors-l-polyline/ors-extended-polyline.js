@@ -20,7 +20,7 @@ class OrsExtendedPolyline {
     const options = {
       options: {
         distance: 20,   //distance from pointer to the polyline
-        tollerance: 5,  //tolerance for snap effect to vertex
+        tolerance: 5,  //tolerance for snap effect to vertex
         vertices: {
           //first: true,  //first vertex is draggable
           //middle: true, //middle vertices are draggable
@@ -169,7 +169,7 @@ class OrsExtendedPolyline {
   mouseContextClick (event) {
     var closest = Leaflet.GeometryUtil.closest(this._map, this._poly, event.latlng, true)
 
-    if (this.options.vertices.destroy !== false && closest.distance < this.options.tollerance) {
+    if (this.options.vertices.destroy !== false && closest.distance < this.options.tolerance) {
       var index = this._poly._latlngs.indexOf(closest)
       var maxIndex = (this._poly._latlngs.length - 1)
       if ((this.options.vertices.first === false && index == 0) || (this.options.vertices.last === false && index == maxIndex)) {
@@ -387,7 +387,7 @@ class OrsExtendedPolyline {
     this._dragging = true
 
     // Check the tolerance
-    if (this.closest.distance < this.options.tollerance) {
+    if (this.closest.distance < this.options.tolerance) {
       this._processDrag()
     } else {
       this.closest = this._getClosestPointAndSegment(latlng)

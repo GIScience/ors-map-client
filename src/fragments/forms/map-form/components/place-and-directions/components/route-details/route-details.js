@@ -1,11 +1,11 @@
 import Download from '@/fragments/forms/map-form/components/download/Download'
 import Share from '@/fragments/forms/map-form/components/share/Share'
+import Print from '@/fragments/forms/map-form/components/print/Print'
 import RouteExtras from './components/extras/RouteExtras'
 import MapViewData from '@/models/map-view-data'
 import Steps from './components/steps/Steps'
 import constants from '@/resources/constants'
 import geoUtils from '@/support/geo-utils'
-import MapViewExporter from '@/support/map-view-exporter'
 
 export default {
   props: {
@@ -189,6 +189,7 @@ export default {
     Steps,
     Download,
     Share,
+    Print,
     RouteExtras
   }
 }

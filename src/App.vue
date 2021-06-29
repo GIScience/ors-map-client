@@ -11,8 +11,6 @@
       </transition>
     </v-content>
     <app-sidebar :class="{'a11y' : $store.getters.mapSettings.accessibleModeActive}"></app-sidebar>
-    <!-- For instance, we will display n app footer, because the want a full height map view -->
-    <!-- <app-footer v-if="$store.getters.displayFooter"></app-footer> -->
   </v-app>
 </template>
 <script src="./app.js"></script>

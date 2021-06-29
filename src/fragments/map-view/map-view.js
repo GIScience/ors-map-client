@@ -421,7 +421,7 @@ export default {
     circleMarker () {
       if (this.clickLatlng) {
         return {
-          center: Leaflet.latLng(this.clickLatlng.lat, this.clickLatlng.lng),
+          center: GeoUtils.buildLatLong(this.clickLatlng.lat, this.clickLatlng.lng),
           radius: 8
         }
       }
@@ -434,7 +434,7 @@ export default {
     myPositionMarker () {
       if (this.$store.getters.currentLocation) {
         const markerData = {
-          center: Leaflet.latLng(this.$store.getters.currentLocation.lat, this.$store.getters.currentLocation.lng),
+          center: GeoUtils.buildLatLong(this.$store.getters.currentLocation.lat, this.$store.getters.currentLocation.lng),
           radius: 9,
           accuracy: this.$store.getters.currentLocation.accuracy,
           opacity: 0.7
@@ -1371,7 +1371,7 @@ export default {
           // If in low resolution and sidebar is open, then left click on the map
           // must close the side bar to allow the user to interact with the map.
           // If not then the normal left click handler must be executed
-          if (this.$store.getters.leftSideBarOpen && !this.$store.getters.leftSideBarPinned) {
+          if (!this.$store.getters.isSidebarVisible) {
             if (this.$lowResolution) {
               this.eventBus.$emit('setSidebarStatus', false)
             } else {

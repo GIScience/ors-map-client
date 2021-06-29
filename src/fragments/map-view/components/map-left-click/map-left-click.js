@@ -6,8 +6,8 @@
  * @listens mapRightClicked
  * @listens mapLeftClicked (to close the right click pop up)
  */
-import GeoUtils from '@/support/geo-utils'
 import { ReverseGeocode } from '@/support/ors-api-runner'
+import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
 
 export default {
@@ -157,7 +157,7 @@ export default {
      * @param {*} placeInfo
      * @emits directionsToPoint
      */
-    directionstoPoint (placeInfo) {
+    directionsToPoint (placeInfo) {
       const place = new Place(placeInfo.latlng.lng, placeInfo.latlng.lat)
       place.resolve().then(() => {
         this.$emit('directionsToPoint', {place})

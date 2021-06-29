@@ -1,7 +1,7 @@
 <template>
   <div>
     <l-map
-      id="map-view"
+      :id="constants.mapViewElementId"
       ref="map"
       class="map-view"
       :class="{'low-resolution': $lowResolution, 'extra-low-resolution': $xlResolution, 'click-to-pick': clickToPickActive}"

@@ -1,7 +1,8 @@
-import geoUtils from '@/support/geo-utils'
+import VueHorizontalList from 'vue-horizontal-list'
 import resolver from '@/support/routes-resolver'
 import MapViewData from '@/models/map-view-data'
-import VueHorizontalList from 'vue-horizontal-list'
+import constants from '@/resources/constants'
+import geoUtils from '@/support/geo-utils'
 import theme from '@/config/theme'
 
 export default {
@@ -24,13 +25,13 @@ export default {
       }
     },
     'activeIndex' (newIndex) {
-      // the place change comes from outside
+      // The place change comes from outside
       this.horizontalListRef.go(newIndex)
     }
   },
   data: () => ({
     imageUrlFallBack: (resolver.homeUrl() + '/static/img/map-pin-600x400.jpg').replace('//', '/'),
-    worldImageryTileProviderBaseUrl: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile',
+    worldImageryTileProviderBaseUrl: constants.worldImageryTileProviderBaseUrl,
     horizontalListRef: null,
     placeActive: null
   }),
@@ -72,9 +73,6 @@ export default {
           color: theme.primary
         }
       }
-    },
-    themeAcessor () {
-      return theme
     }
   },
   methods: {
@@ -121,8 +119,8 @@ export default {
     getItemLayer (place) {
       const layer = this.placeLayer(place)
       if (layer) {
-        let trasnlation = this.$t('global.layers.'+ layer)
-        return trasnlation
+        let translation = this.$t('global.layers.'+ layer)
+        return translation
       } else {
         if (place.properties.category_ids) {
           let categoriesKeys = Object.keys(place.properties.category_ids)
@@ -181,7 +179,7 @@ export default {
       }
     },
     /**
-     * Emmit the directions to latlng
+     * Emit the directions to latlng
      * @param {*} place
      */
     directionsTo (place) {
@@ -189,7 +187,7 @@ export default {
       this.$emit('closed')
     },
     /**
-     * Emmit the directions to latlng
+     * Emit the directions to latlng
      * @param {*} place
      */
     gotToPlace (place) {

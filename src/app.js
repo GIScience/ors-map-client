@@ -8,17 +8,11 @@ import Info from '@/fragments/dialogs/info/Info'
 export default {
   data () {
     return {
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Inspire'
-      }],
-      miniVariant: false,
-      fixed: false,
-      title: 'OSM dev dashboard',
+      title: '',
       showLoading: false
     }
   },
-  name: 'App',
+  name: 'ORSWebClientApp',
   components: {
     appHeader: Header,
     appSidebar: Sidebar,

@@ -46,7 +46,7 @@ export default {
     this.loadData()
   },
   watch: {
-    '$store.getters.leftSideBarOpen': function (newVal) {
+    '$store.getters.isSidebarVisible': function (newVal) {
       if (newVal === true && this.places.length === 1) {
         this.setFocusedPlaceInput(0)
       }
@@ -833,6 +833,7 @@ export default {
       // Create a MapViewData from scratch and set
       // places and options
       this.mapViewData = new MapViewData()
+      this.mapViewData.mode = constants.modes.place
       this.mapViewData.places = [filledPlaces[index]]
       this.mapViewData.options = options
 

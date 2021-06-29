@@ -4,9 +4,7 @@
     <div slot="header">
       <download :map-view-data="mapViewData" ></download>
       <share></share>
-      <v-btn style="float:right; margin-top:0" small icon @click="prepareAndPrintInstructions()" :title="$t('routeDetails.selectRoute')">
-        <v-icon color="dark" >print</v-icon>
-      </v-btn>
+      <print :map-view-data="mapViewData"></print>
       <h3>{{$t('routeDetails.routeDetails')}}</h3>
     </div>
     <v-expansion-panel slot="content" class="no-shadow" v-if="hasRoutes" :value="startedPanelExtended">

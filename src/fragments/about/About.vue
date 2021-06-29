@@ -52,7 +52,7 @@
         <span>
           <h3>
             <v-icon>help</v-icon>
-            <a href="https://ask.openrouteservice.org" target="_blank"><span>
+            <a href="https://ask.openrouteservice.org/c/maps/20" target="_blank"><span>
                 {{$t('about.askOpenrouteservice')}}</span></a>
           </h3>
         </span>

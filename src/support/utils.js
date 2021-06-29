@@ -1,7 +1,19 @@
+import tinyColor2 from 'tinycolor2'
 import lzString from 'lz-string'
 import lodash from 'lodash'
 
 const Utils = {
+
+  /**
+   * Get a text color that has a good reading contrast
+   * for a given background color
+   * @param {*} backgroundColor 
+   * @returns 
+   */
+  contrastingTextColor (backgroundColor) {
+    const textColor = tinyColor2(backgroundColor).isLight() ? 'black' : 'white'
+    return textColor
+  },
  
   /**
    * Compare two objects and get the diffs
@@ -76,6 +88,12 @@ const Utils = {
         return params
       }, {})
   },
+  /**
+   * Get child elements of a given element
+   * @param {*} el 
+   * @param {*} childElType 
+   * @returns 
+   */
   getChildElements (el, childElType) {
     var results = []
     var search = function search (children) {

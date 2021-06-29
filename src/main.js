@@ -58,7 +58,6 @@ Vue.directive('focus', focus)
 Vue.directive('smart-tooltip', smartTooltip)
 
 
-
 // add global custom components
 Vue.component('box', box)
 Vue.component('app-h-menu', HMenu)
@@ -76,7 +75,7 @@ AppLoader.load().then(() => {
   let i18n = I18nBuilder.build()
 
   let mapSettingsLocale = store.getters.mapSettings.locale
-  // In some previous version of this app the `en` locale was stored as `en-us`
+  // In previous versions of this app the `en` locale was stored as `en-us`
   let locale = mapSettingsLocale === 'en' ? 'en-us' : mapSettingsLocale
   // Set locale from store/local storage
   i18n.locale = locale

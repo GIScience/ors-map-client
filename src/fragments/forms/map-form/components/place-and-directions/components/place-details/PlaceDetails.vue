@@ -2,6 +2,7 @@
   <box background="white" no-shadow>
     <div slot="header">
       <share></share>
+      <print :map-view-data="mapViewData"></print>
       <h3>{{$t('placeDetails.placeDetails')}}</h3>
     </div>
     <div>
