@@ -71,11 +71,11 @@
           </div>
         </l-popup>
       </l-circle-marker>
-      <template  v-for="alternativeRoute in alternativeRoutes">
-        <ors-l-polyline :key="alternativeRoute.index" not-active
+      <template  v-for="(alternativeRoute) in alternativeRoutes">
+        <ors-l-polyline :key="alternativeRoute.properties.index" not-active
           :color="alternativeRouteColor"
-          @click="alternativeRouteIndexSelected(alternativeRoute.index, $event)"
-          :lat-lngs="alternativeRoute.polyline" >
+          @click="alternativeRouteIndexSelected(alternativeRoute.properties.index, $event)"
+          :route="alternativeRoute" >
         </ors-l-polyline>
       </template>
       <template v-if="displayActiveRouteData">
