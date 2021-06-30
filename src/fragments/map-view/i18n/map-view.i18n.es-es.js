@@ -51,7 +51,7 @@ export default {
     "accuracy": "Precisión",
     "youCanCenterAtYourLocationLater": "Puedes centrar el mapa en su ubicación actual en cualquier momento haciendo clic en el botón \"mi ubicación\".",
     "yourLocation": "Utiliza su ubicación",
-    "setMyLocationasMapCenter": "¿Quieres centrar el mapa en su ubicación actual? Esto mejorará la precisión de la búsqueda de lugares. Tendrá que autorizarlo, si se le solicita.",
+    "setMyLocationAsMapCenter": "¿Quieres centrar el mapa en su ubicación actual? Esto mejorará la precisión de la búsqueda de lugares. Tendrá que autorizarlo, si se le solicita.",
     "removePlace": "Eliminar lugar",
     "viewOnORS": "Ver en ORS",
     "moveMapPositionToLeft": "Mover el mapa a la izquierda",

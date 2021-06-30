@@ -51,7 +51,7 @@ export default {
     "accuracy": "Pontosság",
     "youCanCenterAtYourLocationLater": "Bármikor térkép középpontjába állíthatja a saját jelenlegi tartózkodási helyét, ha ráklikkel a \"Tartózkodási helyem\" gombra",
     "yourLocation": "Tartózkodási helyének felhasználása",
-    "setMyLocationasMapCenter": "Szeretné jelenlegi tartózkodási helyét a térkép közepére helyezni? Ez javítja a helykeresés pontosságát. Engedélyeznie kell, ha a böngészője/eszköze kéri.",
+    "setMyLocationAsMapCenter": "Szeretné jelenlegi tartózkodási helyét a térkép közepére helyezni? Ez javítja a helykeresés pontosságát. Engedélyeznie kell, ha a böngészője/eszköze kéri.",
     "removePlace": "Hely eltávolítása",
     "viewOnORS": "Megtekintés az OperRouteService-en",
     "moveMapPositionToLeft": "Térkép közepének eltolása balra",

@@ -13,7 +13,8 @@
               <span :style="{background: polygon.properties.color}">
                 <b :style="{color: polygonAreaTextColor(polygon)}">{{polygon.properties.label.replace('Polygon', '')}}</b> 
               </span>
-              <span>&rArr;</span> {{polygon.properties.area}}
+              <span>&rArr;</span> {{polygon.properties.area}} &#38;
+              <span>{{$t('global.population')}}: {{polygon.properties.total_pop}}</span>
             </div>
           </template>
         </template>

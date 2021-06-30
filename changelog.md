@@ -36,6 +36,17 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.1.8] -  2021-06-30 ##
+
+### Added ###
+
+- Total population to isochrones view and printable
+- Fixed typo in map view
+
+### Fixed ###
+
+- Rebuild the value of filter with conditional displaying rules
+
 ## [v1.1.7] -  2021-06-30 ##
 
 ### Changed ###

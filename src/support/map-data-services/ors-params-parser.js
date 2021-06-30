@@ -147,7 +147,8 @@ const orsParamsParser = {
     const args = {
       locations: locations,
       area_units: store.getters.mapSettings.unit,
-      timeout: constants.orsApiRequestTimeout
+      timeout: constants.orsApiRequestTimeout,
+      attributes:["total_pop"]
     }
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
@@ -398,7 +399,7 @@ const orsParamsParser = {
       const newStrJson = JSON.stringify(newObj)
       return newStrJson
     } else {
-      // if it is not parsable, than retrn the original object
+      // if it is not parsable, than return the original object
       return current
     }
   },
@@ -414,13 +415,8 @@ const orsParamsParser = {
       for (const filtersKey in filtersInto) {
         const filter = filtersInto[filtersKey]
 
-        if (filter.name === key) {
-          // If the filter has dependencies
-          // make sure that the visibility of the filter
-          // is defined before checking its availability
-          if (filter.validWhen) {
-            DependencyService.setAvailability(filtersInto, filtersKey, filtersInto)
-          }
+        if (filter.name === key || filter.internalName === key) {
+          
           const available = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
 
           // If the filter is available, it not intended to be used only
@@ -432,6 +428,13 @@ const orsParamsParser = {
               this.parseOptions(filtersInto[filtersKey].props, parsedJson)
             } else {
               orsParamsParser.setFilterValueFromParam(filtersInto[filtersKey], options[key])
+
+              // If the filter has validity conditions 
+              // make sure that the availability of the 
+              // filter is defined before using it
+              if (filtersInto[filtersKey].validWhen) {
+                DependencyService.setAvailability(filtersInto, filtersKey, filtersInto)
+              }
             }
           }
         }
