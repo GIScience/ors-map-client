@@ -36,6 +36,13 @@ RELEASING:
 8. Add version to docker-compose.yml (grunt version always adds 1 on top the current version ...)
  -->
 
+## [v1.1.7] -  2021-06-30 ##
+
+### Changed ###
+
+- Updated link to ask to point to specific maps category
+- Migrated links to constants file
+
 ## [v1.1.6] -  2021-06-29 ##
 
 ### Added ###
