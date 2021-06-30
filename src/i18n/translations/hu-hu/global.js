@@ -88,6 +88,7 @@ export default {
       "postalcode": "Irányítószám",
       "undefined": "Meghatározatlan",
       "ocean": "Óceán"
-    }
+    },
+    "population": 'Népesség'
   }
 }
