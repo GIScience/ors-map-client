@@ -18,21 +18,21 @@
         </v-btn>
       </v-list-tile>
       <v-list-tile>
-        <v-btn class="floating-item" target="_blank" href="https://openrouteservice.org"
+        <v-btn class="floating-item" target="_blank" :href="constants.links.ors"
           :title="$t('floatingTopMenu.openrouteserviceAPI')" flat>
           <v-icon left>code</v-icon>
           <template>{{$t('floatingTopMenu.openrouteserviceAPI')}}</template>
         </v-btn>
       </v-list-tile>
       <v-list-tile>
-        <v-btn class="floating-item" target="_blank" href="https://disaster.openrouteservice.org"
+        <v-btn class="floating-item" target="_blank" :href="constants.links.disaster"
           :title="$t('floatingTopMenu.openrouteserviceForDisasters')" flat>
           <v-icon left>healing</v-icon>
           <template>{{$t('floatingTopMenu.openrouteserviceForDisasters')}}</template>
         </v-btn>
       </v-list-tile>
       <v-list-tile>
-        <v-btn class="floating-item" target="_blank" href="https://ask.openrouteservice.org"
+        <v-btn class="floating-item" target="_blank" :href="constants.links.askOrs"
           :title="$t('floatingTopMenu.askOpenrouteservice')" flat>
           <v-icon left>help</v-icon>
           <template>{{$t('floatingTopMenu.askOpenrouteservice')}}</template>
