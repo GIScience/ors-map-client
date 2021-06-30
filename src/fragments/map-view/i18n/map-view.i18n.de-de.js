@@ -51,7 +51,7 @@ export default {
     accuracy: 'Genauigkeit',
     youCanCenterAtYourLocationLater: 'Sie können die Karte jederzeit auf Ihren aktuellen Standort zentrieren, indem Sie auf die Schaltfläche "Mein Standort" klicken',
     yourLocation: 'Meinen Standort nutzen',
-    setMyLocationasMapCenter: 'Möchten Sie die Karte an Ihrem aktuellen Standort zentrieren? Dies verbessert die Genauigkeit der Ortssuche. Sie müssen es autorisieren, wenn Sie dazu aufgefordert werden.',
+    setMyLocationAsMapCenter: 'Möchten Sie die Karte an Ihrem aktuellen Standort zentrieren? Dies verbessert die Genauigkeit der Ortssuche. Sie müssen es autorisieren, wenn Sie dazu aufgefordert werden.',
     removePlace: 'Ort löschen',
     viewOnORS: 'In ORS anzeigen',
     moveMapPositionToLeft: 'Karte nach Links bewegen',

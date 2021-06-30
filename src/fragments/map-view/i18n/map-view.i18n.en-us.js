@@ -51,7 +51,7 @@ export default {
     accuracy: 'Accuracy',
     youCanCenterAtYourLocationLater: 'You can center the map at your current location at any time by clicking on "my location" button',
     yourLocation: 'Use your location',
-    setMyLocationasMapCenter: 'Do you want to center the map at your current location? This will improve place search precision. You will have to authorize it if prompted.',
+    setMyLocationAsMapCenter: 'Do you want to center the map at your current location? This will improve place search precision. You will have to authorize it if prompted.',
     removePlace: 'Remove place',
     viewOnORS: 'View on ORS',
     moveMapPositionToLeft: 'Move map center to the left',
