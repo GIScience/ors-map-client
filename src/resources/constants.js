@@ -79,6 +79,18 @@ const constants = {
   routeBackgroundColor: '#fff',
   mapViewElementId: 'map-view',
   worldImageryTileProviderBaseUrl: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile',
+  links: {
+    source: 'https://github.com/GIScience/ors-map-client',
+    askOrs: 'https://ask.openrouteservice.org/c/maps/20',
+    reportIssue: 'https://github.com/GIScience/ors-map-client/issues/new',
+    termsOfService: 'https://openrouteservice.org/terms-of-service',
+    donate: 'https://openrouteservice.org/donations/',
+    aboutGHSL: 'https://ghsl.jrc.ec.europa.eu/about.php',
+    heiGitEn: 'http://www.geog.uni-heidelberg.de/gis/heigit_en.html',
+    osm: 'http://www.OpenStreetMap.org',
+    disaster: 'https://disaster.openrouteservice.org',
+    ors: 'https://openrouteservice.org'
+  }
 }
 
 export default constants

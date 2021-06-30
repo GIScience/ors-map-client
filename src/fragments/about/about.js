@@ -1,4 +1,5 @@
 import appConfig from '@/config/app-config'
+import constants from '@/resources/constants'
 
 export default {
   computed: {
