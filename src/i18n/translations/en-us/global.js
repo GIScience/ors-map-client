@@ -89,6 +89,7 @@ export default {
       postalcode: 'Postal code',
       'undefined': 'Not defined',
       ocean: 'Ocean'
-    }
+    },
+    population: 'Population'
   }
 }

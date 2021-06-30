@@ -87,7 +87,8 @@ export default {
         "notAvailable": "Pas disponible",
         "postalcode": 'Code postal',
         "undefined": "Non défini",
-        ocean: 'Océan'
-    }
+        "ocean": 'Océan'
+    },
+    "population": 'Population'
   }
 }
