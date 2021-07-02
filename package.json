@@ -15,7 +15,8 @@
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "build": "node build/build.js",
-    "commit" : "git-cz"
+    "commit": "git-cz",
+    "release": "standard-version"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.11.3",
