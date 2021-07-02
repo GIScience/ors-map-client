@@ -355,8 +355,9 @@ For a detailed explanation on how webpack works, check out the [guide](http://vu
 
 #### Commits and versioning
 
-- This app uses the `commitizen` plugin to generate standardized commit types and messages. So, after applying any change in a feature branch, use `git add .` and then `npm run commit` (instead of `git commit ...`)
-- The plugin `standard-version` is used to generate changelog entries, version tag and to bump the app version in package.json. This utility must be used only in develop branch and with the command `npm run release`. After testing the app in the stating environment, then just merge `develop` to `master`.
+- This app uses the `commitizen` plugin to generate standardized commit types/messages. So, after applying any change in a feature branch, use `git add .` and then `npm run commit` (instead of `git commit ...`)
+- The plugin `standard-version` is used to generate changelog entries, version tag and to bump the app version in package.json. After testing the app in the testing environment, (using `develop` branch), checkout in `master` and use `npm run release` to generate a release.
+
 
 #### Branch policy ####
 
