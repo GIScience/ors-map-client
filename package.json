@@ -14,7 +14,8 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "commit" : "git-cz"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.11.3",
@@ -86,6 +87,7 @@
     "cross-env": "^5.0.1",
     "cross-spawn": "^5.0.1",
     "css-loader": "^3.6.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.6.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-friendly-formatter": "^3.0.0",
@@ -149,5 +151,10 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
