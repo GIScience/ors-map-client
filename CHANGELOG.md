@@ -2,7 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [1.1.9](https://github.com/GIScience/ors-map-client/compare/v1.0.0...v1.1.9) (2021-07-02)
+### [1.1.9](https://github.com/GIScience/ors-map-client/compare/v1.1.8...v1.1.9) (2021-07-02)
+
 
 
 ### Others
@@ -10,8 +11,6 @@ All notable changes to this project will be documented in this file. See [standa
 * prepare changelog and add commiting/versioning section in readme ([33b0795](https://github.com/GIScience/ors-map-client/commit/33b079541c8bbea9b33db4d23770f312ed9d505c))
 * **package.json:** add commitizen ([4992ee3](https://github.com/GIScience/ors-map-client/commit/4992ee3fcb925af7d4bf7dc238e4fa8b7333c51c))
 * **package.json and changelog.md:** add standard-version ([05787d2](https://github.com/GIScience/ors-map-client/commit/05787d20bac3cc94ad3a9dc76e3d77aebb0277c8))
-
-## [0.9.0](https://github.com/GIScience/ors-map-client/compare/v0.8.0...v0.9.0) (2021-02-10)
 
 ### [1.1.8](https://github.com/GIScience/ors-map-client/compare/v1.1.7...v1.1.8) (2021-06-30)
 
