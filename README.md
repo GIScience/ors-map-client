@@ -104,7 +104,8 @@ App folder structure under `src`:
 - `i18n` - internationalization resources
 - `models` - models used to deal transport ors response data and deals with app state and transitions
 - `pages` - app pages (currently only the `maps` page is available)
-- `resoures` - support files like the loader lib, definitions and options used to process requests and responses
+- `resources` - support files like the loader lib, definitions and options used to process requests and responses
+
 - `router` - router component based on vue-router
 - `shared-services` - shared services that can be used by various components
 - `store` - app store definitions
@@ -352,6 +353,11 @@ For a detailed explanation on how webpack works, check out the [guide](http://vu
 
 ### Contribute ###
 
+#### Commits and versioning
+
+- This app uses the `commitizen` plugin to generate standardized commit types and messages. So, after applying any change in a feature branch, use `git add .` and then `npm run commit` (instead of `git commit ...`)
+- The plugin `standard-version` is used to generate changelog entries, version tag and to bump the app version in package.json. This utility must be used only in develop branch and with the command `npm run release`. After testing the app in the stating environment, then just merge `develop` to `master`.
+
 #### Branch policy ####
 
 The `develop` branch is used as the working branch. Anything new goes to develop and then it is tested, committed and
@@ -369,7 +375,8 @@ If you have identified any bug and think that you can help to fix it, please cre
 submitting a push request.
 So the people involved will have the opportunity to discuss it.
 
-`New festures`:
+`New features`:
+
 If you want to contribute by adding a new feature or improve an existing one, please also create an issue.
 We do want contributions, and the community effort is very important to us, but features may add complexity and future
 maintenance effort.
