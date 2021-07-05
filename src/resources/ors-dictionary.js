@@ -46,15 +46,6 @@ const orsDictionary = {
     4: '12-15%',
     5: '>16%'
   },
-  roadaccessrestrictions: {
-    0: 'none',
-    1: 'no',
-    2: 'customers',
-    4: 'destination',
-    8: 'delivery',
-    16: 'private',
-    32: 'permissive'
-  },
   tollways: {
     '0': 'no_tollway',
     '1': 'is_tollway'
@@ -145,8 +136,7 @@ const orsDictionary = {
       '#8B4513',
       '#A52A2A',
       '#800000'
-    ],
-    // deifile colors below   
+    ], 
     roadaccessrestrictions: {
       0: 'gray',
       1: 'green',

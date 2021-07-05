@@ -1,5 +1,5 @@
 export default {
   roundtrip: {
-    "roundtripOptions": "Opciones de rutas circulares"
+    'roundtripOptions': 'Opciones de rutas circulares'
   }
 }

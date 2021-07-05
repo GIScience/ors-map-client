@@ -22,7 +22,7 @@ export default {
     profile: 'Perfil',
     options: 'Opciones',
     parameters: 'Parámetros',
-    custom: "Personalizado",
+    custom: 'Personalizado',
     customOverlayer: 'Capa adicional personalizada',
     rawRouting: 'Enrutamiento sin procesar',    
     months: {

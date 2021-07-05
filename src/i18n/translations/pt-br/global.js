@@ -22,7 +22,7 @@ export default {
     profile: 'Perfil',
     options: 'Opções',
     parameters: 'Parâmetros',
-    custom: "Personalizado",
+    custom: 'Personalizado',
     customOverlayer: 'Camada adicional personalizada',
     rawRouting: 'Roteamento bruto',    
     months: {

@@ -21,10 +21,10 @@ export default {
     'elevation': 'Altitudine',
     'profile': 'Profilo',
     'options': 'Opzioni',
-    "parameters": 'Parametri',
-    "custom": "Personalizzato",
-    "customOverlayer": "Strato personalizzato",
-    "rawRouting": "Routing grezzo",
+    'parameters': 'Parametri',
+    'custom': 'Personalizzato',
+    'customOverlayer': 'Strato personalizzato',
+    'rawRouting': 'Routing grezzo',
     'months': {
       'january': 'Gennaio',
       'february': 'Febbraio',
@@ -68,7 +68,7 @@ export default {
       'lng': 'long.',
       'tones': 'toni',
       't': 't',
-      "kmh": 'km/h'
+      'kmh': 'km/h'
     },
     'layers': {
       'macrocounty': 'Macro county',
@@ -85,10 +85,10 @@ export default {
       'venue': 'Sede',
       'rawCoordinate': 'Coordinate long. lat.',
       'notAvailable': 'Non avviabile',
-      "postalcode": 'Codice postale',
+      'postalcode': 'Codice postale',
       'undefined': 'Non definito',
-      "ocean": 'Oceano'
+      'ocean': 'Oceano'
     },
-    "population": 'Popolazione'
+    'population': 'Popolazione'
   }
 }

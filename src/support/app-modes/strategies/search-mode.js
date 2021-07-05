@@ -7,6 +7,7 @@ import store from '@/store/store'
  * SearchMode class
  */
 class SearchMode {
+  // eslint-disable-next-line no-unused-vars
   buildAppRouteData (places, options) {
     const appRouteData = store.getters.appRouteData || new AppRouteData()
     appRouteData.places = places
@@ -20,6 +21,7 @@ class SearchMode {
    * @param {*} appRouteData
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
+  // eslint-disable-next-line no-unused-vars
   getRoute = (appRouteData, options = {}) => {
     let name = ''
     if (appRouteData.places.length > 0) {

@@ -18,6 +18,6 @@ const surfaceTypes = [
   'pebblestone',
   'ground',
   'grass'
-  ]
+]
 
 export default surfaceTypes

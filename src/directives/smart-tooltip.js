@@ -1,4 +1,6 @@
-import { createPopper } from '@popperjs/core'
+import {
+  createPopper
+} from '@popperjs/core'
 import appConfig from '@/config/app-config'
 import utils from '@/support/utils'
 import store from '@/store/store'
@@ -8,18 +10,18 @@ import main from '@/main'
  * Popper tooltip directive handler
  */
 const smartTooltip = {
-  bind (el, binding, vNode) {
+  bind(el, binding, vNode) {
     render(el, binding, vNode)
   },
-  unbind (el, binding, vNode) {
+  unbind(el, binding, vNode) {
     if (vNode.context.popperTooltipGuid) {
       closeTooltip(vNode.context.popperTooltipGuid)
     }
   },
-  update (el, binding, vNode) {
+  update(el, binding, vNode) {
     render(el, binding, vNode, true)
   },
-  componentUpdated (el, binding, vNode) {
+  componentUpdated(el, binding, vNode) {
     render(el, binding, vNode, true)
   }
 }
@@ -124,7 +126,15 @@ const showToolTip = (el, options, vNode) => {
       setArrowPseudoStyles(guid, options)
 
       // Build tooltip popper options
-      let popperOptions = { placement: options.position, modifiers: [{ name: 'offset', options: { offset: [0, 8] } } ]  }
+      let popperOptions = {
+        placement: options.position,
+        modifiers: [{
+          name: 'offset',
+          options: {
+            offset: [0, 8]
+          }
+        }]
+      }
 
       // Store the tooltip unique id in the vue component
       vNode.context.popperTooltipGuid = guid
@@ -153,7 +163,9 @@ const buildTooltipEl = (guid, options) => {
   let contentColor = options.dark === true ? 'white' : '#333'
 
   let toolTipCloseEl = document.createElement('a')
-  toolTipCloseEl.onclick = () => {closeTooltip(guid, options.saveClose, options.name)}
+  toolTipCloseEl.onclick = () => {
+    closeTooltip(guid, options.saveClose, options.name)
+  }
   toolTipCloseEl.innerText = 'close' // material close icon will be rendered
   toolTipCloseEl.title = vueInstance.$t('global.closeAndDoNotShowAgain')
   toolTipCloseEl.className = 'popper-tooltip-close material-icons'
@@ -177,8 +189,8 @@ const buildTooltipEl = (guid, options) => {
 
   let toolTipEl = document.createElement('div')
   toolTipEl.id = guid
-  toolTipEl.setAttribute("style", style)
-  toolTipEl.setAttribute("role", 'tooltip')
+  toolTipEl.setAttribute('style', style)
+  toolTipEl.setAttribute('role', 'tooltip')
   toolTipEl.className = 'popper-tooltip'
 
   toolTipEl.innerHTML = `<div id="arrow-${guid}" data-popper-arrow></div>`
@@ -195,7 +207,7 @@ const buildTooltipEl = (guid, options) => {
  */
 const setArrowPseudoStyles = (guid, options) => {
   let arrowDivId = `arrow-${guid}`
-  let styleElem = document.head.appendChild(document.createElement("style"));
+  let styleElem = document.head.appendChild(document.createElement('style'))
   let positionStyle = buildArrowPosition(options)
   let arrowColor = options.dark === true ? '#333;' : 'white'
 
@@ -213,19 +225,20 @@ const setArrowPseudoStyles = (guid, options) => {
  */
 const buildArrowPosition = (options) => {
   let arrowPosition = ''
+
   switch (options.position) {
     case 'top':
       arrowPosition += 'bottom: -4px;'
-      break;
+      break
     case 'bottom':
       arrowPosition += 'top: -4px;'
-      break;
+      break
     case 'left':
       arrowPosition += 'right: -4px;'
-      break;
+      break
     case 'right':
       arrowPosition += 'left: -4px;'
-      break;
+      break
   }
   return arrowPosition
 }

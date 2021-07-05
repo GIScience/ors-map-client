@@ -22,7 +22,7 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {*} service
  * @returns {*} filterValue
  */
- const getFilterValue = (filter) => {
+const getFilterValue = (filter) => {
   let filterValue = null
   const filterAvailable = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
   const filterClone = getFilterWithValueUpdated(filter)
@@ -49,7 +49,7 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {*} filterValue
  * @returns {*} filterValue
  */
- const applyFilterValueConditions = (filterClone, filterValue) => {
+const applyFilterValueConditions = (filterClone, filterValue) => {
   if (!Object.is(filterValue) && !Array.isArray(filterValue)) {
     if (filterClone.offset && filterClone.step && filterClone.value > filterClone.step) {
       filterValue = filterValue - filterClone.offset
@@ -70,7 +70,7 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {*} service
  * @returns {*}
  */
- const getChildrenFilterValue = (filter) => {
+const getChildrenFilterValue = (filter) => {
   var childFilter = {}
   for (let propKey in filter.props) {
     const prop = filter.props[propKey]
@@ -90,7 +90,7 @@ const updateFieldsStatus = (scopedFilters) => {
  * Determines if the round trip filter is active
  * @returns {Boolean} isRoundTrip
  */
- const isRoundTripFilterActive = () => {
+const isRoundTripFilterActive = () => {
   const roundTripFilter = OrsFilterUtil.getFilterRefByName(constants.roundTripFilterName)
   const roundTripValue = getFilterValue(roundTripFilter, constants.services.directions)
   const isRoundTrip = roundTripValue !== null
@@ -104,7 +104,7 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {*} filterValue
  * @returns {*} filterValue
  */
- const adjustFilterValue = (filter, filterValue) => {
+const adjustFilterValue = (filter, filterValue) => {
   // Check if the filter value must be extracted as an array and do it if so
   if (filter.type === constants.filterTypes.array && Array.isArray(filter.value) && !filter.valueAsArray) {
     const separator = filter.separator || ','
@@ -134,7 +134,7 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {Boolean} invertedMatch
  * @returns {Boolean}
  */
- const matchForExistingRuleValue = (filterValue, ruleValue, invertedMatch = false) => {
+const matchForExistingRuleValue = (filterValue, ruleValue, invertedMatch = false) => {
   let match
   if (Array.isArray(filterValue)) {
     match = lodash.includes(filterValue, ruleValue)
@@ -154,8 +154,8 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {*} ruleValue
  * @returns {boolean}
  */
- const valueMatchesRule = (value, ruleValue) => {
-  // Check for collection Values like "cycling-*"
+const valueMatchesRule = (value, ruleValue) => {
+  // Check for collection Values like 'cycling-*'
   if (typeof ruleValue === 'string' && ruleValue.endsWith('*')) {
     return value.startsWith(ruleValue.replace('*', ''))
   } else {
@@ -169,7 +169,7 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {String} dependencyKey
  * @returns {boolean} matchRule
  */
- const getMatchesDependencyRules = (filter, dependencyKey) => {
+const getMatchesDependencyRules = (filter, dependencyKey) => {
   let matchRule = true  
 
   for (const ruleKey in filter[dependencyKey]) {
@@ -197,7 +197,7 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {Boolean} matchesRule
  * @returns {boolean}
  */
- const applyConditionRule = (rule, paramValue, matchesRule) => {
+const applyConditionRule = (rule, paramValue, matchesRule) => {
   if (rule.length !== undefined && paramValue.length !== rule.length) {
     matchesRule = false
   }
@@ -224,7 +224,7 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {*} matchesRule
  * @returns {boolean}
  */
- const applyValueRule = (rule, paramValue, matchesRule) => {
+const applyValueRule = (rule, paramValue, matchesRule) => {
   // If the the rule requires a value and the object does not have this value
   // then the dependent object matchesRule is set to false
   let ruleValue = rule.value || rule.valueNot
@@ -250,7 +250,7 @@ const updateFieldsStatus = (scopedFilters) => {
  * @param {Object} filter
  * @returns {Object} filterClone
  */
- const getFilterWithValueUpdated = (filter) => {
+const getFilterWithValueUpdated = (filter) => {
   const filterClone = utils.clone(filter)
   if (filterClone.dependsOnFilter) {
     const matchRules = getMatchesDependencyRules(filter, 'validWhen')
@@ -279,7 +279,7 @@ const setAvailability = (scopedFilters, key) => {
  * @param {*} scopedFilters
  * @param {*} key
  */
- const setVisibility = (scopedFilters, key) => {
+const setVisibility = (scopedFilters, key) => {
   const parameter = scopedFilters[key]
   if (parameter.visibleWhen) {
     const matchesRules = getMatchesDependencyRules(parameter, 'visibleWhen')
@@ -294,7 +294,7 @@ const setAvailability = (scopedFilters, key) => {
  * @param {*} filter
  * @returns {Boolean}
  */
- const isAvailable = (filter) => {
+const isAvailable = (filter) => {
   if (filter.validWhen) {
     let matchesRules = getMatchesDependencyRules(filter, 'validWhen', false)
     if (!matchesRules) {
@@ -363,27 +363,27 @@ const applyValuesRestrictions = (scopedFilters, key) => {
  * @param {*} validWhen
  * @param {*} rule
  */
- const setFilteredValues = (scopedFilters, key, dependsOnFilter, rule) => {
+const setFilteredValues = (scopedFilters, key, dependsOnFilter, rule) => {
   if (rule.valuesWhen && scopedFilters[key]) {    
     Object.keys(rule.valuesWhen).forEach(function (ruleKey) {
       if ((dependsOnFilter.value === ruleKey) || (ruleKey.endsWith('*') && dependsOnFilter.value.startsWith(ruleKey.replace('*', '')))) {
         if (rule.valuesWhen[ruleKey].value !== undefined) {
-          scopedFilters[key].value = getRuleValue(rule, ruleKey, "value")
+          scopedFilters[key].value = getRuleValue(rule, ruleKey, 'value')
         }
         if (rule.valuesWhen[ruleKey].min !== undefined) {
-          scopedFilters[key].min = getRuleValue(rule, ruleKey, "min")
+          scopedFilters[key].min = getRuleValue(rule, ruleKey, 'min')
         }
         if (rule.valuesWhen[ruleKey].max !== undefined) {
-          scopedFilters[key].max = getRuleValue(rule, ruleKey, "max")
+          scopedFilters[key].max = getRuleValue(rule, ruleKey, 'max')
           if (scopedFilters[key].min > scopedFilters[key].max) {
             scopedFilters[key].min = scopedFilters[key].max
           }
         }
         if (rule.valuesWhen[ruleKey].multiplyValueBy !== undefined) {
-          scopedFilters[key].multiplyValueBy = getRuleValue(rule, ruleKey, "multiplyValueBy")
+          scopedFilters[key].multiplyValueBy = getRuleValue(rule, ruleKey, 'multiplyValueBy')
         }
         if (rule.valuesWhen[ruleKey].step !== undefined) {
-          scopedFilters[key].step = getRuleValue(rule, ruleKey, "step")
+          scopedFilters[key].step = getRuleValue(rule, ruleKey, 'step')
         }
         return false
       }
@@ -527,7 +527,7 @@ const getParsedValue = (value, defaultValue = null) => {
  * @param {Boolean} checkAvailability
  * @returns {*} rootTargetObject
  */
- const getDependencyRelationTargetObj = (path, filters) => {
+const getDependencyRelationTargetObj = (path, filters) => {
   const globalFilters = filters || OrsMapFilters
   let rootFilterName = path
   let childPath = null

@@ -15,6 +15,7 @@ class AppHooks {
    * Load registered hooks defined in src/config/hooks.js
    */
   loadRegisteredHooks () {
+    // eslint-disable-next-line no-undef
     require('@/config/hooks')
   }
 

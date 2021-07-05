@@ -84,7 +84,7 @@ const orsParamsParser = {
    *  category_group_ids: Array,
    *  category_ids: Array,
    *  name: Array [String],
-   *  wheelchair: Array ["yes","no","limited","designated"],
+   *  wheelchair: Array ['yes','no','limited','designated'],
    *  smoking: Array ['dedicated','yes','no','separated','isolated','outside'],
    *  fee: Array ['yes', 'no']
    * } @see https://openrouteservice.org/dev/#/api-docs/pois/post
@@ -148,7 +148,7 @@ const orsParamsParser = {
       locations: locations,
       area_units: store.getters.mapSettings.unit,
       timeout: constants.orsApiRequestTimeout,
-      attributes:["total_pop"]
+      attributes:['total_pop']
     }
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components

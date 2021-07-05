@@ -60,11 +60,11 @@ export default {
     moveMapPositionToDown: 'karte nach unten bewegen',
     toggleDirect: 'Direkter Weg (Luftlinie) zu nächstem Punkt an/aus',
     heightGraph: {
-      distance: "Entfernung",
-      elevation: "Höhe",
-      segment_length: "Abschnittslänge",
-      type: "Typ",
-      legend: "Legende"
+      distance: 'Entfernung',
+      elevation: 'Höhe',
+      segment_length: 'Abschnittslänge',
+      type: 'Typ',
+      legend: 'Legende'
     },
     editShape: 'Fläche bearbeiten',
     remove: 'Entfernen',
@@ -75,9 +75,9 @@ export default {
     polygonEditModeEnabled: 'Wenn Sie die Bearbeitung abgeschlossen haben, klicken Sie auf eine beliebige Stelle, um die Änderungen zu speichern',
     customTileProvider: 'Vom Benutzer definierter Kachelanbieter',
     gestureHandling: {      
-      touch: "Verschieben der Karte mit zwei Fingern",
-      scroll: "Verwende Strg + Scrollen zum Zoomen der Karte",
-      scrollMac: "Verwenden Sie \u2318 + Scrollen, um die Karte zu zoomen"      
+      touch: 'Verschieben der Karte mit zwei Fingern',
+      scroll: 'Verwende Strg + Scrollen zum Zoomen der Karte',
+      scrollMac: 'Verwenden Sie \u2318 + Scrollen, um die Karte zu zoomen'      
     }
   }
 }

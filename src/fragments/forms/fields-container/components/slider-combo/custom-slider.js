@@ -2,7 +2,7 @@
 import { VSlider } from 'vuetify'
 
 export default {
-  name:"custom-slider",
+  name:'custom-slider',
   extends: VSlider,
   computed: {
     internalValue: {
@@ -19,7 +19,7 @@ export default {
           // Round value to ensure the
           // entire slider range can
           // be selected with step
-          var value = this.roundValue(Math.min(Math.max(val, min), max));
+          var value = this.roundValue(Math.min(Math.max(val, min), max))
           if (value === this.lazyValue) return
           this.lazyValue = value
           this.$emit('input', value)

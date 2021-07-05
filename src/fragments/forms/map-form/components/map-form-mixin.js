@@ -23,14 +23,14 @@ export default {
      * Provides an accessor to the ors map filters object
      * @return {Object} OrsMapFilters
      */
-    OrsMapFiltersAccessor () {
+    OrsMapFiltersAccessor() {
       return OrsMapFilters
     },
     /**
      * Get the the avoid_polygons filter on the ors-filters array
      * @returns {Object}
      */
-    avoidPolygonsFilterAccessor () {
+    avoidPolygonsFilterAccessor() {
       const filterRef = OrsFilterUtil.getFilterRefByName(constants.avoidPolygonsFilterName)
       return filterRef
     },
@@ -38,7 +38,7 @@ export default {
      * Determines if the sidebar is open
      * @returns {Boolean}
      */
-    isSidebarOpen () {
+    isSidebarOpen() {
       return this.$store.getters.isSidebarVisible
     }
   },
@@ -48,7 +48,7 @@ export default {
      * reset the places array
      * @param {Boolean} isActive
      */
-    activeChanged (isActive) {
+    activeChanged(isActive) {
       if (isActive) {
         // this.places = [new Place()]
       }
@@ -56,14 +56,14 @@ export default {
     /**
      * Toggle round trip
      */
-    toggleRoundTrip () {
+    toggleRoundTrip() {
       this.roundTripActive = !this.roundTripActive
     },
     /**
      * Add a place input
      * @param place object
      */
-    addPlaceInput (place = null) {
+    addPlaceInput(place = null) {
       place = place || new Place()
       this.places.push(place)
     },
@@ -71,7 +71,7 @@ export default {
      * Remove a place input at a given index as a result of user remove input action
      * @param {*} index
      */
-    removePlaceInput (index) {
+    removePlaceInput(index) {
       this.places.splice(index, 1)
       this.mapViewData.places = this.places
       // If there are no more places, then
@@ -86,36 +86,36 @@ export default {
      * Get place input objects from place inputs that are filled
      * @returns {Array} of filled places
      */
-     getFilledPlaces () {
+    getFilledPlaces() {
       let filledPlaces = Place.getFilledPlaces(this.places)
       return filledPlaces
     },
 
     /**
-    * When the user click on a mpa view marker and click to remove it
-    *
-    * @param {*} data {index: ..., place:...}
-    */
-   removePlace (data) {
-    if (this.places[data.index]) {
-      // call the specialized script method
-      this.removePlaceInput(data.index)
-      this.updatePlaceView(data.index)
-    }
-  },
+     * When the user click on a mpa view marker and click to remove it
+     *
+     * @param {*} data {index: ..., place:...}
+     */
+    removePlace(data) {
+      if (this.places[data.index]) {
+        // call the specialized script method
+        this.removePlaceInput(data.index)
+        this.updatePlaceView(data.index)
+      }
+    },
     /**
      * Set the visibility of the sidebar depending on the screen breakpoint
      * and the auto focus on map option
      * @param open boolean|event - sidebar pinned desired status - if it is a boolean, use it.
      */
-    setSidebarIsOpen (open) {
+    setSidebarIsOpen(open) {
       open = typeof open === 'boolean' ? open : this.$store.getters.leftSideBarPinned || (this.$mdAndUpResolution && !this.$store.getters.embed)
       this.$store.commit('setLeftSideBarIsOpen', open)
     },
     /**
      * Reset the places input to its default status (only one empty input)
      */
-    clearPlaces () {
+    clearPlaces() {
       this.places = []
       this.mapViewData = new MapViewData()
       this.addPlaceInput()
@@ -128,7 +128,7 @@ export default {
     /**
      * Reverse the route places
      */
-    reverseRoute () {
+    reverseRoute() {
       this.places = this.places.reverse()
       this.updateAppRoute()
     },
@@ -136,7 +136,7 @@ export default {
      * Deal with the content uploaded
      * @param {*} data {content:..., options: ...}
      */
-    contentUploaded (data) {
+    contentUploaded(data) {
       const context = this
       data.options.translations = context.$t('global.units')
       MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
@@ -165,7 +165,7 @@ export default {
      * Update the place input view
      * @param {*} index
      */
-    updatePlaceView (index) {
+    updatePlaceView(index) {
       // Propagate place view notifies the VueJS that a object inside an array ahs changed
       this.propagatePlaceChange(index)
       // Force a digest
@@ -176,7 +176,7 @@ export default {
      * Let vue know that an item in an array has been updated
      * @param {*} index
      */
-    propagatePlaceChange (index) {
+    propagatePlaceChange(index) {
       let place = this.places[index]
       if (place) {
         // Tell VueJS that the and object property (coordinates)  at the

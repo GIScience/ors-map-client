@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import appUI from './modules/app-ui'

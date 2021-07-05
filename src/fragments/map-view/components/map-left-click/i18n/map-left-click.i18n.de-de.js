@@ -7,7 +7,6 @@ export default {
     copyLnglat: 'Kopieren in Long,Lat Format',
     directionsToClickedPoint: 'Route zum angeklickten Ort',
     latlngCopied: 'Breitengrad und Längengrad kopiert',
-    lnglatCopied: 'Längengrad und Breitengrad kopiert',
-    directionsToClickedPoint: 'Diesen Button klicken um zum ausgewählten Punkt zu navigieren'
+    lnglatCopied: 'Längengrad und Breitengrad kopiert'
   }
 }

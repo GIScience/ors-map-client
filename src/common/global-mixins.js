@@ -31,7 +31,7 @@ const globalMixins = {
       let VueInstance = main.getInstance()
       VueInstance.eventBus.$emit('triggerShowInfo', info)
 
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         VueInstance.eventBus.$on('infoOk', () => {
           resolve()
         })

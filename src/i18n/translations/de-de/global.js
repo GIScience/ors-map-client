@@ -1,4 +1,3 @@
-// general german translations
 export default {
   global: {
     send: 'Senden',

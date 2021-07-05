@@ -37,7 +37,7 @@ const getDatasets = (mapViewData, routeIndex, translations) => {
     coordinates = route.geometry.coordinates
   }
 
-  lodash.each(coordinates, (data, index) => {
+  lodash.each(coordinates, (data) => {
     if (data.length > 2) {
       altitudeDataset.data.push(Math.round(data[2]))
     }

@@ -61,29 +61,29 @@ export default {
       'restrictions': {
         'label': 'Restrizioni'
       },
-      "axleload": {
-        "label": 'Carico sull\'asse',
-        "description": 'Il carico massimo per asse in tonnellate'
+      'axleload': {
+        'label': 'Carico sull\'asse',
+        'description': 'Il carico massimo per asse in tonnellate'
       },
-      "height": {
-        "label": 'Altezza',
-        "description": 'L\'altezza massima in metri'
+      'height': {
+        'label': 'Altezza',
+        'description': 'L\'altezza massima in metri'
       },
-      "length": {
-        "label": 'Lunghezza',
-        "description": 'La lunghezza massima in metri'
+      'length': {
+        'label': 'Lunghezza',
+        'description': 'La lunghezza massima in metri'
       },
-      "weight": {
-        "label": 'Peso',
-        "description": 'Il peso massimo in tonnellate'
+      'weight': {
+        'label': 'Peso',
+        'description': 'Il peso massimo in tonnellate'
       },
-      "width": {
-        "label": 'Larghezza',
-        "description": 'La larghezza massima in metri'
+      'width': {
+        'label': 'Larghezza',
+        'description': 'La larghezza massima in metri'
       },
-      "hazmat": {
-        "label": 'Merci pericolose',
-        "description": 'Trasporto di merci pericolose'
+      'hazmat': {
+        'label': 'Merci pericolose',
+        'description': 'Trasporto di merci pericolose'
       },
       'maximum_incline': {
         'label': 'Inclinazione Massimale',
@@ -170,20 +170,20 @@ export default {
         'label': 'Fattore di lunghezza',
         'description': 'Fattore massimo secondo il quale il percorso diverge dal percorso ottimale. Il valore predefinito di 1.4 significa che i percorsi alternativi possono essere fino a 1.4 volte più lunghi del percorso ottimale.'
       },
-      "maximum_speed": {
-        "label": 'Velocità massima',
-        "description": 'Un limite di velocità massima che deve essere applicato',
+      'maximum_speed': {
+        'label': 'Velocità massima',
+        'description': 'Un limite di velocità massima che deve essere applicato',
       },
-      "weightings": {
-        "label": 'parametri aggiuntivi'
+      'weightings': {
+        'label': 'parametri aggiuntivi'
       },
-      "green": {
-        "label": 'Verde (solo in Germania)',
-        "description": 'Preferisci gli spazi verdi (disponibile solo per la Germania)',
+      'green': {
+        'label': 'Verde (solo in Germania)',
+        'description': 'Preferisci gli spazi verdi (disponibile solo per la Germania)',
       },
-      "quiet": {
-        "label": 'Silenzioso (solo Germania)',
-        "description": 'Preferisce zone tranquille (disponibile solo per la Germania)',
+      'quiet': {
+        'label': 'Silenzioso (solo Germania)',
+        'description': 'Preferisce zone tranquille (disponibile solo per la Germania)',
       }
     }
   }

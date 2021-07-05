@@ -10,6 +10,7 @@ import main from '@/main'
  * PlaceMode class
  */
 class PlaceMode {
+  // eslint-disable-next-line no-unused-vars
   buildAppRouteData (places, options = {}) {
     const appRouteData = store.getters.appRouteData || new AppRouteData()
     appRouteData.places = places

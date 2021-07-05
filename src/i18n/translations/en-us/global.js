@@ -62,7 +62,7 @@ export default {
       minutes: 'minutes',
       hours: 'hour(s)',
       days: 'd',
-      hours: 'h',
+      h: 'h',
       min: 'min',
       meters: 'meters',
       lat: 'lat',

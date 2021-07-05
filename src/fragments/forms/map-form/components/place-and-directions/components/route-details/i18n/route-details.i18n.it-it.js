@@ -18,6 +18,6 @@ export default {
       '3': 'Questo itinerario si basa su vie dirette. Durata e restrizioni sulle strade potrebbero non essere corrette.',
       '4': 'Almeno un\'opzione extra richiesta non è disponibile.'
     },
-    "routeOpacity": 'Opacità del percorso'
+    'routeOpacity': 'Opacità del percorso'
   }
 }

@@ -79,8 +79,8 @@ class OrsExtendedPolyline {
    * Extends the polyline by adding the editingDrag
    */
   addPolylineCustomBehaviour (options) {
-    Leaflet.EditDrag = Leaflet.EditDrag || {};
-    Leaflet.EditDrag.Polyline = Leaflet.Handler.extend(options);
+    Leaflet.EditDrag = Leaflet.EditDrag || {}
+    Leaflet.EditDrag.Polyline = Leaflet.Handler.extend(options)
 
     Leaflet.Polyline.addInitHook(function() {
       if (this.edit_with_drag) {
@@ -88,7 +88,7 @@ class OrsExtendedPolyline {
       }
 
       if (Leaflet.EditDrag.Polyline) {
-        this.editingDrag = new Leaflet.EditDrag.Polyline(this);
+        this.editingDrag = new Leaflet.EditDrag.Polyline(this)
 
         if (this.options.edit_with_drag) {
           this.editingDrag.enable()
@@ -232,7 +232,7 @@ class OrsExtendedPolyline {
 
     } else if (!this._marker && closest) {
       this._createCustomMarkers(closest)
-      var latlng = this._marker.getLatLng()
+      latlng = this._marker.getLatLng()
       this._poly.fireEvent('follow', latlng)
 
     } else if (this._marker) {
@@ -288,7 +288,7 @@ class OrsExtendedPolyline {
     if (this._showPointInfo) {
       const infoIcon = this._buildInfoIcon(closestIndex)
       if (infoIcon) {
-       this._markerInfo = Leaflet.marker(closest.latlng, { clickable: false, draggable: false, icon: infoIcon }).addTo(this._map)
+        this._markerInfo = Leaflet.marker(closest.latlng, { clickable: false, draggable: false, icon: infoIcon }).addTo(this._map)
       }
     }
   }
@@ -305,9 +305,9 @@ class OrsExtendedPolyline {
       const altitude = coordinates[coordinatePolylineIndex][2].toFixed(2)
 
       // calculate the distance of the point
-      const totaldistance = route.summary.distance.toFixed(1)
+      const totalDistance = route.summary.distance.toFixed(1)
       const currentStep = (route.geometry.coordinates.length / (coordinatePolylineIndex + 1))
-      const currentDistance = (totaldistance / currentStep).toFixed(1)
+      const currentDistance = (totalDistance / currentStep).toFixed(1)
       const globalTranslations = context.$t('global')
       const orsPolylineTranslations = context.$t('orsLPolyline')
       const orsDictionaryTranslations = context.$t('orsDictionary')
@@ -324,7 +324,7 @@ class OrsExtendedPolyline {
           }
         }
         if (!surfaceType) {
-          surfaceType = translations.unknownSurfaceType
+          surfaceType = context.$t('orsLPolyline.unknownSurfaceType')
         }
       }
 
@@ -335,7 +335,7 @@ class OrsExtendedPolyline {
           <div class='ors-l-polyline-vertical-bar'></div>
           <div class='ors-l-polyline-content-block'>
             <div class='ors-l-polyline-top-block-info'>
-              <b>${globalTranslations.distance}</b>: ${currentDistance} / ${totaldistance} ${route.summary.unit}<br/>
+              <b>${globalTranslations.distance}</b>: ${currentDistance} / ${totalDistance} ${route.summary.unit}<br/>
               <b>${globalTranslations.elevation}</b>: ${altitude} ${globalTranslations.units.meters}<br/>
               <b>${orsPolylineTranslations.surface}</b>: ${surfaceType}
             </div>

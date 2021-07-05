@@ -1,8 +1,8 @@
 
 export default {
   orsLPolyline: {
-    "type": "Tipo",
-    "surface": "Superficie",
-    "unknownSurfaceType": "Desconocido"
+    'type': 'Tipo',
+    'surface': 'Superficie',
+    'unknownSurfaceType': 'Desconocido'
   }
 }

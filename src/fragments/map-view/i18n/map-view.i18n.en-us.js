@@ -60,11 +60,11 @@ export default {
     moveMapPositionToDown: 'Move map center down',
     toggleDirect: 'Toggle direct from here until next place',
     heightGraph: {
-      distance: "Distance",
-      elevation: "Elevation",
-      segment_length: "Segment length",
-      type: "Type",
-      legend: "Legend"
+      distance: 'Distance',
+      elevation: 'Elevation',
+      segment_length: 'Segment length',
+      type: 'Type',
+      legend: 'Legend'
     },
     editShape: 'Edit shape',
     remove: 'Remove',
@@ -75,9 +75,9 @@ export default {
     polygonEditModeEnabled: 'When you finish editing, click anywhere to save the changes',
     customTileProvider: 'Custom tile provider defined by the user',
     gestureHandling: {      
-      touch: "Use two fingers to move the map",
-      scroll: "Use ctrl + scroll to zoom the map",
-      scrollMac: "Use \u2318 + scroll to zoom the map"      
+      touch: 'Use two fingers to move the map',
+      scroll: 'Use ctrl + scroll to zoom the map',
+      scrollMac: 'Use \u2318 + scroll to zoom the map'      
     }
   }
 }

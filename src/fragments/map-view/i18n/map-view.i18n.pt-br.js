@@ -60,11 +60,11 @@ export default {
     moveMapPositionToDown: 'Mover mapara para baixo',
     toggleDirect: 'Alternar direto daqui até o próximo local',
     heightGraph: {
-      distance: "Distância",
-      elevation: "Elevação",
-      segment_length: "Distância do segmento",
-      type: "Tipo",
-      legend: "Legenda"
+      distance: 'Distância',
+      elevation: 'Elevação',
+      segment_length: 'Distância do segmento',
+      type: 'Tipo',
+      legend: 'Legenda'
     },
     editShape: 'Alterar forma',
     remove: 'Remover',
@@ -75,9 +75,9 @@ export default {
     polygonEditModeEnabled: 'Quando terminar as alterações clicke em qualquer lugar para salvar',
     customTileProvider: 'Provedor de mapa definido pelo usuário',
     gestureHandling: {      
-      touch: "Use dois dedos para mover o mapa",
-      scroll: "Pressione Ctrl e role a tela simultaneamente para aplicar zoom no mapa",
-      scrollMac: "Use \u2318 e role a tela simultaneamente para aplicar zoom no mapa"      
+      touch: 'Use dois dedos para mover o mapa',
+      scroll: 'Pressione Ctrl e role a tela simultaneamente para aplicar zoom no mapa',
+      scrollMac: 'Use \u2318 e role a tela simultaneamente para aplicar zoom no mapa'      
     }
   }
 }

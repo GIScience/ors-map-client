@@ -1,4 +1,7 @@
-import { Geocode, ReverseGeocode } from '@/support/ors-api-runner'
+import {
+  Geocode,
+  ReverseGeocode
+} from '@/support/ors-api-runner'
 import GeoUtils from '@/support/geo-utils'
 import lodash from 'lodash'
 /**
@@ -9,7 +12,7 @@ import lodash from 'lodash'
  * @param {Object} options
  */
 class Place {
-  constructor (lng = null, lat = null, placeName = '', options = {}) {
+  constructor(lng = null, lat = null, placeName = '', options = {}) {
     this.lng = lng !== null && lng !== 'null' ? Number(lng) : null
     this.lat = lat !== null && lat !== 'null' ? Number(lat) : null
 
@@ -51,7 +54,7 @@ class Place {
    * @param {*} lng
    * @param {*} lat
    */
-  setLnglat (lng, lat) {
+  setLnglat(lng, lat) {
     this.lng = Number(lng)
     this.lat = Number(lat)
     this.coordinates = [Number(lng), Number(lat)]
@@ -61,7 +64,7 @@ class Place {
    * Returns an array containing lng and lat
    * @returns {Array} containing [lng, lat]
    */
-  getLngLatArr () {
+  getLngLatArr() {
     if (this.coordinates) {
       return this.coordinates
     }
@@ -81,7 +84,7 @@ class Place {
    * Returns LatLng object
    * @returns {LatLng}
    */
-  getLatLng () {
+  getLatLng() {
     if (this.nameIsCoord()) {
       let coords = this.getCoordsFromName()
       return GeoUtils.buildLatLong(coords[1], coords[0])
@@ -89,11 +92,11 @@ class Place {
     return GeoUtils.buildLatLong(this.lat, this.lng)
   }
 
-   /**
+  /**
    * Returns an array containing lat and lng
    * @returns {Array} containing [lat, lng]
    */
-  getLatLngArr () {
+  getLatLngArr() {
     return this.getLngLatArr().reverse()
   }
 
@@ -101,7 +104,7 @@ class Place {
    * Set the suggestions
    * @param {Array} places
    */
-  setSuggestions (places) {
+  setSuggestions(places) {
     this.suggestions = places
   }
 
@@ -109,11 +112,11 @@ class Place {
    * Set the place id
    * @param {*} id
    */
-  setId (id) {
+  setId(id) {
     this.placeId = id
   }
 
-  isEmpty () {
+  isEmpty() {
     return !this.lat || this.lat === 0 || !this.lng || this.lng === 0
   }
 
@@ -122,7 +125,7 @@ class Place {
    * @param {Place} otherPlace
    * @returns {Boolean} equals
    */
-  equals (otherPlace) {
+  equals(otherPlace) {
     let equals = true
     if (!otherPlace || (otherPlace.lat !== this.lat || otherPlace.lng !== this.lng || otherPlace.properties.layer !== this.properties.layer)) {
       equals = false
@@ -134,7 +137,7 @@ class Place {
    * Create a clone of the current Place
    * @returns {Place}
    */
-  clone () {
+  clone() {
     const clone = new Place(this.lng, this.lat, this.placeName)
     const propertiesToClone = [
       'unresolved',
@@ -158,7 +161,7 @@ class Place {
    * @param {Array} places
    * @returns {Number} index
    */
-  findIndex (places) {
+  findIndex(places) {
     const context = this
     const index = lodash.findIndex(places, (p) => {
       return p.lat === context.lat && p.lng === context.lng && p.placeName === context.placeName
@@ -169,7 +172,7 @@ class Place {
   /**
    * Check if the place contains coordinates as placeName
    */
-  nameIsCoord () {
+  nameIsCoord() {
     const coords = this.getCoordsFromName()
     if (coords) {
       return true
@@ -180,7 +183,7 @@ class Place {
   /**
    * Get the coordinates from name
    */
-  getCoordsFromName () {
+  getCoordsFromName() {
     if (this.placeName && this.placeName.indexOf(',') > -1) {
       const parts = this.placeName.split(',')
       if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
@@ -193,7 +196,7 @@ class Place {
   /**
    * Set the place coordinates as place name
    */
-  setCoordsAsName () {
+  setCoordsAsName() {
     if (this.lat && this.lng) {
       const coords = `${this.lat},${this.lng}`
       this.placeName = coords
@@ -205,7 +208,7 @@ class Place {
    * @param {Number} zoom
    * @returns {Promise}
    */
-  resolve (zoom = 10) {
+  resolve(zoom = 10) {
     const context = this
     return new Promise((resolve, reject) => {
       let promise = null
@@ -235,7 +238,7 @@ class Place {
    * Get place models that are filled
    * @returns {Array} of filled places
    */
-   static getFilledPlaces (places) {
+  static getFilledPlaces(places) {
     const filledPlaces = lodash.filter(places, (p) => {
       if (!p.isEmpty()) {
         return p
@@ -252,7 +255,7 @@ class Place {
    * @param {*} places
    * @returns {Place} place
    */
-  static selectPlaceByZoomLevel (zoom, places) {
+  static selectPlaceByZoomLevel(zoom, places) {
     let selectedPlace = null
     if (Array.isArray(places) && places.length > 0) {
       selectedPlace = places[0]
@@ -277,7 +280,7 @@ class Place {
    * @param {*} features
    * @returns {Array} of Places
    */
-  static placesFromFeatures (features) {
+  static placesFromFeatures(features) {
     const places = []
     for (const key in features) {
       const feature = features[key]
@@ -300,7 +303,7 @@ class Place {
    * @param {*} lng
    * @param {*} lat
    */
-  static build (lng, lat, placeName = '', options = {}) {
+  static build(lng, lat, placeName = '', options = {}) {
     return new Place(lng, lat, placeName, options)
   }
 }

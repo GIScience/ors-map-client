@@ -8,7 +8,7 @@ import main from '@/main'
  * from remote server and then run the local customization over it
  */
 const loadItems = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     if (appConfig.appMenu.useORSMenu) {
       menuManager.getMenu(appConfig.appMenu.mainMenuId).then((menu) => {
         resolve(menu)

@@ -31,7 +31,7 @@ const RouteUtils = {
       const lngLat = coordinates[counter].split(',')
 
       // Add a new place
-      const placeName = route.params[key].replace(',', ', ')
+      let placeName = route.params[key].replace(',', ', ')
       // If a place has as placeName `null` it is a placeholder, so we remove it
       if (placeName === 'null') {
         placeName = ''

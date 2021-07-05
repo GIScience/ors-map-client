@@ -27,7 +27,7 @@ const Utils = {
     var result = { different: [], missing_from_first: [], missing_from_second: [] }
   
     lodash.reduce(a, function (result, value, key) {
-      if (b.hasOwnProperty(key)) {
+      if ( Object.prototype.hasOwnProperty.call(b, key)) {
         if (lodash.isEqual(value, b[key])) {
           return result
         } else {
@@ -36,18 +36,18 @@ const Utils = {
             result.different.push(key)
             return result
           } else {
-            var deeper = Utils.getObjectsDiff(a[key], b[key]);
+            var deeper = Utils.getObjectsDiff(a[key], b[key])
             result.different = result.different.concat(lodash.map(deeper.different, (sub_path) => {
-              return key + "." + sub_path
-            }));
+              return key + '.' + sub_path
+            }))
   
             result.missing_from_second = result.missing_from_second.concat(lodash.map(deeper.missing_from_second, (sub_path) => {
-              return key + "." + sub_path
-            }));
+              return key + '.' + sub_path
+            }))
   
             result.missing_from_first = result.missing_from_first.concat(lodash.map(deeper.missing_from_first, (sub_path) => {
-              return key + "." + sub_path
-            }));
+              return key + '.' + sub_path
+            }))
             return result
           }
         }
@@ -55,10 +55,10 @@ const Utils = {
         result.missing_from_second.push(key)
         return result
       }
-    }, result);
+    }, result)
   
     lodash.reduce(b, function (result, value, key) {
-      if (a.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(a, key)) {
         return result
       } else {
         result.missing_from_first.push(key)
@@ -214,7 +214,7 @@ const Utils = {
       }
     }
     for (const key in obj) {
-      if (!obj.hasOwnProperty(key)) continue
+      if (!Object.prototype.hasOwnProperty.call(obj, key)) continue
       if (typeof obj[key] === 'object') {
         const prop = clone[key]
         if (prop !== undefined) {

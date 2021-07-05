@@ -93,7 +93,13 @@ const geoUtils = {
 
         // Build the marker
         const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName, key, buildAsRoute)
-        const marker = { position: { lng: place.lng, lat: place.lat}, icon: markerIcon}
+        const marker = {
+          position: {
+            lng: place.lng,
+            lat: place.lat
+          },
+          icon: markerIcon
+        }
 
         // If the way point array has the third parameter, it is its label
         marker.label = place.placeName || `${place.lng},${place.lat}`
@@ -199,12 +205,16 @@ const geoUtils = {
    * @returns {Object} markerIcon
    */
   buildMarkerIcon: (color, index, isRoute) => {
-    let propsData = { color: color }
+    let propsData = {
+      color: color
+    }
     if (isRoute && index !== null) {
       propsData.markerNumber = Number(index) + 1
     }
     var htmlMarkerClass = Vue.extend(HtmlMarker)
-    var htmlIconInstance = new htmlMarkerClass({ propsData })
+    var htmlIconInstance = new htmlMarkerClass({
+      propsData
+    })
     htmlIconInstance.$mount()
     let markerHtml = htmlIconInstance.$el.innerHTML
 
@@ -259,7 +269,8 @@ const geoUtils = {
       }
     }
 
-    return [{
+    return [
+      {
         lon: minLng,
         lat: minLat
       },
@@ -414,7 +425,7 @@ const geoUtils = {
    * @param {Array} polylineArr
    * @returns  {Integer|null} indexOnPolyline
    */
-  getPlaceIndexOnPolylineArray (place, polylineArr) {
+  getPlaceIndexOnPolylineArray(place, polylineArr) {
     let indexOnPolyline = null
     var minDistance = null
     // Find an more appropriate inject index, it this is the case
@@ -465,7 +476,7 @@ const geoUtils = {
 
     for (let mIndex = 0; mIndex < placePolylineIndexMap.length; mIndex++) {
       let indexMap = placePolylineIndexMap[mIndex]
-      let nextIndexMap = placePolylineIndexMap[mIndex +1]
+      let nextIndexMap = placePolylineIndexMap[mIndex + 1]
       if (indexMap.polylineIndex <= sourceIndex && nextIndexMap && sourceIndex <= nextIndexMap.polylineIndex) {
         injectIndex = Number(indexMap.placeIndex)
         break
@@ -545,7 +556,7 @@ const geoUtils = {
     return selectedPlace
   },
 
-   /**
+  /**
    * Tests if a point is left|on|right of an infinite line.
    * This is a JavaScript and Leaflet port of the `isLeft()` C++ function by Dan Sunday.
    * @param {LatLng} p0 Point the polyline point

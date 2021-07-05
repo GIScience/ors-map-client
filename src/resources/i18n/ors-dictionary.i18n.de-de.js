@@ -43,10 +43,7 @@ export default {
     unhewn_cobblestone: 'Rohes Kopfsteinpflaster',
     compacted: 'Verdichtet',
     fine_gravel: 'Feinkies',
-    gravel: 'Kies',
     pebblestone: 'Kieselsteine',
-    ground: 'Boden',
-    grass: 'Gras',
     impassable: 'Nicht passierbar',
     very_horrible: 'Sehr schrecklich',
     horrible: 'Schrecklich',
@@ -60,7 +57,6 @@ export default {
     grade3: 'Befestigter oder ausgebesserter Weg',
     grade4: 'Einfacher Weg',
     grade5: 'Unbefestigter Weg',
-
     no_tollway: 'Keine Mautstraße',
     is_tollway: 'Ist mautpflichtig',
     no_category: 'Keine Kategorie',

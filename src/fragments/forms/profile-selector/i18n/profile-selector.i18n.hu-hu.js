@@ -1,6 +1,6 @@
 
 export default {
   profileSelector: {
-    "activeProfile": "Aktív"
+    'activeProfile': 'Aktív'
   }
 }

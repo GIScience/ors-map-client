@@ -187,7 +187,7 @@ const load = () => {
     let embedPromise = checkAndSetEmbedState()
     let fetchMainMenu = store.dispatch('fetchMainMenu')
 
-    Promise.all([apiDataPromise, embedPromise, fetchMainMenu]).then((results) => {
+    Promise.all([apiDataPromise, embedPromise, fetchMainMenu]).then(() => {
       resolve()
     })
   })

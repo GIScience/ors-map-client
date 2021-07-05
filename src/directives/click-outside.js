@@ -24,7 +24,7 @@ const clickOutside = {
     // add Event Listeners
     document.addEventListener('click', handler)
   },
-  unbind: function (el, binding) {
+  unbind: function (el) {
     // Remove Event Listeners
     document.removeEventListener('click', el.__vueClickOutside__)
     el.__vueClickOutside__ = null

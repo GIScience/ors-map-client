@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import global from './global.js'
 import loader from '@/support/loader'
 
@@ -28,8 +29,8 @@ const addComponentKeys = (localeSharedPartsMessages, translationsObj) => {
   for (let messages in localeSharedPartsMessages) {
     let translations = localeSharedPartsMessages[messages]
     for (var key in translations) {
-      // skip loop if the property is from prototype
-      if (!translations.hasOwnProperty(key)) continue
+      // Skip loop if the property is from prototype
+      if (!Object.prototype.hasOwnProperty.call(translations, key)) continue
       translationsObj[key] = translations[key]
     }
   }

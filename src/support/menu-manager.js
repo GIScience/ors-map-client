@@ -13,7 +13,7 @@ import Vue from 'vue'
  * @param {string} slug - slug of the menu
  */
 const getMenu = (slug) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     menuService.query()
       .then(response => {
         const menuBySlug = Vue.lodash.find(response.data, (menu) => {

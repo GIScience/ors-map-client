@@ -1,10 +1,7 @@
 
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import OrsMapFilters from '@/config/ors-map-filters'
-import PolygonUtils from '@/support/polygon-utils'
-import constants from '@/resources/constants'
 import store from '@/store/store'
-import lodash from 'lodash'
 import main from '@/main'
 
 // Modes

@@ -1,6 +1,6 @@
 export default {
   box: {
-    "maximize": "Maximizar",
-    "minimize": "Minimizar"
+    'maximize': 'Maximizar',
+    'minimize': 'Minimizar'
   }
 }

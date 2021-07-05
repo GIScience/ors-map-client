@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Vue from 'vue'
 import Router from 'vue-router'
 import loader from '@/support/loader'
