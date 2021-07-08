@@ -56,9 +56,15 @@ export default {
      * @param {*} index
      * @param {*} value
      */
-    colorValue (extraKey, index, value) {
+    colorValue (extraKey, index, value = null) {
       let dict = orsDictionary
-      const color = dict.colors[extraKey][index] || dict.colors[extraKey][value]
+      let color
+      if (value) {
+        color = dict.colors[extraKey][value]
+      } else {
+        color = dict.colors[extraKey][index]
+      }
+      
       return color
     },
     /**
@@ -69,10 +75,10 @@ export default {
      * @param {Integer} index
      * @returns {Object}
      */
-    segmentStyle (extraKey, amount, index) {
+    segmentStyle (extraKey, summary, index) {
       const style = {
-        width: amount + '%',
-        background: this.colorValue(extraKey, index)
+        width: summary.amount + '%',
+        background: this.colorValue(extraKey, index, summary.value)
       }
       return style
     },
@@ -106,13 +112,13 @@ export default {
      * @emits highlightPolylineSections (via eventBus)
      */
     showSection (extraKey, value, index) {
-      const sectionTitle = this.$t('routeExtras.' + extraKey).toLowerCase()
+      const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
       const color = this.colorValue(extraKey, index)
-      const heighlighData = { extraKey, sectionTitle, sections: [{ intervals: [], color }] }
+      const highlighData = { extraKey, sectionTitle, sections: [{ intervals: [], color }] }
 
       const polylineData = this.buildExtraHighlighPolylineData(extraKey, index, value)
-      heighlighData.sections.push(polylineData)
-      this.eventBus.$emit('highlightPolylineSections', heighlighData)
+      highlighData.sections.push(polylineData)
+      this.eventBus.$emit('highlightPolylineSections', highlighData)
     },
     /**
      * Handle the show all sections click by
@@ -124,17 +130,17 @@ export default {
      * @emits highlightPolylineSections (via eventBus)
      */
     showAllSections (extraKey) {
-      const sectionTitle = this.$t('routeExtras.' + extraKey).toLowerCase()
-      const heighlighData = { extraKey: extraKey, sectionTitle, sections: [] }
+      const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
+      const highlighData = { extraKey: extraKey, sectionTitle, sections: [] }
 
       let index = 0
       for (const summaryKey in this.routeExtras[extraKey].summary) {
         const summary = this.routeExtras[extraKey].summary[summaryKey]
         const polylineData = this.buildExtraHighlighPolylineData(extraKey, index, summary.value)
-        heighlighData.sections.push(polylineData)
+        highlighData.sections.push(polylineData)
         index++
       }
-      this.eventBus.$emit('highlightPolylineSections', heighlighData)
+      this.eventBus.$emit('highlightPolylineSections', highlighData)
     },
     /**
      * Build the the extra info highlighting data

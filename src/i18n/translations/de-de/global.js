@@ -89,6 +89,18 @@ export default {
       'undefined': 'Nicht definiert',
       ocean: 'Ozean'
     },
-    population: 'Einwohner'
+    population: 'Einwohner',
+    green: 'Grün',
+    noise: 'Lärm',
+    steepness: 'Steilheit',
+    surface: 'Oberfläche',
+    roadaccessrestrictions: 'Straßen Zugangsbeschränkung',
+    waytypes: 'Weg Arten',
+    suitability: 'Eignung',
+    waycategory: 'Wegkategorie',
+    tollways: 'Mautstraßen',
+    traildifficulty: 'Trail Schwierigkeit',
+    osmid: 'OSM ID',
+    countryinfo: 'Länderinfo'
   }
 }

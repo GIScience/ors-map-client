@@ -71,20 +71,40 @@ const orsDictionary = {
     '6': '5', //	sac_scale=difficult_alpine_hiking 	mtb:scale=5
     '7': '6', // --- 	mtb:scale=6
   },
-  // green: [
-
-  // ],
-  // noise: [
-
-  // ],
   roadaccessrestrictions: {
     '0': 'none', //	None (there are no restriction data)
     '1': 'no',
     '2': 'customers',
     '4': 'destination',
-    '8': 'Delivery',
+    '8': 'delivery',
     '16': 'private',
     '32': 'permissive'
+  },
+  green: {
+    '0': '0',
+    '1': '1',
+    '2': '2',
+    '3': '3',
+    '4': '4',
+    '5': '5',
+    '6': '6',
+    '7': '7',
+    '8': '8',
+    '9': '9',
+    '10': '10'
+  },
+  noise: {
+    '0': '0',
+    '1': '1',
+    '2': '2',
+    '3': '3',
+    '4': '4',
+    '5': '5',
+    '6': '6',
+    '7': '7',
+    '8': '8',
+    '9': '9',
+    '10': '10'
   },
   colors: {
     waytypes: [
@@ -171,6 +191,35 @@ const orsDictionary = {
       '6': '#A0522D', //	sac_scale=difficult_alpine_hiking 	mtb:scale=5
       '7': '#A52A2A', // --- 	mtb:scale=6
     },
+    green: [
+      // 11 colors accessed by index
+      '#dcedc8',
+      '#c5e1a5',
+      '#ccff90',
+      '#aed581',
+      '#9ccc65',
+      '#b2ff59',
+      '#8bc34a',
+      '#7cb342',
+      '#689f38',
+      '#558b2f',
+      '#33691e'
+    ],
+    noise: [
+      // 11 colors accessed by index
+      // 0 means less noise, 10 means more noise
+      '#F5F5F5',
+      '#E8E8E8',
+      '#DCDCDC',
+      '#D0D0D0',
+      '#BEBEBE',
+      '#B0B0B0',
+      '#989898',
+      '#808080',
+      '#696969',
+      '#505050',
+      '#383838'
+    ],
   }
 }
 

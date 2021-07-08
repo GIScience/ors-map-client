@@ -5,19 +5,6 @@ export default {
     extraInfo: 'Informações extra',
     value: 'Valor',
     clickToHighlightOnMap: 'Clique para destacar no mapa',
-    showAllOnMap: 'Mostrar tudo no mapa',
-
-    steepness: 'Inclinação',
-    surface: 'Superfície',
-    roadaccessrestrictions: 'Road access restrictions',
-    waytypes: 'tipos de caminho',
-    suitability: 'Adequação',
-    waycategory: 'Categoria do caminho',
-    tollways: 'Pedágios',
-    traildifficulty: 'Dificuldade da trilha',
-    osmid: 'OSM ID',
-    countryinfo: 'Informação do país',
-    green: 'Verde',
-    noise: 'Barulho' 
+    showAllOnMap: 'Mostrar tudo no mapa'
   }
 }

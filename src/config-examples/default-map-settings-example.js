@@ -39,17 +39,16 @@ const defaultMapSettings = {
 
   steepness: true,
   surface: true,
-  waytype: true,
-  
+  waytype: true,  
   tollways: false,  
   waycategory: false,
   traildifficulty: false, 
   roadaccessrestrictions: false,
-
-  // Extra settings not being used yet
-  suitability: false,
   green: false,
   noise: false,
+
+  // Extra settings not being used yet
+  suitability: false
 }
 
 export default defaultMapSettings

@@ -270,6 +270,14 @@ const orsParamsParser = {
           if (profileObj.supportsTollways) {
             extraInfo.push(constants.extraInfos[key])
           }
+        } else if (key === constants.extraInfos.green) {
+          if (profileObj.supportsGreen) {
+            extraInfo.push(constants.extraInfos[key])
+          }
+        } else if (key === constants.extraInfos.noise) {
+          if (profileObj.supportsNoise) {
+            extraInfo.push(constants.extraInfos[key])
+          }
         } else {
           extraInfo.push(constants.extraInfos[key])
         }

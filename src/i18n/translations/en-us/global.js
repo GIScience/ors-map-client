@@ -90,6 +90,18 @@ export default {
       'undefined': 'Not defined',
       ocean: 'Ocean'
     },
-    population: 'Population'
+    population: 'Population',
+    green: 'Green',
+    noise: 'Noise',
+    steepness: 'Steepness',
+    surface: 'Surface',
+    roadaccessrestrictions: 'Road access restrictions',
+    waytypes: 'Way types',
+    suitability: 'Suitability',
+    waycategory: 'Way category',
+    tollways: 'Tollways',
+    traildifficulty: 'Trail difficulty',
+    osmid: 'OSM ID',
+    countryinfo: 'Country info'
   }
 }

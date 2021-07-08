@@ -9,11 +9,11 @@
           <v-flex xs10 sm11>
             <v-list>
               <div style="padding:0 0 0 10px">
-                <h5 >{{$t('routeExtras.' + extraKey )}}</h5>
+                <h5 >{{$t('global.' + extraKey )}}</h5>
                 <div class="extra-bar">
                   <template v-for="(summary, index) in routeExtras[extraKey].summary">
                     <v-tooltip :key="index + extraKey" :disabled="$lowResolution" top>
-                      <div @click="showSection(extraKey, summary.value, index)" slot="activator" class="segment" :style="segmentStyle(extraKey, summary.amount, index)"></div>
+                      <div @click="showSection(extraKey, summary.value, index)" slot="activator" class="segment" :style="segmentStyle(extraKey, summary, index)"></div>
                       {{getExtraValueLabel(extraKey, summary.value)}} - {{$t('routeExtras.clickToHighlightOnMap')}}
                     </v-tooltip>
                   </template>

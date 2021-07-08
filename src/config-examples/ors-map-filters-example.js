@@ -37,7 +37,9 @@ const filters = [
         slug: 'foot-walking',
         icon: 'directions_walk',
         nestedProfiles: ['foot-walking', 'foot-hiking'],
-        supportsTrailDifficulty: true
+        supportsTrailDifficulty: true,
+        supportsGreen: true,
+        supportsNoise: true
       },
       'driving-car': {
         slug: 'driving-car',

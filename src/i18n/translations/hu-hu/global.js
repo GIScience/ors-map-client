@@ -89,6 +89,18 @@ export default {
       'undefined': 'Meghatározatlan',
       'ocean': 'Óceán'
     },
-    'population': 'Népesség'
+    'population': 'Népesség',
+    'green': 'Zöld',
+    'noise': 'Zaj',
+    'steepness': 'Meredekség',
+    'surface': 'Felszín',
+    'roadaccessrestrictions': 'Behajtási korlátozások',
+    'waytypes': 'Úttípusok',
+    'suitability': 'Alkalmasság',
+    'waycategory': 'Útkategória',
+    'tollways': 'Fizetős utak',
+    'traildifficulty': 'Út nehézsége',
+    'osmid': 'OSM ID',
+    'countryinfo': 'Országinformációk'  
   }
 }
