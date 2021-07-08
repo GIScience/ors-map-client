@@ -71,8 +71,7 @@ npm install
    If you are using a linux/unix compatible terminal, you can do that by running:
 
    ```sh
-  cd src && cp config-examples/* config
-  cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
+  cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
    ```
 
 4. Set the app-config.js values for:
@@ -289,7 +288,8 @@ For example, similar to `/\.i18n\.en-us\.js$` add `/\.i18n\.fr-fr\.js$`.
 that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux/unix compatible terminal, you can do that by running:
 
   ```sh
-  find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \; # where the last occurrence of locale id (in this case `fr-fr`) is the one you are creating
+  find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \; 
+  # where the last occurrence of locale id (in this case `fr-fr`) is the one you are creating
    ```
 
 - Translate the language strings for each key in all the files created in the previous step.
