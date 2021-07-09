@@ -353,28 +353,28 @@ For a detailed explanation on how webpack works, check out the [guide](http://vu
 
 ### Contribute ###
 
-#### Commits and versioning
+#### Commits and versioning ####
 
-- This app uses the `commitizen` plugin to generate standardized commit types/messages. So, after applying any change in a feature branch, use `git add .` and then `npm run commit` (instead of `git commit ...`)
-- The plugin `standard-version` is used to generate changelog entries, version tag and to bump the app version in package.json. After testing the app in the testing environment, (using `develop` branch), checkout in `master` and use `npm run release` to generate a release.
+- This app uses the `commitizen` plugin to generate standardized commit types/messages. After applying any change in a feature branch, use `git add .` and then `npm run commit` (instead of `git commit ...`)
+- The plugin `standard-version` is used to generate changelog entries, version tag and to bump the app version in package.json.
 
+Deployment flow:
+
+- Apply the changes in a feature branch and test it locally
+- Once the feature is ready, merge it to `develop`, deploy it to the testing environment
+- Checkout in `master`, merge from develop and use `npm run release` to generate a release. This will generate a new release commit as well as a git tag and an entry in [CHANGELOG.md](CHANGELOG.md).
+
+*For more details about `commitizen` and `standard-version` see [this article](https://medium.com/tunaiku-tech/automate-javascript-project-versioning-with-commitizen-and-standard-version-6a967afae7)*
 
 #### Branch policy ####
 
-The `develop` branch is used as the working branch. Anything new goes to develop and then it is tested, committed and
-finally merged into `master`.
-So, develop has always the latest version (latest but not necessarily the production one) while `master` has the
-production version.
-Considering this, any merge request must be tone targeting `develop`.
-If you want to work on a feature we recommend you to create a feature branch then when it is finished send a merge
-request to `develop`.
+The `develop` branch is used as the working branch. Anything new feature goes to develop and then it is tested, committed and finally merged into `master`. So, develop has always the latest version (latest but not necessarily the production one) while `master` has the production version.
+Considering this, any merge request must be done targeting `develop`. If you want to work on a feature we recommend you to create a feature branch and then, when it is finished, send a merge request to `develop`.
 
 Like almost every team, we have limited workforce, and we have to define priorities.
 
 `Bugs`:
-If you have identified any bug and think that you can help to fix it, please create an issue first, instead of directly
-submitting a push request.
-So the people involved will have the opportunity to discuss it.
+If you think you have identified any bug and that you can help to fix it, please create an issue first, instead of directly submitting a push request. So the people involved will have the opportunity to discuss it.
 
 `New features`:
 
@@ -390,13 +390,10 @@ This approach is intended to create cohesion and keep the project sustainable.
 As you may notice, this project is an ongoing project and thus, there is a lot of room for improvement.
 Some are listed below (ordered by priority):
 
-- `Tests` (unit, e2e) - we need it, but we were not able to implement it yet.
- It is one of the priorities of our list.
- So, if you can contribute with it, please let us know.
+So, if you can contribute with it, please let us know.
 - `Rendering performance` - we are continuously looking for performance improvement.
  If you think you can suggest a better way to deal with the rendering phase in a way that it improves the speed,
  please tell us.
  We are relying on [Vue2leaflet](https://github.com/vue-leaflet/Vue2Leaflet) for this.
 - `Accessibility` of the app for people with special needs
-- `User test` to check that the app works in multiple browsers, resolutions and devices (versions of Mac, Windows,
- Linux, Android and Iphone) and their multiple possible browsers
+- `User test` to check that the app works in multiple browsers, resolutions and devices (versions of Mac, Windows, Linux, Android and Iphone) and their multiple possible browsers
