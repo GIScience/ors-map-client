@@ -23,7 +23,7 @@ export default {
     isAltitudeModalOpen: false,
     isSettingsOpen: false,
     isAboutOpen: false,
-    simpleMapSearcHeight: 65,
+    simpleMapSearchHeight: 65,
     defaultZoom: appConfig.initialZoomLevel,
     mapViewData: new MapViewData(),
     bottomNavActive: false,
@@ -196,7 +196,7 @@ export default {
     next()
   },
   watch: {
-    $route: function (to, from) {
+    $route: function () {
       this.loadRoute()
       this.setModalState()
       this.loadAvoidPolygonsFromAppRoute()
@@ -485,7 +485,7 @@ export default {
       this.$store.commit('setLeftSideBarIsOpen', true)
       this.bottomNavActive = false
     },
-     /**
+    /**
      * When an `add isochrones center` option is hit,
      * emits an addAsIsochroneCenter event via eventBus.
      * The map-view component does not emit events via
