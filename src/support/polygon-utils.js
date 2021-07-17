@@ -24,6 +24,43 @@ const PolygonUtils = {
       polygon.properties.visible = true
     }
   },
+
+  /**
+   * Create polygon
+   * @param {*} coordinates 
+   * @param {*} options 
+   * @param {*} shapeType 
+   * @returns {Leaflet.Polygon}
+   */
+  createPolygon (coordinates, options, shapeType) {
+    let polygon
+    if (shapeType === 'rectangle') {
+      polygon = Leaflet.rectangle(coordinates, options)
+    } else {
+      polygon = Leaflet.polygon(coordinates, options)
+    }
+    return polygon
+  },
+
+  /**
+   * Build polygon options
+   * @param {Object} polygonData 
+   * @returns {Object}
+   */
+  buildPolygonOptions (polygonData, defaultColor) {
+    // Set the color options of the polygons about to be drawn
+    let color = defaultColor
+    let dashArray = null
+    if (polygonData.properties) {
+      if (polygonData.properties.color) {
+        color = polygonData.properties.color
+      }
+      if (polygonData.properties.dashArray) {
+        dashArray = polygonData.properties.dashArray
+      }
+    }
+    return { color: color, dashArray: dashArray}
+  },
   hasPlaceAsCenter (place, polygon) {
     if (polygon.properties.center && place.coordinates && polygon.properties.center.toString() === place.coordinates.toString()) {
       return true

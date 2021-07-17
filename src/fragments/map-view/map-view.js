@@ -254,7 +254,7 @@ export default {
       }
       return options
     },
-   /**
+    /**
      * Build and return the map center
      * based on the the current map center defined/set in the store
      * @returns {Latlng}
@@ -446,7 +446,7 @@ export default {
      * Determines if a route stop can be added
      */
     canAddStop () {
-      const can = !Array.isArray(this.markers) || this.markers.length < 15
+      const can = !Array.isArray(this.markers) || this.markers.length < appConfig.maxPlaceInputs
       return can
     },
     /**
@@ -455,9 +455,6 @@ export default {
      */
     polylineMeasureOptions () {
       const options = mapDefinitions.polylineMeasureOptions(this.$t('mapView.polylineMeasure'))
-      // tooltipTextAdd: "Press CTRL-key and click to <b>add point</b>"
-      // tooltipTextDragAndDelete: "Click and drag to <b>move point</b><br>Press SHIFT-key and click to <b>delete point</b>"
-      // tooltipTextResume: "<br>Press CTRL-key and click to <b>resume line</b>"
       this.$root.appHooks.run('polylineMeasureOptionsBuilt', options)
       return options
     },
@@ -707,22 +704,23 @@ export default {
      * @param {String} direction
      */
     moveMapCenter(direction) {
+      var offset
       switch (direction) {
         case 'left':
-          var offset = this.map.getSize().x*0.15
-          this.map.panBy(new L.Point(-offset, 0), {animate: true})
+          offset = this.map.getSize().x*0.15
+          this.map.panBy(new Leaflet.Point(-offset, 0), {animate: true})
           break
         case 'right':
-          var offset = this.map.getSize().x*0.15
-          this.map.panBy(new L.Point(offset, 0), {animate: true})
+          offset = this.map.getSize().x*0.15
+          this.map.panBy(new Leaflet.Point(offset, 0), {animate: true})
           break;
         case 'up':
-          var offset = this.map.getSize().y*0.15
-          this.map.panBy(new L.Point(0, -offset), {animate: true})
+          offset = this.map.getSize().y*0.15
+          this.map.panBy(new Leaflet.Point(0, -offset), {animate: true})
           break
         case 'down':
-          var offset = this.map.getSize().y*0.15
-          this.map.panBy(new L.Point(0, offset), {animate: true})
+          offset = this.map.getSize().y*0.15
+          this.map.panBy(new Leaflet.Point(0, offset), {animate: true})
           break
       }
     },
@@ -757,7 +755,7 @@ export default {
      * @param {Object} polygon
      * @param {Event} event
      */
-    isochroneClicked (index, polygon, event) {
+    isochroneClicked (index, polygon) {
       let isochronePopupContainerRef = this.$refs[`isochronePopupContainer${index}`]
       isochronePopupContainerRef = Array.isArray(isochronePopupContainerRef) ? isochronePopupContainerRef[0] : isochronePopupContainerRef
       this.$root.appHooks.run('beforeOpenIsochronePopup', {isochronePopupContainerRef, polygon})
@@ -916,14 +914,6 @@ export default {
       }
       data.injectIndex = closestPlaceIndex
       this.$emit('addRouteStop', data)
-    },
-    /**
-     * Show the point altitude (to be implemented)
-     * @param {Object} latlng
-     */
-    followPolyline (latlng) {
-      // implement show the point altitude
-      // console.log(latlng)
     },
     /**
      * Remove a marker/place when in directions or isochrones mode
@@ -1140,12 +1130,12 @@ export default {
       let polylineData = []
       const coordinates = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
       const highlightData = routeData.buildHighlightedPolylines(coordinates, this.extraInfo)
-        for (let key in highlightData) {
-          let polylines = highlightData[key].polylines
-          for (let plKey in polylines) {
-            polylineData = polylineData.concat(polylines[plKey])
-          }
+      for (let key in highlightData) {
+        let polylines = highlightData[key].polylines
+        for (let plKey in polylines) {
+          polylineData = polylineData.concat(polylines[plKey])
         }
+      }
       return polylineData
     },
     /**
@@ -1161,15 +1151,16 @@ export default {
     },
     /**
      * Redraw the map component by faking a window resize event
+     * This is a hack to force leaflet redraw/resize correctly the maps
+     * in the case when there are two map viewers and the container of one of them
+     * is resized. 
+     * The candidates map.invalidateSize() and map.eachLayer(function(layer){layer.redraw();});
+     * have not worked at all on this case
+     * @see https://github.com/Leaflet/Leaflet/issues/694
+     * @dispatch resize event
      */
     redrawMap () {
-      return new Promise((resolve, reject) => {
-        // This is a hack to force leaflet redraw/resize correctly the maps
-        // in the case when there are two map viewers and the container of one of them
-        // is resized.
-        // The candidates map.invalidateSize() and map.eachLayer(function(layer){layer.redraw();});
-        // have not worked at all on this case
-        // @see https://github.com/Leaflet/Leaflet/issues/694
+      return new Promise((resolve) => {
         setTimeout(() => {
           window.dispatchEvent(new Event('resize'))
           resolve()
@@ -1252,7 +1243,7 @@ export default {
         // get and use the fit bounds option to determine if the fit should be run
         const maxFitBoundsZoom = this.hasOnlyOneMarker ? context.zoomLevel : this.maxZoom
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           context.buildAndSetBounds()
           // If the map object is already defined
           // then we can directly access it
@@ -1263,7 +1254,7 @@ export default {
             context.$nextTick(() => {
               context.buildAndSetBounds()
               if (context.$refs.map && context.isValidBounds(context.dataBounds)) {
-                context.map = context.$refs.map.mapObject // work as expected when wrapped in a $nextTick
+                context.map = context.$refs.map.mapObject // Work as expected when wrapped in a $nextTick
                 context.fit(force, maxFitBoundsZoom)
               }
               resolve()
@@ -1296,7 +1287,7 @@ export default {
      */
     fit (maxFitBoundsZoom) {
       if (this.dataBounds) {
-        // we set the max zoom in level and then fit the bounds
+        // We set the max zoom in level and then fit the bounds
         // Temporally disabled the zoom Level setting to check impacts (it seems not to be necessary anymore)
 
         // To make it work properly we have to wait a bit
@@ -1310,6 +1301,7 @@ export default {
           context.featuresJustFitted = true
           context.map.fitBounds(context.dataBounds, { padding: [20, 20], maxZoom: maxFitBoundsZoom })
           context.storeMapBoundsAndSetMapAsReady()
+
           // Yeah, it is not nice to have nested timeout
           // but we need it to make sure that this flag is only
           // set as false after a while so other components
@@ -1506,18 +1498,16 @@ export default {
     },
 
     /**
-     * Get position error according error code
+     * Get position error message according error code
      * @param {*} error
      * @returns {String} message
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError
      */
     getPositionErrorMessage (error) {
       // Set the default message
       let message = this.$t('mapView.acquirePositionErrors.generic')
 
       if (typeof error === 'object') {
-        // Treat the error cases
-        // https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError
-
         switch (error.code) {
           case 1:
             message = this.$t('mapView.acquirePositionErrors.permissionDenied') // PERMISSION_DENIED
@@ -1532,18 +1522,19 @@ export default {
       }
       return message
     },
-     /**
+    /**
      * Get map Object
      * @returns {Promise}
      */
     getMapObject () {
+      let context = this
       return new Promise((resolve) => {
-        if (this.map) {
-          resolve(this.map)
+        if (context.map) {
+          resolve(context.map)
         } else {
-          this.$nextTick(() => {
-            this.map = this.$refs.map.mapObject
-            resolve(this.map)
+          context.$nextTick(() => {
+            context.map = context.$refs.map.mapObject
+            resolve(context.map)
           })
         }
       })
@@ -1569,6 +1560,7 @@ export default {
     },
     /**
      * Set drawing polygon tool to the map object
+     * @see https://github.com/DenisCarriere/Leaflet.draw.locales to check the locales supported
      * @listens map.draw:created
      */
     setAvoidPolygonDrawingTool () {
@@ -1586,7 +1578,6 @@ export default {
         }
 
         // Tell the leaflet drawing locale to use the current app locale
-        // check the locales supported here: https://github.com/DenisCarriere/Leaflet.draw.locales
         let shortLocale = I18nBuilder.getShortLocale(this.$i18n.locale)
         let locale
         try {
@@ -1630,12 +1621,12 @@ export default {
      * @param {Object} polygonData
      */
     setAvoidPolygonProperties (polygon, polygonData = null) {
-     // define polygon feature prop.
-     // It will be returned when we get the geojson
-     // representation of the polygon
+      // define polygon feature prop.
+      // It will be returned when we get the geojson
+      // representation of the polygon
       polygon.feature = polygon.feature || {}
-      polygon.feature.type = polygon.feature.type || "Feature";
-      polygon.feature.properties = polygon.feature.properties || {};
+      polygon.feature.type = polygon.feature.type || 'Feature'
+      polygon.feature.properties = polygon.feature.properties || {}
       polygon.feature.properties.avoidPolygon = true
 
       // Append the properties from polygon data
@@ -1662,7 +1653,7 @@ export default {
 
       // If a promise is returned
       if (expectedPromise instanceof Promise) {
-        expectedPromise.then((result) => {
+        expectedPromise.then(() => {
           context.notifyAvoidPolygonsChanged()
         }).catch (err => {
           console.log(err)
@@ -1683,7 +1674,7 @@ export default {
 
       // If a promise is returned
       if (expectedPromise instanceof Promise) {
-        expectedPromise.then((result) => {
+        expectedPromise.then(() => {
           polygon.editing.disable()
           polygon.closePopup()
           context.notifyAvoidPolygonsChanged()
@@ -1707,7 +1698,7 @@ export default {
         let expectedPromise = this.$root.appHooks.run('avoidPolygonRemoved', {polygon, map, context})
         // If a promise is returned
         if (expectedPromise instanceof Promise) {
-          expectedPromise.then((result) => {
+          expectedPromise.then(() => {
             context.notifyAvoidPolygonsChanged()
           }).catch (err => {
             console.log(err)
@@ -1754,37 +1745,17 @@ export default {
       let context = this
       this.getMapObject().then((map) => {
         context.removeAllAvoidPolygons()
-        for (const key in this.localAvoidPolygons) {
+        for (const key in context.localAvoidPolygons) {
           const polygonData = context.localAvoidPolygons[key]
           const coordinates = GeoUtils.switchLatLonIndex(polygonData.geometry.coordinates[0])
-
-          // Set the color options of the polygons about to be drawn
-          let color = context.drawOptions.draw.polygon.shapeOptions.color
-          let dashArray = null
-          if (polygonData.properties) {
-            if (polygonData.properties.color) {
-              color = polygonData.properties.color
-            }
-            if (polygonData.properties.dashArray) {
-              dashArray = polygonData.properties.dashArray
-            }
-          }
-          const polygonOptions = { color: color, dashArray: dashArray}
-
-          let polygon
-          // Create each polygon using the leaflet tool
-          // adn add it to the map object
+          const polygonOptions = PolygonUtils.buildPolygonOptions(polygonData, context.drawOptions.draw.polygon.shapeOptions.color)
           let polygonShapeType = GeoUtils.geojsonShapeType(polygonData)
-          if (polygonShapeType === 'rectangle') {
-            polygon = Leaflet.rectangle(coordinates, polygonOptions)
-          } else {
-            polygon = Leaflet.polygon(coordinates, polygonOptions)
-          }
+          let polygon = PolygonUtils.createPolygon(coordinates, polygonOptions, polygonShapeType)          
           context.setAvoidPolygonProperties(polygon, polygonData)
           polygon.addTo(map)
 
           // Add handler for the polygon click event
-          polygon.on('click', function (event) {
+          polygon.on('click', function () {
             context.onAvoidPolygonClicked(polygon, map)
           })
         }
@@ -1826,7 +1797,7 @@ export default {
       // polygon is already in edit mode
       // So the click is used to sav the changes
       if (polygon.editing._enabled) {
-       this.saveAvoidPolygonChanges(polygon, map)
+        this.saveAvoidPolygonChanges(polygon, map)
       } else { // build the standard popup, run the popup hook and open the popup
         let popupHtmlFragment = this.buildPolygonClickPopupContent(polygon)
         this.$root.appHooks.run('beforeShowAvoidPolygonPopup', {popupHtmlFragment, polygon})
@@ -1840,7 +1811,7 @@ export default {
      * @returns {DocumentFragment}
      */
     buildPolygonClickPopupContent (polygon) {
-      var popupContentWrapper = document.createElement("div")
+      var popupContentWrapper = document.createElement('div')
 
       let editShapeEl = document.createElement('a')
       editShapeEl.onclick = () => {this.enableAvoidPolygonShapeEdit(polygon)}
@@ -1874,7 +1845,7 @@ export default {
      * Highlight a route point on the active route index
      * @param {*} routePointIndex
      */
-     highlightRoutePoint (routePointIndex) {
+    highlightRoutePoint (routePointIndex) {
       const activeRouteCoordinates = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
       if (activeRouteCoordinates[routePointIndex]) {
         this.highlightedRoutePointIndex = routePointIndex
@@ -1903,8 +1874,44 @@ export default {
         this.$store.commit('pickPlaceIndex', null)
       }
     },
+    clearMap () {
+      this.mapDataBuilder = null
+      // When the clearMap event is triggered, we reset places and routes
+      this.localMapViewData.places = []
+      this.localMapViewData.routes = []
+      this.localMapViewData.polygons = []
+      this.clickLatlng = null
+      this.$store.commit('currentLocation', null)
+    },
     /**
-     * Add component initial listeners via eventBus
+     * When a place focus is changed (a new place is selected among the
+     * ones listed on the map) updates the map center if the distance
+     * between the old center and the new is greater then 50 meters
+     */
+    placeFocusChanged (place) {
+      this.focusedPlace = place
+      const center = GeoUtils.buildLatLong(place.lat, place.lng)
+      const distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.mapCenter, center, 'm')
+
+      // We only consider that the center changed if it
+      // changes more than 50 meters from the previous center
+      if (distance > 50) {
+        this.setMapCenter(center)
+      }
+    },
+    /**
+     * Highlight polyline sections on the map view by fitting the zoom to focus only the passed extra info
+     * @param {*} extraInfo 
+     */
+    highlightPolylineSections (extraInfo) {
+      this.extraInfo = extraInfo
+      if (this.$store.getters.mapSettings.autoFitHighlightedBounds) {
+        this.buildAndSetBounds()
+        this.fit()
+      }
+    },
+    /**
+     * Add map view initial eventBus listeners 
      * @listens redrawAndFitMap (via eventBus)
      * @listens clearMap (via eventBus)
      * @listens clearMap (via eventBus)
@@ -1916,66 +1923,29 @@ export default {
      * @listens highlightPolylineSections (via eventBus)
      */
     setListeners () {
-      // we need to resize the map height, redraw the map
-      // and then fit the bounds
       const context = this
+
+      this.eventBus.$on('clearMap', context.clearMap)
+
+      this.eventBus.$on('changeActiveRouteIndex', context.setActiveRouteIndex)
+
+      this.eventBus.$on('altitudeChartHoverIndexChanged', context.highlightRoutePoint)
+
+      this.eventBus.$on('mouseLeftChartAltitudeChart', context.removeRoutePoint)
+
+      this.eventBus.$on('showAltitudeModal', () => { context.isAltitudeModalOpen = true })
+
+      this.eventBus.$on('mapSettingsChanged', context.setProviders)
+
+      this.eventBus.$on('placeFocusChanged', context.placeFocusChanged)
+
+      this.eventBus.$on('highlightPolylineSections', context.highlightPolylineSections)
+     
       this.eventBus.$on('redrawAndFitMap', (data) => {
         if (data.guid && data.guid === context.guid) {
           context.adjustMap()
         }
-      })
-
-      /**
-       * Clear all the map data plotted (lines, polygons markers etc)
-       */
-      this.eventBus.$on('clearMap', () => {
-        context.mapDataBuilder = null
-        // When the clearMap event is triggered, we reset places and routes
-        context.localMapViewData.places = []
-        context.localMapViewData.routes = []
-        context.localMapViewData.polygons = []
-        context.clickLatlng = null
-        this.$store.commit('currentLocation', null)
-      })
-
-      /**
-       * When a place focus is changed (a new place is selected among the
-       * ones listed on the map) updates the map center if the distance
-       * between the old center and the new is greater then 50 meters
-       */
-      this.eventBus.$on('placeFocusChanged', (place) => {
-        context.focusedPlace = place
-        const center = GeoUtils.buildLatLong(place.lat, place.lng)
-        const distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.mapCenter, center, 'm')
-
-        // We only consider that the center changed if it
-        // changes more than 50 meters from the previous center
-        if (distance > 50) {
-          this.setMapCenter(center)
-        }
-      })
-
-      this.eventBus.$on('changeActiveRouteIndex', this.setActiveRouteIndex)
-
-      this.eventBus.$on('altitudeChartHoverIndexChanged', this.highlightRoutePoint)
-
-      this.eventBus.$on('mouseLeftChartAltitudeChart', this.removeRoutePoint)
-
-      this.eventBus.$on('showAltitudeModal', function () {
-        context.isAltitudeModalOpen = true
-      })
-
-      this.eventBus.$on('mapSettingsChanged', function () {
-        context.setProviders()
-      })
-
-      this.eventBus.$on('highlightPolylineSections', (extraInfo) => {
-        context.extraInfo = extraInfo
-        if (this.$store.getters.mapSettings.autoFitHighlightedBounds) {
-          context.buildAndSetBounds()
-          context.fit()
-        }
-      })
+      })      
     },
     /**
      * Toggle the accessible mode by
@@ -2035,6 +2005,6 @@ export default {
     this.localAvoidPolygons = this.avoidPolygons
     this.loadAvoidPolygons()
     this.setMapCenter()
-    window.addEventListener("keyup", this.disablePickPlaceMode);
+    window.addEventListener('keyup', this.disablePickPlaceMode)
   }
 }
