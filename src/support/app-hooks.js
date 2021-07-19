@@ -23,20 +23,20 @@ class AppHooks {
    * Add a hook
    * @param {string} hookName
    * @param {Function} functionToRun
-   * @param {Integer} priotity
+   * @param {Integer} priority
    */
-  add (hookName, functionToRun,  priotity = 1) {
-    this.hooks.push({name: hookName, functionToRun: functionToRun, priotity: priotity})
+  add (hookName, functionToRun,  priority = 1) {
+    this.hooks.push({name: hookName, functionToRun: functionToRun, priority: priority})
   }
 
   /**
    * Remove a hook
    * @param {string} hookName
-   * @param {Integer} priotity
+   * @param {Integer} priority
    */
-  remove (hookName, priotity = 1) {
+  remove (hookName, priority = 1) {
     this.hooks = lodash.remove(this.hooks, function(h) {
-      return h.name === hookName && h.priotity === priotity
+      return h.name === hookName && h.priority === priority
     })
   }
 
@@ -53,7 +53,7 @@ class AppHooks {
     // Only continue if there hooks
     if (targetHooks.length > 0) {
       // Order the hooks so that we run then in the correct order
-      let orderedHooks = lodash.sortBy(targetHooks, [function(h) { return h.priotity }])
+      let orderedHooks = lodash.sortBy(targetHooks, [function(h) { return h.priority }])
 
       // Loop and run each hook
       for(let key in orderedHooks) {
@@ -78,7 +78,7 @@ class AppHooks {
 
     if (catchAllHooks.length > 0) {
       // Order the hooks so that we run then in the correct order
-      let orderedCatchAllHooks = lodash.sortBy(catchAllHooks, [function(h) { return h.priotity }])
+      let orderedCatchAllHooks = lodash.sortBy(catchAllHooks, [function(h) { return h.priority }])
 
       // Loop and run each hook
       for(let key in orderedCatchAllHooks) {
