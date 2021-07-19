@@ -89,24 +89,37 @@
         </ors-l-polyline>
       </template>
       <l-control-layers v-if="showControls" :position="layersPosition" :collapsed="true"/>
-        <l-tile-layer
-          v-for="tileProvider in tileProviders"
-          :key="tileProvider.name"
-          :name="tileProvider.name"
-          :visible="tileProvider.visible"
-          :url="tileProvider.url"
-          :attribution="tileProvider.attribution"
-          :token="tileProvider.token"
-          layer-type="base"/>
-        <l-tile-layer
-          v-for="overlayerTileProvider in overlayerTileProviders"
-          :key="overlayerTileProvider.name"
-          :name="overlayerTileProvider.name"
-          :visible="overlayerTileProvider.visible"
-          :url="overlayerTileProvider.url"
-          :attribution="overlayerTileProvider.attribution"
-          :token="overlayerTileProvider.token"
-          layer-type="overlay"/>
+      <l-tile-layer
+        v-for="tileProvider in tileProviders"
+        :key="tileProvider.name"
+        :name="tileProvider.name"
+        :visible="tileProvider.visible"
+        :url="tileProvider.url"
+        :attribution="tileProvider.attribution"
+        :token="tileProvider.token"
+        layer-type="base"/>
+      <l-tile-layer
+        v-for="layer in overlayerTileProviders"
+        :key="layer.name"
+        :name="layer.name"
+        :visible="layer.visible"
+        :url="layer.url"
+        :attribution="layer.attribution"
+        :token="layer.token"
+        layer-type="overlay"/>
+      <l-wms-tile-layer
+        v-for="layer in wmsOverlayerTileProviders"
+        :key="layer.name"
+        :attribution="layer.attribution"
+        :base-url="layer.baseUrl"
+        :layers="layer.layers"
+        :visible="layer.visible"
+        :name="layer.name"
+        :max-zoom="layer.maxZoom"
+        :version="layer.version"
+        :format="layer.format"
+        :transparent="true"
+        layer-type="overlay"/>
       <v-btn fab small @click.stop="toggleAccessibleMode" v-if="accessibilityToolAvailable"
         :title="$t('maps.toggleAccessibleMode')"
         :class="{'extra-low-resolution': $xlResolution}"

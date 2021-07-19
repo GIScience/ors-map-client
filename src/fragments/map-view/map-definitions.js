@@ -136,6 +136,10 @@ const mapDefinitions = {
       providers.push(overlayerTileService)
     }
     return providers
+  },
+  getWmsOverlayerTileProviders () {
+    var providers = appConfig.wpsOverlayerTileProviders || []
+    return providers
   }
 }
 export default mapDefinitions

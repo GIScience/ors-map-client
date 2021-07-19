@@ -27,7 +27,7 @@
  * @emits setInputPlace
  */
 
-import { LMap, LTileLayer, LLayerGroup, LTooltip, LPopup, LControlZoom, LControlAttribution, LControlScale, LControlLayers, LGeoJson, LPolygon, LCircle, LCircleMarker } from 'vue2-leaflet'
+import { LMap, LTileLayer, LLayerGroup, LTooltip, LPopup, LControlZoom, LControlAttribution, LControlScale, LWMSTileLayer, LControlLayers, LGeoJson, LPolygon, LCircle, LCircleMarker } from 'vue2-leaflet'
 
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
 import ExtraInfoHighlight from './components/extra-info-highlight/ExtraInfoHighlight'
@@ -74,6 +74,7 @@ export default {
     LControlAttribution,
     LControlScale,
     LControlLayers,
+    'l-wms-tile-layer': LWMSTileLayer,
     LGeoJson,
     LPolygon,
     LCircle,
@@ -139,6 +140,7 @@ export default {
     return {
       tileProviders: [], // list of tiles provider that will be set via setProviders
       overlayerTileProviders: [], // list of overlay tiles provider that will be set via setProviders
+      wmsOverlayerTileProviders: [], // list of WMS overlay tiles provider that will be set via setProviders
       layersPosition: 'topright',
       map: null, // map object reference. it will will be defined later
       zoomLevel: null,
@@ -864,9 +866,12 @@ export default {
     setProviders () {
       this.tileProviders = mapDefinitions.getProviders()
       this.overlayerTileProviders = mapDefinitions.getOverlayerProviders()
+      this.wmsOverlayerTileProviders = mapDefinitions.getWmsOverlayerTileProviders()
+      
       let hookData = {
         tileProviders: this.tileProviders, 
         overlayerTileProviders: this.overlayerTileProviders, 
+        wmsOverlayerTileProviders: this.wmsOverlayerTileProviders,
         context: this
       }
       this.$root.appHooks.run('layerProvidersLoaded', hookData)
