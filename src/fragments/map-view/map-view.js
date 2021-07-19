@@ -864,6 +864,12 @@ export default {
     setProviders () {
       this.tileProviders = mapDefinitions.getProviders()
       this.overlayerTileProviders = mapDefinitions.getOverlayerProviders()
+      let hookData = {
+        tileProviders: this.tileProviders, 
+        overlayerTileProviders: this.overlayerTileProviders, 
+        context: this
+      }
+      this.$root.appHooks.run('layerProvidersLoaded', hookData)
     },
     /**
     * Update markers label

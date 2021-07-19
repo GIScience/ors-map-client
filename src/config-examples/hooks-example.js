@@ -399,4 +399,8 @@ appHooks.add('rightClickContentReady', (hookData) => {
   // Do something
 })
 
+appHooks.add('layerProvidersLoaded', (hookData) => {
+  // hookData has the following structure = {tileProviders: Object, overlayerTileProviders: Object, context: Object}
+  // Do something
+})
 */
