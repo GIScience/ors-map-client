@@ -1,4 +1,4 @@
-// This is an example file and is expected to be cloned
+// This is an example file and is expected to be cloned 
 // without the -example on the same folder that it resides.
 
 
@@ -9,35 +9,29 @@ import main from '@/main'
 import PluginExample from '@/plugins/plugin-example/plugin-example.js'
 
 // Create a var that will have a reference to the
-// plugin instance when it is instantiated in
+// plugin instance when it is instantiated in 
 // appLoaded hook defined below.
 var pluginExample
 
 const appHooks = main.getInstance().appHooks
 
 // When adding a hook, three parameters can be passed:
-// the name of the hook (string) to be listened, the
+// the name of the hook (string) to be listened, the 
 // function to be run and the priority (number).
 
 // Below are examples of hook event that happen in the app.
-// Some behaviors of the app can be modified by changing the
+// Some behaviors of the app can be modified by changing the 
 // parameter value that is passed when the hook is run.
 
 appHooks.add('appLoaded', (vueInstance) => {
   pluginExample = new PluginExample(vueInstance)
   // Do something when the app is loaded
-
-  // You can potentially change the translations value before they a rendered
-  let locale = vueInstance.$i18n.locale
-  let messages = vueInstance.$i18n.messages[locale]
-  messages.placeInput.findAPlace = 'Custom place input'
-  vueInstance.$i18n.setLocaleMessage(locale, messages)
 }, 1)
 
 // The catch all hook allows, as the name says, catching all
 // the hooks. It receives as parameters not only the hook parameter
-// arg, but also the hook name. It can be used to run plugin functions
-// with the same name of the hook. By using this hook in combination with
+// arg, but also the hook name. It can be used to run plugin functions 
+// with the same name of the hook. By using this hook in combination with 
 // a plugin you avoid having to define every hook individually and inside
 // these hooks call a plugin method/function.
 
@@ -51,7 +45,7 @@ appHooks.add('catchAll', (hookName, hookData) => {
 
 // #### INDIVIDUAL HOOKS DEFINITION ###
 
-// If you want to define the hooks individually,
+// If you want to define the hooks individually, 
 // then the templates are shown below.
 
 appHooks.add('mapViewDataChanged', (mapViewData) => {
@@ -60,7 +54,7 @@ appHooks.add('mapViewDataChanged', (mapViewData) => {
 
 appHooks.add('mapReady', (hookData) => {
   // hookData has the following structure {context: Object, map: Object}
-  // custom map controls/components can be added via map objects
+  // custom map controls/components can be added via map objects 
   // or via hookData.context.customMapControlsContainer (a vue ref for an empty container inside the map view)
   pluginExample.mapReady(hookData)
 }, 1)
@@ -86,8 +80,8 @@ appHooks.add('placeSelected', (hookData) => {
 // then add two menu items mock p to show that menu  is working
 appHooks.add('modifyMenu', (menu) => {
   // If in app settings is set not  to load/use ORS menu items, then
-  // two items will be added to the menu as a sample. It is just to
-  // demonstrate that the menu is working. You can remove the code
+  // two items will be added to the menu as a sample. It is just to 
+  // demonstrate that the menu is working. You can remove the code 
   // below if you want an empty menu or customize the item of the menu.
   if (!appConfig.appMenu.useORSMenu) {
     menu.push({
@@ -107,7 +101,7 @@ appHooks.add('modifyMenu', (menu) => {
   }
 }, 1)
 
-// The hooks below are just for demonstration about what
+// The hooks below are just for demonstration about what 
 // can be used. If you are not using, you can remove them.
 appHooks.add('afterGetRouteOptions', (options) => {
   // Do something when the route options is built
@@ -189,7 +183,7 @@ appHooks.add('poisMarkersCreated', (markers) => {
   return markers
 }, 1)
 
-// When markers that represent the
+// When markers that represent the 
 // routing places or searched places are created
 appHooks.add('markersCreated', (markers) => {
   // Do something
@@ -204,7 +198,7 @@ appHooks.add('markersCreated', (markers) => {
   //   let markerColor = '#c30b82' // maybe change the color based on the place properties ?
   //  let iconDivMarkerStyle = `width: 30px;height: 30px;border-radius: 50% 50% 50% 0;background: ${markerColor};position: absolute;transform: rotate(-45deg);left: 50%;top: 50%;margin: -15px 0 0 -15px;`
   //  let markerIcon = 'hotel' // maybe change the icon based on the place properties ?
-
+    
   //  markers[key].icon = Leaflet.divIcon({
   //    className: 'custom-div-icon',
   //    html: `<div style='${iconDivMarkerStyle}'><i style='${markerIcoStyle}' class='material-icons'>${markerIcon}</i></div>`,
@@ -256,7 +250,7 @@ appHooks.add('beforeOpenMarkerPopup', (hookData) => {
   // hookData has the following structure {marker: Object, markerPopupContainer: HtmlNode}
   // `markerPopupContainer` is an HTML node and can be manipulated.
   // It possible to remove and change existing content, as well
-  // as add new vue component. See the example below.
+  // as add new VueJS component. See the example below.
 
   // ### BEGINNING OF EXAMPLE
 
@@ -267,36 +261,36 @@ appHooks.add('beforeOpenMarkerPopup', (hookData) => {
   // the line below would remove the inner html
 
   // markerPopupContainer.innerHTML = ''
-
+  
   // this hook will be invoked every time the popup is about
   // to render. So, to avoid content multiple times
   // we check it the component was not already added
-
+  
   //let buttons = markerPopupContainer.querySelectorAll('a')
 
-  // If the vue component was not already added
+  // If the VueJS component was not already added
   // if (buttons.length == 0) {
-  // Don't forget to the the imports in the header
-  // for this example, it would be:
+  // Don't forget to the the imports in the header 
+  // for this example, it would be: 
   // import Vue from 'vue'
   // import {VBtn} from 'vuetify'
-  //  var ComponentClass = Vue.extend(VBtn) // don't forget to add
+  //  var ComponentClass = Vue.extend(VBtn) // don't forget to add 
   //  var instance = new ComponentClass({ propsData: { color: 'primary' } })
   //  instance.$slots.default = [ 'Click me!' ]
   //  instance.$on(['click'], e => { console.log('event', e) })
   //  instance.$mount() // pass nothing
-
-    // Finally append the instantiated vue
+   
+    // Finally append the instantiated vue 
     // component to the markerPopupContainer
     // markerPopupContainer.appendChild(instance.$el)
-  // }
+  // } 
   // ### END OF EXAMPLE
 }, 1)
 
 appHooks.add('beforeShowResolvedPlaceInfo', (hookData) => {
-
-  // hookData has the following structure:
-  // {
+  
+  // hookData has the following structure: 
+  // { 
   //  placeInfo: { placeName: String, containerArea: String, clickInsidePolygon: Boolean, latlng: {lat:..., lng:...}},
   //  placeInfoContainer: HtmlNode
   // }
@@ -306,14 +300,14 @@ appHooks.add('beforeShowResolvedPlaceInfo', (hookData) => {
   // the the hideDirectionsTo btn is not shown
 
   // It possible to remove and change existing content, as well
-  // as add new vue component in the popupHtmlFragment.
+  // as add new VueJS component in the popupHtmlFragment. 
   // See the example in `beforeOpenMarkerPopup`
 }, 1)
 
 appHooks.add('beforeShowAvoidPolygonPopup', (hookData) => {
   // hookData has the following structure {polygon: Object, popupHtmlFragment: HtmlNode}
   // It possible to remove and change existing content, as well
-  // as add new vue component in the popupHtmlFragment.
+  // as add new VueJS component in the popupHtmlFragment. 
   // See the example in `beforeOpenMarkerPopup`
 }, 1)
 
@@ -338,7 +332,7 @@ appHooks.add('beforeOpenIsochronePopup', (hookData) => {
   // hookData has the following structure {polygon: Object, isochronePopupContainer: HtmlNode}
   // isochronePopupContainer = an HTML node and can be manipulated,
   // It possible to remove and change existing content, as well
-  // as add new vue component. See the example below.
+  // as add new VueJS component. See the example below.
   // See the example in `beforeOpenMarkerPopup`
   // Do something
 }, 1)
@@ -348,10 +342,6 @@ appHooks.add('placeSearchAddressArgsDefined', (args) => {
 })
 
 appHooks.add('placeSearchPoisArgsDefined', (args) => {
-  // Do something
-})
-
-appHooks.add('placeSearchLocalityArgsDefined', (args) => {
   // Do something
 })
 
@@ -413,14 +403,4 @@ appHooks.add('rightClickContentReady', (hookData) => {
   // Do something
 })
 
-appHooks.add('importedFileParsed', (hookData) => {
-  // hookData has the following structure = {fileType, fileContent, timestamp}
-  // Do something
-})
-
-appHooks.add('importerAcceptedFilesDefined', (acceptedFilesStr) => {
-  // acceptedFilesStr is a comma separated list of extensions, like `.json,.kml,.gpx`
-  // Do something
-  return acceptedFilesStr
-})
 */
