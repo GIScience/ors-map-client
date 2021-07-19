@@ -105,8 +105,7 @@ App folder structure under `src`:
 - `pages` - app pages (currently only the `maps` page is available)
 - `resources` - support files like the loader lib, definitions and options used to process requests and responses
 
-- `router` - router component based on vue-router
-- `shared-services` - shared services that can be used by various components
+- `router` - router component based on vue-router components
 - `store` - app store definitions
 - `support` - support utilities, like geo-utils, ors-api-runner, routes-resolver and app modes
 
