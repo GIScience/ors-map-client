@@ -1,6 +1,6 @@
-# Plug-ins folder #
+# Plugins folder #
 
-Each plug-in must be contained in a folder created under the `plugins` folder.
+Each plug-in must be contained in a folder created under the `src/plugins` folder.
 For example: src/plugin/my-awesome-plugin. No file should be directly put in the root of the `plugins` folder.
 
 Each plug-in must have a class and methods/functions that can be called on hooks defined in the hooks.js.
@@ -8,11 +8,11 @@ Check the ExamplePlugin in `plugin-example/plugin-example.js` and `/src/config/h
 
 ## What can be used in a plug-in ? ##
 
-Next to the parameters passed to each method via hook call, inside a plug-in you can use the values stored in the
-[vuex](https://vuex.vuejs.org/guide/) store (you need to import store from '@/store/store') and access,
+In addition to the parameters passed to each method via hook call, inside a plug-in you can use the values stored in the
+[vuex](https://vuex.vuejs.org/guide/) store. In order to access the app store you need to import store from '@/store/store') and access it via,
 for example `store.getters.mapBounds`.
-You can also use the app constants to compare values.
-For this import `constants` from `@/resources/constants`.
+
+You can also use the app constants to compare values. For this import `constants` from `@/resources/constants`.
 
 Within the plug-in you can also set listeners to events emitted via `evenBus`, for example `mapViewDataChanged`,
 as well as emit those events.

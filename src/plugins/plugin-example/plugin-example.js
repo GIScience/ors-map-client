@@ -28,6 +28,7 @@ class PluginExample {
    * @param {Object} hookData
    */
   mapReady (hookData) {
+    console.log('PluginExample: mapReady callback', hookData)
     // hookData has the following structure {context: Object, map: Object}
     // The leaflet `map` object is passed and
     // you can potentially change it by adding or removing controls
@@ -45,6 +46,7 @@ class PluginExample {
    * @param {*} mapViewData
    */
   mapViewDataChanged (mapViewData) {
+    console.log('PluginExample: mapViewDataChanged callback', mapViewData)
     // change the mapViewData object
     // so that it will update the map view
   }

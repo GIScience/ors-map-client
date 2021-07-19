@@ -2,16 +2,11 @@
 // without the -example on the same folder that it resides.
 
 
-// THE CODE BELOW IS COMMENTED out BECAUSE THEY ARE JUST EXAMPLES
+// THE CODE BELOW IS COMMENTED OUT BECAUSE THEY ARE JUST EXAMPLES
 
 /*
 import main from '@/main'
 import PluginExample from '@/plugins/plugin-example/plugin-example.js'
-
-// Create a var that will have a reference to the
-// plugin instance when it is instantiated in 
-// appLoaded hook defined below.
-var pluginExample
 
 const appHooks = main.getInstance().appHooks
 
@@ -24,9 +19,12 @@ const appHooks = main.getInstance().appHooks
 // parameter value that is passed when the hook is run.
 
 appHooks.add('appLoaded', (vueInstance) => {
-  pluginExample = new PluginExample(vueInstance)
+  const pluginExample = new PluginExample(vueInstance)
+  appHooks.attachPlugin(pluginExample, vueInstance)
   // Do something when the app is loaded
 }, 1)
+
+// #### INDIVIDUAL HOOKS DEFINITION ###
 
 // The catch all hook allows, as the name says, catching all
 // the hooks. It receives as parameters not only the hook parameter
@@ -42,8 +40,6 @@ appHooks.add('catchAll', (hookName, hookData) => {
     return hookData // this return is always necessary
   }
 }, 1)
-
-// #### INDIVIDUAL HOOKS DEFINITION ###
 
 // If you want to define the hooks individually, 
 // then the templates are shown below.

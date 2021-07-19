@@ -5,10 +5,11 @@ import lodash from 'lodash'
  */
 class AppHooks {
   /**
-   * MapViewData constructor
+   * AppHooks constructor
    */
   constructor () {
     this.hooks = []
+    this.plugins = []
   }
 
   /**
@@ -49,6 +50,7 @@ class AppHooks {
     let targetHooks = lodash.filter(this.hooks, function(h) { return h.name === hookName })
 
     arg = this.executeCatchAllHooks(hookName, arg)
+    arg = this.runPluginHook(hookName, arg)
     
     // Only continue if there hooks
     if (targetHooks.length > 0) {
@@ -88,6 +90,35 @@ class AppHooks {
     }
     return arg
   }
+
+  /**
+   * Attach a plugin to the hooks system
+   * @param {Object} pluginInstance 
+   */
+  attachPlugin (pluginInstance, vueInstance) {
+    this.plugins.push(pluginInstance)
+    if (pluginInstance && typeof pluginInstance.appLoaded === 'function') {
+      return pluginInstance.appLoaded(vueInstance)
+    }
+  }
+
+  /**
+   * Execute a hook of a plugin
+   * @param {Object} hookName
+   * @param {String} arg
+   * @returns {Object} arg
+   */
+  runPluginHook (hookName, arg) {
+    if (Array.isArray(this.plugins) && this.plugins.length > 0) {
+      for (let key in this.plugins) {
+        let plugin = this.plugins[key]
+        if (plugin && typeof plugin[hookName] === 'function') {
+          return plugin[hookName](arg)
+        }
+      }
+    }
+    return arg
+  }
 }
-// export the AppHooks json builder class
+// Export the AppHooks class
 export default AppHooks
