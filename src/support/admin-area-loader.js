@@ -110,17 +110,11 @@ class AdminAreaLoader {
     for (let key in data) {
       let area = data[key]
       if (area.geojson.type !== 'Point') {
-        let hasCoordinatesAsMultyPolygon = Array.isArray(area.geojson.coordinates[0]) && Array.isArray(area.geojson.coordinates[0][0])
+        let hasCoordinatesAsMultiPolygon = Array.isArray(area.geojson.coordinates[0]) && Array.isArray(area.geojson.coordinates[0][0])
 
         // Treat as multipolygon in both cases
-        if (area.geojson.type === 'MultiPolygon' || hasCoordinatesAsMultyPolygon ) {
-          let splitPolygons = PolygonUtils.splitMultiPolygonIntoPolygons(area.geojson)
-          for (let pKey in splitPolygons) {
-            let adjustedPolygon = this.adjustPolygon(splitPolygons[pKey], place)
-            if (adjustedPolygon) {
-              polygons.push(adjustedPolygon)
-            }
-          }
+        if (area.geojson.type === 'MultiPolygon' || hasCoordinatesAsMultiPolygon ) {
+          polygons = this.buildPolygonsFromMultiPolygon(area.geojson, place)
         } else {
           let polygon = {geometry: {coordinates: area.geojson.coordinates}, type: area.geojson.type}
           let adjustedPolygon = this.adjustPolygon(polygon, place)
@@ -136,6 +130,25 @@ class AdminAreaLoader {
       return polygons
     }
     return []
+  }
+
+  /**
+   * Build a polygon collection from a multipolygon area object
+   * @param {Geojson} area 
+   * @param {Place} place 
+   * @returns {Array}
+   */
+  buildPolygonsFromMultiPolygon (AreaGeojson, place) {
+    let polygons = []
+    // Treat as multipolygon in both cases
+    let splitPolygons = PolygonUtils.splitMultiPolygonIntoPolygons(AreaGeojson)
+    for (let pKey in splitPolygons) {
+      let adjustedPolygon = this.adjustPolygon(splitPolygons[pKey], place)
+      if (adjustedPolygon) {
+        polygons.push(adjustedPolygon)
+      }
+    }
+    return polygons
   }
   /**
    * Validate a polygon
@@ -160,10 +173,11 @@ class AdminAreaLoader {
       }
       flattenCoordinates = cleanCoords
     }
-    polygon = {geometry: {coordinates: flattenCoordinates}, type: polygon.type}
-    polygon.label = place.placeName
-    polygon.color = theme.primary
-    polygon.fillColor = 'transparent'
+    polygon = {geometry: {coordinates: flattenCoordinates}, type: polygon.type, properties: {}}
+    polygon.properties.label = place.placeName
+    polygon.properties.color = theme.primary
+    polygon.properties.visible = true
+    polygon.properties.fillColor = 'transparent'
     return polygon
   }
 }

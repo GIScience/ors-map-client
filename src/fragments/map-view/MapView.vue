@@ -36,7 +36,7 @@
         @markerClicked="markerClicked">
       </map-view-markers>
 
-      <!--render isochrones polygons -->
+      <!--render polygons -->
       <template v-if="polygons">
         <template v-for="(polygon, index) in polygons">
           <l-polygon v-if="polygon.properties.visible"
