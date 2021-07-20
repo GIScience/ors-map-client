@@ -137,9 +137,9 @@ const geoUtils = {
       let bottomLeftVortice = coordinates[3]
 
       let topAndBottomParallel = (topLeftVortice[1] - bottomLeftVortice[1]) === (topRightVortice[1] - bottomRightVortice[1])
-      let trightAndLeftParallel = (topLeftVortice[0] - bottomLeftVortice[0]) === (topRightVortice[0] - bottomRightVortice[0])
+      let rightAndLeftParallel = (topLeftVortice[0] - bottomLeftVortice[0]) === (topRightVortice[0] - bottomRightVortice[0])
 
-      if (topAndBottomParallel && trightAndLeftParallel) {
+      if (topAndBottomParallel && rightAndLeftParallel) {
         return true
       }
       return false
@@ -171,7 +171,7 @@ const geoUtils = {
    * Get marker coordinates
    * @param {*} marker
    */
-  getMarkerCordinates(marker) {
+  getMarkerCoordinates(marker) {
     const markerCoordinates = lodash.get(marker, 'data.geometry.coordinates')
     return markerCoordinates
   },
@@ -194,13 +194,8 @@ const geoUtils = {
     return Leaflet.GeometryUtil.readableArea(area, unit)
   },
 
-
-
-
-
   /**
-   * Build a marker icon based on the color specified
-   * Expecting marker PNGs in 180x230 resolution
+   * Build an HTML marker icon based on parameters
    * @param {String} color
    * @returns {Object} markerIcon
    */
