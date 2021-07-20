@@ -7,6 +7,6 @@
 
 .maps .refresh-search-btn {
   position: absolute;
-  width: 170px;
+  min-width: 170px;
   z-index: 5;
 }
