@@ -42,7 +42,7 @@
 
     <v-bottom-nav v-if="showBottomNav && !$store.getters.embed" :style="{height: bottomNavHeight + 'px !important', top: bottomNavTop + 'px !important'}" class="places-nav" absolute color="white" >
       <places-carousel
-        :active-index="activeplaceIndex"
+        :active-index="activePlaceIndex"
         :map-view-data="mapViewData"
         @close="closedBottomNav"
         @placeSelected="placeIndexSelectedInBottomNav"
