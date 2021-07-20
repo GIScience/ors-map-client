@@ -119,6 +119,7 @@
         :version="layer.version"
         :format="layer.format"
         :transparent="true"
+        :opacity="layer.opacity"
         layer-type="overlay"/>
       <v-btn fab small @click.stop="toggleAccessibleMode" v-if="accessibilityToolAvailable"
         :title="$t('maps.toggleAccessibleMode')"
