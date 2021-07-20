@@ -103,7 +103,7 @@ class AppHooks {
   }
 
   /**
-   * Execute a hook of a plugin
+   * Execute a hook of a plugin                       
    * @param {Object} hookName
    * @param {String} arg
    * @returns {Object} arg
@@ -113,7 +113,10 @@ class AppHooks {
       for (let key in this.plugins) {
         let plugin = this.plugins[key]
         if (plugin && typeof plugin[hookName] === 'function') {
-          return plugin[hookName](arg)
+          let argReturned = plugin[hookName](arg)
+          if (argReturned !== undefined && argReturned !== null) {
+            arg = argReturned
+          }
         }
       }
     }
