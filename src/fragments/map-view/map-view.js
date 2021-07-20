@@ -1068,18 +1068,26 @@ export default {
       if (this.localMapViewData.hasPlaces()) {
         this.defineActiveRouteIndex()
         this.updateMarkersLabel()
-        if (this.localMapViewData.places.length === 1 && !this.localMapViewData.places[0].isEmpty()) {
-          this.setMapCenter(this.localMapViewData.places[0].getLatLng())
+        if (this.hasOnlyOneMarker) {
+          this.setFocusedPlace(this.localMapViewData.places[0])
         }
         if (this.mode === constants.modes.place && this.hasOnlyOneMarker && appConfig.showAdminAreaPolygon) {
-          let layer = this.localMapViewData.places[0].layer || this.localMapViewData.places[0].properties.layer
-          if (layer) {
-            this.zoomLevel = GeoUtils.zoomLevelByLayer(layer)
-          }
           this.loadAdminArea()
         } else {
           this.fitFeaturesBounds()
         }
+      }
+    },
+
+    /**
+     * Set the map view zom level when focused on an specific place
+     * @param {Place} place 
+     */
+    setFocusedPlace (place) {
+      let layer = place.layer || place.properties.layer
+      if (layer) {
+        this.zoomLevel = GeoUtils.zoomLevelByLayer(layer)
+        this.setMapCenter(place.getLatLng())
       }
     },
     /**
@@ -1901,13 +1909,13 @@ export default {
      */
     placeFocusChanged (place) {
       this.focusedPlace = place
-      const center = GeoUtils.buildLatLong(place.lat, place.lng)
-      const distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.mapCenter, center, 'm')
+      
+      const distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.mapCenter, place.getLatLng(), 'm')
 
       // We only consider that the center changed if it
       // changes more than 50 meters from the previous center
       if (distance > 50) {
-        this.setMapCenter(center)
+        this.setFocusedPlace(place)
       }
     },
     /**
