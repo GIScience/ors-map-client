@@ -3,6 +3,7 @@ import store from '@/store/store'
 import RoutesResolver from '@/support/routes-resolver'
 import constants from '@/resources/constants'
 import RouteUtils from '@/support/route-utils'
+import appConfig from '@/config/app-config'
 
 const rootPath = RoutesResolver.homeUrl()
 const placePath = RoutesResolver.place()
@@ -13,7 +14,7 @@ const embedParameters = '/:embed?/:locale?'
 
 // Build the optional placesNames Path
 var optionalPlaceNamesPath = ''
-for (let index = 2; index <= 15; index++) {
+for (let index = 2; index <= appConfig.maxPlaceInputs; index++) {
   optionalPlaceNamesPath += `/:placeName${index}?`
 }
 
