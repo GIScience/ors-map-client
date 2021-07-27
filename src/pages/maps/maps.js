@@ -48,6 +48,10 @@ export default {
     ResizeObserver
   },
   computed: {
+    showMapViewClickPopups () {
+      let show = ((!this.$store.getters.isSidebarVisible || this.$highResolution) || (this.$highResolution && this.$store.getters.leftSideBarPinned)) && !this.showBottomNav
+      return show
+    },
 
     /**
      * Returns a reference to the custom map controls container

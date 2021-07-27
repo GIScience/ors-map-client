@@ -1357,6 +1357,8 @@ export default {
           this.eventBus.$emit('mapRightClicked', data)
         }
         this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
+      } else if (this.$store.getters.isSidebarVisible) {
+        this.eventBus.$emit('setSidebarStatus', false)
       }
     },
 
@@ -1382,15 +1384,10 @@ export default {
           // If in low resolution and sidebar is open, then left click on the map
           // must close the side bar to allow the user to interact with the map.
           // If not then the normal left click handler must be executed
-          if (!this.$store.getters.isSidebarVisible) {
-            if (this.$lowResolution) {
-              this.eventBus.$emit('setSidebarStatus', false)
-            } else {
-              this.handleShowLeftClickPlaceInfo(event)
-            }
-          } else {
-            this.handleShowLeftClickPlaceInfo(event)
+          if (this.$store.getters.isSidebarVisible && this.$lowResolution) {
+            this.eventBus.$emit('setSidebarStatus', false)
           }
+          this.handleShowLeftClickPlaceInfo(event)
         }
       }
     },
