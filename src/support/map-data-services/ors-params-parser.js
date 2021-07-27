@@ -139,35 +139,50 @@ const orsParamsParser = {
    * @returns {Object} args
    */
   buildIsochronesArgs: (places) => {
-    const locations = []
-    for (const key in places) {
-      const place = places[key]
-      locations.push([place.lng, place.lat])
-    }
-    const args = {
-      locations: locations,
-      area_units: store.getters.mapSettings.unit,
-      timeout: constants.orsApiRequestTimeout,
-      attributes:['total_pop']
-    }
-    // Add the filters defined in the ORS filters that are manipulated
-    // directly by external components
-    orsParamsParser.setFilters(args, OrsMapFilters, constants.services.isochrones)
+    return new Promise((resolve) => {
+      const locations = []
+      for (const key in places) {
+        const place = places[key]
+        locations.push([place.lng, place.lat])
+      }
+      const args = {
+        locations: locations,
+        area_units: store.getters.mapSettings.unit,
+        timeout: constants.orsApiRequestTimeout,
+        attributes:['total_pop']
+      }
+      // Add the filters defined in the ORS filters that are manipulated
+      // directly by external components
+      orsParamsParser.setFilters(args, OrsMapFilters, constants.services.isochrones)
 
-    // Adjust specific args
-    if (args.range && !Array.isArray(args.range)) {
-      args.range = [args.range]
-    }
-    if (args.range_time) {
-      args.range = args.range_time
-      delete args.range_time
-    }
-    if (args.range_distance) {
-      args.range = args.range_distance
-      delete args.range_distance
-    }
-    main.getInstance().appHooks.run('isochronesArgsCreated', args)
-    return args
+      // Adjust specific args
+      if (args.range && !Array.isArray(args.range)) {
+        args.range = [args.range]
+      }
+      if (args.range_time) {
+        args.range = args.range_time
+        delete args.range_time
+      }
+      if (args.range_distance) {
+        args.range = args.range_distance
+        delete args.range_distance
+      }
+      main.getInstance().appHooks.run('isochronesArgsCreated', args)
+
+      let promiseOrArgs = main.getInstance().appHooks.run('isochronesArgsCreated', args)
+          
+      // If a promise is returned
+      if (promiseOrArgs instanceof Promise) {
+        promiseOrArgs.then((promiseArgs) => {
+          resolve(promiseArgs)
+        }).catch (err => {
+          console.error(err)
+        })
+      } else { // returned value is already an args object
+        resolve(promiseOrArgs)
+      }
+      return args
+    })
   },
 
   /**
@@ -176,44 +191,58 @@ const orsParamsParser = {
    * @returns {Object} args
    */
   buildRoutingArgs: (places) => {
-    const coordinates = lodash.map(places, (p) => {
-      return p.getLngLatArr()
-    })
-    const mapSettings = store.getters.mapSettings
+    return new Promise((resolve) => {
+      const coordinates = lodash.map(places, (p) => {
+        return p.getLngLatArr()
+      })
+      const mapSettings = store.getters.mapSettings
 
-    // Define the extra info that must be be requested
-    // based on the map settings
-    const extraInfo = orsParamsParser.buildExtraInfoOptions(mapSettings)
+      // Define the extra info that must be be requested
+      // based on the map settings
+      const extraInfo = orsParamsParser.buildExtraInfoOptions(mapSettings)
 
-    // Set args object
-    const args = {
-      coordinates: coordinates,
-      format: 'geojson',
-      elevation: mapSettings.elevationProfile,
-      instructions_format: 'html',
-      extra_info: extraInfo,
-      language: mapSettings.routingInstructionsLocale,
-      units: mapSettings.unit,
-      timeout: constants.orsApiRequestTimeout
-    }
-
-    let skipSegments = []
-    for (let pIndex in places) {
-      if (places[pIndex].direct) {
-        let segment = Number(pIndex) +1
-        skipSegments.push(segment)
+      // Set args object
+      const args = {
+        coordinates: coordinates,
+        format: 'geojson',
+        elevation: mapSettings.elevationProfile,
+        instructions_format: 'html',
+        extra_info: extraInfo,
+        language: mapSettings.routingInstructionsLocale,
+        units: mapSettings.unit,
+        timeout: constants.orsApiRequestTimeout
       }
-    }
-    if (skipSegments.length > 0) {
-      args.skip_segments = skipSegments
-    }
-    args.skip_segments
 
-    // Add the filters defined in the ORS filters that are manipulated
-    // directly by external components
-    orsParamsParser.setFilters(args, OrsMapFilters, constants.services.directions)
-    main.getInstance().appHooks.run('routingArgsCreated', args)
-    return args
+      let skipSegments = []
+      for (let pIndex in places) {
+        if (places[pIndex].direct) {
+          let segment = Number(pIndex) +1
+          skipSegments.push(segment)
+        }
+      }
+      if (skipSegments.length > 0) {
+        args.skip_segments = skipSegments
+      }
+      args.skip_segments
+
+      // Add the filters defined in the ORS filters that are manipulated
+      // directly by external components
+      orsParamsParser.setFilters(args, OrsMapFilters, constants.services.directions)
+
+      let promiseOrArgs = main.getInstance().appHooks.run('routingArgsCreated', args)
+        
+      // If a promise is returned
+      if (promiseOrArgs instanceof Promise) {
+        promiseOrArgs.then((promiseArgs) => {
+          resolve(promiseArgs)
+        }).catch (err => {
+          console.error(err)
+        })
+      } else { // returned value is already an args object
+        resolve(promiseOrArgs)
+      }
+      return args
+    })
   },
 
   /**

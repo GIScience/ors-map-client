@@ -31,17 +31,19 @@ const Directions = (places, customArgs = null) => {
     host: mapSettings.apiBaseUrl,
     service: mapSettings.endpoints.directions
   })
-  let args = OrsParamsParser.buildRoutingArgs(places)
-  if (customArgs) {
-    args = Object.assign(args, customArgs)
-  }
+
   return new Promise((resolve, reject) => {
-    directions.calculate(args).then(response => {
-      const data = { options: { origin: constants.dataOrigins.directions, apiVersion: constants.apiVersion }, content: response }
-      resolve(data)
-    }).catch(err => {
-      const result = { response: err, args: args }
-      reject(result)
+    OrsParamsParser.buildRoutingArgs(places).then(args => {
+      if (customArgs) {
+        args = Object.assign(args, customArgs)
+      }
+      directions.calculate(args).then(response => {
+        const data = { options: { origin: constants.dataOrigins.directions, apiVersion: constants.apiVersion }, content: response }
+        resolve(data)
+      }).catch(err => {
+        const result = { response: err, args: args }
+        reject(result)
+      })
     })
   })
 }
@@ -285,13 +287,14 @@ const Isochrones = (places) => {
     service: mapSettings.endpoints.isochrones
   })
   return new Promise((resolve, reject) => {
-    const args = OrsParamsParser.buildIsochronesArgs(places)
-    isochrones.calculate(args).then((response) => {
-      const data = { options: { origin: constants.dataOrigins.isochrones, apiVersion: constants.apiVersion }, content: response }
-      resolve(data)
-    }).catch((err) => {
-      const result = { response: err, args: args }
-      reject(result)
+    OrsParamsParser.buildIsochronesArgs(places).then(args => {
+      isochrones.calculate(args).then((response) => {
+        const data = { options: { origin: constants.dataOrigins.isochrones, apiVersion: constants.apiVersion }, content: response }
+        resolve(data)
+      }).catch((err) => {
+        const result = { response: err, args: args }
+        reject(result)
+      })
     })
   })
 }
