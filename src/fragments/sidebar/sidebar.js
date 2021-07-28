@@ -29,8 +29,8 @@ export default {
         // we can set the sidebar pined status as false
         if (open === false) {
           this.$store.commit('setLeftSideBarIsPinned', open)
-          // Close the mobile virtual keyboard if 
-          // if was open when the sidebar is closed
+          // Blur the active element in order to close 
+          // the mobile virtual keyboard if it was open
           if (utils.isMobile() && document.activeElement) {
             document.activeElement.blur()
           }

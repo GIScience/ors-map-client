@@ -3,6 +3,7 @@
     <v-navigation-drawer
       app
       clipped
+      stateless
       hide-overlay
       class="sidebar"
       v-model="isSideBarOpen"
