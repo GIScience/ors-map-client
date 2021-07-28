@@ -27,7 +27,22 @@
  * @emits setInputPlace
  */
 
-import { LMap, LTileLayer, LLayerGroup, LTooltip, LPopup, LControlZoom, LControlAttribution, LControlScale, LWMSTileLayer, LControlLayers, LGeoJson, LPolygon, LCircle, LCircleMarker } from 'vue2-leaflet'
+import { 
+  LMap, 
+  LTileLayer, 
+  LLayerGroup, 
+  LTooltip, 
+  LPopup, 
+  LControlZoom, 
+  LControlAttribution, 
+  LControlScale, 
+  LWMSTileLayer, 
+  LControlLayers, 
+  LGeoJson, 
+  LPolygon, 
+  LCircle, 
+  LCircleMarker 
+} from 'vue2-leaflet'
 
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
 import ExtraInfoHighlight from './components/extra-info-highlight/ExtraInfoHighlight'

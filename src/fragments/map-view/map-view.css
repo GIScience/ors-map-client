@@ -35,21 +35,26 @@
   right: 5px;
   z-index: 501;
   opacity: 0.7;
-  height: 100px;
-  display: hidden;
+  height: 100px
+}
+
+@media (max-width: 600px) {
+  .over-brand {
+    height: 70px
+  }
 }
 
 .my-location-btn {
   position: absolute !important;
   bottom: 80px;
   right: 0px;
-  z-index: 502;
+  z-index: 1000;
 }
 
 .accessibility-btn {
   position: absolute !important;
   top: 60px;
-  right: 0px;
+  right: 5px;
   z-index: 502;
   background: white !important;
   color: black;
@@ -62,7 +67,7 @@
 .fit-all-features {
   position: absolute !important;
   top: 110px;
-  right: 0px;
+  right: 5px;
   z-index: 502;
   background: white !important;
   color: black;
