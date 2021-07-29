@@ -6,6 +6,14 @@
   margin-top: 70px;
 }
 
+.map-view.extra-low-resolution.hide-controls >>> .leaflet-control-attribution {
+  display: none;
+}
+
+.map-view.extra-low-resolution.hide-controls >>> .leaflet-control-zoom {
+  display: none;
+}
+
 .map-view >>> .leaflet-control-attribution.leaflet-control {
   background-color: rgba(256,256,256, 0.6);
 }

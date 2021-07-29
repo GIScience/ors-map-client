@@ -4,7 +4,7 @@
       :id="constants.mapViewElementId"
       ref="map"
       class="map-view"
-      :class="{'low-resolution': $lowResolution, 'extra-low-resolution': $xlResolution, 'click-to-pick': clickToPickActive}"
+      :class="{'low-resolution': $lowResolution, 'extra-low-resolution': $xlResolution, 'click-to-pick': clickToPickActive, 'hide-controls': !showControls}"
       @click.right="mapRightClick"
       @zoomend="zoomed"
       @baselayerchange="baseLayerChanged"
@@ -88,7 +88,7 @@
           :tooltip-icon="routingProfileIcon">
         </ors-l-polyline>
       </template>
-      <l-control-layers v-if="showControls" :position="layersPosition" :collapsed="true"/>
+      <l-control-layers :position="layersPosition" :collapsed="true"/>
       <l-tile-layer
         v-for="tileProvider in tileProviders"
         :key="tileProvider.name"

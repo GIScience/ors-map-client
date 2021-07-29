@@ -54,7 +54,7 @@
 .accessibility-btn {
   position: absolute !important;
   top: 60px;
-  right: 5px;
+  right: 0px;
   z-index: 502;
   background: white !important;
   color: black;
@@ -67,7 +67,7 @@
 .fit-all-features {
   position: absolute !important;
   top: 110px;
-  right: 5px;
+  right: 0px;
   z-index: 502;
   background: white !important;
   color: black;

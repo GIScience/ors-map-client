@@ -52,6 +52,19 @@ export default {
       let show = ((!this.$store.getters.isSidebarVisible || this.$highResolution) || (this.$highResolution && this.$store.getters.leftSideBarPinned)) && !this.showBottomNav
       return show
     },
+    /**
+     * Determines if the map controls
+     * must be shown based on the current
+     * view resolution and the shrink value
+     * @returns {Boolean} show
+     */
+    showMapControls () {
+      let show = true
+      if ((this.$store.getters.isSidebarVisible && this.$lowResolution) || this.$store.getters.embed) {
+        show = false
+      }
+      return show
+    },
 
     /**
      * Returns a reference to the custom map controls container

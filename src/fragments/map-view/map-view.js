@@ -118,6 +118,10 @@ export default {
       type: Boolean,
       default: true
     },
+    showControls: {
+      type: Boolean,
+      default: true
+    },
     fitBounds: {
       type: Boolean,
       default: true
@@ -209,7 +213,7 @@ export default {
      * @returns {Boolean}
      */
     accessibilityToolAvailable () {
-      let available = appConfig.accessibilityToolAvailable
+      let available = appConfig.accessibilityToolAvailable && this.showControls
       return available
     },
     /**
@@ -239,19 +243,7 @@ export default {
       const zoom = this.zoomLevel > 0 ? this.zoomLevel : this.maxZoom
       return zoom
     },
-    /**
-     * Determines if the map controls
-     * must be shown based on the current
-     * view resolution and the shrink value
-     * @returns {Boolean} show
-     */
-    showControls () {
-      let show = true
-      if (this.shrunk && this.$lowResolution) {
-        show = false
-      }
-      return show
-    },
+
     /**
      * Returns the map options
      * based on the embed mode value
@@ -263,7 +255,7 @@ export default {
         zoomControl: this.showControls,
         attributionControl: true,
         measureControl: true,
-        gestureHandling: this.$store.getters.embed,
+        gestureHandling: this.showControls,
         gestureHandlingOptions: {
           text: this.$t('mapView.gestureHandling'),
           duration: 1000
@@ -676,6 +668,9 @@ export default {
         this.centerChanged()
       },
       deep: true
+    },
+    showControls() {
+      this.disableLayerControlMouseOver()
     }
   },
   methods: {
@@ -1971,12 +1966,30 @@ export default {
       this.eventBus.$on('placeFocusChanged', context.placeFocusChanged)
 
       this.eventBus.$on('highlightPolylineSections', context.highlightPolylineSections)
+
+      this.disableLayerControlMouseOver()
      
       this.eventBus.$on('redrawAndFitMap', (data) => {
         if (data.guid && data.guid === context.guid) {
           context.adjustMap()
         }
-      })      
+      })
+    },
+
+    /**
+     * Disable mouseover for layer control
+     */
+    disableLayerControlMouseOver () {
+      setTimeout(() => {
+        let layerControl = document.getElementsByClassName('leaflet-control-layers-toggle')
+        if (layerControl.length > 0) {
+          layerControl[0].addEventListener('mouseover', function (event) {
+            //this will make sure that layer popup menu
+            //not opens when mouseover
+            event.stopPropagation()
+          })
+        }
+      }, 200)
     },
     /**
      * Toggle the accessible mode by
