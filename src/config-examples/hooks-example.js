@@ -22,7 +22,7 @@ appHooks.add('appLoaded', (vueInstance) => {
   const pluginExample = new PluginExample(vueInstance)
   appHooks.attachPlugin(pluginExample, vueInstance)
   // Do something when the app is loaded
-}, 1)
+})
 
 // #### INDIVIDUAL HOOKS DEFINITION ###
 
