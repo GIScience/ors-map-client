@@ -27,6 +27,7 @@
 
 .sidebar-content {
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebar-content-form {
