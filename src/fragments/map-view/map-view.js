@@ -255,7 +255,7 @@ export default {
         zoomControl: this.showControls,
         attributionControl: true,
         measureControl: true,
-        gestureHandling: this.showControls,
+        gestureHandling: this.$store.getters.embed,
         gestureHandlingOptions: {
           text: this.$t('mapView.gestureHandling'),
           duration: 1000
