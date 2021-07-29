@@ -7,13 +7,15 @@
       <v-tab ripple key="1" class="tab-title" v-if="hasIsochronesTab">
         {{$t('mapForm.isochrones')}}
       </v-tab>
-      <v-tab-item key="0" v-if="hasPlacesAndDirectionsTab">
+    </v-tabs>
+    <v-tabs-items v-model="activeTab" touchless>
+      <v-tab-item key="0" v-if="hasPlacesAndDirectionsTab" touchless>
         <places-and-directions :active="$store.getters.mode !== constants.modes.isochrones"> </places-and-directions>
       </v-tab-item>
-      <v-tab-item key="1" v-if="hasIsochronesTab">
+      <v-tab-item key="1" v-if="hasIsochronesTab" touchless>
         <isochrones :active="$store.getters.mode === constants.modes.isochrones" ></isochrones>
       </v-tab-item>
-    </v-tabs>
+    </v-tabs-items>
   </div>
 </template>
 

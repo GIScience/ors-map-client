@@ -1,6 +1,7 @@
 <template>
   <div >
     <v-navigation-drawer
+      touchless
       app
       clipped
       stateless
