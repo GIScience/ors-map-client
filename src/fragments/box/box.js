@@ -162,7 +162,7 @@ export default {
      * event `boxMaximizedStackChanged` if emitted
      * @param {*} value
      */
-    syncBoxesMaximized (value) {
+    syncBoxesMaximized () {
       // We can have a list of boxes considered as maximized, but only the
       // last one will be displayed in the view as maximized.
       // To achieve this we keep a stack of boxes maximized
@@ -329,19 +329,19 @@ export default {
      * @returns {} object with style properties and values
      */
     boxStyle () {
-      const styl = {
+      const style = {
         background: this.backgroundColor
       }
       if (this.right) {
-        styl.float = 'right'
+        style.float = 'right'
       }
       if (this.maximized) {
-        styl.height = 'auto'
+        style.height = 'auto'
       } else {
-        styl.zIndex = 'auto'
+        style.zIndex = 'auto'
       }
 
-      return styl
+      return style
     },
     /**
      * Build the classes that must be attached to the box element
