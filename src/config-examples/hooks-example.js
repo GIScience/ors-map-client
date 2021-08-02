@@ -403,4 +403,18 @@ appHooks.add('layerProvidersLoaded', (hookData) => {
   // hookData has the following structure = {tileProviders: Object, overlayerTileProviders: Object, context: Object}
   // Do something
 })
+
+appHooks.add('floatingMenuItemsDefined', (menuItems) => {
+  // menuItems is an array in which each item has following structure:
+  // {
+  //   id: String,
+  //   show: boolean,
+  //   href: String (optional),
+  //   title: String,
+  //   text: String,
+  //   icon: String (corresponding to a valid material design icon),
+  //   target: String (like '_blank')
+  // }
+  return menuItems
+})
 */

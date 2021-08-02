@@ -1,43 +1,23 @@
 <template>
-  <v-menu class="info-menu" :open-on-hover="openOnHover" :open-on-click="!openOnHover" nudge-top="10" offset-y>
+  <v-menu v-if="menuItemsReady" class="info-menu" :open-on-hover="openOnHover" :open-on-click="!openOnHover" nudge-top="10" offset-y>
     <v-btn class="no-padding pl2 pr2" flat slot="activator" @click="menuClicked"
       v-smart-tooltip="{show: showSettingsTooltip, text: $t('floatingTopMenu.settingsTooltip'), position: 'bottom', dark: true, showOnce: true, name: 'settingsTooltip'}">
       <v-icon>{{showSettings ? 'more_vert' : 'info'}}</v-icon>
     </v-btn>
     <v-list>
-      <v-list-tile v-if="showSettings">
-        <v-btn class="floating-item" flat @click="eventBus.$emit('showSettingsModal')">
-          <v-icon :title="$t('floatingTopMenu.openSettings')" left color="dark">settings</v-icon>
-          <template>{{$t('floatingTopMenu.openSettings')}}</template>
+
+    <template v-for="(item, index) in menuItems">
+     <v-list-tile :key="index" v-if="item.show">
+        <v-btn flat v-if="item.emitEvent" class="floating-item" @click="eventBus.$emit(item.emitEvent)">
+          <v-icon :title="item.title" left color="dark">{{item.icon}}</v-icon>
+          <template>{{item.title}}</template>
+        </v-btn>
+        <v-btn v-else flat class="floating-item" :target="item.blank" :href="item.href">
+          <v-icon :title="item.title" left color="dark">{{item.icon}}</v-icon>
+          <template>{{item.title}}</template>
         </v-btn>
       </v-list-tile>
-      <v-list-tile>
-        <v-btn class="floating-item" @click="eventBus.$emit('showAboutModal')" :title="$t('floatingTopMenu.openSettings')" flat>
-          <v-icon :title="$t('floatingTopMenu.showAbout')" left>info</v-icon>
-          <template>{{$t('floatingTopMenu.about')}}</template>
-        </v-btn>
-      </v-list-tile>
-      <v-list-tile>
-        <v-btn class="floating-item" target="_blank" :href="constants.links.ors"
-          :title="$t('floatingTopMenu.openrouteserviceAPI')" flat>
-          <v-icon left>code</v-icon>
-          <template>{{$t('floatingTopMenu.openrouteserviceAPI')}}</template>
-        </v-btn>
-      </v-list-tile>
-      <v-list-tile>
-        <v-btn class="floating-item" target="_blank" :href="constants.links.disaster"
-          :title="$t('floatingTopMenu.openrouteserviceForDisasters')" flat>
-          <v-icon left>healing</v-icon>
-          <template>{{$t('floatingTopMenu.openrouteserviceForDisasters')}}</template>
-        </v-btn>
-      </v-list-tile>
-      <v-list-tile>
-        <v-btn class="floating-item" target="_blank" :href="constants.links.askOrs"
-          :title="$t('floatingTopMenu.askOpenrouteservice')" flat>
-          <v-icon left>help</v-icon>
-          <template>{{$t('floatingTopMenu.askOpenrouteservice')}}</template>
-        </v-btn>
-      </v-list-tile>
+    </template>
     </v-list>
   </v-menu>
 </template>
