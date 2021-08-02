@@ -777,6 +777,11 @@ export default {
     removePlaceInput (data, keepDirectionsMode = false) {
       let placeInputsBeforeRemoval = this.places.length
       this.places.splice(data.index, 1)
+
+      // If the last place has the direct flag, set it to false
+      if (this.places[data.index -1] && this.places[data.index -1].direct) {
+        this.places[data.index -1].direct = false
+      }
       // Set the view mode constants.modes.directions or constants.modes.place
       this.setViewMode()
       this.updateAppRoute()
