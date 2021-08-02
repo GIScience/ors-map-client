@@ -543,9 +543,9 @@ export default {
       if (this.$store.getters.mode !== constants.modes.search) {
         const isRoundTrip = this.$store.getters.mode === constants.modes.roundTrip
 
-        // Just enter here if we are dealing with directions round trip
-        // If there are more then 1 place, then it is directions
-        // if there is only one place and it is round trip, then we are also
+        // Just enter here if we are dealing with directions round trip.
+        // If there are more then 1 place, then it is directions mode.
+        // If there is only one place and it is round trip, then we are also
         // dealing with directions, but an special directions (a round trip directions!)
         let context = this
         if (isRoundTrip && this.getFilledPlaces().length === 1) {
@@ -563,12 +563,13 @@ export default {
 
     /**
      * Prepare the view and the data for the directions/routing mode
-     * and data according the amount of filled places
+     * according the amount of filled places
      * @emits mapViewDataChanged
      */
     prepareDirectionsViewAndData () {
       this.setViewMode(constants.modes.directions)
-      this.setSidebarIsOpen(true)
+      this.setSidebarIsOpen()
+      this.eventBus.$emit('newInfoAvailable')
 
       // Only calculate a route if there are more then one place defined
       if (this.getFilledPlaces().length > 1) {
