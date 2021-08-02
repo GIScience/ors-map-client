@@ -2,6 +2,7 @@ import OrsExtendedPolyline from './ors-extended-polyline'
 import { LPolyline, LTooltip, LPopup} from 'vue2-leaflet'
 import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
+import Utils from '@/support/utils'
 import theme from '@/config/theme'
 import store from '@/store/store'
 import lodash from 'lodash'
@@ -75,6 +76,14 @@ export default {
     },
     route: {
       handler: function (newVal, oldVal) {
+        this.openPopupWhenRouteChange(newVal, oldVal)
+      },
+      deep: true
+    }
+  },
+  methods: {
+    openPopupWhenRouteChange (newVal, oldVal) {
+      if (this.$mdAndUpResolution && !Utils.isMobile()) {
         this.active = false
         let context = this
         if (JSON.stringify(newVal.geometry.coordinates) !== JSON.stringify(oldVal.geometry.coordinates)) {
@@ -83,11 +92,8 @@ export default {
             context.updatePopup()
           }, 100)
         }
-      },
-      deep: true
-    }
-  },
-  methods: {
+      }
+    },
     addStopViaPolylineDrag (data) {
       this.$emit('addStopViaPolylineDrag', data)
     },
@@ -228,6 +234,8 @@ export default {
     }
   },
   mounted() {
-    this.updatePopup()
+    if (this.$mdAndUpResolution && !Utils.isMobile()) {
+      this.updatePopup()
+    }
   },
 }
