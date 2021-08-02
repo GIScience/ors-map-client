@@ -86,7 +86,7 @@
         </v-menu>
       </v-flex>
     </v-layout>
-    <div class="suggestions shadow" :class="{'scrollable': $lowResolution && placeSuggestions.length > 0, 'multiple-input': !single && $lowResolution}"  v-if="showSuggestion">
+    <div class="suggestions shadow" :class="{'scrollable': $lowResolution && placeSuggestions.length > 3, 'multiple-input': !single && $lowResolution}"  v-if="showSuggestion">
       <v-layout row>
         <v-flex>
           <v-layout row>
@@ -108,7 +108,7 @@
             <v-spacer></v-spacer>
             <v-flex xs2 sm2 md1 >
               <div>
-                <v-btn flat small fab class="close-suggestions no-marging no-padding" style="width:40px" @click="setFocus(false)">
+                <v-btn flat small fab class="close-suggestions no-margin no-padding" style="width:40px" @click="setFocus(false)">
                   <v-icon :title="$t('global.close')" :large="$lowResolution" >close</v-icon>
                 </v-btn>
               </div>

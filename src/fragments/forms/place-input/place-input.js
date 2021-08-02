@@ -1,10 +1,11 @@
 import AppMode from '@/support/app-modes/app-mode'
 import { PlacesSearch, ReverseGeocode } from '@/support/ors-api-runner'
 import constants from '@/resources/constants'
+import appConfig from '@/config/app-config'
 import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
-import utils from '@/support/utils'
-import appConfig from '@/config/app-config'
+import Utils from '@/support/utils'
+
 
 export default {
   data: () => ({
@@ -119,7 +120,7 @@ export default {
      * @returns {Boolean}
      */
     isMobile () {
-      let isMobile = utils.isMobile()
+      let isMobile = Utils.isMobile()
       return isMobile
     },
     /**
@@ -352,13 +353,13 @@ export default {
     resolveModelWithDebouncing (newVal) {
       let context = this
       clearTimeout(this.modelDebounceTimeoutId)
-        this.modelDebounceTimeoutId = setTimeout(function () {
-          if (context.directIsAvailable && context.$store.getters.mapSettings.skipAllSegments) {
-            newVal.direct = true
-          }
-          context.localModel = newVal.clone()
-          context.resolveModel()
-        }, 1000)
+      this.modelDebounceTimeoutId = setTimeout(function () {
+        if (context.directIsAvailable && context.$store.getters.mapSettings.skipAllSegments) {
+          newVal.direct = true
+        }
+        context.localModel = newVal.clone()
+        context.resolveModel()
+      }, 1000)
     },
     showAreaIcon (place) {
       let show = place.properties.layer === 'country' || place.properties.layer === 'region'
@@ -479,6 +480,8 @@ export default {
           this.focusIsAutomatic = false
           if (places.length === 0) {
             context.showInfo(context.$t('placeInput.noPlaceFound'))
+          } else if (places.length > 1) {
+            Utils.hideMobileKeyboard()
           }
         }).catch(response => {
           console.log(response)
@@ -504,6 +507,9 @@ export default {
         context.localModel = place
         context.focused = true
         this.focusIsAutomatic = false
+        if (places.length > 1) {
+          Utils.hideMobileKeyboard()
+        }
       }).catch(response => {
         console.log(response)
       }).finally(() => {
@@ -834,7 +840,7 @@ export default {
       this.$emit('changedDirectPlace', data)
     },
     getNewGuid (prefix) {
-      let guid = utils.guid(prefix)
+      let guid = Utils.guid(prefix)
       return guid
     }
   }

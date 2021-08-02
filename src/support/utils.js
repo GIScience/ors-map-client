@@ -14,6 +14,16 @@ const Utils = {
     const textColor = tinyColor2(backgroundColor).isLight() ? 'black' : 'white'
     return textColor
   },
+
+  /**
+   * Blur the active element in order to close
+   * the mobile virtual keyboard if it is open
+   */
+  hideMobileKeyboard () {
+    if (Utils.isMobile() && document.activeElement) {
+      document.activeElement.blur()
+    }
+  },
  
   /**
    * Compare two objects and get the diffs

@@ -38,7 +38,7 @@
 .no-padding {
   padding: 0px;
 }
-.no-marging {
+.no-margin {
   margin: 0px;
 }
 
@@ -73,6 +73,10 @@
   padding: 0;
 }
 
+.suggestions >>> .v-list__tile__content {
+  border-bottom: 1px solid #ededed;
+}
+
 .input-pop-up-list .v-btn {
   min-width: 0;
 }
@@ -93,7 +97,7 @@
   font-size: 12px !important;
 }
 
-.aproximate-distance {
+.approximate-distance {
   font-weight: 600;
   font-style: italic;
 }
