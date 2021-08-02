@@ -417,4 +417,10 @@ appHooks.add('floatingMenuItemsDefined', (menuItems) => {
   // }
   return menuItems
 })
+
+appHooks.add('aboutContentDefined', (hookData) => {
+  // hookData has the following structure = {customAbout: HtmlNode, aboutContainer: HtmlNode, aboutLogo: HtmlNode}
+  // Do something
+})
+
 */

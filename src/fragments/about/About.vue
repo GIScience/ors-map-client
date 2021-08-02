@@ -2,9 +2,9 @@
   <div>
     <div class="custom-about" ref="customAbout">
     </div>
-    <div v-if="showDefaultAboutContent">
+    <div v-if="showDefaultAboutContent" ref="aboutContainer">
       <header style="margin-top: 0">
-        <img height="auto" class="logo" src="@/assets/img/logo@2x.png" width="200px" />
+        <img ref="aboutLogo" height="auto" class="logo" src="@/assets/img/logo@2x.png" width="200px" />
       </header>
       <v-divider></v-divider>
       <section>

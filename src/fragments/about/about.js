@@ -1,5 +1,4 @@
 import appConfig from '@/config/app-config'
-import constants from '@/resources/constants'
 
 export default {
   computed: {
@@ -12,8 +11,8 @@ export default {
   },
   methods: {
     callHook () {
-        let hookData = {containerRef: this.$refs.customAbout}
-        this.$root.appHooks.run('setCustomAbout', hookData)
-      }
+      let hookData = {customAbout: this.$refs.customAbout, aboutContainer: this.$refs.aboutContainer, aboutLogo: this.$refs.aboutLogo}
+      this.$root.appHooks.run('aboutContentDefined', hookData)
+    }
   },
 }
