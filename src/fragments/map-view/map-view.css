@@ -54,15 +54,16 @@
 .accessibility-btn {
   position: absolute !important;
   top: 55px;
-  right: 1px;
+  right: 2px;
   z-index: 502;
-  background: white !important;
   color: black;
   transition:all 0.5s ease;
-  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
-  border-radius: 3px;
-  width: 37px;
-  height: 37px;
+  border: 2px solid rgba(0,0,0,.2);
+  background-clip: padding-box;
+  border-radius: 5px;
+  width: 38px;
+  height: 38px;
+  box-shadow: none !important
 }
 .accessibility-btn.extra-low-resolution {
   top: 125px;
@@ -74,11 +75,14 @@
   top: 105px;
   right: 1px;
   z-index: 502;
-  background: white !important;
   color: black;
-  border-radius: 3px;
-  width: 37px;
-  height: 37px;
+  border-radius: 5px;
+  border: 2px solid rgba(0,0,0,.2);
+  background-clip: padding-box;
+  border-radius: 5px;
+  width: 38px;
+  height: 38px;
+  box-shadow: none !important
 }
 
 .fit-all-features.extra-low-resolution {

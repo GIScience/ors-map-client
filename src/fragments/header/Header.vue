@@ -18,7 +18,8 @@
     </v-toolbar>
     <v-btn fab small v-if="!$store.getters.embed && $highResolution"
       :title="$store.getters.topBarOpen? $t('header.hideMenuBar'): $t('header.showMenuBar')"
-      style="width: 37px; height: 37px; position:absolute; right:170px; z-index:4; transition:all 1s ease; border-radius: 3px;"
+      style="width: 38px; height: 38px; position:absolute; right:170px; z-index:4; transition:all 1s ease; border-radius: 5px; border: 2px solid rgba(0,0,0,.2);
+    background-clip: padding-box; box-shadow: none"
       :style="{top: $store.getters.topBarOpen? '103px' : '3px'}"
       @click.stop="toggleTopBar" >
       <v-icon large v-if="$store.getters.topBarOpen" >keyboard_arrow_up </v-icon>

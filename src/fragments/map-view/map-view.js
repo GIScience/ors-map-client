@@ -668,9 +668,6 @@ export default {
         this.centerChanged()
       },
       deep: true
-    },
-    showControls() {
-      this.disableLayerControlMouseOver()
     }
   },
   methods: {
@@ -1966,8 +1963,6 @@ export default {
       this.eventBus.$on('placeFocusChanged', context.placeFocusChanged)
 
       this.eventBus.$on('highlightPolylineSections', context.highlightPolylineSections)
-
-      this.disableLayerControlMouseOver()
      
       this.eventBus.$on('redrawAndFitMap', (data) => {
         if (data.guid && data.guid === context.guid) {
@@ -1976,21 +1971,6 @@ export default {
       })
     },
 
-    /**
-     * Disable mouseover for layer control
-     */
-    disableLayerControlMouseOver () {
-      setTimeout(() => {
-        let layerControl = document.getElementsByClassName('leaflet-control-layers-toggle')
-        if (layerControl.length > 0) {
-          layerControl[0].addEventListener('mouseover', function (event) {
-            //this will make sure that layer popup menu
-            //not opens when mouseover
-            event.stopPropagation()
-          })
-        }
-      }, 200)
-    },
     /**
      * Toggle the accessible mode by
      * storing the flag under the mapSettings store

@@ -46,14 +46,17 @@
 .toggle-sidebar {
   position: absolute;
   top: 300px;
-  left: 403px;
+  left: 402px;
   z-index: 3;
   background: #fff;
   transition:all 0.5s ease;
-  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
-  border-radius: 3px;
-  width: 37px !important;
-  height: 37px !important;
+  border: 2px solid rgba(0,0,0,.2);
+  background-clip: padding-box;
+  border-radius: 5px;
+  width: 38px;
+  height: 38px;
+  box-shadow: none !important
+
 }
 
 
