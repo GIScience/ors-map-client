@@ -5,19 +5,18 @@
       <v-icon>{{showSettings ? 'more_vert' : 'info'}}</v-icon>
     </v-btn>
     <v-list>
-
-    <template v-for="(item, index) in menuItems">
-     <v-list-tile :key="index" v-if="item.show">
-        <v-btn flat v-if="item.emitEvent" class="floating-item" @click="eventBus.$emit(item.emitEvent)">
-          <v-icon :title="item.title" left color="dark">{{item.icon}}</v-icon>
-          <template>{{item.title}}</template>
-        </v-btn>
-        <v-btn v-else flat class="floating-item" :target="item.blank" :href="item.href">
-          <v-icon :title="item.title" left color="dark">{{item.icon}}</v-icon>
-          <template>{{item.title}}</template>
-        </v-btn>
-      </v-list-tile>
-    </template>
+      <template v-for="(item, index) in menuItems">
+        <v-layout row :key="index" v-if="item.show">
+          <v-btn class="floating-item" :key="index" flat v-if="item.emitEvent" @click="eventBus.$emit(item.emitEvent)">
+            <v-icon :title="item.title" left color="dark">{{item.icon}}</v-icon>
+            <template>{{item.title}}</template>
+          </v-btn>
+          <v-btn class="floating-item" :key="index" v-else flat :target="item.blank" :href="item.href">
+            <v-icon :title="item.title" left color="dark">{{item.icon}}</v-icon>
+            <template>{{item.title}}</template>
+          </v-btn>
+        </v-layout>
+      </template>
     </v-list>
   </v-menu>
 </template>
