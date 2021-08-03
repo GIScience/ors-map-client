@@ -18,7 +18,7 @@
   background-color: rgba(256,256,256, 0.6);
 }
 
-.map-view >>> .leaflet-touch.leaflet-control-layers-toggle {
+.map-view >>> .leaflet-control-layers-toggle {
   width: 36px;
   height: 36px;
 }
