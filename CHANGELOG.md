@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/GIScience/ors-map-client/compare/v1.15.1...v1.16.0) (2021-08-04)
+
+
+### Features
+
+* **place-input:** hide new info badge and tooltip when simple place input is focused ([01e9923](https://github.com/GIScience/ors-map-client/commit/01e9923ea3c05487e4ce649e01198136f18a38de))
+
 ### [1.15.1](https://github.com/GIScience/ors-map-client/compare/v1.15.0...v1.15.1) (2021-08-04)
 
 
