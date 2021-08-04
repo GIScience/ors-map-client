@@ -192,6 +192,10 @@ export default {
     }
   },
   computed: {
+
+    showMyLocationControl () {
+      return this.supportsMyLocationBtn && !this.isAltitudeModalOpen && this.showControls
+    },
     /**
      * Determines if the my location btn is available
      * @returns {Boolean}

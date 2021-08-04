@@ -2,8 +2,12 @@
   margin-top: 70px;
 }
 
-.map-view.extra-low-resolution >>> .leaflet-top.leaflet-right {
+.map-view.extra-low-resolution:not(.embedded) >>> .leaflet-top.leaflet-right {
   margin-top: 70px;
+}
+
+.map-view.hide-controls >>> .leaflet-top.leaflet-right {
+  display: none;
 }
 
 .map-view.extra-low-resolution.hide-controls >>> .leaflet-control-attribution {
