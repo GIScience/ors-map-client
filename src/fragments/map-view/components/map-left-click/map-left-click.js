@@ -32,7 +32,9 @@ export default {
   },
   watch: {
     show: function (newVal) {
-      this.showLeftClickPopup = newVal
+      if (newVal === false) {
+        this.showLeftClickPopup = false
+      }
     }
   },
   computed: {
