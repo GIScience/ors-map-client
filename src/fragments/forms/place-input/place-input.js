@@ -368,6 +368,7 @@ export default {
     inputFocused (event) {
       event.stopPropagation()
       event.preventDefault()
+      this.$emit('focused', true)
     },
     appendClicked(event) {
       console.log(event)

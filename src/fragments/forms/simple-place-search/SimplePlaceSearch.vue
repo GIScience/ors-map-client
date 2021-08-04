@@ -30,6 +30,7 @@
             @selected="selectPlace"
             @startDirections="openDirectionsMode"
             @searchChanged="search"
+            @focused="inputFocused"
             @cleared="placeCleared">
           </place-input>
         </v-form>

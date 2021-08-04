@@ -190,6 +190,10 @@ export default {
       this.newInfoAvailable = false
     },
 
+    inputFocused () {
+      this.newInfoAvailable = false
+    },
+
     /**
      * When there is already a place selected
      * and the route action is called, open the
