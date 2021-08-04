@@ -104,13 +104,12 @@ export default {
       }
     },
     /**
-     * Set the visibility of the sidebar depending on the screen breakpoint
-     * and the auto focus on map option
-     * @param open boolean|event - sidebar pinned desired status - if it is a boolean, use it.
+     * Set the visibility of the sidebar depending on the screen breakpoint, embed mode and app mode
+     * @param open boolean|null
      */
     setSidebarIsOpen(open) {
-      if (typeof open !== 'boolean') {
-        open = this.$store.getters.leftSideBarPinned || (this.$mdAndUpResolution && !this.$store.getters.embed)
+      if (typeof open !== 'boolean' && !this.$store.getters.embed) {
+        open = this.$store.getters.leftSideBarPinned || this.$mdAndUpResolution || (this.$store.getters.mode === constants.modes.directions && Place.getFilledPlaces(this.places).length === 1)
       }
       this.$store.commit('setLeftSideBarIsOpen', open)
     },
