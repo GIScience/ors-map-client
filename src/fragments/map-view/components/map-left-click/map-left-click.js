@@ -24,6 +24,15 @@ export default {
     currentZoom: {
       required: true,
       type: Number
+    },
+    show: {
+      type: Boolean,
+      default: true
+    }
+  },
+  watch: {
+    show: function (newVal) {
+      this.showLeftClickPopup = newVal
     }
   },
   computed: {
