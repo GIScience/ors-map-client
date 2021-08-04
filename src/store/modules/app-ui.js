@@ -11,7 +11,8 @@ const state = {
   footerMiniHeight: 140,
   sidebarFullWidth: 400,
   sidebarShrunkWidth: 290,
-  sidebarHeaderHeight: 175
+  sidebarHeaderHeight: 175,
+  pointerTriggeredAction: false
 }
 
 const getters = {
@@ -50,7 +51,10 @@ const getters = {
   },
   pickPlaceId: state => {
     return state.pickPlaceId
-  }  
+  },
+  pointerTriggeredAction: state => {
+    return state.pointerTriggeredAction
+  }
 }
 
 const mutations = {
@@ -76,6 +80,9 @@ const mutations = {
   },
   mainMenu: (state, items) => {
     state.mainMenu = items
+  },
+  pointerTriggeredAction: (state, value) => {
+    return state.pointerTriggeredAction = value
   }
 }
 

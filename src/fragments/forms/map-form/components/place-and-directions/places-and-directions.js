@@ -236,16 +236,19 @@ export default {
 
       // When the user click on the map and select a point as the route start
       this.eventBus.$on('directionsFromPoint', (data) => {
+        this.$store.commit('pointerTriggeredAction', true)
         context.directionsFromPoint(data)
       })
 
       // When the user click on the map and select a point as the route end
       this.eventBus.$on('directionsToPoint', (data) => {
+        this.$store.commit('pointerTriggeredAction', true)
         context.directionsToPoint(data)
       })
 
       // When the user click on the map and select to add this point to the route
       this.eventBus.$on('addRouteStop', (data) => {
+        this.$store.commit('pointerTriggeredAction', true)
         context.addRouteStop(data)
       })
 

@@ -109,8 +109,11 @@ export default {
      */
     setSidebarIsOpen(open) {
       if (typeof open !== 'boolean' && !this.$store.getters.embed) {
-        open = this.$store.getters.leftSideBarPinned || this.$mdAndUpResolution || (this.$store.getters.mode === constants.modes.directions && Place.getFilledPlaces(this.places).length === 1)
+        let filledPlaces = Place.getFilledPlaces(this.places).length
+        let startDirections = this.$store.getters.mode === constants.modes.directions && filledPlaces === 1 && !this.$store.getters.pointerTriggeredAction
+        open = this.$store.getters.leftSideBarPinned || this.$mdAndUpResolution || startDirections
       }
+      this.$store.commit('pointerTriggeredAction', null)
       this.$store.commit('setLeftSideBarIsOpen', open)
     },
     /**
