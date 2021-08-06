@@ -7,7 +7,7 @@
       }
     }]
   ],
-  "plugins": ["transform-vue-jsx", "@babel/transform-runtime", ["transform-imports", {
+  "plugins": ["transform-vue-jsx", ["transform-imports", {
     "vuetify": {
       "transform": "vuetify/es5/components/${member}",
       "preventFullImport": true

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 require('babel-register')
 var config = require('../../config')
 
