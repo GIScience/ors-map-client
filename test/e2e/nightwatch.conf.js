@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-require('babel-register')
+require('@babel/register')
 var config = require('../../config')
 
 // http://nightwatchjs.org/gettingstarted#settings-file
@@ -25,7 +25,13 @@ module.exports = {
       silent: true,
       globals: {
         devServerURL: 'http://localhost:' + (process.env.PORT || config.dev.port)
-      }
+      },
+      // webdriver: {
+      //   start_process: true,
+      //   server_path: require('chromedriver').path,
+      //   port: 4444,
+      //   cli_args: ['--port=4444']
+      // },
     },
 
     chrome: {
