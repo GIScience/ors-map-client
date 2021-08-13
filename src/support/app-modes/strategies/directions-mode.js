@@ -2,13 +2,13 @@ import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import OrsMapFilters from '@/config/ors-map-filters'
 import AppRouteData from '@/models/app-route-data'
 import constants from '@/resources/constants'
-import Utils from '@/support/utils'
 import RouteUtils from '@/support/route-utils'
 import GeoUtils from '@/support/geo-utils'
 import appConfig from '@/config/app-config'
+import AppLoader from '@/app-loader'
+import Utils from '@/support/utils'
 import Place from '@/models/place'
 import store from '@/store/store'
-import main from '@/main'
 
 /**
  * DirectionsMode class
@@ -100,7 +100,7 @@ class DirectionsMode {
       })
     }
 
-    main.getInstance().appHooks.run('afterDirectionsPathDecoded', appRouteData)
+    AppLoader.getInstance().appHooks.run('afterDirectionsPathDecoded', appRouteData)
     return appRouteData
   }
 }

@@ -1,15 +1,15 @@
 import {ModelService} from 'vue-rest-client'
-import main from '@/main'
+import AppLoader from '@/app-loader'
 
 const options = {
   httpClientOptions: {
-    baseURL: 'https://nominatim.openstreetmap.org', // String, an empty string is the default,
+    baseURL: 'https://nominatim.openstreetmap.org',
     getVueInstance: () => {
-      return main.getInstance()
+      return AppLoader.getInstance()
     }
   },
   pk: 'id',
-  raw: true, // we dont need each menu resource to be converted to a Model (@/core/model), because it is a read-only resource
+  raw: true,
   transformResponse: (response) => {
     response.data = response.data || []
   }

@@ -1,10 +1,8 @@
-import {
-  createPopper
-} from '@popperjs/core'
+import { createPopper } from '@popperjs/core'
 import appConfig from '@/config/app-config'
+import AppLoader from '@/app-loader'
 import utils from '@/support/utils'
 import store from '@/store/store'
-import main from '@/main'
 
 /**
  * Popper tooltip directive handler
@@ -36,7 +34,7 @@ const smartTooltip = {
 const render = (el, binding, vNode, rerendering = false) => {
   let options = binding.value
   if (options.show) {
-    if (rerendering) { // it is rerendering, show it imediattly
+    if (rerendering) { // it is rerendering, show it immediately
       showToolTip(el, options, vNode)
     } else { // otherwise, wait 2 seconds
       setTimeout(() => {
@@ -51,13 +49,13 @@ const render = (el, binding, vNode, rerendering = false) => {
 /**
  * Handle the close tooltip click
  * @param {*} tooltipGuid
- * @param {*} hidePermantely
+ * @param {*} hidePermanently
  * @param {*} name
  */
-const closeTooltip = (tooltipGuid, hidePermantely, name) => {
+const closeTooltip = (tooltipGuid, hidePermanently, name) => {
   removeTooltipEl(tooltipGuid)
 
-  if (hidePermantely && name) {
+  if (hidePermanently && name) {
     storeTooltipAlreadyShown(name)
   }
 }
@@ -85,7 +83,7 @@ const storeTooltipAlreadyShown = (tooltipName) => {
   mapSettings.shownOnceTooltips[tooltipName] = true
 
   store.dispatch('saveSettings', mapSettings).then(() => {
-    console.log(tooltipName + ' tooltip hidden permantely')
+    console.log(tooltipName + ' tooltip hidden permanently')
   })
 }
 /**
@@ -158,7 +156,7 @@ const showToolTip = (el, options, vNode) => {
  * @returns {HtmlFragment}
  */
 const buildTooltipEl = (guid, options) => {
-  let vueInstance = main.getInstance()
+  let vueInstance = AppLoader.getInstance()
   let background = options.dark === true ? '#333;' : 'white'
   let contentColor = options.dark === true ? 'white' : '#333'
 

@@ -1,6 +1,6 @@
-import store from '@/store/store'
 import appConfig from '@/config/app-config'
-import main from '@/main'
+import AppLoader from '@/app-loader'
+import store from '@/store/store'
 
 const mapDefinitions = {
   /**
@@ -99,7 +99,7 @@ const mapDefinitions = {
 
     // Add custom tile service if defined in settings
     const customTileProviderUrl = store.getters.mapSettings.customTileProviderUrl
-    let vueInstance = main.getInstance()
+    let vueInstance = AppLoader.getInstance()
     if (customTileProviderUrl) {
       const customTileService = [
         {
@@ -122,7 +122,7 @@ const mapDefinitions = {
     let providers = []
     // Add custom over layer tile service if defined in settings
     const customOverlayerTileProviderUrl = store.getters.mapSettings.customOverlayerTileProviderUrl
-    let vueInstance = main.getInstance()
+    let vueInstance = AppLoader.getInstance()
     if (customOverlayerTileProviderUrl) {
       const overlayerTileService =
       {

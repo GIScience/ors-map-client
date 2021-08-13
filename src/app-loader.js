@@ -9,7 +9,6 @@ import utils from '@/support/utils'
 import store from '@/store/store'
 import router from '@/router'
 import lodash from 'lodash'
-import main from '@/main'
 
 
 class AppLoader {
@@ -131,12 +130,9 @@ class AppLoader {
     }
     this.storeLocale(mapSettings, locale)
   
-    let mainVue = main
-    if (mainVue) { // main maz be not available when app is loading
-      let appInstance = mainVue.getInstance()
-      if (appInstance) {
-        appInstance.appHooks.run('mapSettingsChanged', mapSettings)
-      }
+    let appInstance = AppLoader.getInstance()
+    if (appInstance) { // main app instance may not be available when app is still loading
+      appInstance.appHooks.run('mapSettingsChanged', mapSettings)
     }
   
     // Save the data acquired flag as true
@@ -220,13 +216,17 @@ class AppLoader {
             store: store,
             template: templateTag
           })
+          store.commit('mainAppInstanceRef', context.vueInstance)
           resolve(context.vueInstance)
         })
       }
     })
   }
   
-  
+  /**
+   * Load app external data
+   * @returns {Promise}
+   */
   loadAppData () {
     let context = this
     return new Promise((resolve) => {
@@ -243,6 +243,14 @@ class AppLoader {
         })
       }, 500)      
     })
+  }
+
+  /**
+   * Get a pointer to the main app vue instance
+   * @returns {Vue} instance
+   */
+  static getInstance () {
+    return store.getters.mainAppInstanceRef
   }
 }
 

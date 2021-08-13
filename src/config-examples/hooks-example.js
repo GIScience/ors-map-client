@@ -5,10 +5,10 @@
 // THE CODE BELOW IS COMMENTED OUT BECAUSE THEY ARE JUST EXAMPLES
 
 /*
-import main from '@/main'
+import AppLoader from '@/app-loader'
 import PluginExample from '@/plugins/plugin-example/plugin-example.js'
 
-const appHooks = main.getInstance().appHooks
+const appHooks = AppLoader.getInstance().appHooks
 
 // When adding a hook, three parameters can be passed:
 // the name of the hook (string) to be listened, the 

@@ -2,10 +2,10 @@ import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import DependencyService from '@/support/dependency-service.js'
 import OrsMapFilters from '@/config/ors-map-filters'
 import constants from '@/resources/constants'
+import AppLoader from '@/app-loader'
 import Utils from '@/support/utils'
 import store from '@/store/store'
 import lodash from 'lodash'
-import main from '@/main'
 
 const orsParamsParser = {
   /**
@@ -35,7 +35,7 @@ const orsParamsParser = {
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
     orsParamsParser.setFilters(args, OrsMapFilters, constants.services.autocomplete)
-    main.getInstance().appHooks.run('placeSearchArgsCreated', args)
+    AppLoader.getInstance().appHooks.run('placeSearchArgsCreated', args)
     return args
   },
 
@@ -106,7 +106,7 @@ const orsParamsParser = {
       }
     }
     orsParamsParser.setFilters(args, OrsMapFilters, constants.filterTypes.geocodeSearch)
-    main.getInstance().appHooks.run('poisSearchArgsCreated', args)
+    AppLoader.getInstance().appHooks.run('poisSearchArgsCreated', args)
     return args
   },
 
@@ -129,7 +129,7 @@ const orsParamsParser = {
     // Add the filters defined in the ORS filters that are manipulated
     // directly by external components
     orsParamsParser.setFilters(args, OrsMapFilters, constants.services.reverseGeocode)
-    main.getInstance().appHooks.run('reverseSearchArgsCreated', args)
+    AppLoader.getInstance().appHooks.run('reverseSearchArgsCreated', args)
     return args
   },
 
@@ -167,9 +167,9 @@ const orsParamsParser = {
         args.range = args.range_distance
         delete args.range_distance
       }
-      main.getInstance().appHooks.run('isochronesArgsCreated', args)
+      AppLoader.getInstance().appHooks.run('isochronesArgsCreated', args)
 
-      let promiseOrArgs = main.getInstance().appHooks.run('isochronesArgsCreated', args)
+      let promiseOrArgs = AppLoader.getInstance().appHooks.run('isochronesArgsCreated', args)
           
       // If a promise is returned
       if (promiseOrArgs instanceof Promise) {
@@ -229,7 +229,7 @@ const orsParamsParser = {
       // directly by external components
       orsParamsParser.setFilters(args, OrsMapFilters, constants.services.directions)
 
-      let promiseOrArgs = main.getInstance().appHooks.run('routingArgsCreated', args)
+      let promiseOrArgs = AppLoader.getInstance().appHooks.run('routingArgsCreated', args)
         
       // If a promise is returned
       if (promiseOrArgs instanceof Promise) {
@@ -333,7 +333,7 @@ const orsParamsParser = {
       format: 'geojson'
     }
     orsParamsParser.setFilters(args, OrsMapFilters, constants.services.directions)
-    main.getInstance().appHooks.run('routingElevationArgsCreated', args)
+    AppLoader.getInstance().appHooks.run('routingElevationArgsCreated', args)
     return args
   },
 
@@ -395,7 +395,7 @@ const orsParamsParser = {
         intoArgs[filterName] = filterValue
       }
     }
-    let appHooks = main.getInstance().appHooks
+    let appHooks = AppLoader.getInstance().appHooks
     appHooks.run('mapFilterAdded', {filters: intoArgs, name: filter.name})
   },
   /**

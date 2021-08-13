@@ -1,10 +1,10 @@
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
+import AppLoader from '@/app-loader'
 import Place from '@/models/place'
 import store from '@/store/store'
 import lodash from 'lodash'
-import main from '@/main'
 
 import OrsApiClient from 'openrouteservice-js'
 
@@ -127,14 +127,14 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
     localityArgs.size = 2
     localityArgs.layers = ['locality']
     promises.push(client.geocode(localityArgs))   
-    main.getInstance().appHooks.run('placeSearchLocalityArgsDefined', localityArgs)
+    AppLoader.getInstance().appHooks.run('placeSearchLocalityArgsDefined', localityArgs)
 
     // Build a search for addresses
     let addressesArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
     addressesArgs.size = quantity
     addressesArgs.layers = ['country', 'region', 'macrocounty', 'borough', 'macroregion', 'county', 'neighbourhood', 'borough', 'street', 'address', 'coarse'] // `coarse` will bring places by postal code
     promises.push(client.geocode(addressesArgs))   
-    main.getInstance().appHooks.run('placeSearchAddressArgsDefined', addressesArgs)
+    AppLoader.getInstance().appHooks.run('placeSearchAddressArgsDefined', addressesArgs)
 
     // Build a search for venues
     const restrictToBbox = restrictArea && mapSettings.prioritizeSearchingForNearbyPlaces
@@ -142,9 +142,9 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
     poisArgs.size = quantity
     poisArgs.layers = ['venue'] // venue = POI 
     promises.push(client.geocode(poisArgs)) 
-    main.getInstance().appHooks.run('placeSearchPoisArgsDefined', addressesArgs)
+    AppLoader.getInstance().appHooks.run('placeSearchPoisArgsDefined', addressesArgs)
 
-    promises = main.getInstance().appHooks.run('placeSearchPromisesDefined', promises)
+    promises = AppLoader.getInstance().appHooks.run('placeSearchPromisesDefined', promises)
 
     Promise.all(promises).then((responses) => {
       const places = buildPlacesSearchResult(responses, quantity)
@@ -197,7 +197,7 @@ const buildPlacesSearchResult = (responses, quantity) => {
   features = sortFeatures(features)
 
   let places = Place.placesFromFeatures(features)
-  places = main.getInstance().appHooks.run('placeSearchResultPrepared', places)
+  places = AppLoader.getInstance().appHooks.run('placeSearchResultPrepared', places)
   return places
 }
 

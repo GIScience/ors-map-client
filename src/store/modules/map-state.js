@@ -1,4 +1,4 @@
-import main from '@/main'
+import AppLoader from '@/app-loader'
 
 const state = {
   browserLocation: null,
@@ -33,7 +33,7 @@ const mutations = {
     state.mapBounds = mapBounds
   },
   currentLocation: (state, currentLocation) => {
-    main.getInstance().appHooks.run('beforeUseNewDeviceLocation', currentLocation)
+    AppLoader.getInstance().appHooks.run('beforeUseNewDeviceLocation', currentLocation)
     state.currentLocation = currentLocation
   }
 }

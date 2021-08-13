@@ -1,15 +1,9 @@
 import AppLoader from '@/app-loader'
 import AppRootComponent from '@/App'
 import store from '@/store/store'
+store.getters.mainAppInstanceRef
 
 const main = {
-  /**
-   * Get the main app vue instance
-   * @returns {Vue} instance
-   */
-  getInstance: () => {
-    return main.vueInstance || store.getters.mainAppInstanceRef
-  },
   // Store the vue instance singleton
   vueInstance: null
 }

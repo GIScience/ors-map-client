@@ -2,11 +2,11 @@ import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import OrsMapFilters from '@/config/ors-map-filters'
 import AppRouteData from '@/models/app-route-data'
 import constants from '@/resources/constants'
-import Utils from '@/support/utils'
 import RouteUtils from '@/support/route-utils'
 import appConfig from '@/config/app-config'
+import AppLoader from '@/app-loader'
+import Utils from '@/support/utils'
 import store from '@/store/store'
-import main from '@/main'
 
 /**
  * IsochronesMode class
@@ -55,7 +55,7 @@ class IsochronesMode {
     }
 
     appRouteData.places = RouteUtils.getRoutePlaces(currentRoute)
-    main.getInstance().appHooks.run('afterIsochronesPathDecoded', appRouteData)
+    AppLoader.getInstance().appHooks.run('afterIsochronesPathDecoded', appRouteData)
     return appRouteData
   }
 }
