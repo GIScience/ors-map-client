@@ -2,7 +2,6 @@ import menuManager from '@/support/menu-manager'
 import appConfig from '@/config/app-config'
 import AppLoader from '@/app-loader'
 import store from '@/store/store'
-import main from '@/main'
 
 /**
  * Load the primary menu by its slug defined app config
@@ -18,7 +17,7 @@ const loadItems = () => {
         resolve([])
       })
     } else {
-      let expectedPromise = main.getInstance().appHooks.run('loadMenuItems')
+      let expectedPromise = AppLoader.getInstance().appHooks.run('loadMenuItems')
       if (expectedPromise instanceof Promise) {
         expectedPromise.then((result) => {
           resolve(result)

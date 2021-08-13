@@ -1,8 +1,8 @@
-import main from '@/main'
+import AppLoader from '@/app-loader'
 
 const showMessage = (msg, theme, options) => {
   options = options || {}
-  let VueInstance = main.getInstance()
+  let VueInstance = AppLoader.getInstance()
   VueInstance.eventBus.$emit('showSnack', { message: msg, theme: theme, options: options })
 }
 

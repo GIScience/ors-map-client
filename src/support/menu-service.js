@@ -1,12 +1,12 @@
 import {ModelService} from 'vue-rest-client'
 import appConfig from '@/config/app-config'
-import main from '@/main'
+import AppLoader from '@/app-loader'
 
 const options = {
   httpClientOptions: {
     baseURL: appConfig.dataServiceBaseUrl, // String, an empty string is the default,
     getVueInstance: () => {
-      return main.getInstance()
+      return AppLoader.getInstance()
     }
   },
   pk: appConfig.appMenu.menuPrimaryKeyField,

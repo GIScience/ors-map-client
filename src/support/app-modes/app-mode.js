@@ -1,8 +1,8 @@
 
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import OrsMapFilters from '@/config/ors-map-filters'
+import AppLoader from '@/app-loader'
 import store from '@/store/store'
-import main from '@/main'
 
 // Modes
 import directionsMode from './strategies/directions-mode'
@@ -37,7 +37,7 @@ class AppMode {
     store.commit('appRouteData', newAppRouteData)
     const options = this.getRouteOptions(newAppRouteData.options)
     var route = this.targetMode.getRoute(newAppRouteData, options)
-    main.getInstance().appHooks.run('appModeRouteReady', route)
+    AppLoader.getInstance().appHooks.run('appModeRouteReady', route)
     return route
   }
 
@@ -75,7 +75,7 @@ class AppMode {
    * @returns {*} options
    */
   getRouteOptions = (options) => {
-    main.getInstance().appHooks.run('afterGetRouteOptions', options)
+    AppLoader.getInstance().appHooks.run('afterGetRouteOptions', options)
     return options
   }
 }

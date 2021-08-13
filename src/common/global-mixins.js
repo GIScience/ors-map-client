@@ -1,7 +1,7 @@
 import * as showToaster from './show-toaster-mixin'
-import main from '@/main'
 import appConstants from '@/resources/constants'
 import AppHooks from '@/support/app-hooks'
+import AppLoader from '@/app-loader'
 
 const globalMixins = {
   data: () => ({
@@ -15,7 +15,7 @@ const globalMixins = {
       confirm.text = text
       confirm.title = title
       confirm.neverOption = options && options.neverOption
-      let VueInstance = main.getInstance()
+      let VueInstance = AppLoader.getInstance()
       VueInstance.eventBus.$emit('triggerConfirm', confirm)
 
       return new Promise((resolve, reject) => {
@@ -32,7 +32,7 @@ const globalMixins = {
       const info = options || {}
       info.text = text
       info.title = title
-      let VueInstance = main.getInstance()
+      let VueInstance = AppLoader.getInstance()
       VueInstance.eventBus.$emit('triggerShowInfo', info)
 
       return new Promise((resolve) => {
