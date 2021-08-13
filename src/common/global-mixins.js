@@ -1,8 +1,12 @@
 import * as showToaster from './show-toaster-mixin'
 import main from '@/main'
 import appConstants from '@/resources/constants'
+import AppHooks from '@/support/app-hooks'
 
 const globalMixins = {
+  data: () => ({
+    appHooks: new AppHooks()
+  }),
   methods: {
     ...showToaster, // mix the show toaster methods here
 

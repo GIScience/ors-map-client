@@ -9,7 +9,8 @@ const state = {
   dataAcquired: false,
   mapSettings: {}, // centered at Heidelberg (DE) by default
   embed: false,
-  accessibleModeActive: false
+  accessibleModeActive: false,
+  mainAppInstanceRef: null
 }
 
 const getters = {
@@ -34,6 +35,9 @@ const getters = {
   },
   accessibleModeActive: state => {
     return state.accessibleModeActive
+  },
+  mainAppInstanceRef: state => {
+    return state.mainAppInstanceRef
   }
 }
 
@@ -56,6 +60,9 @@ const mutations = {
   },
   accessibleModeActive: (state, accessibleModeActive) => {
     state.accessibleModeActive = accessibleModeActive
+  },
+  mainAppInstanceRef: (state, mainAppInstanceRef) => {
+    state.mainAppInstanceRef = mainAppInstanceRef
   }
 }
 

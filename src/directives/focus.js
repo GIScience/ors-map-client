@@ -1,4 +1,4 @@
-import Vue from '@/common/vue-with-vuetify.js'
+import PreparedVue from '@/common/prepared-vue.js'
 const focus = {
   inserted: (el, binding) => {
     focus.processFocus(el, binding)
@@ -8,7 +8,7 @@ const focus = {
   },
   processFocus: (el, binding) => {
     if (binding.value) {
-      let VueRoot = Vue
+      let VueRoot = PreparedVue
       VueRoot.nextTick(() => {
         setTimeout(() => {
           let inputs = el.getElementsByTagName('input')
