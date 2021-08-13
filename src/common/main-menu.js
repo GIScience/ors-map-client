@@ -1,5 +1,6 @@
 import menuManager from '@/support/menu-manager'
 import appConfig from '@/config/app-config'
+import AppLoader from '@/app-loader'
 import store from '@/store/store'
 import main from '@/main'
 
@@ -32,7 +33,9 @@ const loadItems = () => {
 }
 
 const adjustMenu = () => {
-  main.getInstance().appHooks.run('modifyMenu', store.getters.mainMenu)
+  new AppLoader().loadApp().then((vueInstance => {
+    vueInstance.appHooks.run('modifyMenu', store.getters.mainMenu)
+  }))
 }
 
 /**
