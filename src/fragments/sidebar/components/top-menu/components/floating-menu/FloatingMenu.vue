@@ -11,7 +11,7 @@
             <v-icon :title="item.title" left color="dark">{{item.icon}}</v-icon>
             <template>{{item.title}}</template>
           </v-btn>
-          <v-btn class="floating-item" :key="index" v-else flat :target="item.blank" :href="item.href">
+          <v-btn class="floating-item" :key="index" v-else flat :target="item.target" :href="item.href">
             <v-icon :title="item.title" left color="dark">{{item.icon}}</v-icon>
             <template>{{item.title}}</template>
           </v-btn>
