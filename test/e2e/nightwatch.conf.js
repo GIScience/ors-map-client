@@ -26,19 +26,20 @@ module.exports = {
       globals: {
         devServerURL: 'http://localhost:' + (process.env.PORT || config.dev.port)
       },
-      // webdriver: {
-      //   start_process: true,
-      //   server_path: require('chromedriver').path,
-      //   port: 4444,
-      //   cli_args: ['--port=4444']
-      // },
     },
 
     chrome: {
       desiredCapabilities: {
         browserName: 'chrome',
         javascriptEnabled: true,
-        acceptSslCerts: true
+        acceptSslCerts: true,
+        'chromeOptions': {
+          'args': [
+            '--headless',
+            '--no-sandbox',
+            '--disable-gpu'
+          ]
+        }
       }
     },
 

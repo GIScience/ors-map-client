@@ -1,19 +1,17 @@
-import MainApp from '@/main'
+import AppLoader from '@/app-loader'
+import AppRootComponent from '@/App'
+
 describe('App render', () => {
   it('should render correct contents', (done) => {
-    // eslint-disable-next-line no-undef
-    
-    // const Constructor = Vue.extend(App)
-    // const vm = new Constructor().$mount()
-
-    setTimeout(() => {
-      let vm = MainApp.getInstance()   
-      expect(vm.$el.querySelector('#app')).toBeDefined()
-      expect(vm.$el.querySelector('.simple-place-search')).toBeDefined()
-      expect(vm.$el.querySelector('.app-content')).toBeDefined()
-      expect(vm.$el.querySelector('#map-view')).toBeDefined()
-      done()      
-    }, 2000)
-
+    let appLoader = new AppLoader()
+    appLoader.loadApp(AppRootComponent, '#app', '<App/>').then(vueInstance => {
+      vueInstance.appHooks.loadRegisteredHooks()
+      vueInstance.appHooks.run('appLoaded', vueInstance)
+      expect(vueInstance.$el.querySelector('#app')).toBeDefined()
+      expect(vueInstance.$el.querySelector('.simple-place-search')).toBeDefined()
+      expect(vueInstance.$el.querySelector('.app-content')).toBeDefined()
+      expect(vueInstance.$el.querySelector('#map-view')).toBeDefined()
+      done()  
+    })
   })
 })
