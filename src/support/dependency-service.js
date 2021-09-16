@@ -366,26 +366,28 @@ const applyValuesRestrictions = (scopedFilters, key) => {
 const setFilteredValues = (scopedFilters, key, dependsOnFilter, rule) => {
   if (rule.valuesWhen && scopedFilters[key]) {    
     Object.keys(rule.valuesWhen).forEach(function (ruleKey) {
-      if ((dependsOnFilter.value === ruleKey) || (ruleKey.endsWith('*') && dependsOnFilter.value.startsWith(ruleKey.replace('*', '')))) {
-        if (rule.valuesWhen[ruleKey].value !== undefined) {
-          scopedFilters[key].value = getRuleValue(rule, ruleKey, 'value')
-        }
-        if (rule.valuesWhen[ruleKey].min !== undefined) {
-          scopedFilters[key].min = getRuleValue(rule, ruleKey, 'min')
-        }
-        if (rule.valuesWhen[ruleKey].max !== undefined) {
-          scopedFilters[key].max = getRuleValue(rule, ruleKey, 'max')
-          if (scopedFilters[key].min > scopedFilters[key].max) {
-            scopedFilters[key].min = scopedFilters[key].max
+      if (dependsOnFilter.value) {
+        if ((dependsOnFilter.value === ruleKey) || (ruleKey.endsWith('*') && dependsOnFilter.value.startsWith(ruleKey.replace('*', '')))) {
+          if (rule.valuesWhen[ruleKey].value !== undefined) {
+            scopedFilters[key].value = getRuleValue(rule, ruleKey, 'value')
           }
+          if (rule.valuesWhen[ruleKey].min !== undefined) {
+            scopedFilters[key].min = getRuleValue(rule, ruleKey, 'min')
+          }
+          if (rule.valuesWhen[ruleKey].max !== undefined) {
+            scopedFilters[key].max = getRuleValue(rule, ruleKey, 'max')
+            if (scopedFilters[key].min > scopedFilters[key].max) {
+              scopedFilters[key].min = scopedFilters[key].max
+            }
+          }
+          if (rule.valuesWhen[ruleKey].multiplyValueBy !== undefined) {
+            scopedFilters[key].multiplyValueBy = getRuleValue(rule, ruleKey, 'multiplyValueBy')
+          }
+          if (rule.valuesWhen[ruleKey].step !== undefined) {
+            scopedFilters[key].step = getRuleValue(rule, ruleKey, 'step')
+          }
+          return false
         }
-        if (rule.valuesWhen[ruleKey].multiplyValueBy !== undefined) {
-          scopedFilters[key].multiplyValueBy = getRuleValue(rule, ruleKey, 'multiplyValueBy')
-        }
-        if (rule.valuesWhen[ruleKey].step !== undefined) {
-          scopedFilters[key].step = getRuleValue(rule, ruleKey, 'step')
-        }
-        return false
       }
     })
   }
