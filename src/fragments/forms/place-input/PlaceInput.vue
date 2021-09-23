@@ -117,7 +117,7 @@
           <v-list-tile @click.stop="selectSuggestion(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'
             :title="placeSuggested.placeName.trim()">
             <v-list-tile-action class="hidden-sm-and-down">
-              <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city'">location_city</v-icon>
+              <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city' || placeSuggested.properties.layer === 'county'">location_city</v-icon>
               <img width="25px" v-else-if="showAreaIcon(placeSuggested)" src="@/assets/img/country-icon.png" height="auto" />
               <v-icon v-else>place</v-icon>              
             </v-list-tile-action>

@@ -129,10 +129,17 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
     promises.push(client.geocode(localityArgs))   
     AppLoader.getInstance().appHooks.run('placeSearchLocalityArgsDefined', localityArgs)
 
+    // Build a search counties only
+    let countyArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
+    countyArgs.size = 2
+    countyArgs.layers = ['county']
+    promises.push(client.geocode(countyArgs))   
+    AppLoader.getInstance().appHooks.run('placeSearchCountyArgsDefined', countyArgs)
+
     // Build a search for addresses
     let addressesArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
     addressesArgs.size = quantity
-    addressesArgs.layers = ['country', 'region', 'macrocounty', 'borough', 'macroregion', 'county', 'neighbourhood', 'borough', 'street', 'address', 'coarse'] // `coarse` will bring places by postal code
+    addressesArgs.layers = ['country', 'region', 'macrocounty', 'macroregion', 'neighbourhood', 'borough', 'street', 'address', 'coarse'] // `coarse` will bring places by postal code
     promises.push(client.geocode(addressesArgs))   
     AppLoader.getInstance().appHooks.run('placeSearchAddressArgsDefined', addressesArgs)
 
@@ -170,19 +177,22 @@ const buildPlacesSearchResult = (responses, quantity) => {
       quantity = quantity - localityFeatures.length
       features = features.concat(localityFeatures)
     }
+
+    let countyFeatures = responses[1].features
+    if(countyFeatures && countyFeatures.length > 0) {
+      quantity = quantity - countyFeatures.length
+      features = features.concat(countyFeatures)
+    }
   
     // By default, get all the features of the administrative places list
     let adminFeatures = []
     if (responses.length > 1) {
-      adminFeatures = responses[1].features
-      if (adminFeatures.length > 0) {
-        adminFeatures[0].bestMatch = true
-      }
+      adminFeatures = responses[2].features
     }
   
     // If there are administrative places and also places 
     // from POIs (venues) then merge them into the collection
-    let poisFeatures = responses.length === 3 ? responses[2].features : []    
+    let poisFeatures = responses.length === 4 ? responses[3].features : []    
     
     if (poisFeatures.length > 0) {          
       let half = Math.round((quantity / 2))
@@ -225,15 +235,20 @@ const sortFeatures  = (features) => {
     // Move best match to to first position (duplicated items will be removed later)
     features.splice(0, 0, features[bestMatchIndex])
   }
-  let closestCityIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'locality' || f.properties.layer === 'city' })
+  let closestCityIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'locality' || f.properties.layer === 'city'})
   if (closestCityIndex > 1) {
     // Move closest city to second position (duplicated items will be removed later)
     features.splice(1, 0, features[closestCityIndex])
   }
+  let closestCountyIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'county' })
+  if (closestCountyIndex > 1) {
+    // Move closest city to second position (duplicated items will be removed later)
+    features.splice(2, 0, features[closestCountyIndex])
+  }
   let closestCountryIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'country'})
   if (closestCountryIndex > 2) {
     // Move closest city to third position (duplicated items will be removed later)
-    features.splice(2, 0, features[closestCountryIndex])
+    features.splice(3, 0, features[closestCountryIndex])
   }
   // remove duplicated
   features = lodash.uniqBy(features, function (f) { return f.properties.unique_id })

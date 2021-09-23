@@ -23,8 +23,13 @@ class AdminAreaLoader {
         adminAreaFilter.state  = place.properties.region.toLowerCase().replace(' region', '')
       }
       if (place.properties.county) {
-        let county = place.properties.county.toLowerCase().replace(' county', '')
-        adminAreaFilter.county  = county
+        adminAreaFilter.county  = place.properties.county.toLowerCase().replace(' county', '')  
+      } else {
+        if (place.placeName.indexOf(',') > -1) {
+          adminAreaFilter.county  = place.placeName.split(',')[0]
+        } else {
+          adminAreaFilter.county  = place.placeName
+        }
       }
     }
     if (layer === 'locality') {
@@ -34,6 +39,12 @@ class AdminAreaLoader {
       let locality = place.properties.locality || place.properties.county || place.properties.macrocounty
       if (locality) {
         adminAreaFilter.city = locality.toLowerCase()
+      } else {
+        if (place.placeName.indexOf(',') > -1) {
+          adminAreaFilter.city  = place.placeName.split(',')[0]
+        } else {
+          adminAreaFilter.city  = place.placeName
+        }
       }
     }
     return adminAreaFilter
@@ -59,22 +70,46 @@ class AdminAreaLoader {
         let layerZoom = GeoUtils.zoomLevelByLayer(layer)
 
         let context = this
-        place.resolve(layerZoom).then(() => {
-          let adminAreaFilter = context.buildAdminAreaFilter(place, layer)
-          NominatimService.query(adminAreaFilter).then((response) => {
-            let validPolygons = context.adjustAdminArea(place, response.data)
-            if (validPolygons) {
+        if (place.isEmpty()) {
+          place.resolve(layerZoom).then(() => {
+            context.getPlaceValidPolygons(place, layer).then((validPolygons) => {
               resolve(validPolygons)
-            } else {
-              resolve([])
-            }
+            }).catch(err => {
+              reject(err)
+            })
+          })
+        } else {
+          context.getPlaceValidPolygons(place, layer).then((validPolygons) => {
+            resolve(validPolygons)
           }).catch(err => {
             reject(err)
           })
-        })
+        }
       } else {
         resolve([])
       }
+    })
+  }
+
+  /**
+   * Get place valid polygons
+   * @param {Place} place 
+   * @param {String} layer 
+   * @returns {Array}
+   */
+  getPlaceValidPolygons (place, layer) {
+    return new Promise((resolve, reject) => {
+      let adminAreaFilter = this.buildAdminAreaFilter(place, layer)
+      NominatimService.query(adminAreaFilter).then((response) => {
+        let validPolygons = this.adjustAdminArea(place, response.data)
+        if (validPolygons) {
+          resolve(validPolygons)
+        } else {
+          resolve([])
+        }
+      }).catch(err => {
+        reject(err)
+      })
     })
   }
 
