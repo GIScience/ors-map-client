@@ -357,7 +357,11 @@ export default {
         if (context.directIsAvailable && context.$store.getters.mapSettings.skipAllSegments) {
           newVal.direct = true
         }
+        let localSuggestions = context.localModel.suggestions
         context.localModel = newVal.clone()
+        if (localSuggestions.length > 0 && newVal.suggestions.length === 0) {
+          context.localModel.suggestions = localSuggestions
+        }
         context.resolveModel()
       }, 1000)
     },
@@ -804,10 +808,9 @@ export default {
     switchCoords () {
       if (this.model.nameIsCoord()) {
         let coordinates = this.model.getCoordsFromName()
-        let switchedCords = coordinates.reverse()
-        this.model.setLnglat(switchedCords[0], switchedCords[1])
+        coordinates.reverse()
+        this.model.setLnglat(coordinates[1], coordinates[0])
         this.model.setCoordsAsName()
-        this.localModel = this.model.clone()
         this.autocompleteByCoords()
       }
     },
