@@ -51,7 +51,7 @@ the current implementation creates results by doing three searches:
 
 Having the results of the three searches, the app merges them using the following rules:
 
-- If there are results for `locality` and `county` layers, they will fill the initial slots
+- If there are results for `locality` and `county` layers, they will fill 30% of the slots
 - If there are results for all the layers except `locality`, `county` they will fill the other available slots
 
 Important: *If some searches do not bring results, the empty slots are filled with extra items from the other searches*

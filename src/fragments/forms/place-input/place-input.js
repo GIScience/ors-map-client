@@ -332,6 +332,28 @@ export default {
   },
   methods: {
     /**
+     * highlight typed place name
+     * @param {String} placeName 
+     * @returns {Html}
+     */
+    highlightedName (placeName) {
+      let searchMask = this.localModel.placeName
+      var regEx = new RegExp(searchMask, 'ig')
+      let localPlaceName = this.localModel.placeName
+      let replaceMask
+      if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase() + ' ') === 0) {
+        localPlaceName = localPlaceName[0].toUpperCase() + localPlaceName.substring(1) + '&nbsp;'
+      } else if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase()) === 0 ) {
+        localPlaceName = localPlaceName[0].toUpperCase() + localPlaceName.substring(1)
+      } else if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase()) > 0 ) {
+        localPlaceName = '&nbsp;' + localPlaceName[0].toUpperCase() + localPlaceName.substring(1)
+      }
+      replaceMask = `<strong>${localPlaceName}</strong>`
+
+      placeName = placeName.replace(regEx, replaceMask)
+      return placeName.trim()
+    },
+    /**
      * Get layer translation based on the layer name
      * or fall back to a default one if not available
      * @param {String} layer 

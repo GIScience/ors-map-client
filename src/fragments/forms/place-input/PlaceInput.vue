@@ -123,8 +123,8 @@
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title :title="placeSuggested.placeName.trim()">
-                <v-btn style="min-width: fit-content" flat small @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">
-                  {{ placeSuggested.placeName.trim() }}
+                <v-btn v-html="highlightedName(placeSuggested.placeName)" style="min-width: fit-content" flat small @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">
+                 
                 </v-btn>
               </v-list-tile-title>
               <v-list-tile-sub-title>

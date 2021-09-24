@@ -16,7 +16,12 @@ class AdminAreaLoader {
     let adminAreaFilter = { polygon_geojson: 1, format: 'json', country: place.properties.country }
 
     if (layer === 'region') {
-      adminAreaFilter.state  = place.properties.region.toLowerCase().replace(' region', '')
+      if (place.properties.region) {
+        adminAreaFilter.state = place.properties.region.toLowerCase().replace(' region', '')
+      } else {
+        adminAreaFilter.state  = this.getPlaceNameAsAdminArea(place)
+      }
+      return adminAreaFilter
     }
     if (layer === 'county') {
       if (place.properties.region) {
@@ -25,12 +30,9 @@ class AdminAreaLoader {
       if (place.properties.county) {
         adminAreaFilter.county  = place.properties.county.toLowerCase().replace(' county', '')  
       } else {
-        if (place.placeName.indexOf(',') > -1) {
-          adminAreaFilter.county  = place.placeName.split(',')[0]
-        } else {
-          adminAreaFilter.county  = place.placeName
-        }
+        adminAreaFilter.county  = this.getPlaceNameAsAdminArea(place)
       }
+      return adminAreaFilter
     }
     if (layer === 'locality') {
       if (place.properties.region && place.properties.region !== place.properties.locality) {
@@ -40,14 +42,25 @@ class AdminAreaLoader {
       if (locality) {
         adminAreaFilter.city = locality.toLowerCase()
       } else {
-        if (place.placeName.indexOf(',') > -1) {
-          adminAreaFilter.city  = place.placeName.split(',')[0]
-        } else {
-          adminAreaFilter.city  = place.placeName
-        }
+        adminAreaFilter.city  = this.getPlaceNameAsAdminArea(place)
       }
+      return adminAreaFilter
     }
-    return adminAreaFilter
+  }
+
+  /**
+   * Get the place name as admin area
+   * @param {Place} place 
+   * @returns {String}
+   */
+  getPlaceNameAsAdminArea (place) {
+    let adminArea
+    if (place.placeName.indexOf(',') > -1) {
+      adminArea  = place.placeName.split(',')[0]
+    } else {
+      adminArea  = place.placeName
+    }
+    return adminArea
   }
 
   /**

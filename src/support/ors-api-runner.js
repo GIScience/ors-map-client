@@ -124,14 +124,14 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
 
     // Build a search localities only
     let localityArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
-    localityArgs.size = 2
+    localityArgs.size = quantity / (quantity / 2)
     localityArgs.layers = ['locality']
     promises.push(client.geocode(localityArgs))   
     AppLoader.getInstance().appHooks.run('placeSearchLocalityArgsDefined', localityArgs)
 
     // Build a search counties only
     let countyArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
-    countyArgs.size = 2
+    countyArgs.size = quantity / (quantity / 1)
     countyArgs.layers = ['county']
     promises.push(client.geocode(countyArgs))   
     AppLoader.getInstance().appHooks.run('placeSearchCountyArgsDefined', countyArgs)
@@ -139,7 +139,7 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
     // Build a search for addresses
     let addressesArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
     addressesArgs.size = quantity
-    addressesArgs.layers = ['country', 'region', 'macrocounty', 'macroregion', 'neighbourhood', 'borough', 'street', 'address', 'coarse'] // `coarse` will bring places by postal code
+    addressesArgs.layers = ['country', 'region', 'macrocounty', 'macroregion', 'neighbourhood', 'borough', 'street', 'address', 'postalcode'] // `coarse` will bring places by postal code
     promises.push(client.geocode(addressesArgs))   
     AppLoader.getInstance().appHooks.run('placeSearchAddressArgsDefined', addressesArgs)
 
@@ -235,16 +235,24 @@ const sortFeatures  = (features) => {
     // Move best match to to first position (duplicated items will be removed later)
     features.splice(0, 0, features[bestMatchIndex])
   }
-  let closestCityIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'locality' || f.properties.layer === 'city'})
-  if (closestCityIndex > 1) {
-    // Move closest city to second position (duplicated items will be removed later)
-    features.splice(1, 0, features[closestCityIndex])
+
+  let postalCodeIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'postalcode'})
+  if (postalCodeIndex > 1) {
+    // Move postalcode place to first position duplicated items will be removed later)
+    features.splice(0, 0, features[postalCodeIndex])
+  } else {
+    let closestCityIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'locality' || f.properties.layer === 'city'})
+    if (closestCityIndex > 1) {
+      // Move closest city to second position (duplicated items will be removed later)
+      features.splice(1, 0, features[closestCityIndex])
+    }
   }
   let closestCountyIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'county' })
   if (closestCountyIndex > 1) {
     // Move closest city to second position (duplicated items will be removed later)
     features.splice(2, 0, features[closestCountyIndex])
   }
+
   let closestCountryIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'country'})
   if (closestCountryIndex > 2) {
     // Move closest city to third position (duplicated items will be removed later)
