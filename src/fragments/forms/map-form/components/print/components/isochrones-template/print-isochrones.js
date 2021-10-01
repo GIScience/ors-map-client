@@ -20,7 +20,7 @@ export default {
   }),
   computed: {
     contentTitle () {
-      let rangeTranslObject = this.$t(`orsMapFilters.filters.range_type`)
+      let rangeTranslObject = this.$t('orsMapFilters.filters.range_type')
       let activeProfile = this.localMapViewData.options.profile
       let title = this.$t(`orsMapFilters.profiles.${activeProfile}`) + '<br/>' 
       let rangeType = this.localMapViewData.options.range_type

@@ -82,16 +82,6 @@ export default {
     }
   },
   methods: {
-    /**
-     * Prepare and print route instructions
-     */
-    prepareAndPrintInstructions() {
-      let mapView = document.getElementById('map-view')
-      let route = this.parsedRoutes[this.$store.getters.activeRouteIndex]
-      let places = this.mapViewData.places
-      MapViewExporter.printRouteInstructions(route, places, mapView, this.$t('routeDetails'))
-    },
-
     formatElevation (elevation) {
       const value = Math.abs(elevation).toFixed(1)
       return value
