@@ -67,11 +67,11 @@ export default {
       },
       'height': {
         'label': 'Altezza',
-        'description': 'L\'altezza massima in metri'
+        'description': 'L\'altezza massima in metri. I limiti non sono obbligatori sul server e sono presenti sul client solo per evitare che vengano impostati valori irragionevoli. Valori troppo alti possono portare a percorsi irrealizzabili quando i dati richiesti non sono attualmente presenti nel database di OpenStreetMap'
       },
       'length': {
         'label': 'Lunghezza',
-        'description': 'La lunghezza massima in metri'
+        'description': 'La lunghezza massima in metri. I limiti non sono obbligatori sul server e sono presenti sul client solo per evitare che vengano impostati valori irragionevoli. Valori troppo alti possono portare a percorsi irrealizzabili quando i dati richiesti non sono attualmente presenti nel database di OpenStreetMap.'
       },
       'weight': {
         'label': 'Peso',
@@ -79,7 +79,7 @@ export default {
       },
       'width': {
         'label': 'Larghezza',
-        'description': 'La larghezza massima in metri'
+        'description': 'La larghezza massima in metri. I limiti non sono obbligatori sul server e sono presenti sul client solo per evitare che vengano impostati valori irragionevoli. Valori troppo alti possono portare a percorsi irrealizzabili quando i dati richiesti non sono attualmente presenti nel database di OpenStreetMap'
       },
       'hazmat': {
         'label': 'Merci pericolose',

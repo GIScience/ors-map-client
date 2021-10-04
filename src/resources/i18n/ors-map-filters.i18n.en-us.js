@@ -68,11 +68,11 @@ export default {
       },
       height: {
         label: 'Height',
-        description: 'The maximum height in meters'
+        description: 'The maximum height in meters. The limits are not enforced by the server and are just there to make sure no unreasonable values are set. Any weirdly large values might lead to unusable routes when OpenStreetMap database isn\'t tagged enough for this.'
       },
       length: {
         label: 'Length',
-        description: 'The maximum length in meters'
+        description: 'The maximum length in meters. The limits are not enforced by the server and are just there to make sure no unreasonable values are set. Any weirdly large values might lead to unusable routes when OpenStreetMap database isn\'t tagged enough for this.'
       },
       weight: {
         label: 'Weight',
@@ -80,7 +80,7 @@ export default {
       },
       width: {
         label: 'Width',
-        description: 'The maximum width in meters'
+        description: 'The maximum width in meters. The limits are not enforced by the server and are just there to make sure no unreasonable values are set. Any weirdly large values might lead to unusable routes when OpenStreetMap database isn\'t tagged enough for this.'
       },
       hazmat: {
         label: 'Hazardous goods',

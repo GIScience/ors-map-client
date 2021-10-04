@@ -80,7 +80,7 @@ export default {
       },
       width: {
         label: 'Largura',
-        description: 'A largura máxima em metros'
+        description: 'A largura máxima em metros. Os limites não são mandatórios no servidor e estão presentes no cliente somente para evitar que valores não razoáveis sejam definidos. Valores muito altos podem gerar a rotas inviáveis quando os dados necessários não estiverem no presentes no banco de dados do OpenStreetMap.'
       },
       hazmat: {
         label: 'Produtos perigosos',

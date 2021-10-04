@@ -68,11 +68,11 @@ export default {
       },
       'height': {
         'label': 'Magasság',
-        'description': 'Az engedélyezett legnagyobb magasság (méter)'
+        'description': 'Az engedélyezett legnagyobb magasság (méter). A korlátozások nem kötelezőek a szerveren, és csak az ügyfélben vannak jelen, hogy megakadályozzák az ésszerűtlen értékek beállítását. A túl magas értékek megvalósíthatatlan útvonalakhoz vezethetnek, ha a szükséges adatok jelenleg nincsenek jelen az OpenStreetMap adatbázisban.'
       },
       'length': {
         'label': 'Hosszúság',
-        'description': 'Az engedélyezett legnagyobb hosszúság (méter)'
+        'description': 'Az engedélyezett legnagyobb hosszúság (méter). A korlátozások nem kötelezőek a szerveren, és csak az ügyfélben vannak jelen, hogy megakadályozzák az ésszerűtlen értékek beállítását. A túl magas értékek megvalósíthatatlan útvonalakhoz vezethetnek, ha a szükséges adatok jelenleg nincsenek jelen az OpenStreetMap adatbázisban.'
       },
       'weight': {
         'label': 'Súly',
@@ -80,7 +80,7 @@ export default {
       },
       'width': {
         'label': 'Szélesség',
-        'description': 'Az engedélyezett legnagyobb szélesség (méter)'
+        'description': 'Az engedélyezett legnagyobb szélesség (méter). A korlátozások nem kötelezőek a szerveren, és csak az ügyfélben vannak jelen, hogy megakadályozzák az ésszerűtlen értékek beállítását. A túl magas értékek megvalósíthatatlan útvonalakhoz vezethetnek, ha a szükséges adatok jelenleg nincsenek jelen az OpenStreetMap adatbázisban.'
       },
       'hazmat': {
         'label': 'Veszélyes áru',
