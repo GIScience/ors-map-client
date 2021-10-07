@@ -117,14 +117,14 @@
           <v-list-tile @click.stop="selectSuggestion(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'
             :title="placeSuggested.placeName.trim()">
             <v-list-tile-action class="hidden-sm-and-down">
-              <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city'">location_city</v-icon>
+              <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city' || placeSuggested.properties.layer === 'county'">location_city</v-icon>
               <img width="25px" v-else-if="showAreaIcon(placeSuggested)" src="@/assets/img/country-icon.png" height="auto" />
               <v-icon v-else>place</v-icon>              
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title :title="placeSuggested.placeName.trim()">
-                <v-btn style="min-width: fit-content" flat small @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">
-                  {{ placeSuggested.placeName.trim() }}
+                <v-btn v-html="highlightedName(placeSuggested.placeName)" style="min-width: fit-content" flat small @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">
+                 
                 </v-btn>
               </v-list-tile-title>
               <v-list-tile-sub-title>

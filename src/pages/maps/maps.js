@@ -402,6 +402,7 @@ export default {
      */
     storeZoomValue (zoom = null) {
       const appRouteData = this.$store.getters.appRouteData
+      appRouteData.options = appRouteData.options || {}
       zoom = zoom || appRouteData.options.zoom || this.defaultZoom
       appRouteData.options.zoom = zoom
       this.$store.commit('appRouteData', appRouteData)

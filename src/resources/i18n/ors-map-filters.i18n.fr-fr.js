@@ -67,11 +67,11 @@ export default {
       },
       'height': {
         'label': 'Hauteur',
-        'description': 'La hauteur maximale en mètres'
+        'description': 'La hauteur maximale en mètres. Les limites ne sont pas obligatoires sur le serveur et sont présentes sur le client uniquement pour empêcher la définition de valeurs déraisonnables. Des valeurs trop élevées peuvent conduire à des itinéraires irréalisables lorsque les données requises ne sont pas actuellement présentes dans la base de données OpenStreetMap.'
       },
       'length': {
         'label': 'Longueur',
-        'description': 'La longueur maximale en mètres'
+        'description': 'La longueur maximale en mètres. Les limites ne sont pas obligatoires sur le serveur et sont présentes sur le client uniquement pour empêcher la définition de valeurs déraisonnables. Des valeurs trop élevées peuvent conduire à des itinéraires irréalisables lorsque les données requises ne sont pas actuellement présentes dans la base de données OpenStreetMap.'
       },
       'weight': {
         'label': 'Poids',
@@ -79,7 +79,7 @@ export default {
       },
       'width': {
         'label': 'Largeur',
-        'description': 'La largeur maximale en mètres'
+        'description': 'La largeur maximale en mètres. Les limites ne sont pas obligatoires sur le serveur et sont présentes sur le client uniquement pour empêcher la définition de valeurs déraisonnables. Des valeurs trop élevées peuvent conduire à des itinéraires irréalisables lorsque les données requises ne sont pas actuellement présentes dans la base de données OpenStreetMap.'
       },
       'hazmat': {
         'label': 'Produits dangereux',

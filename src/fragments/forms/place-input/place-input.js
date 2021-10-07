@@ -332,6 +332,28 @@ export default {
   },
   methods: {
     /**
+     * highlight typed place name
+     * @param {String} placeName 
+     * @returns {Html}
+     */
+    highlightedName (placeName) {
+      let searchMask = this.localModel.placeName
+      var regEx = new RegExp(searchMask, 'ig')
+      let localPlaceName = this.localModel.placeName
+      let replaceMask
+      if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase() + ' ') === 0) {
+        localPlaceName = localPlaceName[0].toUpperCase() + localPlaceName.substring(1) + '&nbsp;'
+      } else if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase()) === 0 ) {
+        localPlaceName = localPlaceName[0].toUpperCase() + localPlaceName.substring(1)
+      } else if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase()) > 0 ) {
+        localPlaceName = '&nbsp;' + localPlaceName[0].toUpperCase() + localPlaceName.substring(1)
+      }
+      replaceMask = `<strong>${localPlaceName}</strong>`
+
+      placeName = placeName.replace(regEx, replaceMask)
+      return placeName.trim()
+    },
+    /**
      * Get layer translation based on the layer name
      * or fall back to a default one if not available
      * @param {String} layer 
@@ -357,7 +379,11 @@ export default {
         if (context.directIsAvailable && context.$store.getters.mapSettings.skipAllSegments) {
           newVal.direct = true
         }
+        let localSuggestions = context.localModel.suggestions
         context.localModel = newVal.clone()
+        if (localSuggestions.length > 0 && newVal.suggestions.length === 0) {
+          context.localModel.suggestions = localSuggestions
+        }
         context.resolveModel()
       }, 1000)
     },
@@ -804,10 +830,9 @@ export default {
     switchCoords () {
       if (this.model.nameIsCoord()) {
         let coordinates = this.model.getCoordsFromName()
-        let switchedCords = coordinates.reverse()
-        this.model.setLnglat(switchedCords[0], switchedCords[1])
+        coordinates.reverse()
+        this.model.setLnglat(coordinates[1], coordinates[0])
         this.model.setCoordsAsName()
-        this.localModel = this.model.clone()
         this.autocompleteByCoords()
       }
     },

@@ -2,6 +2,73 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.19.0](https://github.com/GIScience/ors-map-client/compare/v1.18.0...v1.19.0) (2021-10-04)
+
+
+### Features
+
+* increase hgv dimentions filter values and help message ([16fc741](https://github.com/GIScience/ors-map-client/commit/16fc741804d46d07974db0609a16a8d9dbda3207))
+
+
+### Bug Fixes
+
+* **admin-area-loader.js:** make the admin loader compatible with ors-nominatim data structure ([ffd09a6](https://github.com/GIScience/ors-map-client/commit/ffd09a6ae790786117b011c6fea1dacd6fdf8269))
+
+## [1.18.0](https://github.com/GIScience/ors-map-client/compare/v1.17.1...v1.18.0) (2021-10-01)
+
+
+### Features
+
+* place search and results displaying improved ([d9e7d55](https://github.com/GIScience/ors-map-client/commit/d9e7d550bda033636c2b1d21bed8b757dcb1f321))
+* use separated county search in place search ([fd5f3e9](https://github.com/GIScience/ors-map-client/commit/fd5f3e9f3fbe70bc71853f1f9d7a7a2b68e5d5c2))
+
+
+### Bug Fixes
+
+* **place-input:** fix switching raw coordinates ([fe88dce](https://github.com/GIScience/ors-map-client/commit/fe88dcebf9fab6dbc172eb6dc80092fc9d6a0ab0)), closes [#171](https://github.com/GIScience/ors-map-client/issues/171)
+
+
+### Code Refactoring
+
+* remove unused code ([68641d0](https://github.com/GIScience/ors-map-client/commit/68641d04d17f2070521d6bdbb4f019c0708d4b11))
+* remove unused code in main.js ([ed830fd](https://github.com/GIScience/ors-map-client/commit/ed830fd77e7e6499f54b17d46ed892369c64708b))
+
+### [1.17.1](https://github.com/GIScience/ors-map-client/compare/v1.17.0...v1.17.1) (2021-09-16)
+
+
+### Bug Fixes
+
+* **maps.js:** fix app loading using /reach url ([ae39c88](https://github.com/GIScience/ors-map-client/commit/ae39c883c8550819d1bc3ceb7382981b7ede3b76))
+
+## [1.17.0](https://github.com/GIScience/ors-map-client/compare/v1.16.0...v1.17.0) (2021-08-31)
+
+
+### Features
+
+* **default-map-settings:** define alwaysFitBounds map setting default as false ([935e101](https://github.com/GIScience/ors-map-client/commit/935e101199beda1bc0bbdccdb8e8c350e3d90c7d))
+
+
+### Bug Fixes
+
+* **floatingmenu:** fix menu item target parameter ([f25cedc](https://github.com/GIScience/ors-map-client/commit/f25cedc115eee318d808a8ae91c06a34c9064ff5))
+
+
+### Styling
+
+* **ors-menu:** adjust code identation ([15735c3](https://github.com/GIScience/ors-map-client/commit/15735c30c920db5f4610dee2a236b1b000dca356))
+
+
+### Build System
+
+* **package-lock.json:** update some dependencies ([3422fbe](https://github.com/GIScience/ors-map-client/commit/3422fbe7f6a575672808640728ed773454a5f06a))
+
+
+### Code Refactoring
+
+* **print.js:** remove console.log and adjust quote formatting ([2bb4652](https://github.com/GIScience/ors-map-client/commit/2bb46529e4197c894611b039719e817ddf2fb7c3))
+* decouple the app loading from the app main ([ffe14b9](https://github.com/GIScience/ors-map-client/commit/ffe14b9b78b49f33a556f4b140bd51e753c0554d))
+* migrate getInstance method from main to AppLoader class ([29d29db](https://github.com/GIScience/ors-map-client/commit/29d29db4f01071c64734508eb0ac7f9c51eba406))
+
 ## [1.16.0](https://github.com/GIScience/ors-map-client/compare/v1.15.1...v1.16.0) (2021-08-04)
 
 

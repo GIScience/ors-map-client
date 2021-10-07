@@ -120,24 +120,23 @@ export default {
      */
     printView() {
       let htmlData = this.$refs.printableElement.innerHTML
-      console.log(htmlData)
       var frame1 = document.createElement('iframe')
-      frame1.name = "frame1"
-      frame1.style.position = "absolute"
-      frame1.style.top = "-1000000px"
+      frame1.name = 'frame1'
+      frame1.style.position = 'absolute'
+      frame1.style.top = '-1000000px'
       document.body.appendChild(frame1)
       var frameDoc = frame1.contentWindow ? frame1.contentWindow : frame1.contentDocument.document ? frame1.contentDocument.document : frame1.contentDocument
 
       frameDoc.document.open()
       frameDoc.document.write(`<html><head><title>${document.title}</title>`)
-      frameDoc.document.write(`<style type="text/css">@media print { body {-webkit-print-color-adjust: exact;}}</style>`)
+      frameDoc.document.write('<style type="text/css">@media print { body {-webkit-print-color-adjust: exact;}}</style>')
       frameDoc.document.write('</head><body>')
       frameDoc.document.write(htmlData)
       frameDoc.document.write('</body></html>')
       frameDoc.document.close()
       setTimeout(function () {
-        window.frames["frame1"].focus()
-        window.frames["frame1"].print()
+        window.frames['frame1'].focus()
+        window.frames['frame1'].print()
         document.body.removeChild(frame1)
       }, 500)
       return false
@@ -154,12 +153,12 @@ export default {
         buttonsOverMap[i].style.display = visible ? 'block' : 'none'
       }
       let leafletControls = mapView.getElementsByClassName('leaflet-control')
-      for (var i = 0; i < leafletControls.length; i++) {
-        leafletControls[i].style.display = visible ? 'block' : 'none'
+      for (var j = 0; j < leafletControls.length; j++) {
+        leafletControls[j].style.display = visible ? 'block' : 'none'
       }
       let leafletPopups = mapView.getElementsByClassName('leaflet-popup')
-      for (var i = 0; i < leafletPopups.length; i++) {
-        leafletPopups[i].style.display = visible ? 'block' : 'none'
+      for (var k = 0; k < leafletPopups.length; k++) {
+        leafletPopups[k].style.display = visible ? 'block' : 'none'
       }
     }
   }

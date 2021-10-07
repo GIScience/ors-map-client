@@ -45,14 +45,14 @@ As the `geocode/search` does not accept a parameter for layer priorities, or the
 the current implementation creates results by doing three searches:
 
 1. A search for items in the `locality` layer, passing a focus point
-1. A search for items in the other layers, except `locality` and `venue`
+1. A search for items in the `county` layer, passing a focus point
+1. A search for items in the other layers, except `locality`, `county` and `venue`
 1. A search for items in the `venue` layer, that are within the current map view bounds
 
 Having the results of the three searches, the app merges them using the following rules:
 
-- If there are results for `locality` layer they will fill 20% of the slots (in case of 10 will fill 2 slots)
-- If there are results for all the layers except `locality` and `venue` they will fill 40% of the slots
-- If there are results for `venue` layers they will fill the missing 40% of the slots
+- If there are results for `locality` and `county` layers, they will fill 30% of the slots
+- If there are results for all the layers except `locality`, `county` they will fill the other available slots
 
 Important: *If some searches do not bring results, the empty slots are filled with extra items from the other searches*
 

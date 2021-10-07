@@ -380,8 +380,8 @@ const filters = [
                   }
                 ],
                 value: 0,
-                min: 2,
-                max: 5,
+                min: 1,
+                max: 6,
                 step: 0.1
               },
               {
@@ -406,8 +406,8 @@ const filters = [
                   }
                 ],
                 value: 0,
-                min: 2,
-                max: 15,
+                min: 1,
+                max: 30,
                 step: 0.1
               },
               {
@@ -450,8 +450,8 @@ const filters = [
                   }
                 ], 
                 value: 0,
-                min: 2,
-                max: 5,
+                min: 1,
+                max: 6,
                 step: 0.1
               },
               {

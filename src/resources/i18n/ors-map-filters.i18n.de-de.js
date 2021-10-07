@@ -60,11 +60,11 @@ export default {
       },
       height: {
         label: 'Höhe',
-        description: 'Die maximale Höhe in Metern'
+        description: 'Die maximale Höhe in Metern. Die Grenzen der Werte werden vom Server nicht überprüft. Sie existieren in der App um zu verhindern, dass unangemessene Werte gesetzt werden. Zu hohe Werte können zu unrealistischen Routen führen, wenn in OpenStreetMap keine Grenzwerte vorhanden sind.'
       },
       length: {
         label: 'Länge',
-        description: 'Die maximale Länge in Metern'
+        description: 'Die maximale Länge in Metern. Die Grenzen der Werte werden vom Server nicht überprüft. Sie existieren in der App um zu verhindern, dass unangemessene Werte gesetzt werden. Zu hohe Werte können zu unrealistischen Routen führen, wenn in OpenStreetMap keine Grenzwerte vorhanden sind.'
       },
       weight: {
         label: 'Gewicht',
@@ -72,7 +72,7 @@ export default {
       },
       width: {
         label: 'Breite',
-        description: 'Die maximale Breite in Metern'
+        description: 'Die maximale Breite in Metern. Die Grenzen der Werte werden vom Server nicht überprüft. Sie existieren in der App um zu verhindern, dass unangemessene Werte gesetzt werden. Zu hohe Werte können zu unrealistischen Routen führen, wenn in OpenStreetMap keine Grenzwerte vorhanden sind.'
       },
       hazmat: {
         label: 'Gefahrgut',

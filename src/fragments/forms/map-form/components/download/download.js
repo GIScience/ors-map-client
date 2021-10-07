@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     /**
-     * Set the default filename and format and open the dowload modal
+     * Set the default filename and format and open the download modal
      */
     openDownload () {
       this.downloadFileName = this.defaultDownloadName
@@ -183,7 +183,7 @@ export default {
      */
     getORSGpx () {
       const context = this
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         // Build the args for a directions api request
         let args = OrsParamsParser.buildRoutingArgs(context.mapViewData.places)
         // merge the args with the ones applied in the user request
