@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-var webpackConfig = require('../../build/webpack.test.conf')
+const testWebpackConfig = require('../../build/webpack.test.conf')
 
 module.exports = function (config) {
   config.set({
@@ -9,7 +8,7 @@ module.exports = function (config) {
     exclude: [],
     //files/patterns to load in the browser
     files: [
-      { pattern: 'specs/*spec.js', watched: true, served: true, included: true }
+      { pattern: 'specs/*.js', watched: true, served: true, included: true }
       /*parameters:
           watched: if autoWatch is true all files that have set watched to true will be watched for changes
           served: should the files be served by Karma's webserver?
@@ -21,26 +20,21 @@ module.exports = function (config) {
     ],
 
     //executes the tests whenever one of watched files changes
-    autoWatch: true,
+    autoWatch: false,
     //if true, Karma will run tests and then exit browser
-    singleRun: false,
+    singleRun: true,
     //if true, Karma fails on running empty test-suites
     failOnEmptyTestSuite: false,
     //reduce the kind of information passed to the bash
     logLevel: config.LOG_WARN, //config.LOG_DISABLE, config.LOG_ERROR, config.LOG_INFO, config.LOG_DEBUG
 
     //list of frameworks you want to use, only jasmine is installed with this boilerplate
-    frameworks: ['jasmine', 'browserify'],
-    plugins: [
-      require('karma-jasmine'),
-      require('karma-chrome-launcher'),
-      require('karma-jasmine-html-reporter'),
-      require('karma-coverage-istanbul-reporter'),
-      require('karma-browserify'),
-      require('karma-webpack')
-    ],
+    frameworks: ['jasmine'],
     //list of browsers to launch and capture
     // browsers: ['Chrome'/*,'PhantomJS','Firefox','Edge','ChromeCanary','Opera','IE','Safari'*/],
+
+    //list of browsers to launch and capture
+    //browsers: ['Chrome'/*,'PhantomJS','Firefox','Edge','ChromeCanary','Opera','IE','Safari'*/],
     browsers: ['ChromeHeadlessNoSandbox'],
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
@@ -52,15 +46,14 @@ module.exports = function (config) {
           '--user-data-dir=/tmp/chrome-test-profile',
           '--disable-web-security',
           '--remote-debugging-address=0.0.0.0',
-          '--remote-debugging-port=9222',
+          '--remote-debugging-port=9876',
         ],
         debug: true,
       },
     },
-    restartOnFileChange: true,
+
     //list of reporters to use
-    // reporters: ['mocha', /*'kjhtml','dots','progress','spec'*/],
-    reporters: ['coverage-istanbul'],
+    reporters: ['mocha', 'kjhtml','coverage' /*,'dots','progress','spec'*/],
 
     //address that the server will listen on, '0.0.0.0' is default
     listenAddress: '0.0.0.0',
@@ -71,9 +64,9 @@ module.exports = function (config) {
     //when a browser crashes, karma will try to relaunch, 2 is default
     retryLimit: 0,
     //how long does Karma wait for a browser to reconnect, 2000 is default
-    browserDisconnectTimeout: 5000,
+    browserDisconnectTimeout: 10000,
     //how long will Karma wait for a message from a browser before disconnecting from it, 10000 is default
-    browserNoActivityTimeout: 50000,
+    browserNoActivityTimeout: 10000,
     //timeout for capturing a browser, 60000 is default
     captureTimeout: 60000,
 
@@ -88,26 +81,23 @@ module.exports = function (config) {
       useIframe: true,
       jasmine: {
         //tells jasmine to run specs in semi random order, false is default
-        random: false
+        random: true,
+        timeoutInterval: 10000,
+        seed: '4321',
+        oneFailurePerSpec: true,
+        failFast: true
       }
     },
-    colors: true,
-
-    coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, './coverage'),
-      reports: ['html', 'lcovonly', 'text-summary'],
-      fixWebpackSourcePaths: true,
-    },
-
     /* karma-webpack config
-       pass your webpack configuration for karma
-       add `babel-loader` to the webpack configuration to make 
-       the ES6+ code in the test files readable to the browser  
-       eg. import, export keywords */
-    webpack: webpackConfig,
+    pass your webpack configuration for karma
+    add `babel-loader` to the webpack configuration to make 
+    the ES6+ code in the test files readable to the browser  
+    eg. import, export keywords */
+    webpack: testWebpackConfig,
     preprocessors: {
       //add webpack as preprocessor to support require() in test-suits .js files
-      './specs/*.spec.js': ['webpack']
+      './specs/*.js': ['webpack'],
+      '**/src/app/*.js': ['coverage']
     },
     webpackMiddleware: {
       //turn off webpack bash output when run the tests
@@ -118,6 +108,14 @@ module.exports = function (config) {
     /*karma-mocha-reporter config*/
     mochaReporter: {
       output: 'noFailures'  //full, autowatch, minimal
+    },
+    coverageReporter: {
+      includeAllSources: true,
+      dir: 'coverage',
+      reporters: [
+        { type: 'html', subdir: 'html' },
+        { type: 'text-summary' }
+      ]
     }
   })
 }

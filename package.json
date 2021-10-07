@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
+    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
+    "jasmine": "nyc --reporter=lcov --reporter=text-summary babel-node test/run.js",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "integration": "nyc --reporter=lcov --reporter=text-summary babel-node test/integration/run.js",
@@ -17,6 +18,9 @@
     "build": "node build/build.js",
     "commit": "git-cz",
     "release": "standard-version"
+  },
+  "_moduleAliases": {
+    "@" : "src/"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.11.3",
@@ -33,6 +37,7 @@
     "leaflet-measure": "^3.1.0",
     "lodash": "^4.17.19",
     "lz-string": "^1.4.4",
+    "module-alias": "^2.2.2",
     "openrouteservice-js": "^0.1.27",
     "prismjs": "^1.15.0",
     "tinycolor2": "^1.4.1",

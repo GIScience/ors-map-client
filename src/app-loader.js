@@ -4,11 +4,13 @@ import PreparedVue from '@/common/prepared-vue.js'
 import I18nBuilder from '@/i18n/i18n-builder'
 import constants from '@/resources/constants'
 import appConfig from '@/config/app-config'
+import AppHooks from '@/support/app-hooks'
 import {HttpClient} from 'vue-rest-client'
 import utils from '@/support/utils'
 import store from '@/store/store'
 import router from '@/router'
 import lodash from 'lodash'
+import Vue from 'vue'
 
 
 class AppLoader {
@@ -33,6 +35,12 @@ class AppLoader {
         if (!store.getters.apiDataRequested) {
           store.commit('apiDataRequested', true)
   
+          // eslint-disable-next-line no-undef
+          var ORSKEY = process.env.ORSKEY
+          
+          if (ORSKEY && ORSKEY !== 'put-an-ors-key-here' && ORSKEY != '') {
+            appConfig.orsApiKey = ORSKEY
+          }
           // By default, the app must use an ors API key stored in config.js
           if (appConfig.useUserKey) {
             this.saveApiData(appConfig.orsApiKey, constants.endpoints)
@@ -51,6 +59,8 @@ class AppLoader {
               resolve()
             })
           }
+        } else {
+          resolve()
         }
       }
     })
@@ -250,7 +260,16 @@ class AppLoader {
    * @returns {Vue} instance
    */
   static getInstance () {
-    return store.getters.mainAppInstanceRef
+    if (store.getters.mainAppInstanceRef) {
+      return store.getters.mainAppInstanceRef
+    } else {
+      var vm = new Vue({ 
+        data: { appHooks: new AppHooks() },
+        i18n: I18nBuilder.build(),
+        store
+      })
+      return vm
+    }
   }
 }
 
