@@ -8,8 +8,8 @@ import AppLoader from '@/app-loader'
 import store from '@/store/store'
 
 describe('Map render', () => {
-  it('should render correct contents', (done) => {
-    new AppLoader().loadAppData(() => {
+  it('should render map-view component', (done) => {
+    new AppLoader().fetchApiInitialData().then(() => {
       const MapConstructor = PreparedVue.extend(MapView)
       let props = { 
         initialZoom: appConfig.initialZoomLevel, 
@@ -31,7 +31,9 @@ describe('Map render', () => {
       const vm = mapInstance.$mount()  
       expect(vm.$el.querySelector('#map-view')).toBeDefined()
       done()  
-    })
-
+    }).catch(result => {
+      console.log(result)
+      done()
+    }) 
   })
 })

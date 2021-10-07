@@ -2,7 +2,7 @@ import AppLoader from '@/app-loader'
 import AppRootComponent from '@/App'
 
 describe('App render', () => {
-  it('should render correct contents', (done) => {
+  it('should render app initial page', (done) => {
     let appLoader = new AppLoader()
     appLoader.loadApp(AppRootComponent, '#app', '<App/>').then(vueInstance => {
       vueInstance.appHooks.loadRegisteredHooks()
