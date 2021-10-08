@@ -37,10 +37,10 @@ export default {
         this.loadActiveProfileAndVehicle()
       }
     },
-    '$store.getters.appRouteData.options.profile' (newVal) {
+    '$store.getters.appRouteData.options.profile' () {
       this.loadActiveProfileAndVehicle()
     },
-    '$store.getters.appRouteData.options.vehicle_type' (newVal) {
+    '$store.getters.appRouteData.options.vehicle_type' () {
       this.loadActiveProfileAndVehicle()
     }
   },
