@@ -1,5 +1,7 @@
+// eslint-disable-next-line no-undef
 const testWebpackConfig = require('../../build/webpack.test.conf')
 
+// eslint-disable-next-line no-undef
 module.exports = function (config) {
   config.set({
     //root path location to resolve paths defined in files and exclude
@@ -84,7 +86,7 @@ module.exports = function (config) {
         random: true,
         timeoutInterval: 10000,
         seed: '4321',
-        oneFailurePerSpec: true
+        oneFailurePerSpec: false
       }
     },
     /* karma-webpack config
