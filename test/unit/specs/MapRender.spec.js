@@ -1,5 +1,6 @@
 import defaultMapSettings from '@/config/default-map-settings'
 import MapView from '@/fragments/map-view/MapView.vue'
+import MapViewData from '@/models/map-view-data'
 import PreparedVue from '@/common/prepared-vue.js'
 import constants from '@/resources/constants'
 import I18nBuilder from '@/i18n/i18n-builder'
@@ -14,7 +15,7 @@ describe('Map render', () => {
       let props = { 
         initialZoom: appConfig.initialZoomLevel, 
         avoidPolygons: [],  
-        mapViewData: null,
+        mapViewData: new MapViewData(),
         center: defaultMapSettings.mapCenter,
         showPopups: false,
         height: 900,
