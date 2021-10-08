@@ -5,27 +5,27 @@ import appConfig from '@/config/app-config'
  * Define ORS login menu items
  */
 const loginMenuItem = {
-    title: 'Access',
-    icon: 'lock',
-    startOpen: true,
-    requiresNotBeAuthenticated: true,
-    items: [
-      {
-        href: appConfig.appMenu.baseMenuExternalUrl + '/dev/#/signup',
-        title: 'Sign up',
-        target: '_blank',
-        icon: 'assignment',
-        external: true,
-        requiresNotBeAuthenticated: true
-      },
-      {
-        href: appConfig.appMenu.baseMenuExternalUrl + '/dev/#/login',
-        title: 'Log in',
-        target: '_blank',
-        icon: 'lock'
-      }
-    ]
-  }
+  title: 'Access',
+  icon: 'lock',
+  startOpen: true,
+  requiresNotBeAuthenticated: true,
+  items: [
+    {
+      href: appConfig.appMenu.baseMenuExternalUrl + '/dev/#/signup',
+      title: 'Sign up',
+      target: '_blank',
+      icon: 'assignment',
+      external: true,
+      requiresNotBeAuthenticated: true
+    },
+    {
+      href: appConfig.appMenu.baseMenuExternalUrl + '/dev/#/login',
+      title: 'Log in',
+      target: '_blank',
+      icon: 'lock'
+    }
+  ]
+}
 
 /**
  * Run the local customization over the menu loaded
@@ -63,7 +63,7 @@ const runORSMenuCustomization = (menu) => {
 
   // we can control if the custom icons are applied in the app config
   if (appConfig.appMenu.setCustomMenuIcons === true) {
-      setORSMenuIcons(menu)
+    setORSMenuIcons(menu)
   }
 }
   
