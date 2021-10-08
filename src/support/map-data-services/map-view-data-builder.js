@@ -33,7 +33,7 @@ class MapViewDataBuilder {
   }
 
   /**
-   * Get the response type, considering the endpoint and the response formart
+   * Get the response type, considering the endpoint and the response format
    * It is used to determine the map data extractor that is gonna be used
    * to extract the data from the response and render it
    */
@@ -83,7 +83,7 @@ class MapViewDataBuilder {
 
     return new Promise((resolve, reject) => {
       mapViewDataBuilder.buildMapViewData().then((mapViewData) => {
-        // The places in appRouteData alreay contains the placeName, so we use it
+        // The places in appRouteData already contains the placeName, so we use it
         // to avoid having to resolve each place coordinates to a placeName again
         // If there is no places in appRouteData (dealing with a route import, for example)
         // nothing happens because appRouteData.places will be an empty array
