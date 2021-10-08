@@ -1,7 +1,5 @@
-// eslint-disable-next-line no-undef
 const testWebpackConfig = require('../../build/webpack.test.conf')
 
-// eslint-disable-next-line no-undef
 module.exports = function (config) {
   config.set({
     //root path location to resolve paths defined in files and exclude
@@ -22,9 +20,9 @@ module.exports = function (config) {
     ],
 
     //executes the tests whenever one of watched files changes
-    autoWatch: false,
+    autoWatch: true,
     //if true, Karma will run tests and then exit browser
-    singleRun: true,
+    singleRun: false, // IMPORTANT: necessary to be false for debugging to work. Then, open the browser on http://localhost:{port}/
     //if true, Karma fails on running empty test-suites
     failOnEmptyTestSuite: false,
     //reduce the kind of information passed to the bash
@@ -36,8 +34,23 @@ module.exports = function (config) {
     // browsers: ['Chrome'/*,'PhantomJS','Firefox','Edge','ChromeCanary','Opera','IE','Safari'*/],
 
     //list of browsers to launch and capture
-    //browsers: ['Chrome'/*,'PhantomJS','Firefox','Edge','ChromeCanary','Opera','IE','Safari','FirefoxHeadless'*/],
+    //browsers: ['Chrome'/*,'PhantomJS','Firefox','Edge','ChromeCanary','Opera','IE','Safari'*/],
     browsers: ['FirefoxHeadless'],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: [
+          '--no-sandbox', // required to run without privileges in docker
+          '--headless',
+          '--disable-gpu',
+          '--user-data-dir=/tmp/chrome-test-profile',
+          '--disable-web-security',
+          '--remote-debugging-address=0.0.0.0',
+          '--remote-debugging-port=9876',
+        ],
+        debug: true,
+      },
+    },
 
     //list of reporters to use
     reporters: ['mocha', 'kjhtml','coverage' /*,'dots','progress','spec'*/],
@@ -71,8 +84,7 @@ module.exports = function (config) {
         random: true,
         timeoutInterval: 10000,
         seed: '4321',
-        oneFailurePerSpec: false,
-        failFast: false
+        oneFailurePerSpec: true
       }
     },
     /* karma-webpack config

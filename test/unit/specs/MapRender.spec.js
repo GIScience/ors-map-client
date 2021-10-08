@@ -14,7 +14,7 @@ describe('Map render', () => {
       let props = { 
         initialZoom: appConfig.initialZoomLevel, 
         avoidPolygons: [],  
-        mapViewData: {},
+        mapViewData: null,
         center: defaultMapSettings.mapCenter,
         showPopups: false,
         height: 900,

@@ -1,3 +1,4 @@
+import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import defaultMapSettings from '@/config/default-map-settings'
 import settingsOptions from '@/config/settings-options.js'
 import PreparedVue from '@/common/prepared-vue.js'
@@ -35,15 +36,9 @@ class AppLoader {
         if (!store.getters.apiDataRequested) {
           store.commit('apiDataRequested', true)
   
-          // eslint-disable-next-line no-undef
-          var ORSKEY = process.env.ORSKEY
-          
-          if (ORSKEY && ORSKEY !== 'put-an-ors-key-here' && ORSKEY != '') {
-            appConfig.orsApiKey = ORSKEY
-          }
           // By default, the app must use an ors API key stored in config.js
           if (appConfig.useUserKey) {
-            this.saveApiData(appConfig.orsApiKey, constants.endpoints)
+            this.saveInitialSettings(appConfig.orsApiKey, constants.endpoints)
             resolve()
           } else {
             let httpClient = new HttpClient({baseURL: appConfig.dataServiceBaseUrl})
@@ -51,10 +46,16 @@ class AppLoader {
             // (only works when running the app on valid ORS domains).
             // If the request fails, use the local user key instead
             httpClient.http.get(appConfig.publicApiKeyUrl).then(response => {
-              this.saveApiData(response.data, constants.publicEndpoints)
+              this.saveInitialSettings(response.data, constants.publicEndpoints)
               resolve(response.data)
             }).catch(error => {
-              this.saveApiData(appConfig.orsApiKey, constants.endpoints)
+              // eslint-disable-next-line no-undef
+              var ORSKEY = process.env.ORSKEY
+              
+              if (ORSKEY && ORSKEY !== 'put-an-ors-key-here' && ORSKEY != '') {
+                appConfig.orsApiKey = ORSKEY
+              }
+              this.saveInitialSettings(appConfig.orsApiKey, constants.endpoints)
               console.log(error)
               resolve()
             })
@@ -103,7 +104,7 @@ class AppLoader {
    * @param {*} apiKey
    * @param {*} endpoints
    */
-  saveApiData (apiKey, endpoints) {
+  saveInitialSettings (apiKey, endpoints) {
     // Save the api key and the endpoints to the default settings object
     defaultMapSettings.apiKey = apiKey
     defaultMapSettings.endpoints = endpoints
@@ -138,6 +139,13 @@ class AppLoader {
       // then this option is must start as true
       mapSettings.saveToLocalStorage = true
     }
+
+    // Set the default value for profile in ors-filter
+    const profile = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
+    if (!profile.value) {
+      OrsFilterUtil.setFilterValue(constants.profileFilterName, defaultMapSettings.defaultProfile)
+    }
+     
     this.storeLocale(mapSettings, locale)
   
     let appInstance = AppLoader.getInstance()

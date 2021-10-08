@@ -10,17 +10,16 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
-    "jasmine": "nyc --reporter=lcov --reporter=text-summary babel-node test/run.js",
+    "unit-debug": "cross-env BABEL_ENV=test karma start test/unit/karma.debug.conf.js",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "integration": "nyc --reporter=lcov --reporter=text-summary babel-node test/integration/run.js",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "build": "node build/build.js",
     "commit": "git-cz",
     "release": "standard-version"
   },
   "_moduleAliases": {
-    "@" : "src/"
+    "@": "src/"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.11.3",
@@ -116,6 +115,7 @@
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage": "^1.1.1",
     "karma-coverage-istanbul-reporter": "^3.0.3",
+    "karma-firefox-launcher": "^1.3.0",
     "karma-jasmine-html-reporter": "^1.7.0",
     "karma-mocha": "^1.3.0",
     "karma-phantomjs-launcher": "^1.0.2",

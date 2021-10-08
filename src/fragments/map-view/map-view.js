@@ -851,7 +851,9 @@ export default {
      */
     baseLayerChanged () {
       const layerControl = document.querySelector('.leaflet-control-layers')
-      layerControl.classList.remove('leaflet-control-layers-expanded')
+      if (layerControl) {
+        layerControl.classList.remove('leaflet-control-layers-expanded')
+      }
     },
     /**
      * We watch the box model for changes and update the internal closed data that is used to control the visibility of the box
