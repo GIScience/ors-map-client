@@ -87,7 +87,7 @@
     <dialog-fields v-if="subPropsModalActive" :is-modal=true :title="subPropsModalTitle" :sub-props-index="subPropsModalIndex"
       :parameters="formParameters" @fieldUpdated="fieldUpdated" @modalConfirmed="onModalFieldAssistedConfirm">
     </dialog-fields>
-    <v-dialog v-if="manualEditModalActive" v-model="manualEditModalActive" max-width="600" class="open-field-modal">
+    <v-dialog v-if="manualEditModalActive" v-model="manualEditModalActive" max-width="600" attach="body" class="open-field-modal">
       <box v-if="manualEditModalActive" closable @closed="onEditModalOk" v-model="manualEditModalActive" :resizable="true"
         background="white">
         <div slot="header">

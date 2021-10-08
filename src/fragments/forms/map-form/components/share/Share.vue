@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-btn style="float:right; margin-top:0" small icon :title="$t('share.share')" @click="openShare()"><v-icon>share</v-icon></v-btn>
-    <v-dialog v-model="isShareModalOpen" max-width="600" :persistent="true">
+    <v-dialog v-model="isShareModalOpen" max-width="600" :persistent="true" attach="body">
       <box v-model="isShareModalOpen" background="white" closable @closed="closeShare()">
         <h3 slot="header">{{$t('share.shareLink')}}</h3>
         <v-layout row wrap>

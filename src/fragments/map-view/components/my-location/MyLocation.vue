@@ -1,6 +1,6 @@
 <template>
 <div style="height:0">
-  <v-menu class="my-location-floating-menu" style="box-shadow:none" transition="slide-y-transition" v-model="menuOpen"
+  <v-menu class="my-location-floating-menu" style="box-shadow:none" transition="slide-y-transition" v-model="menuOpen" attach="body"
     :close-on-click="true"
     top offset-y
     :close-on-content-click="true" >

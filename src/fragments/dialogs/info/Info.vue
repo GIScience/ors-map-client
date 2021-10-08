@@ -1,6 +1,6 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="show" :max-width="infoMaxWidth" :style="{zIndex: zIndex}" :persistent="persistent">
+    <v-dialog v-model="show" attach="body" :max-width="infoMaxWidth" :style="{zIndex: zIndex}" :persistent="persistent">
       <box closable @closed="onOk" v-model="show" :fillHeight="true" :resizable="resizable" background="white">
         <div slot="header">
           <h3>{{infoTitle}}</h3>

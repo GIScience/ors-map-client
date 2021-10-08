@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="active" max-width="600" class="props-modal" :persistent="true">
+  <v-dialog v-model="active" attach="body" max-width="600" class="props-modal" :persistent="true">
       <box v-model="active" :resizable="true" background="white">
         <div slot="header">
           <h3>{{title}}</h3>

@@ -6,7 +6,7 @@
       @click="profileSelected(profile.slug)">
       <v-icon large>{{profile.icon}}</v-icon>
     </v-btn>
-    <v-menu v-if="profile.vehicleTypes" class="profile-option-menu" v-model="subProfileIsOpen"
+    <v-menu attach="body" v-if="profile.vehicleTypes" class="profile-option-menu" v-model="subProfileIsOpen"
       transition="slide-y-transition" close-on-click close-on-content-click :open-on-hover="!isMobile" bottom>
       <v-btn icon class="profile-menu-activator" slot="activator">
         <v-icon>keyboard_arrow_down</v-icon>
@@ -22,7 +22,7 @@
         </template>
       </v-list>
     </v-menu>
-    <v-menu v-else-if="profile.nestedProfiles" class="profile-option-menu" v-model="subProfileIsOpen"
+    <v-menu v-else-if="profile.nestedProfiles" class="profile-option-menu" v-model="subProfileIsOpen" attach="body"
       transition="slide-y-transition" close-on-click close-on-content-click :open-on-hover="!isMobile" bottom>
       <v-btn icon class="profile-menu-activator" slot="activator">
         <v-icon>keyboard_arrow_down</v-icon>

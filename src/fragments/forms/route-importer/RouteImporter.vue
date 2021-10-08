@@ -1,7 +1,7 @@
 <template>
   <div>
     <map-form-btn @clicked="openImporter()" :icon="'cloud_upload'" :title="$t('routeImporter.loadRouteFile')" ></map-form-btn>
-    <v-dialog v-model="isImportModalOpen" max-width="600" :persistent="true">
+    <v-dialog v-model="isImportModalOpen" max-width="600" :persistent="true" attach="body">
       <box v-model="isImportModalOpen" background="white" closable @closed="closeImporter()">
         <h3 slot="header">{{$t('routeImporter.loadRouteFile')}}</h3>
         <vue-dropzone ref="importRouteDropzone" @vdropzone-file-added="fileAdded" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
