@@ -9,17 +9,14 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
-    "unit-debug": "cross-env BABEL_ENV=test karma start test/unit/karma.debug.conf.js",
+    "integration": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
+    "integration-debug": "cross-env BABEL_ENV=test karma start test/unit/karma.debug.conf.js",
     "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
+    "test": "npm run integration && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "build": "node build/build.js",
     "commit": "git-cz",
     "release": "standard-version"
-  },
-  "_moduleAliases": {
-    "@": "src/"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.11.3",
@@ -36,8 +33,7 @@
     "leaflet-measure": "^3.1.0",
     "lodash": "^4.17.19",
     "lz-string": "^1.4.4",
-    "module-alias": "^2.2.2",
-    "openrouteservice-js": "^0.1.27",
+    "openrouteservice-js": "^0.1.29",
     "prismjs": "^1.15.0",
     "tinycolor2": "^1.4.1",
     "togpx": "^0.5.4",
@@ -74,7 +70,6 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
     "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
-    "@babel/register": "^7.14.5",
     "@types/leaflet": "^1.5.17",
     "@vue/babel-plugin-transform-vue-jsx": "^1.2.1",
     "autoprefixer": "^7.1.2",
@@ -109,9 +104,7 @@
     "html-webpack-plugin": "^3.2.0",
     "istanbul": "^0.4.5",
     "jasmine": "^3.8.0",
-    "jasmine-node": "^3.0.0",
     "karma": "^5.1.0",
-    "karma-browserify": "^8.1.0",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage": "^1.1.1",
     "karma-coverage-istanbul-reporter": "^3.0.3",
