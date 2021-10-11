@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.20.0](https://github.com/GIScience/ors-map-client/compare/v1.19.0...v1.20.0) (2021-10-11)
+
+
+### Features
+
+* basic e2e setup ([cb6019f](https://github.com/GIScience/ors-map-client/commit/cb6019f9b0f8128dfc62516a826216f29daa3f27))
+
+
+### Tests
+
+* add app, map-view and ors-api tests ([cf4beff](https://github.com/GIScience/ors-map-client/commit/cf4beff6a746744844966e4ba501d4d85fc298cd))
+* add basic unit test ([aeeb0dd](https://github.com/GIScience/ors-map-client/commit/aeeb0dd5a8e7f2e234e2d383678d3236f3212df4))
+* add isochrone build map data and improve other tests ([5e9c5a2](https://github.com/GIScience/ors-map-client/commit/5e9c5a2eb4167f8bf9f77f3059cfd43235291dbc))
+* add karma-jasmin-webpack test infrastructure ([f6668ca](https://github.com/GIScience/ors-map-client/commit/f6668ca43cf6855aaeede39282725e42a8b66220))
+* define basic tests ([64a0ad2](https://github.com/GIScience/ors-map-client/commit/64a0ad2f0479e4083d56e4032b5845dfed292f15))
+* new unit tests configuration using FirefoxHeadless ([d46262e](https://github.com/GIScience/ors-map-client/commit/d46262ee0ac11c57deb8c076f318055006c8216d))
+
+
+### Docs
+
+* **map-view-data-builder.js:** fix documentation spelling ([a3616a2](https://github.com/GIScience/ors-map-client/commit/a3616a23a2f551541d48053bbf24a2dbfb52d573))
+
+
+### Styling
+
+* **ors-menu.js:** fix identation ([0ac8b0a](https://github.com/GIScience/ors-map-client/commit/0ac8b0a63bae2f4c1f66abc062379e7146055569))
+
+
+### Others
+
+* config karma debug tests to show all erros ([6b11d76](https://github.com/GIScience/ors-map-client/commit/6b11d760db2ac86d95630c3256fcd70103c550b2))
+* remove test and coverage files ([d959816](https://github.com/GIScience/ors-map-client/commit/d959816dbbb37a0f6b608f56d1d63a18b41dcd17))
+* remove unused packages and rename test command ([111843b](https://github.com/GIScience/ors-map-client/commit/111843b64ac6eb6d38ce9b4b5ea4d034e8e4e070))
+
+
+### Code Refactoring
+
+* **app-loader.js:** refactor method names ([8046929](https://github.com/GIScience/ors-map-client/commit/804692926089994d53a1bef36ded790956613daf))
+* change the dialogs attach target element to body ([44e2c9c](https://github.com/GIScience/ors-map-client/commit/44e2c9c8dd218a7c130b1f1a7754e9d47ca003ac))
+* **place-input:** add class name for place suggestion element ([0cd3d00](https://github.com/GIScience/ors-map-client/commit/0cd3d008065ac879fc4ab751794ee0900a86a49c))
+* **profile-selector.js:** remove unused parameters in watchers ([4dc70c3](https://github.com/GIScience/ors-map-client/commit/4dc70c3cd2cb27c48d8be29759567ee0a55fcf4c))
+
 ## [1.19.0](https://github.com/GIScience/ors-map-client/compare/v1.18.0...v1.19.0) (2021-10-04)
 
 
