@@ -114,7 +114,7 @@
               </div>
             </v-flex>
           </v-layout>
-          <v-list-tile @click.stop="selectSuggestion(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'
+          <v-list-tile class="place-suggestion" @click.stop="selectSuggestion(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'
             :title="placeSuggested.placeName.trim()">
             <v-list-tile-action class="hidden-sm-and-down">
               <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city' || placeSuggested.properties.layer === 'county'">location_city</v-icon>
