@@ -38,7 +38,7 @@ class AppLoader {
   
           // By default, the app must use an ors API key stored in config.js
           if (appConfig.useUserKey) {
-            this.saveInitialSettings(appConfig.orsApiKey, constants.endpoints)
+            this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)
             resolve()
           } else {
             let httpClient = new HttpClient({baseURL: appConfig.dataServiceBaseUrl})
@@ -46,7 +46,7 @@ class AppLoader {
             // (only works when running the app on valid ORS domains).
             // If the request fails, use the local user key instead
             httpClient.http.get(appConfig.publicApiKeyUrl).then(response => {
-              this.saveInitialSettings(response.data, constants.publicEndpoints)
+              this.setInitialSettings(response.data, constants.publicEndpoints)
               resolve(response.data)
             }).catch(error => {
               // eslint-disable-next-line no-undef
@@ -55,8 +55,8 @@ class AppLoader {
               if (ORSKEY && ORSKEY !== 'put-an-ors-key-here' && ORSKEY != '') {
                 appConfig.orsApiKey = ORSKEY
               }
-              this.saveInitialSettings(appConfig.orsApiKey, constants.endpoints)
-              console.log(error)
+              this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)
+              console.log('Error acquiring api key:', error)
               resolve()
             })
           }
@@ -104,7 +104,7 @@ class AppLoader {
    * @param {*} apiKey
    * @param {*} endpoints
    */
-  saveInitialSettings (apiKey, endpoints) {
+  setInitialSettings (apiKey, endpoints) {
     // Save the api key and the endpoints to the default settings object
     defaultMapSettings.apiKey = apiKey
     defaultMapSettings.endpoints = endpoints
@@ -146,7 +146,7 @@ class AppLoader {
       OrsFilterUtil.setFilterValue(constants.profileFilterName, defaultMapSettings.defaultProfile)
     }
      
-    this.storeLocale(mapSettings, locale)
+    this.saveSettings(mapSettings, locale)
   
     let appInstance = AppLoader.getInstance()
     if (appInstance) { // main app instance may not be available when app is still loading
@@ -161,7 +161,7 @@ class AppLoader {
    * @param {*} mapSettings
    * @param {*} locale
    */
-  storeLocale (mapSettings, locale = null) {
+  saveSettings (mapSettings, locale = null) {
     let fittingLocale = this.setFittingLocale(locale)
     mapSettings.locale = fittingLocale
   
@@ -196,7 +196,7 @@ class AppLoader {
         locale = this.setFittingLocale(locale)
   
         let settings = store.getters.mapSettings
-        this.storeLocale(settings, locale)
+        this.saveSettings(settings, locale)
       }
       resolve(isEmbed)
     })
