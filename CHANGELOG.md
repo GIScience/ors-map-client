@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.1](https://github.com/GIScience/ors-map-client/compare/v1.20.0...v1.20.1) (2021-10-12)
+
+
+### Tests
+
+* renamed unit to integration test ([d978fc5](https://github.com/GIScience/ors-map-client/commit/d978fc508d9478cf334796ecf569666d49ca0c42))
+
 ## [1.20.0](https://github.com/GIScience/ors-map-client/compare/v1.19.0...v1.20.0) (2021-10-11)
 
 
