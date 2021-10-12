@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.3](https://github.com/GIScience/ors-map-client/compare/v1.20.2...v1.20.3) (2021-10-12)
+
+
+### Tests
+
+* remove key output in test ([baa87ad](https://github.com/GIScience/ors-map-client/commit/baa87ad951290cd2f14df9fa5d32bb1b3a1a2f1b))
+
 ### [1.20.2](https://github.com/GIScience/ors-map-client/compare/v1.20.1...v1.20.2) (2021-10-12)
 
 
