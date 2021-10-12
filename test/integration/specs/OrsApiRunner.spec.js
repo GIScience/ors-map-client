@@ -25,7 +25,10 @@ describe('OrsApiRunner test', () => {
         expect(response.content.features[0].geometry.type).toEqual('LineString')      
         done()
       }).catch(result => {
-        const error = lodash.get(result, 'response.response.body.error') || result.response
+        let error = {
+          key: process.env.ORSKEY,
+          error: lodash.get(result, 'response.response.body.error') || result.response
+        }
         done.fail(error)
       })      
     }).catch(result => {
@@ -44,7 +47,10 @@ describe('OrsApiRunner test', () => {
         expect(response.content.features[0].geometry.type).toEqual('Polygon')      
         done()
       }).catch(result => {
-        const error = lodash.get(result, 'response.response.body.error') || result.response
+        let error = {
+          key: process.env.ORSKEY,
+          error: lodash.get(result, 'response.response.body.error') || result.response
+        }
         done.fail(error)
       })      
     }).catch(result => {
@@ -61,7 +67,10 @@ describe('OrsApiRunner test', () => {
         expect(places.length).toBeGreaterThan(10)   
         done()
       }).catch(result => {
-        const error = lodash.get(result, 'response.response.body.error') || result.response
+        let error = {
+          key: process.env.ORSKEY,
+          error: lodash.get(result, 'response.response.body.error') || result.response || result
+        }
         done.fail(error)
       })      
     }).catch(result => {
@@ -78,13 +87,14 @@ describe('OrsApiRunner test', () => {
         expect(places.length).toBeGreaterThan(9)   
         done()
       }).catch(result => {
-        const error = lodash.get(result, 'response.response.body.error') || result.response
+        let error = {
+          key: process.env.ORSKEY,
+          error: lodash.get(result, 'response.response.body.error') || result.response
+        }
         done.fail(error)
       })      
     }).catch(result => {
       done.fail(result)
     }) 
-  })
-
-  
+  })  
 })

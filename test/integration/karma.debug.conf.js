@@ -1,6 +1,9 @@
 // eslint-disable-next-line no-undef
 const testWebpackConfig = require('../../build/webpack.test.conf')
 
+process.env.ORSKEY =
+    '5b3ce3597851110001cf62484c2b303725d843b5b765b5e83e8e3c30'
+
 // eslint-disable-next-line no-undef
 module.exports = function (config) {
   config.set({
