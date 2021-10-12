@@ -30,5 +30,4 @@ jobs:
         ORSKEY: ${{ secrets.ORSKEY }}
     - run: npm install
     - run: cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
-    - run: echo env.ORSKEY
     - run: npm run integration
