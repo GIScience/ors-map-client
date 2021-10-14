@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.21.0](https://github.com/GIScience/ors-map-client/compare/v1.20.5...v1.21.0) (2021-10-14)
+
+
+### Features
+
+* **app-loader.js:** use env ors key if app config has an invalid key ([ebe343e](https://github.com/GIScience/ors-map-client/commit/ebe343ede10792ef78bd3e5ab667d1b9e02eb1ce))
+
+
+### Tests
+
+* add ORSKEY to process.env variables ([a0c3bd5](https://github.com/GIScience/ors-map-client/commit/a0c3bd5122ab681fd26dde4275792ac15c8b06b8))
+* use chromeheadless in karma test ([3b742e2](https://github.com/GIScience/ors-map-client/commit/3b742e2ea879cc79f364d6e464dd5ece2126970b))
+* use custom chrome launcher in karma test ([6418c82](https://github.com/GIScience/ors-map-client/commit/6418c8291d0add4728d4a85348109607def09559))
+
+
+### Others
+
+* add ORSKEY to webpack en variables ([76bc94a](https://github.com/GIScience/ors-map-client/commit/76bc94a40d5d12d5b3d460ae6568254c5ce77f9c))
+
+
+### CI
+
+* **test.yml:** add github workflow for testing ([09f52dd](https://github.com/GIScience/ors-map-client/commit/09f52ddf5320a411a9580b76c8446b6bf9221058))
+
 ### [1.20.5](https://github.com/GIScience/ors-map-client/compare/v1.20.4...v1.20.5) (2021-10-14)
 
 
