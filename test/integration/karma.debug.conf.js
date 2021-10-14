@@ -40,7 +40,7 @@ module.exports = function (config) {
 
     //list of browsers to launch and capture
     //browsers: ['Chrome'/*,'PhantomJS','Firefox','Edge','ChromeCanary','Opera','IE','Safari'*/],
-    browsers: ['FirefoxHeadless'],
+    browsers: ['ChromeHeadless'],
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
         base: 'ChromeHeadless',
