@@ -35,9 +35,15 @@ class AppLoader {
         // so that we avoid running several requests before the promise is resolved
         if (!store.getters.apiDataRequested) {
           store.commit('apiDataRequested', true)
+
+          // eslint-disable-next-line no-undef
+          var ORSKEY = process.env.ORSKEY
   
           // By default, the app must use an ors API key stored in config.js
           if (appConfig.useUserKey) {
+            if (appConfig.orsApiKey === 'put-here-an-ors-api-key' && ORSKEY && ORSKEY !== 'put-an-ors-key-here' && ORSKEY != '') {
+              appConfig.orsApiKey = ORSKEY
+            }
             this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)
             resolve()
           } else {
@@ -48,10 +54,7 @@ class AppLoader {
             httpClient.http.get(appConfig.publicApiKeyUrl).then(response => {
               this.setInitialSettings(response.data, constants.publicEndpoints)
               resolve(response.data)
-            }).catch(error => {
-              // eslint-disable-next-line no-undef
-              var ORSKEY = process.env.ORSKEY
-              
+            }).catch(error => {            
               if (ORSKEY && ORSKEY !== 'put-an-ors-key-here' && ORSKEY != '') {
                 appConfig.orsApiKey = ORSKEY
               }
