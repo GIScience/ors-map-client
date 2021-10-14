@@ -2,8 +2,15 @@
 
 const packageJson = require('../package.json')
 
-module.exports =  {
+let ORSKEY = process.env.ORSKEY
+
+let env = {
   NODE_ENV: '"production"',
-  PACKAGE_JSON: JSON.stringify(packageJson),
-  ORSKEY: process.env.ORSKEY
+  PACKAGE_JSON: JSON.stringify(packageJson)
 }
+
+if (ORSKEY) {
+  env.ORSKEY = `"${ORSKEY}"`
+}
+
+module.exports = env

@@ -10,11 +10,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-// const { VuetifyLoaderPlugin } = require('vuetify-loader')
 
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : require('../config/prod.env')
+
+console.log(env)
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
