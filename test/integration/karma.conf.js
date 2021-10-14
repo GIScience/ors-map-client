@@ -37,7 +37,7 @@ module.exports = function (config) {
 
     //list of browsers to launch and capture
     //browsers: ['Chrome'/*,'PhantomJS','Firefox','Edge','ChromeCanary','Opera','IE','Safari','FirefoxHeadless'*/],
-    browsers: ['ChromeHeadless'],
+    browsers: ['FirefoxHeadless'],
 
     //list of reporters to use
     reporters: ['mocha', 'kjhtml','coverage' /*,'dots','progress','spec'*/],
