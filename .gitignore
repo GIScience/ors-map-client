@@ -8,6 +8,7 @@ yarn-error.log*
 /test/unit/coverage/
 /test/e2e/reports/
 selenium-debug.log
+selenium-server.log
 /src/ors-js/
 
 # Editor directories and files
