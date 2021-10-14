@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.5](https://github.com/GIScience/ors-map-client/compare/v1.20.4...v1.20.5) (2021-10-14)
+
+
+### Others
+
+* **gitignore:** ignore selenium-server.log ([5798fad](https://github.com/GIScience/ors-map-client/commit/5798fad501afc2bdc8489eaadf0fe3278bd0b13e))
+
+
+### Tests
+
+* switch back to chrome headless in karma tests ([9b57c08](https://github.com/GIScience/ors-map-client/commit/9b57c089a85988b4511a547daac676234b082437))
+* use ChromeHeadless in karma tests ([2d5f16f](https://github.com/GIScience/ors-map-client/commit/2d5f16f8c1a1d697a989074538b40fb4fcfaca3c))
+
 ### [1.20.4](https://github.com/GIScience/ors-map-client/compare/v1.20.3...v1.20.4) (2021-10-14)
 
 ### [1.20.3](https://github.com/GIScience/ors-map-client/compare/v1.20.2...v1.20.3) (2021-10-12)
