@@ -37,7 +37,21 @@ module.exports = function (config) {
 
     //list of browsers to launch and capture
     //browsers: ['Chrome'/*,'PhantomJS','Firefox','Edge','ChromeCanary','Opera','IE','Safari','FirefoxHeadless'*/],
-    browsers: ['ChromeHeadless'],
+    //list of browsers to launch and capture
+    //browsers: ['Chrome'/*,'PhantomJS','Firefox','Edge','ChromeCanary','Opera','IE','Safari'*/],
+    browsers: ['ChromeHeadlessCI'],
+    customLaunchers: {
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: [
+          '--no-sandbox', // required to run without privileges in docker
+          '--headless',
+          '--disable-gpu',
+          '--disable-web-security'
+        ],
+        debug: false,
+      },
+    },
 
     //list of reporters to use
     reporters: ['mocha', 'kjhtml','coverage' /*,'dots','progress','spec'*/],
