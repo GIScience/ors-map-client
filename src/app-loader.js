@@ -41,7 +41,7 @@ class AppLoader {
   
           // By default, the app must use an ors API key stored in config.js
           if (appConfig.useUserKey) {
-            if (appConfig.orsApiKey === 'put-here-an-ors-api-key' && ORSKEY && ORSKEY !== 'put-an-ors-key-here' && ORSKEY != '') {
+            if (appConfig.orsApiKey === 'put-here-an-ors-api-key' && ORSKEY && ORSKEY != '') {
               appConfig.orsApiKey = ORSKEY
             }
             this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)
