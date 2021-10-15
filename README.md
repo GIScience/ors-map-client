@@ -28,6 +28,7 @@ code understanding.
 - [Menu](#menu)
 - [Debug](#debug)
 - [Build and deploy](#build-and-deploy)
+- [Tests](#tests)
 - [Contribute](#contribute)
 
 ### Set up and run locally ###
@@ -349,6 +350,10 @@ The `index.html` at the root of this repository will load the app.
 
 For a detailed explanation on how webpack works, check out the [guide](http://vuejs-templates.github.io/webpack/) and
 [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+### Tests ###
+
+The application includes automated tests. They are stored in `test/integration`. More info can be checked on the [tests readme](docs/automated-test.md)
 
 ### Contribute ###
 

@@ -69,7 +69,8 @@
       "lng": "long",
       "tones": "tones",
       "t": "t",
-      "kmh": "km/h"
+      "kmh": "km/h",
+      "polygon": "polygon"
     },
     "layers": {
       "macrocounty": "Macro county",
@@ -266,8 +267,8 @@
       "2000": "Unable to parse JSON request",
       "2001": "Required parameter is missing",
       "2002": "Invalid parameter format",
-      "2003": "Invalid parameter. Please remember that some avoidables have limits, like the route length and the area of an avoid polygon that must not exceed 20000 square kilometers",
-      "2004": "By using certain filters and/or avoidables the distance of a route segment must not be greater than 3000 km. When using alternative routes the distance must be at most 100 km.",
+      "2003": "Route parameters exceed one or more limits. Please remember that some avoidables have limits, like the route length and the area of an avoid polygon that must not exceed 20000 square kilometers.",
+      "2004": "Route parameters exceed one or more limits. Remember that the approximated route distance must not be greater than 6000 kms. When certain route options or avoidables are used, the approximated route distance must not be greater than 150 kms.",
       "2006": "Unable to parse the request to the export handler",
       "2007": "Unsupported export format",
       "2008": "Empty element",
@@ -480,7 +481,7 @@
       },
       "clearControlLabel": "&times",
       "measureControlLabel": "&#8614;",
-      "measureControlClasses": [],
+      "measureControlClasses": ["polyline-measure-unicode-icon"],
       "unitControlLabel": {
         "metres": "m",
         "kilometres": "km",
@@ -707,11 +708,11 @@
       },
       "height": {
         "label": "Height",
-        "description": "The maximum height in meters"
+        "description": "The maximum height in meters. The limits are not enforced by the server and are just there to make sure no unreasonable values are set. Any weirdly large values might lead to unusable routes when OpenStreetMap database isn't tagged enough for this."
       },
       "length": {
         "label": "Length",
-        "description": "The maximum length in meters"
+        "description": "The maximum length in meters. The limits are not enforced by the server and are just there to make sure no unreasonable values are set. Any weirdly large values might lead to unusable routes when OpenStreetMap database isn't tagged enough for this."
       },
       "weight": {
         "label": "Weight",
@@ -719,7 +720,7 @@
       },
       "width": {
         "label": "Width",
-        "description": "The maximum width in meters"
+        "description": "The maximum width in meters. The limits are not enforced by the server and are just there to make sure no unreasonable values are set. Any weirdly large values might lead to unusable routes when OpenStreetMap database isn't tagged enough for this."
       },
       "hazmat": {
         "label": "Hazardous goods",
