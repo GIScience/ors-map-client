@@ -17,10 +17,11 @@ describe('App embed rendering', () => {
         let mapView = vueInstance.$el.querySelector('#map-view')
         expect(mapView).toBeDefined()
         expect(mapView).not.toBeNull()
-
-        store.commit('embed', true)
-
+        
         appContent.__vue__.$nextTick(() => { 
+          // Switch the application to embed mode
+          store.commit('embed', true)
+
           setTimeout(() => {
             let simplePlaceSearch = appContent.querySelector('.simple-place-search')
             expect(simplePlaceSearch).toBeNull() // in embed mode, simple place search must not be visible
