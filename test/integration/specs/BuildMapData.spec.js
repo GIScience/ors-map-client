@@ -28,10 +28,10 @@ describe('Build map mapViewData', () => {
         expect(mapViewData).toBeInstanceOf(MapViewData)
         done()
       }).catch(result => {
-        console.log(result)
+        done.fail(result)
       })      
     }).catch(result => {
-      console.log(result)
+      done.fail(result)
     }) 
   })  
 

@@ -30,11 +30,13 @@ describe('Map render', () => {
       let i18n = I18nBuilder.build()
       var mapInstance = new MapConstructor({ propsData: props, i18n: i18n, store: store})
       const vm = mapInstance.$mount()  
-      expect(vm.$el.querySelector('#map-view')).toBeDefined()
-      done()  
-    }).catch(result => {
-      console.log(result)
+      
+      let mapView = vm.$el.querySelector('#map-view')
+      expect(mapView).toBeDefined()
+      expect(mapView).not.toBeNull()
       done()
+    }).catch(result => {
+      done.fail(result)
     }) 
   })
 })
