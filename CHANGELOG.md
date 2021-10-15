@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.1](https://github.com/GIScience/ors-map-client/compare/v1.21.0...v1.21.1) (2021-10-15)
+
+
+### Bug Fixes
+
+* **app-loader.js:** fix embed mode check ([48a6207](https://github.com/GIScience/ors-map-client/commit/48a6207ffc0fb3f01e7ae094b914ec2d03729f40))
+
+
+### Tests
+
+* **test.yml:** update github action test version ([fb7402f](https://github.com/GIScience/ors-map-client/commit/fb7402fd265bfd79815db56433396bdab9b7246c))
+* update test specs ([57f947f](https://github.com/GIScience/ors-map-client/commit/57f947f66526ff067e0dc8576de11c196fcaa7f2))
+
+
+### Docs
+
+* include docs about automated tests ([371fc5e](https://github.com/GIScience/ors-map-client/commit/371fc5e4b53ac8e55c4458c27d0f31a7b9b13a7f))
+
 ## [1.21.0](https://github.com/GIScience/ors-map-client/compare/v1.20.5...v1.21.0) (2021-10-14)
 
 
