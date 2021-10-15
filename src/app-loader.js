@@ -194,12 +194,12 @@ class AppLoader {
       store.commit('embed', isEmbed)
   
       let parts = location.href.split('/embed/')
-      if (isEmbed && Array.isArray(parts) && parts.length > 1 && parts[1] ) {
+      let mapSettings = store.getters.mapSettings
+      if (Object.keys(mapSettings).length > 0 && isEmbed && Array.isArray(parts) && parts.length > 1 && parts[1] ) {
         let locale = parts[1]
-        locale = this.setFittingLocale(locale)
-  
-        let settings = store.getters.mapSettings
-        this.saveSettings(settings, locale)
+        let appLoader = new AppLoader()
+        locale = appLoader.setFittingLocale(locale)
+        appLoader.saveSettings(mapSettings, locale)
       }
       resolve(isEmbed)
     })
@@ -216,10 +216,10 @@ class AppLoader {
     let context = this
     
     return new Promise((resolve) => {      
-      if (this.vueInstance) {
-        resolve(this.vueInstance)
+      if (context.vueInstance) {
+        resolve(context.vueInstance)
       } else {
-        this.loadAppData().then(() => {
+        context.loadAppData().then(() => {
           let i18n = I18nBuilder.build()
         
           let mapSettingsLocale = store.getters.mapSettings.locale
@@ -254,7 +254,7 @@ class AppLoader {
       if (context.debounceTimeoutId) {
         clearTimeout(context.debounceTimeoutId)
       }
-      this.debounceTimeoutId = setTimeout(function () {
+      context.debounceTimeoutId = setTimeout(function () {
         let apiDataPromise = context.fetchApiInitialData()
         let embedPromise = AppLoader.checkAndSetEmbedState()
         let fetchMainMenu = store.dispatch('fetchMainMenu')
