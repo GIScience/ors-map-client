@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">5.26% </span>
+        <span class="strong">31.58% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/19</span>
+        <span class='fraction'>6/19</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">9.09% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/11</span>
+        <span class='fraction'>1/11</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/3</span>
+        <span class='fraction'>1/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">5.56% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/18</span>
+        <span class='fraction'>6/18</span>
       </div>
     </div>
   </div>
@@ -79,28 +79,28 @@
 34</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -110,17 +110,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const clickOutside = {
-  bind: function (el, binding, vNode) <span class="fstat-no" title="function not covered" >{</span>
+  bind: function (el, binding, vNode) {
     // Provided expression must evaluate to a function.
-<span class="cstat-no" title="statement not covered" >    if (typeof binding.value !== 'function') {</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof binding.value !== 'function') {
       const compName = <span class="cstat-no" title="statement not covered" >vNode.context.name</span>
       let warn = <span class="cstat-no" title="statement not covered" >`[Vue-click-outside:] provided expression '${binding.expression}' is not a function, but has to be`</span>
 <span class="cstat-no" title="statement not covered" >      if (compName) { <span class="cstat-no" title="statement not covered" >warn += `Found in component '${compName}'` </span>}</span>
 <span class="cstat-no" title="statement not covered" >      console.warn(warn)</span>
     }
     // Define Handler and cache it on the element
-    const bubble = <span class="cstat-no" title="statement not covered" >binding.modifiers.bubble</span>
-    const handler = <span class="cstat-no" title="statement not covered" >(e) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+    const bubble = binding.modifiers.bubble
+    const handler = (e) =&gt; <span class="fstat-no" title="function not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >      if (el.id) {</span>
 <span class="cstat-no" title="statement not covered" >        el = document.getElementById(el.id)</span>
       }
@@ -130,10 +130,10 @@
 <span class="cstat-no" title="statement not covered" >        binding.value(e)</span>
       }
     }
-<span class="cstat-no" title="statement not covered" >    el.__vueClickOutside__ = handler</span>
+    el.__vueClickOutside__ = handler
 &nbsp;
     // add Event Listeners
-<span class="cstat-no" title="statement not covered" >    document.addEventListener('click', handler)</span>
+    document.addEventListener('click', handler)
   },
   unbind: function (el) <span class="fstat-no" title="function not covered" >{</span>
     // Remove Event Listeners
@@ -148,7 +148,7 @@ export default clickOutside
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 13:33:08 GMT+0200 (Central European Summer Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 16:52:22 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>

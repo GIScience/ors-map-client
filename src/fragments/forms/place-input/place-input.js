@@ -489,6 +489,8 @@ export default {
 
     /**
      * Search a place by name
+     * @emits autocompleted
+     * @emits showLoading [via eventBus]
      *
      */
     autocompleteByName () {
@@ -510,6 +512,7 @@ export default {
           } else if (places.length > 1) {
             Utils.hideMobileKeyboard()
           }
+          context.$emit('autocompleted')
         }).catch(response => {
           console.log(response)
           context.showError(context.$t('placeInput.unknownSearchPlaceError'))
@@ -537,6 +540,7 @@ export default {
         if (places.length > 1) {
           Utils.hideMobileKeyboard()
         }
+        context.$emit('autocompleted')
       }).catch(response => {
         console.log(response)
       }).finally(() => {

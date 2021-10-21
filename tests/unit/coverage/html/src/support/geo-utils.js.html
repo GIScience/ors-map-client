@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0.49% </span>
+        <span class="strong">7.32% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/205</span>
+        <span class='fraction'>15/205</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">1.5% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/133</span>
+        <span class='fraction'>2/133</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">9.09% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/22</span>
+        <span class='fraction'>2/22</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0.49% </span>
+        <span class="strong">7.32% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/205</span>
+        <span class='fraction'>15/205</span>
       </div>
     </div>
   </div>
@@ -652,7 +652,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1116,27 +1116,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">72×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1222,8 +1222,8 @@ const geoUtils = {
    * Build a leaflet latlng object
    * @returns {Object}
    */
-  buildLatLong: (lat, lng) =&gt; <span class="fstat-no" title="function not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >    return Leaflet.latLng(lat, lng)</span>
+  buildLatLong: (lat, lng) =&gt; {
+    return Leaflet.latLng(lat, lng)
   },
 &nbsp;
   /**
@@ -1687,27 +1687,27 @@ const geoUtils = {
    * @returns {Number}
    */
   calculateDistanceBetweenLocations(fromLatlng, toLatlng, unit = 'km') {
-    const toRadians = <span class="cstat-no" title="statement not covered" >function (deg) <span class="fstat-no" title="function not covered" >{</span></span>
-<span class="cstat-no" title="statement not covered" >      return deg * (Math.PI / 180)</span>
+    const toRadians = function (deg) {
+      return deg * (Math.PI / 180)
     }
 &nbsp;
-    const R = <span class="cstat-no" title="statement not covered" >6371 </span>// km
+    const R = 6371 // km
     // has a problem with the .toRad() method below
-    const x1 = <span class="cstat-no" title="statement not covered" >toLatlng.lat - fromLatlng.lat</span>
-    const dLat = <span class="cstat-no" title="statement not covered" >toRadians(x1)</span>
-    const x2 = <span class="cstat-no" title="statement not covered" >toLatlng.lng - fromLatlng.lng</span>
-    const dLon = <span class="cstat-no" title="statement not covered" >toRadians(x2)</span>
-    const a = <span class="cstat-no" title="statement not covered" >Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadians(fromLatlng.lat)) * Math.cos(toRadians(toLatlng.lat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)</span>
-    const c = <span class="cstat-no" title="statement not covered" >2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))</span>
-    const distance = <span class="cstat-no" title="statement not covered" >R * c</span>
+    const x1 = toLatlng.lat - fromLatlng.lat
+    const dLat = toRadians(x1)
+    const x2 = toLatlng.lng - fromLatlng.lng
+    const dLon = toRadians(x2)
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadians(fromLatlng.lat)) * Math.cos(toRadians(toLatlng.lat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    const distance = R * c
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (unit === 'mi') {</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (unit === 'mi') {
 <span class="cstat-no" title="statement not covered" >      return distance * 0.62137</span>
     }
-<span class="cstat-no" title="statement not covered" >    if (unit === 'm') {</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (unit === 'm') {
 <span class="cstat-no" title="statement not covered" >      return distance * 1000</span>
     }
-<span class="cstat-no" title="statement not covered" >    return distance</span>
+    return distance
   },
 &nbsp;
   /**
@@ -1762,7 +1762,7 @@ export default geoUtils
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 13:33:08 GMT+0200 (Central European Summer Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 16:52:22 GMT+0200 (Central European Summer Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>

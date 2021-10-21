@@ -14,7 +14,7 @@
     "test:unit": "cross-env BABEL_ENV=test karma start tests/unit/karma.conf.js",
     "test:unit-debug": "cross-env BABEL_ENV=test karma start tests/unit/karma.debug.conf.js",
     "test:e2e": "node tests/e2e/runner.js",
-    "test": "npm run test:integration && npm run test:e2e",
+    "test": "npm run test:integration && npm run test:unit",
     "test:integration": "cross-env BABEL_ENV=test karma start tests/integration/karma.conf.js",
     "test:integration-debug": "cross-env BABEL_ENV=test karma start tests/integration/karma.debug.conf.js"
   },

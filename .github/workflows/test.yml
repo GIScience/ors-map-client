@@ -16,4 +16,4 @@ jobs:
           ORSKEY: ${{ secrets.ORSKEY }}
         uses: amoncaldas/github-action-webapp-front-end-test@v1.1
         with:
-          target: 'integration'
+          target: 'test'
