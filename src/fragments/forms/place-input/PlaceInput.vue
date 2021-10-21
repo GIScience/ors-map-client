@@ -1,5 +1,5 @@
 <template>
-  <div v-click-outside="setFocus" :id="predictableId" >
+  <div v-click-outside="setFocus" :id="predictableId" class="place-input-component" >
     <v-layout row wrap >
       <v-flex v-bind="{[inputColumns]: true}">
         <v-text-field class="place-input"

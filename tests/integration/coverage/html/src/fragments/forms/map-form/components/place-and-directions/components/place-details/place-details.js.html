@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fragments/forms/map-form/components/place-and-directions/components/place-details/place-details.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../../../../index.html">all files</a> / <a href="index.html">src/fragments/forms/map-form/components/place-and-directions/components/place-details/</a> place-details.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/29</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Share from '@/fragments/forms/map-form/components/share/Share'
+import Print from '@/fragments/forms/map-form/components/print/Print'
+import resolver from '@/support/routes-resolver'
+import MapViewData from '@/models/map-view-data'
+import geoUtils from '@/support/geo-utils'
+import constants from '@/resources/constants'
+&nbsp;
+export default {
+  props: {
+    mapViewData: {
+      required: true,
+      type: MapViewData
+    }
+  },
+  data: () =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+    imageUrlFallBack: (resolver.homeUrl() + '/static/img/map-pin-600x400.jpg').replace('//', '/'),
+    worldImageryTileProviderBaseUrl: constants.worldImageryTileProviderBaseUrl,
+  }),
+  methods: {
+    /**
+     * Copy latitude.longitude to clipboard
+     *
+     */
+    copyLatlng () {
+      const latlng = <span class="cstat-no" title="statement not covered" >`${this.place.lat}, ${this.place.lng}`</span>
+<span class="cstat-no" title="statement not covered" >      if (this.copyToClipboard(latlng)) {</span>
+<span class="cstat-no" title="statement not covered" >        this.showSuccess(this.$t('placeDetails.latlngCopied'), { timeout: 2000 })</span>
+      }
+    },
+    /**
+     * Copy longitude, latitude to clipboard
+     *
+     */
+    copyLnglat () {
+      const lnglat = <span class="cstat-no" title="statement not covered" >`${this.place.lng}, ${this.place.lat}`</span>
+<span class="cstat-no" title="statement not covered" >      if (this.copyToClipboard(lnglat)) {</span>
+<span class="cstat-no" title="statement not covered" >        this.showSuccess(this.$t('placeDetails.lnglatCopied'), { timeout: 2000 })</span>
+      }
+    },
+    /**
+     * Copy the string to chipboard by creating a temporary textarea element
+     *
+     * @param {*} str
+     * @returns {Boolean}
+     */
+    copyToClipboard (str) {
+      const el = <span class="cstat-no" title="statement not covered" >document.createElement('textarea')</span>
+<span class="cstat-no" title="statement not covered" >      el.value = str</span>
+<span class="cstat-no" title="statement not covered" >      document.body.appendChild(el)</span>
+<span class="cstat-no" title="statement not covered" >      el.select()</span>
+      const result = <span class="cstat-no" title="statement not covered" >document.execCommand('copy')</span>
+<span class="cstat-no" title="statement not covered" >      document.body.removeChild(el)</span>
+<span class="cstat-no" title="statement not covered" >      return result</span>
+    }
+  },
+  computed: {
+    imagePath () {
+<span class="cstat-no" title="statement not covered" >      if (this.placeLayer) {</span>
+        const zoom = <span class="cstat-no" title="statement not covered" >geoUtils.zoomLevelByLayer(this.placeLayer)</span>
+        const tileData = <span class="cstat-no" title="statement not covered" >geoUtils.getTileData(this.place.lat, this.place.lng, zoom)</span>
+        const url = <span class="cstat-no" title="statement not covered" >`${this.worldImageryTileProviderBaseUrl}/${tileData.z}/${tileData.y}/${tileData.x}`</span>
+<span class="cstat-no" title="statement not covered" >        return url</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        return this.imageUrlFallBack</span>
+      }
+    },
+    place () {
+      const place = <span class="cstat-no" title="statement not covered" >this.mapViewData.places[0]</span>
+<span class="cstat-no" title="statement not covered" >      if (!place.properties.country) {</span>
+<span class="cstat-no" title="statement not covered" >        place.resolve().then(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >          if (!place.properties.layer) {</span>
+<span class="cstat-no" title="statement not covered" >            place.properties.layer = 'notAvailable'</span>
+          }
+        })
+      }
+<span class="cstat-no" title="statement not covered" >      return place</span>
+    },
+    placeLayer () {
+      const layer = <span class="cstat-no" title="statement not covered" >this.place.properties.layer</span>
+<span class="cstat-no" title="statement not covered" >      if (layer !== 'notAvailable') {</span>
+<span class="cstat-no" title="statement not covered" >        return layer</span>
+      }
+    }
+  },
+  components: {
+    Share,
+    Print
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 20 2021 17:35:35 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../../../../sorter.js"></script>
+</body>
+</html>

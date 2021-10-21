@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/resources/i18n/ors-map-filters.i18n.pt-br.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">src/resources/i18n/</a> ors-map-filters.i18n.pt-br.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/0</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+export default {
+  orsMapFilters: {
+    profiles: {
+      'cycling-regular': 'Ciclismo regular',
+      'cycling-road': 'Ciclismo de estrada',
+      'cycling-electric': 'E-bike',
+      'cycling-mountain': 'Mountainbike',
+      'cycling-safe': 'Ciclismo seguro',
+      'foot-walking': 'A pé',
+      'foot-hiking': 'Caminhada recreativa',
+      'driving-car': 'Carro',
+      'driving-hgv': 'Veículo pesado',
+      'wheelchair': 'Cadeira de rodas',
+      'hgv': 'Veículo pesado',
+      'bus': 'Ônibus',
+      'agricultural': 'Veículo agrícola',
+      'delivery': 'Caminhão de entrega',
+      'forestry': 'Caminhão florestal',
+      'goods': 'Caminhão de carga'
+    },
+    filters: {
+      preference: {
+        label: 'Preferências de rota',
+        description: 'O fator preferencial a ser considerado no cálculo das rotas',
+        enum: {
+          'fastest': 'Mais rápida',
+          'shortest': 'Mais curta',
+          'recommended': 'Recomendada'
+        }
+      },
+      range_type: {
+        label: 'Método de isócrono',
+        description: 'Método usado para calcular o isócrono',
+        enum: {
+          'time': 'Tempo',
+          'distance': 'Distância'
+        }
+      },
+      time_range: {
+        label: 'Faixa',
+        description: 'A faixa máxima dos isócronos a serem calculados'
+      },
+      distance_range: {
+        label: 'Faixa',
+        description: 'A faixa máxima dos isócronos a serem calculados'
+      },
+      time_interval: {
+        label: 'Intervalo',
+        description: 'O intervalo a ser usado no cáculo de isócronos'
+      },
+      distance_interval: {
+        label: 'Intervalo',
+        description: 'O intervalo a ser usado no cáculo de isócronos'
+      },
+      options: {
+        label: 'Opções'
+      },
+      profile_params: {
+        label: 'Parâmetros de perfil'
+      },
+      restrictions: {
+        label: 'Restrições'
+      },      
+      axleload: {
+        label: 'Carga do eixo',
+        description: 'A carga máxima por eixo em toneladas'
+      },
+      height: {
+        label: 'Altura',
+        description: 'A altura máxima em metros'
+      },
+      length: {
+        label: 'Comprimento',
+        description: 'O comprimento máximo em metros'
+      },
+      weight: {
+        label: 'Peso',
+        description: 'O peso máximo em toneladas'
+      },
+      width: {
+        label: 'Largura',
+        description: 'A largura máxima em metros. Os limites não são mandatórios no servidor e estão presentes no cliente somente para evitar que valores não razoáveis sejam definidos. Valores muito altos podem gerar a rotas inviáveis quando os dados necessários não estiverem no presentes no banco de dados do OpenStreetMap.'
+      },
+      hazmat: {
+        label: 'Produtos perigosos',
+        description: 'Transporte de mercadorias perigosas'
+      },
+      maximum_incline: {
+        label: 'Inclinação máxima',
+        description: 'Inclinação máxima em percentual'
+      },
+      maximum_sloped_kerb: {
+        label: 'Altura máxima do meio-fio',
+        description: 'Especifica a altura máxima do meio-fio em metros'
+      },
+      minimum_width: {
+        label: 'Largura mínima calçada',
+        description: 'Especifica a largura mínima da alçada em metros'
+      },
+      smoothness_type: {
+        label: 'Suavidade de rota',
+        description: 'Especifica a suavidade mínima da rota. Mais informações em https://wiki.openstreetmap.org/wiki/Key:smoothness'
+      },
+      surface_type: {
+        label: 'Tipo mínimo de superfície',
+        description: 'Especifica o tipo mínimo de superfície. Ordem de tipos: https://wiki.openstreetmap.org/wiki/Key:surface'
+      },
+      track_type: {
+        label: 'Nota mínima da rota',
+        description: 'Especifica uma nota mínima para a rota. Valores das notas: https://wiki.openstreetmap.org/wiki/Key:tracktype'
+      },
+      round_trip: {
+        label: 'Rota circular'
+      },
+      round_trip_length: {
+        label: 'Distância da rota circular',
+        description: 'A distância alvo para a rota circular (note que este é um valor desejado, mas os resultados podem ser diferentes).'
+      },
+      points: {
+        label: 'Pontos',
+        description: 'O número de pontos a serem utilizados na rota. Os valores maiores criam mais rotas circulares.'
+      },
+      seed: {
+        label: 'Semente aleatória',
+        description: 'Uma semente aleatória a ser utilizada para adicionar aleatoriedade à rota gerada (min:0, max: 90)'
+      },
+      avoid_polygons: {
+        label: 'Polígonos a evitar',
+        description: 'Polígonos a evitar'
+      },
+      avoid_features: {
+        label: 'Elementos a evitar',
+        description: 'Elementos a evitar',
+        enum: {
+          'highways': 'Auto-estradas',
+          'tollways': 'Pedágios',
+          'ferries': 'Ferries',
+          'hills': 'Colinas',
+          'tunnels': 'Túneis',
+          'fords': 'Passo de rio',
+          'steps': 'Escadaria',
+          'pavedroads': 'Rodovias pavimentadas',
+          'unpavedroads': 'Rodovias não pavimentadas'
+        }
+      },
+      avoid_borders: {
+        label: 'Fronteiras a evitar',
+        description: 'Fronteiras a evitar',
+        enum: {
+          'all': 'Todas',
+          'controlled': 'Controladas'
+        }
+      },
+      avoid_countries: {
+        label: 'Países a evitar',
+        description: 'Países a evitar'
+      },
+      alternative_routes: {
+        label: 'Rotas alternativas'
+      },
+      target_count: {
+        label: 'Número de rotas',
+        description: 'Número alvo de rotas alternativas a calcular. O serviço retorna até este número de rotas que preenchem as restrições do fator de ação e do fator de peso.'
+      },
+      share_factor: {
+        label: 'Fator de compartilhamento',
+        description: 'Fração máxima da rota que as alternativas podem compartilhar com a rota ideal. O valor padrão de 0,6 significa que as alternativas podem compartilhar até 60% dos segmentos da rota com a rota ótima.'
+      },
+      weight_factor: {
+        label: 'Fator de peso',
+        description: 'O fator máximo pelo qual o peso da rota pode divergir da rota ideal. O valor padrão de 1,4 significa que as alternativas podem ser até 1,4 vezes mais longas do que a rota ideal.'
+      },
+      maximum_speed: {
+        label: 'Velocidade máxima',
+        description: 'Uma velocidade máxima que deve ser aplicada',
+      },
+      weightings: {
+        label: 'Parâmetros adicionais'
+      },
+      green: {
+        label: 'Verde (somente na Alemanha)',
+        description: 'Prefira áreas verdes (disponível apenas para Alemanha)',
+      },
+      quiet: {
+        label: 'Silencioso (apenas Alemanha)',
+        description: 'Prefere áreas tranquilas (disponível apenas para Alemanha)',
+      }
+    }
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 20 2021 17:35:35 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,1580 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fragments/map-view/components/ors-l-polyline/ors-extended-polyline.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../index.html">all files</a> / <a href="index.html">src/fragments/map-view/components/ors-l-polyline/</a> ors-extended-polyline.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/191</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/123</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/190</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Leaflet from 'leaflet'
+import GeoUtils from '@/support/geo-utils'
+import orsDictionary from '@/resources/ors-dictionary'
+import lodash from 'lodash'
+&nbsp;
+// The import below will add some methods to Leaflet.GeometryUtil
+// Even if it is not been accessed within this class, it is being used!
+import 'leaflet-geometryutil'
+&nbsp;
+/**
+ * Add custom behaviors to the polyline, specially the drag
+ * to create an stop point.
+ * @emits followMarkerClicked - when the marker created over the polyline to show current cursor position is clicked
+ * @emits follow - when a point of the polyline is focused with the mouse
+ * @emits addstop - when the user drag the new polyline vertex into a location
+ */
+class OrsExtendedPolyline {
+  constructor (context, showPointInfo = false) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this.showPointInfo = showPointInfo</span>
+    const options = <span class="cstat-no" title="statement not covered" >{</span>
+      options: {
+        distance: 20,   //distance from pointer to the polyline
+        tolerance: 5,  //tolerance for snap effect to vertex
+        vertices: {
+          //first: true,  //first vertex is draggable
+          //middle: true, //middle vertices are draggable
+          //last: true,   //last vertex draggable
+          //insert: true, //define if the number of polyline vertices can change
+        },
+        icon: new Leaflet.DivIcon({
+          iconSize: new Leaflet.Point(8, 8),
+          className: 'leaflet-div-icon leaflet-editing-icon'
+        })
+      },
+      tempPolylineDraggingMarkerRef: null,
+      tempPolylineDraggingMarkerInfoRef: null,
+&nbsp;
+      initialize: this.initialize,
+      addHooks: this.addHooks,
+      removeHooks: this.removeHooks,
+&nbsp;
+      _showPointInfo: this.showPointInfo,
+      _processDrag: this.processDrag,
+      _getClosestPointAndSegment: this.getClosestPointAndSegment,
+      _mouseContextClick: this.mouseContextClick,
+      _mouseMove: this.mouseMove,
+      _getClosestIndex: this.getClosestIndex,
+      _getInjectAfterIndex: this.getInjectAfterIndex,
+      _isInvalidDrag: this.isInvalidDrag,
+      _markerDragStart: this.markerDragStart,
+      _markerDrag: this.markerDrag,
+      _markerDragEnd: this.markerDragEnd,
+      _buildInfoIcon: this.buildInfoIcon,
+      _createOrUpdateCustomMarkers: this.createOrUpdateCustomMarkers,
+      _polylineClicked: this.showCustomMarkers,
+      _updateCustomMarkers: this.updateCustomMarkers,
+      _createCustomMarkers: this.createCustomMarkers,
+&nbsp;
+      // The `this`context inside the methods above
+      // refers to the leaflet component context.
+      // so to have access to the external world
+      // we have to bind the context passed via
+      // constructor in order to be able to return
+      // it via method
+      _getOuterContext: this.getContext.bind(context)
+    }
+<span class="cstat-no" title="statement not covered" >    this.addPolylineCustomBehaviour(options)</span>
+  }
+&nbsp;
+  /**
+   * Get the Vue component context provided via constructor
+   * @returns {Object} Vue instance
+   */
+  getContext () <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  }
+&nbsp;
+  /**
+   * Extends the polyline by adding the editingDrag
+   */
+  addPolylineCustomBehaviour (options) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    Leaflet.EditDrag = Leaflet.EditDrag || {}</span>
+<span class="cstat-no" title="statement not covered" >    Leaflet.EditDrag.Polyline = Leaflet.Handler.extend(options)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    Leaflet.Polyline.addInitHook(function() <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      if (this.edit_with_drag) {</span>
+<span class="cstat-no" title="statement not covered" >        return</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (Leaflet.EditDrag.Polyline) {</span>
+<span class="cstat-no" title="statement not covered" >        this.editingDrag = new Leaflet.EditDrag.Polyline(this)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.options.edit_with_drag) {</span>
+<span class="cstat-no" title="statement not covered" >          this.editingDrag.enable()</span>
+        }
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.on('add', function () <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        if (this.editingDrag &amp;&amp; this.editingDrag.enabled()) {</span>
+<span class="cstat-no" title="statement not covered" >          this.editingDrag.addHooks()</span>
+        }
+      })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.on('remove', function () <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        if (this.editingDrag &amp;&amp; this.editingDrag.enabled()) {</span>
+<span class="cstat-no" title="statement not covered" >          this.editingDrag.removeHooks()</span>
+        }
+      })
+<span class="cstat-no" title="statement not covered" >      this.on('polylineClicked', function (event) <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        if (this.editingDrag &amp;&amp; this.editingDrag.enabled()) {</span>
+<span class="cstat-no" title="statement not covered" >          this.editingDrag._polylineClicked(event)</span>
+        }
+      })
+    })
+  }
+  /**
+   * Initialize the draggable polyline
+   * by setting references to objects and options
+   * @param {*} poly
+   */
+  initialize (poly) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this._poly = poly</span>
+<span class="cstat-no" title="statement not covered" >    this._marker = null</span>
+<span class="cstat-no" title="statement not covered" >    this._markerInfo = null</span>
+<span class="cstat-no" title="statement not covered" >    this._dragging = false</span>
+<span class="cstat-no" title="statement not covered" >    Leaflet.Util.setOptions(this, poly.options)</span>
+  }
+&nbsp;
+  /**
+   * Adds the mousemove listener
+   */
+  addHooks () <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    if (this._poly._map) {</span>
+<span class="cstat-no" title="statement not covered" >      this._map = this._poly._map</span>
+<span class="cstat-no" title="statement not covered" >      this._map.on('mousemove', this._mouseMove, this)</span>
+    }
+  }
+&nbsp;
+  /**
+   * Remove the mousemove listener
+   */
+  removeHooks () <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this._map.off('mousemove')</span>
+  }
+&nbsp;
+  /**
+  * return the closest point on the closest segment
+  */
+  getClosestPointAndSegment (latlng) <span class="fstat-no" title="function not covered" >{</span>
+    var distanceMin = <span class="cstat-no" title="statement not covered" >Infinity</span>
+    var segmentMin = <span class="cstat-no" title="statement not covered" >null</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    for (var i = 0, len = (this._poly._latlngs.length - 1); i &lt; len; i++) {</span>
+      var segment = <span class="cstat-no" title="statement not covered" >[ this._poly._latlngs[i], this._poly._latlngs[i + 1] ]</span>
+      var distance = <span class="cstat-no" title="statement not covered" >Leaflet.GeometryUtil.distanceSegment(this._map, latlng, segment[0], segment[1])</span>
+<span class="cstat-no" title="statement not covered" >      if (distance &lt; distanceMin) {</span>
+<span class="cstat-no" title="statement not covered" >        distanceMin = distance</span>
+<span class="cstat-no" title="statement not covered" >        segmentMin = segment</span>
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return { point: Leaflet.GeometryUtil.closestOnSegment(this._map, latlng, segmentMin[0], segmentMin[1]) , segment: segmentMin }</span>
+  }
+&nbsp;
+  /**
+   * When a click is done ends the dragging event
+   * @param {Event} event
+   */
+  mouseContextClick (event) <span class="fstat-no" title="function not covered" >{</span>
+    var closest = <span class="cstat-no" title="statement not covered" >Leaflet.GeometryUtil.closest(this._map, this._poly, event.latlng, true)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.options.vertices.destroy !== false &amp;&amp; closest.distance &lt; this.options.tolerance) {</span>
+      var index = <span class="cstat-no" title="statement not covered" >this._poly._latlngs.indexOf(closest)</span>
+      var maxIndex = (<span class="cstat-no" title="statement not covered" >this._poly._latlngs.length - 1)</span>
+<span class="cstat-no" title="statement not covered" >      if ((this.options.vertices.first === false &amp;&amp; index == 0) || (this.options.vertices.last === false &amp;&amp; index == maxIndex)) {</span>
+<span class="cstat-no" title="statement not covered" >        return</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (index &gt; -1) {</span>
+<span class="cstat-no" title="statement not covered" >        this._poly.spliceLatLngs(index, 1)</span>
+<span class="cstat-no" title="statement not covered" >        this._map.removeLayer(this._marker)</span>
+<span class="cstat-no" title="statement not covered" >        this._map.removeLayer(this._markerInfo)</span>
+<span class="cstat-no" title="statement not covered" >        this._marker = null</span>
+<span class="cstat-no" title="statement not covered" >        this._markerInfo = null</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    this._poly.fireEvent('rightClicked', event)</span>
+  }
+  /**
+   * Handle the mouse move over the map.
+   * @param {*} event
+   */
+  mouseMove (event) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    if (this.options.edit_with_drag) {</span>
+<span class="cstat-no" title="statement not covered" >      this._createOrUpdateCustomMarkers(event)</span>
+    }
+  }
+&nbsp;
+  /**
+   * Show custom markers that appears over the polyline
+   * @param {*} event
+   */
+  showCustomMarkers (event) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    if (this.options.edit_with_drag) {</span>
+      const originalEvent = <span class="cstat-no" title="statement not covered" >event.originalEvent || event</span>
+<span class="cstat-no" title="statement not covered" >      try {</span>
+<span class="cstat-no" title="statement not covered" >        originalEvent.stopPropagation()</span>
+<span class="cstat-no" title="statement not covered" >        originalEvent.preventDefault()</span>
+      } catch (error) {
+<span class="cstat-no" title="statement not covered" >        console.log(error.message)</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this._createOrUpdateCustomMarkers(event)</span>
+    }
+  }
+&nbsp;
+  /**
+   * Create or update the custom markers
+   * when the mouse move over the map.
+   * If the mouse is over the polyline
+   * creates a marker that follows the polyline
+   * and can be used to create the drag effect
+   * @param {*} e
+   */
+  createOrUpdateCustomMarkers (e) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    if (this._dragging) <span class="cstat-no" title="statement not covered" >return</span></span>
+&nbsp;
+    var closest = <span class="cstat-no" title="statement not covered" >Leaflet.GeometryUtil.closestLayerSnap(this._map, [this._poly], e.latlng, this.options.distance, false)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this._marker &amp;&amp; closest) {</span>
+<span class="cstat-no" title="statement not covered" >      this._updateCustomMarkers(closest)</span>
+      var latlng = <span class="cstat-no" title="statement not covered" >this._marker.getLatLng()</span>
+<span class="cstat-no" title="statement not covered" >      this._poly.fireEvent('follow', latlng)</span>
+&nbsp;
+    } else <span class="cstat-no" title="statement not covered" >if (!this._marker &amp;&amp; closest) {</span>
+<span class="cstat-no" title="statement not covered" >      this._createCustomMarkers(closest)</span>
+<span class="cstat-no" title="statement not covered" >      latlng = this._marker.getLatLng()</span>
+<span class="cstat-no" title="statement not covered" >      this._poly.fireEvent('follow', latlng)</span>
+&nbsp;
+    } else <span class="cstat-no" title="statement not covered" >if (this._marker) {</span>
+<span class="cstat-no" title="statement not covered" >      if (this._marker) {</span>
+<span class="cstat-no" title="statement not covered" >        this._map.removeLayer(this._marker)</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (this._markerInfo) {</span>
+<span class="cstat-no" title="statement not covered" >        this._map.removeLayer(this._markerInfo)</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this._marker = null</span>
+<span class="cstat-no" title="statement not covered" >      this._markerInfo = null</span>
+    }
+  }
+&nbsp;
+  /**
+   * Update custom markers when the mouse moves over the polyline
+   * @param {*} closest
+   */
+  updateCustomMarkers (closest) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this.tempPolylineDraggingMarkerRef = this._marker.addTo(this._map)</span>
+<span class="cstat-no" title="statement not covered" >    Leaflet.extend(this._marker._latlng, closest.latlng)</span>
+<span class="cstat-no" title="statement not covered" >    this._marker.options.draggable = true</span>
+<span class="cstat-no" title="statement not covered" >    this._marker.update()</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this._markerInfo) {</span>
+<span class="cstat-no" title="statement not covered" >      this.tempPolylineDraggingMarkerInfoRef = this._markerInfo.addTo(this._map)</span>
+<span class="cstat-no" title="statement not covered" >      Leaflet.extend(this._markerInfo._latlng, closest.latlng)</span>
+<span class="cstat-no" title="statement not covered" >      this._markerInfo.options.draggable = false</span>
+      const closestIndex = <span class="cstat-no" title="statement not covered" >this._getClosestIndex()</span>
+<span class="cstat-no" title="statement not covered" >      this._markerInfo.setIcon(this._buildInfoIcon(closestIndex))</span>
+<span class="cstat-no" title="statement not covered" >      this._markerInfo.update()</span>
+    }
+  }
+  /**
+   * Create custom markers when the mouse is over the polyline
+   * @param {*} closest
+   */
+  createCustomMarkers (closest) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this.closest = closest</span>
+<span class="cstat-no" title="statement not covered" >    this._marker = Leaflet.marker(closest.latlng, { draggable: true, icon: this.options.icon }).addTo(this._map)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._marker.on('dragstart', this._markerDragStart, this)</span>
+<span class="cstat-no" title="statement not covered" >    this._marker.on('drag', this._markerDrag, this)</span>
+<span class="cstat-no" title="statement not covered" >    this._marker.on('dragend', this._markerDragEnd, this)</span>
+<span class="cstat-no" title="statement not covered" >    this._marker.on('contextmenu', this._mouseContextClick, this)</span>
+<span class="cstat-no" title="statement not covered" >    this._marker.on('click', () =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      this._poly.fireEvent('followMarkerClicked')</span>
+    })
+&nbsp;
+    let closestIndex = <span class="cstat-no" title="statement not covered" >this._getClosestIndex()</span>
+&nbsp;
+    // The hover polyline route info pop up is disabled for now
+<span class="cstat-no" title="statement not covered" >    if (this._showPointInfo) {</span>
+      const infoIcon = <span class="cstat-no" title="statement not covered" >this._buildInfoIcon(closestIndex)</span>
+<span class="cstat-no" title="statement not covered" >      if (infoIcon) {</span>
+<span class="cstat-no" title="statement not covered" >        this._markerInfo = Leaflet.marker(closest.latlng, { clickable: false, draggable: false, icon: infoIcon }).addTo(this._map)</span>
+      }
+    }
+  }
+&nbsp;
+  /**
+   * Build route info icon content
+   * @returns {Object} Leaflet.divIcon
+   */
+  buildInfoIcon (coordinatePolylineIndex) <span class="fstat-no" title="function not covered" >{</span>
+    const context = <span class="cstat-no" title="statement not covered" >this._getOuterContext()</span>
+    const coordinates = <span class="cstat-no" title="statement not covered" >lodash.get(context.route, 'geometry.coordinates')</span>
+<span class="cstat-no" title="statement not covered" >    if (coordinates &amp;&amp; coordinatePolylineIndex !== null) {</span>
+      const route = <span class="cstat-no" title="statement not covered" >context.route</span>
+      const altitude = <span class="cstat-no" title="statement not covered" >coordinates[coordinatePolylineIndex][2].toFixed(2)</span>
+&nbsp;
+      // calculate the distance of the point
+      const totalDistance = <span class="cstat-no" title="statement not covered" >route.summary.distance.toFixed(1)</span>
+      const currentStep = (<span class="cstat-no" title="statement not covered" >route.geometry.coordinates.length / (coordinatePolylineIndex + 1))</span>
+      const currentDistance = <span class="cstat-no" title="statement not covered" >(totalDistance / currentStep).toFixed(1)</span>
+      const globalTranslations = <span class="cstat-no" title="statement not covered" >context.$t('global')</span>
+      const orsPolylineTranslations = <span class="cstat-no" title="statement not covered" >context.$t('orsLPolyline')</span>
+      const orsDictionaryTranslations = <span class="cstat-no" title="statement not covered" >context.$t('orsDictionary')</span>
+      var surfaceType = <span class="cstat-no" title="statement not covered" >null</span>
+&nbsp;
+      // Get the surface type for the given point
+<span class="cstat-no" title="statement not covered" >      if (route.properties.extras.surface) {</span>
+<span class="cstat-no" title="statement not covered" >        for (let key in route.properties.extras.surface.values) {</span>
+          let value = <span class="cstat-no" title="statement not covered" >route.properties.extras.surface.values[key]</span>
+<span class="cstat-no" title="statement not covered" >          if (coordinatePolylineIndex &gt;= value[0] &amp;&amp; coordinatePolylineIndex &lt;= value[1]) {</span>
+            let surfaceTypeKey = <span class="cstat-no" title="statement not covered" >orsDictionary.surface[value[2]]</span>
+<span class="cstat-no" title="statement not covered" >            surfaceType = orsDictionaryTranslations[surfaceTypeKey]</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+          }
+        }
+<span class="cstat-no" title="statement not covered" >        if (!surfaceType) {</span>
+<span class="cstat-no" title="statement not covered" >          surfaceType = context.$t('orsLPolyline.unknownSurfaceType')</span>
+        }
+      }
+&nbsp;
+      const infoIcon = <span class="cstat-no" title="statement not covered" >Leaflet.divIcon({</span>
+        className: 'ors-l-polyline-custom-div-icon',
+        html:
+        `&lt;div class='ors-l-polyline-info-wrapper'&gt;
+          &lt;div class='ors-l-polyline-vertical-bar'&gt;&lt;/div&gt;
+          &lt;div class='ors-l-polyline-content-block'&gt;
+            &lt;div class='ors-l-polyline-top-block-info'&gt;
+              &lt;b&gt;${globalTranslations.distance}&lt;/b&gt;: ${currentDistance} / ${totalDistance} ${route.summary.unit}&lt;br/&gt;
+              &lt;b&gt;${globalTranslations.elevation}&lt;/b&gt;: ${altitude} ${globalTranslations.units.meters}&lt;br/&gt;
+              &lt;b&gt;${orsPolylineTranslations.surface}&lt;/b&gt;: ${surfaceType}
+            &lt;/div&gt;
+            &lt;div class='ors-l-polyline-bottom-block-info'&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;`,
+        iconSize: [30, 42],
+        iconAnchor: [15, 42]
+      })
+<span class="cstat-no" title="statement not covered" >      return infoIcon</span>
+    }
+  }
+&nbsp;
+  /**
+   * Check whether the drag is valid
+   * @param {*} index
+   * @returns {Boolean}
+   */
+  isInvalidDrag (index) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    if (!index) {</span>
+<span class="cstat-no" title="statement not covered" >      return true</span>
+    }
+    var maxIndex = (<span class="cstat-no" title="statement not covered" >this._poly._latlngs.length - 1)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if ((this.options.vertices.first === false &amp;&amp; index == 0) ||</span>
+        (this.options.vertices.last === false &amp;&amp; index == maxIndex) ||
+        (this.options.vertices.middle === false &amp;&amp; (index &gt; 0 &amp;&amp; index &lt; maxIndex))) {
+<span class="cstat-no" title="statement not covered" >      return true</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if ((this.options.vertices.middle === false || this.options.vertices.insert === false) &amp;&amp; index === -1) {</span>
+<span class="cstat-no" title="statement not covered" >      return true</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return false</span>
+  }
+&nbsp;
+  /**
+   * When the marker drag starts
+   * set the closest property and
+   * set the flag _dragging as true
+   * and process the drag
+   * @param {*} event
+   */
+  markerDragStart (event) <span class="fstat-no" title="function not covered" >{</span>
+    var latlng = <span class="cstat-no" title="statement not covered" >event.target.getLatLng()</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.closest = Leaflet.GeometryUtil.closest(this._map, this._poly, latlng, true)</span>
+<span class="cstat-no" title="statement not covered" >    this.startingDragPoint = latlng</span>
+<span class="cstat-no" title="statement not covered" >    this._dragging = true</span>
+&nbsp;
+    // Check the tolerance
+<span class="cstat-no" title="statement not covered" >    if (this.closest.distance &lt; this.options.tolerance) {</span>
+<span class="cstat-no" title="statement not covered" >      this._processDrag()</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      this.closest = this._getClosestPointAndSegment(latlng)</span>
+<span class="cstat-no" title="statement not covered" >      this._processDrag()</span>
+    }
+  }
+&nbsp;
+  /**
+   * Get the closest polyline point index
+   * @returns {Integer} closestIndex
+   */
+  getClosestIndex () <span class="fstat-no" title="function not covered" >{</span>
+    var closestIndex = <span class="cstat-no" title="statement not covered" >null</span>
+    var minDistance = <span class="cstat-no" title="statement not covered" >null</span>
+<span class="cstat-no" title="statement not covered" >    if (this.closest) {</span>
+<span class="cstat-no" title="statement not covered" >      for (let index = 0; index &lt; this._poly._latlngs.length; index++) {</span>
+        let latlng = <span class="cstat-no" title="statement not covered" >this._poly._latlngs[index]</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (latlng) {</span>
+          let closestLatLng = <span class="cstat-no" title="statement not covered" >this.closest.point || this.closest</span>
+<span class="cstat-no" title="statement not covered" >          closestLatLng = closestLatLng.latlng || closestLatLng</span>
+&nbsp;
+          let currentDistance = <span class="cstat-no" title="statement not covered" >GeoUtils.calculateDistanceBetweenLocations(latlng, closestLatLng, 'm')</span>
+<span class="cstat-no" title="statement not covered" >          if (currentDistance === 0) {</span>
+<span class="cstat-no" title="statement not covered" >            closestIndex = index</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+          } else {
+<span class="cstat-no" title="statement not covered" >            if (minDistance === null || currentDistance &lt; minDistance) {</span>
+<span class="cstat-no" title="statement not covered" >              minDistance = currentDistance</span>
+<span class="cstat-no" title="statement not covered" >              closestIndex = index</span>
+            }
+          }
+        }
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return closestIndex</span>
+  }
+&nbsp;
+  /**
+   * Get the index where the new stop must be added after
+   * @returns {Integer} injectIndex
+   */
+  getInjectAfterIndex () <span class="fstat-no" title="function not covered" >{</span>
+    var injectIndex = <span class="cstat-no" title="statement not covered" >null</span>
+    var minDistance = <span class="cstat-no" title="statement not covered" >null</span>
+<span class="cstat-no" title="statement not covered" >    for (let index = 0; index &lt; this._poly._latlngs.length; index++) {</span>
+      let latlng = <span class="cstat-no" title="statement not covered" >this._poly._latlngs[index]</span>
+<span class="cstat-no" title="statement not covered" >      if (latlng) {</span>
+        let currentDistance = <span class="cstat-no" title="statement not covered" >GeoUtils.calculateDistanceBetweenLocations(latlng, this.startingDragPoint, 'm')</span>
+<span class="cstat-no" title="statement not covered" >        if (currentDistance === 0) {</span>
+<span class="cstat-no" title="statement not covered" >          injectIndex = index</span>
+<span class="cstat-no" title="statement not covered" >          break</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          if (minDistance === null || currentDistance &lt; minDistance) {</span>
+<span class="cstat-no" title="statement not covered" >            minDistance = currentDistance</span>
+<span class="cstat-no" title="statement not covered" >            injectIndex = index</span>
+          }
+        }
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return injectIndex</span>
+  }
+&nbsp;
+  /**
+   * Process the polyline drag by adding a temporary
+   * vertex to represent user drag action
+   * @param {*} event
+   */
+  processDrag () <span class="fstat-no" title="function not covered" >{</span>
+    var closestIndex = <span class="cstat-no" title="statement not covered" >this._getClosestIndex()</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this._isInvalidDrag(closestIndex)) {</span>
+<span class="cstat-no" title="statement not covered" >      this.closest = null</span>
+<span class="cstat-no" title="statement not covered" >      this._marker.options.draggable = false</span>
+<span class="cstat-no" title="statement not covered" >      this._dragging = false</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    } else {
+      //add a new vertex
+<span class="cstat-no" title="statement not covered" >      this._poly._latlngs.splice(closestIndex, 0, this.closest)</span>
+    }
+  }
+&nbsp;
+  /**
+   * Set the closest lat and lng and redraw the polyline
+   * @param {Object} event
+   */
+  markerDrag (event) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    if (this.closest) {</span>
+<span class="cstat-no" title="statement not covered" >      this.closest.lat = event.target.getLatLng().lat</span>
+<span class="cstat-no" title="statement not covered" >      this.closest.lng = event.target.getLatLng().lng</span>
+<span class="cstat-no" title="statement not covered" >      this._poly.redraw()</span>
+    }
+  }
+&nbsp;
+  /**
+   * When the drag event ends, fire the addStop event
+   * set the flat _dragging boolean as false and remove the
+   * temp marker that follows the cursor over the polyline
+   * @param {*} event
+   */
+  markerDragEnd (event) <span class="fstat-no" title="function not covered" >{</span>
+    var draggedFromIndex = <span class="cstat-no" title="statement not covered" >this._getInjectAfterIndex()</span>
+    const data = <span class="cstat-no" title="statement not covered" >{event, closest: this.closest, draggedFromIndex}</span>
+<span class="cstat-no" title="statement not covered" >    this._poly.fireEvent('addstop', data)</span>
+<span class="cstat-no" title="statement not covered" >    this._dragging = false</span>
+<span class="cstat-no" title="statement not covered" >    this._map.removeLayer(this.tempPolylineDraggingMarkerRef)</span>
+<span class="cstat-no" title="statement not covered" >    if (this.tempPolylineDraggingMarkerInfoRef) {</span>
+<span class="cstat-no" title="statement not covered" >      this._map.removeLayer(this.tempPolylineDraggingMarkerInfoRef)</span>
+    }
+<span class="cstat-no" title="statement not covered" >    this.startingDragPoint = null</span>
+  }
+}
+&nbsp;
+export default OrsExtendedPolyline
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 20 2021 17:35:35 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

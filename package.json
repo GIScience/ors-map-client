@@ -1,22 +1,22 @@
 {
   "name": "ors-maps-client",
   "version": "1.21.2",
-  "repository": "https://github.com/GIScience/ors-map-client",
-  "license": "MIT",
+  "private": false,
   "description": "Openrouteservice maps client",
   "author": "amon@openrouteservice.org",
-  "private": false,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
-    "integration": "cross-env BABEL_ENV=test karma start test/integration/karma.conf.js",
-    "integration-debug": "cross-env BABEL_ENV=test karma start test/integration/karma.debug.conf.js",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run integration && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/integration/specs test/e2e/specs",
     "build": "node build/build.js",
+    "lint": "eslint --ext .js,.vue src tests/integration/specs tests/e2e/specs",
     "commit": "git-cz",
-    "release": "standard-version"
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "release": "standard-version",
+    "start": "npm run dev",
+    "test:unit": "cross-env BABEL_ENV=test karma start tests/unit/karma.conf.js",
+    "test:unit-debug": "cross-env BABEL_ENV=test karma start tests/unit/karma.debug.conf.js",
+    "test:e2e": "node tests/e2e/runner.js",
+    "test": "npm run test:integration && npm run test:e2e",
+    "test:integration": "cross-env BABEL_ENV=test karma start tests/integration/karma.conf.js",
+    "test:integration-debug": "cross-env BABEL_ENV=test karma start tests/integration/karma.debug.conf.js"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.11.3",
@@ -64,15 +64,19 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
-    "@babel/core": "^7.15.0",
+    "@babel/core": "^7.15.8",
     "@babel/node": "^7.14.9",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
     "@babel/plugin-transform-runtime": "^7.11.0",
-    "@babel/preset-env": "^7.11.0",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.15.8",
     "@types/leaflet": "^1.5.17",
     "@vue/babel-plugin-transform-vue-jsx": "^1.2.1",
+    "@vue/test-utils": "^1.2.2",
     "autoprefixer": "^7.1.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^27.3.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-istanbul": "^4.1.1",
@@ -153,10 +157,6 @@
     "webpack-karma-jasmine": "^4.0.0",
     "webpack-merge": "^4.1.0"
   },
-  "engines": {
-    "node": ">= 12.0.0",
-    "npm": ">= 6.0.0"
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
@@ -166,5 +166,11 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "engines": {
+    "node": ">= 12.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/GIScience/ors-map-client"
 }

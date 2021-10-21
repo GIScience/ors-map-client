@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/resources/i18n/ors-map-filters.i18n.hu-hu.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">src/resources/i18n/</a> ors-map-filters.i18n.hu-hu.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/0</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+export default {
+  orsMapFilters: {
+    'profiles': {
+      'cycling-regular': 'Kerékpár',
+      'cycling-road': 'Országúti kerékpár',
+      'cycling-electric': 'E-kerékpár',
+      'cycling-mountain': 'Hegyi kerékpár',
+      'cycling-safe': 'Biztonságos kerékpározás',
+      'foot-walking': 'Séta',
+      'foot-hiking': 'Túrázás',
+      'driving-car': 'Személyautó',
+      'driving-hgv': 'Nehéz jármű',
+      'wheelchair': 'Kerekesszék',
+      'hgv': 'Nehéz tgk.',
+      'bus': 'Busz',
+      'agricultural': 'Mezőgazdasági jármű',
+      'delivery': 'Kisteherautó',
+      'forestry': 'Erdészeti teherautó',
+      'goods': 'Teherautó'
+    },
+    'filters': {
+      'preference': {
+        'label': 'Útvonaltervezési preferencia',
+        'description': 'Az útvonal tervezésénél előnyben részesített tényező',
+        'enum': {
+          'fastest': 'Leggyorsabb',
+          'shortest': 'Legrövidebb',
+          'recommended': 'Ajánlott'
+        }
+      },
+      'range_type': {
+        'label': 'Izokróna típusa',
+        'description': 'Az izokron vonalak kiszámításának módja',
+        'enum': {
+          'time': 'Idő',
+          'distance': 'Távolság'
+        }
+      },
+      'time_range': {
+        'label': 'Hatótávolság',
+        'description': 'A legtávolabbi izokron vonal távolsága'
+      },
+      'distance_range': {
+        'label': 'Hatótávolság',
+        'description': 'A legtávolabbi izokron vonal távolsága'
+      },
+      'time_interval': {
+        'label': 'Intervallum',
+        'description': 'Az izokron vonalak közötti idő- vagy térköz'
+      },
+      'distance_interval': {
+        'label': 'Intervallum',
+        'description': 'Az izokron vonalak közötti idő- vagy térköz'
+      },
+      'options': {
+        'label': 'Útvonaltervezési beállítások'
+      },
+      'profile_params': {
+        'label': 'Profil paraméterei'
+      },
+      'restrictions': {
+        'label': 'Korlátozások'
+      },
+      'axleload': {
+        'label': 'Tengelyterhelés',
+        'description': 'Az engedélyezett legnagyobb tengelyterhelés (tonna)'
+      },
+      'height': {
+        'label': 'Magasság',
+        'description': 'Az engedélyezett legnagyobb magasság (méter). A korlátozások nem kötelezőek a szerveren, és csak az ügyfélben vannak jelen, hogy megakadályozzák az ésszerűtlen értékek beállítását. A túl magas értékek megvalósíthatatlan útvonalakhoz vezethetnek, ha a szükséges adatok jelenleg nincsenek jelen az OpenStreetMap adatbázisban.'
+      },
+      'length': {
+        'label': 'Hosszúság',
+        'description': 'Az engedélyezett legnagyobb hosszúság (méter). A korlátozások nem kötelezőek a szerveren, és csak az ügyfélben vannak jelen, hogy megakadályozzák az ésszerűtlen értékek beállítását. A túl magas értékek megvalósíthatatlan útvonalakhoz vezethetnek, ha a szükséges adatok jelenleg nincsenek jelen az OpenStreetMap adatbázisban.'
+      },
+      'weight': {
+        'label': 'Súly',
+        'description': 'Az engedélyezett legnagyobb tömeg (tonna)'
+      },
+      'width': {
+        'label': 'Szélesség',
+        'description': 'Az engedélyezett legnagyobb szélesség (méter). A korlátozások nem kötelezőek a szerveren, és csak az ügyfélben vannak jelen, hogy megakadályozzák az ésszerűtlen értékek beállítását. A túl magas értékek megvalósíthatatlan útvonalakhoz vezethetnek, ha a szükséges adatok jelenleg nincsenek jelen az OpenStreetMap adatbázisban.'
+      },
+      'hazmat': {
+        'label': 'Veszélyes áru',
+        'description': 'Veszélyes áru szállítása'
+      },
+      'maximum_incline': {
+        'label': 'Lejtés',
+        'description': 'A legnagyobb lejtésszög (százalék)'
+      },
+      'maximum_sloped_kerb': {
+        'label': 'Járdaszegély-magasság',
+        'description': 'A süllyesztett járdaszegélyek legnagyobb magassága (méter)'
+      },
+      'minimum_width': {
+        'label': 'Gyalogút szélességes',
+        'description': 'A gyalogút legkisebb szélessége (méter)'
+      },
+      'smoothness_type': {
+        'label': 'Út simasága',
+        'description': 'Az útvonal minimális simasága. További információ: https://wiki.openstreetmap.org/wiki/Key:smoothness'
+      },
+      'surface_type': {
+        'label': 'Legrosszabb felszín',
+        'description': 'Az útvonalon előforduló legkevésbé jó útfelszín. Sorrend: https://wiki.openstreetmap.org/wiki/Key:surface'
+      },
+      'track_type': {
+        'label': 'Legrosszabb úttípus',
+        'description': 'Mezőgazdasági/erdészeti utak legrosszabb típusa. Értékek: https://wiki.openstreetmap.org/wiki/Key:tracktype'
+      },
+      'round_trip': {
+        'label': 'Körutazás'
+      },
+      'round_trip_length': {
+        'label': 'Körutazás hossza',
+        'description': 'Az útvonal kívánt hossza (ez csupán egy előnyben részesített érték, az eredmény azonban ettől eltérhet).'
+      },
+      'points': {
+        'label': 'Pontok',
+        'description': 'Az útvonal kitűzéséhez használt pontok száma. Minél több a pont, annál jobban hasonlít az út egy körre.'
+      },
+      'seed': {
+        'label': 'Véletlenszerűségi tényező',
+        'description': 'Véletlenszerűségi tényező (random seed) a létrehozott útvonal véletlenszerűségének meghatásozásához (érték: 0–90)'
+      },
+      'avoid_polygons': {
+        'label': 'Elkerülendő sokszögek',
+        'description': 'Elkerülendő sokszögek'
+      },
+      'avoid_features': {
+        'label': 'Elkerülendő objektumok',
+        'description': 'Elkerülendő objektumok',
+        'enum': {
+          'highways': 'Autópályák',
+          'tollways': 'Fizetős utak',
+          'ferries': 'Kompok',
+          'hills': 'Hegyek',
+          'tunnels': 'Alagutak',
+          'fords': 'Gázlók',
+          'steps': 'Lépcsők',
+          'pavedroads': 'Burkolt utak',
+          'unpavedroads': 'Burkolatlan utak'
+        }
+      },
+      'avoid_borders': {
+        'label': 'Elkerülendő határok',
+        'description': 'Elkerülendő országhatárok',
+        'enum': {
+          'all': 'Összes',
+          'controlled': 'Ellenőrzöttek'
+        }
+      },
+      'avoid_countries': {
+        'label': 'Elkerülendő országok',
+        'description': 'Elkerülendő országok'
+      },
+      'alternative_routes': {
+        'label': 'Alternatív útvonalak'
+      },
+      'target_count': {
+        'label': 'Útvonalak száma',
+        'description': 'A megtervezendő alternatív útvonalak száma. A szolgáltatás legfeljebb ennyi útvonalat ad meg, amelyek megfelelnek az egyezőségi és a súlyozási tényező korlátozásainak.'
+      },
+      'share_factor': {
+        'label': 'Egyezőségi tényező',
+        'description': 'Az útvonalnak az a maximális része, amennyi az alternatívák és az optimális útvonal esetében közös lehet. Az alapértelmezett 0,6-os érték azt jelenti, hogy az alternatív útvonalak akár 60%-a is azonos lehet az optimális útvonallal.'
+      },
+      'weight_factor': {
+        'label': 'Súlyozási tényező',
+        'description': 'Az a maximális tényező, amellyel az útvonal súlya eltérhet az optimális úttól. Az alapértelmezett 1,4-es érték azt jelenti, hogy az alternatívák legfeljebb 1,4-szer lehetnek hosszabbak (költségesebbek), mint az optimális útvonal.'
+      },
+      'maximum_speed': {
+        'label': 'Legnagyobb sebesség',
+        'description': 'Az útvonaltervezés során alkalmazott legnagyobb sebesség'
+      },
+      'weightings': {
+        'label': 'További paraméterek'
+      },
+      'green': {
+        'label': 'Zöld (csak Németországban)',
+        'description': 'A zöldterületeket részesítse előnyben (csak Németországban érhető el)',
+      },
+      'quiet': {
+        'label': 'Csendes (csak Németországban)',
+        'description': 'A csendes területeket részesíti előnyben (csak Németországban érhető el)',
+      }
+    }
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 12:16:47 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

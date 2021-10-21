@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/support/route-utils.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/support/</a> route-utils.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.84% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/62</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.55% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>2/44</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">16.67% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.84% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/62</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Utils from '@/support/utils'
+import Place from '@/models/place'
+import lodash from 'lodash'
+import store from '@/store/store'
+import constants from '@/resources/constants'
+&nbsp;
+const RouteUtils = {
+&nbsp;
+  /**
+   * Get route places
+   * @param {Object} route
+   * @returns {Array} places
+   */
+  getRoutePlaces: (route) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+    const places = <span class="cstat-no" title="statement not covered" >[]</span>
+    const data = <span class="cstat-no" title="statement not covered" >RouteUtils.decodeDataParam(route.params.data)</span>
+    // Get the collection of coordinates from the decoded data param object
+    const coordinates = <span class="cstat-no" title="statement not covered" >data.coordinates ? data.coordinates.split(';') : []</span>
+&nbsp;
+    // Check if we have the same number of coordinates and places
+    var placeNameParameters = <span class="cstat-no" title="statement not covered" >lodash.pickBy(route.params, function (value, key) <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      return key.startsWith('placeName') &amp;&amp; value !== undefined</span>
+    })
+    // If the amount of place names and coordinates does not match, it is an invalid path
+<span class="cstat-no" title="statement not covered" >    if (Object.keys(placeNameParameters).length !== coordinates.length) {</span>
+<span class="cstat-no" title="statement not covered" >      return places</span>
+    }
+    // Build each place object and add then to the places array
+    let counter = <span class="cstat-no" title="statement not covered" >0</span>
+<span class="cstat-no" title="statement not covered" >    for (const key in placeNameParameters) {</span>
+      const lngLat = <span class="cstat-no" title="statement not covered" >coordinates[counter].split(',')</span>
+&nbsp;
+      // Add a new place
+      let placeName = <span class="cstat-no" title="statement not covered" >route.params[key].replace(',', ', ')</span>
+      // If a place has as placeName `null` it is a placeholder, so we remove it
+<span class="cstat-no" title="statement not covered" >      if (placeName === 'null') {</span>
+<span class="cstat-no" title="statement not covered" >        placeName = ''</span>
+      }
+<span class="cstat-no" title="statement not covered" >      places.push(new Place(lngLat[0], lngLat[1], placeName, { resolve: false }))</span>
+<span class="cstat-no" title="statement not covered" >      counter++</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return places</span>
+  },
+  /**
+   * Build the route params object out of appRouteDAta and options object
+   * @param {AppRouteData} appRouteData
+   * @param {Object} options
+   * @returns {Object} param
+   */
+  buildRouteParams: (appRouteData, options) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    appRouteData.options = appRouteData.options || {}</span>
+<span class="cstat-no" title="statement not covered" >    Object.assign(appRouteData.options, options)</span>
+    const params = <span class="cstat-no" title="statement not covered" >{}</span>
+    var coordinates = <span class="cstat-no" title="statement not covered" >[]</span>
+    var directPlaces = <span class="cstat-no" title="statement not covered" >[]</span>
+    var poiPlaces = <span class="cstat-no" title="statement not covered" >[]</span>
+&nbsp;
+    // For each place, create a param that starts with `placeName` and ends with an index, like `placeName1`, `placeName2`...
+<span class="cstat-no" title="statement not covered" >    appRouteData.places.forEach((p, index) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+      const placeKey = <span class="cstat-no" title="statement not covered" >'placeName' + (index + 1)</span>
+      // A place name defined as `null` works as a placeholder for directions/routing mode
+      let placeName = <span class="cstat-no" title="statement not covered" >p.placeName || 'null'</span>
+<span class="cstat-no" title="statement not covered" >      params[placeKey] = placeName.replace(/, /g, ',')</span>
+&nbsp;
+      // save the index of the places marked as `direct` point
+<span class="cstat-no" title="statement not covered" >      coordinates.push(`${p.lng},${p.lat}`)</span>
+      let isLast = <span class="cstat-no" title="statement not covered" >index === (appRouteData.places.length - 1)</span>
+<span class="cstat-no" title="statement not covered" >      if (p.direct === true || (store.getters.mapSettings.skipAllSegments &amp;&amp; !isLast)) {</span>
+<span class="cstat-no" title="statement not covered" >        directPlaces.push(index)</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (p.isPoi === true) {</span>
+<span class="cstat-no" title="statement not covered" >        poiPlaces.push(index)</span>
+      }
+    })
+    // If there are direct waypoints
+    // add their indexes to the options
+<span class="cstat-no" title="statement not covered" >    if (directPlaces.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      appRouteData.options.directPlaces = directPlaces</span>
+    }
+    // If there are poi places
+    // add their indexes to the options
+<span class="cstat-no" title="statement not covered" >    if (poiPlaces.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      appRouteData.options.poiPlaces = poiPlaces</span>
+    }
+    const dataString = <span class="cstat-no" title="statement not covered" >JSON.stringify({ coordinates: coordinates.join(';'), options: appRouteData.options })</span>
+    const data = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings.compressDataUrlSegment ? Utils.compressTxt(dataString) : dataString</span>
+&nbsp;
+    // Set the `data` param value, that goes at the end of the url
+<span class="cstat-no" title="statement not covered" >    params.data = data</span>
+<span class="cstat-no" title="statement not covered" >    return params</span>
+  },
+  /**
+   * Decode string url value into an object
+   * @param {String} str
+   * @param {Boolean} tryDecompress
+   * @returns {Object|String}
+   */
+  decodeDataParam: (str, tryDecompress = true) =&gt; {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!str) {
+      return {}
+    }
+    let parsedData = <span class="cstat-no" title="statement not covered" >Utils.tryParseJson(str)</span>
+<span class="cstat-no" title="statement not covered" >    if (tryDecompress &amp;&amp; !parsedData) {</span>
+<span class="cstat-no" title="statement not covered" >      str = Utils.decompressTxt(str)</span>
+<span class="cstat-no" title="statement not covered" >      parsedData = Utils.tryParseJson(str)</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (parsedData) {</span>
+<span class="cstat-no" title="statement not covered" >      for (const key in parsedData) {</span>
+<span class="cstat-no" title="statement not covered" >        if (typeof parsedData[key] === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >          for (const objKey in parsedData[key]) {</span>
+            const value = <span class="cstat-no" title="statement not covered" >parsedData[key][objKey]</span>
+<span class="cstat-no" title="statement not covered" >            if (value &amp;&amp; value.toString().length &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >              parsedData[key][objKey] = RouteUtils.decodeDataParam(value, false)</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >              parsedData[key][objKey] = value</span>
+            }
+          }
+        }
+      }
+    } else {
+<span class="cstat-no" title="statement not covered" >      parsedData = str</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return parsedData</span>
+  },
+&nbsp;
+  /**
+   * Set the directions mode based on the target route
+   * considering the places on the URL params
+   * @param {*} routeTo
+   */
+  setDirectionsModeBasedOnRoute (routeTo) {
+    var placeNameParams = <span class="cstat-no" title="statement not covered" >lodash.pickBy(routeTo.params, function (value, key) <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      return key.startsWith('placeName') &amp;&amp; value !== undefined</span>
+    })
+    const placeNameParamsAmount = <span class="cstat-no" title="statement not covered" >Object.keys(placeNameParams).length</span>
+    const currentMode = <span class="cstat-no" title="statement not covered" >placeNameParamsAmount === 1 ? constants.modes.roundTrip : constants.modes.directions</span>
+<span class="cstat-no" title="statement not covered" >    store.commit('mode', currentMode)</span>
+  }
+}
+&nbsp;
+export default RouteUtils
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 20 2021 17:35:35 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

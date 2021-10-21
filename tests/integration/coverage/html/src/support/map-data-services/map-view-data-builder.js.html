@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/support/map-data-services/map-view-data-builder.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">src/support/map-data-services/</a> map-view-data-builder.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">78.38% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>29/37</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">46.15% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>6/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">81.82% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>9/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">78.38% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>29/37</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import RouteData from '@/support/map-data-services/ors-response-data-extractors/route-data'
+import OrsResponseExtractorBuilder from '@/support/map-data-services/ors-response-data-extractors/ors-response-extractor-builder'
+import FileExtractorBuilder from '@/support/map-data-services/file-data-extractors/file-extractor-builder'
+import constants from '@/resources/constants'
+&nbsp;
+class MapViewDataBuilder {
+  constructor (rawData, options = {}) {
+    this.mapRawData = rawData
+    this.dataOrigin = options.origin
+    this.contentType = options.contentType
+    this.apiVersion = options.apiVersion
+    this.translations = options.translations
+    this.options = options
+  }
+&nbsp;
+  /**
+   * Build and returns map data
+   * @returns {Promise} with MapViewData @see @/models/map-view-data
+   */
+  buildMapViewData = () =&gt; {
+    this.setMapExtractorBuilder()
+    const context = this
+    return new Promise((resolve, reject) =&gt; {
+      const sourceType = this.getSourceType()
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (sourceType) {
+        context.mapDataBuilder.buildMapData(sourceType, this.apiVersion).then(mapViewData =&gt; {
+          resolve(mapViewData)
+        }).catch(error =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >          reject(error)</span>
+        })
+      }
+    })
+  }
+&nbsp;
+  /**
+   * Get the response type, considering the endpoint and the response format
+   * It is used to determine the map data extractor that is gonna be used
+   * to extract the data from the response and render it
+   */
+  getSourceType = () =&gt; {
+    let sourceType
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (this.dataOrigin &amp;&amp; this.dataOrigin === constants.dataOrigins.fileImporter) {
+<span class="cstat-no" title="statement not covered" >      return this.dataOrigin</span>
+    } else {
+      sourceType = RouteData.getSourceType(this.dataOrigin, this.mapRawData)
+    }
+    return sourceType
+  }
+&nbsp;
+  /**
+   * Define the map builder instance according the current response, request and api version
+   */
+  setMapExtractorBuilder = () =&gt; {
+    const sourceType = this.getSourceType()
+&nbsp;
+    // If we have a valid source type
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (sourceType) {
+      const data = {
+        mapRawData: this.mapRawData,
+        dataOrigin: this.dataOrigin,
+        translations: this.translations,
+        options: this.options
+      }
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (sourceType === constants.dataOrigins.fileImporter) {
+<span class="cstat-no" title="statement not covered" >        this.mapDataBuilder = new FileExtractorBuilder(this.contentType, data)</span>
+      } else {
+        this.mapDataBuilder = new OrsResponseExtractorBuilder(sourceType, data, this.apiVersion)
+      }
+    } else {
+<span class="cstat-no" title="statement not covered" >      console.error('Invalid source type for map extractor builder')</span>
+    }
+  }
+&nbsp;
+  /**
+   * Build the mapViewData object
+   * @param {*} data {content:..., options:...}
+   * @emits mapViewDataChanged - using eventBus
+   */
+  static buildMapData = (data, appRouteData) =&gt; {
+    const rawContent = data.content
+    const options = data.options
+    const mapViewDataBuilder = new MapViewDataBuilder(rawContent, options)
+&nbsp;
+    return new Promise((resolve, reject) =&gt; {
+      mapViewDataBuilder.buildMapViewData().then((mapViewData) =&gt; {
+        // The places in appRouteData already contains the placeName, so we use it
+        // to avoid having to resolve each place coordinates to a placeName again
+        // If there is no places in appRouteData (dealing with a route import, for example)
+        // nothing happens because appRouteData.places will be an empty array
+        for (const key in appRouteData.places) {
+<span class="cstat-no" title="statement not covered" >          if (mapViewData.places[key]) {</span>
+<span class="cstat-no" title="statement not covered" >            mapViewData.places[key].placeName = appRouteData.places[key].placeName</span>
+<span class="cstat-no" title="statement not covered" >            mapViewData.places[key].direct = appRouteData.places[key].direct</span>
+          }
+        }
+&nbsp;
+        // Merge the app route data options with the map view data to
+        // keep the view data synced with the app url state
+        Object.assign(mapViewData.options, appRouteData.options)
+        resolve(mapViewData)
+      }).catch(error =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >        reject(error)</span>
+      })
+    })
+  }
+}
+&nbsp;
+export default MapViewDataBuilder
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 20 2021 17:35:35 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

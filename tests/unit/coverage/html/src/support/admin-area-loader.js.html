@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/support/admin-area-loader.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/support/</a> admin-area-loader.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/106</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/65</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/19</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/106</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import NominatimService from '@/support/nominatim-service'
+import PolygonUtils from '@/support/polygon-utils'
+import GeoUtils from '@/support/geo-utils'
+import theme from '@/config/theme'
+&nbsp;
+/**
+ * AdminAreaLoader class
+ */
+class AdminAreaLoader {
+  /**
+   * Build the admin area query filter based on place properties
+   * @param {*} place
+   * @returns {Object} adminAreaFilter
+   */
+  buildAdminAreaFilter(place, layer) <span class="fstat-no" title="function not covered" >{</span>
+    let adminAreaFilter = <span class="cstat-no" title="statement not covered" >{ polygon_geojson: 1, format: 'json', country: place.properties.country }</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (layer === 'region') {</span>
+<span class="cstat-no" title="statement not covered" >      if (place.properties.region) {</span>
+<span class="cstat-no" title="statement not covered" >        adminAreaFilter.state = place.properties.region.toLowerCase().replace(' region', '')</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        adminAreaFilter.state  = this.getPlaceNameAsAdminArea(place)</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return adminAreaFilter</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (layer === 'county') {</span>
+<span class="cstat-no" title="statement not covered" >      this.setAdminRegion(adminAreaFilter, place)</span>
+<span class="cstat-no" title="statement not covered" >      if (place.properties.county) {</span>
+<span class="cstat-no" title="statement not covered" >        adminAreaFilter.county  = place.properties.county.toLowerCase().replace(' county', '')  </span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        adminAreaFilter.county  = this.getPlaceNameAsAdminArea(place)</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return adminAreaFilter</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (layer === 'locality') {</span>
+<span class="cstat-no" title="statement not covered" >      this.setAdminRegion(adminAreaFilter, place)</span>
+      let locality = <span class="cstat-no" title="statement not covered" >place.properties.locality || place.properties.county || place.properties.macrocounty</span>
+<span class="cstat-no" title="statement not covered" >      if (locality) {</span>
+<span class="cstat-no" title="statement not covered" >        adminAreaFilter.city = locality.toLowerCase()</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        adminAreaFilter.city  = this.getPlaceNameAsAdminArea(place)</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return adminAreaFilter</span>
+  }
+&nbsp;
+  /**
+   * Set admin area filter state
+   * @param {Object} adminAreaFilter 
+   * @param {Place} place 
+   */
+  setAdminRegion (adminAreaFilter, place) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    if (place.properties.region &amp;&amp; place.properties.region !== place.properties.locality) {</span>
+<span class="cstat-no" title="statement not covered" >      adminAreaFilter.state  = place.properties.region.toLowerCase().replace(' region', '')</span>
+    }
+  }
+&nbsp;
+  /**
+   * Get the place name as admin area
+   * @param {Place} place 
+   * @returns {String}
+   */
+  getPlaceNameAsAdminArea (place) <span class="fstat-no" title="function not covered" >{</span>
+    let adminArea
+<span class="cstat-no" title="statement not covered" >    if (place.placeName.indexOf(',') &gt; -1) {</span>
+<span class="cstat-no" title="statement not covered" >      adminArea  = place.placeName.split(',')[0]</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      adminArea  = place.placeName</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return adminArea</span>
+  }
+&nbsp;
+  /**
+   * Get the admin area polygon for a given place
+   * @param {Place} place
+   * @return {Promise}
+   */
+  getAdminAreaPolygon(place) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise((resolve, reject) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      if (!place.placeName) {</span>
+<span class="cstat-no" title="statement not covered" >        resolve([])</span>
+      }
+      // make a copy of the original layer
+      // before updating the place via resolver
+      let layer = <span class="cstat-no" title="statement not covered" >place.properties.layer</span>
+      let layersThatSupportAdminPolygon = <span class="cstat-no" title="statement not covered" >['county', 'locality', 'region', 'country']</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (layersThatSupportAdminPolygon.includes(layer)) {</span>
+        // Define the zoom level used to resolve
+        let layerZoom = <span class="cstat-no" title="statement not covered" >GeoUtils.zoomLevelByLayer(layer)</span>
+&nbsp;
+        let context = <span class="cstat-no" title="statement not covered" >this</span>
+<span class="cstat-no" title="statement not covered" >        if (place.isEmpty()) {</span>
+<span class="cstat-no" title="statement not covered" >          place.resolve(layerZoom).then(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >            context.getPlaceValidPolygons(place, layer).then((validPolygons) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >              resolve(validPolygons)</span>
+            }).catch(err =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >              reject(err)</span>
+            })
+          })
+        } else {
+<span class="cstat-no" title="statement not covered" >          context.getPlaceValidPolygons(place, layer).then((validPolygons) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >            resolve(validPolygons)</span>
+          }).catch(err =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            reject(err)</span>
+          })
+        }
+      } else {
+<span class="cstat-no" title="statement not covered" >        resolve([])</span>
+      }
+    })
+  }
+&nbsp;
+  /**
+   * Get place valid polygons
+   * @param {Place} place 
+   * @param {String} layer 
+   * @returns {Array}
+   */
+  getPlaceValidPolygons (place, layer) <span class="fstat-no" title="function not covered" >{</span>
+    let context = <span class="cstat-no" title="statement not covered" >this</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise((resolve, reject) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+      let adminAreaFilter = <span class="cstat-no" title="statement not covered" >this.buildAdminAreaFilter(place, layer)</span>
+<span class="cstat-no" title="statement not covered" >      NominatimService.query(adminAreaFilter).then((response) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+        let validPolygons = <span class="cstat-no" title="statement not covered" >context.adjustAdminArea(place, response.data)</span>
+<span class="cstat-no" title="statement not covered" >        if (Array.isArray(validPolygons) &amp;&amp; validPolygons.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >          resolve(validPolygons)</span>
+        } else {
+          // Some places are stored considered as region/state in OSM
+          // but are taken as county by nominatim. So, in the case it
+          // is not found as state, try as county.
+<span class="cstat-no" title="statement not covered" >          if (adminAreaFilter.state &amp;&amp; !adminAreaFilter.county) {</span>
+<span class="cstat-no" title="statement not covered" >            context.getPlaceValidPolygons(place, 'county').then(result =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >              resolve(result)</span>
+            })
+          } else {
+<span class="cstat-no" title="statement not covered" >            resolve([])</span>
+          }
+        }
+      }).catch(err =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >        reject(err)</span>
+      })
+    })
+  }
+&nbsp;
+  /**
+   * check if a Place is inside of any of the polygons passed
+   * @param {*} polygons
+   * @param {Place} place
+   */
+  isPointInsidePolygons (polygons, place) <span class="fstat-no" title="function not covered" >{</span>
+    let isInside = <span class="cstat-no" title="statement not covered" >false</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    for (let key in polygons) {</span>
+      // Adjust the order of lat lng
+      let polygonCoords = <span class="cstat-no" title="statement not covered" >GeoUtils.switchLatLonIndex(polygons[key].geometry.coordinates)</span>
+&nbsp;
+      // Include the POIs that are inside the area polygon
+<span class="cstat-no" title="statement not covered" >      if (PolygonUtils.isInsidePolygon(place, polygonCoords)) {</span>
+<span class="cstat-no" title="statement not covered" >        isInside = true</span>
+<span class="cstat-no" title="statement not covered" >        break</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return isInside</span>
+  }
+&nbsp;
+  /**
+   * Adjust the area polygon and validate it
+   * @param {*} place
+   * @param {*} polygon
+   * @returns {Object| false}
+   */
+  adjustAdminArea(place, data) <span class="fstat-no" title="function not covered" >{</span>
+    let polygons = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >    for (let key in data) {</span>
+      let area = <span class="cstat-no" title="statement not covered" >data[key]</span>
+<span class="cstat-no" title="statement not covered" >      if (area.geojson.type !== 'Point') {</span>
+        let hasCoordinatesAsMultiPolygon = <span class="cstat-no" title="statement not covered" >Array.isArray(area.geojson.coordinates[0]) &amp;&amp; Array.isArray(area.geojson.coordinates[0][0])</span>
+&nbsp;
+        // Treat as multipolygon in both cases
+<span class="cstat-no" title="statement not covered" >        if (area.geojson.type === 'MultiPolygon' || hasCoordinatesAsMultiPolygon ) {</span>
+          let builtPolygons = <span class="cstat-no" title="statement not covered" >this.buildPolygonsFromMultiPolygon(area.geojson, place)</span>
+<span class="cstat-no" title="statement not covered" >          polygons = polygons.concat(builtPolygons)</span>
+        } else {
+          let polygon = <span class="cstat-no" title="statement not covered" >{geometry: {coordinates: area.geojson.coordinates}, type: area.geojson.type}</span>
+          let adjustedPolygon = <span class="cstat-no" title="statement not covered" >this.adjustPolygon(polygon, place)</span>
+<span class="cstat-no" title="statement not covered" >          if (adjustedPolygon) {</span>
+<span class="cstat-no" title="statement not covered" >            polygons.push(adjustedPolygon)</span>
+<span class="cstat-no" title="statement not covered" >            break</span>
+          }
+        }
+      }
+    }
+    let isInside = <span class="cstat-no" title="statement not covered" >this.isPointInsidePolygons(polygons, place)</span>
+<span class="cstat-no" title="statement not covered" >    if (isInside) {</span>
+<span class="cstat-no" title="statement not covered" >      return polygons</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return []</span>
+  }
+&nbsp;
+  /**
+   * Build a polygon collection from a multipolygon area object
+   * @param {Geojson} area 
+   * @param {Place} place 
+   * @returns {Array}
+   */
+  buildPolygonsFromMultiPolygon (areaGeojson, place) <span class="fstat-no" title="function not covered" >{</span>
+    let polygons = <span class="cstat-no" title="statement not covered" >[]</span>
+    // Treat as multipolygon in both cases
+    let splitPolygons = <span class="cstat-no" title="statement not covered" >PolygonUtils.splitMultiPolygonIntoPolygons(areaGeojson)</span>
+<span class="cstat-no" title="statement not covered" >    for (let pKey in splitPolygons) {</span>
+      let adjustedPolygon = <span class="cstat-no" title="statement not covered" >this.adjustPolygon(splitPolygons[pKey], place)</span>
+<span class="cstat-no" title="statement not covered" >      if (adjustedPolygon) {</span>
+<span class="cstat-no" title="statement not covered" >        if (adjustedPolygon.length === 1 &amp;&amp; adjustedPolygon[0].length &gt; 3) {</span>
+<span class="cstat-no" title="statement not covered" >          polygons.push(adjustedPolygon[0])</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          polygons = polygons.concat(adjustedPolygon)</span>
+        }
+      }
+    }
+    // In some cases, the built multipolygon contains only one polygon
+<span class="cstat-no" title="statement not covered" >    if (polygons.length === 1 &amp;&amp; polygons[0].length &gt; 3) {</span>
+<span class="cstat-no" title="statement not covered" >      polygons = polygons[0]</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return polygons</span>
+  }
+  /**
+   * Validate a polygon
+   * @param {*} polygon
+   * @param {*} place
+   * @returns {Object|false} polygon
+   */
+&nbsp;
+  adjustPolygon (polygon, place) <span class="fstat-no" title="function not covered" >{</span>
+    let flattenCoordinates = <span class="cstat-no" title="statement not covered" >PolygonUtils.flatCoordinates(polygon.geometry.coordinates)</span>
+    let first = <span class="cstat-no" title="statement not covered" >flattenCoordinates[0].toString()</span>
+    let last = <span class="cstat-no" title="statement not covered" >flattenCoordinates[flattenCoordinates.length - 1].toString()</span>
+<span class="cstat-no" title="statement not covered" >    if (first !== last) {</span>
+      let cleanCoords = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >      for (let key in flattenCoordinates) {</span>
+        let current = <span class="cstat-no" title="statement not covered" >flattenCoordinates[key].toString()</span>
+<span class="cstat-no" title="statement not covered" >        if (key &gt; 0 &amp;&amp; current === first) {</span>
+<span class="cstat-no" title="statement not covered" >          break</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          cleanCoords.push(flattenCoordinates[key])</span>
+        }
+      }
+<span class="cstat-no" title="statement not covered" >      flattenCoordinates = cleanCoords</span>
+    }
+<span class="cstat-no" title="statement not covered" >    polygon = {geometry: {coordinates: flattenCoordinates}, type: polygon.type, properties: {}}</span>
+<span class="cstat-no" title="statement not covered" >    polygon.properties.label = place.placeName</span>
+<span class="cstat-no" title="statement not covered" >    polygon.properties.color = theme.primary</span>
+<span class="cstat-no" title="statement not covered" >    polygon.properties.visible = true</span>
+<span class="cstat-no" title="statement not covered" >    polygon.properties.fillColor = 'transparent'</span>
+<span class="cstat-no" title="statement not covered" >    return polygon</span>
+  }
+}
+export default AdminAreaLoader
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 12:16:47 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

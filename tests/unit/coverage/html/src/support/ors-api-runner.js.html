@@ -1,0 +1,1055 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/support/ors-api-runner.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/support/</a> ors-api-runner.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">5.8% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>8/138</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/47</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/34</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">6.06% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>8/132</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
+import constants from '@/resources/constants'
+import GeoUtils from '@/support/geo-utils'
+import AppLoader from '@/app-loader'
+import Place from '@/models/place'
+import store from '@/store/store'
+import lodash from 'lodash'
+&nbsp;
+import OrsApiClient from 'openrouteservice-js'
+&nbsp;
+// By default we use the openrouteservice-js npm package to query the API.
+// But, if it is needed to test and change the openrouteservice-js itself the lib source code
+// can be put in the /src/ors-js folder and then we can use it to apply changes and see
+// these changes on the fly. This is only to developers who will work on
+// the openrouteservice-js project. If you want to do this, comment the OrsApiClient import above
+// and uncomment the import line below to use a local and unpacked openrouteservice-js lib
+// import OrsApiClient from '@/ors-js/src'
+&nbsp;
+/**
+ * Get the Directions function accessor
+ * @param {Array} Places
+ * @param {Object} customArgs
+ * @returns {Promise}
+ */
+const Directions = (places, customArgs = null) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  const mapSettings = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings</span>
+&nbsp;
+  // Build the ors client object
+  const directions = <span class="cstat-no" title="statement not covered" >new OrsApiClient.Directions({</span>
+    api_key: mapSettings.apiKey,
+    host: mapSettings.apiBaseUrl,
+    service: mapSettings.endpoints.directions
+  })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return new Promise((resolve, reject) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >    OrsParamsParser.buildRoutingArgs(places).then(args =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      if (customArgs) {</span>
+<span class="cstat-no" title="statement not covered" >        args = Object.assign(args, customArgs)</span>
+      }
+<span class="cstat-no" title="statement not covered" >      directions.calculate(args).then(response =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+        const data = <span class="cstat-no" title="statement not covered" >{ options: { origin: constants.dataOrigins.directions, apiVersion: constants.apiVersion }, content: response }</span>
+<span class="cstat-no" title="statement not covered" >        resolve(data)</span>
+      }).catch(err =&gt; <span class="fstat-no" title="function not covered" >{</span>
+        const result = <span class="cstat-no" title="statement not covered" >{ response: err, args: args }</span>
+<span class="cstat-no" title="statement not covered" >        reject(result)</span>
+      })
+    })
+  })
+}
+&nbsp;
+/**
+ * Get the Geocode function accessor
+ * @param {String} term
+ * @param {Number} size
+ * @returns {Promise}
+ */
+const Geocode = (term, size = 10) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  const mapSettings = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings</span>
+  const client = <span class="cstat-no" title="statement not covered" >new OrsApiClient.Geocode({</span>
+    api_key: mapSettings.apiKey,
+    host: mapSettings.apiBaseUrl,
+    service: mapSettings.endpoints.geocodeSearch
+  })
+  const args = <span class="cstat-no" title="statement not covered" >OrsParamsParser.buildPlaceSearchArgs(term)</span>
+<span class="cstat-no" title="statement not covered" >  args.size = size</span>
+<span class="cstat-no" title="statement not covered" >  return new Promise((resolve, reject) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >    client.geocode(args).then((response) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+      const places = <span class="cstat-no" title="statement not covered" >Place.placesFromFeatures(response.features)</span>
+<span class="cstat-no" title="statement not covered" >      resolve(places)</span>
+    }).catch(err =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      reject(err)</span>
+    })
+  })
+}
+&nbsp;
+/**
+ * Find places by using reverse geocode
+ * @param {Number} lat
+ * @param {Number} lng
+ * @param {Number} size
+ * @returns {Promise}
+ */
+const ReverseGeocode = (lat, lng, size = 10) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  const mapSettings = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings</span>
+&nbsp;
+  const client = <span class="cstat-no" title="statement not covered" >new OrsApiClient.Geocode({</span>
+    api_key: mapSettings.apiKey,
+    host: mapSettings.apiBaseUrl,
+    service: mapSettings.endpoints.reverseGeocode
+  })
+  const args = <span class="cstat-no" title="statement not covered" >OrsParamsParser.buildReverseSearchArgs(lat, lng)</span>
+<span class="cstat-no" title="statement not covered" >  args.size = size</span>
+<span class="cstat-no" title="statement not covered" >  return new Promise((resolve, reject) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >    client.reverseGeocode(args).then((response) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+      const places = <span class="cstat-no" title="statement not covered" >Place.placesFromFeatures(response.features)</span>
+<span class="cstat-no" title="statement not covered" >      resolve(places)</span>
+    }).catch(err =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      reject(err)</span>
+    })
+  })
+}
+&nbsp;
+/**
+ * Run a search for places given a term. If the search is set to
+ * be run within a restricted are and no results are found with
+ * this restriction than the function runs a second query ignoring
+ * the bounding box restriction
+ * @param {*} term
+ * @param {*} quantity - default 100
+ * @param {*} restrictArea - default true
+ * @returns {Promise}
+ */
+const PlacesSearch = (term, quantity = 100, restrictArea = true) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  return new Promise((resolve, reject) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+    const mapSettings = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings</span>
+&nbsp;
+    const client = <span class="cstat-no" title="statement not covered" >new OrsApiClient.Geocode({</span>
+      api_key: mapSettings.apiKey,
+      host: mapSettings.apiBaseUrl,
+      service: mapSettings.endpoints.geocodeSearch
+    })
+    
+    let promises = <span class="cstat-no" title="statement not covered" >[]</span>
+&nbsp;
+    // Build a search localities only
+    let localityArgs = <span class="cstat-no" title="statement not covered" >OrsParamsParser.buildPlaceSearchArgs(term, false)</span>
+<span class="cstat-no" title="statement not covered" >    localityArgs.size = quantity / (quantity / 2)</span>
+<span class="cstat-no" title="statement not covered" >    localityArgs.layers = ['locality']</span>
+<span class="cstat-no" title="statement not covered" >    promises.push(client.geocode(localityArgs))   </span>
+<span class="cstat-no" title="statement not covered" >    AppLoader.getInstance().appHooks.run('placeSearchLocalityArgsDefined', localityArgs)</span>
+&nbsp;
+    // Build a search counties only
+    let countyArgs = <span class="cstat-no" title="statement not covered" >OrsParamsParser.buildPlaceSearchArgs(term, false)</span>
+<span class="cstat-no" title="statement not covered" >    countyArgs.size = quantity / (quantity / 1)</span>
+<span class="cstat-no" title="statement not covered" >    countyArgs.layers = ['county']</span>
+<span class="cstat-no" title="statement not covered" >    promises.push(client.geocode(countyArgs))   </span>
+<span class="cstat-no" title="statement not covered" >    AppLoader.getInstance().appHooks.run('placeSearchCountyArgsDefined', countyArgs)</span>
+&nbsp;
+    // Build a search for addresses
+    let addressesArgs = <span class="cstat-no" title="statement not covered" >OrsParamsParser.buildPlaceSearchArgs(term, false)</span>
+<span class="cstat-no" title="statement not covered" >    addressesArgs.size = quantity</span>
+<span class="cstat-no" title="statement not covered" >    addressesArgs.layers = ['country', 'region', 'macrocounty', 'macroregion', 'neighbourhood', 'borough', 'street', 'address', 'postalcode'] </span>// `coarse` will bring places by postal code
+<span class="cstat-no" title="statement not covered" >    promises.push(client.geocode(addressesArgs))   </span>
+<span class="cstat-no" title="statement not covered" >    AppLoader.getInstance().appHooks.run('placeSearchAddressArgsDefined', addressesArgs)</span>
+&nbsp;
+    // Build a search for venues
+    const restrictToBbox = <span class="cstat-no" title="statement not covered" >restrictArea &amp;&amp; mapSettings.prioritizeSearchingForNearbyPlaces</span>
+    let poisArgs = <span class="cstat-no" title="statement not covered" >OrsParamsParser.buildPlaceSearchArgs(term, restrictToBbox)</span>
+<span class="cstat-no" title="statement not covered" >    poisArgs.size = quantity</span>
+<span class="cstat-no" title="statement not covered" >    poisArgs.layers = ['venue'] </span>// venue = POI 
+<span class="cstat-no" title="statement not covered" >    promises.push(client.geocode(poisArgs)) </span>
+<span class="cstat-no" title="statement not covered" >    AppLoader.getInstance().appHooks.run('placeSearchPoisArgsDefined', addressesArgs)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    promises = AppLoader.getInstance().appHooks.run('placeSearchPromisesDefined', promises)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    Promise.all(promises).then((responses) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+      const places = <span class="cstat-no" title="statement not covered" >buildPlacesSearchResult(responses, quantity)</span>
+<span class="cstat-no" title="statement not covered" >      resolve(places)</span>
+    }).catch(response =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      reject(response)</span>
+    })  
+  })
+}
+&nbsp;
+/**
+ * Build places result from promises response
+ * @param {Array} responses 
+ * @returns {Array} of Places
+ */
+const buildPlacesSearchResult = (responses, quantity) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let features = <span class="cstat-no" title="statement not covered" >[]</span>
+&nbsp;
+  // Get the locality from the list, if available
+<span class="cstat-no" title="statement not covered" >  if (Array.isArray(responses) &amp;&amp; responses.length &gt; 0) {</span>
+    let localityFeatures = <span class="cstat-no" title="statement not covered" >responses[0].features</span>
+<span class="cstat-no" title="statement not covered" >    if(localityFeatures &amp;&amp; localityFeatures.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      quantity = quantity - localityFeatures.length</span>
+<span class="cstat-no" title="statement not covered" >      features = features.concat(localityFeatures)</span>
+    }
+&nbsp;
+    let countyFeatures = <span class="cstat-no" title="statement not covered" >responses[1].features</span>
+<span class="cstat-no" title="statement not covered" >    if(countyFeatures &amp;&amp; countyFeatures.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      quantity = quantity - countyFeatures.length</span>
+<span class="cstat-no" title="statement not covered" >      features = features.concat(countyFeatures)</span>
+    }
+  
+    // By default, get all the features of the administrative places list
+    let adminFeatures = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >    if (responses.length &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >      adminFeatures = responses[2].features</span>
+    }
+  
+    // If there are administrative places and also places 
+    // from POIs (venues) then merge them into the collection
+    let poisFeatures = <span class="cstat-no" title="statement not covered" >responses.length === 4 ? responses[3].features : []    </span>
+    
+<span class="cstat-no" title="statement not covered" >    if (poisFeatures.length &gt; 0) {          </span>
+      let half = <span class="cstat-no" title="statement not covered" >Math.round((quantity / 2))</span>
+      let amountTobGetFromPOIsList = <span class="cstat-no" title="statement not covered" >poisFeatures.length &gt; half ? half : poisFeatures.length</span>
+      let amountTobGetFromAdminList = <span class="cstat-no" title="statement not covered" >quantity - amountTobGetFromPOIsList</span>
+<span class="cstat-no" title="statement not covered" >      features = features.concat(adminFeatures.slice(0, amountTobGetFromAdminList))</span>
+<span class="cstat-no" title="statement not covered" >      features = features.concat(poisFeatures.slice(0, amountTobGetFromPOIsList))</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      features = features.concat(adminFeatures)</span>
+    }
+  }
+<span class="cstat-no" title="statement not covered" >  features = sortFeatures(features)</span>
+&nbsp;
+  let places = <span class="cstat-no" title="statement not covered" >Place.placesFromFeatures(features)</span>
+<span class="cstat-no" title="statement not covered" >  places = AppLoader.getInstance().appHooks.run('placeSearchResultPrepared', places)</span>
+<span class="cstat-no" title="statement not covered" >  return places</span>
+}
+&nbsp;
+/**
+ * Sort features by layer and distance from current map center
+ * @param {*} features 
+ * @returns {Array} features
+ */
+const sortFeatures  = (features) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  if (features.length &lt; 2) {</span>
+<span class="cstat-no" title="statement not covered" >    return features</span>
+  }
+  // Se the distance of each location considering the current map center
+<span class="cstat-no" title="statement not covered" >  for (let key in features) {    </span>
+    let featureLatLng = <span class="cstat-no" title="statement not covered" >GeoUtils.buildLatLong(features[key].geometry.coordinates[1], features[key].geometry.coordinates[0])</span>
+<span class="cstat-no" title="statement not covered" >    features[key].distance = GeoUtils.calculateDistanceBetweenLocations(store.getters.mapSettings.mapCenter, featureLatLng, store.getters.mapSettings.unit)    </span>
+    // Add a unique id for each feature
+<span class="cstat-no" title="statement not covered" >    features[key].properties.unique_id = features[key].properties.id || `osm_id_${features[key].properties.osm_id}`</span>
+  }
+  // Sort by distance
+<span class="cstat-no" title="statement not covered" >  features = lodash.sortBy(features, ['distance', 'asc'])</span>
+&nbsp;
+  let bestMatchIndex = <span class="cstat-no" title="statement not covered" >lodash.findIndex(features, function(f) <span class="fstat-no" title="function not covered" >{ <span class="cstat-no" title="statement not covered" >return f.bestMatch === true}</span>)</span></span>
+<span class="cstat-no" title="statement not covered" >  if (bestMatchIndex &gt; -1) {</span>
+    // Move best match to to first position (duplicated items will be removed later)
+<span class="cstat-no" title="statement not covered" >    features.splice(0, 0, features[bestMatchIndex])</span>
+  }
+&nbsp;
+  let postalCodeIndex = <span class="cstat-no" title="statement not covered" >lodash.findIndex(features, function(f) <span class="fstat-no" title="function not covered" >{ <span class="cstat-no" title="statement not covered" >return f.properties.layer === 'postalcode'}</span>)</span></span>
+<span class="cstat-no" title="statement not covered" >  if (postalCodeIndex &gt; 1) {</span>
+    // Move postalcode place to first position duplicated items will be removed later)
+<span class="cstat-no" title="statement not covered" >    features.splice(0, 0, features[postalCodeIndex])</span>
+  } else {
+    let closestCityIndex = <span class="cstat-no" title="statement not covered" >lodash.findIndex(features, function(f) <span class="fstat-no" title="function not covered" >{ <span class="cstat-no" title="statement not covered" >return f.properties.layer === 'locality' || f.properties.layer === 'city'}</span>)</span></span>
+<span class="cstat-no" title="statement not covered" >    if (closestCityIndex &gt; 1) {</span>
+      // Move closest city to second position (duplicated items will be removed later)
+<span class="cstat-no" title="statement not covered" >      features.splice(1, 0, features[closestCityIndex])</span>
+    }
+  }
+  let closestCountyIndex = <span class="cstat-no" title="statement not covered" >lodash.findIndex(features, function(f) <span class="fstat-no" title="function not covered" >{ <span class="cstat-no" title="statement not covered" >return f.properties.layer === 'county' </span>})</span></span>
+<span class="cstat-no" title="statement not covered" >  if (closestCountyIndex &gt; 1) {</span>
+    // Move closest city to second position (duplicated items will be removed later)
+<span class="cstat-no" title="statement not covered" >    features.splice(2, 0, features[closestCountyIndex])</span>
+  }
+&nbsp;
+  let closestCountryIndex = <span class="cstat-no" title="statement not covered" >lodash.findIndex(features, function(f) <span class="fstat-no" title="function not covered" >{ <span class="cstat-no" title="statement not covered" >return f.properties.layer === 'country'}</span>)</span></span>
+<span class="cstat-no" title="statement not covered" >  if (closestCountryIndex &gt; 2) {</span>
+    // Move closest city to third position (duplicated items will be removed later)
+<span class="cstat-no" title="statement not covered" >    features.splice(3, 0, features[closestCountryIndex])</span>
+  }
+  // remove duplicated
+<span class="cstat-no" title="statement not covered" >  features = lodash.uniqBy(features, function (f) <span class="fstat-no" title="function not covered" >{ <span class="cstat-no" title="statement not covered" >return f.properties.unique_id </span>})</span></span>
+<span class="cstat-no" title="statement not covered" >  return features</span>
+}
+&nbsp;
+/**
+ * Get the POIs
+ * @param {Object} filters {
+ *  category_group_ids: Array, 
+ *  category_ids: Array, 
+ *  name: Array [String], 
+ *  wheelchair: Array ["yes","no","limited","designated"], 
+ *  smoking: Array ['dedicated','yes','no','separated','isolated','outside'], 
+ *  fee: Array ['yes', 'no']
+ * } @see https://openrouteservice.org/dev/#/api-docs/pois/post
+ * @param {Number} limit
+ * @param {Number} distanceBuffer
+ * @returns {Promise}
+ */
+const Pois = (filters, limit = 100, distanceBuffer = 500) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  const mapSettings = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings</span>
+&nbsp;
+  const pois = <span class="cstat-no" title="statement not covered" >new OrsApiClient.Pois({</span>
+    api_key: mapSettings.apiKey,
+    host: mapSettings.apiBaseUrl,
+    service: mapSettings.endpoints.pois
+  })
+  
+<span class="cstat-no" title="statement not covered" >  return new Promise((resolve, reject) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+    let args = <span class="cstat-no" title="statement not covered" >OrsParamsParser.buildPoisSearchArgs(filters, limit, distanceBuffer)</span>
+<span class="cstat-no" title="statement not covered" >    pois.pois(args).then((response) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      resolve(response)</span>
+    }).catch((err) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      reject(err)</span>
+    })
+  })
+}
+&nbsp;
+/**
+ * Get isochrones for a list of places
+ * @param {*} places 
+ * @returns {Promise}
+ */
+const Isochrones = (places) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  const mapSettings = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings</span>
+&nbsp;
+  var isochrones = <span class="cstat-no" title="statement not covered" >new OrsApiClient.Isochrones({</span>
+    api_key: mapSettings.apiKey,
+    host: mapSettings.apiBaseUrl,
+    service: mapSettings.endpoints.isochrones
+  })
+<span class="cstat-no" title="statement not covered" >  return new Promise((resolve, reject) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >    OrsParamsParser.buildIsochronesArgs(places).then(args =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      isochrones.calculate(args).then((response) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+        const data = <span class="cstat-no" title="statement not covered" >{ options: { origin: constants.dataOrigins.isochrones, apiVersion: constants.apiVersion }, content: response }</span>
+<span class="cstat-no" title="statement not covered" >        resolve(data)</span>
+      }).catch((err) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+        const result = <span class="cstat-no" title="statement not covered" >{ response: err, args: args }</span>
+<span class="cstat-no" title="statement not covered" >        reject(result)</span>
+      })
+    })
+  })
+}
+&nbsp;
+export { Directions }
+export { Geocode }
+export { Pois }
+export { PlacesSearch }
+export { ReverseGeocode }
+export { Isochrones }
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 12:16:47 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

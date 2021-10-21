@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fragments/forms/map-form/components/place-and-directions/components/route-details/components/extras/route-extras.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../../../../../../index.html">all files</a> / <a href="index.html">src/fragments/forms/map-form/components/place-and-directions/components/route-details/components/extras/</a> route-extras.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/47</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/1</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/47</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+import orsDictionary from '@/resources/ors-dictionary'
+&nbsp;
+export default {
+  props: {
+    route: {
+      Type: Object,
+      Required: true
+    }
+  },
+  computed: {
+    /**
+     * Return the array of extras or an empty array
+     * @returns {Array}
+     */
+    routeExtras () {
+<span class="cstat-no" title="statement not covered" >      return this.route.properties.extras || []</span>
+    }
+  },
+  methods: {
+    /**
+     * Determines if a given
+     * extra must be shown by
+     * checking if it is enabled
+     * in the app settings
+     * @param {*} extraKey
+     * @returns {Boolean}
+     */
+    showExtra (extraKey) {
+      let show = (<span class="cstat-no" title="statement not covered" >this.$store.getters.mapSettings[extraKey] === true)</span>
+<span class="cstat-no" title="statement not covered" >      if (!show) { // check if the extra is being returned in a singular keyed property</span>
+        const singular = <span class="cstat-no" title="statement not covered" >extraKey.substring(0, extraKey.length - 1)</span>
+<span class="cstat-no" title="statement not covered" >        show = this.$store.getters.mapSettings[singular] === true</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return show</span>
+    },
+    /**
+     * Determines if the extras block must
+     * be shown, checking if exists
+     * extra data
+     * @returns {Boolean}
+     */
+    showExtras () {
+      let extras = <span class="cstat-no" title="statement not covered" >0</span>
+<span class="cstat-no" title="statement not covered" >      for (const extraKey in this.routeExtras) {</span>
+<span class="cstat-no" title="statement not covered" >        if (this.showExtra(extraKey)) {</span>
+<span class="cstat-no" title="statement not covered" >          extras++</span>
+        }
+      }
+<span class="cstat-no" title="statement not covered" >      return extras &gt; 0</span>
+    },
+    /**
+     * Get the color from the ors dictionary
+     * based on the extra key and index
+     * @param {*} extraKey
+     * @param {*} index
+     * @param {*} value
+     */
+    colorValue (extraKey, index, value = null) {
+      let dict = <span class="cstat-no" title="statement not covered" >orsDictionary</span>
+      let color
+<span class="cstat-no" title="statement not covered" >      if (value) {</span>
+<span class="cstat-no" title="statement not covered" >        color = dict.colors[extraKey][value]</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        color = dict.colors[extraKey][index]</span>
+      }
+      
+<span class="cstat-no" title="statement not covered" >      return color</span>
+    },
+    /**
+     * Build and return
+     * the segment style object
+     * @param {String} extraKey
+     * @param {Number} amount
+     * @param {Integer} index
+     * @returns {Object}
+     */
+    segmentStyle (extraKey, summary, index) {
+      const style = <span class="cstat-no" title="statement not covered" >{</span>
+        width: summary.amount + '%',
+        background: this.colorValue(extraKey, index, summary.value)
+      }
+<span class="cstat-no" title="statement not covered" >      return style</span>
+    },
+    /**
+     * Get the label of an extra value
+     * @param {String} extraKey
+     * @param {Integer} value
+     * @returns {Integer} value
+     */
+    getExtraValueLabel (extraKey, value) {
+      let dict = <span class="cstat-no" title="statement not covered" >orsDictionary</span>
+<span class="cstat-no" title="statement not covered" >      if (dict[extraKey] &amp;&amp; dict[extraKey][value]) {</span>
+        const key = <span class="cstat-no" title="statement not covered" >dict[extraKey][value]</span>
+        const labels = <span class="cstat-no" title="statement not covered" >this.$t('orsDictionary')</span>
+<span class="cstat-no" title="statement not covered" >        if (labels[key]) {</span>
+<span class="cstat-no" title="statement not covered" >          return labels[key]</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return key</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return value</span>
+    },
+    /**
+     * Handle the show section click by
+     * building the object and emitting a
+     * highlightPolylineSections event
+     * that will be catch by the map view
+     * to highlight a given section of a given extra key
+     * @param {String} extraKey
+     * @param {Integer} value
+     * @param {Integer} index
+     * @emits highlightPolylineSections (via eventBus)
+     */
+    showSection (extraKey, value, index) {
+      const sectionTitle = <span class="cstat-no" title="statement not covered" >this.$t('global.' + extraKey).toLowerCase()</span>
+      const color = <span class="cstat-no" title="statement not covered" >this.colorValue(extraKey, index)</span>
+      const highlighData = <span class="cstat-no" title="statement not covered" >{ extraKey, sectionTitle, sections: [{ intervals: [], color }] }</span>
+&nbsp;
+      const polylineData = <span class="cstat-no" title="statement not covered" >this.buildExtraHighlighPolylineData(extraKey, index, value)</span>
+<span class="cstat-no" title="statement not covered" >      highlighData.sections.push(polylineData)</span>
+<span class="cstat-no" title="statement not covered" >      this.eventBus.$emit('highlightPolylineSections', highlighData)</span>
+    },
+    /**
+     * Handle the show all sections click by
+     * building the object and emitting a
+     * highlightPolylineSections event
+     * that will be catch by the map view
+     * to highlight all sections of a given extra key
+     * @param {String} extraKey
+     * @emits highlightPolylineSections (via eventBus)
+     */
+    showAllSections (extraKey) {
+      const sectionTitle = <span class="cstat-no" title="statement not covered" >this.$t('global.' + extraKey).toLowerCase()</span>
+      const highlighData = <span class="cstat-no" title="statement not covered" >{ extraKey: extraKey, sectionTitle, sections: [] }</span>
+&nbsp;
+      let index = <span class="cstat-no" title="statement not covered" >0</span>
+<span class="cstat-no" title="statement not covered" >      for (const summaryKey in this.routeExtras[extraKey].summary) {</span>
+        const summary = <span class="cstat-no" title="statement not covered" >this.routeExtras[extraKey].summary[summaryKey]</span>
+        const polylineData = <span class="cstat-no" title="statement not covered" >this.buildExtraHighlighPolylineData(extraKey, index, summary.value)</span>
+<span class="cstat-no" title="statement not covered" >        highlighData.sections.push(polylineData)</span>
+<span class="cstat-no" title="statement not covered" >        index++</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this.eventBus.$emit('highlightPolylineSections', highlighData)</span>
+    },
+    /**
+     * Build the the extra info highlighting data
+     * @param {String} extraKey
+     * @param {Integer} index
+     * @param {Integer} value
+     * @returns {Object} {intervals: Array, color: string, label: String}
+     */
+    buildExtraHighlighPolylineData (extraKey, index, value) {
+      const color = <span class="cstat-no" title="statement not covered" >this.colorValue(extraKey, index, value)</span>
+      const label = <span class="cstat-no" title="statement not covered" >this.getExtraValueLabel(extraKey, value).toLowerCase()</span>
+      // Values contains an array with the following data:
+      // a) position `zero` - the starting index on the route polyline array of
+      // where the given extra info starts
+      // b) position `1` - the final index on the route polyline array where the
+      // given extra info ends.
+      // c) position 2 - the value that represents the extra info to be
+      // shown on over the route. For example, steepness
+      const values = <span class="cstat-no" title="statement not covered" >this.routeExtras[extraKey].values</span>
+&nbsp;
+&nbsp;
+      // As some extra info may be present in several non-continuous
+      // segments we must get the intervals where the value matches
+      // so that we show only the extra info wth the value selected by the user
+      const intervals = <span class="cstat-no" title="statement not covered" >this.lodash.filter(values, (v) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        return v[2] === value</span>
+      })
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        intervals,
+        color,
+        label
+      }
+    }
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 20 2021 17:35:35 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../../../../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../../../../../../sorter.js"></script>
+</body>
+</html>

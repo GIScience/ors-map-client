@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fragments/places-carousel/places-carousel.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">src/fragments/places-carousel/</a> places-carousel.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/48</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/48</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import VueHorizontalList from 'vue-horizontal-list'
+import resolver from '@/support/routes-resolver'
+import MapViewData from '@/models/map-view-data'
+import constants from '@/resources/constants'
+import geoUtils from '@/support/geo-utils'
+import theme from '@/config/theme'
+&nbsp;
+export default {
+  props: {
+    mapViewData: {
+      required: true,
+      type: MapViewData
+    },
+    activeIndex: {
+      default: 0,
+      type: Number
+    }
+  },
+  watch: {
+    'horizontalListRef.position' (newIndex) {
+<span class="cstat-no" title="statement not covered" >      if (this.mapViewData.places[newIndex]) {</span>
+        const place = <span class="cstat-no" title="statement not covered" >this.mapViewData.places[newIndex]</span>
+<span class="cstat-no" title="statement not covered" >        this.placeActive = place</span>
+<span class="cstat-no" title="statement not covered" >        this.$emit('placeSelected', newIndex)</span>
+      }
+    },
+    'activeIndex' (newIndex) {
+      // The place change comes from outside
+<span class="cstat-no" title="statement not covered" >      this.horizontalListRef.go(newIndex)</span>
+    }
+  },
+  data: () =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+    imageUrlFallBack: (resolver.homeUrl() + '/static/img/map-pin-600x400.jpg').replace('//', '/'),
+    worldImageryTileProviderBaseUrl: constants.worldImageryTileProviderBaseUrl,
+    horizontalListRef: null,
+    placeActive: null
+  }),
+  computed: {
+    /**
+     * Return the horizontal list component options
+     * @returns {Object}
+     */
+    horizontalListOptions () {
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        item: {
+          // css class to inject into each individual item
+          class: '',
+          // padding between each item
+          padding: 12
+        },
+        list: {
+          // css class for the parent of item
+          class: '',
+          // maximum width of the list it can extend to before switching to windowed mode, basically think of the bootstrap container max-width
+          // windowed is used to toggle between full-screen mode and container mode
+          windowed: 1200,
+          // padding of the list, if container &lt; windowed what is the left-right padding of the list
+          // during full-screen mode the padding will added to left &amp; right to centralise the item
+          padding: 24
+        },
+        responsive: [
+          // responsive breakpoints to calculate how many items to show in the list at each width interval
+          // it will always fall back to these:
+          { end: 576, size: 1 },
+          { start: 576, end: 768, size: 2 },
+          { start: 768, end: 992, size: 3 },
+          { start: 992, end: 1200, size: 4 },
+          { start: 1200, size: 5 }
+        ],
+        navigation: {
+          // when to show navigation
+          start: 10000000, // define a very big value in order to avoid the navigation arrows to be shown. We are using custom navigation
+          color: theme.primary
+        }
+      }
+    }
+  },
+  methods: {
+    /**
+     * Get the image path for a given place
+     * @param {*} place
+     * @returns {String} image path
+     */
+    imagePath (place) {
+<span class="cstat-no" title="statement not covered" >      if (this.placeLayer) {</span>
+        const zoom = <span class="cstat-no" title="statement not covered" >geoUtils.zoomLevelByLayer(this.placeLayer(place))</span>
+        const tileData = <span class="cstat-no" title="statement not covered" >geoUtils.getTileData(place.lat, place.lng, zoom)</span>
+        const url = <span class="cstat-no" title="statement not covered" >`${this.worldImageryTileProviderBaseUrl}/${tileData.z}/${tileData.y}/${tileData.x}`</span>
+<span class="cstat-no" title="statement not covered" >        return url</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        return this.imageUrlFallBack</span>
+      }
+    },
+    /**
+     * Determines if a place must be considered as active
+     * @param {*} place
+     * @returns {Boolean}
+     */
+    isActive (place) {
+<span class="cstat-no" title="statement not covered" >      if (this.placeActive) {</span>
+<span class="cstat-no" title="statement not covered" >        return this.placeActive.equals(place)</span>
+      } else {
+        // If there is no place active yet, return the place
+        // at index 0 as active
+<span class="cstat-no" title="statement not covered" >        return place.findIndex(this.mapViewData.places) === 0</span>
+      }
+    },
+    /**
+     * Retrieves the place layer
+     * @param {*} place
+     */
+    placeLayer (place) {
+      const layer = <span class="cstat-no" title="statement not covered" >place.properties.layer</span>
+<span class="cstat-no" title="statement not covered" >      if (layer &amp;&amp; layer !== this.$t('placesCarousel.notAvailable')) {</span>
+<span class="cstat-no" title="statement not covered" >        return layer</span>
+      }
+    },
+&nbsp;
+    getItemLayer (place) {
+      const layer = <span class="cstat-no" title="statement not covered" >this.placeLayer(place)</span>
+<span class="cstat-no" title="statement not covered" >      if (layer) {</span>
+        let translation = <span class="cstat-no" title="statement not covered" >this.$t('global.layers.'+ layer)</span>
+<span class="cstat-no" title="statement not covered" >        return translation</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        if (place.properties.category_ids) {</span>
+          let categoriesKeys = <span class="cstat-no" title="statement not covered" >Object.keys(place.properties.category_ids)</span>
+<span class="cstat-no" title="statement not covered" >          if (categoriesKeys.length &gt; 0) {</span>
+            // TODO: map every category name and create a translation for them
+            let firstCategory = <span class="cstat-no" title="statement not covered" >place.properties.category_ids[categoriesKeys[0]]</span>
+<span class="cstat-no" title="statement not covered" >            return firstCategory.category_name</span>
+          }
+        }
+      }
+    },
+    /**
+     * Handles the place item clicked by
+     * setting the place as active and
+     * emitting a place selected local event
+     * @param {*} place
+     */
+    itemClicked (place) {
+<span class="cstat-no" title="statement not covered" >      this.placeActive = place</span>
+      const index = <span class="cstat-no" title="statement not covered" >place.findIndex(this.mapViewData.places)</span>
+<span class="cstat-no" title="statement not covered" >      this.$emit('placeSelected', index)</span>
+    },
+    /**
+     * Handles the click outside event
+     * emitting the closed event
+     * @emits close
+     */
+    clickOutside (event) {
+      const source = <span class="cstat-no" title="statement not covered" >event.currentTarget.activeElement</span>
+      // If the accessibility button is hit
+      // we don't have to emit the closed
+<span class="cstat-no" title="statement not covered" >      if (!source.classList.contains('do-not-trigger-close-bottom-nav')) {</span>
+<span class="cstat-no" title="statement not covered" >        this.$emit('close')</span>
+      }
+    },
+    /**
+     * Scroll to the next block of places
+     */
+    next () {
+<span class="cstat-no" title="statement not covered" >      if (this.horizontalListRef._hasNext) {</span>
+<span class="cstat-no" title="statement not covered" >        this.horizontalListRef.next()</span>
+      } else {
+        // Go to first
+<span class="cstat-no" title="statement not covered" >        this.horizontalListRef.go(0)</span>
+      }
+    },
+    /**
+     * Scroll to the previous block of places
+     */
+    previous () {
+<span class="cstat-no" title="statement not covered" >      if (this.horizontalListRef._hasPrev) {</span>
+<span class="cstat-no" title="statement not covered" >        this.horizontalListRef.prev()</span>
+      } else {
+        // Go to last
+<span class="cstat-no" title="statement not covered" >        this.horizontalListRef.go(this.horizontalListRef._size)</span>
+      }
+    },
+    /**
+     * Emit the directions to latlng
+     * @param {*} place
+     */
+    directionsTo (place) {
+<span class="cstat-no" title="statement not covered" >      this.$emit('directionsToPoint', { place })</span>
+<span class="cstat-no" title="statement not covered" >      this.$emit('closed')</span>
+    },
+    /**
+     * Emit the directions to latlng
+     * @param {*} place
+     */
+    gotToPlace (place) {
+<span class="cstat-no" title="statement not covered" >      this.$emit('gotToPlace', place)</span>
+<span class="cstat-no" title="statement not covered" >      this.$emit('closed')</span>
+    }
+  },
+  mounted () {
+<span class="cstat-no" title="statement not covered" >    this.horizontalListRef = this.$refs.horizontalList</span>
+    const context = <span class="cstat-no" title="statement not covered" >this</span>
+&nbsp;
+    // Set the active index after a second
+<span class="cstat-no" title="statement not covered" >    setTimeout(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      context.horizontalListRef.go(context.activeIndex)</span>
+    }, 1000)
+  },
+  components: {
+    VueHorizontalList
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 20 2021 17:35:35 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

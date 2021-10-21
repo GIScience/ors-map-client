@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="0"
+            tests="0">
+
+  <testsuite name="app-render"
+    errors="1" failures="0" hostname="" id="" package="app-render" skipped="1"
+    tests="0" time="0.000" timestamp="">
+  
+
+  
+    <system-err>
+        Error: An error occurred while retrieving a new session: &#34;session not created: This version of ChromeDriver only supports Chrome version 92&#34;
+       at endReadableNT (internal/streams/readable.js:1334:12)
+       at processTicksAndRejections (internal/process/task_queues.js:82:21)
+    </system-err>
+  
+
+    
+    <error message="An error occurred while retrieving a new session: &#34;session not created: This version of ChromeDriver only supports Chrome version 92&#34;"><![CDATA[
+      Error: An error occurred while retrieving a new session: &#34;session not created: This version of ChromeDriver only supports Chrome version 92&#34;
+    at Selenium2Protocol.handleSessionCreateError (/home/amon/apps/ors-map-client/node_modules/nightwatch/lib/transport/transport.js:110:15)
+    at HttpRequest.&lt;anonymous&gt; (/home/amon/apps/ors-map-client/node_modules/nightwatch/lib/transport/transport.js:166:32)
+    at HttpRequest.emit (events.js:400:28)
+    at HttpResponse.&lt;anonymous&gt; (/home/amon/apps/ors-map-client/node_modules/nightwatch/lib/http/request.js:143:19)
+    at HttpResponse.emit (events.js:400:28)
+    at IncomingMessage.&lt;anonymous&gt; (/home/amon/apps/ors-map-client/node_modules/nightwatch/lib/http/response.js:60:14)
+    at IncomingMessage.emit (events.js:412:35)
+    at endReadableNT (internal/streams/readable.js:1334:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21)
+      ]]></error>  
+
+  
+    
+    <testcase
+      name="app render" classname="app-render">
+      <skipped />
+    </testcase>
+    
+  
+  </testsuite>
+</testsuites>

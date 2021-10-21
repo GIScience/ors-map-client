@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/support/map-data-services/file-data-extractors/file-extractors/gpx-file-importer.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../index.html">all files</a> / <a href="index.html">src/support/map-data-services/file-data-extractors/file-extractors/</a> gpx-file-importer.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/76</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/76</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import lodash from 'lodash'
+import { parseString } from 'xml2js'
+import MapViewData from '@/models/map-view-data'
+import Place from '@/models/place'
+import constants from '@/resources/constants'
+&nbsp;
+/**
+ * GpxImporter
+ * @param {*} data {mapRawData: {}, translations: {}}
+ */
+class GpxImporter {
+  constructor (data) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this.fileRawContent = data.mapRawData</span>
+<span class="cstat-no" title="statement not covered" >    this.options = data.options</span>
+  }
+&nbsp;
+  /**
+   * Parse the file content to an object
+   * @returns {Promise}
+   */
+  parseFileContent = () =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise((resolve, reject) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      parseString(this.fileRawContent, { trim: true }, function (err, parsedXml) <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >          reject(err)</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          resolve(parsedXml)</span>
+        }
+      })
+    })
+  }
+&nbsp;
+  /**
+   * Build the map data for directions json response
+   * @returns {Promise} that returns in the resolve mapData object
+   */
+  buildMapData = () =&gt; <span class="fstat-no" title="function not covered" >{</span>
+    const mapViewData = <span class="cstat-no" title="statement not covered" >new MapViewData()</span>
+    const context = <span class="cstat-no" title="statement not covered" >this</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise((resolve, reject) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      try {</span>
+<span class="cstat-no" title="statement not covered" >        context.parseFileContent().then((fileObject) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >          mapViewData.routes = context.getRoutes(fileObject)</span>
+<span class="cstat-no" title="statement not covered" >          context.setPlaces(mapViewData, fileObject)</span>
+<span class="cstat-no" title="statement not covered" >          mapViewData.isRouteData = true</span>
+<span class="cstat-no" title="statement not covered" >          mapViewData.origin = constants.dataOrigins.fileImporter</span>
+<span class="cstat-no" title="statement not covered" >          mapViewData.timestamp = context.options.timestamp</span>
+<span class="cstat-no" title="statement not covered" >          mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions</span>
+<span class="cstat-no" title="statement not covered" >          resolve(mapViewData)</span>
+        })
+      } catch (error) {
+<span class="cstat-no" title="statement not covered" >        reject(Error('invalid-file-content'))</span>
+      }
+    })
+  }
+&nbsp;
+  /**
+   * Set the mapViewData places
+   * @param {*} mapViewData
+   * @param {*} fileObject
+   */
+  setPlaces = (mapViewData, fileObject) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    mapViewData.places = this.getPlaces(fileObject)</span>
+<span class="cstat-no" title="statement not covered" >    if (mapViewData.places.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      mapViewData.places = this.buildPlaces(mapViewData.routes)</span>
+    }
+  }
+&nbsp;
+  /**
+   * Get the places data based in the response data
+   * @param {Array} routes
+   * @returns {Array} places
+  */
+  buildPlaces = (routes) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+    const places = <span class="cstat-no" title="statement not covered" >[]</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (routes.length &gt; 0) {</span>
+      // If there are less then 15, so we get all
+<span class="cstat-no" title="statement not covered" >      if (routes[0].length &lt; 16) {</span>
+<span class="cstat-no" title="statement not covered" >        for (const key in routes[0]) {</span>
+          const latlng = <span class="cstat-no" title="statement not covered" >routes[0][key].geometry.coordinates</span>
+          const lng = <span class="cstat-no" title="statement not covered" >latlng[0]</span>
+          const lat = <span class="cstat-no" title="statement not covered" >latlng[1]</span>
+          const place = <span class="cstat-no" title="statement not covered" >new Place(lng, lat)</span>
+<span class="cstat-no" title="statement not covered" >          places.push(place)</span>
+        }
+      } else { // if there are more then 15, only the first and the last
+        const firstCoords = <span class="cstat-no" title="statement not covered" >routes[0].geometry.coordinates[0]</span>
+        const lastCoords = (<span class="cstat-no" title="statement not covered" >routes[0].geometry.coordinates[routes[0].geometry.coordinates.length - 1])</span>
+&nbsp;
+        const firstLng = <span class="cstat-no" title="statement not covered" >firstCoords[0]</span>
+        const firstLat = <span class="cstat-no" title="statement not covered" >firstCoords[1]</span>
+        const firstPlace = <span class="cstat-no" title="statement not covered" >new Place(firstLng, firstLat, '', { resolve: true })</span>
+<span class="cstat-no" title="statement not covered" >        places.push(firstPlace)</span>
+&nbsp;
+        const lastLng = <span class="cstat-no" title="statement not covered" >lastCoords[0]</span>
+        const lastLat = <span class="cstat-no" title="statement not covered" >lastCoords[1]</span>
+        const lastPlace = <span class="cstat-no" title="statement not covered" >new Place(lastLng, lastLat, '', { resolve: true })</span>
+<span class="cstat-no" title="statement not covered" >        places.push(lastPlace)</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return places</span>
+  }
+&nbsp;
+  /**
+   * Get the places from the fileObject
+   * @param {*} fileObject
+   * @returns {Array} of places
+   */
+  getPlaces = (fileObject) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+    const places = <span class="cstat-no" title="statement not covered" >[]</span>
+    const wpts = <span class="cstat-no" title="statement not covered" >lodash.get(fileObject, 'gpx.wpt')</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (wpts) {</span>
+<span class="cstat-no" title="statement not covered" >      for (const key in wpts) {</span>
+        const latlon = <span class="cstat-no" title="statement not covered" >wpts[key].$</span>
+        let name = <span class="cstat-no" title="statement not covered" >Array.isArray(wpts[key].name) ? wpts[key].name[0] : wpts[key].name</span>
+<span class="cstat-no" title="statement not covered" >        if (name.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >          name = Array.isArray(wpts[key].desc) ? wpts[key].desc[0] : wpts[key].desc</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (name.indexOf('=') &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >          name = name.split('=')[1]</span>
+        }
+        const place = <span class="cstat-no" title="statement not covered" >new Place(latlon.lon, latlon.lat, name)</span>
+<span class="cstat-no" title="statement not covered" >        places.push(place)</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return places</span>
+  }
+&nbsp;
+  /**
+   * Get the polyline data if the response contains polyline data
+   * @returns {Array} coordinates
+   */
+  getRoutes = (fileObject) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+    const routes = <span class="cstat-no" title="statement not covered" >[]</span>
+    const tracks = <span class="cstat-no" title="statement not covered" >lodash.get(fileObject, 'gpx.trk') || lodash.get(fileObject, 'gpx.rte')</span>
+    const creator = <span class="cstat-no" title="statement not covered" >lodash.get(fileObject, 'gpx.$.creator')</span>
+<span class="cstat-no" title="statement not covered" >    if (tracks) {</span>
+      const coordinatesParsed = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >      for (const key in tracks) {</span>
+        const track = <span class="cstat-no" title="statement not covered" >tracks[key]</span>
+        let segments = <span class="cstat-no" title="statement not covered" >track.trkseg || [track.rtept]</span>
+<span class="cstat-no" title="statement not covered" >        for (let key in segments) {</span>
+          let points = <span class="cstat-no" title="statement not covered" >segments[key].trkpt || segments[key]</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if (points) {</span>
+            
+<span class="cstat-no" title="statement not covered" >            for (const ptKey in points) {</span>
+              const latlon = <span class="cstat-no" title="statement not covered" >points[ptKey].$</span>
+              const point = <span class="cstat-no" title="statement not covered" >creator === 'openrouteservice' ? [latlon.lat, latlon.lon] : [latlon.lon, latlon.lat]</span>
+              const elev = <span class="cstat-no" title="statement not covered" >points[ptKey].ele</span>
+<span class="cstat-no" title="statement not covered" >              if (elev &amp;&amp; elev.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                point.push(elev[0])</span>
+              }
+<span class="cstat-no" title="statement not covered" >              coordinatesParsed.push(point)</span>
+            }            
+          }
+        }
+<span class="cstat-no" title="statement not covered" >        routes.push({</span>
+          geometry: {
+            coordinates: coordinatesParsed
+          }
+        })
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return routes</span>
+  }
+}
+// export the directions json builder class
+export default GpxImporter
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 20 2021 17:35:35 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

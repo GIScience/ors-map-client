@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/support/map-data-services/ors-response-data-extractors/route-data.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">src/support/map-data-services/ors-response-data-extractors/</a> route-data.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.17% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>1/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/1</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.17% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>1/24</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+const routeData = {
+  /**
+   * Build an array of polylines based on extra info data that contains
+   * route intervals and the color that each segment must be highlighted with
+   * @param {*} polyLineData
+   * @param {*} extraInfo
+   * @returns {Array} of polylinesHighlighted
+   */
+  buildHighlightedPolylines: (polyLineData, extraInfo) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    if (polyLineData &amp;&amp; extraInfo) {</span>
+      const polylinesHighlighted = <span class="cstat-no" title="statement not covered" >[]</span>
+&nbsp;
+      // Build the sections
+      // Each section contains a label, a color and
+      // may contain multiple polylines
+<span class="cstat-no" title="statement not covered" >      for (const key in extraInfo.sections) {</span>
+        const section = <span class="cstat-no" title="statement not covered" >extraInfo.sections[key]</span>
+        const polylineHighlighted = <span class="cstat-no" title="statement not covered" >{</span>
+          label: section.label,
+          color: section.color,
+          polylines: [] // It starts empty and will be populated below
+        }
+        // Use the intervals data to extract the
+        // polyline data for the given interval
+<span class="cstat-no" title="statement not covered" >        for (const intervalKey in section.intervals) {</span>
+          const interval = <span class="cstat-no" title="statement not covered" >section.intervals[intervalKey]</span>
+          // since we are getting items from an array
+          // starting with the index 0, the amount of
+          // items is the final position + 1
+          const amoundOfItems = <span class="cstat-no" title="statement not covered" >interval[1] +1</span>
+          const segment = <span class="cstat-no" title="statement not covered" >polyLineData.slice(interval[0], amoundOfItems)</span>
+<span class="cstat-no" title="statement not covered" >          polylineHighlighted.polylines.push(segment)</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (polylineHighlighted.polylines.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >          polylinesHighlighted.push(polylineHighlighted)</span>
+        }
+      }
+<span class="cstat-no" title="statement not covered" >      return polylinesHighlighted</span>
+    }
+  },
+&nbsp;
+  /**
+   * Get the response data source type based on the endpoint and the type of responseData
+   * @param {String} endpoint
+   * @param {Object} responseData
+   * @returns {String}  response source type
+   */
+  getSourceType (endpoint, responseData) {
+    // In the case of directions and pois, there are
+    // two possibilities. If the response is an object (json) or a gpx (xml)
+<span class="cstat-no" title="statement not covered" >    if (endpoint === '/directions') {</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof responseData === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >        return 'directionsJSON'</span>
+      } else {
+        // This DirectionsGPXDataBuilder needs the request data because it will run a second
+        // request (based on the original request) to get the geojson equivalent response
+<span class="cstat-no" title="statement not covered" >        return 'directionsGPX'</span>
+      }
+    } else {
+<span class="cstat-no" title="statement not covered" >      switch (endpoint) {</span>
+        case '/geocode/search':
+        case '/geocode/autocomplete':
+        case '/geocode/search/structured':
+<span class="cstat-no" title="statement not covered" >          return 'geocodeSearch'</span>
+        case '/geocode/reverse':
+<span class="cstat-no" title="statement not covered" >          return 'geocodeReverse'</span>
+        case '/isochrones':
+<span class="cstat-no" title="statement not covered" >          return 'isochrones'</span>
+        case '/pois':
+<span class="cstat-no" title="statement not covered" >          return 'pois'</span>
+        case '/matrix':
+<span class="cstat-no" title="statement not covered" >          return 'matrix'</span>
+      }
+    }
+  }
+}
+export default routeData
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 12:16:47 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fragments/map-view/i18n/map-view.i18n.en-us.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">src/fragments/map-view/i18n/</a> map-view.i18n.en-us.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/0</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export default {
+  mapView: {
+    routeTo: 'Route to this place',
+    polygonDetails: 'Polygon details',
+    polygon: 'Polygon',
+    whatIsHere: 'What is here ?',
+    directionsFromHere: 'Directions from here',
+    fitAllFeatures: 'Show all features',
+    addRouteStop: 'Add a route stop here',
+    addDestinationToRoute: 'Add destination to route',
+    acquirePositionErrors: {
+      generic: 'It was not possible to acquire your location because it was not authorized or the device does not support it.',
+      unavailable: 'According to your device your location is currently not available. Make sure the positioning option/service is properly configured.',
+      permissionDenied: 'Your position could not be acquired because the device denied access to it. You can retry it by changing the device settings and then click again on the "my position button"',
+      timeout: 'Your device returned "timeout" while trying to acquire a position. You can retry it by clicking on the "my position button"'
+    },
+    yourCurrentLocation: 'Your current location',
+    options: 'Options',
+    polylineMeasure: {
+      bearingTextIn: 'In',
+      bearingTextOut: 'Out',
+      tooltipTextDragAndDelete: 'Click and drag to &lt;b&gt;move point&lt;/b&gt;&lt;br&gt;Press SHIFT-key and click to &lt;b&gt;delete point&lt;/b&gt;',
+      tooltipTextResume: '&lt;br&gt;Press CTRL-key and click to &lt;b&gt;resume line&lt;/b&gt;',
+      tooltipTextDelete: 'Press SHIFT-key and click to &lt;b&gt;delete point&lt;/b&gt;',
+      tooltipTextAdd: 'Press CTRL-key and click to &lt;b&gt;add point&lt;/b&gt;',
+      clearControlTitle: 'Clear measurements',
+      measureControlTitleOn: 'Turn on distance measurement',
+      measureControlTitleOff: 'Turn off distance measurement',
+      unitControlTitle: {
+        text: 'Change units',
+        metres: 'meters',
+        landmiles: 'land miles',
+        nauticalmiles: 'nautical miles'
+      },
+      clearControlLabel: '&amp;times',
+      measureControlLabel: '&amp;#8614;',
+      measureControlClasses: [],
+      unitControlLabel: {
+        metres: 'm',
+        kilometres: 'km',
+        feet: 'ft',
+        landmiles: 'M',
+        nauticalmiles: 'NM'
+      }
+    },
+    defineAvoidPolygon: 'Define avoid polygons to route calculation',
+    defineAvoidRectangle: 'Define avoid rectangles to route calculation',
+    youCantIntersectPolygons: 'You can`t intersect polygons',
+    polygonArea: 'Polygon area',
+    highlighting: 'Highlighting',
+    accuracy: 'Accuracy',
+    youCanCenterAtYourLocationLater: 'You can center the map at your current location at any time by clicking on "my location" button',
+    yourLocation: 'Use your location',
+    setMyLocationAsMapCenter: 'Do you want to center the map at your current location? This will improve place search precision. You will have to authorize it if prompted.',
+    removePlace: 'Remove place',
+    viewOnORS: 'View on ORS',
+    moveMapPositionToLeft: 'Move map center to the left',
+    moveMapPositionToRight: 'Move map center to the right',
+    moveMapPositionToUp: 'Move map center up',
+    moveMapPositionToDown: 'Move map center down',
+    toggleDirect: 'Toggle direct from here until next place',
+    heightGraph: {
+      distance: 'Distance',
+      elevation: 'Elevation',
+      segment_length: 'Segment length',
+      type: 'Type',
+      legend: 'Legend'
+    },
+    editShape: 'Edit shape',
+    remove: 'Remove',
+    avoidPolygonSaved: 'Avoid polygon saved',
+    avoidPolygonRemoved: 'Avoid polygon removed',
+    avoidPolygonNotRemoved: 'It was not possible to remove the avoid polygon',
+    avoidPolygonNotSaved: 'It was not possible to save the avoid polygon',
+    polygonEditModeEnabled: 'When you finish editing, click anywhere to save the changes',
+    customTileProvider: 'Custom tile provider defined by the user',
+    gestureHandling: {      
+      touch: 'Use two fingers to move the map',
+      scroll: 'Use ctrl + scroll to zoom the map',
+      scrollMac: 'Use \u2318 + scroll to zoom the map'      
+    }
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 12:16:47 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

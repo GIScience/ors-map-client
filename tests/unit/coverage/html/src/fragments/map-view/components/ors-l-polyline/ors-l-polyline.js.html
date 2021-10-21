@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fragments/map-view/components/ors-l-polyline/ors-l-polyline.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../index.html">all files</a> / <a href="index.html">src/fragments/map-view/components/ors-l-polyline/</a> ors-l-polyline.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/72</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/51</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/72</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import OrsExtendedPolyline from './ors-extended-polyline'
+import { LPolyline, LTooltip, LPopup} from 'vue2-leaflet'
+import constants from '@/resources/constants'
+import GeoUtils from '@/support/geo-utils'
+import Utils from '@/support/utils'
+import theme from '@/config/theme'
+import store from '@/store/store'
+import lodash from 'lodash'
+&nbsp;
+export default {
+  data () {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      orsExtendedPolyline: null,
+      backgroundWeight: 11, // will automatically be changed based on the weight value on `created`,
+      active: true
+    }
+  },
+  components: {
+    LPolyline,
+    LTooltip,
+    LPopup
+  },
+  props: {
+    options: {
+      type: Object,
+      default: function () <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >        return {}</span>
+      }
+    },
+    route: {
+      type: Object,
+      default: function () <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >        return {}</span>
+      }
+    },
+    latLngs: {
+      type: Array,
+      default: function () <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >        return []</span>
+      }
+    },
+    weight: {
+      type: Number,
+      default: 7
+    },
+    focusedPolyIndex: {
+      type: Number,
+      default: null
+    },
+    color: {
+      type: String,
+      default: theme.primary
+    },
+    backgroundColor: {
+      type: String,
+      default: constants.routeBackgroundColor,
+    },
+    draggable: {
+      type: Boolean,
+      default: false
+    },
+    notActive: {
+      type: Boolean,
+      default: false
+    },
+    tooltipIcon: {
+      type: String,
+      required: false
+    }
+  },
+  watch: {
+    focusedPolyIndex: function (newVal) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      if (newVal !== null) {</span>
+<span class="cstat-no" title="statement not covered" >        this.showPolylinePointByIndex(newVal)</span>
+      }
+    },
+    route: {
+      handler: function (newVal, oldVal) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >        this.openPopupWhenRouteChange(newVal, oldVal)</span>
+      },
+      deep: true
+    }
+  },
+  methods: {
+    openPopupWhenRouteChange (newVal, oldVal) {
+<span class="cstat-no" title="statement not covered" >      if (this.$mdAndUpResolution &amp;&amp; !Utils.isMobile()) {</span>
+<span class="cstat-no" title="statement not covered" >        this.active = false</span>
+        let context = <span class="cstat-no" title="statement not covered" >this</span>
+<span class="cstat-no" title="statement not covered" >        if (JSON.stringify(newVal.geometry.coordinates) !== JSON.stringify(oldVal.geometry.coordinates)) {</span>
+<span class="cstat-no" title="statement not covered" >          setTimeout(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >            context.active = true</span>
+<span class="cstat-no" title="statement not covered" >            context.updatePopup()</span>
+          }, 100)
+        }
+      }
+    },
+    addStopViaPolylineDrag (data) {
+<span class="cstat-no" title="statement not covered" >      this.$emit('addStopViaPolylineDrag', data)</span>
+    },
+    followPolyline (data) {
+<span class="cstat-no" title="statement not covered" >      this.$emit('followPolyline', data)</span>
+    },
+    rightClicked (event) {
+<span class="cstat-no" title="statement not covered" >      if (this.$refs.foregroundPolyline &amp;&amp; this.$refs.foregroundPolyline.mapObject) {</span>
+<span class="cstat-no" title="statement not covered" >        this.$refs.foregroundPolyline.mapObject.closePopup()</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this.$emit('rightClicked', event)</span>
+    },
+    openPopup(event) {
+<span class="cstat-no" title="statement not covered" >      this.$nextTick(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        event.target.openPopup()</span>
+      })
+    },
+    updatePopup () {
+<span class="cstat-no" title="statement not covered" >      if (this.$refs.foregroundPolyline &amp;&amp; this.popupContent) {</span>
+        // Create and show popup
+<span class="cstat-no" title="statement not covered" >        this.$refs.foregroundPolyline.mapObject.bindPopup(this.popupContent, {autoClose: true, closeOnClick: true, autoPan: false}).openPopup()</span>
+      }
+    },
+    /**
+     * When the polyline is clicked
+     * check if it is active. If so, show clicked point
+     * the polyline details. If not active, just
+     * forward the event by emitting a Vue.js `click` event
+     * @param {*} event
+     * @emits click
+     */
+    click (event) {
+<span class="cstat-no" title="statement not covered" >      if (!this.notActive &amp;&amp; this.$refs.foregroundPolyline.mapObject) {</span>
+<span class="cstat-no" title="statement not covered" >        this.openPopup(event)</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        this.$emit('click', event)</span>
+      }
+    },
+    /**
+     * Show the details of a polyline point
+     * by firing the polylineClicked event
+     * @param {Event} event
+     * @fire polylineClicked
+     */
+    showPolylinePointDetails (event) {
+      const leafletPolylineObject = <span class="cstat-no" title="statement not covered" >this.$refs.foregroundPolyline.mapObject</span>
+      let originalEvent = <span class="cstat-no" title="statement not covered" >event.originalEvent || event</span>
+<span class="cstat-no" title="statement not covered" >      originalEvent.stopPropagation()</span>
+<span class="cstat-no" title="statement not covered" >      originalEvent.preventDefault()</span>
+<span class="cstat-no" title="statement not covered" >      originalEvent.clickedOverPolyline = true</span>
+<span class="cstat-no" title="statement not covered" >      leafletPolylineObject.fire('polylineClicked', event)</span>
+    },
+    /**
+     * Show the polyline point by index
+     * @param {Number} polylineCoordsIndex
+     */
+    showPolylinePointByIndex (polylineCoordsIndex) {
+      const customEvent = <span class="cstat-no" title="statement not covered" >new Event('showPolylinePointByIndex')</span>
+      const point = <span class="cstat-no" title="statement not covered" >this.latLngsCoordinates[polylineCoordsIndex]</span>
+<span class="cstat-no" title="statement not covered" >      customEvent.latlng = GeoUtils.buildLatLong(point[0], point[1])</span>
+<span class="cstat-no" title="statement not covered" >      this.showPolylinePointDetails(customEvent)</span>
+    }
+  },
+  computed: {
+    routeOpacity () {
+      let opacity = <span class="cstat-no" title="statement not covered" >lodash.get(this.route, 'properties.opacity')</span>
+<span class="cstat-no" title="statement not covered" >      if (opacity) {</span>
+<span class="cstat-no" title="statement not covered" >        return opacity</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        return 0.2</span>
+      }
+    },
+    /**
+     * Get the latlngs coordinate array
+     * from the latLngs prop or from the route
+     * coordinates or return an empty array
+     * @returns {Array}
+     */
+    latLngsCoordinates () {
+<span class="cstat-no" title="statement not covered" >      if (this.latLngs.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >        return this.latLngs</span>
+      } else {
+        let latLngs = <span class="cstat-no" title="statement not covered" >lodash.get(this.route, 'geometry.coordinates')</span>
+<span class="cstat-no" title="statement not covered" >        if (latLngs &amp;&amp; Array.isArray(latLngs) &amp;&amp; latLngs.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >          return latLngs</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          return []</span>
+        }
+      }
+    },
+    popupContent () {
+<span class="cstat-no" title="statement not covered" >      if (!this.active) {</span>
+<span class="cstat-no" title="statement not covered" >        return ''</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (this.route.summary) {</span>
+        const summaryCopy = <span class="cstat-no" title="statement not covered" >Object.assign({}, this.route.summary)</span>
+        const humanizedData = <span class="cstat-no" title="statement not covered" >GeoUtils.getHumanizedTimeAndDistance(summaryCopy, this.$t('global.units'))</span>
+        let tooltipInnerContent = <span class="cstat-no" title="statement not covered" >`${this.$t('global.distance')}: ${humanizedData.distance}`</span>
+<span class="cstat-no" title="statement not covered" >        if (humanizedData.duration) {</span>
+<span class="cstat-no" title="statement not covered" >          tooltipInnerContent += `&lt;br&gt; ${this.$t('global.duration')}: ${humanizedData.duration}`</span>
+        }
+        let tooltipIcon = <span class="cstat-no" title="statement not covered" >this.tooltipIcon</span>
+        let iconStyle = <span class="cstat-no" title="statement not covered" >''</span>
+<span class="cstat-no" title="statement not covered" >        if (store.getters.mapSettings.skipAllSegments) {</span>
+<span class="cstat-no" title="statement not covered" >          tooltipIcon = 'near_me'</span>
+<span class="cstat-no" title="statement not covered" >          iconStyle = 'transform: scaleY(-1) rotate(45deg)'</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (tooltipIcon) {</span>
+          let tooltip = <span class="cstat-no" title="statement not covered" >`</span>
+          &lt;div&gt;
+            &lt;div style='min-width:30px;width:20%;height:50px;float:left'&gt;
+              &lt;span style='${iconStyle}' class="material-icons"&gt;${tooltipIcon}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div style='min-width:180px'&gt;${tooltipInnerContent}&lt;/div&gt;
+          &lt;/div&gt;`
+<span class="cstat-no" title="statement not covered" >          return tooltip</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          return `&lt;div&gt;&lt;div style='min-width:180px'&gt;${tooltipInnerContent}&lt;/div&gt;&lt;/div&gt;`</span>
+        }
+      }
+    },
+  },
+  created () {
+<span class="cstat-no" title="statement not covered" >    this.active = !this.notActive</span>
+<span class="cstat-no" title="statement not covered" >    if (this.latLngs.length === 0 &amp;&amp; !lodash.get(this.route, 'geometry.coordinates')) {</span>
+<span class="cstat-no" title="statement not covered" >      console.error('Latlngs or route object must be passed with valid values')</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      this.backgroundWeight = this.weight + 4</span>
+&nbsp;
+      // If draggable is defined via prop as true
+      // then add the necessary attribute on the
+      // options object
+<span class="cstat-no" title="statement not covered" >      if (this.draggable === true) {</span>
+<span class="cstat-no" title="statement not covered" >        this.options.edit_with_drag = true</span>
+      }
+      // This will add custom behaviors to the vue2leaflet polyline
+<span class="cstat-no" title="statement not covered" >      this.orsExtendedPolyline = new OrsExtendedPolyline(this)</span>
+    }
+  },
+  mounted() {
+<span class="cstat-no" title="statement not covered" >    if (this.$mdAndUpResolution &amp;&amp; !Utils.isMobile()) {</span>
+<span class="cstat-no" title="statement not covered" >      this.updatePopup()</span>
+    }
+  },
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 12:16:47 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

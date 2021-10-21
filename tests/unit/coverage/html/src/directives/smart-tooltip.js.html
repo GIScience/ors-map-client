@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/directives/smart-tooltip.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/directives/</a> smart-tooltip.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">26.04% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>25/96</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">29.17% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>14/48</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>3/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">26.04% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>25/96</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { createPopper } from '@popperjs/core'
+import appConfig from '@/config/app-config'
+import AppLoader from '@/app-loader'
+import utils from '@/support/utils'
+import store from '@/store/store'
+&nbsp;
+/**
+ * Popper tooltip directive handler
+ */
+const smartTooltip = {
+  bind(el, binding, vNode) {
+    render(el, binding, vNode)
+  },
+  unbind(el, binding, vNode) {
+<span class="cstat-no" title="statement not covered" >    if (vNode.context.popperTooltipGuid) {</span>
+<span class="cstat-no" title="statement not covered" >      closeTooltip(vNode.context.popperTooltipGuid)</span>
+    }
+  },
+  update(el, binding, vNode) {
+    render(el, binding, vNode, true)
+  },
+  componentUpdated(el, binding, vNode) {
+    render(el, binding, vNode, true)
+  }
+}
+&nbsp;
+/**
+ * Render the tooltip component
+ * @param {*} el - DOM the element which the tooltip will be attached to
+ * @param {*} binding - parameters
+ * @param {*} vNode - vue element which the tooltip will be attached to
+ * @param {*} rerendering - if the tooltip is being updated
+ */
+const render = (el, binding, vNode, rerendering = false) =&gt; {
+  let options = binding.value
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (options.show) {
+    if (rerendering) { // it is rerendering, show it immediately
+      showToolTip(el, options, vNode)
+    } else { // otherwise, wait 2 seconds
+      setTimeout(() =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >        showToolTip(el, options, vNode)</span>
+      }, 2000)
+    }
+  } else <span class="cstat-no" title="statement not covered" >if (vNode.context.popperTooltipGuid) {</span>
+<span class="cstat-no" title="statement not covered" >    removeTooltipEl(vNode.context.popperTooltipGuid)</span>
+  }
+}
+&nbsp;
+/**
+ * Handle the close tooltip click
+ * @param {*} tooltipGuid
+ * @param {*} hidePermanently
+ * @param {*} name
+ */
+const closeTooltip = (tooltipGuid, hidePermanently, name) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  removeTooltipEl(tooltipGuid)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (hidePermanently &amp;&amp; name) {</span>
+<span class="cstat-no" title="statement not covered" >    storeTooltipAlreadyShown(name)</span>
+  }
+}
+&nbsp;
+/**
+ * Remove tooltip rom DOM
+ * @param {*} tooltipGuid
+ */
+const removeTooltipEl = (tooltipGuid) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  if (tooltipGuid) {</span>
+    let tooltipEl = <span class="cstat-no" title="statement not covered" >document.getElementById(tooltipGuid)</span>
+<span class="cstat-no" title="statement not covered" >    if (tooltipEl) {</span>
+<span class="cstat-no" title="statement not covered" >      document.body.removeChild(tooltipEl)</span>
+    }
+  }
+}
+&nbsp;
+/**
+ * Store in browser's local storage that the the tooltip has already been shown
+ * @param {*} tooltipName
+ */
+const storeTooltipAlreadyShown = (tooltipName) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let mapSettings = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings</span>
+<span class="cstat-no" title="statement not covered" >  mapSettings.shownOnceTooltips = mapSettings.shownOnceTooltips || {}</span>
+<span class="cstat-no" title="statement not covered" >  mapSettings.shownOnceTooltips[tooltipName] = true</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  store.dispatch('saveSettings', mapSettings).then(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >    console.log(tooltipName + ' tooltip hidden permanently')</span>
+  })
+}
+/**
+ * Show tooltip
+ * @param {*} el - DOM the element which the tooltip will be attached to
+ * @param {*} options tool tip options object
+ * @param {*} vNode - vue element which the tooltip will be attached to
+ */
+const showToolTip = (el, options, vNode) =&gt; {
+  vNode.context.$nextTick(() =&gt; {
+    var mustBeShown = true
+    // Check if tool tip was already shown
+    <span class="missing-if-branch" title="else path not taken" >E</span>if ((options.showOnce || <span class="branch-1 cbranch-no" title="branch not covered" >options.saveClose)</span> &amp;&amp; options.name) {
+      let mapSettings = store.getters.mapSettings
+      mustBeShown = !(mapSettings.shownOnceTooltips &amp;&amp; mapSettings.shownOnceTooltips[options.name])
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (options.showOnce &amp;&amp; !appConfig.showInstructionsTooltipsOnFirstLoad) {
+<span class="cstat-no" title="statement not covered" >      mustBeShown = false</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (options.forceShow) {
+<span class="cstat-no" title="statement not covered" >      mustBeShown = true</span>
+    }
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (mustBeShown) {
+      // Will remove the tooltip from DOM if it already exists
+<span class="cstat-no" title="statement not covered" >      removeTooltipEl(vNode.context.popperTooltipGuid)</span>
+&nbsp;
+      //Generate an unique id for this tooltip element
+      let guid = <span class="cstat-no" title="statement not covered" >utils.guid('popper-tooltip')</span>
+&nbsp;
+      // Get the tooltip position or a default one
+<span class="cstat-no" title="statement not covered" >      options.position = options.position || 'left'</span>
+&nbsp;
+      //Build the tooltip html, attache it to the dom
+      // and set the required styles for it
+      let toolTipEl = <span class="cstat-no" title="statement not covered" >buildTooltipEl(guid, options)</span>
+<span class="cstat-no" title="statement not covered" >      document.body.appendChild(toolTipEl)</span>
+<span class="cstat-no" title="statement not covered" >      setArrowPseudoStyles(guid, options)</span>
+&nbsp;
+      // Build tooltip popper options
+      let popperOptions = <span class="cstat-no" title="statement not covered" >{</span>
+        placement: options.position,
+        modifiers: [{
+          name: 'offset',
+          options: {
+            offset: [0, 8]
+          }
+        }]
+      }
+&nbsp;
+      // Store the tooltip unique id in the vue component
+<span class="cstat-no" title="statement not covered" >      vNode.context.popperTooltipGuid = guid</span>
+&nbsp;
+      // Create the popper tooltip
+<span class="cstat-no" title="statement not covered" >      createPopper(el, toolTipEl, popperOptions)</span>
+&nbsp;
+      // Ir the tooltip must be shown only once
+      // then store that it was already shown
+<span class="cstat-no" title="statement not covered" >      if (options.showOnce) {</span>
+<span class="cstat-no" title="statement not covered" >        storeTooltipAlreadyShown(options.name)</span>
+      }
+    }
+  })
+}
+&nbsp;
+/**
+ * Build tooltip el html fragment
+ * @param {*} guid
+ * @param {*} options
+ * @returns {HtmlFragment}
+ */
+const buildTooltipEl = (guid, options) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let vueInstance = <span class="cstat-no" title="statement not covered" >AppLoader.getInstance()</span>
+  let background = <span class="cstat-no" title="statement not covered" >options.dark === true ? '#333;' : 'white'</span>
+  let contentColor = <span class="cstat-no" title="statement not covered" >options.dark === true ? 'white' : '#333'</span>
+&nbsp;
+  let toolTipCloseEl = <span class="cstat-no" title="statement not covered" >document.createElement('a')</span>
+<span class="cstat-no" title="statement not covered" >  toolTipCloseEl.onclick = () =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >    closeTooltip(guid, options.saveClose, options.name)</span>
+  }
+<span class="cstat-no" title="statement not covered" >  toolTipCloseEl.innerText = 'close' </span>// material close icon will be rendered
+<span class="cstat-no" title="statement not covered" >  toolTipCloseEl.title = vueInstance.$t('global.closeAndDoNotShowAgain')</span>
+<span class="cstat-no" title="statement not covered" >  toolTipCloseEl.className = 'popper-tooltip-close material-icons'</span>
+<span class="cstat-no" title="statement not covered" >  toolTipCloseEl.style.color = contentColor</span>
+<span class="cstat-no" title="statement not covered" >  toolTipCloseEl.style.float = 'right'</span>
+<span class="cstat-no" title="statement not covered" >  toolTipCloseEl.style.cursor = 'pointer'</span>
+&nbsp;
+  let toolTipContentEl = <span class="cstat-no" title="statement not covered" >document.createElement('div')</span>
+<span class="cstat-no" title="statement not covered" >  toolTipContentEl.innerText = options.text</span>
+<span class="cstat-no" title="statement not covered" >  toolTipContentEl.className = 'popper-tooltip-content'</span>
+&nbsp;
+  let style = <span class="cstat-no" title="statement not covered" >`</span>
+    z-index:4;
+    background-color: ${background};
+    color: ${contentColor};
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    max-width: 200px;
+    box-shadow: 0px 2px 1px 2px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);`
+&nbsp;
+  let toolTipEl = <span class="cstat-no" title="statement not covered" >document.createElement('div')</span>
+<span class="cstat-no" title="statement not covered" >  toolTipEl.id = guid</span>
+<span class="cstat-no" title="statement not covered" >  toolTipEl.setAttribute('style', style)</span>
+<span class="cstat-no" title="statement not covered" >  toolTipEl.setAttribute('role', 'tooltip')</span>
+<span class="cstat-no" title="statement not covered" >  toolTipEl.className = 'popper-tooltip'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  toolTipEl.innerHTML = `&lt;div id="arrow-${guid}" data-popper-arrow&gt;&lt;/div&gt;`</span>
+<span class="cstat-no" title="statement not covered" >  toolTipEl.appendChild(toolTipCloseEl)</span>
+<span class="cstat-no" title="statement not covered" >  toolTipEl.appendChild(toolTipContentEl)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return toolTipEl</span>
+}
+&nbsp;
+/**
+ * Set the tooltip pseudo style by adding an style element to the DOM
+ * @param {*} guid
+ * @param {*} options
+ */
+const setArrowPseudoStyles = (guid, options) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let arrowDivId = <span class="cstat-no" title="statement not covered" >`arrow-${guid}`</span>
+  let styleElem = <span class="cstat-no" title="statement not covered" >document.head.appendChild(document.createElement('style'))</span>
+  let positionStyle = <span class="cstat-no" title="statement not covered" >buildArrowPosition(options)</span>
+  let arrowColor = <span class="cstat-no" title="statement not covered" >options.dark === true ? '#333;' : 'white'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  styleElem.innerHTML = `</span>
+    #${arrowDivId} {${positionStyle}}
+    #${arrowDivId}, #${arrowDivId}::before {position: absolute;width: 8px;height: 8px;z-index: -1; background: transparent;}
+    #${arrowDivId}:before {content: ''; transform: rotate(45deg); background: ${arrowColor};}
+    `
+}
+&nbsp;
+/**
+ * Build the tooltip arrow position style
+ * @param {String} options
+ * @returns {string} arrowPosition
+ */
+const buildArrowPosition = (options) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let arrowPosition = <span class="cstat-no" title="statement not covered" >''</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  switch (options.position) {</span>
+    case 'top':
+<span class="cstat-no" title="statement not covered" >      arrowPosition += 'bottom: -4px;'</span>
+<span class="cstat-no" title="statement not covered" >      break</span>
+    case 'bottom':
+<span class="cstat-no" title="statement not covered" >      arrowPosition += 'top: -4px;'</span>
+<span class="cstat-no" title="statement not covered" >      break</span>
+    case 'left':
+<span class="cstat-no" title="statement not covered" >      arrowPosition += 'right: -4px;'</span>
+<span class="cstat-no" title="statement not covered" >      break</span>
+    case 'right':
+<span class="cstat-no" title="statement not covered" >      arrowPosition += 'left: -4px;'</span>
+<span class="cstat-no" title="statement not covered" >      break</span>
+  }
+<span class="cstat-no" title="statement not covered" >  return arrowPosition</span>
+}
+&nbsp;
+&nbsp;
+export default smartTooltip
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 12:16:47 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

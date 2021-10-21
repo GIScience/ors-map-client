@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fragments/map-view/map-definitions.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">src/fragments/map-view/</a> map-definitions.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.17% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>1/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/1</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.17% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>1/24</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import appConfig from '@/config/app-config'
+import AppLoader from '@/app-loader'
+import store from '@/store/store'
+&nbsp;
+const mapDefinitions = {
+  /**
+   * Reorder the values of an array of coordinates switching the position of lat and long of each coordinate
+   * @param {*} coordinatesArr
+   * @returns {Array} of reordered coordinates
+   */
+  polylineMeasureOptions: (polylineMeasureTranslations) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+    // eslint-disable-block no-multi-spaces
+    const options = <span class="cstat-no" title="statement not covered" >{</span>
+      // language options
+      ...polylineMeasureTranslations,
+      // other options
+      position: 'topleft', // Position to show the control. Values: 'topright', 'topleft', 'bottomright', 'bottomleft'
+      clearMeasurementsOnStop: true, // Clear all the measurements when the control is unselected
+      showBearings: true, // Whether bearings are displayed within the tooltips
+      showClearControl: false, // Show a control to clear all the measurements
+      clearControlClasses: [], // Classes to apply to clear control button
+      showUnitControl: true, // Show a control to change the units of measurements
+      distanceShowSameUnit: true, // Keep same unit in tooltips in case of distance less then 1 km/mi/nm
+      tempLine: { // Styling settings for the temporary dashed line
+        color: '#00f', // Dashed line color
+        weight: 5 // Dashed line weight
+      },
+      fixedLine: { // Styling for the solid line
+        color: '#00f', // Solid line color
+        weight: 5 // Solid line weight
+      },
+      startCircle: { // Style settings for circle marker indicating the starting point of the polyline
+        color: '#000', // Color of the border of the circle
+        weight: 1, // Weight of the circle
+        fillColor: '#4caf50', // Fill color of the circle
+        fillOpacity: 1, // Fill opacity of the circle
+        radius: 6 // Radius of the circle
+      },
+      intermedCircle: { // Style settings for all circle markers between startCircle and endCircle
+        color: '#000', // Color of the border of the circle
+        weight: 2, // Weight of the circle
+        fillColor: '#2196f3', // Fill color of the circle
+        fillOpacity: 1, // Fill opacity of the circle
+        radius: 6 // Radius of the circle
+      },
+      currentCircle: { // Style settings for circle marker indicating the latest point of the polyline during drawing a line
+        color: '#000', // Color of the border of the circle
+        weight: 2, // Weight of the circle
+        fillColor: '#000', // Fill color of the circle
+        fillOpacity: 1, // Fill opacity of the circle
+        radius: 6 // Radius of the circle
+      },
+      endCircle: { // Style settings for circle marker indicating the last point of the polyline
+        color: '#000', // Color of the border of the circle
+        weight: 2, // Weight of the circle
+        fillColor: '#f44336', // Fill color of the circle
+        fillOpacity: 1, // Fill opacity of the circle
+        radius: 6 // Radius of the circle
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return options</span>
+  },
+  /**
+   * Build the draw options object
+   * @param {*} cantIntersectMsg
+   */
+  drawOptions (cantIntersectMsg) {
+    var options = <span class="cstat-no" title="statement not covered" >{</span>
+      position: 'topleft',
+      draw: {
+        polyline: false,
+        rectangle: true,
+        marker: false,
+        circlemarker: false,
+        circle: false, // circle is not supported as an avoid area
+        polygon: {
+          allowIntersection: false, // Restricts shapes to simple polygons
+          drawError: {
+            color: '#e1e100', // Color the shape will turn when intersects
+            message: cantIntersectMsg // Message that will show when intersect
+          },
+          shapeOptions: {
+            color: 'blue'
+          },
+          showArea: true,
+          showLength: true
+        }
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return options</span>
+  },
+&nbsp;
+  /**
+   * Build map providers array
+   */
+  getProviders () {
+    const defaultTilesProvider = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings.defaultTilesProvider || 'osm'</span>
+    var providers = <span class="cstat-no" title="statement not covered" >appConfig.mapTileProviders</span>
+&nbsp;
+    // Add custom tile service if defined in settings
+    const customTileProviderUrl = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings.customTileProviderUrl</span>
+    let vueInstance = <span class="cstat-no" title="statement not covered" >AppLoader.getInstance()</span>
+<span class="cstat-no" title="statement not covered" >    if (customTileProviderUrl) {</span>
+      const customTileService = <span class="cstat-no" title="statement not covered" >[</span>
+        {
+          name: vueInstance.$t('global.custom'),
+          id: 'custom',
+          visible: false,
+          attribution: vueInstance.$t('mapView.customTileProvider'),
+          url: customTileProviderUrl.toString()
+        }
+      ]
+<span class="cstat-no" title="statement not covered" >      providers = providers.concat(customTileService)</span>
+    }
+    // Se the tile provider that is visible by default
+<span class="cstat-no" title="statement not covered" >    for (let key in providers) {</span>
+<span class="cstat-no" title="statement not covered" >      providers[key].visible = providers[key].id === defaultTilesProvider</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return providers</span>
+  },
+  getOverlayerProviders () {
+    let providers = <span class="cstat-no" title="statement not covered" >[]</span>
+    // Add custom over layer tile service if defined in settings
+    const customOverlayerTileProviderUrl = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings.customOverlayerTileProviderUrl</span>
+    let vueInstance = <span class="cstat-no" title="statement not covered" >AppLoader.getInstance()</span>
+<span class="cstat-no" title="statement not covered" >    if (customOverlayerTileProviderUrl) {</span>
+      const overlayerTileService =
+<span class="cstat-no" title="statement not covered" >      {</span>
+        name: vueInstance.$t('global.customOverlayer'),
+        id: 'custom-overlayer',
+        visible: true,
+        attribution: vueInstance.$t('mapView.customTileProvider'),
+        url: customOverlayerTileProviderUrl.toString()
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      providers.push(overlayerTileService)</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return providers</span>
+  },
+  getWmsOverlayerTileProviders () {
+    var providers = <span class="cstat-no" title="statement not covered" >appConfig.wpsOverlayerTileProviders || []</span>
+<span class="cstat-no" title="statement not covered" >    return providers</span>
+  }
+}
+export default mapDefinitions
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 12:16:47 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

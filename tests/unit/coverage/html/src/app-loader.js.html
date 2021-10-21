@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/app-loader.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">src/</a> app-loader.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">49.11% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>55/112</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">33.33% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>22/66</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">45.45% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>10/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">49.11% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>55/112</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
+import defaultMapSettings from '@/config/default-map-settings'
+import settingsOptions from '@/config/settings-options.js'
+import PreparedVue from '@/common/prepared-vue.js'
+import I18nBuilder from '@/i18n/i18n-builder'
+import constants from '@/resources/constants'
+import appConfig from '@/config/app-config'
+import AppHooks from '@/support/app-hooks'
+import {HttpClient} from 'vue-rest-client'
+import utils from '@/support/utils'
+import store from '@/store/store'
+import router from '@/router'
+import lodash from 'lodash'
+import Vue from 'vue'
+&nbsp;
+&nbsp;
+class AppLoader {
+  constructor() {
+    this.debounceTimeoutId = null
+    this.vueInstance = null
+  }
+  /**
+   * Fetch required api data to run the app
+   */
+  fetchApiInitialData () {
+    return new Promise((resolve) =&gt; {
+      // If the data was already acquired
+      // don't run the request again
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (store.getters.dataAcquired) {
+<span class="cstat-no" title="statement not covered" >        resolve(store.getters.mapSettings.apiKey)</span>
+      } else {
+        // For some reason not yet identified (maybe a vue router bug?)
+        // the `beforeEnter` guard used to fire this action is being called
+        // multiple times. so, we had to implement this `apiDataRequested` flag
+        // so that we avoid running several requests before the promise is resolved
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (!store.getters.apiDataRequested) {
+          store.commit('apiDataRequested', true)
+&nbsp;
+          // eslint-disable-next-line no-undef
+          var ORSKEY = process.env.ORSKEY
+  
+          // By default, the app must use an ors API key stored in config.js
+          <span class="missing-if-branch" title="else path not taken" >E</span>if (appConfig.useUserKey) {
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (appConfig.orsApiKey === 'put-here-an-ors-api-key' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >ORSKEY </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >ORSKEY != '')</span> {
+<span class="cstat-no" title="statement not covered" >              appConfig.orsApiKey = ORSKEY</span>
+            }
+            this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)
+            resolve()
+          } else {
+            let httpClient = <span class="cstat-no" title="statement not covered" >new HttpClient({baseURL: appConfig.dataServiceBaseUrl})</span>
+            // Request the public API key from the remote service
+            // (only works when running the app on valid ORS domains).
+            // If the request fails, use the local user key instead
+<span class="cstat-no" title="statement not covered" >            httpClient.http.get(appConfig.publicApiKeyUrl).then(response =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >              this.setInitialSettings(response.data, constants.publicEndpoints)</span>
+<span class="cstat-no" title="statement not covered" >              resolve(response.data)</span>
+            }).catch(error =&gt; <span class="fstat-no" title="function not covered" >{            </span>
+<span class="cstat-no" title="statement not covered" >              if (ORSKEY &amp;&amp; ORSKEY !== 'put-an-ors-key-here' &amp;&amp; ORSKEY != '') {</span>
+<span class="cstat-no" title="statement not covered" >                appConfig.orsApiKey = ORSKEY</span>
+              }
+<span class="cstat-no" title="statement not covered" >              this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)</span>
+<span class="cstat-no" title="statement not covered" >              console.log('Error acquiring api key:', error)</span>
+<span class="cstat-no" title="statement not covered" >              resolve()</span>
+            })
+          }
+        } else {
+<span class="cstat-no" title="statement not covered" >          resolve()</span>
+        }
+      }
+    })
+  }
+  /**
+   * Find the fitting locale
+   * @returns {String}
+   * @param storedLocale
+   */
+  setFittingLocale (storedLocale) {
+    var deviceLocale = window.navigator.language || <span class="branch-1 cbranch-no" title="branch not covered" >window.navigator.userLanguage</span>
+    let locale =  storedLocale || <span class="branch-1 cbranch-no" title="branch not covered" >deviceLocale</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (locale) {
+      locale = locale.toLowerCase()
+    }
+    let isLocaleValid = lodash.find(settingsOptions.appLocales, (l) =&gt; {
+      return l.value === locale
+    })
+    // If the exact locale of the device is not available, try at least to use the language
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!isLocaleValid) {
+      let language = <span class="cstat-no" title="statement not covered" >locale</span>
+<span class="cstat-no" title="statement not covered" >      if (locale.length &gt; 2 &amp;&amp; locale.indexOf('-') &gt; -1) {</span>
+<span class="cstat-no" title="statement not covered" >        language = locale.split('-')[0]</span>
+      }
+<span class="cstat-no" title="statement not covered" >      isLocaleValid = lodash.find(settingsOptions.appLocales, (l) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        return l.value.split('-')[0] === language</span>
+      })
+<span class="cstat-no" title="statement not covered" >      if (isLocaleValid) {</span>
+<span class="cstat-no" title="statement not covered" >        locale = isLocaleValid.value</span>
+      }
+    }
+    // If the selected locale is not supported, set the default
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!isLocaleValid) {
+<span class="cstat-no" title="statement not covered" >      locale = appConfig.defaultLocale</span>
+    }
+    return locale
+  }
+  /**
+   * Save the API data
+   * @param {*} apiKey
+   * @param {*} endpoints
+   */
+  setInitialSettings (apiKey, endpoints) {
+    // Save the api key and the endpoints to the default settings object
+    defaultMapSettings.apiKey = apiKey
+    defaultMapSettings.endpoints = endpoints
+  
+    // WE will save the mapSettings on our store
+    // but the default settings are preserved
+    const mapSettings = utils.clone(defaultMapSettings)
+  
+    // Get map settings from local storage
+    const serializedMapSettings = localStorage.getItem('mapSettings')
+  
+    var locale = null
+  
+    // Restore settings stored in local storage, if available
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (serializedMapSettings) {
+      const storedMapSettings = JSON.parse(serializedMapSettings)
+      for (const key in storedMapSettings) {
+        if (key === 'locale') {
+          locale = storedMapSettings.locale
+        } else {
+          <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof storedMapSettings[key] === 'object') {
+            mapSettings[key] = Object.assign({}, storedMapSettings[key])
+          } else {
+<span class="cstat-no" title="statement not covered" >            mapSettings[key] = storedMapSettings[key]</span>
+          }
+        }
+      }
+      <span class="missing-if-branch" title="if path not taken" >I</span>if ( typeof mapSettings.apiKey !== 'string' || mapSettings.apiKey === '') {
+<span class="cstat-no" title="statement not covered" >        mapSettings.apiKey = defaultMapSettings.apiKey</span>
+      }
+      // If the settings was saved in local storage
+      // then this option is must start as true
+      mapSettings.saveToLocalStorage = true
+    }
+&nbsp;
+    // Set the default value for profile in ors-filter
+    const profile = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!profile.value) {
+      OrsFilterUtil.setFilterValue(constants.profileFilterName, defaultMapSettings.defaultProfile)
+    }
+     
+    this.saveSettings(mapSettings, locale)
+  
+    let appInstance = AppLoader.getInstance()
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (appInstance) { // main app instance may not be available when app is still loading
+      appInstance.appHooks.run('mapSettingsChanged', mapSettings)
+    }
+  
+    // Save the data acquired flag as true
+    store.commit('dataAcquired', true)
+  }
+  /**
+   * Store the map settings locale and routing locale
+   * @param {*} mapSettings
+   * @param {*} locale
+   */
+  saveSettings (mapSettings, locale = null) {
+    let fittingLocale = this.setFittingLocale(locale)
+    mapSettings.locale = fittingLocale
+  
+    let validRoutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) =&gt; {
+      return l.value === fittingLocale
+    })
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (validRoutingLocale) {
+<span class="cstat-no" title="statement not covered" >      settingsOptions.routingInstructionsLocale = locale</span>
+    } else {
+      validRoutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) =&gt; {
+        return l.value === fittingLocale.split('-')[0]
+      })
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (validRoutingLocale) {
+        mapSettings.routingInstructionsLocale = validRoutingLocale.value
+      }
+    }
+  
+    // Save the map settings
+    store.commit('mapSettings', mapSettings)
+  }
+  /**
+   * check if the embed is in the url params and set the embed state
+   */
+  static checkAndSetEmbedState () <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise((resolve) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+      let isEmbed = <span class="cstat-no" title="statement not covered" >location.href.indexOf('/embed') &gt; -1</span>
+<span class="cstat-no" title="statement not covered" >      store.commit('embed', isEmbed)</span>
+  
+      let parts = <span class="cstat-no" title="statement not covered" >location.href.split('/embed/')</span>
+      let mapSettings = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings</span>
+<span class="cstat-no" title="statement not covered" >      if (Object.keys(mapSettings).length &gt; 0 &amp;&amp; isEmbed &amp;&amp; Array.isArray(parts) &amp;&amp; parts.length &gt; 1 &amp;&amp; parts[1] ) {</span>
+        let locale = <span class="cstat-no" title="statement not covered" >parts[1]</span>
+        let appLoader = <span class="cstat-no" title="statement not covered" >new AppLoader()</span>
+<span class="cstat-no" title="statement not covered" >        locale = appLoader.setFittingLocale(locale)</span>
+<span class="cstat-no" title="statement not covered" >        appLoader.saveSettings(mapSettings, locale)</span>
+      }
+<span class="cstat-no" title="statement not covered" >      resolve(isEmbed)</span>
+    })
+  }
+&nbsp;
+  /**
+   * Load and mount the main VueJS app using the 
+   * @param {Object} App 
+   * @param {String} elementSelector
+   * @param {String} templateTag 
+   * @returns {Promise} that resolves a the main app Vue  instance
+   */
+  loadApp (App, elementSelector, templateTag) <span class="fstat-no" title="function not covered" >{</span>
+    let context = <span class="cstat-no" title="statement not covered" >this</span>
+    
+<span class="cstat-no" title="statement not covered" >    return new Promise((resolve) =&gt; <span class="fstat-no" title="function not covered" >{      </span></span>
+<span class="cstat-no" title="statement not covered" >      if (context.vueInstance) {</span>
+<span class="cstat-no" title="statement not covered" >        resolve(context.vueInstance)</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        context.loadAppData().then(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+          let i18n = <span class="cstat-no" title="statement not covered" >I18nBuilder.build()</span>
+        
+          let mapSettingsLocale = <span class="cstat-no" title="statement not covered" >store.getters.mapSettings.locale</span>
+          // In previous versions of this app the `en` locale was stored as `en-us`
+          let locale = <span class="cstat-no" title="statement not covered" >mapSettingsLocale === 'en' ? 'en-us' : mapSettingsLocale</span>
+          // Set locale from store/local storage
+<span class="cstat-no" title="statement not covered" >          i18n.locale = locale</span>
+        
+          /* eslint-disable no-new */
+<span class="cstat-no" title="statement not covered" >          context.vueInstance = new PreparedVue({</span>
+            el: elementSelector,
+            i18n,
+            router,
+            components: { App },
+            store: store,
+            template: templateTag
+          })
+<span class="cstat-no" title="statement not covered" >          store.commit('mainAppInstanceRef', context.vueInstance)</span>
+<span class="cstat-no" title="statement not covered" >          resolve(context.vueInstance)</span>
+        })
+      }
+    })
+  }
+  
+  /**
+   * Load app external data
+   * @returns {Promise}
+   */
+  loadAppData () <span class="fstat-no" title="function not covered" >{</span>
+    let context = <span class="cstat-no" title="statement not covered" >this</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise((resolve) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      if (context.debounceTimeoutId) {</span>
+<span class="cstat-no" title="statement not covered" >        clearTimeout(context.debounceTimeoutId)</span>
+      }
+<span class="cstat-no" title="statement not covered" >      context.debounceTimeoutId = setTimeout(function () <span class="fstat-no" title="function not covered" >{</span></span>
+        let apiDataPromise = <span class="cstat-no" title="statement not covered" >context.fetchApiInitialData()</span>
+        let embedPromise = <span class="cstat-no" title="statement not covered" >AppLoader.checkAndSetEmbedState()</span>
+        let fetchMainMenu = <span class="cstat-no" title="statement not covered" >store.dispatch('fetchMainMenu')</span>
+    
+<span class="cstat-no" title="statement not covered" >        Promise.all([apiDataPromise, embedPromise, fetchMainMenu]).then(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >          resolve()</span>
+        })
+      }, 500)      
+    })
+  }
+&nbsp;
+  /**
+   * Get a pointer to the main app vue instance
+   * @returns {Vue} instance
+   */
+  static getInstance () {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (store.getters.mainAppInstanceRef) {
+<span class="cstat-no" title="statement not covered" >      return store.getters.mainAppInstanceRef</span>
+    } else {
+      var vm = new Vue({ 
+        data: { appHooks: new AppHooks() },
+        i18n: I18nBuilder.build(),
+        store
+      })
+      return vm
+    }
+  }
+}
+&nbsp;
+export default AppLoader
+&nbsp;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 21 2021 12:16:47 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

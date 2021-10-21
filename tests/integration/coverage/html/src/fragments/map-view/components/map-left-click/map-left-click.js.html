@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fragments/map-view/components/map-left-click/map-left-click.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../index.html">all files</a> / <a href="index.html">src/fragments/map-view/components/map-left-click/</a> map-left-click.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">15.15% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>10/66</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">13.64% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>3/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.11% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">15.15% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>10/66</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Render and deals with left click events
+ * @emits closed
+ * @emits showLoading [via eventBus] (when resolving place info)
+ * @emits directionsToPoint
+ * @listens mapRightClicked
+ * @listens mapLeftClicked (to close the right click pop up)
+ */
+import { ReverseGeocode } from '@/support/ors-api-runner'
+import GeoUtils from '@/support/geo-utils'
+import Place from '@/models/place'
+&nbsp;
+export default {
+  data () {
+    return {
+      showLeftClickPopup: false,
+      clickPoint: null,
+      clickLatlng: null,
+      clickInsidePolygon: false,
+      data: null
+    }
+  },
+  props: {
+    currentZoom: {
+      required: true,
+      type: Number
+    },
+    show: {
+      type: Boolean,
+      default: true
+    }
+  },
+  watch: {
+    show: function (newVal) {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (newVal === false) {
+        this.showLeftClickPopup = false
+      }
+    }
+  },
+  computed: {
+    placeInfo () {
+<span class="cstat-no" title="statement not covered" >      if (this.clickPoint) {</span>
+<span class="cstat-no" title="statement not covered" >        return this.clickPoint</span>
+      }
+    },
+    hasPlaceInfo () {
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (this.clickPoint) {
+<span class="cstat-no" title="statement not covered" >        return true</span>
+      }
+      return false
+    },
+    placeInfoTitle () {
+      const title = this.clickInsidePolygon ? <span class="branch-0 cbranch-no" title="branch not covered" >this.$t('mapLeftClick.placeInsidePolygon') </span>: this.$t('mapLeftClick.placeInfo')
+      return title
+    }
+  },
+  methods: {
+    /**
+     * Close the place info pop up
+     */
+    closePlaceInfo () {
+<span class="cstat-no" title="statement not covered" >      this.clickLatlng = null</span>
+<span class="cstat-no" title="statement not covered" >      this.$emit('closed')</span>
+    },
+    /**
+     * Deal wth the map left click, preparing the data and displaying the popup
+     * @param {*} data
+     */
+    mapLeftClick (data) {
+<span class="cstat-no" title="statement not covered" >      this.clickInsidePolygon = data.insidePolygon</span>
+<span class="cstat-no" title="statement not covered" >      this.showLeftClickPopup = true</span>
+<span class="cstat-no" title="statement not covered" >      this.clickLatlng = data.event.latlng</span>
+<span class="cstat-no" title="statement not covered" >      this.clickPoint = { latlng: data.event.latlng }</span>
+&nbsp;
+      // Calculate and set polygon area
+<span class="cstat-no" title="statement not covered" >      if (this.clickInsidePolygon !== false) {</span>
+        const latlngs = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >        for (const key in this.clickInsidePolygon) {</span>
+<span class="cstat-no" title="statement not covered" >          latlngs.push(GeoUtils.buildLatLong(this.clickInsidePolygon[key][1], this.clickInsidePolygon[key][0]))</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this.clickPoint.containerArea = GeoUtils.readableArea(latlngs, this.$store.getters.mapSettings.areaUnit)</span>
+<span class="cstat-no" title="statement not covered" >        this.clickInsidePolygon = this.clickPoint.clickInsidePolygon = true</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (this.$refs.placeInfoBox) {</span>
+<span class="cstat-no" title="statement not covered" >        this.$refs.placeInfoBox.show()</span>
+      }
+&nbsp;
+      const context = <span class="cstat-no" title="statement not covered" >this</span>
+<span class="cstat-no" title="statement not covered" >      this.resolvePoint(data.event.latlng.lat, data.event.latlng.lng).then((place) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        if (place) {</span>
+<span class="cstat-no" title="statement not covered" >          context.clickPoint.placeName = place.placeName</span>
+          let hookData = <span class="cstat-no" title="statement not covered" >{placeInfo: this.clickPoint, htmlFragment: this.$refs.placeInfoContainer}</span>
+<span class="cstat-no" title="statement not covered" >          this.$root.appHooks.run('beforeShowResolvedPlaceInfo', hookData)</span>
+<span class="cstat-no" title="statement not covered" >          if (context.$refs.placeInfoBox) {</span>
+<span class="cstat-no" title="statement not covered" >            context.$refs.placeInfoBox.show()</span>
+          }
+<span class="cstat-no" title="statement not covered" >          context.$forceUpdate()</span>
+        }
+      })
+    },
+    /**
+     * Resolve the coordinates of a point to a qualified location
+     * @param lar
+     * @param lng
+     * @param options
+     * @returns {Promise}
+     * @emits showLoading (via eventBus)
+     */
+    resolvePoint (lat, lng) {
+<span class="cstat-no" title="statement not covered" >      return new Promise((resolve, reject) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        this.eventBus.$emit('showLoading', true)</span>
+        const context = <span class="cstat-no" title="statement not covered" >this</span>
+<span class="cstat-no" title="statement not covered" >        ReverseGeocode(lat, lng).then(places =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >          if (places.length &gt; 0) {</span>
+            const selectedPlace = <span class="cstat-no" title="statement not covered" >Place.selectPlaceByZoomLevel(context.currentZoom, places)</span>
+<span class="cstat-no" title="statement not covered" >            resolve(selectedPlace)</span>
+          } else {
+            const place = <span class="cstat-no" title="statement not covered" >new Place(lat, lng)</span>
+<span class="cstat-no" title="statement not covered" >            resolve(place)</span>
+          }
+        }).catch(response =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >          console.log(response)</span>
+<span class="cstat-no" title="statement not covered" >          reject(response)</span>
+        }).finally(() =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >          this.eventBus.$emit('showLoading', false)</span>
+        })
+      })
+    },
+    /**
+     * Copy latitude.longitude to clipboard
+     *
+     */
+    copyLatlng () {
+      const latlng = <span class="cstat-no" title="statement not covered" >`${this.clickLatlng.lat}, ${this.clickLatlng.lng}`</span>
+<span class="cstat-no" title="statement not covered" >      if (this.copyToClipboard(latlng)) {</span>
+<span class="cstat-no" title="statement not covered" >        this.showSuccess(this.$t('mapLeftClick.latlngCopied'), { timeout: 2000 })</span>
+      }
+    },
+    /**
+     * Copy longitude, latitude to clipboard
+     *
+     */
+    copyLnglat () {
+      const lnglat = <span class="cstat-no" title="statement not covered" >`${this.clickLatlng.lng}, ${this.clickLatlng.lat}`</span>
+<span class="cstat-no" title="statement not covered" >      if (this.copyToClipboard(lnglat)) {</span>
+<span class="cstat-no" title="statement not covered" >        this.showSuccess(this.$t('mapLeftClick.lnglatCopied'), { timeout: 2000 })</span>
+      }
+    },
+    /**
+     * Copy the string to chipboard by creating a temporary textarea element
+     *
+     * @param {*} str
+     * @returns {Boolean}
+     */
+    copyToClipboard (str) {
+      const el = <span class="cstat-no" title="statement not covered" >document.createElement('textarea')</span>
+<span class="cstat-no" title="statement not covered" >      el.value = str</span>
+<span class="cstat-no" title="statement not covered" >      document.body.appendChild(el)</span>
+<span class="cstat-no" title="statement not covered" >      el.select()</span>
+      const result = <span class="cstat-no" title="statement not covered" >document.execCommand('copy')</span>
+<span class="cstat-no" title="statement not covered" >      document.body.removeChild(el)</span>
+<span class="cstat-no" title="statement not covered" >      return result</span>
+    },
+    /**
+     * Build a place and emits an event to set the
+     * app in directions mode to the clicked place
+     * @param {*} placeInfo
+     * @emits directionsToPoint
+     */
+    directionsToPoint (placeInfo) {
+      const place = <span class="cstat-no" title="statement not covered" >new Place(placeInfo.latlng.lng, placeInfo.latlng.lat)</span>
+<span class="cstat-no" title="statement not covered" >      place.resolve().then(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        this.$emit('directionsToPoint', {place})</span>
+      })
+    }
+  },
+  created () {
+    const context = this
+    this.eventBus.$on('mapLeftClicked', (data) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      context.mapLeftClick(data)</span>
+    })
+    this.eventBus.$on('mapRightClicked', () =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      context.showLeftClickPopup = false</span>
+    })
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 20 2021 17:35:35 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>
