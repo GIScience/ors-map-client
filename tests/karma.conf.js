@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-undef
-const testWebpackConfig = require('../../build/webpack.test.conf')
+const testWebpackConfig = require('../build/webpack.test.conf')
 
 // eslint-disable-next-line no-undef
 module.exports = function (config) {
@@ -10,7 +10,8 @@ module.exports = function (config) {
     exclude: [],
     //files/patterns to load in the browser
     files: [
-      { pattern: 'specs/*.js', watched: true, served: true, included: true }
+      { pattern: 'unit/specs/*[sS]pec.js', watched: true, served: true, included: true },
+      { pattern: 'integration/specs/*[sS]pec.js', watched: true, served: true, included: true }
       /*parameters:
           watched: if autoWatch is true all files that have set watched to true will be watched for changes
           served: should the files be served by Karma's webserver?
@@ -97,7 +98,8 @@ module.exports = function (config) {
     webpack: testWebpackConfig,
     preprocessors: {
       //add webpack as preprocessor to support require() in test-suits .js files
-      './specs/*.js': ['webpack'],
+      'integration/specs/*[sS]pec.js': ['webpack'],
+      'unit/specs/*[sS]pec.js': ['webpack'],
       '**/src/app/*.js': ['coverage']
     },
     webpackMiddleware: {

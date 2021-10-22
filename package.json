@@ -11,12 +11,9 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "release": "standard-version",
     "start": "npm run dev",
-    "test:unit": "cross-env BABEL_ENV=test karma start tests/unit/karma.conf.js",
-    "test:unit-debug": "cross-env BABEL_ENV=test karma start tests/unit/karma.debug.conf.js",
     "test:e2e": "node tests/e2e/runner.js",
-    "test": "npm run test:integration && npm run test:unit",
-    "test:integration": "cross-env BABEL_ENV=test karma start tests/integration/karma.conf.js",
-    "test:integration-debug": "cross-env BABEL_ENV=test karma start tests/integration/karma.debug.conf.js"
+    "test": "cross-env BABEL_ENV=test karma start tests/karma.conf.js",
+    "test:debug": "cross-env BABEL_ENV=test karma start tests/karma.debug.conf.js"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.11.3",
