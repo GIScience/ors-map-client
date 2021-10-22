@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.4](https://github.com/GIScience/ors-map-client/compare/v1.21.3...v1.21.4) (2021-10-22)
+
+
+### Others
+
+* remove unused testing-related packages ([2efdbf1](https://github.com/GIScience/ors-map-client/commit/2efdbf15a319f39e0003d36added2c4c894c474b))
+
+
+### Docs
+
+* **automated-test.md:** improve automated test docs ([9fc8483](https://github.com/GIScience/ors-map-client/commit/9fc8483d27eb2e8eafc5965af868df9134ae4646))
+
 ### [1.21.3](https://github.com/GIScience/ors-map-client/compare/v1.21.2...v1.21.3) (2021-10-22)
 
 
