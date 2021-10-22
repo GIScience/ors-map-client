@@ -1,7 +1,7 @@
 name: Test webapp
 on: [push]
 jobs:
-  Run-integration-test:
+  Run-tests:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
