@@ -4,9 +4,8 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/test/integration/coverage/
-/test/unit/coverage/
-/test/e2e/reports/
+/tests/coverage/
+/tests/e2e/reports/
 selenium-debug.log
 selenium-server.log
 /src/ors-js/
