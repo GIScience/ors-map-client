@@ -105,7 +105,7 @@ describe('App rendering', () => {
             expect(viewOnOrs).toBeDefined()
             expect(viewOnOrs).not.toBeNull()
             done()            
-          }, 200)
+          }, 1000)
         })
       })      
     }).catch ( err => {
