@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.3](https://github.com/GIScience/ors-map-client/compare/v1.21.2...v1.21.3) (2021-10-22)
+
+
+### Performance Improvements
+
+* use single karma configuration for unit and integration tests ([5a992c6](https://github.com/GIScience/ors-map-client/commit/5a992c61512820d0c8a10762819b1af6734a9a97))
+
+
+### Tests
+
+* add place-input test ([0be80a6](https://github.com/GIScience/ors-map-client/commit/0be80a64864c786d5fba628e1a9be8f19c9f77bc))
+* add support for vue server render testing ([357495c](https://github.com/GIScience/ors-map-client/commit/357495cca2bdb43cc456034995b5b295b6a81883))
+* add test for place input ([32781e0](https://github.com/GIScience/ors-map-client/commit/32781e0a340b0bbcfdd0bedf409d0154b849cc34))
+* add unit test infrastructure with vue-test-utils ([a3cf6eb](https://github.com/GIScience/ors-map-client/commit/a3cf6eb3c486089977398822bb8786d51fb4ce50))
+
+
+### Others
+
+* remove test coverage results from repository ([8c806d5](https://github.com/GIScience/ors-map-client/commit/8c806d5a6b6ad5060adbb66dd72d4f8d1f8377f4))
+
 ### [1.21.2](https://github.com/GIScience/ors-map-client/compare/v1.21.1...v1.21.2) (2021-10-15)
 
 
