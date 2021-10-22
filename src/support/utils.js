@@ -239,6 +239,12 @@ const Utils = {
     return clone
   },
 
+  merge (original, changes) {
+    let clone = Utils.clone(original)
+    let merged = {...clone, ...changes}
+    return merged
+  },
+
   /**
    * Compress a text to a unit 8 array
    * @param {*} txt

@@ -14,7 +14,7 @@ describe('OrsApiRunner test', () => {
       done.fail(result)
     }) 
   })
-  it('fetch API data and calculate a route', (done) => {
+  it('should fetch API data and calculate a route', (done) => {
     new AppLoader().fetchApiInitialData().then(() => {
       expect(store.getters.mapSettings.apiKey).toBeDefined() 
       let places = [mockupPlaces.FromToDirectionsPlaces.from, mockupPlaces.FromToDirectionsPlaces.to]
@@ -33,7 +33,7 @@ describe('OrsApiRunner test', () => {
     }) 
   })
 
-  it('fetch API data and calculate isochrone', (done) => {
+  it('should fetch API data and calculate isochrone', (done) => {
     new AppLoader().fetchApiInitialData().then(() => {
       expect(store.getters.mapSettings.apiKey).toBeDefined() 
       let places = [mockupPlaces.isochroneSinglePlace]
@@ -52,7 +52,7 @@ describe('OrsApiRunner test', () => {
     }) 
   })
 
-  it('fetch API data and find places', (done) => {
+  it('should fetch API data and find places', (done) => {
     new AppLoader().fetchApiInitialData().then(() => {
       expect(store.getters.mapSettings.apiKey).toBeDefined() 
       store.commit('mode', constants.modes.place)      
@@ -69,7 +69,7 @@ describe('OrsApiRunner test', () => {
     }) 
   })
 
-  it('fetch API data and reverse geocode', (done) => {
+  it('should fetch API data and reverse geocode', (done) => {
     new AppLoader().fetchApiInitialData().then(() => {
       expect(store.getters.mapSettings.apiKey).toBeDefined() 
       store.commit('mode', constants.modes.place)      
