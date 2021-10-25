@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.5](https://github.com/GIScience/ors-map-client/compare/v1.21.4...v1.21.5) (2021-10-25)
+
+
+### CI
+
+* **test.yml:** change CI test title to Run-tests ([b371eec](https://github.com/GIScience/ors-map-client/commit/b371eec0fd8067404418b200ec5a1ff4747ad7fa))
+
+
+### Tests
+
+* await for app view/data load before proceeding with the test ([a15b1c8](https://github.com/GIScience/ors-map-client/commit/a15b1c8a6256f39f09dc257fe159ea7b261773db))
+* increate timeout for embed mode rendering check ([727a0ea](https://github.com/GIScience/ors-map-client/commit/727a0ea608fca02c57d3fd3125f35caa84b63c75))
+* rename some tests ([2262ef2](https://github.com/GIScience/ors-map-client/commit/2262ef28c034198f548072ccf5ebb479d32a4005))
+
+
+### Docs
+
+* **readme.md:** add github test action badge ([1e736e6](https://github.com/GIScience/ors-map-client/commit/1e736e6936a9555be15f4e4a7e9685c1162ce5ba))
+* **readme.md:** fix readme test badge link ([18b4df3](https://github.com/GIScience/ors-map-client/commit/18b4df3a3b829bcccf5915fd4daf0891c746edda))
+
 ### [1.21.4](https://github.com/GIScience/ors-map-client/compare/v1.21.3...v1.21.4) (2021-10-22)
 
 
