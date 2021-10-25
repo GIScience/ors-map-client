@@ -7,7 +7,7 @@ import store from '@/store/store'
 import '@babel/polyfill'
 
 describe('App rendering', () => {
-  it('should render app initial page', (done) => {
+  it('should render app', (done) => {
     let appLoader = new AppLoader()
     appLoader.loadApp(AppRootComponent, '#app', '<App/>').then(vueInstance => {
       vueInstance.appHooks.loadRegisteredHooks()

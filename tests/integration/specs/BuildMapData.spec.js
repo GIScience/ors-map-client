@@ -8,7 +8,7 @@ import AppLoader from '@/app-loader'
 import Place from '@/models/place'
 import store from '@/store/store'
 
-describe('Build map mapViewData', () => {
+describe('MapViewData building', () => {
   it('should build directions mapViewData', async (done) => {
     await new AppLoader().fetchApiInitialData()
     expect(store.getters.mapSettings.apiKey).toBeDefined()

@@ -8,7 +8,7 @@ import appConfig from '@/config/app-config'
 import AppLoader from '@/app-loader'
 import store from '@/store/store'
 
-describe('Map render', () => {
+describe('Map rendering', () => {
   it('should render map-view component', async (done) => {
     await new AppLoader().fetchApiInitialData()
     const MapConstructor = PreparedVue.extend(MapView)
