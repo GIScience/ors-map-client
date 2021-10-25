@@ -355,7 +355,7 @@ For a detailed explanation on how webpack works, check out the [guide](http://vu
 
 ### Tests ###
 
-The application includes automated tests. They are stored in `test/integration`. More info can be checked on the [tests readme](docs/automated-test.md)
+The application includes automated tests. They are stored in `tests` folder. More info can be checked on the [tests readme](docs/automated-test.md)
 
 ### Contribute ###
 
