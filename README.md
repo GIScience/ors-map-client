@@ -1,6 +1,6 @@
 # ORS map client #
 
-[![Test](https://github.com/GIScience/ors-map-client/actions/workflows/test.yml/badge.svg)](https://github.com/GIScience/openrouteservice-js/actions/workflows/test.yml)
+[![Test](https://github.com/GIScience/ors-map-client/actions/workflows/test.yml/badge.svg)](https://github.com/GIScience/ors-map-client/actions/workflows/test.yml)
 
 This application implements a map client for the [openrouteservice API](https://openrouteservice.org/dev/#/api-docs/) as
 Single Page Application (SPA). It is a base application that can be used for multiple purposes,
