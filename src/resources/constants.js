@@ -83,6 +83,7 @@ const constants = {
     askOrs: 'https://ask.openrouteservice.org/c/maps/20',
     reportIssue: 'https://github.com/GIScience/ors-map-client/issues/new',
     termsOfService: 'https://openrouteservice.org/terms-of-service',
+    privacyPolicy: 'https://openrouteservice.org/privacy-policy/',
     donate: 'https://openrouteservice.org/donations/',
     aboutGHSL: 'https://ghsl.jrc.ec.europa.eu/about.php',
     heiGitEn: 'http://www.geog.uni-heidelberg.de/gis/heigit_en.html',

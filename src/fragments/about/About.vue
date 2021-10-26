@@ -55,8 +55,10 @@
         <br>
         <p class="textjustify">{{$t('about.info_V')}}</p>
         <v-divider></v-divider>
-        <h4 class="sectionHeader"><a class="link" :href="constants.links.termsOfService"
-            target="_blank">{{$t('about.privacyPolicy')}}</a></h4>
+        <h4 class="sectionHeader">
+          <a class="link" :title="$t('about.privacyPolicy')" :href="constants.links.privacyPolicy" target="_blank">{{$t('about.privacyPolicy')}}</a>&nbsp; &nbsp;
+          <a class="link" :title="$t('about.termsOfService')" :href="constants.links.termsOfService" target="_blank">{{$t('about.termsOfService')}}</a>
+        </h4>
         <br>
       </section>
     </div>
