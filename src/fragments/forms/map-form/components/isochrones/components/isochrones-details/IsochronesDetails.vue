@@ -19,15 +19,22 @@
                 <template v-if="hasAsCenter(place, polygon)">
                   <div :key="polygonIndex" style="padding-left:10px">
                     <v-layout class="action-options-wrapper">
-                      <v-flex v-bind="{[ $highResolution? 'md7' : 'md12']: true}">
-                        <v-btn icon @click="toggleVisibility(polygonIndex)"
+                      <v-flex v-bind="{[ $highResolution? 'lg4' : 'md12']: true}">
+                        <v-btn icon @click="toggleVisibility(polygonIndex)" class="no-margin"
                           :title="$t('isochronesDetails.toggleVisibility')">
                           <v-icon :color="polygon.properties.visible? 'primary' : 'dark' ">visibility</v-icon>
                         </v-btn>                        
                         <span class="polygon-area" :style="{background: polygon.properties.color}">
-                          <b :style="{color: polygonAreaTextColor(polygon.properties.color)}">{{polygon.properties.label.replace('Polygon', '')}}</b>
+                          <b style="font-size:11px" :style="{color: polygonAreaTextColor(polygon.properties.color)}">{{polygon.properties.label.replace('Polygon', '')}}</b>
                         </span>
                       </v-flex>
+                       <v-flex lg3>
+                         <template v-if="polygon.properties.total_pop !== null">
+                           <div style="font-size:12px">
+                            <span >{{$t('global.population')}}</span> <br/> <span>{{polygon.properties.total_pop}}</span>
+                           </div>
+                         </template>                        
+                      </v-flex>   
                        <v-spacer></v-spacer>
                       <v-flex md5 v-if="$highResolution">
                         <v-slider class="polygon-opacity-slider" :min="0" :max="1" 
@@ -38,7 +45,7 @@
                           @change="polygonOpacityChanged(polygonIndex)" :step="0.1">
                         </v-slider>
                         <br/>
-                      </v-flex>                     
+                      </v-flex>       
                     </v-layout>                   
                   </div>
                 </template>

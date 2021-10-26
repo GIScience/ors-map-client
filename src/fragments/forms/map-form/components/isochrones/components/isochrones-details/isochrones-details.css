@@ -10,3 +10,7 @@
   min-height: 35px;
   background: transparent;
 }
+
+.action-options-wrapper {
+  height: 45px;
+}

@@ -56,7 +56,8 @@
             <l-popup v-if="polygon.properties.label">
               <div :ref="'isochronePopupContainer' + index" >
                 {{polygon.properties.label}} {{$t('mapView.polygon')}} - {{polygon.properties.area}} 
-                <br/><span>{{$t('global.population')}}: {{polygon.properties.total_pop}}</span>
+                <br/>
+                <span v-if="polygon.properties.total_pop">{{$t('global.population')}}: {{polygon.properties.total_pop}}</span>
               </div>
             </l-popup>
           </l-polygon>         
