@@ -7,9 +7,18 @@
           <a target="_blank" href="https://github.com/GIScience/ors-map-client">v{{ appVersion }}</a>
         </strong>
         <span>&nbsp;© {{currentYear}} <strong>{{footerMainSiteName}}</strong></span>
-        <span class="hidden-sm-and-down"> | {{ $t('global.developedByIntro') }}
+        <span > | {{ $t('global.developedByIntro') }}
           <strong>
-            <a class="hidden-sm-and-down" target="_blank" :href="footerLink">{{ $t('global.developedBy') }}</a>
+            <a target="_blank" :title="$t('global.developedBy')" :href="footerLink">{{ $t('global.developedBy') }}</a>
+          </strong>
+        </span><br>
+        <span>
+          <strong>
+            <a class="link" :title="$t('about.privacyPolicy')" :href="constants.links.privacyPolicy" target="_blank">{{$t('about.privacyPolicy')}}</a>
+          </strong>
+          &nbsp; &nbsp;
+          <strong>
+            <a class="link" :title="$t('about.termsOfService')" :href="constants.links.termsOfService" target="_blank">{{$t('about.termsOfService')}}</a>
           </strong>
         </span>
       </p>
