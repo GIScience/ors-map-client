@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.1](https://github.com/GIScience/ors-map-client/compare/v1.22.0...v1.22.1) (2021-10-27)
+
+
+### Tests
+
+* reorganize the tests commands and update the automated-test documentation ([db6d21e](https://github.com/GIScience/ors-map-client/commit/db6d21e32492986bbb0520dc5ed27a30d3385ad6))
+* test embed mode only in e2e test ([2d5d98b](https://github.com/GIScience/ors-map-client/commit/2d5d98b97ac717ea11b25180c8f415e2cce5ec3b))
+
 ## [1.22.0](https://github.com/GIScience/ors-map-client/compare/v1.21.5...v1.22.0) (2021-10-27)
 
 
