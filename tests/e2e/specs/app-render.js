@@ -17,6 +17,7 @@ module.exports = {
       .assert.elementPresent('.leaflet-draw')
       .assert.elementPresent('#polyline-measure-control')
       .assert.elementPresent('.my-location-btn')
+      .assert.not.elementPresent('.view-on-ors')
       .end()
   },
   'app embedded mode rendering': function (browser) {
@@ -36,6 +37,7 @@ module.exports = {
       .assert.not.elementPresent('.leaflet-draw')
       .assert.not.elementPresent('#polyline-measure-control')
       .assert.not.elementPresent('.my-location-btn')
+      .assert.elementPresent('.view-on-ors')
       .end()
   }
 }
