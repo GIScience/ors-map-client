@@ -12,7 +12,7 @@
     "release": "standard-version",
     "start": "npm run dev",
     "test:e2e": "node tests/e2e/runner.js",
-    "test": "cross-env BABEL_ENV=test karma start tests/karma.conf.js",
+    "test": "npm run test:e2e && cross-env BABEL_ENV=test karma start tests/karma.conf.js",
     "test:debug": "cross-env BABEL_ENV=test karma start tests/karma.debug.conf.js"
   },
   "dependencies": {
