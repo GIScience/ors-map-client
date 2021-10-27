@@ -100,7 +100,7 @@ module.exports = function (config) {
       //add webpack as preprocessor to support require() in test-suits .js files
       'integration/specs/*[sS]pec.js': ['webpack'],
       'unit/specs/*[sS]pec.js': ['webpack'],
-      '**/src/app/*.js': ['coverage']
+      '**/src/*.js': ['coverage']
     },
     webpackMiddleware: {
       //turn off webpack bash output when run the tests
@@ -118,7 +118,12 @@ module.exports = function (config) {
       reporters: [
         { type: 'html', subdir: 'html' },
         { type: 'text-summary' }
-      ]
+      ],
+      global: {       
+        excludes: [
+          'src/**/*i18n*.js'
+        ]       
+      }
     }
   })
 }
