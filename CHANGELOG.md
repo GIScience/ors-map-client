@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.22.0](https://github.com/GIScience/ors-map-client/compare/v1.21.5...v1.22.0) (2021-10-27)
+
+
+### Features
+
+* **footer.vue:** add the privacy policy and terms of service links in sidebar footer ([84baea7](https://github.com/GIScience/ors-map-client/commit/84baea77f6f27eb6aa8bb0f8b782af113a8fabe4)), closes [#237](https://github.com/GIScience/ors-map-client/issues/237)
+
+
+### Bug Fixes
+
+* fix privacy policy and term of service links in about page ([f05da0d](https://github.com/GIScience/ors-map-client/commit/f05da0dfa71b5e5c707795e5de6f4a8295a13ccd)), closes [#237](https://github.com/GIScience/ors-map-client/issues/237)
+* show isochrone population in the sidebar and hide population label when showing place polygon ([9bdaae2](https://github.com/GIScience/ors-map-client/commit/9bdaae21d9cfbe616f712a65b3b320435b46ead7)), closes [#238](https://github.com/GIScience/ors-map-client/issues/238)
+
+
+### Docs
+
+* **readme.md:** update the tests location in tests section ([c6b21ec](https://github.com/GIScience/ors-map-client/commit/c6b21ec7eba0616d0377be298cb274350a4aa2d2))
+
+
+### Tests
+
+* disable e2e test build progress output ([9fa9049](https://github.com/GIScience/ors-map-client/commit/9fa904905bd9e9e6003cfe613d1118d2bf413412))
+* include e2e in global test script command ([dfd59ff](https://github.com/GIScience/ors-map-client/commit/dfd59ffadc5a7d390edd4ff20f102370cd25139f))
+* **karma.conf.js:** fix the karma config coverage preprocessor path ([4094f0e](https://github.com/GIScience/ors-map-client/commit/4094f0eb2d9b1f29feb7e58aae269e08dd922f09))
+* make e2e test runner to wait for the compiler/bundle to be ready ([4a8a6b0](https://github.com/GIScience/ors-map-client/commit/4a8a6b04cf2f96a4badaa4a4bba427e2132773bf))
+* **nightwatch.conf.js:** update the test folders to tests and the chrome browser options ([d70fadc](https://github.com/GIScience/ors-map-client/commit/d70fadc1dd901a1c72607b73ee1c211db0ef2965))
+* remove unused jest config file ([61252c7](https://github.com/GIScience/ors-map-client/commit/61252c7cafbcd829e6d361f4ab65a1735fd3862a))
+* update the chromedriver version to 94 ([0f5b5ba](https://github.com/GIScience/ors-map-client/commit/0f5b5ba182972f5f6373785367be6f98cdb7d17d))
+
+
+### Code Refactoring
+
+* **app-config-example.js:** disable eslint no-undef in config file to avoid require error ([b85d43e](https://github.com/GIScience/ors-map-client/commit/b85d43e873121b029deb15db1982d74566d36701))
+
 ### [1.21.5](https://github.com/GIScience/ors-map-client/compare/v1.21.4...v1.21.5) (2021-10-25)
 
 
