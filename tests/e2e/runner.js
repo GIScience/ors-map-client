@@ -64,11 +64,12 @@ function makeServer(config) {
       else compiled = true
     })
 
-    let options = {...config.devServer, ...{progress: true}}
+    let options = {...config.devServer, ...{progress: false}}
     const server = new DevServer(compiler, options)
 
     server.listen(config.devServer.port, config.devServer.host, err => {
       if (err) return reject(err)
+      console.log('Preparing and compiling the app. The tests will start after that. Please wait...')
       if (compiled) resolve(server)
       else listening = true
     })
