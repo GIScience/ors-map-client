@@ -2,7 +2,7 @@
 // without the -example on the same folder that it resides.
 
 // You can change the value of a property (using a supported value), but you shouldn't remove a property
-
+/* eslint-disable no-undef */
 const appConfig = {
   appName: 'Openrouteservice Maps', // The App name that is used as title for the logo
   footerAppName: 'openrouteservice', // The App name that appears on the bottom
