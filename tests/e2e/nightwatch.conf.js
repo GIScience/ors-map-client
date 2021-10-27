@@ -4,9 +4,9 @@ var config = require('../../config')
 
 // http://nightwatchjs.org/gettingstarted#settings-file
 module.exports = {
-  src_folders: ['test/e2e/specs'],
-  output_folder: 'test/e2e/reports',
-  custom_assertions_path: ['test/e2e/custom-assertions'],
+  src_folders: ['tests/e2e/specs'],
+  output_folder: 'tests/e2e/reports',
+  custom_assertions_path: ['tests/e2e/custom-assertions'],
 
   selenium: {
     start_process: true,
@@ -36,8 +36,9 @@ module.exports = {
         'chromeOptions': {
           'args': [
             '--headless',
-            '--no-sandbox',
-            '--disable-gpu'
+            '--disable-gpu',
+            '--no-sandbox', // required to run without privileges in docker
+            '--disable-web-security'
           ]
         }
       }
