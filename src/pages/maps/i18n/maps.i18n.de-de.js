@@ -10,6 +10,7 @@ export default {
     toggleAccessibleMode: 'Barrierefreien Modus aktivieren/deaktivieren',
     about: 'Über ors',
     updateSearch: 'Suche in dieser Gegend',
-    updateSearchAfterZoomOrCenterChange: 'Suche nach Kartenbewegung aktualisieren'
+    updateSearchAfterZoomOrCenterChange: 'Suche nach Kartenbewegung aktualisieren',
+    pageNotFound: 'Seite nicht gefunden. Überprüfen Sie, ob die URL unvollständig oder falsch ist'
   }
 }

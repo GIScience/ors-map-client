@@ -53,7 +53,7 @@ To run the tests, use npm commands, as follows:
   sudo apt update && apt install -y default-jdk
   ```
 
-  Once Java in installed, to run e2e tests, use the command:
+  Once Java is installed, to run e2e tests, use the command:
 
   ```sh
   # Run e2e tests

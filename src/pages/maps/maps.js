@@ -214,6 +214,7 @@ export default {
   },
   watch: {
     $route: function () {
+      this.hideMessages()
       this.loadRoute()
       this.setModalState()
       this.loadAvoidPolygonsFromAppRoute()
@@ -415,16 +416,18 @@ export default {
     loadRoute () {
       this.eventBus.$emit('clearMap')
       // After clearing the map, wait a bit to load the new route
-      let context = this
 
-      const appRouteData = AppMode.decodePath(context.$route)
+      var appRouteData = false
 
-      if (appRouteData === false) { // if there is no app route data, load default state
-        context.$router.push({name: 'Maps'})
-      } else {
-        context.$store.commit('appRouteData', appRouteData)
-        context.storeZoomValue()
-        context.eventBus.$emit('appRouteDataChanged', appRouteData)
+      if (this.$store.getters.mode !== constants.modes.pageNotFound) {
+        appRouteData = AppMode.decodePath(this.$route)
+        if (appRouteData === false) { // if there is no app route data, load default state
+          this.$router.push({name: 'Maps'})
+        } else {
+          this.$store.commit('appRouteData', appRouteData)
+          this.storeZoomValue()
+          this.eventBus.$emit('appRouteDataChanged', appRouteData)
+        }
       }
     },
 
@@ -678,6 +681,11 @@ export default {
     this.loadRoute()
     this.setModalState()
     this.setViewHeight()
-    this.loadAvoidPolygonsFromAppRoute()
+    this.loadAvoidPolygonsFromAppRoute()  
+
+    // If in pageNotfound mode, show the error message
+    if (this.$store.getters.mode === constants.modes.pageNotFound) {
+      this.showError(this.$t('maps.pageNotFound'), {timeout: 0})      
+    } 
   }
 }

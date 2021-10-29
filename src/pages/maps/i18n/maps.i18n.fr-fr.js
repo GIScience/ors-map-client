@@ -10,6 +10,7 @@ export default {
     'toggleAccessibleMode': 'Basculer en mode accessible',
     'aboutTitle': 'À propos d\'ORS',
     'updateSearch': 'Rechercher dans cette zone',
-    'updateSearchAfterZoomOrCenterChange': 'Mettre à jour la recherche après un changement de zoom ou de centre'
+    'updateSearchAfterZoomOrCenterChange': 'Mettre à jour la recherche après un changement de zoom ou de centre',
+    'pageNotFound': 'Page non trouvée. Vérifiez que l\'URL n\'est pas incomplète ou incorrecte'
   },
 }

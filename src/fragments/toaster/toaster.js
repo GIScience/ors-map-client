@@ -41,6 +41,9 @@ export default {
       this.visible = false
       event.preventDefault()
       event.stopPropagation()
+    },
+    hide () {
+      this.visible = false
     }
   },
   computed: {
@@ -57,6 +60,9 @@ export default {
   created () {
     this.eventBus.$on('showSnack', (snack) => {
       this.show(snack)
+    })
+    this.eventBus.$on('hideSnack', () => {
+      this.hide()
     })
   }
 }

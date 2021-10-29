@@ -109,6 +109,15 @@ const mapRoutes = [
       store.commit('openAbout', true)
       next()
     }
+  },
+  {
+    path: '*', 
+    name: '404',
+    component: Maps,
+    beforeEnter: (to, from, next) => {
+      store.commit('mode', constants.modes.pageNotFound)
+      next()
+    }
   }
 ]
 

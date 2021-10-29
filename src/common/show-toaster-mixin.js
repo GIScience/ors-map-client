@@ -6,6 +6,11 @@ const showMessage = (msg, theme, options) => {
   VueInstance.eventBus.$emit('showSnack', { message: msg, theme: theme, options: options })
 }
 
+const hideMessages = () => {
+  let VueInstance = AppLoader.getInstance()
+  VueInstance.eventBus.$emit('hideSnack')
+}
+
 const showError = (msg, options) => {
   showMessage(msg, 'error', options)
 }
@@ -27,3 +32,4 @@ export { showError }
 export { showWarning }
 export { showInfo }
 export { showSuccess }
+export { hideMessages }

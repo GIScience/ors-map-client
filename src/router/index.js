@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
-import Vue from 'vue'
-import Router from 'vue-router'
-import loader from '@/support/loader'
 import resolver from '@/support/routes-resolver'
 import appConfig from '@/config/app-config'
+import loader from '@/support/loader'
 import AppLoader from '@/app-loader'
+import Router from 'vue-router'
+import Vue from 'vue'
 
 Vue.use(Router)
 
@@ -35,7 +35,9 @@ let routeFiles = pageRoutes.concat(pluginRoutes)
 
 routeFiles.forEach(routeFile => {
   if (Array.isArray(routeFile)) {
-    router.addRoutes(routeFile)
+    routeFile.forEach(route => {
+      router.addRoute(route)
+    })
   } else {
     router.addRoute(routeFile)
   }

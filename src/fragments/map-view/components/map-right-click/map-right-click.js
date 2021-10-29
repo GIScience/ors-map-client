@@ -121,13 +121,14 @@ export default {
       this.callHook()
     },
     callHook () {
+      let context = this
       setTimeout(() => {
-        let el = this.$el.querySelectorAll('.box-content')
+        let el = context.$el.querySelectorAll('.box-content')
         if (!el || el.length === 0) {
-          this.callHook()
+          context.callHook()
         } else {
-          let hookData = {context: this, containerRef: el[0], latlng: this.clickLatlng}
-          this.$root.appHooks.run('rightClickContentReady', hookData)
+          let hookData = {context: context, containerRef: el[0], latlng: context.clickLatlng}
+          context.$root.appHooks.run('rightClickContentReady', hookData)
         }
       }, 200)
     }

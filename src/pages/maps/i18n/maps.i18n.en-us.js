@@ -10,6 +10,7 @@ export default {
     toggleAccessibleMode: 'Toggle accessible mode',
     aboutTitle: 'About ORS',
     updateSearch: 'Search this area',
-    updateSearchAfterZoomOrCenterChange: 'Update search after zoom or center change'
+    updateSearchAfterZoomOrCenterChange: 'Update search after zoom or center change',
+    pageNotFound: 'Page not not found. Check if the URL is not malformed'
   }
 }
