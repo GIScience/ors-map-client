@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.23.0](https://github.com/GIScience/ors-map-client/compare/v1.22.1...v1.23.0) (2021-11-02)
+
+
+### Features
+
+* add support for page not found mode when URL is malformed ([7e8febf](https://github.com/GIScience/ors-map-client/commit/7e8febf7810de4ca17431e9909b9fa2f78404b56))
+
+
+### Code Refactoring
+
+* move the maps modal css classes to box element ([14f6ffd](https://github.com/GIScience/ors-map-client/commit/14f6ffdeaeb10da4f31218f61dd1aa0f7572a49d))
+
+
+### Tests
+
+* **app-render.js:** add app render/loading tests for all pages/entry points ([252828e](https://github.com/GIScience/ors-map-client/commit/252828e7903821111bc20dc0fe5ae8072fe53298))
+* set up custom asserts ([63547a9](https://github.com/GIScience/ors-map-client/commit/63547a9f73a47d0f20e6d5e1e010728e4ff1db73))
+
 ### [1.22.1](https://github.com/GIScience/ors-map-client/compare/v1.22.0...v1.22.1) (2021-10-27)
 
 
