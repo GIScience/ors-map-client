@@ -7,11 +7,11 @@
 // For more information on custom assertions see:
 // http://nightwatchjs.org/guide#writing-custom-assertions
 
-exports.assertion = function elementCount(selector, count) {
-  this.message = 'Testing if element <' + selector + '> has count: ' + count
+exports.assertion = function elementCountAbove (selector, count) {
+  this.message = 'Testing if element <' + selector + '> has count above: ' + count
   this.expected = count
   this.pass = function (val) {
-    return val === this.expected
+    return val > this.expected
   }
   this.value = function (res) {
     return res.value
