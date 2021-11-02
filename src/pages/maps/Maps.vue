@@ -52,15 +52,15 @@
       </places-carousel>
     </v-bottom-nav>
 
-    <v-dialog v-model="isSettingsOpen" max-width="600" class="settings-modal" :persistent="true" attach="body">
-      <box background="white" v-if="isSettingsOpen" resizable closable @closed="closeSettingsModal()">
+    <v-dialog v-model="isSettingsOpen" max-width="600" :persistent="true" attach="body">
+      <box background="white" v-if="isSettingsOpen" class="settings-modal" resizable closable @closed="closeSettingsModal()">
         <h3 slot="header">{{$t('maps.settings')}}</h3>
         <settings @saved="closeSettingsModal"></settings>
       </box>
     </v-dialog>
 
-    <v-dialog v-model="isAboutOpen" max-width="600" class="about-modal" :persistent="true" attach="body">
-      <box background="white" v-if="isAboutOpen" resizable closable @closed="closeAboutModal()">
+    <v-dialog v-model="isAboutOpen" max-width="600" :persistent="true" attach="body">
+      <box background="white" v-if="isAboutOpen" class="about-modal" resizable closable @closed="closeAboutModal()">
         <h3 slot="header">{{$t('maps.aboutTitle')}}</h3>
         <about></about>
       </box>
