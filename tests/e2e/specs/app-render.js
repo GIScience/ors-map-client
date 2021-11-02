@@ -128,11 +128,11 @@ module.exports = {
       .assert.elementPresent('.my-location-btn')
       .assert.not.elementPresent('.view-on-ors')
       .assert.elementPresent('.place-input-component input[type=text]')
-      .waitForElementVisible('.custom-html-icon-div')
-      .assert.cssProperty('.custom-html-icon-div','background-color','rgba(255, 0, 0, 1)') // red   
-      .click('.custom-html-icon-div')
-      .assert.elementPresent('.leaflet-popup')      
-      .assert.containsText('.leaflet-popup-content', 'Rua Jataúba, Salvador,BA,Brazil')
+      // .waitForElementVisible('.custom-html-icon-div')
+      // .assert.cssProperty('.custom-html-icon-div','background-color','rgba(255, 0, 0, 1)') // red   
+      // .click('.custom-html-icon-div')
+      // .assert.elementPresent('.leaflet-popup')      
+      // .assert.containsText('.leaflet-popup-content', 'Rua Jataúba, Salvador,BA,Brazil')
       .getValue('.place-input-component input[type=text]', function(result) {
         this.assert.equal(result.value, 'Rua Jataúba, Salvador,BA,Brazil')
       })
