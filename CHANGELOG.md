@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.23.1](https://github.com/GIScience/ors-map-client/compare/v1.23.0...v1.23.1) (2021-11-02)
+
+
+### Tests
+
+* disable check for marker div in isochrones rendering ([d84e75a](https://github.com/GIScience/ors-map-client/commit/d84e75abeefaf1ed873e8ca7998e0309dbc986ab))
+* enable marker check in isochrones rendering ([f24d967](https://github.com/GIScience/ors-map-client/commit/f24d967e437ce9a8e8ec5305c58a6780fb1d5bf5))
+* **nightwatch.conf.js:** disable browser flag disable-web-security ([5ac612f](https://github.com/GIScience/ors-map-client/commit/5ac612f789f04b4e096701ccd7e9d147a703dbbb))
+
 ## [1.23.0](https://github.com/GIScience/ors-map-client/compare/v1.22.1...v1.23.0) (2021-11-02)
 
 
