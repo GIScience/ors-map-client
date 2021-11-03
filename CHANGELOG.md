@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.24.0](https://github.com/GIScience/ors-map-client/compare/v1.23.1...v1.24.0) (2021-11-03)
+
+
+### Features
+
+* **altitudepreview.vue:** add a class to the expand button ([df417de](https://github.com/GIScience/ors-map-client/commit/df417dee39975af91481178a9327eced8a708803))
+
+
+### Bug Fixes
+
+* **map-left-click:** fix the displaying of out of range coordinates ([8bb87a6](https://github.com/GIScience/ors-map-client/commit/8bb87a6fe3db87f98848c6791255a303b9ecd319))
+
+
+### Code Refactoring
+
+* use dash-case for naming spect files ([053fce4](https://github.com/GIScience/ors-map-client/commit/053fce4ea8df0423bddfcd9d1f9a2e9ea60e655e))
+
+
+### Tests
+
+* add altitude graph and place info displaying e2e tests ([59da1c1](https://github.com/GIScience/ors-map-client/commit/59da1c1d10549273818bf93e0ae5b3419cb59d3f))
+* add geo-utils unit tests ([c4ce8e8](https://github.com/GIScience/ors-map-client/commit/c4ce8e836eedf9e0f62b76b419fb4052af7b6346))
+* generate test coverage report only on full test run but allow run tests by type ([df02b90](https://github.com/GIScience/ors-map-client/commit/df02b90c70879ec9e987ee81f46328fdfc4958eb)), closes [#242](https://github.com/GIScience/ors-map-client/issues/242)
+
 ### [1.23.1](https://github.com/GIScience/ors-map-client/compare/v1.23.0...v1.23.1) (2021-11-02)
 
 
