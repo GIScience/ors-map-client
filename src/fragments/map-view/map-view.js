@@ -1365,6 +1365,7 @@ export default {
         const insidePolygon = this.isPointInsidePolygons(event.latlng)
         if (!insidePolygon) {
           const mapEl = this.$refs.map.$el
+          GeoUtils.normalizeCoordinates(event.latlng)
           const data = { event, mapEl, canAddStop: this.canAddStop }
           // Event to be catch by the MapRightClick.vue component
           this.eventBus.$emit('mapRightClicked', data)
@@ -1431,6 +1432,7 @@ export default {
       const clickedOverPolyline = event.originalEvent && event.originalEvent.clickedOverPolyline === true
       if (this.showClickPopups && !drawPolygonToolbarActive && !clickedOverPolyline) {
         const insidePolygon = this.isPointInsidePolygons(event.latlng)
+        GeoUtils.normalizeCoordinates(event.latlng)
         const data = { event, insidePolygon }
         this.eventBus.$emit('mapLeftClicked', data)
         this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }

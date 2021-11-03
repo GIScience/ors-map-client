@@ -566,6 +566,43 @@ const geoUtils = {
   isOverLine: (p0, p1, p2) => {
     let val = ((p1.lng - p0.lng) * (p2.lat - p0.lat) - (p2.lng - p0.lng) * (p1.lat - p0.lat))
     return val
+  },
+
+  /**
+   * Normalize latlng to keep lat in range 90 >< 90 and lng -180 >< 180
+   * @param {Object} latlng 
+   */
+  normalizeCoordinates (latlng) {
+    latlng.lat = geoUtils.normalizeLat(latlng.lat)
+    latlng.lng = geoUtils.normalizeLng(latlng.lng)
+  },
+
+  /**
+   * Normalize longitude to keep it between 90 >< 90
+   * @param {Number} lat 
+   */
+  normalizeLat (lat) {
+    while(lat < -180){
+      lat +=360
+    }
+    while (lat > 180){
+      lat -= 360
+    }
+    return lat
+  },
+
+  /**
+   * Normalize longitude to keep it between -180 >< 180
+   * @param {Number} lng 
+   */
+  normalizeLng (lng) {
+    while(lng < -180){
+      lng +=360
+    }
+    while (lng > 180){
+      lng -= 360
+    }
+    return lng
   }
 }
 export default geoUtils
