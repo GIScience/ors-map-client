@@ -16,7 +16,7 @@
     "test:unit-debug": "cross-env BABEL_ENV=test karma start tests/unit/karma.debug.conf.js",
     "test:integration": "cross-env BABEL_ENV=test karma start tests/integration/karma.conf.js",
     "test:integration-debug": "cross-env BABEL_ENV=test karma start tests/integration/karma.debug.conf.js",
-    "test": "npm run test:e2e && npm run test:unit && npm run test:integration"
+    "test": "npm run test:e2e && cross-env BABEL_ENV=test karma start tests/karma.conf.js"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.11.3",
