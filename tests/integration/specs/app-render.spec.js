@@ -1,6 +1,5 @@
 import AppLoader from '@/app-loader'
 import AppRootComponent from '@/App'
-import store from '@/store/store'
 
 // Solves the 'RegeneratorRuntime is not defined' issue according to
 // https://stackoverflow.com/questions/28976748/regeneratorruntime-is-not-defined
