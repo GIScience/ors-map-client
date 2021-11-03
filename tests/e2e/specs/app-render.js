@@ -18,7 +18,12 @@ module.exports = {
       .assert.elementPresent('#polyline-measure-control')
       .assert.elementPresent('.my-location-btn')
       .assert.elementPresent('.over-brand')
+      .assert.elementPresent('.accessibility-btn')      
       .assert.not.elementPresent('.view-on-ors')
+      .moveToElement('#map-view', 0, 0, () => {     
+        browser.click('#map-view')     
+        browser.waitForElementVisible('.left-context-menu')
+      })  
       .end()
   },
   'app embedded mode rendering': function (browser) {
@@ -88,7 +93,7 @@ module.exports = {
     browser.end()
   },
 
-  'app page directions rendering': function (browser) {
+  'app directions rendering': function (browser) {
     const directionsUrl = `${browser.globals.devServerURL}/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D`
 
     browser
@@ -107,7 +112,26 @@ module.exports = {
       .assert.cssProperty({selector: '.custom-html-icon-div', index: 0},'background-color','rgba(0, 128, 0, 1)') // green
       .assert.cssProperty({selector: '.custom-html-icon-div', index: 1},'background-color','rgba(255, 0, 0, 1)') // red
       .expect.elements('.custom-html-icon-div').count.to.equal(2)
-    browser.end()
+    browser.click('.open-menu')
+      .assert.visible('.sidebar')
+      .click('.expand-altitude-btn')
+      .waitForElementVisible('.heightgraph')
+      .assert.visible('svg.heightgraph-container')
+      .assert.elementCountAbove('svg.heightgraph-container g path', 2) 
+      .assert.visible('#rightArrowSelection')  
+      .assert.visible('#leftArrowSelection')
+      .assert.visible('#selectionText')  
+      .assert.visible('.heightgraph-close-icon')      
+      .click('#rightArrowSelection')
+      .assert.elementCountAbove('svg.heightgraph-container g path', 2) 
+      .assert.visible('.legend-hover')
+      .moveToElement('.legend-hover', 0, 0, () => {            
+        browser.assert.elementCountAbove('svg.heightgraph-container g.legend', 0)
+        browser.waitForElementVisible('svg.heightgraph-container g.legend')
+      })  
+      .click('.heightgraph-close-icon')   
+      .assert.not.elementPresent('svg.heightgraph-container')   
+      .end()
 
     //browser.useXpath().assert.cssProperty({ selector: '//div[contains(@class, "custom-html-icon-div")]', index: 0},'background-color','rgba(0, 128, 0, 1)')
     //browser.useXpath().assert.cssProperty({ selector: '//div[contains(@class, "custom-html-icon-div")]', index: 1},'background-color','rgba(255, 0, 0, 1)')
