@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.1](https://github.com/GIScience/ors-map-client/compare/v1.25.0...v1.25.1) (2021-11-04)
+
+
+### Docs
+
+* **readme.md:** fix app-config path in docs and add extra details about deployment ([e83294f](https://github.com/GIScience/ors-map-client/commit/e83294f1d835eebaee1ee1a4b62d916a7c80c248))
+
+
+### Code Refactoring
+
+* **formactions.vue:** add class to each map-form-btn ([c3af03a](https://github.com/GIScience/ors-map-client/commit/c3af03af9a40c3060b6ab77eb0cf27e80ed07e7c))
+* **mapform.vue:** add class to tab content containers ([0c9116b](https://github.com/GIScience/ors-map-client/commit/0c9116b14d0bfcad55835d4bdf4a62539befde9e))
+
+
+### Tests
+
+* **app-render.js:** add test for reach endpoint and directions for round trip ([1c6340d](https://github.com/GIScience/ors-map-client/commit/1c6340dd5d37a34e578d616ca752f1d1b85108ff))
+
 ## [1.25.0](https://github.com/GIScience/ors-map-client/compare/v1.24.0...v1.25.0) (2021-11-04)
 
 
