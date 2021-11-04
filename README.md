@@ -367,16 +367,18 @@ Deployment flow:
 
 1. Apply the changes in a feature branch and test it locally
   
-    *Important*: to run the tests, `src/app-config.js` must contain:
+    *Important*: to run the tests, `src/config/app-config.js` must contain:
     - `orsApiKey`: 'a-valid-ors-api-key-here',
     - `useUserKey`: true,
 
-    By default, src/app-config.js is ignored by git. So, the changes are just local
+    By default, `src/config/app-config.js` is ignored by git. So, the changes are just local and used to run the tests.
 
     ```sh
     # Run automated tests
     npm run test
     ```
+
+    *Important:* Besides the automated tests, some manual/human tests are also recommended
 
 2. Once the feature is ready, merge it to `master`, and run the tests
 
@@ -407,9 +409,9 @@ Deployment flow:
     # `git push --follow-tags origin master && npm publish`
 
     # We must use/run only
-    # Once you push it, the automated tests will be triggered on Github actions
     git push --follow-tags origin master 
 
+    # Once you push it, the automated tests will be triggered on Github actions
     # Check the automated tests results on https://github.com/GIScience/ors-map-client/actions
     ```
 
