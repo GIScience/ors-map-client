@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.25.0](https://github.com/GIScience/ors-map-client/compare/v1.24.0...v1.25.0) (2021-11-04)
+
+
+### Features
+
+* add the meta image to assets ([d0fd68e](https://github.com/GIScience/ors-map-client/commit/d0fd68e3bf155172e2d300c264ac4e5caad762cd))
+* **dev.html:** add image and og meta to root dev/index html file ([52e886d](https://github.com/GIScience/ors-map-client/commit/52e886d0402887f4168ceec291c6985793db4b51))
+
+
+### Docs
+
+* **readme.md:** update the deployment flow and branch policy ([73c7b98](https://github.com/GIScience/ors-map-client/commit/73c7b988ef1af81de38893f1ec01e721a97b6520))
+
 ## [1.24.0](https://github.com/GIScience/ors-map-client/compare/v1.23.1...v1.24.0) (2021-11-03)
 
 
