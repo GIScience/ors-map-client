@@ -107,7 +107,6 @@ App folder structure under `src`:
 - `models` - models used to deal transport ors response data and deals with app state and transitions
 - `pages` - app pages (currently only the `maps` page is available)
 - `resources` - support files like the loader lib, definitions and options used to process requests and responses
-
 - `router` - router component based on vue-router components
 - `store` - app store definitions
 - `support` - support utilities, like geo-utils, ors-api-runner, routes-resolver and app modes
@@ -366,16 +365,60 @@ The application includes automated tests. They are stored in `tests` folder. Mor
 
 Deployment flow:
 
-- Apply the changes in a feature branch and test it locally
-- Once the feature is ready, merge it to `develop`, deploy it to the testing environment
-- Checkout in `master`, merge from develop and use `npm run release` to generate a release. This will generate a new release commit as well as a git tag and an entry in [CHANGELOG.md](CHANGELOG.md).
+1. Apply the changes in a feature branch and test it locally
+  
+    *Important*: to run the tests, `src/app-config.js` must contain:
+    - `orsApiKey`: 'a-valid-ors-api-key-here',
+    - `useUserKey`: true,
 
-*For more details about `commitizen` and `standard-version` see [this article](https://medium.com/tunaiku-tech/automate-javascript-project-versioning-with-commitizen-and-standard-version-6a967afae7)*
+    By default, src/app-config.js is ignored by git. So, the changes are just local
+
+    ```sh
+    # Run automated tests
+    npm run test
+    ```
+
+2. Once the feature is ready, merge it to `master`, and run the tests
+
+    ```sh
+    git checkout master
+    git merge feature/<name-of-my-future-branch>
+    # Run automated tests after merge
+    npm run test
+    ```
+
+3. If the tests pass, create a release
+
+    ```sh
+    # Create a release. This will :
+    # - bump the app version, 
+    # - generate a new release commit
+    # - create a new git tag with the app version 
+    # - Create an entry in CHANGELOG.md
+    npm run release
+    ```
+
+4. Push the changes applied to master
+
+    *Important*: the release command will output a command, but We `DON'T USE the whole outputted command`, since there is no npm package to be published.
+
+    ```sh
+    # The command outputted is expected to be:
+    # `git push --follow-tags origin master && npm publish`
+
+    # We must use/run only
+    # Once you push it, the automated tests will be triggered on Github actions
+    git push --follow-tags origin master 
+
+    # Check the automated tests results on https://github.com/GIScience/ors-map-client/actions
+    ```
+
+*For more details about `commitizen` and `standard-version` see [this article](https://medium.com/tunaiku-tech/automate-javascript-project-versioning-with-commitizen-and-standard-version-6a967afae7)* and [standard-version documentation](https://github.com/conventional-changelog/standard-version)
 
 #### Branch policy ####
 
-The `develop` branch is used as the working branch. Anything new feature goes to develop and then it is tested, committed and finally merged into `master`. So, develop has always the latest version (latest but not necessarily the production one) while `master` has the production version.
-Considering this, any merge request must be done targeting `develop`. If you want to work on a feature we recommend you to create a feature branch and then, when it is finished, send a merge request to `develop`.
+The `master` branch is used as the stable and most updated branch. Any new feature goes to feature branch, then it is tested, committed and finally merged into `master`. So, master has always the latest version and the production version.
+Considering this, any merge request must be done targeting `master`.
 
 Like almost every team, we have limited workforce, and we have to define priorities.
 
