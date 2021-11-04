@@ -23,7 +23,9 @@ module.exports = {
       .moveToElement('#map-view', 0, 0, () => {     
         browser.click('#map-view')     
         browser.waitForElementVisible('.left-context-menu')
-      })  
+      })
+      .click('.open-menu')
+      .waitForElementVisible('.places-and-directions-tab-form')
       .end()
   },
   'app embedded mode rendering': function (browser) {
@@ -93,7 +95,7 @@ module.exports = {
     browser.end()
   },
 
-  'app directions rendering': function (browser) {
+  'directions rendering': function (browser) {
     const directionsUrl = `${browser.globals.devServerURL}/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D`
 
     browser
@@ -132,11 +134,54 @@ module.exports = {
       .click('.heightgraph-close-icon')   
       .assert.not.elementPresent('svg.heightgraph-container')   
       .end()
-
-    //browser.useXpath().assert.cssProperty({ selector: '//div[contains(@class, "custom-html-icon-div")]', index: 0},'background-color','rgba(0, 128, 0, 1)')
-    //browser.useXpath().assert.cssProperty({ selector: '//div[contains(@class, "custom-html-icon-div")]', index: 1},'background-color','rgba(255, 0, 0, 1)')
   },
-  'app page isochrones rendering': function (browser) {
+  'roundtrip rendering': function (browser) {
+    const roundtripUrl = `${browser.globals.devServerURL}/#/directions/Heidelberg,BW,Germany/data/%7B"coordinates":"8.769869,49.37625","options":%7B"profile":"foot-walking","options":%7B"round_trip":%7B"length":10000,"points":3,"seed":0%7D%7D,"zoom":18%7D%7D`
+
+    browser
+      .url(roundtripUrl)
+      .waitForElementVisible('.app-content')
+      .assert.elementPresent('#app')
+      .assert.elementPresent('.simple-place-search')
+      .assert.elementPresent('#map-view')
+      .assert.elementPresent('.leaflet-control-layers')
+      .assert.elementPresent('.leaflet-control-zoom')
+      .assert.elementPresent('.leaflet-draw')
+      .assert.elementPresent('#polyline-measure-control')
+      .assert.elementPresent('.my-location-btn')
+      .assert.not.elementPresent('.view-on-ors')
+      .assert.elementPresent('.place-input-component input[type=text]')
+      .waitForElementVisible('.custom-html-icon-div')
+      .assert.cssProperty({selector: '.custom-html-icon-div', index: 0},'background-color','rgba(255, 0, 0, 1)') // red
+      .expect.elements('.custom-html-icon-div').count.to.equal(1)
+    browser.assert.elementCountAbove('.leaflet-overlay-pane svg path.leaflet-interactive', 0) 
+      .click('.open-menu')
+      .assert.visible('.round-trip-btn .opt-btn i.primary--text')
+      .end()
+  },
+  'reach rendering': function (browser) {
+    const reachUrl = `${browser.globals.devServerURL}/#/reach`
+
+    browser
+      .url(reachUrl)
+      .waitForElementVisible('.app-content')
+      .assert.elementPresent('#app')
+      .assert.elementPresent('.simple-place-search')
+      .assert.elementPresent('#map-view')
+      .assert.elementPresent('.leaflet-control-layers')
+      .assert.elementPresent('.leaflet-control-zoom')
+      .assert.elementPresent('.leaflet-draw')
+      .assert.elementPresent('#polyline-measure-control')
+      .assert.elementPresent('.my-location-btn')
+      .assert.not.elementPresent('.view-on-ors')
+      .assert.elementPresent('.place-input-component input[type=text]')
+      .assert.visible('.sidebar')
+      .click('.open-menu')
+      .waitForElementVisible('.isochrones-tab-form')    
+      .assert.not.visible('.places-and-directions-tab-form')
+      .end()
+  },
+  'isochrones rendering': function (browser) {
     const isochronesUrl = `${browser.globals.devServerURL}/#/reach/Rua Jataúba,Salvador,BA,Brazil/data/{"coordinates":"-38.48030090332032,-12.983147716796566","options":{"profile":"cycling-regular","range_type":"distance","range":[31000],"interval":15000,"zoom":18}}`
 
     browser
@@ -233,3 +278,5 @@ module.exports = {
 }
 
 //browser.resizeWindow(1280, 800, done);
+//browser.useXpath().assert.cssProperty({ selector: '//div[contains(@class, "custom-html-icon-div")]', index: 0},'background-color','rgba(0, 128, 0, 1)')
+//browser.useXpath().assert.cssProperty({ selector: '//div[contains(@class, "custom-html-icon-div")]', index: 1},'background-color','rgba(255, 0, 0, 1)')
