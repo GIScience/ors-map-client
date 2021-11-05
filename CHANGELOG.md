@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.2](https://github.com/GIScience/ors-map-client/compare/v1.25.1...v1.25.2) (2021-11-05)
+
+
+### Code Refactoring
+
+* add css class to route importer component ([872f1ce](https://github.com/GIScience/ors-map-client/commit/872f1cebd071149ad43d017de6021090082b9bfd))
+* **header.vue:** remove unused button and add css class to toggle btn ([6900e61](https://github.com/GIScience/ors-map-client/commit/6900e617659f4d135e7f669fc3c3eb4882141142))
+
+
+### Tests
+
+* add tests for header and places-caroussel components and extend other tests ([42f75db](https://github.com/GIScience/ors-map-client/commit/42f75db7afe92ac4dc228e046cd3ba29cb4ccdab))
+* adjust karma debug config for integration and unit tests ([fc8a2ea](https://github.com/GIScience/ors-map-client/commit/fc8a2ea13b4ac94b7af57c5621b404246f7e3af0))
+* **base-karma.debug.conf.js:** fix base debug karma object return ([321be3d](https://github.com/GIScience/ors-map-client/commit/321be3d6327d6cb0a1b0ac4c8e3a12dd872595e5))
+* rename, split and improve e2e tests ([bca9890](https://github.com/GIScience/ors-map-client/commit/bca9890fe13bbbd5f83e4880324f1cf046117caf))
+
 ### [1.25.1](https://github.com/GIScience/ors-map-client/compare/v1.25.0...v1.25.1) (2021-11-04)
 
 
