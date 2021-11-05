@@ -17,7 +17,7 @@
           :color="roundtripActive ? 'primary' : 'default'"></map-form-btn>
       </v-flex>
       <v-flex :class="{'high-resolution': $highResolution}" v-if="isEnabled('routeImporter')">
-        <route-importer @contentUploaded="contentUploaded"></route-importer>
+        <route-importer class="route-importer" @contentUploaded="contentUploaded"></route-importer>
       </v-flex>
       <v-spacer></v-spacer>
     </v-layout>
