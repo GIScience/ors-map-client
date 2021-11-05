@@ -1,4 +1,5 @@
-import { Directions, Isochrones, PlacesSearch, ReverseGeocode } from '@/support/ors-api-runner'
+import { Directions, Isochrones, PlacesSearch, ReverseGeocode, Pois } from '@/support/ors-api-runner'
+import Place from '@/models/place'
 import mockupPlaces from '../mockups/places.js'
 import constants from '@/resources/constants'
 import AppLoader from '@/app-loader'
@@ -46,10 +47,10 @@ describe('OrsApiRunner test', () => {
   it('should fetch API data and find places', async (done) => {
     await new AppLoader().fetchApiInitialData()
     expect(store.getters.mapSettings.apiKey).toBeDefined() 
-    store.commit('mode', constants.modes.place)      
 
     PlacesSearch('Heidelberg').then(places => {
       expect(places.length).toBeGreaterThan(10)   
+      expect(places[0]).toBeInstanceOf(Place)
       done()
     }).catch(result => {
       let error = lodash.get(result, 'response.response.body.error') || result.response || result
@@ -59,15 +60,28 @@ describe('OrsApiRunner test', () => {
 
   it('should fetch API data and reverse geocode', async (done) => {
     await new AppLoader().fetchApiInitialData()
-    expect(store.getters.mapSettings.apiKey).toBeDefined() 
-    store.commit('mode', constants.modes.place)      
+    expect(store.getters.mapSettings.apiKey).toBeDefined()  
 
     ReverseGeocode(41.060067961642716, -8.543758392333986).then(places => {
-      expect(places.length).toBeGreaterThan(9)   
+      expect(places.length).toBeGreaterThan(9)
+      expect(places[0]).toBeInstanceOf(Place)
       done()
     }).catch(result => {
       let error = lodash.get(result, 'response.response.body.error') || result.response
       done.fail(error)
     })
-  })  
+  }) 
+
+  it('should fetch API data and get pois', async (done) => {
+    await new AppLoader().fetchApiInitialData()
+    expect(store.getters.mapSettings.apiKey).toBeDefined() 
+
+    Pois({category_group_ids: [420]}).then(response => {
+      expect(response.features.length).toBeGreaterThan(0)   
+      done()
+    }).catch(result => {
+      let error = lodash.get(result, 'response.response.body.error') || result.response
+      done.fail(error)
+    })
+  })
 })
