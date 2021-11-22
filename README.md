@@ -148,7 +148,7 @@ Data flow, state and requests to services, in a simplified view, happens as foll
    that in their turn may change the URL and trigger the step 2 again.
   9. Several app hooks are called during the app flow, and it is possible to listen to these hooks and run custom code
    to modify some app behavior.
-    The available hooks are listed in `src/config/hook-example.js` and must be coded in `src/config/hooks.js`.
+    The available hooks are listed in `src/config-examples/hooks-example.js` and must be coded in `src/config/hooks.js`.
 
 ### Feature-by-folder design ###
 
