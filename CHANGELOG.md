@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.0](https://github.com/GIScience/ors-map-client/compare/v1.26.0...v1.27.0) (2021-11-22)
+
+
+### Features
+
+* **route-importer:** add support for importing .geojson files ([80922a1](https://github.com/GIScience/ors-map-client/commit/80922a152bcdad45611913af107eb8d342477c10)), closes [#243](https://github.com/GIScience/ors-map-client/issues/243)
+
+
+### Bug Fixes
+
+* fix the capitalization of the german word ([28efb62](https://github.com/GIScience/ors-map-client/commit/28efb62ca7a43279960c4fe8b6d36af480977e6e)), closes [#243](https://github.com/GIScience/ors-map-client/issues/243)
+
 ## [1.26.0](https://github.com/GIScience/ors-map-client/compare/v1.25.2...v1.26.0) (2021-11-22)
 
 
