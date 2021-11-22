@@ -74,7 +74,7 @@ class AppLoader {
    * @returns {String}
    * @param storedLocale
    */
-  setFittingLocale (storedLocale) {
+  getFittingLocale (storedLocale) {
     var deviceLocale = window.navigator.language || window.navigator.userLanguage
     let locale =  storedLocale || deviceLocale
     if (locale) {
@@ -165,7 +165,7 @@ class AppLoader {
    * @param {*} locale
    */
   saveSettings (mapSettings, locale = null) {
-    let fittingLocale = this.setFittingLocale(locale)
+    let fittingLocale = this.getFittingLocale(locale)
     mapSettings.locale = fittingLocale
   
     let validRoutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) => {
@@ -198,7 +198,7 @@ class AppLoader {
       if (Object.keys(mapSettings).length > 0 && isEmbed && Array.isArray(parts) && parts.length > 1 && parts[1] ) {
         let locale = parts[1]
         let appLoader = new AppLoader()
-        locale = appLoader.setFittingLocale(locale)
+        locale = appLoader.getFittingLocale(locale)
         appLoader.saveSettings(mapSettings, locale)
       }
       resolve(isEmbed)
@@ -218,15 +218,15 @@ class AppLoader {
     return new Promise((resolve) => {      
       if (context.vueInstance) {
         resolve(context.vueInstance)
+      } else if (store.getters.mainAppInstanceRef) {
+        context.vueInstance = store.getters.mainAppInstanceRef
+        resolve(store.getters.mainAppInstanceRef)
       } else {
         context.loadAppData().then(() => {
           let i18n = I18nBuilder.build()
         
-          let mapSettingsLocale = store.getters.mapSettings.locale
           // In previous versions of this app the `en` locale was stored as `en-us`
-          let locale = mapSettingsLocale === 'en' ? 'en-us' : mapSettingsLocale
-          // Set locale from store/local storage
-          i18n.locale = locale
+          i18n.locale = store.getters.mapSettings.locale === 'en' ? 'en-us' : store.getters.mapSettings.locale
         
           /* eslint-disable no-new */
           context.vueInstance = new PreparedVue({
@@ -271,16 +271,17 @@ class AppLoader {
    * @returns {Vue} instance
    */
   static getInstance () {
+    let ref
     if (store.getters.mainAppInstanceRef) {
-      return store.getters.mainAppInstanceRef
+      ref = store.getters.mainAppInstanceRef
     } else {
-      var vm = new Vue({ 
+      ref = new Vue({ 
         data: { appHooks: new AppHooks() },
         i18n: I18nBuilder.build(),
         store
       })
-      return vm
     }
+    return ref
   }
 }
 
