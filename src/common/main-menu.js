@@ -32,9 +32,7 @@ const loadItems = () => {
 }
 
 const adjustMenu = () => {
-  new AppLoader().loadApp().then((vueInstance => {
-    vueInstance.appHooks.run('modifyMenu', store.getters.mainMenu)
-  }))
+  AppLoader.getInstance().appHooks.run('modifyMenu', store.getters.mainMenu)
 }
 
 /**
