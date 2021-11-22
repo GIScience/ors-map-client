@@ -15,7 +15,7 @@ export default {
     calculatingRoute: 'Route wird berechnet ...',
     yourLocation: 'Mein Standort',
     expandAltitudeChart: 'Höhenprofil vergrößern',
-    errorRenderingContentUploaded: 'Fehler beim anzeigen des hochgeladenen Objekts. Bitte Format und Inhalt überprüfen.',
+    errorRenderingContentUploaded: 'Fehler beim Anzeigen des hochgeladenen Objekts. Bitte Format und Inhalt überprüfen.',
     roundTrip: 'Rundweg',
     notPossibleToCalculateRoute: 'Keine Route zwischen den gewählten Orten gefunden.',
     apiError: {

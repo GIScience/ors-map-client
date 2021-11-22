@@ -4,6 +4,6 @@ export default {
     placesAndDirections: 'Suche & Los',
     isochrones: 'Erreichbarkeit',
     uploadedContentRendered: 'Importierter Inhalt bereit',
-    errorRenderingContentUploaded: 'Fehler beim anzeigen des hochgeladenen Objekts. Bitte Format und Inhalt überprüfen.'
+    errorRenderingContentUploaded: 'Fehler beim Anzeigen des hochgeladenen Objekts. Bitte Format und Inhalt überprüfen.'
   }
 }
