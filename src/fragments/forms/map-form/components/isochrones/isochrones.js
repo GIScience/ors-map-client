@@ -157,8 +157,10 @@ export default {
 
         // Define new app route
         const route = appMode.getRoute(this.places)
-        this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
-        this.$router.push(route)
+        if (Object.keys(route.params).length > 1) { // params contains data and placeName? props
+          this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
+          this.$router.push(route)          
+        }
       }
     },
     /**
@@ -178,7 +180,9 @@ export default {
       this.$store.commit('mode', constants.modes.isochrones)
       const appMode = new AppMode(this.$store.getters.mode)
       const route = appMode.getRoute(places)
-      this.$router.push(route)
+      if (Object.keys(route.params).length > 1) {// params contains data and placeName? props
+        this.$router.push(route)
+      }
     },
     /**
      * Update the value in the filter when a parameter is updated in form-fields

@@ -815,17 +815,12 @@ export default {
       if (this.$store.getters.mode === constants.modes.search && this.places[0].placeName === '') {
         this.setViewMode(constants.modes.place)
       }
-
-      // const filledPlaces = this.getFilledPlaces()
-      // if (filledPlaces.length > 1) {
-      //   this.setViewMode(constants.modes.directions)
-      // } else if (filledPlaces.length === 0) {
-      //   this.setViewMode(constants.modes.place)
-      // }
       const appMode = new AppMode(this.$store.getters.mode)
       const route = appMode.getRoute(this.places)
-      this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
-      this.$router.push(route)
+      if (Object.keys(route.params).length > 1) { // params contains data and placeName? props
+        this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
+        this.$router.push(route)
+      }
     },
 
     /**
