@@ -85,7 +85,7 @@
     "caniuse-lite": "^1.0.30001249",
     "chai": "^4.1.2",
     "chalk": "^2.0.1",
-    "chromedriver": "^94.0.0",
+    "chromedriver": "^96.0.0",
     "commitizen": "^4.2.4",
     "copy-webpack-plugin": "^4.6.0",
     "cross-spawn": "^5.0.1",
