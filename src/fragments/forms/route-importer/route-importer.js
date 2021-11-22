@@ -6,7 +6,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 export default {
   data: () => ({
     isImportModalOpen: false,
-    acceptedFiles: '.json,.kml,.gpx',
+    acceptedFiles: '.json,.kml,.gpx,.geojson',
   }),
   computed: {
     dropzoneOptions () {
@@ -68,7 +68,7 @@ export default {
         fileType = 'gpx'
       } else if (fileContent.startsWith('<?xml')) {
         fileType = 'xml'
-      } else if (type === 'application/json') {
+      } else if (type === 'application/json' || type === 'application/geo+json') {
         const parsedJson = JSON.parse(fileContent)
         if (parsedJson && parsedJson.features) {
           fileType = 'geojson'
