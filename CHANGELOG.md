@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.26.0](https://github.com/GIScience/ors-map-client/compare/v1.25.2...v1.26.0) (2021-11-22)
+
+
+### Features
+
+* add support for calculated min/max values and add calc parameters for isochrones interval ([af5dba3](https://github.com/GIScience/ors-map-client/commit/af5dba3609734acd2bd3a488efa734c1ec1cea8d))
+* **main.js:** emit appLoaded event via eventbus once the app is loaded ([a0732be](https://github.com/GIScience/ors-map-client/commit/a0732bed1b54096fc6296be404c9b6722a9b4e3e))
+* skip pushing a new route when the route is not valid ([b3221e4](https://github.com/GIScience/ors-map-client/commit/b3221e479996bd4423e6d99a9f1543865c873dff))
+
+
+### Bug Fixes
+
+* **app.js:** remove commit on created and run menu adjustment on appload event ([a66afb8](https://github.com/GIScience/ors-map-client/commit/a66afb8608c615770229383b0a6709520e1b0a6b))
+* **main-menu.js:** run modifyMenu hook without loadapp wrapper ([9471cb2](https://github.com/GIScience/ors-map-client/commit/9471cb2199960b334ea3cc53584ef5bef7eda801))
+
+
+### Others
+
+* update chromedriver to 96.0.0 ([6a425b2](https://github.com/GIScience/ors-map-client/commit/6a425b2fd5b30b1f7696dc749e73166415c418d4))
+
+
+### Tests
+
+* **app-render.spec.js:** improve render tests by using await and reordering the event emit/on ([bba2b9d](https://github.com/GIScience/ors-map-client/commit/bba2b9ddb5f1414a58c3d2c3b99418fac744fb10))
+
+
+### Code Refactoring
+
+* **app-loader.js:** simplify, refactor and rename methods ([3cb6fd9](https://github.com/GIScience/ors-map-client/commit/3cb6fd98aef687f3efa4b5863372096bd165ac3f))
+
+
+### Docs
+
+* **plugin-example.js:** fix the reference to the getInstance method ([d5f2ef1](https://github.com/GIScience/ors-map-client/commit/d5f2ef1216703b0d267c511a5ebd0c9438f55e33))
+* **readme.md:** fix the path to hooks-example.js file ([fab3f4b](https://github.com/GIScience/ors-map-client/commit/fab3f4b5881377bd36d1fe498b5f99c639d62d39))
+
 ### [1.25.2](https://github.com/GIScience/ors-map-client/compare/v1.25.1...v1.25.2) (2021-11-05)
 
 
