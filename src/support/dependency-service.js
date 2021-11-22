@@ -407,10 +407,23 @@ const getRuleValue = (rule, ruleKey, propName) => {
     if (Array.isArray(propValue)) {
       let valueRule = propValue[0]
       let dependsOnFilter = getDependencyRelationTargetObj(valueRule.ref)
+      // if the first option doe not have a valid value, gets the second
       if ((!dependsOnFilter || dependsOnFilter.value === undefined) && propValue.length === 2) {
-        value = propValue[1] // if the first option doe not have a valid value, gets the second
+        value = propValue[1]
       } else {
-        value = dependsOnFilter.value
+        if (valueRule.calc) {
+          let prop = valueRule.prop || 'value'
+          if (valueRule.calc.dividedBy) {
+            value = Math.round(dependsOnFilter[prop] / valueRule.calc.dividedBy)
+          } else if (valueRule.calc.multipliedBy) {
+            value = Math.round(dependsOnFilter[prop] / valueRule.calc.multipliedBy)
+          }
+          if (value < valueRule.min)  {
+            value = valueRule.min
+          }
+        } else {
+          value = dependsOnFilter.value
+        }
       }
     } else {
       value = propValue

@@ -161,7 +161,7 @@ const filters = [
     required: false,
     type: constants.filterTypes.steps,
     value: 1,
-    min: 3,
+    min: 1,
     max: 30,
     step: 1,
     multiplyValueBy: 60,
@@ -185,19 +185,19 @@ const filters = [
         valuesWhen: {
           'driving-*': {
             max: [{ref: 'time_range'}, 60], // the max value of range or 60
-            min: 6
+            min: [{ref: 'time_range', calc: {dividedBy: 9}, min: 1}]
           },
           'cycling-*': {
             max: [{ref: 'time_range'}, 30], // the max value of range or 30,
-            min: 3
+            min: [{ref: 'time_range', calc: {dividedBy: 9}, min: 1}] //set min value by calcing time_range value divided by 9 or ...
           },
           'foot-*': {
             max: [{ref: 'time_range'}, 1200], // the max value of range or 1200,
-            min: 12
+            min: [{ref: 'time_range', calc: {dividedBy: 9}, min: 1}]
           },
           wheelchair: {
             max: [{ref: 'time_range'}, 1200], // the max value of range or 1200,
-            min: 12
+            min: [{ref: 'time_range', calc: {dividedBy: 9}, min: 1}]
           },
         }
       }
@@ -237,7 +237,7 @@ const filters = [
     required: false,
     type: constants.filterTypes.steps,
     value: 1,
-    min: 3,
+    min: 1,
     max: 30,
     multiplyValueBy: 1000,
     step: 1,
@@ -261,19 +261,19 @@ const filters = [
         valuesWhen: {
           'driving-*': {
             max: [{ref: 'distance_range'}, 120], // the max value of range or 120
-            min: 12
+            min: [{ref: 'distance_range', calc: {dividedBy: 9}, min: 1}]
           },
           'cycling-*': {
             max: [{ref: 'distance_range'}, 120], // the max value of range or 120
-            min: 12
+            min: [{ref: 'distance_range', calc: {dividedBy: 9}, min: 1}]
           },
           'foot-*': {
             max: [{ref: 'distance_range'}, 120], // the max value of range or 120
-            min: 12
+            min: [{ref: 'distance_range', calc: {dividedBy: 9}, min: 1}]
           },
           wheelchair: {
             max: [{ref: 'distance_range'}, 120], // the max value of range or 120
-            min: 12
+            min: [{ref: 'distance_range', calc: {dividedBy: 9}, min: 1}]
           },
         }
       }
