@@ -8,7 +8,7 @@
  * It is possible to use values from the store, like, for example:
  * store.getters.mapCenter, store.getters.mapBounds and store.getters.mode
  * It is also possible to emit events using the eventBus. For example:
- * main.getInstance().eventBus.$emit('mapViewDataChanged', mapViewDataChanged)
+ * appLoader.getInstance().eventBus.$emit('mapViewDataChanged', mapViewDataChanged)
  */
 class PluginExample {
   /**
