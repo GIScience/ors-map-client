@@ -23,12 +23,6 @@ export default {
     appInfo: Info
   },
   created () {
-    // This is the first and main component rendered when the app
-    // is loaded. Therefore, as soon as it is created, we store
-    // a reference to the root Vue component in the store
-    // so that other component can easily access it
-    this.$store.commit('mainAppInstanceRef', this.$root)
-
     // Register the listener for the showLoading and 
     // titleChanged events
     this.eventBus.$on('showLoading', (value) => {
@@ -39,6 +33,8 @@ export default {
     })
   },
   mounted() {
-    MainMenu.adjustMenu()  
+    this.eventBus.$on('appLoaded', () => {
+      MainMenu.adjustMenu()
+    })
   },
 }
