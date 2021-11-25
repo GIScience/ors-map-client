@@ -13,11 +13,6 @@
       "preventFullImport": true
     }
   }],
-  ["prismjs", {
-    "languages": ["javascript", "css", "markup", "bash", "java", "json", "perl", "python", "php", "ruby", "csharp", "go", "visual-basic", "groovy", "objectivec", "swift", "markdown"],
-    "theme": "default",
-    "css": true
-  }],
   ["@babel/plugin-proposal-class-properties"]],
   "env": {
     "test": {

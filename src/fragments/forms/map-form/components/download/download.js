@@ -1,7 +1,7 @@
 import { Directions } from '@/support/ors-api-runner'
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import toGpx from 'togpx'
-import toKml from 'tokml'
+import toKml from '@maphubs/tokml'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 
