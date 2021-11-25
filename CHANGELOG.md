@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.1](https://github.com/GIScience/ors-map-client/compare/v1.27.0...v1.27.1) (2021-11-25)
+
+
+### Bug Fixes
+
+* update cyclosm tile url in config example ([693162e](https://github.com/GIScience/ors-map-client/commit/693162e2f316381cdcee016a23f58c729be4cc31))
+
+
+### Code Refactoring
+
+* remove unused pretty-code-viewer component ([2efaf0a](https://github.com/GIScience/ors-map-client/commit/2efaf0aa87d487ea0f7497c8c92869c34cf52bda))
+
+
+### Others
+
+* update npm packages ([20a3530](https://github.com/GIScience/ors-map-client/commit/20a35306ae504368c080e64da2a11da79b7271a5))
+
 ## [1.27.0](https://github.com/GIScience/ors-map-client/compare/v1.26.0...v1.27.0) (2021-11-22)
 
 
