@@ -6,11 +6,7 @@
           <h3>{{infoTitle}}</h3>
           </div>
         <div slot="content" >
-          <pretty-code-viewer v-if="textIsMarkdown" :source="infoText" max-height-minimized="100%"></pretty-code-viewer>
-          <div v-else v-html="infoText"></div>
-          <div class="code-container" v-if="code">
-            <pretty-code-viewer :level="3" :source="code" max-height-minimized="100%"></pretty-code-viewer>
-          </div>
+          <div v-html="infoText"></div>  
         </div>
         <div slot="footer" class="text-right">
           <v-spacer></v-spacer>

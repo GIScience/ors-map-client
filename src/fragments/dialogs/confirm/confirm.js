@@ -1,5 +1,3 @@
-import PrettyCodeViewer from '@/fragments/pretty-code-viewer/PrettyCodeViewer'
-import JsonTree from 'ors-vue-json-tree'
 import utils from '@/support/utils'
 export default {
   data: () => ({
@@ -56,9 +54,5 @@ export default {
     this.eventBus.$on('triggerConfirm', (confirm) => {
       this.showDialog(confirm)
     })
-  },
-  components: {
-    PrettyCodeViewer,
-    JsonTree
   }
 }

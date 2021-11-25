@@ -6,11 +6,7 @@
           <h3>{{confirmTitle}}</h3>
         </div>
         <div slot="content">
-          <pretty-code-viewer v-if="textIsMarkdown" :source="confirmText" max-height-minimized="100%"></pretty-code-viewer>
-          <div v-else v-html="confirmText"></div>
-          <div class="code-container" v-if="code">
-            <pretty-code-viewer :level="3" :source="code" max-height-minimized="100%"></pretty-code-viewer>
-          </div>
+          <div v-html="confirmText"></div>
         </div>
         <div slot="footer" class="text-right">
           <v-spacer></v-spacer>

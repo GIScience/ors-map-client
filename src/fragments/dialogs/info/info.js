@@ -1,4 +1,3 @@
-import PrettyCodeViewer from '@/fragments/pretty-code-viewer/PrettyCodeViewer'
 import utils from '@/support/utils'
 export default {
   data: () => ({
@@ -45,8 +44,5 @@ export default {
     this.eventBus.$on('triggerShowInfo', (info) => {
       this.showDialog(info)
     })
-  },
-  components: {
-    PrettyCodeViewer
   }
 }
