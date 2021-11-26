@@ -3,9 +3,6 @@ import appConfig from '@/config/app-config'
 import constants from '@/resources/constants'
 
 export default {
-  created () {
-    this.shareUrl = this.currentUrl
-  },
   data: () => ({
     isShareModalOpen: false,
     shareUrl: null,
@@ -25,7 +22,6 @@ export default {
     }
   },
   methods: {
-
     /**
      * Toggle the url short/full
      */
@@ -38,6 +34,7 @@ export default {
       this.isShortened = !this.isShortened
     },
     openShare () {
+      this.shareUrl = this.currentUrl
       this.isShareModalOpen = true
     },
     closeShare () {
@@ -58,7 +55,6 @@ export default {
      *
      */
     copyEmbed () {
-      const url = this.embedCode ? this.shareUrl : this.currentUrl
       if (this.copyToClipboard(this.embedCode)) {
         this.showSuccess(this.$t('share.embedCodeCopied'), { timeout: 2000 })
       }

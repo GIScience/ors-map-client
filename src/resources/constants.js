@@ -1,6 +1,6 @@
 const constants = {
   apiVersion: '5.0',
-  orsPublicHost: 'https://openrouteservice.org',
+  orsPublicHost: 'https://maps.openrouteservice.org',
   orsApiRequestTimeout: 40000,
   publicEndpoints: {
     directions: 'pdirections',
