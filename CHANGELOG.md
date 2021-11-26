@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.2](https://github.com/GIScience/ors-map-client/compare/v1.27.1...v1.27.2) (2021-11-26)
+
+
+### Bug Fixes
+
+* **share.js:** update share url before displaying modal and sync share with route stop ([bfdf1f7](https://github.com/GIScience/ors-map-client/commit/bfdf1f737971cbb597ece90b8dcc4838652c6874)), closes [#245](https://github.com/GIScience/ors-map-client/issues/245)
+
 ### [1.27.1](https://github.com/GIScience/ors-map-client/compare/v1.27.0...v1.27.1) (2021-11-25)
 
 
