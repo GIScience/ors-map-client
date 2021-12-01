@@ -79,7 +79,7 @@ module.exports = {
         }
       },
       {
-        test: /\.md$/,
+        test: /\.(txt?|gpx|geojson|kml)(\?.*)?$/,
         use: 'raw-loader'
       }
     ]
