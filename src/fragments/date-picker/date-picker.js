@@ -38,7 +38,7 @@ export default {
     }
   },
   watch: {
-    model: function (newVal, oldVal) {
+    model: function (newVal) {
       this.date = newVal
     }
   },
