@@ -29,6 +29,17 @@ class AppLoader {
       if (store.getters.dataAcquired) {
         resolve(store.getters.mapSettings.apiKey)
       } else {
+        // eslint-disable-next-line no-undef
+        var BITLYLOGIN = process.env.BITLYLOGIN
+        // eslint-disable-next-line no-undef
+        var BITLYAPIKEY = process.env.BITLYAPIKEY
+        if (BITLYLOGIN) {
+          appConfig.bitlyLogin = BITLYLOGIN
+        }
+        if (BITLYAPIKEY) {
+          appConfig.bitlyApiKey = BITLYAPIKEY
+        }
+
         // For some reason not yet identified (maybe a vue router bug?)
         // the `beforeEnter` guard used to fire this action is being called
         // multiple times. so, we had to implement this `apiDataRequested` flag
@@ -37,7 +48,7 @@ class AppLoader {
           store.commit('apiDataRequested', true)
 
           // eslint-disable-next-line no-undef
-          var ORSKEY = process.env.ORSKEY
+          var ORSKEY = process.env.ORSKEY         
   
           // By default, the app must use an ors API key stored in config.js
           if (appConfig.useUserKey) {
