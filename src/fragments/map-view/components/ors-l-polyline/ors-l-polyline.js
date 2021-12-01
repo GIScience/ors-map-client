@@ -163,7 +163,7 @@ export default {
       if (opacity) {
         return opacity
       } else {
-        return 0.2
+        return 0.9
       }
     },
     /**
