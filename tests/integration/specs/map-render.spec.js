@@ -1,11 +1,8 @@
-import defaultMapSettings from '@/config/default-map-settings'
 import mapViewDataTemplates from '../mockups/map-view-data.js'
 import MapView from '@/fragments/map-view/MapView.vue'
 import MapViewProps from '../mockups/map-view-props.js'
 import PreparedVue from '@/common/prepared-vue.js'
-import constants from '@/resources/constants'
 import I18nBuilder from '@/i18n/i18n-builder'
-import appConfig from '@/config/app-config'
 import AppLoader from '@/app-loader'
 import store from '@/store/store'
 
