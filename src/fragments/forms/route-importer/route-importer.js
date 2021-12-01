@@ -46,8 +46,8 @@ export default {
           context.showError(context.$t('routeImporter.failedToLoadFile'), 20000)
         } else {
           let parts = file.name.split('.')
-          let extention = parts[parts.length - 1]
-          let type = file.type || extention
+          let extension = parts[parts.length - 1]
+          let type = file.type || extension
           context.catchAndParseFile(content, type, new Date().getTime())
           context.isImportModalOpen = false
         }
