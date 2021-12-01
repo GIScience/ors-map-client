@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.4](https://github.com/GIScience/ors-map-client/compare/v1.27.3...v1.27.4) (2021-12-01)
+
+
+### Build System
+
+* use bit.ly credentials from env keys, if present ([5589dd0](https://github.com/GIScience/ors-map-client/commit/5589dd088b72444f00daaec033ba35ea942f9959))
+
+
+### Tests
+
+* increate wait for element timeout ([5f27627](https://github.com/GIScience/ors-map-client/commit/5f276273a27616b2a11769a2f3c559c691b81b42))
+
 ### [1.27.3](https://github.com/GIScience/ors-map-client/compare/v1.27.2...v1.27.3) (2021-12-01)
 
 
