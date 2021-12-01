@@ -7,7 +7,7 @@ module.exports = {
     browser
       .resizeWindow(1848, 980)
       .url(directionsUrl)
-      .waitForElementVisible('.app-content')
+      .waitForElementVisible('.app-content', 10000)
       .assert.elementPresent('#app')
       .assert.not.elementPresent('.simple-place-search')
       .assert.visible('#map-view')

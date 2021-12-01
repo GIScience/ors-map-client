@@ -5,7 +5,7 @@ module.exports = {
 
     browser
       .url(reachUrl)
-      .waitForElementVisible('.app-content')
+      .waitForElementVisible('.app-content', 10000)
       .assert.elementPresent('#app')
       .assert.elementPresent('.simple-place-search')
       .assert.elementPresent('#map-view')
@@ -27,7 +27,7 @@ module.exports = {
 
     browser
       .url(isochronesUrl)
-      .waitForElementVisible('.app-content')
+      .waitForElementVisible('.app-content', 10000)
       .assert.elementPresent('#app')
       .assert.elementPresent('.simple-place-search')
       .assert.elementPresent('#map-view')
