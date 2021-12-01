@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.3](https://github.com/GIScience/ors-map-client/compare/v1.27.2...v1.27.3) (2021-12-01)
+
+
+### Bug Fixes
+
+* **ors-l-polyline.js:** fix the default opacity value ([086fdc1](https://github.com/GIScience/ors-map-client/commit/086fdc18314cb0d97f47a5bff1b845b8366e82bd))
+
+
+### Others
+
+* **webpack.base.conf.js:** add support for importing raw files like gpx, kml, txt and geojson ([be1384f](https://github.com/GIScience/ors-map-client/commit/be1384f3cbc1b4300396afdde9a659ed698682ac))
+
+
+### Docs
+
+* **app-hooks.js:** fix parameter type typo ([2bab02c](https://github.com/GIScience/ors-map-client/commit/2bab02c88b7c54505da2f3155a952041cdb58b56))
+
+
+### Code Refactoring
+
+* **date-picker.js:** remove unused oldval parameter in model watch function ([e422aab](https://github.com/GIScience/ors-map-client/commit/e422aabc26e3aec6c2c1753dba243dfffaf67746))
+* **map-render.spec.js:** remove unused imports ([81c734b](https://github.com/GIScience/ors-map-client/commit/81c734b761d4bbbd0906434978e868f7e1a4a8af))
+* pass share url as a prameter to share component ([caedb08](https://github.com/GIScience/ors-map-client/commit/caedb08444c67ee99089741891c45ffb51c322cd))
+* **place-input.spec.js:** replace timeout for await ([1d09fc3](https://github.com/GIScience/ors-map-client/commit/1d09fc3ac956f6e1f101de5b210c6cdc55918e6e))
+* **route-importer.js:** fix variable typo ([6d9c8d1](https://github.com/GIScience/ors-map-client/commit/6d9c8d1af8f552674ca639fadd91d3081fa02ffa))
+* **routeimporter.vue:** add css class to elements ([efb0081](https://github.com/GIScience/ors-map-client/commit/efb008134701c8bb1fd7e999cc611086c4520418))
+
+
+### Tests
+
+* **route-importer.spec.js:** add test for route-importer component ([eb46748](https://github.com/GIScience/ors-map-client/commit/eb46748d5b1787937558a0b161b6fe96ed0813c6))
+* **share.spec.js:** add test for share component ([aa004ce](https://github.com/GIScience/ors-map-client/commit/aa004ced7948d0470944a4da922d6d8141764c12))
+
 ### [1.27.2](https://github.com/GIScience/ors-map-client/compare/v1.27.1...v1.27.2) (2021-11-26)
 
 
