@@ -61,14 +61,13 @@ describe('Place-input', () => {
     await textInput.trigger('keyup')
 
     // When the input has completed the autocomplete task
-    wrapper.vm.$on('autocompleted', () => {
+    wrapper.vm.$on('autocompleted', async () => {
       // Wait a bit so that suggestions are rendered
-      setTimeout(() => {
-        expect(wrapper.findAll('.place-suggestion').length).toBeGreaterThan(2)
-        expect(wrapper.vm.localModel.suggestions.length).toBeGreaterThan(2)
-        expect(wrapper.vm.placeSuggestions.length).toBeGreaterThan(2)
-        done()        
-      }, 200)
+      await new Promise(resolve => setTimeout(resolve, 200))
+      expect(wrapper.findAll('.place-suggestion').length).toBeGreaterThan(2)
+      expect(wrapper.vm.localModel.suggestions.length).toBeGreaterThan(2)
+      expect(wrapper.vm.placeSuggestions.length).toBeGreaterThan(2)
+      done()
     })
   })
 })
