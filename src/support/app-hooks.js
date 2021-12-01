@@ -32,7 +32,7 @@ class AppHooks {
 
   /**
    * Remove a hook
-   * @param {string} hookName
+   * @param {String} hookName
    * @param {Integer} priority
    */
   remove (hookName, priority = 1) {
@@ -94,6 +94,7 @@ class AppHooks {
   /**
    * Attach a plugin to the hooks system
    * @param {Object} pluginInstance 
+   * @param {Object} vueInstance
    */
   attachPlugin (pluginInstance, vueInstance) {
     this.plugins.push(pluginInstance)
