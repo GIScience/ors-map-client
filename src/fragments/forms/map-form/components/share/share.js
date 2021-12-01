@@ -8,12 +8,18 @@ export default {
     shareUrl: null,
     isShortened: false
   }),
+  props: {
+    url: {
+      required: false,
+      default: null
+    }
+  },
   computed: {
     currentUrl () {
-      return location.href
+      return this.url || location.href
     },
     embedCode () {
-      let code = `<iframe style='border:none' width='100%' height='100%'  src="${this.currentUrl}/embed/${this.$store.getters.mapSettings.locale}"></iframe>`
+      let code = `<iframe style='border:none' width='100%' height='100%'  src="${this.shareUrl}/embed/${this.$store.getters.mapSettings.locale}"></iframe>`
       return code
     },
     shortBtnTitle () {
@@ -29,7 +35,14 @@ export default {
       if (this.isShortened) {
         this.shareUrl = this.currentUrl
       } else {
-        this.short()
+        let context = this
+        this.short().then((shortUrl => {
+          context.shareUrl = shortUrl
+          context.isShortened = true
+          context.showSuccess(context.$t('share.urlShortened'), { timeout: 2000 })
+        })).catch(() => {
+          context.showError(context.$t('share.shorteningNotPossible'), { timeout: 2000 })
+        })
       }
       this.isShortened = !this.isShortened
     },
@@ -97,19 +110,19 @@ export default {
 
       // Run the request and get the short url
       let httpClient = new HttpClient({getVueInstance: () => { return this }})
-      let context = this
-      httpClient.http.get(shortenerRequestUrl).then((response) => {
-        if (response.data.status_code === 200) {
-          context.shareUrl = response.data.data.url
-          context.isShortened = true
-          context.showSuccess(context.$t('share.urlShortened'), { timeout: 2000 })
-        } else {
-          this.showError(context.$t('share.shorteningNotPossible'), { timeout: 2000 })
-          console.log(response)
-        }
-      }).catch((error) => {
-        context.showError(context.$t('share.shorteningNotPossible'), { timeout: 2000 })
-        console.log(error)
+
+      return new Promise((resolve, reject) => {
+        httpClient.http.get(shortenerRequestUrl).then((response) => {
+          if (response.data.status_code === 200) {
+            resolve(response.data.data.url)
+          } else {
+            console.log(response)
+            reject(response)
+          }
+        }).catch((error) => {
+          console.log(error)
+          reject(error)
+        })
       })
     }
   }

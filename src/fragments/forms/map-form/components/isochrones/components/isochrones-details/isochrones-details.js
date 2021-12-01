@@ -20,6 +20,11 @@ export default {
     Download,
     Print
   },
+  computed: {
+    shareUrl () {
+      return location.href
+    }
+  },
   created() {
     this.localMapViewData = this.mapViewData.clone()
   },

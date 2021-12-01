@@ -1,7 +1,7 @@
 <template>
   <box background="white" no-shadow>
     <div slot="header">
-      <share></share>
+      <share :url="shareUrl"></share>
       <print :map-view-data="mapViewData"></print>
       <h3>{{$t('placeDetails.placeDetails')}}</h3>
     </div>

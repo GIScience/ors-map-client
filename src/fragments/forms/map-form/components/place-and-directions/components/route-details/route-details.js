@@ -28,7 +28,7 @@ export default {
      * the map builder is reset and the
      * map data is reloaded
      */
-     'mapViewData.routes': {
+    'mapViewData.routes': {
       handler: function () {
         // When the mapViewData prop changes, we copy its value to a
         // local instance so that we can modify it when necessary
@@ -40,6 +40,9 @@ export default {
   computed: {
     hasRoutes () {
       return this.localMapViewData.isRouteData
+    },
+    shareUrl () {
+      return location.href
     },
     startedPanelExtended () {
       return this.localMapViewData.routes.length === 1 ? 0 : null

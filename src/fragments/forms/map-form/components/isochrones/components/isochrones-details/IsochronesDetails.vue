@@ -2,7 +2,7 @@
   <box background="white" no-shadow>
     <div slot="header">
       <download :download-formats-supported="['json', 'geojson']" :map-view-data="localMapViewData"></download>
-      <share></share>
+      <share :url="shareUrl"></share>
       <print :map-view-data="localMapViewData"></print>
       <h3>{{$t('isochrones.isochrones')}}</h3>
     </div>

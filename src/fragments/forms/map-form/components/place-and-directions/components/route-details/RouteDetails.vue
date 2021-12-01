@@ -3,7 +3,7 @@
   <box background="white" v-if="hasRoutes" custom-class="expansion-box" no-shadow>
     <div slot="header">
       <download :map-view-data="mapViewData" ></download>
-      <share></share>
+      <share :url="shareUrl"></share>
       <print :map-view-data="mapViewData"></print>
       <h3>{{$t('routeDetails.routeDetails')}}</h3>
     </div>

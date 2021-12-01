@@ -54,6 +54,9 @@ export default {
     }
   },
   computed: {
+    shareUrl () {
+      return location.href
+    },
     imagePath () {
       if (this.placeLayer) {
         const zoom = geoUtils.zoomLevelByLayer(this.placeLayer)
