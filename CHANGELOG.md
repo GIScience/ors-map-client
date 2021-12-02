@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.5](https://github.com/GIScience/ors-map-client/compare/v1.27.4...v1.27.5) (2021-12-02)
+
+
+### Tests
+
+* **test.yml:** add bit.ly env secrets ([7e93653](https://github.com/GIScience/ors-map-client/commit/7e93653bb4c21c0e9054ede43361f4713dfba840))
+
 ### [1.27.4](https://github.com/GIScience/ors-map-client/compare/v1.27.3...v1.27.4) (2021-12-01)
 
 
