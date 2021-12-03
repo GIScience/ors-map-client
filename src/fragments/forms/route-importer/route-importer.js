@@ -43,13 +43,12 @@ export default {
       reader.addEventListener('loadend', function (event) {
         const content = event.target.result
         if (!content || content === 'null') {
-          context.showError(context.$t('routeImporter.failedToLoadFile'), 20000)
+          context.showError(context.$t('routeImporter.failedToLoadFile'), {timeout: 0})
         } else {
           let parts = file.name.split('.')
           let extension = parts[parts.length - 1]
           let type = file.type || extension
           context.catchAndParseFile(content, type, new Date().getTime())
-          context.isImportModalOpen = false
         }
       })
       this.$refs.importRouteDropzone.removeAllFiles()
@@ -61,14 +60,14 @@ export default {
      * @param {*} type
      */
     catchAndParseFile (fileContent, type, timestamp) {
-      let fileType = ''
+      let fileType = null
       if (type.indexOf('kml') > -1) {
         fileType = 'kml'
       } else if (type.indexOf('gpx') > -1 || fileContent.startsWith('<gpx')) {
         fileType = 'gpx'
       } else if (fileContent.startsWith('<?xml')) {
         fileType = 'xml'
-      } else if (type === 'application/json' || type === 'application/geo+json') {
+      } else if (type.indexOf('json') > -1 || type.indexOf('geojson') > -1) {
         const parsedJson = JSON.parse(fileContent)
         if (parsedJson && parsedJson.features) {
           fileType = 'geojson'
@@ -76,12 +75,15 @@ export default {
           fileType = 'json'
         }
       }
-      let parseData = {fileType, fileContent, timestamp}
-
-      this.$root.appHooks.run('importedFileParsed', parseData)
-
-      this.sendDataToMap(parseData.fileType, parseData.fileContent, parseData.timestamp)
-      this.closeImporter()
+      if (fileType) {
+        let parseData = {fileType, fileContent, timestamp}  
+        this.$root.appHooks.run('importedFileParsed', parseData)  
+        this.closeImporter()
+        this.sendDataToMap(parseData.fileType, parseData.fileContent, parseData.timestamp)
+      } else {
+        this.showError(this.$t('routeImporter.failedToLoadFile'), {timeout: 0})
+        this.$emit('failedToImportFile')
+      }
     },
 
     /**
