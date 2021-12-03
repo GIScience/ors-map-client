@@ -7,6 +7,8 @@ import orsRouteGeojson from '../mockups/ors-route.geojson'
 import orsRouteJson from '../mockups/ors-route.json'
 import orsRouteGpx from '../mockups/ors-route.gpx'
 import orsRouteKml from '../mockups/ors-route.kml'
+// import orsRouteTxt from '../mockups/ors-route.txt'
+import orsRouteXmlTxt from '../mockups/ors-route.xml.txt'
 
 
 // Solves the 'RegeneratorRuntime is not defined' issue according to
@@ -14,7 +16,7 @@ import orsRouteKml from '../mockups/ors-route.kml'
 import '@babel/polyfill'
 
 describe('Route-importer', () => {
-  it('should import geojson route', async (done) => {
+  it('should import geojson route', async () => {
     await new AppLoader().fetchApiInitialData()
     const wrapper = mount(RouteImporter, {i18n: I18nBuilder.build(), store: store })
 
@@ -22,7 +24,7 @@ describe('Route-importer', () => {
     expect(wrapper.findComponent(RouteImporter).exists()).toBe(true)
 
     await wrapper.find('.route-importer-btn button').trigger('click')
-    await new Promise((resolve) => { setTimeout(() => { resolve(true)}, 2000)})
+    await new Promise(resolve => setTimeout(resolve, 2000))
 
     let importerModal = document.querySelector('.route-importer-modal')
     expect(importerModal).toBeDefined()
@@ -37,16 +39,12 @@ describe('Route-importer', () => {
     expect(dropzone).not.toBeNull()
     dropzone.dispatchEvent(new DragEvent('drop', {dataTransfer: dataTransfer}))
     
-    wrapper.vm.$on('contentUploaded', async (content) => {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      importerModal = document.querySelector('.route-importer-modal') 
-      expect(importerModal).toBeNull()
-      console.log(content)
-      done()
-    })   
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    importerModal = document.querySelector('.route-importer-modal') 
+    expect(importerModal).toBeNull() 
   })
 
-  it('should import json route', async (done) => {
+  it('should import JSON route', async () => {
     await new AppLoader().fetchApiInitialData()
     const wrapper = mount(RouteImporter, {i18n: I18nBuilder.build(), store: store })
 
@@ -54,7 +52,7 @@ describe('Route-importer', () => {
     expect(wrapper.findComponent(RouteImporter).exists()).toBe(true)
 
     await wrapper.find('.route-importer-btn button').trigger('click')
-    await new Promise((resolve) => { setTimeout(() => { resolve(true)}, 2000)})
+    await new Promise(resolve => setTimeout(resolve, 2000))
 
     let importerModal = document.querySelector('.route-importer-modal')
     expect(importerModal).toBeDefined()
@@ -69,16 +67,13 @@ describe('Route-importer', () => {
     expect(dropzone).not.toBeNull()
     dropzone.dispatchEvent(new DragEvent('drop', {dataTransfer: dataTransfer}))
     
-    wrapper.vm.$on('contentUploaded', async (content) => {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      importerModal = document.querySelector('.route-importer-modal') 
-      expect(importerModal).toBeNull()
-      console.log(content)
-      done()
-    })   
+    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 3000))
+    importerModal = document.querySelector('.route-importer-modal') 
+    expect(importerModal).toBeNull() 
   })
 
-  it('should import gpx route', async (done) => {
+  it('should import GPX route', async () => {
     await new AppLoader().fetchApiInitialData()
     const wrapper = mount(RouteImporter, {i18n: I18nBuilder.build(), store: store })
 
@@ -86,7 +81,7 @@ describe('Route-importer', () => {
     expect(wrapper.findComponent(RouteImporter).exists()).toBe(true)
 
     await wrapper.find('.route-importer-btn button').trigger('click')
-    await new Promise((resolve) => { setTimeout(() => { resolve(true)}, 2000)})
+    await new Promise(resolve => setTimeout(resolve, 2000))
 
     let importerModal = document.querySelector('.route-importer-modal')
     expect(importerModal).toBeDefined()
@@ -101,16 +96,12 @@ describe('Route-importer', () => {
     expect(dropzone).not.toBeNull()
     dropzone.dispatchEvent(new DragEvent('drop', {dataTransfer: dataTransfer}))
     
-    wrapper.vm.$on('contentUploaded', async (content) => {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      importerModal = document.querySelector('.route-importer-modal') 
-      expect(importerModal).toBeNull()
-      console.log(content)
-      done()
-    })   
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    importerModal = document.querySelector('.route-importer-modal') 
+    expect(importerModal).toBeNull()  
   })
 
-  it('should import gpx route', async (done) => {
+  it('should import KML route', async () => {
     await new AppLoader().fetchApiInitialData()
     const wrapper = mount(RouteImporter, {i18n: I18nBuilder.build(), store: store })
 
@@ -118,7 +109,7 @@ describe('Route-importer', () => {
     expect(wrapper.findComponent(RouteImporter).exists()).toBe(true)
 
     await wrapper.find('.route-importer-btn button').trigger('click')
-    await new Promise((resolve) => { setTimeout(() => { resolve(true)}, 2000)})
+    await new Promise(resolve => setTimeout(resolve, 2000))
 
     let importerModal = document.querySelector('.route-importer-modal')
     expect(importerModal).toBeDefined()
@@ -133,11 +124,70 @@ describe('Route-importer', () => {
     expect(dropzone).not.toBeNull()
     dropzone.dispatchEvent(new DragEvent('drop', {dataTransfer: dataTransfer}))
     
-    wrapper.vm.$on('contentUploaded', async () => {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      importerModal = document.querySelector('.route-importer-modal') 
-      expect(importerModal).toBeNull()
-      done()
-    })   
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    importerModal = document.querySelector('.route-importer-modal') 
+    expect(importerModal).toBeNull()  
   })
+
+  it('should import txt file with valid xml', async () => {
+    await new AppLoader().fetchApiInitialData()
+    const wrapper = mount(RouteImporter, {i18n: I18nBuilder.build(), store: store })
+
+    expect(wrapper.contains('.route-importer-container')).toBe(true)
+    expect(wrapper.findComponent(RouteImporter).exists()).toBe(true)
+
+    await wrapper.find('.route-importer-btn button').trigger('click')
+    await new Promise(resolve => setTimeout(resolve, 2000))
+
+    let importerModal = document.querySelector('.route-importer-modal')
+    expect(importerModal).toBeDefined()
+    expect(importerModal).not.toBeNull()
+    
+    const dataTransfer = new DataTransfer()
+    const aFileParts = [orsRouteXmlTxt]
+    dataTransfer.items.add(new File([new Blob(aFileParts, { type: 'text/plain' })], 'ors-route.xml.txt'))    
+
+    let dropzone = document.querySelector('#dropzone')
+    expect(dropzone).toBeDefined()
+    expect(dropzone).not.toBeNull()
+    dropzone.dispatchEvent(new DragEvent('drop', {dataTransfer: dataTransfer}))
+    
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    importerModal = document.querySelector('.route-importer-modal') 
+    expect(importerModal).toBeNull()  
+  })
+
+  // it('should not import file with invalid content and extension', async () => {
+  //   await new AppLoader().fetchApiInitialData()
+  //   const wrapper = mount(RouteImporter, {i18n: I18nBuilder.build(), store: store })
+
+  //   expect(wrapper.contains('.route-importer-container')).toBe(true)
+  //   expect(wrapper.findComponent(RouteImporter).exists()).toBe(true)
+
+  //   await wrapper.find('.route-importer-btn button').trigger('click')
+  //   await new Promise((resolve) => { setTimeout(() => { resolve(true)}, 2000)})
+
+  //   let importerModal = document.querySelector('.route-importer-modal')
+  //   expect(importerModal).toBeDefined()
+  //   expect(importerModal).not.toBeNull()
+    
+  //   const dataTransfer = new DataTransfer()
+  //   const aFileParts = [orsRouteTxt]
+  //   dataTransfer.items.add(new File([new Blob(aFileParts, { type: 'text/plain' })], 'ors-route.txt'))    
+
+  //   let dropzone = document.querySelector('#dropzone')
+  //   expect(dropzone).toBeDefined()
+  //   expect(dropzone).not.toBeNull()
+  //   dropzone.dispatchEvent(new DragEvent('drop', {dataTransfer: dataTransfer}))
+    
+  //   // await new Promise(resolve => setTimeout(resolve, 2000))
+  //   await wrapper.vm.$nextTick()
+  //   expect(wrapper.emitted('failedToImportFile')).toBeTruthy()
+  //   // importerModal = document.querySelector('.route-importer-modal')
+  //   // expect(importerModal).toBeDefined()
+  //   // expect(importerModal).not.toBeNull()
+  //   // let errorToaster = document.querySelector('.v-snack__wrapper.error')
+  //   // expect(errorToaster).toBeDefined()
+  //   // expect(errorToaster).not.toBeNull()
+  // })
 })
