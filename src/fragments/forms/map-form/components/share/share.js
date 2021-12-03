@@ -75,7 +75,7 @@ export default {
     /**
      * Copy the string to chipboard by creating a temporary textarea element
      *
-     * @param {*} str
+     * @param {String} str
      * @returns {Boolean}
      */
     copyToClipboard (str) {
