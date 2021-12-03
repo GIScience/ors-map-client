@@ -19,7 +19,7 @@ export default {
       return this.url || location.href
     },
     embedCode () {
-      let code = `<iframe style='border:none' width='100%' height='100%'  src="${this.shareUrl}/embed/${this.$store.getters.mapSettings.locale}"></iframe>`
+      let code = `<iframe style='border:none' width='100%' height='100%'  src="${this.currentUrl}/embed/${this.$store.getters.mapSettings.locale}"></iframe>`
       return code
     },
     shortBtnTitle () {
