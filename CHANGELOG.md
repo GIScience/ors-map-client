@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.1](https://github.com/GIScience/ors-map-client/compare/v1.28.0...v1.28.1) (2021-12-09)
+
+
+### Bug Fixes
+
+* **map-view.js:** save tile provider id when a new base layer is selected ([2405de5](https://github.com/GIScience/ors-map-client/commit/2405de5cdcff5c840ebd27c424ea0a6a42571292))
+
 ## [1.28.0](https://github.com/GIScience/ors-map-client/compare/v1.27.5...v1.28.0) (2021-12-09)
 
 
