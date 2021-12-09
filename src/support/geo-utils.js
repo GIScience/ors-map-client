@@ -33,6 +33,8 @@ const geoUtils = {
 
   /**
    * Build a leaflet latlng object
+   * @param {String|Number} lat
+   * @param {String|Number} lng
    * @returns {Object}
    */
   buildLatLong: (lat, lng) => {
