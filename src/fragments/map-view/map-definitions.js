@@ -94,7 +94,7 @@ const mapDefinitions = {
    * Build map providers array
    */
   getProviders () {
-    const defaultTilesProvider = store.getters.mapSettings.defaultTilesProvider || 'osm'
+    const defaultTilesProvider = store.getters.mapSettings.defaultTilesProvider
     var providers = appConfig.mapTileProviders
 
     // Add custom tile service if defined in settings
