@@ -11,7 +11,7 @@ import store from '@/store/store'
  */
 class PlaceMode {
   // eslint-disable-next-line no-unused-vars
-  buildAppRouteData (places, options = {}) {
+  buildAppRouteData (places) {
     const appRouteData = store.getters.appRouteData || new AppRouteData()
     appRouteData.places = places
 
@@ -24,7 +24,9 @@ class PlaceMode {
       appRouteData.options.country = appRouteData.places[0].properties.country || appRouteData.options.country
 
       // Update the zoom according to the place type/layer
-      appRouteData.options.zoom = GeoUtils.zoomLevelByLayer(appRouteData.options.layer)
+      if (!appRouteData.options.zoom) {
+        appRouteData.options.zoom = GeoUtils.zoomLevelByLayer(appRouteData.options.layer)
+      }
     }
     return appRouteData
   }
@@ -35,21 +37,30 @@ class PlaceMode {
    * @param {*} options
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
-  getRoute = (appRouteData, options) => {
+  getRoute = (appRouteData) => {
     if (appRouteData.places.length > 0) {
       const place = appRouteData.places[0]
-      const name = place.placeName ? place.placeName.replace(/, /g, ',') : ''
+      const name = place.placeName ? place.placeName.replace(/, /g, ',') : ''      
 
       // Transform the coordinates into a comma separated value (easier to put in the url)
-      const lngLatStr = place.isEmpty() ? '' : `${place.lng},${place.lat}`
+      var lngLatStr = place.isEmpty() ? '' : `${place.lng},${place.lat}`
+      if (appRouteData.options.zoom) {
+        lngLatStr = `${lngLatStr},${appRouteData.options.zoom}`
+      }
 
-      options = JSON.stringify(options)
-
-      const data = store.getters.mapSettings.compressDataUrlSegment ? utils.compressTxt(options) : options
-
+       
+      
       // Create the route object
-      const params = { placeName: name, coordinates: lngLatStr, data: data }
-      const route = { name: 'MapPlace', params: params }
+      const params = { coordinates: lngLatStr}
+      let route = { name: 'MapLocation' }
+
+      if (name && name !== 'null' && Object.keys(appRouteData.options).length > 1) {
+        params.placeName= name
+        route.name = 'MapPlace'
+        let options = JSON.stringify(appRouteData.options)     
+        params.data = store.getters.mapSettings.compressDataUrlSegment ? utils.compressTxt(options) : options
+      }   
+      route.params = params
       return route
     } else {
       store.commit('cleanMap', true)
@@ -71,15 +82,22 @@ class PlaceMode {
     }
 
     if (currentRoute.params.coordinates) {
-      const lnglat = currentRoute.params.coordinates.split(',')
+      const coordinates = currentRoute.params.coordinates.split(',')
+      appRouteData.options.center =  GeoUtils.buildLatLong(coordinates[1], coordinates[0])
+      if (coordinates.length > 2) {
+        appRouteData.options.zoom = Number(coordinates[2])
+      }
 
       // Get and format the place name
-      const placeName = currentRoute.params.placeName.replace(/, /g, ',').replace(',', ', ')
-      // Recreate the place object
-      const place = new Place(lnglat[0], lnglat[1], placeName, { properties: data })
-
-      // Add the single place to the route data
-      appRouteData.places.push(place)
+      if (currentRoute.params.placeName) {
+        const placeName = currentRoute.params.placeName.replace(/, /g, ',').replace(',', ', ')
+        if (placeName && placeName !== 'null') {
+          // Recreate the place object
+          const place = new Place(coordinates[0], coordinates[1], placeName, { properties: data })
+          // Add the single place to the route data
+          appRouteData.places.push(place)
+        }
+      }
     }
     // Return the object
     AppLoader.getInstance().appHooks.run('afterPlacePathDecoded', appRouteData)

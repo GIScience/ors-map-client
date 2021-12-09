@@ -47,7 +47,8 @@ class DirectionsMode {
    * @param {*} appRouteData
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
-  getRoute = (appRouteData, options) => {
+  getRoute = (appRouteData, options = null) => {
+    options = options || appRouteData.options
     // Get only the valid params for directions
     const validOptions = {}
     const validParams = ['profile', 'preference']

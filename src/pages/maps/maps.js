@@ -13,6 +13,7 @@ import RouteUtils from '@/support/route-utils'
 import appConfig from '@/config/app-config'
 import constants from '@/resources/constants'
 import { ResizeObserver } from 'vue-resize'
+import Place from '@/models/place'
 import lodash from 'lodash'
 
 export default {
@@ -164,9 +165,11 @@ export default {
      *
      */
     fitMapBounds () {
-      if (this.mapViewData.timestamp && this.previousMapViewDataTimeStamp !== this.mapViewData.timestamp && this.$store.getters.mapSettings.alwaysFitBounds) {
+      if (this.mapViewData.timestamp 
+        && this.previousMapViewDataTimeStamp !== this.mapViewData.timestamp 
+        && this.$store.getters.mapSettings.alwaysFitBounds) {
         return true
-      } else if (this.firstLoad) {
+      } else if (this.firstLoad && (this.$store.getters.mode !== constants.modes.place || !this.$store.getters.appRouteData.options.zoom)) {
         return true
       }
       return false
@@ -240,7 +243,17 @@ export default {
     zoomChanged (data) {
       this.$root.appHooks.run('zoomChanged', data)
       this.storeZoomValue(data.zoom)
-      this.searchBtnAvailable = true
+      // Set searchBtnAvailable as true if in search mode
+      this.searchBtnAvailable = this.$store.getters.mode === constants.modes.search   
+
+      if (this.$store.getters.mode === constants.modes.place) {
+        const appMode = new AppMode(this.$store.getters.mode)
+        let places = this.getCurrentMapPlaces()
+        const route = appMode.getRoute(places, {zoom: data.zoom})
+        if (route.params && Object.keys(route.params).length > 0) { // params contains data and placeName? props
+          this.$router.push(route)
+        }
+      }      
     },
     /**
      * Set the refreshing search flag as true,
@@ -263,11 +276,32 @@ export default {
       this.eventBus.$emit('refreshSearch')
     },
     /**
+     * Get current map place center
+     * @returns {Array} okf Places
+     */
+    getCurrentMapPlaces () {
+      let places = this.$store.getters.appRouteData.places || []
+      if (places.length === 0) {
+        let centerPlace = new Place(this.$store.getters.mapCenter.lng, this.$store.getters.mapCenter.lat, 'null')
+        places.push(centerPlace)
+      }
+      return places
+    },
+    /**
      * Defines if the searchBtnAvailable based on
      * how much the map has been moved
      * @param {Object} data
      */
     mapCenterMoved (data) {
+      if (this.$store.getters.appRouteData.places.length === 0) {
+        const appMode = new AppMode(this.$store.getters.mode)
+        let places = this.getCurrentMapPlaces()
+        const route = appMode.getRoute(places, {zoom: data.zoom})
+        if (route.params && Object.keys(route.params).length > 0) { // params contains data and placeName? props
+          this.$router.push(route)
+        }
+      }
+
       // Only enables the refresh search btn
       // if the map has been moved more than 500 meters
       if (data.distance > 500) {
@@ -424,9 +458,12 @@ export default {
         if (appRouteData === false) { // if there is no app route data, load default state
           this.$router.push({name: 'Maps'})
         } else {
+          //TOCONTINUE here. When the zoom changes, the map moves a bit!
           this.$store.commit('appRouteData', appRouteData)
-          this.storeZoomValue()
-          this.eventBus.$emit('appRouteDataChanged', appRouteData)
+          if (this.$route.name !== 'MapLocation') {
+            this.storeZoomValue()
+            this.eventBus.$emit('appRouteDataChanged', appRouteData)            
+          }
         }
       }
     },

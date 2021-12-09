@@ -104,6 +104,7 @@
         :url="tileProvider.url"
         :attribution="tileProvider.attribution"
         :token="tileProvider.token"
+        :options="{maxZoom: tileProvider.maxZoom}"
         layer-type="base"/>
       <l-tile-layer
         v-for="layer in overlayerTileProviders"

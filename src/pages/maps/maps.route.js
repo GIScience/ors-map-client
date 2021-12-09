@@ -37,14 +37,25 @@ const mapRoutes = [
         // Go to the child route
         next(currentPath)
       } else {
-        // Otherwise load the root route
-        next()
+        // Otherwise load the map in the default or previous location
+        let zoom = store.getters.appRouteData.options.zoom || appConfig.initialZoomLevel
+        let mapLocation = `${placePath}@${store.getters.mapCenter.lng},${store.getters.mapCenter.lat},${zoom}`
+        next(mapLocation)
       }
     }
   },
   {
     path: `${placePath}:placeName/@:coordinates/data/:data${embedParameters}`,
     name: 'MapPlace',
+    component: Maps,
+    beforeEnter: (to, from, next) => {
+      store.commit('mode', constants.modes.place)
+      next()
+    }
+  },
+  {
+    path: `${placePath}@:coordinates`,
+    name: 'MapLocation',
     component: Maps,
     beforeEnter: (to, from, next) => {
       store.commit('mode', constants.modes.place)

@@ -22,7 +22,7 @@ class SearchMode {
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
   // eslint-disable-next-line no-unused-vars
-  getRoute = (appRouteData, options = {}) => {
+  getRoute = (appRouteData) => {
     let name = ''
     if (appRouteData.places.length > 0) {
       const place = appRouteData.places[0]

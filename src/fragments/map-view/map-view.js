@@ -192,7 +192,7 @@ export default {
     }
   },
   computed: {
-
+    
     showMyLocationControl () {
       return this.supportsMyLocationBtn && !this.isAltitudeModalOpen && this.showControls
     },
@@ -675,8 +675,12 @@ export default {
      * store the current location on localStorage
      */
     center: {
-      handler: function () {
-        this.centerChanged()
+      handler: function (newVal, oldVal) {
+        // Center might contain a new object, but with the same values
+        // We make this check before triggering centerChanged
+        if (oldVal && newVal && newVal.toString() !== oldVal.toString()) {
+          this.centerChanged()
+        }
       },
       deep: true
     }
@@ -868,16 +872,18 @@ export default {
      * @emits zoomChanged
      */
     zoomed (event) {
-      this.zoomLevel = event.sourceTarget._zoom
-      if (!this.featuresJustFitted && !this.hasOnlyOneMarker) {
-        this.storeMapBoundsAndSetMapAsReady()
+      if (this.zoomLevel !== event.sourceTarget._zoom) {
+        this.zoomLevel = event.sourceTarget._zoom
+        if (!this.featuresJustFitted && !this.hasOnlyOneMarker) {
+          this.storeMapBoundsAndSetMapAsReady()        
+        } else {
+          // If the zoom was changed programmatically
+          // reset the flag to false, as it has already
+          // been accomplished its goal for one zoom event cycle
+          this.featuresJustFitted = false
+        }
         this.$emit('zoomChanged', {zoom: event.sourceTarget._zoom, map: this.map, context: this})
-      } else {
-        // If the zoom was changed programmatically
-        // reset the flag to false, as it has already
-        // been accomplished its goal for one zoom event cycle
-        this.featuresJustFitted = false
-      }
+      }      
     },
 
     /**
@@ -1088,7 +1094,7 @@ export default {
       if (this.localMapViewData.hasPlaces()) {
         this.defineActiveRouteIndex()
         this.updateMarkersLabel()
-        if (this.hasOnlyOneMarker) {
+        if (this.hasOnlyOneMarker && this.fitBounds) {
           this.setFocusedPlace(this.localMapViewData.places[0])
         }
         if (this.mode === constants.modes.place && this.hasOnlyOneMarker && appConfig.showAdminAreaPolygon) {
@@ -1118,8 +1124,10 @@ export default {
       let adminAreaLoader = new AdminAreaLoader()
       let context = this
       adminAreaLoader.getAdminAreaPolygon(place).then(polygons => {
-        context.localMapViewData.polygons = context.localMapViewData.polygons.concat(polygons)
-        context.fitFeaturesBounds(true)
+        if (Array.isArray(polygons) && polygons.length > 0) {
+          context.localMapViewData.polygons = context.localMapViewData.polygons.concat(polygons)
+          context.fitFeaturesBounds()
+        }
       }).catch(err => {
         console.log(err)
       })
@@ -2029,7 +2037,6 @@ export default {
 
     // Once the map component is mounted, load the map data
     this.loadMapData()
-    this.setProviders()
     this.setDrawingTool()
     this.storeMapBoundsAndSetMapAsReady()
   },
@@ -2043,6 +2050,7 @@ export default {
     this.showClickPopups = this.showPopups
     this.localAvoidPolygons = this.avoidPolygons
     this.loadAvoidPolygons()
+    this.setProviders()
     this.setMapCenter()
     window.addEventListener('keyup', this.disablePickPlaceMode)
   }

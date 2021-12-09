@@ -2,7 +2,9 @@
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import OrsMapFilters from '@/config/ors-map-filters'
 import AppLoader from '@/app-loader'
+import utils from '@/support/utils'
 import store from '@/store/store'
+import lodash from 'lodash'
 
 // Modes
 import directionsMode from './strategies/directions-mode'
@@ -29,14 +31,14 @@ class AppMode {
 
   /**
    * Get a route object based on the places given and the app mode
-   * @param {*} places
+   * @param {Array} places
    * @returns {Object} - {name: ..., params: ...}
    */
-  getRoute (places) {
-    const newAppRouteData = this.getAppRouteData(places)
+  getRoute (places = null,  options = {}) {
+    places =  places || store.getters.appRouteData.places
+    const newAppRouteData = this.getAppRouteData(places,  this.getRouteOptions(options))
     store.commit('appRouteData', newAppRouteData)
-    const options = this.getRouteOptions(newAppRouteData.options)
-    var route = this.targetMode.getRoute(newAppRouteData, options)
+    var route = this.targetMode.getRoute(newAppRouteData)
     AppLoader.getInstance().appHooks.run('appModeRouteReady', route)
     return route
   }
@@ -46,13 +48,14 @@ class AppMode {
    * @param {*} places
    * @returns {AppRouteData} newAppRouteData
    */
-  getAppRouteData (places) {
+  getAppRouteData (places, options = {}) {
     // We are about to build a new appRouteData using the passed places
     // and the values stored in the @see ors-map-filter object in memory.
     // We have identified that in this case we should not use the previous
     // options in the old appRouteData and pass it as a second parameter
     // for the method below
-    const newAppRouteData = this.targetMode.buildAppRouteData(places)
+    const newAppRouteData = this.targetMode.buildAppRouteData(places, options)
+    newAppRouteData.options = lodash(newAppRouteData.options).omitBy(lodash.isUndefined).omitBy(lodash.isNull).value()
     return newAppRouteData
   }
 
@@ -75,6 +78,7 @@ class AppMode {
    * @returns {*} options
    */
   getRouteOptions = (options) => {
+    options = utils.merge(store.getters.appRouteData.options, options)
     AppLoader.getInstance().appHooks.run('afterGetRouteOptions', options)
     return options
   }
