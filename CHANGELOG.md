@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.28.0](https://github.com/GIScience/ors-map-client/compare/v1.27.5...v1.28.0) (2021-12-09)
+
+
+### Features
+
+* add sincronization between map center/zoom and app url ([02949e1](https://github.com/GIScience/ors-map-client/commit/02949e1183214c33a1f5c116ece74b798b8fffe1))
+* max zoom defined at tile layer provider level via app-config ([c3f5e4b](https://github.com/GIScience/ors-map-client/commit/c3f5e4bead90e11de112e0d38084fa11cd39fff7))
+
+
+### Bug Fixes
+
+* fix share embedded code url in url short mode ([d83456f](https://github.com/GIScience/ors-map-client/commit/d83456f5f51a272d1a3e2a2fb689a82954de040a))
+
+
+### Tests
+
+* improve route-importer test coverage ([bcba63c](https://github.com/GIScience/ors-map-client/commit/bcba63cf993a919160365b5fe77fdfa628cb4d41))
+* **share.spec.js:** extend share component test ([8fbd0b3](https://github.com/GIScience/ors-map-client/commit/8fbd0b3ffeffbaafd91554c53ff4eafe4fd00eb5))
+
+
+### Code Refactoring
+
+* **map-definitions.js:** use default tiles provider from mapSettings ([817bd36](https://github.com/GIScience/ors-map-client/commit/817bd36ce9e720df0a415a1d9ef89be1918dc78f))
+* **route-importer.js:** refactor file uploaded handling ([6154e03](https://github.com/GIScience/ors-map-client/commit/6154e0397a8fc1f4829aef7f3ccd52c801d42695))
+* **route-importer.js:** remove unused code ([c0699b8](https://github.com/GIScience/ors-map-client/commit/c0699b8a6839572d5d728b371bd59c454239ec77))
+
+
+### Docs
+
+* add missing parameter type/description ([89c710a](https://github.com/GIScience/ors-map-client/commit/89c710abdcb3dd28a2e9bcda56c28facac538490))
+* fix type typo ([61b5cd8](https://github.com/GIScience/ors-map-client/commit/61b5cd884fc5fc16185d4eda12cceabc6c4a5906))
+
 ### [1.27.5](https://github.com/GIScience/ors-map-client/compare/v1.27.4...v1.27.5) (2021-12-02)
 
 
