@@ -860,11 +860,27 @@ export default {
      * remove the expand class so that it is closed
      * after the selection
      */
-    baseLayerChanged () {
+    baseLayerChanged (newTileProvider) {
       const layerControl = document.querySelector('.leaflet-control-layers')
       if (layerControl) {
         layerControl.classList.remove('leaflet-control-layers-expanded')
       }
+      // Get the new active tile object based on its url
+      let activeTileProvider = lodash.find(this.tileProviders, (t) => {
+        return t.url === newTileProvider.layer._url
+      })
+      // Retrieve the mapSettings and set the profile id
+      let mapSettings = this.$store.getters.mapSettings
+      mapSettings.defaultTilesProvider = activeTileProvider.id
+
+      // This will take effect immediately
+      this.$store.commit('mapSettings', mapSettings)
+
+      // This is an asynchronous operation, necessary to be executed
+      // to propagate the new settings state
+      this.$store.dispatch('saveSettings', mapSettings).then(() => {
+        console.log('map settings updated')
+      })
     },
     /**
      * We watch the box model for changes and update the internal closed data that is used to control the visibility of the box
