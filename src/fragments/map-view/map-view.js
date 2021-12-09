@@ -422,8 +422,15 @@ export default {
     maxZoom () {
       if (this.localMapViewData.maxZoom) {
         return this.localMapViewData.maxZoom
+      } else  {
+        let activeTileProvider = lodash.find(this.tileProviders, (t) => {
+          return t.id === this.$store.getters.mapSettings.defaultTilesProvider
+        })
+        if (activeTileProvider){
+          return activeTileProvider.maxZoom 
+        }
+        return this.initialMaxZoom
       }
-      return this.initialMaxZoom
     },
     /**
      * Build and return the circle marker

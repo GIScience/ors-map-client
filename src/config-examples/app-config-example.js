@@ -61,7 +61,7 @@ const appConfig = {
       visible: false,
       attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      token: null
+      maxZoom: 19
     },
     {
       name: 'Satellite imagery',
@@ -69,7 +69,7 @@ const appConfig = {
       visible: false,
       url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-      token: null
+      maxZoom: 17
     },
     {
       name: 'Topography',
@@ -77,7 +77,7 @@ const appConfig = {
       visible: false,
       url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
       attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
-      token: null
+      maxZoom: 18
     },
     {
       name: 'Transport Dark',
@@ -85,21 +85,23 @@ const appConfig = {
       visible: false,
       url: 'https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey=13efc496ac0b486ea05691c820824f5f',
       attribution: 'Maps &copy; <a href="http://thunderforest.com/">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      token: null
+      maxZoom: 18
     },
     {
       name: 'Outdoors',
       id: 'outdoors',
       visible: false,
       url: 'https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=13efc496ac0b486ea05691c820824f5f',
-      attribution: 'Maps &copy; <a href="http://thunderforest.com/">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      attribution: 'Maps &copy; <a href="http://thunderforest.com/">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 18
     },
     {
       name: 'Cyclosm',
       id: 'cyclosm',
       visible: false,
       url: 'https://{s}.tile.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
-      attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 18
     }
   ],
   wpsOverlayerTileProviders: []
