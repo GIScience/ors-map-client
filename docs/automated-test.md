@@ -108,3 +108,8 @@ The following packages are used for the testing solution:
 - vue-server-renderer
 - vue-template-compiler
 - phantomjs-prebuilt
+- webpack-karma-jasmine
+- @babel/polyfill
+- @babel/preset-env
+- sinon
+- sinon-chai
