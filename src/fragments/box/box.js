@@ -168,7 +168,7 @@ export default {
       // To achieve this we keep a stack of boxes maximized
       // but we only set the `this.maximized = true` to the box
       // that is above all others, considering the order of maximization
-      const lastGuid = this.getLasBoxMaximizedGuid()
+      const lastGuid = this.getLastBoxMaximizedGuid()
       if (!lastGuid || lastGuid !== this.guid) {
         this.maximized = false
       } else {
@@ -191,7 +191,7 @@ export default {
      * We can have a list of boxes considered as maximized, but only the
      * last one will be displayed in the view as maximized.
      */
-    getLasBoxMaximizedGuid () {
+    getLastBoxMaximizedGuid () {
       const boxMaximizedStack = this.$store.getters.boxMaximizedStack || {}
       const length = Object.keys(boxMaximizedStack).length
       let lastKey
@@ -215,7 +215,7 @@ export default {
       this.removeFromMaximizedStack()
 
       // Remove any root html overflow in case that there is not other box maximized
-      const boxMaximized = this.getLasBoxMaximizedGuid()
+      const boxMaximized = this.getLastBoxMaximizedGuid()
       if (!boxMaximized) {
         const html = document.getElementsByTagName('html')[0]
         html.style.overflow = 'auto'
