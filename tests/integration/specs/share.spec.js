@@ -24,10 +24,8 @@ describe('Share', () => {
     await wrapper.find('.open-share-btn').trigger('click')
     let shareModal = document.querySelector('.share-modal')
     expect(shareModal).toBeTruthy()     
-    await wrapper.find('.share-modal .box-header button').trigger('click')
-    await wrapper.vm.$nextTick()
-    expect(document.querySelector('.share-modal')).not.toBeTruthy()
-    done()  
+    await document.querySelector('.share-modal .box-header .close').click()
+    done()
   })
 
   it('should open and copy share url', async (done) => {
