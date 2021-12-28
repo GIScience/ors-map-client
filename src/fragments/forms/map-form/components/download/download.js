@@ -17,14 +17,10 @@ export default {
       Type: MapViewData,
       Required: true
     },
-    requestArgs: {
-      Type: Object,
-      Required: true
-    },
     downloadFormatsSupported: {
       Type: Array,
       default: function () {
-        return ['json', 'ors-gpx', 'geojson', 'to-gpx', 'gpx', 'kml']
+        return ['json', 'ors-gpx', 'geojson', 'to-gpx', 'kml']
       }
     }
   },
