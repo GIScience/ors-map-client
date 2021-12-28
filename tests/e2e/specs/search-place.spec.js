@@ -5,7 +5,7 @@ module.exports = {
 
     browser
       .url(searchUrl)
-      .waitForElementVisible('.app-content')
+      .waitForElementVisible('.app-content', 10000)
       .assert.elementPresent('#app')
       .assert.elementPresent('.simple-place-search')
       .assert.elementPresent('#map-view')
