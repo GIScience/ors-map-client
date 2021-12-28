@@ -7,6 +7,7 @@ module.exports = {
   src_folders: ['tests/e2e/specs'],
   output_folder: 'tests/e2e/reports',
   custom_assertions_path: ['tests/e2e/custom-assertions'],
+  custom_commands_path: ['tests/e2e/commands'],
 
   selenium: {
     start_process: true,
@@ -39,7 +40,13 @@ module.exports = {
             '--disable-gpu',
             '--no-sandbox', // required to run without privileges in docker
             // '--disable-web-security'
-          ]
+          ],
+          prefs:{
+            download:{
+              prompt_for_download: false,
+              default_directory:require('path').resolve(__dirname + '/download')
+            }
+          }
         }
       }
     },
@@ -48,7 +55,13 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'firefox',
         javascriptEnabled: true,
-        acceptSslCerts: true
+        acceptSslCerts: true,
+        prefs:{
+          download:{
+            prompt_for_download: false,
+            default_directory:require('path').resolve(__dirname + '/download')
+          }
+        }
       }
     }
   }

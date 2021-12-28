@@ -7,6 +7,7 @@
 // For more information on custom assertions see:
 // http://nightwatchjs.org/guide#writing-custom-assertions
 
+// eslint-disable-next-line no-undef
 exports.assertion = function elementCountAbove (selector, count) {
   this.message = 'Testing if element <' + selector + '> has count above: ' + count
   this.expected = count
