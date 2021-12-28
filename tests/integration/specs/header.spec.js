@@ -23,17 +23,13 @@ describe('Header', () => {
     expect(toolBar).toBeDefined()
     expect(toolBar).not.toBeNull()
 
-    wrapper.vm.$nextTick(() => { 
-      setTimeout(() => {
-        let appBtnMh = wrapper.vm.$el.querySelectorAll('.app-btn-mh')
-        expect(appBtnMh.length).toBeGreaterThan(2) 
-        
-        let logo = wrapper.vm.$el.querySelector('a img')
-        expect(logo).toBeDefined()
-        expect(logo).not.toBeNull()
-        done()
-      }, 200)
-    })
-    
+    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 200))
+    let appBtnMh = wrapper.vm.$el.querySelectorAll('.app-btn-mh')
+    expect(appBtnMh.length).toBeGreaterThan(2)     
+    let logo = wrapper.vm.$el.querySelector('a img')
+    expect(logo).toBeDefined()
+    expect(logo).not.toBeNull()
+    done()
   })
 })
