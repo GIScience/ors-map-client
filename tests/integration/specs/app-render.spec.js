@@ -12,24 +12,21 @@ describe('App render', () => {
     vueInstance.appHooks.loadRegisteredHooks()
     vueInstance.appHooks.run('appLoaded', vueInstance)
 
-    vueInstance.$nextTick(() => { 
-      let appContent = vueInstance.$el.querySelector('.app-content')
-      expect(appContent).toBeDefined()
-      expect(appContent).not.toBeNull()
+    await vueInstance.$nextTick()
+    let appContent = vueInstance.$el.querySelector('.app-content')
+    expect(appContent).toBeDefined()
+    expect(appContent).not.toBeNull()
 
-      let mapView = vueInstance.$el.querySelector('#map-view')
-      expect(mapView).toBeDefined()
-      expect(mapView).not.toBeNull()
+    let mapView = vueInstance.$el.querySelector('#map-view')
+    expect(mapView).toBeDefined()
+    expect(mapView).not.toBeNull()
 
-      appContent.__vue__.$nextTick(() => { 
-        setTimeout(() => {
-          let simplePlaceSearch = appContent.querySelector('.simple-place-search')
-          expect(simplePlaceSearch).toBeDefined()
-          expect(simplePlaceSearch).not.toBeNull()  
-          done()            
-        }, 200)
-      })
-    })
+    await appContent.__vue__.$nextTick() 
+    await new Promise(resolve => setTimeout(resolve, 200))
+    let simplePlaceSearch = appContent.querySelector('.simple-place-search')
+    expect(simplePlaceSearch).toBeDefined()
+    expect(simplePlaceSearch).not.toBeNull()  
+    done()    
   })
   it('should show progress linear on showLoading (true) event', async (done) => {
     let appLoader = new AppLoader()
@@ -37,17 +34,15 @@ describe('App render', () => {
     vueInstance.appHooks.loadRegisteredHooks()
     vueInstance.appHooks.run('appLoaded', vueInstance)
 
-    vueInstance.$nextTick(() => { 
-      vueInstance.eventBus.$on('showLoading', () => {
-        setTimeout(() => {
-          let progress = vueInstance.$el.querySelector('.progress-linear')
-          expect(progress).toBeDefined()
-          expect(progress).not.toBeNull()
-          done() 
-        }, 200)
-      })
-      vueInstance.eventBus.$emit('showLoading', true)
+    await vueInstance.$nextTick()  
+    vueInstance.eventBus.$on('showLoading', async () => {
+      await new Promise(resolve => setTimeout(resolve, 200))
+      let progress = vueInstance.$el.querySelector('.progress-linear')
+      expect(progress).toBeDefined()
+      expect(progress).not.toBeNull()
+      done()
     })
+    vueInstance.eventBus.$emit('showLoading', true)    
   })
   it('should hide progress linear on showLoading (false) event', async (done) => {
     let appLoader = new AppLoader()
@@ -55,20 +50,17 @@ describe('App render', () => {
     vueInstance.appHooks.loadRegisteredHooks()
     vueInstance.appHooks.run('appLoaded', vueInstance)
 
-    vueInstance.$nextTick(() => { 
-      
-      vueInstance.eventBus.$on('showLoading', (state) => {
-        if (state === false) {
-          setTimeout(() => {
-            let progress = vueInstance.$el.querySelector('.progress-linear')
-            expect(progress).toBeDefined()
-            expect(progress).not.toBeNull()
-            done() 
-          }, 1000)
-        }
-      })
-      vueInstance.eventBus.$emit('showLoading', true)
-      vueInstance.eventBus.$emit('showLoading', false)        
+    await vueInstance.$nextTick()
+    vueInstance.eventBus.$on('showLoading', async (state) => {
+      if (state === false) {
+        await new Promise(resolve => setTimeout(resolve, 1000))        
+        let progress = vueInstance.$el.querySelector('.progress-linear')
+        expect(progress).toBeDefined()
+        expect(progress).not.toBeNull()
+        done() 
+      }
     })
+    vueInstance.eventBus.$emit('showLoading', true)
+    vueInstance.eventBus.$emit('showLoading', false)
   })
 })
