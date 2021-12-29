@@ -1,9 +1,9 @@
-import { Directions } from '@/support/ors-api-runner'
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
-import toGpx from 'togpx'
-import toKml from '@maphubs/tokml'
+import { Directions } from '@/support/ors-api-runner'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
+import toKml from '@maphubs/tokml'
+import toGpx from 'togpx'
 
 export default {
   data: () => ({
@@ -69,9 +69,11 @@ export default {
     },
     /**
      * Close the download modal
+     * @emits downloadClosed
      */
     closeDownload () {
       this.isDownloadModalOpen = false
+      this.$emit('downloadClosed')
     },
     /**
      * Build the string download content and force a native browser download
@@ -83,33 +85,34 @@ export default {
       this.buildContent().then((content) => {
         // The way to force a native browser download of a string is by
         // creating a hidden anchor and setting its href as a data text
-        const link = document.createElement('a')
-        link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(content)
+        const anchor = document.createElement('a')
+        anchor.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(content)
 
         // Check if it has reached the max length
-        if (link.href.length > 2097152) {
-          this.showError(this.$t('download.fileTooBigToBeDownloaded'), { timeout: 2000 })
+        if (anchor.href.length > 2097152) {
+          context.showError(context.$t('download.fileTooBigToBeDownloaded'), { timeout: 2000 })
         } else {
           // Set the filename
           const timestamp = new Date().getTime()
           const format = context.lodash.find(context.downloadFormats, (df) => { return df.value === context.downloadFormat })
           // If the file has the default name, add a unique timestamp
-          if (this.downloadFileName === this.defaultDownloadName) {
-            link.download = `${context.downloadFileName}_${timestamp}.${format.ext}`
+          if (context.downloadFileName === context.defaultDownloadName) {
+            anchor.download = `${context.downloadFileName}_${timestamp}.${format.ext}`
           } else {
-            link.download = `${context.downloadFileName}.${format.ext}`
+            anchor.download = `${context.downloadFileName}.${format.ext}`
           }
 
           // Fire the download by triggering a click on the hidden anchor
-          document.body.appendChild(link)
-          link.click()
-          link.remove()
-          this.showSuccess(this.$t('download.fileReady'), { timeout: 2000 })
-          this.closeDownload()
+          //document.body.appendChild(anchor)
+          context.$refs.downloadContainer.appendChild(anchor)
+          anchor.click()
+          anchor.remove()
+          context.showSuccess(context.$t('download.fileReady'), { timeout: 2000 })
+          context.closeDownload()
         }
       }).catch(error => {
         console.error(error)
-        this.showError(this.$t('download.errorPreparingFile'), { timeout: 2000 })
+        context.showError(context.$t('download.errorPreparingFile'), { timeout: 2000 })
       })
     },
     /**
@@ -125,7 +128,7 @@ export default {
         try {
           if (context.downloadFormat === 'json') {
             // Get the ORS mapViewData model and stringify it
-            const orsJSONStr = JSON.stringify(this.mapViewData)
+            const orsJSONStr = JSON.stringify(context.mapViewData)
             resolve(orsJSONStr)
           } else if (context.downloadFormat === 'ors-gpx') {
             // If the format is ors-gpx, run anew request with the format being 'gpx'

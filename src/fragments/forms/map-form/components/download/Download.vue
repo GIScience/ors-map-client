@@ -1,5 +1,5 @@
 <template>
-  <div class="download-container">
+  <div class="download-container" ref="downloadContainer">
     <v-btn class="open-download-btn" style="float:right; margin-top:0" small icon :title="$t('download.download')" @click="openDownload()"><v-icon>cloud_download</v-icon></v-btn>
     <v-dialog v-model="isDownloadModalOpen" max-width="600" attach="body" :persistent="true">
       <box customClass="download-modal" v-model="isDownloadModalOpen" background="white" closable @closed="closeDownload()">
