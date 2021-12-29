@@ -2,7 +2,7 @@
   <div>
     <div class="custom-about" ref="customAbout">
     </div>
-    <div v-if="showDefaultAboutContent" ref="aboutContainer">
+    <div v-if="showDefaultAboutContent" class="about-container" ref="aboutContainer">
       <header style="margin-top: 0">
         <img ref="aboutLogo" height="auto" class="logo" src="@/assets/img/logo@2x.png" width="200px" />
       </header>
