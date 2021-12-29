@@ -5,9 +5,6 @@ import { mount } from '@vue/test-utils'
 import AppLoader from '@/app-loader'
 import store from '@/store/store'
 
-// importing files
-import orsRouteGeojson from '../mockups/ors-route.geojson'
-
 
 // Solves the 'RegeneratorRuntime is not defined' issue according to
 // https://stackoverflow.com/questions/28976748/regeneratorruntime-is-not-defined
@@ -17,26 +14,26 @@ describe('Download route', () => {
 
   let exporterDefaultProps = {
     mapViewData: mapViewDataTemplates.route,
-    downloadFormatsSupported: ['json', 'ors-gpx', 'geojson', 'to-gpx', 'gpx', 'kml']
+    downloadFormatsSupported: ['json', 'ors-gpx', 'geojson', 'to-gpx', 'kml']
   }
   it('should export json route', async () => {
     await new AppLoader().fetchApiInitialData()
     const wrapper = mount(Download, {propsData: exporterDefaultProps, i18n: I18nBuilder.build(), store: store })
 
-    expect(wrapper.contains('.download-container')).toBe(true)
+    expect(wrapper.find('.download-container')).toBeTruthy()
     expect(wrapper.findComponent(Download).exists()).toBe(true)
 
     await wrapper.find('.open-download-btn').trigger('click')
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    //await new Promise(resolve => setTimeout(resolve, 2000))
     let downloadModal = document.querySelector('.download-modal')
     expect(downloadModal).toBeTruthy()
     await wrapper.findAll('.download-format').trigger('click')
-    await wrapper.findAll('.download-format a').wrappers[0].trigger('click')
     wrapper.vm.downloadFormat = 'json'
-    expect(wrapper.vm.downloadFormat).toBe('json')
-    await wrapper.find('.download').trigger('click')    
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    expect(document.querySelector('.download-modal') ).toBeNull() 
+    await wrapper.find('.download-modal .download').trigger('click')
+    await wrapper.vm.$nextTick()  
+    let emitted = wrapper.emitted()
+    expect(emitted.downloadClosed).toBeTruthy()
+    expect(document.querySelector('.download-modal')).toBeNull()    
   })
 
   it('should export gpx route', async () => {
@@ -44,12 +41,11 @@ describe('Download route', () => {
     const wrapper = mount(Download, {propsData: exporterDefaultProps, i18n: I18nBuilder.build(), store: store })
 
     await wrapper.find('.open-download-btn').trigger('click')
-    await new Promise(resolve => setTimeout(resolve, 2000))
     await wrapper.find('.download-format').trigger('click')
     wrapper.vm.downloadFormat = 'to-gpx'
-    await wrapper.find('.download').trigger('click')    
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    expect(document.querySelector('.download-modal') ).toBeNull() 
+    await wrapper.find('.download-modal .download').trigger('click')    
+    await wrapper.vm.$nextTick()
+    expect(wrapper.emitted().downloadClosed).toBeTruthy()
   })
 
   it('should export geojson route', async () => {
@@ -57,12 +53,11 @@ describe('Download route', () => {
     const wrapper = mount(Download, {propsData: exporterDefaultProps, i18n: I18nBuilder.build(), store: store })
 
     await wrapper.find('.open-download-btn').trigger('click')
-    await new Promise(resolve => setTimeout(resolve, 2000))
     await wrapper.find('.download-format').trigger('click')
     wrapper.vm.downloadFormat = 'geojson'
-    await wrapper.find('.download').trigger('click')    
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    expect(document.querySelector('.download-modal') ).toBeNull() 
+    await wrapper.find('.download-modal .download').trigger('click')    
+    await wrapper.vm.$nextTick()
+    expect(wrapper.emitted().downloadClosed).toBeTruthy()
   })
 
   it('should export kml route', async () => {
@@ -70,24 +65,25 @@ describe('Download route', () => {
     const wrapper = mount(Download, {propsData: exporterDefaultProps, i18n: I18nBuilder.build(), store: store })
 
     await wrapper.find('.open-download-btn').trigger('click')
-    await new Promise(resolve => setTimeout(resolve, 2000))
     await wrapper.find('.download-format').trigger('click')
     wrapper.vm.downloadFormat = 'kml'
-    await wrapper.find('.download').trigger('click')    
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    expect(document.querySelector('.download-modal') ).toBeNull() 
+    await wrapper.find('.download-modal .download').trigger('click')    
+    await wrapper.vm.$nextTick()
+    expect(wrapper.emitted().downloadClosed).toBeTruthy() 
   })
 
-  it('should export ors-gpx route', async () => {
+  it('should export ors-gpx route', async (done) => {
     await new AppLoader().fetchApiInitialData()
     const wrapper = mount(Download, {propsData: exporterDefaultProps, i18n: I18nBuilder.build(), store: store })
 
     await wrapper.find('.open-download-btn').trigger('click')
-    await new Promise(resolve => setTimeout(resolve, 2000))
     await wrapper.find('.download-format').trigger('click')
     wrapper.vm.downloadFormat = 'ors-gpx'
-    await wrapper.find('.download').trigger('click')    
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    expect(document.querySelector('.download-modal') ).toBeNull() 
+    await wrapper.find('.download-modal .download').trigger('click')    
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.$on('downloadClosed', async () => {
+      done()
+    })
   })
 })
