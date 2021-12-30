@@ -8,7 +8,7 @@ yarn-error.log*
 /tests/unit/coverage/
 /tests/integration/coverage/
 /tests/e2e/reports/
-/tests/e2e/downloads/
+/tests/e2e/downloads/*
 selenium-debug.log
 selenium-server.log
 /src/ors-js/
@@ -20,6 +20,8 @@ selenium-server.log
 *.ntvs*
 *.njsproj
 *.sln
+
+!/tests/e2e/downloads/.gitkeep
 
 ## The ignores below can be removed/commented in the case
 ## you want to include the config files, the plugins
@@ -38,3 +40,5 @@ selenium-server.log
 !/static/css/.gitkeep
 !/static/fonts/.gitkeep
 !/static/img/.gitkeep
+!/static/img/.gitkeep
+
