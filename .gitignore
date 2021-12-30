@@ -8,6 +8,7 @@ yarn-error.log*
 /tests/unit/coverage/
 /tests/integration/coverage/
 /tests/e2e/reports/
+/tests/e2e/downloads/
 selenium-debug.log
 selenium-server.log
 /src/ors-js/
