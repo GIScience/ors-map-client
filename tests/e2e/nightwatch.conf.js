@@ -1,3 +1,5 @@
+
+// https://www.davidmello.com/nightwatch-global-environment-variables/
 /* eslint-disable no-undef */
 require('@babel/register')
 var config = require('../../config')
@@ -8,6 +10,17 @@ module.exports = {
   output_folder: 'tests/e2e/reports',
   custom_assertions_path: ['tests/e2e/custom-assertions'],
   custom_commands_path: ['tests/e2e/commands'],
+  // An object which will be made available on the main test api, throughout the test execution
+  globals: { // https://nightwatchjs.org/guide/configuration/defaults.html
+
+    // default timeout value in milliseconds for waitFor commands and implicit waitFor value for
+    // expect assertions
+    waitForConditionTimeout: 10000,
+
+    // controls the timeout value for async hooks. Expects the done() callback to be invoked within this time
+    // or an error is thrown
+    asyncHookTimeout: 10000,
+  },
 
   selenium: {
     start_process: true,
