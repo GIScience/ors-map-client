@@ -5,7 +5,7 @@ function clearDownloadFolder() {}
 
 clearDownloadFolder.prototype.command = function () {
 
-  let folder =__dirname + '/../download/'
+  let folder =__dirname + '/../downloads/'
 
   fs.readdir(folder, (err, files) => {
     if (err) throw err  
@@ -13,7 +13,7 @@ clearDownloadFolder.prototype.command = function () {
       console.log(`File ${file} deleted successfully`)      
       fs.unlinkSync(folder+file)      
     }    
-    console.log('Download folder cleared successfully')       
+    console.log('Downloads folder cleared successfully')       
   })
 }.bind(this)
 

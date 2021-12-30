@@ -4,7 +4,7 @@ const fs = require('fs')
 function checkDownloadFileIsValid() {}
 
 checkDownloadFileIsValid.prototype.command = function (fileName) {
-  let path = `${__dirname}/../download/${fileName}`
+  let path = `${__dirname}/../downloads/${fileName}`
 
   if (fs.existsSync(path)) {
     var stats = fs.statSync(path)

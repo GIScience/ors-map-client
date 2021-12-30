@@ -4,7 +4,7 @@ const fs = require('fs')
 function deleteDownloadedFile() {}
 
 deleteDownloadedFile.prototype.command = function (fileName) {
-  let path = `${__dirname}/../download/${fileName}`
+  let path = `${__dirname}/../downloads/${fileName}`
   fs.unlinkSync(path)
 }.bind(this)
 
