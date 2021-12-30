@@ -57,7 +57,7 @@ module.exports = {
           prefs:{
             download:{
               prompt_for_download: false,
-              default_directory:require('path').resolve(__dirname + '/download')
+              default_directory:require('path').resolve(__dirname + '/downloads')
             }
           }
         }
@@ -72,7 +72,7 @@ module.exports = {
         prefs:{
           download:{
             prompt_for_download: false,
-            default_directory:require('path').resolve(__dirname + '/download')
+            default_directory:require('path').resolve(__dirname + '/downloads')
           }
         }
       }
