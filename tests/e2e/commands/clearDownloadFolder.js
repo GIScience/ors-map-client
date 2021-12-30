@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 const fs = require('fs')
 
-function clearDownloadedFiles() {}
+function clearDownloadFolder() {}
 
-clearDownloadedFiles.prototype.command = function () {
+clearDownloadFolder.prototype.command = function () {
 
   let folder =__dirname + '/../download/'
 
@@ -17,4 +17,4 @@ clearDownloadedFiles.prototype.command = function () {
   })
 }.bind(this)
 
-module.exports = clearDownloadedFiles
+module.exports = clearDownloadFolder
