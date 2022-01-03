@@ -2,6 +2,66 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.2](https://github.com/GIScience/ors-map-client/compare/v1.28.1...v1.28.2) (2022-01-03)
+
+
+### Bug Fixes
+
+* **box.js:** fix method typo ([8fb2a0c](https://github.com/GIScience/ors-map-client/commit/8fb2a0c84d3383ed079997fed381287574473710))
+
+
+### Performance Improvements
+
+* **share.spec.js:** remove incosistent assert  in share component ([604ec6d](https://github.com/GIScience/ors-map-client/commit/604ec6d6dcaca91abac775a1a842c103859ab89e))
+
+
+### Code Refactoring
+
+* **about.vue:** add class to about container ([d8f82d4](https://github.com/GIScience/ors-map-client/commit/d8f82d471a8df193f416dec7c3e26b07a738248e))
+* **box.vue:** add custom classes to header corner buttons ([5682d5f](https://github.com/GIScience/ors-map-client/commit/5682d5ff5c22f2f8d6ba7ffd288cee9f6c0d3703))
+* **download.js:** remove unused prop and duplicated format extension ([ab8f0b8](https://github.com/GIScience/ors-map-client/commit/ab8f0b8d113faab3a8a1cea613d430d1d14a1004))
+* **download.vue:** add add class to elements ([f24e8f0](https://github.com/GIScience/ors-map-client/commit/f24e8f0407b04f79fed56340e085636fd1476821))
+* **download:** refactor download component adding css classes and emitting downloadclosed event ([581dec1](https://github.com/GIScience/ors-map-client/commit/581dec1bfc19e04642ae41838ec3d6332918d972))
+* **share:** append copy-to-clipboard text area to component's root element ([4cbf7ee](https://github.com/GIScience/ors-map-client/commit/4cbf7eee98e655f85433845dc058558e611a3cd0))
+
+
+### Others
+
+* **.gitignore:** add e2e download folder to gitignore ([ae98757](https://github.com/GIScience/ors-map-client/commit/ae98757ee966e7db270e60ceb852511ed786b2cb))
+* add gitkeep to donwloads folder ([25c2df2](https://github.com/GIScience/ors-map-client/commit/25c2df2b7ed85a0742e6454cbd3b303135bb6f89))
+* ignore files in downlaods folder, but keep donwload folder ([600d564](https://github.com/GIScience/ors-map-client/commit/600d564c1087bb0e668f66af93b5ef65469b745e))
+
+
+### Tests
+
+* **about.spec.js:** add about test ([f74a30c](https://github.com/GIScience/ors-map-client/commit/f74a30c6b9db4ecb8418364c16fd98f0b49ef8d4))
+* add e2e download test for all export formats ([631e57f](https://github.com/GIScience/ors-map-client/commit/631e57f916a748823d8de5da04dfb827487ae004))
+* add integration tst for download component ([61c70a2](https://github.com/GIScience/ors-map-client/commit/61c70a26d801844bafee068df2dedee16c6c327f))
+* add not found test for non estisting route ([c29563d](https://github.com/GIScience/ors-map-client/commit/c29563de5b1aa26c1afc32655b2c7ba7194f4fd8))
+* **app-render.spec.js:** replace promise resolving for await ([0d3ac5f](https://github.com/GIScience/ors-map-client/commit/0d3ac5f290b776cebed50dedd26fa7ed7340ace3))
+* **base-karma.conf.js:** add the --disable-dev-shm-usage flag ([3444cab](https://github.com/GIScience/ors-map-client/commit/3444cab8f96dd6a3344c8f8d56a6b7a306f37256))
+* **base-karma.conf.js:** increase karma timeouts ([6de7923](https://github.com/GIScience/ors-map-client/commit/6de7923739b9c456508aa631a694b42c1a9c62d2))
+* **box.spec.js:** add unit test for box component ([c8eac13](https://github.com/GIScience/ors-map-client/commit/c8eac13a30e7e6e30f496575bef45bacd67fd7d6))
+* create delete downloaded file command for nightwatch ([bab3b0b](https://github.com/GIScience/ors-map-client/commit/bab3b0b4e08e6d253d1dc0670601cf563502b5bd))
+* **download.spec.js:** improve download tests ([4102f49](https://github.com/GIScience/ors-map-client/commit/4102f49c9fce695f1aff6ae84bcb81a0f15ed96a))
+* **download.spec.js:** resize window before running download action ([0f25cbe](https://github.com/GIScience/ors-map-client/commit/0f25cbe4e6860f611479213beabc036d54c4f24a))
+* **header.spec.js:** replace promises for await ([af9552b](https://github.com/GIScience/ors-map-client/commit/af9552be669ee297038fb4d3a7f46625a201c290))
+* **nightwatch.conf.js:** add 10000 wait timeout ([91a8d13](https://github.com/GIScience/ors-map-client/commit/91a8d13d95a8a035e7e7c226dfeadba465c963f7))
+* **nightwatch.conf.js:** add custom commands and default download folder ([6a6e604](https://github.com/GIScience/ors-map-client/commit/6a6e60479c3d207ea3409f4aa894e38007616c2b))
+* **nightwatch.conf.js:** rename download folder to donwloads ([bec4afb](https://github.com/GIScience/ors-map-client/commit/bec4afb720bbcc2c0110669c3c58f5f5fd722ce6))
+* **nightwatch.conf.js:** use flag that tells browser to use temp files instead of shared memory ([8766964](https://github.com/GIScience/ors-map-client/commit/8766964691ed8a940918cf52356ecc99c6f1087f))
+* remove download test files ([4890237](https://github.com/GIScience/ors-map-client/commit/489023729ca5d756884f89b6db7ffd7758a8bc2a))
+* remove files from e2e download folder ([231728d](https://github.com/GIScience/ors-map-client/commit/231728daa80eb2a154b2affa5dddb5ef3716ccfb))
+* rename donwload folder to downloads ([5af1c18](https://github.com/GIScience/ors-map-client/commit/5af1c1821206e221a910b5a9a7237aa16b70b7db))
+* **search-place.spec.js:** add longer timeout for app-content visibility ([6da9888](https://github.com/GIScience/ors-map-client/commit/6da9888f8efe17400c9bf246be462077405b7efa))
+
+
+### Docs
+
+* **automated-test.md:** add missing packages in the automated test doc ([f90b83b](https://github.com/GIScience/ors-map-client/commit/f90b83b93daca81d4eb99ebb64177bbcd8bf0314))
+* **learned-lessons.md:** document learned lessons ([6471d11](https://github.com/GIScience/ors-map-client/commit/6471d11830beda32e66b05ced9a98a28d0e77d34))
+* **learned-lessons.md:** improve learned lessons doc ([bf432c6](https://github.com/GIScience/ors-map-client/commit/bf432c6eec5e5e252a3136c29cd3de125db14779))
+
 ### [1.28.1](https://github.com/GIScience/ors-map-client/compare/v1.28.0...v1.28.1) (2021-12-09)
 
 
