@@ -64,9 +64,9 @@ module.exports = {
   //when a browser crashes, karma will try to relaunch, 2 is default
   retryLimit: 0,
   //how long does Karma wait for a browser to reconnect, 2000 is default
-  browserDisconnectTimeout: 10000,
+  browserDisconnectTimeout: 60000,
   //how long will Karma wait for a message from a browser before disconnecting from it, 10000 is default
-  browserNoActivityTimeout: 10000,
+  browserNoActivityTimeout: 60000,
   //timeout for capturing a browser, 60000 is default
   captureTimeout: 60000,
 
