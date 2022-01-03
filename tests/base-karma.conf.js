@@ -45,7 +45,8 @@ module.exports = {
         '--no-sandbox', // required to run without privileges in docker
         '--headless',
         '--disable-gpu',
-        '--disable-web-security'
+        '--disable-web-security',
+        '--disable-dev-shm-usage', // https://svdoscience.com/2021-03-17/fix-session-deleted-page-crash-selenium-grid-chrome-docker
       ],
       debug: false,
     },
