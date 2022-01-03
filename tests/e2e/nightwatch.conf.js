@@ -52,6 +52,7 @@ module.exports = {
             '--headless',
             '--disable-gpu',
             '--no-sandbox', // required to run without privileges in docker
+            '--disable-dev-shm-usage'
             // '--disable-web-security'
           ],
           prefs:{
