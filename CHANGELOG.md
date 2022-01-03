@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Performance Improvements
 
-* **share.spec.js:** remove incosistent assert  in share component ([604ec6d](https://github.com/GIScience/ors-map-client/commit/604ec6d6dcaca91abac775a1a842c103859ab89e))
+* **share.spec.js:** remove inconsistent assert  in share component ([604ec6d](https://github.com/GIScience/ors-map-client/commit/604ec6d6dcaca91abac775a1a842c103859ab89e))
 
 
 ### Code Refactoring
@@ -28,16 +28,16 @@ All notable changes to this project will be documented in this file. See [standa
 ### Others
 
 * **.gitignore:** add e2e download folder to gitignore ([ae98757](https://github.com/GIScience/ors-map-client/commit/ae98757ee966e7db270e60ceb852511ed786b2cb))
-* add gitkeep to donwloads folder ([25c2df2](https://github.com/GIScience/ors-map-client/commit/25c2df2b7ed85a0742e6454cbd3b303135bb6f89))
-* ignore files in downlaods folder, but keep donwload folder ([600d564](https://github.com/GIScience/ors-map-client/commit/600d564c1087bb0e668f66af93b5ef65469b745e))
+* add gitkeep to downloads folder ([25c2df2](https://github.com/GIScience/ors-map-client/commit/25c2df2b7ed85a0742e6454cbd3b303135bb6f89))
+* ignore files in downloads folder, but keep download folder ([600d564](https://github.com/GIScience/ors-map-client/commit/600d564c1087bb0e668f66af93b5ef65469b745e))
 
 
 ### Tests
 
 * **about.spec.js:** add about test ([f74a30c](https://github.com/GIScience/ors-map-client/commit/f74a30c6b9db4ecb8418364c16fd98f0b49ef8d4))
 * add e2e download test for all export formats ([631e57f](https://github.com/GIScience/ors-map-client/commit/631e57f916a748823d8de5da04dfb827487ae004))
-* add integration tst for download component ([61c70a2](https://github.com/GIScience/ors-map-client/commit/61c70a26d801844bafee068df2dedee16c6c327f))
-* add not found test for non estisting route ([c29563d](https://github.com/GIScience/ors-map-client/commit/c29563de5b1aa26c1afc32655b2c7ba7194f4fd8))
+* add integration test for download component ([61c70a2](https://github.com/GIScience/ors-map-client/commit/61c70a26d801844bafee068df2dedee16c6c327f))
+* add not found test for non existing route ([c29563d](https://github.com/GIScience/ors-map-client/commit/c29563de5b1aa26c1afc32655b2c7ba7194f4fd8))
 * **app-render.spec.js:** replace promise resolving for await ([0d3ac5f](https://github.com/GIScience/ors-map-client/commit/0d3ac5f290b776cebed50dedd26fa7ed7340ace3))
 * **base-karma.conf.js:** add the --disable-dev-shm-usage flag ([3444cab](https://github.com/GIScience/ors-map-client/commit/3444cab8f96dd6a3344c8f8d56a6b7a306f37256))
 * **base-karma.conf.js:** increase karma timeouts ([6de7923](https://github.com/GIScience/ors-map-client/commit/6de7923739b9c456508aa631a694b42c1a9c62d2))
@@ -48,11 +48,11 @@ All notable changes to this project will be documented in this file. See [standa
 * **header.spec.js:** replace promises for await ([af9552b](https://github.com/GIScience/ors-map-client/commit/af9552be669ee297038fb4d3a7f46625a201c290))
 * **nightwatch.conf.js:** add 10000 wait timeout ([91a8d13](https://github.com/GIScience/ors-map-client/commit/91a8d13d95a8a035e7e7c226dfeadba465c963f7))
 * **nightwatch.conf.js:** add custom commands and default download folder ([6a6e604](https://github.com/GIScience/ors-map-client/commit/6a6e60479c3d207ea3409f4aa894e38007616c2b))
-* **nightwatch.conf.js:** rename download folder to donwloads ([bec4afb](https://github.com/GIScience/ors-map-client/commit/bec4afb720bbcc2c0110669c3c58f5f5fd722ce6))
+* **nightwatch.conf.js:** rename download folder to downloads ([bec4afb](https://github.com/GIScience/ors-map-client/commit/bec4afb720bbcc2c0110669c3c58f5f5fd722ce6))
 * **nightwatch.conf.js:** use flag that tells browser to use temp files instead of shared memory ([8766964](https://github.com/GIScience/ors-map-client/commit/8766964691ed8a940918cf52356ecc99c6f1087f))
 * remove download test files ([4890237](https://github.com/GIScience/ors-map-client/commit/489023729ca5d756884f89b6db7ffd7758a8bc2a))
 * remove files from e2e download folder ([231728d](https://github.com/GIScience/ors-map-client/commit/231728daa80eb2a154b2affa5dddb5ef3716ccfb))
-* rename donwload folder to downloads ([5af1c18](https://github.com/GIScience/ors-map-client/commit/5af1c1821206e221a910b5a9a7237aa16b70b7db))
+* rename download folder to downloads ([5af1c18](https://github.com/GIScience/ors-map-client/commit/5af1c1821206e221a910b5a9a7237aa16b70b7db))
 * **search-place.spec.js:** add longer timeout for app-content visibility ([6da9888](https://github.com/GIScience/ors-map-client/commit/6da9888f8efe17400c9bf246be462077405b7efa))
 
 
@@ -74,7 +74,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* add sincronization between map center/zoom and app url ([02949e1](https://github.com/GIScience/ors-map-client/commit/02949e1183214c33a1f5c116ece74b798b8fffe1))
+* add synchronization between map center/zoom and app url ([02949e1](https://github.com/GIScience/ors-map-client/commit/02949e1183214c33a1f5c116ece74b798b8fffe1))
 * max zoom defined at tile layer provider level via app-config ([c3f5e4b](https://github.com/GIScience/ors-map-client/commit/c3f5e4bead90e11de112e0d38084fa11cd39fff7))
 
 
