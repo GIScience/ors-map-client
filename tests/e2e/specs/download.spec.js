@@ -18,7 +18,7 @@ module.exports = {
       .moveToElement('.export-file-name input[type=text]', 0, 0)
       .click('.download-format .v-select__selections')
       .pause(1000)
-      .click({selector: '.menuable__content__active a', index: 0})
+      .click({selector: '.menuable__content__active a', index: 0})// index 0 = json
       .click('.download')
       .pause(1000)
       .checkDownloadFileIsValid(fileName)
@@ -43,7 +43,7 @@ module.exports = {
       .moveToElement('.export-file-name input[type=text]', 0, 0)
       .click('.download-format .v-select__selections')
       .pause(1000)
-      .click({selector: '.menuable__content__active a', index: 1})
+      .click({selector: '.menuable__content__active a', index: 1}) // index 1 = geojson
       .click('.download')
       .pause(1000)
       .checkDownloadFileIsValid(fileName)
@@ -67,7 +67,7 @@ module.exports = {
       .moveToElement('.export-file-name input[type=text]', 0, 0)
       .click('.download-format .v-select__selections')
       .pause(1000)
-      .click({selector: '.menuable__content__active a', index: 2})
+      .click({selector: '.menuable__content__active a', index: 2})// index 2 = ors-gpx
       .click('.download')
       .pause(1000)
       .checkDownloadFileIsValid(fileName)
@@ -91,7 +91,7 @@ module.exports = {
       .moveToElement('.export-file-name input[type=text]', 0, 0)
       .click('.download-format .v-select__selections')
       .pause(1000)
-      .click({selector: '.menuable__content__active a', index: 3})
+      .click({selector: '.menuable__content__active a', index: 3})// index 3 = standard gpx
       .click('.download')
       .pause(1000)
       .checkDownloadFileIsValid(fileName)
@@ -115,7 +115,7 @@ module.exports = {
       .moveToElement('.export-file-name input[type=text]', 0, 0)
       .click('.download-format .v-select__selections')
       .pause(1000)
-      .click({selector: '.menuable__content__active a', index: 4})
+      .click({selector: '.menuable__content__active a', index: 4}) // index 4 = kml
       .click('.download')
       .pause(1000)
       .checkDownloadFileIsValid(fileName)
