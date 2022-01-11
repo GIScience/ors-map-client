@@ -92,6 +92,8 @@ const actions = {
       }
       commit('mapSettings', settingsToKeepInAppStore)
       localStorage.setItem('mapSettings', JSON.stringify(savingSettings))
+      // Update the html language
+      document.documentElement.lang = savingSettings.locale
       resolve(settingsToKeepInAppStore)
     })
   }
