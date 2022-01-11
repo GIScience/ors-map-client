@@ -24,7 +24,6 @@ describe('Download route', () => {
     expect(wrapper.findComponent(Download).exists()).toBe(true)
 
     await wrapper.find('.open-download-btn').trigger('click')
-    //await new Promise(resolve => setTimeout(resolve, 2000))
     let downloadModal = document.querySelector('.download-modal')
     expect(downloadModal).toBeTruthy()
     await wrapper.findAll('.download-format').trigger('click')
