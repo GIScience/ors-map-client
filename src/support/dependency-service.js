@@ -92,7 +92,7 @@ const getChildrenFilterValue = (filter) => {
  */
 const isRoundTripFilterActive = () => {
   const roundTripFilter = OrsFilterUtil.getFilterRefByName(constants.roundTripFilterName)
-  const roundTripValue = getFilterValue(roundTripFilter, constants.services.directions)
+  const roundTripValue = getFilterValue(roundTripFilter)
   const isRoundTrip = roundTripValue !== null
   return isRoundTrip
 }
@@ -296,7 +296,7 @@ const setVisibility = (scopedFilters, key) => {
  */
 const isAvailable = (filter) => {
   if (filter.validWhen) {
-    let matchesRules = getMatchesDependencyRules(filter, 'validWhen', false)
+    let matchesRules = getMatchesDependencyRules(filter, 'validWhen')
     if (!matchesRules) {
       return false
     }
