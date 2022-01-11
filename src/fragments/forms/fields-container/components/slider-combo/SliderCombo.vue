@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="slider-combo">
     <p>{{label}} (<b>{{filter.min}}</b> - <b>{{filterMax}}</b>)</p>
     <v-layout>
       <v-flex xs4 sm3>        

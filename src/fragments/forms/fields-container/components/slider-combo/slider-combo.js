@@ -28,7 +28,7 @@ export default {
   },
   watch: {
     filter: {
-      handler: function (newFilter, oldFilter) {
+      handler: function (newFilter) {
         if (newFilter.value !== this.localModel) {
           this.setLocalData()
         }
