@@ -20,12 +20,12 @@
 
     <v-list  v-if="!locationActive" light style="background:transparent; box-shadow:none" class="input-pop-up-list">
       <div class="text-xs-right">
-        <v-btn round style="text-transformation:initial" :title="$t('myLocation.continuouslyLocation')" @click="setLocationFromBrowser(true)" >{{$t('myLocation.continuously')}}
+        <v-btn round style="text-transform:initial" :title="$t('myLocation.continuouslyLocation')" @click="setLocationFromBrowser(true)" >{{$t('myLocation.continuously')}}
           <v-icon color="primary" >autorenew</v-icon>
         </v-btn>
       </div>
       <div class="text-xs-right">
-        <v-btn round style="text-transformation:initial" :title="$t('myLocation.onlyOnceLocation')" @click="setLocationFromBrowser()" >{{$t('myLocation.onlyOnce')}}
+        <v-btn round style="text-transform:initial" :title="$t('myLocation.onlyOnceLocation')" @click="setLocationFromBrowser()" >{{$t('myLocation.onlyOnce')}}
           <v-icon color="primary" >play_for_work</v-icon>
         </v-btn>
       </div>
