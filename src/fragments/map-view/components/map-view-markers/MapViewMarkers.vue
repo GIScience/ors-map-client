@@ -7,7 +7,7 @@
           <l-popup v-if="showMarkerPopup">
             <div :ref="'markerPopupContainer' + index">
               {{marker.label}}
-              <div style="width=:100%;height:1px"></div>
+              <div style="width:100%;height:1px"></div>
               <v-btn outline small fab v-if="markerIsRemovable" :title="$t('mapView.removePlace')"
                 @click="removePlace(index)">
                 <v-icon>delete</v-icon>
@@ -27,7 +27,7 @@
         <l-popup v-if="showMarkerPopup">
           <div :ref="'markerPopupContainer' + index">
             {{marker.label}}
-            <div style="width=:100%;height:1px"></div>
+            <div style="width:100%;height:1px"></div>
             <v-btn outline small fab v-if="markerIsRemovable" :title="$t('mapView.removePlace')"
               @click="removePlace(index)">
               <v-icon>delete</v-icon>
