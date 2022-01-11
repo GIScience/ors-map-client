@@ -223,8 +223,6 @@ const orsParamsParser = {
       if (skipSegments.length > 0) {
         args.skip_segments = skipSegments
       }
-      args.skip_segments
-
       // Add the filters defined in the ORS filters that are manipulated
       // directly by external components
       orsParamsParser.setFilters(args, OrsMapFilters, constants.services.directions)

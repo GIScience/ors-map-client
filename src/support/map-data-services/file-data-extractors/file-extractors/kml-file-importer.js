@@ -49,6 +49,8 @@ class KmlImporter {
           mapViewData.timestamp = context.options.timestamp
           mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
           resolve(mapViewData)
+        }).catch(() => {
+          reject(Error('invalid-file-content'))
         })
       } catch (error) {
         reject(Error('invalid-file-content'))
