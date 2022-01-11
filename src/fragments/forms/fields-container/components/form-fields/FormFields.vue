@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div class="form-fields">
     <template v-if="formParameters">
       <template v-for="(parameter, index) in formParameters">
         <v-layout v-if="showField(parameter)" :key="index" row class="field-row" :style="{'padding-left': (level * 5) + 'px'}" >
           <v-flex v-bind="{[parameter.type === constants.filterTypes.wrapper ? 'sm12': 'sm11']: true}">
             <v-autocomplete v-if="parameter.isEnum || parameter.items" :ref="'field'+ index"
               class="field-input no-input-details form-fields-autocomplete"
+              :class="{'multi-select': parameter.multiSelect}"
               :required="parameter.required"
-              @change="isModalMultiSelect(parameter) ? () => {} : fieldUpdated({index: index, value: $event, parameter: parameter})"
+              @change="multiSelectChanged({index: index, value: $event, parameter: parameter})"
               :items="getSelectableItems(parameter)"
               v-model="formParameters[index].value"
               item-text="itemText"
@@ -27,12 +28,9 @@
               class="field-input no-input-details"
               :type="parameter.inputType"
               :step="parameter.inputTypeStep"
-              :append-icon="hasValidChildProps(parameter) ? 'edit' : ''"
-              @click:append="maybeOpenAssistant(index)"
               @keyup="debounceTextFieldChange(index)"
               :min="parameter.min"
               :max="parameter.max"
-              @focus="maybeOpenManualEdit(index)"
               :label="buildLabel(parameter)"
               :title="buildLabel(parameter)"
               v-model="formParameters[index].value"
@@ -40,7 +38,7 @@
             </v-text-field>
 
             <v-text-field v-else-if="parameter.type === constants.filterTypes.random" :ref="'field'+ index"
-              class="field-input no-input-details"
+              class="field-input random no-input-details"
               readonly
               append-icon="autorenew"
               :type="parameter.inputType"
@@ -84,25 +82,6 @@
         </v-layout>
       </template>
     </template>
-    <dialog-fields v-if="subPropsModalActive" :is-modal=true :title="subPropsModalTitle" :sub-props-index="subPropsModalIndex"
-      :parameters="formParameters" @fieldUpdated="fieldUpdated" @modalConfirmed="onModalFieldAssistedConfirm">
-    </dialog-fields>
-    <v-dialog v-if="manualEditModalActive" v-model="manualEditModalActive" max-width="600" attach="body" class="open-field-modal">
-      <box v-if="manualEditModalActive" closable @closed="onEditModalOk" v-model="manualEditModalActive" :resizable="true"
-        background="white">
-        <div slot="header">
-          <h3>{{subPropsModalTitle}}</h3>
-        </div>
-        <div slot="content">
-          <v-text-field class="field-input no-input-details" :label="$t('formFields.paramJSONContent')" :multi-line="true"
-            :title="buildLabel(manualEditingParameter)" v-model="manualEditingParameter.value"></v-text-field>
-        </div>
-        <div slot="footer" class="text-right">
-          <v-spacer></v-spacer>
-          <v-btn color="primary" flat @click.native="onEditModalOk">{{$t('global.ok')}}</v-btn>
-        </div>
-      </box>
-    </v-dialog>
   </div>
 </template>
 <script src="./form-fields.js"></script>
