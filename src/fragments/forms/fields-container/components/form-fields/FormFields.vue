@@ -40,14 +40,15 @@
             <v-text-field v-else-if="parameter.type === constants.filterTypes.random" :ref="'field'+ index"
               class="field-input random-input no-input-details"
               readonly
-              append-icon="autorenew"
               :type="parameter.inputType"
-              :step="parameter.inputTypeStep"
-              @click:append="setNewRandomValue(index)"
+              :step="parameter.inputTypeStep"              
               :label="buildLabel(parameter)"
               :title="buildLabel(parameter)"
               v-model="formParameters[index].value"
               :required="parameter.required">
+              <template slot="append">
+                <v-icon style="cursor:pointer" class="generate-random" @click="setNewRandomValue(index)">autorenew</v-icon>
+              </template>
             </v-text-field>
 
             <template v-else-if="parameter.type === constants.filterTypes.steps" :ref="'field'+ index">
