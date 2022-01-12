@@ -110,7 +110,7 @@ describe('Form-fields', () => {
     expect(wrapper.contains('.form-fields')).toBe(true)
     expect(wrapper.findComponent(FormFields).exists()).toBe(true)
     await new Promise(resolve => setTimeout(resolve, 5000))    
-    await wrapper.vm.$el.querySelectorAll('.generate-random')[0].click()
+    await wrapper.find('.generate-random').trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.emitted().fieldUpdated).toBeTruthy()
     done()
