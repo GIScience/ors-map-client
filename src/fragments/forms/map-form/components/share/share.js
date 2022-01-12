@@ -84,7 +84,7 @@ export default {
       this.$refs.shareContainer.appendChild(tempTextArea)
       tempTextArea.select()
       const result = document.execCommand('copy')
-      document.body.removeChild(tempTextArea)
+      this.$refs.shareContainer.removeChild(tempTextArea)
       return result
     },
 
