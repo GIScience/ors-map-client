@@ -69,7 +69,7 @@ module.exports = {
       .pause(1000)
       .click({selector: '.menuable__content__active a', index: 2})// index 2 = ors-gpx
       .click('.download')
-      .pause(1000)
+      .pause(3000)
       .checkDownloadFileIsValid(fileName)
       .deleteDownloadedFile(fileName)
       .end()
@@ -93,7 +93,7 @@ module.exports = {
       .pause(1000)
       .click({selector: '.menuable__content__active a', index: 3})// index 3 = standard gpx
       .click('.download')
-      .pause(1000)
+      .pause(3000)
       .checkDownloadFileIsValid(fileName)
       .deleteDownloadedFile(fileName)
       .end()
