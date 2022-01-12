@@ -103,16 +103,14 @@ describe('Form-fields', () => {
   it('should render form-fields in roundtrip', async (done) => {
     await new AppLoader().fetchApiInitialData()
     store.commit('mode', constants.modes.roundTrip)
-    let options = {zoom: 10}
-    OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
+    OrsParamsParser.setFilters({zoom: 10}, OrsMapFilters, constants.services.directions)
     var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 } 
     
     const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store }) 
     expect(wrapper.contains('.form-fields')).toBe(true)
     expect(wrapper.findComponent(FormFields).exists()).toBe(true)
     await new Promise(resolve => setTimeout(resolve, 5000))
-    let  randomBtn = wrapper.find('.random .v-input__append-inner .v-icon')
-    await randomBtn.trigger('click')
+    await wrapper.vm.$el.querySelectorAll('.random')[0].querySelectorAll('.v-input__append-inner')[0].querySelectorAll('.v-icon')[0].click()
     await wrapper.vm.$nextTick()
     expect(wrapper.emitted().fieldUpdated).toBeTruthy()
     done()
