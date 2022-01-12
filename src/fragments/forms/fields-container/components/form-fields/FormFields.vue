@@ -38,7 +38,7 @@
             </v-text-field>
 
             <v-text-field v-else-if="parameter.type === constants.filterTypes.random" :ref="'field'+ index"
-              class="field-input random no-input-details"
+              class="field-input random-input no-input-details"
               readonly
               append-icon="autorenew"
               :type="parameter.inputType"
@@ -55,7 +55,7 @@
             </template>
 
             <template v-else-if="parameter.type === constants.filterTypes.boolean" :ref="'field'+ index">
-              <v-checkbox class="pt-0 top-0 form-felds-checkbox" 
+              <v-checkbox class="pt-0 top-0 form-fields-checkbox" 
               v-model="formParameters[index].value" :label="buildLabel(parameter)" 
               @change="fieldUpdated({index: index, parameter: parameter})">
               </v-checkbox>
