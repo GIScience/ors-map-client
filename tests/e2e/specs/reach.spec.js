@@ -38,7 +38,7 @@ module.exports = {
       .assert.elementPresent('.my-location-btn')
       .assert.not.elementPresent('.view-on-ors')
       .assert.elementPresent('.place-input-component input[type=text]')
-      .waitForElementVisible('.custom-html-icon-div')
+      .waitForElementVisible('.custom-html-icon-div', 20000)
       .assert.cssProperty('.custom-html-icon-div','background-color','rgba(255, 0, 0, 1)') // red   
       .click('.custom-html-icon-div')
       .assert.elementPresent('.leaflet-popup')      
