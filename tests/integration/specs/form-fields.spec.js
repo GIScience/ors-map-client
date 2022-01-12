@@ -14,91 +14,91 @@ import '@babel/polyfill'
 describe('Form-fields', () => {
   var i18n = I18nBuilder.build()
   
-  it('should render and update form fields', async (done) => {
-    await new AppLoader().fetchApiInitialData()
-    store.commit('mode', constants.modes.directions)
-    let options = {zoom: 10}
-    OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
-    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 } 
-    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store })
-    expect(wrapper.contains('.form-fields')).toBe(true)
-    expect(wrapper.findComponent(FormFields).exists()).toBe(true)
-    await wrapper.vm.$el.querySelectorAll('.form-fields-autocomplete input')[0].click()   
-    await wrapper.vm.$el.querySelectorAll('.form-fields-autocomplete')[0].querySelectorAll('.v-menu a')[0].click()
-    expect(wrapper.emitted().fieldUpdated).toBeTruthy()
+  // it('should render and update form fields', async (done) => {
+  //   await new AppLoader().fetchApiInitialData()
+  //   store.commit('mode', constants.modes.directions)
+  //   let options = {zoom: 10}
+  //   OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
+  //   var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 } 
+  //   const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store })
+  //   expect(wrapper.contains('.form-fields')).toBe(true)
+  //   expect(wrapper.findComponent(FormFields).exists()).toBe(true)
+  //   await wrapper.vm.$el.querySelectorAll('.form-fields-autocomplete input')[0].click()   
+  //   await wrapper.vm.$el.querySelectorAll('.form-fields-autocomplete')[0].querySelectorAll('.v-menu a')[0].click()
+  //   expect(wrapper.emitted().fieldUpdated).toBeTruthy()
     
-    let  multiSelect = wrapper.find('.multi-select input')
-    await multiSelect.trigger('click')
-    await wrapper.vm.$nextTick()
-    await wrapper.vm.$el.querySelectorAll('.multi-select')[0].querySelectorAll('.v-menu a')[1].click()
-    await wrapper.vm.$el.querySelectorAll('.multi-select')[0].querySelectorAll('.v-menu a')[0].click()
-    expect(wrapper.emitted().fieldUpdated).toBeTruthy()
-    done()
-  })
+  //   let  multiSelect = wrapper.find('.multi-select input')
+  //   await multiSelect.trigger('click')
+  //   await wrapper.vm.$nextTick()
+  //   await wrapper.vm.$el.querySelectorAll('.multi-select')[0].querySelectorAll('.v-menu a')[1].click()
+  //   await wrapper.vm.$el.querySelectorAll('.multi-select')[0].querySelectorAll('.v-menu a')[0].click()
+  //   expect(wrapper.emitted().fieldUpdated).toBeTruthy()
+  //   done()
+  // })
 
-  it('should react to filters changed externally', async (done) => {
-    await new AppLoader().fetchApiInitialData()
-    store.commit('mode', constants.modes.directions)
-    let options = {zoom: 10}
-    OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
-    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 } 
-    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store })
-    expect(wrapper.contains('.form-fields')).toBe(true)
-    expect(wrapper.findComponent(FormFields).exists()).toBe(true)
-    wrapper.vm.eventBus.$emit('filtersChangedExternally')
-    await wrapper.vm.$nextTick()
-    expect(wrapper.emitted().updated).toBeTruthy()
-    done()
-  })
+  // it('should react to filters changed externally', async (done) => {
+  //   await new AppLoader().fetchApiInitialData()
+  //   store.commit('mode', constants.modes.directions)
+  //   let options = {zoom: 10}
+  //   OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
+  //   var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 } 
+  //   const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store })
+  //   expect(wrapper.contains('.form-fields')).toBe(true)
+  //   expect(wrapper.findComponent(FormFields).exists()).toBe(true)
+  //   wrapper.vm.eventBus.$emit('filtersChangedExternally')
+  //   await wrapper.vm.$nextTick()
+  //   expect(wrapper.emitted().updated).toBeTruthy()
+  //   done()
+  // })
 
-  it('should render form-fields with level 1', async (done) => {
-    await new AppLoader().fetchApiInitialData()
-    store.commit('mode', constants.modes.directions)
-    let options = {zoom: 10}
-    OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
-    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 1 } 
-    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store }) 
-    expect(wrapper.contains('.form-fields')).toBe(true)
-    expect(wrapper.findComponent(FormFields).exists()).toBe(true)
-    done()
-  })
+  // it('should render form-fields with level 1', async (done) => {
+  //   await new AppLoader().fetchApiInitialData()
+  //   store.commit('mode', constants.modes.directions)
+  //   let options = {zoom: 10}
+  //   OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
+  //   var props = { parameters: OrsMapFilters, parentIndex: 0, level: 1 } 
+  //   const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store }) 
+  //   expect(wrapper.contains('.form-fields')).toBe(true)
+  //   expect(wrapper.findComponent(FormFields).exists()).toBe(true)
+  //   done()
+  // })
 
-  it('should render form-fields with parent index', async (done) => {
-    await new AppLoader().fetchApiInitialData()
-    store.commit('mode', constants.modes.directions)
-    let options = {zoom: 10}
-    OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
-    var props = { parameters: OrsMapFilters[8], parentIndex: 8, level: 0 } 
+  // it('should render form-fields with parent index', async (done) => {
+  //   await new AppLoader().fetchApiInitialData()
+  //   store.commit('mode', constants.modes.directions)
+  //   let options = {zoom: 10}
+  //   OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
+  //   var props = { parameters: OrsMapFilters[8], parentIndex: 8, level: 0 } 
     
-    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store }) 
-    expect(wrapper.contains('.form-fields')).toBe(true)
-    expect(wrapper.findComponent(FormFields).exists()).toBe(true)
-    done()
-  })
+  //   const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store }) 
+  //   expect(wrapper.contains('.form-fields')).toBe(true)
+  //   expect(wrapper.findComponent(FormFields).exists()).toBe(true)
+  //   done()
+  // })
 
-  it('should render form-fields in isochrones', async (done) => {
-    await new AppLoader().fetchApiInitialData()
-    store.commit('mode', constants.modes.isochrones)
-    let options = {zoom: 10}
-    OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
-    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 } 
+  // it('should render form-fields in isochrones', async (done) => {
+  //   await new AppLoader().fetchApiInitialData()
+  //   store.commit('mode', constants.modes.isochrones)
+  //   let options = {zoom: 10}
+  //   OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
+  //   var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 } 
     
-    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store }) 
-    expect(wrapper.contains('.form-fields')).toBe(true)
-    expect(wrapper.findComponent(FormFields).exists()).toBe(true)
-    let slider = wrapper.find('.v-slider input')
-    await slider.setValue(30)
-    await wrapper.vm.$nextTick()
-    expect(wrapper.emitted().updated).toBeTruthy()
+  //   const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store }) 
+  //   expect(wrapper.contains('.form-fields')).toBe(true)
+  //   expect(wrapper.findComponent(FormFields).exists()).toBe(true)
+  //   let slider = wrapper.find('.v-slider input')
+  //   await slider.setValue(30)
+  //   await wrapper.vm.$nextTick()
+  //   expect(wrapper.emitted().updated).toBeTruthy()
 
-    let  sliderComboInput = wrapper.find('.form-fields-slider-text-input input[type="number"]')
-    sliderComboInput.trigger('focus')
-    await sliderComboInput.setValue(5)
-    await sliderComboInput.trigger('keyup')
-    await  wrapper.vm.$nextTick()
-    expect(wrapper.emitted().updated).toBeTruthy()
-    done()
-  })
+  //   let  sliderComboInput = wrapper.find('.form-fields-slider-text-input input[type="number"]')
+  //   sliderComboInput.trigger('focus')
+  //   await sliderComboInput.setValue(5)
+  //   await sliderComboInput.trigger('keyup')
+  //   await  wrapper.vm.$nextTick()
+  //   expect(wrapper.emitted().updated).toBeTruthy()
+  //   done()
+  // })
 
   it('should render form-fields in roundtrip', async (done) => {
     await new AppLoader().fetchApiInitialData()
@@ -109,8 +109,18 @@ describe('Form-fields', () => {
     const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store }) 
     expect(wrapper.contains('.form-fields')).toBe(true)
     expect(wrapper.findComponent(FormFields).exists()).toBe(true)
-    await new Promise(resolve => setTimeout(resolve, 5000))
-    await wrapper.vm.$el.querySelectorAll('.random')[0].querySelectorAll('.v-input__append-inner')[0].querySelectorAll('.v-icon')[0].click()
+    await new Promise(resolve => setTimeout(resolve, 5000))    
+    console.log('This is the HTML', wrapper.html())
+    let random = wrapper.find('.random')
+    console.log(random)
+
+    let radomInput = random.find('.v-input__append-inner')
+    console.log(radomInput)
+
+    let randomIcon = radomInput.find('.v-icon')
+    console.log(randomIcon)
+    await randomIcon.trigger('click')
+    //await wrapper.vm.$el.querySelectorAll('.random')[0].querySelectorAll('.v-input__append-inner')[0].querySelectorAll('.v-icon')[0].click()
     await wrapper.vm.$nextTick()
     expect(wrapper.emitted().fieldUpdated).toBeTruthy()
     done()
