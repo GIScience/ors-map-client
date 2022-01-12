@@ -3,7 +3,7 @@
     <v-expansion-panel-content class="round-trip-panel-content">
       <div slot="header"><h4>{{$t('roundtrip.roundtripOptions')}}</h4></div>
       <template>
-        <fields-container @fieldUpdated="filterUpdated" :parameters="roundTripFilterAcessor.props"></fields-container>
+        <fields-container @fieldUpdated="filterUpdated" :parameters="roundTripFilterAccessor.props"></fields-container>
       </template>
     </v-expansion-panel-content>
   </v-expansion-panel>

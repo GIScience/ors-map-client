@@ -12,7 +12,7 @@ export default {
     FieldsContainer
   },
   computed: {
-    roundTripFilterAcessor () {
+    roundTripFilterAccessor () {
       const filterRef = OrsFilterUtil.getFilterRefByName('round_trip')
       return filterRef
     }
