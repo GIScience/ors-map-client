@@ -46,8 +46,6 @@ describe('Share', () => {
     expect(shareModal).toBeTruthy()
     shareModal.querySelector('input[type="text"]').click()
     await new Promise(resolve => setTimeout(resolve, 200))
-    // let clipboard = await navigator.clipboard.readText()
-    // expect(clipboard).toBeTruthy()
     done()  
   })
 
@@ -73,18 +71,17 @@ describe('Share', () => {
     expect(shareUrlInput.value).toBe(directionsUrl)
     let iframeCode = `<iframe style='border:none' width='100%' height='100%'  src="${directionsUrl}/embed/en-us"></iframe>`
     expect(shareUrlTextarea.value).toContain(iframeCode)    
-    await wrapper.find('.toggle-short-url').trigger('click')
-
-    await wrapper.vm.$nextTick()
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    shareUrlInput = shareModal.querySelector('input[type="text"]')
-    expect(shareUrlInput.value).toContain('https://bit.ly/')
 
     await wrapper.find('.toggle-short-url').trigger('click')
-    await wrapper.vm.$nextTick()
-    // await new Promise(resolve => setTimeout(resolve, 1000))
-    shareUrlInput = shareModal.querySelector('input[type="text"]')
-    expect(shareUrlInput.value).not.toContain('https://bit.ly/')
-    done()  
+    await  wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 3000))
+    expect(wrapper.vm.shareUrl).toContain('https://bit.ly/')
+
+    await wrapper.find('.toggle-short-url').trigger('click')    
+    await  wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 3000))
+    expect(wrapper.vm.shareUrl).not.toContain('https://bit.ly/')
+
+    done()
   })
 })
