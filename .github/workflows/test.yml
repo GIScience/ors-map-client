@@ -16,6 +16,6 @@ jobs:
           ORSKEY: ${{ secrets.ORSKEY }}
           BITLYLOGIN: ${{ secrets.BITLYLOGIN }}
           BITLYAPIKEY: ${{ secrets.BITLYAPIKEY }}
-        uses: amoncaldas/github-action-webapp-front-end-test@v1.3
+        uses: GIScience/github-action-webapp-front-end-test@v1.3
         with:
           target: 'test'
