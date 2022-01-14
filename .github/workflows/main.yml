@@ -1,0 +1,21 @@
+name: Test webapp
+on: [push]
+jobs:
+  Run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Set up default config files
+        run: cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
+      - name: Run test target
+        env:
+          ORSKEY: ${{ secrets.ORSKEY }}
+          BITLYLOGIN: ${{ secrets.BITLYLOGIN }}
+          BITLYAPIKEY: ${{ secrets.BITLYAPIKEY }}
+        uses: GIScience/github-action-webapp-front-end-test@v1.3
+        with:
+          target: 'test'
