@@ -657,7 +657,7 @@ const filters = [
         name: 'round_trip',
         type: constants.filterTypes.wrapper,
         valueAsObject: true,
-        hidden: true,
+        hidden: false,
         availableOnModes: [constants.modes.roundTrip],
         useInServices: [constants.services.directions],
         props: [
