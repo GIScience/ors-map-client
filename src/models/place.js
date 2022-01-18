@@ -182,6 +182,7 @@ class Place {
 
   /**
    * Get the coordinates from name
+   * @returns {Array|false}
    */
   getCoordsFromName() {
     if (this.placeName && this.placeName.indexOf(',') > -1) {
