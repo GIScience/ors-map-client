@@ -26,7 +26,7 @@ describe('Download route', () => {
     await wrapper.find('.open-download-btn').trigger('click')
     let downloadModal = document.querySelector('.download-modal')
     expect(downloadModal).toBeTruthy()
-    await wrapper.findAll('.download-format').trigger('click')
+    await wrapper.find('.download-format').trigger('click')
     wrapper.vm.downloadFormat = 'json'
     await wrapper.find('.download-modal .download').trigger('click')
     await wrapper.vm.$nextTick()  
