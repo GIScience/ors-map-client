@@ -1,5 +1,5 @@
-import AppMode from '@/support/app-modes/app-mode'
 import { PlacesSearch, ReverseGeocode } from '@/support/ors-api-runner'
+import AppMode from '@/support/app-modes/app-mode'
 import constants from '@/resources/constants'
 import appConfig from '@/config/app-config'
 import GeoUtils from '@/support/geo-utils'
@@ -298,7 +298,7 @@ export default {
       let suggestions = []
       if (this.localModel.nameIsCoord()) {
         const lnglatArr = this.localModel.getLngLatArr()
-        const rawCoordinatesPlace = new Place(lnglatArr[0], lnglatArr[1], this.localModel.placeName, { properties: { layer: 'rawCoordinate' } })
+        const rawCoordinatesPlace = new Place(lnglatArr[1], lnglatArr[0], this.localModel.placeName, { properties: { layer: 'rawCoordinate' } })
         rawCoordinatesPlace.rawCoordinate = true
         suggestions.push(rawCoordinatesPlace)
       }
@@ -395,11 +395,6 @@ export default {
       event.stopPropagation()
       event.preventDefault()
       this.$emit('focused', true)
-    },
-    appendClicked(event) {
-      console.log(event)
-      event.stopPropagation()
-      event.preventDefault()
     },
     /**
      * Handle the click on the pick a place btn
@@ -568,6 +563,11 @@ export default {
 
           // Make sure that the changes in the input are debounced
           this.debounceTimeoutId = setTimeout(function () {
+            if (context.localModel.nameIsCoord()) {
+              let coords = context.localModel.getCoordsFromName()
+              //context.localModel.setLnglat(coords[0], coords[1])
+              context.model.setLnglat(coords[0], coords[1])
+            }
             if (event.key === 'Enter') {
               context.focused = false
               context.handleSearchInputEnter()
@@ -633,20 +633,24 @@ export default {
 
     /**
      * Send the app to search mode
+     * @emits switchedToSearchMode
+     * @emits searchChanged
      */
     sendToSearchMode () {
       if (!this.model.placeName || this.model.placeName.length === 0) {
         this.showError(this.$t('placeInput.pleaseTypeSomething'))
         return
       } else {
+        if (previousMode === constants.modes.search) {
+          this.$emit('searchChanged')
+        } else {
+          this.$emit('switchedToSearchMode')
+        }
         const previousMode = this.$store.getters.mode
         this.$store.commit('mode', constants.modes.search)
         const appMode = new AppMode(this.$store.getters.mode)
         const route = appMode.getRoute([this.localModel])
         this.$router.push(route)
-        if (previousMode === constants.modes.search) {
-          this.$emit('searchChanged')
-        }
       }
     },
 
