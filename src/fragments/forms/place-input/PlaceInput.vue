@@ -20,7 +20,7 @@
           @keyup="changed($event)"
           @click:clear="() => placeCleared(index)">
           <template v-slot:append v-if="searchAvailable">
-            <v-btn v-if="appendBtn === 'search'" icon small flat class="append-input-btn" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
+            <v-btn v-if="appendBtn === 'search'" icon small flat class="append-input-btn search" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
               @click="sendToSearchMode()">
               <v-icon left>search</v-icon>
             </v-btn>
@@ -48,7 +48,7 @@
           <v-icon :title="$t('placeInput.directions')" color="dark" :large="$lowResolution" class="input-icon" >directions</v-icon>
         </v-btn>
 
-        <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="switchCoordsAvailable && ($mdAndUpResolution || single)" @click="switchCoords()">
+        <v-btn flat class="input-btn switch-coords" :class="{small: $mdAndUpResolution}" v-if="switchCoordsAvailable && ($mdAndUpResolution || single)" @click="switchCoords()">
           <v-icon :title="$t('placeInput.switchCoords')" color="dark" :large="$lowResolution" class="input-icon" >compare_arrows</v-icon>
         </v-btn>
 
@@ -114,7 +114,7 @@
               </div>
             </v-flex>
           </v-layout>
-          <v-list-tile class="place-suggestion" @click.stop="selectSuggestion(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'
+          <v-list-tile class="place-suggestion" :class="{'raw-coord': placeSuggested.rawCoordinate}" @click="selectSuggestion(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'
             :title="placeSuggested.placeName.trim()">
             <v-list-tile-action class="hidden-sm-and-down">
               <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city' || placeSuggested.properties.layer === 'county'">location_city</v-icon>
@@ -123,8 +123,7 @@
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title :title="placeSuggested.placeName.trim()">
-                <v-btn v-html="highlightedName(placeSuggested.placeName)" style="min-width: fit-content" flat small @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">
-                 
+                <v-btn v-html="highlightedName(placeSuggested.placeName)" style="min-width: fit-content" flat small @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">                 
                 </v-btn>
               </v-list-tile-title>
               <v-list-tile-sub-title>
