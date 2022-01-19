@@ -2,6 +2,70 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.29.0](https://github.com/GIScience/ors-map-client/compare/v1.28.2...v1.29.0) (2022-01-19)
+
+
+### Features
+
+* add surface_quality_known and allow_unsuitable parameters for wheelchair profile ([daa1799](https://github.com/GIScience/ors-map-client/commit/daa1799b3c34500b3631cb73dd10d7fce8b51c1c))
+* **app-state.js:** update the html document lang when when the app language is changed ([5fa4508](https://github.com/GIScience/ors-map-client/commit/5fa450884d71750b8c501780d3b1318d1e2c1440))
+
+
+### Bug Fixes
+
+* **download.spec.js:** replace findAll for find when accessing download-format element ([f437d18](https://github.com/GIScience/ors-map-client/commit/f437d18ead012abf4205a72f9e25bfb75714dcec))
+* **maps.route.js:** avoid redirecting to next route if it is the same of the current one ([e0dbe76](https://github.com/GIScience/ors-map-client/commit/e0dbe761c81f21076feea247ade24410c7e3eccc))
+* **mapviewmarker.vue:** fix styles ([8669e0c](https://github.com/GIScience/ors-map-client/commit/8669e0c9cf74fadbaf8c6bf560f0bdce6e9f2775))
+* **mylocation.vue:** fix styles ([9582035](https://github.com/GIScience/ors-map-client/commit/9582035a5b744b5b9a867edda7e294858196a4fa))
+* **ors-map-filters-example.js:** fix the roud_trip hidden property value ([0f2860e](https://github.com/GIScience/ors-map-client/commit/0f2860e1ef3b4f4a90c9e112346ae49a6493dc32))
+* **place-input.js:** fix coordinates switch and related suggestions listing ([08d0d2a](https://github.com/GIScience/ors-map-client/commit/08d0d2a164ee0391504e11de46248d5178d1c0ae))
+* **place-input.js:** fix switch coords and raw coords displaying ([902a4cd](https://github.com/GIScience/ors-map-client/commit/902a4cda0f09fb779c99d6ec7f4758541d745e35))
+* **place-input.spec.js:** make place-input test compatible with last component fix ([f1cd7fb](https://github.com/GIScience/ors-map-client/commit/f1cd7fb9fcb1e72b26e7c144d835cfe8450ff679))
+* **place.js:** build lng lat array always from lng and lat attributes ([20e3b2b](https://github.com/GIScience/ors-map-client/commit/20e3b2b79e7d1ca6ad3b77f36ae36d67ff18a4b9))
+* **share.js:** remove copy-to-clipboard child element from share container instead of from body ([f540f24](https://github.com/GIScience/ors-map-client/commit/f540f2429fa9290a1061d9e4da34238b6bd00bdd))
+
+
+### Others
+
+* **test.yml:** switch to GIScience test action ([f961dd0](https://github.com/GIScience/ors-map-client/commit/f961dd0631cf9ff6833461f83b6ba016d55a241a))
+
+
+### Docs
+
+* **changelog.md:** fix typos in changelog.md ([470478e](https://github.com/GIScience/ors-map-client/commit/470478e994634066fe7ebf0d35db53581dd6f2c6))
+* **download.spec.js:** add file type doc for each menu index clicked ([af50f09](https://github.com/GIScience/ors-map-client/commit/af50f0975eb01b6cbb7ace587bb95c8ac67f272c))
+* **place.js:** add missing method documentation ([170049b](https://github.com/GIScience/ors-map-client/commit/170049be9609eb00bc4b65e98066c7f4908abd05))
+
+
+### Code Refactoring
+
+* add default lang attribute to html documents ([89606b9](https://github.com/GIScience/ors-map-client/commit/89606b9374c2f5e5e21768fb76f80391cb398910))
+* **dependency-service.js:** remove unused parameters ([0ef4401](https://github.com/GIScience/ors-map-client/commit/0ef4401ec8a9ece4c79acc9813174f83636df82b))
+* **download.spec.js:** remove commented line ([19c3a03](https://github.com/GIScience/ors-map-client/commit/19c3a030cef8ad887e8567867b909b6d353e5131))
+* fix code smells ([6485f5e](https://github.com/GIScience/ors-map-client/commit/6485f5e00a6425a378292a8da6eeee9ebe6dcb7b))
+* **form-fields.spec.js:** change the way the randon field is accessed and clicked on the test ([aeadef8](https://github.com/GIScience/ors-map-client/commit/aeadef8b867aa8d09a087f1f10f8a6da3a140b02))
+* **form-fields.spec.js:** refactor form-fields test ([39486c7](https://github.com/GIScience/ors-map-client/commit/39486c7c00bb5fb53625aa6e682b77ba905ff8b7))
+* **formfields.vue:** remove unused sub props modal logic and child dialog fields component ([36b36d9](https://github.com/GIScience/ors-map-client/commit/36b36d966419dac1561f4fe0c5b35309f3bcf030))
+* **formfields.vue:** rename random input class to random-input ([971fcbf](https://github.com/GIScience/ors-map-client/commit/971fcbf08abd5f0a7905a3e2fc5c056b58b6fb81))
+* **map-view.css:** remove duplicated style ([68bb3e5](https://github.com/GIScience/ors-map-client/commit/68bb3e57a5144dc22c565170dc3243f225c9501c))
+* **ors-l-polyline.css:** remove overlapping style ([3876e14](https://github.com/GIScience/ors-map-client/commit/3876e145e66015e9afb1165080fb9e98509d3eee))
+* **placeinput.vue:** add classes to some elements necessary to test running ([85665d6](https://github.com/GIScience/ors-map-client/commit/85665d6c0b5d3e04ff8e4465fc35644c6dc66ec4))
+* **roudn-trip:** fix typo ([c886cc5](https://github.com/GIScience/ors-map-client/commit/c886cc56bb5b914f6f528fdf6188c7ba8f2ceb74))
+* **share.spec.js:** refactor share test to avoid some intermitent failures ([a7f15eb](https://github.com/GIScience/ors-map-client/commit/a7f15eb253c4e15573ceb1ca543a566033554d30))
+* **slidercombo.vue:** add css class to root element and remove unused watch parameter ([48ee0e2](https://github.com/GIScience/ors-map-client/commit/48ee0e2f0eb36a7c29c8688b9fe050dd9b05fff0))
+
+
+### Tests
+
+* **base-karma.conf.js:** disable captureConsole ([5dd55fa](https://github.com/GIScience/ors-map-client/commit/5dd55faf25c3e93de9dd61dec901a11b6a461dfa))
+* **base-karma.conf.js:** set captureconsole to true ([d74cfcc](https://github.com/GIScience/ors-map-client/commit/d74cfccf9d10fb144a33853b104feaf27084c4b1))
+* **download.spec.js:** increase pause for gpx donwload test ([594465e](https://github.com/GIScience/ors-map-client/commit/594465e5a0a6fbf0c12dc1b391eeee048b80ea1f))
+* **form-fields.spec.js:** add formfields test ([e24caab](https://github.com/GIScience/ors-map-client/commit/e24caabef5c4d8c17ca136233198068fdf59f211))
+* **form-fields:** fix generate random seed test ([6256c8e](https://github.com/GIScience/ors-map-client/commit/6256c8ec4bf417cd88e98e24d7464f55d8941a21))
+* **main.spec.js:** add main.js test ([aec126c](https://github.com/GIScience/ors-map-client/commit/aec126c65473fe72c4fa777d2e2bac7c6d516062))
+* **place-input.spec.js:** extend place-input test coverage ([f8c2cce](https://github.com/GIScience/ors-map-client/commit/f8c2cce8164c04bd0d38aebfe2c315f570776775))
+* **reach.spec.js:** increase wait timeout for isochrones reandering test ([9edc071](https://github.com/GIScience/ors-map-client/commit/9edc071b5af375efa6f030cbddc5a0fa927c1f9e))
+
 ### [1.28.2](https://github.com/GIScience/ors-map-client/compare/v1.28.1...v1.28.2) (2022-01-03)
 
 
