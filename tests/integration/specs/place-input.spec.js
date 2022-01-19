@@ -84,12 +84,8 @@ describe('Place-input', () => {
     rawCoordinates = wrapper.findAll('.place-suggestion').wrappers[0].find('.raw-coord .v-list__tile__title button strong')
     expect(rawCoordinates.element.innerText).toBe('-12.489208068615273,-37.97321319580079')  
     expect(wrapper.emitted().autocompleted).toBeTruthy() 
-    
-    let switchCoords =  wrapper.find('.switch-coords')
-    await switchCoords.trigger('click')
-    await new Promise(resolve => setTimeout(resolve, 2000))
     let suggestions = wrapper.findAll('.place-suggestion')
-    expect(suggestions.length).toBe(2)      
+    expect(suggestions.length).toBe(2)   
     done()
   })  
 
