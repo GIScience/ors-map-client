@@ -297,8 +297,8 @@ export default {
       }
       let suggestions = []
       if (this.localModel.nameIsCoord()) {
-        const lnglatArr = this.localModel.getLngLatArr()
-        const rawCoordinatesPlace = new Place(lnglatArr[1], lnglatArr[0], this.localModel.placeName, { properties: { layer: 'rawCoordinate' } })
+        const latlng = this.model.getLatLng()
+        const rawCoordinatesPlace = new Place(latlng.lng, latlng.lat, `${latlng.lng},${latlng.lat}`, { properties: { layer: 'rawCoordinate' } })
         rawCoordinatesPlace.rawCoordinate = true
         suggestions.push(rawCoordinatesPlace)
       }
@@ -523,7 +523,7 @@ export default {
      *
      */
     autocompleteByCoords () {
-      const latlng = this.localModel.getLatLng()
+      const latlng = this.model.getLatLng()
       this.eventBus.$emit('showLoading', true)
       const context = this
       ReverseGeocode(latlng.lat, latlng.lng, 10).then(places => {
@@ -564,9 +564,8 @@ export default {
           // Make sure that the changes in the input are debounced
           this.debounceTimeoutId = setTimeout(function () {
             if (context.localModel.nameIsCoord()) {
-              let coords = context.localModel.getCoordsFromName()
-              //context.localModel.setLnglat(coords[0], coords[1])
-              context.model.setLnglat(coords[0], coords[1])
+              let latlng = context.localModel.getLatLng()
+              context.model.setLnglat(latlng.lng, latlng.lat)
             }
             if (event.key === 'Enter') {
               context.focused = false
@@ -837,10 +836,11 @@ export default {
      */
     switchCoords () {
       if (this.model.nameIsCoord()) {
-        let coordinates = this.model.getCoordsFromName()
-        coordinates.reverse()
-        this.model.setLnglat(coordinates[1], coordinates[0])
+        let latlng = this.model.getLatLng()
+        this.model.lat = latlng.lng
+        this.model.lng = latlng.lat
         this.model.setCoordsAsName()
+        this.model.placeName = `${latlng.lat},${latlng.lng}`
         this.autocompleteByCoords()
       }
     },
