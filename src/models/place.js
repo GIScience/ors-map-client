@@ -65,10 +65,7 @@ class Place {
    * @returns {Array} containing [lng, lat]
    */
   getLngLatArr() {
-    if (this.coordinates) {
-      return this.coordinates
-    }
-    if (this.lat !== 0 && this.lng !== 0) {
+    if (this.lat !== null && this.lng !== null) {
       return [this.lng, this.lat]
     } else {
       if (this.nameIsCoord()) {
