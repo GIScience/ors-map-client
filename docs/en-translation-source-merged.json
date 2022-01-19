@@ -69,8 +69,7 @@
       "lng": "long",
       "tones": "tones",
       "t": "t",
-      "kmh": "km/h",
-      "polygon": "polygon"
+      "kmh": "km/h"
     },
     "layers": {
       "macrocounty": "Macro county",
@@ -115,7 +114,8 @@
     "toggleAccessibleMode": "Toggle accessible mode",
     "aboutTitle": "About ORS",
     "updateSearch": "Search this area",
-    "updateSearchAfterZoomOrCenterChange": "Update search after zoom or center change"
+    "updateSearchAfterZoomOrCenterChange": "Update search after zoom or center change",
+    "pageNotFound": "Page not not found. Check if the URL is not malformed"
   },
   "about": {
     "donate": "Donate!",
@@ -481,7 +481,7 @@
       },
       "clearControlLabel": "&times",
       "measureControlLabel": "&#8614;",
-      "measureControlClasses": ["polyline-measure-unicode-icon"],
+      "measureControlClasses": [],
       "unitControlLabel": {
         "metres": "m",
         "kilometres": "km",
@@ -825,6 +825,18 @@
       "quiet": {
         "label": "Quiet (Germany only)",
         "description": "Prefer quiet areas (only available for Germany)"
+      },
+      "surface_quality_known": {
+        "label": "Only surfaces with known quality",
+        "description": "Forces the usage only of edges where the surface quality is explicitly known"
+      },
+      "allow_unsuitable": {
+        "label": "Allow unsuitable",
+        "description": "Allows usage of edges that might be unsuitable for wheelchair which were formerly excluded"
+      },
+      "vehicle_type": {
+        "label": "Vehicle type",
+        "description": "Vehicle type to be considered for the route calculation"
       }
     }
   }

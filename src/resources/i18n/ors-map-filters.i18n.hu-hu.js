@@ -185,7 +185,19 @@ export default {
       'quiet': {
         'label': 'Csendes (csak Németországban)',
         'description': 'A csendes területeket részesíti előnyben (csak Németországban érhető el)',
-      }
+      },
+      'surface_quality_known': {
+        'label': 'Csak ismert minőségű felületek',
+        'description': 'Csak olyan élek használatát kényszeríti ki, ahol a felület minősége kifejezetten ismert'
+      },
+      'allow_unsuitable': {
+        'label': 'Nem megfelelő',
+        'description': 'Lehetővé teszi olyan élek használatát, amelyek esetleg nem alkalmasak a korábban kizárt kerekesszékekhez'
+      },
+      'vehicle_type': {
+        'label': 'Jármű típus',
+        'description': 'Az útvonal kiszámításakor figyelembe veendő jármű típusa',
+      } 
     }
   }
 }

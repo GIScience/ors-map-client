@@ -184,7 +184,19 @@ export default {
       'quiet': {
         'label': 'Calme (Allemagne uniquement)',
         'description': 'Préfère les zones calmes (uniquement disponible pour l\'Allemagne)',
-      }
+      },
+      'surface_quality_known': {
+        'label': 'Uniquement des surfaces de qualité connue',
+        'description': 'Force l\'utilisation des seules arêtes dont la qualité de surface est explicitement connue',
+      },
+      'allow_unsuitable': {
+        'label': 'Permettre inadéquat',
+        'description': 'Permet l\'utilisation de bords qui pourraient ne pas convenir aux fauteuils roulants qui étaient auparavant exclus',
+      },
+      'vehicle_type': {
+        'label': 'Type de véhicule',
+        'description': 'Type de véhicule à considérer pour le calcul d\'itinéraire',
+      } 
     }
   }
 }

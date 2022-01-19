@@ -1,6 +1,6 @@
 export default {
   orsMapFilters: {
-    profiles: {
+    'profiles': {
       'cycling-regular': 'Bici',
       'cycling-road': 'Bici da corsa',
       'cycling-electric': 'E-bike',
@@ -18,7 +18,7 @@ export default {
       'forestry': 'Autocarro agricolo',
       'goods': 'Autocarro da beni'
     },
-    filters: {
+    'filters': {
       'preference': {
         'label': 'Preferenza itinerario',
         'description': 'Fattore preferito da considerare quando viene calcolato l\'itinerario',
@@ -184,7 +184,19 @@ export default {
       'quiet': {
         'label': 'Silenzioso (solo Germania)',
         'description': 'Preferisce zone tranquille (disponibile solo per la Germania)',
-      }
+      },
+      'surface_quality_known': {
+        'label': 'Solo superfici con qualità nota',
+        'description': 'Impone l\'uso dei soli bordi in cui la qualità della superficie è esplicitamente nota',
+      },
+      'allow_unsuitable': {
+        'label': 'Consentire inadeguato',
+        'description': 'Consente l\'utilizzo di bordi che potrebbero non essere adatti a sedie a rotelle precedentemente escluse',
+      },
+      'vehicle_type': {
+        'label': 'Tipo di veicolo',
+        'description': 'Tipo di veicolo da considerare per il calcolo del percorso',
+      } 
     }
   }
 }

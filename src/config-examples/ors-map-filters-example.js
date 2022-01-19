@@ -289,7 +289,6 @@ const filters = [
       {
         name: 'vehicle_type',
         required: false,
-        hidden: true,
         type: constants.filterTypes.string,
         useInServices: [constants.services.directions],
         availableOnModes: [constants.modes.directions],
@@ -613,7 +612,6 @@ const filters = [
             name: 'weightings',
             type: constants.filterTypes.wrapper,
             valueAsObject: true,
-            hidden: true,
             availableOnModes: [constants.modes.directions],
             useInServices: [constants.services.directions],            
             validWhen: [ { ref: 'profile', value: 'foot-*' }], 
@@ -650,6 +648,26 @@ const filters = [
                 ], 
               }
             ]                               
+          },
+          {
+            name: 'surface_quality_known',
+            type: constants.filterTypes.boolean,
+            availableOnModes: [constants.modes.directions],
+            useInServices: [constants.services.directions],            
+            validWhen: [ { ref: 'profile', value: 'wheelchair' }], 
+            visibleWhen: [ { ref: 'profile', value: 'wheelchair' } ], 
+            default: false,
+            value: false                              
+          },
+          {
+            name: 'allow_unsuitable',
+            type: constants.filterTypes.boolean,
+            availableOnModes: [constants.modes.directions],
+            useInServices: [constants.services.directions],            
+            validWhen: [ { ref: 'profile', value: 'wheelchair' }], 
+            visibleWhen: [ { ref: 'profile', value: 'wheelchair' } ], 
+            default: false,
+            value: false                              
           }
         ]
       },

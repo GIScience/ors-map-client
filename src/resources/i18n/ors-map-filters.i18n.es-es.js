@@ -185,7 +185,20 @@ export default {
       'quiet': {
         'label': 'Tranquilo (solo Alemania)',
         'description': 'Prefiere zonas tranquilas (solo disponible para Alemania)',
-      }
+      },
+      'surface_quality_known': {
+        'label': 'Sólo superficies con calidad conocida',
+        'description': 'Fuerza el uso solo de los bordes donde la calidad de la superficie se conoce explícitamente',
+      },
+      'allow_unsuitable': {
+        'label': 'Permitir inadecuada',
+        'description': 'Permite el uso de bordes que podrían no ser adecuados para sillas de ruedas que antes estaban excluidos',
+      },
+      'vehicle_type': {
+        'label': 'Tipo de vehículo',
+        'description': 'Tipo de vehículo a considerar para el cálculo de la ruta',
+      } 
+
     }
   }
 }

@@ -177,7 +177,19 @@ export default {
       quiet: {
         label: 'Ruhig',
         description: 'Ruhige Gebiete bevorzugen (nur für Deutschland verfügbar)',
-      }
+      },
+      surface_quality_known: {
+        label: 'Nur Oberflächen mit bekannter Qualität',
+        description: 'Erzwingt die Verwendung nur von Kanten, deren Oberflächenqualität explizit bekannt ist',
+      },
+      allow_unsuitable: {
+        label: 'Ungeeignet zulassen',
+        description: 'Ermöglicht die Verwendung von Kanten, die für Rollstuhlfahrer möglicherweise ungeeignet sind und früher ausgeschlossen waren'
+      },
+      vehicle_type: {
+        label: 'Fahrzeugtyp',
+        description: 'Für die Routenberechnung zu berücksichtigender Fahrzeugtyp',
+      } 
     }
   }
 }

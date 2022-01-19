@@ -185,7 +185,19 @@ export default {
       quiet: {
         label: 'Silencioso (apenas Alemanha)',
         description: 'Prefere áreas tranquilas (disponível apenas para Alemanha)',
-      }
+      },
+      surface_quality_known: {
+        label: 'Somente superfícies com qualidade conhecida',
+        description: 'Força o uso apenas de quinas onde a qualidade da superfície é explicitamente conhecida',
+      },
+      allow_unsuitable: {
+        label: 'Permitir inadequado',
+        description: 'Permite o uso de quinas que podem ser inadequadas para cadeira de rodas que anteriormente eram excluídas',
+      },
+      vehicle_type: {
+        label: 'Tipo de veículo',
+        description: 'Tipo de veículo a ser considerado para o cálculo da rota',
+      } 
     }
   }
 }

@@ -185,7 +185,19 @@ export default {
       quiet: {
         label: 'Quiet (Germany only)',
         description: 'Prefer quiet areas (only available for Germany)',
-      }
+      },
+      surface_quality_known: {
+        label: 'Only surfaces with known quality',
+        description: 'Forces the usage only of edges where the surface quality is explicitly known',
+      },
+      allow_unsuitable: {
+        label: 'Allow unsuitable',
+        description: 'Allows usage of edges that might be unsuitable for wheelchair which were formerly excluded',
+      },
+      vehicle_type: {
+        label: 'Vehicle type',
+        description: 'Vehicle type to be considered for the route calculation',
+      }          
     }  
   }
 }
