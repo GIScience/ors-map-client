@@ -107,7 +107,8 @@ const mapDefinitions = {
           id: 'custom',
           visible: false,
           attribution: vueInstance.$t('mapView.customTileProvider'),
-          url: customTileProviderUrl.toString()
+          url: customTileProviderUrl.toString(),
+          maxZoom: appConfig.initialMapMaxZoom
         }
       ]
       providers = providers.concat(customTileService)
