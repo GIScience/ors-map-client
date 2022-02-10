@@ -1,5 +1,5 @@
 // List of route smoothness
-const routeSmothness = [
+const routeSmoothness = [
   'impassable',
   'very_horrible',
   'horrible',
@@ -10,4 +10,4 @@ const routeSmothness = [
   'excellent'
 ]
 
-export default routeSmothness
+export default routeSmoothness
