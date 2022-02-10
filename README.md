@@ -32,6 +32,7 @@ code understanding.
 - [Build and deploy](#build-and-deploy)
 - [Tests](#tests)
 - [Contribute](#contribute)
+- [Additional documentation](#additional-documentation)
 
 ### Set up and run locally ###
 
@@ -436,15 +437,11 @@ Because of this, we have also to analyze the trade off of such contributions.
 We just have to decide about them together before the hands on.
 This approach is intended to create cohesion and keep the project sustainable.
 
-#### Current needs ####
+### Additional documentation ###
 
-As you may notice, this project is an ongoing project and thus, there is a lot of room for improvement.
-Some are listed below (ordered by priority):
+There are additional documents that are part of the software documentation. they are in the folder `/docs` and are listed below:
 
-So, if you can contribute with it, please let us know.
-- `Rendering performance` - we are continuously looking for performance improvement.
- If you think you can suggest a better way to deal with the rendering phase in a way that it improves the speed,
- please tell us.
- We are relying on [Vue2leaflet](https://github.com/vue-leaflet/Vue2Leaflet) for this.
-- `Accessibility` of the app for people with special needs
-- `User test` to check that the app works in multiple browsers, resolutions and devices (versions of Mac, Windows, Linux, Android and Iphone) and their multiple possible browsers
+- [docs/dynamic-inputs.md](docs/dynamic-inputs.md) - describe how the inputs are rendered using a custom engine and not hard-coded
+- [docs/automated-test.md](docs/automated-test.md) - explains how the automated tests are implemented
+- [docs/learned-lessons.md](docs/learned-lessons.md) - lessons learned and that might help in the future
+- [docs/learned-lessons.md](docs/learned-lessons.md) - explains what are the criteria for the search results
