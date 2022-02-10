@@ -57,7 +57,8 @@ const constants = {
     steps: 'steps',
     random: 'random',
     text: 'text',
-    boolean: 'boolean'
+    boolean: 'boolean',
+    switch: 'switch'
   },
   extraInfos: {
     surface: 'surface',
