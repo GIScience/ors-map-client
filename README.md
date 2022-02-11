@@ -258,8 +258,7 @@ They can be adjusted according the needs. Other files can be used to adjust app 
 #### Plug-ins ####
 
 It is possible to add plug-ins to the application in order to change its behavior or extend it.
-Please check the `src/plugins` folder, the [plug-ins readme](src/plugins/readme.md) and the
-[plugin example](src/plugins/plugin-example/plugin-example.js) for more details.
+Please check [docs/plugins.md](docs/plugins.md) for more details.
 
 ### Add language ###
 
@@ -445,3 +444,4 @@ There are additional documents that are part of the software documentation. they
 - [docs/automated-test.md](docs/automated-test.md) - explains how the automated tests are implemented
 - [docs/learned-lessons.md](docs/learned-lessons.md) - lessons learned and that might help in the future
 - [docs/learned-lessons.md](docs/learned-lessons.md) - explains what are the criteria for the search results
+- [docs/plugins.md](docs/plugins.md) - explains how the plugins can be added to the maps client
