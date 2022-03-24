@@ -1,0 +1,843 @@
+{
+  "global": {
+    "send": "Odeslat",
+    "save": "Uložit",
+    "confirm": "Potvrdit",
+    "cancel": "Zrušit",
+    "brand": "HeiGIT - Heidelberg University",
+    "close": "Zavřít",
+    "closeAndDoNotShowAgain": "Zavřít auž znovu neukazovat",
+    "select": "Vybrat",
+    "yes": "Ano",
+    "no": "Ne",
+    "and": "a",
+    "noAndDonAskAgain": "NE (už se znovu neptat)",
+    "ok": "OK",
+    "polygon": "polygon",
+    "developedByIntro": "Služby vyvinuty od",
+    "developedBy": "Heidelberg Institute for Geoinformation Technology",
+    "duration": "Trvání",
+    "distance": "Vzdálenost",
+    "elevation": "Nadmořská výška",
+    "profile": "Profil",
+    "options": "Možnosti",
+    "parameters": "Parametry",
+    "custom": "Vlastní",
+    "customOverlayer": "Vlastní překryvná vrstva",
+    "rawRouting": "Hrubá navigace",
+    "months": {
+      "january": "Leden",
+      "february": "Únor",
+      "march": "Březen",
+      "april": "Duben",
+      "may": "Květen",
+      "june": "Červen",
+      "july": "Červenec",
+      "august": "Srpen",
+      "september": "Září",
+      "october": "Říjen",
+      "november": "Listopad",
+      "december": "Prosinec"
+    },
+    "monthsShort": {
+      "january": "Led",
+      "february": "Úno",
+      "march": "Bře",
+      "april": "Dub",
+      "may": "Kvě",
+      "june": "Čer",
+      "july": "Čvc",
+      "august": "Srp",
+      "september": "Zář",
+      "october": "Říj",
+      "november": "Lis",
+      "december": "Pro"
+    },
+    "units": {
+      "km": "km(s)",
+      "mi": "mi(s)",
+      "m": "m",
+      "seconds": "sekund",
+      "s": "s",
+      "minutes": "minut",
+      "hours": "hodin(a)",
+      "days": "d",
+      "h": "h",
+      "min": "min",
+      "meters": "metrů",
+      "lat": "lat",
+      "lng": "long",
+      "tones": "tun",
+      "t": "t",
+      "kmh": "km/h"
+    },
+    "layers": {
+      "macrocounty": "Makroregion",
+      "country": "Země",
+      "region": "Kraj",
+      "county": "Okres",
+      "macroregion": "Region",
+      "neighbourhood": "Sousedství",
+      "locality": "Lokalita",
+      "borough": "Obec",
+      "localadmin": "Místní správce",
+      "address": "Adresa",
+      "street": "Ulice",
+      "venue": "Místo",
+      "rawCoordinate": "Hrubé lng,lat koordináty",
+      "notAvailable": "Není dostupné",
+      "postalcode": "PSČ",
+      "undefined": "Není definováno",
+      "ocean": "Oceán"
+    },
+    "population": "Obyvatelstvo",
+    "green": "Zeleň",
+    "noise": "Hluk",
+    "steepness": "Strmost",
+    "surface": "Povrch",
+    "roadaccessrestrictions": "Omezení přístupu na silnice",
+    "waytypes": "Typy cest",
+    "suitability": "Vhodnost",
+    "waycategory": "Kategorie cest",
+    "tollways": "Mýtné brány",
+    "traildifficulty": "Obtížnost stezky",
+    "osmid": "OSM ID",
+    "countryinfo": "Informacei zemi"
+  },
+  "maps": {
+    "pageTitle": "ORS Mapy",
+    "Places": "Místa",
+    "isochrones": "Isochrony",
+    "placeNameRequired": "Název místa je vyžadován",
+    "altitude": "Výkyvy nadmořské výšky",
+    "settings": "Nastavení",
+    "toggleAccessibleMode": "Přepnutí režimu dostupnosti",
+    "aboutTitle": "O ORS",
+    "updateSearch": "Prohledat tuto oblast",
+    "updateSearchAfterZoomOrCenterChange": "Aktualizace vyhledávání po změně zvětšení nebo středu",
+    "pageNotFound": "Stránka nebyla nalezena. Zkontrolujte, zda adresa URL není chybná"
+  },
+  "about": {
+    "donate": "Darujte!",
+    "donateText": "Prosím, věnujte svá geografická data na",
+    "info_I": "Službu Openrouteservice vyvíjí a poskytuje Heidelberský institut pro geoinformační technologie (HeiGIT) a nabízí služby Routing s využitím bezplatných geografických dat z OpenStreetMap, která jsou generována uživateli a shromažďována na základě spolupráce. Darujte prosím svá geografická data na openstreetmap.org!",
+    "info_II": "K uchování informací používáme místní úložiště prohlížeče, takže je nemusíte znovu zadávat během návštěvy ani při dalších návštěvách. Neshromažďujeme ani neukládáme žádné vaše osobní údaje ani informace, které by vás mohly identifikovat, s výjimkou těch, které nám dobrovolně poskytnete prostřednictvím přímého kontaktu. Kromě toho nesdílíme analytické údaje s žádnými poskytovateli služeb nebo partnery.",
+    "sources": "Pro tuto webovou aplikaci používáme různé knihovny s otevřeným zdrojovým kódem. Ty naleznete v příslušných souborech balíčků na adrese",
+    "feelFreeToReportBugs": "Neváhejte prosím nahlásit chyby na",
+    "orToFixThem": "nebo je opravte sami a vytvořte pull request",
+    "info_III": "Uživatelům je zakázán jakýkoli komerční přeprodej nebo šíření bez výslovného písemného souhlasu CIAT. Původní data  Jarvis A., H.I. Reuter, A. Nelson, E. Guevara, 2008, Hole-filled seamless SRTM data V4, International Centre for Tropical Agriculture (CIAT)",
+    "info_IV": "V případě jakýchkoli dalších dotazů, obav nebo zpětné vazby nás prosím kontaktujte prostřednictvím:",
+    "info_V": "Openrouteservice se zajímá o vaše dotazy, problémy, otázky atd. Vzhledem k tomu, že dotazů bude stále přibývat, bereme na sebe velkou zodpovědnost za to, že vám odpovíme v krátkém čase. Poté, co obdržíte náš automatický e-mail s odpovědí, který vás informuje o tom, že jsme obdrželi váš dotaz, obvykle odpovíme v krátké době. Než se nám ozvete, dejte nám prosím čas, abychom se na váš nahlášený problém řádně podívali.",
+    "CIAT_CSI_SRTM": "CIAT-CSI SRTM",
+    "dataProvided": "Údaje o obyvatelstvu poskytl",
+    "ghsFramework": "The Global Human Settlement (GHS) frameworks",
+    "askOpenrouteservice": "Obraťte se s dotazem na Openrouteservice",
+    "termsOfService": "Podmínky poskytování služeb",
+    "privacyPolicy": "Zásady ochrany osobních údajů",
+    "openStreetMapOrg": "OpenStreetMap.org",
+    "infoSupport": "Podpořte prosím openrouteservice.org",
+    "supportText": "Služba Openrouteservice nabízí bezplatné služby a většinu svých finančních prostředků získává z darů. Pokud chcete podpořit další rozvoj funkcí a serverové infrastruktury, dary jsou velmi vítány.",
+    "softwareAndLibraries": "Software & Knihovny"
+  },
+  "box": {
+    "maximize": "Maximalizovat",
+    "minimize": "Minimalizovat"
+  },
+  "formFields": {
+    "fieldHelp": "Kliknutím otevřete popis",
+    "defaultAbbreviation": "df.: ",
+    "paramJSONContent": "JSON obsah",
+    "wrongInputValue": "Špatná vstupní hodnota tohoto parametru.",
+    "notValidJsonString": "Žádný platný Json pro :fieldName"
+  },
+  "download": {
+    "documentTitle": "ORS trasa",
+    "download": "Stažení",
+    "downloadFileName": "Název souboru ke stažení",
+    "downloadFormat": "Formát ke stažení",
+    "downloadRoute": "Trasa stažení",
+    "preparingDownload": "Příprava ke stažení ...",
+    "fileReady": "Soubor je připraven",
+    "errorPreparingFile": "Chyba přípravy souboru",
+    "fileTooBigToBeDownloaded": "Soubor je příliš velký na to, aby mohl být stažen",
+    "standard": "Standard"
+  },
+  "formActions": {
+    "addPlaceInput": "Přidat vstupní místo",
+    "clearRoute": "Vymazat trasu",
+    "reverseRoute": "Obrátit trasu",
+    "roundTrip": "Cesta tam a zpět",
+    "toggleRoundTrip": "Přepnout zpáteční cestu"
+  },
+  "isochronesDetails": {
+    "polygons": "Polygony",
+    "center": "Střed",
+    "reachCenters": "Centra dosahu",
+    "toggleVisibility": "Přepnout viditelnost",
+    "opacity": "Průhlednost"
+  },
+  "isochrones": {
+    "isochrones": "Isochrony",
+    "isochronesReady": "Isochrony připraveny",
+    "calculatingIsochrones": "Výpočet isochron ...",
+    "itWasNotPossibleToCalculateIsochronesWithTheDefinedOptions": "S definovanými možnostmi nebylo možné izochrony vypočítat. Zkuste definovat menší izochrony.",
+    "couldResolveTheSelectedPlaceAsASuitableCenter": "Vybraný bod nebylo možné vyřešit jako vhodný střed.",
+    "apiError": {
+      "2003": "Plocha polygonu, kterému je třeba se vyhnout, nesmí překročit 20,0000 km2.",
+      "3001": "Jeden nebo více parametrů má nesprávnou hodnotu nebo formát.",
+      "3003": "Parametr 'avoid_features' má nesprávnou hodnotu 'null'.",
+      "3004": "Vybraná kombinace profilu, intervalu a času nebo vzdálenosti překračuje maximální podporovanou hodnotu. Hodnoty upravte.",
+      "3099": "Nelze sestavit izochronní mapu pro vybraný bod (body) a profil."
+    },
+    "genericErrorMsg": "Izochrony nebylo možné vypočítat."
+  },
+  "altitudePreview": {
+    "expandAltitudeChart": "Rozbalit tabulku",
+    "altitude": "Nadmořská výška"
+  },
+  "placeDetails": {
+    "layer": "Vrstva",
+    "lat": "Lat.",
+    "lon": "Lon.",
+    "notAvailable": "Není k dispozici",
+    "placeDetails": "Podrobnosti o místu",
+    "placeName": "Název",
+    "latlngCopied": "Zeměpisná šířka a délka zkopírována",
+    "lnglatCopied": "Zeměpisná délka a šířka zkopírována",
+    "copyLatlng": "Kopírovat ve formátu zeměpisná šířka,délka",
+    "copyLnglat": "Kopírovat ve formátu zeměpisná délka,šířka",
+    "satelliteView": "satelitní pohled"
+  },
+  "roundtrip": {
+    "roundtripOptions": "Možnosti zpáteční cesty"
+  },
+  "routeExtras": {
+    "extras": "Doplňky k trase",
+    "extraInfo": "Další informace",
+    "value": "Hodnota",
+    "clickToHighlightOnMap": "Kliknutím ji zvýrazníte na mapě",
+    "showAllOnMap": "Zobrazit vše na mapě"
+  },
+  "steps": {
+    "instruction": "Instrukce",
+    "on": "Na",
+    "step": "kroku",
+    "gotoStep": "Přejít na krok"
+  },
+  "routeDetails": {
+    "routeDetails": "Podrobnosti o trase",
+    "warnings": "Výstrahy",
+    "routes": "Trasy",
+    "route": "Trasa",
+    "segments": "Segmenty",
+    "segment": "Segment",
+    "instructions": "Instrukce",
+    "instruction": "Instrukce",
+    "name": "Name",
+    "selectRoute": "Vybrat tuto trasu",
+    "selectedRoute": "Vybraná trasa",
+    "gotoSegment": "Přejít na segment",
+    "warningCodes": {
+      "1": "Na některých silnicích mohou platit omezení",
+      "2": "Na trase jsou zpoplatněné silnice",
+      "3": "Na trase jsou vynechané úseky. Délka a dostupnost nemusí být správné",
+      "4": "Minimálně jedna požadovaná informace navíc, ale není k dispozici"
+    },
+    "routeOpacity": "Neprůhlednost trasy"
+  },
+  "placesAndDirections": {
+    "isochrones": "Isochrony",
+    "place": "místo",
+    "notRouteFound": "Nebylo možné najít trasu spojující místa s vybraným profilem.",
+    "notRouteFoundWithFilters": "Nebylo možné najít trasu spojující místa s vybraným profilem a filtry.",
+    "noPlaceFound": "Nebylo nalezeno žádné místo se zadaným obsahem",
+    "routeReady": "Trasa připravena",
+    "useLocation": "GPS",
+    "addPlaceInput": "Přidat místo",
+    "clearRoute": "Vymazat trasu",
+    "reverseRoute": "Obráceně",
+    "orderByClosestPlaces": "Objednávejte podle míst blíže k vaší poloze",
+    "calculatingRoute": "Výpočet trasy...",
+    "yourLocation": "Vaše poloha",
+    "expandAltitudeChart": "Rozbalit tabulku",
+    "errorRenderingContentUploaded": "Chyba při vykreslování nahraného obsahu. Zkontrolujte formát a obsah souboru",
+    "roundTrip": "Zpáteční cesta",
+    "notPossibleToCalculateRoute": "Trasu nebylo možné vypočítat pomocí jednoho z vybraných míst.",
+    "apiError": {
+      "2000": "Nelze analyzovat požadavek JSON",
+      "2001": "Chybí požadovaný parametr",
+      "2002": "Chybný formát parametru",
+      "2003": "Parametry trasy překračují jeden nebo více limitů. Nezapomeňte, že některé vyhýbací parametry mají limity, například délka trasy a plocha vyhýbacího polygonu, která nesmí překročit 20000 km2.",
+      "2004": "Parametry trasy překračují jeden nebo více limitů. Nezapomeňte, že přibližná vzdálenost trasy nesmí být větší než 6000 km. Při použití určitých možností trasy nebo vyhýbacích možností nesmí být přibližná vzdálenost trasy větší než 150 km.",
+      "2006": "Nelze analyzovat požadavek na obsluhu exportu",
+      "2007": "Nepodporovaný formát exportu",
+      "2008": "Prázdný prvek",
+      "2009": "Nelze najít vhodnou trasu pro zadaná místa a kritéria. Možná, že zadaný profil není v této oblasti/regionu s použitými filtry podporován.",
+      "2010": "Nebylo možné najít vhodný bod, který je součástí trasy. Možná jeden z vybraných bodů není směrovatelný nebo vybraný profil není v této oblasti podporován.",
+      "2011": "Při použití možnosti alternativních tras není možné definovat zastávky na trase.",
+      "2012": "Byl zadán neplatný parametr. Zkontrolujte, zda je adresa URL správná",
+      "2099": "Nelze vypočítat trasu spojující vybraná místa"
+    },
+    "genericErrorMsg": "Nebylo možné vypočítat trasu",
+    "reorder": "Přeskupit"
+  },
+  "print": {
+    "print": "Tisk",
+    "segment": "Segment",
+    "preparingPrinting": "Příprava tisku",
+    "readyToPrint": "Připraveno k tisku"
+  },
+  "share": {
+    "fullUrl": "Celé",
+    "shortUrl": "Krátké",
+    "urlCopied": "URL zkopírovaná do schránky.",
+    "clickToCopy": "Kliknutím zkopírovat URL adresu",
+    "share": "Sdílet (kliknutím zkopírovat)",
+    "shareLink": "Sdílet odkaz",
+    "short": "Krátké URL",
+    "copyUrlInfo": "Odkaz můžete také zkopírovat z adresního řádku prohlížeče.",
+    "urlShortened": "Zkrácené URL",
+    "shorteningNotPossible": "Nebylo možné vygenerovat krátkou adresu URL. Použijte prosím úplnou adresu URL",
+    "embedCodeCopied": "Kód pro vložení zkopírován",
+    "embed": "Vkládání (kliknutím zkopírujete)",
+    "embedInstructions": "Tento kód použijte k vložení mapy ORS na svůj web"
+  },
+  "mapForm": {
+    "placesAndDirections": "Vyhledat a přejít",
+    "isochrones": "Dosah",
+    "uploadedContentRendered": "Zobrazení nahraného obsahu",
+    "errorRenderingContentUploaded": "Chyba při vykreslování nahraného obsahu. Zkontrolujte formát a obsah souboru"
+  },
+  "placeInput": {
+    "findAPlace": "Najít místo",
+    "place": "Místo",
+    "addRouteStop": "Přidat zastávku na trase",
+    "routePlace": "Zastávka na trase",
+    "routeDestination": "Cíl",
+    "placeNameRequired": "Název místa je vyžadován",
+    "yourLocation": "Vaše poloha",
+    "couldNotDetermineYourLocation": "Vaši polohu se nepodařilo zjistit. Ujistěte se, že jste získali požadovaná oprávnění",
+    "useYourLocation": "Použijte svou aktuální polohu",
+    "removeInput": "Odstranit místo/vstup",
+    "directions": "Instrukce",
+    "fromYourBrowser": "Z vašeho zařízení",
+    "addStartingPlace": "Přidání výchozího místa",
+    "startingPlace": "Výchozí místo",
+    "openInputOptions": "Otevřít možnosti vstupu",
+    "addInput": "Přidat místo vstupu",
+    "switchCoords": "Přepnout souřadnice",
+    "rawCoordinate": "Lat,lng hrubé souřadnice",
+    "fillOrRemoveInput": "Vyhledejte místo nebo použijte tlačítko na mapě vpravo",
+    "noPlaceFound": "Nebyly vráceny žádné výsledky",
+    "unknownSearchPlaceError": "Chyba hledání neznámého místa",
+    "approximateDistance": "Přibližná vzdálenost po přímce od aktuálního středu mapy",
+    "couldNotDetermineYourPreciseLocationUsingPreviousLocation": "Vaši přesnou polohu nebylo možné určit. Místo toho bude použita vaše předchozí poloha",
+    "pleaseTypeSomething": "Zadejte něco k vyhledávání",
+    "toggleDirect": "Přepněte přímo odsud na další místo",
+    "clickOnTheMapToSelectAPlace": "Vyberte místo kliknutím na místo na mapě",
+    "clickOnTheMapBtnToPickAPlace": "Kliknutím na toto tlačítko vyberete místo na mapě pro tento vstup.",
+    "goToDirectionsMode": "kliknutím na tlačítko navigace se přepnete do režimu navigace.",
+    "clickToSearchAndShowResultsOnTheMap": "Kliknutím zobrazíte výsledky vyhledávání na mapě"
+  },
+  "profileSelector": {
+    "activeProfile": "Aktivní"
+  },
+  "routeImporter": {
+    "loadRouteFile": "Import souboru",
+    "failedToLoadFile": "Nepodařilo se načíst vybraný soubor. Ujistěte se, že soubor není poškozený a je v jednom z přijatelných formátů.",
+    "acceptedImportTypes": "Přijatelné typy importu",
+    "dictDefaultMessage": "Vložte soubor s trasou, který chcete importovat, nebo klikněte sem",
+    "dictFallbackMessage": "Prohlížeč není podporovaný",
+    "dictFileTooBig": "Soubor je příliš velký",
+    "dictInvalidFileType": "Nesprávný typ souboru",
+    "dictCancelUpload": "Zrušit nahrávání",
+    "dictUploadCanceled": "Nahrávání zrušeno",
+    "dictRemoveFile": "Odebrat soubor"
+  },
+  "settings": {
+    "endpointsSectionTitle": "Koncové body služby (URI nebo úplná adresa URL)",
+    "language": "Jazyk",
+    "appLocale": "Lokalizace aplikace",
+    "unit": "Jednotka",
+    "areaUnit": "Jednotka plochy",
+    "saveToLocalStorage": "Uložit v mém prohlížeči",
+    "routeInstructions": "Instrukce pro navigaci",
+    "randomizedIsochroneColors": "Náhodné izochronní barvy",
+    "distanceMarkers": "Značky vzdálenosti",
+    "elevationProfile": "Profil převýšení",
+    "mapSettings": "Zobrazení mapy a další informace",
+    "defaultMapSettingsRestored": "Obnovení a uložení výchozího nastavení mapy",
+    "endpointsTitle": {
+      "directions": "Instrukce",
+      "isochrones": "Isochrony",
+      "geocodeSearch": "Hledání podle Geocode",
+      "autocomplete": "Automatické dokončení Geocode",
+      "pois": "Body zájmu",
+      "reverseGeocode": "Reverzní Geocode"
+    },
+    "apiKey": "klíč API",
+    "customApiKey": "Vlastní klíč API",
+    "apiBaseUrl": "Základní URL API",
+    "invalidSettingsValue": "Neplatné hodnoty nastavení. Zkontrolujte pole nebo obnovte výchozí hodnoty",
+    "restoreDefaults": "Obnovit výchozí nastavení",
+    "advanced": "Pokročilé",
+    "mapSettingsSaved": "Nastavení mapy uloženo",
+    "alwaysFitBounds": "Při změně trasy se vždy přizpůsobte hranicím",
+    "routeExtraInfo": "Další informace o trase",
+    "mapViewOptions": "Možnosti zobrazení mapy",
+    "advancedSettingsWarning": "Pokud nevíte, co děláte, neměňte níže uvedená nastavení!",
+    "customOverlayerTileProviderUrl": "Vlastní URL poskytovatele překryvné vrstvy",
+    "customTileProviderUrl": "Vlastní URL poskytovatele dlaždic",
+    "defaultTilesProvider": "Výchozí poskytovatel dlaždic",
+    "customTileProviderUrlHint": "https://domain.tld/path/{z}/{x}/{y}.ext?optionalKey=value",
+    "prioritizeSearchingForNearbyPlaces": "Upřednostnit vyhledávání míst v okolí",
+    "defaultProfile": "Výchozí profil",
+    "compressDataUrlSegment": "Komprese segmentu URL po /data/",
+    "autoFitHighlightedBounds": "Automatické přizpůsobení zvýrazněných hranic",
+    "reloadToApplyLanguageChangeTitle": "Je nutné aplikaci znovu načíst",
+    "reloadToApplyLanguageChangeText": "Pro úplné uplatnění změny jazyka je nutné aplikaci znovu načíst. Znovu načíst nyní?",
+    "resetShownOnceTooltips": "Zobrazit popisky nástrojů při novém načtení aplikace",
+    "convertStopAfterRouteEndingToDestination": "Převést zastávku přidanou na konci trasy na cíl trasy",
+    "skipAllSegments": "přímá trasa pro všechny úseky",
+    "useStopOptimization": "Optimalizace trasy při vytvoření zastávky přetažením."
+  },
+  "simplePlaceSearch": {
+    "noPlaceFound": "Nenalezeno žádné místo s přidaným obsahem",
+    "openSidebarToSeeRouteDetails": "Otevřete postranní panel a zobrazte podrobnosti o trase",
+    "unknownSearchPlaceError": "Chyba neznámého místa hledání"
+  },
+  "header": {
+    "hideMenuBar": "Skrýt panel nabídek",
+    "showMenuBar": "Zobrazit panel nabídek"
+  },
+  "mapLeftClick": {
+    "placeInfo": "Informace o místě",
+    "placeInsidePolygon": "Místo uvnitř polygonu",
+    "polygonArea": "Plocha polygonu",
+    "copyLnglat": "Kopírovat lng, lat",
+    "copyLatlng": "Kopírovat lat, lng",
+    "directionsToClickedPoint": "Instrukce k místu kliknutí",
+    "lnglatCopied": "Zeměpisná délka a šířka zkopírována",
+    "latlngCopied": "Zeměpisná šířka a délka zkopírována"
+  },
+  "mapRightClick": {
+    "options": "Možnosti",
+    "addDestinationToRoute": "Přidat jako cíl",
+    "directionsFromHere": "Instrukce odtud",
+    "directionsToHere": "Instrukce sem",
+    "nonStopDirectionsToHere": "Přímo sem",
+    "addRouteStop": "Sem přidat zastávku",
+    "centerHere": "Vystředit zde",
+    "addAsIsochroneCenter": "Přidat jako střed dosahu",
+    "inspectDataOnOSM": "Prohlédnout data na OSM"
+  },
+  "myLocation": {
+    "stopShowingCurrentLocation": "Kliknutím zastavíte zobrazování aktuální polohy",
+    "showCurrentLocation": "Kliknutím zobrazíte svou aktuální polohu",
+    "yourCurrentLocation": "Vaše aktuální poloha",
+    "continuously": "Nepřetržitě",
+    "onlyOnce": "Pouze jednou",
+    "continuouslyLocation": "Obnovení pozice každé 2 sekundy",
+    "onlyOnceLocation": "Získat pozici pouze jednou",
+    "myPositionToolTip": "Aktivace polohy pro zobrazení vaší polohy a snadnější vyhledávání míst v okolí"
+  },
+  "orsLPolyline": {
+    "type": "Typ",
+    "surface": "Povrch",
+    "unknownSurfaceType": "Neznámý"
+  },
+  "mapView": {
+    "routeTo": "Trasa na toto místo",
+    "polygonDetails": "Podrobnosti o polygonu",
+    "polygon": "Polygon",
+    "whatIsHere": "Co je tady?",
+    "directionsFromHere": "Instrukce odtud",
+    "fitAllFeatures": "Zobrazit všechny funkce",
+    "addRouteStop": "Zde přidejte zastávku na trase",
+    "addDestinationToRoute": "Přidat cíl do trasy",
+    "acquirePositionErrors": {
+      "generic": "Vaši polohu nebylo možné získat, protože nebyla autorizována nebo ji zařízení nepodporuje.",
+      "unavailable": "Podle vašeho zařízení není vaše poloha momentálně dostupná. Zkontrolujte, zda je správně nakonfigurována možnost/služba určování polohy.",
+      "permissionDenied": "Vaši pozici nebylo možné získat, protože k ní zařízení odepřelo přístup. Můžete to zkusit znovu tak, že změníte nastavení zařízení a znovu kliknete na tlačítko \"moje poloha\".",
+      "timeout": "Vaše zařízení při pokusu o získání polohy vrátilo \"timeout\". Můžete to zkusit znovu kliknutím na tlačítko \"moje pozice\"."
+    },
+    "yourCurrentLocation": "Vaše aktuální poloha",
+    "options": "Možnosti",
+    "polylineMeasure": {
+      "bearingTextIn": "Do",
+      "bearingTextOut": "Z",
+      "tooltipTextDragAndDelete": "Kliknutím a přetažením <b>bod přesunete</b><br>Stiskněte klávesu SHIFT a kliknutím <b>bod smažte</b>",
+      "tooltipTextResume": "<br>Stiskněte klávesu CTRL a kliknutím <b>obnovte řádek</b>",
+      "tooltipTextDelete": "Stiskněte klávesu SHIFT a kliknutím <b>bod smažte</b>",
+      "tooltipTextAdd": "Stiskněte klávesu CTRL a kliknutím <b>přidejte bod</b>",
+      "clearControlTitle": "Vymazat měření",
+      "measureControlTitleOn": "Zapnout měření vzdálenosti",
+      "measureControlTitleOff": "Vypnout měření vzdálenosti",
+      "unitControlTitle": {
+        "text": "Změnit jednotky",
+        "metres": "metry",
+        "landmiles": "pozemní míle",
+        "nauticalmiles": "námořní míle"
+      },
+      "clearControlLabel": "&krát",
+      "measureControlLabel": "&#8614;",
+      "measureControlClasses": [],
+      "unitControlLabel": {
+        "metres": "m",
+        "kilometres": "km",
+        "feet": "ft",
+        "landmiles": "M",
+        "nauticalmiles": "NM"
+      }
+    },
+    "defineAvoidPolygon": "Definice polygonů, kterým se lze vyhnout při výpočtu trasy",
+    "defineAvoidRectangle": "Definice obdélníků, kterým se lze vyhnout při výpočtu trasy",
+    "youCantIntersectPolygons": "Nelze protínat polygony",
+    "polygonArea": "plocha Polygonu",
+    "highlighting": "Zvýraznění",
+    "accuracy": "Přesnost",
+    "youCanCenterAtYourLocationLater": "Kliknutím na tlačítko \"moje poloha\" můžete kdykoli vycentrovat mapu na svou aktuální polohu.",
+    "yourLocation": "Použijte svou polohu",
+    "setMyLocationAsMapCenter": "Chcete mapu vycentrovat na aktuální polohu? Zlepšíte tím přesnost vyhledávání místa. Pokud budete vyzváni, budete to muset autorizovat.",
+    "removePlace": "Odebrat místo",
+    "viewOnORS": "Zobrazit na ORS",
+    "moveMapPositionToLeft": "Posunout střed mapy doleva",
+    "moveMapPositionToRight": "Posunout střed mapy doprava",
+    "moveMapPositionToUp": "Posunout střed mapy nahoru",
+    "moveMapPositionToDown": "Posunout střed mapy dolu",
+    "toggleDirect": "Přepnout přímo odtud až na další místo",
+    "heightGraph": {
+      "distance": "Vzdálenost",
+      "elevation": "Nadmořská výška",
+      "segment_length": "Délka úseku",
+      "type": "Typ",
+      "legend": "Legenda"
+    },
+    "editShape": "Upravit tvar",
+    "remove": "Odstranit",
+    "avoidPolygonSaved": "Vyhnout se uloženému polygonu",
+    "avoidPolygonRemoved": "Vyhnout se odstraněnému polygonu",
+    "avoidPolygonNotRemoved": "Nebylo možné odstranit polygon, kterému se lze vyhnout.",
+    "avoidPolygonNotSaved": "Nebylo možné uložit polygon, kterému se lze vyhnout.",
+    "polygonEditModeEnabled": "Po dokončení úprav klikněte kamkoli, abyste změny uložili.",
+    "customTileProvider": "Vlastní poskytovatel dlaždic definovaný uživatelem",
+    "gestureHandling": {
+      "touch": "Posunujte mapu pomocí dvou prstů",
+      "scroll": "Pro přiblížení mapy použijte kombinaci kláves ctrl + rolování",
+      "scrollMac": "Pro přiblížení mapy použijte ⌘ + rolování"
+    }
+  },
+  "placesCarousel": {
+    "layer": "Vrstva",
+    "lat": "Lat.",
+    "lon": "Lon.",
+    "notAvailable": "Není k dispozici",
+    "placeDetails": "Detaily místa",
+    "next": "Další blok",
+    "prev": "Předchozí blok",
+    "directionsTo": "Instrukce k",
+    "distance": "Vzdálenost",
+    "distanceFromLocationMarkedOnTheMap": "Přibližná vzdálenost od místa vyznačeného na mapě",
+    "selectPlace": "Vybrat"
+  },
+  "floatingTopMenu": {
+    "openSettings": "Nastavení",
+    "showAbout": "Zobrazit obecné informace",
+    "about": "O ORS",
+    "openrouteserviceAPI": "Openrouteservice API",
+    "openrouteserviceForDisasters": "Openrouteservice pro katastrofy",
+    "askOpenrouteservice": "Ptejte se openrouteservice",
+    "settingsTooltip": "Pokud chcete upravit nastavení aplikace a zobrazit další možnosti, klikněte zde."
+  },
+  "topMenu": {
+    "openSettings": "Otevřít nastavení",
+    "showAbout": "Zobrazit obecné informace",
+    "about": "O ORS",
+    "pinSidebar": "Připnout boční panel",
+    "settingsTooltip": "Pokud chcete upravit nastavení aplikace, klikněte sem"
+  },
+  "sidebar": {
+    "switchSide": "Přehodit strany",
+    "showSidebar": "Zobrazit boční panel",
+    "hideSidebar": "Skrýt boční panel"
+  },
+  "options": {
+    "units": {
+      "kilometers": "kilometry",
+      "meters": "metry",
+      "miles": "míle"
+    },
+    "areUnits": {
+      "sqKms": "km²",
+      "hectare": "hektar",
+      "sqMeters": "m²"
+    }
+  },
+  "orsDictionary": {
+    "unknown": "Neznámý",
+    "paved": "Zpevněný",
+    "unpaved": "Nezpevněný",
+    "asphalt": "Asfalt",
+    "concrete": "Beton",
+    "cobblestone": "Dlažba",
+    "metal": "Kovový",
+    "wood": "Dřevěný",
+    "compactedGravel": "Zhutněný štěrk",
+    "fineGravel": "Jemný štěrk",
+    "gravel": "Štěrk",
+    "dirt": "Prach",
+    "ground": "Hlína",
+    "ice": "Led",
+    "pavingStones": "Dlažební kostky",
+    "sand": "Písek",
+    "woodchips": "Dřevní štěpka",
+    "grass": "Tráva",
+    "grassPaver": "Travnatý povrch",
+    "none": "Žádný",
+    "no": "Ne",
+    "customers": "Zákazníci",
+    "destination": "Cíl",
+    "delivery": "Obslužná",
+    "private": "Soukromá",
+    "permissive": "Na povolení",
+    "stateRoad": "Státní silnice",
+    "road": "Silnice",
+    "street": "Ulice",
+    "path": "Cesta",
+    "track": "Trasa",
+    "cycleway": "Cyklostezka",
+    "footway": "Chodník",
+    "steps": "Schody",
+    "ferry": "Trajekt",
+    "construction": "Ve výstavbě",
+    "concrete:lanes": "betonové pásy",
+    "paving_stones": "dlažební kostky",
+    "sett": "mozaiková dlažba",
+    "unhewn_cobblestone": "Hrubá dlažba",
+    "compacted": "Zhutněný",
+    "fine_gravel": "Jemný štěrk",
+    "pebblestone": "Oblázková dlažba",
+    "impassable": "Neprůjezdné",
+    "very_horrible": "Velmi strašné",
+    "horrible": "Hrozné",
+    "very_bad": "Velmi špatné",
+    "bad": "Špatné",
+    "intermediate": "Běžné",
+    "good": "Dobré",
+    "excellent": "Vynikající",
+    "grade1": "Stupeň 1",
+    "grade2": "Stupeň 2",
+    "grade3": "Stupeň 3",
+    "grade4": "Stupeň 4",
+    "grade5": "Stupeň 5",
+    "no_tollway": "Bez mýtného",
+    "is_tollway": "Je mýtné",
+    "no_category": "Bez kategorie",
+    "highway": "Dálnice",
+    "unpaved_road": "Nezpevněná cesta",
+    "tunnel": "Tunel",
+    "paved_road": "Zpevněná cesta",
+    "ford": "Brod",
+    "no_data": "Nejsou data"
+  },
+  "orsMapFilters": {
+    "profiles": {
+      "cycling-regular": "Kolo",
+      "cycling-road": "Silniční kolo",
+      "cycling-electric": "Elektrokolo",
+      "cycling-mountain": "Horské kolo",
+      "cycling-safe": "Bezpečné pro cyklisty",
+      "foot-walking": "Chůze",
+      "foot-hiking": "Pěší turistika",
+      "driving-car": "Auto",
+      "driving-hgv": "Těžké vozidlo",
+      "wheelchair": "Invalidní vozík",
+      "hgv": "Těžké vozidlo",
+      "bus": "Autobus",
+      "agricultural": "Zemědělský stroj",
+      "delivery": "Dodávkový vůz",
+      "forestry": "Lesní stroj",
+      "goods": "Nákladní vůz"
+    },
+    "filters": {
+      "preference": {
+        "label": "Předvolby trasy",
+        "description": "Upřednostňovaný faktor, který je třeba vzít v úvahu při výpočtu tras",
+        "enum": {
+          "fastest": "Nejrychlejší",
+          "shortest": "Nejkratší",
+          "recommended": "Doporučená"
+        }
+      },
+      "range_type": {
+        "label": "metoda Isochronu",
+        "description": "Metoda použitá pro výpočet isochronu",
+        "enum": {
+          "time": "Čas",
+          "distance": "Vzdálenost"
+        }
+      },
+      "time_range": {
+        "label": "Rozsah",
+        "description": "Maximální rozsah isochron, které se mají vypočítat"
+      },
+      "distance_range": {
+        "label": "Rozsah",
+        "description": "Maximální rozsah isochron, které se mají vypočítat"
+      },
+      "time_interval": {
+        "label": "Interval",
+        "description": "Interval isochron, které se mají vypočítat"
+      },
+      "distance_interval": {
+        "label": "Interval",
+        "description": "Interval isochron, které se mají vypočítat"
+      },
+      "options": {
+        "label": "Možnosti"
+      },
+      "profile_params": {
+        "label": "Parametry profilu"
+      },
+      "restrictions": {
+        "label": "Omezení"
+      },
+      "axleload": {
+        "label": "Zatížení nápravy",
+        "description": "Maximální zatížení nápravy v tunách"
+      },
+      "height": {
+        "label": "Výška",
+        "description": "Maximální výška v metrech. Tyto limity nejsou serverem vynucovány a slouží pouze k zajištění toho, aby nebyly nastaveny nepřiměřené hodnoty. Jakékoli podivně velké hodnoty by mohly vést k nepoužitelným trasám, když databáze OpenStreetMap není dostatečně označená."
+      },
+      "length": {
+        "label": "Délka",
+        "description": "Maximální délka v metrech. Tyto limity nejsou serverem vynucovány a slouží pouze k zajištění toho, aby nebyly nastaveny nepřiměřené hodnoty. Jakékoli podivně velké hodnoty by mohly vést k nepoužitelným trasám, když databáze OpenStreetMap není dostatečně označená."
+      },
+      "weight": {
+        "label": "Váha",
+        "description": "Maximální váha v tunách"
+      },
+      "width": {
+        "label": "Šířka",
+        "description": "Maximální šířka v metrech. Tyto limity nejsou serverem vynucovány a slouží pouze k zajištění toho, aby nebyly nastaveny nepřiměřené hodnoty. Jakékoli podivně velké hodnoty by mohly vést k nepoužitelným trasám, když databáze OpenStreetMap není dostatečně označená."
+      },
+      "hazmat": {
+        "label": "Nebezpečný náklad",
+        "description": "Přeprava nebezpečného nákladu"
+      },
+      "maximum_incline": {
+        "label": "Maximální sklon",
+        "description": "Maximální sklon v procentech"
+      },
+      "maximum_sloped_kerb": {
+        "label": "Maximální výška obrubníku",
+        "description": "Udává maximální výšku šikmého obrubníku v metrech."
+      },
+      "minimum_width": {
+        "label": "Minimální šířka chodníku",
+        "description": "Určuje minimální šířku chodníku pro pěší v metrech."
+      },
+      "smoothness_type": {
+        "label": "Plynulost trasy",
+        "description": "Určuje minimální hladkost trasy. Další informace: https://wiki.openstreetmap.org/wiki/Key:smoothness"
+      },
+      "surface_type": {
+        "label": "Min. typ povrchu",
+        "description": "Určuje minimální typ povrchu. Pořadí typu: https://wiki.openstreetmap.org/wiki/Key:surface"
+      },
+      "track_type": {
+        "label": "Minimální stupeň trasy",
+        "description": "Určuje minimální stoupání trasy. Hodnoty stupně: https://wiki.openstreetmap.org/wiki/Key:tracktype"
+      },
+      "round_trip": {
+        "label": "Cesta tam a zpět"
+      },
+      "round_trip_length": {
+        "label": "Délka cesty tam a zpět",
+        "description": "Cílová délka trasy (upozorňujeme, že se jedná o preferovanou hodnotu, ale výsledky se mohou lišit)."
+      },
+      "points": {
+        "label": "Body",
+        "description": "Počet bodů, které se mají na trase použít. Větší počty bodů vytvářejí více kruhové trasy."
+      },
+      "seed": {
+        "label": "Náhodné rozmístění",
+        "description": "Náhodné rozmístění, které se použije pro přidání náhodnosti do generované trasy (min:0, max: 90)."
+      },
+      "avoid_polygons": {
+        "label": "Vyhnout se polygonům",
+        "description": "Vyhnout se polygonům"
+      },
+      "avoid_features": {
+        "label": "Vyhnout se objektům",
+        "description": "Vyhnout se objektům",
+        "enum": {
+          "highways": "Dálnice",
+          "tollways": "Mýtné brány",
+          "ferries": "Trajekty",
+          "hills": "Kopce",
+          "tunnels": "Tunely",
+          "fords": "Brody",
+          "steps": "Schody",
+          "pavedroads": "Zpevněné cesty",
+          "unpavedroads": "Nezpevněné cesty"
+        }
+      },
+      "avoid_borders": {
+        "label": "Vyhnout se hranicím",
+        "description": "Vyhnout se hranicím",
+        "enum": {
+          "all": "Všem",
+          "controlled": "Kontrolovaným"
+        }
+      },
+      "avoid_countries": {
+        "label": "Vyhnout se zemím",
+        "description": "Vyhnout se zemím"
+      },
+      "alternative_routes": {
+        "label": "Alternativní trasy"
+      },
+      "target_count": {
+        "label": "Počet tras",
+        "description": "Cílový počet alternativních tras k výpočtu. Služba vrátí až tento počet tras, které splňují omezení podílového a váhového faktoru."
+      },
+      "share_factor": {
+        "label": "Faktor podílu",
+        "description": "Maximální podíl trasy, který mohou alternativy sdílet s optimální trasou. Výchozí hodnota 0,6 znamená, že alternativy mohou s optimální trasou sdílet až 60 % úseků trasy."
+      },
+      "weight_factor": {
+        "label": "Faktor váhy",
+        "description": "Maximální faktor, o který se může váha trasy odchýlit od optimální trasy. Výchozí hodnota 1,4 znamená, že alternativy mohou být až 1,4krát delší (nákladnější) než optimální trasa."
+      },
+      "maximum_speed": {
+        "label": "Maximální rychlost",
+        "description": "Maximální rychlost, která musí být použita"
+      },
+      "weightings": {
+        "label": "Další nastavení"
+      },
+      "green": {
+        "label": "Zeleň (pouze Německo)",
+        "description": "Preferovat zelené plochy (k dispozici pouze pro Německo)"
+      },
+      "quiet": {
+        "label": "Klid (pouze Německo)",
+        "description": "Preferují klidné oblasti (k dispozici pouze pro Německo)"
+      },
+      "surface_quality_known": {
+        "label": "Pouze povrchy se známou kvalitou",
+        "description": "vynucuje použití pouze těch částí povrchu, u kterých je kvalita povrchu výslovně známa."
+      },
+      "allow_unsuitable": {
+        "label": "Povolit nevhodné",
+        "description": "Umožňuje použití takových částí, které by mohly být nevhodné pro invalidní vozík a které byly dříve vyloučeny."
+      },
+      "vehicle_type": {
+        "label": "Typ vozidla",
+        "description": "Typ vozidla, který se bere v úvahu při výpočtu trasy"
+      }
+    }
+  }
+}
