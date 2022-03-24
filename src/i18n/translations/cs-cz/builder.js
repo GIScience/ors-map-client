@@ -6,20 +6,20 @@ import loader from '@/support/loader'
  * Fetch required api data to run the app
  */
 const build = () => {
-  // ES LANGUAGE
+  // CZ LANGUAGE
 
   let translationsObj = global
 
-  const componentMessages = loader.load(require.context('@/pages/', true, /\.i18n\.es-es\.js$/), true)
+  const componentMessages = loader.load(require.context('@/pages/', true, /\.i18n\.cs-cz\.js$/), true)
   addComponentKeys(componentMessages, translationsObj)
 
-  const sharedPartsMessages = loader.load(require.context('@/fragments/', true, /\.i18n\.es-es\.js$/), true)
+  const sharedPartsMessages = loader.load(require.context('@/fragments/', true, /\.i18n\.cs-cz\.js$/), true)
   addComponentKeys(sharedPartsMessages, translationsObj)
 
-  const resourcesMessages = loader.load(require.context('@/resources/', true, /\.i18n\.es-es\.js$/), true)
+  const resourcesMessages = loader.load(require.context('@/resources/', true, /\.i18n\.cs-cz\.js$/), true)
   addComponentKeys(resourcesMessages, translationsObj)
 
-  const pluginsMessages = loader.load(require.context('@/plugins/', true, /\.i18n\.es-es\.js$/), true)
+  const pluginsMessages = loader.load(require.context('@/plugins/', true, /\.i18n\.cs-cz\.js$/), true)
   addComponentKeys(pluginsMessages, translationsObj)
 
   return translationsObj
