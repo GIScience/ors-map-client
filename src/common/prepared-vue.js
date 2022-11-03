@@ -1,4 +1,3 @@
-import DatePicker from '@/fragments/date-picker/DatePicker'
 import wrapperTag from '@/fragments/wrapper/wrapper-tag'
 import clickOutside from '@/directives/click-outside'
 import smartTooltip from '@/directives/smart-tooltip'
@@ -49,7 +48,6 @@ import {
   VTabs,
   VDataTable,
   VProgressLinear,
-  VDatePicker,
   VChip,
   VSwitch,
   VAlert,
@@ -92,7 +90,6 @@ Vue.use(Vuetify, {
     VTabs,
     VDataTable,
     VProgressLinear,
-    VDatePicker,
     VChip,
     VSwitch,
     VAlert,
@@ -141,7 +138,6 @@ Vue.directive('smart-tooltip', smartTooltip)
 Vue.component('box', box)
 Vue.component('app-h-menu', HMenu)
 Vue.component('app-v-menu', AppVMenu)
-Vue.component('date-picker', DatePicker)
 Vue.component('wrapper-tag', wrapperTag)
 
 // add global custom filters
