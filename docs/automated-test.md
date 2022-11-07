@@ -1,6 +1,6 @@
 # Automated test
 
-The automated test for this applications are focused on integration tests.
+The automated test for this application are focused on integration tests.
 
 The tests were implemented harmonizing:
 
@@ -18,16 +18,22 @@ The tests were implemented harmonizing:
 
 ## Running tests locally
 
-In oder to run the tests, it is required that you have Chrome and Firefox browsers installed locally. The CI tests in github uses a custom action environment which includes those browsers. If you don't have a version of each one that are compatible with the test runner, you must install them. If you are using a Debian-like OS, you can install them by running:
+In oder to run the tests, it is required that you have Chrome and Firefox browsers installed locally.
+The CI tests in GitHub uses a custom action environment which includes those browsers.
+If you don't have a version of each one that are compatible with the test runner, you must install them.
+If you are using a Debian-like OS, you can install them by running:
 
 ```sh
 # Install Chrome and Firefox browsers in a Debian-like OS
 sudo apt update \
 && apt install -y curl wget \
-&& echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list \
+&& echo 'deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list \
 && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
 && apt update \
 && apt install -y google-chrome-stable firefox
+
+# In macOS using homebrew
+brew install chromium && export CHROME_BIN=/usr/local/bin/chromium
 ```
 
 To run the tests, use npm commands, as follows:
@@ -44,7 +50,8 @@ To run the tests, use npm commands, as follows:
 
 - Run e2e tests individually, in a single run
 
-  To run the e2e tests, it is necessary to have Java installed locally (for Selenium server). The CI tests in github uses a custom action environment which includes a Java installation.
+  To run the e2e tests, it is necessary to have Java installed locally (for Selenium server).
+  The CI tests in GitHub uses a custom action environment which includes a Java installation.
 
   If you are using a Debian-like OS, you can install java by running:
 
@@ -81,7 +88,11 @@ To run the tests, use npm commands, as follows:
 
 ## Automated CI tests on push
 
-The application includes a github action workflow, stored in `.github/workflows/test.yml`, that triggers the test run when it is pushed to the github repository. In order to run the testes, a custom github action was created and published to github market place and is referenced in the `test.yml` file. More details can be seen on [https://github.com/amoncaldas/github-action-webapp-front-end-test](https://github.com/amoncaldas/github-action-webapp-front-end-test)
+The application includes a GitHub action workflow, stored in `.github/workflows/test.yml`, that triggers the test run
+when it is pushed to the GitHub repository.
+In order to run the testes, a custom GitHub action was created and published to GitHub marketplace and is referenced
+in the `test.yml` file.
+More details can be seen on [https://github.com/amoncaldas/github-action-webapp-front-end-test](https://github.com/amoncaldas/github-action-webapp-front-end-test)
 
 ## Testing dedicated packages
 

@@ -17,7 +17,7 @@ module.exports = {
 
 http://alexeyhorn.com/javascript/karma/2017/05/31/fix-karma-disconnected-error.html
 
-## Error in nighwatch/sellenium test: session deleted because of page crash
+## Error in nightwatch/selenium test: session deleted because of page crash
 
 Add the '--disable-dev-shm-usage' flag to the browser.
 
@@ -41,13 +41,13 @@ module.exports = {
 
 https://svdoscience.com/2021-03-17/fix-session-deleted-page-crash-selenium-grid-chrome-docker
 
-## Support for aliases in imports outside webpack cotnext
+## Support for aliases in imports outside webpack context
 
 Install the module-alias package - https://github.com/ilearnio/module-alias
 
 Add to package.json (for an alias to @):
 
-```js
+```json
 "_moduleAliases": {
     "@": "src/"
 }
@@ -57,7 +57,7 @@ Add to package.json (for an alias to @):
 
 Install the @babel/register package - https://www.npmjs.com/package/@babel/register
 
-Add to the file where you want to use import, before any import statment:
+Add to the file where you want to use import, before any import statement:
 
 ```js
 require('@babel/register')
@@ -65,4 +65,4 @@ require('@babel/register')
 
 ## Use babel.config.js to support dynamic compiling rules
 
-babel.config.js replaces .babelrc and can have dynamic behavior
+`babel.config.js` replaces `.babelrc` and can have dynamic behavior
