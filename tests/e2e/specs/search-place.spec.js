@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-undef
 module.exports = {
   'search place rendering': function (browser) {
-    const searchUrl = `${browser.globals.devServerURL}/#/search/heidelberg/@50.92381327191293,9.052734375000002/z/6`
+    const searchUrl = `${browser.baseUrl}/#/search/heidelberg/@50.92381327191293,9.052734375000002/z/6`
 
     browser
       .url(searchUrl)

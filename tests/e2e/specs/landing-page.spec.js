@@ -4,7 +4,7 @@ module.exports = {
     // automatically uses dev Server port from /config.index.js
     // default: http://localhost:8080
     // see nightwatch.conf.js
-    const appUrl = browser.globals.devServerURL
+    const appUrl = browser.baseUrl
 
     browser
       .url(appUrl)

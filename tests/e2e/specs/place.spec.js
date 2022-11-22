@@ -2,7 +2,7 @@
 module.exports = {
 
   'place location rendering': function (browser) {
-    const placeLocationUrl = `${browser.globals.devServerURL}/#/place/@-48.467559814453125,-23.856953970230652,6`
+    const placeLocationUrl = `${browser.baseUrl}/#/place/@-48.467559814453125,-23.856953970230652,6`
 
     browser
       .resizeWindow(1848, 980)
@@ -28,7 +28,7 @@ module.exports = {
 
   },
   'single place rendering': function (browser) {
-    const singlePlaceUrl = `${browser.globals.devServerURL}/#/place/Salvador,BA,Brazil/@-38.421936,-12.964413,9/data/%7B"layer":"locality","country":"Brazil","zoom":9%7D`
+    const singlePlaceUrl = `${browser.baseUrl}/#/place/Salvador,BA,Brazil/@-38.421936,-12.964413,9/data/%7B"layer":"locality","country":"Brazil","zoom":9%7D`
 
     browser
       .url(singlePlaceUrl)
@@ -56,7 +56,7 @@ module.exports = {
   },
 
   'app page single place rendering': function (browser) {
-    const placeModeUrl = `${browser.globals.devServerURL}/#/place/Heidelberg,BW,Germany/@8.692416,49.401247/data/%7B"zoom":8,"layer":"county","country":"Germany"%7D`
+    const placeModeUrl = `${browser.baseUrl}/#/place/Heidelberg,BW,Germany/@8.692416,49.401247/data/%7B"zoom":8,"layer":"county","country":"Germany"%7D`
 
     browser
       .url(placeModeUrl)
@@ -75,7 +75,7 @@ module.exports = {
       .assert.cssProperty('.custom-html-icon-div', 'background-color', 'rgba(255, 0, 0, 1)')
       .click('.custom-html-icon-div')
       .assert.elementPresent('.leaflet-popup')
-      .assert.containsText('.leaflet-popup-content', 'Heidelberg, BW,Germany')
+      .assert.textContains('.leaflet-popup-content', 'Heidelberg, BW,Germany')
       .getValue('.place-input-component input[type=text]', function (result) {
         this.assert.equal(result.value, 'Heidelberg, BW,Germany')
       })

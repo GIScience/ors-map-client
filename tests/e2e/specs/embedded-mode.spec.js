@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-undef
 module.exports = {
   'app embedded mode rendering': function (browser) {
-    const embeddedModeUrl = `${browser.globals.devServerURL}/#/place/Heidelberg,BW,Germany/@8.692416,49.401247/data/%7B%22zoom%22:8,%22layer%22:%22county%22,%22country%22:%22Germany%22%7D/embed/en-us`
+    const embeddedModeUrl = `${browser.baseUrl}/#/place/Heidelberg,BW,Germany/@8.692416,49.401247/data/%7B%22zoom%22:8,%22layer%22:%22county%22,%22country%22:%22Germany%22%7D/embed/en-us`
 
     browser
       .url(embeddedModeUrl)
@@ -21,7 +21,7 @@ module.exports = {
       .assert.cssProperty('.custom-html-icon-div', 'background-color', 'rgba(255, 0, 0, 1)') // red
       .click('.custom-html-icon-div')
       .assert.elementPresent('.leaflet-popup')
-      .assert.containsText('.leaflet-popup-content', 'Heidelberg, BW,Germany')
+      .assert.textContains('.leaflet-popup-content', 'Heidelberg, BW,Germany')
       .getValue('.place-input-component input[type=text]', function (result) {
         this.assert.equal(result.value, 'Heidelberg, BW,Germany')
       })

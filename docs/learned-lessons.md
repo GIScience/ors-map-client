@@ -66,3 +66,14 @@ require('@babel/register')
 ## Use babel.config.js to support dynamic compiling rules
 
 `babel.config.js` replaces `.babelrc` and can have dynamic behavior
+
+## Testing for colors
+
+Chromedriver and geckodriver differ in the way they return rgb style colors.
+While chromedriver gives back `rgba`, geckodriver returns `rgb` which is both valid due to a lax requirement definition
+for browsers.
+When checking for specific colors, currently a regex should be used to match both returned values, e.g.
+
+  /rgba?\(255, 0, 0(, 1)?\)/
+
+to match both `rgb(255, 0, 0)` and `rgba(255, 0, 0, 1)`.

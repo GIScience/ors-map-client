@@ -10,12 +10,12 @@ import '@babel/polyfill'
 
 describe('About', () => {
   var i18n = I18nBuilder.build()
-  it('should render about page', async (done) => {
+  it('should render about page', async () => {
     await new AppLoader().fetchApiInitialData()
-    const wrapper = mount(About, {i18n: i18n, store: store })   
-    
-    expect(wrapper.contains('.about-container')).toBe(true)
+    const wrapper = mount(About, {i18n: i18n, store: store })
+
+    expect(wrapper.find('.about-container').exists()).toBe(true)
     expect(wrapper.findComponent(About).exists()).toBe(true)
-    done()
+
   })
 })
