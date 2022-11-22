@@ -6,4 +6,4 @@ For example: src/plugin/my-awesome-plugin. No file should be directly put in the
 Each plug-in must have a class and methods/functions that can be called on hooks defined in the hooks.js.
 Check the ExamplePlugin in `plugin-example/plugin-example.js` and `/src/config/hook-example.js` for more details.
 
-See the ful plugins' documentation in [docs/plugins.md](../../docs/plugins.md)
+See the full plugins' documentation in [docs/plugins.md](../../docs/plugins.md)
