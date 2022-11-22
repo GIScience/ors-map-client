@@ -3,8 +3,8 @@ import constants from '@/resources/constants'
 import {LMarker, LPopup } from 'vue2-leaflet'
 import appConfig from '@/config/app-config'
 
-import 'leaflet.markercluster/dist/MarkerCluster.css';
-import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+import 'leaflet.markercluster/dist/MarkerCluster.css'
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
 
 export default {
   props: {

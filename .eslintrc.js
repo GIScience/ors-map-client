@@ -8,6 +8,7 @@ module.exports = {
     requireConfigFile: false
   },
   env: {
+    node: true,
     browser: true,
   },
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md

@@ -42,3 +42,6 @@ selenium-server.log
 !/static/img/.gitkeep
 !/static/img/.gitkeep
 
+# leaflet helpers
+
+/images
