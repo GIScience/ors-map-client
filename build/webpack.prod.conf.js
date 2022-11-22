@@ -1,6 +1,5 @@
 'use strict'
-const path = require('path')
-const utils = require('./utils')
+const {assetsPath, resolveRoot} = require('./utils')
 const webpack = require('webpack')
 const config = require('../config')
 const merge = require('webpack-merge')
@@ -8,57 +7,90 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+// const TerserPlugin = require("terser-webpack-plugin");
 
 const env = process.env.NODE_ENV === 'testing'
-  ? require('../config/test.env')
+  ? require('../config/dev.env')
   : require('../config/prod.env')
 
 console.log(env)
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
+  stats: 'errors-warnings',
   module: {
-    rules: utils.styleLoaders({
-      sourceMap: config.build.productionSourceMap,
-      extract: true,
-      usePostCSS: true
-    })
+    // rules: utils.styleLoaders({
+    //   sourceMap: config.build.productionSourceMap,
+    //   extract: true,
+    //   usePostCSS: true
+    // })
+    rules: [{
+      test: /\.(sa|sc|c)ss$/,
+      exclude: [
+        resolveRoot("node_modules/leaflet/dist"),
+        resolveRoot("node_modules/leaflet-measure/dist"),
+        resolveRoot("node_modules/vue2-leaflet-height-graph"),
+        resolveRoot("node_modules/leaflet/dist"),
+      ],
+      use: [
+        MiniCssExtractPlugin.loader,
+        "css-loader",
+        "postcss-loader",
+        "sass-loader",
+      ],
+    },{
+      test: /\.(styl|stylus)$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        "css-loader",
+        "postcss-loader",
+        "stylus-loader"
+      ]
+    },{
+      test: /\.css$/,
+      include: [
+        resolveRoot("node_modules/leaflet/dist"),
+        resolveRoot("node_modules/leaflet-measure/dist"),
+        resolveRoot("node_modules/vue2-leaflet-height-graph"),
+        resolveRoot("node_modules/leaflet/dist"),
+        ],
+      use: [
+        MiniCssExtractPlugin.loader,
+        "css-loader",
+        "postcss-loader",
+      ],
+      generator: {
+        outputPath: 'static/img',
+      }
+    }
+    ]
+  },
+  resolve: {
+    alias: {
+      "favicon.ico": "static/img/favicon.ico",
+    }
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
-    path: config.build.assetsRoot,
-    filename: utils.assetsPath('js/[name].[contenthash].js'),
+    path: resolveRoot(),
+    filename: 'static/js/[name].[contenthash].js',
   },
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
-        vendor: {
+        commons: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
+          name: 'vendors',
           chunks: 'all'
         }
       }
     },
     minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            warnings: false
-          }
-        },
-        sourceMap: config.build.productionSourceMap,
-        parallel: true
-      }),
       // Compress extracted CSS. We are using this plugin so that possible
       // duplicated CSS from different components can be deduped.
-      new OptimizeCSSPlugin({
-        cssProcessorOptions: config.build.productionSourceMap
-          ? { safe: true, map: { inline: false } }
-          : { safe: true }
-      })
+      new CssMinimizerPlugin({})
     ]
   },
   plugins: [
@@ -68,7 +100,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     // extract css into its own file
     new MiniCssExtractPlugin({
-      filename: utils.assetsPath('css/[name].[hash].css')
+      filename: assetsPath('css/[name].[hash].css'),
+      chunkFilename: "[id].[contenthash].css",
     }),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
@@ -85,20 +118,17 @@ const webpackConfig = merge(baseWebpackConfig, {
         removeAttributeQuotes: true
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
-      },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
+      }
     }),
     // keep module.id stable when vendor modules does not change
-    new webpack.HashedModuleIdsPlugin(),
+    new webpack.ids.HashedModuleIdsPlugin(),
     // copy custom static assets
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../src/assets'),
-        to: path.resolve(__dirname, '../static'),
-        ignore: ['.*']
-      }
-    ]),
+    new CopyWebpackPlugin({
+        patterns: [{
+            from: resolveRoot("src/assets"),
+            to: resolveRoot("static")
+          }]
+      }),
   ]
 })
 

@@ -1,18 +1,16 @@
 'use strict'
-const path = require('path')
-const utils = require('./utils')
+const { resolveRoot } = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const webpack = require('webpack')
 
-function resolve (dir) {
-  return path.join(__dirname, '..', dir)
-}
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',
   enforce: 'pre',
-  include: [resolve('src'), resolve('test')],
+  include: [resolveRoot('src'), resolveRoot('test')],
+  exclude: [resolveRoot('tests/integration/mockups')],
   options: {
     formatter: require('eslint-friendly-formatter'),
     emitWarning: !config.dev.showEslintErrorsInOverlay
@@ -20,23 +18,32 @@ const createLintingRule = () => ({
 })
 
 module.exports = {
-  context: path.resolve(__dirname, '../'),
+  plugins: [
+    // fix "process is not defined" error:
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    })
+  ],
+  context: resolveRoot(),
   entry: {
     app: './src/main.js'
   },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    assetModuleFilename: '[base]',
+    publicPath: '/'
   },
   resolve: {
     alias: {
-      '@': resolve('src'),
+      '@': resolveRoot('src'),
       'vue$': 'vue/dist/vue.esm.js'
     },
-    extensions: ['.vue', '.js', '.json']
+    extensions: ['.vue', '.js', '.json'],
+    fallback: {
+      timers: require.resolve('timers-browserify'),
+      stream: require.resolve('stream-browserify')
+    }
   },
   module: {
     rules: [
@@ -49,38 +56,19 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
+        include: [
+          resolveRoot('src/'),
+          resolveRoot('test/'),
+          resolveRoot('node_modules/webpack-dev-server/client/')],
         options: {
           plugins: [ '@babel/plugin-proposal-object-rest-spread' ]
         }
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: utils.assetsPath('media/[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.(txt?|gpx|geojson|kml)(\?.*)?$/,
-        use: 'raw-loader'
+      },{
+        test: /\.(woff|woff2|eot|ttf|otf|png|svg|jpg|jpeg|gif|ico)$/i,
+        type: 'asset'
+      },{
+        test: /\.(geojson|kml|gpx|txt)$/i,
+        type: 'asset/source',
       }
     ]
   }
