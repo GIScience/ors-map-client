@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-undef
 module.exports = {
   'app page broken url rendering': function (browser) {
-    const pageNotFoundUrl = `${browser.globals.devServerURL}/#/directions/Old%20Invercauld%20Bridge,Aberdeenshire,Scotland,United%20Kingdom/Old%20Deeside%20Road,Aberdeenshire,Schottland,Vereinigtes%20Königreich/Old%20Deeside%20Road,Aberdeenshire,S`
+    const pageNotFoundUrl = `${browser.baseUrl}/#/directions/Old%20Invercauld%20Bridge,Aberdeenshire,Scotland,United%20Kingdom/Old%20Deeside%20Road,Aberdeenshire,Schottland,Vereinigtes%20Königreich/Old%20Deeside%20Road,Aberdeenshire,S`
 
     browser
       .url(pageNotFoundUrl)
@@ -21,7 +21,7 @@ module.exports = {
       .end()
   },
   'app page not found mode rendering': function (browser) {
-    const pageNotFoundUrl = `${browser.globals.devServerURL}/#/dummy-page`
+    const pageNotFoundUrl = `${browser.baseUrl}/#/dummy-page`
 
     browser
       .url(pageNotFoundUrl)

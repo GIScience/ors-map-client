@@ -2,7 +2,7 @@
 module.exports = {
 
   'download route json file': function (browser) {
-    const directionsUrl = `${browser.globals.devServerURL}/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D`
+    const directionsUrl = `${browser.baseUrl}/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D`
     const downloadFileNameAppend = `-${new Date().getTime()}`
     let fileName = `ors-route${downloadFileNameAppend}.json`
 
@@ -27,7 +27,7 @@ module.exports = {
   },
 
   'download route geojson file': function (browser) {
-    const directionsUrl = `${browser.globals.devServerURL}/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D`
+    const directionsUrl = `${browser.baseUrl}/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D`
     const downloadFileNameAppend = `-${new Date().getTime()}`
     let fileName = `ors-route${downloadFileNameAppend}.json`
 
@@ -51,7 +51,7 @@ module.exports = {
       .end()
   },
   'download route ors gpx file': function (browser) {
-    const directionsUrl = `${browser.globals.devServerURL}/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D`
+    const directionsUrl = `${browser.baseUrl}/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D`
     const downloadFileNameAppend = `-${new Date().getTime()}`
     let fileName = `ors-route${downloadFileNameAppend}.gpx`
 
@@ -75,7 +75,7 @@ module.exports = {
       .end()
   },
   'download route standard gpx file': function (browser) {
-    const directionsUrl = `${browser.globals.devServerURL}/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D`
+    const directionsUrl = `${browser.baseUrl}/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D`
     const downloadFileNameAppend = `-${new Date().getTime()}`
     let fileName = `ors-route${downloadFileNameAppend}.gpx`
 
@@ -99,7 +99,7 @@ module.exports = {
       .end()
   },
   'download route kml file': function (browser) {
-    const directionsUrl = `${browser.globals.devServerURL}/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D`
+    const directionsUrl = `${browser.baseUrl}/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D`
     const downloadFileNameAppend = `-${new Date().getTime()}`
     let fileName = `ors-route${downloadFileNameAppend}.kml`
 

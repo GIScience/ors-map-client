@@ -8,13 +8,13 @@ const devConfigPromise = require('../../build/webpack.dev.conf')
 
 devConfigPromise.then(devConfig => {
   makeServer(devConfig).then(server => {
-    runTests(server) 
-  })    
+    runTests(server)
+  })
 })
 
 /**
  * Run the nightwatch tests against the server
- * @param {Object} server 
+ * @param {Object} server
  */
 function runTests (server) {
   // Run the nightwatch test suite against it to run in additional browsers:
@@ -25,10 +25,10 @@ function runTests (server) {
   // http://nightwatchjs.org/guide#settings-file
   let opts = process.argv.slice(2)
   if (opts.indexOf('--config') === -1) {
-    opts = opts.concat(['--config', 'tests/e2e/nightwatch.conf.js'])
+    opts = opts.concat(['--config', 'nightwatch.conf.js'])
   }
   if (opts.indexOf('--env') === -1) {
-    opts = opts.concat(['--env', 'chrome'])
+    opts = opts.concat(['--env', 'firefox'])
   }
 
   const spawn = require('cross-spawn')
@@ -47,7 +47,7 @@ function runTests (server) {
 
 /**
  * Create a server and wait for compiler and bundle to be ready
- * @param {Object} config 
+ * @param {Object} config
  * @returns {Promise}
  * @see https://newbedev.com/wait-until-webpack-dev-server-is-ready
  */
@@ -63,8 +63,8 @@ function makeServer(config) {
       else compiled = true
     })
 
-    let options = {...config.devServer, ...{progress: false}}
-    const server = new DevServer(compiler, options)
+    let options = {...config.devServer}
+    const server = new DevServer(options, compiler)
 
     server.listen(config.devServer.port, config.devServer.host, err => {
       if (err) return reject(err)

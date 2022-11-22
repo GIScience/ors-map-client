@@ -29,7 +29,7 @@ module.exports = {
   //reduce the kind of information passed to the bash
 
   //list of frameworks you want to use, only jasmine is installed with this boilerplate
-  frameworks: ['jasmine'],
+  frameworks: ['webpack','jasmine'],
   //list of browsers to launch and capture
   // browsers: ['Chrome'/*,'PhantomJS','Firefox','Edge','ChromeCanary','Opera','IE','Safari'*/],
 
@@ -90,8 +90,8 @@ module.exports = {
   },
   /* karma-webpack config
   pass your webpack configuration for karma
-  add `babel-loader` to the webpack configuration to make 
-  the ES6+ code in the test files readable to the browser  
+  add `babel-loader` to the webpack configuration to make
+  the ES6+ code in the test files readable to the browser
   eg. import, export keywords */
   webpack: testWebpackConfig,
   preprocessors: {
@@ -116,10 +116,10 @@ module.exports = {
       { type: 'html', subdir: 'html' },
       { type: 'text-summary' }
     ],
-    global: {       
+    global: {
       excludes: [
         'src/**/*i18n*.js'
-      ]       
+      ]
     }
   }
 }

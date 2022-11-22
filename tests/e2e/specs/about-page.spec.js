@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-undef
 module.exports = {
   'app about open rendering': function (browser) {
-    const aboutUrl = `${browser.globals.devServerURL}/#/about`
+    const aboutUrl = `${browser.baseUrl}/#/about`
 
     browser
       .url(aboutUrl)

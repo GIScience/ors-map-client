@@ -6,11 +6,10 @@ import Vue from 'vue'
 import '@babel/polyfill'
 
 describe('Main', () => {
-  it('should run main and load app', async (done) => {
+  it('should run main and load app', async () => {
     let main = Main
     await new Promise(resolve => setTimeout(resolve, 2000))
-    expect(main.vueInstance).not.toBeNull()  
+    expect(main.vueInstance).not.toBeNull()
     expect(main.vueInstance).toBeInstanceOf(Vue)
-    done()    
   })
 })
