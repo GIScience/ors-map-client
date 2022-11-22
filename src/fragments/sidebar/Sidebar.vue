@@ -17,7 +17,7 @@
         <v-layout row class="sidebar-header-top" >
           <v-flex xs6 md9>
             <div class="logo-container">
-              <a :href="homeUrl"><img height="52.5" class="small ml-2" :src="getConfigVal('logoImgSrc')" :title="getConfigVal('appName')" :alt="getConfigVal('appName')"></a>
+              <a :href="homeUrl"><img height="52.5" class="small ml-2" :src="getImgSrc('logoImgSrc')" :title="getConfigVal('appName')" :alt="getConfigVal('appName')"></a>
             </div>
           </v-flex>
           <v-spacer></v-spacer>
@@ -49,11 +49,11 @@
         <app-footer></app-footer>
       </div>
     </v-navigation-drawer>
-    <v-btn fab small v-if="isSideBarOpen && $highResolution" :title="$t('sidebar.hideSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen, 'low-res': $lowResolution}" @click.stop="isSideBarOpen = false" > 
-      <v-icon large >keyboard_arrow_left </v-icon> 
+    <v-btn fab small v-if="isSideBarOpen && $highResolution" :title="$t('sidebar.hideSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen, 'low-res': $lowResolution}" @click.stop="isSideBarOpen = false" >
+      <v-icon large >keyboard_arrow_left </v-icon>
     </v-btn>
-    <v-btn fab small v-else-if="!isSideBarOpen && !$lowResolution && !$store.getters.embed" :title="$t('sidebar.showSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen}" @click.stop="isSideBarOpen = true" > 
-      <v-icon large >keyboard_arrow_right </v-icon> 
+    <v-btn fab small v-else-if="!isSideBarOpen && !$lowResolution && !$store.getters.embed" :title="$t('sidebar.showSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen}" @click.stop="isSideBarOpen = true" >
+      <v-icon large >keyboard_arrow_right </v-icon>
     </v-btn>
   </div>
 </template>

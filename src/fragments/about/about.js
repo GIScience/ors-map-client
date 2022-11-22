@@ -1,4 +1,5 @@
 import appConfig from '@/config/app-config'
+import utils from '@/support/utils'
 
 export default {
   computed: {
@@ -8,6 +9,9 @@ export default {
   },
   mounted() {
     this.callHook()
+  },
+  created() {
+    this.getImgSrc = utils.getImgSrc
   },
   methods: {
     callHook () {
