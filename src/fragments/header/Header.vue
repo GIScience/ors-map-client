@@ -3,7 +3,7 @@
     <v-toolbar v-if="showToolbar" :class="{'hidden': !$store.getters.topBarOpen}" class="ors-toolbar app-toolbar" height="93" app
       :clipped-left="clipped" v-click-outside="hideTopBar">
       <a :href="homeUrl">
-        <img height="52.5" :src="getConfigVal('logoImgSrc')" :alt="getConfigVal('appName')" class="ml-3">
+        <img height="52.5" :src="getImgSrc('logoImgSrc')" :alt="getConfigVal('appName')" class="ml-3">
       </a>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">

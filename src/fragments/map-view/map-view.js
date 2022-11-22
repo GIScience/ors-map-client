@@ -27,21 +27,21 @@
  * @emits setInputPlace
  */
 
-import { 
-  LMap, 
-  LTileLayer, 
-  LLayerGroup, 
-  LTooltip, 
-  LPopup, 
-  LControlZoom, 
-  LControlAttribution, 
-  LControlScale, 
-  LWMSTileLayer, 
-  LControlLayers, 
-  LGeoJson, 
-  LPolygon, 
-  LCircle, 
-  LCircleMarker 
+import {
+  LMap,
+  LTileLayer,
+  LLayerGroup,
+  LTooltip,
+  LPopup,
+  LControlZoom,
+  LControlAttribution,
+  LControlScale,
+  LWMSTileLayer,
+  LControlLayers,
+  LGeoJson,
+  LPolygon,
+  LCircle,
+  LCircleMarker
 } from 'vue2-leaflet'
 
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
@@ -192,7 +192,7 @@ export default {
     }
   },
   computed: {
-    
+
     showMyLocationControl () {
       return this.supportsMyLocationBtn && !this.isAltitudeModalOpen && this.showControls
     },
@@ -427,7 +427,7 @@ export default {
           return t.id === this.$store.getters.mapSettings.defaultTilesProvider
         })
         if (activeTileProvider){
-          return activeTileProvider.maxZoom 
+          return activeTileProvider.maxZoom
         }
         return this.initialMaxZoom
       }
@@ -699,7 +699,7 @@ export default {
       }
       this.mapDataViewChangeDebounceTimeoutId = setTimeout(function () {
         // Create a new instance of MapViewData and set all the props into the local instance
-        context.localMapViewData = context.mapViewData.clone()        
+        context.localMapViewData = context.mapViewData.clone()
 
         let changes = Utils.getObjectsDiff(context.localMapViewData, context.mapViewData)
         let different = changes.different
@@ -708,7 +708,7 @@ export default {
           context.loadMapData()
           context.refreshAltitudeModal()
         }
-        
+
       }, 500)
     },
     /**
@@ -737,7 +737,7 @@ export default {
         case 'right':
           offset = this.map.getSize().x*0.15
           this.map.panBy(new Leaflet.Point(offset, 0), {animate: true})
-          break;
+          break
         case 'up':
           offset = this.map.getSize().y*0.15
           this.map.panBy(new Leaflet.Point(0, -offset), {animate: true})
@@ -891,7 +891,7 @@ export default {
       if (this.zoomLevel !== event.sourceTarget._zoom) {
         this.zoomLevel = event.sourceTarget._zoom
         if (!this.featuresJustFitted && !this.hasOnlyOneMarker) {
-          this.storeMapBoundsAndSetMapAsReady()        
+          this.storeMapBoundsAndSetMapAsReady()
         } else {
           // If the zoom was changed programmatically
           // reset the flag to false, as it has already
@@ -899,7 +899,7 @@ export default {
           this.featuresJustFitted = false
         }
         this.$emit('zoomChanged', {zoom: event.sourceTarget._zoom, map: this.map, context: this})
-      }      
+      }
     },
 
     /**
@@ -909,10 +909,10 @@ export default {
       this.tileProviders = mapDefinitions.getProviders()
       this.overlayerTileProviders = mapDefinitions.getOverlayerProviders()
       this.wmsOverlayerTileProviders = mapDefinitions.getWmsOverlayerTileProviders()
-      
+
       let hookData = {
-        tileProviders: this.tileProviders, 
-        overlayerTileProviders: this.overlayerTileProviders, 
+        tileProviders: this.tileProviders,
+        overlayerTileProviders: this.overlayerTileProviders,
         wmsOverlayerTileProviders: this.wmsOverlayerTileProviders,
         context: this
       }
@@ -1123,7 +1123,7 @@ export default {
 
     /**
      * Set the map view zom level when focused on an specific place
-     * @param {Place} place 
+     * @param {Place} place
      */
     setFocusedPlace (place) {
       let layer = place.layer || place.properties.layer
@@ -1216,7 +1216,7 @@ export default {
      * Redraw the map component by faking a window resize event
      * This is a hack to force leaflet redraw/resize correctly the maps
      * in the case when there are two map viewers and the container of one of them
-     * is resized. 
+     * is resized.
      * The candidates map.invalidateSize() and map.eachLayer(function(layer){layer.redraw();});
      * have not worked at all on this case
      * @see https://github.com/Leaflet/Leaflet/issues/694
@@ -1812,7 +1812,7 @@ export default {
           const coordinates = GeoUtils.switchLatLonIndex(polygonData.geometry.coordinates[0])
           const polygonOptions = PolygonUtils.buildPolygonOptions(polygonData, context.drawOptions.draw.polygon.shapeOptions.color)
           let polygonShapeType = GeoUtils.geojsonShapeType(polygonData)
-          let polygon = PolygonUtils.createPolygon(coordinates, polygonOptions, polygonShapeType)          
+          let polygon = PolygonUtils.createPolygon(coordinates, polygonOptions, polygonShapeType)
           context.setAvoidPolygonProperties(polygon, polygonData)
           polygon.addTo(map)
 
@@ -1952,7 +1952,7 @@ export default {
      */
     placeFocusChanged (place) {
       this.focusedPlace = place
-      
+
       const distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.mapCenter, place.getLatLng(), 'm')
 
       // We only consider that the center changed if it
@@ -1963,7 +1963,7 @@ export default {
     },
     /**
      * Highlight polyline sections on the map view by fitting the zoom to focus only the passed extra info
-     * @param {*} extraInfo 
+     * @param {*} extraInfo
      */
     highlightPolylineSections (extraInfo) {
       this.extraInfo = extraInfo
@@ -1973,7 +1973,7 @@ export default {
       }
     },
     /**
-     * Add map view initial eventBus listeners 
+     * Add map view initial eventBus listeners
      * @listens redrawAndFitMap (via eventBus)
      * @listens clearMap (via eventBus)
      * @listens clearMap (via eventBus)
@@ -2002,7 +2002,7 @@ export default {
       this.eventBus.$on('placeFocusChanged', context.placeFocusChanged)
 
       this.eventBus.$on('highlightPolylineSections', context.highlightPolylineSections)
-     
+
       this.eventBus.$on('redrawAndFitMap', (data) => {
         if (data.guid && data.guid === context.guid) {
           context.adjustMap()
@@ -2063,6 +2063,7 @@ export default {
   created () {
     // Copy the prop value to a local prop
     // so it can be modified locally
+    this.getImgSrc = Utils.getImgSrc
     this.showClickPopups = this.showPopups
     this.localAvoidPolygons = this.avoidPolygons
     this.loadAvoidPolygons()
