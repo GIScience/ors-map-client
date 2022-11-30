@@ -45,8 +45,4 @@ repos:
     rev: "v2.37.1"
     hooks:
       - id: commitizen
-        name: Commitizen check
-        entry: cz
-        args: ['check', '--commit-msg-file', '.git/COMMIT_EDITMSG']
-        pass_filenames: false
         stages: [ commit-msg ]
