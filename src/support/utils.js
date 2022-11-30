@@ -15,7 +15,31 @@ const Utils = {
     const textColor = tinyColor2(backgroundColor).isLight() ? 'black' : 'white'
     return textColor
   },
-
+  /**
+   * Get a hexadecimal RGB representation of decimal (0-255) color values
+   * @param red
+   * @param green
+   * @param blue
+   * @returns {string}
+   */
+  rgbDecimalToHex (red, green, blue) {
+    let r = this.decimalToHex(red)
+    let g = this.decimalToHex(green)
+    let b = this.decimalToHex(blue)
+    return '#'+r+g+b
+  },
+  /**
+   * Convert a decimal value to its hexadecimal representation
+   * @param decimal
+   * @returns {string}
+   */
+  decimalToHex (decimal) {
+    let hex = Number(decimal).toString(16)
+    if (hex.length < 2) {
+      hex = '0' + hex
+    }
+    return hex
+  },
   /**
    * Blur the active element in order to close
    * the mobile virtual keyboard if it is open
