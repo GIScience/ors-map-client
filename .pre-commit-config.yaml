@@ -8,7 +8,6 @@ repos:
       - id: check-json
       - id: forbid-submodules
       - id: double-quote-string-fixer
-      - id: mixed-line-ending
       - id: check-merge-conflict
       - id: check-symlinks
       - id: pretty-format-json
@@ -42,3 +41,9 @@ repos:
           - eslint-plugin-promise@4.2.1
           - eslint-plugin-standard@4.0.1
           - eslint-plugin-vue@7.0.0-beta.2
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: "v2.37.1"
+    hooks:
+      - id: commitizen
+      - id: commitizen-branch
+        stages: [push]

@@ -365,9 +365,7 @@ For details on individual checks see `.pre-commit-config.yaml`.
 
 ```bash
 # Install the pre-commit git hooks to be automatically executed before committing.
-pre-commit install
-# Uninstall the automatic git hooks.
-pre-commit uninstall
+pre-commit install --hook-type commit-msg --hook-type pre-push --hook-type pre-commit
 # Manually run all pre-commits. The first execution will setup the environment and can take some time.
 pre-commit run --all
 ```
