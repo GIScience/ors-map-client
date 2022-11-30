@@ -502,4 +502,3 @@ class OrsExtendedPolyline {
 }
 
 export default OrsExtendedPolyline
-

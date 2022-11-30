@@ -146,4 +146,3 @@
 <script src="./place-input.js"></script>
 
 <style scoped src="./place-input.scss"></style>
-

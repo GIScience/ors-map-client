@@ -41,5 +41,3 @@ const translationsBuilder = {
 }
 
 export default translationsBuilder
-
-

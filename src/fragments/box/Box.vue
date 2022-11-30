@@ -24,4 +24,3 @@
 
 <script src="./box.js"></script>
 <style scoped src="./box.css" scoped></style>
-

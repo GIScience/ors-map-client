@@ -26,5 +26,3 @@
 <script src="./place-details.js"></script>
 
 <style scoped src="./place-details.css"></style>
-
-
