@@ -224,7 +224,7 @@ export default {
      */
     calculateIsochrones () {
       const context = this
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const places = context.getFilledPlaces()
 
         if (places.length > 0) {
