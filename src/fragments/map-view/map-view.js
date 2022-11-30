@@ -737,7 +737,7 @@ export default {
         case 'right':
           offset = this.map.getSize().x*0.15
           this.map.panBy(new Leaflet.Point(offset, 0), {animate: true})
-          break;
+          break
         case 'up':
           offset = this.map.getSize().y*0.15
           this.map.panBy(new Leaflet.Point(0, -offset), {animate: true})
