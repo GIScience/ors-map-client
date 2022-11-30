@@ -289,7 +289,7 @@ For example, similar to `/\.i18n\.en-us\.js$` add `/\.i18n\.fr-fr\.js$`.
 that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux/unix compatible terminal, you can do that by running:
 
   ```sh
-  find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \; 
+  find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \;
   # where the last occurrence of locale id (in this case `fr-fr`) is the one you are creating
    ```
 
@@ -358,6 +358,20 @@ The application includes automated tests. They are stored in `tests` folder. Mor
 
 ### Contribute ###
 
+#### pre-commit git hooks ####
+We use `pre-commit` to make sure contributions have the same basic quality.
+Before you commit make sure that your commit satisfies all `pre-commit` checks.
+For details on individual checks see `.pre-commit-config.yaml`.
+
+```bash
+# Install the pre-commit git hooks to be automatically executed before committing.
+pre-commit install
+# Uninstall the automatic git hooks.
+pre-commit uninstall
+# Manually run all pre-commits. The first execution will setup the environment and can take some time.
+pre-commit run --all
+```
+
 #### Commits and versioning ####
 
 - This app uses the `commitizen` plugin to generate standardized commit types/messages. After applying any change in a feature branch, use `git add .` and then `npm run commit` (instead of `git commit ...`)
@@ -366,7 +380,7 @@ The application includes automated tests. They are stored in `tests` folder. Mor
 Deployment flow:
 
 1. Apply the changes in a feature branch and test it locally
-  
+
     *Important*: to run the tests, `src/config/app-config.js` must contain:
     - `orsApiKey`: 'a-valid-ors-api-key-here',
     - `useUserKey`: true,
@@ -393,9 +407,9 @@ Deployment flow:
 
     ```sh
     # Create a release. This will :
-    # - bump the app version, 
+    # - bump the app version,
     # - generate a new release commit
-    # - create a new git tag with the app version 
+    # - create a new git tag with the app version
     # - Create an entry in CHANGELOG.md
     npm run release
     ```
@@ -409,7 +423,7 @@ Deployment flow:
     # `git push --follow-tags origin master && npm publish`
 
     # We must use/run only
-    git push --follow-tags origin master 
+    git push --follow-tags origin master
 
     # Once you push it, the automated tests will be triggered on Github actions
     # Check the automated tests results on https://github.com/GIScience/ors-map-client/actions

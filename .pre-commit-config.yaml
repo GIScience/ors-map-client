@@ -1,0 +1,29 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: forbid-new-submodules
+      - id: mixed-line-ending
+        args: [ "--fix=lf" ]
+        description: Forces to replace line ending by the UNIX 'lf' character.
+      - id: no-commit-to-branch
+        args: [ --branch, master, --branch, main ]
+      - id: check-added-large-files
+        args: [ '--maxkb=500' ]
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: "v8.28.0"
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: eslint
+        language: node
+        types: [ javascript ]
+        types_or: [javascript, jsx, ts, tsx, vue]
+        args: [ ]
+        require_serial: false
+        additional_dependencies:
+          - eslint
