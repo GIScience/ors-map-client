@@ -196,7 +196,7 @@ export default {
       'vehicle_type': {
         'label': 'Type de véhicule',
         'description': 'Type de véhicule à considérer pour le calcul d\'itinéraire',
-      } 
+      }
     }
   }
 }

@@ -10,7 +10,7 @@ import '@babel/polyfill'
 
 describe('Box', () => {
   var i18n = I18nBuilder.build()
-  
+
   var defaultBoxProps = {
     closable: true,
     vModel: true,
@@ -27,10 +27,10 @@ describe('Box', () => {
     noBorder: false,
     value: true,// model (v-model parameter) that indicates if the box must be shown or not
     tag: 'div'
-  }  
+  }
 
   it('should render , resize, and close default box', async (done) => {
-    const wrapper = mount(Box, {propsData: defaultBoxProps, i18n: i18n, store: store, slots: { default: '<div style="min-width:600px" class="default-box-slot"/>', header: 'Test box' } })   
+    const wrapper = mount(Box, {propsData: defaultBoxProps, i18n: i18n, store: store, slots: { default: '<div style="min-width:600px" class="default-box-slot"/>', header: 'Test box' } })
     expect(wrapper.findComponent(Box).exists()).toBe(true)
     expect(wrapper.vm.$el.querySelector(`#${wrapper.vm.guid}`)).toBeTruthy()
     expect(wrapper.get('.default-box-slot')).toBeTruthy()
@@ -50,7 +50,7 @@ describe('Box', () => {
 
   it('should render section box', async (done) => {
     let boxProps = Utils.merge(defaultBoxProps, {tag: 'section'})
-    const wrapper = mount(Box, {propsData: boxProps, i18n: i18n, store: store, slots: { default: '<div class="default-box-slot"/>' } })   
+    const wrapper = mount(Box, {propsData: boxProps, i18n: i18n, store: store, slots: { default: '<div class="default-box-slot"/>' } })
     expect(wrapper.findComponent(Box).exists()).toBe(true)
     expect(wrapper.get('section')).toBeTruthy()
     expect(wrapper.get('.default-box-slot')).toBeTruthy()
@@ -60,23 +60,23 @@ describe('Box', () => {
 
   it('should render non-closable box', async (done) => {
     let boxProps = Utils.merge(defaultBoxProps, {closable: false})
-    const wrapper = mount(Box, {propsData: boxProps, i18n: i18n, store: store, slots: { default: '<div class="default-box-slot"/>' } })   
+    const wrapper = mount(Box, {propsData: boxProps, i18n: i18n, store: store, slots: { default: '<div class="default-box-slot"/>' } })
     expect(wrapper.findComponent(Box).exists()).toBe(true)
     expect(wrapper.get('.default-box-slot')).toBeTruthy()
     expect(wrapper.find('.box-header')).toBeTruthy()
     expect(wrapper.vm.$el.querySelector('.close')).not.toBeTruthy()
-    expect(wrapper.vm.closable).toBe(false)    
+    expect(wrapper.vm.closable).toBe(false)
     done()
   })
 
   it('should render non-resizable box', async (done) => {
     let boxProps = Utils.merge(defaultBoxProps, {resizable: false})
-    const wrapper = mount(Box, {propsData: boxProps, i18n: i18n, store: store, slots: { default: '<div class="default-box-slot"/>' } })   
+    const wrapper = mount(Box, {propsData: boxProps, i18n: i18n, store: store, slots: { default: '<div class="default-box-slot"/>' } })
     expect(wrapper.findComponent(Box).exists()).toBe(true)
     expect(wrapper.get('.default-box-slot')).toBeTruthy()
     expect(wrapper.find('.box-header')).toBeTruthy()
     expect(wrapper.vm.$el.querySelector('.resize')).not.toBeTruthy()
-    expect(wrapper.vm.resizable).toBe(false)    
+    expect(wrapper.vm.resizable).toBe(false)
     done()
   })
 })

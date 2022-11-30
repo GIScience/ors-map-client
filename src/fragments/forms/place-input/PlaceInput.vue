@@ -42,7 +42,7 @@
           <v-icon :color="localModel.direct? 'primary': 'dark'" :title="$t('placeInput.toggleDirect')" class="input-icon" >settings_ethernet</v-icon>
         </v-btn>
 
-        <v-btn flat class="input-btn" :id="getNewGuid('directions')" :class="{small: $mdAndUpResolution}" 
+        <v-btn flat class="input-btn" :id="getNewGuid('directions')" :class="{small: $mdAndUpResolution}"
           v-if="directionsAvailable" @click="startDirections()"
           v-smart-tooltip="{show: directionsButtonTooltip, text: $t('placeInput.goToDirectionsMode'), position: directionsButtonTooltipPosition, dark: true, showOnce: true, name: 'useDiretionsButton'}">
           <v-icon :title="$t('placeInput.directions')" color="dark" :large="$lowResolution" class="input-icon" >directions</v-icon>
@@ -119,11 +119,11 @@
             <v-list-tile-action class="hidden-sm-and-down">
               <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city' || placeSuggested.properties.layer === 'county'">location_city</v-icon>
               <img width="25px" v-else-if="showAreaIcon(placeSuggested)" src="@/assets/img/country-icon.png" height="auto" />
-              <v-icon v-else>place</v-icon>              
+              <v-icon v-else>place</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title :title="placeSuggested.placeName.trim()">
-                <v-btn v-html="highlightedName(placeSuggested.placeName)" style="min-width: fit-content" flat small @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">                 
+                <v-btn v-html="highlightedName(placeSuggested.placeName)" style="min-width: fit-content" flat small @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">
                 </v-btn>
               </v-list-tile-title>
               <v-list-tile-sub-title>
@@ -137,7 +137,7 @@
               </v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-        </v-flex>        
+        </v-flex>
       </v-layout>
     </div>
   </div>

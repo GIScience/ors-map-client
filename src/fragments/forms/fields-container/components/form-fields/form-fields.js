@@ -76,9 +76,9 @@ export default {
     },
 
     /**
-     * Handle the multi select change, applying a debounce so that 
+     * Handle the multi select change, applying a debounce so that
      * there is a wait for sequential changes avoiding multiple refreshes
-     * @param {*} args 
+     * @param {*} args
      */
     multiSelectChanged (args) {
       if (args.parameter.multiSelect) {
@@ -91,7 +91,7 @@ export default {
         }, 2000)
       } else {
         this.fieldUpdated(args)
-      }      
+      }
     },
 
     /**
@@ -126,8 +126,8 @@ export default {
 
     /**
      * Update filed modal when the combo component triggers an update
-     * @param {*} index 
-     * @param {*} newVal 
+     * @param {*} index
+     * @param {*} newVal
      */
     sliderComboUpdated (index) {
       let parameter = this.parameters[index]

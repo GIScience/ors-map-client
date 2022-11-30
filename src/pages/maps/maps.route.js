@@ -124,7 +124,7 @@ const mapRoutes = [
     }
   },
   {
-    path: '*', 
+    path: '*',
     name: '404',
     component: Maps,
     beforeEnter: (to, from, next) => {

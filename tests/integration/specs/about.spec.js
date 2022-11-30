@@ -12,8 +12,8 @@ describe('About', () => {
   var i18n = I18nBuilder.build()
   it('should render about page', async (done) => {
     await new AppLoader().fetchApiInitialData()
-    const wrapper = mount(About, {i18n: i18n, store: store })   
-    
+    const wrapper = mount(About, {i18n: i18n, store: store })
+
     expect(wrapper.contains('.about-container')).toBe(true)
     expect(wrapper.findComponent(About).exists()).toBe(true)
     done()

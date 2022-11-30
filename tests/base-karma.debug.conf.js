@@ -89,8 +89,8 @@ module.exports = {
   },
   /* karma-webpack config
   pass your webpack configuration for karma
-  add `babel-loader` to the webpack configuration to make 
-  the ES6+ code in the test files readable to the browser  
+  add `babel-loader` to the webpack configuration to make
+  the ES6+ code in the test files readable to the browser
   eg. import, export keywords */
   webpack: testWebpackConfig,
   preprocessors: {

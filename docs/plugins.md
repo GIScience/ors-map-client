@@ -129,8 +129,8 @@ Check below the list of all hooks available, how they are expected to be declare
   // then add two menu items mock p to show that menu  is working
   modifyMenu (menu) {
     // If in app settings is set not  to load/use ORS menu items, then
-    // two items will be added to the menu as a sample. It is just to 
-    // demonstrate that the menu is working. You can remove the code 
+    // two items will be added to the menu as a sample. It is just to
+    // demonstrate that the menu is working. You can remove the code
     // below if you want an empty menu or customize the item of the menu.
     if (!appConfig.appMenu.useORSMenu) {
       menu.push({
@@ -150,7 +150,7 @@ Check below the list of all hooks available, how they are expected to be declare
     }
   }
 
-  // The hooks below are just for demonstration about what 
+  // The hooks below are just for demonstration about what
   // can be used. If you are not using, you can remove them.
   afterGetRouteOptions (options) {
     // Do something when the route options is built
@@ -232,7 +232,7 @@ Check below the list of all hooks available, how they are expected to be declare
     return markers
   }
 
-  // When markers that represent the 
+  // When markers that represent the
   // routing places or searched places are created
   markersCreated (markers) {
     // Code example for customizing icons using material design icons https://material.io/resources/icons/
@@ -243,7 +243,7 @@ Check below the list of all hooks available, how they are expected to be declare
       let markerColor = '#c30b82' // maybe change the color based on the place properties ?
      let iconDivMarkerStyle = `width: 30px;height: 30px;border-radius: 50% 50% 50% 0;background: ${markerColor};position: absolute;transform: rotate(-45deg);left: 50%;top: 50%;margin: -15px 0 0 -15px;`
      let markerIcon = 'hotel' // maybe change the icon based on the place properties ?
-      
+
      markers[key].icon = Leaflet.divIcon({
        className: 'custom-div-icon',
        html: `<div style='${iconDivMarkerStyle}'><i style='${markerIcoStyle}' class='material-icons'>${markerIcon}</i></div>`,
@@ -297,7 +297,7 @@ Check below the list of all hooks available, how they are expected to be declare
     // as add new VueJS component. See the example below.
 
     markerPopupContainer.innerText = ''
-    
+
     // this hook will be invoked every time the popup is about
     // to render. So, to avoid content multiple times
     // we check it the component was not already added
@@ -305,24 +305,24 @@ Check below the list of all hooks available, how they are expected to be declare
 
     If the VueJS component was not already added
     if (buttons.length == 0) {
-      // Don't forget to the the imports in the header 
-      // for this example, it would be: 
+      // Don't forget to the the imports in the header
+      // for this example, it would be:
       // import Vue from 'vue'
       // import {VBtn} from 'vuetify'
-      var ComponentClass = Vue.extend(VBtn) // don't forget to add 
+      var ComponentClass = Vue.extend(VBtn) // don't forget to add
       var instance = new ComponentClass({ propsData: { color: 'primary' } })
       instance.$slots.default = [ 'Click me!' ]
       instance.$on(['click'], e => { console.log('event', e) })
       instance.$mount() // pass nothing
-      // Finally append the instantiated vue 
+      // Finally append the instantiated vue
       // component to the markerPopupContainer
       markerPopupContainer.appendChild(instance.$el)
-    } 
+    }
   }
 
   beforeShowResolvedPlaceInfo (hookData) {
-    // hookData has the following structure: 
-    // { 
+    // hookData has the following structure:
+    // {
     //  placeInfo: { placeName: String, containerArea: String, clickInsidePolygon: Boolean, latlng: {lat:..., lng:...}},
     //  placeInfoContainer: HtmlNode
     // }
@@ -332,14 +332,14 @@ Check below the list of all hooks available, how they are expected to be declare
     // the the hideDirectionsTo btn is not shown
 
     // It possible to remove and change existing content, as well
-    // as add new VueJS component in the popupHtmlFragment. 
+    // as add new VueJS component in the popupHtmlFragment.
     // See the example in `beforeOpenMarkerPopup`
   }
 
   beforeShowAvoidPolygonPopup (hookData) {
     // hookData has the following structure {polygon: Object, popupHtmlFragment: HtmlNode}
     // It possible to remove and change existing content, as well
-    // as add new VueJS component in the popupHtmlFragment. 
+    // as add new VueJS component in the popupHtmlFragment.
     // See the example in `beforeOpenMarkerPopup`
   }
 
@@ -347,7 +347,7 @@ Check below the list of all hooks available, how they are expected to be declare
     // Do something
   }
 
-  placeInputLabelBuilt (hookData){ 
+  placeInputLabelBuilt (hookData){
     // hookData has the following structure {label: String, supportDirections: Boolean, single: Boolean, placeModel: Place}
     // Do something
   }

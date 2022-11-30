@@ -7,8 +7,8 @@ const Utils = {
   /**
    * Get a text color that has a good reading contrast
    * for a given background color
-   * @param {*} backgroundColor 
-   * @returns 
+   * @param {*} backgroundColor
+   * @returns
    */
   contrastingTextColor (backgroundColor) {
     const textColor = tinyColor2(backgroundColor).isLight() ? 'black' : 'white'
@@ -24,18 +24,18 @@ const Utils = {
       document.activeElement.blur()
     }
   },
- 
+
   /**
    * Compare two objects and get the diffs
-   * @param {*} a 
-   * @param {*} b 
+   * @param {*} a
+   * @param {*} b
    * @returns {Object}
    */
   getObjectsDiff(a, b) {
     a = a || {}
     b = b || {}
     var result = { different: [], missing_from_first: [], missing_from_second: [] }
-  
+
     lodash.reduce(a, function (result, value, key) {
       if ( Object.prototype.hasOwnProperty.call(b, key)) {
         if (lodash.isEqual(value, b[key])) {
@@ -50,11 +50,11 @@ const Utils = {
             result.different = result.different.concat(lodash.map(deeper.different, (sub_path) => {
               return key + '.' + sub_path
             }))
-  
+
             result.missing_from_second = result.missing_from_second.concat(lodash.map(deeper.missing_from_second, (sub_path) => {
               return key + '.' + sub_path
             }))
-  
+
             result.missing_from_first = result.missing_from_first.concat(lodash.map(deeper.missing_from_first, (sub_path) => {
               return key + '.' + sub_path
             }))
@@ -66,7 +66,7 @@ const Utils = {
         return result
       }
     }, result)
-  
+
     lodash.reduce(b, function (result, value, key) {
       if (Object.prototype.hasOwnProperty.call(a, key)) {
         return result
@@ -75,7 +75,7 @@ const Utils = {
         return result
       }
     }, result)
-  
+
     return result
   },
   /**
@@ -100,9 +100,9 @@ const Utils = {
   },
   /**
    * Get child elements of a given element
-   * @param {*} el 
-   * @param {*} childElType 
-   * @returns 
+   * @param {*} el
+   * @param {*} childElType
+   * @returns
    */
   getChildElements (el, childElType) {
     var results = []

@@ -80,13 +80,13 @@ The code below shows all the possible properties of a field, but they are not al
       {
         ref: String // the path to another filter/field in the ors-map-filters.js structure. For example 'range_type' (the filter is at the root level) or 'alternative_routes.props.target_count' in an example where the navigation to the filter is informed, `self` can also be used so that the condition will look for the filter itself and evaluate it value, min or max
         value: String/Array // like 'distance' or ['driving-hgv', 'wheelchair', 'foot-*']. The mask * is accepted.
-        min: Number // the min value of a filter/field    
+        min: Number // the min value of a filter/field
     ],
     visibleWhen: [ // Array of objects containing conditions to determine if the filter/field is visible.
       {
         ref: String // the path to another filter/field in the ors-map-filters.js structure. For example 'range_type' (the filter is at the root level) or 'alternative_routes.props.target_count' in an example where the navigation to the filter is informed, `self` can also be used so that the condition will look for the filter itself and evaluate it value, min or max
         value: String/Array // like 'distance' or ['driving-hgv', 'wheelchair', 'foot-*']. The mask * is accepted.
-        min: Number // the min value of a filter/field    
+        min: Number // the min value of a filter/field
     ],
     valuesRestrictions: [ // Array of objects containing conditions that might determine the value of some of the field properties, like value, min and max
       {

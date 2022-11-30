@@ -18,16 +18,16 @@ describe('MapViewData building', () => {
     for (let key in buildMapData.directionsMapData.content.metadata.query.coordinates) {
       let coordinates = buildMapData.directionsMapData.content.metadata.query.coordinates[key]
       places.push(new Place(coordinates[1], coordinates[0]))
-    }      
+    }
 
-    let filters = {}   
+    let filters = {}
     OrsParamsParser.setFilters(filters, OrsMapFilters, constants.services.directions)
-    
+
     let mapViewData = await MapViewDataBuilder.buildMapData(buildMapData.directionsMapData, places, filters)
     expect(mapViewData).toBeDefined()
     expect(mapViewData).toBeInstanceOf(MapViewData)
-    done()      
-  })  
+    done()
+  })
 
   it('should build isochrones mapViewData', async (done) => {
     await new AppLoader().fetchApiInitialData()
@@ -38,11 +38,11 @@ describe('MapViewData building', () => {
     for (let key in buildMapData.directionsMapData.content.metadata.query.locations) {
       let coordinates = buildMapData.directionsMapData.content.metadata.query.locations[key]
       places.push(new Place(coordinates[1], coordinates[0]))
-    }      
+    }
 
-    let filters = {}   
+    let filters = {}
     OrsParamsParser.setFilters(filters, OrsMapFilters, constants.services.isochrones)
-    
+
     let mapViewData = await MapViewDataBuilder.buildMapData(buildMapData.isochronesMapData, places, filters)
     expect(mapViewData).toBeDefined()
     expect(mapViewData).toBeInstanceOf(MapViewData)

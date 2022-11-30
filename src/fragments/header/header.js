@@ -59,7 +59,7 @@ export default {
       return url
     },
     showToolbar () {
-      // we can't wait for the $store.getters.embed to be set 
+      // we can't wait for the $store.getters.embed to be set
       let contains = location.hash.includes('/embed/')
       return !contains
     }

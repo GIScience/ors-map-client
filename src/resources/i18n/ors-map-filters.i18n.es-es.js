@@ -197,7 +197,7 @@ export default {
       'vehicle_type': {
         'label': 'Tipo de vehículo',
         'description': 'Tipo de vehículo a considerar para el cálculo de la ruta',
-      } 
+      }
 
     }
   }

@@ -1,6 +1,6 @@
 export default {
   routeExtras: {
-    'extras': 'Opzioni extra per il percorso',    
+    'extras': 'Opzioni extra per il percorso',
     'extraInfo': 'Informazioni extra',
     'value': 'Valore',
     'clickToHighlightOnMap': 'Clicca per evidenziare sulla mappa',

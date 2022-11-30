@@ -165,8 +165,8 @@ export default {
      *
      */
     fitMapBounds () {
-      if (this.mapViewData.timestamp 
-        && this.previousMapViewDataTimeStamp !== this.mapViewData.timestamp 
+      if (this.mapViewData.timestamp
+        && this.previousMapViewDataTimeStamp !== this.mapViewData.timestamp
         && this.$store.getters.mapSettings.alwaysFitBounds) {
         return true
       } else if (this.firstLoad && (this.$store.getters.mode !== constants.modes.place || !this.$store.getters.appRouteData.options.zoom)) {
@@ -244,7 +244,7 @@ export default {
       this.$root.appHooks.run('zoomChanged', data)
       this.storeZoomValue(data.zoom)
       // Set searchBtnAvailable as true if in search mode
-      this.searchBtnAvailable = this.$store.getters.mode === constants.modes.search   
+      this.searchBtnAvailable = this.$store.getters.mode === constants.modes.search
 
       if (this.$store.getters.mode === constants.modes.place) {
         const appMode = new AppMode(this.$store.getters.mode)
@@ -253,7 +253,7 @@ export default {
         if (route.params && Object.keys(route.params).length > 0) { // params contains data and placeName? props
           this.$router.push(route)
         }
-      }      
+      }
     },
     /**
      * Set the refreshing search flag as true,
@@ -462,7 +462,7 @@ export default {
           this.$store.commit('appRouteData', appRouteData)
           if (this.$route.name !== 'MapLocation') {
             this.storeZoomValue()
-            this.eventBus.$emit('appRouteDataChanged', appRouteData)            
+            this.eventBus.$emit('appRouteDataChanged', appRouteData)
           }
         }
       }
@@ -718,11 +718,11 @@ export default {
     this.loadRoute()
     this.setModalState()
     this.setViewHeight()
-    this.loadAvoidPolygonsFromAppRoute()  
+    this.loadAvoidPolygonsFromAppRoute()
 
     // If in pageNotfound mode, show the error message
     if (this.$store.getters.mode === constants.modes.pageNotFound) {
-      this.showError(this.$t('maps.pageNotFound'), {timeout: 0})      
-    } 
+      this.showError(this.$t('maps.pageNotFound'), {timeout: 0})
+    }
   }
 }

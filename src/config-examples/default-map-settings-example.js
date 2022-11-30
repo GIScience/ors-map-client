@@ -1,9 +1,9 @@
-// This is an example file and is expected to be cloned 
+// This is an example file and is expected to be cloned
 // without the -example on the same folder that it resides.
 
 /**
  * The object below contains the default settings that are configurable via
- * app interface in src/fragments/forms/settings.vue. If the user changes a value for 
+ * app interface in src/fragments/forms/settings.vue. If the user changes a value for
  * a given setting option, then it will be saved in the localStorage, loaded on the app load
  * and will override the default value.  The options for each settings value are defined
  * in src/config/settings-options-example.js. You can change the default value, but not
@@ -39,10 +39,10 @@ const defaultMapSettings = {
 
   steepness: true,
   surface: true,
-  waytype: true,  
-  tollways: false,  
+  waytype: true,
+  tollways: false,
   waycategory: false,
-  traildifficulty: false, 
+  traildifficulty: false,
   roadaccessrestrictions: false,
   green: false,
   noise: false,

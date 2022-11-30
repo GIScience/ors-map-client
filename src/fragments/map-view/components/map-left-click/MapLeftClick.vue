@@ -14,7 +14,7 @@
         <div v-if="placeInfo.customHtml" v-html="placeInfo.customHtml"></div>
         <v-btn flat icon v-if="!placeInfo.hideDirectionsTo"
           v-smart-tooltip="{show: true, text: $t('mapLeftClick.directionsToClickedPoint'), position: $lowResolution? 'top' : 'left', dark: true, saveClose: true, name: 'directionsToClickedPoint'}"
-          @click="directionsToPoint(placeInfo)"><v-icon 
+          @click="directionsToPoint(placeInfo)"><v-icon
           :title="$t('mapLeftClick.directionsToClickedPoint')" color="dark" >directions</v-icon>
         </v-btn>
         <v-btn :title="$t('mapLeftClick.copyLnglat')" flat small icon  @click="copyLnglat()" > <v-icon>content_copy</v-icon> </v-btn>

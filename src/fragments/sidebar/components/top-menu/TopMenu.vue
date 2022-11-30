@@ -1,7 +1,7 @@
 <template>
   <v-layout row class="top-menu">
     <v-flex sm4 v-if="$mdAndUpResolution">
-      <v-btn class="no-padding" v-if="$mdAndUpResolution" 
+      <v-btn class="no-padding" v-if="$mdAndUpResolution"
         flat @click="settingsClicked"
         v-smart-tooltip="{show: showSettingsTooltip, text: $t('topMenu.settingsTooltip'), position: 'left', dark: true, showOnce: true, name: 'settingsTooltip'}">
         <v-icon :title="$t('topMenu.openSettings')" color="dark" :medium="$lowResolution">settings</v-icon>

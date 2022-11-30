@@ -40,7 +40,7 @@ class PlaceMode {
   getRoute = (appRouteData) => {
     if (appRouteData.places.length > 0) {
       const place = appRouteData.places[0]
-      const name = place.placeName ? place.placeName.replace(/, /g, ',') : ''      
+      const name = place.placeName ? place.placeName.replace(/, /g, ',') : ''
 
       // Transform the coordinates into a comma separated value (easier to put in the url)
       var lngLatStr = place.isEmpty() ? '' : `${place.lng},${place.lat}`
@@ -48,8 +48,8 @@ class PlaceMode {
         lngLatStr = `${lngLatStr},${appRouteData.options.zoom}`
       }
 
-       
-      
+
+
       // Create the route object
       const params = { coordinates: lngLatStr}
       let route = { name: 'MapLocation' }
@@ -57,9 +57,9 @@ class PlaceMode {
       if (name && name !== 'null' && Object.keys(appRouteData.options).length > 1) {
         params.placeName= name
         route.name = 'MapPlace'
-        let options = JSON.stringify(appRouteData.options)     
+        let options = JSON.stringify(appRouteData.options)
         params.data = store.getters.mapSettings.compressDataUrlSegment ? utils.compressTxt(options) : options
-      }   
+      }
       route.params = params
       return route
     } else {

@@ -57,7 +57,7 @@ export default {
       this.removeHighlightedSegments()
     }
   },
-  
+
   created () {
     this.buildHighlightedPolyline()
     this.$emit('beforeOpen')

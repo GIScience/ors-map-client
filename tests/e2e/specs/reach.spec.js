@@ -39,9 +39,9 @@ module.exports = {
       .assert.not.elementPresent('.view-on-ors')
       .assert.elementPresent('.place-input-component input[type=text]')
       .waitForElementVisible('.custom-html-icon-div', 20000)
-      .assert.cssProperty('.custom-html-icon-div','background-color','rgba(255, 0, 0, 1)') // red   
+      .assert.cssProperty('.custom-html-icon-div','background-color','rgba(255, 0, 0, 1)') // red
       .click('.custom-html-icon-div')
-      .assert.elementPresent('.leaflet-popup')      
+      .assert.elementPresent('.leaflet-popup')
       .assert.containsText('.leaflet-popup-content', 'Rua Jataúba, Salvador,BA,Brazil')
       .getValue('.place-input-component input[type=text]', function(result) {
         this.assert.equal(result.value, 'Rua Jataúba, Salvador,BA,Brazil')
@@ -49,7 +49,7 @@ module.exports = {
       .assert.visible('.sidebar')
       .expect.elements('.custom-html-icon-div').count.to.equal(1)
     browser.expect.elements('.sidebar li.polygons-header').count.to.equal(1)
-    browser.expect.elements('.sidebar .polygon-area').count.to.equal(3)      
+    browser.expect.elements('.sidebar .polygon-area').count.to.equal(3)
     browser.end()
   },
 }

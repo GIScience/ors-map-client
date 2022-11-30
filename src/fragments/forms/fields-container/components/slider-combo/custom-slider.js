@@ -11,7 +11,7 @@ export default {
       },
       set: function set(val) {
         var min = this.min, max = this.max
-       
+
         // Only trigger the change if the value is not
         // null or undefined. Otherwise the min value
         // is set in replacement of the null

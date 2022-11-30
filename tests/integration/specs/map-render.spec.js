@@ -11,11 +11,11 @@ describe('Map rendering', () => {
     await new AppLoader().fetchApiInitialData()
     const MapConstructor = PreparedVue.extend(MapView)
     let props = {...MapViewProps, ...{mapViewData: mapViewDataTemplates.singlePlace }}
-      
+
     let i18n = I18nBuilder.build()
     var mapInstance = new MapConstructor({ propsData: props, i18n: i18n, store: store})
-    const vm = mapInstance.$mount()  
-    
+    const vm = mapInstance.$mount()
+
     let mapView = vm.$el.querySelector('#map-view')
     expect(mapView).toBeDefined()
     expect(mapView).not.toBeNull()
@@ -24,12 +24,12 @@ describe('Map rendering', () => {
   it('should render map-view with place search results', async (done) => {
     await new AppLoader().fetchApiInitialData()
     const MapConstructor = PreparedVue.extend(MapView)
-    let props = {...MapViewProps, ...{mapViewData: mapViewDataTemplates.placeSearchResults }}   
-      
+    let props = {...MapViewProps, ...{mapViewData: mapViewDataTemplates.placeSearchResults }}
+
     let i18n = I18nBuilder.build()
     var mapInstance = new MapConstructor({ propsData: props, i18n: i18n, store: store})
-    const vm = mapInstance.$mount()  
-    
+    const vm = mapInstance.$mount()
+
     let mapView = vm.$el.querySelector('#map-view')
     expect(mapView).toBeDefined()
     expect(mapView).not.toBeNull()

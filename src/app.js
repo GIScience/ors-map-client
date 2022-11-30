@@ -23,7 +23,7 @@ export default {
     appInfo: Info
   },
   created () {
-    // Register the listener for the showLoading and 
+    // Register the listener for the showLoading and
     // titleChanged events
     this.eventBus.$on('showLoading', (value) => {
       this.showLoading = value

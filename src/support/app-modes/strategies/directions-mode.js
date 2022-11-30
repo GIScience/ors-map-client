@@ -15,10 +15,10 @@ import store from '@/store/store'
  */
 class DirectionsMode {
   buildAppRouteData (places) {
-    
+
     const appRouteData = store.getters.appRouteData || new AppRouteData()
     appRouteData.places = places
-    
+
     // All directions request filters will be extracted from the OrsMapFilters
     // object that is an in memory object used by all the filters
     // rendered as model in in its respective key
@@ -27,7 +27,7 @@ class DirectionsMode {
     appRouteData.options = options
     let layer = appRouteData.options.layer
 
-    // If only one place is defined, then 
+    // If only one place is defined, then
     // define the zoom level by the place layer
     let filledPlaces = Place.getFilledPlaces(appRouteData.places)
     if (filledPlaces.length === 1) {

@@ -13,20 +13,20 @@ import '@babel/polyfill'
 
 describe('Form-fields', () => {
   var i18n = I18nBuilder.build()
-  
+
   it('should render and update form fields', async (done) => {
     await new AppLoader().fetchApiInitialData()
     store.commit('mode', constants.modes.directions)
     let options = {zoom: 10}
     OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
-    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 } 
+    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 }
     const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store })
     expect(wrapper.contains('.form-fields')).toBe(true)
     expect(wrapper.findComponent(FormFields).exists()).toBe(true)
-    await wrapper.vm.$el.querySelectorAll('.form-fields-autocomplete input')[0].click()   
+    await wrapper.vm.$el.querySelectorAll('.form-fields-autocomplete input')[0].click()
     await wrapper.vm.$el.querySelectorAll('.form-fields-autocomplete')[0].querySelectorAll('.v-menu a')[0].click()
     expect(wrapper.emitted().fieldUpdated).toBeTruthy()
-    
+
     let  multiSelect = wrapper.find('.multi-select input')
     await multiSelect.trigger('click')
     await wrapper.vm.$nextTick()
@@ -41,7 +41,7 @@ describe('Form-fields', () => {
     store.commit('mode', constants.modes.directions)
     let options = {zoom: 10}
     OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
-    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 } 
+    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 }
     const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store })
     expect(wrapper.contains('.form-fields')).toBe(true)
     expect(wrapper.findComponent(FormFields).exists()).toBe(true)
@@ -56,8 +56,8 @@ describe('Form-fields', () => {
     store.commit('mode', constants.modes.directions)
     let options = {zoom: 10}
     OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
-    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 1 } 
-    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store }) 
+    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 1 }
+    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store })
     expect(wrapper.contains('.form-fields')).toBe(true)
     expect(wrapper.findComponent(FormFields).exists()).toBe(true)
     done()
@@ -68,9 +68,9 @@ describe('Form-fields', () => {
     store.commit('mode', constants.modes.directions)
     let options = {zoom: 10}
     OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
-    var props = { parameters: OrsMapFilters[8], parentIndex: 8, level: 0 } 
-    
-    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store }) 
+    var props = { parameters: OrsMapFilters[8], parentIndex: 8, level: 0 }
+
+    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store })
     expect(wrapper.contains('.form-fields')).toBe(true)
     expect(wrapper.findComponent(FormFields).exists()).toBe(true)
     done()
@@ -81,9 +81,9 @@ describe('Form-fields', () => {
     store.commit('mode', constants.modes.isochrones)
     let options = {zoom: 10}
     OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
-    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 } 
-    
-    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store }) 
+    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 }
+
+    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store })
     expect(wrapper.contains('.form-fields')).toBe(true)
     expect(wrapper.findComponent(FormFields).exists()).toBe(true)
     let slider = wrapper.find('.v-slider input')
@@ -104,12 +104,12 @@ describe('Form-fields', () => {
     await new AppLoader().fetchApiInitialData()
     store.commit('mode', constants.modes.roundTrip)
     OrsParamsParser.setFilters({zoom: 10}, OrsMapFilters, constants.services.directions)
-    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 } 
-    
-    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store }) 
+    var props = { parameters: OrsMapFilters, parentIndex: 0, level: 0 }
+
+    const wrapper = mount(FormFields, {propsData: props, i18n: i18n, store: store })
     expect(wrapper.contains('.form-fields')).toBe(true)
     expect(wrapper.findComponent(FormFields).exists()).toBe(true)
-    await new Promise(resolve => setTimeout(resolve, 5000))    
+    await new Promise(resolve => setTimeout(resolve, 5000))
     await wrapper.find('.generate-random').trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.emitted().fieldUpdated).toBeTruthy()

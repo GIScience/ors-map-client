@@ -170,7 +170,7 @@ const orsParamsParser = {
       AppLoader.getInstance().appHooks.run('isochronesArgsCreated', args)
 
       let promiseOrArgs = AppLoader.getInstance().appHooks.run('isochronesArgsCreated', args)
-          
+
       // If a promise is returned
       if (promiseOrArgs instanceof Promise) {
         promiseOrArgs.then((promiseArgs) => {
@@ -228,7 +228,7 @@ const orsParamsParser = {
       orsParamsParser.setFilters(args, OrsMapFilters, constants.services.directions)
 
       let promiseOrArgs = AppLoader.getInstance().appHooks.run('routingArgsCreated', args)
-        
+
       // If a promise is returned
       if (promiseOrArgs instanceof Promise) {
         promiseOrArgs.then((promiseArgs) => {
@@ -451,7 +451,7 @@ const orsParamsParser = {
         const filter = filtersInto[filtersKey]
 
         if (filter.name === key || filter.internalName === key) {
-          
+
           const available = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
 
           // If the filter is available, it not intended to be used only
@@ -464,8 +464,8 @@ const orsParamsParser = {
             } else {
               orsParamsParser.setFilterValueFromParam(filtersInto[filtersKey], options[key])
 
-              // If the filter has validity conditions 
-              // make sure that the availability of the 
+              // If the filter has validity conditions
+              // make sure that the availability of the
               // filter is defined before using it
               if (filtersInto[filtersKey].validWhen) {
                 DependencyService.setAvailability(filtersInto, filtersKey, filtersInto)

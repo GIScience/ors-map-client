@@ -322,7 +322,7 @@ export default {
     // Update local model when the model prop change outside
     model: {
       handler: function (newVal) {
-        this.resolveModelWithDebouncing(newVal)        
+        this.resolveModelWithDebouncing(newVal)
       },
       deep: true
     },
@@ -333,7 +333,7 @@ export default {
   methods: {
     /**
      * highlight typed place name
-     * @param {String} placeName 
+     * @param {String} placeName
      * @returns {Html}
      */
     highlightedName (placeName) {
@@ -356,21 +356,21 @@ export default {
     /**
      * Get layer translation based on the layer name
      * or fall back to a default one if not available
-     * @param {String} layer 
+     * @param {String} layer
      * @returns {String}
      */
     getLayerTranslation (layer) {
       let transKey = 'global.layers.'+ layer
-      let translation = this.$t(transKey) 
+      let translation = this.$t(transKey)
       if (translation !== transKey) {
         return translation
       } else {
-        return this.$t('global.layers.notAvailable') 
+        return this.$t('global.layers.notAvailable')
       }
     },
     /**
      * Resolve the model using a debounce to avoid unnecessary sequential requests
-     * @param {*} newVal 
+     * @param {*} newVal
      */
     resolveModelWithDebouncing (newVal) {
       let context = this

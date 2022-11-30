@@ -50,7 +50,7 @@ export default {
      */
     isMobile () {
       let isMobile = utils.isMobile() || this.$lowResolution
-      return isMobile 
+      return isMobile
     },
   },
   methods: {
@@ -70,8 +70,8 @@ export default {
      * Handles the profile selector button click
      * by setting local properties, emitting the profileSelected event
      * and by updating the interface due to the subProfileIsOpen change
-     * @param {*} profileSlug 
-     * @param {*} vehicleType 
+     * @param {*} profileSlug
+     * @param {*} vehicleType
      * @emits profileSelected
      */
     profileSelected (profileSlug, vehicleType = null) {

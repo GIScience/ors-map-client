@@ -147,7 +147,7 @@ class GpxImporter {
           let points = segments[key].trkpt || segments[key]
 
           if (points) {
-            
+
             for (const ptKey in points) {
               const latlon = points[ptKey].$
               const point = creator === 'openrouteservice' ? [latlon.lat, latlon.lon] : [latlon.lon, latlon.lat]
@@ -156,7 +156,7 @@ class GpxImporter {
                 point.push(elev[0])
               }
               coordinatesParsed.push(point)
-            }            
+            }
           }
         }
         routes.push({

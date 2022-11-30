@@ -49,11 +49,11 @@
         <app-footer></app-footer>
       </div>
     </v-navigation-drawer>
-    <v-btn fab small v-if="isSideBarOpen && $highResolution" :title="$t('sidebar.hideSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen, 'low-res': $lowResolution}" @click.stop="isSideBarOpen = false" > 
-      <v-icon large >keyboard_arrow_left </v-icon> 
+    <v-btn fab small v-if="isSideBarOpen && $highResolution" :title="$t('sidebar.hideSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen, 'low-res': $lowResolution}" @click.stop="isSideBarOpen = false" >
+      <v-icon large >keyboard_arrow_left </v-icon>
     </v-btn>
-    <v-btn fab small v-else-if="!isSideBarOpen && !$lowResolution && !$store.getters.embed" :title="$t('sidebar.showSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen}" @click.stop="isSideBarOpen = true" > 
-      <v-icon large >keyboard_arrow_right </v-icon> 
+    <v-btn fab small v-else-if="!isSideBarOpen && !$lowResolution && !$store.getters.embed" :title="$t('sidebar.showSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen}" @click.stop="isSideBarOpen = true" >
+      <v-icon large >keyboard_arrow_right </v-icon>
     </v-btn>
   </div>
 </template>

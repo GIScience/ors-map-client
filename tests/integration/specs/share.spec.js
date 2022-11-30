@@ -20,10 +20,10 @@ describe('Share', () => {
     const wrapper = mount(Share, {i18n: I18nBuilder.build(), store: store, propsData: shareProps })
 
     expect(wrapper.contains('.share-container')).toBe(true)
-    expect(wrapper.findComponent(Share).exists()).toBe(true)    
+    expect(wrapper.findComponent(Share).exists()).toBe(true)
     await wrapper.find('.open-share-btn').trigger('click')
     let shareModal = document.querySelector('.share-modal')
-    expect(shareModal).toBeTruthy()     
+    expect(shareModal).toBeTruthy()
     await document.querySelector('.share-modal .box-header .close').click()
     done()
   })
@@ -38,15 +38,15 @@ describe('Share', () => {
     const wrapper = mount(Share, {i18n: I18nBuilder.build(), store: store, propsData: shareProps })
 
     expect(wrapper.contains('.share-container')).toBe(true)
-    expect(wrapper.findComponent(Share).exists()).toBe(true)    
+    expect(wrapper.findComponent(Share).exists()).toBe(true)
     await wrapper.find('.open-share-btn').trigger('click')
     expect(document.querySelector('.share-modal')).toBeTruthy()
-    
+
     var shareModal = document.querySelector('.share-modal')
     expect(shareModal).toBeTruthy()
     shareModal.querySelector('input[type="text"]').click()
     await new Promise(resolve => setTimeout(resolve, 200))
-    done()  
+    done()
   })
 
   it('should render share component and toggle short url', async (done) => {
@@ -70,14 +70,14 @@ describe('Share', () => {
     let shareUrlTextarea = shareModal.querySelector('textarea')
     expect(shareUrlInput.value).toBe(directionsUrl)
     let iframeCode = `<iframe style='border:none' width='100%' height='100%'  src="${directionsUrl}/embed/en-us"></iframe>`
-    expect(shareUrlTextarea.value).toContain(iframeCode)    
+    expect(shareUrlTextarea.value).toContain(iframeCode)
 
     await wrapper.find('.toggle-short-url').trigger('click')
     await  wrapper.vm.$nextTick()
     await new Promise(resolve => setTimeout(resolve, 3000))
     expect(wrapper.vm.shareUrl).toContain('https://bit.ly/')
 
-    await wrapper.find('.toggle-short-url').trigger('click')    
+    await wrapper.find('.toggle-short-url').trigger('click')
     await  wrapper.vm.$nextTick()
     await new Promise(resolve => setTimeout(resolve, 3000))
     expect(wrapper.vm.shareUrl).not.toContain('https://bit.ly/')
