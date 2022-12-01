@@ -10,6 +10,8 @@ repos:
       - id: double-quote-string-fixer
       - id: check-merge-conflict
       - id: check-symlinks
+      - id: destroyed-symlinks
+      - id: detect-private-key
       - id: pretty-format-json
         args: ['--no-sort-keys', '--autofix', '--indent=2']
       - id: mixed-line-ending
