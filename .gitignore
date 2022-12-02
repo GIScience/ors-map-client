@@ -40,8 +40,11 @@ selenium-server.log
 !/static/css/.gitkeep
 !/static/fonts/.gitkeep
 !/static/img/.gitkeep
-!/static/img/.gitkeep
 
 # leaflet helpers
 
 /images
+
+# cypress tests
+/cypress/videos/
+/cypress/screenshots/
