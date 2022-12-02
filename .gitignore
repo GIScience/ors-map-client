@@ -45,3 +45,7 @@ selenium-server.log
 # leaflet helpers
 
 /images
+
+# cypress tests
+/cypress/videos/
+/cypress/screenshots/

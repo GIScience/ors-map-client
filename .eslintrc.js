@@ -14,7 +14,8 @@ module.exports = {
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
   extends: [
     "eslint:recommended",
-    "plugin:vue/base"
+    "plugin:vue/base",
+    "plugin:cypress/recommended"
   ],
   // add your custom rules here
   rules: {

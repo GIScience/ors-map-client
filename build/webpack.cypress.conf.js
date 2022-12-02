@@ -1,5 +1,5 @@
 'use strict'
-const { resolveRoot } = require('./utils')
+const { resolveRoot, styleLoaders} = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const webpack = require('webpack')
@@ -42,8 +42,7 @@ module.exports = {
     extensions: ['.vue', '.js', '.json'],
     fallback: {
       timers: require.resolve('timers-browserify'),
-      stream: require.resolve('stream-browserify'),
-      path: require.resolve('path-browserify')
+      stream: require.resolve('stream-browserify')
     }
   },
   module: {
@@ -60,7 +59,8 @@ module.exports = {
         include: [
           resolveRoot('src/'),
           resolveRoot('test/'),
-          resolveRoot('node_modules/webpack-dev-server/client/')],
+          resolveRoot('node_modules/webpack-dev-server/client/')
+        ],
         options: {
           plugins: [ '@babel/plugin-proposal-object-rest-spread' ]
         }
@@ -70,7 +70,8 @@ module.exports = {
       },{
         test: /\.(geojson|kml|gpx|txt)$/i,
         type: 'asset/source',
-      }
+      },
+      ...styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
     ]
   }
 }
