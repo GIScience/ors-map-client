@@ -289,7 +289,7 @@ For example, similar to `/\.i18n\.en-us\.js$` add `/\.i18n\.fr-fr\.js$`.
 that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux/unix compatible terminal, you can do that by running:
 
   ```sh
-  find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \; 
+  find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \;
   # where the last occurrence of locale id (in this case `fr-fr`) is the one you are creating
    ```
 
@@ -354,7 +354,34 @@ For a detailed explanation on how webpack works, check out the [guide](http://vu
 
 ### Tests ###
 
-The application includes automated tests. They are stored in `tests` folder. More info can be checked on the [tests readme](docs/automated-test.md)
+Testing is done using the [cypress](https://docs.cypress.io) testing framework.
+
+All tests (End-to-end(e2e), component and unit) can be executed by running:
+```sh
+npm run test:ci
+```
+
+During development, you start the development server and use the following command which opens the cypress UI interface
+to view the test output and hot reload after making changes:
+```shell
+# and do 'npm run dev' before
+npm run test
+```
+You can run tests in any standard browser that you have installed.
+If you are new to cypress check out the "[Getting started](https://docs.cypress.io/guides/getting-started/opening-the-app)"
+documentation, and keep it close.
+An overview on the usable [assertions](https://docs.cypress.io/guides/references/assertions) will help with simple
+test cases.
+
+#### Structure
+Component tests should be written in the component itself e.g.
+`../fragments/MyComponent.cy.js` for `../fragments/MyComponent.vue`
+
+Unit tests for js source files should be created in a separate `./__tests__` folder next to the source file and for the sake of
+clarity be named the same e.g. `../support/__tests__/utils.cy.js` for `../support/utils.js`
+
+End-to-end tests should be created in `./cypress/e2e/test-name.cy.js`
+
 
 ### Contribute ###
 
@@ -366,7 +393,7 @@ The application includes automated tests. They are stored in `tests` folder. Mor
 Deployment flow:
 
 1. Apply the changes in a feature branch and test it locally
-  
+
     *Important*: to run the tests, `src/config/app-config.js` must contain:
     - `orsApiKey`: 'a-valid-ors-api-key-here',
     - `useUserKey`: true,
@@ -375,7 +402,7 @@ Deployment flow:
 
     ```sh
     # Run automated tests
-    npm run test
+    npm run test:ci
     ```
 
     *Important:* Besides the automated tests, some manual/human tests are also recommended
@@ -393,9 +420,9 @@ Deployment flow:
 
     ```sh
     # Create a release. This will :
-    # - bump the app version, 
+    # - bump the app version,
     # - generate a new release commit
-    # - create a new git tag with the app version 
+    # - create a new git tag with the app version
     # - Create an entry in CHANGELOG.md
     npm run release
     ```
@@ -409,7 +436,7 @@ Deployment flow:
     # `git push --follow-tags origin master && npm publish`
 
     # We must use/run only
-    git push --follow-tags origin master 
+    git push --follow-tags origin master
 
     # Once you push it, the automated tests will be triggered on Github actions
     # Check the automated tests results on https://github.com/GIScience/ors-map-client/actions
@@ -441,7 +468,6 @@ This approach is intended to create cohesion and keep the project sustainable.
 There are additional documents that are part of the software documentation. they are in the folder `/docs` and are listed below:
 
 - [docs/dynamic-inputs.md](docs/dynamic-inputs.md) - describe how the inputs are rendered using a custom engine and not hard-coded
-- [docs/automated-test.md](docs/automated-test.md) - explains how the automated tests are implemented
 - [docs/learned-lessons.md](docs/learned-lessons.md) - lessons learned and that might help in the future
 - [docs/learned-lessons.md](docs/learned-lessons.md) - explains what are the criteria for the search results
 - [docs/plugins.md](docs/plugins.md) - explains how the plugins can be added to the maps client
