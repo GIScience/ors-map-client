@@ -6,7 +6,7 @@
   "author": "amon@openrouteservice.org",
   "scripts": {
     "build": "rimraf ./static && webpack --progress --config build/webpack.prod.conf.js",
-    "lint": "eslint --ext .js,.vue src tests/integration/specs tests/e2e/specs",
+    "lint": "eslint --ext .js,.vue src cypress/e2e/*.cy.js",
     "commit": "git-cz",
     "dev": "webpack serve --progress --config build/webpack.dev.conf.js",
     "release": "standard-version",
