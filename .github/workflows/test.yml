@@ -9,7 +9,7 @@ jobs:
   Run-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    container: cypress/browsers:node14.17.6-chrome100-ff98
+    container: cypress/browsers:node18.12.0-chrome103-ff107
     steps:
       - name: Checkout
         uses: actions/checkout@v3
