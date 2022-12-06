@@ -9,12 +9,10 @@ jobs:
   Run-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    container: cypress/browsers:node18.12.0-chrome103-ff107
+    container: cypress/browsers:node16.16.0-chrome107-ff107
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: remove npm cache
-        run: rm -rf /github/home/.npm
       - name: Set up default config files
         run: cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
       - name: Cypress install
