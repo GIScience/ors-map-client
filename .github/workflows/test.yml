@@ -19,6 +19,8 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           runTests: false
+      - name: Clean cache
+        uses: npm cache clean --force
       - name: Cypress info
         run: npx cypress info
       - name: Run tests
