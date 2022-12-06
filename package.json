@@ -83,8 +83,6 @@
     "babel-plugin-transform-imports": "^1.4.1",
     "babel-preset-env": "^1.3.2",
     "babel-preset-stage-2": "^6.22.0",
-    "caniuse-lite": "^1.0.30001249",
-    "chai": "^4.1.2",
     "chalk": "^2.0.1",
     "commitizen": "^4.2.4",
     "copy-webpack-plugin": "^11.0.0",
