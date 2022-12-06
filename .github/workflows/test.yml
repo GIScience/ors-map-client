@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: remove npm cache
+        run: rm -rf /github/home/.npm
       - name: Set up default config files
         run: cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
       - name: Cypress install
