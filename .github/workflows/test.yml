@@ -14,7 +14,7 @@ jobs:
         node-version: [ "16.16.0" ]
         chrome-version: [ stable ]
         os: [ ubuntu-latest ]
-    runs-on: ${{ matrix.node-version }}
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
       - name: Checkout
