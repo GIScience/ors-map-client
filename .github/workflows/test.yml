@@ -7,12 +7,25 @@ on:
   pull_request:
 jobs:
   Run-tests:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [ "16.16.0" ]
+        chrome-version: [ stable ]
+        os: [ ubuntu-latest ]
+    runs-on: ${{ matrix.node-version }}
     timeout-minutes: 10
-    container: cypress/browsers:node16.16.0-chrome107-ff107
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Chrome ${{ matrix.chrome-version }}
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: ${{ matrix.chrome-version }}
+      - run: chrome --version
       - name: Set up default config files
         run: cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
       - name: Cypress install
