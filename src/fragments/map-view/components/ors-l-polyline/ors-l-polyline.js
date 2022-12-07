@@ -1,5 +1,5 @@
 import OrsExtendedPolyline from './ors-extended-polyline'
-import { LPolyline, LTooltip, LPopup} from 'vue2-leaflet'
+import {LPolyline, LPopup, LTooltip} from 'vue2-leaflet'
 import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
 import Utils from '@/support/utils'
@@ -202,16 +202,13 @@ export default {
           iconStyle = 'transform: scaleY(-1) rotate(45deg)'
         }
         if (tooltipIcon) {
-          let tooltip = `
-          <div>
-            <div style='min-width:30px;width:20%;height:50px;float:left'>
-              <span style='${iconStyle}' class="material-icons">${tooltipIcon}</span>
-            </div>
-            <div style='min-width:180px'>${tooltipInnerContent}</div>
+          return `
+          <div style="display:flex;align-items:center;">
+            <div class="material-icons cy-route-popup-icon" style='min-width:40px;${iconStyle};'>${tooltipIcon}</div>
+            <div class="cy-route-popup-text" style='min-width:max-content;'>${tooltipInnerContent}</div>
           </div>`
-          return tooltip
         } else {
-          return `<div><div style='min-width:180px'>${tooltipInnerContent}</div></div>`
+          return `<div><div style='min-width:max-content;' class="route-popup-text">${tooltipInnerContent}</div></div>`
         }
       }
     },
