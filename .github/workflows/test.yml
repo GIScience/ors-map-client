@@ -5,6 +5,7 @@ on:
       - master
       - main
   pull_request:
+  workflow_dispatch:
 jobs:
   Run-tests:
     strategy:
