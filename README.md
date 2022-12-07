@@ -385,6 +385,18 @@ End-to-end tests should be created in `./cypress/e2e/test-name.cy.js`
 
 ### Contribute ###
 
+#### pre-commit git hooks ####
+We use `pre-commit` to make sure contributions have the same basic quality.
+Before you commit make sure that your commit satisfies all `pre-commit` checks.
+For details on individual checks see `.pre-commit-config.yaml`.
+
+```bash
+# Install the pre-commit git hooks to be automatically executed before committing.
+pre-commit install --hook-type commit-msg --hook-type pre-push --hook-type pre-commit
+# Manually run all pre-commits. The first execution will setup the environment and can take some time.
+pre-commit run --all
+```
+
 #### Commits and versioning ####
 
 - This app uses the `commitizen` plugin to generate standardized commit types/messages. After applying any change in a feature branch, use `git add .` and then `npm run commit` (instead of `git commit ...`)
