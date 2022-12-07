@@ -297,5 +297,3 @@ class AppLoader {
 }
 
 export default AppLoader
-
-
