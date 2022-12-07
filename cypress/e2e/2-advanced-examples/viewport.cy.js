@@ -24,33 +24,44 @@ context('Viewport', () => {
 
     // We added a cy.wait() between each viewport change so you can see
     // the change otherwise it is a little too fast to see :)
-
     cy.viewport('macbook-15')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
     cy.viewport('macbook-13')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
     cy.viewport('macbook-11')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
     cy.viewport('ipad-2')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
     cy.viewport('ipad-mini')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
     cy.viewport('iphone-6+')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
     cy.viewport('iphone-6')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
     cy.viewport('iphone-5')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
     cy.viewport('iphone-4')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
     cy.viewport('iphone-3')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
 
     // cy.viewport() accepts an orientation for all presets
     // the default orientation is 'portrait'
     cy.viewport('ipad-2', 'portrait')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
     cy.viewport('iphone-4', 'landscape')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
 
     // The viewport will be reset back to the default dimensions
