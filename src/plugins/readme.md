@@ -1,4 +1,4 @@
-# Plugins folder #
+# Plugins folder
 
 Each plug-in must be contained in a folder created under the `src/plugins` folder.
 For example: src/plugin/my-awesome-plugin. No file should be directly put in the root of the `plugins` folder.

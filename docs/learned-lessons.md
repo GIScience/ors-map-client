@@ -8,11 +8,11 @@ Add longer timeouts:
 
 ```js
 module.exports = {
-    //how long does Karma wait for a browser to reconnect, 2000 is default
-    browserDisconnectTimeout: 60000,
-    //how long will Karma wait for a message from a browser before disconnecting from it, 10000 is default
-    browserNoActivityTimeout: 60000,
-}
+  //how long does Karma wait for a browser to reconnect, 2000 is default
+  browserDisconnectTimeout: 60000,
+  //how long will Karma wait for a message from a browser before disconnecting from it, 10000 is default
+  browserNoActivityTimeout: 60000,
+};
 ```
 
 http://alexeyhorn.com/javascript/karma/2017/05/31/fix-karma-disconnected-error.html
@@ -26,17 +26,14 @@ module.exports = {
   test_settings: {
     chrome: {
       desiredCapabilities: {
-        browserName: 'chrome',
-        'chromeOptions': {
-          'args': [
-            '--disable-dev-shm-usage',
-          ]
-        }
-      }
-    }
-  }
-}
-
+        browserName: "chrome",
+        chromeOptions: {
+          args: ["--disable-dev-shm-usage"],
+        },
+      },
+    },
+  },
+};
 ```
 
 https://svdoscience.com/2021-03-17/fix-session-deleted-page-crash-selenium-grid-chrome-docker
@@ -60,7 +57,7 @@ Install the @babel/register package - https://www.npmjs.com/package/@babel/regis
 Add to the file where you want to use import, before any import statement:
 
 ```js
-require('@babel/register')
+require("@babel/register");
 ```
 
 ## Use babel.config.js to support dynamic compiling rules
@@ -74,6 +71,6 @@ While chromedriver gives back `rgba`, geckodriver returns `rgb` which is both va
 for browsers.
 When checking for specific colors, currently a regex should be used to match both returned values, e.g.
 
-  /rgba?\(255, 0, 0(, 1)?\)/
+/rgba?\(255, 0, 0(, 1)?\)/
 
 to match both `rgb(255, 0, 0)` and `rgba(255, 0, 0, 1)`.

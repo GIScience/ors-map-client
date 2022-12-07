@@ -54,7 +54,7 @@ Having the results of the three searches, the app merges them using the followin
 - If there are results for `locality` and `county` layers, they will fill 30% of the slots
 - If there are results for all the layers except `locality`, `county` they will fill the other available slots
 
-Important: *If some searches do not bring results, the empty slots are filled with extra items from the other searches*
+Important: _If some searches do not bring results, the empty slots are filled with extra items from the other searches_
 
 Then the results are ordered by distance (considering the current map center), and some items are moved to certain
 positions:
@@ -62,7 +62,7 @@ positions:
 - if the search (1) brought results, its first item is moved to the `second` position
 - if the search (2) brought results, the best match (item in position 0) is put on the `top of the list`
 - if the search (2) brought results and there is a result that is on the `country` layer,
-it is moved to the third position (if it is not already the best match)
+  it is moved to the third position (if it is not already the best match)
 
 With this solution it seems that we could find a good balance and considering the possibilities and what the API offers
 fulfill the expectations of the most of the users.
@@ -79,7 +79,7 @@ This commercial tools might have access or use data like:
 
 - search history (even outside the maps client)
 - search patterns (people on a certain location, with a certain language defined, in certain time span or season tends
-to find xx results better)
+  to find xx results better)
 - user location history
 - user recent interactions with pages that has some connection with the service provider
 - user recent dialogs (captured by a mobile microphone, for example)

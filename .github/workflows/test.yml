@@ -5,15 +5,15 @@ on:
       - master
       - main
   pull_request:
-    branches: [ "**" ]
+    branches: ["**"]
 jobs:
   Run-lint:
     strategy:
       fail-fast: true # Good to fail all fast if one of the matrix runs fails.
       matrix:
-        node-version: [ 16 ]
-        python-version: [ "3.10" ]
-        os: [ ubuntu-20.04 ]
+        node-version: [16]
+        python-version: ["3.10"]
+        os: [ubuntu-20.04]
     runs-on: ${{ matrix.os }}
     steps:
       - name: checkout
