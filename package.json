@@ -3,21 +3,33 @@
   "version": "1.29.0",
   "private": false,
   "description": "Openrouteservice maps client",
+  "repository": "https://github.com/GIScience/ors-map-client",
+  "license": "MIT",
   "author": "amon@openrouteservice.org",
   "scripts": {
     "build": "rimraf ./static && webpack --progress --config build/webpack.prod.conf.js",
-    "lint": "eslint --ext .js,.vue src cypress/e2e/*.cy.js",
     "commit": "git-cz",
     "dev": "webpack serve --progress --config build/webpack.dev.conf.js",
+    "lint": "eslint --ext .js,.vue src cypress/e2e/*.cy.js",
     "release": "standard-version",
     "start": "npm run dev",
     "test": "cypress open",
     "test:ci": "start-server-and-test dev http://localhost:8080/ 'cypress run -q && cypress run --component -q'",
-    "test:e2e": "cypress open --e2e",
-    "test:e2e:ci": "start-server-and-test dev http://localhost:8080/ 'cypress run -q'",
     "test:component": "cypress open --component",
-    "test:component:ci": "start-server-and-test dev http://localhost:8080/ 'cypress run --component -q'"
+    "test:component:ci": "start-server-and-test dev http://localhost:8080/ 'cypress run --component -q'",
+    "test:e2e": "cypress open --e2e",
+    "test:e2e:ci": "start-server-and-test dev http://localhost:8080/ 'cypress run -q'"
   },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
   "dependencies": {
     "@babel/eslint-parser": "^7.11.3",
     "@maphubs/tokml": "^0.6.0",
@@ -139,20 +151,8 @@
     "webpack-dev-server": "^4.0.0",
     "webpack-merge": "^4.1.0"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
   "engines": {
     "node": ">=14.0.0",
     "npm": ">=6.0.0"
-  },
-  "license": "MIT",
-  "repository": "https://github.com/GIScience/ors-map-client"
+  }
 }
