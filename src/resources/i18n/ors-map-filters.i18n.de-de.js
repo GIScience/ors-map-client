@@ -189,7 +189,7 @@ export default {
       vehicle_type: {
         label: 'Fahrzeugtyp',
         description: 'Für die Routenberechnung zu berücksichtigender Fahrzeugtyp',
-      } 
+      }
     }
   }
 }

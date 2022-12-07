@@ -41,7 +41,7 @@
               class="field-input random-input no-input-details"
               readonly
               :type="parameter.inputType"
-              :step="parameter.inputTypeStep"              
+              :step="parameter.inputTypeStep"
               :label="buildLabel(parameter)"
               :title="buildLabel(parameter)"
               v-model="formParameters[index].value"
@@ -56,8 +56,8 @@
             </template>
 
             <template v-else-if="parameter.type === constants.filterTypes.boolean" :ref="'field'+ index">
-              <v-checkbox class="pt-0 top-0 form-fields-checkbox" 
-              v-model="formParameters[index].value" :label="buildLabel(parameter)" 
+              <v-checkbox class="pt-0 top-0 form-fields-checkbox"
+              v-model="formParameters[index].value" :label="buildLabel(parameter)"
               @change="fieldUpdated({index: index, parameter: parameter})">
               </v-checkbox>
             </template>
@@ -75,10 +75,10 @@
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-flex>
-          <v-flex sm1 class="txt-right top-15" v-if="parameter.type !== constants.filterTypes.wrapper">           
+          <v-flex sm1 class="txt-right top-15" v-if="parameter.type !== constants.filterTypes.wrapper">
             <v-btn :title="buildDescription(parameter)" flat icon class="help-btn" @click="infoDialog(buildLabel(parameter), buildDescription(parameter), {markdown: true, resizable: true})">
               <v-icon class="pointer">help</v-icon>
-            </v-btn>        
+            </v-btn>
           </v-flex>
         </v-layout>
       </template>

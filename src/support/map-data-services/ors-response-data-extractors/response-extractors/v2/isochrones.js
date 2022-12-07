@@ -28,7 +28,7 @@ class IsochronesBuilder {
       mapViewData.rawData = context.responseData
       mapViewData.isRouteData = false
       mapViewData.mode = constants.modes.isochrones
-      
+
       resolve(mapViewData)
     })
   }

@@ -26,7 +26,7 @@ const loadItems = () => {
         })
       } else {
         resolve([])
-      }      
+      }
     }
   })
 }

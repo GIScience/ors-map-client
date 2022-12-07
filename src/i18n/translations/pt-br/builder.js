@@ -34,7 +34,7 @@ const addComponentKeys = (localeSharedPartsMessages, translationsObj) => {
     }
   }
 }
-  
+
 
 const translationsBuilder = {
   build,

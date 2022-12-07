@@ -6,7 +6,7 @@
     <div ref="printableElement" style="display:none">
       <h1>{{title}}</h1>
       <b>{{hostname}}</b>
-      <div v-html="modePrintingHtml"></div>      
+      <div v-html="modePrintingHtml"></div>
     </div>
   </div>
 </template>

@@ -35,7 +35,7 @@ class DirectionsJSONBuilder {
 
   buildRoutes = () => {
     for (const key in this.responseData.features) {
-      this.responseData.features[key].properties.opacity = 0.9 
+      this.responseData.features[key].properties.opacity = 0.9
     }
     return this.responseData.features
   }

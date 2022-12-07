@@ -21,7 +21,7 @@
       </v-flex>
       <v-spacer></v-spacer>
     </v-layout>
-  </div> 
+  </div>
 </template>
 
 <script src="./form-actions.js"></script>

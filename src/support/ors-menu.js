@@ -66,7 +66,7 @@ const runORSMenuCustomization = (menu) => {
     setORSMenuIcons(menu)
   }
 }
-  
+
 /**
  * Set the default icons based in the menu item's url endpoint
  *

@@ -119,36 +119,36 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
       host: mapSettings.apiBaseUrl,
       service: mapSettings.endpoints.geocodeSearch
     })
-    
+
     let promises = []
 
     // Build a search localities only
     let localityArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
     localityArgs.size = quantity / (quantity / 2)
     localityArgs.layers = ['locality']
-    promises.push(client.geocode(localityArgs))   
+    promises.push(client.geocode(localityArgs))
     AppLoader.getInstance().appHooks.run('placeSearchLocalityArgsDefined', localityArgs)
 
     // Build a search counties only
     let countyArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
     countyArgs.size = quantity / (quantity / 1)
     countyArgs.layers = ['county']
-    promises.push(client.geocode(countyArgs))   
+    promises.push(client.geocode(countyArgs))
     AppLoader.getInstance().appHooks.run('placeSearchCountyArgsDefined', countyArgs)
 
     // Build a search for addresses
     let addressesArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
     addressesArgs.size = quantity
     addressesArgs.layers = ['country', 'region', 'macrocounty', 'macroregion', 'neighbourhood', 'borough', 'street', 'address', 'postalcode'] // `coarse` will bring places by postal code
-    promises.push(client.geocode(addressesArgs))   
+    promises.push(client.geocode(addressesArgs))
     AppLoader.getInstance().appHooks.run('placeSearchAddressArgsDefined', addressesArgs)
 
     // Build a search for venues
     const restrictToBbox = restrictArea && mapSettings.prioritizeSearchingForNearbyPlaces
     let poisArgs = OrsParamsParser.buildPlaceSearchArgs(term, restrictToBbox)
     poisArgs.size = quantity
-    poisArgs.layers = ['venue'] // venue = POI 
-    promises.push(client.geocode(poisArgs)) 
+    poisArgs.layers = ['venue'] // venue = POI
+    promises.push(client.geocode(poisArgs))
     AppLoader.getInstance().appHooks.run('placeSearchPoisArgsDefined', addressesArgs)
 
     promises = AppLoader.getInstance().appHooks.run('placeSearchPromisesDefined', promises)
@@ -158,13 +158,13 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
       resolve(places)
     }).catch(response => {
       reject(response)
-    })  
+    })
   })
 }
 
 /**
  * Build places result from promises response
- * @param {Array} responses 
+ * @param {Array} responses
  * @returns {Array} of Places
  */
 const buildPlacesSearchResult = (responses, quantity) => {
@@ -183,18 +183,18 @@ const buildPlacesSearchResult = (responses, quantity) => {
       quantity = quantity - countyFeatures.length
       features = features.concat(countyFeatures)
     }
-  
+
     // By default, get all the features of the administrative places list
     let adminFeatures = []
     if (responses.length > 1) {
       adminFeatures = responses[2].features
     }
-  
-    // If there are administrative places and also places 
+
+    // If there are administrative places and also places
     // from POIs (venues) then merge them into the collection
-    let poisFeatures = responses.length === 4 ? responses[3].features : []    
-    
-    if (poisFeatures.length > 0) {          
+    let poisFeatures = responses.length === 4 ? responses[3].features : []
+
+    if (poisFeatures.length > 0) {
       let half = Math.round((quantity / 2))
       let amountTobGetFromPOIsList = poisFeatures.length > half ? half : poisFeatures.length
       let amountTobGetFromAdminList = quantity - amountTobGetFromPOIsList
@@ -213,7 +213,7 @@ const buildPlacesSearchResult = (responses, quantity) => {
 
 /**
  * Sort features by layer and distance from current map center
- * @param {*} features 
+ * @param {*} features
  * @returns {Array} features
  */
 const sortFeatures  = (features) => {
@@ -221,9 +221,9 @@ const sortFeatures  = (features) => {
     return features
   }
   // Se the distance of each location considering the current map center
-  for (let key in features) {    
+  for (let key in features) {
     let featureLatLng = GeoUtils.buildLatLong(features[key].geometry.coordinates[1], features[key].geometry.coordinates[0])
-    features[key].distance = GeoUtils.calculateDistanceBetweenLocations(store.getters.mapSettings.mapCenter, featureLatLng, store.getters.mapSettings.unit)    
+    features[key].distance = GeoUtils.calculateDistanceBetweenLocations(store.getters.mapSettings.mapCenter, featureLatLng, store.getters.mapSettings.unit)
     // Add a unique id for each feature
     features[key].properties.unique_id = features[key].properties.id || `osm_id_${features[key].properties.osm_id}`
   }
@@ -266,11 +266,11 @@ const sortFeatures  = (features) => {
 /**
  * Get the POIs
  * @param {Object} filters {
- *  category_group_ids: Array, 
- *  category_ids: Array, 
- *  name: Array [String], 
- *  wheelchair: Array ["yes","no","limited","designated"], 
- *  smoking: Array ['dedicated','yes','no','separated','isolated','outside'], 
+ *  category_group_ids: Array,
+ *  category_ids: Array,
+ *  name: Array [String],
+ *  wheelchair: Array ["yes","no","limited","designated"],
+ *  smoking: Array ['dedicated','yes','no','separated','isolated','outside'],
  *  fee: Array ['yes', 'no']
  * } @see https://openrouteservice.org/dev/#/api-docs/pois/post
  * @param {Number} limit
@@ -285,7 +285,7 @@ const Pois = (filters, limit = 100, distanceBuffer = 500) => {
     host: mapSettings.apiBaseUrl,
     service: mapSettings.endpoints.pois
   })
-  
+
   return new Promise((resolve, reject) => {
     let args = OrsParamsParser.buildPoisSearchArgs(filters, limit, distanceBuffer)
     pois.pois(args).then((response) => {
@@ -298,7 +298,7 @@ const Pois = (filters, limit = 100, distanceBuffer = 500) => {
 
 /**
  * Get isochrones for a list of places
- * @param {*} places 
+ * @param {*} places
  * @returns {Promise}
  */
 const Isochrones = (places) => {

@@ -24,7 +24,7 @@ export default {
     parameters: 'Parâmetros',
     custom: 'Personalizado',
     customOverlayer: 'Camada adicional personalizada',
-    rawRouting: 'Roteamento bruto',    
+    rawRouting: 'Roteamento bruto',
     months: {
       january: 'Janeiro',
       february: 'Fevereiro',

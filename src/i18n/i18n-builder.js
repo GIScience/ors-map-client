@@ -22,15 +22,15 @@ const build = () => {
   i18n.messages['de-de'] = deDETranslations.build()
   i18n.messages['pt-br'] = ptBRTranslations.build()
   i18n.messages['it-it'] = itITTranslations.build()
-  i18n.messages['fr-fr'] = frFRTranslations.build()  
+  i18n.messages['fr-fr'] = frFRTranslations.build()
   i18n.messages['hu-hu'] = huHUTranslations.build()
-  i18n.messages['es-es'] = esESTranslations.build()   
+  i18n.messages['es-es'] = esESTranslations.build()
 
-  /* 
-    Uncomment the line below to output, via browser 
-    console, a merged version of the translation source 
-    file when the application runs. If necessary, you can 
-    replace 'en-us' below by any of the supported 
+  /*
+    Uncomment the line below to output, via browser
+    console, a merged version of the translation source
+    file when the application runs. If necessary, you can
+    replace 'en-us' below by any of the supported
     locale, like 'de-de' or 'fr-fr'.
   */
   // console.log(JSON.stringify(i18n.messages['en-us']))

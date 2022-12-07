@@ -101,6 +101,6 @@ export default {
     'tollways': 'Fizetős utak',
     'traildifficulty': 'Út nehézsége',
     'osmid': 'OSM ID',
-    'countryinfo': 'Országinformációk'  
+    'countryinfo': 'Országinformációk'
   }
 }

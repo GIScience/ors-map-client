@@ -197,7 +197,7 @@ export default {
       'vehicle_type': {
         'label': 'Jármű típus',
         'description': 'Az útvonal kiszámításakor figyelembe veendő jármű típusa',
-      } 
+      }
     }
   }
 }

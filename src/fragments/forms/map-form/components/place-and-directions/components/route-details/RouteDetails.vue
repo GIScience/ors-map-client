@@ -49,7 +49,7 @@
                         <v-flex sm6 v-if="segment.descent">
                           <p><v-icon>arrow_downward</v-icon> {{formatElevation(segment.descent)}} {{$t('global.units.m')}}</p>
                         </v-flex>
-                      </v-layout>                      
+                      </v-layout>
                       </div>
                       <div style="padding:0 0 0 0px">
                         <h4 >{{$t('routeDetails.instructions')}}:</h4>
@@ -60,10 +60,10 @@
                   </v-list>
                 </v-expansion-panel-content>
               </v-expansion-panel>
-              <route-extras :route="route"></route-extras>              
+              <route-extras :route="route"></route-extras>
               <div style="padding-left: 5px; padding-right:30px; padding-top:10px">
                 <b>{{$t('routeDetails.routeOpacity')}}</b>
-                <v-slider class="route-opacity-slider" :min="0" :max="1" 
+                <v-slider class="route-opacity-slider" :min="0" :max="1"
                   append-icon="opacity"
                   :thumb-size="24"
                   thumb-label="always"
@@ -87,7 +87,7 @@
                 </v-expansion-panel>
                 <route-extras :route="route"></route-extras>
                 <div style="padding-left: 5px; padding-right:30px; padding-top:10px">
-                  <v-slider class="route-opacity-slider" :min="0" :max="1" 
+                  <v-slider class="route-opacity-slider" :min="0" :max="1"
                     append-icon="opacity"
                     :thumb-size="24"
                     thumb-label="always"

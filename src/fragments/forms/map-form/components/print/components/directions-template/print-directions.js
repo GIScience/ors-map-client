@@ -22,22 +22,22 @@ export default {
   computed: {
     contentTitle () {
       let places = this.localMapViewData.places
-      let title = this.$t(`orsMapFilters.profiles.${this.localMapViewData.options.profile}`) + ': ' 
+      let title = this.$t(`orsMapFilters.profiles.${this.localMapViewData.options.profile}`) + ': '
 
       if (places.length > 0 && places[0].placeName) {
         title +=  places[0].placeName
-      } 
-      
+      }
+
       if (places.length > 1 && places[places.length -1].placeName) {
         title += ` &rArr; ${places[places.length -1].placeName}`
-      } 
+      }
       return title
     },
     activeRoute () {
       let route = this.localMapViewData.routes[this.$store.getters.activeRouteIndex]
       return route
     },
-    
+
   },
   methods: {
     humanizedSummary (summary) {
@@ -48,7 +48,7 @@ export default {
     },
     getGlobalStepCounter (segmentIndex, stepIndex) {
       let counter = stepIndex
-      
+
       if (segmentIndex > 0) {
         for (let i = 0; i < segmentIndex; i++) {
           let steps = this.activeRoute.properties.segments[segmentIndex].steps.length

@@ -51,7 +51,7 @@ class AppHooks {
 
     arg = this.executeCatchAllHooks(hookName, arg)
     arg = this.runPluginHook(hookName, arg)
-    
+
     // Only continue if there hooks
     if (targetHooks.length > 0) {
       // Order the hooks so that we run then in the correct order
@@ -93,7 +93,7 @@ class AppHooks {
 
   /**
    * Attach a plugin to the hooks system
-   * @param {Object} pluginInstance 
+   * @param {Object} pluginInstance
    * @param {Object} vueInstance
    */
   attachPlugin (pluginInstance, vueInstance) {
@@ -104,7 +104,7 @@ class AppHooks {
   }
 
   /**
-   * Execute a hook of a plugin                       
+   * Execute a hook of a plugin
    * @param {Object} hookName
    * @param {String} arg
    * @returns {Object} arg
