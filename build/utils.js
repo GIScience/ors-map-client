@@ -18,7 +18,8 @@ exports.cssLoaders = function (options) {
   const cssLoader = {
     loader: 'css-loader',
     options: {
-      sourceMap: options.sourceMap
+      sourceMap: options.sourceMap,
+      url: false
     }
   }
 
@@ -94,7 +95,15 @@ exports.createNotifierCallback = () => {
       title: packageConfig.name,
       message: severity + ': ' + error.name,
       subtitle: filename || '',
-      icon: path.join(__dirname, 'logo.png')
+      icon: resolve('logo.png')
     })
   }
+}
+
+/**
+ * Resolves paths relative from repository root
+ * @param {string} rootPath
+ */
+exports.resolveRoot = (rootPath= "") => {
+  return path.join(__dirname, '..', rootPath)
 }

@@ -5,6 +5,7 @@ import Toaster from '@/fragments/toaster/Toaster'
 import Confirm from '@/fragments/dialogs/confirm/Confirm'
 import Info from '@/fragments/dialogs/info/Info'
 import MainMenu from '@/common/main-menu'
+import utils from '@/support/utils'
 
 export default {
   data () {
@@ -23,14 +24,15 @@ export default {
     appInfo: Info
   },
   created () {
-    // Register the listener for the showLoading and 
-    // titleChanged events
+    // Register the listener for the showLoading and titleChanged events
     this.eventBus.$on('showLoading', (value) => {
       this.showLoading = value
     })
     this.eventBus.$on('titleChanged', (title) => {
       this.title = title
     })
+    const favIcon = document.getElementById('favIcon')
+    favIcon.href = utils.getImgSrc('favIcon')
   },
   mounted() {
     this.eventBus.$on('appLoaded', () => {

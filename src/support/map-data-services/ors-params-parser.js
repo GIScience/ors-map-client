@@ -170,7 +170,7 @@ const orsParamsParser = {
       AppLoader.getInstance().appHooks.run('isochronesArgsCreated', args)
 
       let promiseOrArgs = AppLoader.getInstance().appHooks.run('isochronesArgsCreated', args)
-          
+
       // If a promise is returned
       if (promiseOrArgs instanceof Promise) {
         promiseOrArgs.then((promiseArgs) => {
@@ -228,7 +228,7 @@ const orsParamsParser = {
       orsParamsParser.setFilters(args, OrsMapFilters, constants.services.directions)
 
       let promiseOrArgs = AppLoader.getInstance().appHooks.run('routingArgsCreated', args)
-        
+
       // If a promise is returned
       if (promiseOrArgs instanceof Promise) {
         promiseOrArgs.then((promiseArgs) => {
@@ -412,14 +412,14 @@ const orsParamsParser = {
    * back to a json object, add the prop->value and then convert
    * it back to a string representation of the object
    *
-   * @param {String} current an string representing an objet where a new prop will be added
-   * @param {String|Object} adding an objet or string representing an object that will merged to a parent object
-   * @returns {String} representing an object stringified
+   * @param {String} current a string representing an objet where a new prop will be added
+   * @param {String|Object} adding an object or string representing an object that will merged to a parent object
+   * @returns {String} representing a stringified object
    */
   getMergedParameterValues (current, adding) {
     const addingParsedJson = typeof adding === 'string' ? Utils.tryParseJson(adding) : adding
 
-    // If what we wanna add was an object stringified
+    // If we want to add a stringified object
     // that was successfully parsed, continue this way
     if (addingParsedJson) {
       let newObj = null
@@ -434,7 +434,7 @@ const orsParamsParser = {
       const newStrJson = JSON.stringify(newObj)
       return newStrJson
     } else {
-      // if it is not parsable, than return the original object
+      // if it is not parsable, return the original object
       return current
     }
   },
@@ -451,10 +451,10 @@ const orsParamsParser = {
         const filter = filtersInto[filtersKey]
 
         if (filter.name === key || filter.internalName === key) {
-          
+
           const available = !filter.availableOnModes || filter.availableOnModes.includes(store.getters.mode)
 
-          // If the filter is available, it not intended to be used only
+          // If the filter is available, it is not intended to be used only
           // in the interface and is not disabled, set its value
           if (available && !filter.onlyInFront && !filter.disabled) {
             const value = options[key]
@@ -464,8 +464,8 @@ const orsParamsParser = {
             } else {
               orsParamsParser.setFilterValueFromParam(filtersInto[filtersKey], options[key])
 
-              // If the filter has validity conditions 
-              // make sure that the availability of the 
+              // If the filter has validity conditions
+              // make sure that the availability of the
               // filter is defined before using it
               if (filtersInto[filtersKey].validWhen) {
                 DependencyService.setAvailability(filtersInto, filtersKey, filtersInto)

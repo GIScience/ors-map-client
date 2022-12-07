@@ -3976,7 +3976,7 @@ let routes = [
     }
   }
 ]
-let routePlaces = [ 
+let routePlaces = [
   new Place(6.054840087890626, 50.90130070888041, 'Waubacherweg, Eygelshoven,LB,Netherlands'),
   new Place(6.080245971679688, 50.87054481536601, 'Kanunnik Kruyderpad, Kerkrade,LB,Netherlands')
 ]
@@ -5692,7 +5692,7 @@ let rawData = {
                       155.3
                   ],
                   [
-                      6.077489,
+            6.077489,
                       50.866662,
                       155.3
                   ],

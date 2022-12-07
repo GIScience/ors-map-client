@@ -47,6 +47,9 @@ export default {
     getConfigVal (key) {
       let configVal = appConfig[key]
       return configVal
+    },
+    getLogo (key) {
+      return utils.getImgSrc(key)
     }
   },
   watch: {
@@ -67,6 +70,7 @@ export default {
       // pass a boolean that indicates 'force'
       context.$store.commit('setLeftSideBarIsOpen', isOpen)
     })
+    this.getImgSrc = utils.getImgSrc
   },
   components: {
     ProfileSelector,

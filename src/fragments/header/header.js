@@ -1,6 +1,7 @@
 import menuManager from '@/support/menu-manager'
 import resolver from '@/support/routes-resolver'
 import appConfig from '@/config/app-config'
+import utils from '@/support/utils'
 
 export default {
   data () {
@@ -27,6 +28,7 @@ export default {
     }
   },
   created () {
+    this.getImgSrc = utils.getImgSrc
     const context = this
     context.menuItems = context.$store.getters.mainMenu
 
@@ -59,7 +61,7 @@ export default {
       return url
     },
     showToolbar () {
-      // we can't wait for the $store.getters.embed to be set 
+      // we can't wait for the $store.getters.embed to be set
       let contains = location.hash.includes('/embed/')
       return !contains
     }

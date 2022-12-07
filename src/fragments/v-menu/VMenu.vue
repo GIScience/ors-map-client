@@ -33,7 +33,7 @@
 
 <script src="./v-menu.js"></script>
 
-<style >
+<style scoped>
   .v-menu-item {
     max-width: 100%;
   }
