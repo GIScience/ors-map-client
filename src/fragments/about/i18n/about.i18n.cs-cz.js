@@ -13,7 +13,7 @@ export default {
     CIAT_CSI_SRTM: 'CIAT-CSI SRTM',
     dataProvided: 'Údaje o obyvatelstvu poskytl',
     ghsFramework: 'The Global Human Settlement (GHS) frameworks',
-    askOpenrouteservice: 'Obraťte se s dotazem na Openrouteservice',
+    askOpenrouteservice: 'Obraťte se s dotazem na komunitní fOpenrouteservice',
     termsOfService: 'Podmínky poskytování služeb',
     privacyPolicy: 'Zásady ochrany osobních údajů',
     openStreetMapOrg: 'OpenStreetMap.org',
