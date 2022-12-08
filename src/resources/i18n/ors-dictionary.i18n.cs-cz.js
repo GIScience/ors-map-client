@@ -24,7 +24,7 @@ export default {
     no: 'Ne',
     customers: 'Zákazníci',
     destination: 'Cíl',
-    delivery: 'Obslužná',
+    delivery: 'Zásobovací',
     private: 'Soukromá',
     permissive: 'Na povolení',
     stateRoad: 'Státní silnice',
@@ -57,7 +57,6 @@ export default {
     grade3: 'Stupeň 3',
     grade4: 'Stupeň 4',
     grade5: 'Stupeň 5',
-
     no_tollway: 'Bez mýtného',
     is_tollway: 'S mýtným',
     no_category: 'Bez kategorie',
