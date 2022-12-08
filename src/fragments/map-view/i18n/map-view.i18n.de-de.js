@@ -54,10 +54,10 @@ export default {
     setMyLocationAsMapCenter: 'Möchten Sie die Karte an Ihrem aktuellen Standort zentrieren? Dies verbessert die Genauigkeit der Ortssuche. Sie müssen es autorisieren, wenn Sie dazu aufgefordert werden.',
     removePlace: 'Ort löschen',
     viewOnORS: 'In ORS anzeigen',
-    moveMapPositionToLeft: 'Karte nach Links bewegen',
-    moveMapPositionToRight: 'Karte nach Rechts bewegen',
-    moveMapPositionToUp: 'harte nach oben bewegen',
-    moveMapPositionToDown: 'karte nach unten bewegen',
+    moveMapPositionToLeft: 'Karte nach links bewegen',
+    moveMapPositionToRight: 'Karte nach rechts bewegen',
+    moveMapPositionToUp: 'Karte nach oben bewegen',
+    moveMapPositionToDown: 'Karte nach unten bewegen',
     toggleDirect: 'Direkter Weg (Luftlinie) zu nächstem Punkt an/aus',
     heightGraph: {
       distance: 'Entfernung',
@@ -74,10 +74,10 @@ export default {
     avoidPolygonNotSaved: 'Es war nicht möglich, das Vermeidungspolygon zu speichern',
     polygonEditModeEnabled: 'Wenn Sie die Bearbeitung abgeschlossen haben, klicken Sie auf eine beliebige Stelle, um die Änderungen zu speichern',
     customTileProvider: 'Vom Benutzer definierter Kachelanbieter',
-    gestureHandling: {      
+    gestureHandling: {
       touch: 'Verschieben der Karte mit zwei Fingern',
       scroll: 'Verwende Strg + Scrollen zum Zoomen der Karte',
-      scrollMac: 'Verwenden Sie \u2318 + Scrollen, um die Karte zu zoomen'      
+      scrollMac: 'Verwenden Sie \u2318 + Scrollen, um die Karte zu zoomen'
     }
   }
 }
