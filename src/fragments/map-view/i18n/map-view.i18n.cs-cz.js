@@ -76,7 +76,7 @@ mapView: {
     customTileProvider: 'Vlastní poskytovatel dlaždic definovaný uživatelem',
     gestureHandling: {
       touch: 'Posunujte mapu pomocí dvou prstů',
-      scroll: 'Pro přiblížení mapy použijte kombinaci kláves ctrl + rolování',
+      scroll: 'Pro přiblížení mapy použijte ctrl + rolování',
       scrollMac: 'Pro přiblížení mapy použijte \u2318 + rolování'
     }
   }
