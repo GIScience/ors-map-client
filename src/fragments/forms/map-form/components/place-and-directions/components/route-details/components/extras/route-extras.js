@@ -64,7 +64,7 @@ export default {
       } else {
         color = dict.colors[extraKey][index]
       }
-      
+
       return color
     },
     /**

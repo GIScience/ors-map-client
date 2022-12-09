@@ -17,7 +17,3 @@
 
 <style lang="scss" src="./app.scss"></style>
 <style lang="scss" src="./a11y.scss"></style>
-
-
-
-

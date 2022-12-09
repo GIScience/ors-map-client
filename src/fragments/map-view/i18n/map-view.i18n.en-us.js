@@ -74,10 +74,10 @@ export default {
     avoidPolygonNotSaved: 'It was not possible to save the avoid polygon',
     polygonEditModeEnabled: 'When you finish editing, click anywhere to save the changes',
     customTileProvider: 'Custom tile provider defined by the user',
-    gestureHandling: {      
+    gestureHandling: {
       touch: 'Use two fingers to move the map',
       scroll: 'Use ctrl + scroll to zoom the map',
-      scrollMac: 'Use \u2318 + scroll to zoom the map'      
+      scrollMac: 'Use \u2318 + scroll to zoom the map'
     }
   }
 }

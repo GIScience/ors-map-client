@@ -37,7 +37,7 @@ const getFilterValue = (filter) => {
     } else {
       // adjustFilterValue internally use applyFilterValueConditions
       filterValue = adjustFilterValue(filterClone, filterValue)
-    }    
+    }
   }
 
   return filterValue
@@ -170,7 +170,7 @@ const valueMatchesRule = (value, ruleValue) => {
  * @returns {boolean} matchRule
  */
 const getMatchesDependencyRules = (filter, dependencyKey) => {
-  let matchRule = true  
+  let matchRule = true
 
   for (const ruleKey in filter[dependencyKey]) {
     const rule = filter[dependencyKey][ruleKey]
@@ -318,14 +318,14 @@ const applyFilterRestrictions = (scopedFilters, key) => {
   } else if (parameter.props) {
     for (const propKey in parameter.props) {
       applyFilterRestrictions(parameter.props, propKey)
-    } 
+    }
   }
 }
 
 /**
  * Apply items restriction based on rules defined in filter object
- * @param {*} scopedFilters 
- * @param {*} key 
+ * @param {*} scopedFilters
+ * @param {*} key
  */
 const applyItemRestrictions = (scopedFilters, key) => {
   const filter = scopedFilters[key]
@@ -342,8 +342,8 @@ const applyItemRestrictions = (scopedFilters, key) => {
 
 /**
  * Apply values restrictions based on rules defined in filter object
- * @param {*} scopedFilters 
- * @param {*} key 
+ * @param {*} scopedFilters
+ * @param {*} key
  */
 const applyValuesRestrictions = (scopedFilters, key) => {
   const filter = scopedFilters[key]
@@ -364,7 +364,7 @@ const applyValuesRestrictions = (scopedFilters, key) => {
  * @param {*} rule
  */
 const setFilteredValues = (scopedFilters, key, dependsOnFilter, rule) => {
-  if (rule.valuesWhen && scopedFilters[key]) {    
+  if (rule.valuesWhen && scopedFilters[key]) {
     Object.keys(rule.valuesWhen).forEach(function (ruleKey) {
       if (dependsOnFilter.value) {
         if ((dependsOnFilter.value === ruleKey) || (ruleKey.endsWith('*') && dependsOnFilter.value.startsWith(ruleKey.replace('*', '')))) {
@@ -395,9 +395,9 @@ const setFilteredValues = (scopedFilters, key, dependsOnFilter, rule) => {
 
 /**
  * Get a rule value based on routeKey, propName and value rule dependencies
- * @param {Object} rule 
- * @param {String} ruleKey 
- * @param {String} propName 
+ * @param {Object} rule
+ * @param {String} ruleKey
+ * @param {String} propName
  * @returns {*} value
  */
 const getRuleValue = (rule, ruleKey, propName) => {
@@ -550,7 +550,7 @@ const getDependencyRelationTargetObj = (path, filters) => {
     rootFilterName = path.split('.')[0]
     childPath = path.replace(`${rootFilterName}.`, '')
   }
-  const rootTargetObject = lodash.find(globalFilters, function (filter) { 
+  const rootTargetObject = lodash.find(globalFilters, function (filter) {
     return filter.name === rootFilterName
   })
 
@@ -565,8 +565,8 @@ const getDependencyRelationTargetObj = (path, filters) => {
 
 /**
  * Get filter child prop based on a string path
- * @param {*} rootObject 
- * @param {*} propPath 
+ * @param {*} rootObject
+ * @param {*} propPath
  * @returns {Object}
  */
 const getChildProp = (rootObject, propPath) => {

@@ -22,12 +22,12 @@ export default {
     contentTitle () {
       let rangeTranslObject = this.$t('orsMapFilters.filters.range_type')
       let activeProfile = this.localMapViewData.options.profile
-      let title = this.$t(`orsMapFilters.profiles.${activeProfile}`) + '<br/>' 
+      let title = this.$t(`orsMapFilters.profiles.${activeProfile}`) + '<br/>'
       let rangeType = this.localMapViewData.options.range_type
       let rangeTypeLabel = rangeTranslObject.enum[rangeType].toLowerCase()
-      title += `${rangeTranslObject.label}: ${rangeTypeLabel}</br>`      
+      title += `${rangeTranslObject.label}: ${rangeTypeLabel}</br>`
       return title
-    }    
+    }
   },
   methods: {
     polygonAreaTextColor (polygon) {

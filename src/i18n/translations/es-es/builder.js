@@ -35,12 +35,10 @@ const addComponentKeys = (localeSharedPartsMessages, translationsObj) => {
     }
   }
 }
-  
+
 
 const translationsBuilder = {
   build,
 }
 
 export default translationsBuilder
-
-

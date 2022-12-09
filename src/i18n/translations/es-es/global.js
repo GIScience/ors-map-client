@@ -24,7 +24,7 @@ export default {
     parameters: 'Parámetros',
     custom: 'Personalizado',
     customOverlayer: 'Capa adicional personalizada',
-    rawRouting: 'Enrutamiento sin procesar',    
+    rawRouting: 'Enrutamiento sin procesar',
     months: {
       january: 'Enero',
       february: 'Febrero',

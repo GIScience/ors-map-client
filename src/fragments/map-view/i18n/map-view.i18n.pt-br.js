@@ -74,10 +74,10 @@ export default {
     avoidPolygonNotSaved: 'Não foi possível salvar o polígono a evitar',
     polygonEditModeEnabled: 'Quando terminar as alterações clicke em qualquer lugar para salvar',
     customTileProvider: 'Provedor de mapa definido pelo usuário',
-    gestureHandling: {      
+    gestureHandling: {
       touch: 'Use dois dedos para mover o mapa',
       scroll: 'Pressione Ctrl e role a tela simultaneamente para aplicar zoom no mapa',
-      scrollMac: 'Use \u2318 e role a tela simultaneamente para aplicar zoom no mapa'      
+      scrollMac: 'Use \u2318 e role a tela simultaneamente para aplicar zoom no mapa'
     }
   }
 }

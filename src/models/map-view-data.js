@@ -89,7 +89,7 @@ class MapViewData {
         mapViewDataClone.pois.push(place.clone())
       }
     }
-    
+
     return mapViewDataClone
   }
 

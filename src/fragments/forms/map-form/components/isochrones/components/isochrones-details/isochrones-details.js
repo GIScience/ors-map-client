@@ -42,7 +42,7 @@ export default {
       this.eventBus.$emit('togglePolygonVisibility', polygonIndex)
     },
 
-    polygonOpacityChanged (polygonIndex) {      
+    polygonOpacityChanged (polygonIndex) {
       let fillOpacity = this.localMapViewData.polygons[polygonIndex].properties.fillOpacity
       this.eventBus.$emit('setPolygonOpacity', {polygonIndex, fillOpacity })
     }

@@ -4,13 +4,13 @@
       <v-flex xs2 sm2 md1>
         <v-badge overlap left v-model="showNewInfo" color="info">
           <b slot="badge">i</b>
-          <v-btn 
-            :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''" 
+          <v-btn
+            :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''"
             class="open-menu" slot="default" flat @click="openMenu()"
             v-smart-tooltip="{
-              show: showRouteDetailsTooltip, 
-              text: $t('simplePlaceSearch.openSidebarToSeeRouteDetails'), 
-              position: 'right', 
+              show: showRouteDetailsTooltip,
+              text: $t('simplePlaceSearch.openSidebarToSeeRouteDetails'),
+              position: 'right',
               dark: true
             }"
           >
@@ -24,7 +24,7 @@
             id-postfix="simple-place-search"
             :model="place"
             :directions-button-tooltip="showDirectionsBtnTooltip"
-            directions-button-tooltip-position="bottom"   
+            directions-button-tooltip-position="bottom"
             :autofocus="true"
             :single="true"
             @selected="selectPlace"

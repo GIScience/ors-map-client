@@ -21,7 +21,7 @@ export default {
       highlighData.sections.push(segmentData)
       this.eventBus.$emit('highlightPolylineSections', highlighData)
     },
-    buildExtraHighlighPolylineData (step, index) {
+    buildExtraHighlighPolylineData (step) {
       const color = constants.segmentHighlightColor
       const label = step.instruction.replace(/<(?:.|\n)*?>/gm, '')
       const intervals = [step.way_points]

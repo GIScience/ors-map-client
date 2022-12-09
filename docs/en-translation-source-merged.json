@@ -524,7 +524,7 @@
     "gestureHandling": {
       "touch": "Use two fingers to move the map",
       "scroll": "Use ctrl + scroll to zoom the map",
-      "scrollMac": "Use ⌘ + scroll to zoom the map"
+      "scrollMac": "Use \u2318 + scroll to zoom the map"
     }
   },
   "placesCarousel": {
@@ -568,9 +568,9 @@
       "miles": "Miles"
     },
     "areUnits": {
-      "sqKms": "km²",
+      "sqKms": "km\u00b2",
       "hectare": "Hectare",
-      "sqMeters": "m²"
+      "sqMeters": "m\u00b2"
     }
   },
   "orsDictionary": {

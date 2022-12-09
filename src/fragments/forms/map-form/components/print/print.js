@@ -35,7 +35,7 @@ export default {
      */
     generateAndPrintView() {
       this.showInfo(this.$t('print.preparingPrinting'), { timeout: 0 })
-      // Make sure the sidebar is closed before the 
+      // Make sure the sidebar is closed before the
       // map view image is captured
       let leftSideBarOpen = this.$store.getters.leftSideBarOpen
       let sidebarIsPinned = this.$store.getters.leftSideBarPinned
@@ -52,7 +52,7 @@ export default {
         // Get current rendered map view from DOM
         let mapView = document.getElementById(constants.mapViewElementId)
 
-        // Hide all over map elements before 
+        // Hide all over map elements before
         // capturing the map view image
         this.setMapViewControlsVisibility(mapView, false)
         let context = this
@@ -81,7 +81,7 @@ export default {
 
     /**
      * Set the printing HTML based on the mode template
-     * @param {String} mapImageUrlData 
+     * @param {String} mapImageUrlData
      * @returns {String}
      */
     setTemplatePrintingHtml(mapImageUrlData) {
@@ -144,8 +144,8 @@ export default {
 
     /**
      * Set map view controls visibility
-     * @param {HtmlNode} mapView 
-     * @param {Boolean} visible 
+     * @param {HtmlNode} mapView
+     * @param {Boolean} visible
      */
     setMapViewControlsVisibility(mapView, visible) {
       let buttonsOverMap = mapView.getElementsByClassName('v-btn')

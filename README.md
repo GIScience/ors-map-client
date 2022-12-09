@@ -1,4 +1,4 @@
-# ORS map client #
+# ORS map client
 
 [![Test](https://github.com/GIScience/ors-map-client/actions/workflows/test.yml/badge.svg)](https://github.com/GIScience/ors-map-client/actions/workflows/test.yml)
 
@@ -17,7 +17,7 @@ code understanding.
 
 ![ORS map client](docs/ors-map-client.png?raw=true "ORS map client")
 
-## Sections ##
+## Sections
 
 - [Set up and run locally](#set-up-and-run-locally)
 - [App folders](#app-folders)
@@ -34,13 +34,13 @@ code understanding.
 - [Contribute](#contribute)
 - [Additional documentation](#additional-documentation)
 
-### Set up and run locally ###
+### Set up and run locally
 
 Run the app locally in three steps: set the environment up, get the code and define a configuration file.
 
 1. To manage dependencies and pack the app it is necessary to have Node version 12.
-If you already have it, skip this step.
-If you don't, please install it by running:
+   If you already have it, skip this step.
+   If you don't, please install it by running:
 
 ```sh
 curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
@@ -72,11 +72,11 @@ npm install
 - default-map-settings`-example`.js => **default-map-settings.js**
 - settings-options`-example`.js => **settings-options.js**
 
-   If you are using a linux/unix compatible terminal, you can do that by running:
+  If you are using a linux/unix compatible terminal, you can do that by running:
 
-   ```sh
+  ```sh
   cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
-   ```
+  ```
 
 4. Set the app-config.js values for:
 
@@ -95,7 +95,7 @@ npm run dev
 # This will start a standalone http node server and the host and port to access it will be displayed
 ```
 
-### App folders ###
+### App folders
 
 App folder structure under `src`:
 
@@ -112,7 +112,7 @@ App folder structure under `src`:
 - `store` - app store definitions
 - `support` - support utilities, like geo-utils, ors-api-runner, routes-resolver and app modes
 
-### App flow overview ###
+### App flow overview
 
 This is a Single Page Application (SPA). This means that the client app is loaded in the browser and defines which
 components and pages are processed based on the browser URL.
@@ -127,31 +127,31 @@ The app load cycle follows these steps:
 2. `main.js` will run a request to get necessary data from a service and then create a VueJS app instance and load the `App.vue`. At this point `AppHooks` is set up and attached to the main VueJS instance and then the `appLoaded` hook is called.
 3. `App.vue` includes all basic navigation components, like menu, sidebar, footer etc.
 4. After loading all routes (including the ones in the `pages` sub folder) the page with the `/` route (`Maps.vue`) will
- also be rendered in the `<router-view></router-view>` slot in `App.vue` component.
+   also be rendered in the `<router-view></router-view>` slot in `App.vue` component.
 
 Data flow, state and requests to services, in a simplified view, happens as follows:
 
 - The app is loaded
   1. the API data are fetched from ORS website service and if `appConfig.appMenu.useORSMenu` is **true**, the menu items
-   are loaded in `src/main.js` using `src/app-loader.js`.
+     are loaded in `src/main.js` using `src/app-loader.js`.
   2. the app `mode` is defined based on the matching URL in the `maps.route.js`
   3. the `maps` page, uses the app mode utility to define the app state using the current `mode`.
-   This utility will also populate the values of the `ors-map-filters` based on the URL and build the `AppRouteData`
-   (in src/models/app-route-data.js).
+     This utility will also populate the values of the `ors-map-filters` based on the URL and build the `AppRouteData`
+     (in src/models/app-route-data.js).
   4. based on the app mode/state certain components are activated/displayed
   5. Every component, once activated, may use the data in `src/config/ors-map-filters` to render its elements and may
-   run requests to the ORS api using the `src/support/ors-api-runner`.
-   Once the request succeed, the response data will be used to fill the `MapViewData` object.
+     run requests to the ORS api using the `src/support/ors-api-runner`.
+     Once the request succeed, the response data will be used to fill the `MapViewData` object.
   6. Once an input is changed the app goes to a new URL and this makes the flow restart at the step 2.
   7. If a component changes the `MapViewData` model, it emits an event to the `maps` page, that passes the current
-   `MapViewData` object to the `MapView` component.
+     `MapViewData` object to the `MapView` component.
   8. Interactions via `MapView` may result in events sent back to `maps` page, that may notify other child components,
-   that in their turn may change the URL and trigger the step 2 again.
+     that in their turn may change the URL and trigger the step 2 again.
   9. Several app hooks are called during the app flow, and it is possible to listen to these hooks and run custom code
-   to modify some app behavior.
-    The available hooks are listed in `src/config-examples/hooks-example.js` and must be coded in `src/config/hooks.js`.
+     to modify some app behavior.
+     The available hooks are listed in `src/config-examples/hooks-example.js` and must be coded in `src/config/hooks.js`.
 
-### Feature-by-folder design ###
+### Feature-by-folder design
 
 This app uses feature by folder components and predefined folders where the business code should be placed in.
 Example of this design usage:
@@ -182,10 +182,10 @@ The app will automatically load:
 - the defined routes in files ending with `.routes.js`
 - the store definitions in files ending with `.store.js`
 
-### Reserved methods and accessors ###
+### Reserved methods and accessors
 
 All the VueJS components created (including the fragments) will have, by default, the following methods/accessors
- defined in the main vue instance app:
+defined in the main vue instance app:
 
 - `showMessage (msg, theme, options)` - shows a message using the toaster with specified theme and options
 
@@ -198,17 +198,17 @@ All the VueJS components created (including the fragments) will have, by default
 - `showSuccess (msg, options)` - shows a success message using the toaster with the specified options
 
 - `confirmDialog (title, text, options)` - shows a confirm-dialog with the specified title, text and options and returns
-a promise. If the user clicks `yes`, the promise will be resolved, if s/he clicks on `no`, the promise will be rejected.
+  a promise. If the user clicks `yes`, the promise will be resolved, if s/he clicks on `no`, the promise will be rejected.
 
 - `eventBus` - accessor to global event bus object, that allows broadcasting and getting events in all components
 
 - `$store` - accessor to app vuex-store
 
-### Pages ###
+### Pages
 
 - `maps` - the page where the user can search places, routes and create isochrones.
 
-### Configuration, theming, customization and extension ###
+### Configuration, theming, customization and extension
 
 The map client app can be configured, customized and extended. Several aspects can be defined/changed in order to
 disable features, customize visual identity and change/extend its features/behaviors.
@@ -243,9 +243,9 @@ The ways to change/extend the app are:
 1. Define custom settings (see files in `src/config`) that will change the standard way that the app works.
 1. Add hook listeners in `src/config/hooks.js` and run custom code inside those hooks
 1. Create a plug-in that has its methods linked to hooks called during the app flow
-(see `src/plugins/example-plugin/`)
+   (see `src/plugins/example-plugin/`)
 
-#### Configuration ####
+#### Configuration
 
 It is possible to configure/disable some app features and behaviors by changing the values
 of the `src/config/app-config.js`. It is also possible to change the app theme/colors by changing the values of
@@ -255,63 +255,64 @@ The available filters/options to be used in the services are defined in the `src
 They can be adjusted according the needs. Other files can be used to adjust app configurations are the
 `layer-zoom-mapping.js`, `settings-options.js` and the `default-map-settings.js`.
 
-#### Plug-ins ####
+#### Plug-ins
 
 It is possible to add plug-ins to the application in order to change its behavior or extend it.
 Please check [docs/plugins.md](docs/plugins.md) for more details.
 
-### Add language ###
+### Add language
 
-#### - Generate a translation file ####
+#### - Generate a translation file
 
 If you just want to translate the application strings for a certain language, but you don't have the skills to `"code"`
 it into the app, just download the [en-translation-source-merged.json](/docs/en-translation-source-merged.json),
 translate it, and contact us.
 
-**Check the file [src/i18n/i18n-builder.js](src/i18n/i18n-builder.js) to see how to generate merged translation sources*
+\*_Check the file [src/i18n/i18n-builder.js](src/i18n/i18n-builder.js) to see how to generate merged translation sources_
 
-#### - Add a language to the app ####
+#### - Add a language to the app
 
 The app uses a feature-by-folder design, so each component might have its own translation strings.
 That is why there is no single translation file. If you want to add a translation and `"implement"` it into the app,
 follow the steps below.
 
 - Create a copy of the /src/i18n/translations/`en-us` folder giving it the identification of the target language.
-For example: if you are adding the French from France, then the folder should be called `fr-fr`.
+  For example: if you are adding the French from France, then the folder should be called `fr-fr`.
 
 - Edit the `builder.js` file inside the just created folder in order to replace the language pattern to the one you are
-creating.
-For example, similar to `/\.i18n\.en-us\.js$` add `/\.i18n\.fr-fr\.js$`.
+  creating.
+  For example, similar to `/\.i18n\.en-us\.js$` add `/\.i18n\.fr-fr\.js$`.
 
 - Translate the language strings for each key in the `global.js` file
 
 - Search for each file inside the `/src` folder that ends with `i18n.en-us.js` and create a copy of it and each one so
-that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux/unix compatible terminal, you can do that by running:
+  that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux/unix compatible terminal, you can do that by running:
 
   ```sh
   find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \;
   # where the last occurrence of locale id (in this case `fr-fr`) is the one you are creating
-   ```
+  ```
 
 - Translate the language strings for each key in all the files created in the previous step.
 
 - Edit `/src/config/settings-options.js` and add the new locale object to the `appLocales` array (e.g.
- `{ text: 'Français FR', value: 'fr-fr' }`).
+  `{ text: 'Français FR', value: 'fr-fr' }`).
 
 - Open the src/i18n/`i18n-builder.js` file and apply the following changes:
+
   - Import the object from the new language builder that you just created
-  (e.g. `import frFRTranslations from './translations/fr-fr/builder'`)
+    (e.g. `import frFRTranslations from './translations/fr-fr/builder'`)
 
   - Inside the `build` method, add:
 
     - the new language placeholder object to the messages object (e.g. `, 'fr-fr': {}`).
 
     - the result of the new language building to the previously created message object
-     (e.g. `i18n.messages['fr-fr'] = frFRTranslations.build()`.
+      (e.g. `i18n.messages['fr-fr'] = frFRTranslations.build()`.
 
   - Save all the files changed and rebuild the application.
 
-### Menu ###
+### Menu
 
 The menu displayed in the header and in the sidebar (low resolution and mobile devices) is loaded from the ORS website
 back-end and adjusted to be shown according the resolution.
@@ -321,10 +322,10 @@ It dispatches the store `fetchMainMenu` and `@/common/main-menu.js` retrieves th
 `@/support/menu-manager.js` and `@/support/model-service.js`.
 Once the items from the back-end are loaded, `MenuManager` adds or removes custom items and defines icons for sidebar
 items.
-The items displayed on the menu can be changed by running custom code on the `loadMenuItems`  and/or the
+The items displayed on the menu can be changed by running custom code on the `loadMenuItems` and/or the
 `modifyMenu` hooks. Check the `/src/config-example/hooks-example.js` to see more details.
 
-### Debug ###
+### Debug
 
 If you are using [WebStorm](https://www.jetbrains.com/webstorm/download) you should set the
 _webpack config_ (settings -> Languages & Frameworks -> JavaScript -> Webpack) to
@@ -336,7 +337,7 @@ extension.
 After doing that, open the application in the browser and press F12 and select the tab `Console`, `Vue` or `Sources`
 (and then expand e.g.: `webpack://src`).
 
-### Build and deploy ###
+### Build and deploy
 
 The app must be built before it is deployed. To do so, run:
 
@@ -345,28 +346,31 @@ cd <project-root-folder>/
 npm run build
 ```
 
-*Important:* to run the built application you have to set up a web server and put this repository (after the build)
+_Important:_ to run the built application you have to set up a web server and put this repository (after the build)
 there.
 The `index.html` at the root of this repository will load the app.
 
 For a detailed explanation on how webpack works, check out the [guide](http://vuejs-templates.github.io/webpack/) and
 [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-### Tests ###
+### Tests
 
 Testing is done using the [cypress](https://docs.cypress.io) testing framework.
 
 All tests (End-to-end(e2e), component and unit) can be executed by running:
+
 ```sh
 npm run test:ci
 ```
 
 During development, you start the development server and use the following command which opens the cypress UI interface
 to view the test output and hot reload after making changes:
+
 ```shell
 # and do 'npm run dev' before
 npm run test
 ```
+
 You can run tests in any standard browser that you have installed.
 If you are new to cypress check out the "[Getting started](https://docs.cypress.io/guides/getting-started/opening-the-app)"
 documentation, and keep it close.
@@ -374,6 +378,7 @@ An overview on the usable [assertions](https://docs.cypress.io/guides/references
 test cases.
 
 #### Structure
+
 Component tests should be written in the component itself e.g.
 `../fragments/MyComponent.cy.js` for `../fragments/MyComponent.vue`
 
@@ -382,10 +387,22 @@ clarity be named the same e.g. `../support/__tests__/utils.cy.js` for `../suppor
 
 End-to-end tests should be created in `./cypress/e2e/test-name.cy.js`
 
+### Contribute
 
-### Contribute ###
+#### pre-commit git hooks
 
-#### Commits and versioning ####
+We use `pre-commit` to make sure contributions have the same basic quality.
+Before you commit make sure that your commit satisfies all `pre-commit` checks.
+For details on individual checks see `.pre-commit-config.yaml`.
+
+```bash
+# Install the pre-commit git hooks to be automatically executed before committing.
+pre-commit install --hook-type commit-msg --hook-type pre-push --hook-type pre-commit
+# Manually run all pre-commits. The first execution will setup the environment and can take some time.
+pre-commit run --all
+```
+
+#### Commits and versioning
 
 - This app uses the `commitizen` plugin to generate standardized commit types/messages. After applying any change in a feature branch, use `git add .` and then `npm run commit` (instead of `git commit ...`)
 - The plugin `standard-version` is used to generate changelog entries, version tag and to bump the app version in package.json.
@@ -394,57 +411,58 @@ Deployment flow:
 
 1. Apply the changes in a feature branch and test it locally
 
-    *Important*: to run the tests, `src/config/app-config.js` must contain:
-    - `orsApiKey`: 'a-valid-ors-api-key-here',
-    - `useUserKey`: true,
+   _Important_: to run the tests, `src/config/app-config.js` must contain:
 
-    By default, `src/config/app-config.js` is ignored by git. So, the changes are just local and used to run the tests.
+   - `orsApiKey`: 'a-valid-ors-api-key-here',
+   - `useUserKey`: true,
 
-    ```sh
-    # Run automated tests
-    npm run test:ci
-    ```
+   By default, `src/config/app-config.js` is ignored by git. So, the changes are just local and used to run the tests.
 
-    *Important:* Besides the automated tests, some manual/human tests are also recommended
+   ```sh
+   # Run automated tests
+   npm run test:ci
+   ```
+
+   _Important:_ Besides the automated tests, some manual/human tests are also recommended
 
 2. Once the feature is ready, merge it to `master`, and run the tests
 
-    ```sh
-    git checkout master
-    git merge feature/<name-of-my-future-branch>
-    # Run automated tests after merge
-    npm run test
-    ```
+   ```sh
+   git checkout master
+   git merge feature/<name-of-my-future-branch>
+   # Run automated tests after merge
+   npm run test
+   ```
 
 3. If the tests pass, create a release
 
-    ```sh
-    # Create a release. This will :
-    # - bump the app version,
-    # - generate a new release commit
-    # - create a new git tag with the app version
-    # - Create an entry in CHANGELOG.md
-    npm run release
-    ```
+   ```sh
+   # Create a release. This will :
+   # - bump the app version,
+   # - generate a new release commit
+   # - create a new git tag with the app version
+   # - Create an entry in CHANGELOG.md
+   npm run release
+   ```
 
 4. Push the changes applied to master
 
-    *Important*: the release command will output a command, but We `DON'T USE the whole outputted command`, since there is no npm package to be published.
+   _Important_: the release command will output a command, but We `DON'T USE the whole outputted command`, since there is no npm package to be published.
 
-    ```sh
-    # The command outputted is expected to be:
-    # `git push --follow-tags origin master && npm publish`
+   ```sh
+   # The command outputted is expected to be:
+   # `git push --follow-tags origin master && npm publish`
 
-    # We must use/run only
-    git push --follow-tags origin master
+   # We must use/run only
+   git push --follow-tags origin master
 
-    # Once you push it, the automated tests will be triggered on Github actions
-    # Check the automated tests results on https://github.com/GIScience/ors-map-client/actions
-    ```
+   # Once you push it, the automated tests will be triggered on Github actions
+   # Check the automated tests results on https://github.com/GIScience/ors-map-client/actions
+   ```
 
-*For more details about `commitizen` and `standard-version` see [this article](https://medium.com/tunaiku-tech/automate-javascript-project-versioning-with-commitizen-and-standard-version-6a967afae7)* and [standard-version documentation](https://github.com/conventional-changelog/standard-version)
+_For more details about `commitizen` and `standard-version` see [this article](https://medium.com/tunaiku-tech/automate-javascript-project-versioning-with-commitizen-and-standard-version-6a967afae7)_ and [standard-version documentation](https://github.com/conventional-changelog/standard-version)
 
-#### Branch policy ####
+#### Branch policy
 
 The `master` branch is used as the stable and most updated branch. Any new feature goes to feature branch, then it is tested, committed and finally merged into `master`. So, master has always the latest version and the production version.
 Considering this, any merge request must be done targeting `master`.
@@ -463,7 +481,7 @@ Because of this, we have also to analyze the trade off of such contributions.
 We just have to decide about them together before the hands on.
 This approach is intended to create cohesion and keep the project sustainable.
 
-### Additional documentation ###
+### Additional documentation
 
 There are additional documents that are part of the software documentation. they are in the folder `/docs` and are listed below:
 

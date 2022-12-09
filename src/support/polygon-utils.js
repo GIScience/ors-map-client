@@ -7,7 +7,7 @@ const PolygonUtils = {
 
   /**
    * Prepare polygon for view
-   * @param {*} polygon 
+   * @param {*} polygon
    * @param {*} translations
    * @param {*} index
    */
@@ -27,9 +27,9 @@ const PolygonUtils = {
 
   /**
    * Create polygon
-   * @param {*} coordinates 
-   * @param {*} options 
-   * @param {*} shapeType 
+   * @param {*} coordinates
+   * @param {*} options
+   * @param {*} shapeType
    * @returns {Leaflet.Polygon}
    */
   createPolygon (coordinates, options, shapeType) {
@@ -44,7 +44,7 @@ const PolygonUtils = {
 
   /**
    * Build polygon options
-   * @param {Object} polygonData 
+   * @param {Object} polygonData
    * @returns {Object}
    */
   buildPolygonOptions (polygonData, defaultColor) {
@@ -68,7 +68,7 @@ const PolygonUtils = {
   },
   /**
    * Calculate polygon area
-   * @param {Object} polygon 
+   * @param {Object} polygon
    * @returns {String} polygon area + unit
    */
   calcPolygonArea (polygon) {

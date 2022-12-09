@@ -16,7 +16,7 @@
                     id-postfix="places-and-directions"
                     :support-directions="inputSupportsDirections"
                     :directions-button-tooltip="$store.getters.isSidebarVisible && active"
-                    directions-button-tooltip-position="right" 
+                    directions-button-tooltip-position="right"
                     support-direct-routing
                     :pick-place-supported="places.length > 1"
                     :support-search="places.length === 1"

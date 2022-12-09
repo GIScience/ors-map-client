@@ -11,7 +11,7 @@ export default {
       'foot-hiking': 'Foot hiking',
       'driving-car': 'Car',
       'driving-hgv': 'Heavy vehicle',
-      'wheelchair': 'Wheelchair',      
+      'wheelchair': 'Wheelchair',
       'hgv': 'Heavy vehicle',
       'bus': 'Bus',
       'agricultural': 'Agricultural vehicle',
@@ -197,7 +197,7 @@ export default {
       vehicle_type: {
         label: 'Vehicle type',
         description: 'Vehicle type to be considered for the route calculation',
-      }          
-    }  
+      }
+    }
   }
 }

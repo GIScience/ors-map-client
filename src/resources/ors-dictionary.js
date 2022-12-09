@@ -60,7 +60,7 @@ const orsDictionary = {
     '32':	'tunnel',
     '64':	'paved_road',
     '128': 'ford',
-  },  
+  },
   traildifficulty: {
     '0': 'no_data',	// no tag 	no tag
     '1': '0', // sac_scale=hiking 	mtb:scale=0
@@ -156,7 +156,7 @@ const orsDictionary = {
       '#8B4513',
       '#A52A2A',
       '#800000'
-    ], 
+    ],
     roadaccessrestrictions: {
       0: 'gray',
       1: 'green',
@@ -180,7 +180,7 @@ const orsDictionary = {
       '32':	'#BDB76B',
       '64':	'#FFFF00',
       '128': '#808000',
-    },  
+    },
     traildifficulty: {
       '0': 'gray',	// no tag 	no tag
       '1': '#F4A460', // sac_scale=hiking 	mtb:scale=0

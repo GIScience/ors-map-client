@@ -1,4 +1,4 @@
-// This is an example file and is expected to be cloned 
+// This is an example file and is expected to be cloned
 // without the -example on the same folder that it resides.
 // You can change the items of an array of options but not remove
 // an options array. Only Valid options must be present

@@ -144,7 +144,7 @@ export default {
     toggleRoundTrip () {
       this.roundTripActive = !this.roundTripActive
     },
-  
+
     /**
      * Set a a suggested place as the selected one for a given place input
      * @param {*} data - can be the place object or an object containing the place
@@ -159,7 +159,7 @@ export default {
         const route = appMode.getRoute(this.places)
         if (Object.keys(route.params).length > 1) { // params contains data and placeName? props
           this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
-          this.$router.push(route)          
+          this.$router.push(route)
         }
       }
     },
@@ -224,7 +224,7 @@ export default {
      */
     calculateIsochrones () {
       const context = this
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const places = context.getFilledPlaces()
 
         if (places.length > 0) {

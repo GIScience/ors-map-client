@@ -61,7 +61,7 @@ export default {
       },
       restrictions: {
         label: 'Restrições'
-      },      
+      },
       axleload: {
         label: 'Carga do eixo',
         description: 'A carga máxima por eixo em toneladas'
@@ -197,7 +197,7 @@ export default {
       vehicle_type: {
         label: 'Tipo de veículo',
         description: 'Tipo de veículo a ser considerado para o cálculo da rota',
-      } 
+      }
     }
   }
 }

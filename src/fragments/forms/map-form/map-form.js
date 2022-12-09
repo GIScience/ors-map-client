@@ -67,7 +67,7 @@ export default {
         }
       } else {
         this.activeTab = 0
-        
+
       }
     }
   }

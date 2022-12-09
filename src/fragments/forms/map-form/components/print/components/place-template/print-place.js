@@ -19,6 +19,6 @@ export default {
   computed: {
     place () {
       return this.localMapViewData.places[0]
-    }    
+    }
   }
 }
