@@ -1,5 +1,5 @@
 export default {
-mapView: {
+  mapView: {
     routeTo: 'Trasa na toto místo',
     polygonDetails: 'Podrobnosti o polygonu',
     polygon: 'Polygon',
