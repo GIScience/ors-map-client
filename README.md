@@ -38,15 +38,15 @@ code understanding.
 
 Run the app locally in three steps: set the environment up, get the code and define a configuration file.
 
-1. To manage dependencies and pack the app it is necessary to have Node version 12.
+1. To manage dependencies and pack the app it is necessary to have Node version 16.
    If you already have it, skip this step.
    If you don't, please install it by running:
 
 ```sh
-curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
 apt-get update && \
 apt-get install -y nodejs && \
-npm install -g npm && \
+npm install -g pnpm && \
 npm update -g
 ```
 
@@ -59,7 +59,7 @@ git clone https://github.com/GIScience/ors-map-client.git
 cd ors-map-client
 
 # The installation of dependencies is required before running the app:
-npm install
+pnpm install
 ```
 
 3. Copy fo the files in the `src/config-example` to `src/config`, without `-example` in their names. The files are:
@@ -91,7 +91,7 @@ The filters, theme and hooks of the map client can be customized if needed.
 At this point the app is ready to run in `dev` mode. Do it by executing the following command in the app root folder:
 
 ```sh
-npm run dev
+pnpm dev
 # This will start a standalone http node server and the host and port to access it will be displayed
 ```
 
@@ -343,7 +343,7 @@ The app must be built before it is deployed. To do so, run:
 
 ```sh
 cd <project-root-folder>/
-npm run build
+pnpm build
 ```
 
 _Important:_ to run the built application you have to set up a web server and put this repository (after the build)
@@ -360,15 +360,15 @@ Testing is done using the [cypress](https://docs.cypress.io) testing framework.
 All tests (End-to-end(e2e), component and unit) can be executed by running:
 
 ```sh
-npm run test:ci
+pnpm test:ci
 ```
 
 During development, you start the development server and use the following command which opens the cypress UI interface
 to view the test output and hot reload after making changes:
 
 ```shell
-# and do 'npm run dev' before
-npm run test
+# and do 'pnpm dev' before
+pnpm test
 ```
 
 You can run tests in any standard browser that you have installed.
@@ -404,7 +404,7 @@ pre-commit run --all
 
 #### Commits and versioning
 
-- This app uses the `commitizen` plugin to generate standardized commit types/messages. After applying any change in a feature branch, use `git add .` and then `npm run commit` (instead of `git commit ...`)
+- This app uses the `commitizen` plugin to generate standardized commit types/messages. After applying any change in a feature branch, use `git add .` and then `pnpm commit` (instead of `git commit ...`)
 - The plugin `standard-version` is used to generate changelog entries, version tag and to bump the app version in package.json.
 
 Deployment flow:
@@ -413,17 +413,17 @@ Deployment flow:
 
    _Important_: to run the tests, `src/config/app-config.js` must contain:
 
-   - `orsApiKey`: 'a-valid-ors-api-key-here',
-   - `useUserKey`: true,
+- `orsApiKey`: 'a-valid-ors-api-key-here',
+- `useUserKey`: true,
 
-   By default, `src/config/app-config.js` is ignored by git. So, the changes are just local and used to run the tests.
+By default, `src/config/app-config.js` is ignored by git. So, the changes are just local and used to run the tests.
 
-   ```sh
-   # Run automated tests
-   npm run test:ci
-   ```
+```sh
+# Run automated tests
+pnpm test:ci
+```
 
-   _Important:_ Besides the automated tests, some manual/human tests are also recommended
+_Important:_ Besides the automated tests, some manual/human tests are also recommended
 
 2. Once the feature is ready, merge it to `master`, and run the tests
 
@@ -431,7 +431,7 @@ Deployment flow:
    git checkout master
    git merge feature/<name-of-my-future-branch>
    # Run automated tests after merge
-   npm run test
+   pnpm test
    ```
 
 3. If the tests pass, create a release
@@ -442,7 +442,7 @@ Deployment flow:
    # - generate a new release commit
    # - create a new git tag with the app version
    # - Create an entry in CHANGELOG.md
-   npm run release
+   pnpm release
    ```
 
 4. Push the changes applied to master
@@ -451,7 +451,7 @@ Deployment flow:
 
    ```sh
    # The command outputted is expected to be:
-   # `git push --follow-tags origin master && npm publish`
+   # `git push --follow-tags origin master && pnpm publish`
 
    # We must use/run only
    git push --follow-tags origin master

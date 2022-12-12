@@ -48,15 +48,35 @@ jobs:
         uses: actions/checkout@v3
       - name: Set up default config files
         run: cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: Cache PNPM and Cypress
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/Cypress
+            ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-cypress-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-cypress-store-
       - name: Cypress install
         uses: cypress-io/github-action@v4
         with:
           runTests: false
+          install-command: pnpm install --frozen-lockfile --silent
       - name: Cypress info
-        run: npx cypress info
+        run: pnpm cypress info
       - name: Run tests
         env:
           ORSKEY: ${{ secrets.ORSKEY }}
           BITLYLOGIN: ${{ secrets.BITLYLOGIN }}
           BITLYAPIKEY: ${{ secrets.BITLYAPIKEY }}
-        run: npm run test:ci
+        run: pnpm test:ci
