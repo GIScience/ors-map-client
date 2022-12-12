@@ -20,8 +20,6 @@ repos:
       - id: mixed-line-ending
         args: ["--fix=lf"]
         description: Forces to replace line ending by the UNIX 'lf' character.
-      - id: no-commit-to-branch
-        args: [--branch, master, --branch, main]
       - id: check-added-large-files
         args: ["--maxkb=500"]
   - repo: https://github.com/pre-commit/mirrors-eslint
