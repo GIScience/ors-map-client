@@ -1,4 +1,3 @@
-
 export default {
   maps: {
     pageTitle: 'ORS Mapy',

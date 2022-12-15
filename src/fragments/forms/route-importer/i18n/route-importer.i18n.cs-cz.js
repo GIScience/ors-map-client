@@ -1,4 +1,3 @@
-
 export default {
   routeImporter: {
     loadRouteFile: 'Import souboru',

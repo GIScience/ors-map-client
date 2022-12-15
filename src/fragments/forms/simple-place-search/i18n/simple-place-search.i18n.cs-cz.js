@@ -1,4 +1,3 @@
-
 export default {
   simplePlaceSearch: {
     noPlaceFound: 'Nenalezeno žádné místo s přidaným obsahem',

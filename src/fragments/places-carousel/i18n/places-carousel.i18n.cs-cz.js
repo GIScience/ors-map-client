@@ -1,4 +1,3 @@
-
 export default {
   placesCarousel: {
     layer: 'Vrstva',

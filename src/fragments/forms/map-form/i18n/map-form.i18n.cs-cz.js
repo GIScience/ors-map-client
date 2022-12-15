@@ -1,4 +1,3 @@
-
 export default {
   mapForm: {
     placesAndDirections: 'Vyhledat a přejít',

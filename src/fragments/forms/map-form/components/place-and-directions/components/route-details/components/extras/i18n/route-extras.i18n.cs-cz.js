@@ -1,4 +1,3 @@
-
 export default {
   routeExtras: {
     extras: 'Doplňky k trase',

@@ -1,4 +1,3 @@
-
 export default {
   download: {
     documentTitle: 'ORS trasa',

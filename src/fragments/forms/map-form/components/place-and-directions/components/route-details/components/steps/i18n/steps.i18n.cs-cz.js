@@ -1,4 +1,3 @@
-
 export default {
   steps: {
     instruction: 'Instrukce',

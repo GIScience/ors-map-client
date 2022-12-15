@@ -1,4 +1,3 @@
-
 export default {
   placeDetails: {
     layer: 'Vrstva',

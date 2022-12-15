@@ -1,4 +1,3 @@
-
 export default {
   formActions: {
     addPlaceInput: 'Přidat vstupní místo',

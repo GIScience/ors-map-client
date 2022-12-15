@@ -1,4 +1,3 @@
-
 export default {
   altitudePreview: {
     expandAltitudeChart: 'Rozbalit tabulku',

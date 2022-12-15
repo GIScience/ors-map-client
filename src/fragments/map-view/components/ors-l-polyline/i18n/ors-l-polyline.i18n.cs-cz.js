@@ -1,4 +1,3 @@
-
 export default {
   orsLPolyline: {
     type: 'Typ',

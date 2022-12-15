@@ -1,4 +1,3 @@
-
 export default {
   routeDetails: {
     routeDetails: 'Route details',

@@ -1,4 +1,3 @@
-
 export default {
   print: {
     print: 'Tisk',

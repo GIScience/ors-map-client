@@ -1,4 +1,3 @@
-
 export default {
   placeInput: {
     findAPlace: 'Najít místo',

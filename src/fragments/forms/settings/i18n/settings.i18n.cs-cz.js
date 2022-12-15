@@ -1,4 +1,3 @@
-
 export default {
   settings: {
     endpointsSectionTitle: 'Koncové body služby (URI nebo úplná adresa URL)',
