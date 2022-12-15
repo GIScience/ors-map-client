@@ -64,6 +64,21 @@ describe('Directions component', () => {
       cy.get('.custom-html-icon-div').eq(0).should('have.css', 'background-color', 'rgb(0, 128, 0)')
       cy.get('.custom-html-icon-div').eq(1).should('have.css', 'background-color', 'rgb(255, 0, 0)')
     })
+
+    it('shows the popup correctly', () => {
+      let contentWidth = 0
+      cy.get('.cy-route-popup-icon').then((element) => {
+        contentWidth += element.width()
+      })
+      cy.get('.cy-route-popup-text').then((element) => {
+        contentWidth += element.width()
+      })
+
+      // content width is larger than width of above 2 divs combined
+      cy.get('.leaflet-popup-content').then(($popup) => {
+        expect($popup.width()).to.be.gte(contentWidth)
+      })
+    })
   })
 
   context('loads round trip from url link', () => {
