@@ -1,8 +1,8 @@
 export default {
   isochrones: {
-    isochrones: 'Isochrony',
-    isochronesReady: 'Isochrony připraveny',
-    calculatingIsochrones: 'Výpočet isochron ...',
+    isochrones: 'Izochrony',
+    isochronesReady: 'Izochrony připraveny',
+    calculatingIsochrones: 'Výpočet izochron ...',
     itWasNotPossibleToCalculateIsochronesWithTheDefinedOptions: 'S definovanými možnostmi nebylo možné izochrony vypočítat. Zkuste definovat menší izochrony.',
     couldResolveTheSelectedPlaceAsASuitableCenter: 'Vybraný bod nebylo možné vyřešit jako vhodný střed.',
     apiError: {
