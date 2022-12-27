@@ -14,7 +14,7 @@ export default {
     defaultMapSettingsRestored: 'Obnovení a uložení výchozího nastavení mapy',
     endpointsTitle: {
       directions: 'Instrukce',
-      isochrones: 'Isochrony',
+      isochrones: 'Izochrony',
       geocodeSearch: 'Hledání podle Geocode',
       autocomplete: 'Automatické dokončení Geocode',
       pois: 'Body zájmu',
