@@ -1,6 +1,6 @@
 export default {
   placesAndDirections: {
-    isochrones: 'Isochrony',
+    isochrones: 'Izochrony',
     place: 'místo',
     notRouteFound: 'Nebylo možné najít trasu spojující místa s vybraným profilem.',
     notRouteFoundWithFilters: 'Nebylo možné najít trasu spojující místa s vybraným profilem a filtry.',
@@ -21,7 +21,7 @@ export default {
       2000: 'Nelze analyzovat požadavek JSON',
       2001: 'Chybí požadovaný parametr',
       2002: 'Chybný formát parametru',
-      2003: 'Parametry trasy překračují jeden nebo více limitů. Nezapomeňte, že některé vyhýbací parametry mají limity, například délka trasy a plocha vyhýbacího polygonu, která nesmí překročit 20000 km2.',
+      2003: 'Parametry trasy překračují jeden nebo více limitů. Nezapomeňte, že některé vyhýbací parametry mají limity, například délka trasy a plocha vyhýbacího polygonu, která nesmí překročit 20000 km².',
       2004: 'Parametry trasy překračují jeden nebo více limitů. Nezapomeňte, že přibližná vzdálenost trasy nesmí být větší než 6000 km. Při použití určitých možností trasy nebo vyhýbacích možností nesmí být přibližná vzdálenost trasy větší než 150 km.',
       2006: 'Nelze analyzovat požadavek na obsluhu exportu',
       2007: 'Nepodporovaný formát exportu',
