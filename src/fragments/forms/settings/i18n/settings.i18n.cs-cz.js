@@ -11,7 +11,7 @@ export default {
     distanceMarkers: 'Značky vzdálenosti',
     elevationProfile: 'Profil převýšení',
     mapSettings: 'Zobrazení mapy a další informace',
-    defaultMapSettingsRestored: 'Obnovení a uložení výchozího nastavení mapy',
+    defaultMapSettingsRestored: 'Výchozí nastavení mapy obnoveno a uloženo',
     endpointsTitle: {
       directions: 'Instrukce',
       isochrones: 'Izochrony',
