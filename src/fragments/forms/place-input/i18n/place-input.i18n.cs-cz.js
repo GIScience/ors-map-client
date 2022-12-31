@@ -27,7 +27,7 @@ export default {
     toggleDirect: 'Přepněte přímo odsud na další místo',
     clickOnTheMapToSelectAPlace: 'Vyberte místo kliknutím na místo na mapě',
     clickOnTheMapBtnToPickAPlace: 'Kliknutím na toto tlačítko vyberete místo na mapě pro tento vstup.',
-    goToDirectionsMode: 'kliknutím na tlačítko navigace se přepnete do režimu navigace.',
+    goToDirectionsMode: 'Kliknutím na tlačítko navigace se přepnete do režimu navigace.',
     clickToSearchAndShowResultsOnTheMap: 'Kliknutím zobrazíte výsledky vyhledávání na mapě'
   }
 }
