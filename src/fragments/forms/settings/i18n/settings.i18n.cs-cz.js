@@ -23,7 +23,7 @@ export default {
     apiKey: 'klíč API',
     customApiKey: 'Vlastní klíč API',
     apiBaseUrl: 'Základní URL API',
-    invalidSettingsValue: 'Neplatné hodnoty nastavení. Zkontrolujte pole nebo obnovte výchozí hodnoty',
+    invalidSettingsValue: 'Neplatná(é) hodnota(y) nastavení. Zkontrolujte pole nebo obnovte výchozí hodnotu(y)',
     restoreDefaults: 'Obnovit výchozí nastavení',
     advanced: 'Pokročilé',
     mapSettingsSaved: 'Nastavení mapy uloženo',
