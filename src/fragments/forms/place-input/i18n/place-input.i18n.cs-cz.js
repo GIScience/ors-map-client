@@ -23,7 +23,7 @@ export default {
     unknownSearchPlaceError: 'Chyba hledání neznámého místa',
     approximateDistance: 'Přibližná vzdálenost po přímce od aktuálního středu mapy',
     couldNotDetermineYourPreciseLocationUsingPreviousLocation: 'Vaši přesnou polohu nebylo možné určit. Místo toho bude použita vaše předchozí poloha',
-    pleaseTypeSomething: 'Zadejte něco k vyhledávání',
+    pleaseTypeSomething: 'Zadejte prosím něco k vyhledávání',
     toggleDirect: 'Přepněte přímo odsud na další místo',
     clickOnTheMapToSelectAPlace: 'Vyberte místo kliknutím na místo na mapě',
     clickOnTheMapBtnToPickAPlace: 'Kliknutím na toto tlačítko vyberete místo na mapě pro tento vstup.',
