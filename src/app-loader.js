@@ -48,8 +48,8 @@ class AppLoader {
           store.commit('apiDataRequested', true)
 
           // eslint-disable-next-line no-undef
-          var ORSKEY = process.env.ORSKEY         
-  
+          var ORSKEY = process.env.ORSKEY
+
           // By default, the app must use an ors API key stored in config.js
           if (appConfig.useUserKey) {
             if (appConfig.orsApiKey === 'put-here-an-ors-api-key' && ORSKEY && ORSKEY != '') {
@@ -65,7 +65,7 @@ class AppLoader {
             httpClient.http.get(appConfig.publicApiKeyUrl).then(response => {
               this.setInitialSettings(response.data, constants.publicEndpoints)
               resolve(response.data)
-            }).catch(error => {            
+            }).catch(error => {
               if (ORSKEY && ORSKEY !== 'put-an-ors-key-here' && ORSKEY != '') {
                 appConfig.orsApiKey = ORSKEY
               }
@@ -122,16 +122,16 @@ class AppLoader {
     // Save the api key and the endpoints to the default settings object
     defaultMapSettings.apiKey = apiKey
     defaultMapSettings.endpoints = endpoints
-  
+
     // WE will save the mapSettings on our store
     // but the default settings are preserved
     const mapSettings = utils.clone(defaultMapSettings)
-  
+
     // Get map settings from local storage
     const serializedMapSettings = localStorage.getItem('mapSettings')
-  
+
     var locale = null
-  
+
     // Restore settings stored in local storage, if available
     if (serializedMapSettings) {
       const storedMapSettings = JSON.parse(serializedMapSettings)
@@ -159,14 +159,14 @@ class AppLoader {
     if (!profile.value) {
       OrsFilterUtil.setFilterValue(constants.profileFilterName, defaultMapSettings.defaultProfile)
     }
-     
+
     this.saveSettings(mapSettings, locale)
-  
+
     let appInstance = AppLoader.getInstance()
     if (appInstance) { // main app instance may not be available when app is still loading
       appInstance.appHooks.run('mapSettingsChanged', mapSettings)
     }
-  
+
     // Save the data acquired flag as true
     store.commit('dataAcquired', true)
   }
@@ -178,7 +178,7 @@ class AppLoader {
   saveSettings (mapSettings, locale = null) {
     let fittingLocale = this.getFittingLocale(locale)
     mapSettings.locale = fittingLocale
-  
+
     let validRoutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) => {
       return l.value === fittingLocale
     })
@@ -192,7 +192,7 @@ class AppLoader {
         mapSettings.routingInstructionsLocale = validRoutingLocale.value
       }
     }
-  
+
     // Save the map settings
     store.commit('mapSettings', mapSettings)
   }
@@ -203,7 +203,7 @@ class AppLoader {
     return new Promise((resolve) => {
       let isEmbed = location.href.indexOf('/embed') > -1
       store.commit('embed', isEmbed)
-  
+
       let parts = location.href.split('/embed/')
       let mapSettings = store.getters.mapSettings
       if (Object.keys(mapSettings).length > 0 && isEmbed && Array.isArray(parts) && parts.length > 1 && parts[1] ) {
@@ -217,16 +217,16 @@ class AppLoader {
   }
 
   /**
-   * Load and mount the main VueJS app using the 
-   * @param {Object} App 
+   * Load and mount the main VueJS app using the
+   * @param {Object} App
    * @param {String} elementSelector
-   * @param {String} templateTag 
+   * @param {String} templateTag
    * @returns {Promise} that resolves a the main app Vue  instance
    */
   loadApp (App, elementSelector, templateTag) {
     let context = this
-    
-    return new Promise((resolve) => {      
+
+    return new Promise((resolve) => {
       if (context.vueInstance) {
         resolve(context.vueInstance)
       } else if (store.getters.mainAppInstanceRef) {
@@ -235,10 +235,10 @@ class AppLoader {
       } else {
         context.loadAppData().then(() => {
           let i18n = I18nBuilder.build()
-        
+
           // In previous versions of this app the `en` locale was stored as `en-us`
           i18n.locale = store.getters.mapSettings.locale === 'en' ? 'en-us' : store.getters.mapSettings.locale
-        
+
           /* eslint-disable no-new */
           context.vueInstance = new PreparedVue({
             el: elementSelector,
@@ -254,7 +254,7 @@ class AppLoader {
       }
     })
   }
-  
+
   /**
    * Load app external data
    * @returns {Promise}
@@ -269,11 +269,11 @@ class AppLoader {
         let apiDataPromise = context.fetchApiInitialData()
         let embedPromise = AppLoader.checkAndSetEmbedState()
         let fetchMainMenu = store.dispatch('fetchMainMenu')
-    
+
         Promise.all([apiDataPromise, embedPromise, fetchMainMenu]).then(() => {
           resolve()
         })
-      }, 500)      
+      }, 500)
     })
   }
 
@@ -286,7 +286,7 @@ class AppLoader {
     if (store.getters.mainAppInstanceRef) {
       ref = store.getters.mainAppInstanceRef
     } else {
-      ref = new Vue({ 
+      ref = new Vue({
         data: { appHooks: new AppHooks() },
         i18n: I18nBuilder.build(),
         store
@@ -297,5 +297,3 @@ class AppLoader {
 }
 
 export default AppLoader
-
-

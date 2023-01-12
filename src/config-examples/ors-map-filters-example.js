@@ -1,4 +1,4 @@
-// This is an example file and is expected to be cloned 
+// This is an example file and is expected to be cloned
 // without the -example on the same folder that it resides.
 
 import routeSmoothnessList from '@/resources/lists/route-smoothness'
@@ -298,19 +298,19 @@ const filters = [
         type: constants.filterTypes.wrapper,
         useInServices: [constants.services.directions],
         availableOnModes: [constants.modes.roundTrip, constants.modes.directions],
-        valueAsObject: true,     
+        valueAsObject: true,
         validWhen: [
           {
             ref: 'profile',
             value: ['driving-hgv', 'wheelchair', 'foot-*']
           }
-        ],  
+        ],
         visibleWhen: [
           {
             ref: 'profile',
             value: ['driving-hgv', 'wheelchair', 'foot-*']
           }
-        ],  
+        ],
         props: [
           {
             name: 'restrictions',
@@ -323,13 +323,13 @@ const filters = [
                 ref: 'profile',
                 value: ['driving-hgv', 'wheelchair']
               }
-            ],  
+            ],
             visibleWhen: [
               {
                 ref: 'profile',
                 value: ['driving-hgv', 'wheelchair']
               }
-            ], 
+            ],
             props: [
               {
                 name: 'axleload',
@@ -345,7 +345,7 @@ const filters = [
                     ref: 'self',
                     min: 1
                   }
-                ], 
+                ],
                 visibleWhen: [
                   {
                     ref: 'profile',
@@ -371,7 +371,7 @@ const filters = [
                     ref: 'self',
                     min: 2
                   }
-                ], 
+                ],
                 visibleWhen: [
                   {
                     ref: 'profile',
@@ -397,7 +397,7 @@ const filters = [
                     ref: 'self',
                     min: 2
                   }
-                ], 
+                ],
                 visibleWhen: [
                   {
                     ref: 'profile',
@@ -419,7 +419,7 @@ const filters = [
                     ref: 'profile',
                     value: 'driving-hgv'
                   }
-                ], 
+                ],
                 visibleWhen: [
                   {
                     ref: 'profile',
@@ -441,13 +441,13 @@ const filters = [
                     ref: 'profile',
                     value: 'driving-hgv'
                   }
-                ], 
+                ],
                 visibleWhen: [
                   {
                     ref: 'profile',
                     value: 'driving-hgv'
                   }
-                ], 
+                ],
                 value: 0,
                 min: 1,
                 max: 6,
@@ -462,7 +462,7 @@ const filters = [
                     ref: 'profile',
                     value: 'driving-hgv'
                   }
-                ], 
+                ],
                 visibleWhen: [
                   {
                     ref: 'profile',
@@ -505,7 +505,7 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ], 
+                ],
                 visibleWhen: [
                   {
                     ref: 'profile',
@@ -530,7 +530,7 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ], 
+                ],
                 visibleWhen: [
                   {
                     ref: 'profile',
@@ -551,7 +551,7 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ], 
+                ],
                 visibleWhen: [
                   {
                     ref: 'profile',
@@ -560,7 +560,7 @@ const filters = [
                 ],
                 isEnum: true,
                 value: 'good',
-                items: routeSmoothnessList,                
+                items: routeSmoothnessList,
                 itemValue: 'value'
               },
               {
@@ -572,7 +572,7 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ], 
+                ],
                 visibleWhen: [
                   {
                     ref: 'profile',
@@ -581,7 +581,7 @@ const filters = [
                 ],
                 isEnum: true,
                 value: 'cobblestone',
-                items: surfaceTypesList,                
+                items: surfaceTypesList,
                 itemValue: 'value'
               },
               {
@@ -593,16 +593,16 @@ const filters = [
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ], 
+                ],
                 visibleWhen: [
                   {
                     ref: 'profile',
                     value: 'wheelchair'
                   }
-                ], 
+                ],
                 isEnum: true,
                 default: null,
-                value: 'grade1',                
+                value: 'grade1',
                 itemValue: 'value',
                 items: gradesList
               },
@@ -613,61 +613,61 @@ const filters = [
             type: constants.filterTypes.wrapper,
             valueAsObject: true,
             availableOnModes: [constants.modes.directions],
-            useInServices: [constants.services.directions],            
-            validWhen: [ { ref: 'profile', value: 'foot-*' }], 
-            visibleWhen: [ { ref: 'profile', value: 'foot-*' } ], 
+            useInServices: [constants.services.directions],
+            validWhen: [ { ref: 'profile', value: 'foot-*' }],
+            visibleWhen: [ { ref: 'profile', value: 'foot-*' } ],
             props: [
               {
                 name: 'green',
                 type: constants.filterTypes.steps,
                 min: 0,
                 max: 1,
-                step: 0.1,                    
+                step: 0.1,
                 default: null,
-                value: 0, 
+                value: 0,
                 validWhen: [
                   {
                     ref: 'self',
                     min: 0.1
                   }
-                ], 
+                ],
               },
               {
                 name: 'quiet',
                 type: constants.filterTypes.steps,
                 min: 0,
                 max: 1,
-                step: 0.1,                    
+                step: 0.1,
                 default: null,
-                value: 0, 
+                value: 0,
                 validWhen: [
                   {
                     ref: 'self',
                     min: 0.1
                   }
-                ], 
+                ],
               }
-            ]                               
+            ]
           },
           {
             name: 'surface_quality_known',
             type: constants.filterTypes.boolean,
             availableOnModes: [constants.modes.directions],
-            useInServices: [constants.services.directions],            
-            validWhen: [ { ref: 'profile', value: 'wheelchair' }], 
-            visibleWhen: [ { ref: 'profile', value: 'wheelchair' } ], 
+            useInServices: [constants.services.directions],
+            validWhen: [ { ref: 'profile', value: 'wheelchair' }],
+            visibleWhen: [ { ref: 'profile', value: 'wheelchair' } ],
             default: false,
-            value: false                              
+            value: false
           },
           {
             name: 'allow_unsuitable',
             type: constants.filterTypes.boolean,
             availableOnModes: [constants.modes.directions],
-            useInServices: [constants.services.directions],            
-            validWhen: [ { ref: 'profile', value: 'wheelchair' }], 
-            visibleWhen: [ { ref: 'profile', value: 'wheelchair' } ], 
+            useInServices: [constants.services.directions],
+            validWhen: [ { ref: 'profile', value: 'wheelchair' }],
+            visibleWhen: [ { ref: 'profile', value: 'wheelchair' } ],
             default: false,
-            value: false                              
+            value: false
           }
         ]
       },
@@ -804,7 +804,7 @@ const filters = [
         name: 'avoid_countries',
         required: false,
         type: constants.filterTypes.array,
-        default: false,        
+        default: false,
         itemValue: 'cid',
         apiDefault: false,
         isEnum: true,

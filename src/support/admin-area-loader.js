@@ -26,7 +26,7 @@ class AdminAreaLoader {
     if (layer === 'county') {
       this.setAdminRegion(adminAreaFilter, place)
       if (place.properties.county) {
-        adminAreaFilter.county  = place.properties.county.toLowerCase().replace(' county', '')  
+        adminAreaFilter.county  = place.properties.county.toLowerCase().replace(' county', '')
       } else {
         adminAreaFilter.county  = this.getPlaceNameAsAdminArea(place)
       }
@@ -46,8 +46,8 @@ class AdminAreaLoader {
 
   /**
    * Set admin area filter state
-   * @param {Object} adminAreaFilter 
-   * @param {Place} place 
+   * @param {Object} adminAreaFilter
+   * @param {Place} place
    */
   setAdminRegion (adminAreaFilter, place) {
     if (place.properties.region && place.properties.region !== place.properties.locality) {
@@ -57,7 +57,7 @@ class AdminAreaLoader {
 
   /**
    * Get the place name as admin area
-   * @param {Place} place 
+   * @param {Place} place
    * @returns {String}
    */
   getPlaceNameAsAdminArea (place) {
@@ -113,8 +113,8 @@ class AdminAreaLoader {
 
   /**
    * Get place valid polygons
-   * @param {Place} place 
-   * @param {String} layer 
+   * @param {Place} place
+   * @param {String} layer
    * @returns {Array}
    */
   getPlaceValidPolygons (place, layer) {
@@ -200,8 +200,8 @@ class AdminAreaLoader {
 
   /**
    * Build a polygon collection from a multipolygon area object
-   * @param {Geojson} area 
-   * @param {Place} place 
+   * @param {Geojson} area
+   * @param {Place} place
    * @returns {Array}
    */
   buildPolygonsFromMultiPolygon (areaGeojson, place) {

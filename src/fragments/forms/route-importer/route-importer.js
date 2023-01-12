@@ -76,8 +76,8 @@ export default {
         }
       }
       if (fileType) {
-        let parseData = {fileType, fileContent, timestamp}  
-        this.$root.appHooks.run('importedFileParsed', parseData)  
+        let parseData = {fileType, fileContent, timestamp}
+        this.$root.appHooks.run('importedFileParsed', parseData)
         this.closeImporter()
         this.sendDataToMap(parseData.fileType, parseData.fileContent, parseData.timestamp)
       } else {

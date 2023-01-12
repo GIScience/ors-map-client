@@ -30,5 +30,3 @@
 </script>
 
 <style src="./footer.css" scoped></style>
-
-

@@ -572,7 +572,7 @@ const geoUtils = {
 
   /**
    * Normalize latlng to keep lat in range 90 >< 90 and lng -180 >< 180
-   * @param {Object} latlng 
+   * @param {Object} latlng
    */
   normalizeCoordinates (latlng) {
     latlng.lat = geoUtils.normalizeLat(latlng.lat)
@@ -581,7 +581,7 @@ const geoUtils = {
 
   /**
    * Normalize longitude to keep it between 90 >< 90
-   * @param {Number} lat 
+   * @param {Number} lat
    */
   normalizeLat (lat) {
     while(lat < -180){
@@ -595,7 +595,7 @@ const geoUtils = {
 
   /**
    * Normalize longitude to keep it between -180 >< 180
-   * @param {Number} lng 
+   * @param {Number} lng
    */
   normalizeLng (lng) {
     while(lng < -180){

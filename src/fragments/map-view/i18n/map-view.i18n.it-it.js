@@ -74,7 +74,7 @@ export default {
     'avoidPolygonNotSaved': 'Non è stato possibile salvare il poligono da evitare',
     'polygonEditModeEnabled': 'Dopo aver finito clicca da qualsiasi parte per salvare i cambiamenti',
     'customTileProvider': 'Mattonella (tile) fornita dall\'utente',
-    'gestureHandling': {      
+    'gestureHandling': {
       'touch': 'Utilizza due dita per spostare la mappa',
       'scroll': 'Utilizza CTRL + scorrimento per eseguire lo zoom della mappa',
       'scrollMac': 'Utilizza ⌘ + scorrimento per eseguire lo zoom della mappa'

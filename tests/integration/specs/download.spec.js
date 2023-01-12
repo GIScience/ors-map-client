@@ -29,10 +29,10 @@ describe('Download route', () => {
     await wrapper.find('.download-format').trigger('click')
     wrapper.vm.downloadFormat = 'json'
     await wrapper.find('.download-modal .download').trigger('click')
-    await wrapper.vm.$nextTick()  
+    await wrapper.vm.$nextTick()
     let emitted = wrapper.emitted()
     expect(emitted.downloadClosed).toBeTruthy()
-    expect(document.querySelector('.download-modal')).toBeNull()    
+    expect(document.querySelector('.download-modal')).toBeNull()
   })
 
   it('should export gpx route', async () => {
@@ -42,7 +42,7 @@ describe('Download route', () => {
     await wrapper.find('.open-download-btn').trigger('click')
     await wrapper.find('.download-format').trigger('click')
     wrapper.vm.downloadFormat = 'to-gpx'
-    await wrapper.find('.download-modal .download').trigger('click')    
+    await wrapper.find('.download-modal .download').trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.emitted().downloadClosed).toBeTruthy()
   })
@@ -54,7 +54,7 @@ describe('Download route', () => {
     await wrapper.find('.open-download-btn').trigger('click')
     await wrapper.find('.download-format').trigger('click')
     wrapper.vm.downloadFormat = 'geojson'
-    await wrapper.find('.download-modal .download').trigger('click')    
+    await wrapper.find('.download-modal .download').trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.emitted().downloadClosed).toBeTruthy()
   })
@@ -66,23 +66,22 @@ describe('Download route', () => {
     await wrapper.find('.open-download-btn').trigger('click')
     await wrapper.find('.download-format').trigger('click')
     wrapper.vm.downloadFormat = 'kml'
-    await wrapper.find('.download-modal .download').trigger('click')    
+    await wrapper.find('.download-modal .download').trigger('click')
     await wrapper.vm.$nextTick()
-    expect(wrapper.emitted().downloadClosed).toBeTruthy() 
+    expect(wrapper.emitted().downloadClosed).toBeTruthy()
   })
 
-  it('should export ors-gpx route', async (done) => {
+  it('should export ors-gpx route', async () => {
     await new AppLoader().fetchApiInitialData()
     const wrapper = mount(Download, {propsData: exporterDefaultProps, i18n: I18nBuilder.build(), store: store })
 
     await wrapper.find('.open-download-btn').trigger('click')
     await wrapper.find('.download-format').trigger('click')
     wrapper.vm.downloadFormat = 'ors-gpx'
-    await wrapper.find('.download-modal .download').trigger('click')    
+    await wrapper.find('.download-modal .download').trigger('click')
     await wrapper.vm.$nextTick()
-
     wrapper.vm.$on('downloadClosed', async () => {
-      done()
+      return new Promise(resolve => {resolve()})
     })
   })
 })

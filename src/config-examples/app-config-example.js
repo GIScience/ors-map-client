@@ -6,7 +6,10 @@
 const appConfig = {
   appName: 'Openrouteservice Maps', // The App name that is used as title for the logo
   footerAppName: 'openrouteservice', // The App name that appears on the bottom
-  logoImgSrc: require('@/assets/img/logo@2x.png'), // The logo used on the top-right corner of the sidebar and on the header menu
+  favIcon: '@/assets/img/favicon.ico', // The favicon used in the browser tab
+  logoImgSrc: '@/assets/img/logo.png', // The logo used in the top-right corner of the sidebar and on the header menu
+  brandLogoSrc: '@/assets/img/heigit-and-hd-uni.png', // used for 'About' page and map overlay on large screens
+  countryIconImgSrc: '@/assets/img/country-icon.png', // used for Place search as icon for country level results
   footerDevelopedByLink: 'https://www.heigit.org/', // The url that is used on the footer developed by link
   urlMode: 'hash', // The url mode for vue router: `hash` or `history`
   baseAppUrl: '/', // Could be, for example, '/map' if your app is running in a folder under a domain
@@ -59,7 +62,7 @@ const appConfig = {
       name: 'OpenStreetMap',
       id: 'osm',
       visible: false,
-      attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      attribution: '&copy; <a target="_blank" href="https://osm.org/copyright">OpenStreetMap</a> contributors',
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       maxZoom: 19
     },
@@ -76,7 +79,7 @@ const appConfig = {
       id: 'topography',
       visible: false,
       url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-      attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+      attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href=https:///viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
       maxZoom: 18
     },
     {
@@ -84,7 +87,7 @@ const appConfig = {
       id: 'transport-dark',
       visible: false,
       url: 'https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey=13efc496ac0b486ea05691c820824f5f',
-      attribution: 'Maps &copy; <a href="http://thunderforest.com/">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      attribution: 'Maps &copy; <a href="https://thunderforest.com/">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 18
     },
     {
@@ -92,14 +95,14 @@ const appConfig = {
       id: 'outdoors',
       visible: false,
       url: 'https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=13efc496ac0b486ea05691c820824f5f',
-      attribution: 'Maps &copy; <a href="http://thunderforest.com/">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      attribution: 'Maps &copy; <a href="https://thunderforest.com/">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 18
     },
     {
       name: 'Cyclosm',
       id: 'cyclosm',
       visible: false,
-      url: 'https://{s}.tile.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
+      url: 'https://{s}.tile-openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
       attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 18
     }

@@ -196,7 +196,7 @@ export default {
       'vehicle_type': {
         'label': 'Tipo di veicolo',
         'description': 'Tipo di veicolo da considerare per il calcolo del percorso',
-      } 
+      }
     }
   }
 }

@@ -33,7 +33,7 @@ const render = (el, binding) => {
         el.style.borderTop = '5px solid ' + theme.primary
       }
     }
-    
+
   }
 }
 

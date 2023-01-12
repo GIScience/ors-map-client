@@ -11,7 +11,7 @@ export default {
     'info_IV': 'Nel caso in cui tu abbia domande, lamentele o feedback da dare contattaci via:',
     'info_V': 'Openrouteservice ha a cuore le tue richieste, i tuoi problemi, le tue domande, ecc. Nonostante la gran quantità di richieste, ci impegniamo a risponderti nel più breve tempo possibile. Dopo aver ricevuto la nostra email automatica di conferma d\'avvenuta richiesta, riceverai una risposta nel più breve tempo possibile. Dacci comunque del tempo per poter elaborare la tua richiesta.',
     'CIAT_CSI_SRTM': 'CIAT-CSI SRTM',
-    'dataProvided': 'I dati sulla popolazione sono forniti da',    
+    'dataProvided': 'I dati sulla popolazione sono forniti da',
     'ghsFramework': 'The Global Human Settlement (GHS) frameworks',
     'askOpenrouteservice': 'Chiedi a Openrouteservice',
     'termsOfService': 'Condizioni di servizio',

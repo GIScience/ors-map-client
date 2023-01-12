@@ -89,7 +89,7 @@ export default {
       const value = Math.abs(elevation).toFixed(1)
       return value
     },
-    routeOpacityChanged (routeIndex) {      
+    routeOpacityChanged (routeIndex) {
       let opacity = this.localMapViewData.routes[routeIndex].properties.opacity
       this.eventBus.$emit('setRouteOpacity', {routeIndex, opacity })
     },

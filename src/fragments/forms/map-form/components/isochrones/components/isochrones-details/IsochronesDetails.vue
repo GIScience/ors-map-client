@@ -23,7 +23,7 @@
                         <v-btn icon @click="toggleVisibility(polygonIndex)" class="no-margin"
                           :title="$t('isochronesDetails.toggleVisibility')">
                           <v-icon :color="polygon.properties.visible? 'primary' : 'dark' ">visibility</v-icon>
-                        </v-btn>                        
+                        </v-btn>
                         <span class="polygon-area" :style="{background: polygon.properties.color}">
                           <b style="font-size:11px" :style="{color: polygonAreaTextColor(polygon.properties.color)}">{{polygon.properties.label.replace('Polygon', '')}}</b>
                         </span>
@@ -33,11 +33,11 @@
                            <div style="font-size:12px">
                             <span >{{$t('global.population')}}</span> <br/> <span>{{polygon.properties.total_pop}}</span>
                            </div>
-                         </template>                        
-                      </v-flex>   
+                         </template>
+                      </v-flex>
                        <v-spacer></v-spacer>
                       <v-flex md5 v-if="$highResolution">
-                        <v-slider class="polygon-opacity-slider" :min="0" :max="1" 
+                        <v-slider class="polygon-opacity-slider" :min="0" :max="1"
                           prepend-icon="opacity"
                           :thumb-size="24"
                           thumb-label="always"
@@ -45,8 +45,8 @@
                           @change="polygonOpacityChanged(polygonIndex)" :step="0.1">
                         </v-slider>
                         <br/>
-                      </v-flex>       
-                    </v-layout>                   
+                      </v-flex>
+                    </v-layout>
                   </div>
                 </template>
               </template>

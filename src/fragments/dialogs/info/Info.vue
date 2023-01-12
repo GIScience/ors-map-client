@@ -6,7 +6,7 @@
           <h3>{{infoTitle}}</h3>
           </div>
         <div slot="content" >
-          <div v-html="infoText"></div>  
+          <div v-html="infoText"></div>
         </div>
         <div slot="footer" class="text-right">
           <v-spacer></v-spacer>
@@ -27,4 +27,3 @@
   word-wrap: break-word;
 }
 </style>
-

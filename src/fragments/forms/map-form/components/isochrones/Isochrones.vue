@@ -49,7 +49,7 @@
         </div>
         <fields-container @fieldUpdated="filterUpdated" :parameters="OrsMapFiltersAccessor"></fields-container>
         <br/>
-      </box>      
+      </box>
       <br>
     </v-form>
   </div>

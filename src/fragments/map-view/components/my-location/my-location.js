@@ -25,7 +25,7 @@ export default {
     /**
      * Handles the menu activation event
      */
-    activatorClicked (event) {
+    activatorClicked () {
       this.menuOpen = !this.menuOpen
       if (this.locationActive) {
         this.setLocationFromBrowser(false)

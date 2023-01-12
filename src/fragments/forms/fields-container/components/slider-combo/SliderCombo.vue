@@ -2,7 +2,7 @@
   <div class="slider-combo">
     <p>{{label}} (<b>{{filter.min}}</b> - <b>{{filterMax}}</b>)</p>
     <v-layout>
-      <v-flex xs4 sm3>        
+      <v-flex xs4 sm3>
         <v-text-field hide-details class="field-input form-fields-slider-text-input no-input-details"
           type="number" box height="40px" label="" title="" v-model="textLocalModel"
           @keyup="debounceTextFieldChange()" :required="filter.required">
@@ -14,7 +14,7 @@
           :thumb-label="localModel > 0 ? 'always' : true"
           :label="buildUnit() " :title="label" @change="sliderValueChanged()" :step="filter.step"></custom-slider>
       </v-flex>
-    </v-layout>    
+    </v-layout>
   </div>
 </template>
 <script src="./slider-combo.js"></script>

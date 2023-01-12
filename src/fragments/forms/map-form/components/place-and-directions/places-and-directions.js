@@ -141,7 +141,7 @@ export default {
      *
      * @param {*} data
      */
-    filterUpdated (data) {      
+    filterUpdated (data) {
       // Make sure that the OrsMapFilter object has the ost updated value
       if (data.value !== undefined) {
         if (data.parentIndex !== undefined) {
@@ -151,7 +151,7 @@ export default {
           this.OrsMapFiltersAccessor[data.index].value = data.value
         }
       }
-      this.updateAppRoute()      
+      this.updateAppRoute()
     },
 
     /**
@@ -340,7 +340,7 @@ export default {
           context.addPlaceInput()
         }
         context.updateAppRoute()
-      
+
         if (context.places.length === 1) {
           setTimeout(() => {
             context.setFocusedPlaceInput(this.places.length - 1)
@@ -393,8 +393,8 @@ export default {
         this.addPlaceInput()
         placeIndex = 1
       } else { // if there are more than one input, the destination goes in at the last slot
-        placeIndex = this.places.length - 1 
-      }   
+        placeIndex = this.places.length - 1
+      }
       this.places[placeIndex] = toPlace
 
       const context = this
@@ -537,7 +537,7 @@ export default {
     },
 
     /**
-     * Update map data by setting the view mode, 
+     * Update map data by setting the view mode,
      * and calculating the directions or seeing a single place state
      */
     updateMapViewAndData () {

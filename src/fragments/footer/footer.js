@@ -15,5 +15,5 @@ export default {
       let version = env.PACKAGE_JSON.version
       return version
     }
-  }  
+  }
 }

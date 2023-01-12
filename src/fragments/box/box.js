@@ -312,7 +312,7 @@ export default {
           color: '#cbced1',
           thickness: '1px'
         }
-      } 
+      }
       // the initial color the the defined as primary at @/common/theme.js
       var color = theme.primary || '#cbced1'
 
