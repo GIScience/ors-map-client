@@ -9,10 +9,10 @@ class MapViewData {
   /**
    * MapViewData constructor
    */
-  constructor () {
+  constructor ({places = []} = {}) {
     this.polygons = []
     this.options = {} // {origin: String, apiVersion: String, contentType: String, timestamp: timestamp, options: {avoid_polygons: Object, avoid_features: Array}},
-    this.places = [] // array of Place objects @see /src/models/place
+    this.places = places ? Place.placesFromFeatures(places) : [] // array of Place objects @see /src/models/place
     this.pois = [] // array of Place objects @see /src/models/place
     this.routes = [] // array of route objects containing route data and summary
     this.origin = 'response' // where the data comes from
