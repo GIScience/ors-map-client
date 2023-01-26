@@ -37,7 +37,8 @@ module.exports = {
   resolve: {
     alias: {
       '@': resolveRoot('src'),
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      'fixtures': resolveRoot('cypress/fixtures')
     },
     extensions: ['.vue', '.js', '.json'],
     fallback: {
