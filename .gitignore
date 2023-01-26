@@ -48,4 +48,5 @@ selenium-server.log
 # cypress tests
 /cypress/videos/
 /cypress/screenshots/
+/cypress/downloads/
 /index.html
