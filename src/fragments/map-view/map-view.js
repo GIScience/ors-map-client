@@ -367,8 +367,6 @@ export default {
     polygons () {
       const polygons = []
       if (this.localMapViewData) {
-        const translations = this.$t('global.units')
-        translations.polygon = this.$t('global.polygon')
         // We must not change the original object
         const mapViewDataToBeTransformed = this.localMapViewData.clone()
 
