@@ -246,7 +246,7 @@ let features = [
         'osm': {
           'wikidata': 'Q1562946',
           'wikipedia': 'de:Skulpturenpark Heidelberg',
-          'website': 'http://www.skulpturenpark-heidelberg.de',
+          'website': 'https://www.skulpturenpark-heidelberg.de',
           'opening_hours': '24/7'
         }
       },
@@ -617,7 +617,7 @@ let features = [
       'addendum': {
         'osm': {
           'wheelchair': 'no',
-          'website': 'http://www.jazzhaus-hd.de/',
+          'website': 'https://www.jazzhaus-hd.de/',
           'phone': '+49-6221-4332040',
           'opening_hours': 'We-Sa 20:00+; \'Konzertbeginn 21:30\''
         }
@@ -883,7 +883,7 @@ let features = [
         'osm': {
           'wheelchair': 'yes',
           'operator': 'Ilona Prosenäk',
-          'website': 'http://www.eckhausheidelberg.de/',
+          'website': 'https://www.eckhausheidelberg.de/',
           'phone': '+4962217278115',
           'opening_hours': 'Mo-Sa 11:00-18:00'
         }
@@ -935,7 +935,7 @@ let features = [
           'wikidata': 'Q819654',
           'wikipedia': 'de:Bergfriedhof (Heidelberg)',
           'operator': 'Stadt Heidelberg',
-          'website': 'http://grabsteine.genealogy.net/namelist.php?cem=4612'
+          'website': 'https://grabsteine.genealogy.net/namelist.php?cem=4612'
         }
       },
       'unique_id': 'relation/12286306'
@@ -1187,7 +1187,7 @@ let features = [
       'label': 'Landgericht Heidelberg, Heidelberg, BW, Germany',
       'addendum': {
         'osm': {
-          'website': 'http://www.landgericht-heidelberg.de',
+          'website': 'https://www.landgericht-heidelberg.de',
           'phone': '+49 6221 590',
           'opening_hours': 'Mo-Th 07:30-16:30; Fr 7:30-15:00'
         }
@@ -1669,7 +1669,7 @@ let features = [
       'label': 'DEKRA Heidelberg – Station Heidelberg, Heidelberg, BW, Germany',
       'addendum': {
         'osm': {
-          'website': 'http://www.dekra.de/heidelberg/portal.html',
+          'website': 'https://www.dekra.de/heidelberg/portal.html',
           'phone': '+49 6221 737390'
         }
       },
@@ -1773,7 +1773,7 @@ let features = [
       'addendum': {
         'osm': {
           'operator': 'VRNnextbike',
-          'website': 'http://www.vrnnextbike.de'
+          'website': 'https://www.vrnnextbike.de'
         }
       },
       'unique_id': 'node/8856635298'
@@ -1941,7 +1941,7 @@ let features = [
       'addendum': {
         'osm': {
           'operator': 'DLRG',
-          'website': 'http://www.heidelberg.dlrg.de'
+          'website': 'https://www.heidelberg.dlrg.de'
         }
       },
       'unique_id': 'way/375731342'
