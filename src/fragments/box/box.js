@@ -12,6 +12,8 @@
  */
 import theme from '@/config/theme'
 import utils from '@/support/utils'
+import {EventBus} from '@/common/event-bus'
+
 
 export default {
   props: {
@@ -84,14 +86,14 @@ export default {
     // that allow us to synchronize the maximized boxes
     // setting each to not maximized if they are not the
     // last one (over the others)
-    this.eventBus.$on('boxMaximizedStackChanged', function (value) {
+    EventBus.$on('boxMaximizedStackChanged', function (value) {
       context.syncBoxesMaximized(value)
     })
 
     // The box component listen to `closeBox` event so that
     // it is possible to close a box via eventBus, passing the
     // box guid
-    this.eventBus.$on('closeBox', function (boxGuid) {
+    EventBus.$on('closeBox', function (boxGuid) {
       if (context.guid === boxGuid) {
         context.close()
       }
@@ -100,7 +102,7 @@ export default {
     // it is possible to resize a box via eventBus, passing the
     // an object containing the boxGuid and maximized boolean property
     // like {boxGuid: <the-guid>, maximized: true}
-    this.eventBus.$on('resizeBox', function (data) {
+    EventBus.$on('resizeBox', function (data) {
       if (context.guid === data.boxGuid) {
         context.resize(data.maximized)
       }
@@ -236,7 +238,7 @@ export default {
 
       // Tell every body that the box was maximized/minimized
       const globalEvent = this.maximized ? 'boxMaximized' : 'boxMinimized'
-      this.eventBus.$emit(globalEvent, { maximized: maximized, guid: this.guid })
+      EventBus.$emit(globalEvent, { maximized: maximized, guid: this.guid })
 
       // Ff is not maximized, remove this box from the maximized stack
       if (!this.maximized) {

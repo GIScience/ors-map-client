@@ -1,14 +1,13 @@
-import AppLoader from '@/app-loader'
+import {EventBus} from '@/common/event-bus'
+
 
 const showMessage = (msg, theme, options) => {
   options = options || {}
-  let VueInstance = AppLoader.getInstance()
-  VueInstance.eventBus.$emit('showSnack', { message: msg, theme: theme, options: options })
+  EventBus.$emit('showSnack', { message: msg, theme: theme, options: options })
 }
 
 const hideMessages = () => {
-  let VueInstance = AppLoader.getInstance()
-  VueInstance.eventBus.$emit('hideSnack')
+  EventBus.$emit('hideSnack')
 }
 
 const showError = (msg, options) => {

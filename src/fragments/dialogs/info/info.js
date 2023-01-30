@@ -1,4 +1,6 @@
 import utils from '@/support/utils'
+import {EventBus} from '@/common/event-bus'
+
 export default {
   data: () => ({
     infoPromise: null,
@@ -35,13 +37,13 @@ export default {
       event.preventDefault()
       event.stopPropagation()
       this.show = false
-      this.eventBus.$emit('infoOk', { event: 'ok', guid: this.guid })
+      EventBus.$emit('infoOk', { event: 'ok', guid: this.guid })
     }
   },
   created () {
     this.guid = utils.guid('info')
     this.$emit('infoCreated', this.guid)
-    this.eventBus.$on('triggerShowInfo', (info) => {
+    EventBus.$on('triggerShowInfo', (info) => {
       this.showDialog(info)
     })
   }

@@ -2,6 +2,7 @@ import constants from '@/resources/constants'
 import MapViewData from '@/models/map-view-data'
 import appConfig from '@/config/app-config'
 import lodash from 'lodash'
+import {EventBus} from '@/common/event-bus'
 
 /**
  * Render and deals with right click events
@@ -135,10 +136,10 @@ export default {
   },
   created () {
     const context = this
-    this.eventBus.$on('mapRightClicked', (data) => {
+    EventBus.$on('mapRightClicked', (data) => {
       context.mapRightClick(data)
     })
-    this.eventBus.$on('mapLeftClicked', () => {
+    EventBus.$on('mapLeftClicked', () => {
       context.showRightClickPopup = false
     })
   },

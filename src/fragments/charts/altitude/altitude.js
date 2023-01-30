@@ -2,6 +2,7 @@ import LineChart from '@/fragments/charts/line-chart/line-chart'
 import ChartWrapper from '@/fragments/charts/chart-wrapper/ChartWrapper'
 import AltitudeDataParser from './altitude-parser'
 import MapViewData from '@/models/map-view-data'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   props: {
@@ -36,7 +37,7 @@ export default {
     this.build()
 
     // Rebuild altitude data when the active route index change
-    this.eventBus.$on('activeRouteIndexChanged', this.build)
+    EventBus.$on('activeRouteIndexChanged', this.build)
   },
   computed: {
     altitudeData () {
@@ -78,11 +79,11 @@ export default {
     },
     chartHoverIndexChanged (index) {
       if (this.propagateActivePoint) {
-        this.eventBus.$emit('altitudeChartHoverIndexChanged', index)
+        EventBus.$emit('altitudeChartHoverIndexChanged', index)
       }
     },
     mouseLeftChart () {
-      this.eventBus.$emit('mouseLeftChartAltitudeChart')
+      EventBus.$emit('mouseLeftChartAltitudeChart')
     }
   }
 }

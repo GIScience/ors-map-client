@@ -6,6 +6,8 @@ import MapViewData from '@/models/map-view-data'
 import Steps from './components/steps/Steps'
 import constants from '@/resources/constants'
 import geoUtils from '@/support/geo-utils'
+import {EventBus} from '@/common/event-bus'
+
 
 export default {
   props: {
@@ -91,7 +93,7 @@ export default {
     },
     routeOpacityChanged (routeIndex) {
       let opacity = this.localMapViewData.routes[routeIndex].properties.opacity
-      this.eventBus.$emit('setRouteOpacity', {routeIndex, opacity })
+      EventBus.$emit('setRouteOpacity', {routeIndex, opacity })
     },
     /**
      * Get the route summary with humanized
@@ -143,7 +145,7 @@ export default {
      * @emits changeActiveRouteIndex
      */
     changeActiveRouteIndex (index) {
-      this.eventBus.$emit('changeActiveRouteIndex', index)
+      EventBus.$emit('changeActiveRouteIndex', index)
     },
     /**
      * When a segment is clicked
@@ -159,7 +161,7 @@ export default {
       const highlighData = {sectionTitle, sections: [] }
       const segmentData = this.buildExtraHighlighPolylineData(segment, index)
       highlighData.sections.push(segmentData)
-      this.eventBus.$emit('highlightPolylineSections', highlighData)
+      EventBus.$emit('highlightPolylineSections', highlighData)
     },
     /**
      * Build the the extra info highlighting data

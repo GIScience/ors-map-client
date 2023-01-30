@@ -4,6 +4,7 @@ import defaultMapSettings from '@/config/default-map-settings'
 import ProfileSelectorOption from './components/profile-selector-option/ProfileSelectorOption'
 import lodash from 'lodash'
 import constants from '@/resources/constants'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   data: () => ({
@@ -80,7 +81,7 @@ export default {
     },
 
     notifyProfileChanged () {
-      this.eventBus.$emit('filtersChangedExternally')
+      EventBus.$emit('filtersChangedExternally')
     },
 
     /**

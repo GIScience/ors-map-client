@@ -15,6 +15,7 @@ import constants from '@/resources/constants'
 import { ResizeObserver } from 'vue-resize'
 import Place from '@/models/place'
 import lodash from 'lodash'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   data: () => ({
@@ -273,7 +274,7 @@ export default {
       // the map bounds have been already defined by the user
       this.refreshingSearch = true
       this.searchBtnAvailable = false
-      this.eventBus.$emit('refreshSearch')
+      EventBus.$emit('refreshSearch')
     },
     /**
      * Get current map place center
@@ -363,14 +364,14 @@ export default {
      * @param {*} data
      */
     removePlace (data) {
-      this.eventBus.$emit('removePlace', data)
+      EventBus.$emit('removePlace', data)
     },
     /**
      * Remove place
      * @param {*} data
      */
     directChanged (data) {
-      this.eventBus.$emit('directChanged', data)
+      EventBus.$emit('directChanged', data)
     },
     /**
      * Close bottom nav component
@@ -385,7 +386,7 @@ export default {
      * @emits placeFocusChanged [via eventBus]
      */
     placeIndexSelectedInBottomNav (index) {
-      this.eventBus.$emit('placeFocusChanged', this.mapViewData.places[index])
+      EventBus.$emit('placeFocusChanged', this.mapViewData.places[index])
     },
     /**
      * Set the map view data object and emit a event to redraw the map
@@ -448,7 +449,7 @@ export default {
      * @emits appRouteDataChanged
      */
     loadRoute () {
-      this.eventBus.$emit('clearMap')
+      EventBus.$emit('clearMap')
       // After clearing the map, wait a bit to load the new route
 
       var appRouteData = false
@@ -462,7 +463,7 @@ export default {
           this.$store.commit('appRouteData', appRouteData)
           if (this.$route.name !== 'MapLocation') {
             this.storeZoomValue()
-            this.eventBus.$emit('appRouteDataChanged', appRouteData)
+            EventBus.$emit('appRouteDataChanged', appRouteData)
           }
         }
       }
@@ -485,7 +486,7 @@ export default {
      * @emits markerDragged via eventBus
      */
     markerDragged (marker) {
-      this.eventBus.$emit('markerDragged', marker)
+      EventBus.$emit('markerDragged', marker)
     },
 
     /**
@@ -497,7 +498,7 @@ export default {
      * @emits directionsFromPoint via eventBus
      */
     directionsFromPoint (data) {
-      this.eventBus.$emit('directionsFromPoint', data)
+      EventBus.$emit('directionsFromPoint', data)
     },
     /**
      * Trigger directions based on the data passed
@@ -509,7 +510,7 @@ export default {
      */
     directionsToPoint (data) {
       let context = this
-      this.eventBus.$emit('clearMap')
+      EventBus.$emit('clearMap')
       setTimeout(() => {
         this.mapViewData.places = [data.place]
         context.eventBus.$emit('directionsToPoint', data)
@@ -525,7 +526,7 @@ export default {
      */
     setInputPlace (data) {
       if (data.pickPlaceIndex !== null) {
-        this.eventBus.$emit('setInputPlace', data)
+        EventBus.$emit('setInputPlace', data)
       }
     },
     /**
@@ -552,7 +553,7 @@ export default {
      * @emits addAsIsochroneCenter via eventBus
      */
     addAsIsochroneCenter (data) {
-      this.eventBus.$emit('addAsIsochroneCenter', data)
+      EventBus.$emit('addAsIsochroneCenter', data)
     },
 
     /**
@@ -564,7 +565,7 @@ export default {
      * @emits addRouteStop via eventBus
      */
     addRouteStop (data) {
-      this.eventBus.$emit('addRouteStop', data)
+      EventBus.$emit('addRouteStop', data)
     },
     /**
      * When an `add destination to route` option is hit,
@@ -575,7 +576,7 @@ export default {
      * @emits addDestinationToRoute via eventBus
      */
     addDestinationToRoute (data) {
-      this.eventBus.$emit('addDestinationToRoute', data)
+      EventBus.$emit('addDestinationToRoute', data)
     },
     /**
      * Set the `settings` open flag as false
@@ -615,7 +616,7 @@ export default {
         // As it is possible to have several polygons, we merge them into
         // a multiPolygon so that all them are considered (array of polygons is not supported)
         let multiPolygon = PolygonUtils.mergePolygonsIntoMultiPolygon(polygons)
-        this.eventBus.$emit('avoidPolygonsChanged', multiPolygon)
+        EventBus.$emit('avoidPolygonsChanged', multiPolygon)
       }
     },
     /**
@@ -655,7 +656,7 @@ export default {
   created () {
     // Emit the an event catch by root App component
     // telling it to update the page title
-    this.eventBus.$emit('titleChanged', this.$t('maps.pageTitle'))
+    EventBus.$emit('titleChanged', this.$t('maps.pageTitle'))
 
     // Set sidebar initial state (open/closed)
     let sidebarStartOpen = false
@@ -667,7 +668,7 @@ export default {
     const context = this
     // Listen to the mapViewDataChanged event and call the
     // necessary methods when it happens
-    this.eventBus.$on('mapViewDataChanged', function (mapViewData) {
+    EventBus.$on('mapViewDataChanged', function (mapViewData) {
       context.$root.appHooks.run('mapViewDataChanged', mapViewData)
       context.setMapDataAndUpdateMapView(mapViewData)
       context.setViewHeightAndBottomNav()
@@ -675,32 +676,32 @@ export default {
 
     // Set the modal open flags to true when
     // a show-<something> events happen
-    this.eventBus.$on('showAltitudeModal', () => {
+    EventBus.$on('showAltitudeModal', () => {
       context.isAltitudeModalOpen = true
     })
-    this.eventBus.$on('showSettingsModal', () => {
+    EventBus.$on('showSettingsModal', () => {
       context.isSettingsOpen = true
     })
-    this.eventBus.$on('showAboutModal', () => {
+    EventBus.$on('showAboutModal', () => {
       context.isAboutOpen = true
     })
-    this.eventBus.$on('loadAvoidPolygons', (avoidPolygons) => {
+    EventBus.$on('loadAvoidPolygons', (avoidPolygons) => {
       context.localAvoidPolygons = avoidPolygons
     })
 
-    this.eventBus.$on('togglePolygonVisibility', (polygonIndex) => {
+    EventBus.$on('togglePolygonVisibility', (polygonIndex) => {
       if (context.mapViewData.polygons[polygonIndex]) {
         context.mapViewData.polygons[polygonIndex].properties.visible = !context.mapViewData.polygons[polygonIndex].properties.visible
       }
     })
 
-    this.eventBus.$on('setPolygonOpacity', (data) => {
+    EventBus.$on('setPolygonOpacity', (data) => {
       if (context.mapViewData.polygons[data.polygonIndex]) {
         context.mapViewData.polygons[data.polygonIndex].properties.fillOpacity = data.fillOpacity
       }
     })
 
-    this.eventBus.$on('setRouteOpacity', (data) => {
+    EventBus.$on('setRouteOpacity', (data) => {
       if (context.mapViewData.routes[data.routeIndex]) {
         context.mapViewData.routes[data.routeIndex].properties.opacity = data.opacity
       }

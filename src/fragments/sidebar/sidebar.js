@@ -5,6 +5,8 @@ import resolver from '@/support/routes-resolver'
 import Footer from '@/fragments/footer/Footer'
 import appConfig from '@/config/app-config'
 import utils from '@/support/utils'
+import {EventBus} from '@/common/event-bus'
+
 
 export default {
   data () {
@@ -66,7 +68,7 @@ export default {
      * Set sidebar open status
      */
     const context = this
-    this.eventBus.$on('setSidebarStatus', (isOpen) => {
+    EventBus.$on('setSidebarStatus', (isOpen) => {
       // pass a boolean that indicates 'force'
       context.$store.commit('setLeftSideBarIsOpen', isOpen)
     })

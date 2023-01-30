@@ -1,3 +1,5 @@
+import {EventBus} from '@/common/event-bus'
+
 export default {
   data () {
     return {
@@ -58,10 +60,10 @@ export default {
     }
   },
   created () {
-    this.eventBus.$on('showSnack', (snack) => {
+    EventBus.$on('showSnack', (snack) => {
       this.show(snack)
     })
-    this.eventBus.$on('hideSnack', () => {
+    EventBus.$on('hideSnack', () => {
       this.hide()
     })
   }

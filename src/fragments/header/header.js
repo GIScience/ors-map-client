@@ -2,6 +2,8 @@ import menuManager from '@/support/menu-manager'
 import resolver from '@/support/routes-resolver'
 import appConfig from '@/config/app-config'
 import utils from '@/support/utils'
+import {EventBus} from '@/common/event-bus'
+
 
 export default {
   data () {
@@ -32,7 +34,7 @@ export default {
     const context = this
     context.menuItems = context.$store.getters.mainMenu
 
-    this.eventBus.$on('routeChanged', (routeParams) => {
+    EventBus.$on('routeChanged', (routeParams) => {
       if (context.menuItems.length > 0) {
         menuManager.setMenuActiveStatus(context.menuItems, routeParams.to)
       }

@@ -1,4 +1,6 @@
 import utils from '@/support/utils'
+import {EventBus} from '@/common/event-bus'
+
 export default {
   data: () => ({
     confirmPromise: null,
@@ -37,21 +39,21 @@ export default {
     },
     onYes () {
       this.show = false
-      this.eventBus.$emit('confirmAnswered', { response: 'yes', guid: this.guid })
+      EventBus.$emit('confirmAnswered', { response: 'yes', guid: this.guid })
     },
     onNo () {
       this.show = false
-      this.eventBus.$emit('confirmAnswered', { response: 'no', guid: this.guid })
+      EventBus.$emit('confirmAnswered', { response: 'no', guid: this.guid })
     },
     onNever () {
       this.show = false
-      this.eventBus.$emit('confirmAnswered', { response: 'never', guid: this.guid })
+      EventBus.$emit('confirmAnswered', { response: 'never', guid: this.guid })
     }
   },
   created () {
     this.guid = utils.guid('confirm')
     this.$emit('confirmCreated', this.guid)
-    this.eventBus.$on('triggerConfirm', (confirm) => {
+    EventBus.$on('triggerConfirm', (confirm) => {
       this.showDialog(confirm)
     })
   }

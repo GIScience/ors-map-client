@@ -1,7 +1,7 @@
-
 import dependencyService from '@/support/dependency-service.js'
 import defaultMapSettings from '@/config/default-map-settings'
 import SliderCombo from '../slider-combo/SliderCombo.vue'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   props: {
@@ -28,7 +28,7 @@ export default {
 
     // Every time the active console tab changes
     // we refresh the single parameter model
-    this.eventBus.$on('filtersChangedExternally', () => {
+    EventBus.$on('filtersChangedExternally', () => {
       context.updateFieldsStatus()
       context.$forceUpdate()
     })

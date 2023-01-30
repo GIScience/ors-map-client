@@ -114,11 +114,6 @@ Vue.use(VeeValidate)
 // Managing Date and Times
 Vue.use(VueMoment)
 
-// Create a global event bus, so all the components
-// can access it to emit and capture events using this.eventBus
-const eventBus = new Vue()
-Vue.prototype.eventBus = eventBus
-
 // turn off console message saying we are in dev mode
 Vue.config.productionTip = false
 

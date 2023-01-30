@@ -1,5 +1,5 @@
-
 import orsDictionary from '@/resources/ors-dictionary'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   props: {
@@ -109,7 +109,7 @@ export default {
      * @param {String} extraKey
      * @param {Integer} value
      * @param {Integer} index
-     * @emits highlightPolylineSections (via eventBus)
+     * @emits highlightPolylineSections (via EventBus)
      */
     showSection (extraKey, value, index) {
       const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
@@ -118,7 +118,7 @@ export default {
 
       const polylineData = this.buildExtraHighlighPolylineData(extraKey, index, value)
       highlighData.sections.push(polylineData)
-      this.eventBus.$emit('highlightPolylineSections', highlighData)
+      EventBus.$emit('highlightPolylineSections', highlighData)
     },
     /**
      * Handle the show all sections click by
@@ -140,7 +140,7 @@ export default {
         highlighData.sections.push(polylineData)
         index++
       }
-      this.eventBus.$emit('highlightPolylineSections', highlighData)
+      EventBus.$emit('highlightPolylineSections', highlighData)
     },
     /**
      * Build the the extra info highlighting data

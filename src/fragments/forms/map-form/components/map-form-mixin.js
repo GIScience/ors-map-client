@@ -5,6 +5,7 @@ import AppRouteData from '@/models/app-route-data'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import Place from '@/models/place'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   props: {
@@ -125,8 +126,8 @@ export default {
       this.addPlaceInput()
       this.$store.commit('appRouteData', new AppRouteData())
       this.$store.commit('mode', constants.modes.place)
-      this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
-      this.eventBus.$emit('clearMap')
+      EventBus.$emit('mapViewDataChanged', this.mapViewData)
+      EventBus.$emit('clearMap')
       this.updateAppRoute()
     },
     /**
