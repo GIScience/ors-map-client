@@ -1,7 +1,7 @@
 /**
  * Render and deals with left click events
  * @emits closed
- * @emits showLoading [via eventBus] (when resolving place info)
+ * @emits showLoading [via EventBus] (when resolving place info)
  * @emits directionsToPoint
  * @listens mapRightClicked
  * @listens mapLeftClicked (to close the right click pop up)
@@ -106,7 +106,7 @@ export default {
      * @param lng
      * @param options
      * @returns {Promise}
-     * @emits showLoading (via eventBus)
+     * @emits showLoading (via EventBus)
      */
     resolvePoint (lat, lng) {
       return new Promise((resolve, reject) => {

@@ -487,7 +487,7 @@ export default {
     /**
      * Search a place by name
      * @emits autocompleted
-     * @emits showLoading [via eventBus]
+     * @emits showLoading [via EventBus]
      *
      */
     autocompleteByName () {

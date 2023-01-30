@@ -260,7 +260,7 @@ export default {
      * Set the refreshing search flag as true,
      * the searchBtnAvailable flag as false
      * and emits the refreshSearch event
-     * @emits refreshSearch via eventBus
+     * @emits refreshSearch via EventBus
      */
     refreshSearch () {
       // the refresh search event will
@@ -311,9 +311,9 @@ export default {
     },
     /**
      * Save the new map center in mapSettings when it changes
-     * and emit a mapCenterChanged event via eventBus
+     * and emit a mapCenterChanged event via EventBus
      * @param {*} latlng
-     * @emits mapCenterChanged [via eventBus]
+     * @emits mapCenterChanged [via EventBus]
      */
     mapCenterChanged (latlng) {
       let context = this
@@ -381,9 +381,9 @@ export default {
       this.setViewHeight()
     },
     /**
-     * Handle place index selected and emits event via eventBus
+     * Handle place index selected and emits event via EventBus
      * @param {*} index
-     * @emits placeFocusChanged [via eventBus]
+     * @emits placeFocusChanged [via EventBus]
      */
     placeIndexSelectedInBottomNav (index) {
       EventBus.$emit('placeFocusChanged', this.mapViewData.places[index])
@@ -481,9 +481,9 @@ export default {
     },
     /**
      * When a marker has been dragged
-     * emits the markerDragged event (via eventBus)
+     * emits the markerDragged event (via EventBus)
      * @param {Object} marker
-     * @emits markerDragged via eventBus
+     * @emits markerDragged via EventBus
      */
     markerDragged (marker) {
       EventBus.$emit('markerDragged', marker)
@@ -491,11 +491,11 @@ export default {
 
     /**
      * When a directions from point is hit,
-     * emit a directionsFromPoint event via eventBus.
+     * emit a directionsFromPoint event via EventBus.
      * The map-view component does not emit events via
-     * eventBus, only local events to its container (this component)
+     * EventBus, only local events to its container (this component)
      * @param {Object} data
-     * @emits directionsFromPoint via eventBus
+     * @emits directionsFromPoint via EventBus
      */
     directionsFromPoint (data) {
       EventBus.$emit('directionsFromPoint', data)
@@ -503,9 +503,9 @@ export default {
     /**
      * Trigger directions based on the data passed
      * that includes a Place by clearing the map
-     * and by emitting the directionsToPoint event (via eventBus)
+     * and by emitting the directionsToPoint event (via EventBus)
      * The map-view component does not emit events via
-     * eventBus, only local events to its container (this component)
+     * EventBus, only local events to its container (this component)
      * @param {Object} data {place: Place}
      */
     directionsToPoint (data) {
@@ -519,7 +519,7 @@ export default {
 
     /**
      * Check if the data contains the pick place index
-     * and emits the setInputPlace via eventBus
+     * and emits the setInputPlace via EventBus
      * @param {*} data
      * @emits setInputPlace
      */
@@ -545,11 +545,11 @@ export default {
     },
     /**
      * When an `add isochrones center` option is hit,
-     * emits an addAsIsochroneCenter event via eventBus.
+     * emits an addAsIsochroneCenter event via EventBus.
      * The map-view component does not emit events via
-     * eventBus, only local events to its container (this component)
+     * EventBus, only local events to its container (this component)
      * @param {Object} data
-     * @emits addAsIsochroneCenter via eventBus
+     * @emits addAsIsochroneCenter via EventBus
      */
     addAsIsochroneCenter (data) {
       EventBus.$emit('addAsIsochroneCenter', data)
@@ -557,22 +557,22 @@ export default {
 
     /**
      * When an `add route stop` option is hit,
-     * emits an addRouteStop event via eventBus.
+     * emits an addRouteStop event via EventBus.
      * The map-view component does not emit events via
-     * eventBus, only local events to its container (this component)
+     * EventBus, only local events to its container (this component)
      * @param {Object} data
-     * @emits addRouteStop via eventBus
+     * @emits addRouteStop via EventBus
      */
     addRouteStop (data) {
       EventBus.$emit('addRouteStop', data)
     },
     /**
      * When an `add destination to route` option is hit,
-     * emits an addDestinationToRoute event via eventBus.
+     * emits an addDestinationToRoute event via EventBus.
      * The map-view component does not emit events via
-     * eventBus, only local events to its container (this component)
+     * EventBus, only local events to its container (this component)
      * @param {Object} data
-     * @emits addDestinationToRoute via eventBus
+     * @emits addDestinationToRoute via EventBus
      */
     addDestinationToRoute (data) {
       EventBus.$emit('addDestinationToRoute', data)
@@ -606,9 +606,9 @@ export default {
     /**
      * When an avoid polygons option changes,
      * merge the avoid polygons array into a multiPolygon and
-     * emits an avoidPolygonsChanged event via eventBus.
+     * emits an avoidPolygonsChanged event via EventBus.
      * @param {Array} polygons
-     * @emits avoidPolygonsChanged via eventBus
+     * @emits avoidPolygonsChanged via EventBus
      */
     avoidPolygonsChanged (polygons) {
       if (polygons) {

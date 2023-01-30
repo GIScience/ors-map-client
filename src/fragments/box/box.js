@@ -7,8 +7,8 @@
  * @emits resized, [to parent] passing object {maximized: boolean, guid: unique string}
  * @emits boxCreated [to parent] passing the box guid
  * @listens boxMaximizedStackChanged
- * @listens closeBox [global, via eventBus] expecting box guid
- * @listens closeBox [global, via eventBus] expecting {guid:<id>, maximized: boolean}
+ * @listens closeBox [global, via EventBus] expecting box guid
+ * @listens closeBox [global, via EventBus] expecting {guid:<id>, maximized: boolean}
  */
 import theme from '@/config/theme'
 import utils from '@/support/utils'
@@ -91,7 +91,7 @@ export default {
     })
 
     // The box component listen to `closeBox` event so that
-    // it is possible to close a box via eventBus, passing the
+    // it is possible to close a box via EventBus, passing the
     // box guid
     EventBus.$on('closeBox', function (boxGuid) {
       if (context.guid === boxGuid) {
@@ -99,7 +99,7 @@ export default {
       }
     })
     // The box component listen to `resizeBox` event so that
-    // it is possible to resize a box via eventBus, passing the
+    // it is possible to resize a box via EventBus, passing the
     // an object containing the boxGuid and maximized boolean property
     // like {boxGuid: <the-guid>, maximized: true}
     EventBus.$on('resizeBox', function (data) {

@@ -140,7 +140,7 @@ export default {
     /**
      * Handle the active route index change
      * by emitting a changeActiveRouteIndex
-     * event via eventBus
+     * event via EventBus
      * @param {*} index
      * @emits changeActiveRouteIndex
      */

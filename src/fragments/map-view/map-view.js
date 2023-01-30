@@ -4,11 +4,11 @@
  * @uses storage defined in @see /src/store/modules/map-state
  *
  * Events that this component listens to:
- * @listens redrawAndFitMap [via eventBus] - event that will trigger a map redraw and refit bounds - expects {isMaximized: Boolean, guid: String}
- * @listens clearMap [via eventBus] - event that will trigger a map clear
- * @listens changeActiveRouteIndex [via eventBus] - event that will trigger active route index change
- * @listens placeFocusChanged [via eventBus] - updates the map center when a new place is selected *
- * Events emitted via eventBus:
+ * @listens redrawAndFitMap [via EventBus] - event that will trigger a map redraw and refit bounds - expects {isMaximized: Boolean, guid: String}
+ * @listens clearMap [via EventBus] - event that will trigger a map clear
+ * @listens changeActiveRouteIndex [via EventBus] - event that will trigger active route index change
+ * @listens placeFocusChanged [via EventBus] - updates the map center when a new place is selected *
+ * Events emitted via EventBus:
  * @emits activeRouteIndexChanged
  * @emits setSideBarStatus
  * @emits mapLeftClicked
@@ -1388,7 +1388,7 @@ export default {
      * and emits events that will trigger the displaying
      * of the right click floating-context menu
      * @param {Object} event
-     * @emits mapRightClicked (via eventBus)
+     * @emits mapRightClicked (via EventBus)
      */
     mapRightClick (event) {
       if (this.showClickPopups) {
@@ -1412,8 +1412,8 @@ export default {
      * and emits events that will trigger the displaying
      * of the place info pop up box
      * @param {Object} event
-     * @emits setSidebarStatus (via eventBus)
-     * @emits mapLeftClicked (via eventBus)
+     * @emits setSidebarStatus (via EventBus)
+     * @emits mapLeftClicked (via EventBus)
      */
     mapLeftClick (event) {
       if (this.$store.getters.pickPlaceIndex !== null) {
@@ -1972,16 +1972,16 @@ export default {
       }
     },
     /**
-     * Add map view initial eventBus listeners
-     * @listens redrawAndFitMap (via eventBus)
-     * @listens clearMap (via eventBus)
-     * @listens clearMap (via eventBus)
-     * @listens placeFocusChanged (via eventBus)
-     * @listens changeActiveRouteIndex (via eventBus)
-     * @listens altitudeChartHoverIndexChanged (via eventBus)
-     * @listens mouseLeftChartAltitudeChart (via eventBus)
-     * @listens showAltitudeModal (via eventBus)
-     * @listens highlightPolylineSections (via eventBus)
+     * Add map view initial EventBus listeners
+     * @listens redrawAndFitMap (via EventBus)
+     * @listens clearMap (via EventBus)
+     * @listens clearMap (via EventBus)
+     * @listens placeFocusChanged (via EventBus)
+     * @listens changeActiveRouteIndex (via EventBus)
+     * @listens altitudeChartHoverIndexChanged (via EventBus)
+     * @listens mouseLeftChartAltitudeChart (via EventBus)
+     * @listens showAltitudeModal (via EventBus)
+     * @listens highlightPolylineSections (via EventBus)
      */
     setListeners () {
       const context = this

@@ -87,8 +87,8 @@ export default {
     },
 
     /**
-     * Send new map data via eventBus to ors-map
-     * @emits mapViewDataChanged via eventBus passing fileType and fileContent
+     * Send new map data via EventBus to ors-map
+     * @emits mapViewDataChanged via EventBus passing fileType and fileContent
      * @param {*} fileType
      * @param {*} fileContent
      * @param {*} timestamp

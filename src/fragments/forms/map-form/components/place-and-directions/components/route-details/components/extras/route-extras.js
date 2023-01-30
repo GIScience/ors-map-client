@@ -127,7 +127,7 @@ export default {
      * that will be catch by the map view
      * to highlight all sections of a given extra key
      * @param {String} extraKey
-     * @emits highlightPolylineSections (via eventBus)
+     * @emits highlightPolylineSections (via EventBus)
      */
     showAllSections (extraKey) {
       const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
