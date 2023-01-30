@@ -153,11 +153,11 @@ export default {
           // and that will trigger the display of a info icon
           // on the right side of the main menu letting the user
           // know that there are new information
-          context.eventBus.$emit('newInfoAvailable')
+          EventBus.$emit('newInfoAvailable')
         }
-        context.eventBus.$emit('mapViewDataChanged', mapViewData)
+        EventBus.$emit('mapViewDataChanged', mapViewData)
         setTimeout(() => {
-          context.eventBus.$emit('mapViewDataUploaded', mapViewData)
+          EventBus.$emit('mapViewDataUploaded', mapViewData)
           context.showSuccess(context.$t('mapForm.uploadedContentRendered'))
         }, 200)
       }).catch((error) => {

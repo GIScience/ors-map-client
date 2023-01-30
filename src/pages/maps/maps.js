@@ -321,7 +321,7 @@ export default {
       mapSettings.mapCenter = latlng
       this.$store.dispatch('saveSettings', mapSettings).then(() => {
         context.$root.appHooks.run('mapCenterChanged', mapSettings.mapCenter)
-        context.eventBus.$emit('mapCenterChanged', mapSettings.mapCenter)
+        EventBus.$emit('mapCenterChanged', mapSettings.mapCenter)
       })
     },
     /**
@@ -509,11 +509,10 @@ export default {
      * @param {Object} data {place: Place}
      */
     directionsToPoint (data) {
-      let context = this
       EventBus.$emit('clearMap')
       setTimeout(() => {
         this.mapViewData.places = [data.place]
-        context.eventBus.$emit('directionsToPoint', data)
+        EventBus.$emit('directionsToPoint', data)
       }, 100)
       this.bottomNavActive = false
     },

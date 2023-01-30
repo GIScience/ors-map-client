@@ -307,7 +307,7 @@ export default {
         context.showError(context.$t('simplePlaceSearch.unknownSearchPlaceError'))
       }).finally(() => {
         context.searching = false
-        context.eventBus.$emit('showLoading', false)
+        EventBus.$emit('showLoading', false)
       })
     }
   }

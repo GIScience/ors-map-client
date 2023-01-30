@@ -230,7 +230,7 @@ export default {
 
         if (places.length > 0) {
           context.showInfo(context.$t('isochrones.calculatingIsochrones'), { timeout: 0 })
-          context.eventBus.$emit('showLoading', true)
+          EventBus.$emit('showLoading', true)
 
           // Calculate the route
           Isochrones(places).then(data => {
@@ -241,8 +241,8 @@ export default {
             if (data) {
               MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
                 context.mapViewData = mapViewData
-                context.eventBus.$emit('mapViewDataChanged', mapViewData)
-                context.eventBus.$emit('newInfoAvailable')
+                EventBus.$emit('mapViewDataChanged', mapViewData)
+                EventBus.$emit('newInfoAvailable')
                 context.showSuccess(context.$t('isochrones.isochronesReady'))
                 context.setSidebarIsOpen()
                 resolve(mapViewData)
@@ -251,7 +251,7 @@ export default {
           }).catch(result => {
             context.handleCalculateIsochronesError(result)
           }).finally(() => {
-            context.eventBus.$emit('showLoading', false)
+            EventBus.$emit('showLoading', false)
           })
         } else {
           // There are no enough places or round trip to be routed

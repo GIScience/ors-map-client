@@ -377,7 +377,7 @@ export default {
             reject(err)
           }).finally(() => {
             context.searching = false
-            context.eventBus.$emit('showLoading', false)
+            EventBus.$emit('showLoading', false)
           })
         }
       })
@@ -632,7 +632,7 @@ export default {
 
         if (places.length > 1 || context.$store.getters.mode === constants.modes.roundTrip) {
           context.showInfo(context.$t('placesAndDirections.calculatingRoute'), { timeout: 0 })
-          context.eventBus.$emit('showLoading', true)
+          EventBus.$emit('showLoading', true)
 
           // Calculate the route
           Directions(places).then(data => {
@@ -642,9 +642,9 @@ export default {
               MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
                 mapViewData.places = context.places // places from context have more fine data, so use it
                 context.mapViewData = mapViewData
-                context.eventBus.$emit('newInfoAvailable', true)
+                EventBus.$emit('newInfoAvailable', true)
                 context.showSuccess(context.$t('placesAndDirections.routeReady'), {timeout: 3})
-                context.eventBus.$emit('mapViewDataChanged', mapViewData)
+                EventBus.$emit('mapViewDataChanged', mapViewData)
                 context.setSidebarIsOpen()
                 resolve(mapViewData)
               })
@@ -654,9 +654,9 @@ export default {
             context.mapViewData.places = context.places // in case of failure, use the places on the app context
             context.mapViewData.routes = []
             context.mapViewData.timestamp = new Date().getTime()
-            context.eventBus.$emit('mapViewDataChanged', context.mapViewData)
+            EventBus.$emit('mapViewDataChanged', context.mapViewData)
           }).finally(() => {
-            context.eventBus.$emit('showLoading', false)
+            EventBus.$emit('showLoading', false)
           })
         } else {
           // There are no enough places or round trip to be routed

@@ -454,7 +454,7 @@ export default {
           reject(err)
         }).finally(() => {
           context.searching = false
-          context.eventBus.$emit('showLoading', false)
+          EventBus.$emit('showLoading', false)
         })
       })
     },
@@ -515,7 +515,7 @@ export default {
           context.showError(context.$t('placeInput.unknownSearchPlaceError'))
         }).finally(() => {
           context.searching = false
-          context.eventBus.$emit('showLoading', false)
+          EventBus.$emit('showLoading', false)
         })
       }
     },
@@ -542,7 +542,7 @@ export default {
         console.log(response)
       }).finally(() => {
         context.searching = false
-        context.eventBus.$emit('showLoading', false)
+        EventBus.$emit('showLoading', false)
       })
     },
 
@@ -610,7 +610,7 @@ export default {
             // In case of any fail, call the search mode handler
             context.handleGoToSearchMode()
           }).finally(() => {
-            context.eventBus.$emit('showLoading', false)
+            EventBus.$emit('showLoading', false)
           })
         } else {
           context.handleGoToSearchMode()
