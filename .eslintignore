@@ -2,6 +2,4 @@
 /config/
 /dist/
 /*.js
-/test/unit/coverage/
-/test/integration/mockups
 /src/ors-js/node_modules/

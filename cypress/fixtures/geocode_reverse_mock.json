@@ -1,0 +1,84 @@
+{
+  "geocoding": {
+    "version": "0.2",
+    "attribution": "https://openrouteservice.org/terms-of-service/#attribution-geocode",
+    "query": {
+      "size": 10,
+      "private": false,
+      "point.lat": 8.611907958984377,
+      "point.lon": 49.46098385110948,
+      "boundary.circle.lat": 8.611907958984377,
+      "boundary.circle.lon": 49.46098385110948,
+      "lang": {
+        "name": "English",
+        "iso6391": "en",
+        "iso6393": "eng",
+        "via": "header",
+        "defaulted": false
+      },
+      "querySize": 20
+    },
+    "engine": {
+      "name": "Pelias",
+      "author": "Mapzen",
+      "version": "1.0"
+    },
+    "timestamp": 1674480984059
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.769869, 49.37625]
+      },
+      "properties": {
+        "layer": "locality",
+        "name": "Heidelberg",
+        "distance": 0.867,
+        "country_a": "DEU",
+        "locality": "Heidelberg",
+        "label": "Heidelberg, BW, Germany"
+      },
+      "bbox": [8.57312513958, 49.3521596612, 8.79412886129, 49.4595876777],
+      "distance": 0.8655641929890087
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.793137, 49.39434]
+      },
+      "properties": {
+        "layer": "venue",
+        "source": "openstreetmap",
+        "name": "Sparkasse Heidelberg",
+        "distance": 2.585,
+        "country_a": "DEU",
+        "locality": "Neckargemünd",
+        "label": "Sparkasse Heidelberg, Neckargemünd, BW, Germany"
+      },
+      "bbox": [8.7928299, 49.3941569, 8.7933164, 49.3943459],
+      "distance": 2.58199841383592
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.692416, 49.401247]
+      },
+      "properties": {
+        "layer": "county",
+        "name": "Heidelberg",
+        "distance": 5.497,
+        "country_a": "DEU",
+        "county": "Heidelberg",
+        "label": "Heidelberg, BW, Germany"
+      },
+      "bbox": [8.573125, 49.35216, 8.794129, 49.459588],
+      "distance": 5.490898644881834
+    }
+  ],
+  "bbox": [49.039135, 8.337058, 50.090204, 10.559783]
+}

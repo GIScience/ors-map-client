@@ -4,13 +4,6 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/tests/coverage/
-/tests/unit/coverage/
-/tests/integration/coverage/
-/tests/e2e/reports/
-/tests/e2e/downloads/*
-selenium-debug.log
-selenium-server.log
 /src/ors-js/
 
 # Editor directories and files
@@ -20,8 +13,6 @@ selenium-server.log
 *.ntvs*
 *.njsproj
 *.sln
-
-!/tests/e2e/downloads/.gitkeep
 
 ## The ignores below can be removed/commented in the case
 ## you want to include the config files, the plugins
@@ -48,4 +39,5 @@ selenium-server.log
 # cypress tests
 /cypress/videos/
 /cypress/screenshots/
+/cypress/downloads/
 /index.html

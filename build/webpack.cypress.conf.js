@@ -3,7 +3,24 @@ const { resolveRoot, styleLoaders} = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const webpack = require('webpack')
+const packageJson = require("../package.json")
 
+let ORSKEY = process.env.ORSKEY
+let BITLYLOGIN = process.env.BITLYLOGIN
+let BITLYAPIKEY = process.env.BITLYAPIKEY
+
+let env = {
+  PACKAGE_JSON: JSON.stringify(packageJson)
+}
+if (ORSKEY) {
+  env.ORSKEY = `"${ORSKEY}"`
+}
+if (BITLYLOGIN) {
+  env.BITLYLOGIN = `"${BITLYLOGIN}"`
+}
+if (BITLYAPIKEY) {
+  env.BITLYAPIKEY = `"${BITLYAPIKEY}"`
+}
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
@@ -22,6 +39,9 @@ module.exports = {
     // fix "process is not defined" error:
     new webpack.ProvidePlugin({
       process: 'process/browser',
+    }),
+    new webpack.DefinePlugin({
+      'process.env': env
     })
   ],
   context: resolveRoot(),
@@ -37,7 +57,8 @@ module.exports = {
   resolve: {
     alias: {
       '@': resolveRoot('src'),
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      'fixtures': resolveRoot('cypress/fixtures')
     },
     extensions: ['.vue', '.js', '.json'],
     fallback: {
