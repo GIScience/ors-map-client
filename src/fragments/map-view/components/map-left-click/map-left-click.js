@@ -1,7 +1,7 @@
 /**
  * Render and deals with left click events
  * @emits closed
- * @emits showLoading [via eventBus] (when resolving place info)
+ * @emits showLoading [via EventBus] (when resolving place info)
  * @emits directionsToPoint
  * @listens mapRightClicked
  * @listens mapLeftClicked (to close the right click pop up)
@@ -9,6 +9,7 @@
 import { ReverseGeocode } from '@/support/ors-api-runner'
 import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   data () {
@@ -105,11 +106,11 @@ export default {
      * @param lng
      * @param options
      * @returns {Promise}
-     * @emits showLoading (via eventBus)
+     * @emits showLoading (via EventBus)
      */
     resolvePoint (lat, lng) {
       return new Promise((resolve, reject) => {
-        this.eventBus.$emit('showLoading', true)
+        EventBus.$emit('showLoading', true)
         const context = this
         ReverseGeocode(lat, lng).then(places => {
           if (places.length > 0) {
@@ -123,7 +124,7 @@ export default {
           console.log(response)
           reject(response)
         }).finally(() => {
-          this.eventBus.$emit('showLoading', false)
+          EventBus.$emit('showLoading', false)
         })
       })
     },
@@ -177,10 +178,10 @@ export default {
   },
   created () {
     const context = this
-    this.eventBus.$on('mapLeftClicked', (data) => {
+    EventBus.$on('mapLeftClicked', (data) => {
       context.mapLeftClick(data)
     })
-    this.eventBus.$on('mapRightClicked', () => {
+    EventBus.$on('mapRightClicked', () => {
       context.showLeftClickPopup = false
     })
   }

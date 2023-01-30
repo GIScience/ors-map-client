@@ -10,6 +10,7 @@ import constants from '@/resources/constants'
 import appConfig from '@/config/app-config'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
+import {EventBus} from '@/common/event-bus'
 
 // Local components
 import IschronesDetails from './components/isochrones-details/IsochronesDetails'
@@ -39,13 +40,13 @@ export default {
     this.loadData()
     const context = this
     // When the filters object has changed externally, reprocess the app route
-    this.eventBus.$on('filtersChangedExternally', () => {
+    EventBus.$on('filtersChangedExternally', () => {
       if (context.active) {
         context.updateAppRoute()
       }
     })
     // When the user click on a marker to remove it
-    this.eventBus.$on('removePlace', (data) => {
+    EventBus.$on('removePlace', (data) => {
       if (context.active) {
         context.removePlace(data)
       }
@@ -54,7 +55,7 @@ export default {
     /**
      * Update local object when a mapViewData is uploaded
      */
-    this.eventBus.$on('mapViewDataUploaded', (mapViewData) => {
+    EventBus.$on('mapViewDataUploaded', (mapViewData) => {
       if (context.active) {
         context.mapViewData = mapViewData
         context.places = mapViewData.places
@@ -65,7 +66,7 @@ export default {
      * If the map data view has changed and this component
      * is not active, then reset its data to the initial state
      */
-    this.eventBus.$on('mapViewDataChanged', () => {
+    EventBus.$on('mapViewDataChanged', () => {
       if (!context.active) {
         context.mapViewData = new MapViewData()
         context.places = [new Place()]
@@ -73,7 +74,7 @@ export default {
     })
 
     // Avoid polygons changed, so recalculate the route
-    this.eventBus.$on('avoidPolygonsChanged', (polygons) => {
+    EventBus.$on('avoidPolygonsChanged', (polygons) => {
       if (context.active) {
         context.$root.appHooks.run('avoidPolygonsChangedInIsochrones', polygons)
         context.avoidPolygonsFilterAccessor.value = polygons
@@ -84,13 +85,13 @@ export default {
       }
     })
     // When the user click on the map and select to add this point as an additional destination in the route
-    this.eventBus.$on('addAsIsochroneCenter', (data) => {
+    EventBus.$on('addAsIsochroneCenter', (data) => {
       context.addAsIsochroneCenter(data)
     })
 
     // When a marker drag finishes, update
     // the place coordinates and re render the map
-    this.eventBus.$on('markerDragged', (marker) => {
+    EventBus.$on('markerDragged', (marker) => {
       if (context.active) {
         const place = new Place(marker.position.lng, marker.position.lat)
         context.places[marker.inputIndex] = place
@@ -100,7 +101,7 @@ export default {
       }
     })
 
-    this.eventBus.$on('setInputPlace', (data) => {
+    EventBus.$on('setInputPlace', (data) => {
       if (context.active) {
         context.places[data.pickPlaceIndex] = data.place
         let filledPlaces = context.getFilledPlaces()
@@ -229,7 +230,7 @@ export default {
 
         if (places.length > 0) {
           context.showInfo(context.$t('isochrones.calculatingIsochrones'), { timeout: 0 })
-          context.eventBus.$emit('showLoading', true)
+          EventBus.$emit('showLoading', true)
 
           // Calculate the route
           Isochrones(places).then(data => {
@@ -240,8 +241,8 @@ export default {
             if (data) {
               MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
                 context.mapViewData = mapViewData
-                context.eventBus.$emit('mapViewDataChanged', mapViewData)
-                context.eventBus.$emit('newInfoAvailable')
+                EventBus.$emit('mapViewDataChanged', mapViewData)
+                EventBus.$emit('newInfoAvailable')
                 context.showSuccess(context.$t('isochrones.isochronesReady'))
                 context.setSidebarIsOpen()
                 resolve(mapViewData)
@@ -250,7 +251,7 @@ export default {
           }).catch(result => {
             context.handleCalculateIsochronesError(result)
           }).finally(() => {
-            context.eventBus.$emit('showLoading', false)
+            EventBus.$emit('showLoading', false)
           })
         } else {
           // There are no enough places or round trip to be routed

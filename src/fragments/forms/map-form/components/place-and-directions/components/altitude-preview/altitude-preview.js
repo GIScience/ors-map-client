@@ -1,5 +1,6 @@
 import Altitude from '@/fragments/charts/altitude/Altitude'
 import MapViewData from '@/models/map-view-data'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   props: {
@@ -22,7 +23,7 @@ export default {
       if (this.$lowResolution) {
         this.$store.commit('setLeftSideBarIsOpen', false)
       }
-      this.eventBus.$emit('showAltitudeModal')
+      EventBus.$emit('showAltitudeModal')
     }
   }
 }

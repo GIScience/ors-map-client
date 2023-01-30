@@ -10,6 +10,7 @@ import MapViewData from '@/models/map-view-data'
 import { PlacesSearch } from '@/support/ors-api-runner'
 import constants from '@/resources/constants'
 import Place from '@/models/place'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   data: () => ({
@@ -93,7 +94,7 @@ export default {
       // Set marker clicked event listener
       // When in search place mode, if the marker is clicked, we select it as the target
       // for the inputIndex
-      this.eventBus.$on('markerClicked', (marker) => {
+      EventBus.$on('markerClicked', (marker) => {
         const lat = marker.data.geometry.coordinates[1]
         const lng = marker.data.geometry.coordinates[0]
         const placeOptions = { resolve: false, id: marker.data.properties.id }
@@ -103,13 +104,13 @@ export default {
 
       // When a marker drag finishes, update
       // the place coordinates and re render the map
-      this.eventBus.$on('markerDragged', (marker) => {
+      EventBus.$on('markerDragged', (marker) => {
         context.place.coordinates = [marker.position.lng, marker.position.lat]
         context.loadData()
       })
 
       // reload the map data after the app route has changed
-      this.eventBus.$on('appRouteDataChanged', (appRouteData) => {
+      EventBus.$on('appRouteDataChanged', (appRouteData) => {
         context.reloadAfterAppRouteDataChanged(appRouteData)
       })
 
@@ -117,26 +118,26 @@ export default {
       // side bar is not opened, notify visually that there
       // new data about the route calculated that can be seen
       // by opening the sidebar
-      this.eventBus.$on('newInfoAvailable', (available) => {
+      EventBus.$on('newInfoAvailable', (available) => {
         if (!context.$store.getters.isSidebarVisible) {
           context.newInfoAvailable = available
         }
       })
 
-      this.eventBus.$on('searched', () => {
+      EventBus.$on('searched', () => {
         if (!context.$store.getters.isSidebarVisible) {
           context.newInfoAvailable = true
         }
         context.$emit('searched')
       })
 
-      this.eventBus.$on('refreshSearch', () => {
+      EventBus.$on('refreshSearch', () => {
         context.refreshSearch()
       })
 
       // When the user click on a marker to remove it
       // and there is only one place
-      this.eventBus.$on('removePlace', () => {
+      EventBus.$on('removePlace', () => {
         if (context.$store.getters.mode === constants.modes.place) {
           context.place = new Place()
         }
@@ -209,7 +210,7 @@ export default {
       // the only search result place must auto selected as target
       if (this.$store.getters.mode === constants.modes.search && this.mapViewData.places.length === 1) {
         this.place = this.mapViewData.places[0]
-        this.eventBus.$emit('openDirectionsMode', this.place)
+        EventBus.$emit('openDirectionsMode', this.place)
       } else {
         if (this.place.isEmpty()) { // place has no lat and lng
           // Make sure that the place will
@@ -218,9 +219,9 @@ export default {
           // It must be resolved using its coordinates
           this.place.placeName = ''
           this.place.unresolved = false
-          this.eventBus.$emit('switchToDirections')
+          EventBus.$emit('switchToDirections')
         } else {
-          this.eventBus.$emit('openDirectionsMode', this.place)
+          EventBus.$emit('openDirectionsMode', this.place)
         }
       }
       this.openingRouteMode = true
@@ -251,7 +252,7 @@ export default {
       this.mapViewData.places = places
       this.mapViewData.routes = []
       this.mapViewData.timestamp = Date.now()
-      this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
+      EventBus.$emit('mapViewDataChanged', this.mapViewData)
     },
 
     /**
@@ -279,7 +280,7 @@ export default {
      */
     placeCleared () {
       this.place = new Place()
-      this.eventBus.$emit('clearMap')
+      EventBus.$emit('clearMap')
       this.$forceUpdate()
       this.searching = true
       this.updateAppRoute()
@@ -294,7 +295,7 @@ export default {
       const context = this
 
       // Run the place search
-      this.eventBus.$emit('showLoading', true)
+      EventBus.$emit('showLoading', true)
       PlacesSearch(this.place.placeName).then(places => {
         if (places.length === 0) {
           this.showInfo(this.$t('simplePlaceSearch.noPlaceFound'))
@@ -306,7 +307,7 @@ export default {
         context.showError(context.$t('simplePlaceSearch.unknownSearchPlaceError'))
       }).finally(() => {
         context.searching = false
-        context.eventBus.$emit('showLoading', false)
+        EventBus.$emit('showLoading', false)
       })
     }
   }

@@ -4,6 +4,7 @@ import defaultMapSettings from '@/config/default-map-settings'
 import constants from '@/resources/constants'
 import utils from '@/support/utils'
 import lodash from 'lodash'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   data: () => ({
@@ -64,12 +65,12 @@ export default {
               }
             })
           }
-          this.eventBus.$emit('mapSettingsChanged', savingSettings)
+          EventBus.$emit('mapSettingsChanged', savingSettings)
           this.$emit('saved')
         })
       }
       // Dispatch an event about the locale change
-      this.eventBus.$emit('localeChanged', this.mapSettingsTransient.locale)
+      EventBus.$emit('localeChanged', this.mapSettingsTransient.locale)
     },
     saveAll () {
       if (!this.validateSettings()) {

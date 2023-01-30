@@ -21,6 +21,7 @@ import PlaceDetails from './components/place-details/PlaceDetails.vue'
 import RoundTrip from './components/round-trip/RoundTrip.vue'
 import FormActions from '../form-actions/FormActions'
 import MapFormMixin from '../map-form-mixin'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   mixins: [MapFormMixin],
@@ -173,7 +174,7 @@ export default {
 
       // When the simple map search send a place
       // set the sent place as the destination of a route
-      this.eventBus.$on('openDirectionsMode', (place) => {
+      EventBus.$on('openDirectionsMode', (place) => {
         context.setTargetPlaceForDirections(place)
         context.setViewMode(constants.modes.directions)
         context.updateAppRoute()
@@ -181,7 +182,7 @@ export default {
 
       // When the simple map search sends a place
       // set the sent place as the destination of a route
-      this.eventBus.$on('switchToDirections', () => {
+      EventBus.$on('switchToDirections', () => {
         if (context.places.length === 1) {
           context.addPlaceInput()
         }
@@ -194,7 +195,7 @@ export default {
 
       // When a marker drag finishes, update
       // the place coordinates and re render the map
-      this.eventBus.$on('markerDragged', (marker) => {
+      EventBus.$on('markerDragged', (marker) => {
         if (context.active) {
           context.places[marker.inputIndex].setLnglat(marker.position.lng, marker.position.lat)
           // remove the name so that the resolve will use only the coordinates
@@ -211,7 +212,7 @@ export default {
       })
       // When a marker is marked as a start place of
       // a direct segment
-      this.eventBus.$on('directChanged', (data) => {
+      EventBus.$on('directChanged', (data) => {
         if (context.active) {
           context.places[data.index] = data.place
           context.updateAppRoute()
@@ -219,7 +220,7 @@ export default {
       })
 
       // When the filters object has changed externally, reprocess the app route
-      this.eventBus.$on('filtersChangedExternally', () => {
+      EventBus.$on('filtersChangedExternally', () => {
         // Filters are only used to calculate route (directions or round trip)
         // so we must update the app route if we are already
         // in directions/round trip mode if all the place inputs are filled
@@ -235,37 +236,37 @@ export default {
       })
 
       // When the user click on the map and select a point as the route start
-      this.eventBus.$on('directionsFromPoint', (data) => {
+      EventBus.$on('directionsFromPoint', (data) => {
         this.$store.commit('pointerTriggeredAction', true)
         context.directionsFromPoint(data)
       })
 
       // When the user click on the map and select a point as the route end
-      this.eventBus.$on('directionsToPoint', (data) => {
+      EventBus.$on('directionsToPoint', (data) => {
         this.$store.commit('pointerTriggeredAction', true)
         context.directionsToPoint(data)
       })
 
       // When the user click on the map and select to add this point to the route
-      this.eventBus.$on('addRouteStop', (data) => {
+      EventBus.$on('addRouteStop', (data) => {
         this.$store.commit('pointerTriggeredAction', true)
         context.addRouteStop(data)
       })
 
       // When the user click on a marker to remove it
-      this.eventBus.$on('removePlace', (data) => {
+      EventBus.$on('removePlace', (data) => {
         if (context.active) {
           context.removePlaceInput(data, true)
         }
       })
 
       // When the user click on the map and select to add this point as an additional destination in the route
-      this.eventBus.$on('addDestinationToRoute', (data) => {
+      EventBus.$on('addDestinationToRoute', (data) => {
         context.addDestinationToRoute(data)
       })
 
       // Avoid polygons changed, so recalculate the route
-      this.eventBus.$on('avoidPolygonsChanged', (polygons) => {
+      EventBus.$on('avoidPolygonsChanged', (polygons) => {
         if (context.active) {
           context.$root.appHooks.run('avoidPolygonsChangedInDirections', polygons)
           context.avoidPolygonsFilterAccessor.value = polygons
@@ -277,18 +278,18 @@ export default {
 
       // If the app is in a low resolution mode
       // hide the sidebar when route sections are highlighted
-      this.eventBus.$on('highlightPolylineSections', () => {
+      EventBus.$on('highlightPolylineSections', () => {
         const sidebarVisible = !context.$lowResolution
         context.setSidebarIsOpen(sidebarVisible)
       })
 
       // reload the map data after the app route has changed
-      this.eventBus.$on('appRouteDataChanged', (appRouteData) => {
+      EventBus.$on('appRouteDataChanged', (appRouteData) => {
         context.reloadAfterAppRouteDataChanged(appRouteData)
       })
 
       // Update local object when a mapViewData is uploaded
-      this.eventBus.$on('mapViewDataUploaded', (mapViewData) => {
+      EventBus.$on('mapViewDataUploaded', (mapViewData) => {
         if (context.active) {
           context.mapViewData = mapViewData
           context.places = mapViewData.places
@@ -298,14 +299,14 @@ export default {
        * If the map data view has changed and this component
        * is not active, then reset its data to the initial state
        */
-      this.eventBus.$on('mapViewDataChanged', () => {
+      EventBus.$on('mapViewDataChanged', () => {
         if (!context.active) {
           context.mapViewData = new MapViewData()
           context.places = [new Place()]
         }
       })
 
-      this.eventBus.$on('setInputPlace', (data) => {
+      EventBus.$on('setInputPlace', (data) => {
         if (context.active) {
           context.places[data.pickPlaceIndex] = data.place
           let filledPlaces = context.getFilledPlaces()
@@ -367,7 +368,7 @@ export default {
         if (!place.unresolved) {
           resolve(place)
         } else {
-          this.eventBus.$emit('showLoading', true)
+          EventBus.$emit('showLoading', true)
           context.searching = true
           place.resolve(this.$store.getters.appRouteData.options.zoom).then(() => {
             resolve(place)
@@ -376,7 +377,7 @@ export default {
             reject(err)
           }).finally(() => {
             context.searching = false
-            context.eventBus.$emit('showLoading', false)
+            EventBus.$emit('showLoading', false)
           })
         }
       })
@@ -533,7 +534,7 @@ export default {
       this.mapViewData.places = places
       this.mapViewData.routes = []
       this.mapViewData.timestamp = Date.now()
-      this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
+      EventBus.$emit('mapViewDataChanged', this.mapViewData)
     },
 
     /**
@@ -572,7 +573,7 @@ export default {
     prepareDirectionsViewAndData () {
       this.setViewMode(constants.modes.directions)
       this.setSidebarIsOpen()
-      this.eventBus.$emit('newInfoAvailable')
+      EventBus.$emit('newInfoAvailable')
 
       // Only calculate a route if there are more then one place defined
       if (this.getFilledPlaces().length > 1) {
@@ -582,7 +583,7 @@ export default {
         })
       } else { // The app might be in directions mode, but containing for example, only the destination
         this.mapViewData.places = this.places
-        this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
+        EventBus.$emit('mapViewDataChanged', this.mapViewData)
       }
     },
     /**
@@ -631,7 +632,7 @@ export default {
 
         if (places.length > 1 || context.$store.getters.mode === constants.modes.roundTrip) {
           context.showInfo(context.$t('placesAndDirections.calculatingRoute'), { timeout: 0 })
-          context.eventBus.$emit('showLoading', true)
+          EventBus.$emit('showLoading', true)
 
           // Calculate the route
           Directions(places).then(data => {
@@ -641,9 +642,9 @@ export default {
               MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
                 mapViewData.places = context.places // places from context have more fine data, so use it
                 context.mapViewData = mapViewData
-                context.eventBus.$emit('newInfoAvailable', true)
+                EventBus.$emit('newInfoAvailable', true)
                 context.showSuccess(context.$t('placesAndDirections.routeReady'), {timeout: 3})
-                context.eventBus.$emit('mapViewDataChanged', mapViewData)
+                EventBus.$emit('mapViewDataChanged', mapViewData)
                 context.setSidebarIsOpen()
                 resolve(mapViewData)
               })
@@ -653,9 +654,9 @@ export default {
             context.mapViewData.places = context.places // in case of failure, use the places on the app context
             context.mapViewData.routes = []
             context.mapViewData.timestamp = new Date().getTime()
-            context.eventBus.$emit('mapViewDataChanged', context.mapViewData)
+            EventBus.$emit('mapViewDataChanged', context.mapViewData)
           }).finally(() => {
-            context.eventBus.$emit('showLoading', false)
+            EventBus.$emit('showLoading', false)
           })
         } else {
           // There are no enough places or round trip to be routed
@@ -748,7 +749,7 @@ export default {
       this.setFocusedPlaceInput(this.places.length - 1)
       this.switchPlaceInputsValues()
       this.setViewMode(constants.modes.directions)
-      this.eventBus.$emit('clearMap')
+      EventBus.$emit('clearMap')
       this.updateAppRoute()
     },
 
@@ -796,7 +797,7 @@ export default {
       // in order to allow the user to continue to
       // use the directions mode, add a place input
       if (keepDirectionsMode && placeInputsBeforeRemoval === 2) {
-        this.eventBus.$emit('newInfoAvailable', false)
+        EventBus.$emit('newInfoAvailable', false)
         setTimeout(() => {
           this.addInput()
           this.setViewMode(constants.modes.directions)
@@ -842,7 +843,7 @@ export default {
       this.mapViewData.options = options
 
       // Notify the listeners that the MapViewData has changed
-      this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
+      EventBus.$emit('mapViewDataChanged', this.mapViewData)
 
       // Update the place view for the place input
       // at index 0 (the only one)
@@ -863,7 +864,7 @@ export default {
         this.updateAppRoute()
       } else if (filledPlaces.length > 0) {
         this.mapViewData.places = filledPlaces
-        this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
+        EventBus.$emit('mapViewDataChanged', this.mapViewData)
       }
       this.searching = false
     },
@@ -890,7 +891,7 @@ export default {
       appRouteData.options = {}
       this.$store.commit('appRouteData', appRouteData)
       this.mapViewData = new MapViewData()
-      this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
+      EventBus.$emit('mapViewDataChanged', this.mapViewData)
     },
     /**
      * Reset a place input at a given index

@@ -1,6 +1,6 @@
-
 import InstructionCodeToSymbol from '@/resources/lists/instruction-code-to-symbol'
 import constants from '@/resources/constants'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   props: {
@@ -19,7 +19,7 @@ export default {
       const highlighData = {sectionTitle, sections: [] }
       const segmentData = this.buildExtraHighlighPolylineData(step, index)
       highlighData.sections.push(segmentData)
-      this.eventBus.$emit('highlightPolylineSections', highlighData)
+      EventBus.$emit('highlightPolylineSections', highlighData)
     },
     buildExtraHighlighPolylineData (step) {
       const color = constants.segmentHighlightColor

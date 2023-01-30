@@ -1,4 +1,6 @@
 import FloatingMenu from './components/floating-menu/FloatingMenu'
+import {EventBus} from '@/common/event-bus'
+
 
 export default {
   data () {
@@ -32,7 +34,7 @@ export default {
     },
     settingsClicked () {
       this.settingsTooltipClicked = true
-      this.eventBus.$emit('showSettingsModal')
+      EventBus.$emit('showSettingsModal')
     }
   },
   components: {

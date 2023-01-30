@@ -5,6 +5,7 @@ import AppRouteData from '@/models/app-route-data'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import Place from '@/models/place'
+import {EventBus} from '@/common/event-bus'
 
 export default {
   props: {
@@ -125,8 +126,8 @@ export default {
       this.addPlaceInput()
       this.$store.commit('appRouteData', new AppRouteData())
       this.$store.commit('mode', constants.modes.place)
-      this.eventBus.$emit('mapViewDataChanged', this.mapViewData)
-      this.eventBus.$emit('clearMap')
+      EventBus.$emit('mapViewDataChanged', this.mapViewData)
+      EventBus.$emit('clearMap')
       this.updateAppRoute()
     },
     /**
@@ -152,11 +153,11 @@ export default {
           // and that will trigger the display of a info icon
           // on the right side of the main menu letting the user
           // know that there are new information
-          context.eventBus.$emit('newInfoAvailable')
+          EventBus.$emit('newInfoAvailable')
         }
-        context.eventBus.$emit('mapViewDataChanged', mapViewData)
+        EventBus.$emit('mapViewDataChanged', mapViewData)
         setTimeout(() => {
-          context.eventBus.$emit('mapViewDataUploaded', mapViewData)
+          EventBus.$emit('mapViewDataUploaded', mapViewData)
           context.showSuccess(context.$t('mapForm.uploadedContentRendered'))
         }, 200)
       }).catch((error) => {

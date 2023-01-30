@@ -4,6 +4,8 @@ import Print from '@/fragments/forms/map-form/components/print/Print'
 import PolygonUtils from '@/support/polygon-utils'
 import MapViewData from '@/models/map-view-data'
 import Utils from '@/support/utils'
+import {EventBus} from '@/common/event-bus'
+
 
 export default {
   data: () => ({
@@ -39,12 +41,12 @@ export default {
       return PolygonUtils.hasPlaceAsCenter(place, polygon)
     },
     toggleVisibility (polygonIndex) {
-      this.eventBus.$emit('togglePolygonVisibility', polygonIndex)
+      EventBus.$emit('togglePolygonVisibility', polygonIndex)
     },
 
     polygonOpacityChanged (polygonIndex) {
       let fillOpacity = this.localMapViewData.polygons[polygonIndex].properties.fillOpacity
-      this.eventBus.$emit('setPolygonOpacity', {polygonIndex, fillOpacity })
+      EventBus.$emit('setPolygonOpacity', {polygonIndex, fillOpacity })
     }
   },
   watch: {

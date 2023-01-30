@@ -4,11 +4,11 @@
  * @uses storage defined in @see /src/store/modules/map-state
  *
  * Events that this component listens to:
- * @listens redrawAndFitMap [via eventBus] - event that will trigger a map redraw and refit bounds - expects {isMaximized: Boolean, guid: String}
- * @listens clearMap [via eventBus] - event that will trigger a map clear
- * @listens changeActiveRouteIndex [via eventBus] - event that will trigger active route index change
- * @listens placeFocusChanged [via eventBus] - updates the map center when a new place is selected *
- * Events emitted via eventBus:
+ * @listens redrawAndFitMap [via EventBus] - event that will trigger a map redraw and refit bounds - expects {isMaximized: Boolean, guid: String}
+ * @listens clearMap [via EventBus] - event that will trigger a map clear
+ * @listens changeActiveRouteIndex [via EventBus] - event that will trigger active route index change
+ * @listens placeFocusChanged [via EventBus] - updates the map center when a new place is selected *
+ * Events emitted via EventBus:
  * @emits activeRouteIndexChanged
  * @emits setSideBarStatus
  * @emits mapLeftClicked
@@ -67,6 +67,7 @@ import GeoUtils from '@/support/geo-utils'
 import Utils from '@/support/utils'
 import theme from '@/config/theme'
 import Place from '@/models/place'
+import {EventBus} from '@/common/event-bus'
 import 'vue2-leaflet-draw-toolbar'
 import Leaflet from 'leaflet'
 import lodash from 'lodash'
@@ -822,7 +823,7 @@ export default {
     alternativeRouteIndexSelected (index, event) {
       event.originalEvent.stopPropagation()
       event.originalEvent.preventDefault()
-      this.eventBus.$emit('activeRouteIndexChanged', index)
+      EventBus.$emit('activeRouteIndexChanged', index)
       this.setActiveRouteIndex(index)
     },
     /**
@@ -1337,7 +1338,7 @@ export default {
       // If the app is in a low resolution mode
       // hide the sidebar so that the features can be seen
       if (this.$lowResolution) {
-        this.eventBus.$emit('setSidebarStatus', false)
+        EventBus.$emit('setSidebarStatus', false)
       }
     },
 
@@ -1387,7 +1388,7 @@ export default {
      * and emits events that will trigger the displaying
      * of the right click floating-context menu
      * @param {Object} event
-     * @emits mapRightClicked (via eventBus)
+     * @emits mapRightClicked (via EventBus)
      */
     mapRightClick (event) {
       if (this.showClickPopups) {
@@ -1397,11 +1398,11 @@ export default {
           GeoUtils.normalizeCoordinates(event.latlng)
           const data = { event, mapEl, canAddStop: this.canAddStop }
           // Event to be catch by the MapRightClick.vue component
-          this.eventBus.$emit('mapRightClicked', data)
+          EventBus.$emit('mapRightClicked', data)
         }
         this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
       } else if (this.$store.getters.isSidebarVisible) {
-        this.eventBus.$emit('setSidebarStatus', false)
+        EventBus.$emit('setSidebarStatus', false)
       }
     },
 
@@ -1411,8 +1412,8 @@ export default {
      * and emits events that will trigger the displaying
      * of the place info pop up box
      * @param {Object} event
-     * @emits setSidebarStatus (via eventBus)
-     * @emits mapLeftClicked (via eventBus)
+     * @emits setSidebarStatus (via EventBus)
+     * @emits mapLeftClicked (via EventBus)
      */
     mapLeftClick (event) {
       if (this.$store.getters.pickPlaceIndex !== null) {
@@ -1428,7 +1429,7 @@ export default {
           // must close the side bar to allow the user to interact with the map.
           // If not then the normal left click handler must be executed
           if (this.$store.getters.isSidebarVisible && this.$lowResolution) {
-            this.eventBus.$emit('setSidebarStatus', false)
+            EventBus.$emit('setSidebarStatus', false)
           }
           this.handleShowLeftClickPlaceInfo(event)
         }
@@ -1463,7 +1464,7 @@ export default {
         const insidePolygon = this.isPointInsidePolygons(event.latlng)
         GeoUtils.normalizeCoordinates(event.latlng)
         const data = { event, insidePolygon }
-        this.eventBus.$emit('mapLeftClicked', data)
+        EventBus.$emit('mapLeftClicked', data)
         this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
       }
     },
@@ -1971,37 +1972,37 @@ export default {
       }
     },
     /**
-     * Add map view initial eventBus listeners
-     * @listens redrawAndFitMap (via eventBus)
-     * @listens clearMap (via eventBus)
-     * @listens clearMap (via eventBus)
-     * @listens placeFocusChanged (via eventBus)
-     * @listens changeActiveRouteIndex (via eventBus)
-     * @listens altitudeChartHoverIndexChanged (via eventBus)
-     * @listens mouseLeftChartAltitudeChart (via eventBus)
-     * @listens showAltitudeModal (via eventBus)
-     * @listens highlightPolylineSections (via eventBus)
+     * Add map view initial EventBus listeners
+     * @listens redrawAndFitMap (via EventBus)
+     * @listens clearMap (via EventBus)
+     * @listens clearMap (via EventBus)
+     * @listens placeFocusChanged (via EventBus)
+     * @listens changeActiveRouteIndex (via EventBus)
+     * @listens altitudeChartHoverIndexChanged (via EventBus)
+     * @listens mouseLeftChartAltitudeChart (via EventBus)
+     * @listens showAltitudeModal (via EventBus)
+     * @listens highlightPolylineSections (via EventBus)
      */
     setListeners () {
       const context = this
 
-      this.eventBus.$on('clearMap', context.clearMap)
+      EventBus.$on('clearMap', context.clearMap)
 
-      this.eventBus.$on('changeActiveRouteIndex', context.setActiveRouteIndex)
+      EventBus.$on('changeActiveRouteIndex', context.setActiveRouteIndex)
 
-      this.eventBus.$on('altitudeChartHoverIndexChanged', context.highlightRoutePoint)
+      EventBus.$on('altitudeChartHoverIndexChanged', context.highlightRoutePoint)
 
-      this.eventBus.$on('mouseLeftChartAltitudeChart', context.removeRoutePoint)
+      EventBus.$on('mouseLeftChartAltitudeChart', context.removeRoutePoint)
 
-      this.eventBus.$on('showAltitudeModal', () => { context.isAltitudeModalOpen = true })
+      EventBus.$on('showAltitudeModal', () => { context.isAltitudeModalOpen = true })
 
-      this.eventBus.$on('mapSettingsChanged', context.setProviders)
+      EventBus.$on('mapSettingsChanged', context.setProviders)
 
-      this.eventBus.$on('placeFocusChanged', context.placeFocusChanged)
+      EventBus.$on('placeFocusChanged', context.placeFocusChanged)
 
-      this.eventBus.$on('highlightPolylineSections', context.highlightPolylineSections)
+      EventBus.$on('highlightPolylineSections', context.highlightPolylineSections)
 
-      this.eventBus.$on('redrawAndFitMap', (data) => {
+      EventBus.$on('redrawAndFitMap', (data) => {
         if (data.guid && data.guid === context.guid) {
           context.adjustMap()
         }

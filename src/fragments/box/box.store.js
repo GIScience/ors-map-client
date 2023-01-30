@@ -1,4 +1,4 @@
-import AppLoader from '@/app-loader'
+import {EventBus} from '@/common/event-bus'
 
 const state = {
   boxMaximizedStack: null
@@ -13,8 +13,7 @@ const getters = {
 const mutations = {
   boxMaximizedStack: (state, value) => {
     state.boxMaximizedStack = value
-    let VueInstance = AppLoader.getInstance()
-    VueInstance.eventBus.$emit('boxMaximizedStackChanged', value)
+    EventBus.$emit('boxMaximizedStackChanged', value)
   }
 }
 

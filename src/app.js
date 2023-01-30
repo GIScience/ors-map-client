@@ -6,6 +6,8 @@ import Confirm from '@/fragments/dialogs/confirm/Confirm'
 import Info from '@/fragments/dialogs/info/Info'
 import MainMenu from '@/common/main-menu'
 import utils from '@/support/utils'
+import {EventBus} from '@/common/event-bus'
+
 
 export default {
   data () {
@@ -25,17 +27,17 @@ export default {
   },
   created () {
     // Register the listener for the showLoading and titleChanged events
-    this.eventBus.$on('showLoading', (value) => {
+    EventBus.$on('showLoading', (value) => {
       this.showLoading = value
     })
-    this.eventBus.$on('titleChanged', (title) => {
+    EventBus.$on('titleChanged', (title) => {
       this.title = title
     })
     const favIcon = document.getElementById('favIcon')
     favIcon.href = utils.getImgSrc('favIcon')
   },
   mounted() {
-    this.eventBus.$on('appLoaded', () => {
+    EventBus.$on('appLoaded', () => {
       MainMenu.adjustMenu()
     })
   },

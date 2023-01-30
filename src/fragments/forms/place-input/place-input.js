@@ -5,6 +5,7 @@ import appConfig from '@/config/app-config'
 import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
 import Utils from '@/support/utils'
+import {EventBus} from '@/common/event-bus'
 
 
 export default {
@@ -89,7 +90,7 @@ export default {
 
     const context = this
 
-    this.eventBus.$on('suggestionsUpdated', (data) => {
+    EventBus.$on('suggestionsUpdated', (data) => {
       context.suggestionUpdated(data)
     })
     this.resolveModel()
@@ -442,7 +443,7 @@ export default {
      */
     resolvePlace () {
       const place = this.localModel
-      this.eventBus.$emit('showLoading', true)
+      EventBus.$emit('showLoading', true)
       const context = this
       return new Promise((resolve, reject) => {
         context.searching = false
@@ -453,7 +454,7 @@ export default {
           reject(err)
         }).finally(() => {
           context.searching = false
-          context.eventBus.$emit('showLoading', false)
+          EventBus.$emit('showLoading', false)
         })
       })
     },
@@ -486,7 +487,7 @@ export default {
     /**
      * Search a place by name
      * @emits autocompleted
-     * @emits showLoading [via eventBus]
+     * @emits showLoading [via EventBus]
      *
      */
     autocompleteByName () {
@@ -498,7 +499,7 @@ export default {
         const context = this
 
         // Run the place search
-        this.eventBus.$emit('showLoading', true)
+        EventBus.$emit('showLoading', true)
         PlacesSearch(this.localModel.placeName, 10).then(places => {
           context.localModel.setSuggestions(places)
           context.focused = true
@@ -514,7 +515,7 @@ export default {
           context.showError(context.$t('placeInput.unknownSearchPlaceError'))
         }).finally(() => {
           context.searching = false
-          context.eventBus.$emit('showLoading', false)
+          EventBus.$emit('showLoading', false)
         })
       }
     },
@@ -525,7 +526,7 @@ export default {
      */
     autocompleteByCoords () {
       const latlng = this.model.getLatLng()
-      this.eventBus.$emit('showLoading', true)
+      EventBus.$emit('showLoading', true)
       const context = this
       ReverseGeocode(latlng.lat, latlng.lng, 10).then(places => {
         const place = new Place(latlng.lng, latlng.lat)
@@ -541,7 +542,7 @@ export default {
         console.log(response)
       }).finally(() => {
         context.searching = false
-        context.eventBus.$emit('showLoading', false)
+        EventBus.$emit('showLoading', false)
       })
     },
 
@@ -591,7 +592,7 @@ export default {
       if (!this.localModel.nameIsCoord()) {
         let context = this
         if (appConfig.autoSelectFirstExactAddressMatchOnSearchEnter) {
-          this.eventBus.$emit('showLoading', true)
+          EventBus.$emit('showLoading', true)
           PlacesSearch(this.localModel.placeName, 10).then(places => {
             // If the first result is an address and the match_type is exact,
             // then we auto select the first item on the enter/return action
@@ -609,7 +610,7 @@ export default {
             // In case of any fail, call the search mode handler
             context.handleGoToSearchMode()
           }).finally(() => {
-            context.eventBus.$emit('showLoading', false)
+            EventBus.$emit('showLoading', false)
           })
         } else {
           context.handleGoToSearchMode()
