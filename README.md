@@ -200,8 +200,6 @@ defined in the main vue instance app:
 - `confirmDialog (title, text, options)` - shows a confirm-dialog with the specified title, text and options and returns
   a promise. If the user clicks `yes`, the promise will be resolved, if s/he clicks on `no`, the promise will be rejected.
 
-- `eventBus` - accessor to global event bus object, that allows broadcasting and getting events in all components
-
 - `$store` - accessor to app vuex-store
 
 ### Pages

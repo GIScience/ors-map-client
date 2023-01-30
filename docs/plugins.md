@@ -76,7 +76,7 @@ You can also use the app constants to compare values. For this import `constants
 
 Within the plug-in you can also set listeners to events emitted via `evenBus`, for example `mapViewDataChanged`,
 as well as emit those events.
-Some events emitted via `eventBus` are:
+Some events emitted via `EventBus` are:
 
 - `mapViewDataChanged`
 - `loadAvoidPolygons`
@@ -89,7 +89,7 @@ Some events emitted via `eventBus` are:
 - `addRouteStop`
 - `appRouteDataChanged`
 
-You can search the entire app for `eventBus.$on(` to find all the events emitted via eventBus.
+You can search the entire app for `EventBus.$on(` to find all the events emitted via EventBus.
 
 ## List of all hooks available
 
