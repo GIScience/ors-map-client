@@ -518,6 +518,5 @@ This approach is intended to create cohesion and keep the project sustainable.
 There are additional documents that are part of the software documentation. they are in the folder `/docs` and are listed below:
 
 - [docs/dynamic-inputs.md](docs/dynamic-inputs.md) - describe how the inputs are rendered using a custom engine and not hard-coded
-- [docs/learned-lessons.md](docs/learned-lessons.md) - lessons learned and that might help in the future
-- [docs/learned-lessons.md](docs/learned-lessons.md) - explains what are the criteria for the search results
+- [docs/search-results-criteria.md](docs/search-results-criteria.md) - explains what are the criteria for the search results
 - [docs/plugins.md](docs/plugins.md) - explains how the plugins can be added to the maps client
