@@ -1,0 +1,22 @@
+version: "2.1"
+networks:
+  production:
+    name: production
+
+services:
+  web:
+    # wait for proper env implementation in the app.
+    #    env_file:
+    #      - ./production.env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: heigit/ors-map-client:local
+    container_name: ors-map-client
+    volumes:
+      - ./nginx/logs:/var/log/nginx
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - production
