@@ -1,0 +1,101 @@
+name: Publish Docker image with version
+on:
+  push:
+    branches: [main, master]
+    tags:
+      - "*.*.*"
+  pull_request:
+    branches: ["**"]
+  workflow_dispatch:
+
+jobs:
+  push_to_registries:
+    name: Push Docker image to docker hub and github packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        id: buildx
+        with:
+          install: true
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: "Get Previous tag"
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+      - name: Prepare
+        id: prepare
+        run: |
+          function test_version() {
+            curl -s -S "https://registry.hub.docker.com/v2/repositories/heigit/ors-map-client/tags/?page_size=1024" |
+              sed -e 's/,/,\n/g' -e 's/\[/\[\n/g' |
+              grep '"name"' |
+              awk -F\" '{print $4;}' |
+              sort -fu
+          }
+          DOCKER_IMAGE=heigit/ors-map-client
+          CURRENT_VERSIONS=$(test_version)
+          DOCKER_VERSION=${{ steps.previoustag.outputs.tag }}
+          DOCKER_PLATFORMS=linux/amd64
+          TAGS_VERSION="--tag ${DOCKER_IMAGE}:${DOCKER_VERSION}"
+          TAGS_LATEST="--tag ${DOCKER_IMAGE}:latest"
+          TAGS_NIGHTLY="--tag ${DOCKER_IMAGE}:nightly"
+          if [[ $CURRENT_VERSIONS =~ $DOCKER_VERSION ]]; then
+            echo "Version: $DOCKER_VERSION present or latest. Skipping it!"
+            BUILD_VERSION=false
+          else
+            echo "Version $DOCKER_VERSION not present and not latest. Building it!"
+            BUILD_VERSION=true
+          fi
+          echo ::set-output name=build_version::${BUILD_VERSION}
+          echo ::set-output name=buildx_args_version::--platform ${DOCKER_PLATFORMS} \
+                      ${TAGS_VERSION} .
+          echo ::set-output name=buildx_args_latest::--platform ${DOCKER_PLATFORMS} \
+                      ${TAGS_LATEST} .
+          echo ::set-output name=buildx_args_nightly::--platform ${DOCKER_PLATFORMS} \
+                      ${TAGS_NIGHTLY} .
+      - name: Checkout tag ${{ steps.previoustag.outputs.tag }}
+        uses: actions/checkout@v3
+        if: ${{ steps.prepare.outputs.build_version == 'true' }}
+        with:
+          fetch-depth: 0
+          ref: ${{ steps.previoustag.outputs.tag }}
+      - name: Check file existence
+        id: check_files
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "Dockerfile"
+      - name: Build ${{ steps.previoustag.outputs.tag }} if not present and Dockerfile is present
+        if: (steps.prepare.outputs.build_version == 'true' &&
+          steps.check_files.outputs.files_exists == 'true')
+        run: |
+          cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done && cd ..
+          docker buildx build --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args_version }}
+          docker buildx build --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args_latest }}
+      - name: Checkout main/master as nightly
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Build nightly
+        run: |
+          cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done && cd ..
+          docker buildx build --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args_nightly }}
+
+#      - name: Login to DockerHub
+#        if: success()
+#        uses: docker/login-action@v2
+#        with:
+#          username: ${{ secrets.DOCKER_USERNAME }}
+#          password: ${{ secrets.DOCKER_TOKEN }}
+#      - name: Publish version and latest if not present
+#        if: ${{ steps.prepare.outputs.build_version == 'true' }}
+#        run: |
+#          docker buildx build --output "type=image,push=true" ${{ steps.prepare.outputs.buildx_args_version }}
+#          docker buildx build --output "type=image,push=true" ${{ steps.prepare.outputs.buildx_args_latest }}
+#      - name: Publish nightly
+#        run: |
+#          docker buildx build --output "type=image,push=true" ${{ steps.prepare.outputs.buildx_args_nightly }}
