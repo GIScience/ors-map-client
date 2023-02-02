@@ -41,3 +41,4 @@ yarn-error.log*
 /cypress/screenshots/
 /cypress/downloads/
 /index.html
+/nginx/

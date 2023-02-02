@@ -4,6 +4,11 @@ repos:
     hooks:
       - id: prettier
         types_or: [json, yaml, markdown]
+  - repo: https://github.com/hadolint/hadolint.git
+    rev: "v2.12.1-beta"
+    hooks:
+      - id: hadolint-docker
+        types: ["dockerfile"]
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
@@ -22,8 +27,13 @@ repos:
         description: Forces to replace line ending by the UNIX 'lf' character.
       - id: check-added-large-files
         args: ["--maxkb=500"]
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.4.2
+    hooks:
+      - id: forbid-crlf
+      - id: remove-crlf
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: "v8.29.0"
+    rev: "v8.33.0"
     hooks:
       - id: eslint
         name: eslint
@@ -59,7 +69,7 @@ repos:
           - "eslint-plugin-vue@7.0.0-beta.2"
           - "eslint-plugin-cypress@2.12.1"
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: "v2.37.1"
+    rev: "v2.40.0"
     hooks:
       - id: commitizen
         stages: [commit-msg]

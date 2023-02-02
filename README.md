@@ -19,7 +19,7 @@ code understanding.
 
 ## Sections
 
-- [Set up and run locally](#set-up-and-run-locally)
+- [Set up and run](#set-up-and-run)
 - [App folders](#app-folders)
 - [App flow overview](#app-flow-overview)
 - [Feature-by-folder design](#feature-by-folder-design)
@@ -34,35 +34,24 @@ code understanding.
 - [Contribute](#contribute)
 - [Additional documentation](#additional-documentation)
 
-### Set up and run locally
+### Set up and run
 
-Run the app locally in three steps: set the environment up, get the code and define a configuration file.
+The app can be run with `docker`, `docker-compose`, and `natively`.
 
-1. To manage dependencies and pack the app it is necessary to have Node version 16.
-   If you already have it, skip this step.
-   If you don't, please install it by running:
-
-```sh
-curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
-apt-get update && \
-apt-get install -y nodejs && \
-npm install -g pnpm && \
-npm update -g
-```
-
-2. Clone the repository of the ORS Map Client, go to the root folder and install the dependencies:
+First of all, checkout the repository to get the relevant code:
 
 ```sh
 git clone https://github.com/GIScience/ors-map-client.git
-
 # Go to your local repository root folder
 cd ors-map-client
-
-# The installation of dependencies is required before running the app:
-pnpm install
 ```
 
-3. Copy fo the files in the `src/config-example` to `src/config`, without `-example` in their names. The files are:
+##### Configure
+
+In order to run the app either with `docker`, `docker-compose`, or `native`, you have to configure you application
+first.
+
+1. Copy the files in the `src/config-example` to `src/config`, without `-example` in their names. The files are:
 
 - app-config-`example`.js => **app-config.js**
 - ors-map-filters`-example`.js => **ors-map-filters.js**
@@ -78,15 +67,60 @@ pnpm install
   cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
   ```
 
-4. Set the app-config.js values for:
+2. Set the app-config.js values for:
 
 - `orsApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
 - `bitlyApiKey` - the Bitly key (used to shorten the share URL)
 - `bitlyLogin` - the Bitly login (used to shorten the share URL)
 
-5. The ORS menu is loaded/used by default. If you want to use a custom menu, have a look in the `hooks-example.js`.
+3. The ORS menu is loaded/used by default. If you want to use a custom menu, have a look in the `hooks-example.js`.
 
 The filters, theme and hooks of the map client can be customized if needed.
+
+##### Run with `Docker`
+
+```shell
+# Build the image
+docker build --tag ors-map-client:local .
+
+# Run a container
+docker run -d -it -v "$(pwd)"/nginx/logs:/var/log/nginx:rw -p 127.0.0.1:8080:80 --name ors-map-client ors-map-client:local
+
+# Check the logs with
+docker logs --follow ors-map-client
+```
+
+The app should now be running at http://127.0.0.1:8080.
+
+##### Run with `docker-compose`
+
+```shell
+# Build and run the image
+docker-compose up -d
+
+# Check the logs with
+docker-compose logs -ft
+```
+
+The app should now be running at http://127.0.0.1:8080.
+
+##### Run `natively`
+
+Run the app locally without docker in three steps: set the environment up, and define a configuration file.
+
+1. To manage dependencies and pack the app it is necessary to have Node version 16.
+   If you already have it, skip this step.
+   If you don't, please install it by running:
+
+```sh
+curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+apt-get update && \
+apt-get install -y nodejs && \
+npm install -g pnpm && \
+npm update -g
+# The installation of dependencies is required before running the app:
+pnpm install
+```
 
 At this point the app is ready to run in `dev` mode. Do it by executing the following command in the app root folder:
 
@@ -329,7 +363,7 @@ If you are using [WebStorm](https://www.jetbrains.com/webstorm/download) you sho
 _webpack config_ (settings -> Languages & Frameworks -> JavaScript -> Webpack) to
 `{path to ors-map-client}/build/webpack.base.conf.js` to resolve file paths correctly.
 
-To debug the application you must run it in [`dev` mode](#set-up-and-run-locally).
+To debug the application you must run it in [`dev` mode](#set-up-and-run).
 For better debugging in your browser install the [VueJS devtools](https://github.com/vuejs/vue-devtools#installation)
 extension.
 After doing that, open the application in the browser and press F12 and select the tab `Console`, `Vue` or `Sources`
@@ -484,6 +518,5 @@ This approach is intended to create cohesion and keep the project sustainable.
 There are additional documents that are part of the software documentation. they are in the folder `/docs` and are listed below:
 
 - [docs/dynamic-inputs.md](docs/dynamic-inputs.md) - describe how the inputs are rendered using a custom engine and not hard-coded
-- [docs/learned-lessons.md](docs/learned-lessons.md) - lessons learned and that might help in the future
-- [docs/learned-lessons.md](docs/learned-lessons.md) - explains what are the criteria for the search results
+- [docs/search-results-criteria.md](docs/search-results-criteria.md) - explains what are the criteria for the search results
 - [docs/plugins.md](docs/plugins.md) - explains how the plugins can be added to the maps client
