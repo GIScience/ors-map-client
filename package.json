@@ -57,7 +57,7 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-vue": "^7.0.0-beta.2",
-    "html-colors": "0.0.4",
+    "html-colors": "0.0.6",
     "html-webpack-plugin": "^5.0.0",
     "leaflet": "^1.8.0",
     "leaflet-draw-locales": "^1.1.0",
