@@ -61,7 +61,7 @@
     "html-webpack-plugin": "^5.0.0",
     "leaflet": "^1.8.0",
     "leaflet-draw-locales": "^1.1.0",
-    "leaflet-geometryutil": "^0.9.3",
+    "leaflet-geometryutil": "^0.10.1",
     "leaflet-gesture-handling": "^1.1.8",
     "leaflet-measure": "^3.1.0",
     "leaflet.markercluster": "^1.5.3",
