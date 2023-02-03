@@ -81,7 +81,7 @@
     "rimraf": "^2.6.0",
     "sass-loader": "^13.2.0",
     "stream-browserify": "^3.0.0",
-    "stylus": "^0.54.5",
+    "stylus": "^0.59.0",
     "stylus-loader": "^3.0.2",
     "timers-browserify": "^2.0.12",
     "tinycolor2": "^1.4.1",
