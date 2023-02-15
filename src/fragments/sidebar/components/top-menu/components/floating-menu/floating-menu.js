@@ -1,4 +1,6 @@
 import constants from '@/resources/constants'
+import {EventBus} from '@/common/event-bus'
+
 export default {
   props: {
     openOnHover: {
@@ -86,6 +88,9 @@ export default {
           context.setReadyStatus()
         }
       }, 100)
+    },
+    emitEvent (event) {
+      EventBus.$emit(event)
     }
   },
   created() {
