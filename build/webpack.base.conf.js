@@ -67,7 +67,15 @@ module.exports = {
         }
       },{
         test: /\.(woff|woff2|eot|ttf|otf|png|svg|jpg|jpeg|gif|ico)$/i,
-        type: 'asset'
+        type: 'asset',
+        exclude: resolveRoot('src/plugins')
+      },{
+        test: /\.(woff|woff2|eot|ttf|otf|png|svg|jpg|jpeg|gif|ico)$/i,
+        type: 'asset',
+        include: resolveRoot('src/plugins'),
+        generator: {
+          filename: 'static/img/[name][ext]'
+        }
       },{
         test: /\.(geojson|kml|gpx|txt)$/i,
         type: 'asset/source',
