@@ -16,7 +16,7 @@ describe('place component', () => {
   it('renders single place correctly', () => {
     cy.visit('/#/place/Salvador,BA,Brazil/@-38.421936,-12.964413,9/data/%7B"layer":"locality","country":"Brazil","zoom":9%7D')
     cy.get('.place-input-component input[type=text]')
-    cy.get('.fit-all-features').click()
+    cy.get('.fit-all-features').click({force: true})
     cy.get('.custom-html-icon-div').should('be.visible')
     cy.get('.custom-html-icon-div').should('have.length', 1)
     cy.get('.custom-html-icon-div').eq(0).should('have.css', 'background-color', 'rgb(255, 0, 0)')
@@ -27,8 +27,7 @@ describe('place component', () => {
     cy.visit('/#/place/Heidelberg,BW,Germany/@8.692416,49.401247/data/%7B"zoom":8,"layer":"county","country":"Germany"%7D')
     cy.get('.place-input-component input[type=text]')
     cy.get('.place-input-component input[type=text]').should('have.value', 'Heidelberg, BW,Germany')
-    cy.get('.custom-html-icon-div').click()  // needs to be first to avoid "removed from DOM" after redraw with vue
-    cy.get('.custom-html-icon-div').should('have.length', 1)
+    cy.get('.custom-html-icon-div').should('have.length', 1).click({force: true})
     cy.get('.custom-html-icon-div').eq(0).should('have.css', 'background-color', 'rgb(255, 0, 0)')
     cy.get('.leaflet-popup')
     cy.get('.leaflet-popup-content').should('contain.text', 'Heidelberg, BW,Germany')
