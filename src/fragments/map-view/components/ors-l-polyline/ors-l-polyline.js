@@ -196,15 +196,13 @@ export default {
           tooltipInnerContent += `<br> ${this.$t('global.duration')}: ${humanizedData.duration}`
         }
         let tooltipIcon = this.tooltipIcon
-        let iconStyle = ''
         if (store.getters.mapSettings.skipAllSegments) {
-          tooltipIcon = 'near_me'
-          iconStyle = 'transform: scaleY(-1) rotate(45deg)'
+          tooltipIcon = 'arrow_forward'
         }
         if (tooltipIcon) {
           return `
           <div style="display:flex;align-items:center;">
-            <div class="material-icons cy-route-popup-icon" style='min-width:40px;${iconStyle};'>${tooltipIcon}</div>
+            <div class="material-icons cy-route-popup-icon" style='min-width:40px;'>${tooltipIcon}</div>
             <div class="cy-route-popup-text" style='min-width:max-content;'>${tooltipInnerContent}</div>
           </div>`
         } else {
