@@ -673,7 +673,7 @@ export default {
     handleCalculateDirectionsError (result) {
       this.$root.appHooks.run('beforeHandleDirectionsError', result)
 
-      const errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
+      const errorCode = this.lodash.get(result, constants.responseErrorCodePath)
       if (errorCode) {
         const errorKey = `placesAndDirections.apiError.${errorCode}`
         let errorMsg = this.$t(errorKey)
