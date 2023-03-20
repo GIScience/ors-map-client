@@ -4,8 +4,8 @@ FROM node:16-alpine as build-stage
 WORKDIR /opt/client/
 
 # System deps and app setup:
-RUN apk --no-cache add build-base=0.5-r3 git=2.38.4-r0 \
-    && npm install -g pnpm@7.26.2
+RUN apk --no-cache add 'build-base=~0.5' 'git=~2.38' \
+    && npm install -g 'pnpm@^7.30'
 
 # Add diretories with necessary config files
 COPY pnpm-lock.yaml package.json /opt/client/
@@ -23,8 +23,8 @@ RUN pnpm build
 # 2. Stage: Start server with needed files only
 FROM nginx:stable-alpine as production-stage
 
-RUN apk add --no-cache openssl=1.1.1t-r0 bash=5.1.16-r2 && \
-    rm -rf /usr/share/nginx/html/* \
+RUN apk add --no-cache 'openssl=~1.1' 'bash=~5.1'  \
+    && rm -rf /usr/share/nginx/html/*
 
 USER nginx
 
