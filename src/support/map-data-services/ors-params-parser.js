@@ -47,30 +47,33 @@ const orsParamsParser = {
     if (!store.getters.mapBounds) {
       return false
     }
-    const mapBounds = store.getters.mapBounds
+    const mapBounds = store.getters.mapBounds.rect
+    const min_lat = mapBounds['min_lat']
+    const max_lat = mapBounds['max_lat']
+    const min_lon = mapBounds['min_lon']
+    const max_lon = mapBounds['max_lon']
     let validBbox = true
 
+    // If no map view (during tests)
+    if (min_lat === max_lat || min_lon === max_lon) return false
+
     // Make sure that min and max lat are valid
-    const lats = ['min_lat', 'max_lat']
-    for (const key in lats) {
-      const prop = lats[key]
-      if (mapBounds.rect[prop] > 90 || mapBounds.rect[prop] < -90) {
+    for (const value of [min_lat, max_lat]) {
+      if (value > 90 || value < -90) {
         validBbox = false
       }
     }
     // Make sure that min and max lng are valid
-    const lngs = ['min_lon', 'max_lon']
-    for (const key in lngs) {
-      const prop = lngs[key]
-      if (mapBounds.rect[prop] > 180 || mapBounds.rect[prop] < -180) {
+    for (const value of [min_lon, max_lon]) {
+      if (value > 180 || value < -180) {
         validBbox = false
       }
     }
     // If the bounding box is valid, then add it to the args
     if (validBbox) {
       let bbox = [
-        [mapBounds.rect.min_lat, mapBounds.rect.min_lon],
-        [mapBounds.rect.max_lat, mapBounds.rect.max_lon]
+        [min_lat, min_lon],
+        [max_lat, max_lon]
       ]
       return bbox
     } else {
