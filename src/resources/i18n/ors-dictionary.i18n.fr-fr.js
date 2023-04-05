@@ -31,7 +31,7 @@ export default {
     'road': 'Route',
     'street': 'Rue',
     'path': 'Chemin',
-    'track': 'Pister',
+    'track': 'Piste',
     'cycleway': 'Piste cyclable',
     'footway': 'Sentier',
     'steps': 'Marches',
