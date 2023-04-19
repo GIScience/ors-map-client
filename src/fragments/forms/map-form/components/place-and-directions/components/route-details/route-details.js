@@ -7,6 +7,7 @@ import Steps from './components/steps/Steps'
 import constants from '@/resources/constants'
 import geoUtils from '@/support/geo-utils'
 import {EventBus} from '@/common/event-bus'
+import lodash from 'lodash'
 
 
 export default {
@@ -65,6 +66,14 @@ export default {
         const route = Object.assign({}, this.localMapViewData.routes[key])
         const unit = route.summary.unit || route.summary.originalUnit
         if (!route.summary.humanized) {
+          // Heal
+          if(route.properties.extras['csv']) {
+            route.properties.extras['csv'].summary = this.reduceCsvSummaryToThreeClasses(route)
+            route.properties.extras['csv'].values = lodash.map(route.properties.extras['csv'].values, values => {
+              return [values[0], values[1], this.classifyHeatStressValues(values[2])]
+            })
+          }
+          // Heal stuff ends
           route.summary = context.getHumanizedSummary(route.summary, unit)
           route.summary.humanized = true
           context.parseSegments(route.properties.segments)
@@ -168,6 +177,46 @@ export default {
         intervals.push(wps)
       }
       return { intervals, color, label }
+    },
+    /**
+     * Classifies the Heat Stress levels into 3 classes as 0,1,2
+     *
+     * @param rawValue
+     * @returns {number}
+     */
+    classifyHeatStressValues(rawValue) {
+      // console.log('rawValue = ', rawValue)
+      let value
+      if(rawValue >= 0 && rawValue <= 33)
+        value = 0
+      if(rawValue >= 34 && rawValue <= 66)
+        value = 1
+      if(rawValue >= 67)
+        value = 2
+      return value
+    },
+    /**
+     * Gets the summary part of the extrainfo and reduces them into groups of classes classified based on values
+     * in classifyHeatStressValues function and returns the new summary
+     *
+     * @param route
+     * @returns {*[]}
+     */
+    reduceCsvSummaryToThreeClasses(route) {
+      const tempSummary = route.properties.extras['csv'].summary
+      let groupedSummary = lodash.groupBy(tempSummary, summary => this.classifyHeatStressValues(summary.value))
+      let reducedSummary = []
+      lodash.forEach(groupedSummary, summaries => {
+        reducedSummary.push(lodash.reduce(summaries, (acc, cur) => {
+          return {
+            amount: acc.amount + cur.amount,
+            distance: acc.distance + cur.distance,
+            value: this.classifyHeatStressValues(cur.value)
+          }
+        }, {amount: 0, distance: 0, value: 0})
+        )
+      })
+      return reducedSummary
     }
   },
   components: {

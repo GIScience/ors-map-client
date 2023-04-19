@@ -48,18 +48,25 @@
           </form-actions>
       </v-layout>
       <br/>
+      <box v-if="$store.getters.mode === constants.modes.directions" background="white" no-shadow>
+        <div slot="header">
+          <h3>{{$t('placesAndDirections.timeBasedRouteHeader')}} : {{new Date().toLocaleDateString('de-DE')}}</h3>
+        </div>
+        <time-based-route :places="places" :mapViewData="mapViewData"></time-based-route>
+        <br/>
+      </box>
       <template  v-if="showRouteDetails" >
         <route-details :map-view-data="mapViewData"></route-details>
         <br/>
       </template>
       <round-trip v-if="$store.getters.mode === constants.modes.roundTrip" @changed="roundTripFilterChanged"></round-trip>
-      <box v-if="$store.getters.mode === constants.modes.directions" background="white" no-shadow>
+      <!--<box v-if="$store.getters.mode === constants.modes.directions" background="white" no-shadow>
         <div slot="header">
           <h3>{{$t('global.parameters')}}</h3>
         </div>
         <fields-container @fieldUpdated="filterUpdated" :parameters="OrsMapFiltersAccessor"></fields-container>
         <br/>
-      </box>
+      </box>-->
       <template v-if="showAltitudePreview">
         <br>
         <altitude-preview :map-view-data="mapViewData" ></altitude-preview>
