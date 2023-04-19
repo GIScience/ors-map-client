@@ -101,6 +101,7 @@ export default {
     tollways: 'Mautstraßen',
     traildifficulty: 'Trail Schwierigkeit',
     osmid: 'OSM ID',
-    countryinfo: 'Länderinfo'
+    countryinfo: 'Länderinfo',
+    csv: 'Hitzestress' // HEAL api
   }
 }

@@ -35,6 +35,7 @@ export default {
     },
     genericErrorMsg: 'It was not possible to calculate the route',
     reorder: 'Reorder',
-    timeoutError: 'The request took too long and timed out. Try shorter distances.'
+    timeoutError: 'The request took too long and timed out. Try shorter distances.',
+    timeBasedRouteHeader: 'Depart at'
   }
 }

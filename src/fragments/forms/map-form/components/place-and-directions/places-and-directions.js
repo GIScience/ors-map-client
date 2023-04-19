@@ -19,6 +19,7 @@ import AltitudePreview from './components/altitude-preview/AltitudePreview'
 import RouteDetails from './components/route-details/RouteDetails.vue'
 import PlaceDetails from './components/place-details/PlaceDetails.vue'
 import RoundTrip from './components/round-trip/RoundTrip.vue'
+import TimeBasedRoute from './components/time-based-route/TimeBasedRoute.vue'
 import FormActions from '../form-actions/FormActions'
 import MapFormMixin from '../map-form-mixin'
 import {EventBus} from '@/common/event-bus'
@@ -40,7 +41,8 @@ export default {
     AltitudePreview,
     RoundTrip,
     FormActions,
-    MapFormBtn
+    MapFormBtn,
+    TimeBasedRoute
   },
   created () {
     this.setListeners()
