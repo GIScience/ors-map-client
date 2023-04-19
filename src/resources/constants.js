@@ -36,7 +36,8 @@ const constants = {
     place: 'place',
     search: 'search',
     isochrones: 'isochrones',
-    pageNotFound: 'pageNotFound'
+    pageNotFound: 'pageNotFound',
+    timeBasedDirections: 'timeBasedDirections'
   },
   importableModes: {
     roundTrip: 'roundtrip',
@@ -72,7 +73,8 @@ const constants = {
     roadaccessrestrictions: 'roadaccessrestrictions',
     countryinfo: 'countryinfo',
     green: 'green',
-    noise: 'noise'
+    noise: 'noise',
+    csv: 'csv'
   },
   orsKmlDocumentDescription: 'ORS route file',
   segmentHighlightColor: '#9ACD32',

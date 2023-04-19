@@ -42,7 +42,7 @@ function getCustomEndpointSettings(apiBaseUrl, endpoint) {
 const Directions = (places, customArgs = null) => {
   const mapSettings = store.getters.mapSettings
 
-  const [host, service] = getCustomEndpointSettings(mapSettings.apiBaseUrl, mapSettings.endpoints.directions)
+  const [host, service] = getCustomEndpointSettings(mapSettings.healRouteApiUrl + '/ors', mapSettings.endpoints.directions)
   // Build the ors client object
   const directions = new OrsApiClient.Directions({
     api_key: mapSettings.apiKey,

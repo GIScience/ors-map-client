@@ -1,4 +1,10 @@
 const orsDictionary = {
+  // Heal
+  csv: {
+    0: 'low',
+    1: 'moderate',
+    2: 'high'
+  },
   waytype: [
     'unknown', // at position 0
     'stateRoad', // at position 1
@@ -108,6 +114,15 @@ const orsDictionary = {
     '10': '10'
   },
   colors: {
+    csv: [
+      // '#2196F3', // Low
+      '#4FC3F7',
+      // '#FFC107', // Moderate
+      '#FFD54F',
+      // '#F44336', // High
+      // '#FF5722',
+      '#FF7043'
+    ],
     waytype: [
       // 11 colors accessed by index
       '#AFEEEE',

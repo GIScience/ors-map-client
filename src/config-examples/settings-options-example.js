@@ -7,19 +7,7 @@
 const settingsOptions = {
   routingInstructionsLocales: [
     { text: 'EN', value: 'en' },
-    { text: 'DE', value: 'de' },
-    { text: 'CN', value: 'cn' },
-    { text: 'ES', value: 'es' },
-    { text: 'RU', value: 'ru' },
-    { text: 'DK', value: 'dk' },
-    { text: 'FR', value: 'fr' },
-    { text: 'IT', value: 'it' },
-    { text: 'NL', value: 'nl' },
-    { text: 'PT BR', value: 'pt' },
-    { text: 'SE', value: 'se' },
-    { text: 'TR', value: 'tr' },
-    { text: 'GR', value: 'gr' },
-    { text: 'HU', value: 'hu' }
+    { text: 'DE', value: 'de' }
   ],
   units: [
     { text: 'Kilometers', value: 'km', slug: 'kilometers' },
@@ -33,14 +21,7 @@ const settingsOptions = {
   ],
   appLocales: [
     { text: 'English US', value: 'en-us' },
-    { text: 'Deutsch DE', value: 'de-de' },
-    { text: 'Español ES', value: 'es-es' },
-    { text: 'Français FR', value: 'fr-fr' },
-    { text: 'Português BR', value: 'pt-br' },
-    { text: 'Italiano IT', value: 'it-it' },
-    { text: 'Magyar HU', value: 'hu-hu' },
-    { text: 'Čeština CS', value: 'cs-cz' },
-    { text: 'Română RO', value: 'ro-ro' }
+    { text: 'Deutsch DE', value: 'de-de' }
   ],
   tileServices: [
     { text: 'OpenStreetMap', value: 'osm' },

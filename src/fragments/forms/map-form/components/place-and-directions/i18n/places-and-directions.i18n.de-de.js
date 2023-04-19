@@ -34,6 +34,7 @@ export default {
     },
     genericErrorMsg: 'Keine Route gefunden',
     reorder: 'Neu ordnen',
-    timeoutError: 'Die Anfrage dauerte zu lange und wurde abgebrochen. Versuchen Sie kürzere Distanzen.'
+    timeoutError: 'Die Anfrage dauerte zu lange und wurde abgebrochen. Versuchen Sie kürzere Distanzen.',
+    timeBasedRouteHeader: 'Route für'
   }
 }

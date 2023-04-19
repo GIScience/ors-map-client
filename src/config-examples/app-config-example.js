@@ -8,7 +8,7 @@ const appConfig = {
   footerAppName: 'openrouteservice', // The App name that appears on the bottom
   favIcon: '@/assets/img/favicon.ico', // The favicon used in the browser tab
   logoImgSrc: '@/assets/img/logo.png', // The logo used in the top-right corner of the sidebar and on the header menu
-  brandLogoSrc: '@/assets/img/heigit-and-hd-uni.png', // used for 'About' page and map overlay on large screens
+  brandLogoSrc: '@/assets/img/heigit-and-hd-uni-and-bw.png', // used for 'About' page and map overlay on large screens
   countryIconImgSrc: '@/assets/img/country-icon.png', // used for Place search as icon for country level results
   footerDevelopedByLink: 'https://www.heigit.org/', // The url that is used on the footer developed by link
   urlMode: 'hash', // The url mode for vue router: `hash` or `history`
@@ -38,27 +38,27 @@ const appConfig = {
   showAdminAreaPolygon: true, // show admin area polygon
   showInstructionsTooltipsOnFirstLoad: true, // if the instructions tooltips must be shown on the app first load
   showDefaultAboutContent: true, // show default about content
-  showAltitudeOnSidebar: true, // show altitude preview on sidebar
+  showAltitudeOnSidebar: false, // show altitude preview on sidebar
 
   autoSelectFirstExactAddressMatchOnSearchEnter: true, // If the first exact address match must be auto selected when the user type a text and in the place search and hit enter/return
 
-  disabledActionsForIsochrones: ['roundtrip'], // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
-  disabledActionsForPlacesAndDirections: [], // // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
+  disabledActionsForIsochrones: ['roundtrip', 'routeImporter'], // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
+  disabledActionsForPlacesAndDirections: ['routeImporter'], // // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
   supportsPlacesAndDirections: true, // If the whole places and directions feature is supported/enabled in the application
-  supportsIsochrones: true, // If isochrones is supported/enabled in the application
+  supportsIsochrones: false, // If isochrones is supported/enabled in the application
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
   supportsDirections: true, // If the directions functionality is available
   sidebarStartsOpenInHighResolution: false, // if the sidebar must start open in high resolution
   defaultTilesProvider: 'osm', // The default tile provider  (valid values are the `id` property of one of the `mapTileProviders` array below)
-  supportsAvoidPolygonDrawing: true, // If the avoid polygon drawing tools must be available on the map view
-  distanceMeasureToolAvailable: true, // If the polyline distance measure tool must be available on the map view
+  supportsAvoidPolygonDrawing: false, // If the avoid polygon drawing tools must be available on the map view
+  distanceMeasureToolAvailable: false, // If the polyline distance measure tool must be available on the map view
   accessibilityToolAvailable: true, // If the accessibility tool must be available on the map view
   fitAllFeaturesToolAvailable: true, // If the fitAllFeatures tool must be available on the map view
   supportsClusteredMarkers: true, // If clustered markers is supported (then markers with `clustered=true` property will be clustered)
   supportsSearchBottomCarousel: true, // If the bottom carousel with the search results must be displayed or not.
   supportsSearchMode: true, // If the search mode is supported
   supportsMyLocationBtn: true, // If the `my location` button is supported on the map view
-  initialZoomLevel: 6, // The initial map view zoom level
+  initialZoomLevel: 13, // The initial map view zoom level
   initialMapMaxZoom: 18, // The initial map view max zoom
 
 

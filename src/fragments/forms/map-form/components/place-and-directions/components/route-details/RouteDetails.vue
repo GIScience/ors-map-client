@@ -2,7 +2,7 @@
 <div>
   <box background="white" v-if="hasRoutes" custom-class="expansion-box" no-shadow>
     <div slot="header">
-      <download :map-view-data="mapViewData" ></download>
+<!--      <download :map-view-data="mapViewData" ></download>-->
       <share :url="shareUrl"></share>
       <print :map-view-data="mapViewData"></print>
       <h3>{{$t('routeDetails.routeDetails')}}</h3>
@@ -42,6 +42,7 @@
                           </v-btn>
                         </div>
                         <div>{{$t('global.duration')}}:  <b>{{segment.duration}} </b></div>
+                        <div>{{$t('global.heatScore')}}:  <b>{{route.summary.value}} </b></div>
                         <v-layout>
                         <v-flex sm6 v-if="segment.ascent">
                           <p><v-icon>arrow_upward</v-icon> {{formatElevation(segment.ascent)}} {{$t('global.units.m')}}</p>
