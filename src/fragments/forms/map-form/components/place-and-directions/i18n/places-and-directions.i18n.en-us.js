@@ -34,6 +34,7 @@ export default {
       2099: 'Unable to compute a route connecting connecting the places selected'
     },
     genericErrorMsg: 'It was not possible to calculate the route',
-    reorder: 'Reorder'
+    reorder: 'Reorder',
+    timeBasedRouteHeader: 'Depart at'
   }
 }
