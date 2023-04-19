@@ -25,7 +25,7 @@
             <top-menu></top-menu>
           </v-flex>
         </v-layout>
-        <profile-selector></profile-selector>
+        <!--<profile-selector></profile-selector>-->
       </div>
 
       <!-- sidebar-content padding-bottom must be the same that is calculated in footer component height -->
