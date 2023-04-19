@@ -28,7 +28,8 @@ const Directions = (places, customArgs = null) => {
   // Build the ors client object
   const directions = new OrsApiClient.Directions({
     api_key: mapSettings.apiKey,
-    host: mapSettings.apiBaseUrl,
+    // host: mapSettings.apiBaseUrl,
+    host: mapSettings.healRouteApiUrl + '/ors',
     service: mapSettings.endpoints.directions
   })
 

@@ -25,14 +25,14 @@ const defaultMapSettings = {
   customTileProviderUrl: '',
   customOverlayerTileProviderUrl: '',
   prioritizeSearchingForNearbyPlaces: true,
-  defaultProfile: 'cycling-regular',
+  defaultProfile: 'foot-walking',
   compressDataUrlSegment: true,
   autoFitHighlightedBounds: true,
   convertStopAfterRouteEndingToDestination: false,
   useStopOptimization: false,
   accessibleModeActive: false,
   shownOnceTooltips: {},
-  mapCenter: {lat: 49.510944, lng: 8.76709}, // Default center is at Heidelberg, Germany
+  mapCenter: {lat: 49.410757, lng: 8.681120}, // Default center is at Heidelberg, Germany
   defaultIsochroneColors: [  // qgis plugin color scheme as default
     '#2b83ba',
     '#64abb0',
@@ -58,6 +58,9 @@ const defaultMapSettings = {
   roadaccessrestrictions: false,
   green: false,
   noise: false,
+  // heal specific
+  csv: true,
+  healRouteApiUrl: './api',
 
   // Extra settings not being used yet
   suitability: false
