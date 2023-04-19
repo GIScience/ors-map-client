@@ -10,7 +10,7 @@ const state = {
   footerHeight: 89,
   sidebarFullWidth: 400,
   sidebarShrunkWidth: 290,
-  sidebarHeaderHeight: 175,
+  sidebarHeaderHeight: 60,
   pointerTriggeredAction: false
 }
 
