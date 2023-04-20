@@ -3,7 +3,7 @@ export default {
     profiles: {
       'cycling-regular': 'Fahrrad',
       'cycling-road': 'Rennrad',
-      'cycling-electric': 'E-bike',
+      'cycling-electric': 'E-Bike',
       'cycling-mountain': 'Mountainbike',
       'cycling-safe': 'Cycling safe',
       'foot-walking': 'Zu Fuß',
@@ -14,14 +14,14 @@ export default {
 
       'hgv': 'LKW',
       'bus': 'Bus',
-      'agricultural': 'Forstwirtschaftliches Fahrzeug',
+      'agricultural': 'Landwirtschaftliches Fahrzeug',
       'delivery': 'Lieferwagen',
       'forestry': 'Forstwirtschaftlicher Lkw',
-      'goods': 'Güter-Lkw'
+      'goods': 'Gütertransport'
     },
     filters: {
       preference: {
-        label: 'Routen Präferenz',
+        label: 'Routenpräferenz',
         description: 'Bevorzugte Gewichtung bei der Wegsuche.',
         enum: {
           'fastest': 'Schnellste',
@@ -30,26 +30,34 @@ export default {
         }
       },
       range_type: {
-        label: 'Isochronen Typ',
+        label: 'Isochronen-Typ',
         description: 'Art der generierten Isochrone',
         enum: {
           'time': 'Zeit',
           'distance': 'Entfernung'
         }
       },
-      range: {
+      time_range: {
         label: 'Reichweite',
-        description: 'Die maximale Reichweite der Isochrone'
+        description: 'Maximale Reichweite der Isochrone'
       },
-      interval: {
+      distance_range: {
+        label: 'Reichweite',
+        description: 'Maximale Reichweite der Isochrone'
+      },
+      time_interval: {
         label: 'Intervall',
-        description: 'Intervall in dem Isochronen erzeugt werden sollen'
+        description: 'Intervall der zu berechnenden Isochronen'
+      },
+      distance_interval: {
+        label: 'Intervall',
+        description: 'Intervall der zu berechnenden Isochronen'
       },
       options: {
         label: 'Einstellungen'
       },
       profile_params: {
-        label: 'Profil Eigenschaften'
+        label: 'Profil-Parameter'
       },
       restrictions: {
         label: 'Einschränkungen'
@@ -92,40 +100,40 @@ export default {
       },
       smoothness_type: {
         label: 'Oberflächenbeschaffenheit',
-        description: 'Minimalwert der Oberflächenbeschaffenheit. Für nähere Infos: https://wiki.openstreetmap.org/wiki/DE:Key:smoothness'
+        description: 'Schlechteste nutzbare Oberflächenbeschaffenheit. Für nähere Infos: https://wiki.openstreetmap.org/wiki/DE:Key:smoothness'
       },
       surface_type: {
         label: 'Min. Oberflächentyp',
-        description: 'Minimaler Oberflächentyp. Reihenfolge von Oberflächentypen: https://wiki.openstreetmap.org/wiki/DE:Key:surface'
+        description: 'Schlechtester nutzbarer Oberflächentyp. Reihenfolge von Oberflächentypen: https://wiki.openstreetmap.org/wiki/DE:Key:surface'
       },
       track_type: {
         label: 'Min. Wegzustand',
-        description: 'Minimaler Zustand des Weges. Informationen über Wegzustand: https://wiki.openstreetmap.org/wiki/DE:Key:tracktype'
+        description: 'Schlechtester nutzbarer Zustand des Weges. Informationen über Wegzustand: https://wiki.openstreetmap.org/wiki/DE:Key:tracktype'
       },
       round_trip: {
         label: 'Rundweg'
       },
       round_trip_length: {
         label: 'Länge des Rundweges',
-        description: 'Die Längenvorgabe für den Rundweg (Dies ist ein Richtwert. Die resultierende Länge kann abweichen.).'
+        description: 'Längenvorgabe für den Rundweg (Dies ist ein Richtwert. Die resultierende Länge kann abweichen.).'
       },
       points: {
         label: 'Punkte',
-        description: 'Anzahl der erzeugten Wegpunkte. Mit Höhere Werte werden Routen kreisförmiger.'
+        description: 'Anzahl der erzeugten Wegpunkte. Mit höherer Anzahl wird die Route kreisförmiger.'
       },
       seed: {
         label: 'Zufallsindex',
-        description: 'Ein Zufallsindex welcher die Ausrichtung des Rundweges beeinflusst. Ganze Zahl > 0.'
+        description: 'Zufallswert, welcher die Ausrichtung des Rundweges beeinflusst. Ganze Zahl > 0.'
       },
       avoid_polygons: {
-        label: 'Vermeide Polygone',
+        label: 'Polygone vermeiden',
         description: 'Route oder Isochrone wird den definierten Bereich vermeiden.'
       },
       avoid_features: {
-        label: 'Vermeide Features',
+        label: 'Features vermeiden',
         description: 'Route oder Isochrone wird das definierte Feature vermeiden',
         enum: {
-          'highways': 'Autobahn',
+          'highways': 'Autobahnen',
           'tollways': 'Mautstraßen',
           'ferries': 'Fähren',
           'hills': 'Hügel',
@@ -137,15 +145,15 @@ export default {
         }
       },
       avoid_borders: {
-        label: 'Grenzen Vermeiden',
-        description: 'Vermeide alle oder kontrollierte Grenzen',
+        label: 'Grenzen vermeiden',
+        description: 'Vermeide alle oder nur kontrollierte Grenzen',
         enum: {
           'all': 'Alle',
-          'controlled': 'Kontrollierte'
+          'controlled': 'Nur kontrollierte'
         }
       },
       avoid_countries: {
-        label: 'Länder Vermeiden',
+        label: 'Länder vermeiden',
         description: 'Vermeide ein oder mehrere Länder'
       },
       alternative_routes: {
@@ -164,8 +172,8 @@ export default {
         description: 'Faktor um den die Alternativroute länger sein darf. Der Standardwert von 1,4 bedeutet, dass Alternativen maximal 1,4-mal so lang wie die optimale Route sein darf.'
       },
       maximum_speed: {
-        label: 'Max Geschwindigkeit',
-        description: 'Eine maximale Geschwindigkeitsbegrenzung, die angewendet werden muss',
+        label: 'Maximale Geschwindigkeit',
+        description: 'Maximal mögliche Geschwindigkeit des Fahrzeugs',
       },
       weightings: {
         label: 'Zusätzliche Einstellungen'
@@ -180,10 +188,10 @@ export default {
       },
       surface_quality_known: {
         label: 'Nur Oberflächen mit bekannter Qualität',
-        description: 'Erzwingt die Verwendung nur von Kanten, deren Oberflächenqualität explizit bekannt ist',
+        description: 'Bevorzugte Verwendung von Kanten, deren Oberflächenqualität explizit bekannt ist',
       },
       allow_unsuitable: {
-        label: 'Ungeeignet zulassen',
+        label: 'Ungeeignete Kanten zulassen',
         description: 'Ermöglicht die Verwendung von Kanten, die für Rollstuhlfahrer möglicherweise ungeeignet sind und früher ausgeschlossen waren'
       },
       vehicle_type: {

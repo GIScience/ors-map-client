@@ -1,9 +1,8 @@
-
 export default {
   formActions: {
     addPlaceInput: 'Punkt hinzufügen',
-    clearRoute: 'Route zurücksetzen',
-    reverseRoute: 'Route invertieren',
+    clearRoute: 'Route löschen',
+    reverseRoute: 'Route umkehren',
     roundTrip: 'Rundweg',
     toggleRoundTrip: 'Rundweg an/aus'
   }

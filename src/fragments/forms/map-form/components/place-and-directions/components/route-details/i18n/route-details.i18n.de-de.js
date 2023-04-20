@@ -1,4 +1,3 @@
-
 export default {
   routeDetails: {
     routeDetails: 'Routendetails',
@@ -7,17 +6,17 @@ export default {
     route: 'Route',
     segments: 'Abschnitte',
     segment: 'Abschnitt',
-    instructions: 'Wegbeschreibung',
+    instructions: 'Wegbeschreibungen',
     instruction: 'Wegbeschreibung',
     name: 'Name',
-    selectRoute: 'Wähle diese Route',
+    selectRoute: 'Diese Route wählen',
     selectedRoute: 'Gewählte Route',
     gotoSegment: 'Gehe zu Abschnitt',
     warningCodes: {
-      1: 'Bei manchen Straßen können Zufahrts- oder Zugangsbeschränkungen gelten',
+      1: 'Auf einigen Straßen können Zufahrts- oder Zugangsbeschränkungen gelten',
       2: 'Diese Route nutzt Mautstraßen',
-      3: 'Die Route nutzt direkte Wegpunkte. Dauer und Zugangsbeschränkungen können falsch sein.',
-      4: 'Mindestens eine angefragte extra Info ist nicht verfügbar.'
+      3: 'Auf der Route gibt es übersprungene Abschnitte. Dauer und Zugangsbeschränkungen sind möglicherweise nicht korrekt.',
+      4: 'Mindestens eine angefragte Zusatzinformation ist nicht verfügbar.'
     },
     routeOpacity: 'Routendeckkraft'
   }
