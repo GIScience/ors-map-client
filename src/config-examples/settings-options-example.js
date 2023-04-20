@@ -38,7 +38,9 @@ const settingsOptions = {
     { text: 'Français FR', value: 'fr-fr' },
     { text: 'Português BR', value: 'pt-br' },
     { text: 'Italiano IT', value: 'it-it' },
-    { text: 'Magyar HU', value: 'hu-hu' }
+    { text: 'Magyar HU', value: 'hu-hu' },
+    { text: 'Čeština CS', value: 'cs-cz' },
+    { text: 'Română RO', value: 'ro-ro' }
   ],
   tileServices: [
     { text: 'OpenStreetMap', value: 'osm' },
