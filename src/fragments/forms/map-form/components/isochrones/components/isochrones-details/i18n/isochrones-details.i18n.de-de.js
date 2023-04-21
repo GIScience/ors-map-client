@@ -1,10 +1,9 @@
-
 export default {
   isochronesDetails: {
     polygons: 'Polygone',
     center: 'Zentrum',
-    reachCenters: 'Zentren erreichen',
+    reachCenters: 'Erreichbarkeits-Zentren',
     toggleVisibility: 'Sichtbarkeit umschalten',
-    opacity: 'Opazität'
+    opacity: 'Deckkraft'
   }
 }

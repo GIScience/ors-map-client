@@ -7,7 +7,7 @@ export default {
     nonStopDirectionsToHere: 'Route verwerfen und hierher',
     addRouteStop: 'Als Wegpunkt hinzufügen',
     centerHere: 'Als Kartenmittelpunkt verwenden',
-    addAsIsochroneCenter: 'Als Zentrum verwenden',
+    addAsIsochroneCenter: 'Als Reichweitenzentrum verwenden',
     inspectDataOnOSM: 'Daten in OSM anzeigen'
   }
 }

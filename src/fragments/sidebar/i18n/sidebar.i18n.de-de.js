@@ -1,7 +1,7 @@
 export default {
   sidebar: {
     switchSide: 'Seite wechseln',
-    showSidebar: 'Seitenleiste zeigen',
-    hideSidebar: 'Seitenleiste verbergen'
+    showSidebar: 'Seitenleiste anzeigen',
+    hideSidebar: 'Seitenleiste ausblenden'
   }
 }

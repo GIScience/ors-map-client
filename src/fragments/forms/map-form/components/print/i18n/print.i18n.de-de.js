@@ -1,9 +1,8 @@
-
 export default {
   print: {
-    print: 'Ausdrucken',
+    print: 'Drucken',
     segment: 'Abschnitt',
-    preparingPrinting: 'Ausdruck vorbereiten',
+    preparingPrinting: 'Druck vorbereiten…',
     readyToPrint: 'Bereit zum Drucken'
   }
 }

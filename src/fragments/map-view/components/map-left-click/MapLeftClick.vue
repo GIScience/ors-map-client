@@ -9,7 +9,7 @@
         <b>{{placeInfo.placeName}}</b><br/>
       </template>
       <template v-if="hasPlaceInfo">
-        {{$t('global.units.lng')}},{{$t('global.units.lat')}}:
+        {{$t('global.units.lng')}}, {{$t('global.units.lat')}}:
         {{placeInfo.latlng.lng.toFixed(6)}}, {{placeInfo.latlng.lat.toFixed(6)}} <br/>
         <div v-if="placeInfo.customHtml" v-html="placeInfo.customHtml"></div>
         <v-btn flat icon v-if="!placeInfo.hideDirectionsTo"

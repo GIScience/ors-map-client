@@ -1,8 +1,7 @@
-
 export default {
   simplePlaceSearch: {
     noPlaceFound: 'Kein Ort mit diesen Angaben gefunden',
-    openSidebarToSeeRouteDetails: 'Seitenleiste öffnen für Routen Infos',
+    openSidebarToSeeRouteDetails: 'Öffnen Sie die Seitenleiste, um Routendetails zu sehen.',
     unknownSearchPlaceError: 'Unbekannter Fehler beim Suchen von Orten'
   }
 }

@@ -1,16 +1,15 @@
-
 export default {
   placeDetails: {
     layer: 'Ebene',
-    lat: 'Lat.',
-    lon: 'Lon.',
+    lat: 'Breite',
+    lon: 'Länge',
     notAvailable: 'Nicht verfügbar',
-    placeDetails: 'Ort Details',
+    placeDetails: 'Details zum Ort',
     placeName: 'Name',
     latlngCopied: 'Breiten- und Längengrad kopiert',
     lnglatCopied: 'Längen und Breitengrad kopiert',
-    copyLatlng: 'Kopiere in Latitude,Longitude Format',
-    copyLnglat: 'Kopiere in Longitude,Latitude Format',
+    copyLatlng: 'Im Format "Breitengrad, Längengrad" kopieren',
+    copyLnglat: 'Im Format "Längengrad, Breitengrad" kopieren',
     satelliteView: 'Satellitenbild'
   }
 }
