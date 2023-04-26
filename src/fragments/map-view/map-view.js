@@ -37,6 +37,7 @@ import {
   LControlAttribution,
   LControlScale,
   LWMSTileLayer,
+  LFeatureGroup,
   LControlLayers,
   LGeoJson,
   LPolygon,
@@ -92,6 +93,7 @@ export default {
     LControlLayers,
     'l-wms-tile-layer': LWMSTileLayer,
     LGeoJson,
+    LFeatureGroup,
     LPolygon,
     LCircle,
     LCircleMarker,
@@ -366,23 +368,24 @@ export default {
      * @returns {Array} polygons
      */
     polygons () {
-      const polygons = []
       if (this.localMapViewData) {
         // We must not change the original object
         const mapViewDataToBeTransformed = this.localMapViewData.clone()
 
-        for (const key in mapViewDataToBeTransformed.polygons) {
-          const polygon = mapViewDataToBeTransformed.polygons[key]
+        for (const group of mapViewDataToBeTransformed.polygons) {
+          for (let ring of group.rings) {
 
-          // Vue2-Leaflet, the component used to render data on the map, expect the coordinates in the [lat,lon] order,
-          // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
-          // So we invert them to provide what the component expects
-          let flattenCoords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
-          polygon.latlngs = GeoUtils.switchLatLonIndex(flattenCoords)
-          polygons.push(polygon)
+
+            // Vue2-Leaflet, the component used to render data on the map, expect the coordinates in the [lat,lon] order,
+            // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
+            // So we invert them to provide what the component expects
+            let flattenCoords = PolygonUtils.flatCoordinates(ring.geometry.coordinates)
+            ring.latlngs = GeoUtils.switchLatLonIndex(flattenCoords)
+          }
         }
+        return mapViewDataToBeTransformed.polygons
       }
-      return polygons
+      return []
     },
     /**
      * Build and return an array of marker objects
@@ -685,6 +688,13 @@ export default {
     }
   },
   methods: {
+    setMapReady () {
+      console.log(this.$refs.map.mapObject.getPanes())
+      for(let x of [0,1,2,3,4]) {
+        this.$refs.map.mapObject.createPane('isochrones-'+x)
+      }
+      console.log(this.$refs.map.mapObject.getPanes())
+    },
     /**
      * Refresh map view data after the prop mapViewData has changed
      * We use a debounce in order to apply only the last change
@@ -1167,10 +1177,9 @@ export default {
         }
         // Add the polygons coordinates to the polyline that must
         // be considered to  the all features bounds
-        for (const pKey in this.localMapViewData.polygons) {
-          const polygon = this.localMapViewData.polygons[pKey]
-          if (polygon) {
-            var coords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
+        for (const group of this.localMapViewData.polygons) {
+          for (const ring of group.rings) {
+            const coords = PolygonUtils.flatCoordinates(ring.geometry.coordinates)
             polylineData = polylineData.concat(coords)
           }
         }

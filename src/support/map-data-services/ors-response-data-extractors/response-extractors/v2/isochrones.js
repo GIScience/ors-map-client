@@ -59,21 +59,36 @@ class IsochronesBuilder {
    * @returns {Array} markers
    */
   getPolygons = () => {
-    const polygons = []
+    const isochrones = []
     if (this.responseData.features) {
       // When you request multiple points in an isochrone request, ors returns them all as a single array
       // of polygon features
       const ranges = this.responseData.metadata.query.range
       const maxRange = Math.max(ranges)
 
-      this.responseData.features.forEach((feature, index) => {
-        const polygon = { geometry: feature.geometry, properties: feature.properties }
-        polygon.properties.range_type = this.responseData.metadata.query.range_type
-        PolygonUtils.preparePolygonForView(polygon, this.translations, index, maxRange)
-        polygons.push(polygon)
-      })
+      const grouped_features = this.responseData.features.reduce((result, item) => {
+        const groupIndex = item.properties.group_index
+        if (!result[groupIndex]) {
+          result[groupIndex] = []
+        }
+        result[groupIndex].push(item)
+        return result
+      }, {})
+      const range_type = this.responseData.metadata.query.range_type
+      const i18n = this.translations
+      for (const [groupId, group] of Object.entries(grouped_features)) {
+        isochrones[groupId] = {rings: [], visible: true, opacity: 0.5}
+        group.forEach((polygon, index) => {
+          const feature = { geometry: polygon.geometry, properties: polygon.properties }
+          feature.properties.range_type = range_type
+
+          PolygonUtils.preparePolygonForView(feature, i18n, index, maxRange)
+          isochrones[groupId].rings.push(feature)
+        })
+        isochrones[groupId].rings = isochrones[groupId].rings.reverse()
+      }
     }
-    return polygons.reverse()
+    return isochrones
   }
 }
 

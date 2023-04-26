@@ -22,7 +22,8 @@ const PolygonUtils = {
     polygon.properties.area = PolygonUtils.calcPolygonArea(polygon)
 
     polygon.properties.opacity = polygon.properties.opacity || 1
-    polygon.properties.fillOpacity = polygon.properties.fillOpacity || 0.3
+    polygon.properties.fillOpacity = polygon.properties.fillOpacity || 1
+    polygon.properties.strokeWidth = polygon.properties.strokeWidth || 2
     if (polygon.properties.visible === undefined) {
       polygon.properties.visible = true
     }

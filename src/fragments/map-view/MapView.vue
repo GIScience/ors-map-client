@@ -16,6 +16,7 @@
       @baselayerchange="baseLayerChanged"
       @click.exact="mapLeftClick"
       @dragend="mapMoved"
+      @leaflet:load="setMapReady(true)"
       :max-zoom="maxZoom"
       :min-zoom="2"
       :center="mapCenter"
@@ -44,23 +45,28 @@
 
       <!--render polygons -->
       <template v-if="polygons">
-        <template v-for="(polygon, index) in polygons">
-          <l-polygon v-if="polygon.properties.visible"
-            :key="index+'-polygon'"
-            @click="isochroneClicked(index, polygon, $event)"
-            :lat-lngs="polygon.latlngs"
-            :opacity="polygon.properties.opacity"
-            :fillOpacity="polygon.properties.fillOpacity"
-            :fillColor="polygon.properties.fillColor"
-            :color="polygon.properties.color">
-            <l-popup v-if="polygon.properties.label">
-              <div :ref="'isochronePopupContainer' + index" >
-                {{polygon.properties.label}} {{$t('mapView.polygon')}} - {{polygon.properties.area}}
-                <br/>
-                <span v-if="polygon.properties.total_pop">{{$t('global.population')}}: {{polygon.properties.total_pop}}</span>
-              </div>
-            </l-popup>
-          </l-polygon>
+        <template v-for="(group, groupId) in polygons">
+            <l-feature-group v-if="group.visible">
+              <template v-for="(polygon, index) in group.rings">
+                <l-polygon :pane="'isochrones-'+groupId"
+                           :key="index+'-ring'"
+                           @click="isochroneClicked(index, polygon)"
+                           :lat-lngs="polygon.latlngs"
+                           :opacity="polygon.properties.opacity"
+                           :weight="polygon.properties.strokeWidth"
+                           :fillOpacity="polygon.properties.fillOpacity"
+                           :fillColor="polygon.properties.fillColor"
+                           :color="'white'">
+                  <l-popup v-if="polygon.properties.label">
+                    <div :ref="'isochronePopupContainer' + index" >
+                      {{polygon.properties.label}} {{$t('mapView.polygon')}} - {{polygon.properties.area}}
+                      <br/>
+                      <span v-if="polygon.properties.total_pop">{{$t('global.population')}}: {{polygon.properties.total_pop}}</span>
+                    </div>
+                  </l-popup>
+                </l-polygon>
+              </template>
+            </l-feature-group>
         </template>
       </template>
 

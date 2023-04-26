@@ -9,42 +9,65 @@
     <div slot="content">
       <h4>{{$t('isochronesDetails.reachCenters')}}</h4>
       <v-list dense class="centers">
-        <template v-for="(place, index) in localMapViewData.places">
-          <v-expansion-panel :key="index" style="box-shadow: none;" :value="index === 0 ? 0 : null">
+        <template v-for="(group, groupId) in localMapViewData.polygons">
+          <v-expansion-panel :key="groupId" style="box-shadow: none;" :value="groupId === 0 ? 0 : null">
             <v-expansion-panel-content class="polygons-header">
-              <div slot="header">
-                <h5>{{place.placeName}}</h5>
+              <div slot="header" style="display: flex;align-items: center">
+                  <v-btn icon @click.stop="toggleIsochroneVisibility(groupId)" class="no-margin"
+                         :title="$t('isochronesDetails.toggleVisibility')">
+                    <v-icon :color="group.visible ? 'primary' : 'dark' ">visibility</v-icon>
+                  </v-btn>
+                  <h5>{{localMapViewData.places[groupId].placeName}}</h5>
               </div>
-              <template v-for="(polygon, polygonIndex) in localMapViewData.polygons">
-                <template v-if="hasAsCenter(place, polygon)">
-                  <div :key="polygonIndex" style="padding-left:10px">
+              <v-flex>
+                <v-slider class="polygon-opacity-slider" :min="0" :max="1"
+                  prepend-icon="opacity"
+                  :thumb-size="24"
+                  v-model="group.opacity" label="" :title="$t('isochronesDetails.opacity')"
+                  @change="polygonOpacityChanged(groupId)" :step="0.1">
+                </v-slider>
+              </v-flex>
+              <div style="padding-left:10px">
+                <v-layout class="action-options-wrapper">
+                  <v-flex justify-center v-bind="{[ $highResolution? 'lg4' : 'md12']: true}"></v-flex>
+                  <template v-if="group.rings[0].properties.total_pop !== null">
+                    <v-flex lg3>
+                      <div style="font-size:12px">
+                        {{$t('global.population')}}
+                      </div>
+                    </v-flex>
+                  </template>
+                  <v-flex md5>
+                    <div style="font-size:12px">
+                      {{$t('mapView.polygonArea')}}
+                    </div>
+                  </v-flex>
+                </v-layout>
+              </div>
+              <template v-for="(ring, ringId) in group.rings">
+                <template>
+                  <div :key="ringId" style="padding-left:10px">
                     <v-layout class="action-options-wrapper">
                       <v-flex v-bind="{[ $highResolution? 'lg4' : 'md12']: true}">
-                        <v-btn icon @click="toggleVisibility(polygonIndex)" class="no-margin"
-                          :title="$t('isochronesDetails.toggleVisibility')">
-                          <v-icon :color="polygon.properties.visible? 'primary' : 'dark' ">visibility</v-icon>
+                        <v-btn icon @click="toggleRingVisibility(groupId, ringId)" class="no-margin"
+                               :title="$t('isochronesDetails.toggleVisibility')">
+                          <v-icon :color="ring.properties.visible? 'primary' : 'dark' ">visibility</v-icon>
                         </v-btn>
-                        <span class="polygon-area" :style="{background: polygon.properties.color}">
-                          <b style="font-size:11px" :style="{color: polygonAreaTextColor(polygon.properties.color)}">{{polygon.properties.label.replace('Polygon', '')}}</b>
+                        <span class="polygon-area" :style="{background: ring.properties.color}">
+                          <b style="font-size:11px" :style="{color: polygonAreaTextColor(ring.properties.color)}">{{ring.properties.label.replace('Polygon', '')}}</b>
                         </span>
                       </v-flex>
                        <v-flex lg3>
-                         <template v-if="polygon.properties.total_pop !== null">
+                         <template v-if="ring.properties.total_pop !== null">
                            <div style="font-size:12px">
-                            <span >{{$t('global.population')}}</span> <br/> <span>{{polygon.properties.total_pop}}</span>
+                            <span>{{ring.properties.total_pop}}</span>
                            </div>
                          </template>
                       </v-flex>
-                       <v-spacer></v-spacer>
-                      <v-flex md5 v-if="$highResolution">
-                        <v-slider class="polygon-opacity-slider" :min="0" :max="1"
-                          prepend-icon="opacity"
-                          :thumb-size="24"
-                          thumb-label="always"
-                          v-model="polygon.properties.fillOpacity" label="" :title="$t('isochronesDetails.opacity')"
-                          @change="polygonOpacityChanged(polygonIndex)" :step="0.1">
-                        </v-slider>
-                        <br/>
+                      <v-flex md5>
+                        <div style="font-size:12px">
+                          <span>{{ring.properties.area}}</span>
+                        </div>
                       </v-flex>
                     </v-layout>
                   </div>

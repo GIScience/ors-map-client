@@ -40,13 +40,16 @@ export default {
     hasAsCenter (place, polygon) {
       return PolygonUtils.hasPlaceAsCenter(place, polygon)
     },
-    toggleVisibility (polygonIndex) {
-      EventBus.$emit('togglePolygonVisibility', polygonIndex)
+    toggleRingVisibility (groupId, ringId) {
+      EventBus.$emit('toggleRingVisibility', { groupIndex: groupId, ringIndex: ringId })
+    },
+    toggleIsochroneVisibility (groupId) {
+      EventBus.$emit('toggleIsochroneVisibility', { groupIndex: groupId })
     },
 
-    polygonOpacityChanged (polygonIndex) {
-      let fillOpacity = this.localMapViewData.polygons[polygonIndex].properties.fillOpacity
-      EventBus.$emit('setPolygonOpacity', {polygonIndex, fillOpacity })
+    polygonOpacityChanged (groupId) {
+      let opacity = this.localMapViewData.polygons[groupId].opacity
+      EventBus.$emit('setIsochroneOpacity', { groupIndex: groupId, opacity })
     }
   },
   watch: {

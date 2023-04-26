@@ -12,5 +12,12 @@
 }
 
 .action-options-wrapper {
-  height: 45px;
+  height: 30px;
+  justify-items: center;
+}
+
+.polygon-opacity-slider {
+  height: 30px;
+  width: 90%;
+  margin-top: 5px;
 }

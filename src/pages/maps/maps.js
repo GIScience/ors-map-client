@@ -688,16 +688,18 @@ export default {
       context.localAvoidPolygons = avoidPolygons
     })
 
-    EventBus.$on('togglePolygonVisibility', (polygonIndex) => {
-      if (context.mapViewData.polygons[polygonIndex]) {
-        context.mapViewData.polygons[polygonIndex].properties.visible = !context.mapViewData.polygons[polygonIndex].properties.visible
+    EventBus.$on('toggleRingVisibility', ({groupIndex, ringIndex}) => {
+      if (context.mapViewData.polygons[groupIndex]) {
+        context.mapViewData.polygons[groupIndex].rings[ringIndex].properties.visible = !context.mapViewData.polygons[groupIndex].rings[ringIndex].properties.visible
       }
     })
+    EventBus.$on('toggleIsochroneVisibility', ({groupIndex}) => {
+      context.mapViewData.polygons[groupIndex].visible = !context.mapViewData.polygons[groupIndex].visible
+    })
 
-    EventBus.$on('setPolygonOpacity', (data) => {
-      if (context.mapViewData.polygons[data.polygonIndex]) {
-        context.mapViewData.polygons[data.polygonIndex].properties.fillOpacity = data.fillOpacity
-      }
+    EventBus.$on('setIsochroneOpacity', ({groupIndex, opacity}) => {
+      let pane = this.$refs.mapView.map.getPane('isochrones-'+groupIndex)
+      pane.getElementsByTagName('svg')[0].setAttribute('opacity', opacity)
     })
 
     EventBus.$on('setRouteOpacity', (data) => {
