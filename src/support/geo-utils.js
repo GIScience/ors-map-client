@@ -192,8 +192,18 @@ const geoUtils = {
    * @param {String} unit
    */
   readableArea(latlngs, unit) {
-    let area = Leaflet.GeometryUtil.geodesicArea(latlngs)
-    return Leaflet.GeometryUtil.readableArea(area, unit)
+    // see https://github.com/Leaflet/Leaflet.draw/blob/33ea262678bbfc3da7e92c226f70c017bd328434/src/ext/GeometryUtil.js#L66-L99
+    let precision = precision || 2
+    let area = this.geodesicArea(latlngs)
+    let areaStr
+    if (area >= 10000 && unit === 'km') {
+      areaStr = Leaflet.GeometryUtil.formattedNumber(area * 0.000001, precision) + ' km²'
+    } else if (area >= 10000 && unit === 'ha') {
+      areaStr = Leaflet.GeometryUtil.formattedNumber(area * 0.0001, precision) + ' ha'
+    } else {
+      areaStr = Leaflet.GeometryUtil.formattedNumber(area, 0) + ' m²'
+    }
+    return areaStr
   },
 
   /**
