@@ -8,7 +8,7 @@ export default {
     areaUnit: 'Area unit',
     saveToLocalStorage: 'Save in my browser',
     routeInstructions: 'Routing instructions',
-    randomizedIsochroneColors: 'Randomized isochrone colors',
+    alternativeIsochroneColors: 'Alternative isochrone colors',
     distanceMarkers: 'Distance markers',
     elevationProfile: 'Elevation profile',
     mapSettings: 'Map view and extra information',

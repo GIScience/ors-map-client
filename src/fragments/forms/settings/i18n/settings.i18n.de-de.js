@@ -8,7 +8,7 @@ export default {
     areaUnit: 'Flächeneinheit',
     saveToLocalStorage: 'Im Browser speichern',
     routeInstructions: 'Sprache der Wegbeschreibung',
-    randomizedIsochroneColors: 'Zufällige Isochronenfarben',
+    alternativeIsochroneColors: 'Alternative Isochronenfarben',
     distanceMarkers: 'Distanzmarkierungen',
     elevationProfile: 'Höhenprofil',
     mapSettings: 'Kartenansicht und extra Infos',

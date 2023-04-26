@@ -7,7 +7,7 @@ export default {
     areaUnit: 'Jednotka plochy',
     saveToLocalStorage: 'Uložit v mém prohlížeči',
     routeInstructions: 'Instrukce pro navigaci',
-    randomizedIsochroneColors: 'Náhodné izochronní barvy',
+    alternativeIsochroneColors: 'Alternativní izochronní barvy',
     distanceMarkers: 'Značky vzdálenosti',
     elevationProfile: 'Profil převýšení',
     mapSettings: 'Zobrazení mapy a další informace',

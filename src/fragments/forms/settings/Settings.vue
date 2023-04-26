@@ -85,6 +85,8 @@
                     :label="$t('settings.prioritizeSearchingForNearbyPlaces')"></v-checkbox>
                   <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.autoFitHighlightedBounds"
                     :label="$t('settings.autoFitHighlightedBounds')"></v-checkbox>
+                  <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.alternativeIsochroneColors"
+                    :label="$t('settings.alternativeIsochroneColors')"></v-checkbox>
                   <v-select :label="$t('settings.defaultTilesProvider')" :items="availableTileServices"
                     v-model="mapSettingsTransient.defaultTilesProvider"></v-select>
                 </v-container>
