@@ -7,7 +7,7 @@ export default {
     'areaUnit': 'Terület-mértékegység',
     'saveToLocalStorage': 'Mentés a böngészőmbe',
     'routeInstructions': 'Útvonaltervezési utasítások',
-    'randomizedIsochroneColors': 'Véletlenszerű izokronvonal-színek',
+    'alternativeIsochroneColors': 'Alternatív izokronvonal-színek',
     'distanceMarkers': 'Távolságjelölők',
     'elevationProfile': 'Magassági profil',
     'mapSettings': 'Térképnézet és további információk',

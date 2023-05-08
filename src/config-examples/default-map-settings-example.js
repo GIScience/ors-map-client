@@ -33,7 +33,19 @@ const defaultMapSettings = {
   accessibleModeActive: false,
   shownOnceTooltips: {},
   mapCenter: {lat: 49.510944, lng: 8.76709}, // Default center is at Heidelberg, Germany
-  randomizedIsochroneColors: false,
+  defaultIsochroneColors: [  // qgis plugin color scheme as default
+    '#2b83ba',
+    '#64abb0',
+    '#9dd3a7',
+    '#c7e9ad',
+    '#edf8b9',
+    '#ffedaa',
+    '#fec980',
+    '#f99e59',
+    '#e85b3a',
+    '#d7191c'
+  ],
+  alternativeIsochroneColors: false,
   distanceMarkers: false,
   skipAllSegments: false,
 

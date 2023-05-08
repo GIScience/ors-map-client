@@ -61,12 +61,15 @@ class IsochronesBuilder {
   getPolygons = () => {
     const polygons = []
     if (this.responseData.features) {
+      // When you request multiple points in an isochrone request, ors returns them all as a single array
+      // of polygon features
+      const ranges = this.responseData.metadata.query.range
+      const maxRange = Math.max(ranges)
+
       this.responseData.features.forEach((feature, index) => {
         const polygon = { geometry: feature.geometry, properties: feature.properties }
         polygon.properties.range_type = this.responseData.metadata.query.range_type
-
-        PolygonUtils.preparePolygonForView(polygon, this.translations, index)
-
+        PolygonUtils.preparePolygonForView(polygon, this.translations, index, maxRange)
         polygons.push(polygon)
       })
     }

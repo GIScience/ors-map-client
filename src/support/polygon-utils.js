@@ -1,7 +1,8 @@
-import htmlColors from 'html-colors'
 import GeoUtils from '@/support/geo-utils'
 import Leaflet from 'leaflet'
 import store from '@/store/store'
+import utils from '@/support/utils'
+import defaultMapSettings from '@/config/default-map-settings'
 
 const PolygonUtils = {
 
@@ -10,16 +11,18 @@ const PolygonUtils = {
    * @param {*} polygon
    * @param {*} translations
    * @param {*} index
+   * @param {number} maxRange
    */
-  preparePolygonForView (polygon, translations, index) {
+  preparePolygonForView (polygon, translations, index, maxRange) {
     polygon.properties = polygon.properties || {}
-    polygon.properties.color = polygon.properties.color || PolygonUtils.buildPolygonColor(index)
+    // the "value" property contains the range for the feature
+    polygon.properties.color = polygon.properties.color || PolygonUtils.buildPolygonColor(index, polygon, maxRange)
     polygon.properties.fillColor = polygon.properties.fillColor || polygon.properties.color
     polygon.properties.label = polygon.properties.label || PolygonUtils.buildPolygonLabel(polygon, translations)
     polygon.properties.area = PolygonUtils.calcPolygonArea(polygon)
 
     polygon.properties.opacity = polygon.properties.opacity || 1
-    polygon.properties.fillOpacity = polygon.properties.fillOpacity || 0.2
+    polygon.properties.fillOpacity = polygon.properties.fillOpacity || 0.3
     if (polygon.properties.visible === undefined) {
       polygon.properties.visible = true
     }
@@ -84,15 +87,33 @@ const PolygonUtils = {
   /**
    * Get polygon color
    * @param {Number} index
+   * @param {*} polygon
+   * @param {number} maxRange
    * @returns {String} color
    */
-  buildPolygonColor(index) {
-    index = Number(index)
-    // We get a color from the color collection but we
-    // skip the first 5 colors because they are not nice
-    const names = htmlColors.names() // Get an array containing all colors names
-    const color = htmlColors.hex(names[index + 6])
-    return color
+  buildPolygonColor(index, polygon, maxRange) {
+    if (store.getters.mapSettings.alternativeIsochroneColors) {
+      // the "value" property contains the range for the feature
+      return PolygonUtils.buildPolygonColorFromScale(polygon.properties.value, maxRange)
+    }
+    return defaultMapSettings.defaultIsochroneColors[index]
+  },
+  /**
+   * Generate a color (from red to blue) on a linear scale
+   * @param {Number} value The number to be placed on the scale
+   * @param {Number} scaleMax The maximum value of the scale
+   * @returns {String} color
+   */
+  buildPolygonColorFromScale(value, scaleMax) {
+    let modifier = parseInt(255 * (value/scaleMax))
+
+    let red = modifier * 2
+    let blue = (255 - modifier) * 2
+    // Cap values to 255. By multiplying by two we ensure that we get a good middle color (where both are 255)
+    if (red > 255) red = 255
+    if (blue > 255) blue = 255
+
+    return utils.rgbDecimalToHex(red, 0, blue)
   },
   /**
    * Build polygon label

@@ -6,7 +6,7 @@ export default {
     unit: 'Unitate',
     saveToLocalStorage: 'Salvați în browserul meu',
     routeInstructions: 'Instrucțiuni de rutare',
-    randomizedIsochroneColors: 'Culori izocrone randomizate',
+    alternativeIsochroneColors: 'Culori izocrone alternative',
     elevationProfile: 'Profil de elevație',
     mapSettings: 'Vizualizarea hărții și informații suplimentare',
     endpointsTitle: {

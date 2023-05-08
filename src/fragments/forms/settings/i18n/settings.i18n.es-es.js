@@ -7,7 +7,7 @@ export default {
     'areaUnit': 'Unidad de área',
     'saveToLocalStorage': 'Guardar en mi navegador',
     'routeInstructions': 'Instrucciones de la ruta',
-    'randomizedIsochroneColors': 'Colores de las isócronas aleatorias',
+    'alternativeIsochroneColors': 'Colores de las isócronas alternativas',
     'distanceMarkers': 'Marcadores de distância',
     'elevationProfile': 'Perfil de altitud',
     'mapSettings': 'Vista del mapa e información adicional',
