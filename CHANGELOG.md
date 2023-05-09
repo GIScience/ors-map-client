@@ -2,6 +2,144 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/GIScience/ors-map-client/compare/v1.29.0...v2.0.0) (2023-05-09)
+
+
+### Features
+
+* change default isochrone color & enable alternative colors ([165b0a4](https://github.com/GIScience/ors-map-client/commit/165b0a47e4570ce0171243d4d1536c675c5a923e))
+* Add Czech language ([c0b8258](https://github.com/GIScience/ors-map-client/commit/c0b82583e0ac39fd22a490bf778c7abbdcb0d783))
+* **i18n:** add Romanian translations ([bf08ce2](https://github.com/GIScience/ors-map-client/commit/bf08ce281d2c6ea92b2ca5fccd763335664140d3))
+* **i18n:** add translation builder and globals for romanian ([3b96348](https://github.com/GIScience/ors-map-client/commit/3b9634800762f466db6e72aee93319c83ffbbbd4))
+* load plugin images properly ([bcaba6a](https://github.com/GIScience/ors-map-client/commit/bcaba6a23ba3d8d476e25abb7a3da343a9a4dff2))
+* Make logos adjustable ([47185f8](https://github.com/GIScience/ors-map-client/commit/47185f8b87e05e3bbff91aa6fe6ef4fa598289bf))
+* **tests:** Init cypress framework ([10631c1](https://github.com/GIScience/ors-map-client/commit/10631c1ea759f822daa81ca1db1e2c6c41fb7bb7))
+
+
+### Bug Fixes
+
+* Add missing element to component-index.html ([67863e1](https://github.com/GIScience/ors-map-client/commit/67863e1c9cb42e57fa72b5aff6014423bb9be7af))
+* change to https links in mock data ([7e583ad](https://github.com/GIScience/ors-map-client/commit/7e583ad08e730401c24374cfabc8856099b68672))
+* **constants.js:** add missing switch in field types ([bfdba3f](https://github.com/GIScience/ors-map-client/commit/bfdba3f37017c0f1a851437b82fda231e324c459))
+* **cypress:** process.env.ORSKEY variable not resolving ([49c290d](https://github.com/GIScience/ors-map-client/commit/49c290dbf2f3161bb207c4a6d5a60daa803dd947))
+* flaky test ([5fe8261](https://github.com/GIScience/ors-map-client/commit/5fe826151e2c3e2f2f57bc204f9d5105b5f250c7))
+* floating menu using event bus ([0193e60](https://github.com/GIScience/ors-map-client/commit/0193e60c67038a73ef9c2782a19d8588e04119cd))
+* git and ssl versions in Dockerfile ([b29576b](https://github.com/GIScience/ors-map-client/commit/b29576b19821ee870b9979e7adeb2cd77819a07c))
+* **i18n:** remove empty first line ([1d1d9a4](https://github.com/GIScience/ors-map-client/commit/1d1d9a433eab895d719a6ff816fa7e81f8dc7ee0))
+* **i18n:** revise german translation ([805afc1](https://github.com/GIScience/ors-map-client/commit/805afc1400e5b83ea3100a0f21d97e727d66fc4c))
+* **map-definitions.js:** add maxZomm value for when custom tile provider is created ([e29350b](https://github.com/GIScience/ors-map-client/commit/e29350b285463bfbae1602cb85d3a433fcd4b560))
+* Remove pre-commit step no-commit-to-branch ([af8a313](https://github.com/GIScience/ors-map-client/commit/af8a313b627478af147389f3240d77b16f68173b))
+* Remove unnecessary installation step. ([a7b1a4e](https://github.com/GIScience/ors-map-client/commit/a7b1a4e712e294dad1721946eb07c0dcc5d7e504))
+* **route-information-popup:** popup text splits mid-word ([cb3579c](https://github.com/GIScience/ors-map-client/commit/cb3579c14253761b199217362f3cbd1785cbd669))
+* **route-information-popup:** popup text splits mid-word ([df1d005](https://github.com/GIScience/ors-map-client/commit/df1d005f0ba7b7056e1dc7c7d847dfd6fc284fce))
+* Tests after webpack 5 migration ([9865f2c](https://github.com/GIScience/ors-map-client/commit/9865f2ce0e66e236eba0e28b67ebceb5c559bd13))
+
+
+### CI
+
+* **test:** Adjust GitHub test workflow ([61e5aac](https://github.com/GIScience/ors-map-client/commit/61e5aac8abd299ea5c515a217e75808f2d2b3b9e))
+* update github runner version ([73072b8](https://github.com/GIScience/ors-map-client/commit/73072b8c6c671c403d6ba3eb7e9b8fd8ede51b07))
+
+
+### Docs
+
+* adapt EventBus documentation ([66d30e1](https://github.com/GIScience/ors-map-client/commit/66d30e1e0d11a7920cee3c9bef9579bb2e5fb8bc))
+* add dynamic inputs readme and additional documentation to the main readme ([6139a2b](https://github.com/GIScience/ors-map-client/commit/6139a2b00d968a0ec44d1ba490dc1caaaf475dbb))
+* Add instructions for docker and docker compose ([796a48a](https://github.com/GIScience/ors-map-client/commit/796a48a4c944df51674befb5d0e85f0464b21b89))
+* Adjust doc files ([f3cef99](https://github.com/GIScience/ors-map-client/commit/f3cef998df1f4c9101f1aed4cdc104f63b960948))
+* Fix old links. ([c165369](https://github.com/GIScience/ors-map-client/commit/c165369d89768bf2277a8da56e713b05bc2ebed3))
+* improve plugins documentation ([11d2238](https://github.com/GIScience/ors-map-client/commit/11d22388a8203a3dd9dbbb16d6bd0eced1671a36))
+* **plugins.md:** improve plugins documentation ([1ec61b7](https://github.com/GIScience/ors-map-client/commit/1ec61b7e7ec5e9b4d91715c3fe52b128b8ad425c))
+* **test:** Adjust docs for tests with cypress ([9771971](https://github.com/GIScience/ors-map-client/commit/977197185a1f283a7e75cfb924a40b9fa602af34))
+
+
+### Styling
+
+* Format project with prettier for json, yaml and markdown. ([456db08](https://github.com/GIScience/ors-map-client/commit/456db08bcd3779966197526a3282cb6dd74b1e53))
+* **MapLeftClick:** add space between lat & lon output ([7738051](https://github.com/GIScience/ors-map-client/commit/773805146d7b440ef58e579bd2fb51d0917c8b07))
+* pre-commit eslint automatic linter fixes. ([b6626ab](https://github.com/GIScience/ors-map-client/commit/b6626ababe23faf528d0270a274b17a59e9b7804))
+* pre-commit eslint manual fixes. ([76569c4](https://github.com/GIScience/ors-map-client/commit/76569c4245d83e531356d40d6f9e45b89625d7ad))
+* run pre-commit end-of-file-fixer. ([f3aa047](https://github.com/GIScience/ors-map-client/commit/f3aa0474ebf8ae6a1ab7d8ea6c691a30e7056939))
+* run pre-commit trailing-whitespace. ([522da4c](https://github.com/GIScience/ors-map-client/commit/522da4c5d0e0bde11cd48b26a3040c9804c67303))
+* Sort package.json according to best practices. ([c0bc087](https://github.com/GIScience/ors-map-client/commit/c0bc087a4bf68271b5f9143140db202f5326dc21))
+
+
+### Tests
+
+* Add cypress examples ([2c2ac86](https://github.com/GIScience/ors-map-client/commit/2c2ac86d59c9e5dc19142ce667b3cd347b36dcef))
+* Add tests for new util functions ([ec2e775](https://github.com/GIScience/ors-map-client/commit/ec2e7756c3f1da9e682fa55a30ef5229191c303f))
+* **integration:** Migrate About component test ([d7ac997](https://github.com/GIScience/ors-map-client/commit/d7ac997d5bbcebc0e30c05b2fb4d9d78ee4881f5))
+* Migrate about-page test ([83f1505](https://github.com/GIScience/ors-map-client/commit/83f1505672963c09d694d240e0ad88b79e0e39c3))
+* Migrate app-render.spec.js ([3c842ed](https://github.com/GIScience/ors-map-client/commit/3c842ed69d9ce4338ba57d159d37bc46a775b5f8))
+* Migrate Box component test ([8d430c6](https://github.com/GIScience/ors-map-client/commit/8d430c6a5d42e4782e741543c816ca9d38b32b76))
+* Migrate directions test ([472b50f](https://github.com/GIScience/ors-map-client/commit/472b50fcd90717e5b4ab47e3bf020af78e4cdccf))
+* Migrate download test ([8a59aca](https://github.com/GIScience/ors-map-client/commit/8a59acac02e0db5143c061020c970744b15a37a2))
+* Migrate download.spec.js ([2992821](https://github.com/GIScience/ors-map-client/commit/29928214a36ba33f496241537764f74394e25cf1))
+* Migrate embedded-mode test ([1068b30](https://github.com/GIScience/ors-map-client/commit/1068b30cad93c2c18c826895bbc5acf6d93accd2))
+* Migrate form-fields.spec.js ([9ccfe7a](https://github.com/GIScience/ors-map-client/commit/9ccfe7a5d15c452ede0ef1be772e54143f97b51f))
+* Migrate geo-utils test ([336c1ff](https://github.com/GIScience/ors-map-client/commit/336c1ffc257b3bc4198aff1d1649e235ae905a13))
+* Migrate header.spec.js ([bc97b9e](https://github.com/GIScience/ors-map-client/commit/bc97b9e06a6390d7d0c2883b4fd7d69a574cf46e))
+* Migrate landing-page test to home_page.cy.js ([db26803](https://github.com/GIScience/ors-map-client/commit/db2680337101a1c211262715d8bff6d563aba019))
+* Migrate map-render.spec.js ([ee4e60a](https://github.com/GIScience/ors-map-client/commit/ee4e60a031b715371c1c363e4d5c8ccd94beee89))
+* Migrate muild-map-data.spec.js ([3e5161b](https://github.com/GIScience/ors-map-client/commit/3e5161b582bad9bc6746bf0b45d127ce34ccde28))
+* Migrate not-found test ([2d65828](https://github.com/GIScience/ors-map-client/commit/2d658280c7395682888a67097f85b41f426e59cc))
+* Migrate ors-api-runner.spec.js ([e70d02f](https://github.com/GIScience/ors-map-client/commit/e70d02fe623a2bbc9bc1c45c771bd066e1588f59))
+* Migrate place test ([a941cef](https://github.com/GIScience/ors-map-client/commit/a941cefe83f5c9fd254e790e8e46fcc26d0a0897))
+* Migrate place-input.spec.js ([dca867b](https://github.com/GIScience/ors-map-client/commit/dca867bbef887edd2af3407b76b7fc1aaa160a58))
+* Migrate places-carousel.spec.js ([c305cee](https://github.com/GIScience/ors-map-client/commit/c305cee6399ff34e47aaec2161bd986ad4f301df))
+* Migrate reach test ([4210f68](https://github.com/GIScience/ors-map-client/commit/4210f68611df8a882be2d2f03a2e519a9c200238))
+* Migrate route-importer.spec.js ([3d97c7d](https://github.com/GIScience/ors-map-client/commit/3d97c7dc55565297a1ea37cbf129f98c8174711a))
+* Migrate search-place test ([15760d6](https://github.com/GIScience/ors-map-client/commit/15760d66aeef5a0595461f92096a7e194e371cad))
+* Migrate settings-page test ([a767742](https://github.com/GIScience/ors-map-client/commit/a767742db73d4eca1f735818f0fce56561bd77a1))
+* Migrate share.spec.js ([2e5957a](https://github.com/GIScience/ors-map-client/commit/2e5957a705c8634be071bcead6d9ce3094d51755))
+* Move sidebar toggle test ([ec56b4e](https://github.com/GIScience/ors-map-client/commit/ec56b4e86728be39270dfdd1cf26c1d26cce3ddb))
+* Remove main.spec.js ([1ae02a1](https://github.com/GIScience/ors-map-client/commit/1ae02a1c942d523662c6d69229d1aac5f667c454))
+* Remove old testfolder structure ([49dada4](https://github.com/GIScience/ors-map-client/commit/49dada48a42d5f49e0fe4597c758e667b9fc2c13))
+* **route-information-popup:** popup text splits mid-word ([e3beb53](https://github.com/GIScience/ors-map-client/commit/e3beb5316b746fad6c05fc50834cf8ede36282fe))
+
+
+### Code Refactoring
+
+* area value presentation ([8e11046](https://github.com/GIScience/ors-map-client/commit/8e11046efa3db46f9dcaa299f34c07e4dfc2e229))
+* capitalize EventBus in comments ([ea161b0](https://github.com/GIScience/ors-map-client/commit/ea161b0815dad3cdf956c12b9266a6432c9afe76))
+* **fragments:** remove unused DatePicker component ([6a188c8](https://github.com/GIScience/ors-map-client/commit/6a188c893812aacf723435af1f1e1d546b8a7494))
+* **isochrones:** changes colouring of isochrones to be a red to blue scale ([749c686](https://github.com/GIScience/ors-map-client/commit/749c6862e44197b7522d7c54c0cd1eddd7b8392d))
+* move eventBus to standalone module ([8acd75e](https://github.com/GIScience/ors-map-client/commit/8acd75e73ef0a6147064cc791751b5cc732ea06d)), closes [#324](https://github.com/GIScience/ors-map-client/issues/324)
+* **ors-response-util.js:** remove not used import ([cc15b43](https://github.com/GIScience/ors-map-client/commit/cc15b43ea13e2323960bd02cef6691724a2663d6))
+* **route-smoothness.js:** fix a typo ([1228cf8](https://github.com/GIScience/ors-map-client/commit/1228cf8695ed3c7430df681ad274a7e26c1cfdb1))
+* use EventBus module also for context.eventBus ([389f39f](https://github.com/GIScience/ors-map-client/commit/389f39fec7adf8c8b5430110cd0929025dabadbb))
+* use global EventBus in tests ([ac3205f](https://github.com/GIScience/ors-map-client/commit/ac3205fcf9e6caf0c3ef45e46321af34ed25bd2f))
+* Enhance MapViewData constructor ([b4767b9](https://github.com/GIScience/ors-map-client/commit/b4767b975bf57d80338ddce11628cb504afae0ef))
+
+
+### Build System
+
+* Add docker and docker compose ([a34b926](https://github.com/GIScience/ors-map-client/commit/a34b926d9c81cef39cd7cfa29fc02e1e674ae716))
+* Add test and build scripts for the docker setup ([234cabc](https://github.com/GIScience/ors-map-client/commit/234cabcace5ef68d10d327c619fcbb45b9320129))
+* Adjust lint task to cypress test location ([43d3c5d](https://github.com/GIScience/ors-map-client/commit/43d3c5d375936ec2be3987469a8e1294e9b80965))
+* **Dockerfile:** fix dependency versioning ([0f2e67b](https://github.com/GIScience/ors-map-client/commit/0f2e67b41d3514f1a3e682cb591eaa1404def1e9))
+* **Dockerfile:** Relax version pinning ([a459606](https://github.com/GIScience/ors-map-client/commit/a459606c73ced35747ba42e46512a5edcff7d83c))
+* Migrate to webpack 5 and node 14 ([18d703e](https://github.com/GIScience/ors-map-client/commit/18d703e356205e0d79439a01896dec6052de0bac))
+* Move mock data to cypress/fixtures ([d21d1f2](https://github.com/GIScience/ors-map-client/commit/d21d1f24459234220bcdddd1164bacaf4249f671))
+* Remove npm version check ([5dd666f](https://github.com/GIScience/ors-map-client/commit/5dd666f5116b8a1b35f554e2dc818d5b345a0231))
+* Remove old test dependencies ([2a69fa6](https://github.com/GIScience/ors-map-client/commit/2a69fa653ec5c30e8a1f906752a06b8e9a58eb43))
+* **Webpack:** Add cypress/fixtures alias ([26953e4](https://github.com/GIScience/ors-map-client/commit/26953e4e223e32f3423ce29e1ad2753b8ae7a14f))
+* Replace npm with pnpm. ([252af42](https://github.com/GIScience/ors-map-client/commit/252af42cbc3eaa5f4bd97a24aa3813c446789498))
+
+
+### Others
+
+* Add cypress/downloads to .gitignore ([5d12a87](https://github.com/GIScience/ors-map-client/commit/5d12a8785fc92c20edb708c33cc0bb818e7575fd))
+* Add pre-commit config,  Readme instructions and a workflow check. ([9836022](https://github.com/GIScience/ors-map-client/commit/98360228d51f7ea9a01f0f48b8395fa32ac6f035))
+* Add pre-commit hooks for docker and file endings. ([d771ae0](https://github.com/GIScience/ors-map-client/commit/d771ae03c572493b82ca3072281405e28bcd43fb))
+* Clean dependencies. ([364d400](https://github.com/GIScience/ors-map-client/commit/364d40000768a6b3ff513c1b798fbf6a5c2b2596))
+* Delete and add index.html to gitignore. ([b5cfb9b](https://github.com/GIScience/ors-map-client/commit/b5cfb9b846a910e0b42038ac080491da2190b1de))
+* Fix some typos ([bff27d1](https://github.com/GIScience/ors-map-client/commit/bff27d1b96f0370ef5f2b0c8d9c1c95bb06114e7))
+* **pre-commit:** exclude CHANGELOG.md from prettier ([881cc02](https://github.com/GIScience/ors-map-client/commit/881cc0247f6a017b514cc75c8c87fe62a984e0bf))
+* **pre-commit:** ignore autogenerated pnpm-lock.yaml ([0bc3530](https://github.com/GIScience/ors-map-client/commit/0bc353066e801095c401579f88d816dd417643f4))
+* Remove leftover remnants from old test framework ([224e0a8](https://github.com/GIScience/ors-map-client/commit/224e0a860a8e033440da6993f6478617505d7b0b))
+* Remove unused stats.json file ([8b74441](https://github.com/GIScience/ors-map-client/commit/8b74441bebb88d72c3affe51be3cbe36f3f21582))
+
 ## [1.29.0](https://github.com/GIScience/ors-map-client/compare/v1.28.2...v1.29.0) (2022-01-19)
 
 ### Features
