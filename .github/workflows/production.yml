@@ -1,0 +1,29 @@
+name: Production
+
+on:
+  pull_request:
+    branches:
+      - chore/release*
+    types:
+      - closed
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    environment: production
+    runs-on: [self-hosted, ors-map-client-production]
+    steps:
+      - name: trigger branch name
+        run: echo ${GITHUB_REF_NAME}
+      - name: fetch repo state and prune remotes
+        working-directory: ${{ secrets.work_dir }}
+        run: git fetch --prune
+      - name: checkout trigger branch
+        working-directory: ${{ secrets.work_dir }}
+        run: git checkout --progress --force -B ${GITHUB_REF_NAME} ${GITHUB_REF}
+      - name: hard reset to origin state
+        working-directory: ${{ secrets.work_dir }}
+        run: git reset --hard origin/${GITHUB_REF_NAME}
+      - name: build docker rebuild and restart
+        working-directory: ${{ secrets.work_dir }}
+        run: docker-compose up --build --force-recreate -d
