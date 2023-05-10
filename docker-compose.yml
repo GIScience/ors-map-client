@@ -11,6 +11,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    user: "${UID:-0}:${GID:-0}"
     image: heigit/ors-map-client:local
     container_name: ors-map-client
     volumes:
