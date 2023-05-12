@@ -4,7 +4,7 @@ repos:
     hooks:
       - id: prettier
         types_or: [json, yaml, markdown]
-        exclude: pnpm-lock.yaml
+        exclude: pnpm-lock.yaml|CHANGELOG.md
   - repo: https://github.com/hadolint/hadolint.git
     rev: "v2.12.1-beta"
     hooks:
