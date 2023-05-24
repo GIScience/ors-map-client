@@ -15,6 +15,7 @@ RUN pnpm install --only=prod
 
 COPY build /opt/client/build
 COPY src /opt/client/src
+RUN cd src && cp -r config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
 COPY config /opt/client/config
 COPY .eslintignore pnpm-lock.yaml cypress.config.js .babelrc .eslintrc.js dev.html package.json .postcssrc.js /opt/client/
 
