@@ -27,8 +27,6 @@ FROM nginx:stable-alpine as production-stage
 RUN apk add --no-cache 'openssl>=3.0' 'bash>=5.1'  \
     && rm -rf /usr/share/nginx/html/*
 
-USER nginx
-
 COPY --from=build-stage /opt/client/static /usr/share/nginx/html/static
 COPY --from=build-stage /opt/client/index.html /usr/share/nginx/html/
 COPY templates/nginx.ors-map-client.conf.nginx /etc/nginx/conf.d/default.conf
