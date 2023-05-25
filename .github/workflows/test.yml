@@ -68,7 +68,28 @@ jobs:
           key: ${{ runner.os }}-pnpm-cypress-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-cypress-store-
-      - name: Cypress install
+      - name: Check if last commit was done by snyk-bot
+        # if the last commit was done by snyk-bot then skip the install
+        id: snyk-bot
+        run: |
+          author=$(git log -1 --pretty=format:'%an')
+          echo "Last commit was done by $author"
+          if [ $author = "snyk-bot" ]; then
+            echo "Commit done by snyk-bot"
+            echo ::set-output name=found::true
+            exit 0
+          else
+            echo ::set-output name=found::false
+            exit 0
+          fi
+      - name: Cypress install for snyk only
+        if: ${{ steps.snyk-bot.outputs.found == 'true' }}
+        uses: cypress-io/github-action@v4
+        with:
+          runTests: false
+          install-command: pnpm install --no-frozen-lockfile --silent
+      - name: Cypress install for non-snyk
+        if: ${{ steps.snyk-bot.outputs.found == 'false' }}
         uses: cypress-io/github-action@v4
         with:
           runTests: false
