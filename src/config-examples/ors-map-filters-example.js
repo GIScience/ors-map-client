@@ -646,7 +646,15 @@ const filters = [
                     min: 0.1
                   }
                 ],
-              }
+              },
+              {
+                name: 'csv_factor',
+                value: 0.8
+              },
+              {
+                name: 'csv_column',
+                value: 'heat_noon' // default value if nothing is selected by the user
+              },
             ]
           },
           {
