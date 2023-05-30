@@ -45,7 +45,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-imports": "^1.4.1",
-    "chart.js": "2.9.4",
+    "chart.js": "2.7.3",
     "compression-webpack-plugin": "^10.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^3.6.0",
