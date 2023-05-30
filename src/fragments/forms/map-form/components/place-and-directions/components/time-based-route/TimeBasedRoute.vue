@@ -7,7 +7,7 @@
         v-model="selectedHour" v-on:change="departHourChange()"></v-select>
     </v-layout>
     <v-divider></v-divider>
-    <v-btn class="form-actions" flat :title="$t('timeBasedRoute.hotDays')" @click="routeOnHotDays()">{{$t('timeBasedRoute.hotDays')}}</v-btn>
+<!--    <v-btn class="form-actions" flat :title="$t('timeBasedRoute.hotDays')" @click="routeOnHotDays()">{{$t('timeBasedRoute.hotDays')}}</v-btn>-->
   </div>
 </template>
 
