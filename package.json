@@ -45,7 +45,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-imports": "^1.4.1",
-    "chart.js": "2.9.4",
+    "chart.js": "2.7.3",
     "compression-webpack-plugin": "^10.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^3.6.0",
@@ -60,7 +60,7 @@
     "html-webpack-plugin": "^5.0.0",
     "leaflet": "^1.8.0",
     "leaflet-draw-locales": "^1.1.0",
-    "leaflet-geometryutil": "^0.10.1",
+    "leaflet-geometryutil": "^0.10.2",
     "leaflet-gesture-handling": "^1.1.8",
     "leaflet-measure": "^3.1.0",
     "leaflet.markercluster": "^1.5.3",
@@ -94,7 +94,7 @@
     "vue-loader": "^14.2.4",
     "vue-lodash": "^2.1.2",
     "vue-moment": "^4.0.0",
-    "vue-resize": "^0.5.0",
+    "vue-resize": "^1.0.1",
     "vue-rest-client": "^0.1.15",
     "vue-router": "^3.0.1",
     "vue-style-loader": "^3.0.1",
@@ -111,7 +111,7 @@
     "webpack-bundle-analyzer": "^4.7.0",
     "webpack-cli": "^4.0.0",
     "webpack-merge": "^4.1.0",
-    "xml2js": "^0.5.0"
+    "xml2js": "^0.6.0"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^5.12.2",
