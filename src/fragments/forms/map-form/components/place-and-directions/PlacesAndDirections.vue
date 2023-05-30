@@ -50,7 +50,9 @@
       <br/>
       <box v-if="$store.getters.mode === constants.modes.directions" background="white" no-shadow>
         <div slot="header">
-          <h3>{{$t('placesAndDirections.timeBasedRouteHeader')}} : {{new Date().toLocaleDateString('de-DE')}}</h3>
+          <h3>{{$t('placesAndDirections.timeBasedRouteHeader')}}
+          <!-- : {{new Date().toLocaleDateString('de-DE')}}-->
+          </h3>
         </div>
         <time-based-route :places="places" :mapViewData="mapViewData"></time-based-route>
         <br/>
