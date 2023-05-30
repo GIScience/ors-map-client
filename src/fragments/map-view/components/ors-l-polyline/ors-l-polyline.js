@@ -191,10 +191,11 @@ export default {
       if (this.route.summary) {
         const summaryCopy = Object.assign({}, this.route.summary)
         const humanizedData = GeoUtils.getHumanizedTimeAndDistance(summaryCopy, this.$t('global.units'))
-        let tooltipInnerContent = `${this.$t('global.distance')}: ${humanizedData.distance}`
+        let tooltipInnerContent = ''
         if (humanizedData.duration) {
-          tooltipInnerContent += `<br> ${this.$t('global.duration')}: ${humanizedData.duration}`
+          tooltipInnerContent += `<b>${humanizedData.duration}</b><br>`
         }
+        tooltipInnerContent += `${humanizedData.distance}`
         let tooltipIcon = this.tooltipIcon
         if (store.getters.mapSettings.skipAllSegments) {
           tooltipIcon = 'arrow_forward'
