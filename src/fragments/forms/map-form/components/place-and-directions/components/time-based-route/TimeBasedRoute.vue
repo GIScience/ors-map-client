@@ -18,7 +18,7 @@
     <v-divider></v-divider>
     <v-btn class="form-actions" flat :title="$t('timeBasedRoute.inFewHours')" @click="route('1Hours')">{{$t('timeBasedRoute.inFewHours')}}</v-btn> -->
     <v-divider></v-divider>
-    <v-btn class="form-actions" flat :title="$t('timeBasedRoute.hotDays')" @click="routeOnHotDays()">{{$t('timeBasedRoute.hotDays')}}</v-btn>
+<!--    <v-btn class="form-actions" flat :title="$t('timeBasedRoute.hotDays')" @click="routeOnHotDays()">{{$t('timeBasedRoute.hotDays')}}</v-btn>-->
   </div>
 </template>
 
