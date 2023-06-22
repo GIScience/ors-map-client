@@ -63,7 +63,7 @@ const appConfig = {
       id: 'osm',
       visible: false,
       attribution: '&copy; <a target="_blank" href="https://osm.org/copyright">OpenStreetMap</a> contributors',
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
       maxZoom: 19
     },
     {
