@@ -7,7 +7,7 @@ import store from '@/store/store'
 
 describe('Map rendering', () => {
   beforeEach(() => {
-    cy.intercept('GET', 'https://*.tile.openstreetmap.org/*/*/*.png', {fixture: 'map-pin.jpg'})
+    cy.intercept('GET', 'https://tile.openstreetmap.org/*/*/*.png', {fixture: 'map-pin.jpg'})
   })
   it('should render map-view with single place', () => {
     new AppLoader().fetchApiInitialData()

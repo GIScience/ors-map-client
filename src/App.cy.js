@@ -14,7 +14,7 @@ describe('<App />', () => {
   beforeEach(() => {
     cy.spy(EventBus, '$on').as('eventBusRegisterSpy')
     cy.spy(EventBus, '$emit').as('eventBusEmitSpy')
-    cy.intercept('GET', 'https://*.tile.openstreetmap.org/*/*/*.png', {fixture: 'map-pin.jpg'})
+    cy.intercept('GET', 'https://tile.openstreetmap.org/*/*/*.png', {fixture: 'map-pin.jpg'})
     new AppLoader().fetchApiInitialData()
     cy.stub(Footer.computed, 'appVersion', () => {
       // appVersion reads from process.env, which isn't available in browser during testing
