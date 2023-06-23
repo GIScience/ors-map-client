@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/GIScience/ors-map-client/compare/v2.0.0...v2.1.0) (2023-06-23)
+
+
+### Features
+
+* remove distance and duration text from route popup ([#366](https://github.com/GIScience/ors-map-client/issues/366)) ([6e4d420](https://github.com/GIScience/ors-map-client/commit/6e4d420ab48e6de0a60319bef3ed43b42f5c63b8))
+
+
+### Bug Fixes
+
+* avoid_countries not working ([#372](https://github.com/GIScience/ors-map-client/issues/372)) ([550024c](https://github.com/GIScience/ors-map-client/commit/550024ca2312bb223cff52383878ea90c6ed44ff))
+* user location functionality ([#364](https://github.com/GIScience/ors-map-client/issues/364)) ([5e41779](https://github.com/GIScience/ors-map-client/commit/5e41779a0c8477c8fc3957246fa5a287474de047))
+* Fix the usage of the legacy osm tile service to the new one. ([#375](https://github.com/GIScience/ors-map-client/issues/375)) ([5a3b590](https://github.com/GIScience/ors-map-client/commit/5a3b590a0720a7ff34c4ffd235143f21e2f1bfb8))
+
+
+### CI
+
+* fix env in heal.yml ([2bd403a](https://github.com/GIScience/ors-map-client/commit/2bd403a1d937a79d0fbf1f761e68d53b890a9000))
+
+
+### Others
+
+* **cve:** Upgrade 5 packages to close CVEs ([#367](https://github.com/GIScience/ors-map-client/issues/367)) ([96769cd](https://github.com/GIScience/ors-map-client/commit/96769cd5c3e4792c3c60b496e80a1e2fac00bf5e))
+* **deps:** downgrade chart.js dependency due to ui issue ([0edc754](https://github.com/GIScience/ors-map-client/commit/0edc754b96d73b930e6662f1880b0975fc057aeb))
+
 ## [2.0.0](https://github.com/GIScience/ors-map-client/compare/v1.29.0...v2.0.0) (2023-05-09)
 
 
