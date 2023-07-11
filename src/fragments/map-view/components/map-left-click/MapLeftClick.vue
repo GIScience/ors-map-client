@@ -17,8 +17,8 @@
           @click="directionsToPoint(placeInfo)"><v-icon
           :title="$t('mapLeftClick.directionsToClickedPoint')" color="dark" >directions</v-icon>
         </v-btn>
-        <v-btn :title="$t('mapLeftClick.copyLnglat')" flat small icon  @click="copyLngLat()" > <v-icon>content_copy</v-icon> </v-btn>
-        <v-btn :title="$t('mapLeftClick.copyLatlng')" flat small color="primary" icon class="copy-inverted" @click="copyLatLng()" > <v-icon>content_copy</v-icon> </v-btn>
+<!--        <v-btn :title="$t('mapLeftClick.copyLnglat')" flat small icon  @click="copyLngLat()" > <v-icon>content_copy</v-icon> </v-btn>-->
+<!--        <v-btn :title="$t('mapLeftClick.copyLatlng')" flat small color="primary" icon class="copy-inverted" @click="copyLatLng()" > <v-icon>content_copy</v-icon> </v-btn>-->
       </template>
     </div>
   </box>
