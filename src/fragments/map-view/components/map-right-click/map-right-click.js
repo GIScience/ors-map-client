@@ -95,7 +95,7 @@ export default {
       const event = data.event
       const mapEl = data.mapEl
       const boxWidth = 190
-      const boxHeight = 217
+      const boxHeight = 190
       const mapWidth = mapEl.clientWidth
       const mapHeight = mapEl.clientHeight
       const offsetX = 10
