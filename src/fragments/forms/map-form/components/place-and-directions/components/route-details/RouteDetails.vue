@@ -22,7 +22,6 @@
             <div style="padding:0 0 0 10px">
               <div>{{$t('global.distance')}}:  <b>{{route.summary.distance}} </b></div>
               <div v-if="route.summary.duration" >{{$t('global.duration')}}:  <b>{{route.summary.duration}} </b></div>
-              <div>{{$t('global.heatScore')}}:  <b>{{route.summary.value}} </b></div>
             </div>
             <div  style="padding:0 0 0 10px" v-if="route.properties.warnings">
               <h4 >{{$t('routeDetails.warnings')}}:</h4>
