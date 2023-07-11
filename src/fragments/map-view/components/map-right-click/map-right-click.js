@@ -45,13 +45,14 @@ export default {
       }
     },
     canAddIsochroneCenter () {
-      return this.$store.getters.mode === constants.modes.isochrones || (this.$store.getters.mode === constants.modes.place && !this.$store.getters.isSidebarVisible)
+      // return this.$store.getters.mode === constants.modes.isochrones || (this.$store.getters.mode === constants.modes.place && !this.$store.getters.isSidebarVisible)
+      return false
     },
     canRoute () {
       return this.$store.getters.mode !== constants.modes.isochrones
     },
     canShowInspector () {
-      return true
+      return false
     }
   },
   methods: {
