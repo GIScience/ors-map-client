@@ -35,6 +35,8 @@ export default {
     })
     const favIcon = document.getElementById('favIcon')
     favIcon.href = utils.getImgSrc('favIcon')
+    // show heatstress level on the route by default.
+    this.$store.commit('extraHighlight', {key: 'csv', value: 'all', index: 0})
   },
   mounted() {
     EventBus.$on('appLoaded', () => {
