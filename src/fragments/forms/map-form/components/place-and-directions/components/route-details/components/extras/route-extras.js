@@ -174,5 +174,19 @@ export default {
         label
       }
     }
+  },
+  created() {
+    // show heatstress level on the route by default. The users can
+    // add a delay so that active route is rendered first
+    // otherwise causes error in map-view
+    setTimeout( () => {
+      this.showAllSections('csv')
+    }, 500)
+
+  },
+  updated() {
+    setTimeout( () => {
+      this.showAllSections('csv')
+    }, 500)
   }
 }
