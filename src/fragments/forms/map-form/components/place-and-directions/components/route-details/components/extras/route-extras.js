@@ -193,5 +193,9 @@ export default {
         label
       }
     }
+  },
+  created() {
+    // show heatstress level on the route by default.
+    this.showAllSections('csv')
   }
 }
