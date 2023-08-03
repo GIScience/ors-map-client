@@ -200,10 +200,7 @@ export default {
     supportsDrawingTool () {
       const modeWithDrawingTools = [constants.modes.directions, constants.modes.roundTrip]
       // If the app is in one of the modes that supports drawing tool
-      if (modeWithDrawingTools.includes(this.$store.getters.mode)) {
-        return true
-      }
-      return false
+      return modeWithDrawingTools.includes(this.$store.getters.mode)
     }
   },
   beforeRouteUpdate (to, from, next) {

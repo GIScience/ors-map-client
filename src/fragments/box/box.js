@@ -171,11 +171,7 @@ export default {
       // but we only set the `this.maximized = true` to the box
       // that is above all others, considering the order of maximization
       const lastGuid = this.getLastBoxMaximizedGuid()
-      if (!lastGuid || lastGuid !== this.guid) {
-        this.maximized = false
-      } else {
-        this.maximized = true
-      }
+      this.maximized = lastGuid && lastGuid === this.guid
     },
 
     /**

@@ -45,10 +45,7 @@ export default {
       }
     },
     hasPlaceInfo () {
-      if (this.clickPoint) {
-        return true
-      }
-      return false
+      return !!this.clickPoint
     },
     placeInfoTitle () {
       const title = this.clickInsidePolygon ? this.$t('mapLeftClick.placeInsidePolygon') : this.$t('mapLeftClick.placeInfo')

@@ -171,10 +171,7 @@ class Place {
    */
   nameIsCoord() {
     const coords = this.getCoordsFromName()
-    if (coords) {
-      return true
-    }
-    return false
+    return !!coords
   }
 
   /**

@@ -68,10 +68,7 @@ export default {
      *
      */
     showPlaceDetails () {
-      if (this.$store.getters.mode === constants.modes.place && this.mapViewData.places.length === 1 && !this.searching && !this.places[0].isEmpty() && this.mapViewData) {
-        return true
-      }
-      return false
+      return !!(this.$store.getters.mode === constants.modes.place && this.mapViewData.places.length === 1 && !this.searching && !this.places[0].isEmpty() && this.mapViewData)
     },
     /**
      * Determines if a route is ready to be rendered
@@ -698,10 +695,7 @@ export default {
      * @returns {Boolean}
      */
     hasRouteFilters (args) {
-      if (args.options || args.preference) {
-        return true
-      }
-      return false
+      return !!(args.options || args.preference)
     },
 
     /**

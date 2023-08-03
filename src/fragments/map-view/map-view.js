@@ -516,10 +516,7 @@ export default {
      */
     canFitFeatures () {
       let available = appConfig.fitAllFeaturesToolAvailable
-      if (available && (this.localMapViewData.hasPlaces() || this.localMapViewData.hasRoutes() || this.localAvoidPolygons.length > 0 )) {
-        return true
-      }
-      return false
+      return available && (this.localMapViewData.hasPlaces() || this.localMapViewData.hasRoutes() || this.localAvoidPolygons.length > 0)
     },
     /**
      * If an active route data must be shown

@@ -141,10 +141,7 @@ const geoUtils = {
       let topAndBottomParallel = (topLeftVortice[1] - bottomLeftVortice[1]) === (topRightVortice[1] - bottomRightVortice[1])
       let rightAndLeftParallel = (topLeftVortice[0] - bottomLeftVortice[0]) === (topRightVortice[0] - bottomRightVortice[0])
 
-      if (topAndBottomParallel && rightAndLeftParallel) {
-        return true
-      }
-      return false
+      return topAndBottomParallel && rightAndLeftParallel
     }
   },
 
