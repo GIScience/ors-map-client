@@ -210,10 +210,6 @@ export default {
         btnColumns++
       }
 
-      if (btnColumns > 1) {
-        btnColumns = btnColumns + 0
-      }
-
       return btnColumns
     },
     /**
