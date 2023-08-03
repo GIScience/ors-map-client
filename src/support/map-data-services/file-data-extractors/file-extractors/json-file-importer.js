@@ -141,7 +141,7 @@ class JsonImporter {
       }
     } else { // if there are more then 15, only the first and the last
       const firstCoords = (this.coordinates[0])
-      const lastCoords = (this.coordinates[this.coordinates.length - 1])
+      const lastCoords = (this.coordinates.at(-1))
 
       const firstLng = firstCoords[1]
       const firstLat = firstCoords[0]

@@ -433,9 +433,8 @@ export default {
      */
     addDestinationToRoute (data) {
       this.places.push(new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true }))
-      const lastPlaceIdex = this.places.length - 1
       const context = this
-      this.resolvePlace(this.places[lastPlaceIdex]).then(() => {
+      this.resolvePlace(this.places.at(-1)).then(() => {
         context.updateAppRoute()
       }).catch((err) => {
         console.log(err)

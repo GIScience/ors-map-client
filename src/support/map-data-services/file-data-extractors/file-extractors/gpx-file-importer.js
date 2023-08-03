@@ -88,7 +88,7 @@ class GpxImporter {
         }
       } else { // if there are more then 15, only the first and the last
         const firstCoords = routes[0].geometry.coordinates[0]
-        const lastCoords = (routes[0].geometry.coordinates[routes[0].geometry.coordinates.length - 1])
+        const lastCoords = (routes[0].geometry.coordinates.at(-1))
 
         const firstLng = firstCoords[0]
         const firstLat = firstCoords[1]

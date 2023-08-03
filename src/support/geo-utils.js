@@ -129,7 +129,7 @@ const geoUtils = {
   geojsonIsARectangle(geojson) {
     let coordinates = geojson.geometry.coordinates[0]
     let firstVortice = coordinates[0].toString()
-    let lastVortice = coordinates[coordinates.length - 1].toString()
+    let lastVortice = coordinates.at(-1).toString()
 
     // It is a four side closed polygon
     if (coordinates.length === 5 && firstVortice === lastVortice) {

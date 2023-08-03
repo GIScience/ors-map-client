@@ -130,9 +130,8 @@ export default {
      */
     addAsIsochroneCenter (data) {
       this.places.push(new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true }))
-      const lastPlaceIdex = this.places.length - 1
       const context = this
-      this.places[lastPlaceIdex].resolve().then(() => {
+      this.places.at(-1).resolve().then(() => {
         context.updateAppRoute()
       }).catch((err) => {
         console.log(err)

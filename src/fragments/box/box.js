@@ -195,10 +195,9 @@ export default {
      */
     getLastBoxMaximizedGuid () {
       const boxMaximizedStack = this.$store.getters.boxMaximizedStack || {}
-      const length = Object.keys(boxMaximizedStack).length
       let lastKey
-      if (length > 0) {
-        lastKey = Object.keys(boxMaximizedStack)[length - 1]
+      if (Object.keys(boxMaximizedStack).length > 0) {
+        lastKey = Object.keys(boxMaximizedStack).at(-1)
       }
       return lastKey
     },
