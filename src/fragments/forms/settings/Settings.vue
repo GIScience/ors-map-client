@@ -47,7 +47,7 @@
               </div>
               <v-list>
                 <v-list dense>
-                  <v-container fluid style="padding-top: 0px;padding-bottom: 0px">
+                  <v-container fluid style="padding-top: 0;padding-bottom: 0">
                     <h4>{{$t('settings.routeExtraInfo')}}</h4>
                     <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.elevationProfile"
                       :label="$t('settings.elevationProfile')"></v-checkbox>
@@ -77,7 +77,7 @@
                 </v-list>
               </v-list>
               <v-list dense>
-                <v-container fluid style="padding-top: 0px;padding-bottom: 0px">
+                <v-container fluid style="padding-top: 0;padding-bottom: 0">
                   <h4>{{$t('settings.mapViewOptions')}}</h4>
                   <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.alwaysFitBounds"
                     :label="$t('settings.alwaysFitBounds')"></v-checkbox>

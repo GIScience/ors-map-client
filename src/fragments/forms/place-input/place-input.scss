@@ -30,16 +30,16 @@
 }
 
 .shadow {
-  -webkit-box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
-  -moz-box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
-  box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
+  -webkit-box-shadow: 0 4px 5px 0 rgba(130,117,130,1);
+  -moz-box-shadow: 0 4px 5px 0 rgba(130,117,130,1);
+  box-shadow: 0 4px 5px 0 rgba(130,117,130,1);
 }
 
 .no-padding {
-  padding: 0px;
+  padding: 0;
 }
 .no-margin {
-  margin: 0px;
+  margin: 0;
 }
 
 .input-btn:before {
@@ -47,10 +47,10 @@
 }
 
 .input-btn {
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   float: right;
-  padding-left: 0px;
+  padding-left: 0;
   margin-top: 6px;
   padding-bottom: 18px;
   height: 40px;
@@ -90,7 +90,7 @@
 }
 
 .floating-menu-activator {
-  margin-right: 0px;
+  margin-right: 0;
 }
 
 .suggestions >>> .v-list__tile__sub-title {

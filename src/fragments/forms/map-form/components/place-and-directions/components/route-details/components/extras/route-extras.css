@@ -7,8 +7,8 @@
 }
 
 .extras-header >>> .v-expansion-panel__header {
- padding-top: 0px !important;
- padding-bottom: 0px !important;
+ padding-top: 0 !important;
+ padding-bottom: 0 !important;
  padding-left: 5px;
  min-height: 35px;
 }
@@ -45,6 +45,6 @@
 .show-all-on-map {
   height: 30px;
   width: 30px;
-  margin: 0px;
+  margin: 0;
   margin-top: 22px !important;
 }

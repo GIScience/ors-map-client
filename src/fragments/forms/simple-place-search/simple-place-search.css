@@ -5,7 +5,7 @@
   padding-bottom: 5px
 }
 .open-menu {
-  padding: 0px;
+  padding: 0;
   min-width: 0;
 }
 
@@ -15,9 +15,9 @@
 
 
 .shadow {
-  -webkit-box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
-  -moz-box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
-  box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
+  -webkit-box-shadow: 0 4px 5px 0 rgba(130,117,130,1);
+  -moz-box-shadow: 0 4px 5px 0 rgba(130,117,130,1);
+  box-shadow: 0 4px 5px 0 rgba(130,117,130,1);
 }
 
 .simple-place-search {
@@ -38,8 +38,8 @@
 }
 
 .simple-place-search >>> .box-content {
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .mini-input >>> .suggestions {

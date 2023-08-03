@@ -47,7 +47,7 @@
 .my-location-btn {
   position: absolute !important;
   bottom: 80px;
-  right: 0px;
+  right: 0;
   z-index: 1000;
 }
 
