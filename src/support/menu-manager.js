@@ -1,3 +1,5 @@
+// noinspection HttpUrlsUsage
+
 import menuService from './menu-service'
 import appConfig from '@/config/app-config'
 import Vue from 'vue'
