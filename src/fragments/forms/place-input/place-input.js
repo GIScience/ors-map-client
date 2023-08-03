@@ -640,7 +640,7 @@ export default {
     sendToSearchMode () {
       if (!this.model.placeName || this.model.placeName.length === 0) {
         this.showError(this.$t('placeInput.pleaseTypeSomething'))
-        return
+
       } else {
         if (previousMode === constants.modes.search) {
           this.$emit('searchChanged')

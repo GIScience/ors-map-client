@@ -463,7 +463,7 @@ class OrsExtendedPolyline {
       this.closest = null
       this._marker.options.draggable = false
       this._dragging = false
-      return
+
     } else {
       //add a new vertex
       this._poly._latlngs.splice(closestIndex, 0, this.closest)
