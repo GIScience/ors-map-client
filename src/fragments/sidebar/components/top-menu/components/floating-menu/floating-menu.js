@@ -64,7 +64,7 @@ export default {
         {
           id: 'askOpenrouteservice',
           show: true,
-          href: constants.links.askOrs,
+          href: constants.links.forum,
           title: this.$t('floatingTopMenu.askOpenrouteservice'),
           text: this.$t('floatingTopMenu.askOpenrouteservice'),
           icon: 'help',

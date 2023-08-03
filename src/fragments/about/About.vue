@@ -11,7 +11,7 @@
         <v-alert outline :value="true" color="info">
           <h3 class="header"> {{$t('about.donate')}}</h3>
           <span class="textjustify">{{$t('about.donateText')}}</span>
-          <a class="link" :href="constants.links.osmLink" target="_blank">{{$t('about.openStreetMapOrg')}}</a>
+          <a class="link" :href="constants.links.osm" target="_blank">{{$t('about.openStreetMapOrg')}}</a>
         </v-alert>
         <p class="textjustify">{{$t('about.info_I')}}</p>
         <v-alert outline :value="true" color="info">
@@ -29,26 +29,26 @@
       <section>
         <h4 class="sectionHeader">{{$t('about.softwareAndLibraries')}}</h4>
         <p class="textjustify">
-          {{$t('about.dataProvided')}} <a class='link' :href='constants.links.aboutGHSL'
+          {{$t('about.dataProvided')}} <a class='link' :href='constants.links.ghsl'
             target='_blank'>{{$t('about.ghsFramework')}}</a>
         </p>
         <p>
           {{$t('about.sources')}} <a class='link' :href="constants.links.source" target='_blank'>github</a>.
         </p>
-        <p>{{$t('about.feelFreeToReportBugs')}} <a :href="constants.links.reportIssue" target='_blank'>github</a>
+        <p>{{$t('about.feelFreeToReportBugs')}} <a :href="constants.links.newIssue" target='_blank'>github</a>
           {{$t('about.orToFixThem')}}.</p>
       </section>
       <v-divider></v-divider>
       <br>
       <section>
-        <a :href="constants.links.heiGitEn" target="_blank">
+        <a :href="constants.links.heigit" target="_blank">
           <img height="auto" :src="getImgSrc('brandLogoSrc')" class="brand" width="150px" />
         </a>
         <p>{{$t('about.info_IV')}}</p>
         <span>
           <h3>
             <v-icon>help</v-icon>
-            <a :href="constants.links.askOrs" target="_blank"><span>
+            <a :href="constants.links.forum" target="_blank"><span>
               {{$t('about.askOpenrouteservice')}}</span></a>
           </h3>
         </span>
