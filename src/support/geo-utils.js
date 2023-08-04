@@ -6,9 +6,10 @@ import Vue from 'vue'
 import HtmlMarker from '@/fragments/html-marker/HtmlMarker'
 
 // The import below will add some methods to Leaflet.GeometryUtil
-// Even if it is not been accessed within this class, it is being used!
+// Even if it is not accessed within this class, it is being used!
 import 'leaflet-geometryutil'
 
+// noinspection GrazieInspection
 const geoUtils = {
   /**
    * Reorder the values of an array of coordinates switching the position of lat and long of each coordinate
@@ -18,7 +19,7 @@ const geoUtils = {
   switchLatLonIndex: (coordinatesArr) => {
     const switchedCoords = []
     // the lat and long data of the geometry comes in the
-    // inverted order from the one that is expected by leaflet
+    // inverted order from the one that is expected by leaflet,
     // so we just iterate over than and create an array
     // with lat and long in the expected order
     coordinatesArr.forEach(function (coordinate) {
@@ -131,7 +132,7 @@ const geoUtils = {
     let firstVortice = coordinates[0].toString()
     let lastVortice = coordinates.at(-1).toString()
 
-    // It is a four side closed polygon
+    // It is a four sided, closed polygon
     if (coordinates.length === 5 && firstVortice === lastVortice) {
       let topLeftVortice = coordinates[0]
       let topRightVortice = coordinates[1]
@@ -299,7 +300,7 @@ const geoUtils = {
         data.distance = (data.distance / 1000).toFixed(1)
         data.unit = 'km'
       } else {
-        // If km or mi, only one decimal
+        // If km or miles, only one decimal
         data.distance = data.distance.toFixed(1)
       }
       humanizedDistance = `${data.distance} ${data.unit}`
@@ -405,7 +406,7 @@ const geoUtils = {
     // If the closest place is the last one,
     // check if the new place to be inserted
     // is not closer to the place before the las
-    // then the the last place. If so, we define move
+    // then the last place. If so, we define move
     // the new place slot to  be before the last
     if (closestPlaceIndex === places.length - 1) {
       const placeBefore = places[closestPlaceIndex - 1]
@@ -432,7 +433,7 @@ const geoUtils = {
   getPlaceIndexOnPolylineArray(place, polylineArr) {
     let indexOnPolyline = null
     let minDistance = null
-    // Find an more appropriate inject index, it this is the case
+    // Find a more appropriate inject index, it this is the case
     for (let pIndex = 0; pIndex < polylineArr.length; pIndex++) {
       const polylineCoords = polylineArr[pIndex]
       const polylineCoordsLatlng = {
@@ -457,7 +458,7 @@ const geoUtils = {
     return indexOnPolyline
   },
   /**
-   * Get the inject index considering the source polyline point
+   * Get the inject-index considering the source polyline point
    * @param {Array} places
    * @param {Array} polylineArr
    * @param {Integer} sourceIndex
@@ -550,7 +551,7 @@ const geoUtils = {
 
         // If the difference between the reference zoom and
         // the current feature zoom is smaller than the
-        // the difference between the previously selected feature
+        // difference between the previously selected feature
         // then replace the current selected feature bt the current feature
         if (featureZoom % zoom < selectedFeatureZoom % zoom) {
           selectedPlace = places[key]
@@ -569,7 +570,7 @@ const geoUtils = {
    * @returns {Number}
    *  >0 for p2 left of the line through this point and p1,
    *  =0 for p2 on the line,
-   *  <0 for p2 right of the line through this point an p1.
+   *  <0 for p2 right of the line through this point and p1.
    * @see {@link http://geomalgorithms.com/a03-_inclusion.html Inclusion of a Point in a Polygon} by Dan Sunday.
    */
   isOverLine: (p0, p1, p2) => {

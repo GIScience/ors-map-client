@@ -99,7 +99,7 @@ export default {
       }
     })
     // The box component listen to `resizeBox` event so that
-    // it is possible to resize a box via EventBus, passing the
+    // it is possible to resize a box via EventBus, passing
     // an object containing the boxGuid and maximized boolean property
     // like {boxGuid: <the-guid>, maximized: true}
     EventBus.$on('resizeBox', function (data) {
@@ -167,7 +167,7 @@ export default {
     syncBoxesMaximized () {
       // We can have a list of boxes considered as maximized, but only the
       // last one will be displayed in the view as maximized.
-      // To achieve this we keep a stack of boxes maximized
+      // To achieve this we keep a stack of boxes maximized,
       // but we only set the `this.maximized = true` to the box
       // that is above all others, considering the order of maximization
       const lastGuid = this.getLastBoxMaximizedGuid()
@@ -310,7 +310,7 @@ export default {
           thickness: '1px'
         }
       }
-      // the initial color the the defined as primary at @/common/theme.js
+      // the initial color the defined as primary at @/common/theme.js
       let color = theme.primary || '#cbced1'
 
       // if the topBorderPalette prop is defined, use it to define the color
@@ -343,7 +343,7 @@ export default {
     /**
      * Build the classes that must be attached to the box element
      * They are defined according the maximized and noShadow props
-     * and the customClass, that may contains additional classes that
+     * and the customClass, that may contain additional classes that
      * must be added
      * @returns {} containing classes to be appended to the box element
      */

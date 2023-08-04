@@ -47,7 +47,7 @@ export default {
         this.$store.commit('setLeftSideBarIsPinned', !sidebarIsPinned)
       }
 
-      // Wait a bit so that the sidebar is closed (it it was open)
+      // Wait a bit so that the sidebar is closed (if it was open)
       setTimeout(() => {
         // Get current rendered map view from DOM
         let mapView = document.getElementById(constants.mapViewElementId)

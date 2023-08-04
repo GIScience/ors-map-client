@@ -83,7 +83,7 @@ const actions = {
         if (defaultSettings[key] !== undefined && savingSettings[key] != undefined) {
           let saveVal = JSON.stringify(savingSettings[key])
           let defaultVal = JSON.stringify(defaultSettings[key])
-          // locale is an exception, because the app auto detects the browser locale
+          // locale is an exception, because the app auto-detects the browser locale
           // so the user would not be able to save the default language as preferred
           if (saveVal === defaultVal && key !== 'locale') {
             delete savingSettings[key]

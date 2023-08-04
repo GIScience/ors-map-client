@@ -164,7 +164,7 @@ export default {
       EventBus.$emit('highlightPolylineSections', highlighData)
     },
     /**
-     * Build the the extra info highlighting data
+     * Build the extra info highlighting data
      * @param {*} segment
      * @param {*} index
      * @returns {Object}

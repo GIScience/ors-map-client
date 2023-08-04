@@ -104,7 +104,7 @@ export default {
      * Handle the show section click by
      * building the object and emitting a
      * highlightPolylineSections event
-     * that will be catch by the map view
+     * that will be caught by the map view
      * to highlight a given section of a given extra key
      * @param {String} extraKey
      * @param {Integer} value
@@ -124,7 +124,7 @@ export default {
      * Handle the show all sections click by
      * building the object and emitting a
      * highlightPolylineSections event
-     * that will be catch by the map view
+     * that will be caught by the map view
      * to highlight all sections of a given extra key
      * @param {String} extraKey
      * @emits highlightPolylineSections (via EventBus)
@@ -143,7 +143,7 @@ export default {
       EventBus.$emit('highlightPolylineSections', highlighData)
     },
     /**
-     * Build the the extra info highlighting data
+     * Build the extra info highlighting data
      * @param {String} extraKey
      * @param {Integer} index
      * @param {Integer} value

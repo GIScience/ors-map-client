@@ -23,7 +23,7 @@ const appConfig = {
     setCustomMenuIcons: true, // If the icons of the menu loaded must be customized via (only necessary if useORSMenu is true)
     baseMenuExternalUrl: 'https://openrouteservice.org' // The base url to retrieve the menu items
   },
-  defaultLocale: 'en-us', // only set as default a locale that is present in the app. By default they are: 'en-us', 'de-de' and 'pt-br'
+  defaultLocale: 'en-us', // only set as default a locale that is present in the app. By default, they are: 'en-us', 'de-de' and 'pt-br'
   orsApiKey: 'put-here-an-ors-api-key', // ORS API key to be used on the ORS requests. You can get one here: https://openrouteservice.org/dev/#/signup
   useUserKey: true, // If the app is using a user ORS API key. // Don't change this unless you know what your doing!
   bitlyApiKey: 'put-the-bitly-api-key-here', // Bit.ly key used to generate the short url
@@ -47,7 +47,7 @@ const appConfig = {
   supportsAvoidPolygonDrawing: true, // If the avoid polygon drawing tools must be available on the map view
   distanceMeasureToolAvailable: true, // If the polyline distance measure tool must be available on the map view
   accessibilityToolAvailable: true, // If the accessibility tool must be available on the map view
-  fitAllFeaturesToolAvailable: true, // If the fitAllFeatures to0l must be available on the map view
+  fitAllFeaturesToolAvailable: true, // If the fitAllFeatures tool must be available on the map view
   supportsClusteredMarkers: true, // If clustered markers is supported (then markers with `clustered=true` property will be clustered)
   supportsSearchBottomCarousel: true, // If the bottom carousel with the search results must be displayed or not.
   supportsSearchMode: true, // If the search mode is supported

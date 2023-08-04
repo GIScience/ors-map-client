@@ -221,7 +221,7 @@ class AppLoader {
    * @param {Object} App
    * @param {String} elementSelector
    * @param {String} templateTag
-   * @returns {Promise} that resolves a the main app Vue  instance
+   * @returns {Promise} resolves main Vue instance
    */
   loadApp (App, elementSelector, templateTag) {
     let context = this

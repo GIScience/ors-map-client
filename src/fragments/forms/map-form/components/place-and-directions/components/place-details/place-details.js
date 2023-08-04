@@ -18,7 +18,7 @@ export default {
   }),
   methods: {
     /**
-     * Copy latitude.longitude to clipboard
+     * Copy latitude/longitude to clipboard
      *
      */
     copyLatlng () {

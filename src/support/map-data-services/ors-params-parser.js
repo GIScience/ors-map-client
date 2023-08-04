@@ -40,7 +40,7 @@ const orsParamsParser = {
   },
 
   /**
-   * Get current bbox based on the stored ma bounds
+   * Get current bbox based on the stored map bounds
    * @returns {Array} bbox
    */
   getCurrentBbox () {
@@ -193,7 +193,7 @@ const orsParamsParser = {
       })
       const mapSettings = store.getters.mapSettings
 
-      // Define the extra info that must be be requested
+      // Define the extra info that must be requested
       // based on the map settings
       const extraInfo = orsParamsParser.buildExtraInfoOptions(mapSettings)
 
@@ -268,7 +268,7 @@ const orsParamsParser = {
   },
 
   /**
-   * Define the extra info that must be be requested
+   * Define the extra info that must be requested
    * @param {Object} mapSettings
    * @returns {Array} extraInfo
    */
@@ -352,7 +352,7 @@ const orsParamsParser = {
         if (filter.props) {
           DependencyService.updateFieldsStatus(filter.props)
         }
-        // Build the value for the current filter (if it has child filters, they are gonna be built too)
+        // Build the value for the current filter (if it has child filters, they are going to be built too)
         const filterValue = DependencyService.getFilterValue(filter)
 
         // If the value of the filter is valid, add in the intoArgs array
@@ -378,7 +378,7 @@ const orsParamsParser = {
    */
   setFilterVal (filter, filterValue, intoArgs) {
     let filterName = filter.internalName || filter.name
-    // If the parent is a wrapping object and it is already defined in intoArgs, add it to the object
+    // If the parent is a wrapping object, and it is already defined in intoArgs, add it to the object
     if (filter.type === constants.filterTypes.wrapper && typeof intoArgs[filterName] !== 'undefined') {
       intoArgs[filterName] = orsParamsParser.getMergedParameterValues(intoArgs[filterName], filterValue)
     } else { // if not
@@ -409,7 +409,7 @@ const orsParamsParser = {
    * it back to a string representation of the object
    *
    * @param {String} current a string representing an objet where a new prop will be added
-   * @param {String|Object} adding an object or string representing an object that will merged to a parent object
+   * @param {String|Object} adding an object or string representing an object that will be merged to a parent object
    * @returns {String} representing a stringified object
    */
   getMergedParameterValues (current, adding) {

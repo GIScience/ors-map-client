@@ -68,7 +68,7 @@ class AppHooks {
   }
 
   /**
-   * Execute the defined catch all hooks,
+   * Execute the defined catch-all hooks,
    * if they are defined
    * @param {Object} hookName
    * @param {String} arg

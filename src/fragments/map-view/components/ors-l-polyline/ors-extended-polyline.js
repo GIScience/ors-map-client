@@ -4,12 +4,12 @@ import orsDictionary from '@/resources/ors-dictionary'
 import lodash from 'lodash'
 
 // The import below will add some methods to Leaflet.GeometryUtil
-// Even if it is not been accessed within this class, it is being used!
+// Even if it has not been accessed within this class, it is being used!
 import 'leaflet-geometryutil'
 
 /**
  * Add custom behaviors to the polyline, specially the drag
- * to create an stop point.
+ * to create a stop point.
  * @emits followMarkerClicked - when the marker created over the polyline to show current cursor position is clicked
  * @emits follow - when a point of the polyline is focused with the mouse
  * @emits addstop - when the user drag the new polyline vertex into a location

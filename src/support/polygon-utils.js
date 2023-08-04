@@ -258,7 +258,7 @@ const PolygonUtils = {
         wn = 1
         break
       } else {
-        if (isLeftTest !== 0) { // If not a vertex or on line (the C++ version does not check for this)
+        if (isLeftTest !== 0) { // If not a vertex or on the line (the C++ version does not check for this)
           if (vertices[i].lat <= point.lat) {
             if (vertices[i + 1].lat > point.lat) { // An upward crossing
               if (isLeftTest > 0) { // P left of edge

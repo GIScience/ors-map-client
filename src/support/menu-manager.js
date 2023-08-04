@@ -7,7 +7,7 @@ import Vue from 'vue'
 /**
  * Get a menu from remove service by its slug
  * As the menu in the back-end are managed, we can not be sure about the
- * id of the menu we want to load, but we expect that the menu has an specific
+ * id of the menu we want to load, but we expect that the menu has a specific
  * slug. Unfortunately, the menu api does not allow getting a single menu based in its
  * slug. So, we load a list of menus, iterate over them and get the id of the menu
  * that has as slug the slug passed and then make a second request to get the desired menu
@@ -92,7 +92,7 @@ const parseItem = (item) => {
 }
 
 /**
- * Define if the a menu item is active or not
+ * Define if the menu item is active or not
  * @param {*} item
  * @param {} router to object
  */

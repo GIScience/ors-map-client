@@ -509,7 +509,7 @@ If you think you have identified any bug and that you can help to fix it, please
 If you want to contribute by adding a new feature or improve an existing one, please also create an issue.
 We do want contributions, and the community effort is very important to us, but features may add complexity and future
 maintenance effort.
-Because of this, we have also to analyze the trade off of such contributions.
+Because of this, we have also to analyze the trade-off of such contributions.
 We just have to decide about them together before the hands on.
 This approach is intended to create cohesion and keep the project sustainable.
 

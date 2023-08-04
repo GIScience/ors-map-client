@@ -20,7 +20,7 @@ const mapDefinitions = {
       showClearControl: false, // Show a control to clear all the measurements
       clearControlClasses: [], // Classes to apply to clear control button
       showUnitControl: true, // Show a control to change the units of measurements
-      distanceShowSameUnit: true, // Keep same unit in tooltips in case of distance less then 1 km/mi/nm
+      distanceShowSameUnit: true, // Keep same unit in tooltips in case of distance less than 1 km/mi/nm
       tempLine: { // Styling settings for the temporary dashed line
         color: '#00f', // Dashed line color
         weight: 5 // Dashed line weight

@@ -28,7 +28,7 @@ export default {
       return OrsMapFilters
     },
     /**
-     * Get the the avoid_polygons filter on the ors-filters array
+     * Get the avoid_polygons filter on the ors-filters array
      * @returns {Object}
      */
     avoidPolygonsFilterAccessor() {
@@ -149,8 +149,8 @@ export default {
 
         if (context.$lowResolution) {
           context.setSidebarIsOpen(true)
-          // Emits the event that will be catch by the sidebar
-          // and that will trigger the display of a info icon
+          // Emits the event that will be caught by the sidebar
+          // and that will trigger the display of an info icon
           // on the right side of the main menu letting the user
           // know that there are new information
           EventBus.$emit('newInfoAvailable')
@@ -171,7 +171,7 @@ export default {
      * @param {*} index
      */
     updatePlaceView(index) {
-      // Propagate place view notifies the VueJS that a object inside an array ahs changed
+      // Propagate place view notifies Vue, that an object inside an array has changed
       this.propagatePlaceChange(index)
       // Force a digest
       this.$forceUpdate()

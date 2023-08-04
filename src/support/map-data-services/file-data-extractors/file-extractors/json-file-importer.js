@@ -130,7 +130,7 @@ class JsonImporter {
    */
   buildPlaces = () => {
     const places = []
-    // If there are less then 15, so we get all
+    // If there are less than 15, so we get all
     if (this.coordinates.length < 16) {
       for (const latLng of this.coordinates) {
         const lng = latLng[1]
@@ -138,7 +138,7 @@ class JsonImporter {
         const place = new Place(lng, lat)
         places.push(place)
       }
-    } else { // if there are more then 15, only the first and the last
+    } else { // if there are more than 15, only the first and the last
       const firstCoords = (this.coordinates[0])
       const lastCoords = (this.coordinates.at(-1))
 

@@ -77,7 +77,7 @@ class GpxImporter {
     const places = []
 
     if (routes.length > 0) {
-      // If there are less then 15, so we get all
+      // If there are less than 15, so we get all
       if (routes[0].length < 16) {
         for (const key in routes[0]) {
           const latlng = routes[0][key].geometry.coordinates
@@ -86,7 +86,7 @@ class GpxImporter {
           const place = new Place(lng, lat)
           places.push(place)
         }
-      } else { // if there are more then 15, only the first and the last
+      } else { // if there are more than 15, only the first and the last
         const firstCoords = routes[0].geometry.coordinates[0]
         const lastCoords = (routes[0].geometry.coordinates.at(-1))
 

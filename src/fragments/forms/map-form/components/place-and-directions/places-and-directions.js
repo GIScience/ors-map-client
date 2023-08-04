@@ -120,10 +120,10 @@ export default {
       this.setFocusedPlaceInput(this.places.length - 1)
     },
     /**
-     * Every time the appRouteData changes
+     * Every time the appRouteData changes,
      * and it has at least one place defined
      * the map data is reloaded, so we keep the
-     * the map search and synchronized with the url
+     * map search and are synchronized with the url
      */
     reloadAfterAppRouteDataChanged (appRouteData) {
       if (appRouteData && appRouteData.places.length > 0) {
@@ -170,7 +170,7 @@ export default {
       const context = this
 
       // When the simple map search send a place
-      // set the sent place as the destination of a route
+      // set the passed place as the destination of a route
       EventBus.$on('openDirectionsMode', (place) => {
         context.setTargetPlaceForDirections(place)
         context.setViewMode(constants.modes.directions)
@@ -178,7 +178,7 @@ export default {
       })
 
       // When the simple map search sends a place
-      // set the sent place as the destination of a route
+      // set the passed place as the destination of a route
       EventBus.$on('switchToDirections', () => {
         if (context.places.length === 1) {
           context.addPlaceInput()
@@ -191,7 +191,7 @@ export default {
       })
 
       // When a marker drag finishes, update
-      // the place coordinates and re render the map
+      // the place coordinates and re-render the map
       EventBus.$on('markerDragged', (marker) => {
         if (context.active) {
           context.places[marker.inputIndex].setLnglat(marker.position.lng, marker.position.lat)
@@ -461,7 +461,7 @@ export default {
           closestPlaceIndex--
         }
         // In the other cases, we have to 'inject' a route point between the exiting points
-        // To do that we add a place input, set its coordinates and then
+        // To do that we add a place input, set its coordinates, and then
         // we change the app url so that the route will be recalculated
         const injectedIndex = this.injectPlaceAndReturnIndex(data.latlng, closestPlaceIndex)
         const context = this
@@ -501,7 +501,7 @@ export default {
 
     /**
      * Load the map data from the url
-     * rebuilding the place inputs and it values
+     * rebuilding the place inputs, and its values
      * and render the map with these data (place or route)
      */
     loadData () {
@@ -544,9 +544,9 @@ export default {
         const isRoundTrip = this.$store.getters.mode === constants.modes.roundTrip
 
         // Just enter here if we are dealing with directions round trip.
-        // If there are more then 1 place, then it is directions mode.
-        // If there is only one place and it is round trip, then we are also
-        // dealing with directions, but an special directions (a round trip directions!)
+        // If there are more than 1 place, then it is directions mode.
+        // If there is only one place, and it is round trip, then we are also
+        // dealing with directions, but a special directions (a round trip directions!)
         let context = this
         if (isRoundTrip && this.getFilledPlaces().length === 1) {
           this.calculateDirections().then((mapViewData) => {
@@ -571,7 +571,7 @@ export default {
       this.setSidebarIsOpen()
       EventBus.$emit('newInfoAvailable')
 
-      // Only calculate a route if there are more then one place defined
+      // Only calculate a route if there are more than one place defined
       if (this.getFilledPlaces().length > 1) {
         let context = this
         this.calculateDirections().then((mapViewData) => {
@@ -584,7 +584,7 @@ export default {
     },
     /**
      * Get the browser location and store it in our store
-     * If fail, shows a toaster to the user
+     * If failed, shows a toaster to the user
      * @param {*} location
      */
     setLocationFromBrowser (location) {
@@ -721,12 +721,12 @@ export default {
     /**
      * When the user hits the start routing button
      * we switch the place index values so that the
-     * first searched/selected place will be the the destination
+     * first searched/selected place will be the destination
      * of the route, or the place at the index 1
      */
     switchPlaceInputsValues () {
       const filled = this.getFilledPlaces()
-      // If we are starting a route, the selected place must the be second one, the target
+      // If we are starting a route, the selected place must be the second one, the target
       if (filled.length === 1 && this.places.length === 2) {
         const place1 = this.places[1]
         this.places[1] = this.places[0]
@@ -783,12 +783,12 @@ export default {
       this.setViewMode()
       this.updateAppRoute()
 
-      // If there was two inputs before one
+      // If there were two inputs before one
       // place input removal, then the
       // updateAppRoute will switch to place
       // mode. To keep two place inputs
       // in order to allow the user to continue to
-      // use the directions mode, add a place input
+      // use the 'directions' mode, add a place input
       if (keepDirectionsMode && placeInputsBeforeRemoval === 2) {
         EventBus.$emit('newInfoAvailable', false)
         setTimeout(() => {
@@ -844,7 +844,7 @@ export default {
     },
 
     /**
-     * Set a a suggested place as the selected one for a given place input
+     * Set a suggested place as the selected one for a given place input
      * @param {*} data
      */
     selectPlace (data) {
@@ -905,7 +905,7 @@ export default {
      */
     toggleRoundTrip () {
       // If it is in roundTrip mode, we must be reset to single place mode
-      // It it is in single place or directions mode, it must be reset
+      // If it is in single place or directions mode, it must be reset
       // to single place. So, in all cases, we must run resetStateToSinglePlace
       this.mapViewData = new MapViewData()
       const appRouteData = this.$store.getters.appRouteData

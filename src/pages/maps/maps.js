@@ -205,7 +205,7 @@ export default {
   },
   beforeRouteUpdate (to, from, next) {
     // Although the mode is defined in the beforeEnter route event
-    // when te browser back button is pressed and we are changing from
+    // when te browser back button is pressed, and we are changing from
     // similar types of route - like directions with two places and
     // directions with one (for round trip), then the beforeEnter is not triggered
     if (to.fullPath.startsWith(resolver.directions())) {
@@ -233,7 +233,7 @@ export default {
     /**
      * Stores the new zoom value and set the
      * searchBtnAvailable flag as true, since
-     * once the map has been moved, the user may wants to
+     * once the map has been moved, the user may want to
      * refresh the search to get features within the
      * visible map view
      * @param {Object} { zoom: Object, map: Object, context: Object}
@@ -262,7 +262,7 @@ export default {
     refreshSearch () {
       // the refresh search event will
       // trigger a flow that will make other
-      // components to re do the search
+      // components to redo the search
       // and update the data. During this cycle
       // we need a flag that tells us we are on
       // this state so that the computed fitMapBounds
@@ -328,7 +328,7 @@ export default {
       this.viewHeight = window.innerHeight
     },
     /**
-     * Refresh the view size using a debounce
+     * Refresh the view size using a debounce-timeout
      * it respond to touch event, so we just want
      * to apply the new size when the event ends
      */
@@ -386,7 +386,7 @@ export default {
       EventBus.$emit('placeFocusChanged', this.mapViewData.places[index])
     },
     /**
-     * Set the map view data object and emit a event to redraw the map
+     * Set the map view data object and emit an event to redraw the map
      * @param {MapViewData} mapViewData
      */
     setMapDataAndUpdateMapView (mapViewData) {
@@ -469,7 +469,7 @@ export default {
     /**
      * Store the current map view guid
      * in a local property. so in case
-     * there are more then one map (future)
+     * there are more than one map (future)
      * we can check which map must be accessed
      * @param {*} mapViewGuid
      */
@@ -577,7 +577,7 @@ export default {
     /**
      * Set the `settings` open flag as false
      * and if the current route is MapSettings
-     * clear the map and redirect the app the the
+     * clear the map and redirect the app the
      * `Maps` route
      */
     closeSettingsModal () {
@@ -590,7 +590,7 @@ export default {
     /**
      * Set the `about` open flag as false
      * and if the current route is MapSettings
-     * clear the map and redirect the app the the
+     * clear the map and redirect the app the
      * `Maps` route
      */
     closeAboutModal () {
@@ -602,7 +602,7 @@ export default {
     },
     /**
      * When an avoid polygons option changes,
-     * merge the avoid polygons array into a multiPolygon and
+     * merge the avoid-polygons-array into a multiPolygon and
      * emits an avoidPolygonsChanged event via EventBus.
      * @param {Array} polygons
      * @emits avoidPolygonsChanged via EventBus
@@ -650,7 +650,7 @@ export default {
   },
 
   created () {
-    // Emit the an event catch by root App component
+    // Emit an event caught by the root App component
     // telling it to update the page title
     EventBus.$emit('titleChanged', this.$t('maps.pageTitle'))
 

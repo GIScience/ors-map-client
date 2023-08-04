@@ -104,7 +104,7 @@ const Utils = {
     return result
   },
   /**
-   * Get the GET/query url params present in the url as an key value object
+   * Get the GET/query url params present in the url as a key value object
    * @param {*} query
    */
   getUrlParams: (query) => {

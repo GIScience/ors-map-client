@@ -13,7 +13,7 @@ export default {
         const min = this.min, max = this.max
 
         // Only trigger the change if the value is not
-        // null or undefined. Otherwise the min value
+        // null or undefined. Otherwise, the min value
         // is set in replacement of the null
         if (val !== null && val !== undefined) {
           // Round value to ensure the

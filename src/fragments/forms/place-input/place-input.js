@@ -126,7 +126,7 @@ export default {
       return isMobile
     },
     /**
-     * Determines if the pick a place button must show its tooltip
+     * Determines if the 'pick a place' button must show its tooltip
      * @returns {Boolean}
      */
     showInputPickPlaceTooltip () {
@@ -281,7 +281,7 @@ export default {
       }
     },
     /**
-     * Determines if the current browser location option should be prepend to the suggestion lis of the current place input
+     * Determines if the current browser location option should be prepended to the suggestion lis of the current place input
      */
     showBrowserLocationInPlacesList () {
       return this.focused
@@ -469,7 +469,7 @@ export default {
      * Search for a place based on the place input value
      */
     autocompleteSearch () {
-      // Make sure that the local model is up to date
+      // Make sure that the local model is up-to-date
       if (!this.localModel || this.localModel.placeName.length === 0) {
         this.localModel = this.model.clone()
       }
@@ -543,7 +543,7 @@ export default {
     },
 
     /**
-     * Handles the input change with a debounce
+     * Handles the input change with a debounce-timeout
      * @param {*} event
      */
     changed (event = null) {
@@ -551,7 +551,7 @@ export default {
         const isPasteEvent = event instanceof ClipboardEvent
         // In case of a ClipboardEvent (ctr + v)
         // we must just ignore, since the input
-        // model  has not changed yet and it will
+        // model  has not changed yet, and it will
         // trigger another change event when it changes
         if (!isPasteEvent) {
           event.preventDefault()
@@ -583,7 +583,7 @@ export default {
      * suggestions for the other cases
      */
     handleSearchInputEnter () {
-      // We can only try yo auto select the first result
+      // We can only try to auto select the first result
       // if the inputted text is not a coordinate
       if (!this.localModel.nameIsCoord()) {
         let context = this
@@ -652,7 +652,7 @@ export default {
     },
 
     /**
-     * Set a a suggested place as the selected one for a given place input
+     * Set a suggested place as the selected one for a given place input
      * @param {Place} place
      */
     selectPlace (place) {
@@ -795,8 +795,8 @@ export default {
 
     /**
      * Defines the place input values at the given index based in the browser location api
-     * It will requires the users' authorization to access the browser location. Id denied
-     * will show a toaster with an error message
+     * It will require the users' authorization to access the browser location. If denied,
+     * it will show a toaster with an error message
      */
     setLocationFromBrowser () {
       this.focused = false

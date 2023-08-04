@@ -74,7 +74,7 @@ const removeTooltipEl = (tooltipGuid) => {
 }
 
 /**
- * Store in browser's local storage that the the tooltip has already been shown
+ * Store in browser's local storage that the tooltip has already been shown
  * @param {*} tooltipName
  */
 const storeTooltipAlreadyShown = (tooltipName) => {
@@ -117,7 +117,7 @@ const showToolTip = (el, options, vNode) => {
       // Get the tooltip position or a default one
       options.position = options.position || 'left'
 
-      //Build the tooltip html, attache it to the dom
+      // Build the tooltip html, attach it to the dom
       // and set the required styles for it
       let toolTipEl = buildTooltipEl(guid, options)
       document.body.appendChild(toolTipEl)
@@ -199,7 +199,7 @@ const buildTooltipEl = (guid, options) => {
 }
 
 /**
- * Set the tooltip pseudo style by adding an style element to the DOM
+ * Set the tooltip pseudo style by adding a style element to the DOM
  * @param {*} guid
  * @param {*} options
  */

@@ -54,7 +54,7 @@ export default {
       return show
     },
     /**
-     * Set a ne random value for the random component
+     * Set a new random value for the random component
      * @param {*} index
      */
     setNewRandomValue (index) {
@@ -76,8 +76,8 @@ export default {
     },
 
     /**
-     * Handle the multi select change, applying a debounce so that
-     * there is a wait for sequential changes avoiding multiple refreshes
+     * Handle the multi select change, applying a debounce-timeout
+     * for sequential changes to avoid multiple refreshes
      * @param {*} args
      */
     multiSelectChanged (args) {
@@ -135,7 +135,7 @@ export default {
     },
 
     /**
-     * Get a list of selectable items from a enum/select input
+     * Get a list of selectable items from an enum/select input
      *
      * @param {*} parameter
      * @returns []

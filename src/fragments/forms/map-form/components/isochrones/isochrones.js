@@ -90,7 +90,7 @@ export default {
     })
 
     // When a marker drag finishes, update
-    // the place coordinates and re render the map
+    // the place coordinates and re-render the map
     EventBus.$on('markerDragged', (marker) => {
       if (context.active) {
         const place = new Place(marker.position.lng, marker.position.lat)
@@ -146,7 +146,7 @@ export default {
     },
 
     /**
-     * Set a a suggested place as the selected one for a given place input
+     * Set a suggested place as the selected one for a given place input
      * @param {*} data - can be the place object or an object containing the place
      */
     selectPlace (data) {
@@ -283,8 +283,8 @@ export default {
 
     /**
      * Load the map data from the url
-     * rebuilding the place inputs and it values
-     * and render the map with these data (place or route)
+     * rebuilding the place inputs, and its values
+     * and render the map with this data (place or route)
      */
     loadData () {
       if (this.$store.getters.mode === constants.modes.isochrones) {

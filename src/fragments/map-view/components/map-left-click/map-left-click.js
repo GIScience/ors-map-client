@@ -126,7 +126,7 @@ export default {
       })
     },
     /**
-     * Copy latitude.longitude to clipboard
+     * Copy latitude/longitude to clipboard
      *
      */
     copyLatlng () {

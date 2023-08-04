@@ -50,7 +50,7 @@ class Place {
   }
 
   /**
-   * Set the the lng and lat of the Place
+   * Set the lng and lat of the Place
    * @param {*} lng
    * @param {*} lat
    */
@@ -260,8 +260,8 @@ class Place {
 
         // If the difference between the reference zoom and
         // the current feature zoom is smaller than the
-        // the difference between the previously selected feature
-        // then replace the current selected feature bt the current feature
+        // difference between the previously selected feature,
+        // replace the current selected feature with the current feature
         if (placeZoom % zoom < selectedPlaceZoom % zoom) {
           selectedPlace = places[key]
         }
@@ -294,7 +294,7 @@ class Place {
   }
 
   /**
-   * Build a place using only lng an lat
+   * Build a place using only lng and lat
    * @param {*} lng
    * @param {*} lat
    */

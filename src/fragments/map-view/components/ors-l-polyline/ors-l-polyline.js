@@ -219,13 +219,12 @@ export default {
     } else {
       this.backgroundWeight = this.weight + 4
 
-      // If draggable is defined via prop as true
-      // then add the necessary attribute on the
-      // options object
+      // If draggable is defined via prop as true,
+      // add the necessary attribute on the options object
       if (this.draggable === true) {
         this.options.edit_with_drag = true
       }
-      // This will add custom behaviors to the vue2leaflet polyline
+      // This will add custom behaviors to the vue2-leaflet polyline
       this.orsExtendedPolyline = new OrsExtendedPolyline(this)
     }
   },

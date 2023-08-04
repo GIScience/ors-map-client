@@ -21,7 +21,7 @@ class DirectionsMode {
 
     // All directions request filters will be extracted from the OrsMapFilters
     // object that is an in memory object used by all the filters
-    // rendered as model in in its respective key
+    // rendered as model in its respective key
     let options = {zoom: appRouteData.options.zoom}
     OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
     appRouteData.options = options
@@ -77,8 +77,8 @@ class DirectionsMode {
     // Get coordinates and options from the param
     appRouteData.options = data.options
 
-    // In the directions mode, the options parameter may contains an options object
-    // that is expected to be used as the ORS API request options (avoid_polygons, avoid_features etc)
+    // In the 'directions' mode, the options parameter may contain an options object
+    // that is expected to be used as the ORS API request options (avoid_polygons, avoid_features etc.)
     // So, as they are stringified on the url, we try to parse them back to an object
     if (appRouteData.options && appRouteData.options.options) {
       appRouteData.options.options = Utils.tryParseJson(appRouteData.options.options) || appRouteData.options.options

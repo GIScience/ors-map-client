@@ -17,7 +17,7 @@ const loader = {
       // skip loop if the property is from prototype
       if (!Object.prototype.hasOwnProperty.call(dependenceObjects, prop)) continue
 
-      // it is expected that each file has an default export
+      // it is expected that each file has a default export
       // populate the array with named key of index, according the option passed
       if (namedKey === true) {
         defaultExports[prop] = dependenceObjects[prop].default

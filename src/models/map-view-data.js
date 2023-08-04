@@ -23,7 +23,7 @@ class MapViewData {
   }
 
   /**
-   * Build a place using only lng an lat
+   * Build a place using only lng a lat
    * @param {*} lng
    * @param {*} lat
    */

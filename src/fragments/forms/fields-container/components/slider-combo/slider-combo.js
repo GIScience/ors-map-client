@@ -57,7 +57,7 @@ export default {
       }
     },
     /**
-     * Run a field update with a debounce
+     * Run a field update with a debounce-timeout
      */
     debounceTextFieldChange () {
       const context = this

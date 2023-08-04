@@ -144,7 +144,7 @@ class AdminAreaLoader {
   }
 
   /**
-   * check if a Place is inside of any of the polygons passed
+   * check if a Place is inside any passed polygon
    * @param {*} polygons
    * @param {Place} place
    */
