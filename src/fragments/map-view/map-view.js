@@ -293,7 +293,7 @@ export default {
       return this.mapHeight > 450 || this.$store.getters.embed
     },
     /**
-     * Build and return the geojson options based on the
+     * Build and return the GeoJSON options based on the
      * color defined as main
      * @returns {Object}
      */
@@ -303,7 +303,7 @@ export default {
       }
     },
     /**
-     * Return the geojson style options
+     * Return the GeoJSON style options
      * using the value in constants object
      * @returns {Object}
      */
@@ -1097,7 +1097,7 @@ export default {
      * and then once it is ready, we set the local data from
      * the data returned by the builder
      * and then set the bounds, fit the bounds and redraw the map
-     * If the response data does not contain a geojson
+     * If the response data does not contain a GeoJSON
      * then the promise resolver will return an object with the expected
      * props but all of them containing null values. This will not cause a fail
      *
@@ -1679,7 +1679,7 @@ export default {
      */
     setAvoidPolygonProperties (polygon, polygonData = null) {
       // define polygon feature prop.
-      // It will be returned when we get the geojson
+      // It will be returned when we get the GeoJSON
       // representation of the polygon
       polygon.feature = polygon.feature || {}
       polygon.feature.type = polygon.feature.type || 'Feature'
@@ -1833,7 +1833,7 @@ export default {
             let polygonGeoJson = layer.toGeoJSON()
 
             // properties defined via feature.properties in layer are accessible via
-            // .properties when the layer is converted to geojson.
+            // .properties when the layer is converted to GeoJSON.
             if (polygonGeoJson.properties && polygonGeoJson.properties.avoidPolygon) {
               if (inGeoJsonFormat) {
                 mapAvoidPolygons.push(polygonGeoJson)

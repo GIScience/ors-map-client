@@ -167,7 +167,7 @@ export default {
       }
     },
     /**
-     * Get the latlngs coordinate array
+     * Get the lat-lng coordinate array
      * from the latLngs prop or from the route
      * coordinates or return an empty array
      * @returns {Array}

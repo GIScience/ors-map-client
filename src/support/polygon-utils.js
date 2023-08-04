@@ -214,7 +214,7 @@ const PolygonUtils = {
 
   /**
    * Determines if a point is inside the polygon bounds
-   * @param {Leaflet.latlng} point
+   * @param {Leaflet.LatLng} point
    * @param {Leaflet.Polygon} polygon
    * @returns {Boolean} insideBounds
    */

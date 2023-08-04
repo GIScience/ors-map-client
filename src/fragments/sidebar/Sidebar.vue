@@ -28,7 +28,7 @@
         <profile-selector></profile-selector>
       </div>
 
-      <!-- sidebar-content padding-bottom must be the same that is caculated in footer component height -->
+      <!-- sidebar-content padding-bottom must be the same that is calculated in footer component height -->
       <div class="sidebar-content" :style="{height: sidebarContentHeightFormula}">
         <div class="sidebar-content-form" :style="{'padding-bottom': $vuetify.breakpoint.smAndDown ? $store.getters.footerMiniHeight + 'px': $store.getters.footerFullHeight + 'px'}">
           <map-form v-if="$store.getters.mapReady" class="map-search"></map-form>

@@ -200,7 +200,7 @@ export default {
           // Resolve the place to update its name and properties
           context.places[marker.inputIndex].resolve().then(() => {
             // Only updates the app route if we are already in
-            // directions or roundtrip mode
+            // directions or round trip mode
             if (context.$store.getters.mode !== constants.modes.place) {
               context.updateAppRoute()
             }
@@ -319,7 +319,7 @@ export default {
 
     /**
      * When the user click on the map and select a point as the route start
-     * @param {*} latlng
+     * @param {*} data
      */
     directionsFromPoint (data) {
       // If there is already a place selected and
@@ -911,7 +911,7 @@ export default {
       const appRouteData = this.$store.getters.appRouteData
 
       if (this.$store.getters.mode === constants.modes.roundTrip) {
-        // Remove roundtrip from appRouteData if present
+        // Remove round trip from appRouteData if present
         let filterPath = `appRouteData.options.options[${constants.roundTripFilterName}]`
         if (this.lodash.get(appRouteData, filterPath)) {
           delete appRouteData.options.options[constants.roundTripFilterName]

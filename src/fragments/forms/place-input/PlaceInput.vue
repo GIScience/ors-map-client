@@ -44,7 +44,7 @@
 
         <v-btn flat class="input-btn" :id="getNewGuid('directions')" :class="{small: $mdAndUpResolution}"
           v-if="directionsAvailable" @click="startDirections()"
-          v-smart-tooltip="{show: directionsButtonTooltip, text: $t('placeInput.goToDirectionsMode'), position: directionsButtonTooltipPosition, dark: true, showOnce: true, name: 'useDiretionsButton'}">
+          v-smart-tooltip="{show: directionsButtonTooltip, text: $t('placeInput.goToDirectionsMode'), position: directionsButtonTooltipPosition, dark: true, showOnce: true, name: 'useDirectionsButton'}">
           <v-icon :title="$t('placeInput.directions')" color="dark" :large="$lowResolution" class="input-icon" >directions</v-icon>
         </v-btn>
 

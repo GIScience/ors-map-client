@@ -54,7 +54,7 @@ const routeData = {
         return 'directionsJSON'
       } else {
         // This DirectionsGPXDataBuilder needs the request data because it will run a second
-        // request (based on the original request) to get the geojson equivalent response
+        // request (based on the original request) to get the GeoJSON equivalent response
         return 'directionsGPX'
       }
     } else {

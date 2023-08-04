@@ -179,7 +179,7 @@ export default {
       }
     },
     /**
-     * Emit the directions to latlng
+     * Emit 'directionsToPoint'
      * @param {*} place
      */
     directionsTo (place) {
@@ -187,7 +187,7 @@ export default {
       this.$emit('closed')
     },
     /**
-     * Emit the directions to latlng
+     * Emit 'gotToPlace'
      * @param {*} place
      */
     gotToPlace (place) {

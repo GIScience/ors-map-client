@@ -456,7 +456,7 @@ export default {
         if (appRouteData === false) { // if there is no app route data, load default state
           this.$router.push({name: 'Maps'})
         } else {
-          //TOCONTINUE here. When the zoom changes, the map moves a bit!
+          // TODO: When the zoom changes, the map moves a bit!
           this.$store.commit('appRouteData', appRouteData)
           if (this.$route.name !== 'MapLocation') {
             this.storeZoomValue()

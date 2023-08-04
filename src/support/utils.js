@@ -204,7 +204,7 @@ const Utils = {
   },
 
   /**
-   * TRies to parse a string into a JSON object
+   * Tries to parse a string into a JSON object
    * @param {String} str
    * @returns {Object|false}
    */
@@ -297,7 +297,7 @@ const Utils = {
     try {
       decompressed = lzString.decompressFromUint8Array(numericArr)
     } catch (error) {
-      console.log('Not decompressible data')
+      console.log('It was not possible to decompress the data')
     }
     return decompressed
   },

@@ -79,7 +79,7 @@ class DirectionsMode {
 
     // In the 'directions' mode, the options parameter may contain an options object
     // that is expected to be used as the ORS API request options (avoid_polygons, avoid_features etc.)
-    // So, as they are stringified on the url, we try to parse them back to an object
+    // They are stringified in the url, we try to parse them back to an object
     if (appRouteData.options && appRouteData.options.options) {
       appRouteData.options.options = Utils.tryParseJson(appRouteData.options.options) || appRouteData.options.options
     }
@@ -94,7 +94,7 @@ class DirectionsMode {
       })
     }
 
-    // If there are poi places, mark them as pois
+    // If there are poi places, mark them as POIs
     if (appRouteData.options.poiPlaces) {
       appRouteData.options.poiPlaces.forEach(index => {
         appRouteData.places[index].isPoi = true

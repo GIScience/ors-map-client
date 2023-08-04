@@ -189,7 +189,7 @@ const filters = [
           },
           'cycling-*': {
             max: [{ref: 'time_range'}, 30], // the max value of range or 30,
-            min: [{ref: 'time_range', calc: {dividedBy: 9}, min: 1}] //set min value by calcing time_range value divided by 9 or ...
+            min: [{ref: 'time_range', calc: {dividedBy: 9}, min: 1}] //set min value by calculating time_range value divided by 9 or ...
           },
           'foot-*': {
             max: [{ref: 'time_range'}, 1200], // the max value of range or 1200,
