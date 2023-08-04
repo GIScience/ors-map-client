@@ -29,12 +29,12 @@ const smartTooltip = {
  * @param {*} el - DOM the element which the tooltip will be attached to
  * @param {*} binding - parameters
  * @param {*} vNode - vue element which the tooltip will be attached to
- * @param {*} rerendering - if the tooltip is being updated
+ * @param {*} updated - if the tooltip is being updated
  */
-const render = (el, binding, vNode, rerendering = false) => {
+const render = (el, binding, vNode, updated = false) => {
   let options = binding.value
   if (options.show) {
-    if (rerendering) { // it is rerendering, show it immediately
+    if (updated) { // it is updated, show it immediately
       showToolTip(el, options, vNode)
     } else { // otherwise, wait 2 seconds
       setTimeout(() => {

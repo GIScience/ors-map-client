@@ -144,11 +144,11 @@ class XmlImporter {
    */
   getRoutes (fileObject) {
     const routes = []
-    const rtes = lodash.get(fileObject, 'gpx.rte') || lodash.get(fileObject, 'gpx.trk')
-    if (rtes) {
+    const tracks = lodash.get(fileObject, 'gpx.rte') || lodash.get(fileObject, 'gpx.trk')
+    if (tracks) {
       const coordinatesParsed = []
-      for (const key in rtes) {
-        const rte = rtes[key]
+      for (const key in tracks) {
+        const rte = tracks[key]
 
         let segments = rte.trkseg || [rte.rtept]
 
