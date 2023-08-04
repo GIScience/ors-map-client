@@ -151,12 +151,10 @@ class KmlImporter {
       for (const rKey in placeMarks) {
         const placeMark = placeMarks[rKey]
         if (placeMark.LineString) {
-          for (let segmKey in placeMark.LineString) {
-            let segment = placeMark.LineString[segmKey]
+          for (let segment of placeMark.LineString) {
             for (const cKey in segment.coordinates) {
               const routeCoords = segment.coordinates[cKey].split(' ')
-              for (const pkey in routeCoords) {
-                const routePointStr = routeCoords[pkey]
+              for (const routePointStr of routeCoords) {
                 if (routePointStr.length > 2) {
                   let point = routePointStr.split(',')
                   // It is a ORS generated KML

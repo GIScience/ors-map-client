@@ -132,10 +132,9 @@ class JsonImporter {
     const places = []
     // If there are less then 15, so we get all
     if (this.coordinates.length < 16) {
-      for (const key in this.coordinates) {
-        const latlng = this.coordinates[key]
-        const lng = latlng[1]
-        const lat = latlng[0]
+      for (const latLng of this.coordinates) {
+        const lng = latLng[1]
+        const lat = latLng[0]
         const place = new Place(lng, lat)
         places.push(place)
       }

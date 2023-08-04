@@ -51,18 +51,14 @@ const orsParamsParser = {
     let validBbox = true
 
     // Make sure that min and max lat are valid
-    const lats = ['min_lat', 'max_lat']
-    for (const key in lats) {
-      const prop = lats[key]
-      if (mapBounds.rect[prop] > 90 || mapBounds.rect[prop] < -90) {
+    for (const val of ['min_lat', 'max_lat']) {
+      if (mapBounds.rect[val] > 90 || mapBounds.rect[val] < -90) {
         validBbox = false
       }
     }
     // Make sure that min and max lng are valid
-    const lngs = ['min_lon', 'max_lon']
-    for (const key in lngs) {
-      const prop = lngs[key]
-      if (mapBounds.rect[prop] > 180 || mapBounds.rect[prop] < -180) {
+    for (const val of ['min_lon', 'max_lon']) {
+      if (mapBounds.rect[val] > 180 || mapBounds.rect[val] < -180) {
         validBbox = false
       }
     }
