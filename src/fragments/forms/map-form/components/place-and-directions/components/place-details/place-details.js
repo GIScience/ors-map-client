@@ -21,9 +21,9 @@ export default {
      * Copy latitude/longitude to clipboard
      *
      */
-    copyLatlng () {
-      const latlng = `${this.place.lat}, ${this.place.lng}`
-      if (this.copyToClipboard(latlng)) {
+    copyLatLng () {
+      const latLng = `${this.place.lat}, ${this.place.lng}`
+      if (this.copyToClipboard(latLng)) {
         this.showSuccess(this.$t('placeDetails.latlngCopied'), { timeout: 2000 })
       }
     },
@@ -31,9 +31,9 @@ export default {
      * Copy longitude, latitude to clipboard
      *
      */
-    copyLnglat () {
-      const lnglat = `${this.place.lng}, ${this.place.lat}`
-      if (this.copyToClipboard(lnglat)) {
+    copyLngLat () {
+      const lngLat = `${this.place.lng}, ${this.place.lat}`
+      if (this.copyToClipboard(lngLat)) {
         this.showSuccess(this.$t('placeDetails.lnglatCopied'), { timeout: 2000 })
       }
     },

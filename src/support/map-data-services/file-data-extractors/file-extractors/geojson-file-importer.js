@@ -2,10 +2,10 @@ import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import store from '@/store/store'
 /**
- * GeojsonImporter Map data Builder class
+ * GeoJsonImporter Map data Builder class
  * @param {*} data {mapRawData: {}, translations: {}}
  */
-class GeojsonImporter {
+class GeoJsonImporter {
   constructor (data) {
     this.fileRawContent = data.mapRawData
     this.options = data.options
@@ -47,8 +47,8 @@ class GeojsonImporter {
    * @returns {Object}
    */
   buildMapViewData = () => {
-    const geojson = JSON.parse(this.fileRawContent)
-    const mapViewData = MapViewData.buildFromGeojson(geojson)
+    const geoJson = JSON.parse(this.fileRawContent)
+    const mapViewData = MapViewData.buildFromGeoJson(geoJson)
     return mapViewData
   }
 
@@ -70,4 +70,4 @@ class GeojsonImporter {
   }
 }
 // export the directions json builder class
-export default GeojsonImporter
+export default GeoJsonImporter

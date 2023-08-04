@@ -30,7 +30,7 @@ export default {
     canAddPlaceInput () {
       return this.placeInputs < appConfig.maxPlaceInputs
     },
-    roundtripActive () {
+    roundTripActive () {
       return this.$store.getters.mode === constants.modes.roundTrip
     }
   },

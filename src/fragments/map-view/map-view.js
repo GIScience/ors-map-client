@@ -171,7 +171,7 @@ export default {
       alternativeRouteColor: constants.alternativeRouteColor,
       routeBackgroundColor: constants.routeBackgroundColor,
       guid: null,
-      clickLatlng: null,
+      clickLatLng: null,
       myLocationActive: false,
       setDrawingTimeout: null,
       markerMoveTimeoutId: null,
@@ -271,11 +271,11 @@ export default {
     /**
      * Build and return the map center
      * based on the current map center defined/set in the store
-     * @returns {Latlng}
+     * @returns {Object} LatLng
      */
     mapCenter () {
-      let latlng = GeoUtils.buildLatLong(this.$store.getters.mapCenter)
-      return latlng
+      let latLng = GeoUtils.buildLatLong(this.$store.getters.mapCenter)
+      return latLng
     },
     /**
      * Determines if only one marker if on the map view
@@ -297,7 +297,7 @@ export default {
      * color defined as main
      * @returns {Object}
      */
-    geojsonOptions () {
+    geoJsonOptions () {
       return {
         style: { color: this.mainRouteColor, weight: '5' },
       }
@@ -307,13 +307,13 @@ export default {
      * using the value in constants object
      * @returns {Object}
      */
-    geojsonOutlineOptions () {
+    geoJsonOutlineOptions () {
       return { style: { color: constants.routeBackgroundColor, weight: '9' } }
     },
     /**
      * Build and return the active route data
      * based on the $store.getters.activeRouteIndex
-     * @returns {Array} of latlng
+     * @returns {Array} of latLng
      */
     activeRouteData () {
       if (this.localMapViewData.hasRoutes()) {
@@ -378,7 +378,7 @@ export default {
           // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
           // So we invert them to provide what the component expects
           let flattenCoords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
-          polygon.latlngs = GeoUtils.switchLatLonIndex(flattenCoords)
+          polygon.latLngs = GeoUtils.switchLatLonIndex(flattenCoords)
           polygons.push(polygon)
         }
       }
@@ -433,14 +433,14 @@ export default {
     },
     /**
      * Build and return the circle marker
-     * based on the clickLatlng position
+     * based on the clickLatLng position
      * to show to the user where s/he has clicked
      * @returns {Object}
      */
     circleMarker () {
-      if (this.clickLatlng) {
+      if (this.clickLatLng) {
         return {
-          center: GeoUtils.buildLatLong(this.clickLatlng.lat, this.clickLatlng.lng),
+          center: GeoUtils.buildLatLong(this.clickLatLng.lat, this.clickLatLng.lng),
           radius: 8
         }
       }
@@ -998,13 +998,13 @@ export default {
      * @emits markerDragged
      */
     markerDragEnd (event) {
-      const targetLatlng = event.oldLatLng
+      const targetLatLng = event.oldLatLng
       let markerIndex = null
 
       // Find the marker index by comparing the lat and long
       for (let index = 0; index < this.markers.length; index++) {
         const markerP = this.markers[index].position
-        if (markerP.lat === targetLatlng.lat && markerP.lng === targetLatlng.lng) {
+        if (markerP.lat === targetLatLng.lat && markerP.lng === targetLatLng.lng) {
           // update the marker position
           this.markers[index].position.lat = event.latlng.lat
           this.markers[index].position.lng = event.latlng.lng
@@ -1024,17 +1024,17 @@ export default {
 
     /**
      * Set the map center
-     * @param {*} latlng
+     * @param {*} latLng
      * @use localStorage
      * @emits mapCenterChanged
      */
-    setMapCenter (latlng) {
-      if (latlng) {
+    setMapCenter (latLng) {
+      if (latLng) {
         let mapSettings = this.$store.getters.mapSettings
         const previousCenter = Utils.clone(mapSettings.mapCenter)
 
-        if (previousCenter.toString() !== latlng.toString()) {
-          this.$emit('mapCenterChanged', latlng)
+        if (previousCenter.toString() !== latLng.toString()) {
+          this.$emit('mapCenterChanged', latLng)
         }
       } else {
         // TODO: stop using appRouteData, receive places as a prop?
@@ -1230,7 +1230,7 @@ export default {
     /**
      * Emit the right click event according the parameter received
      * This method emits only one of the events listed below at a time
-     * @param {Object} data { eventName:..., clickLatlng: ...}
+     * @param {Object} data { eventName:..., clickLatLng: ...}
      * @emits directionsFromPoint
      * @emits directionsToPoint
      * @emits addRouteStop
@@ -1246,16 +1246,16 @@ export default {
 
     /**
      * Update localMapViewData places
-     * @param {Object} data {clickLatlng: latlng, eventName:String}
+     * @param {Object} data {clickLatLng: latLng, eventName:String}
      * @emits directionsFromPoint
      * @emits directionsToPoint
      * @emits addRouteStop
      * @emits addDestinationToRoute
      */
     prepareDataAndEmitRightClickEvent (data) {
-      let place = new Place(data.clickLatlng.lng, data.clickLatlng.lat)
+      let place = new Place(data.clickLatLng.lng, data.clickLatLng.lat)
       place.resolve().then(() =>{
-        const dataPassed = { latlng: data.clickLatlng, place}
+        const dataPassed = { latLng: data.clickLatLng, place}
         this.$emit(data.eventName, dataPassed)
       })
     },
@@ -1381,7 +1381,7 @@ export default {
 
     /**
      * Handle the map right click event,
-     * Set the clickLatlng current value
+     * Set the clickLatLng current value
      * and emits events that will trigger the displaying
      * of the right click floating-context menu
      * @param {Object} event
@@ -1397,7 +1397,7 @@ export default {
           // Event to be caught by the MapRightClick.vue component
           EventBus.$emit('mapRightClicked', data)
         }
-        this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
+        this.clickLatLng = { lat: event.latlng.lat, lng: event.latlng.lng }
       } else if (this.$store.getters.isSidebarVisible) {
         EventBus.$emit('setSidebarStatus', false)
       }
@@ -1405,7 +1405,7 @@ export default {
 
     /**
      * Handle the map left click event
-     * Set the clickLatlng current value
+     * Set the clickLatLng current value
      * and emits events that will trigger the displaying
      * of the place info pop up box
      * @param {Object} event
@@ -1462,7 +1462,7 @@ export default {
         GeoUtils.normalizeCoordinates(event.latlng)
         const data = { event, insidePolygon }
         EventBus.$emit('mapLeftClicked', data)
-        this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
+        this.clickLatLng = { lat: event.latlng.lat, lng: event.latlng.lng }
       }
     },
 
@@ -1488,15 +1488,14 @@ export default {
     /**
      * Check if the lat lng point is inside one of the map polygons
      * If it is returned the polygon points array
-     * @param {Latlng} latlng
-     * @param {*} lng
+     * @param {Leaflet.LatLng} latLng
      * @returns {Boolean|Array}
      */
-    isPointInsidePolygons (latlng) {
+    isPointInsidePolygons (latLng) {
       for (const key in this.localAvoidPolygons) {
         let polygon = this.localAvoidPolygons[key]
         const coords = GeoUtils.switchLatLonIndex(polygon.geometry.coordinates[0])
-        const inside = PolygonUtils.isInsidePolygon(latlng, coords)
+        const inside = PolygonUtils.isInsidePolygon(latLng, coords)
         if (inside) {
           return coords
         }
@@ -1542,8 +1541,8 @@ export default {
           context.myLocationActive = showLocation
 
           // Set returned location as map center
-          const latlng = GeoUtils.buildLatLong(location.lat, location.lng)
-          this.setMapCenter(latlng)
+          const latLng = GeoUtils.buildLatLong(location.lat, location.lng)
+          this.setMapCenter(latLng)
         }).catch(error => {
           const message = this.getPositionErrorMessage(error)
           context.showWarning(message, { timeout: 0 })
@@ -1807,7 +1806,7 @@ export default {
           const polygonData = context.localAvoidPolygons[key]
           const coordinates = GeoUtils.switchLatLonIndex(polygonData.geometry.coordinates[0])
           const polygonOptions = PolygonUtils.buildPolygonOptions(polygonData, context.drawOptions.draw.polygon.shapeOptions.color)
-          let polygonShapeType = GeoUtils.geojsonShapeType(polygonData)
+          let polygonShapeType = GeoUtils.geoJsonShapeType(polygonData)
           let polygon = PolygonUtils.createPolygon(coordinates, polygonOptions, polygonShapeType)
           context.setAvoidPolygonProperties(polygon, polygonData)
           polygon.addTo(map)
@@ -1938,7 +1937,7 @@ export default {
       this.localMapViewData.places = []
       this.localMapViewData.routes = []
       this.localMapViewData.polygons = []
-      this.clickLatlng = null
+      this.clickLatLng = null
       this.$store.commit('currentLocation', null)
     },
     /**

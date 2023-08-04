@@ -54,7 +54,7 @@ class Place {
    * @param {*} lng
    * @param {*} lat
    */
-  setLnglat(lng, lat) {
+  setLngLat(lng, lat) {
     this.lng = Number(lng)
     this.lat = Number(lat)
     this.coordinates = [Number(lng), Number(lat)]

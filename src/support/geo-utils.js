@@ -123,12 +123,12 @@ const geoUtils = {
   },
 
   /**
-   * Determines if a geojson is a rectangle
-   * @param {Object} geojson
+   * Determines if a GeoJSON is a rectangle
+   * @param {Object} geoJson
    * @returns {Boolean}
    */
-  geojsonIsARectangle(geojson) {
-    let coordinates = geojson.geometry.coordinates[0]
+  geoJsonIsARectangle(geoJson) {
+    let coordinates = geoJson.geometry.coordinates[0]
     let firstVortice = coordinates[0].toString()
     let lastVortice = coordinates.at(-1).toString()
 
@@ -147,20 +147,20 @@ const geoUtils = {
   },
 
   /**
-   * Determines the type of polygon a geojson has.
-   * If the geojson is of the type  Polygon it returns false.
-   * @param {Object} geojson
+   * Determines the type of polygon a GeoJSON has.
+   * If the GeoJSON is of the type  Polygon it returns false.
+   * @param {Object} geoJson
    * @returns {String|false}
    */
-  geojsonShapeType(geojson) {
-    let type = geojson.type
-    if (geojson.geometry && geojson.geometry.type) {
-      type = geojson.geometry.type
+  geoJsonShapeType(geoJson) {
+    let type = geoJson.type
+    if (geoJson.geometry && geoJson.geometry.type) {
+      type = geoJson.geometry.type
     }
     if (type !== 'Polygon') {
       return false
     }
-    if (geoUtils.geojsonIsARectangle(geojson)) {
+    if (geoUtils.geoJsonIsARectangle(geoJson)) {
       return 'rectangle'
     } else {
       return 'polygon'
@@ -178,21 +178,21 @@ const geoUtils = {
 
   /**
    * Calculate geodesic area
-   * @param {Array} latlngs
+   * @param {Array} coords
    */
-  geodesicArea(latlngs) {
-    return Leaflet.GeometryUtil.geodesicArea(latlngs)
+  geodesicArea(coords) {
+    return Leaflet.GeometryUtil.geodesicArea(coords)
   },
 
   /**
    * Get readable area
-   * @param {Number} area
+   * @param {Array} coords
    * @param {String} unit
    */
-  readableArea(latlngs, unit) {
+  readableArea(coords, unit) {
     // see https://github.com/Leaflet/Leaflet.draw/blob/33ea262678bbfc3da7e92c226f70c017bd328434/src/ext/GeometryUtil.js#L66-L99
     let precision = precision || 2
-    let area = this.geodesicArea(latlngs)
+    let area = this.geodesicArea(coords)
     let areaStr
     if (area >= 10000 && unit === 'km') {
       areaStr = Leaflet.GeometryUtil.formattedNumber(area * 0.000001, precision) + ' km²'
@@ -380,18 +380,18 @@ const geoUtils = {
   },
 
   /**
-   * Get the slot index for adding a new place given the new place latlng
-   * @param {*} latlng
+   * Get the slot index for adding a new place given the new place latLng
+   * @param {*} latLng
    * @param {Array} places
    */
-  getClosestPlaceIndex: (latlng, places) => {
+  getClosestPlaceIndex: (latLng, places) => {
     let shorterDistance = null
     let closestPlaceIndex = 0
 
     places.forEach((p, index) => {
       if (p.coordinates) {
-        const toLatlng = geoUtils.buildLatLong(p.coordinates[1], p.coordinates[0])
-        const currentDistance = geoUtils.calculateDistanceBetweenLocations(latlng, toLatlng)
+        const toLatLng = geoUtils.buildLatLong(p.coordinates[1], p.coordinates[0])
+        const currentDistance = geoUtils.calculateDistanceBetweenLocations(latLng, toLatLng)
         if (shorterDistance) {
           if (currentDistance < shorterDistance) {
             shorterDistance = currentDistance
@@ -411,11 +411,11 @@ const geoUtils = {
     if (closestPlaceIndex === places.length - 1) {
       const placeBefore = places[closestPlaceIndex - 1]
       const lastPlace = places[closestPlaceIndex]
-      const beforeLatlng = geoUtils.buildLatLong(placeBefore.coordinates[1], placeBefore.coordinates[0])
-      const fromNewToPlaceBefore = geoUtils.calculateDistanceBetweenLocations(latlng, beforeLatlng)
-      const lastLatlng = geoUtils.buildLatLong(lastPlace.coordinates[1], lastPlace.coordinates[0])
+      const beforeLatLng = geoUtils.buildLatLong(placeBefore.coordinates[1], placeBefore.coordinates[0])
+      const fromNewToPlaceBefore = geoUtils.calculateDistanceBetweenLocations(latLng, beforeLatLng)
+      const lastLatLng = geoUtils.buildLatLong(lastPlace.coordinates[1], lastPlace.coordinates[0])
 
-      const fromBeforeToLast = geoUtils.calculateDistanceBetweenLocations(lastLatlng, beforeLatlng)
+      const fromBeforeToLast = geoUtils.calculateDistanceBetweenLocations(lastLatLng, beforeLatLng)
       if (fromNewToPlaceBefore < fromBeforeToLast) {
         closestPlaceIndex--
       }
@@ -436,13 +436,13 @@ const geoUtils = {
     // Find a more appropriate inject index, it this is the case
     for (let pIndex = 0; pIndex < polylineArr.length; pIndex++) {
       const polylineCoords = polylineArr[pIndex]
-      const polylineCoordsLatlng = {
+      const polylineCoordsLatLng = {
         lat: polylineCoords[0],
         lng: polylineCoords[1]
       }
 
       // Check the place that has the shortest distance to the polyline point
-      let currentDistance = geoUtils.calculateDistanceBetweenLocations(polylineCoordsLatlng, place, 'm')
+      let currentDistance = geoUtils.calculateDistanceBetweenLocations(polylineCoordsLatLng, place, 'm')
       if (currentDistance === 0) {
         // Get the closest polyline point index
         indexOnPolyline = pIndex
@@ -504,23 +504,23 @@ const geoUtils = {
 
   /**
    * Calculate the distance between two coordinates
-   * @param {Object} fromLatlng
-   * @param {Object} toLatlng
+   * @param {Object} fromLatLng
+   * @param {Object} toLatLng
    * @param {String} unit km|mi|m
    * @returns {Number}
    */
-  calculateDistanceBetweenLocations(fromLatlng, toLatlng, unit = 'km') {
+  calculateDistanceBetweenLocations(fromLatLng, toLatLng, unit = 'km') {
     const toRadians = function (deg) {
       return deg * (Math.PI / 180)
     }
 
     const R = 6371 // km
     // has a problem with the .toRad() method below
-    const x1 = toLatlng.lat - fromLatlng.lat
+    const x1 = toLatLng.lat - fromLatLng.lat
     const dLat = toRadians(x1)
-    const x2 = toLatlng.lng - fromLatlng.lng
+    const x2 = toLatLng.lng - fromLatLng.lng
     const dLon = toRadians(x2)
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadians(fromLatlng.lat)) * Math.cos(toRadians(toLatlng.lat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadians(fromLatLng.lat)) * Math.cos(toRadians(toLatLng.lat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
     const distance = R * c
 
@@ -579,12 +579,12 @@ const geoUtils = {
   },
 
   /**
-   * Normalize latlng to keep lat in range 90 >< 90 and lng -180 >< 180
-   * @param {Object} latlng
+   * Normalize latLng to keep lat in range 90 >< 90 and lng -180 >< 180
+   * @param {Object} latLng
    */
-  normalizeCoordinates (latlng) {
-    latlng.lat = geoUtils.normalizeLat(latlng.lat)
-    latlng.lng = geoUtils.normalizeLng(latlng.lng)
+  normalizeCoordinates (latLng) {
+    latLng.lat = geoUtils.normalizeLat(latLng.lat)
+    latLng.lng = geoUtils.normalizeLng(latLng.lng)
   },
 
   /**

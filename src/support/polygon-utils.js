@@ -75,13 +75,13 @@ const PolygonUtils = {
    * @returns {String} polygon area + unit
    */
   calcPolygonArea (polygon) {
-    const latlngs = []
+    const coords = []
     const coordinates = polygon.geometry.coordinates.length === 1 ? polygon.geometry.coordinates[0] : polygon.geometry.coordinates
     for (const key in coordinates) {
       const coordinate = coordinates[key]
-      latlngs.push(GeoUtils.buildLatLong(coordinate[1], coordinate[0]))
+      coords.push(GeoUtils.buildLatLong(coordinate[1], coordinate[0]))
     }
-    const polygonArea = GeoUtils.readableArea(latlngs, store.getters.mapSettings.areaUnit)
+    const polygonArea = GeoUtils.readableArea(coords, store.getters.mapSettings.areaUnit)
     return polygonArea
   },
   /**

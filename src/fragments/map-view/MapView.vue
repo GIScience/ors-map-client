@@ -48,7 +48,7 @@
           <l-polygon v-if="polygon.properties.visible"
             :key="index+'-polygon'"
             @click="isochroneClicked(index, polygon, $event)"
-            :lat-lngs="polygon.latlngs"
+            :lat-lngs="polygon.latLngs"
             :opacity="polygon.properties.opacity"
             :fillOpacity="polygon.properties.fillOpacity"
             :fillColor="polygon.properties.fillColor"
@@ -154,8 +154,8 @@
       <div ref="customMapControlsContainer" style="z-index: 501" class="custom-controls" ></div>
     </l-map>
     <v-btn v-if="$store.getters.embed" small :title="$t('mapView.viewOnORS')" class="view-on-ors" target="_blank" :href="nonEmbedUrl" > {{$t('mapView.viewOnORS')}} <v-icon right small >open_in_new</v-icon> </v-btn>
-    <map-right-click v-if="!$store.getters.embed" :map-view-data="mapViewData" @closed="clickLatlng = null" @rightClickEvent="handleRightClickEvent"></map-right-click>
-    <map-left-click :show="showControls && showClickPopups" :current-zoom="zoom" @closed="clickLatlng = null" @directionsToPoint="directionsToPoint"></map-left-click>
+    <map-right-click v-if="!$store.getters.embed" :map-view-data="mapViewData" @closed="clickLatLng = null" @rightClickEvent="handleRightClickEvent"></map-right-click>
+    <map-left-click :show="showControls && showClickPopups" :current-zoom="zoom" @closed="clickLatLng = null" @directionsToPoint="directionsToPoint"></map-left-click>
 
     <div v-if="$store.getters.mapSettings.accessibleModeActive">
       <v-btn fab small @click="moveMapCenter('left')" :title="$t('mapView.moveMapPositionToLeft')" class="move-map-arrow left do-not-trigger-close-bottom-nav" > <v-icon large color="primary" >arrow_back</v-icon> </v-btn>

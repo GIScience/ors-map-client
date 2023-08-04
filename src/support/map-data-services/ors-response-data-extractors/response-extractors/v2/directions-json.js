@@ -48,8 +48,8 @@ class DirectionsJSONBuilder {
     const places = []
     if (lodash.get(this, 'responseData.metadata.query.coordinates')) {
       for (const key in this.responseData.metadata.query.coordinates) {
-        const lnglat = this.responseData.metadata.query.coordinates[key]
-        const place = new Place(lnglat[0], lnglat[1])
+        const lngLat = this.responseData.metadata.query.coordinates[key]
+        const place = new Place(lngLat[0], lngLat[1])
         places.push(place)
       }
       return places

@@ -299,7 +299,7 @@ class PluginExample {
     // Do something
   }
 
-  mapCenterChanged(latlng) {
+  mapCenterChanged(latLng) {
     // Do something
   }
 
@@ -338,7 +338,7 @@ class PluginExample {
   beforeShowResolvedPlaceInfo(hookData) {
     // hookData has the following structure:
     // {
-    //  placeInfo: { placeName: String, containerArea: String, clickInsidePolygon: Boolean, latlng: {lat:..., lng:...}},
+    //  placeInfo: { placeName: String, containerArea: String, clickInsidePolygon: Boolean, latLng: {lat:..., lng:...}},
     //  placeInfoContainer: HtmlNode
     // }
     // If the placeInfo.customHtml prop is set,
@@ -439,7 +439,7 @@ class PluginExample {
   }
 
   rightClickContentReady(hookData) {
-    // hookData has the following structure = {context: Object, containerRef: Object, latlng: Object}
+    // hookData has the following structure = {context: Object, containerRef: Object, latLng: Object}
     // Do something
   }
 

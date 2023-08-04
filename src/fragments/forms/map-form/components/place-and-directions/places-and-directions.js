@@ -194,7 +194,7 @@ export default {
       // the place coordinates and re-render the map
       EventBus.$on('markerDragged', (marker) => {
         if (context.active) {
-          context.places[marker.inputIndex].setLnglat(marker.position.lng, marker.position.lat)
+          context.places[marker.inputIndex].setLngLat(marker.position.lng, marker.position.lat)
           // remove the name so that the resolve will use only the coordinates
           context.places[marker.inputIndex].placeName = ''
           // Resolve the place to update its name and properties
@@ -330,7 +330,7 @@ export default {
       if (filledPlaces.length === 1) {
         this.places[1] = filledPlaces[0]
       }
-      this.places[0] = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })
+      this.places[0] = data.place || new Place(data.latLng.lng, data.latLng.lat, '', { resolve: true })
       const context = this
       this.resolvePlace(this.places[0]).then(() => {
         context.setViewMode(constants.modes.directions)
@@ -385,7 +385,7 @@ export default {
      * @param {*} data
      */
     directionsToPoint (data) {
-      const toPlace = data.place || new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true })
+      const toPlace = data.place || new Place(data.latLng.lng, data.latLng.lat, '', { resolve: true })
       let placeIndex = null
       if (this.places.length === 1) {
         this.addPlaceInput()
@@ -426,10 +426,10 @@ export default {
 
     /**
      * When the user click on the map and select a point as the route start
-     * @param {*} data {latlng: ..., place:...}
+     * @param {*} data {latLng: ..., place:...}
      */
     addDestinationToRoute (data) {
-      this.places.push(new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true }))
+      this.places.push(new Place(data.latLng.lng, data.latLng.lat, '', { resolve: true }))
       const context = this
       this.resolvePlace(this.places.at(-1)).then(() => {
         context.updateAppRoute()
@@ -442,7 +442,7 @@ export default {
     /**
      * When the user click on the map and select to add this point to the route
      *
-     * @param {*} data {latlng: ..., place:...}
+     * @param {*} data {latLng: ..., place:...}
      */
     addRouteStop (data) {
       // Only one place input, so the selected point will be the 'from'
@@ -451,7 +451,7 @@ export default {
       } else {
         let closestPlaceIndex = data.injectIndex
         if (closestPlaceIndex === null || closestPlaceIndex === undefined) {
-          closestPlaceIndex = GeoUtils.getClosestPlaceIndex(data.latlng, this.places)
+          closestPlaceIndex = GeoUtils.getClosestPlaceIndex(data.latLng, this.places)
         }
         let convertStopAfterRouteEndingToDestination = this.$store.getters.mapSettings.convertStopAfterRouteEndingToDestination
         // If the selected point is after the last route point and
@@ -463,7 +463,7 @@ export default {
         // In the other cases, we have to 'inject' a route point between the exiting points
         // To do that we add a place input, set its coordinates, and then
         // we change the app url so that the route will be recalculated
-        const injectedIndex = this.injectPlaceAndReturnIndex(data.latlng, closestPlaceIndex)
+        const injectedIndex = this.injectPlaceAndReturnIndex(data.latLng, closestPlaceIndex)
         const context = this
         this.resolvePlace(this.places[injectedIndex]).then(() => {
           context.updateAppRoute()
@@ -477,18 +477,18 @@ export default {
 
     /**
      * Inject a place input at the closest place and return the chosen slot
-     * @param {*} latlng
+     * @param {*} latLng
      * @param {*} closestPlaceIndex
      * @returns {Integer} slot index
      */
-    injectPlaceAndReturnIndex (latlng, closestPlaceIndex) {
+    injectPlaceAndReturnIndex (latLng, closestPlaceIndex) {
       const newPlaces = []
       const insertSlotPlaceIndex = closestPlaceIndex + 1
 
       const newLength = this.places.length + 1
       for (let index = 0; index < newLength; index++) {
         if (index === insertSlotPlaceIndex) {
-          const place = new Place(latlng.lng, latlng.lat, '', { resolve: true })
+          const place = new Place(latLng.lng, latLng.lat, '', { resolve: true })
           newPlaces.push(place)
         } else {
           const sourceIndex = index > insertSlotPlaceIndex ? index - 1 : index

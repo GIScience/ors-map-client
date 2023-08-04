@@ -309,13 +309,13 @@ export default {
     /**
      * Save the new map center in mapSettings when it changes
      * and emit a mapCenterChanged event via EventBus
-     * @param {*} latlng
+     * @param {*} latLng
      * @emits mapCenterChanged [via EventBus]
      */
-    mapCenterChanged (latlng) {
+    mapCenterChanged (latLng) {
       let context = this
       let mapSettings = this.$store.getters.mapSettings
-      mapSettings.mapCenter = latlng
+      mapSettings.mapCenter = latLng
       this.$store.dispatch('saveSettings', mapSettings).then(() => {
         context.$root.appHooks.run('mapCenterChanged', mapSettings.mapCenter)
         EventBus.$emit('mapCenterChanged', mapSettings.mapCenter)

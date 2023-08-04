@@ -18,7 +18,7 @@ export default {
       rightClickPopUpX: null,
       rightClickPopUpY: null,
       clickPoint: null,
-      clickLatlng: null,
+      clickLatLng: null,
       data: null
     }
   },
@@ -60,7 +60,7 @@ export default {
       if (!zoom) {
         zoom = appConfig.initialZoomLevel
       }
-      let url = `https://www.openstreetmap.org/query?lat=${this.clickLatlng.lat}&lon=${this.clickLatlng.lng}#map=${zoom}/${this.clickLatlng.lat}/${this.clickLatlng.lng}`
+      let url = `https://www.openstreetmap.org/query?lat=${this.clickLatLng.lat}&lon=${this.clickLatLng.lng}#map=${zoom}/${this.clickLatLng.lat}/${this.clickLatLng.lng}`
       window.open(url, '_blank')
     },
     /**
@@ -79,10 +79,10 @@ export default {
      */
     rightClickEvent (eventName) {
       this.showRightClickPopup = false
-      const clickLatlng = this.clickLatlng
-      const data = { eventName, clickLatlng }
+      const clickLatLng = this.clickLatLng
+      const data = { eventName, clickLatLng }
       this.$emit('rightClickEvent', data)
-      this.clickLatlng = null
+      this.clickLatLng = null
     },
     /**
      * Deal wth the map right click, preparing the data and displaying the modal
@@ -117,7 +117,7 @@ export default {
 
       this.rightClickPopUpX = `${x}px`
       this.rightClickPopUpY = `${y}px`
-      this.clickLatlng = event.latlng
+      this.clickLatLng = event.latlng
       this.showRightClickPopup = true
       this.callHook()
     },
@@ -128,7 +128,7 @@ export default {
         if (!el || el.length === 0) {
           context.callHook()
         } else {
-          let hookData = {context: context, containerRef: el[0], latlng: context.clickLatlng}
+          let hookData = {context: context, containerRef: el[0], latLng: context.clickLatLng}
           context.$root.appHooks.run('rightClickContentReady', hookData)
         }
       }, 200)

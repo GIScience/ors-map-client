@@ -44,8 +44,8 @@ class IsochronesBuilder {
       this.responseData.features.forEach(feature => {
         const locationCoordsStr = `${feature.properties.center[0]}, ${feature.properties.center[1]}`
         if (!polygonCenters.includes(locationCoordsStr)) {
-          const lnglat = feature.properties.center
-          const place = new Place(lnglat[0], lnglat[1], locationCoordsStr, { properties: feature.properties })
+          const lngLat = feature.properties.center
+          const place = new Place(lngLat[0], lngLat[1], locationCoordsStr, { properties: feature.properties })
           places.push(place)
           polygonCenters.push(locationCoordsStr)
         }

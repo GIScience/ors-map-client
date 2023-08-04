@@ -35,8 +35,8 @@ class GeocodeReverseBuilder {
     const places = []
     if (this.responseData.features) {
       this.responseData.features.forEach(feature => {
-        const lnglat = feature.geometry.coordinates
-        const place = new Place(lnglat[0], lnglat[0], feature.properties.label, { properties: feature })
+        const lngLat = feature.geometry.coordinates
+        const place = new Place(lngLat[0], lngLat[0], feature.properties.label, { properties: feature })
         places.push(place)
       })
       const queryPoint = this.responseData.geocoding.query

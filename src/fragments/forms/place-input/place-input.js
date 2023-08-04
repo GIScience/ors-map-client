@@ -295,8 +295,8 @@ export default {
       }
       let suggestions = []
       if (this.localModel.nameIsCoord()) {
-        const latlng = this.model.getLatLng()
-        const rawCoordinatesPlace = new Place(latlng.lng, latlng.lat, `${latlng.lng},${latlng.lat}`, { properties: { layer: 'rawCoordinate' } })
+        const latLng = this.model.getLatLng()
+        const rawCoordinatesPlace = new Place(latLng.lng, latLng.lat, `${latLng.lng},${latLng.lat}`, { properties: { layer: 'rawCoordinate' } })
         rawCoordinatesPlace.rawCoordinate = true
         suggestions.push(rawCoordinatesPlace)
       }
@@ -521,11 +521,11 @@ export default {
      *
      */
     autocompleteByCoords () {
-      const latlng = this.model.getLatLng()
+      const latLng = this.model.getLatLng()
       EventBus.$emit('showLoading', true)
       const context = this
-      ReverseGeocode(latlng.lat, latlng.lng, 10).then(places => {
-        const place = new Place(latlng.lng, latlng.lat)
+      ReverseGeocode(latLng.lat, latLng.lng, 10).then(places => {
+        const place = new Place(latLng.lng, latLng.lat)
         place.setSuggestions(places)
         context.localModel = place
         context.focused = true
@@ -562,8 +562,8 @@ export default {
           // Make sure that the changes in the input are debounced
           this.debounceTimeoutId = setTimeout(function () {
             if (context.localModel.nameIsCoord()) {
-              let latlng = context.localModel.getLatLng()
-              context.model.setLnglat(latlng.lng, latlng.lat)
+              let latLng = context.localModel.getLatLng()
+              context.model.setLngLat(latLng.lng, latLng.lat)
             }
             if (event.key === 'Enter') {
               context.focused = false
@@ -659,7 +659,7 @@ export default {
       // We shall not reassign an external object, so we update each property
       this.model.placeName = place.properties.label || place.placeName
       this.model.placeId = place.properties.id
-      this.model.setLnglat(place.lng, place.lat)
+      this.model.setLngLat(place.lng, place.lat)
       this.model.properties = place.properties
       this.model.suggestions = []
       this.searching = false
@@ -834,11 +834,11 @@ export default {
      */
     switchCoords () {
       if (this.model.nameIsCoord()) {
-        let latlng = this.model.getLatLng()
-        this.model.lat = latlng.lng
-        this.model.lng = latlng.lat
+        let latLng = this.model.getLatLng()
+        this.model.lat = latLng.lng
+        this.model.lng = latLng.lat
         this.model.setCoordsAsName()
-        this.model.placeName = `${latlng.lat},${latlng.lng}`
+        this.model.placeName = `${latLng.lat},${latLng.lng}`
         this.autocompleteByCoords()
       }
     },
@@ -849,11 +849,11 @@ export default {
      */
     distance (suggestedPlace) {
       // Set origin and destination
-      const fromLatlng = { lat: this.$store.getters.mapCenter.lat, lng: this.$store.getters.mapCenter.lng }
-      const toLatlng = { lat: suggestedPlace.lat, lng: suggestedPlace.lng }
+      const fromLatLng = { lat: this.$store.getters.mapCenter.lat, lng: this.$store.getters.mapCenter.lng }
+      const toLatLng = { lat: suggestedPlace.lat, lng: suggestedPlace.lng }
 
       // calculate the distance between the two points
-      let distance = GeoUtils.calculateDistanceBetweenLocations(fromLatlng, toLatlng, this.$store.getters.mapSettings.unit)
+      let distance = GeoUtils.calculateDistanceBetweenLocations(fromLatLng, toLatLng, this.$store.getters.mapSettings.unit)
 
       if (distance > 0) {
         distance = distance.toFixed(1)

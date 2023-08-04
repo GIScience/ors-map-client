@@ -80,9 +80,9 @@ class GpxImporter {
       // If there are less than 15, so we get all
       if (routes[0].length < 16) {
         for (const key in routes[0]) {
-          const latlng = routes[0][key].geometry.coordinates
-          const lng = latlng[0]
-          const lat = latlng[1]
+          const lngLat = routes[0][key].geometry.coordinates
+          const lng = lngLat[0]
+          const lat = lngLat[1]
           const place = new Place(lng, lat)
           places.push(place)
         }
@@ -111,19 +111,19 @@ class GpxImporter {
    */
   getPlaces = (fileObject) => {
     const places = []
-    const wpts = lodash.get(fileObject, 'gpx.wpt')
+    const pts = lodash.get(fileObject, 'gpx.wpt')
 
-    if (wpts) {
-      for (const key in wpts) {
-        const latlon = wpts[key].$
-        let name = Array.isArray(wpts[key].name) ? wpts[key].name[0] : wpts[key].name
+    if (pts) {
+      for (const key in pts) {
+        const latLon = pts[key].$
+        let name = Array.isArray(pts[key].name) ? pts[key].name[0] : pts[key].name
         if (name.length === 0) {
-          name = Array.isArray(wpts[key].desc) ? wpts[key].desc[0] : wpts[key].desc
+          name = Array.isArray(pts[key].desc) ? pts[key].desc[0] : pts[key].desc
         }
         if (name.indexOf('=') > 0) {
           name = name.split('=')[1]
         }
-        const place = new Place(latlon.lon, latlon.lat, name)
+        const place = new Place(latLon.lon, latLon.lat, name)
         places.push(place)
       }
     }
@@ -149,8 +149,8 @@ class GpxImporter {
           if (points) {
 
             for (const ptKey in points) {
-              const latlon = points[ptKey].$
-              const point = creator === 'openrouteservice' ? [latlon.lat, latlon.lon] : [latlon.lon, latlon.lat]
+              const latLon = points[ptKey].$
+              const point = creator === 'openrouteservice' ? [latLon.lat, latLon.lon] : [latLon.lon, latLon.lat]
               const elev = points[ptKey].ele
               if (elev && elev.length > 0) {
                 point.push(elev[0])

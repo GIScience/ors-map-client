@@ -126,10 +126,10 @@ export default {
   methods: {
     /**
      * When the user click on the map and select a point as the route start
-     * @param {*} data {latlng: ..., place:...}
+     * @param {*} data {latLng: ..., place:...}
      */
     addAsIsochroneCenter (data) {
-      this.places.push(new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true }))
+      this.places.push(new Place(data.latLng.lng, data.latLng.lat, '', { resolve: true }))
       const context = this
       this.places.at(-1).resolve().then(() => {
         context.updateAppRoute()

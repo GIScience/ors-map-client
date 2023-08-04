@@ -98,7 +98,7 @@ class MapViewData {
    * @param {*} geoJson
    * @returns {MapViewData} mapViewAta
    */
-  static buildFromGeojson (geoJson) {
+  static buildFromGeoJson (geoJson) {
     const mapViewAta = new MapViewData()
 
     for (const fKey in geoJson.features) {

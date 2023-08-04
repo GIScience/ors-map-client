@@ -34,8 +34,8 @@ class GeocodeSearchBuilder {
     const places = []
     if (this.responseData.features) {
       this.responseData.features.forEach(feature => {
-        const lnglat = feature.geometry.coordinates
-        const place = new Place(lnglat[0], lnglat[1], feature.properties.label, { properties: feature.properties })
+        const lngLat = feature.geometry.coordinates
+        const place = new Place(lngLat[0], lngLat[1], feature.properties.label, { properties: feature.properties })
         places.push(place)
       })
     }
