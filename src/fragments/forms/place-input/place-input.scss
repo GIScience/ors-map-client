@@ -53,16 +53,16 @@
   height: 40px;
 }
 
-/* small class is for md and up resolutions. In small devices, we display bigger btns to easy the interaction*/
+/* small class is for md and up resolutions. In small devices, we display bigger buttons to easy the interaction */
 .input-btn.small {
   margin-top: 10px;
 }
 
-.input-btns .v-btn__content {
+.input-btn-group .v-btn__content {
   padding: 0;
 }
 
-.input-btns .v-btn {
+.input-btn-group .v-btn {
   min-width: 0;
 }
 

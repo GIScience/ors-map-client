@@ -1,5 +1,5 @@
 <template>
-  <div class="priting-template directions-template">
+  <div class="printing-template directions-template">
     <h2 v-html="place.placeName"></h2>
     <br /><br />
 

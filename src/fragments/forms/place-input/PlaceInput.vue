@@ -34,7 +34,7 @@
           </template>
         </v-text-field>
       </v-flex>
-      <v-flex v-if="iconsBtnCounter > 0" v-bind="{[iconsColumns]: true}" class="input-btns">
+      <v-flex v-if="iconsBtnCounter > 0" v-bind="{[iconsColumns]: true}" class="input-btn-group">
         <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="deleteAvailable && $mdAndUpResolution"  @click="removePlaceInput()">
           <v-icon :title="$t('placeInput.removeInput')" class="input-icon" >delete</v-icon>
         </v-btn>

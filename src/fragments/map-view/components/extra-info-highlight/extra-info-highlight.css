@@ -1,4 +1,4 @@
-.hightlighted-polyline-active {
+.highlighted-polyline-active {
   position: absolute !important;
   text-transform: none !important;
   bottom: 70px;
@@ -35,11 +35,11 @@
   color: black;
 }
 
-.highligh-intro {
+.highlight-intro {
   color: black;
   margin-right: 10px;
 }
-.highligh-intro, .section-highlighted {
+.highlight-intro, .section-highlighted {
   display: unset;
   float: left;
   margin-top: 5px;

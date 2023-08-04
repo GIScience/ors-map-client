@@ -18,7 +18,7 @@
         :timeout="0" >
         <div class="snack-highlighted-content">
           <v-btn class="snack-highlighted-close" right flat @click.stop="removeHighlightedSegments()"> <v-icon large :title="$t('global.close')" color="black" >close</v-icon> </v-btn>
-          <span class="highligh-intro">
+          <span class="highlight-intro">
             {{$t('mapView.highlighting')}} {{ extraInfo.sectionTitle }}:
           </span>
           <span class="section-highlighted" :style="highlightedSectionStyle(polyline.color)" :key="sectionKey" v-for="(polyline, sectionKey) in highlightedPolylines">{{polyline.label}}</span>

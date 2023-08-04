@@ -1,5 +1,5 @@
 <template>
-  <div class="priting-template directions-template">
+  <div class="printing-template directions-template">
     <h2 v-html="contentTitle"></h2>
     <b>{{humanizedSummary(activeRoute.summary).distance}} </b> &#38; <b>{{humanizedSummary(activeRoute.summary).duration}} </b>
     <br /><br />

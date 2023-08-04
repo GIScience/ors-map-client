@@ -10,25 +10,25 @@
       <section>
         <v-alert outline :value="true" color="info">
           <h3 class="header"> {{$t('about.donate')}}</h3>
-          <span class="textjustify">{{$t('about.donateText')}}</span>
+          <span class="text-justify">{{$t('about.donateText')}}</span>
           <a class="link" :href="constants.links.osm" target="_blank">{{$t('about.openStreetMapOrg')}}</a>
         </v-alert>
-        <p class="textjustify">{{$t('about.info_I')}}</p>
+        <p class="text-justify">{{$t('about.info_I')}}</p>
         <v-alert outline :value="true" color="info">
           <h3 class="header">{{$t('about.infoSupport') }}</h3>
-          <div class="textjustify">
+          <div class="text-justify">
             <a class="link" :href="constants.links.donate" target="_blank">{{$t('about.supportText')}}</a>
           </div>
         </v-alert>
         <br>
         <v-divider></v-divider>
         <br>
-        <p class="textjustify">{{$t('about.info_II')}}</p>
+        <p class="text-justify">{{$t('about.info_II')}}</p>
       </section>
       <v-divider></v-divider>
       <section>
         <h4 class="sectionHeader">{{$t('about.softwareAndLibraries')}}</h4>
-        <p class="textjustify">
+        <p class="text-justify">
           {{$t('about.dataProvided')}} <a class='link' :href='constants.links.ghsl'
             target='_blank'>{{$t('about.ghsFramework')}}</a>
         </p>
@@ -53,7 +53,7 @@
           </h3>
         </span>
         <br>
-        <p class="textjustify">{{$t('about.info_V')}}</p>
+        <p class="text-justify">{{$t('about.info_V')}}</p>
         <v-divider></v-divider>
         <h4 class="sectionHeader">
           <a class="link" :title="$t('about.privacyPolicy')" :href="constants.links.privacyPolicy" target="_blank">{{$t('about.privacyPolicy')}}</a>&nbsp; &nbsp;
