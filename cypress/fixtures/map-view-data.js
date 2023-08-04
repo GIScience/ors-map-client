@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import Place from '@/models/place'
