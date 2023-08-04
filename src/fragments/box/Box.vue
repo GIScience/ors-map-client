@@ -23,4 +23,4 @@
 </template>
 
 <script src="./box.js"></script>
-<style scoped src="./box.css" scoped></style>
+<style scoped src="./box.css"></style>
