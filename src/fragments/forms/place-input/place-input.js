@@ -257,7 +257,7 @@ export default {
     },
     // Switch the coordinates position ([lat, long] -> [long, lat] and [long, lat] -> [lat, long])
     switchCoordsAvailable () {
-      const canSwitch = this.model.nameIsCoord()
+      const canSwitch = this.model.nameIsNumeric()
       return canSwitch
     },
     searchAvailable () {
@@ -294,7 +294,7 @@ export default {
         return []
       }
       let suggestions = []
-      if (this.localModel.nameIsCoord()) {
+      if (this.localModel.nameIsNumeric()) {
         const latLng = this.model.getLatLng()
         const rawCoordinatesPlace = new Place(latLng.lng, latLng.lat, `${latLng.lng},${latLng.lat}`, { properties: { layer: 'rawCoordinate' } })
         rawCoordinatesPlace.rawCoordinate = true
@@ -473,7 +473,7 @@ export default {
       if (!this.localModel || this.localModel.placeName.length === 0) {
         this.localModel = this.model.clone()
       }
-      if (this.localModel.nameIsCoord()) {
+      if (this.localModel.nameIsNumeric()) {
         this.autocompleteByCoords()
       } else {
         this.autocompleteByName()
@@ -561,7 +561,7 @@ export default {
 
           // Make sure that the changes in the input are debounced
           this.debounceTimeoutId = setTimeout(function () {
-            if (context.localModel.nameIsCoord()) {
+            if (context.localModel.nameIsNumeric()) {
               let latLng = context.localModel.getLatLng()
               context.model.setLngLat(latLng.lng, latLng.lat)
             }
@@ -585,7 +585,7 @@ export default {
     handleSearchInputEnter () {
       // We can only try to auto select the first result
       // if the inputted text is not a coordinate
-      if (!this.localModel.nameIsCoord()) {
+      if (!this.localModel.nameIsNumeric()) {
         let context = this
         if (appConfig.autoSelectFirstExactAddressMatchOnSearchEnter) {
           EventBus.$emit('showLoading', true)
@@ -833,7 +833,7 @@ export default {
      * @returns void
      */
     switchCoords () {
-      if (this.model.nameIsCoord()) {
+      if (this.model.nameIsNumeric()) {
         let latLng = this.model.getLatLng()
         this.model.lat = latLng.lng
         this.model.lng = latLng.lat

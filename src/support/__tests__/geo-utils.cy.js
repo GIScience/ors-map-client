@@ -22,26 +22,26 @@ describe('GeoUtils test', () => {
     done()
   })
 
-  it('should build a latlng object', (done) => {
+  it('should build a lat-lng object', (done) => {
     let result = GeoUtils.buildLatLong(49.46092806407386, 8.591051101684572)
     expect(result.lng).to.equal(8.591051101684572)
     expect(result.lat).to.equal(49.46092806407386)
     done()
   })
 
-  it('should normalize latlng object', (done) => {
-    let latlng = {lat:549.46092806407386, lng: 185.591051101684572}
-    GeoUtils.normalizeCoordinates(latlng)
-    expect(latlng.lng).to.equal(-174.40894889831543)
-    expect(latlng.lat).to.equal(-170.53907193592613)
+  it('should normalize lat-lng object', (done) => {
+    let latLng = {lat:549.46092806407386, lng: 185.591051101684572}
+    GeoUtils.normalizeCoordinates(latLng)
+    expect(latLng.lng).to.equal(-174.40894889831543)
+    expect(latLng.lat).to.equal(-170.53907193592613)
     done()
   })
 
-  it('should not change already normalized latlng object ', (done) => {
-    let latlng = {lat:49.46092806407387, lng: 8.591051101684571}
-    GeoUtils.normalizeCoordinates(latlng)
-    expect(latlng.lng).to.equal(8.591051101684571)
-    expect(latlng.lat).to.equal(49.46092806407387)
+  it('should not change already normalized lat-lng object ', (done) => {
+    let latLng = {lat:49.46092806407387, lng: 8.591051101684571}
+    GeoUtils.normalizeCoordinates(latLng)
+    expect(latLng.lng).to.equal(8.591051101684571)
+    expect(latLng.lat).to.equal(49.46092806407387)
     done()
   })
 })

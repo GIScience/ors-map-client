@@ -169,7 +169,7 @@ export default {
         this.place = places[0]
       }
       if (this.$store.getters.mode === constants.modes.search) {
-        if (!this.place.nameIsCoord()) {
+        if (!this.place.nameIsNumeric()) {
           let mapSettings = this.$store.getters.mapSettings
           mapSettings.mapCenter = this.$store.getters.appRouteData.options.center
           this.$store.dispatch('saveSettings', mapSettings).then(() => {

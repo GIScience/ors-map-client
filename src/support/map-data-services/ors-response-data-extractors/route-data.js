@@ -28,8 +28,8 @@ const routeData = {
           // since we are getting items from an array
           // starting with the index 0, the amount of
           // items is the final position + 1
-          const amoundOfItems = interval[1] +1
-          const segment = polyLineData.slice(interval[0], amoundOfItems)
+          const amountOfItems = interval[1] +1
+          const segment = polyLineData.slice(interval[0], amountOfItems)
           polylineHighlighted.polylines.push(segment)
         }
         if (polylineHighlighted.polylines.length > 0) {

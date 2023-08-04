@@ -129,18 +129,18 @@ const geoUtils = {
    */
   geoJsonIsARectangle(geoJson) {
     let coordinates = geoJson.geometry.coordinates[0]
-    let firstVortice = coordinates[0].toString()
-    let lastVortice = coordinates.at(-1).toString()
+    let firstVertex = coordinates[0].toString()
+    let lastVertex = coordinates.at(-1).toString()
 
     // It is a four sided, closed polygon
-    if (coordinates.length === 5 && firstVortice === lastVortice) {
-      let topLeftVortice = coordinates[0]
-      let topRightVortice = coordinates[1]
-      let bottomRightVortice = coordinates[2]
-      let bottomLeftVortice = coordinates[3]
+    if (coordinates.length === 5 && firstVertex === lastVertex) {
+      let topLeftVertex = coordinates[0]
+      let topRightVertex = coordinates[1]
+      let bottomRightVertex = coordinates[2]
+      let bottomLeftVertex = coordinates[3]
 
-      let topAndBottomParallel = (topLeftVortice[1] - bottomLeftVortice[1]) === (topRightVortice[1] - bottomRightVortice[1])
-      let rightAndLeftParallel = (topLeftVortice[0] - bottomLeftVortice[0]) === (topRightVortice[0] - bottomRightVortice[0])
+      let topAndBottomParallel = (topLeftVertex[1] - bottomLeftVertex[1]) === (topRightVertex[1] - bottomRightVertex[1])
+      let rightAndLeftParallel = (topLeftVertex[0] - bottomLeftVertex[0]) === (topRightVertex[0] - bottomRightVertex[0])
 
       return topAndBottomParallel && rightAndLeftParallel
     }

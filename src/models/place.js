@@ -68,7 +68,7 @@ class Place {
     if (this.lat !== null && this.lng !== null) {
       return [this.lng, this.lat]
     } else {
-      if (this.nameIsCoord()) {
+      if (this.nameIsNumeric()) {
         const coords = this.getCoordsFromName()
         return coords
       } else {
@@ -82,7 +82,7 @@ class Place {
    * @returns {LatLng}
    */
   getLatLng() {
-    if (this.nameIsCoord()) {
+    if (this.nameIsNumeric()) {
       let coords = this.getCoordsFromName()
       return GeoUtils.buildLatLong(coords[1], coords[0])
     }
@@ -169,7 +169,7 @@ class Place {
   /**
    * Check if the place contains coordinates as placeName
    */
-  nameIsCoord() {
+  nameIsNumeric() {
     const coords = this.getCoordsFromName()
     return !!coords
   }
@@ -207,7 +207,7 @@ class Place {
     const context = this
     return new Promise((resolve, reject) => {
       let promise = null
-      if (context.placeName && context.placeName.length > 0 && !context.nameIsCoord()) {
+      if (context.placeName && context.placeName.length > 0 && !context.nameIsNumeric()) {
         promise = Geocode(context.placeName)
       } else {
         promise = ReverseGeocode(context.lat, context.lng)
