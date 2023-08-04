@@ -39,7 +39,7 @@ export default {
      */
     fileAdded (file) {
       const context = this
-      var reader = new FileReader()
+      const reader = new FileReader()
       reader.addEventListener('loadend', function (event) {
         const content = event.target.result
         if (!content || content === 'null') {

@@ -94,7 +94,7 @@ const storeTooltipAlreadyShown = (tooltipName) => {
  */
 const showToolTip = (el, options, vNode) => {
   vNode.context.$nextTick(() => {
-    var mustBeShown = true
+    let mustBeShown = true
     // Check if tool tip was already shown
     if ((options.showOnce || options.saveClose) && options.name) {
       let mapSettings = store.getters.mapSettings

@@ -2,10 +2,10 @@
 
 const loader = {
   load: function (webPackContext, namedKey) {
-    var defaultExports = []
+    const defaultExports = []
 
     // here we initialize the object that will hold all the dependencies loaded
-    var dependenceObjects = {}
+    const dependenceObjects = {}
 
     // tell the importer to use the passed context and populate the defined object
     importAll(webPackContext, dependenceObjects)
@@ -13,7 +13,7 @@ const loader = {
     /**
      * Once we have all additional route, we add them to the router
      */
-    for (var prop in dependenceObjects) {
+    for (let prop in dependenceObjects) {
       // skip loop if the property is from prototype
       if (!Object.prototype.hasOwnProperty.call(dependenceObjects, prop)) continue
 

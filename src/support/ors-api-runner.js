@@ -304,7 +304,7 @@ const Pois = (filters, limit = 100, distanceBuffer = 500) => {
 const Isochrones = (places) => {
   const mapSettings = store.getters.mapSettings
 
-  var isochrones = new OrsApiClient.Isochrones({
+  const isochrones = new OrsApiClient.Isochrones({
     api_key: mapSettings.apiKey,
     host: mapSettings.apiBaseUrl,
     service: mapSettings.endpoints.isochrones

@@ -43,7 +43,7 @@ class PlaceMode {
       const name = place.placeName ? place.placeName.replace(/, /g, ',') : ''
 
       // Transform the coordinates into a comma separated value (easier to put in the url)
-      var lngLatStr = place.isEmpty() ? '' : `${place.lng},${place.lat}`
+      let lngLatStr = place.isEmpty() ? '' : `${place.lng},${place.lat}`
       if (appRouteData.options.zoom) {
         lngLatStr = `${lngLatStr},${appRouteData.options.zoom}`
       }

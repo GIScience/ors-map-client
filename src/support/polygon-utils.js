@@ -198,7 +198,7 @@ const PolygonUtils = {
    *
    */
   isInsidePolygon: (point, polygonCoords) => {
-    var windingNumber
+    let windingNumber
     let polygon = Leaflet.polygon(polygonCoords)
     let insideBounds = PolygonUtils.isInsidePolygonBounds(point, polygon)
 
@@ -243,7 +243,7 @@ const PolygonUtils = {
    * @see {@link https://en.wikipedia.org/wiki/Winding_number} to understand winding number
    */
   getWindingNumber: (point, vertices) => {
-    var i, isLeftTest, n, wn // the winding number counter
+    let i, isLeftTest, n, wn // the winding number counter
 
     n = vertices.length
     // Note that per the algorithm, the vertices (V) must be "a vertex points of a polygon V[n+1] with V[n]=V[0]"

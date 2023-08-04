@@ -38,7 +38,7 @@ class AppMode {
     places =  places || store.getters.appRouteData.places
     const newAppRouteData = this.getAppRouteData(places,  this.getRouteOptions(options))
     store.commit('appRouteData', newAppRouteData)
-    var route = this.targetMode.getRoute(newAppRouteData)
+    const route = this.targetMode.getRoute(newAppRouteData)
     AppLoader.getInstance().appHooks.run('appModeRouteReady', route)
     return route
   }

@@ -12,7 +12,7 @@ import lodash from 'lodash'
 const getFilterRefByName = (filterName, OrsMapFiltersAccessor = null, onlyIfEnabled = false) => {
   OrsMapFiltersAccessor = OrsMapFiltersAccessor || OrsMapFilters
 
-  var filter
+  let filter
   for (const filterKey in OrsMapFiltersAccessor) {
     const f = OrsMapFiltersAccessor[filterKey]
     // Don't get disabled filters if the

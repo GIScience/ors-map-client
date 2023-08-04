@@ -449,7 +449,7 @@ export default {
       EventBus.$emit('clearMap')
       // After clearing the map, wait a bit to load the new route
 
-      var appRouteData = false
+      let appRouteData = false
 
       if (this.$store.getters.mode !== constants.modes.pageNotFound) {
         appRouteData = AppMode.decodePath(this.$route)

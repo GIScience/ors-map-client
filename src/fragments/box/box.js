@@ -311,7 +311,7 @@ export default {
         }
       }
       // the initial color the the defined as primary at @/common/theme.js
-      var color = theme.primary || '#cbced1'
+      let color = theme.primary || '#cbced1'
 
       // if the topBorderPalette prop is defined, use it to define the color
       if (this.topBorderPalette) {

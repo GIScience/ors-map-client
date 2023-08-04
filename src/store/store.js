@@ -30,7 +30,7 @@ const fragmentModules = loader.load(require.context('@/fragments/', true, /\.sto
 const pluginsModules = loader.load(require.context('@/plugins/', true, /\.store\.js$/), true)
 const mergedModules = { ...storeModules, ...fragmentModules, ...pluginsModules }
 
-for (var key in mergedModules) {
+for (let key in mergedModules) {
   storeBuilder.modules[key] = mergedModules[key]
 }
 

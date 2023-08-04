@@ -65,7 +65,7 @@ const mapDefinitions = {
    * @param {*} cantIntersectMsg
    */
   drawOptions (cantIntersectMsg) {
-    var options = {
+    const options = {
       position: 'topleft',
       draw: {
         polyline: false,
@@ -95,7 +95,7 @@ const mapDefinitions = {
    */
   getProviders () {
     const defaultTilesProvider = store.getters.mapSettings.defaultTilesProvider
-    var providers = appConfig.mapTileProviders
+    let providers = appConfig.mapTileProviders
 
     // Add custom tile service if defined in settings
     const customTileProviderUrl = store.getters.mapSettings.customTileProviderUrl
@@ -139,7 +139,7 @@ const mapDefinitions = {
     return providers
   },
   getWmsOverlayerTileProviders () {
-    var providers = appConfig.wpsOverlayerTileProviders || []
+    const providers = appConfig.wpsOverlayerTileProviders || []
     return providers
   }
 }

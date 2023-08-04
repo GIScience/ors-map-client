@@ -336,7 +336,7 @@ export default {
      */
     highlightedName (placeName) {
       let searchMask = this.localModel.placeName
-      var regEx = new RegExp(searchMask, 'ig')
+      const regEx = new RegExp(searchMask, 'ig')
       let localPlaceName = this.localModel.placeName
       let replaceMask
       if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase() + ' ') === 0) {

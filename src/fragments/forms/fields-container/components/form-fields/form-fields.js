@@ -190,7 +190,7 @@ export default {
      * @returns {String}
      */
     getItemTranslation (itemValue, parameter) {
-      var translation = itemValue
+      let translation = itemValue
 
       // if the value is not a number, find the translation
       if(isNaN(itemValue)) {

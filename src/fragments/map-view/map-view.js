@@ -724,7 +724,7 @@ export default {
      * @param {String} direction
      */
     moveMapCenter(direction) {
-      var offset
+      let offset
       switch (direction) {
         case 'left':
           offset = this.map.getSize().x*0.15
@@ -1167,7 +1167,7 @@ export default {
         for (const pKey in this.localMapViewData.polygons) {
           const polygon = this.localMapViewData.polygons[pKey]
           if (polygon) {
-            var coords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
+            const coords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
             polylineData = polylineData.concat(coords)
           }
         }
@@ -1701,7 +1701,7 @@ export default {
      * @param {Object} map
      */
     avoidPolygonCreated (event, map) {
-      var polygon = event.layer
+      const polygon = event.layer
       this.setAvoidPolygonProperties(polygon)
       polygon.feature.properties.type = event.layerType
       let context = this
@@ -1869,7 +1869,7 @@ export default {
      * @returns {DocumentFragment}
      */
     buildPolygonClickPopupContent (polygon) {
-      var popupContentWrapper = document.createElement('div')
+      const popupContentWrapper = document.createElement('div')
 
       let editShapeEl = document.createElement('a')
       editShapeEl.onclick = () => {this.enableAvoidPolygonShapeEdit(polygon)}

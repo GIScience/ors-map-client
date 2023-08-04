@@ -71,7 +71,7 @@ const applyFilterValueConditions = (filterClone, filterValue) => {
  * @returns {*}
  */
 const getChildrenFilterValue = (filter) => {
-  var childFilter = {}
+  const childFilter = {}
   for (let propKey in filter.props) {
     const prop = filter.props[propKey]
     // Filter may have dependency and only be available
@@ -442,7 +442,7 @@ const removeInvalidValue = (filter) => {
     if (Array.isArray(filter.value)) {
       for (let arrKey in filter.value) {
         let val = filter.value[arrKey]
-        var valueIndex = filter.filteredItems.findIndex(function(v) {
+        const valueIndex = filter.filteredItems.findIndex(function (v) {
           return val === v || val === v.itemValue
         })
         if (valueIndex === -1) {

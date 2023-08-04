@@ -85,7 +85,7 @@ export default {
      * @returns {String}
      */
     setTemplatePrintingHtml(mapImageUrlData) {
-      var PrintTemplateClass
+      let PrintTemplateClass
 
       // Define the printing template based on the `mode`
       switch (this.localMapViewData.mode) {
@@ -111,7 +111,7 @@ export default {
         i18n: this.$i18n,
         store: this.$store
       }
-      var printingTemplate = new PrintTemplateClass(bidingData)
+      const printingTemplate = new PrintTemplateClass(bidingData)
       this.modePrintingHtml = printingTemplate.$mount().$el.innerHTML
     },
 
@@ -120,12 +120,12 @@ export default {
      */
     printView() {
       let htmlData = this.$refs.printableElement.innerHTML
-      var frame1 = document.createElement('iframe')
+      const frame1 = document.createElement('iframe')
       frame1.name = 'frame1'
       frame1.style.position = 'absolute'
       frame1.style.top = '-1000000px'
       document.body.appendChild(frame1)
-      var frameDoc = frame1.contentWindow ? frame1.contentWindow : frame1.contentDocument.document ? frame1.contentDocument.document : frame1.contentDocument
+      const frameDoc = frame1.contentWindow ? frame1.contentWindow : frame1.contentDocument.document ? frame1.contentDocument.document : frame1.contentDocument
 
       frameDoc.document.open()
       frameDoc.document.write(`<html><head><title>${document.title}</title>`)
@@ -149,15 +149,15 @@ export default {
      */
     setMapViewControlsVisibility(mapView, visible) {
       let buttonsOverMap = mapView.getElementsByClassName('v-btn')
-      for (var i = 0; i < buttonsOverMap.length; i++) {
+      for (let i = 0; i < buttonsOverMap.length; i++) {
         buttonsOverMap[i].style.display = visible ? 'block' : 'none'
       }
       let leafletControls = mapView.getElementsByClassName('leaflet-control')
-      for (var j = 0; j < leafletControls.length; j++) {
+      for (let j = 0; j < leafletControls.length; j++) {
         leafletControls[j].style.display = visible ? 'block' : 'none'
       }
       let leafletPopups = mapView.getElementsByClassName('leaflet-popup')
-      for (var k = 0; k < leafletPopups.length; k++) {
+      for (let k = 0; k < leafletPopups.length; k++) {
         leafletPopups[k].style.display = visible ? 'block' : 'none'
       }
     }

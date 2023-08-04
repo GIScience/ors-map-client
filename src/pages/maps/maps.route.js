@@ -13,7 +13,7 @@ const isochronesPath = RoutesResolver.isochronesPath()
 const embedParameters = '/:embed?/:locale?'
 
 // Build the optional placesNames Path
-var optionalPlaceNamesPath = ''
+let optionalPlaceNamesPath = ''
 for (let index = 2; index <= appConfig.maxPlaceInputs; index++) {
   optionalPlaceNamesPath += `/:placeName${index}?`
 }

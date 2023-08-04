@@ -59,7 +59,7 @@ const Utils = {
   getObjectsDiff(a, b) {
     a = a || {}
     b = b || {}
-    var result = { different: [], missing_from_first: [], missing_from_second: [] }
+    const result = {different: [], missing_from_first: [], missing_from_second: []}
 
     lodash.reduce(a, function (result, value, key) {
       if ( Object.prototype.hasOwnProperty.call(b, key)) {
@@ -71,7 +71,7 @@ const Utils = {
             result.different.push(key)
             return result
           } else {
-            var deeper = Utils.getObjectsDiff(a[key], b[key])
+            const deeper = Utils.getObjectsDiff(a[key], b[key])
             result.different = result.different.concat(lodash.map(deeper.different, (sub_path) => {
               return key + '.' + sub_path
             }))
@@ -130,12 +130,12 @@ const Utils = {
    * @returns
    */
   getChildElements (el, childElType) {
-    var results = []
-    var search = function search (children) {
-      var depth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0
+    const results = []
+    const search = function search(children) {
+      const depth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0
 
-      for (var index = 0; index < children.length; index++) {
-        var child = children[index]
+      for (let index = 0; index < children.length; index++) {
+        const child = children[index]
         if (child.localName === childElType) {
           results.push(child)
         } else {

@@ -215,8 +215,8 @@ const geoUtils = {
     if (isRoute && index !== null) {
       propsData.markerNumber = Number(index) + 1
     }
-    var htmlMarkerClass = Vue.extend(HtmlMarker)
-    var htmlIconInstance = new htmlMarkerClass({
+    const htmlMarkerClass = Vue.extend(HtmlMarker)
+    const htmlIconInstance = new htmlMarkerClass({
       propsData
     })
     htmlIconInstance.$mount()
@@ -238,11 +238,11 @@ const geoUtils = {
    * @returns {Array} of 2 objects {lon:..., lat:...}
    */
   getBounds: (places = [], polyline = []) => {
-    var boundsCollection = []
-    var minLat = null
-    var maxLat = null
-    var minLng = null
-    var maxLng = null
+    const boundsCollection = []
+    let minLat = null
+    let maxLat = null
+    let minLng = null
+    let maxLng = null
 
     places.forEach((place) => {
       boundsCollection.push({
@@ -431,7 +431,7 @@ const geoUtils = {
    */
   getPlaceIndexOnPolylineArray(place, polylineArr) {
     let indexOnPolyline = null
-    var minDistance = null
+    let minDistance = null
     // Find an more appropriate inject index, it this is the case
     for (let pIndex = 0; pIndex < polylineArr.length; pIndex++) {
       const polylineCoords = polylineArr[pIndex]
@@ -468,7 +468,7 @@ const geoUtils = {
     let placePolylineIndexMap = []
 
     for (let placeKey in places) {
-      var placeIndexOnPolyline = geoUtils.getPlaceIndexOnPolylineArray(places[placeKey], polylineArr)
+      const placeIndexOnPolyline = geoUtils.getPlaceIndexOnPolylineArray(places[placeKey], polylineArr)
       if (placeIndexOnPolyline !== null) {
         let map = {
           polylineIndex: placeIndexOnPolyline,
