@@ -3,7 +3,7 @@
     <h2 v-html="contentTitle"></h2>
     <br /><br />
 
-    <img width="auto" height="400" :src="mapViewImage" />
+    <img alt="Map print view" width="auto" height="400" :src="mapViewImage" />
     <template v-for="(place, index) in localMapViewData.places">
       <div :key="index">
         <h5>{{place.placeName}}</h5>

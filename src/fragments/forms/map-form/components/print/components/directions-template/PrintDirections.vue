@@ -4,7 +4,7 @@
     <b>{{humanizedSummary(activeRoute.summary).distance}} </b> &#38; <b>{{humanizedSummary(activeRoute.summary).duration}} </b>
     <br /><br />
 
-    <img width="auto" height="400" :src="mapViewImage" />
+    <img alt="Map print view" width="auto" height="400" :src="mapViewImage" />
     <template v-for="(segment, segmentIndex) in activeRoute.properties.segments">
       <h3 :key="segmentIndex + 'header' "> {{$t('print.segment')}} {{Number(segmentIndex) + 1}} </h3>
         <div :key="segmentIndex" v-if="activeRoute.properties.segments.length > 1">

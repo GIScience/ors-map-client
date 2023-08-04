@@ -118,7 +118,7 @@
             :title="placeSuggested.placeName.trim()">
             <v-list-tile-action class="hidden-sm-and-down">
               <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city' || placeSuggested.properties.layer === 'county'">location_city</v-icon>
-              <img width="25px" v-else-if="showAreaIcon(placeSuggested)" :src="getImgSrc('countryIconImgSrc')" height="auto" />
+              <img alt="Icon or image for suggested place" width="25px" v-else-if="showAreaIcon(placeSuggested)" :src="getImgSrc('countryIconImgSrc')" height="auto" />
               <v-icon v-else>place</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>

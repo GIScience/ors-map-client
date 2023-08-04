@@ -4,7 +4,7 @@
     </div>
     <div v-if="showDefaultAboutContent" class="about-container" ref="aboutContainer">
       <header style="margin-top: 0">
-        <img ref="aboutLogo" height="auto" class="logo" :src="getImgSrc('logoImgSrc')" width="200px" />
+        <img alt="Main about page logo" ref="aboutLogo" height="auto" class="logo" :src="getImgSrc('logoImgSrc')" width="200px" />
       </header>
       <v-divider></v-divider>
       <section>
@@ -42,7 +42,7 @@
       <br>
       <section>
         <a :href="constants.links.heigit" target="_blank">
-          <img height="auto" :src="getImgSrc('brandLogoSrc')" class="brand" width="150px" />
+          <img alt="Brand logo"  height="auto" :src="getImgSrc('brandLogoSrc')" class="brand" width="150px" />
         </a>
         <p>{{$t('about.info_IV')}}</p>
         <span>
