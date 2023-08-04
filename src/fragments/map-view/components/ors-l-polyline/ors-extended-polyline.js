@@ -12,7 +12,7 @@ import 'leaflet-geometryutil'
  * to create a stop point.
  * @emits followMarkerClicked - when the marker created over the polyline to show current cursor position is clicked
  * @emits follow - when a point of the polyline is focused with the mouse
- * @emits addstop - when the user drag the new polyline vertex into a location
+ * @emits addStop - when the user drag the new polyline vertex into a location
  */
 class OrsExtendedPolyline {
   constructor (context, showPointInfo = false) {
@@ -492,7 +492,7 @@ class OrsExtendedPolyline {
   markerDragEnd (event) {
     const draggedFromIndex = this._getInjectAfterIndex()
     const data = {event, closest: this.closest, draggedFromIndex}
-    this._poly.fireEvent('addstop', data)
+    this._poly.fireEvent('addStop', data)
     this._dragging = false
     this._map.removeLayer(this.tempPolylineDraggingMarkerRef)
     if (this.tempPolylineDraggingMarkerInfoRef) {

@@ -6,7 +6,7 @@
       @rightClicked="rightClicked"
       @click.exact="click($event)"
       @followMarkerClicked="click($event)"
-      @addstop="addStopViaPolylineDrag"
+      @addStop="addStopViaPolylineDrag"
       @add="openPopup"
       :options="options"
       :lat-lngs="coordinates"
