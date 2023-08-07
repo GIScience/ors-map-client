@@ -1,3 +1,4 @@
+// noinspection SpellCheckingInspection
 // List of countries for avoid countries feature
 
 const countries = [
