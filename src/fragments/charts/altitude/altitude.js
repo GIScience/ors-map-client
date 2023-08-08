@@ -1,5 +1,4 @@
 import {Line} from 'vue-chartjs'
-import ChartWrapper from '@/fragments/charts/chart-wrapper/ChartWrapper'
 import AltitudeDataParser from './altitude-parser'
 import MapViewData from '@/models/map-view-data'
 import {EventBus} from '@/common/event-bus'
@@ -49,8 +48,7 @@ export default {
     }
   }),
   components: {
-    lineChart: Line,
-    ChartWrapper
+    lineChart: Line
   },
   created () {
     this.setChartDefaults()
