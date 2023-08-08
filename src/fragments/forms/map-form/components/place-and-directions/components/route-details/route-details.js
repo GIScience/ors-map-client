@@ -146,6 +146,7 @@ export default {
      */
     changeActiveRouteIndex (index) {
       EventBus.$emit('changeActiveRouteIndex', index)
+      EventBus.$emit('activeRouteIndexChanged', index)
     },
     /**
      * When a segment is clicked
