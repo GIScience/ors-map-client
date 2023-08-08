@@ -1,39 +1,30 @@
-import theme from '@/config/theme'
 import lodash from 'lodash'
 
 /**
- * Get the columns from the mapViewData @see src/models/map-view-data
- * @param {*} mapViewData
+ * Get the chart columns from route coordinate length
+ * @param route - route response object
  */
-const getColumns = (mapViewData, routeIndex) => {
+const getColumns = (route) => {
   let coordinates = []
-  const route = mapViewData.routes[routeIndex]
   if (route && route.geometry && route.geometry.coordinates) {
     coordinates = route.geometry.coordinates
   }
   const columns = coordinates.length
-  return Array(columns)
+  return Array(columns).fill('')
 }
 
 /**
- * Get the datasets from the mapViewData @see src/models/map-view-data
- * @param {*} mapViewData
+ * Build the chart datasets from the Z value of the route coordinates
+ * @param route - route response object
+ * @param metersTranslation - localized 'meters' string
  */
-const getDatasets = (mapViewData, routeIndex, translations) => {
+const getDatasets = (route, metersTranslation) => {
   const altitudeDataset = {
-    label: translations.meters,
-    borderColor: theme.info,
-    borderWidth: 0,
-    backgroundColor: '#A1C8DC',
-    pointHoverBackgroundColor: 'white',
-    showLines: false,
-    fill: 'origin',
-    pointRadius: 0,
+    label: metersTranslation,
     data: []
   }
   let coordinates = []
-  const route = mapViewData.routes[routeIndex]
-  if (route && route.geometry && route.geometry.coordinates) {
+  if (route?.geometry?.coordinates) {
     coordinates = route.geometry.coordinates
   }
 
@@ -45,12 +36,11 @@ const getDatasets = (mapViewData, routeIndex, translations) => {
   return [altitudeDataset]
 }
 
-const parse = (mapViewData, routeIndex, translations) => {
-  const parsed = {
-    labels: getColumns(mapViewData, routeIndex),
-    datasets: getDatasets(mapViewData, routeIndex, translations)
+const parse = (route, translations) => {
+  return {
+    labels: getColumns(route),
+    datasets: getDatasets(route, translations)
   }
-  return parsed
 }
 
 export default {
