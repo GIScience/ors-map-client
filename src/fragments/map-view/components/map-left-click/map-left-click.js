@@ -16,7 +16,7 @@ export default {
     return {
       showLeftClickPopup: false,
       clickPoint: null,
-      clickLatlng: null,
+      clickLatLng: null,
       clickInsidePolygon: false,
       data: null
     }
@@ -45,10 +45,7 @@ export default {
       }
     },
     hasPlaceInfo () {
-      if (this.clickPoint) {
-        return true
-      }
-      return false
+      return !!this.clickPoint
     },
     placeInfoTitle () {
       const title = this.clickInsidePolygon ? this.$t('mapLeftClick.placeInsidePolygon') : this.$t('mapLeftClick.placeInfo')
@@ -60,7 +57,7 @@ export default {
      * Close the place info pop up
      */
     closePlaceInfo () {
-      this.clickLatlng = null
+      this.clickLatLng = null
       this.$emit('closed')
     },
     /**
@@ -70,16 +67,16 @@ export default {
     mapLeftClick (data) {
       this.clickInsidePolygon = data.insidePolygon
       this.showLeftClickPopup = true
-      this.clickLatlng = data.event.latlng
-      this.clickPoint = { latlng: data.event.latlng }
+      this.clickLatLng = data.event.latlng
+      this.clickPoint = { latLng: data.event.latlng }
 
       // Calculate and set polygon area
       if (this.clickInsidePolygon !== false) {
-        const latlngs = []
+        const coords = []
         for (const key in this.clickInsidePolygon) {
-          latlngs.push(GeoUtils.buildLatLong(this.clickInsidePolygon[key][1], this.clickInsidePolygon[key][0]))
+          coords.push(GeoUtils.buildLatLong(this.clickInsidePolygon[key][1], this.clickInsidePolygon[key][0]))
         }
-        this.clickPoint.containerArea = GeoUtils.readableArea(latlngs, this.$store.getters.mapSettings.areaUnit)
+        this.clickPoint.containerArea = GeoUtils.readableArea(coords, this.$store.getters.mapSettings.areaUnit)
         this.clickInsidePolygon = this.clickPoint.clickInsidePolygon = true
       }
 
@@ -129,12 +126,12 @@ export default {
       })
     },
     /**
-     * Copy latitude.longitude to clipboard
+     * Copy latitude/longitude to clipboard
      *
      */
-    copyLatlng () {
-      const latlng = `${this.clickLatlng.lat}, ${this.clickLatlng.lng}`
-      if (this.copyToClipboard(latlng)) {
+    copyLatLng () {
+      const latLng = `${this.clickLatLng.lat}, ${this.clickLatLng.lng}`
+      if (this.copyToClipboard(latLng)) {
         this.showSuccess(this.$t('mapLeftClick.latlngCopied'), { timeout: 2000 })
       }
     },
@@ -142,9 +139,9 @@ export default {
      * Copy longitude, latitude to clipboard
      *
      */
-    copyLnglat () {
-      const lnglat = `${this.clickLatlng.lng}, ${this.clickLatlng.lat}`
-      if (this.copyToClipboard(lnglat)) {
+    copyLngLat () {
+      const lngLat = `${this.clickLatLng.lng}, ${this.clickLatLng.lat}`
+      if (this.copyToClipboard(lngLat)) {
         this.showSuccess(this.$t('mapLeftClick.lnglatCopied'), { timeout: 2000 })
       }
     },
@@ -170,7 +167,7 @@ export default {
      * @emits directionsToPoint
      */
     directionsToPoint (placeInfo) {
-      const place = new Place(placeInfo.latlng.lng, placeInfo.latlng.lat)
+      const place = new Place(placeInfo.latLng.lng, placeInfo.latLng.lat)
       place.resolve().then(() => {
         this.$emit('directionsToPoint', {place})
       })

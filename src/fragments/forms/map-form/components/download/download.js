@@ -47,7 +47,7 @@ export default {
      * @returns string
      */
     destinationName () {
-      const destination = this.mapViewData.places[this.mapViewData.places.length - 1]
+      const destination = this.mapViewData.places.at(-1)
       return destination ? destination.placeName : ''
     },
     availableDownloadFormats () {

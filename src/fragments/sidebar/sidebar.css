@@ -19,7 +19,7 @@
 }
 
 .sidebar{
-  margin-top: 0px !important;
+  margin-top: 0 !important;
   max-height: 100% !important;
   z-index: 4;
   height:100%;
@@ -61,7 +61,7 @@
 
 
 .toggle-sidebar.hidden{
-  left: 0px;
+  left: 0;
 }
 
 .toggle-sidebar.low-res {

@@ -58,7 +58,7 @@ const runORSMenuCustomization = (menu) => {
     external: true
   })
 
-  // replace the signup item for a custom one that requires a non authenticated user to be displayed
+  // replace the signup item for a custom one that requires a non-authenticated user to be displayed
   menuManager.replaceItemEndingWith(menu, '/signup', loginMenuItem.items[0])
 
   // we can control if the custom icons are applied in the app config

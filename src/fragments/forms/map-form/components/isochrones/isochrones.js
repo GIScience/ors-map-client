@@ -90,7 +90,7 @@ export default {
     })
 
     // When a marker drag finishes, update
-    // the place coordinates and re render the map
+    // the place coordinates and re-render the map
     EventBus.$on('markerDragged', (marker) => {
       if (context.active) {
         const place = new Place(marker.position.lng, marker.position.lat)
@@ -126,13 +126,12 @@ export default {
   methods: {
     /**
      * When the user click on the map and select a point as the route start
-     * @param {*} data {latlng: ..., place:...}
+     * @param {*} data {latLng: ..., place:...}
      */
     addAsIsochroneCenter (data) {
-      this.places.push(new Place(data.latlng.lng, data.latlng.lat, '', { resolve: true }))
-      const lastPlaceIdex = this.places.length - 1
+      this.places.push(new Place(data.latLng.lng, data.latLng.lat, '', { resolve: true }))
       const context = this
-      this.places[lastPlaceIdex].resolve().then(() => {
+      this.places.at(-1).resolve().then(() => {
         context.updateAppRoute()
       }).catch((err) => {
         console.log(err)
@@ -147,7 +146,7 @@ export default {
     },
 
     /**
-     * Set a a suggested place as the selected one for a given place input
+     * Set a suggested place as the selected one for a given place input
      * @param {*} data - can be the place object or an object containing the place
      */
     selectPlace (data) {
@@ -284,8 +283,8 @@ export default {
 
     /**
      * Load the map data from the url
-     * rebuilding the place inputs and it values
-     * and render the map with these data (place or route)
+     * rebuilding the place inputs, and its values
+     * and render the map with this data (place or route)
      */
     loadData () {
       if (this.$store.getters.mode === constants.modes.isochrones) {

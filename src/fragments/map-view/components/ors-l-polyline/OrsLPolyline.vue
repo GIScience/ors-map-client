@@ -1,15 +1,15 @@
 <template>
   <div class="ors-l-polyline">
-    <l-polyline :lat-lngs="latLngsCoordinates" :opacity="routeOpacity" :weight="backgroundWeight" :color="backgroundColor"></l-polyline>
+    <l-polyline :lat-lngs="coordinates" :opacity="routeOpacity" :weight="backgroundWeight" :color="backgroundColor"></l-polyline>
     <l-polyline ref="foregroundPolyline"
       @follow="followPolyline"
       @rightClicked="rightClicked"
       @click.exact="click($event)"
       @followMarkerClicked="click($event)"
-      @addstop="addStopViaPolylineDrag"
+      @addStop="addStopViaPolylineDrag"
       @add="openPopup"
       :options="options"
-      :lat-lngs="latLngsCoordinates"
+      :lat-lngs="coordinates"
       :weight="weight"
       :opacity="routeOpacity"
       :color="color">

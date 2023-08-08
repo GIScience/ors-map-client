@@ -77,7 +77,7 @@ Some applications on the market have access to many user-specific data as well a
 determine the best match.
 This commercial tools might have access or use data like:
 
-- search history (even outside the maps client)
+- search history (even outside the maps-client)
 - search patterns (people on a certain location, with a certain language defined, in certain time span or season tends
   to find xx results better)
 - user location history

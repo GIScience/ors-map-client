@@ -40,19 +40,6 @@ class FileExtractorBuilder {
     const fileExtractorName = `${fileType}Importer`
     return new fileExtractors[fileExtractorName](data)
   }
-
-  /**
-   * Determines if the ors map component has support
-   * for given endpoint
-   *
-   * @static
-   * @param {*} data {responseData: {}, requestData: {}, apiVersion: String}
-   * @memberof TableDataBuilder
-   */
-  static hasFilepBuilderFor = (contentType, data) => {
-    const builder = FileExtractorBuilder.getFileDataExtractor(contentType, data)
-    return builder !== null && builder !== undefined
-  }
 }
 
 // export the request builder class

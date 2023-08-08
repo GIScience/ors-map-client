@@ -1,9 +1,9 @@
 <template>
-  <div class="priting-template directions-template">
+  <div class="printing-template directions-template">
     <h2 v-html="place.placeName"></h2>
     <br /><br />
 
-    <img width="auto" height="400" :src="mapViewImage" />
+    <img alt="Map print view" width="auto" height="400" :src="mapViewImage" />
     <div>
       <div v-if="place.placeName">{{$t('placeDetails.placeName')}}: <b>{{place.placeName}}</b></div>
       <div v-if="place.properties.country">{{$t('global.layers.country')}}: <b>{{place.properties.country}}</b></div>

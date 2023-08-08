@@ -4,8 +4,8 @@
 }
 
 .polygons-header>>>.v-expansion-panel__header {
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
   padding-left: 5px;
   min-height: 35px;
   background: transparent;

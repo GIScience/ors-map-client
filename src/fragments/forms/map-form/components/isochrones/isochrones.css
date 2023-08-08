@@ -14,11 +14,11 @@ ul.place-inputs li {
 }
 
 ul.place-inputs {
-  padding: 0px;
+  padding: 0;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
-.extra-btns {
-  padding-left: 0px;
+.extra-btn {
+  padding-left: 0;
 }

@@ -33,10 +33,7 @@ const getFilteredFeatureResponse = (featureId, rawResponse) => {
 const isANewResponse = (newResponse, oldResponse) => {
   const newTimestamp = lodash.get(newResponse, 'metadata.timestamp')
   const oldTimestamp = lodash.get(oldResponse, 'metadata.timestamp')
-  if (!oldTimestamp || (newTimestamp !== oldTimestamp)) {
-    return true
-  }
-  return false
+  return !oldTimestamp || (newTimestamp !== oldTimestamp)
 }
 
 /**
@@ -46,10 +43,8 @@ const isANewResponse = (newResponse, oldResponse) => {
  * @param {*} oldResponse
 */
 const isANewMapViewData = (newMapData, oldMapData) => {
-  if (!newMapData || !oldMapData || !newMapData.timestamp || newMapData.timestamp > oldMapData.timestamp) {
-    return true
-  }
-  return false
+  return !newMapData || !oldMapData || !newMapData.timestamp || newMapData.timestamp > oldMapData.timestamp
+
 }
 
 /**

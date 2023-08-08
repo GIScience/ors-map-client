@@ -23,7 +23,7 @@ class MapViewData {
   }
 
   /**
-   * Build a place using only lng an lat
+   * Build a place using only lng a lat
    * @param {*} lng
    * @param {*} lat
    */
@@ -94,11 +94,11 @@ class MapViewData {
   }
 
   /**
-   * Build a mapViewData object from a geojson object
+   * Build a mapViewData object from a GeoJSON object
    * @param {*} geoJson
    * @returns {MapViewData} mapViewAta
    */
-  static buildFromGeojson (geoJson) {
+  static buildFromGeoJson (geoJson) {
     const mapViewAta = new MapViewData()
 
     for (const fKey in geoJson.features) {
@@ -129,13 +129,13 @@ class MapViewData {
   }
 
   /**
-   * Get the geojson from the mapViewData
-   * @returns {Object} geojson
+   * Get the GeoJSON from the mapViewData
+   * @returns {Object} GeoJSON
    */
   getGeoJson () {
     const geoJsonData = { type: 'FeatureCollection', features: [] }
 
-    // Build and add routes/linestring features to the geojson
+    // Build and add routes/linestring features to the GeoJSON
     for (const rKey in this.routes) {
       const routeFeature = {
         type: 'Feature',
@@ -148,7 +148,7 @@ class MapViewData {
       geoJsonData.features.push(routeFeature)
     }
 
-    // Build and add places/points features to the geojson
+    // Build and add places/points features to the GeoJSON
     for (const plaKey in this.places) {
       const placeFeature = {
         type: 'Feature',
@@ -161,7 +161,7 @@ class MapViewData {
       geoJsonData.features.push(placeFeature)
     }
 
-    // Build and add polygons features to the geojson
+    // Build and add polygons features to the GeoJSON
     for (const polKey in this.polygons) {
       const polygon = this.polygons[polKey]
 
@@ -173,7 +173,7 @@ class MapViewData {
       geoJsonData.features.push(polygonFeature)
     }
 
-    // Return geojson with features
+    // Return GeoJSON with features
     return geoJsonData
   }
 }

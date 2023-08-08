@@ -74,7 +74,7 @@ class JsonImporter {
 
       // If an expected property
       // does not exist in the parsed content
-      // the parsed object is invalid (pois is not mandatory)
+      // the parsed object is invalid (POIs is not mandatory)
       if (content[key] === undefined && key !== 'pois') {
         return false
       } else {
@@ -130,18 +130,17 @@ class JsonImporter {
    */
   buildPlaces = () => {
     const places = []
-    // If there are less then 15, so we get all
+    // If there are less than 15, so we get all
     if (this.coordinates.length < 16) {
-      for (const key in this.coordinates) {
-        const latlng = this.coordinates[key]
-        const lng = latlng[1]
-        const lat = latlng[0]
+      for (const latLng of this.coordinates) {
+        const lng = latLng[1]
+        const lat = latLng[0]
         const place = new Place(lng, lat)
         places.push(place)
       }
-    } else { // if there are more then 15, only the first and the last
+    } else { // if there are more than 15, only the first and the last
       const firstCoords = (this.coordinates[0])
-      const lastCoords = (this.coordinates[this.coordinates.length - 1])
+      const lastCoords = (this.coordinates.at(-1))
 
       const firstLng = firstCoords[1]
       const firstLat = firstCoords[0]

@@ -144,7 +144,7 @@ class AdminAreaLoader {
   }
 
   /**
-   * check if a Place is inside of any of the polygons passed
+   * check if a Place is inside any passed polygon
    * @param {*} polygons
    * @param {Place} place
    */
@@ -234,7 +234,7 @@ class AdminAreaLoader {
   adjustPolygon (polygon, place) {
     let flattenCoordinates = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
     let first = flattenCoordinates[0].toString()
-    let last = flattenCoordinates[flattenCoordinates.length - 1].toString()
+    let last = flattenCoordinates.at(-1).toString()
     if (first !== last) {
       let cleanCoords = []
       for (let key in flattenCoordinates) {

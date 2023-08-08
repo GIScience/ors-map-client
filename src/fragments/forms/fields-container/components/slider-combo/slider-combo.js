@@ -57,7 +57,7 @@ export default {
       }
     },
     /**
-     * Run a field update with a debounce
+     * Run a field update with a debounce-timeout
      */
     debounceTextFieldChange () {
       const context = this
@@ -66,7 +66,7 @@ export default {
       }
       this.debounceTimeoutId = setTimeout(function () {
         if (context.textLocalModel) {
-          var value = Number(context.textLocalModel)
+          let value = Number(context.textLocalModel)
 
           // Make sure the filter has a value that is allowed
           if (context.filter.max && value > context.filter.max) {

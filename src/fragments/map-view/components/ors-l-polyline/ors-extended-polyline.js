@@ -4,15 +4,15 @@ import orsDictionary from '@/resources/ors-dictionary'
 import lodash from 'lodash'
 
 // The import below will add some methods to Leaflet.GeometryUtil
-// Even if it is not been accessed within this class, it is being used!
+// Even if it has not been accessed within this class, it is being used!
 import 'leaflet-geometryutil'
 
 /**
  * Add custom behaviors to the polyline, specially the drag
- * to create an stop point.
+ * to create a stop point.
  * @emits followMarkerClicked - when the marker created over the polyline to show current cursor position is clicked
  * @emits follow - when a point of the polyline is focused with the mouse
- * @emits addstop - when the user drag the new polyline vertex into a location
+ * @emits addStop - when the user drag the new polyline vertex into a location
  */
 class OrsExtendedPolyline {
   constructor (context, showPointInfo = false) {
@@ -146,20 +146,21 @@ class OrsExtendedPolyline {
   /**
   * return the closest point on the closest segment
   */
-  getClosestPointAndSegment (latlng) {
-    var distanceMin = Infinity
-    var segmentMin = null
+  getClosestPointAndSegment (latLng) {
+    let distanceMin = Infinity
+    let segmentMin = null
+    const len = (this._poly._latlngs.length - 1)
 
-    for (var i = 0, len = (this._poly._latlngs.length - 1); i < len; i++) {
-      var segment = [ this._poly._latlngs[i], this._poly._latlngs[i + 1] ]
-      var distance = Leaflet.GeometryUtil.distanceSegment(this._map, latlng, segment[0], segment[1])
+    for (let i = 0; i < len; i++) {
+      const segment = [this._poly._latlngs[i], this._poly._latlngs[i + 1]]
+      const distance = Leaflet.GeometryUtil.distanceSegment(this._map, latLng, segment[0], segment[1])
       if (distance < distanceMin) {
         distanceMin = distance
         segmentMin = segment
       }
     }
 
-    return { point: Leaflet.GeometryUtil.closestOnSegment(this._map, latlng, segmentMin[0], segmentMin[1]) , segment: segmentMin }
+    return { point: Leaflet.GeometryUtil.closestOnSegment(this._map, latLng, segmentMin[0], segmentMin[1]) , segment: segmentMin }
   }
 
   /**
@@ -167,11 +168,11 @@ class OrsExtendedPolyline {
    * @param {Event} event
    */
   mouseContextClick (event) {
-    var closest = Leaflet.GeometryUtil.closest(this._map, this._poly, event.latlng, true)
+    const closest = Leaflet.GeometryUtil.closest(this._map, this._poly, event.latlng, true)
 
     if (this.options.vertices.destroy !== false && closest.distance < this.options.tolerance) {
-      var index = this._poly._latlngs.indexOf(closest)
-      var maxIndex = (this._poly._latlngs.length - 1)
+      const index = this._poly._latlngs.indexOf(closest)
+      const maxIndex = (this._poly._latlngs.length - 1)
       if ((this.options.vertices.first === false && index == 0) || (this.options.vertices.last === false && index == maxIndex)) {
         return
       }
@@ -223,17 +224,17 @@ class OrsExtendedPolyline {
   createOrUpdateCustomMarkers (e) {
     if (this._dragging) return
 
-    var closest = Leaflet.GeometryUtil.closestLayerSnap(this._map, [this._poly], e.latlng, this.options.distance, false)
+    const closest = Leaflet.GeometryUtil.closestLayerSnap(this._map, [this._poly], e.latlng, this.options.distance, false)
 
     if (this._marker && closest) {
       this._updateCustomMarkers(closest)
-      var latlng = this._marker.getLatLng()
-      this._poly.fireEvent('follow', latlng)
+      const latLng = this._marker.getLatLng()
+      this._poly.fireEvent('follow', latLng)
 
     } else if (!this._marker && closest) {
       this._createCustomMarkers(closest)
-      latlng = this._marker.getLatLng()
-      this._poly.fireEvent('follow', latlng)
+      const latLng = this._marker.getLatLng()
+      this._poly.fireEvent('follow', latLng)
 
     } else if (this._marker) {
       if (this._marker) {
@@ -311,7 +312,7 @@ class OrsExtendedPolyline {
       const globalTranslations = context.$t('global')
       const orsPolylineTranslations = context.$t('orsLPolyline')
       const orsDictionaryTranslations = context.$t('orsDictionary')
-      var surfaceType = null
+      let surfaceType = null
 
       // Get the surface type for the given point
       if (route.properties.extras.surface) {
@@ -358,7 +359,7 @@ class OrsExtendedPolyline {
     if (!index) {
       return true
     }
-    var maxIndex = (this._poly._latlngs.length - 1)
+    const maxIndex = (this._poly._latlngs.length - 1)
 
     if ((this.options.vertices.first === false && index == 0) ||
         (this.options.vertices.last === false && index == maxIndex) ||
@@ -380,17 +381,17 @@ class OrsExtendedPolyline {
    * @param {*} event
    */
   markerDragStart (event) {
-    var latlng = event.target.getLatLng()
+    const latLng = event.target.getLatLng()
 
-    this.closest = Leaflet.GeometryUtil.closest(this._map, this._poly, latlng, true)
-    this.startingDragPoint = latlng
+    this.closest = Leaflet.GeometryUtil.closest(this._map, this._poly, latLng, true)
+    this.startingDragPoint = latLng
     this._dragging = true
 
     // Check the tolerance
     if (this.closest.distance < this.options.tolerance) {
       this._processDrag()
     } else {
-      this.closest = this._getClosestPointAndSegment(latlng)
+      this.closest = this._getClosestPointAndSegment(latLng)
       this._processDrag()
     }
   }
@@ -400,17 +401,17 @@ class OrsExtendedPolyline {
    * @returns {Integer} closestIndex
    */
   getClosestIndex () {
-    var closestIndex = null
-    var minDistance = null
+    let closestIndex = null
+    let minDistance = null
     if (this.closest) {
       for (let index = 0; index < this._poly._latlngs.length; index++) {
-        let latlng = this._poly._latlngs[index]
+        let latLng = this._poly._latlngs[index]
 
-        if (latlng) {
+        if (latLng) {
           let closestLatLng = this.closest.point || this.closest
           closestLatLng = closestLatLng.latlng || closestLatLng
 
-          let currentDistance = GeoUtils.calculateDistanceBetweenLocations(latlng, closestLatLng, 'm')
+          let currentDistance = GeoUtils.calculateDistanceBetweenLocations(latLng, closestLatLng, 'm')
           if (currentDistance === 0) {
             closestIndex = index
             break
@@ -431,12 +432,12 @@ class OrsExtendedPolyline {
    * @returns {Integer} injectIndex
    */
   getInjectAfterIndex () {
-    var injectIndex = null
-    var minDistance = null
+    let injectIndex = null
+    let minDistance = null
     for (let index = 0; index < this._poly._latlngs.length; index++) {
-      let latlng = this._poly._latlngs[index]
-      if (latlng) {
-        let currentDistance = GeoUtils.calculateDistanceBetweenLocations(latlng, this.startingDragPoint, 'm')
+      let latLng = this._poly._latlngs[index]
+      if (latLng) {
+        let currentDistance = GeoUtils.calculateDistanceBetweenLocations(latLng, this.startingDragPoint, 'm')
         if (currentDistance === 0) {
           injectIndex = index
           break
@@ -457,13 +458,13 @@ class OrsExtendedPolyline {
    * @param {*} event
    */
   processDrag () {
-    var closestIndex = this._getClosestIndex()
+    const closestIndex = this._getClosestIndex()
 
     if (this._isInvalidDrag(closestIndex)) {
       this.closest = null
       this._marker.options.draggable = false
       this._dragging = false
-      return
+
     } else {
       //add a new vertex
       this._poly._latlngs.splice(closestIndex, 0, this.closest)
@@ -489,9 +490,9 @@ class OrsExtendedPolyline {
    * @param {*} event
    */
   markerDragEnd (event) {
-    var draggedFromIndex = this._getInjectAfterIndex()
+    const draggedFromIndex = this._getInjectAfterIndex()
     const data = {event, closest: this.closest, draggedFromIndex}
-    this._poly.fireEvent('addstop', data)
+    this._poly.fireEvent('addStop', data)
     this._dragging = false
     this._map.removeLayer(this.tempPolylineDraggingMarkerRef)
     if (this.tempPolylineDraggingMarkerInfoRef) {

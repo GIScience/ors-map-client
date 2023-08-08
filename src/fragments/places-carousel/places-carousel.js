@@ -55,7 +55,7 @@ export default {
           // windowed is used to toggle between full-screen mode and container mode
           windowed: 1200,
           // padding of the list, if container < windowed what is the left-right padding of the list
-          // during full-screen mode the padding will added to left & right to centralise the item
+          // during full-screen mode the padding will be added to left & right to centralise the item
           padding: 24
         },
         responsive: [
@@ -179,7 +179,7 @@ export default {
       }
     },
     /**
-     * Emit the directions to latlng
+     * Emit 'directionsToPoint'
      * @param {*} place
      */
     directionsTo (place) {
@@ -187,7 +187,7 @@ export default {
       this.$emit('closed')
     },
     /**
-     * Emit the directions to latlng
+     * Emit 'gotToPlace'
      * @param {*} place
      */
     gotToPlace (place) {

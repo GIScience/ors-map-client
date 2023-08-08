@@ -45,8 +45,8 @@ class SearchMode {
     appRouteData.options.search = true
 
     const coords = currentRoute.params.center.split(',')
-    const latlng = GeoUtils.buildLatLong(coords[0], coords[1])
-    appRouteData.options.center = latlng
+    const latLng = GeoUtils.buildLatLong(coords[0], coords[1])
+    appRouteData.options.center = latLng
     appRouteData.options.zoom = Number(currentRoute.params.zoom)
 
     // Get and format the place name

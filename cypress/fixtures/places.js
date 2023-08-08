@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 import Place from '@/models/place'
 
 const places = {

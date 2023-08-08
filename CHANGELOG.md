@@ -170,7 +170,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 - add surface_quality_known and allow_unsuitable parameters for wheelchair profile ([daa1799](https://github.com/GIScience/ors-map-client/commit/daa1799b3c34500b3631cb73dd10d7fce8b51c1c))
-- **app-state.js:** update the html document lang when when the app language is changed ([5fa4508](https://github.com/GIScience/ors-map-client/commit/5fa450884d71750b8c501780d3b1318d1e2c1440))
+- **app-state.js:** update the html document lang when the app language is changed ([5fa4508](https://github.com/GIScience/ors-map-client/commit/5fa450884d71750b8c501780d3b1318d1e2c1440))
 
 ### Bug Fixes
 
@@ -238,7 +238,7 @@ All notable changes to this project will be documented in this file. See [standa
 - **about.vue:** add class to about container ([d8f82d4](https://github.com/GIScience/ors-map-client/commit/d8f82d471a8df193f416dec7c3e26b07a738248e))
 - **box.vue:** add custom classes to header corner buttons ([5682d5f](https://github.com/GIScience/ors-map-client/commit/5682d5ff5c22f2f8d6ba7ffd288cee9f6c0d3703))
 - **download.js:** remove unused prop and duplicated format extension ([ab8f0b8](https://github.com/GIScience/ors-map-client/commit/ab8f0b8d113faab3a8a1cea613d430d1d14a1004))
-- **download.vue:** add add class to elements ([f24e8f0](https://github.com/GIScience/ors-map-client/commit/f24e8f0407b04f79fed56340e085636fd1476821))
+- **download.vue:** add class to elements ([f24e8f0](https://github.com/GIScience/ors-map-client/commit/f24e8f0407b04f79fed56340e085636fd1476821))
 - **download:** refactor download component adding css classes and emitting downloadclosed event ([581dec1](https://github.com/GIScience/ors-map-client/commit/581dec1bfc19e04642ae41838ec3d6332918d972))
 - **share:** append copy-to-clipboard text area to component's root element ([4cbf7ee](https://github.com/GIScience/ors-map-client/commit/4cbf7eee98e655f85433845dc058558e611a3cd0))
 
@@ -253,7 +253,7 @@ All notable changes to this project will be documented in this file. See [standa
 - **about.spec.js:** add about test ([f74a30c](https://github.com/GIScience/ors-map-client/commit/f74a30c6b9db4ecb8418364c16fd98f0b49ef8d4))
 - add e2e download test for all export formats ([631e57f](https://github.com/GIScience/ors-map-client/commit/631e57f916a748823d8de5da04dfb827487ae004))
 - add integration test for download component ([61c70a2](https://github.com/GIScience/ors-map-client/commit/61c70a26d801844bafee068df2dedee16c6c327f))
-- add not found test for non existing route ([c29563d](https://github.com/GIScience/ors-map-client/commit/c29563de5b1aa26c1afc32655b2c7ba7194f4fd8))
+- add not found test for non-existing route ([c29563d](https://github.com/GIScience/ors-map-client/commit/c29563de5b1aa26c1afc32655b2c7ba7194f4fd8))
 - **app-render.spec.js:** replace promise resolving for await ([0d3ac5f](https://github.com/GIScience/ors-map-client/commit/0d3ac5f290b776cebed50dedd26fa7ed7340ace3))
 - **base-karma.conf.js:** add the --disable-dev-shm-usage flag ([3444cab](https://github.com/GIScience/ors-map-client/commit/3444cab8f96dd6a3344c8f8d56a6b7a306f37256))
 - **base-karma.conf.js:** increase karma timeouts ([6de7923](https://github.com/GIScience/ors-map-client/commit/6de7923739b9c456508aa631a694b42c1a9c62d2))
@@ -525,7 +525,7 @@ All notable changes to this project will be documented in this file. See [standa
 - include e2e in global test script command ([dfd59ff](https://github.com/GIScience/ors-map-client/commit/dfd59ffadc5a7d390edd4ff20f102370cd25139f))
 - **karma.conf.js:** fix the karma config coverage preprocessor path ([4094f0e](https://github.com/GIScience/ors-map-client/commit/4094f0eb2d9b1f29feb7e58aae269e08dd922f09))
 - make e2e test runner to wait for the compiler/bundle to be ready ([4a8a6b0](https://github.com/GIScience/ors-map-client/commit/4a8a6b04cf2f96a4badaa4a4bba427e2132773bf))
-- **nightwatch.conf.js:** update the test folders to tests and the chrome browser options ([d70fadc](https://github.com/GIScience/ors-map-client/commit/d70fadc1dd901a1c72607b73ee1c211db0ef2965))
+- **nightwatch.conf.js:** update the test folders to tests and the Chrome browser options ([d70fadc](https://github.com/GIScience/ors-map-client/commit/d70fadc1dd901a1c72607b73ee1c211db0ef2965))
 - remove unused jest config file ([61252c7](https://github.com/GIScience/ors-map-client/commit/61252c7cafbcd829e6d361f4ab65a1735fd3862a))
 - update the chromedriver version to 94 ([0f5b5ba](https://github.com/GIScience/ors-map-client/commit/0f5b5ba182972f5f6373785367be6f98cdb7d17d))
 
@@ -547,7 +547,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Docs
 
-- **readme.md:** add github test action badge ([1e736e6](https://github.com/GIScience/ors-map-client/commit/1e736e6936a9555be15f4e4a7e9685c1162ce5ba))
+- **readme.md:** add GitHub test action badge ([1e736e6](https://github.com/GIScience/ors-map-client/commit/1e736e6936a9555be15f4e4a7e9685c1162ce5ba))
 - **readme.md:** fix readme test badge link ([18b4df3](https://github.com/GIScience/ors-map-client/commit/18b4df3a3b829bcccf5915fd4daf0891c746edda))
 
 ### [1.21.4](https://github.com/GIScience/ors-map-client/compare/v1.21.3...v1.21.4) (2021-10-22)
@@ -591,7 +591,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Tests
 
-- **test.yml:** update github action test version ([fb7402f](https://github.com/GIScience/ors-map-client/commit/fb7402fd265bfd79815db56433396bdab9b7246c))
+- **test.yml:** update GitHub action test version ([fb7402f](https://github.com/GIScience/ors-map-client/commit/fb7402fd265bfd79815db56433396bdab9b7246c))
 - update test specs ([57f947f](https://github.com/GIScience/ors-map-client/commit/57f947f66526ff067e0dc8576de11c196fcaa7f2))
 
 ### Docs
@@ -616,7 +616,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### CI
 
-- **test.yml:** add github workflow for testing ([09f52dd](https://github.com/GIScience/ors-map-client/commit/09f52ddf5320a411a9580b76c8446b6bf9221058))
+- **test.yml:** add GitHub workflow for testing ([09f52dd](https://github.com/GIScience/ors-map-client/commit/09f52ddf5320a411a9580b76c8446b6bf9221058))
 
 ### [1.20.5](https://github.com/GIScience/ors-map-client/compare/v1.20.4...v1.20.5) (2021-10-14)
 
@@ -751,7 +751,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- **map-left-click:** do not show place info when sidebar is open and map view is clicked ([318c2f9](https://github.com/GIScience/ors-map-client/commit/318c2f9169ead99b4dd0faff8067d6d71443ea5f))
+- **map-left-click:** do not show info for place when sidebar is open and map view is clicked ([318c2f9](https://github.com/GIScience/ors-map-client/commit/318c2f9169ead99b4dd0faff8067d6d71443ea5f))
 
 ## [1.15.0](https://github.com/GIScience/ors-map-client/compare/v1.14.1...v1.15.0) (2021-08-04)
 
@@ -1163,7 +1163,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Others
 
-- Removed altitude component i18n files, since it is not been used anymore
+- Removed altitude component i18n files, since it is not used anymore
 
 ### 1.0.6 (2021-03-25)
 
@@ -1179,14 +1179,14 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- Stop displaying old route when the route way points changed, and a new route cannot be calculated
+- Stop displaying old route when the route waypoints changed, and a new route cannot be calculated
 - Build extra info highlight color based on an item index or value
 
 ### 1.0.4 (2021-03-24)
 
 ### Bug Fixes
 
-- Show place markers when the route cannot be calculated
+- Show place-markers when the route cannot be calculated
 - Show calculating toaster indefinitely (until an error or success toaster replace it)
 - the adding of extra info to the request when a nested profile is active, like foot-hiking
 

@@ -158,18 +158,18 @@ export default {
      */
     segmentClicked (segment, index) {
       const sectionTitle = ''
-      const highlighData = {sectionTitle, sections: [] }
-      const segmentData = this.buildExtraHighlighPolylineData(segment, index)
-      highlighData.sections.push(segmentData)
-      EventBus.$emit('highlightPolylineSections', highlighData)
+      const highlightData = {sectionTitle, sections: [] }
+      const segmentData = this.buildExtraHighlightPolylineData(segment, index)
+      highlightData.sections.push(segmentData)
+      EventBus.$emit('highlightPolylineSections', highlightData)
     },
     /**
-     * Build the the extra info highlighting data
+     * Build the extra info highlighting data
      * @param {*} segment
      * @param {*} index
      * @returns {Object}
      */
-    buildExtraHighlighPolylineData (segment, index) {
+    buildExtraHighlightPolylineData (segment, index) {
       const color = constants.segmentHighlightColor
       const label = `${this.$t('routeDetails.segment')} ${index+1}`
       const intervals = []

@@ -14,7 +14,7 @@
 
 
 .app-hm-list .app-btn-mh .v-btn__content {
-  padding-left: 0px;
+  padding-left: 0;
   text-align: left;
   display: block;
 }
@@ -48,7 +48,7 @@
   content: '';
   width: 20px;
   height: 2px;
-  margin-left: 0px;
+  margin-left: 0;
   background-color: #b5152b;
 }
 

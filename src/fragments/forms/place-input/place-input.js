@@ -126,7 +126,7 @@ export default {
       return isMobile
     },
     /**
-     * Determines if the pick a place button must show its tooltip
+     * Determines if the 'pick a place' button must show its tooltip
      * @returns {Boolean}
      */
     showInputPickPlaceTooltip () {
@@ -210,10 +210,6 @@ export default {
         btnColumns++
       }
 
-      if (btnColumns > 1) {
-        btnColumns = btnColumns + 0
-      }
-
       return btnColumns
     },
     /**
@@ -261,7 +257,7 @@ export default {
     },
     // Switch the coordinates position ([lat, long] -> [long, lat] and [long, lat] -> [lat, long])
     switchCoordsAvailable () {
-      const canSwitch = this.model.nameIsCoord()
+      const canSwitch = this.model.nameIsNumeric()
       return canSwitch
     },
     searchAvailable () {
@@ -285,7 +281,7 @@ export default {
       }
     },
     /**
-     * Determines if the current browser location option should be prepend to the suggestion lis of the current place input
+     * Determines if the current browser location option should be prepended to the suggestion lis of the current place input
      */
     showBrowserLocationInPlacesList () {
       return this.focused
@@ -298,9 +294,9 @@ export default {
         return []
       }
       let suggestions = []
-      if (this.localModel.nameIsCoord()) {
-        const latlng = this.model.getLatLng()
-        const rawCoordinatesPlace = new Place(latlng.lng, latlng.lat, `${latlng.lng},${latlng.lat}`, { properties: { layer: 'rawCoordinate' } })
+      if (this.localModel.nameIsNumeric()) {
+        const latLng = this.model.getLatLng()
+        const rawCoordinatesPlace = new Place(latLng.lng, latLng.lat, `${latLng.lng},${latLng.lat}`, { properties: { layer: 'rawCoordinate' } })
         rawCoordinatesPlace.rawCoordinate = true
         suggestions.push(rawCoordinatesPlace)
       }
@@ -340,7 +336,7 @@ export default {
      */
     highlightedName (placeName) {
       let searchMask = this.localModel.placeName
-      var regEx = new RegExp(searchMask, 'ig')
+      const regEx = new RegExp(searchMask, 'ig')
       let localPlaceName = this.localModel.placeName
       let replaceMask
       if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase() + ' ') === 0) {
@@ -473,11 +469,11 @@ export default {
      * Search for a place based on the place input value
      */
     autocompleteSearch () {
-      // Make sure that the local model is up to date
+      // Make sure that the local model is up-to-date
       if (!this.localModel || this.localModel.placeName.length === 0) {
         this.localModel = this.model.clone()
       }
-      if (this.localModel.nameIsCoord()) {
+      if (this.localModel.nameIsNumeric()) {
         this.autocompleteByCoords()
       } else {
         this.autocompleteByName()
@@ -525,11 +521,11 @@ export default {
      *
      */
     autocompleteByCoords () {
-      const latlng = this.model.getLatLng()
+      const latLng = this.model.getLatLng()
       EventBus.$emit('showLoading', true)
       const context = this
-      ReverseGeocode(latlng.lat, latlng.lng, 10).then(places => {
-        const place = new Place(latlng.lng, latlng.lat)
+      ReverseGeocode(latLng.lat, latLng.lng, 10).then(places => {
+        const place = new Place(latLng.lng, latLng.lat)
         place.setSuggestions(places)
         context.localModel = place
         context.focused = true
@@ -547,7 +543,7 @@ export default {
     },
 
     /**
-     * Handles the input change with a debounce
+     * Handles the input change with a debounce-timeout
      * @param {*} event
      */
     changed (event = null) {
@@ -555,7 +551,7 @@ export default {
         const isPasteEvent = event instanceof ClipboardEvent
         // In case of a ClipboardEvent (ctr + v)
         // we must just ignore, since the input
-        // model  has not changed yet and it will
+        // model  has not changed yet, and it will
         // trigger another change event when it changes
         if (!isPasteEvent) {
           event.preventDefault()
@@ -565,9 +561,9 @@ export default {
 
           // Make sure that the changes in the input are debounced
           this.debounceTimeoutId = setTimeout(function () {
-            if (context.localModel.nameIsCoord()) {
-              let latlng = context.localModel.getLatLng()
-              context.model.setLnglat(latlng.lng, latlng.lat)
+            if (context.localModel.nameIsNumeric()) {
+              let latLng = context.localModel.getLatLng()
+              context.model.setLngLat(latLng.lng, latLng.lat)
             }
             if (event.key === 'Enter') {
               context.focused = false
@@ -587,9 +583,9 @@ export default {
      * suggestions for the other cases
      */
     handleSearchInputEnter () {
-      // We can only try yo auto select the first result
+      // We can only try to auto select the first result
       // if the inputted text is not a coordinate
-      if (!this.localModel.nameIsCoord()) {
+      if (!this.localModel.nameIsNumeric()) {
         let context = this
         if (appConfig.autoSelectFirstExactAddressMatchOnSearchEnter) {
           EventBus.$emit('showLoading', true)
@@ -640,7 +636,7 @@ export default {
     sendToSearchMode () {
       if (!this.model.placeName || this.model.placeName.length === 0) {
         this.showError(this.$t('placeInput.pleaseTypeSomething'))
-        return
+
       } else {
         if (previousMode === constants.modes.search) {
           this.$emit('searchChanged')
@@ -656,14 +652,14 @@ export default {
     },
 
     /**
-     * Set a a suggested place as the selected one for a given place input
+     * Set a suggested place as the selected one for a given place input
      * @param {Place} place
      */
     selectPlace (place) {
       // We shall not reassign an external object, so we update each property
       this.model.placeName = place.properties.label || place.placeName
       this.model.placeId = place.properties.id
-      this.model.setLnglat(place.lng, place.lat)
+      this.model.setLngLat(place.lng, place.lat)
       this.model.properties = place.properties
       this.model.suggestions = []
       this.searching = false
@@ -799,8 +795,8 @@ export default {
 
     /**
      * Defines the place input values at the given index based in the browser location api
-     * It will requires the users' authorization to access the browser location. Id denied
-     * will show a toaster with an error message
+     * It will require the users' authorization to access the browser location. If denied,
+     * it will show a toaster with an error message
      */
     setLocationFromBrowser () {
       this.focused = false
@@ -837,12 +833,12 @@ export default {
      * @returns void
      */
     switchCoords () {
-      if (this.model.nameIsCoord()) {
-        let latlng = this.model.getLatLng()
-        this.model.lat = latlng.lng
-        this.model.lng = latlng.lat
+      if (this.model.nameIsNumeric()) {
+        let latLng = this.model.getLatLng()
+        this.model.lat = latLng.lng
+        this.model.lng = latLng.lat
         this.model.setCoordsAsName()
-        this.model.placeName = `${latlng.lat},${latlng.lng}`
+        this.model.placeName = `${latLng.lat},${latLng.lng}`
         this.autocompleteByCoords()
       }
     },
@@ -853,11 +849,11 @@ export default {
      */
     distance (suggestedPlace) {
       // Set origin and destination
-      const fromLatlng = { lat: this.$store.getters.mapCenter.lat, lng: this.$store.getters.mapCenter.lng }
-      const toLatlng = { lat: suggestedPlace.lat, lng: suggestedPlace.lng }
+      const fromLatLng = { lat: this.$store.getters.mapCenter.lat, lng: this.$store.getters.mapCenter.lng }
+      const toLatLng = { lat: suggestedPlace.lat, lng: suggestedPlace.lng }
 
       // calculate the distance between the two points
-      let distance = GeoUtils.calculateDistanceBetweenLocations(fromLatlng, toLatlng, this.$store.getters.mapSettings.unit)
+      let distance = GeoUtils.calculateDistanceBetweenLocations(fromLatLng, toLatLng, this.$store.getters.mapSettings.unit)
 
       if (distance > 0) {
         distance = distance.toFixed(1)

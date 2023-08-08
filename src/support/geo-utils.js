@@ -6,9 +6,10 @@ import Vue from 'vue'
 import HtmlMarker from '@/fragments/html-marker/HtmlMarker'
 
 // The import below will add some methods to Leaflet.GeometryUtil
-// Even if it is not been accessed within this class, it is being used!
+// Even if it is not accessed within this class, it is being used!
 import 'leaflet-geometryutil'
 
+// noinspection GrazieInspection
 const geoUtils = {
   /**
    * Reorder the values of an array of coordinates switching the position of lat and long of each coordinate
@@ -18,7 +19,7 @@ const geoUtils = {
   switchLatLonIndex: (coordinatesArr) => {
     const switchedCoords = []
     // the lat and long data of the geometry comes in the
-    // inverted order from the one that is expected by leaflet
+    // inverted order from the one that is expected by leaflet,
     // so we just iterate over than and create an array
     // with lat and long in the expected order
     coordinatesArr.forEach(function (coordinate) {
@@ -32,7 +33,7 @@ const geoUtils = {
   },
 
   /**
-   * Build a leaflet latlng object
+   * Build a leaflet lat-lng object
    * @param {String|Number} lat
    * @param {String|Number} lng
    * @returns {Object}
@@ -122,47 +123,44 @@ const geoUtils = {
   },
 
   /**
-   * Determines if a geojson is a rectangle
-   * @param {Object} geojson
+   * Determines if a GeoJSON is a rectangle
+   * @param {Object} geoJson
    * @returns {Boolean}
    */
-  geojsonIsARectangle(geojson) {
-    let coordinates = geojson.geometry.coordinates[0]
-    let firstVortice = coordinates[0].toString()
-    let lastVortice = coordinates[coordinates.length - 1].toString()
+  geoJsonIsARectangle(geoJson) {
+    let coordinates = geoJson.geometry.coordinates[0]
+    let firstVertex = coordinates[0].toString()
+    let lastVertex = coordinates.at(-1).toString()
 
-    // It is a four side closed polygon
-    if (coordinates.length === 5 && firstVortice === lastVortice) {
-      let topLeftVortice = coordinates[0]
-      let topRightVortice = coordinates[1]
-      let bottomRightVortice = coordinates[2]
-      let bottomLeftVortice = coordinates[3]
+    // It is a four sided, closed polygon
+    if (coordinates.length === 5 && firstVertex === lastVertex) {
+      let topLeftVertex = coordinates[0]
+      let topRightVertex = coordinates[1]
+      let bottomRightVertex = coordinates[2]
+      let bottomLeftVertex = coordinates[3]
 
-      let topAndBottomParallel = (topLeftVortice[1] - bottomLeftVortice[1]) === (topRightVortice[1] - bottomRightVortice[1])
-      let rightAndLeftParallel = (topLeftVortice[0] - bottomLeftVortice[0]) === (topRightVortice[0] - bottomRightVortice[0])
+      let topAndBottomParallel = (topLeftVertex[1] - bottomLeftVertex[1]) === (topRightVertex[1] - bottomRightVertex[1])
+      let rightAndLeftParallel = (topLeftVertex[0] - bottomLeftVertex[0]) === (topRightVertex[0] - bottomRightVertex[0])
 
-      if (topAndBottomParallel && rightAndLeftParallel) {
-        return true
-      }
-      return false
+      return topAndBottomParallel && rightAndLeftParallel
     }
   },
 
   /**
-   * Determines the type of polygon a geojson has.
-   * If the geojson is of the type  Polygon it returns false.
-   * @param {Object} geojson
+   * Determines the type of polygon a GeoJSON has.
+   * If the GeoJSON is of the type  Polygon it returns false.
+   * @param {Object} geoJson
    * @returns {String|false}
    */
-  geojsonShapeType(geojson) {
-    let type = geojson.type
-    if (geojson.geometry && geojson.geometry.type) {
-      type = geojson.geometry.type
+  geoJsonShapeType(geoJson) {
+    let type = geoJson.type
+    if (geoJson.geometry && geoJson.geometry.type) {
+      type = geoJson.geometry.type
     }
     if (type !== 'Polygon') {
       return false
     }
-    if (geoUtils.geojsonIsARectangle(geojson)) {
+    if (geoUtils.geoJsonIsARectangle(geoJson)) {
       return 'rectangle'
     } else {
       return 'polygon'
@@ -180,21 +178,21 @@ const geoUtils = {
 
   /**
    * Calculate geodesic area
-   * @param {Array} latlngs
+   * @param {Array} coords
    */
-  geodesicArea(latlngs) {
-    return Leaflet.GeometryUtil.geodesicArea(latlngs)
+  geodesicArea(coords) {
+    return Leaflet.GeometryUtil.geodesicArea(coords)
   },
 
   /**
    * Get readable area
-   * @param {Number} area
+   * @param {Array} coords
    * @param {String} unit
    */
-  readableArea(latlngs, unit) {
+  readableArea(coords, unit) {
     // see https://github.com/Leaflet/Leaflet.draw/blob/33ea262678bbfc3da7e92c226f70c017bd328434/src/ext/GeometryUtil.js#L66-L99
     let precision = precision || 2
-    let area = this.geodesicArea(latlngs)
+    let area = this.geodesicArea(coords)
     let areaStr
     if (area >= 10000 && unit === 'km') {
       areaStr = Leaflet.GeometryUtil.formattedNumber(area * 0.000001, precision) + ' km²'
@@ -218,8 +216,8 @@ const geoUtils = {
     if (isRoute && index !== null) {
       propsData.markerNumber = Number(index) + 1
     }
-    var htmlMarkerClass = Vue.extend(HtmlMarker)
-    var htmlIconInstance = new htmlMarkerClass({
+    const htmlMarkerClass = Vue.extend(HtmlMarker)
+    const htmlIconInstance = new htmlMarkerClass({
       propsData
     })
     htmlIconInstance.$mount()
@@ -241,11 +239,11 @@ const geoUtils = {
    * @returns {Array} of 2 objects {lon:..., lat:...}
    */
   getBounds: (places = [], polyline = []) => {
-    var boundsCollection = []
-    var minLat = null
-    var maxLat = null
-    var minLng = null
-    var maxLng = null
+    const boundsCollection = []
+    let minLat = null
+    let maxLat = null
+    let minLng = null
+    let maxLng = null
 
     places.forEach((place) => {
       boundsCollection.push({
@@ -302,7 +300,7 @@ const geoUtils = {
         data.distance = (data.distance / 1000).toFixed(1)
         data.unit = 'km'
       } else {
-        // If km or mi, only one decimal
+        // If km or miles, only one decimal
         data.distance = data.distance.toFixed(1)
       }
       humanizedDistance = `${data.distance} ${data.unit}`
@@ -382,18 +380,18 @@ const geoUtils = {
   },
 
   /**
-   * Get the slot index for adding a new place given the new place latlng
-   * @param {*} latlng
+   * Get the slot index for adding a new place given the new place latLng
+   * @param {*} latLng
    * @param {Array} places
    */
-  getClosestPlaceIndex: (latlng, places) => {
+  getClosestPlaceIndex: (latLng, places) => {
     let shorterDistance = null
     let closestPlaceIndex = 0
 
     places.forEach((p, index) => {
       if (p.coordinates) {
-        const toLatlng = geoUtils.buildLatLong(p.coordinates[1], p.coordinates[0])
-        const currentDistance = geoUtils.calculateDistanceBetweenLocations(latlng, toLatlng)
+        const toLatLng = geoUtils.buildLatLong(p.coordinates[1], p.coordinates[0])
+        const currentDistance = geoUtils.calculateDistanceBetweenLocations(latLng, toLatLng)
         if (shorterDistance) {
           if (currentDistance < shorterDistance) {
             shorterDistance = currentDistance
@@ -408,16 +406,16 @@ const geoUtils = {
     // If the closest place is the last one,
     // check if the new place to be inserted
     // is not closer to the place before the las
-    // then the the last place. If so, we define move
+    // then the last place. If so, we define move
     // the new place slot to  be before the last
     if (closestPlaceIndex === places.length - 1) {
       const placeBefore = places[closestPlaceIndex - 1]
       const lastPlace = places[closestPlaceIndex]
-      const beforeLatlng = geoUtils.buildLatLong(placeBefore.coordinates[1], placeBefore.coordinates[0])
-      const fromNewToPlaceBefore = geoUtils.calculateDistanceBetweenLocations(latlng, beforeLatlng)
-      const lastLatlng = geoUtils.buildLatLong(lastPlace.coordinates[1], lastPlace.coordinates[0])
+      const beforeLatLng = geoUtils.buildLatLong(placeBefore.coordinates[1], placeBefore.coordinates[0])
+      const fromNewToPlaceBefore = geoUtils.calculateDistanceBetweenLocations(latLng, beforeLatLng)
+      const lastLatLng = geoUtils.buildLatLong(lastPlace.coordinates[1], lastPlace.coordinates[0])
 
-      const fromBeforeToLast = geoUtils.calculateDistanceBetweenLocations(lastLatlng, beforeLatlng)
+      const fromBeforeToLast = geoUtils.calculateDistanceBetweenLocations(lastLatLng, beforeLatLng)
       if (fromNewToPlaceBefore < fromBeforeToLast) {
         closestPlaceIndex--
       }
@@ -434,17 +432,17 @@ const geoUtils = {
    */
   getPlaceIndexOnPolylineArray(place, polylineArr) {
     let indexOnPolyline = null
-    var minDistance = null
-    // Find an more appropriate inject index, it this is the case
+    let minDistance = null
+    // Find a more appropriate inject index, it this is the case
     for (let pIndex = 0; pIndex < polylineArr.length; pIndex++) {
       const polylineCoords = polylineArr[pIndex]
-      const polylineCoordsLatlng = {
+      const polylineCoordsLatLng = {
         lat: polylineCoords[0],
         lng: polylineCoords[1]
       }
 
       // Check the place that has the shortest distance to the polyline point
-      let currentDistance = geoUtils.calculateDistanceBetweenLocations(polylineCoordsLatlng, place, 'm')
+      let currentDistance = geoUtils.calculateDistanceBetweenLocations(polylineCoordsLatLng, place, 'm')
       if (currentDistance === 0) {
         // Get the closest polyline point index
         indexOnPolyline = pIndex
@@ -460,7 +458,7 @@ const geoUtils = {
     return indexOnPolyline
   },
   /**
-   * Get the inject index considering the source polyline point
+   * Get the inject-index considering the source polyline point
    * @param {Array} places
    * @param {Array} polylineArr
    * @param {Integer} sourceIndex
@@ -471,7 +469,7 @@ const geoUtils = {
     let placePolylineIndexMap = []
 
     for (let placeKey in places) {
-      var placeIndexOnPolyline = geoUtils.getPlaceIndexOnPolylineArray(places[placeKey], polylineArr)
+      const placeIndexOnPolyline = geoUtils.getPlaceIndexOnPolylineArray(places[placeKey], polylineArr)
       if (placeIndexOnPolyline !== null) {
         let map = {
           polylineIndex: placeIndexOnPolyline,
@@ -506,23 +504,23 @@ const geoUtils = {
 
   /**
    * Calculate the distance between two coordinates
-   * @param {Object} fromLatlng
-   * @param {Object} toLatlng
+   * @param {Object} fromLatLng
+   * @param {Object} toLatLng
    * @param {String} unit km|mi|m
    * @returns {Number}
    */
-  calculateDistanceBetweenLocations(fromLatlng, toLatlng, unit = 'km') {
+  calculateDistanceBetweenLocations(fromLatLng, toLatLng, unit = 'km') {
     const toRadians = function (deg) {
       return deg * (Math.PI / 180)
     }
 
     const R = 6371 // km
     // has a problem with the .toRad() method below
-    const x1 = toLatlng.lat - fromLatlng.lat
+    const x1 = toLatLng.lat - fromLatLng.lat
     const dLat = toRadians(x1)
-    const x2 = toLatlng.lng - fromLatlng.lng
+    const x2 = toLatLng.lng - fromLatLng.lng
     const dLon = toRadians(x2)
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadians(fromLatlng.lat)) * Math.cos(toRadians(toLatlng.lat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadians(fromLatLng.lat)) * Math.cos(toRadians(toLatLng.lat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
     const distance = R * c
 
@@ -553,7 +551,7 @@ const geoUtils = {
 
         // If the difference between the reference zoom and
         // the current feature zoom is smaller than the
-        // the difference between the previously selected feature
+        // difference between the previously selected feature
         // then replace the current selected feature bt the current feature
         if (featureZoom % zoom < selectedFeatureZoom % zoom) {
           selectedPlace = places[key]
@@ -572,7 +570,7 @@ const geoUtils = {
    * @returns {Number}
    *  >0 for p2 left of the line through this point and p1,
    *  =0 for p2 on the line,
-   *  <0 for p2 right of the line through this point an p1.
+   *  <0 for p2 right of the line through this point and p1.
    * @see {@link http://geomalgorithms.com/a03-_inclusion.html Inclusion of a Point in a Polygon} by Dan Sunday.
    */
   isOverLine: (p0, p1, p2) => {
@@ -581,12 +579,12 @@ const geoUtils = {
   },
 
   /**
-   * Normalize latlng to keep lat in range 90 >< 90 and lng -180 >< 180
-   * @param {Object} latlng
+   * Normalize latLng to keep lat in range 90 >< 90 and lng -180 >< 180
+   * @param {Object} latLng
    */
-  normalizeCoordinates (latlng) {
-    latlng.lat = geoUtils.normalizeLat(latlng.lat)
-    latlng.lng = geoUtils.normalizeLng(latlng.lng)
+  normalizeCoordinates (latLng) {
+    latLng.lat = geoUtils.normalizeLat(latLng.lat)
+    latLng.lng = geoUtils.normalizeLng(latLng.lng)
   },
 
   /**

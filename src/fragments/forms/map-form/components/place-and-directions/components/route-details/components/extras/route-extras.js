@@ -104,7 +104,7 @@ export default {
      * Handle the show section click by
      * building the object and emitting a
      * highlightPolylineSections event
-     * that will be catch by the map view
+     * that will be caught by the map view
      * to highlight a given section of a given extra key
      * @param {String} extraKey
      * @param {Integer} value
@@ -114,42 +114,42 @@ export default {
     showSection (extraKey, value, index) {
       const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
       const color = this.colorValue(extraKey, index)
-      const highlighData = { extraKey, sectionTitle, sections: [{ intervals: [], color }] }
+      const highlightData = { extraKey, sectionTitle, sections: [{ intervals: [], color }] }
 
-      const polylineData = this.buildExtraHighlighPolylineData(extraKey, index, value)
-      highlighData.sections.push(polylineData)
-      EventBus.$emit('highlightPolylineSections', highlighData)
+      const polylineData = this.buildExtraHighlightPolylineData(extraKey, index, value)
+      highlightData.sections.push(polylineData)
+      EventBus.$emit('highlightPolylineSections', highlightData)
     },
     /**
      * Handle the show all sections click by
      * building the object and emitting a
      * highlightPolylineSections event
-     * that will be catch by the map view
+     * that will be caught by the map view
      * to highlight all sections of a given extra key
      * @param {String} extraKey
      * @emits highlightPolylineSections (via EventBus)
      */
     showAllSections (extraKey) {
       const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
-      const highlighData = { extraKey: extraKey, sectionTitle, sections: [] }
+      const highlightData = { extraKey: extraKey, sectionTitle, sections: [] }
 
       let index = 0
       for (const summaryKey in this.routeExtras[extraKey].summary) {
         const summary = this.routeExtras[extraKey].summary[summaryKey]
-        const polylineData = this.buildExtraHighlighPolylineData(extraKey, index, summary.value)
-        highlighData.sections.push(polylineData)
+        const polylineData = this.buildExtraHighlightPolylineData(extraKey, index, summary.value)
+        highlightData.sections.push(polylineData)
         index++
       }
-      EventBus.$emit('highlightPolylineSections', highlighData)
+      EventBus.$emit('highlightPolylineSections', highlightData)
     },
     /**
-     * Build the the extra info highlighting data
+     * Build the extra info highlighting data
      * @param {String} extraKey
      * @param {Integer} index
      * @param {Integer} value
      * @returns {Object} {intervals: Array, color: string, label: String}
      */
-    buildExtraHighlighPolylineData (extraKey, index, value) {
+    buildExtraHighlightPolylineData (extraKey, index, value) {
       const color = this.colorValue(extraKey, index, value)
       const label = this.getExtraValueLabel(extraKey, value).toLowerCase()
       // Values contains an array with the following data:

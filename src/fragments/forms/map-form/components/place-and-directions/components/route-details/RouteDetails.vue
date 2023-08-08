@@ -34,7 +34,7 @@
                   <v-list>
                     <v-divider></v-divider>
                     <v-list dense class="instructions-scroll">
-                      <div style="padding:0 0 0 0px">
+                      <div style="padding:0 0 0 0">
                         <div>
                           {{$t('global.distance')}}:  <b>{{segment.distance}} </b>
                           <v-btn :max-width="30" style="height:15px" fab icon small @click="segmentClicked(segment, segmentIndex)" :title="$t('routeDetails.gotoSegment')">
@@ -51,7 +51,7 @@
                         </v-flex>
                       </v-layout>
                       </div>
-                      <div style="padding:0 0 0 0px">
+                      <div style="padding:0 0 0 0">
                         <h4 >{{$t('routeDetails.instructions')}}:</h4>
                         <br>
                         <steps :steps=" segment.steps"></steps>

@@ -18,7 +18,7 @@ const RouteUtils = {
     const coordinates = data.coordinates ? data.coordinates.split(';') : []
 
     // Check if we have the same number of coordinates and places
-    var placeNameParameters = lodash.pickBy(route.params, function (value, key) {
+    const placeNameParameters = lodash.pickBy(route.params, function (value, key) {
       return key.startsWith('placeName') && value !== undefined
     })
     // If the amount of place names and coordinates does not match, it is an invalid path
@@ -51,9 +51,9 @@ const RouteUtils = {
     appRouteData.options = appRouteData.options || {}
     Object.assign(appRouteData.options, options)
     const params = {}
-    var coordinates = []
-    var directPlaces = []
-    var poiPlaces = []
+    const coordinates = []
+    const directPlaces = []
+    const poiPlaces = []
 
     // For each place, create a param that starts with `placeName` and ends with an index, like `placeName1`, `placeName2`...
     appRouteData.places.forEach((p, index) => {
@@ -129,7 +129,7 @@ const RouteUtils = {
    * @param {*} routeTo
    */
   setDirectionsModeBasedOnRoute (routeTo) {
-    var placeNameParams = lodash.pickBy(routeTo.params, function (value, key) {
+    const placeNameParams = lodash.pickBy(routeTo.params, function (value, key) {
       return key.startsWith('placeName') && value !== undefined
     })
     const placeNameParamsAmount = Object.keys(placeNameParams).length

@@ -75,13 +75,13 @@ const PolygonUtils = {
    * @returns {String} polygon area + unit
    */
   calcPolygonArea (polygon) {
-    const latlngs = []
+    const coords = []
     const coordinates = polygon.geometry.coordinates.length === 1 ? polygon.geometry.coordinates[0] : polygon.geometry.coordinates
     for (const key in coordinates) {
       const coordinate = coordinates[key]
-      latlngs.push(GeoUtils.buildLatLong(coordinate[1], coordinate[0]))
+      coords.push(GeoUtils.buildLatLong(coordinate[1], coordinate[0]))
     }
-    const polygonArea = GeoUtils.readableArea(latlngs, store.getters.mapSettings.areaUnit)
+    const polygonArea = GeoUtils.readableArea(coords, store.getters.mapSettings.areaUnit)
     return polygonArea
   },
   /**
@@ -198,7 +198,7 @@ const PolygonUtils = {
    *
    */
   isInsidePolygon: (point, polygonCoords) => {
-    var windingNumber
+    let windingNumber
     let polygon = Leaflet.polygon(polygonCoords)
     let insideBounds = PolygonUtils.isInsidePolygonBounds(point, polygon)
 
@@ -214,7 +214,7 @@ const PolygonUtils = {
 
   /**
    * Determines if a point is inside the polygon bounds
-   * @param {Leaflet.latlng} point
+   * @param {Leaflet.LatLng} point
    * @param {Leaflet.Polygon} polygon
    * @returns {Boolean} insideBounds
    */
@@ -243,7 +243,7 @@ const PolygonUtils = {
    * @see {@link https://en.wikipedia.org/wiki/Winding_number} to understand winding number
    */
   getWindingNumber: (point, vertices) => {
-    var i, isLeftTest, n, wn // the winding number counter
+    let i, isLeftTest, n, wn // the winding number counter
 
     n = vertices.length
     // Note that per the algorithm, the vertices (V) must be "a vertex points of a polygon V[n+1] with V[n]=V[0]"
@@ -258,7 +258,7 @@ const PolygonUtils = {
         wn = 1
         break
       } else {
-        if (isLeftTest !== 0) { // If not a vertex or on line (the C++ version does not check for this)
+        if (isLeftTest !== 0) { // If not a vertex or on the line (the C++ version does not check for this)
           if (vertices[i].lat <= point.lat) {
             if (vertices[i + 1].lat > point.lat) { // An upward crossing
               if (isLeftTest > 0) { // P left of edge

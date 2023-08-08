@@ -30,17 +30,14 @@ export default {
     canAddPlaceInput () {
       return this.placeInputs < appConfig.maxPlaceInputs
     },
-    roundtripActive () {
+    roundTripActive () {
       return this.$store.getters.mode === constants.modes.roundTrip
     }
   },
   methods: {
     isEnabled (action) {
       const disabled = this.disabledActions
-      if (disabled.includes(action)) {
-        return false
-      }
-      return true
+      return !disabled.includes(action)
     },
     /**
      * Toggle round trip

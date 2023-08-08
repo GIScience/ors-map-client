@@ -28,8 +28,8 @@ export default {
         title +=  places[0].placeName
       }
 
-      if (places.length > 1 && places[places.length -1].placeName) {
-        title += ` &rArr; ${places[places.length -1].placeName}`
+      if (places.length > 1 && places.at(-1).placeName) {
+        title += ` &rArr; ${places.at(-1).placeName}`
       }
       return title
     },

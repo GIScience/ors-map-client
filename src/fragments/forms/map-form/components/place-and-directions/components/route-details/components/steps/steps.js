@@ -16,12 +16,12 @@ export default {
     },
     stepClicked (step, index) {
       const sectionTitle = this.$t('steps.step')
-      const highlighData = {sectionTitle, sections: [] }
-      const segmentData = this.buildExtraHighlighPolylineData(step, index)
-      highlighData.sections.push(segmentData)
-      EventBus.$emit('highlightPolylineSections', highlighData)
+      const highlightData = {sectionTitle, sections: [] }
+      const segmentData = this.buildExtraHighlightPolylineData(step, index)
+      highlightData.sections.push(segmentData)
+      EventBus.$emit('highlightPolylineSections', highlightData)
     },
-    buildExtraHighlighPolylineData (step) {
+    buildExtraHighlightPolylineData (step) {
       const color = constants.segmentHighlightColor
       const label = step.instruction.replace(/<(?:.|\n)*?>/gm, '')
       const intervals = [step.way_points]

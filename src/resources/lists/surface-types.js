@@ -1,3 +1,4 @@
+// noinspection SpellCheckingInspection
 // List of surface types
 
 const surfaceTypes = [

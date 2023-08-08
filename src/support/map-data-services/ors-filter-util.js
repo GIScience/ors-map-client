@@ -12,7 +12,7 @@ import lodash from 'lodash'
 const getFilterRefByName = (filterName, OrsMapFiltersAccessor = null, onlyIfEnabled = false) => {
   OrsMapFiltersAccessor = OrsMapFiltersAccessor || OrsMapFilters
 
-  var filter
+  let filter
   for (const filterKey in OrsMapFiltersAccessor) {
     const f = OrsMapFiltersAccessor[filterKey]
     // Don't get disabled filters if the
@@ -49,7 +49,7 @@ const getFilterByAncestryAndItemIndex = (ancestry, itemIndex = null) => {
  * Build the ancestry accessor string as a goal to build a string
  * that represents the path to retrieve a target item present in
  * @see /resources/ors-map-filter.js.
- * The map filters is a array of objects that may contains
+ * The map filters is an array of objects that may contain
  * child objects under the `props` property, that, if defined,
  * also contains an array of child objects. Many levels of objects
  * with props and child objects is possible. This method creates
@@ -63,14 +63,14 @@ const buildAncestryAccessorString = (ancestry, itemIndex = null) => {
   let path
   // Multiple levels of ancestry is supported.
   // So, if ancestry is an array, then the first value
-  // is the parent level of ancestry and we have to
+  // is the parent level of ancestry, and we have to
   // resolve it recursively
   if (Array.isArray(ancestry) && ancestry.length > 1) {
     if (Array.isArray(ancestry[0])) {
       let subPath = buildAncestryAccessorString(ancestry[0])
       // In case of recursive ancestry, the value in
-      // position 1 is the immediate parent and we must
-      // assembly this with the sub-path generated
+      // position 1 is the immediate parent, and we must
+      // assemble this with the sub-path generated
       path = `[${ancestry[1]}].props${subPath}`
     } else {
       // In case there is not recursive ancestry
@@ -79,12 +79,11 @@ const buildAncestryAccessorString = (ancestry, itemIndex = null) => {
       path = `[${ancestry[1]}].props[${ancestry[0]}]`
     }
   } else {
-    // ancestry is jut an integer,
-    // pointing to a position in a index
+    // ancestry is an integer pointing to a position in an index
     path = `[${ancestry}]`
   }
   // Item index is the last level of navigation towards the
-  // target item and we append it to the building path if it
+  // target item, and we append it to the building path if it
   if (itemIndex !== null && itemIndex !== undefined && itemIndex >= 0) {
     path = `${path}.props[${itemIndex}]`
   }

@@ -99,7 +99,7 @@ export default {
       }
     })
     // The box component listen to `resizeBox` event so that
-    // it is possible to resize a box via EventBus, passing the
+    // it is possible to resize a box via EventBus, passing
     // an object containing the boxGuid and maximized boolean property
     // like {boxGuid: <the-guid>, maximized: true}
     EventBus.$on('resizeBox', function (data) {
@@ -167,15 +167,11 @@ export default {
     syncBoxesMaximized () {
       // We can have a list of boxes considered as maximized, but only the
       // last one will be displayed in the view as maximized.
-      // To achieve this we keep a stack of boxes maximized
+      // To achieve this we keep a stack of boxes maximized,
       // but we only set the `this.maximized = true` to the box
       // that is above all others, considering the order of maximization
       const lastGuid = this.getLastBoxMaximizedGuid()
-      if (!lastGuid || lastGuid !== this.guid) {
-        this.maximized = false
-      } else {
-        this.maximized = true
-      }
+      this.maximized = lastGuid && lastGuid === this.guid
     },
 
     /**
@@ -195,10 +191,9 @@ export default {
      */
     getLastBoxMaximizedGuid () {
       const boxMaximizedStack = this.$store.getters.boxMaximizedStack || {}
-      const length = Object.keys(boxMaximizedStack).length
       let lastKey
-      if (length > 0) {
-        lastKey = Object.keys(boxMaximizedStack)[length - 1]
+      if (Object.keys(boxMaximizedStack).length > 0) {
+        lastKey = Object.keys(boxMaximizedStack).at(-1)
       }
       return lastKey
     },
@@ -315,8 +310,8 @@ export default {
           thickness: '1px'
         }
       }
-      // the initial color the the defined as primary at @/common/theme.js
-      var color = theme.primary || '#cbced1'
+      // the initial color the defined as primary at @/common/theme.js
+      let color = theme.primary || '#cbced1'
 
       // if the topBorderPalette prop is defined, use it to define the color
       if (this.topBorderPalette) {
@@ -348,7 +343,7 @@ export default {
     /**
      * Build the classes that must be attached to the box element
      * They are defined according the maximized and noShadow props
-     * and the customClass, that may contains additional classes that
+     * and the customClass, that may contain additional classes that
      * must be added
      * @returns {} containing classes to be appended to the box element
      */

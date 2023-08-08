@@ -33,17 +33,13 @@ export default {
       } else {
         const context = this
         setTimeout(() => {
-          if (context.menuOpen) {
-            context.toolTipVisible = true
-          } else {
-            context.toolTipVisible = false
-          }
+          context.toolTipVisible = !!context.menuOpen
         }, 100)
       }
     },
     /**
      * Get the browser location and store it in our store
-     * If fail, shows a toaster to the user
+     * If failed, shows a toaster to the user
      * @param {Boolean} continuously
      */
     setLocationFromBrowser (continuously = false) {

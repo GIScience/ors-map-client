@@ -1,6 +1,6 @@
 /**
  * This is an example of a simple plugin aiming at demonstrating how you can add
- * custom behavior to the maps client. To make the plugin work it is necessary
+ * custom behavior to the maps-client. To make the plugin work it is necessary
  * to import this class in the hooks.js, instantiate it and run the plugin methods
  * on hooks defined on hooks.js
  * @see /src/config/hook-example.js
@@ -30,7 +30,7 @@ class PluginExample {
   mapReady (hookData) {
     console.log('PluginExample: mapReady callback', hookData)
     // hookData has the following structure {context: Object, map: Object}
-    // The leaflet `map` object is passed and
+    // The leaflet `map` object is passed, and
     // you can potentially change it by adding or removing controls
   }
 

@@ -152,7 +152,7 @@ export default {
      */
     showPolylinePointByIndex (polylineCoordsIndex) {
       const customEvent = new Event('showPolylinePointByIndex')
-      const point = this.latLngsCoordinates[polylineCoordsIndex]
+      const point = this.coordinates[polylineCoordsIndex]
       customEvent.latlng = GeoUtils.buildLatLong(point[0], point[1])
       this.showPolylinePointDetails(customEvent)
     }
@@ -167,18 +167,18 @@ export default {
       }
     },
     /**
-     * Get the latlngs coordinate array
+     * Get the lat-lng coordinate array
      * from the latLngs prop or from the route
      * coordinates or return an empty array
      * @returns {Array}
      */
-    latLngsCoordinates () {
+    coordinates () {
       if (this.latLngs.length > 0) {
         return this.latLngs
       } else {
-        let latLngs = lodash.get(this.route, 'geometry.coordinates')
-        if (latLngs && Array.isArray(latLngs) && latLngs.length > 0) {
-          return latLngs
+        let coords = lodash.get(this.route, 'geometry.coordinates')
+        if (coords && Array.isArray(coords) && coords.length > 0) {
+          return coords
         } else {
           return []
         }
@@ -215,17 +215,16 @@ export default {
   created () {
     this.active = !this.notActive
     if (this.latLngs.length === 0 && !lodash.get(this.route, 'geometry.coordinates')) {
-      console.error('Latlngs or route object must be passed with valid values')
+      console.error('Coordinates or route object must be passed with valid values')
     } else {
       this.backgroundWeight = this.weight + 4
 
-      // If draggable is defined via prop as true
-      // then add the necessary attribute on the
-      // options object
+      // If draggable is defined via prop as true,
+      // add the necessary attribute on the options object
       if (this.draggable === true) {
         this.options.edit_with_drag = true
       }
-      // This will add custom behaviors to the vue2leaflet polyline
+      // This will add custom behaviors to the vue2-leaflet polyline
       this.orsExtendedPolyline = new OrsExtendedPolyline(this)
     }
   },

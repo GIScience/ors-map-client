@@ -27,7 +27,7 @@ export default {
       },
       set (open) {
         this.$store.commit('setLeftSideBarIsOpen', open)
-        // If the side bar is closed by a user's action, then
+        // If the sidebar is closed by a user's action, then
         // we can set the sidebar pined status as false
         if (open === false) {
           this.$store.commit('setLeftSideBarIsPinned', open)

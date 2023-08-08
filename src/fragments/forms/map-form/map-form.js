@@ -53,8 +53,8 @@ export default {
     },
     /**
      * Load the map data from the url
-     * rebuilding the place inputs and it values
-     * and render the map with these data (place or route)
+     * rebuilding the place inputs, and it values
+     * and render the map with this data (place or route)
      */
     setTab () {
       if (!this.hasPlacesAndDirectionsTab) (

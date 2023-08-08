@@ -29,12 +29,12 @@ const smartTooltip = {
  * @param {*} el - DOM the element which the tooltip will be attached to
  * @param {*} binding - parameters
  * @param {*} vNode - vue element which the tooltip will be attached to
- * @param {*} rerendering - if the tooltip is being updated
+ * @param {*} updated - if the tooltip is being updated
  */
-const render = (el, binding, vNode, rerendering = false) => {
+const render = (el, binding, vNode, updated = false) => {
   let options = binding.value
   if (options.show) {
-    if (rerendering) { // it is rerendering, show it immediately
+    if (updated) { // it is updated, show it immediately
       showToolTip(el, options, vNode)
     } else { // otherwise, wait 2 seconds
       setTimeout(() => {
@@ -74,7 +74,7 @@ const removeTooltipEl = (tooltipGuid) => {
 }
 
 /**
- * Store in browser's local storage that the the tooltip has already been shown
+ * Store in browser's local storage that the tooltip has already been shown
  * @param {*} tooltipName
  */
 const storeTooltipAlreadyShown = (tooltipName) => {
@@ -94,7 +94,7 @@ const storeTooltipAlreadyShown = (tooltipName) => {
  */
 const showToolTip = (el, options, vNode) => {
   vNode.context.$nextTick(() => {
-    var mustBeShown = true
+    let mustBeShown = true
     // Check if tool tip was already shown
     if ((options.showOnce || options.saveClose) && options.name) {
       let mapSettings = store.getters.mapSettings
@@ -117,7 +117,7 @@ const showToolTip = (el, options, vNode) => {
       // Get the tooltip position or a default one
       options.position = options.position || 'left'
 
-      //Build the tooltip html, attache it to the dom
+      // Build the tooltip html, attach it to the dom
       // and set the required styles for it
       let toolTipEl = buildTooltipEl(guid, options)
       document.body.appendChild(toolTipEl)
@@ -199,7 +199,7 @@ const buildTooltipEl = (guid, options) => {
 }
 
 /**
- * Set the tooltip pseudo style by adding an style element to the DOM
+ * Set the tooltip pseudo style by adding a style element to the DOM
  * @param {*} guid
  * @param {*} options
  */

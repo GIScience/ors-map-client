@@ -38,7 +38,7 @@ export default {
       return appConfig.supportsClusteredMarkers
     },
     /**
-     * Return the marker cluster options. By default it is empty
+     * Return the marker cluster options. By default, it is empty,
      * but it can be changed via app hook
      * @returns {Object}
      */

@@ -18,7 +18,7 @@ class RoundTripMode {
 
     // The round_trip filter will be extracted from the OrsMapFilters
     // object that is an in memory object used by all the filters
-    // rendered as model in in its respective key
+    // rendered as model in its respective key
     OrsParamsParser.setFilters(options, OrsMapFilters, constants.services.directions)
     appRouteData.options = options
     appRouteData.options.zoom = appConfig.initialMapMaxZoom
@@ -50,8 +50,8 @@ class RoundTripMode {
     // Get coordinates and options from the param
     appRouteData.options = data.options
 
-    // In the directions mode, the options parameter may contains an options object
-    // that is expected to be used as the ORS API request options (avoid_polygons, avoid_features etc)
+    // In the 'directions' mode, the options parameter may contain an options object
+    // that is expected to be used as the ORS API request options (avoid_polygons, avoid_features etc.)
     // So, as they are stringified on the url, we try to parse them to convert them back to an object
     if (appRouteData.options.options) {
       appRouteData.options.options = Utils.tryParseJson(appRouteData.options.options) || appRouteData.options.options

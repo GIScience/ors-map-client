@@ -30,16 +30,16 @@
 }
 
 .shadow {
-  -webkit-box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
-  -moz-box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
-  box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
+  -webkit-box-shadow: 0 4px 5px 0 rgba(130,117,130,1);
+  -moz-box-shadow: 0 4px 5px 0 rgba(130,117,130,1);
+  box-shadow: 0 4px 5px 0 rgba(130,117,130,1);
 }
 
 .no-padding {
-  padding: 0px;
+  padding: 0;
 }
 .no-margin {
-  margin: 0px;
+  margin: 0;
 }
 
 .input-btn:before {
@@ -47,25 +47,22 @@
 }
 
 .input-btn {
-  padding: 0px;
-  margin: 0px;
   float: right;
-  padding-left: 0px;
-  margin-top: 6px;
-  padding-bottom: 18px;
+  margin: 6px 0 0;
+  padding: 0 0 18px;
   height: 40px;
 }
 
-/* small class is for md and up resolutions. In small devices, we display bigger btns to easy the interaction*/
+/* small class is for md and up resolutions. In small devices, we display bigger buttons to easy the interaction */
 .input-btn.small {
   margin-top: 10px;
 }
 
-.input-btns .v-btn__content {
+.input-btn-group .v-btn__content {
   padding: 0;
 }
 
-.input-btns .v-btn {
+.input-btn-group .v-btn {
   min-width: 0;
 }
 
@@ -90,7 +87,7 @@
 }
 
 .floating-menu-activator {
-  margin-right: 0px;
+  margin-right: 0;
 }
 
 .suggestions >>> .v-list__tile__sub-title {

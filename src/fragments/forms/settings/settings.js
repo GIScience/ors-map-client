@@ -47,7 +47,7 @@ export default {
     save () {
       if (this.mapSettingsTransient.saveToLocalStorage) {
         let context = this
-        var savingSettings = utils.clone(this.mapSettingsTransient)
+        const savingSettings = utils.clone(this.mapSettingsTransient)
         if (this.resetShownOnceTooltips) {
           savingSettings.shownOnceTooltips = {}
         } else {

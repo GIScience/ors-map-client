@@ -66,7 +66,7 @@ export default {
       }, 1000)
     },
     /**
-     * Se the place model if the app is in place mode
+     * Se the place model if the app is in place mode,
      * and it there is only one place in appRouteData
      */
     setPlace () {
@@ -76,10 +76,10 @@ export default {
       }
     },
     /**
-     * Every time the appRouteData changes
+     * Every time the appRouteData changes,
      * and it has at least one place defined
      * the map data is reloaded, so we keep the
-     * the map search and synchronized with the url
+     * map search and synchronized with the url
      */
     reloadAfterAppRouteDataChanged (appRouteData) {
       if (appRouteData && appRouteData.places.length > 0) {
@@ -103,7 +103,7 @@ export default {
       })
 
       // When a marker drag finishes, update
-      // the place coordinates and re render the map
+      // the place coordinates and re-render the map
       EventBus.$on('markerDragged', (marker) => {
         context.place.coordinates = [marker.position.lng, marker.position.lat]
         context.loadData()
@@ -114,8 +114,8 @@ export default {
         context.reloadAfterAppRouteDataChanged(appRouteData)
       })
 
-      // When there are changes in the route and and the
-      // side bar is not opened, notify visually that there
+      // When there are changes in the route and the
+      // sidebar is not opened, notify visually that there
       // new data about the route calculated that can be seen
       // by opening the sidebar
       EventBus.$on('newInfoAvailable', (available) => {
@@ -159,7 +159,7 @@ export default {
 
     /**
      * Load the map data from the url
-     * rebuilding the place inputs and it values
+     * rebuilding the place inputs, and it values
      * and render the map with these data (place or route)
      */
     loadData () {
@@ -169,7 +169,7 @@ export default {
         this.place = places[0]
       }
       if (this.$store.getters.mode === constants.modes.search) {
-        if (!this.place.nameIsCoord()) {
+        if (!this.place.nameIsNumeric()) {
           let mapSettings = this.$store.getters.mapSettings
           mapSettings.mapCenter = this.$store.getters.appRouteData.options.center
           this.$store.dispatch('saveSettings', mapSettings).then(() => {
@@ -198,7 +198,7 @@ export default {
     /**
      * When there is already a place selected
      * and the route action is called, open the
-     * side bar and emit and event passing the current
+     * sidebar and emit and event passing the current
      * place to the map-search component
      * @emits openDirectionsMode
      * @emits switchToDirections
@@ -256,7 +256,7 @@ export default {
     },
 
     /**
-     * Set a a suggested place as the selected one for a given place input
+     * Set a suggested place as the selected one for a given place input
      * @param {*} data - can be the place object or an object containing the place
      */
     selectPlace (data) {

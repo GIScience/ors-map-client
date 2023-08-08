@@ -89,13 +89,13 @@ class XmlImporter {
       for (const key in placeMarks) {
         if (placeMarks[key].Point) {
           const coordinatesStr = placeMarks[key].Point[0].coordinates[0]
-          const coordinatesaArr = coordinatesStr.split(',')
-          const latlon = { lat: coordinatesaArr[0], lon: coordinatesaArr[1] }
+          const coordinatesArr = coordinatesStr.split(',')
+          const latLon = { lat: coordinatesArr[0], lon: coordinatesArr[1] }
           let name = placeMarks[key].name || lodash.get(placeMarks[key], 'ExtendedData[0].Data[0].value[0]')
           if (Array.isArray(name) && name.length > 0) {
             name = name[0]
           }
-          const place = new Place(latlon.lat, latlon.lon, name)
+          const place = new Place(latLon.lat, latLon.lon, name)
           places.push(place)
         }
       }
@@ -111,18 +111,18 @@ class XmlImporter {
     const places = []
 
     if (routes.length > 0) {
-      // If there are less then 15, so we get all
+      // If there are less than 15, so we get all
       if (routes[0].length < 16) {
         for (const key in routes[0]) {
-          const latlng = routes[0][key].geometry.coordinates
-          const lng = latlng[0]
-          const lat = latlng[1]
+          const latLng = routes[0][key].geometry.coordinates
+          const lng = latLng[0]
+          const lat = latLng[1]
           const place = new Place(lng, lat)
           places.push(place)
         }
-      } else { // if there are more then 15, only the first and the last
+      } else { // if there are more than 15, only the first and the last
         const firstCoords = routes[0].geometry.coordinates[0]
-        const lastCoords = (routes[0].geometry.coordinates[routes[0].geometry.coordinates.length - 1])
+        const lastCoords = (routes[0].geometry.coordinates.at(-1))
 
         const firstLng = firstCoords[0]
         const firstLat = firstCoords[1]
@@ -144,11 +144,11 @@ class XmlImporter {
    */
   getRoutes (fileObject) {
     const routes = []
-    const rtes = lodash.get(fileObject, 'gpx.rte') || lodash.get(fileObject, 'gpx.trk')
-    if (rtes) {
+    const tracks = lodash.get(fileObject, 'gpx.rte') || lodash.get(fileObject, 'gpx.trk')
+    if (tracks) {
       const coordinatesParsed = []
-      for (const key in rtes) {
-        const rte = rtes[key]
+      for (const key in tracks) {
+        const rte = tracks[key]
 
         let segments = rte.trkseg || [rte.rtept]
 
@@ -156,8 +156,8 @@ class XmlImporter {
           let ptsCollection = segments[key].trkpt || segments[key]
           if (ptsCollection) {
             for (const ptKey in ptsCollection) {
-              const latlon = ptsCollection[ptKey].$
-              const point = [latlon.lon, latlon.lat]
+              const latLon = ptsCollection[ptKey].$
+              const point = [latLon.lon, latLon.lat]
               const elev = ptsCollection[ptKey].ele
               if (elev && elev.length > 0) {
                 point.push(elev[0])

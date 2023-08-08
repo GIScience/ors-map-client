@@ -39,14 +39,14 @@ export default {
      */
     fileAdded (file) {
       const context = this
-      var reader = new FileReader()
+      const reader = new FileReader()
       reader.addEventListener('loadend', function (event) {
         const content = event.target.result
         if (!content || content === 'null') {
           context.showError(context.$t('routeImporter.failedToLoadFile'), {timeout: 0})
         } else {
           let parts = file.name.split('.')
-          let extension = parts[parts.length - 1]
+          let extension = parts.at(-1)
           let type = file.type || extension
           context.catchAndParseFile(content, type, new Date().getTime())
         }

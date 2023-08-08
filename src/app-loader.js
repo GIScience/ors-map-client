@@ -30,9 +30,9 @@ class AppLoader {
         resolve(store.getters.mapSettings.apiKey)
       } else {
         // eslint-disable-next-line no-undef
-        var BITLYLOGIN = process.env.BITLYLOGIN
+        const BITLYLOGIN = process.env.BITLYLOGIN
         // eslint-disable-next-line no-undef
-        var BITLYAPIKEY = process.env.BITLYAPIKEY
+        const BITLYAPIKEY = process.env.BITLYAPIKEY
         if (BITLYLOGIN) {
           appConfig.bitlyLogin = BITLYLOGIN
         }
@@ -48,7 +48,7 @@ class AppLoader {
           store.commit('apiDataRequested', true)
 
           // eslint-disable-next-line no-undef
-          var ORSKEY = process.env.ORSKEY
+          const ORSKEY = process.env.ORSKEY
 
           // By default, the app must use an ors API key stored in config.js
           if (appConfig.useUserKey) {
@@ -86,7 +86,7 @@ class AppLoader {
    * @param storedLocale
    */
   getFittingLocale (storedLocale) {
-    var deviceLocale = window.navigator.language || window.navigator.userLanguage
+    const deviceLocale = window.navigator.language || window.navigator.userLanguage
     let locale =  storedLocale || deviceLocale
     if (locale) {
       locale = locale.toLowerCase()
@@ -130,7 +130,7 @@ class AppLoader {
     // Get map settings from local storage
     const serializedMapSettings = localStorage.getItem('mapSettings')
 
-    var locale = null
+    let locale = null
 
     // Restore settings stored in local storage, if available
     if (serializedMapSettings) {
@@ -221,7 +221,7 @@ class AppLoader {
    * @param {Object} App
    * @param {String} elementSelector
    * @param {String} templateTag
-   * @returns {Promise} that resolves a the main app Vue  instance
+   * @returns {Promise} resolves main Vue instance
    */
   loadApp (App, elementSelector, templateTag) {
     let context = this

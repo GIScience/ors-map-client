@@ -71,7 +71,7 @@ const applyFilterValueConditions = (filterClone, filterValue) => {
  * @returns {*}
  */
 const getChildrenFilterValue = (filter) => {
-  var childFilter = {}
+  const childFilter = {}
   for (let propKey in filter.props) {
     const prop = filter.props[propKey]
     // Filter may have dependency and only be available
@@ -225,7 +225,7 @@ const applyConditionRule = (rule, paramValue, matchesRule) => {
  * @returns {boolean}
  */
 const applyValueRule = (rule, paramValue, matchesRule) => {
-  // If the the rule requires a value and the object does not have this value
+  // If the rule requires a value and the object does not have this value
   // then the dependent object matchesRule is set to false
   let ruleValue = rule.value || rule.valueNot
   ruleValue = getParsedValue(ruleValue)
@@ -236,7 +236,7 @@ const applyValueRule = (rule, paramValue, matchesRule) => {
       matchesRule = matchForExistingRuleValue(paramValue, ruleValue, true)
     }
   } else {
-    // If the rule does not required a specific value, then it just requires any value
+    // If the rule does not require a specific value, then it just requires any value
     // We just check if it has an assigned value
     if (paramValue === null || paramValue === undefined) {
       matchesRule = false
@@ -407,7 +407,7 @@ const getRuleValue = (rule, ruleKey, propName) => {
     if (Array.isArray(propValue)) {
       let valueRule = propValue[0]
       let dependsOnFilter = getDependencyRelationTargetObj(valueRule.ref)
-      // if the first option doe not have a valid value, gets the second
+      // if the first option does not have a valid value, get the second
       if ((!dependsOnFilter || dependsOnFilter.value === undefined) && propValue.length === 2) {
         value = propValue[1]
       } else {
@@ -442,7 +442,7 @@ const removeInvalidValue = (filter) => {
     if (Array.isArray(filter.value)) {
       for (let arrKey in filter.value) {
         let val = filter.value[arrKey]
-        var valueIndex = filter.filteredItems.findIndex(function(v) {
+        const valueIndex = filter.filteredItems.findIndex(function (v) {
           return val === v || val === v.itemValue
         })
         if (valueIndex === -1) {

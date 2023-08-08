@@ -21,9 +21,9 @@
 
 .ors-l-polyline-top-block-info {
   width: 178px; height: 85px; background:white; padding-left: 5px;
-  -webkit-box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
-  -moz-box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
-  box-shadow: 0px 4px 5px 0px rgba(130,117,130,1);
+  -webkit-box-shadow: 0 4px 5px 0 rgba(130,117,130,1);
+  -moz-box-shadow: 0 4px 5px 0 rgba(130,117,130,1);
+  box-shadow: 0 4px 5px 0 rgba(130,117,130,1);
   font-size: 12px;
   word-break: break-all;
   opacity: 1;

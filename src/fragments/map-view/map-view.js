@@ -1,6 +1,6 @@
 /**
  * MapView component.
- * Renders an leaflet/vue2leaflet map based on the mapViewData passed via props. Capture the map events, dealing with them or emitting events.
+ * Renders a leaflet/vue2-leaflet map based on the mapViewData passed via props. Capture the map events, dealing with them or emitting events.
  * @uses storage defined in @see /src/store/modules/map-state
  *
  * Events that this component listens to:
@@ -162,7 +162,7 @@ export default {
       overlayerTileProviders: [], // list of overlay tiles provider that will be set via setProviders
       wmsOverlayerTileProviders: [], // list of WMS overlay tiles provider that will be set via setProviders
       layersPosition: 'topright',
-      map: null, // map object reference. it will will be defined later
+      map: null, // map object reference
       zoomLevel: null,
       mapDataBuilder: null,
       initialMaxZoom: appConfig.initialMapMaxZoom,
@@ -171,7 +171,7 @@ export default {
       alternativeRouteColor: constants.alternativeRouteColor,
       routeBackgroundColor: constants.routeBackgroundColor,
       guid: null,
-      clickLatlng: null,
+      clickLatLng: null,
       myLocationActive: false,
       setDrawingTimeout: null,
       markerMoveTimeoutId: null,
@@ -198,7 +198,7 @@ export default {
       return this.supportsMyLocationBtn && !this.isAltitudeModalOpen && this.showControls
     },
     /**
-     * Determines if the my location btn is available
+     * Determines if the 'my location' button is available
      * @returns {Boolean}
      */
     supportsMyLocationBtn () {
@@ -270,12 +270,12 @@ export default {
     },
     /**
      * Build and return the map center
-     * based on the the current map center defined/set in the store
-     * @returns {Latlng}
+     * based on the current map center defined/set in the store
+     * @returns {Object} LatLng
      */
     mapCenter () {
-      let latlng = GeoUtils.buildLatLong(this.$store.getters.mapCenter)
-      return latlng
+      let latLng = GeoUtils.buildLatLong(this.$store.getters.mapCenter)
+      return latLng
     },
     /**
      * Determines if only one marker if on the map view
@@ -293,27 +293,27 @@ export default {
       return this.mapHeight > 450 || this.$store.getters.embed
     },
     /**
-     * Build and return the geojson options based on the
+     * Build and return the GeoJSON options based on the
      * color defined as main
      * @returns {Object}
      */
-    geojsonOptions () {
+    geoJsonOptions () {
       return {
         style: { color: this.mainRouteColor, weight: '5' },
       }
     },
     /**
-     * Return the geojson style options
+     * Return the GeoJSON style options
      * using the value in constants object
      * @returns {Object}
      */
-    geojsonOutlineOptions () {
+    geoJsonOutlineOptions () {
       return { style: { color: constants.routeBackgroundColor, weight: '9' } }
     },
     /**
      * Build and return the active route data
      * based on the $store.getters.activeRouteIndex
-     * @returns {Array} of latlng
+     * @returns {Array} of latLng
      */
     activeRouteData () {
       if (this.localMapViewData.hasRoutes()) {
@@ -378,7 +378,7 @@ export default {
           // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
           // So we invert them to provide what the component expects
           let flattenCoords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
-          polygon.latlngs = GeoUtils.switchLatLonIndex(flattenCoords)
+          polygon.latLngs = GeoUtils.switchLatLonIndex(flattenCoords)
           polygons.push(polygon)
         }
       }
@@ -386,7 +386,7 @@ export default {
     },
     /**
      * Build and return an array of marker objects
-     * based on the on the places defined on the localMapViewData
+     * based on the places defined on the localMapViewData
      * @returns {Array} of markers
      */
     markers () {
@@ -433,20 +433,20 @@ export default {
     },
     /**
      * Build and return the circle marker
-     * based on the clickLatlng position
+     * based on the clickLatLng position
      * to show to the user where s/he has clicked
      * @returns {Object}
      */
     circleMarker () {
-      if (this.clickLatlng) {
+      if (this.clickLatLng) {
         return {
-          center: GeoUtils.buildLatLong(this.clickLatlng.lat, this.clickLatlng.lng),
+          center: GeoUtils.buildLatLong(this.clickLatLng.lat, this.clickLatLng.lng),
           radius: 8
         }
       }
     },
     /**
-     * Build and return the my position marker object
+     * Build and return the 'my position' marker object
      * based on the current location stored in the store
      * @returns {Object}
      */
@@ -516,10 +516,7 @@ export default {
      */
     canFitFeatures () {
       let available = appConfig.fitAllFeaturesToolAvailable
-      if (available && (this.localMapViewData.hasPlaces() || this.localMapViewData.hasRoutes() || this.localAvoidPolygons.length > 0 )) {
-        return true
-      }
-      return false
+      return available && (this.localMapViewData.hasPlaces() || this.localMapViewData.hasRoutes() || this.localAvoidPolygons.length > 0)
     },
     /**
      * If an active route data must be shown
@@ -687,7 +684,7 @@ export default {
   methods: {
     /**
      * Refresh map view data after the prop mapViewData has changed
-     * We use a debounce in order to apply only the last change
+     * We use a debounce-timeout in order to apply only the last change
      */
     refreshMapViewData () {
       // When the mapViewData prop changes, we copy its value to a
@@ -711,7 +708,7 @@ export default {
       }, 500)
     },
     /**
-     * Refresh the altitude modal (force a destroy and a rebuild)
+     * Refresh the altitude modal (force a 'destroy' and a 'rebuild')
      * with the new data
      */
     refreshAltitudeModal () {
@@ -727,7 +724,7 @@ export default {
      * @param {String} direction
      */
     moveMapCenter(direction) {
-      var offset
+      let offset
       switch (direction) {
         case 'left':
           offset = this.map.getSize().x*0.15
@@ -784,7 +781,7 @@ export default {
       this.$root.appHooks.run('beforeOpenIsochronePopup', {isochronePopupContainerRef, polygon})
     },
     /**
-     * Deals with the map center changed event triggered by the vue2leaflet
+     * Deals with the map center changed event triggered by the vue2-leaflet
      * component. Get the current map center, set it via setMapCenter and
      * define the current myLocationActive based on the last map center
      * @param {*} event
@@ -807,10 +804,10 @@ export default {
       if (this.myLocationActive) {
         const distance = GeoUtils.calculateDistanceBetweenLocations(this.$store.getters.currentLocation, center, 'm')
         // For some unknown reason, when a new map center
-        // is defined it may varies from the location acquired
+        // is defined it may vary from the location acquired
         // via browser location api. So, we are considering that
-        // if this distance is less then 50 meters, then the my
-        // location must still be considered as active
+        // if this distance is less than 50 meters, then the 'my location'
+        // must still be considered as active
         this.myLocationActive = (distance < 50)
       }
     },
@@ -836,7 +833,7 @@ export default {
 
       // We just want to disable the showClickPopups
       // temporarily, so we get the original state
-      // set it as false and after a two seconds
+      // set it as false and after two seconds
       // we restore the original value
       const showPopupBefore = this.showClickPopups
       this.showClickPopups = false
@@ -856,7 +853,7 @@ export default {
 
     /**
      * When a layer is selected in the layer control
-     * remove the expand class so that it is closed
+     * remove the expand-class, so it is closed
      * after the selection
      */
     baseLayerChanged (newTileProvider) {
@@ -931,9 +928,9 @@ export default {
     },
     /**
      * Handles the marker move
-     * by creating a debounce in order to
+     * by creating a debounce-timeout in order to
      * recalculate the route and update the map
-     * view. A 1 second delay is applied to avoid
+     * view. A 1-second delay is applied to avoid
      * subsequent marker move updates and get the new
      * position only when the movement has ended
      * @param {*} event
@@ -1001,13 +998,13 @@ export default {
      * @emits markerDragged
      */
     markerDragEnd (event) {
-      const targetLatlng = event.oldLatLng
+      const targetLatLng = event.oldLatLng
       let markerIndex = null
 
       // Find the marker index by comparing the lat and long
       for (let index = 0; index < this.markers.length; index++) {
         const markerP = this.markers[index].position
-        if (markerP.lat === targetLatlng.lat && markerP.lng === targetLatlng.lng) {
+        if (markerP.lat === targetLatLng.lat && markerP.lng === targetLatLng.lng) {
           // update the marker position
           this.markers[index].position.lat = event.latlng.lat
           this.markers[index].position.lng = event.latlng.lng
@@ -1027,17 +1024,17 @@ export default {
 
     /**
      * Set the map center
-     * @param {*} latlng
+     * @param {*} latLng
      * @use localStorage
      * @emits mapCenterChanged
      */
-    setMapCenter (latlng) {
-      if (latlng) {
+    setMapCenter (latLng) {
+      if (latLng) {
         let mapSettings = this.$store.getters.mapSettings
         const previousCenter = Utils.clone(mapSettings.mapCenter)
 
-        if (previousCenter.toString() !== latlng.toString()) {
-          this.$emit('mapCenterChanged', latlng)
+        if (previousCenter.toString() !== latLng.toString()) {
+          this.$emit('mapCenterChanged', latLng)
         }
       } else {
         // TODO: stop using appRouteData, receive places as a prop?
@@ -1100,9 +1097,9 @@ export default {
      * and then once it is ready, we set the local data from
      * the data returned by the builder
      * and then set the bounds, fit the bounds and redraw the map
-     * If the response data does not contains a geojson
+     * If the response data does not contain a GeoJSON
      * then the promise resolver will return an object with the expected
-     * props but all of then containing null values. This will not cause a fail
+     * props but all of them containing null values. This will not cause a fail
      *
      */
     loadMapData () {
@@ -1121,7 +1118,7 @@ export default {
     },
 
     /**
-     * Set the map view zom level when focused on an specific place
+     * Set the map view zom level when focused on a specific place
      * @param {Place} place
      */
     setFocusedPlace (place) {
@@ -1170,12 +1167,12 @@ export default {
         for (const pKey in this.localMapViewData.polygons) {
           const polygon = this.localMapViewData.polygons[pKey]
           if (polygon) {
-            var coords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
+            const coords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
             polylineData = polylineData.concat(coords)
           }
         }
         // Build the all features bounds taking into consideration
-        // the places and the roues/polygons polyline
+        // the places and the routes/polygons polyline
         if (this.localMapViewData.hasPlaces() || polylineData.length > 0) {
           let places = Place.getFilledPlaces(this.localMapViewData.places)
           this.dataBounds = GeoUtils.getBounds(places, polylineData)
@@ -1232,8 +1229,8 @@ export default {
 
     /**
      * Emit the right click event according the parameter received
-     * This methods emits only one of the events listed below at a time
-     * @param {Object} data { eventName:..., clickLatlng: ...}
+     * This method emits only one of the events listed below at a time
+     * @param {Object} data { eventName:..., clickLatLng: ...}
      * @emits directionsFromPoint
      * @emits directionsToPoint
      * @emits addRouteStop
@@ -1249,16 +1246,16 @@ export default {
 
     /**
      * Update localMapViewData places
-     * @param {Object} data {clickLatlng: latlng, eventName:String}
+     * @param {Object} data {clickLatLng: latLng, eventName:String}
      * @emits directionsFromPoint
      * @emits directionsToPoint
      * @emits addRouteStop
      * @emits addDestinationToRoute
      */
     prepareDataAndEmitRightClickEvent (data) {
-      let place = new Place(data.clickLatlng.lng, data.clickLatlng.lat)
+      let place = new Place(data.clickLatLng.lng, data.clickLatLng.lat)
       place.resolve().then(() =>{
-        const dataPassed = { latlng: data.clickLatlng, place}
+        const dataPassed = { latLng: data.clickLatLng, place}
         this.$emit(data.eventName, dataPassed)
       })
     },
@@ -1357,14 +1354,14 @@ export default {
         const context = this
         setTimeout(() => {
           // The fit may affect the zoom level.
-          // So we set the programmatically zoom flag to let
-          // other methods to have this information if
-          // they need, specially method `zoomed`
+          // So we set the zoom flag programmatically to let
+          // other methods have this information,
+          // especially the `zoomed` method
           context.featuresJustFitted = true
           context.map.fitBounds(context.dataBounds, { padding: [20, 20], maxZoom: maxFitBoundsZoom })
           context.storeMapBoundsAndSetMapAsReady()
 
-          // Yeah, it is not nice to have nested timeout
+          // Yeah, it is not nice to have nested timeout,
           // but we need it to make sure that this flag is only
           // set as false after a while so other components
           // have time to treat this before it is set to false again
@@ -1375,7 +1372,7 @@ export default {
       }
     },
     /**
-     * Handle the polygon click event and show the polygon data in a pop up
+     * Handle the polygon click event and show the polygon data in a pop-up
      * @param {*} polygon
      */
     polygonInfoClick (polygon) {
@@ -1384,7 +1381,7 @@ export default {
 
     /**
      * Handle the map right click event,
-     * Set the clickLatlng current value
+     * Set the clickLatLng current value
      * and emits events that will trigger the displaying
      * of the right click floating-context menu
      * @param {Object} event
@@ -1397,10 +1394,10 @@ export default {
           const mapEl = this.$refs.map.$el
           GeoUtils.normalizeCoordinates(event.latlng)
           const data = { event, mapEl, canAddStop: this.canAddStop }
-          // Event to be catch by the MapRightClick.vue component
+          // Event to be caught by the MapRightClick.vue component
           EventBus.$emit('mapRightClicked', data)
         }
-        this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
+        this.clickLatLng = { lat: event.latlng.lat, lng: event.latlng.lng }
       } else if (this.$store.getters.isSidebarVisible) {
         EventBus.$emit('setSidebarStatus', false)
       }
@@ -1408,7 +1405,7 @@ export default {
 
     /**
      * Handle the map left click event
-     * Set the clickLatlng current value
+     * Set the clickLatLng current value
      * and emits events that will trigger the displaying
      * of the place info pop up box
      * @param {Object} event
@@ -1425,8 +1422,8 @@ export default {
             this.saveAvoidPolygonChanges(polygonInEditMode, map)
           })
         } else {
-          // If in low resolution and sidebar is open, then left click on the map
-          // must close the side bar to allow the user to interact with the map.
+          // If in low resolution and sidebar is open, then left-click on the map
+          // must close the sidebar to allow the user to interact with the map.
           // If not then the normal left click handler must be executed
           if (this.$store.getters.isSidebarVisible && this.$lowResolution) {
             EventBus.$emit('setSidebarStatus', false)
@@ -1465,7 +1462,7 @@ export default {
         GeoUtils.normalizeCoordinates(event.latlng)
         const data = { event, insidePolygon }
         EventBus.$emit('mapLeftClicked', data)
-        this.clickLatlng = { lat: event.latlng.lat, lng: event.latlng.lng }
+        this.clickLatLng = { lat: event.latlng.lat, lng: event.latlng.lng }
       }
     },
 
@@ -1489,17 +1486,16 @@ export default {
     },
 
     /**
-     * Check if the a lat lng point is inside in one of the map polygons
+     * Check if the lat lng point is inside one of the map polygons
      * If it is returned the polygon points array
-     * @param {Latlng} latlng
-     * @param {*} lng
+     * @param {Leaflet.LatLng} latLng
      * @returns {Boolean|Array}
      */
-    isPointInsidePolygons (latlng) {
+    isPointInsidePolygons (latLng) {
       for (const key in this.localAvoidPolygons) {
         let polygon = this.localAvoidPolygons[key]
         const coords = GeoUtils.switchLatLonIndex(polygon.geometry.coordinates[0])
-        const inside = PolygonUtils.isInsidePolygon(latlng, coords)
+        const inside = PolygonUtils.isInsidePolygon(latLng, coords)
         if (inside) {
           return coords
         }
@@ -1516,9 +1512,9 @@ export default {
       const context = this
 
       // After map container box is resized
-      // we need to wait a little bit
+      // we need to wait a bit
       // to redraw the map and then
-      // wait a little bit more to fit the bounds
+      // wait a bit more to fit the bounds
       setTimeout(() => {
         // Redraw the map and then wait
         context.redrawMap().then(() => {
@@ -1545,8 +1541,8 @@ export default {
           context.myLocationActive = showLocation
 
           // Set returned location as map center
-          const latlng = GeoUtils.buildLatLong(location.lat, location.lng)
-          this.setMapCenter(latlng)
+          const latLng = GeoUtils.buildLatLong(location.lat, location.lng)
+          this.setMapCenter(latLng)
         }).catch(error => {
           const message = this.getPositionErrorMessage(error)
           context.showWarning(message, { timeout: 0 })
@@ -1683,7 +1679,7 @@ export default {
      */
     setAvoidPolygonProperties (polygon, polygonData = null) {
       // define polygon feature prop.
-      // It will be returned when we get the geojson
+      // It will be returned when we get the GeoJSON
       // representation of the polygon
       polygon.feature = polygon.feature || {}
       polygon.feature.type = polygon.feature.type || 'Feature'
@@ -1704,7 +1700,7 @@ export default {
      * @param {Object} map
      */
     avoidPolygonCreated (event, map) {
-      var polygon = event.layer
+      const polygon = event.layer
       this.setAvoidPolygonProperties(polygon)
       polygon.feature.properties.type = event.layerType
       let context = this
@@ -1810,7 +1806,7 @@ export default {
           const polygonData = context.localAvoidPolygons[key]
           const coordinates = GeoUtils.switchLatLonIndex(polygonData.geometry.coordinates[0])
           const polygonOptions = PolygonUtils.buildPolygonOptions(polygonData, context.drawOptions.draw.polygon.shapeOptions.color)
-          let polygonShapeType = GeoUtils.geojsonShapeType(polygonData)
+          let polygonShapeType = GeoUtils.geoJsonShapeType(polygonData)
           let polygon = PolygonUtils.createPolygon(coordinates, polygonOptions, polygonShapeType)
           context.setAvoidPolygonProperties(polygon, polygonData)
           polygon.addTo(map)
@@ -1837,7 +1833,7 @@ export default {
             let polygonGeoJson = layer.toGeoJSON()
 
             // properties defined via feature.properties in layer are accessible via
-            // .properties when the layer is converted to geojson.
+            // .properties when the layer is converted to GeoJSON.
             if (polygonGeoJson.properties && polygonGeoJson.properties.avoidPolygon) {
               if (inGeoJsonFormat) {
                 mapAvoidPolygons.push(polygonGeoJson)
@@ -1851,7 +1847,7 @@ export default {
       return mapAvoidPolygons
     },
     /**
-     * Enable edit mode for polygon by adding a edit popup when clicked
+     * Enable edit mode for polygon by adding an edit popup when clicked
      * @param {*} polygon
      */
     onAvoidPolygonClicked (polygon, map) {
@@ -1872,7 +1868,7 @@ export default {
      * @returns {DocumentFragment}
      */
     buildPolygonClickPopupContent (polygon) {
-      var popupContentWrapper = document.createElement('div')
+      const popupContentWrapper = document.createElement('div')
 
       let editShapeEl = document.createElement('a')
       editShapeEl.onclick = () => {this.enableAvoidPolygonShapeEdit(polygon)}
@@ -1941,13 +1937,13 @@ export default {
       this.localMapViewData.places = []
       this.localMapViewData.routes = []
       this.localMapViewData.polygons = []
-      this.clickLatlng = null
+      this.clickLatLng = null
       this.$store.commit('currentLocation', null)
     },
     /**
      * When a place focus is changed (a new place is selected among the
      * ones listed on the map) updates the map center if the distance
-     * between the old center and the new is greater then 50 meters
+     * between the old center and the new is greater than 50 meters
      */
     placeFocusChanged (place) {
       this.focusedPlace = place
@@ -2039,7 +2035,7 @@ export default {
     // Define a unique identifier to the map component instance
     this.guid = Utils.guid()
 
-    // When the box is created, it emit
+    // When the box is created, it emits
     // an event to its parent telling the parent its guid
     this.$emit('onCreate', this.guid)
 
@@ -2060,7 +2056,7 @@ export default {
    * and set the map center on create
    */
   created () {
-    // Copy the prop value to a local prop
+    // Copy the prop value to a local prop,
     // so it can be modified locally
     this.getImgSrc = Utils.getImgSrc
     this.showClickPopups = this.showPopups

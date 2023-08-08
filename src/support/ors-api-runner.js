@@ -8,9 +8,9 @@ import lodash from 'lodash'
 
 import OrsApiClient from 'openrouteservice-js'
 
-// By default we use the openrouteservice-js npm package to query the API.
+// By default, we use the openrouteservice-js npm package to query the API.
 // But, if it is needed to test and change the openrouteservice-js itself the lib source code
-// can be put in the /src/ors-js folder and then we can use it to apply changes and see
+// can be put in the /src/ors-js folder, and then we can use it to apply changes and see
 // these changes on the fly. This is only to developers who will work on
 // the openrouteservice-js project. If you want to do this, comment the OrsApiClient import above
 // and uncomment the import line below to use a local and unpacked openrouteservice-js lib
@@ -232,30 +232,30 @@ const sortFeatures  = (features) => {
 
   let bestMatchIndex = lodash.findIndex(features, function(f) { return f.bestMatch === true})
   if (bestMatchIndex > -1) {
-    // Move best match to to first position (duplicated items will be removed later)
+    // Move best match to first position (duplicated items will be removed later)
     features.splice(0, 0, features[bestMatchIndex])
   }
 
   let postalCodeIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'postalcode'})
   if (postalCodeIndex > 1) {
-    // Move postalcode place to first position duplicated items will be removed later)
+    // Move postalcode place to first position (duplicated items will be removed later)
     features.splice(0, 0, features[postalCodeIndex])
   } else {
     let closestCityIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'locality' || f.properties.layer === 'city'})
     if (closestCityIndex > 1) {
-      // Move closest city to second position (duplicated items will be removed later)
+      // Move the closest city to second position (duplicated items will be removed later)
       features.splice(1, 0, features[closestCityIndex])
     }
   }
   let closestCountyIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'county' })
   if (closestCountyIndex > 1) {
-    // Move closest city to second position (duplicated items will be removed later)
+    // Move the closest city to second position (duplicated items will be removed later)
     features.splice(2, 0, features[closestCountyIndex])
   }
 
   let closestCountryIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'country'})
   if (closestCountryIndex > 2) {
-    // Move closest city to third position (duplicated items will be removed later)
+    // Move the closest city to third position (duplicated items will be removed later)
     features.splice(3, 0, features[closestCountryIndex])
   }
   // remove duplicated
@@ -304,7 +304,7 @@ const Pois = (filters, limit = 100, distanceBuffer = 500) => {
 const Isochrones = (places) => {
   const mapSettings = store.getters.mapSettings
 
-  var isochrones = new OrsApiClient.Isochrones({
+  const isochrones = new OrsApiClient.Isochrones({
     api_key: mapSettings.apiKey,
     host: mapSettings.apiBaseUrl,
     service: mapSettings.endpoints.isochrones

@@ -50,11 +50,11 @@ class Place {
   }
 
   /**
-   * Set the the lng and lat of the Place
+   * Set the lng and lat of the Place
    * @param {*} lng
    * @param {*} lat
    */
-  setLnglat(lng, lat) {
+  setLngLat(lng, lat) {
     this.lng = Number(lng)
     this.lat = Number(lat)
     this.coordinates = [Number(lng), Number(lat)]
@@ -68,7 +68,7 @@ class Place {
     if (this.lat !== null && this.lng !== null) {
       return [this.lng, this.lat]
     } else {
-      if (this.nameIsCoord()) {
+      if (this.nameIsNumeric()) {
         const coords = this.getCoordsFromName()
         return coords
       } else {
@@ -82,7 +82,7 @@ class Place {
    * @returns {LatLng}
    */
   getLatLng() {
-    if (this.nameIsCoord()) {
+    if (this.nameIsNumeric()) {
       let coords = this.getCoordsFromName()
       return GeoUtils.buildLatLong(coords[1], coords[0])
     }
@@ -169,12 +169,9 @@ class Place {
   /**
    * Check if the place contains coordinates as placeName
    */
-  nameIsCoord() {
+  nameIsNumeric() {
     const coords = this.getCoordsFromName()
-    if (coords) {
-      return true
-    }
-    return false
+    return !!coords
   }
 
   /**
@@ -210,7 +207,7 @@ class Place {
     const context = this
     return new Promise((resolve, reject) => {
       let promise = null
-      if (context.placeName && context.placeName.length > 0 && !context.nameIsCoord()) {
+      if (context.placeName && context.placeName.length > 0 && !context.nameIsNumeric()) {
         promise = Geocode(context.placeName)
       } else {
         promise = ReverseGeocode(context.lat, context.lng)
@@ -263,8 +260,8 @@ class Place {
 
         // If the difference between the reference zoom and
         // the current feature zoom is smaller than the
-        // the difference between the previously selected feature
-        // then replace the current selected feature bt the current feature
+        // difference between the previously selected feature,
+        // replace the current selected feature with the current feature
         if (placeZoom % zoom < selectedPlaceZoom % zoom) {
           selectedPlace = places[key]
         }
@@ -297,7 +294,7 @@ class Place {
   }
 
   /**
-   * Build a place using only lng an lat
+   * Build a place using only lng and lat
    * @param {*} lng
    * @param {*} lat
    */
