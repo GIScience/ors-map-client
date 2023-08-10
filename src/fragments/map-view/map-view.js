@@ -68,6 +68,7 @@ import Utils from '@/support/utils'
 import theme from '@/config/theme'
 import Place from '@/models/place'
 import {EventBus} from '@/common/event-bus'
+import region from '@/support/region-of-interest'
 import 'vue2-leaflet-draw-toolbar'
 import Leaflet from 'leaflet'
 import lodash from 'lodash'
@@ -1968,6 +1969,30 @@ export default {
       }
     },
     /**
+     * Display an inverted polygon of region of interest
+     */
+    addRegionOfInterest() {
+      if (region) {
+        this.getMapObject().then((map) => {
+          // assumption is that region will be a polygon and not a mulitpolygon
+          let geometryCoords = region.features[0].geometry.coordinates[0]
+          let holes = []
+          for (let key in geometryCoords) {
+            holes.push(GeoUtils.switchLatLonIndex(geometryCoords[key]))
+          }
+
+          var coords = [[[90, -180], [90, 180], [-90, 180], [-90, -180]], holes]
+
+          Leaflet.polygon(coords, {color: 'red', fillColor: '#000', opacity: 1, weight: 1, fillOpacity: 0.3})
+            .addTo(map)
+
+          let bounds = Leaflet.geoJSON(region).getBounds()
+          map.setMaxBounds(bounds)
+          map.fitBounds(bounds, { padding: [20, 20], maxZoom: 18 })
+        })
+      }
+    },
+    /**
      * Add map view initial EventBus listeners
      * @listens redrawAndFitMap (via EventBus)
      * @listens clearMap (via EventBus)
@@ -2064,6 +2089,7 @@ export default {
     this.loadAvoidPolygons()
     this.setProviders()
     this.setMapCenter()
+    this.addRegionOfInterest()
     window.addEventListener('keyup', this.disablePickPlaceMode)
   }
 }
