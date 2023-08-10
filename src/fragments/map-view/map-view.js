@@ -158,6 +158,7 @@ export default {
   },
   data () {
     return {
+      region: {},
       tileProviders: [], // list of tiles provider that will be set via setProviders
       overlayerTileProviders: [], // list of overlay tiles provider that will be set via setProviders
       wmsOverlayerTileProviders: [], // list of WMS overlay tiles provider that will be set via setProviders
@@ -1919,6 +1920,31 @@ export default {
       }
     },
     /**
+     * Display an inverted polygon of region of interest
+     */
+    addRegionOfInterest() {
+      if (this.region) {
+        let context = this
+        this.getMapObject().then((map) => {
+          // assumption is that region will be a polygon and not a mulitpolygon
+          let geometryCoords = context.region.features[0].geometry.coordinates[0]
+          let holes = []
+          for (let key in geometryCoords) {
+            holes.push(GeoUtils.switchLatLonIndex(geometryCoords[key]))
+          }
+
+          var coords = [[[90, -180], [90, 180], [-90, 180], [-90, -180]], holes]
+
+          Leaflet.polygon(coords, {color: 'red', fillColor: '#000', opacity: 1, weight: 1, fillOpacity: 0.3})
+            .addTo(map)
+
+          let bounds = Leaflet.geoJSON(context.region).getBounds()
+          map.setMaxBounds(bounds)
+          map.fitBounds(bounds, { padding: [20, 20], maxZoom: 18 })
+        })
+      }
+    },
+    /**
      * Add map view initial EventBus listeners
      * @listens redrawAndFitMap (via EventBus)
      * @listens clearMap (via EventBus)
@@ -2015,6 +2041,24 @@ export default {
     this.loadAvoidPolygons()
     this.setProviders()
     this.setMapCenter()
+    try {
+      fetch('/static/config/region-of-interest.json').then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`)
+        }
+        return response.json()
+      })
+        .then(data => {
+          this.region = data
+          this.addRegionOfInterest()
+        })
+        .catch(err => {
+          this.error = err.message
+          console.error('Error loading region config:', err)
+        })
+    } catch (e) {
+      console.error('Error loading region config:', e)
+    }
     window.addEventListener('keyup', this.disablePickPlaceMode)
   }
 }
