@@ -6,6 +6,7 @@ import AppLoader from '@/app-loader'
 import Utils from '@/support/utils'
 import store from '@/store/store'
 import lodash from 'lodash'
+import region from '@/config/region-of-interest.json'
 
 const orsParamsParser = {
   /**
@@ -19,7 +20,9 @@ const orsParamsParser = {
     const args = {
       text: placeName,
       size: 8,
-      focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng]
+      focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng],
+      // Use GeoJSON Region as bbox
+      boundary_bbox : region.bbox
     }
     // If is set to restrict the search to current mapBounds,
     // then apply the restriction
