@@ -7,6 +7,25 @@ import Utils from '@/support/utils'
 import store from '@/store/store'
 import lodash from 'lodash'
 
+let region_bbox = []
+try {
+  fetch('/static/config/region-of-interest.json').then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`)
+    }
+    return response.json()
+  })
+    .then(data => {
+      region_bbox = data['bbox']
+    })
+    .catch(err => {
+      this.error = err.message
+      console.error('Error loading region config:', err)
+    })
+} catch (e) {
+  console.error('Error loading region config:', e)
+}
+
 const orsParamsParser = {
   /**
    * Build the args object to be used in autocomplete places request
@@ -19,7 +38,9 @@ const orsParamsParser = {
     const args = {
       text: placeName,
       size: 8,
-      focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng]
+      focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng],
+      // Use GeoJSON Region as bbox
+      boundary_bbox : [[region_bbox[0], region_bbox[1]], [region_bbox[2], region_bbox[3]]]
     }
     // If is set to restrict the search to current mapBounds,
     // then apply the restriction
