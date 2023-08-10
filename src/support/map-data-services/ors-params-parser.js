@@ -19,7 +19,19 @@ const orsParamsParser = {
     const args = {
       text: placeName,
       size: 8,
-      focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng]
+      focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng],
+      // as HEAL project is only for Heidelberg region, we restrict the place search to just this region
+      // heal: heidelberg bbox but long in height
+      boundary_bbox : [
+        [
+          49.32624080869595,
+          8.556461334228517
+        ],
+        [
+          49.552723238903546,
+          8.80434036254883
+        ]
+      ]
     }
     // If is set to restrict the search to current mapBounds,
     // then apply the restriction
