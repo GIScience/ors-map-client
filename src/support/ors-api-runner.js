@@ -41,8 +41,10 @@ const Directions = (places, customArgs = null) => {
         const data = { options: { origin: constants.dataOrigins.directions, apiVersion: constants.apiVersion }, content: response }
         resolve(data)
       }).catch(err => {
-        const result = { response: err, args: args }
-        reject(result)
+        err.response.json().then((error) => {
+          const result = { response: error, args: args }
+          reject(result)
+        })
       })
     })
   })
@@ -68,7 +70,9 @@ const Geocode = (term, size = 10) => {
       const places = Place.placesFromFeatures(response.features)
       resolve(places)
     }).catch(err => {
-      reject(err)
+      err.response.json().then((error) => {
+        reject(error)
+      })
     })
   })
 }
@@ -95,7 +99,9 @@ const ReverseGeocode = (lat, lng, size = 10) => {
       const places = Place.placesFromFeatures(response.features)
       resolve(places)
     }).catch(err => {
-      reject(err)
+      err.response.json().then((error) => {
+        reject(error)
+      })
     })
   })
 }
@@ -156,8 +162,10 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
     Promise.all(promises).then((responses) => {
       const places = buildPlacesSearchResult(responses, quantity)
       resolve(places)
-    }).catch(response => {
-      reject(response)
+    }).catch(err => {
+      err.response.json().then((error) => {
+        reject(error)
+      })
     })
   })
 }
@@ -291,7 +299,9 @@ const Pois = (filters, limit = 100, distanceBuffer = 500) => {
     pois.pois(args).then((response) => {
       resolve(response)
     }).catch((err) => {
-      reject(err)
+      err.response.json().then((error) => {
+        reject(error)
+      })
     })
   })
 }
@@ -315,8 +325,10 @@ const Isochrones = (places) => {
         const data = { options: { origin: constants.dataOrigins.isochrones, apiVersion: constants.apiVersion }, content: response }
         resolve(data)
       }).catch((err) => {
-        const result = { response: err, args: args }
-        reject(result)
+        err.response.json().then((error) => {
+          const result = { response: error, args: args }
+          reject(result)
+        })
       })
     })
   })
