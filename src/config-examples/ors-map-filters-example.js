@@ -600,7 +600,7 @@ const filters = [
                 ],
               },
               {
-                name: 'quiet',
+                name: 'heat',
                 type: constants.filterTypes.steps,
                 min: 0,
                 max: 1,
@@ -723,6 +723,7 @@ const filters = [
         required: false,
         type: constants.filterTypes.array,
         default: false,
+        value: ['ferries'],
         apiDefault: false,
         isEnum: true,
         valueAsArray: true,
