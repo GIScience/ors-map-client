@@ -266,7 +266,7 @@ export default {
     handleCalculateIsochronesError (result) {
       this.$root.appHooks.run('beforeHandleIsochronesError', result)
 
-      const errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
+      const errorCode = this.lodash.get(result, constants.responseErrorCodePath)
       if (errorCode) {
         const errorKey = `isochrones.apiError.${errorCode}`
         let errorMsg = this.$t(errorKey)
@@ -274,7 +274,7 @@ export default {
           errorMsg = this.$t('isochrones.genericErrorMsg')
         }
         this.showError(errorMsg, { timeout: 0, mode: 'multi-line' })
-        console.error(result.response.response.body.error)
+        console.error(result.response.error)
       } else {
         this.showError(this.$t('isochrones.itWasNotPossibleToCalculateIsochronesWithTheDefinedOptions'), { timeout: 0 })
         console.error(result)

@@ -669,7 +669,7 @@ export default {
     handleCalculateDirectionsError (result) {
       this.$root.appHooks.run('beforeHandleDirectionsError', result)
 
-      const errorCode = this.lodash.get(result.response, constants.responseErrorCodePath)
+      const errorCode = this.lodash.get(result, constants.responseErrorCodePath)
       if (errorCode) {
         const errorKey = `placesAndDirections.apiError.${errorCode}`
         let errorMsg = this.$t(errorKey)
@@ -677,7 +677,7 @@ export default {
           errorMsg = this.$t('placesAndDirections.genericErrorMsg')
         }
         this.showError(errorMsg, { timeout: 0, mode: 'multi-line' })
-        console.error('Original error', this.lodash.get(result, 'response.response.body.error'))
+        console.error('Original error', this.lodash.get(result, 'response.error'))
       } else {
         if (this.hasRouteFilters(result.args)) {
           this.showError(this.$t('placesAndDirections.notRouteFoundWithFilters'), { timeout: 0 })

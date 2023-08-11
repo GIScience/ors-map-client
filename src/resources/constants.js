@@ -24,7 +24,7 @@ const constants = {
   avoidPolygonsOptionsPath: 'options.options.avoid_polygons',
   profileFilterName: 'profile',
   vehicleTypeFilterName: 'vehicle_type',
-  responseErrorCodePath: 'response.body.error.code',
+  responseErrorCodePath: 'response.error.code',
   dataOrigins: {
     directions: '/directions',
     isochrones: '/isochrones',
