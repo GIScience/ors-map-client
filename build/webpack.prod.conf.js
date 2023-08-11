@@ -100,7 +100,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     // extract css into its own file
     new MiniCssExtractPlugin({
-      filename: assetsPath('css/[name].[hash].css'),
+      filename: assetsPath('css/[name].[fullhash].css'),
       chunkFilename: "[id].[contenthash].css",
     }),
     // generate dist index.html with correct asset hash for caching.
