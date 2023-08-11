@@ -5,9 +5,9 @@ import appConfig from '../../src/config/app-config'
 describe('Ors map client', () => {
   beforeEach(() => {
     cy.viewport(1848, 980)
-  })
-  it('successfully loads', () => {
     cy.visit('/')
+  })
+  it('loads with correct url', () => {
     let coords = defaultMapSettings.mapCenter
     cy.url().should('contain', coords.lat).should('contain', coords.lng).
       should('contain', appConfig.initialZoomLevel.toString())
@@ -32,6 +32,8 @@ describe('Ors map client', () => {
   })
 
   it('toggles the sidebar with menu button', () => {
+    // wait for top menu to hide as menu button lies behind it
+    cy.get('.ors-toolbar').should('be.hidden')
     cy.get('.sidebar').should('not.be.visible')
     cy.get('.open-menu').click()
     cy.get('.sidebar').should('be.visible')
