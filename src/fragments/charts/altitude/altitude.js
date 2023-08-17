@@ -37,7 +37,6 @@ export default {
   },
   data: () => ({
     parsedData: null,
-    localMapViewData: null,
     chartOptions: {
       aspectRatio: 4,
       scales: {
@@ -64,8 +63,8 @@ export default {
       return data
     },
     summary () {
-      if (this.localMapViewData) {
-        const summary = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].summary
+      if (this.mapViewData) {
+        const summary = this.mapViewData.routes[this.$store.getters.activeRouteIndex].summary
         return summary
       }
     },
