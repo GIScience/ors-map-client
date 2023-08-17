@@ -2,6 +2,7 @@ import path from 'path'
 describe('download functionality', function () {
   beforeEach(()  => {
     cy.viewport(1848, 980)
+    cy.visit('/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.612543, 49.472737;8.611746, 49.472586","options":%7B"zoom":18,"profile":"driving-car","preference":"recommended"%7D%7D')
   })
 
   function downloadFile(typeTitle, ext) {
@@ -12,18 +13,17 @@ describe('download functionality', function () {
     cy.get('.download-format .v-select__selections').click()
     cy.get('.v-menu__content--fixed > .v-select-list > .v-list')
       .contains('div > .v-list__tile > ' +
-    '.v-list__tile__content > .v-list__tile__title', typeTitle).click()
+    '.v-list__tile__content > .v-list__tile__title', typeTitle).click({force: true})
     cy.get('.download').click()
     let fileName = `${cleanName}.${ext}`
     return path.join(Cypress.config('downloadsFolder'), fileName)
   }
 
   it('downloads route json file', () => {
-    cy.visit('/#/directions/Mannheim,BW,Germany/Heidelberg,BW,Germany/data/%7B"coordinates":"8.492765,49.488789;8.692416,49.401247","options":%7B"zoom":8,"profile":"driving-car","preference":"recommended"%7D%7D')
     const filePath = downloadFile('ORS JSON', 'json')
     cy.readFile(filePath).its('options').should('deep.equal',
       {
-        'zoom': 8,
+        'zoom': 18,
         'profile': 'driving-car',
         'preference': 'recommended'
       })
