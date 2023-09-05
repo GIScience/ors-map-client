@@ -69,7 +69,7 @@ first.
 
 2. Set the app-config.js values for:
 
-- `orsApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
+- `orsApiKey` - ORS API key to be used when not running the app from localhost or ors valid domains
 - `bitlyApiKey` - the Bitly key (used to shorten the share URL)
 - `bitlyLogin` - the Bitly login (used to shorten the share URL)
 
