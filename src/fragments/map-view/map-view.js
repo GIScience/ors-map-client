@@ -1829,7 +1829,7 @@ export default {
       if (this.map) {
         // Extract each polygon from the map object
         this.map.eachLayer(function (layer) {
-          if (layer instanceof Leaflet.Polygon) {
+          if (layer instanceof Leaflet.Polygon && layer.getLatLngs().length === 1) {
             let polygonGeoJson = layer.toGeoJSON()
 
             // properties defined via feature.properties in layer are accessible via
