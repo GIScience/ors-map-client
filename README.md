@@ -369,6 +369,10 @@ extension.
 After doing that, open the application in the browser and press F12 and select the tab `Console`, `Vue` or `Sources`
 (and then expand e.g.: `webpack://src`).
 
+##### USB debugging
+
+To debug the client on a mobile phone you can follow e.g. [this guide](https://chenhuijing.com/blog/debugging-firefox-on-android/#%F0%9F%8F%80).
+
 ### Build and deploy
 
 The app must be built before it is deployed. To do so, run:
