@@ -103,6 +103,6 @@ export default {
     traildifficulty: 'Trail difficulty',
     osmid: 'OSM ID',
     countryinfo: 'Country info',
-    csv: 'Heat Stress' // HEAL api
+    csv: 'Heat stress' // HEAL api
   }
 }
