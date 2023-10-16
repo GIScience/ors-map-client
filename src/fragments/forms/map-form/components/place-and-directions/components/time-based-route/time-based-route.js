@@ -9,17 +9,10 @@ export default {
     },
     places: []
   },
-  components: {
-
-  },
+  components: {},
   data: () => {
     return {
-      // hours: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
       timesOfTheDay: [
-      // {
-      //   label: 'now',
-      //   value: 'now'
-      // },
         {
           label: 'morning',
           value: 'heat_morning'
@@ -41,27 +34,19 @@ export default {
     }
   },
   computed: {
-    timesOfTheDayLabel () {
-      return this.timesOfTheDay.map( t => {
+    timesOfTheDayLabel() {
+      return this.timesOfTheDay.map(t => {
         return {
-          label: `${this.$t('timeBasedRoute.'+ t.label)}`,
+          label: `${this.$t('timeBasedRoute.' + t.label)}`,
           value: t.value
         }
       })
     },
   },
   methods: {
-    routeOnHotDays(time) {
+    /*routeOnHotDays(time) {
       console.log('>>> timeBasedRoute >>> routeOnHotDays ', time)
-    },
-    /* addHour() {
-      if(this.selectedHour >= 0 && this.selectedHour < 23)
-      this.selectedHour++
-    },
-    subtracthour() {
-      if(this.selectedHour > 0 && this.selectedHour <= 23)
-      this.selectedHour--
-    }, */
+    },*/
     departHourChange() {
       let appRouteData = this.$store.getters.appRouteData
       // console.log('>>> departHourChange ', this.selectedHour, appRouteData)
@@ -70,6 +55,26 @@ export default {
       // this.$store.commit('appRouteData', appRouteData)
       EventBus.$emit('appRouteDataChanged', appRouteData)
     },
+    getTimeOfDay(hour, minute) {
+      // Function to determine the time of the day
+      const totalMinutes = hour * 60 + minute
 
+      if (totalMinutes >= 0 && totalMinutes <= 11 * 60 + 30) {
+        return this.timesOfTheDay[0].value // Morning
+      } else if (totalMinutes <= 14 * 60 + 30) {
+        return this.timesOfTheDay[1].value // Noon
+      } else if (totalMinutes <= 17 * 60 + 30) {
+        return this.timesOfTheDay[2].value // Afternoon
+      } else {
+        return this.timesOfTheDay[3].value // Evening
+      }
+    }
+  },
+  created() {
+    const currentTime = new Date()
+    const currentHour = currentTime.getHours()
+    const currentMinute = currentTime.getMinutes()
+
+    this.selectedHour = this.getTimeOfDay(currentHour, currentMinute)
   }
 }
