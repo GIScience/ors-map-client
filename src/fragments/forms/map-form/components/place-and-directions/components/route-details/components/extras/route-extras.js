@@ -168,7 +168,7 @@ export default {
      */
     showAllSections (extraKey) {
       this.$store.commit('extraHighlight', {key: extraKey, value: 'all', index: 0})
-      const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
+      const sectionTitle = this.$t('global.' + extraKey)
       const highlightData = { extraKey: extraKey, sectionTitle, sections: [] }
 
       let index = 0
