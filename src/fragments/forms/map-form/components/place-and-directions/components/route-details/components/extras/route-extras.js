@@ -130,7 +130,7 @@ export default {
      * @emits highlightPolylineSections (via EventBus)
      */
     showAllSections (extraKey) {
-      const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
+      const sectionTitle = this.$t('global.' + extraKey)
       const highlightData = { extraKey: extraKey, sectionTitle, sections: [] }
 
       let index = 0

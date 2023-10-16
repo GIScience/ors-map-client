@@ -66,6 +66,9 @@ export default {
     tunnel:	'Tunnel',
     paved_road:	'Paved road',
     ford: 'Ford',
-    no_data: 'No data'
+    no_data: 'No data',
+    low: 'Low',
+    moderate: 'Moderate',
+    high: 'High'
   }
 }
