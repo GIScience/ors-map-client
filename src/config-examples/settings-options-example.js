@@ -26,10 +26,9 @@ const settingsOptions = {
   tileServices: [
     { text: 'OpenStreetMap', value: 'osm' },
     { text: 'World Imagery', value: 'world-imagery' },
-    { text: 'Topography', value: 'topography' },
-    { text: 'Transport Dark', value: 'transport-dark' },
-    { text: 'Cyclosm', value: 'cyclosm' },
-    { text: 'Custom', value: 'custom' }
+    { text: 'Lite contrast', value: 'stamen-toner-lite' },
+    { text: 'High contrast', value: 'stamen-toner' },
+    { text: 'Light color', value: 'cartodb-positron' }
   ]
 }
 
