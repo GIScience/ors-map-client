@@ -38,7 +38,7 @@ const appConfig = {
 
   disabledActionsForIsochrones: ['roundtrip'], // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
   disabledActionsForPlacesAndDirections: [], // // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
-  supportsPlacesAndDirections: true, // If thw whole places and directions feature is supported/enabled in the application
+  supportsPlacesAndDirections: true, // If the whole places and directions feature is supported/enabled in the application
   supportsIsochrones: true, // If isochrones is supported/enabled in the application
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
   supportsDirections: true, // If the directions functionality is available
@@ -72,7 +72,7 @@ const appConfig = {
       visible: false,
       url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-      maxZoom: 17
+      maxZoom: 19
     },
     {
       name: 'Topography',
@@ -104,7 +104,7 @@ const appConfig = {
       visible: false,
       url: 'https://{s}.tile-openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
       attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 18
+      maxZoom: 20
     }
   ],
   wpsOverlayerTileProviders: []
