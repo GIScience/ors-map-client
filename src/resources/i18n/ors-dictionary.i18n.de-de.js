@@ -65,6 +65,9 @@ export default {
     tunnel:	'Tunnel',
     paved_road:	'Befestigte Straße',
     ford: 'Furt',
-    no_data: 'Keine Daten'
+    no_data: 'Keine Daten',
+    low: 'Niedrig',
+    moderate: 'Mittel',
+    high: 'Hoch'
   }
 }
