@@ -47,7 +47,7 @@ export default {
       return location.href
     },
     startedPanelExtended () {
-      return this.localMapViewData.routes.length === 1 ? 0 : null
+      return this.localMapViewData.routes.length > 0 ? 0 : null
     },
     /**
      * Builds and return route summary
