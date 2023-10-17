@@ -144,7 +144,7 @@
       </v-btn>
 
       <!-- highlight extra info polyline -->
-      <extra-info-highlight v-if="extraInfo" @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" :extra-info="extraInfo" :polyline-data="activeRouteData.geometry.coordinates"/>
+      <extra-info-highlight v-if="displayActiveRouteData && extraInfo" @closed="extraInfo = null" @beforeOpen="isAltitudeModalOpen = false" :extra-info="extraInfo" :polyline-data="activeRouteData.geometry.coordinates"/>
 
       <l-height-graph v-if="isAltitudeModalOpen" @closed="closeAltitudeInfo" lg8 sm11 :data="localMapViewDataRawData" :options="lHeightGraphOptions"/>
       <my-location v-if="showMyLocationControl" class="my-location-btn" :active="myLocationActive" @updateLocation="updateMyLocation"></my-location>
