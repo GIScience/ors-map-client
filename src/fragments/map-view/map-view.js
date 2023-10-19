@@ -694,13 +694,12 @@ export default {
         clearTimeout(this.mapDataViewChangeDebounceTimeoutId)
       }
       this.mapDataViewChangeDebounceTimeoutId = setTimeout(function () {
+        let changes = Utils.getObjectsDiff(context.localMapViewData, context.mapViewData)
         // Create a new instance of MapViewData and set all the props into the local instance
         context.localMapViewData = context.mapViewData.clone()
-
-        let changes = Utils.getObjectsDiff(context.localMapViewData, context.mapViewData)
         let different = changes.different
         // Only refresh local data if the change was not only the opacity
-        if (different.length !== 1 || (different.length === 1 && different[0].indexOf('.opacity') > 0)) {
+        if (!(different.length === 1 && different[0].indexOf('.opacity') > 0)) {
           context.loadMapData()
           context.refreshAltitudeModal()
         }
