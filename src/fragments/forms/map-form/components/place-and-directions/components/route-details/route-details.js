@@ -50,17 +50,6 @@ export default {
       return this.localMapViewData.routes.length > 0 ? 0 : null
     },
     /**
-     * Builds and return route summary
-     * @returns {Object}
-     */
-    routeSummary () {
-      if (this.hasRoutes) {
-        let summary = Object.assign({}, this.localMapViewData.routes[this.$store.getters.activeRouteIndex].summary)
-        summary = this.getHumanizedSummary(summary, summary.unit)
-        return summary
-      }
-    },
-    /**
      * Builds and return the routes
      * parsed, with translations and
      * humanized content
