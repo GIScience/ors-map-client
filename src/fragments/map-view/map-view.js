@@ -700,6 +700,7 @@ export default {
         let different = changes.different
         // Only refresh local data if the change was not only the opacity
         if (!(different.length === 1 && different[0].indexOf('.opacity') > 0)) {
+          context.setActiveRouteIndex(0)
           context.loadMapData()
           context.refreshAltitudeModal()
         }
