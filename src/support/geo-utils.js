@@ -239,49 +239,26 @@ const geoUtils = {
    * @returns {Array} of 2 objects {lon:..., lat:...}
    */
   getBounds: (places = [], polyline = []) => {
-    const boundsCollection = []
-    let minLat = null
-    let maxLat = null
-    let minLng = null
-    let maxLng = null
+    let latValues = []
+    let lngValues = []
 
-    places.forEach((place) => {
-      boundsCollection.push({
-        lat: place.lat,
-        lng: place.lng
-      })
-    })
-    if (Array.isArray(polyline)) {
-      polyline.forEach((lngLatArr) => {
-        boundsCollection.push({
-          lng: lngLatArr[0],
-          lat: lngLatArr[1]
-        })
-      })
+    if (places.length) {
+      latValues.push(...places.map(p => p.lat))
+      lngValues.push(...places.map(p => p.lng))
     }
-
-    if (places.length === 1 && boundsCollection.length === 1) {
-      const place = places[0]
-      minLat = maxLat = place.lat
-      minLng = maxLng = place.lng
-    } else {
-      for (let itemKey in boundsCollection) {
-        let lngLat = boundsCollection[itemKey]
-        minLat = minLat === null || lngLat.lat < minLat ? lngLat.lat : minLat
-        minLng = minLng === null || lngLat.lng < minLng ? lngLat.lng : minLng
-        maxLat = maxLat === null || lngLat.lat > maxLat ? lngLat.lat : maxLat
-        maxLng = maxLng === null || lngLat.lng > maxLng ? lngLat.lng : maxLng
-      }
+    if (polyline.length) {
+      latValues.push(...polyline.map(e => e[1]))
+      lngValues.push(...polyline.map(e => e[0]))
     }
 
     return [
       {
-        lon: minLng,
-        lat: minLat
+        lon: lngValues.length ? Math.min(...lngValues) : null,
+        lat: latValues.length ? Math.min(...latValues) : null
       },
       {
-        lon: maxLng,
-        lat: maxLat
+        lon: lngValues.length ? Math.max(...lngValues) : null,
+        lat: latValues.length ? Math.max(...latValues) : null
       }
     ]
   },
