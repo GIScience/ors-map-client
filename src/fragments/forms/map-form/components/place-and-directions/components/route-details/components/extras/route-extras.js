@@ -2,6 +2,11 @@ import orsDictionary from '@/resources/ors-dictionary'
 import {EventBus} from '@/common/event-bus'
 
 export default {
+  data () {
+    return {
+      showExtraInfoSection: null
+    }
+  },
   props: {
     route: {
       Type: Object,
@@ -21,6 +26,7 @@ export default {
     // get current displayed extras
     let {key: extraKey, value: extraValue, index: index} = this.$store.getters.extraHighlight
     if (extraKey) {
+      this.showExtraInfoSection = 0  // show extra section
       // does the active route have the specific extraValue?
       if (this.routeExtras[extraKey].summary.map(e => e.value).includes(extraValue)) {
         this.showSection(extraKey, extraValue, index)
