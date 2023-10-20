@@ -46,8 +46,8 @@ export default {
     shareUrl () {
       return location.href
     },
-    startedPanelExtended () {
-      return this.localMapViewData.routes.length > 0 ? 0 : null
+    panelExtended () {
+      return this.localMapViewData.routes.length > 0 ? this.$store.getters.activeRouteIndex : null
     },
     /**
      * Builds and return the routes
