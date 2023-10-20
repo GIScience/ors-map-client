@@ -17,6 +17,18 @@ export default {
       return this.route.properties.extras || []
     }
   },
+  created() {
+    // get current displayed extras
+    let {key: extraKey, value: extraValue, index: index} = this.$store.getters.extraHighlight
+    if (extraKey) {
+      // does the active route have the specific extraValue?
+      if (this.routeExtras[extraKey].summary.map(e => e.value).includes(extraValue)) {
+        this.showSection(extraKey, extraValue, index)
+      } else {
+        this.showAllSections(extraKey)
+      }
+    }
+  },
   methods: {
     /**
      * Determines if a given
@@ -112,6 +124,7 @@ export default {
      * @emits highlightPolylineSections (via EventBus)
      */
     showSection (extraKey, value, index) {
+      this.$store.commit('extraHighlight', {key: extraKey, value: value, index: index})
       const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
       const color = this.colorValue(extraKey, index)
       const highlightData = { extraKey, sectionTitle, sections: [{ intervals: [], color }] }
@@ -130,6 +143,7 @@ export default {
      * @emits highlightPolylineSections (via EventBus)
      */
     showAllSections (extraKey) {
+      this.$store.commit('extraHighlight', {key: extraKey, value: 'all', index: 0})
       const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
       const highlightData = { extraKey: extraKey, sectionTitle, sections: [] }
 
