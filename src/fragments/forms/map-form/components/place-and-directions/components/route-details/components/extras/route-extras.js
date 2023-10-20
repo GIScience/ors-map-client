@@ -154,8 +154,7 @@ export default {
       const highlightData = { extraKey: extraKey, sectionTitle, sections: [] }
 
       let index = 0
-      for (const summaryKey in this.routeExtras[extraKey].summary) {
-        const summary = this.routeExtras[extraKey].summary[summaryKey]
+      for (const summary of this.routeExtras[extraKey].summary) {
         const polylineData = this.buildExtraHighlightPolylineData(extraKey, index, summary.value)
         highlightData.sections.push(polylineData)
         index++

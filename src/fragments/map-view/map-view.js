@@ -1156,16 +1156,15 @@ export default {
       } else {
         // Add the routes coordinates to the polyline that must
         // be considered to the all features bounds
-        for (const rKey in this.localMapViewData.routes) {
-          if (this.localMapViewData.routes[rKey].geometry.coordinates) {
-            const coords = this.localMapViewData.routes[rKey].geometry.coordinates
+        for (const route of this.localMapViewData.routes) {
+          if (route.geometry.coordinates) {
+            const coords = route.geometry.coordinates
             polylineData = polylineData.concat(coords)
           }
         }
         // Add the polygons coordinates to the polyline that must
         // be considered to  the all features bounds
-        for (const pKey in this.localMapViewData.polygons) {
-          const polygon = this.localMapViewData.polygons[pKey]
+        for (const polygon of this.localMapViewData.polygons) {
           if (polygon) {
             const coords = PolygonUtils.flatCoordinates(polygon.geometry.coordinates)
             polylineData = polylineData.concat(coords)
@@ -1189,10 +1188,10 @@ export default {
       let polylineData = []
       const coordinates = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
       const highlightData = routeData.buildHighlightedPolylines(coordinates, this.extraInfo)
-      for (let key in highlightData) {
-        let polylines = highlightData[key].polylines
-        for (let plKey in polylines) {
-          polylineData = polylineData.concat(polylines[plKey])
+      for (const highlightDatum of highlightData) {
+        let polylines = highlightDatum.polylines
+        for (const polyline of polylines) {
+          polylineData = polylineData.concat(polyline)
         }
       }
       return polylineData
@@ -1440,8 +1439,7 @@ export default {
      */
     isThereAnPolygonInEditMode () {
       let polygons = this.extractAvoidPolygonsFromMap()
-      for (let key in polygons) {
-        let polygon = polygons[key]
+      for (const polygon of polygons) {
         if (polygon.editing && polygon.editing._enabled) {
           return polygon
         }
