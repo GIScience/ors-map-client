@@ -38,6 +38,8 @@ describe('Ors map client', () => {
     cy.get('.open-menu').click()
     cy.get('.sidebar').should('be.visible')
     cy.get('.places-and-directions-tab-form')
+    cy.get('.no-padding.pr2').eq(1).click()
+    cy.get('.sidebar').should('not.be.visible')
   })
 
   it('toggles the sidebar correctly', () => {
