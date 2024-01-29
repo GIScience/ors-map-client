@@ -140,6 +140,14 @@ export default {
     },
     markAsDirectFromHere (index) {
       this.$emit('markAsDirectFromHere', index)
+    },
+
+    skillIds(skills) {
+      const ids = []
+      for (const skill of skills) {
+        ids.push(skill.id)
+      }
+      return ids
     }
   },
 }

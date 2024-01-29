@@ -29,13 +29,15 @@
             {{marker.label}}
             <template v-if="modeIsOptimization">
               <div style="width: 100%; height: auto" v-for="(j, i) in marker.job" :key="i">
-                <div v-if="['service', 'skill','amount'].includes(i)">
-                  <v-chip v-if="j && j.length">{{i}}: {{j}}</v-chip>
+                <div v-if="['amount','service','skills','time_window','amount'].includes(i)">
+                  <v-chip v-if="j && j.length && i !== 'skills'">{{i}}: {{j}}</v-chip>
+                  <v-chip v-if="j && j.length && i === 'skills'">{{i}}: {{ skillIds(j) }}</v-chip>
                 </div>
               </div>
               <div style="width: 100%; height: auto" v-for="(v, i) in marker.vehicle" :key="i">
-                <div v-if="['profile', 'amount', 'capacity', 'description'].includes(i)">
-                  <v-chip v-if="v && v.length">{{i}}: {{v}}</v-chip>
+                <div v-if="['amount','service','skills','time_window','profile','capacity', 'description'].includes(i)">
+                  <v-chip v-if="v && v.length && i !== 'skills'">{{i}}: {{v}}</v-chip>
+                  <v-chip v-if="v && v.length && i === 'skills'">{{i}}: {{ skillIds(v) }}</v-chip>
                 </div>
               </div>
             </template>
