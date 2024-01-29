@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-expansion-panel v-if="showExtras()" slot="content" class="no-shadow" :value="null">
+  <v-expansion-panel v-if="showExtras()" slot="content" class="no-shadow" :value="showExtraInfoSection">
     <v-expansion-panel-content style="background: transparent;" class="extras-header" >
       <div slot="header"><h4 >{{$t('routeExtras.extraInfo')}}</h4></div>
       <div><p class="click-action-info">{{$t('routeExtras.clickToHighlightOnMap')}}</p></div>

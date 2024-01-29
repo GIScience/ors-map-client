@@ -14,8 +14,7 @@ const routeData = {
       // Build the sections
       // Each section contains a label, a color and
       // may contain multiple polylines
-      for (const key in extraInfo.sections) {
-        const section = extraInfo.sections[key]
+      for (const section of extraInfo.sections) {
         const polylineHighlighted = {
           label: section.label,
           color: section.color,
@@ -23,8 +22,7 @@ const routeData = {
         }
         // Use the intervals data to extract the
         // polyline data for the given interval
-        for (const intervalKey in section.intervals) {
-          const interval = section.intervals[intervalKey]
+        for (const interval of section.intervals) {
           // since we are getting items from an array
           // starting with the index 0, the amount of
           // items is the final position + 1
