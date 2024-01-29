@@ -83,5 +83,10 @@ class Job extends Place {
     }
     return out
   }
+
+  setLngLat (lng, lat) {
+    super.setLngLat(lng, lat)
+    this.location = this.coordinates
+  }
 }
 export default Job
