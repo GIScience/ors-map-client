@@ -27,25 +27,29 @@ class Vehicle extends Place {
    */
   static fromJSON(vehicleJSONString) {
     let vehicle = JSON.parse(vehicleJSONString)
+    return this.fromObject(vehicle)
+  }
+
+  static fromObject(vObject) {
     let skillObjects = []
-    if (vehicle.skills) {
-      for (let id of vehicle.skills) {
+    if (vObject.skills) {
+      for (let id of vObject.skills) {
         skillObjects.push(Skill.getName(id))
       }
     }
     return new Vehicle(
-      vehicle.start[0] || vehicle.end[0],
-      vehicle.start[1] || vehicle.end[1],
-      vehicle.placeName,
+      vObject.start[0] || vObject.end[0],
+      vObject.start[1] || vObject.end[1],
+      vObject.placeName,
       {
-        id: vehicle.id,
-        description: vehicle.description,
-        profile: vehicle.profile,
-        start: vehicle.start,
-        end: vehicle.end,
-        capacity: vehicle.capacity,
+        id: vObject.id,
+        description: vObject.description,
+        profile: vObject.profile,
+        start: vObject.start,
+        end: vObject.end,
+        capacity: vObject.capacity,
         skills: skillObjects,
-        time_window: vehicle.time_window,
+        time_window: vObject.time_window,
         resolve: true,
       }
     )

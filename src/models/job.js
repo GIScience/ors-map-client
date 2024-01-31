@@ -26,18 +26,22 @@ class Job extends Place {
    */
   static fromJSON(jobJSONString) {
     let job = JSON.parse(jobJSONString)
+    return this.fromObject(job)
+  }
+
+  static fromObject(jobObject) {
     let skillObjects = []
-    if (job.skills) {
-      for (let id of job.skills) {
+    if (jobObject.skills) {
+      for (let id of jobObject.skills) {
         skillObjects.push(Skill.getName(id))
       }
     }
-    return new Job(job.location[0], job.location[1], job.placeName, {
-      id: job.id,
-      service: job.service,
+    return new Job(jobObject.location[0], jobObject.location[1], jobObject.placeName, {
+      id: jobObject.id,
+      service: jobObject.service,
       skills: skillObjects,
-      priority: job.priority,
-      time_windows: job.time_windows,
+      priority: jobObject.priority,
+      time_windows: jobObject.time_windows,
       resolve: true
     })
   }
