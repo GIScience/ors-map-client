@@ -4,6 +4,12 @@
       <box background="white" closable @closed="closeSkillsModal()">
         <h3 slot="header" style="padding-right: 55px">
           {{ $t('optimization.manageSkills') }}
+          <v-btn class="edit-skills-btn" flat :style="{background: 'white'}" @click="exportSkills()" :title="$t('optimization.exportSkillFile')">
+            <v-icon color="primary">cloud_download</v-icon>
+          </v-btn>
+          <v-btn class="edit-skills-btn" flat :style="{background: 'white'}" @click="importSkills()" :title="$t('optimization.importSkillFile')">
+            <v-icon color="primary">cloud_upload</v-icon>
+          </v-btn>
           <v-btn class="edit-skills-btn" flat :style="{background: 'white'}" @click="saveSkills()" :title="$t('optimization.saveSkills')">
             <v-icon color="success">save</v-icon>
           </v-btn>
@@ -38,6 +44,17 @@
               {{$t('global.save')}}</v-btn>
           </v-flex>
         </v-layout>
+      </box>
+    </v-dialog>
+    <v-dialog v-model="isImportOpen" max-width="500" :persistent="true" attach="body">
+      <box background="white" closable @closed="closeImport()">
+        <h3 slot="header" style="padding-right: 55px">
+          {{ $t('optimization.importSkillFile') }}
+          <v-btn class="edit-skills-btn" flat :style="{background: 'white'}" @click="saveSkillImport()" :title="$t('optimization.saveSkills')">
+            <v-icon color="success">save</v-icon>
+          </v-btn>
+        </h3>
+        <v-textarea v-model="pastedSkills" :persistent-hint="true" :hint="'paste JSON here'" auto-grow :placeholder="JsonPlaceholder"></v-textarea>
       </box>
     </v-dialog>
   </div>

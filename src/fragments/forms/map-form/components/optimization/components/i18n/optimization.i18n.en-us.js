@@ -13,6 +13,8 @@ export default {
     capacity: 'Capacity',
     skills: 'Skills',
     manageSkills: 'Manage Skills',
+    importSkillFile: 'Import skills',
+    exportSkillFile: 'Export skills',
     saveSkills: 'Save skills',
     addSkill: 'Add skill',
     removeSkill: 'Remove skill',

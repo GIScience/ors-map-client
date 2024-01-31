@@ -1,12 +1,16 @@
 import {EventBus} from '@/common/event-bus'
 import Skill from '@/models/skill'
+import Job from "@/models/job";
 
 export default {
   data: () => ({
     isSkillsOpen: true,
     editId: 0,
     editSkills: [],
-    selectedSkills: []
+    selectedSkills: [],
+    pastedSkills: [],
+    JsonPlaceholder: '[{"name":"example skill","id":1}]',
+    isImportOpen: false
   }),
   props: {
     skills: {
@@ -44,6 +48,35 @@ export default {
       this.$emit('close')
     },
 
+    importSkills () {
+      this.isImportOpen = true
+    },
+    closeImport() {
+      this.isImportOpen = false
+      this.$emit('close')
+    },
+    saveSkillImport() {
+      try {
+        const skills = []
+        for (const s of JSON.parse(this.pastedSkills)) {
+          skills.push(Skill.fromObject(s))
+        }
+        this.editSkills = skills
+
+        this.isImportOpen = false
+        this.saveSkills()
+      } catch (err) {
+        this.showError(this.$t('optimization.notAJson'), {timeout: 3000})
+      }
+    },
+
+    exportSkills () {
+      navigator.clipboard.writeText(JSON.stringify(this.editSkillsJSON)).then(() => {
+        this.showSuccess(this.$t('skill.copiedToClipboard'), {timeout: 3000})
+      }, () => {
+        this.showError(this.$t('skill.copiedToClipboardFailed'), {timeout: 3000})
+      },)
+    },
     saveSkills () {
       this.$emit('skillsChanged', this.editSkills)
       localStorage.setItem('skills', JSON.stringify(this.editSkillsJSON))
