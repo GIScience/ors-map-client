@@ -12,7 +12,10 @@ export default {
     editId: 0,
     editJobs: [],
     jobSkills: [],
-    showSkillManagement: false
+    pastedJobs: [],
+    JsonPlaceholder: '[{"id":1,"location":[8.68525,49.420822],"service":300,"delivery":[1],"skills":[1]}]',
+    showSkillManagement: false,
+    isImportOpen: false
   }),
   props: {
     jobs: {
@@ -85,9 +88,27 @@ export default {
     },
 
     importJobs () {
-      // TODO: Import from JSON
-      this.showError(this.$t('global.notImplemented'), {timeout: 3000})
+      this.isImportOpen = true
     },
+    closeImport() {
+      this.isImportOpen = false
+      this.$emit('close')
+    },
+    saveJobImport() {
+      try {
+        const jobs = []
+        for (const s of JSON.parse(this.pastedJobs)) {
+          jobs.push(Job.fromObject(s))
+        }
+        this.editJobs = jobs
+
+        this.isImportOpen = false
+        this.saveJobs()
+      } catch (err) {
+        this.showError(this.$t('optimization.notAJson'), {timeout: 3000})
+      }
+    },
+
     exportJobs () {
       navigator.clipboard.writeText(JSON.stringify(this.jobsJSON)).then(() => {
         this.showSuccess(this.$t('job.copiedToClipboard'), {timeout: 3000})

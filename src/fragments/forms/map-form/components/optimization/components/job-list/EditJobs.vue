@@ -72,6 +72,17 @@
       </box>
     </v-dialog>
     <edit-skills v-if="showSkillManagement" :skills="skills" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
+    <v-dialog v-model="isImportOpen" max-width="500" :persistent="true" attach="body">
+      <box background="white" closable @closed="closeImport()">
+        <h3 slot="header" style="padding-right: 55px">
+          {{ $t('optimization.importJobFile') }}
+          <v-btn class="edit-jobs-btn" flat :style="{background: 'white'}" @click="saveJobImport()" :title="$t('optimization.saveJobs')">
+            <v-icon color="success">save</v-icon>
+          </v-btn>
+        </h3>
+        <v-textarea v-model="pastedJobs" :persistent-hint="true" :hint="'paste JSON here'" auto-grow :placeholder="JsonPlaceholder"></v-textarea>
+      </box>
+    </v-dialog>
   </div>
 </template>
 
