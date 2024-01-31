@@ -115,7 +115,7 @@ export default {
       if (storedSkills) {
         const skills = []
         for (const skill of JSON.parse(storedSkills)) {
-          skills.push(Skill.fromJSON(skill))
+          skills.push(Skill.fromObject(skill))
         }
         this.vehicleSkills = skills
       }

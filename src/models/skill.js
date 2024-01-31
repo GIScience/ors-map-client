@@ -6,7 +6,11 @@ class Skill {
 
   static fromJSON(skillJSONString) {
     let skill = JSON.parse(skillJSONString)
-    return new Skill(skill.name, skill.id)
+    return this.fromObject(skill)
+  }
+
+  static fromObject(skillObject) {
+    return new Skill(skillObject.name, skillObject.id)
   }
 
   static getName(id) {
@@ -14,7 +18,7 @@ class Skill {
     let skillObjects = []
     let skillIds = []
     for (const skill of JSON.parse(storedSkills)) {
-      const thisSkill = skill
+      const thisSkill = this.fromObject(skill)
       skillObjects.push(thisSkill)
       skillIds.push(thisSkill['id'])
     }
@@ -28,7 +32,7 @@ class Skill {
       for (const skill of skillObjects) {
         jsonSkills.push(skill.toJSON())
       }
-      localStorage.setItem('skills', jsonSkills)
+      localStorage.setItem('skills', JSON.stringify(jsonSkills))
       return newSkill
     }
   }

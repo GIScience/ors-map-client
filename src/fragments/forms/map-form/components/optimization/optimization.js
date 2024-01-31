@@ -78,7 +78,7 @@ export default {
     if (storedSkills) {
       const skills = []
       for (const s of JSON.parse(storedSkills)) {
-        skills.push(new Skill(s.name, s.id))
+        skills.push(Skill.fromObject(s))
       }
       this.skills = skills
     } else {
