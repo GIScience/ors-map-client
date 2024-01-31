@@ -12,7 +12,10 @@ export default {
     editId: 0,
     editVehicles: [],
     vehicleSkills: [],
-    showSkillManagement: false
+    pastedVehicles: [],
+    JsonPlaceholder: '[{"id":1,"description":"","profile":"driving-car","start":[8.675863,49.418477],"end":[8.675863,49.418477],"capacity":[4],"skills":[1]}]',
+    showSkillManagement: false,
+    isImportOpen: false
   }),
   props: {
     vehicles: {
@@ -79,9 +82,27 @@ export default {
     },
 
     importVehicles () {
-      // TODO: Import from JSON
-      this.showError(this.$t('global.notImplemented'), {timeout: 3000})
+      this.isImportOpen = true
     },
+    closeImport() {
+      this.isImportOpen = false
+      this.$emit('close')
+    },
+    saveVehicleImport() {
+      try {
+        const vehicles = []
+        for (const v of JSON.parse(this.pastedVehicles)) {
+          vehicles.push(Vehicle.fromObject(v))
+        }
+        this.editVehicles = vehicles
+
+        this.isImportOpen = false
+        this.saveVehicles()
+      } catch (err) {
+        this.showError(this.$t('optimization.notAJson'), {timeout: 3000})
+      }
+    },
+
     exportVehicles () {
       navigator.clipboard.writeText(JSON.stringify(this.vehiclesJSON)).then(() => {
         this.showSuccess(this.$t('vehicle.copiedToClipboard'), {timeout: 3000})
