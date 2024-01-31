@@ -4,6 +4,11 @@
       <template>
         <template v-if="mapViewData">
           <optimization-details v-if="mapViewData.hasRoutes()" :map-view-data="mapViewData"></optimization-details>
+          <div class="route-btn">
+            <v-btn @click="optimizeJobs" color="primary" fab small>
+              <v-icon :title="'Calculate route(s)'">navigation</v-icon>
+            </v-btn>
+          </div>
           <br>
         </template>
         <div class="optimization-heading">
