@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog v-model="isJobsOpen" max-width="600" :persistent="true" attach="body">
-      <box background="white" class="jobs-modal" closable @closed="closeJobsModal()">
+      <box background="white" closable @closed="closeJobsModal()">
         <h3 slot="header" style="padding-right: 55px">
           {{ $t('optimization.manageJobs') }}  {{ `editing ${editId}`}}
           <v-btn class="edit-jobs-btn" flat :style="{background: 'white'}" @click="exportJobs()" :title="$t('optimization.exportJobFile')">

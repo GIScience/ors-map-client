@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog v-model="isSkillsOpen" max-width="500" :persistent="true" attach="body">
-      <box background="white" class="skills-modal" closable @closed="closeSkillsModal()">
+      <box background="white" closable @closed="closeSkillsModal()">
         <h3 slot="header" style="padding-right: 55px">
           {{ $t('optimization.manageSkills') }}
           <v-btn class="edit-skills-btn" flat :style="{background: 'white'}" @click="saveSkills()" :title="$t('optimization.saveSkills')">
