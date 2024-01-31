@@ -1,13 +1,14 @@
 .edit-vehicles-btn {
-  padding: 5px;
+  padding: 0 20px;
   min-width: 0;
   float: right;
   margin: 0;
   height: 24px;
+  background: white;
 }
 
 .remove-btn {
-  align-self: end;
+  float: right;
 }
 
 .edit-btn {

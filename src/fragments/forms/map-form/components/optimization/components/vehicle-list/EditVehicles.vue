@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog v-model="isVehiclesOpen" max-width="600" :persistent="true" attach="body">
-      <box background="white" resizable closable @closed="closeVehiclesModal()">
+      <box background="white" closable @closed="closeVehiclesModal()">
         <h3 slot="header" style="padding-right: 55px">
           {{ $t('optimization.manageVehicles') }}  {{ `editing ${editId}`}}
           <v-btn class="edit-vehicles-btn" flat :style="{background: 'white'}" @click="exportVehicles()" :title="$t('optimization.exportVehicleFile')">
