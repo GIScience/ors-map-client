@@ -1,6 +1,5 @@
 import {EventBus} from '@/common/event-bus'
 import Skill from '@/models/skill'
-import Job from "@/models/job";
 
 export default {
   data: () => ({
