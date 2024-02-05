@@ -13,13 +13,14 @@
           <v-btn class="edit-jobs-btn" flat :style="{background: 'white'}" @click="saveJobs()" :title="$t('optimization.saveJobs')">
             <v-icon color="success">save</v-icon>
           </v-btn>
-          <v-btn class="edit-jobs-btn" flat :style="{}" @click="addJob(true)" :title="$t('optimization.addJob')">
+          <v-btn class="edit-jobs-btn" flat :style="{}" @click="addJob()" :title="$t('optimization.addJob')">
             <v-icon color="info">add</v-icon>
           </v-btn>
         </h3>
         <v-card @click="editId = i+1" elevation="3" style="margin: 5px;cursor: pointer" v-for="(j, i) in editJobs" :key="i">
           <v-card-title style="padding-bottom: 0;">
-            <div><b>Job {{ j.id }} - {{ j.location[0].toPrecision(8) }}, {{ j.location[1].toPrecision(8)}}</b></div>
+            <div v-if="j.location"><b>Job {{ j.id }} - {{ j.location[0].toPrecision(8) }}, {{ j.location[1].toPrecision(8)}}</b></div>
+            <div v-else><b>Job {{ j.id }} - please add Location</b></div>
             <v-btn v-if="editId === j.id" class="edit-btn" flat small :style="{background: 'white'}" @click.stop="editId = 0" :title="$t('optimization.editJob')">
               <v-icon color="primary">edit</v-icon>
             </v-btn>
@@ -39,7 +40,40 @@
               </div>
             </div>
             <div v-else>
-              <v-text-field v-model="editJobs[i].location" :persistent-hint="true" :hint="'Location'"></v-text-field>
+              <div v-if="!j.location">
+                <v-text-field class="locationInput"
+                              v-model="model.placeName"
+                              :persistent-hint="true"  :hint="'Location'"
+                              @click="setFocus(true)"
+                              @keyup="locationInputChanged($event)">
+                </v-text-field>
+                  <box background="white" v-if="placeSuggestions.length !== 0">
+                      <v-list-tile class="place-suggestion" :class="{'raw-coord': placeSuggested.rawCoordinate}" @click="selectSuggestion(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'
+                                   :title="placeSuggested.placeName.trim()">
+                        <v-list-tile-action class="hidden-sm-and-down">
+                          <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city' || placeSuggested.properties.layer === 'county'">location_city</v-icon>
+                          <img alt="Icon or image for suggested place" width="25px" v-else-if="showAreaIcon(placeSuggested)" :src="getImgSrc('countryIconImgSrc')" height="auto" />
+                          <v-icon v-else>place</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                          <v-list-tile-title :title="placeSuggested.placeName.trim()">
+                            <v-btn v-html="highlightedName(placeSuggested.placeName)" style="min-width: fit-content" flat small @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">
+                            </v-btn>
+                          </v-list-tile-title>
+                          <v-list-tile-sub-title>
+                            {{ getLayerTranslation(placeSuggested.properties.layer) }}
+                            <span v-if="placeSuggested.properties.locality"> - {{ placeSuggested.properties.locality }} </span>
+                            <span v-if="placeSuggested.properties.country"> - {{ placeSuggested.properties.country }} </span>
+                            <span class="approximate-distance" :title="$t('placeInput.approximateDistance')">
+                          ~{{distance(placeSuggested)}}
+                          {{$t('global.units.' + $store.getters.mapSettings.unit)}}
+                        </span>
+                          </v-list-tile-sub-title>
+                        </v-list-tile-content>
+                      </v-list-tile>
+                  </box>
+              </div>
+              <div v-else><v-text-field v-model="editJobs[i].location" :persistent-hint="true" :hint="'Location'"></v-text-field></div>
               <v-text-field v-model.number="editJobs[i].service" :persistent-hint="true" :hint="'Service time (in seconds)'"></v-text-field>
               <v-select v-model="editJobs[i].skills" :items="jobSkills" :item-text="'name'" :item-value="'id'" return-object chips deletable-chips
                         :persistent-hint="true" :hint="'Skills needed for this Job'" multiple :menu-props="{'closeOnContentClick':true}">
