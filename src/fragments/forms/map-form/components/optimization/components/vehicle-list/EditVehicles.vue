@@ -25,9 +25,16 @@
             </v-btn>
           </v-card-title>
           <v-card-text>
-            <div v-if="editId !== v.id">Location: {{ v }}</div>
+            <div v-if="editId !== v.id">Start: {{ v.start[0].toPrecision(8) }}, {{ v.start[1].toPrecision(8) }} -
+              End: {{ v.end[0].toPrecision(8) }}, {{ v.end[1].toPrecision(8) }}</div>
             <div v-else>
-              <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start & End'"></v-text-field>
+              <div v-if="v.start[0] === v.end[0] && v.start[1] === v.end[1]">
+                <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start & End'"></v-text-field>
+              </div>
+              <div v-else>
+                <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start'"></v-text-field>
+                <v-text-field v-model="editVehicles[i].end" :persistent-hint="true" :hint="'End'"></v-text-field>
+              </div>
               <v-text-field v-model.number="editVehicles[i].capacity[0]" :persistent-hint="true" :hint="'Capacity'"></v-text-field>
               <v-select v-model="editVehicles[i].skills" :items="vehicleSkills" :item-text="'name'" :item-value="'id'" return-object chips deletable-chips
                         :persistent-hint="true" :hint="'Skills this Vehicle has'" multiple :menu-props="{'closeOnContentClick':true}">
@@ -61,7 +68,7 @@
       <box background="white" closable @closed="closeImport()">
         <h3 slot="header" style="padding-right: 55px">
           {{ $t('optimization.importVehicleFile') }}
-          <v-btn class="edit-jobs-btn" flat :style="{background: 'white'}" @click="saveVehicleImport()" :title="$t('optimization.saveJobs')">
+          <v-btn class="edit-vehicles-btn" flat :style="{background: 'white'}" @click="saveVehicleImport()" :title="$t('optimization.saveJobs')">
             <v-icon color="success">save</v-icon>
           </v-btn>
         </h3>
