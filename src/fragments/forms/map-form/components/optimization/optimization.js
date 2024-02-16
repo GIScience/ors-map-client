@@ -334,7 +334,7 @@ export default {
         if (storedVehicles) {
           const vehicles = []
           for (const v of JSON.parse(storedVehicles)) {
-            vehicles.push(Vehicle.fromJSON(v))
+            vehicles.push(Vehicle.fromObject(v))
           }
           this.vehicles = vehicles
         }
@@ -347,7 +347,7 @@ export default {
           }
         } else if (storedJobs) {
           for (const job of JSON.parse(storedJobs)) {
-            jobs.push(Job.fromJSON(job))
+            jobs.push(Job.fromObject(job))
           }
         }
         this.jobs = jobs

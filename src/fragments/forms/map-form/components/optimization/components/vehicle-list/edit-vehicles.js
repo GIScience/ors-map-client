@@ -52,9 +52,9 @@ export default {
     EventBus
   },
   computed: {
-    vehiclesJSON () {
+    editVehiclesJSON () {
       const jsonVehicles = []
-      for (const v of this.vehicles) {
+      for (const v of this.editVehicles) {
         jsonVehicles.push(v.toJSON())
       }
       return jsonVehicles
@@ -130,7 +130,7 @@ export default {
     },
 
     exportVehicles () {
-      navigator.clipboard.writeText(JSON.stringify(this.vehiclesJSON)).then(() => {
+      navigator.clipboard.writeText(JSON.stringify(this.editVehiclesJSON)).then(() => {
         this.showSuccess(this.$t('vehicle.copiedToClipboard'), {timeout: 3000})
       }, () => {
         this.showError(this.$t('vehicle.copiedToClipboardFailed'), {timeout: 3000})
@@ -149,6 +149,7 @@ export default {
         this.showError('Added vehicle does not have a valid start location', {timeout: 3000})
       } else {
         this.$emit('vehiclesChanged', this.editVehicles)
+        localStorage.setItem('vehicles', JSON.stringify(this.editVehiclesJSON))
         this.closeVehiclesModal()
       }
     },

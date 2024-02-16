@@ -22,6 +22,7 @@ export default {
     focused: false,
     searching: false,
     debounceTimeoutId: null,
+    saveToLocalStorage: true,
     showSkillManagement: false,
     isImportOpen: false
   }),
@@ -52,9 +53,9 @@ export default {
     EventBus
   },
   computed: {
-    jobsJSON () {
+    editJobsJSON () {
       const jsonJobs = []
-      for (const job of this.jobs) {
+      for (const job of this.editJobs) {
         jsonJobs.push(job.toJSON())
       }
       return jsonJobs
@@ -130,7 +131,7 @@ export default {
     },
 
     exportJobs () {
-      navigator.clipboard.writeText(JSON.stringify(this.jobsJSON)).then(() => {
+      navigator.clipboard.writeText(JSON.stringify(this.editJobsJSON)).then(() => {
         this.showSuccess(this.$t('job.copiedToClipboard'), {timeout: 3000})
       }, () => {
         this.showError(this.$t('job.copiedToClipboardFailed'), {timeout: 3000})
@@ -149,6 +150,9 @@ export default {
         this.showError('Added job does not have a valid location', {timeout: 3000})
       } else {
         this.$emit('jobsChanged', this.editJobs)
+        if (this.saveToLocalStorage) {
+          localStorage.setItem('jobs', JSON.stringify(this.editJobsJSON))
+        }
         this.closeJobsModal()
       }
     },

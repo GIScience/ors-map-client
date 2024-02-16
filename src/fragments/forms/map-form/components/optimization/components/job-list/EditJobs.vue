@@ -88,6 +88,7 @@
             </div>
           </v-card-text>
         </v-card>
+        <v-checkbox class="edit-jobs-checkbox" v-model="saveToLocalStorage" color="primary" :label="'Save Jobs to local storage'"></v-checkbox>
         <v-layout row :wrap="$lowResolution">
           <v-spacer class="hidden-md-and-down"></v-spacer>
           <v-flex text-xs-right xs12 sm5 md7 :class="{'ml-2': $vuetify.breakpoint.smAndDown, 'mb-2': $lowResolution}">
