@@ -165,6 +165,10 @@ export default {
         this.editId = id
       }
     },
+    switchToSearch () {
+      this.model = new Place()
+      this.editJobs[this.editId - 1].location = null
+    },
     setFocus (data) {
       // When the user clicks outside an input this method is called and is intended to
       // set the focus as false in this case. To do so, we check if the was previously focused

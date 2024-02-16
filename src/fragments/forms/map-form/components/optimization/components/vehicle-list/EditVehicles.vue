@@ -32,7 +32,7 @@
               End: {{ v.end[0].toPrecision(8) }}, {{ v.end[1].toPrecision(8) }}</div>
             <div v-else>
               <div v-if="v.start && v.start[0] === v.end[0] && v.start[1] === v.end[1]">
-                <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start & End'"></v-text-field>
+                <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start & End'" append-icon="search" @click:append="switchToSearch"></v-text-field>
               </div>
               <div v-else-if="!v.start">
                 <v-text-field class="locationInput"

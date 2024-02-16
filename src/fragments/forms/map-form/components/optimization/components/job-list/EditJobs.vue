@@ -73,7 +73,7 @@
                       </v-list-tile>
                   </box>
               </div>
-              <div v-else><v-text-field v-model="editJobs[i].location" :persistent-hint="true" :hint="'Location'"></v-text-field></div>
+              <div v-else><v-text-field v-model="editJobs[i].location" :persistent-hint="true" :hint="'Location'" append-icon="search" @click:append="switchToSearch"></v-text-field></div>
               <v-text-field v-model.number="editJobs[i].service" :persistent-hint="true" :hint="'Service time (in seconds)'"></v-text-field>
               <v-select v-model="editJobs[i].skills" :items="jobSkills" :item-text="'name'" :item-value="'id'" return-object chips deletable-chips
                         :persistent-hint="true" :hint="'Skills needed for this Job'" multiple :menu-props="{'closeOnContentClick':true}">
