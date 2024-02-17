@@ -14,3 +14,10 @@
 .edit-btn {
 
 }
+
+.small-btn {
+  float: right;
+  margin-top: 0;
+  background: white;
+  color: dimgray;
+}

@@ -22,6 +22,8 @@ export default {
     focused: false,
     searching: false,
     debounceTimeoutId: null,
+    newEndPoint: false,
+    onlyStartPoint: false,
     showSkillManagement: false,
     isImportOpen: false
   }),
@@ -73,6 +75,10 @@ export default {
       suggestions = suggestions.concat(this.localModel.suggestions)
       return suggestions
     },
+    sameStartEndPoint () {
+      const id = this.editId - 1
+      return this.editVehicles[id].start[0] === this.editVehicles[id].end[0] && this.editVehicles[id].start[1] === this.editVehicles[id].end[1]
+    }
   },
   created () {
     // this.loadSkills()
@@ -136,6 +142,13 @@ export default {
         this.showError(this.$t('vehicle.copiedToClipboardFailed'), {timeout: 3000})
       },)
     },
+    addEndPoint() {
+      this.model = new Place()
+      this.newEndPoint = true
+    },
+    removeEndPoint(index) {
+      this.editVehicles[index].end = this.editVehicles[index].start
+    },
     emptyLocation () {
       for (let jobId in this.editVehicles) {
         if (this.editVehicles[jobId].start === null) {
@@ -166,9 +179,17 @@ export default {
         this.editId = id
       }
     },
-    switchToSearch () {
+    switchToSearch (mode) {
       this.model = new Place()
-      this.editVehicles[this.editId - 1].start = null
+      if (mode === 'start') {
+        if (!this.sameStartEndPoint) {
+          this.onlyStartPoint = true
+        }
+        this.editVehicles[this.editId - 1].start = null
+      } else if (mode === 'end') {
+        this.newEndPoint = true
+        this.editVehicles[this.editId - 1].end = null
+      }
     },
     setFocus (data) {
       // When the user clicks outside an input this method is called and is intended to
@@ -258,8 +279,18 @@ export default {
     },
     selected () {
       this.focused = false
-      this.editVehicles[this.editId-1].start = this.model.coordinates
-      this.editVehicles[this.editId-1].end = this.model.coordinates
+      if (!this.newEndPoint) {
+        if (this.onlyStartPoint) {
+          this.editVehicles[this.editId-1].start = this.model.coordinates
+          this.onlyStartPoint = false
+        } else {
+          this.editVehicles[this.editId-1].start = this.model.coordinates
+          this.editVehicles[this.editId-1].end = this.model.coordinates
+        }
+      } else {
+        this.editVehicles[this.editId-1].end = this.model.coordinates
+        this.newEndPoint = false
+      }
     },
     locationInputChanged (event = null) {
       this.localModel = this.model.clone()
