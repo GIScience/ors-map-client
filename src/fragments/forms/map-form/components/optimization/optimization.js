@@ -371,6 +371,7 @@ export default {
         newVehicles.push(vehicle.clone())
       }
       this.vehicles = newVehicles
+      this.optimizeJobs()
     },
     skillsChanged(editedSkills) {
       let newSkills = []
