@@ -328,7 +328,6 @@ export default {
         const defaultJobs = this.jobs
         this.jobs = this.$store.getters.appRouteData.jobs
         let places = this.$store.getters.appRouteData.places
-        // TODO: load jobs
         let storedJobs = localStorage.getItem('jobs')
         let storedVehicles = localStorage.getItem('vehicles')
         if (storedVehicles) {
@@ -345,7 +344,7 @@ export default {
             job.setId(i + 1)
             jobs.push(job)
           }
-        } else if (storedJobs) {
+        } else if (this.jobs === undefined && storedJobs) {
           for (const job of JSON.parse(storedJobs)) {
             jobs.push(Job.fromObject(job))
           }
