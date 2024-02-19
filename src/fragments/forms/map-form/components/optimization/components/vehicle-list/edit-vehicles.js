@@ -175,6 +175,7 @@ export default {
         this.model = new Place()
         let id = this.editVehicles.length + 1
         vehicle.setId(id)
+        vehicle.capacity = [1]
         this.editVehicles.push(vehicle)
         this.editId = id
       }
