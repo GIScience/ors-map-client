@@ -107,7 +107,8 @@
                 <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start'" append-icon="search" @click:append="switchToSearch('start')"></v-text-field>
                 <v-text-field v-model="editVehicles[i].end" :persistent-hint="true" :hint="'End'" append-icon="search" @click:append="switchToSearch('end')" append-outer-icon="delete" @click:append-outer="removeEndPoint(i)"></v-text-field>
               </div>
-              <v-text-field v-model.number="editVehicles[i].capacity[0]" :persistent-hint="true" :hint="'Capacity'"></v-text-field>
+              <v-text-field v-model.number="editVehicles[i].capacity[0]" type="number" style="width: 50%" :persistent-hint="true" :hint="'Capacity'"></v-text-field>
+              <v-text-field v-model="editVehicles[i].time_window" :persistent-hint="true" :hint="'Working time window (in seconds passed since 00:00 or timestamp)'"></v-text-field>
               <v-select v-model="editVehicles[i].skills" :items="vehicleSkills" :item-text="'name'" :item-value="'id'" return-object chips deletable-chips
                         :persistent-hint="true" :hint="'Skills this Vehicle has'" multiple :menu-props="{'closeOnContentClick':true}">
                 <template v-slot:append-item>
@@ -118,7 +119,6 @@
                   </v-btn>
                 </template>
               </v-select>
-              <v-text-field v-model="editVehicles[i].time_window" :persistent-hint="true" :hint="'Working time window of this Vehicle (in seconds passed since 00:00 or timestamp'"></v-text-field>
             </div>
           </v-card-text>
         </v-card>

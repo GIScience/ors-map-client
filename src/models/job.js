@@ -12,6 +12,7 @@ class Job extends Place {
     this.skills = options.skills || []
     this.priority = options.priority || 0
     this.delivery = options.delivery || [1]
+    this.pickup = options.pickup || [0]
     this.time_windows = options.time_windows || []
   }
 
@@ -41,6 +42,8 @@ class Job extends Place {
       service: jobObject.service,
       skills: skillObjects,
       priority: jobObject.priority,
+      delivery: jobObject.delivery,
+      pickup: jobObject.pickup,
       time_windows: jobObject.time_windows,
       resolve: true
     })
@@ -63,7 +66,8 @@ class Job extends Place {
       'id': this.id,
       'location': this.location,
       'service': this.service,
-      'delivery': this.delivery
+      'delivery': this.delivery,
+      'pickup': this.pickup
     }
 
     if (this.skills.length) {

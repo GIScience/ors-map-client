@@ -10,9 +10,13 @@ export default {
   },
   methods: {
     skillIds(job) {
-      const ids = []
+      let ids = ''
       for (const skill of job.skills) {
-        ids.push(skill.id)
+        if(ids === ''){
+          ids = skill.id
+        } else {
+          ids = ids + ', ' + skill.id
+        }
       }
       return ids
     }

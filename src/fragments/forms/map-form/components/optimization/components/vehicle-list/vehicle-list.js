@@ -12,9 +12,13 @@ export default {
   },
   methods: {
     skillIds(vehicle) {
-      const ids = []
+      let ids = ''
       for (const skill of vehicle.skills) {
-        ids.push(skill.id)
+        if(ids === ''){
+          ids = skill.id
+        } else {
+          ids = ids + ', ' + skill.id
+        }
       }
       return ids
     },

@@ -11,6 +11,8 @@ export default {
     genericErrorMsg: 'It was not possible to optimize Jobs',
     service: 'Service time',
     capacity: 'Capacity',
+    delivery: 'Deliveries',
+    pickup: 'Pickups',
     skills: 'Skills',
     manageSkills: 'Manage Skills',
     importSkillFile: 'Import skills',

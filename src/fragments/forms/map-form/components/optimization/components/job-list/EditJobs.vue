@@ -74,6 +74,10 @@
                   </box>
               </div>
               <div v-else><v-text-field v-model="editJobs[i].location" :persistent-hint="true" :hint="'Location'" append-icon="search" @click:append="switchToSearch"></v-text-field></div>
+              <v-layout row-wrap>
+                <v-text-field v-model.number="editJobs[i].delivery[0]" type="number" style="padding-right: 10px" :persistent-hint="true" :hint="$t('optimization.delivery')"></v-text-field>
+                <v-text-field v-model.number="editJobs[i].pickup[0]" type="number" style="padding-left: 10px" :persistent-hint="true" :hint="$t('optimization.pickup')"></v-text-field>
+              </v-layout>
               <v-text-field v-model.number="editJobs[i].service" :persistent-hint="true" :hint="'Service time (in seconds)'"></v-text-field>
               <v-select v-model="editJobs[i].skills" :items="jobSkills" :item-text="'name'" :item-value="'id'" return-object chips deletable-chips
                         :persistent-hint="true" :hint="'Skills needed for this Job'" multiple :menu-props="{'closeOnContentClick':true}">
