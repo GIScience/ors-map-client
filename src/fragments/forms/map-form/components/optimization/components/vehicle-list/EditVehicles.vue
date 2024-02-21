@@ -32,16 +32,16 @@
               End: {{ v.end[0].toPrecision(8) }}, {{ v.end[1].toPrecision(8) }}</div>
             <div v-else>
               <div v-if="!v.start">
-                <place-autocomplete :vehicles="editVehicles" :edit-id="editId" :new-end-point="newEndPoint" :only-start-point="onlyStartPoint"></place-autocomplete>
+                <place-autocomplete :vehicles="editVehicles" :edit-id="editId" :show-edit-box="isVehiclesOpen" :new-end-point="newEndPoint" :only-start-point="onlyStartPoint"></place-autocomplete>
                 <v-text-field v-if="onlyStartPoint" v-model="editVehicles[i].end" :persistent-hint="true" :hint="'End'"></v-text-field>
               </div>
               <div v-else-if="newEndPoint">
                 <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start'"></v-text-field>
-                <place-autocomplete :vehicles="editVehicles" :edit-id="editId" :new-end-point="newEndPoint"></place-autocomplete>
+                <place-autocomplete :vehicles="editVehicles" :edit-id="editId" :show-edit-box="isVehiclesOpen" :new-end-point="newEndPoint" :only-start-point="onlyStartPoint"></place-autocomplete>
               </div>
               <div v-else-if="sameStartEndPoint">
                 <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start & End'" append-icon="search" @click:append="switchToSearch('start')"></v-text-field>
-                <v-btn class="small-btn" small flat @click="this.newEndPoint=true">+ add different end point</v-btn>
+                <v-btn class="small-btn" small flat @click="newEndPoint=true">+ add different end point</v-btn>
               </div>
               <div v-else>
                 <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start'" append-icon="search" @click:append="switchToSearch('start')"></v-text-field>

@@ -76,6 +76,9 @@ export default {
       context.isVehiclesOpen = true
       context.editId = editId
     })
+    EventBus.$on('pickAPlace', () => {
+      this.closeVehiclesModal()
+    })
   },
   methods: {
     isEnabled (action) {

@@ -68,6 +68,13 @@ export default {
       context.isJobsOpen = true
       context.editId = editId
     })
+    EventBus.$on('pickAPlace', () => {
+      this.closeJobsModal()
+    })
+    // place is selected
+    EventBus.$on('locationPicked', (data) => {
+      context.editJobs[data.pickPlaceIndex].location = data.place.coordinates
+    })
   },
   methods: {
     isEnabled (action) {

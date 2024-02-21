@@ -6,6 +6,7 @@ const state = {
   topBarOpen: true,
   pickPlaceIndex: null,
   pickPlaceId: null,
+  pickEditSource: null,
   mainMenu: [],
   footerFullHeight: 89,
   footerMiniHeight: 140,
@@ -52,6 +53,9 @@ const getters = {
   pickPlaceId: state => {
     return state.pickPlaceId
   },
+  pickEditSource: state => {
+    return state.pickEditSource
+  },
   pointerTriggeredAction: state => {
     return state.pointerTriggeredAction
   }
@@ -77,6 +81,9 @@ const mutations = {
   },
   pickPlaceId: (state, id) => {
     state.pickPlaceId = id
+  },
+  pickEditSource: (state, source) => {
+    state.pickEditSource = source
   },
   mainMenu: (state, items) => {
     state.mainMenu = items

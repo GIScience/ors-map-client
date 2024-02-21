@@ -41,7 +41,7 @@
             </div>
             <div v-else>
               <div v-if="!j.location">
-                <place-autocomplete :jobs="editJobs" :edit-id="editId"></place-autocomplete>
+                <place-autocomplete :jobs="editJobs" :edit-id="editId" :show-edit-box="isJobsOpen"></place-autocomplete>
               </div>
               <div v-else><v-text-field v-model="editJobs[i].location" :persistent-hint="true" :hint="'Location'" append-icon="search" @click:append="switchToSearch"></v-text-field></div>
               <v-layout row-wrap>

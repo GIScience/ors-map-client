@@ -5,6 +5,13 @@
                   :persistent-hint="true"  :hint="'Location'"
                   @click="setFocus(true)"
                   @keyup="locationInputChanged($event)">
+      <template v-slot:append-outer>
+        <v-btn v-if="appendBtn === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
+               @click="pickPlaceClick($event)"
+               v-smart-tooltip="{text: $t('placeInput.clickOnTheMapBtnToPickAPlace'), position: 'bottom', dark: true, showOnce: true, name: 'pickAPlaceOnTheMap'}">
+          <v-icon left>map</v-icon>
+        </v-btn>
+      </template>
     </v-text-field>
     <box background="white" v-if="placeSuggestions.length !== 0">
       <v-list-tile class="place-suggestion" :class="{'raw-coord': placeSuggested.rawCoordinate}" @click="selectSuggestion(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'

@@ -11,9 +11,12 @@ export default {
   data: () => ({
     model: new Place(),
     localModel: null,
+    editSource: null,
     focused: false,
     searching: false,
-    debounceTimeoutId: null
+    debounceTimeoutId: null,
+    pickPlaceSupported: true,
+    showEditBox: true
   }),
   props: {
     editId: {
@@ -55,9 +58,17 @@ export default {
       suggestions = suggestions.concat(this.localModel.suggestions)
       return suggestions
     },
+    appendBtn () {
+      if (this.$lowResolution || this.localModel.isEmpty()) {
+        return 'map'
+      }
+    }
   },
   created() {
     this.localModel = this.model.clone()
+    this.getImgSrc = Utils.getImgSrc
+
+    this.setSource()
   },
   methods: {
     setFocus (data) {
@@ -75,6 +86,33 @@ export default {
       // If the job location is in search mode, then run the autocompleteSearch that will show the suggestions
       if (this.focused) {
         this.autocompleteSearch()
+      }
+    },
+    setSource () {
+      if (this.jobs) {
+        this.editSource = 'jobs'
+      } else if (this.vehicles) {
+        this.editSource = 'vehicles'
+      }
+    },
+
+    // Handle the click on the pick a place btn
+    pickPlaceClick (event) {
+      this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
+      this.localModel = new Place()
+
+      this.showEditBox = false
+      EventBus.$emit('pickAPlace')
+
+      this.setPickPlaceSource()
+      event.stopPropagation()
+      event.preventDefault()
+    },
+    setPickPlaceSource () {
+      if (this.pickPlaceSupported) {
+        this.$store.commit('pickPlaceIndex', this.editId - 1)
+        this.$store.commit('pickPlaceId', this.editId)
+        this.$store.commit('pickEditSource', this.editSource)
       }
     },
     highlightedName (placeName) {
@@ -148,9 +186,9 @@ export default {
     },
     selected () {
       this.focused = false
-      if (this.jobs) {
+      if (this.editSource === 'jobs') {
         this.jobs[this.editId-1].location = this.model.coordinates
-      } else if (this.vehicles) {
+      } else if (this.editSource === 'vehicles') {
         if (!this.newEndPoint) {
           if (this.onlyStartPoint) {
             this.vehicles[this.editId-1].start = this.model.coordinates

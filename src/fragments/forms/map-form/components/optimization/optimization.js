@@ -89,6 +89,7 @@ export default {
     this. vehicles = [Vehicle.fromJSON('{"id":1,"profile":"driving-car","start":[ 8.675863, 49.418477 ],"end":[ 8.675863, 49.418477 ],"capacity":[4],"skills":[1]}')]
 
     this.loadData()
+
     const context = this
     // When the filters object has changed externally, reprocess the app route
     EventBus.$on('filtersChangedExternally', () => {
@@ -159,6 +160,21 @@ export default {
           job.setLngLat(marker.position.lng, marker.position.lat)
           context.optimizeJobs()
         }
+      }
+    })
+
+    // place is picked from Map
+    EventBus.$on('setInputPlace', (data) => {
+      if (context.active) {
+        EventBus.$emit('locationPicked', data)
+        if (data.pickEditSource === 'jobs') {
+          EventBus.$emit('showJobsModal', data.placeInputId)
+        } else if (data.pickEditSource === 'vehicles') {
+          EventBus.$emit('showVehiclesModal', data.placeInputId)
+        }
+      } else {
+        context.setSidebarIsOpen(true)
+        context.$forceUpdate()
       }
     })
   },
