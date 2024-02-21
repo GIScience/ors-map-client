@@ -9,15 +9,13 @@ import Place from '@/models/place'
 
 export default {
   data: () => ({
+    model: new Place(),
+    localModel: null,
     focused: false,
     searching: false,
     debounceTimeoutId: null
   }),
   props: {
-    model: {
-      Type: Place,
-      Required: true
-    },
     editId: {
       Type: Array,
       Required: true
@@ -59,7 +57,7 @@ export default {
     },
   },
   created() {
-    this.model = new Place()
+    this.localModel = this.model.clone()
   },
   methods: {
     setFocus (data) {
