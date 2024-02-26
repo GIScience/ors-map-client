@@ -33,6 +33,7 @@ export default {
     roundTripActive: false,
     showManageJobsTooltip: true,
     showJobManagement: false,
+    editJobsOpen: false,
     showVehicleManagement: false,
     showSkillManagement: false
   }),
@@ -166,11 +167,24 @@ export default {
     // place is picked from Map
     EventBus.$on('setInputPlace', (data) => {
       if (context.active) {
-        EventBus.$emit('locationPicked', data)
         if (data.pickEditSource === 'jobs') {
-          EventBus.$emit('showJobsModal', data.placeInputId)
-        } else if (data.pickEditSource === 'vehicles') {
-          EventBus.$emit('showVehiclesModal', data.placeInputId)
+          let job = Job.fromPlace(data.place)
+          let id = data.placeInputId
+          job.setId(id)
+
+          context.jobs.push(job)
+          context.manageJobs(id)
+        } else if (data.pickEditSource === 'vehicleStart') {
+          let v = Vehicle.fromPlace(data.place)
+          let id = data.placeInputId
+          v.setId(id)
+
+          context.vehicles.push(v)
+          context.manageVehicles(id)
+        } else if (data.pickEditSource === 'vehicleEnd') {
+          this.vehicles[data.pickPlaceIndex].end = data.place.coordinates
+
+          context.manageVehicles(data.placeInputId)
         }
       } else {
         context.setSidebarIsOpen(true)

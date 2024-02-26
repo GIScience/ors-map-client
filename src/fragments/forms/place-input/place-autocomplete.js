@@ -93,13 +93,15 @@ export default {
     setSource () {
       if (this.jobs) {
         this.editSource = 'jobs'
+      } else if (this.newEndPoint) {
+        this.editSource = 'vehicleEnd'
       } else if (this.vehicles) {
-        this.editSource = 'vehicles'
+        this.editSource = 'vehicleStart'
       }
     },
 
-    // Handle the click on the pick a place btn
-    pickPlaceClick (event) {
+    // Handle the click on the pick a place from the map btn
+    pickPlaceMapClick (event) {
       this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
       this.localModel = new Place()
 

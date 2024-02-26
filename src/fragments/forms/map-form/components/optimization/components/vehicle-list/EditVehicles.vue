@@ -68,6 +68,10 @@
             <v-btn :block="$lowResolution" color="primary" :title="$t('settings.restoreDefaults')"
                    @click="closeVehiclesModal">{{$t('global.cancel')}}</v-btn>
           </v-flex>
+          <v-flex text-xs-right xs12 sm3 md4 :class="{'ml-2': $vuetify.breakpoint.smAndDown}">
+            <v-btn :block="$lowResolution" color="info" :title="$t('optimization.addVehicle')" @click="addVehicle(true)">
+              {{$t('optimization.addVehicle')}}</v-btn>
+          </v-flex>
           <v-flex text-xs-right xs12 sm3 md3 :class="{'ml-2': $vuetify.breakpoint.smAndDown}">
             <v-btn :block="$lowResolution" color="success" :title="$t('global.save')" @click="saveVehicles">
               {{$t('global.save')}}</v-btn>

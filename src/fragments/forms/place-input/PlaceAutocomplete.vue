@@ -7,7 +7,7 @@
                   @keyup="locationInputChanged($event)">
       <template v-slot:append-outer>
         <v-btn v-if="appendBtn === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
-               @click="pickPlaceClick($event)"
+               @click="pickPlaceMapClick($event)"
                v-smart-tooltip="{text: $t('placeInput.clickOnTheMapBtnToPickAPlace'), position: 'bottom', dark: true, showOnce: true, name: 'pickAPlaceOnTheMap'}">
           <v-icon left>map</v-icon>
         </v-btn>

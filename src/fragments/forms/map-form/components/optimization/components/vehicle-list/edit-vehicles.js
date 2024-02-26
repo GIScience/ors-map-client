@@ -15,6 +15,7 @@ export default {
     vehicleSkills: [],
     pastedVehicles: [],
     JsonPlaceholder: '[{"id":1,"description":"","profile":"driving-car","start":[8.675863,49.418477],"end":[8.675863,49.418477],"capacity":[4],"skills":[1]}]',
+    pickPlaceSupported: true,
     focused: false,
     searching: false,
     debounceTimeoutId: null,
@@ -77,7 +78,7 @@ export default {
       context.isVehiclesOpen = true
       context.editId = editId
     })
-    // close editVehciles box to pick a place from the map
+    // close editVehicles box to pick a place from the map
     EventBus.$on('pickAPlace', () => {
       this.closeVehiclesModal()
     })
@@ -157,8 +158,9 @@ export default {
     // if not chosen from map it has an empty start location and placeAutocomplete is activated
     addVehicle (fromMap) {
       if(fromMap) {
-        // TODO: choose point from map
-        this.showError(this.$t('global.notImplemented'), {timeout: 3000})
+        this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
+        this.closeVehiclesModal()
+        this.setPickPlaceSource()
       } else {
         let vehicle = new Vehicle()
         let id = this.editVehicles.length + 1
@@ -166,6 +168,14 @@ export default {
         vehicle.capacity = [1]
         this.editVehicles.push(vehicle)
         this.editId = id
+      }
+    },
+    // Set the pick place input source
+    setPickPlaceSource () {
+      if (this.pickPlaceSupported) {
+        this.$store.commit('pickPlaceIndex', this.editVehicles.length)
+        this.$store.commit('pickPlaceId', this.editVehicles.length + 1)
+        this.$store.commit('pickEditSource', 'vehicleStart')
       }
     },
     // delete old location when switching to search to activate placeAutocomplete

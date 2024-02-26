@@ -14,6 +14,7 @@ export default {
     jobSkills: [],
     pastedJobs: [],
     JsonPlaceholder: '[{"id":1,"location":[8.68525,49.420822],"service":300,"delivery":[1],"skills":[1]}]',
+    pickPlaceSupported: true,
     focused: false,
     searching: false,
     debounceTimeoutId: null,
@@ -57,7 +58,6 @@ export default {
     for (const job of this.jobs) {
       this.editJobs.push(job.clone())
     }
-
     for (const skill of this.skills) {
       this.jobSkills.push(skill.clone())
     }
@@ -68,13 +68,9 @@ export default {
       context.isJobsOpen = true
       context.editId = editId
     })
-    // close editJobs box to pick a plce from the map
+    // close editJobs box to pick a place from the map
     EventBus.$on('pickAPlace', () => {
       this.closeJobsModal()
-    })
-    // write coordinates into job location when place is selected
-    EventBus.$on('locationPicked', (data) => {
-      context.editJobs[data.pickPlaceIndex].location = data.place.coordinates
     })
   },
   methods: {
@@ -150,14 +146,23 @@ export default {
     // if not chosen from map it has an empty location and placeAutocomplete is activated
     addJob (fromMap) {
       if(fromMap) {
-        // TODO: choose point from map
-        this.showError(this.$t('global.notImplemented'), {timeout: 3000})
+        this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
+        this.closeJobsModal()
+        this.setPickPlaceSource()
       } else {
         let job = new Job()
         let id = this.editJobs.length + 1
         job.setId(id)
         this.editJobs.push(job)
         this.editId = id
+      }
+    },
+    // Set the pick place input source
+    setPickPlaceSource () {
+      if (this.pickPlaceSupported) {
+        this.$store.commit('pickPlaceIndex', this.editJobs.length)
+        this.$store.commit('pickPlaceId', this.editJobs.length + 1)
+        this.$store.commit('pickEditSource', 'jobs')
       }
     },
     // delete old location when switching to search to activate placeAutocomplete

@@ -11,7 +11,7 @@ class Vehicle extends Place {
     this.id = options.id || null
     this.description = options.description || ''
     this.profile = options.profile || 'driving-car'
-    this.capacity = options.capacity || [0]
+    this.capacity = options.capacity || [1]
     this.skills = options.skills || []
     this.time_window = options.time_window || []
   }
