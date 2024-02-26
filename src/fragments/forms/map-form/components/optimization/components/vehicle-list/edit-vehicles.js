@@ -54,6 +54,7 @@ export default {
       }
       return jsonVehicles
     },
+    // returns true if start and end point are the same
     sameStartEndPoint () {
       const id = this.editId - 1
       return this.editVehicles[id].start[0] === this.editVehicles[id].end[0] && this.editVehicles[id].start[1] === this.editVehicles[id].end[1]
@@ -76,6 +77,7 @@ export default {
       context.isVehiclesOpen = true
       context.editId = editId
     })
+    // close editVehciles box to pick a place from the map
     EventBus.$on('pickAPlace', () => {
       this.closeVehiclesModal()
     })
@@ -95,6 +97,7 @@ export default {
       this.$emit('contentUploaded', data)
     },
 
+    // open the import dialog
     importVehicles () {
       this.isImportOpen = true
     },
@@ -102,6 +105,7 @@ export default {
       this.isImportOpen = false
       this.$emit('close')
     },
+    // save vehicles from pasted JSON and return error if not a valid JSON
     saveVehicleImport() {
       try {
         const vehicles = []
@@ -117,6 +121,7 @@ export default {
       }
     },
 
+    // copy JSON object containing jobs to clipboard
     exportVehicles () {
       navigator.clipboard.writeText(JSON.stringify(this.editVehiclesJSON)).then(() => {
         this.showSuccess(this.$t('vehicle.copiedToClipboard'), {timeout: 3000})
@@ -124,9 +129,12 @@ export default {
         this.showError(this.$t('vehicle.copiedToClipboardFailed'), {timeout: 3000})
       },)
     },
+    // remove different end location and automatically fill it to match start location
     removeEndPoint(index) {
       this.editVehicles[index].end = this.editVehicles[index].start
     },
+    // check if one of the vehicles does not have a start location
+    // missing end location is not a problem, since it is set to be the same as the start in that case
     emptyLocation () {
       for (let jobId in this.editVehicles) {
         if (this.editVehicles[jobId].start === null) {
@@ -135,6 +143,7 @@ export default {
       }
       return false
     },
+    // save vehicles and close the editVehicles box, show error if one or more of them has an empty start location
     saveVehicles () {
       if (this.emptyLocation()) {
         this.showError('Added vehicle does not have a valid start location', {timeout: 3000})
@@ -144,6 +153,8 @@ export default {
         this.closeVehiclesModal()
       }
     },
+    // add a vehicle
+    // if not chosen from map it has an empty start location and placeAutocomplete is activated
     addVehicle (fromMap) {
       if(fromMap) {
         // TODO: choose point from map
@@ -157,6 +168,7 @@ export default {
         this.editId = id
       }
     },
+    // delete old location when switching to search to activate placeAutocomplete
     switchToSearch (mode) {
       if (mode === 'start') {
         if (!this.sameStartEndPoint) {
@@ -192,10 +204,12 @@ export default {
         this.vehicleSkills = skills
       }
     },
+    // open manage skill box dialog
     manageSkills(skillId) {
       this.showSkillManagement = true
       EventBus.$emit('showSkillsModal', skillId)
     },
+    // update job skills selection when the skills were changed
     skillsChanged(editedSkills) {
       let newSkills = []
       for (const skill of editedSkills) {

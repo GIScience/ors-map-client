@@ -68,10 +68,11 @@ export default {
       context.isJobsOpen = true
       context.editId = editId
     })
+    // close editJobs box to pick a plce from the map
     EventBus.$on('pickAPlace', () => {
       this.closeJobsModal()
     })
-    // place is selected
+    // write coordinates into job location when place is selected
     EventBus.$on('locationPicked', (data) => {
       context.editJobs[data.pickPlaceIndex].location = data.place.coordinates
     })
@@ -91,6 +92,7 @@ export default {
       this.$emit('contentUploaded', data)
     },
 
+    // open the import dialog
     importJobs () {
       this.isImportOpen = true
     },
@@ -98,6 +100,7 @@ export default {
       this.isImportOpen = false
       this.$emit('close')
     },
+    // save jobs from pasted JSON and return error if not a valid JSON
     saveJobImport() {
       try {
         const jobs = []
@@ -113,6 +116,7 @@ export default {
       }
     },
 
+    // copy JSON object containing jobs to clipboard
     exportJobs () {
       navigator.clipboard.writeText(JSON.stringify(this.editJobsJSON)).then(() => {
         this.showSuccess(this.$t('job.copiedToClipboard'), {timeout: 3000})
@@ -120,6 +124,7 @@ export default {
         this.showError(this.$t('job.copiedToClipboardFailed'), {timeout: 3000})
       },)
     },
+    // check if one of the jobs does not have a location
     emptyLocation () {
       for (let jobId in this.editJobs) {
         if (this.editJobs[jobId].location === null) {
@@ -128,6 +133,8 @@ export default {
       }
       return false
     },
+    // save jobs and close the editJobs box, show error if one or more of them has an empty location
+    // only save to local storage if checkbox is ticked
     saveJobs () {
       if (this.emptyLocation()) {
         this.showError('Added job does not have a valid location', {timeout: 3000})
@@ -139,6 +146,8 @@ export default {
         this.closeJobsModal()
       }
     },
+    // add a job
+    // if not chosen from map it has an empty location and placeAutocomplete is activated
     addJob (fromMap) {
       if(fromMap) {
         // TODO: choose point from map
@@ -151,6 +160,7 @@ export default {
         this.editId = id
       }
     },
+    // delete old location when switching to search to activate placeAutocomplete
     switchToSearch () {
       this.editJobs[this.editId - 1].location = null
     },
@@ -161,6 +171,7 @@ export default {
       }
     },
     copyJob () {
+      // TODO: copy job to clipboard? or duplicate job?
       this.showError(this.$t('global.notImplemented'), {timeout: 3000})
     },
     restoreJobs () {
@@ -178,10 +189,12 @@ export default {
         this.jobSkills = skills
       }
     },
+    // open manage skill box dialog
     manageSkills(skillId) {
       this.showSkillManagement = true
       EventBus.$emit('showSkillsModal', skillId)
     },
+    // update job skills selection when the skills were changed
     skillsChanged(editedSkills) {
       let newSkills = []
       for (const skill of editedSkills) {

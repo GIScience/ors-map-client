@@ -206,11 +206,13 @@ export default {
         context.showError(this.$t('optimization.couldNotResolveTheJobLocation'), { timeout: 0 })
       })
     },
+    // open editJobs dialog
     manageJobs(jobId) {
       this.showJobManagement = true
       EventBus.$emit('showJobsModal', jobId)
     },
 
+    // When the user clicks on the map and selects a point as the route start
     addVehicle (data) {
       const vehicle = Vehicle.fromPlace(data.place)
       vehicle.setId(this.vehicles.length + 1)
@@ -223,11 +225,13 @@ export default {
         context.showError(this.$t('optimization.couldNotResolveTheVehicleLocation'), { timeout: 0 })
       })
     },
+    // open editVehicles dialog
     manageVehicles(vehicleId) {
       this.showVehicleManagement = true
       EventBus.$emit('showVehiclesModal', vehicleId)
     },
 
+    // open editSkills dialog
     manageSkills(skillId) {
       this.showSkillManagement = true
       EventBus.$emit('showSkillsModal', skillId)
@@ -372,6 +376,7 @@ export default {
         this.optimizeJobs()
       }
     },
+    // when jobs are changed update jobs and generate new route
     jobsChanged(editedJobs) {
       let newJobs = []
       for (const job of editedJobs) {
@@ -380,6 +385,7 @@ export default {
       this.jobs = newJobs
       this.optimizeJobs()
     },
+    // when vehicles are changed update vehicles and generate new route
     vehiclesChanged(editedVehicles) {
       let newVehicles = []
       for (const vehicle of editedVehicles) {
@@ -388,6 +394,7 @@ export default {
       this.vehicles = newVehicles
       this.optimizeJobs()
     },
+    // when skills are changed update skills
     skillsChanged(editedSkills) {
       let newSkills = []
       for (const skill of editedSkills) {

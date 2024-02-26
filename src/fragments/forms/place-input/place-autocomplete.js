@@ -44,6 +44,7 @@ export default {
     EventBus
   },
   computed: {
+    // Return an array with the place's suggestion based on the model suggestion data
     placeSuggestions () {
       if (!this.focused) {
         return []
@@ -74,7 +75,7 @@ export default {
     setFocus (data) {
       // When the user clicks outside an input this method is called and is intended to
       // set the focus as false in this case. To do so, we check if the was previously focused
-      // The parameters passed (automatically) by the click-outside is expected to be MouseEvent object and no a boolean.
+      // The parameters passed (automatically) by the click-outside is expected to be MouseEvent object and not a boolean.
       if (typeof data === 'object' && data.clickedOutside) {
         if (this.inputWasActiveAndLostFocus(data)) {
           this.emptyPickPlaceSource()
@@ -88,6 +89,7 @@ export default {
         this.autocompleteSearch()
       }
     },
+    // set the parent source by checking which property was handed into this component
     setSource () {
       if (this.jobs) {
         this.editSource = 'jobs'
@@ -108,6 +110,7 @@ export default {
       event.stopPropagation()
       event.preventDefault()
     },
+    // Set the pick place input source
     setPickPlaceSource () {
       if (this.pickPlaceSupported) {
         this.$store.commit('pickPlaceIndex', this.editId - 1)
@@ -115,6 +118,13 @@ export default {
         this.$store.commit('pickEditSource', this.editSource)
       }
     },
+    // Empty the pick place source
+    emptyPickPlaceSource() {
+      this.$store.commit('pickPlaceIndex', null)
+      this.$store.commit('pickPlaceId', null)
+      this.$store.commit('pickEditSource', null)
+    },
+    // highlight typed place name
     highlightedName (placeName) {
       let searchMask = this.localModel.placeName
       const regEx = new RegExp(searchMask, 'ig')
@@ -135,6 +145,7 @@ export default {
     showAreaIcon (place) {
       return place.properties.layer === 'country' || place.properties.layer === 'region'
     },
+    // Get layer translation based on the layer name or fall back to a default one if not available
     getLayerTranslation (layer) {
       let transKey = 'global.layers.'+ layer
       let translation = this.$t(transKey)
@@ -144,6 +155,7 @@ export default {
         return this.$t('global.layers.notAvailable')
       }
     },
+    // Get the distance between the current map center and a suggestion location
     distance (suggestedPlace) {
       // Set origin and destination
       const fromLatLng = { lat: this.$store.getters.mapCenter.lat, lng: this.$store.getters.mapCenter.lng }
@@ -159,6 +171,7 @@ export default {
       }
       return distance
     },
+    // Set a suggestion item clicked as selected and emit the selected event
     selectSuggestion (suggestedPlace) {
       // Only proceed if it is being selected
       // a place different from the current one
@@ -173,6 +186,7 @@ export default {
         this.selected()
       }
     },
+    // Set a suggested place as the selected one for a given place input
     selectPlace (place) {
       // We shall not reassign an external object, so we update each property
       this.model.placeName = place.properties.label || place.placeName
@@ -184,6 +198,7 @@ export default {
       // If a place is selected from a suggestion then no current location must be active.
       this.$store.commit('currentLocation', null)
     },
+    // Run the place selection hook and emit the selected event
     selected () {
       this.focused = false
       if (this.editSource === 'jobs') {
@@ -203,6 +218,7 @@ export default {
         }
       }
     },
+    // Handles the input change with a debounce-timeout
     locationInputChanged (event = null) {
       this.localModel = this.model.clone()
       if (event) {
@@ -215,6 +231,7 @@ export default {
           clearTimeout(this.debounceTimeoutId)
           const context = this
 
+          // Resolve the model using a debounce to avoid unnecessary sequential requests
           // Make sure that the changes in the input are debounced
           this.debounceTimeoutId = setTimeout(function () {
             if (context.localModel.nameIsNumeric()) {
@@ -258,6 +275,7 @@ export default {
         }
       }
     },
+    // Search for a place based on the place input value
     autocompleteSearch () {
       // Make sure that the local model is up-to-date
       if (!this.localModel || this.localModel.placeName.length === 0) {
