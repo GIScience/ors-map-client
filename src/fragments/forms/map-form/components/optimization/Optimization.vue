@@ -24,6 +24,12 @@
           </v-tooltip>
         </div>
       </template>
+      <div v-if="jobs.length === 0">
+        <v-btn @click="manageJobs" color="success">
+          <v-icon style="margin-right: 5px;">map</v-icon>
+          add Job from map
+        </v-btn>
+      </div>
       <job-list :jobs="jobs"></job-list>
       <div class="optimization-heading">
         {{ $t('optimization.vehicles') }} (Max: 3)
@@ -36,6 +42,12 @@
           </template>
           {{ $t('optimization.manageVehicles') }}
         </v-tooltip>
+      </div>
+      <div v-if="vehicles.length === 0">
+        <v-btn @click="manageVehicles" color="success">
+          <v-icon style="margin-right: 5px;">map</v-icon>
+          add Vehicle from map
+        </v-btn>
       </div>
       <vehicle-list :vehicles="vehicles"></vehicle-list>
       <v-layout row class="form-actions-btns">

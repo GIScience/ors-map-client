@@ -3,7 +3,7 @@ import MapViewDataBuilder from '@/support/map-data-services/map-view-data-builde
 import FieldsContainer from '@/fragments/forms/fields-container/FieldsContainer'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import FormActions from '@/fragments/forms/map-form/components/form-actions/FormActions'
-import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
+import PlaceAutocomplete from '@/fragments/forms/place-input/PlaceAutocomplete.vue'
 import {EventBus} from '@/common/event-bus'
 import { Optimization } from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
@@ -30,6 +30,7 @@ export default {
     skills: [],
     jobs: [],
     vehicles: [],
+    pickPlaceSupported: true,
     roundTripActive: false,
     showManageJobsTooltip: true,
     showJobManagement: false,
@@ -40,7 +41,7 @@ export default {
   components: {
     FieldsContainer,
     FormActions,
-    PlaceInput,
+    PlaceAutocomplete,
     OptimizationDetails,
     JobList,
     VehicleList,
@@ -86,8 +87,8 @@ export default {
       this.skills = [Skill.fromJSON('{"name":"length over 1.5m", "id":1}')]
       localStorage.setItem('skills', JSON.stringify(this.skillsJSON))
     }
-    this.jobs = [Job.fromJSON('{"id":1,"service":300,"skills":[1],"amount":[1],"location":[8.68525,49.420822]}')]
-    this. vehicles = [Vehicle.fromJSON('{"id":1,"profile":"driving-car","start":[ 8.675863, 49.418477 ],"end":[ 8.675863, 49.418477 ],"capacity":[4],"skills":[1]}')]
+    // this.jobs = [Job.fromJSON('{"id":1,"service":300,"skills":[1],"amount":[1],"location":[8.68525,49.420822]}')]
+    // this. vehicles = [Vehicle.fromJSON('{"id":1,"profile":"driving-car","start":[ 8.675863, 49.418477 ],"end":[ 8.675863, 49.418477 ],"capacity":[4],"skills":[1]}')]
 
     this.loadData()
 
@@ -222,8 +223,13 @@ export default {
     },
     // open editJobs dialog
     manageJobs(jobId) {
-      this.showJobManagement = true
-      EventBus.$emit('showJobsModal', jobId)
+      if (this.jobs.length === 0) {
+        this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
+        this.setPickPlaceSource(this.jobs)
+      } else {
+        this.showJobManagement = true
+        EventBus.$emit('showJobsModal', jobId)
+      }
     },
 
     // When the user clicks on the map and selects a point as the route start
@@ -241,14 +247,32 @@ export default {
     },
     // open editVehicles dialog
     manageVehicles(vehicleId) {
-      this.showVehicleManagement = true
-      EventBus.$emit('showVehiclesModal', vehicleId)
+      if (this.vehicles.length === 0) {
+        this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
+        this.setPickPlaceSource(this.vehicles)
+      } else {
+        this.showVehicleManagement = true
+        EventBus.$emit('showVehiclesModal', vehicleId)
+      }
     },
 
     // open editSkills dialog
     manageSkills(skillId) {
       this.showSkillManagement = true
       EventBus.$emit('showSkillsModal', skillId)
+    },
+
+    // Set the pick place input source
+    setPickPlaceSource (source) {
+      if (this.pickPlaceSupported) {
+        this.$store.commit('pickPlaceIndex', source.length)
+        this.$store.commit('pickPlaceId', source.length + 1)
+        if (source === this.jobs) {
+          this.$store.commit('pickEditSource', 'jobs')
+        } else if (source === this.vehicles) {
+          this.$store.commit('pickEditSource', 'vehicleStart')
+        }
+      }
     },
     /**
      * After each change on the map search we redirect the user to the built target app route
