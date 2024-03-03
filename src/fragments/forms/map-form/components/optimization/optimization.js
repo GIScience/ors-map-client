@@ -274,6 +274,22 @@ export default {
         }
       }
     },
+    // remove job or vehicle when marker is deleted from map view
+    removePlace (data) {
+      if (data.job) {
+        let index = data.job.id - 1
+        this.jobs.splice(index,1)
+        for (const i in this.jobs) {
+          this.jobs[i].setId(parseInt(i)+1)
+        }
+      } else if (data.vehicle) {
+        let index = data.vehicle.id - 1
+        this.vehicles.splice(index,1)
+        for (const i in this.vehicles) {
+          this.vehicles[i].setId(parseInt(i)+1)
+        }
+      }
+    },
     /**
      * After each change on the map search we redirect the user to the built target app route
      * The data will be loaded from the path and the map will be updated, keeping the

@@ -983,7 +983,9 @@ export default {
     removePlace (markerIndex) {
       if (this.markers[markerIndex]) {
         let place = this.markers[markerIndex].place
-        let data = {place, index: markerIndex}
+        let job = this.markers[markerIndex].job
+        let vehicle = this.markers[markerIndex].vehicle
+        let data = {place, job, vehicle, index: markerIndex}
         this.$emit('removePlace', data)
       }
     },
