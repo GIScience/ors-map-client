@@ -7,7 +7,7 @@
           <v-btn class="edit-vehicles-btn" flat :style="{background: 'white'}" @click="exportVehicles()" :title="$t('optimization.exportVehicleFile')">
             <v-icon color="primary">cloud_download</v-icon>
           </v-btn>
-          <v-btn class="edit-vehicles-btn" flat :style="{background: 'white'}" @click="importVehicles()" :title="$t('optimization.importVehicleFile')">
+          <v-btn class="edit-vehicles-btn" flat :style="{background: 'white'}" @click="isImportOpen=true" :title="$t('optimization.importVehicleFile')">
             <v-icon color="primary">cloud_upload</v-icon>
           </v-btn>
           <v-btn class="edit-vehicles-btn" flat :style="{background: 'white', 'padding-right':'15px'}" @click="saveVehicles()" :title="$t('optimization.saveVehicles')">
@@ -80,17 +80,9 @@
       </box>
     </v-dialog>
     <edit-skills v-if="showSkillManagement" :skills="skills" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
-    <v-dialog v-model="isImportOpen" max-width="500" :persistent="true" attach="body">
-      <box background="white" closable @closed="closeImport()">
-        <h3 slot="header" style="padding-right: 55px">
-          {{ $t('optimization.importVehicleFile') }}
-          <v-btn class="edit-vehicles-btn" flat :style="{background: 'white'}" @click="saveVehicleImport()" :title="$t('optimization.saveJobs')">
-            <v-icon color="success">save</v-icon>
-          </v-btn>
-        </h3>
-        <v-textarea v-model="pastedVehicles" :persistent-hint="true" :hint="'paste JSON here'" auto-grow :placeholder="JsonPlaceholder"></v-textarea>
-      </box>
-    </v-dialog>
+    <optimization-import v-if="isImportOpen" :is-import-open="isImportOpen" :expected-data="'vehicles'"
+                         @saveOptimizationImport="saveVehicleImport"
+                         @close="isImportOpen=false"></optimization-import>
   </div>
 </template>
 

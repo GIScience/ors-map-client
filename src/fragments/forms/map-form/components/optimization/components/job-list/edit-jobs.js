@@ -2,6 +2,7 @@ import RouteImporter from '@/fragments/forms/route-importer/RouteImporter.vue'
 import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn.vue'
 import PlaceAutocomplete from '@/fragments/forms/place-input/PlaceAutocomplete.vue'
 import EditSkills from '@/fragments/forms/map-form/components/optimization/components/skill-list/EditSkills.vue'
+import OptimizationImport from '@/fragments/forms/map-form/components/optimization/components/optimization-import/OptimizationImport.vue'
 import {EventBus} from '@/common/event-bus'
 import Job from '@/models/job'
 import Skill from '@/models/skill'
@@ -13,7 +14,6 @@ export default {
     editJobs: [],
     jobSkills: [],
     pastedJobs: [],
-    JsonPlaceholder: '[{"id":1,"location":[8.68525,49.420822],"service":300,"delivery":[1],"skills":[1]}]',
     pickPlaceSupported: true,
     focused: false,
     searching: false,
@@ -41,6 +41,7 @@ export default {
     MapFormBtn,
     PlaceAutocomplete,
     EditSkills,
+    OptimizationImport,
     EventBus
   },
   computed: {
@@ -88,28 +89,11 @@ export default {
       this.$emit('contentUploaded', data)
     },
 
-    // open the import dialog
-    importJobs () {
-      this.isImportOpen = true
-    },
-    closeImport() {
-      this.isImportOpen = false
-      this.$emit('close')
-    },
     // save jobs from pasted JSON and return error if not a valid JSON
-    saveJobImport() {
-      try {
-        const jobs = []
-        for (const s of JSON.parse(this.pastedJobs)) {
-          jobs.push(Job.fromObject(s))
-        }
-        this.editJobs = jobs
-
-        this.isImportOpen = false
-        this.saveJobs()
-      } catch (err) {
-        this.showError(this.$t('optimization.notAJson'), {timeout: 3000})
-      }
+    saveJobImport(data) {
+      this.editJobs = data.jobs
+      this.saveJobs()
+      this.isImportOpen = false
     },
 
     // copy JSON object containing jobs to clipboard

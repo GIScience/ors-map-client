@@ -3,6 +3,7 @@ import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn.vue'
 import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
 import PlaceAutocomplete from '@/fragments/forms/place-input/PlaceAutocomplete.vue'
 import EditSkills from '@/fragments/forms/map-form/components/optimization/components/skill-list/EditSkills.vue'
+import OptimizationImport from '@/fragments/forms/map-form/components/optimization/components/optimization-import/OptimizationImport.vue'
 import {EventBus} from '@/common/event-bus'
 import Vehicle from '@/models/vehicle'
 import Skill from '@/models/skill'
@@ -14,7 +15,6 @@ export default {
     editVehicles: [],
     vehicleSkills: [],
     pastedVehicles: [],
-    JsonPlaceholder: '[{"id":1,"description":"","profile":"driving-car","start":[8.675863,49.418477],"end":[8.675863,49.418477],"capacity":[4],"skills":[1]}]',
     pickPlaceSupported: true,
     focused: false,
     searching: false,
@@ -45,6 +45,7 @@ export default {
     PlaceInput,
     PlaceAutocomplete,
     EditSkills,
+    OptimizationImport,
     EventBus
   },
   computed: {
@@ -97,29 +98,12 @@ export default {
     contentUploaded (data) {
       this.$emit('contentUploaded', data)
     },
-
-    // open the import dialog
-    importVehicles () {
-      this.isImportOpen = true
-    },
-    closeImport() {
-      this.isImportOpen = false
-      this.$emit('close')
-    },
     // save vehicles from pasted JSON and return error if not a valid JSON
-    saveVehicleImport() {
-      try {
-        const vehicles = []
-        for (const v of JSON.parse(this.pastedVehicles)) {
-          vehicles.push(Vehicle.fromObject(v))
-        }
-        this.editVehicles = vehicles
+    saveVehicleImport(data) {
+      this.editVehicles = data.vehicles
+      this.saveVehicles()
 
-        this.isImportOpen = false
-        this.saveVehicles()
-      } catch (err) {
-        this.showError(this.$t('optimization.notAJson'), {timeout: 3000})
-      }
+      this.isImportOpen = false
     },
 
     // copy JSON object containing jobs to clipboard
