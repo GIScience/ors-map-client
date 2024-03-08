@@ -1,6 +1,7 @@
 <template>
   <div class="download-container" ref="downloadContainer">
-    <v-btn class="open-download-btn" style="float:right; margin-top:0" small icon :title="$t('download.download')" @click="openDownload()"><v-icon>cloud_download</v-icon></v-btn>
+    <v-btn v-if="mapViewData" class="open-download-btn" style="float:right; margin-top:0" small icon :title="$t('download.download')" @click="openDownload()"><v-icon>cloud_download</v-icon></v-btn>
+    <v-btn v-else-if="jobData || vehicleData" class="export-btn" style="background: white" :title="$t('download.downloadJson')" @click="openDownload()"><v-icon color="primary">description</v-icon></v-btn>
     <v-dialog v-model="isDownloadModalOpen" max-width="600" attach="body" :persistent="true">
       <box customClass="download-modal" v-model="isDownloadModalOpen" background="white" closable @closed="closeDownload()">
         <h3 slot="header">{{$t('download.downloadRoute')}}</h3>
@@ -18,3 +19,4 @@
 </template>
 
 <script src="./download.js"></script>
+<style scoped src="../optimization/components/optimization-export/optimization-export.css"></style>

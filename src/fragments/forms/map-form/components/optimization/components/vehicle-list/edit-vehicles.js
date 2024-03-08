@@ -4,6 +4,7 @@ import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
 import PlaceAutocomplete from '@/fragments/forms/place-input/PlaceAutocomplete.vue'
 import EditSkills from '@/fragments/forms/map-form/components/optimization/components/skill-list/EditSkills.vue'
 import OptimizationImport from '@/fragments/forms/map-form/components/optimization/components/optimization-import/OptimizationImport.vue'
+import OptimizationExport from '@/fragments/forms/map-form/components/optimization/components/optimization-export/OptimizationExport.vue'
 import {EventBus} from '@/common/event-bus'
 import Vehicle from '@/models/vehicle'
 import Skill from '@/models/skill'
@@ -22,7 +23,8 @@ export default {
     newEndPoint: false,
     onlyStartPoint: false,
     showSkillManagement: false,
-    isImportOpen: false
+    isImportOpen: false,
+    isExportOpen: false
   }),
   props: {
     vehicles: {
@@ -46,6 +48,7 @@ export default {
     PlaceAutocomplete,
     EditSkills,
     OptimizationImport,
+    OptimizationExport,
     EventBus
   },
   computed: {

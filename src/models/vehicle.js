@@ -91,6 +91,32 @@ class Vehicle extends Place {
     return stringify ? JSON.stringify(out) : out
   }
 
+  toGeoJSON(stringify = false) {
+    let props = {
+      id: this.id,
+      description: this.description,
+      profile: this.profile,
+      capacity: this.capacity,
+    }
+
+    if (this.skills.length) {
+      let skillIds = []
+      for (const skill of this.skills) {
+        skillIds.push(skill.id)
+      }
+      skillIds.sort()
+      props.skills = skillIds
+    }
+    if (this.time_windows.length) {
+      props.time_windows = this.time_windows
+    }
+
+    const geoJsonData = { type: 'FeatureCollection', features: [
+      { type: 'Feature', geometry: {type: 'Point', coordinates: this.start }, },
+      { type: 'Feature', geometry: { type: 'Point', coordinates: this.end }, }], properties: props }
+    return stringify ? JSON.stringify(geoJsonData) : geoJsonData
+  }
+
   static vehiclesFromFeatures(vehicles) {
     const out = []
     for (const v of vehicles) {

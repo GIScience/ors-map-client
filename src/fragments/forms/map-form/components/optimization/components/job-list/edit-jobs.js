@@ -3,6 +3,7 @@ import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn.vue'
 import PlaceAutocomplete from '@/fragments/forms/place-input/PlaceAutocomplete.vue'
 import EditSkills from '@/fragments/forms/map-form/components/optimization/components/skill-list/EditSkills.vue'
 import OptimizationImport from '@/fragments/forms/map-form/components/optimization/components/optimization-import/OptimizationImport.vue'
+import OptimizationExport from '@/fragments/forms/map-form/components/optimization/components/optimization-export/OptimizationExport.vue'
 import {EventBus} from '@/common/event-bus'
 import Job from '@/models/job'
 import Skill from '@/models/skill'
@@ -20,7 +21,8 @@ export default {
     debounceTimeoutId: null,
     saveToLocalStorage: true,
     showSkillManagement: false,
-    isImportOpen: false
+    isImportOpen: false,
+    isExportOpen: false
   }),
   props: {
     jobs: {
@@ -42,6 +44,7 @@ export default {
     PlaceAutocomplete,
     EditSkills,
     OptimizationImport,
+    OptimizationExport,
     EventBus
   },
   computed: {

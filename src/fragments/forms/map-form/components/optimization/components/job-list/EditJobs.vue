@@ -4,7 +4,7 @@
       <box background="white" closable @closed="closeJobsModal()">
         <h3 slot="header" style="padding-right: 55px">
           {{ $t('optimization.manageJobs') }}  {{ `editing ${editId}`}}
-          <v-btn class="edit-jobs-btn" flat :style="{background: 'white'}" @click="exportJobs()" :title="$t('optimization.exportJobFile')">
+          <v-btn class="edit-jobs-btn" flat :style="{background: 'white'}" @click="isExportOpen=true" :title="$t('optimization.exportJobFile')">
             <v-icon color="primary">cloud_download</v-icon>
           </v-btn>
           <v-btn class="edit-jobs-btn" flat :style="{background: 'white'}" @click="isImportOpen=true" :title="$t('optimization.importJobFile')">
@@ -84,6 +84,7 @@
     <optimization-import v-if="isImportOpen" :expected-data="'jobs'"
                          @saveOptimizationImport="saveJobImport"
                          @close="isImportOpen=false"></optimization-import>
+    <optimization-export v-if="isExportOpen" :edit-jobs="editJobs" @close="isExportOpen=false"></optimization-export>
   </div>
 </template>
 

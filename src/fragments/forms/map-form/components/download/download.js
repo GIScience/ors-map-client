@@ -1,6 +1,8 @@
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import { Directions } from '@/support/ors-api-runner'
 import MapViewData from '@/models/map-view-data'
+import Job from '@/models/job'
+import Vehicle from '@/models/vehicle'
 import constants from '@/resources/constants'
 import toKml from '@maphubs/tokml'
 import toGpx from 'togpx'
@@ -15,7 +17,15 @@ export default {
   props: {
     mapViewData: {
       Type: MapViewData,
-      Required: true
+      Required: false
+    },
+    jobData: {
+      Type: [Job],
+      Required: false
+    },
+    vehicleData: {
+      Type: [Vehicle],
+      Required: false,
     },
     downloadFormatsSupported: {
       Type: Array,
@@ -56,14 +66,48 @@ export default {
         return context.downloadFormatsSupported.includes(f.value)
       })
       return available
-    }
+    },
+    jobsJson () {
+      const jsonJobs = []
+      for (const job of this.jobData) {
+        jsonJobs.push(job.toJSON(true))
+      }
+      return jsonJobs
+    },
+    vehiclesJson () {
+      const jsonVehicles = []
+      for (const v of this.vehicleData) {
+        jsonVehicles.push(v.toJSON(true))
+      }
+      return jsonVehicles
+    },
+    jobsGeoJson () {
+      const jsonJobs = []
+      for (const job of this.jobData) {
+        jsonJobs.push(job.toGeoJSON())
+      }
+      return jsonJobs
+    },
+    vehiclesGeoJson () {
+      const jsonVehicles = []
+      for (const v of this.vehicleData) {
+        jsonVehicles.push(v.toGeoJSON())
+      }
+      return jsonVehicles
+    },
   },
   methods: {
     /**
      * Set the default filename and format and open the download modal
      */
     openDownload () {
-      this.downloadFileName = this.defaultDownloadName
+      if (this.jobData) {
+        this.downloadFileName = 'ors-jobs'
+      } else if (this.vehicleData) {
+        this.downloadFileName = 'ors-vehicles'
+      } else {
+        this.downloadFileName = this.defaultDownloadName
+      }
       this.downloadFormat = this.downloadFormats[0].value
       this.isDownloadModalOpen = true
     },
@@ -128,7 +172,14 @@ export default {
         try {
           if (context.downloadFormat === 'json') {
             // Get the ORS mapViewData model and stringify it
-            const orsJSONStr = JSON.stringify(context.mapViewData)
+            let orsJSONStr
+            if (this.mapViewData) {
+              orsJSONStr = JSON.stringify(context.mapViewData)
+            } else if (this.jobData) {
+              orsJSONStr = context.jobsJson
+            } else if (this.vehicleData) {
+              orsJSONStr = context.vehiclesJson
+            }
             resolve(orsJSONStr)
           } else if (context.downloadFormat === 'ors-gpx') {
             // If the format is ors-gpx, run anew request with the format being 'gpx'
@@ -143,7 +194,13 @@ export default {
             const toGPX = toGpx(geoJSON)
             resolve(toGPX)
           } else if (context.downloadFormat === 'geojson') {
-            jsonData = context.mapViewData.getGeoJson()
+            if (this.mapViewData) {
+              jsonData = context.mapViewData.getGeoJson()
+            } else if (this.jobData) {
+              jsonData = context.jobsGeoJson
+            } else if (this.vehicleData) {
+              jsonData = context.vehiclesGeoJson
+            }
             const jsonStr = JSON.stringify(jsonData)
             resolve(jsonStr)
           } else if (context.downloadFormat === 'kml') {

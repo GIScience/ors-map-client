@@ -84,6 +84,30 @@ class Job extends Place {
     return stringify ? JSON.stringify(out) : out
   }
 
+  toGeoJSON(stringify = false) {
+    let props = {
+      id: this.id,
+      service: this.service,
+      delivery: this.delivery,
+      pickup: this.pickup
+    }
+
+    if (this.skills.length) {
+      let skillIds = []
+      for (const skill of this.skills) {
+        skillIds.push(skill.id)
+      }
+      skillIds.sort()
+      props.skills = skillIds
+    }
+    if (this.time_windows.length) {
+      props.time_windows = this.time_windows
+    }
+
+    const geoJsonData = { type: 'Feature', geometry: { type: 'Point', coordinates: this.location }, properties: props }
+    return stringify ? JSON.stringify(geoJsonData) : geoJsonData
+  }
+
   static jobsFromFeatures(jobs) {
     const out = []
     for (const job of jobs) {
