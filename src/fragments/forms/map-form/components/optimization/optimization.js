@@ -328,6 +328,8 @@ export default {
      * @returns {Promise}
      */
     optimizeJobs () {
+      localStorage.setItem('jobs', JSON.stringify(this.jobsJSON))
+      localStorage.setItem('vehicles', JSON.stringify(this.vehiclesJSON))
       const context = this
       return new Promise((resolve) => {
         if (context.jobs.length) {
