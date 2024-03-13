@@ -157,11 +157,11 @@ export default {
         if (marker.text.startsWith('V')) {
           let vehicle = context.vehicles[parseInt(marker.text.slice(1))-1]
           vehicle.setLngLat(marker.position.lng, marker.position.lat)
-          context.optimizeJobs()
+          context.updateAppRoute()
         } else {
           let job = context.jobs[parseInt(marker.text)-1]
           job.setLngLat(marker.position.lng, marker.position.lat)
-          context.optimizeJobs()
+          context.updateAppRoute()
         }
       }
     })
@@ -217,6 +217,7 @@ export default {
       job.resolve().then(() => {
         context.jobs.push(job)
         context.manageJobs(job.id)
+        context.updateAppRoute()
       }).catch((err) => {
         console.log(err)
         context.showError(this.$t('optimization.couldNotResolveTheJobLocation'), { timeout: 0 })
@@ -241,6 +242,7 @@ export default {
       vehicle.resolve().then(() => {
         context.vehicles.push(vehicle)
         context.manageVehicles(vehicle.id)
+        context.updateAppRoute()
       }).catch((err) => {
         console.log(err)
         context.showError(this.$t('optimization.couldNotResolveTheVehicleLocation'), { timeout: 0 })
@@ -290,6 +292,7 @@ export default {
           this.vehicles[i].setId(parseInt(i)+1)
         }
       }
+      this.updateAppRoute()
     },
     /**
      * After each change on the map search we redirect the user to the built target app route
@@ -298,10 +301,10 @@ export default {
      */
     updateAppRoute () {
       const jobs = this.jobs
+      const vehicles = this.vehiclesJSON
       this.$store.commit('mode', constants.modes.optimization)
-      // TODO: adjust this for Jobs
       const appMode = new AppMode(this.$store.getters.mode)
-      const route = appMode.getRoute(jobs)
+      const route = appMode.getRoute(jobs, {vehicles: vehicles})
       if (Object.keys(route.params).length > 1) {// params contains data and placeName? props
         this.$router.push(route)
       }
@@ -403,16 +406,26 @@ export default {
         // places from the appRoute without changing the
         // object reference because it is a prop
         const defaultJobs = this.jobs
+        const defaultVehicles = this.vehicles
         this.jobs = this.$store.getters.appRouteData.jobs
+        const urlVehicles = this.$store.getters.appRouteData.options.vehicles
         let places = this.$store.getters.appRouteData.places
         let storedJobs = localStorage.getItem('jobs')
         let storedVehicles = localStorage.getItem('vehicles')
-        if (storedVehicles) {
+        if (urlVehicles) {
+          const vehicles = []
+          for (let v of urlVehicles) {
+            vehicles.push(Vehicle.fromObject(v))
+          }
+          this.vehicles = vehicles
+        } else if (this.vehicles === undefined && storedVehicles) {
           const vehicles = []
           for (const v of JSON.parse(storedVehicles)) {
             vehicles.push(Vehicle.fromObject(v))
           }
           this.vehicles = vehicles
+        } else if (this.vehicles === undefined || !this.vehicles.length) {
+          this.vehicles = defaultVehicles
         }
         const jobs = []
         if (places.length > 0) {
@@ -440,7 +453,7 @@ export default {
         newJobs.push(job.clone())
       }
       this.jobs = newJobs
-      this.optimizeJobs()
+      this.updateAppRoute()
     },
     // when vehicles are changed update vehicles and generate new route
     vehiclesChanged(editedVehicles) {
@@ -449,7 +462,7 @@ export default {
         newVehicles.push(vehicle.clone())
       }
       this.vehicles = newVehicles
-      this.optimizeJobs()
+      this.updateAppRoute()
     },
     // when skills are changed update skills
     skillsChanged(editedSkills) {
