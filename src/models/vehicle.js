@@ -55,6 +55,39 @@ class Vehicle extends Place {
     )
   }
 
+  static fromCsv(csv) {
+    const lines = csv.split('\n')
+    const header = lines[0].split(',')
+
+    let vehicles = []
+    for (let i=1; i < lines.length; i++) {
+      let obj = {}
+      let currentLine = lines[i].split(',')
+
+      for (const k in header){
+        let parsedLine
+        if (header[k] !== 'description' || header[k] !== 'profile') {
+          parsedLine = Number(currentLine[k])
+        } else {
+          parsedLine = currentLine[k]
+        }
+
+        if (header[k] === 'start_lng' || header[k] === 'end_lng') {
+          obj[header[k].split('_')[0]] = [parsedLine]
+        } else if (header[k] === 'start_lat' || header[k] === 'end_lat') {
+          obj[header[k].split('_')[0]].push(parsedLine)
+        } else if (['skills', 'capacity', 'time_window'].includes(header[k])) {
+          obj[header[k]] = [parsedLine]
+        } else {
+          obj[header[k]] = parsedLine
+        }
+      }
+      vehicles.push(Vehicle.fromObject(obj))
+    }
+
+    return vehicles
+  }
+
   clone() {
     return Vehicle.fromJSON(this.toJSON(true))
   }

@@ -85,12 +85,17 @@ export default {
      * @param {*} fileContent
      * @param {*} type
      */
-    catchAndParseFile (fileContent, type, timestamp) {
+    catchAndParseFile (fileContent, type) {
       let fileType = null
       let newJobs = []
       let newVehicles = []
       if (type.indexOf('csv') > -1) {
         fileType = 'csv'
+        if (this.expectedData === 'jobs') {
+          newJobs = Job.fromCsv(fileContent)
+        } else if (this.expectedData === 'vehicles') {
+          newVehicles = Vehicle.fromCsv(fileContent)
+        }
       } else if (type.indexOf('json') > -1 || type.indexOf('geojson') > -1) {
         const parsedJson = JSON.parse(fileContent)
         if (parsedJson && parsedJson.features) {
@@ -99,7 +104,7 @@ export default {
           fileType = 'json'
         }
         if (this.expectedData === 'jobs') {
-          for (const j of JSON.parse(fileContent)) {
+          for (const j of parsedJson) {
             try {
               newJobs.push(Job.fromObject(j))
             } catch {
@@ -107,7 +112,7 @@ export default {
             }
           }
         } else if (this.expectedData === 'vehicles') {
-          for (const v of JSON.parse(fileContent)) {
+          for (const v of parsedJson) {
             try {
               newVehicles.push(Vehicle.fromObject(v))
             } catch {

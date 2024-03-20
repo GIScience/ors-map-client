@@ -49,6 +49,34 @@ class Job extends Place {
     })
   }
 
+  static fromCsv(csv) {
+    const lines = csv.split('\n')
+    const header = lines[0].split(',')
+
+    let jobs = []
+    for (let i=1; i < lines.length; i++) {
+      let obj = {}
+      let currentLine = lines[i].split(',')
+
+      for (const k in header){
+        let parsedLine = Number(currentLine[k])
+
+        if (header[k] === 'location_lng') {
+          obj['location'] = [currentLine[k]]
+        } else if (header[k] === 'location_lat') {
+          obj['location'].push(parsedLine)
+        } else if (['skills', 'delivery', 'pickup', 'time_window'].includes(header[k])) {
+          obj[header[k]] = [parsedLine]
+        } else {
+          obj[header[k]] = parsedLine
+        }
+      }
+      jobs.push(Job.fromObject(obj))
+    }
+
+    return jobs
+  }
+
   clone() {
     return Job.fromJSON(this.toJSON(true))
   }
