@@ -99,7 +99,7 @@ class Vehicle extends Place {
       capacity: this.capacity,
     }
 
-    if (this.skills.length) {
+    if (this.skills) {
       let skillIds = []
       for (const skill of this.skills) {
         skillIds.push(skill.id)
@@ -107,7 +107,7 @@ class Vehicle extends Place {
       skillIds.sort()
       props.skills = skillIds
     }
-    if (this.time_windows.length) {
+    if (this.time_windows) {
       props.time_windows = this.time_windows
     }
 
@@ -115,6 +115,25 @@ class Vehicle extends Place {
       { type: 'Feature', geometry: {type: 'Point', coordinates: this.start }, },
       { type: 'Feature', geometry: { type: 'Point', coordinates: this.end }, }], properties: props }
     return stringify ? JSON.stringify(geoJsonData) : geoJsonData
+  }
+
+  static toCsv(vehicles) {
+    const csvKeys = ['id', 'start', 'end', 'description', 'profile', 'capacity', 'skills', 'time_windows']
+    const header = ['id', 'start_lng', 'start_lat', 'end_lng', 'end_lat', 'description', 'profile', 'capacity', 'skills', 'time_windows']
+    let data = header.join()
+    for (let v of vehicles) {
+      v = v.toJSON()
+      let vehicleValues = []
+      for (const key of csvKeys) {
+        if (key in v) {
+          vehicleValues.push(v[key].toString())
+        } else {
+          vehicleValues.push('')
+        }
+      }
+      data = data + '\n' + vehicleValues.join()
+    }
+    return data
   }
 
   static vehiclesFromFeatures(vehicles) {

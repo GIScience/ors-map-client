@@ -30,7 +30,7 @@ export default {
     downloadFormatsSupported: {
       Type: Array,
       default: function () {
-        return ['json', 'ors-gpx', 'geojson', 'to-gpx', 'kml']
+        return ['json', 'ors-gpx', 'geojson', 'to-gpx', 'kml', 'csv']
       }
     }
   },
@@ -41,7 +41,8 @@ export default {
         { text: 'GeoJSON', value: 'geojson', ext: 'json' },
         { text: 'ORS API GPX', value: 'ors-gpx', ext: 'gpx' },
         { text: `${this.$t('download.standard')} GPX`, value: 'to-gpx', ext: 'gpx' },
-        { text: 'KML', value: 'kml', ext: 'kml' }
+        { text: 'KML', value: 'kml', ext: 'kml' },
+        { text: 'CSV', value: 'csv', ext: 'csv'}
       ]
     },
     /**
@@ -70,14 +71,14 @@ export default {
     jobsJson () {
       const jsonJobs = []
       for (const job of this.jobData) {
-        jsonJobs.push(job.toJSON(true))
+        jsonJobs.push(job.toJSON())
       }
       return jsonJobs
     },
     vehiclesJson () {
       const jsonVehicles = []
       for (const v of this.vehicleData) {
-        jsonVehicles.push(v.toJSON(true))
+        jsonVehicles.push(v.toJSON())
       }
       return jsonVehicles
     },
@@ -172,15 +173,14 @@ export default {
         try {
           if (context.downloadFormat === 'json') {
             // Get the ORS mapViewData model and stringify it
-            let orsJSONStr
             if (this.mapViewData) {
-              orsJSONStr = JSON.stringify(context.mapViewData)
+              jsonData = JSON.stringify(context.mapViewData)
             } else if (this.jobData) {
-              orsJSONStr = context.jobsJson
+              jsonData = JSON.stringify(context.jobsJson)
             } else if (this.vehicleData) {
-              orsJSONStr = context.vehiclesJson
+              jsonData = JSON.stringify(context.vehiclesJson)
             }
-            resolve(orsJSONStr)
+            resolve(jsonData)
           } else if (context.downloadFormat === 'ors-gpx') {
             // If the format is ors-gpx, run anew request with the format being 'gpx'
             context.getORSGpx().then((orsGpx) => {
@@ -213,11 +213,34 @@ export default {
             // Use the third party utility to convert geojson to kml
             const toKML = toKml(jsonData, kmlOptions)
             resolve(toKML)
+          } else if (context.downloadFormat === 'csv') {
+            let csvData
+            if (this.jobData) {
+              csvData = Job.toCsv(this.jobData)
+            } else if (this.vehicleData) {
+              csvData = Vehicle.toCsv(this.vehicleData)
+            }
+            resolve(csvData)
           }
         } catch (error) {
           reject(error)
         }
       })
+    },
+
+    copyToClipboard () {
+      let data = []
+      if (this.jobData) {
+        data = (this.jobsJson)
+      } else if (this.vehicleData) {
+        data = this.vehiclesJson
+      }
+
+      navigator.clipboard.writeText(JSON.stringify(data)).then(() => {
+        this.showSuccess(this.content.copied, {timeout: 3000})
+      }, () => {
+        this.showError(this.$t('download.copiedToClipboardFailed'), {timeout: 3000})
+      },)
     },
     /**
      * Get the response data routes and make sure that the geometry format is geojson

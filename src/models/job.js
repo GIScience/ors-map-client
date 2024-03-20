@@ -92,7 +92,7 @@ class Job extends Place {
       pickup: this.pickup
     }
 
-    if (this.skills.length) {
+    if (this.skills) {
       let skillIds = []
       for (const skill of this.skills) {
         skillIds.push(skill.id)
@@ -100,12 +100,31 @@ class Job extends Place {
       skillIds.sort()
       props.skills = skillIds
     }
-    if (this.time_windows.length) {
+    if (this.time_windows) {
       props.time_windows = this.time_windows
     }
 
     const geoJsonData = { type: 'Feature', geometry: { type: 'Point', coordinates: this.location }, properties: props }
     return stringify ? JSON.stringify(geoJsonData) : geoJsonData
+  }
+
+  static toCsv(jobs) {
+    const csvKeys = ['id', 'location', 'service', 'delivery', 'pickup', 'skills', 'time_windows']
+    const header = ['id', 'location_lng', 'location_lat', 'service', 'delivery', 'pickup', 'skills', 'time_windows']
+    let data = header.join()
+    for (let job of jobs) {
+      job = job.toJSON()
+      let jobValues = []
+      for (const key of csvKeys) {
+        if (key in job) {
+          jobValues.push(job[key].toString())
+        } else {
+          jobValues.push('')
+        }
+      }
+      data = data + '\n' + jobValues.join()
+    }
+    return data
   }
 
   static jobsFromFeatures(jobs) {

@@ -3,10 +3,7 @@
     <v-dialog v-model="isJobsOpen" max-width="600" :persistent="true" attach="body">
       <box background="white" closable @closed="closeJobsModal()">
         <h3 slot="header" style="padding-right: 55px">
-          {{ $t('optimization.manageJobs') }}  {{ `editing ${editId}`}}
-          <v-btn class="edit-jobs-btn" flat :style="{background: 'white'}" @click="isExportOpen=true" :title="$t('optimization.exportJobFile')">
-            <v-icon color="primary">cloud_download</v-icon>
-          </v-btn>
+          <download :download-formats-supported="['json', 'geojson', 'csv']" :job-data="editJobs"></download>
           <v-btn class="edit-jobs-btn" flat :style="{background: 'white'}" @click="isImportOpen=true" :title="$t('optimization.importJobFile')">
             <v-icon color="primary">cloud_upload</v-icon>
           </v-btn>
@@ -16,6 +13,7 @@
           <v-btn class="edit-jobs-btn" flat :style="{}" @click="addJob()" :title="$t('optimization.addJob')">
             <v-icon color="info">add</v-icon>
           </v-btn>
+          {{ $t('optimization.manageJobs') }}  {{ `editing ${editId}`}}
         </h3>
         <v-card @click="editId = i+1" elevation="3" style="margin: 5px;cursor: pointer" v-for="(j, i) in editJobs" :key="i">
           <v-card-title style="padding-bottom: 0;">
@@ -84,7 +82,6 @@
     <optimization-import v-if="isImportOpen" :expected-data="'jobs'"
                          @saveOptimizationImport="saveJobImport"
                          @close="isImportOpen=false"></optimization-import>
-    <optimization-export v-if="isExportOpen" :edit-jobs="editJobs" @close="isExportOpen=false"></optimization-export>
   </div>
 </template>
 

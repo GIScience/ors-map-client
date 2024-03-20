@@ -3,10 +3,7 @@
     <v-dialog v-model="isVehiclesOpen" max-width="600" :persistent="true" attach="body">
       <box background="white" closable @closed="closeVehiclesModal()">
         <h3 slot="header" style="padding-right: 55px">
-          {{ $t('optimization.manageVehicles') }}  {{ `editing ${editId}`}}
-          <v-btn class="edit-vehicles-btn" flat :style="{background: 'white'}" @click="isExportOpen=true" :title="$t('optimization.exportVehicleFile')">
-            <v-icon color="primary">cloud_download</v-icon>
-          </v-btn>
+          <download :download-formats-supported="['json', 'geojson', 'csv']" :vehicle-data="editVehicles"></download>
           <v-btn class="edit-vehicles-btn" flat :style="{background: 'white'}" @click="isImportOpen=true" :title="$t('optimization.importVehicleFile')">
             <v-icon color="primary">cloud_upload</v-icon>
           </v-btn>
@@ -16,6 +13,7 @@
           <v-btn class="edit-vehicles-btn" flat :style="{}" @click="addVehicle()" :title="$t('optimization.addVehicle')">
             <v-icon color="info">add</v-icon>
           </v-btn>
+          {{ $t('optimization.manageVehicles') }} {{ `editing ${editId}` }}
         </h3>
         <v-card @click="editId = i+1" elevation="3" style="margin: 5px;cursor: pointer" v-for="(v, i) in editVehicles" :key="i">
           <v-card-title style="padding-bottom: 0;">
@@ -83,7 +81,6 @@
     <optimization-import v-if="isImportOpen" :is-import-open="isImportOpen" :expected-data="'vehicles'"
                          @saveOptimizationImport="saveVehicleImport"
                          @close="isImportOpen=false"></optimization-import>
-    <optimization-export v-if="isExportOpen" :edit-jobs="editVehicles" @close="isExportOpen=false"></optimization-export>
   </div>
 </template>
 

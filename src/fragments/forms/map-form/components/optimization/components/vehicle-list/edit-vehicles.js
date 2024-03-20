@@ -1,10 +1,10 @@
 import RouteImporter from '@/fragments/forms/route-importer/RouteImporter.vue'
+import Download from '@/fragments/forms/map-form/components/download/Download'
 import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn.vue'
 import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
 import PlaceAutocomplete from '@/fragments/forms/place-input/PlaceAutocomplete.vue'
 import EditSkills from '@/fragments/forms/map-form/components/optimization/components/skill-list/EditSkills.vue'
 import OptimizationImport from '@/fragments/forms/map-form/components/optimization/components/optimization-import/OptimizationImport.vue'
-import OptimizationExport from '@/fragments/forms/map-form/components/optimization/components/optimization-export/OptimizationExport.vue'
 import {EventBus} from '@/common/event-bus'
 import Vehicle from '@/models/vehicle'
 import Skill from '@/models/skill'
@@ -24,7 +24,6 @@ export default {
     onlyStartPoint: false,
     showSkillManagement: false,
     isImportOpen: false,
-    isExportOpen: false
   }),
   props: {
     vehicles: {
@@ -43,12 +42,12 @@ export default {
   },
   components: {
     RouteImporter,
+    Download,
     MapFormBtn,
     PlaceInput,
     PlaceAutocomplete,
     EditSkills,
     OptimizationImport,
-    OptimizationExport,
     EventBus
   },
   computed: {
@@ -109,14 +108,6 @@ export default {
       this.isImportOpen = false
     },
 
-    // copy JSON object containing jobs to clipboard
-    exportVehicles () {
-      navigator.clipboard.writeText(JSON.stringify(this.editVehiclesJSON)).then(() => {
-        this.showSuccess(this.$t('vehicle.copiedToClipboard'), {timeout: 3000})
-      }, () => {
-        this.showError(this.$t('vehicle.copiedToClipboardFailed'), {timeout: 3000})
-      },)
-    },
     // remove different end location and automatically fill it to match start location
     removeEndPoint(index) {
       this.editVehicles[index].end = this.editVehicles[index].start
