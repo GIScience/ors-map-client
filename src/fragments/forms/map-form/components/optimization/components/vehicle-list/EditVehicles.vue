@@ -78,8 +78,7 @@
       </box>
     </v-dialog>
     <edit-skills v-if="showSkillManagement" :skills="skills" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
-    <optimization-import v-if="isImportOpen" :is-import-open="isImportOpen" :expected-data="'vehicles'"
-                         @saveOptimizationImport="saveVehicleImport"
+    <optimization-import v-if="isImportOpen" :expected-data="'vehicles'" @saveOptimizationImport="saveVehicleImport"
                          @close="isImportOpen=false"></optimization-import>
   </div>
 </template>

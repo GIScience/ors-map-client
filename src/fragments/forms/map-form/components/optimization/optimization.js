@@ -16,6 +16,7 @@ import Skill from '@/models/skill'
 
 // Local components
 import OptimizationDetails from './components/optimization-details/OptimizationDetails'
+import OptimizationImport from './components/optimization-import/OptimizationImport.vue'
 import JobList from './components/job-list/JobList.vue'
 import VehicleList from './components/vehicle-list/VehicleList.vue'
 import EditJobs from './components/job-list/EditJobs.vue'
@@ -36,6 +37,8 @@ export default {
     showJobManagement: false,
     editJobsOpen: false,
     showVehicleManagement: false,
+    isImportOpen: false,
+    expectedImport: '',
     showSkillManagement: false
   }),
   components: {
@@ -43,6 +46,7 @@ export default {
     FormActions,
     PlaceAutocomplete,
     OptimizationDetails,
+    OptimizationImport,
     JobList,
     VehicleList,
     EditJobs,
@@ -88,8 +92,8 @@ export default {
       localStorage.setItem('skills', JSON.stringify(this.skillsJSON))
     }
     // TODO: remove defaults
-    this.jobs = [Job.fromJSON('{"id":1,"service":300,"skills":[1],"amount":[1],"location":[8.68525,49.420822]}')]
-    this. vehicles = [Vehicle.fromJSON('{"id":1,"profile":"driving-car","start":[ 8.675863, 49.418477 ],"end":[ 8.675863, 49.418477 ],"capacity":[4],"skills":[1]}')]
+    // this.jobs = [Job.fromJSON('{"id":1,"service":300,"skills":[1],"amount":[1],"location":[8.68525,49.420822]}')]
+    // this. vehicles = [Vehicle.fromJSON('{"id":1,"profile":"driving-car","start":[ 8.675863, 49.418477 ],"end":[ 8.675863, 49.418477 ],"capacity":[4],"skills":[1]}')]
 
     this.loadData()
 
@@ -226,12 +230,17 @@ export default {
     // open editJobs dialog
     manageJobs(jobId) {
       if (this.jobs.length === 0) {
-        this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
-        this.setPickPlaceSource(this.jobs)
+        this.showInfo(this.$t('optimization.noJobsToManage'))
+        this.isImportOpen = true
+        this.expectedImport = 'jobs'
       } else {
         this.showJobManagement = true
         EventBus.$emit('showJobsModal', jobId)
       }
+    },
+    addJobFromMap() {
+      this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
+      this.setPickPlaceSource(this.jobs)
     },
 
     // When the user clicks on the map and selects a point as the route start
@@ -251,12 +260,28 @@ export default {
     // open editVehicles dialog
     manageVehicles(vehicleId) {
       if (this.vehicles.length === 0) {
-        this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
-        this.setPickPlaceSource(this.vehicles)
+        this.showInfo(this.$t('optimization.noVehiclesToManage'))
+        this.isImportOpen = true
+        this.expectedImport = 'vehicles'
       } else {
         this.showVehicleManagement = true
         EventBus.$emit('showVehiclesModal', vehicleId)
       }
+    },
+    addVehicleFromMap() {
+      this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
+      this.setPickPlaceSource(this.vehicles)
+    },
+
+    // save vehicles from pasted JSON and return error if not a valid JSON
+    saveImport(data) {
+      if (data.jobs.length) {
+        this.jobsChanged(data.jobs)
+      } else if (data.vehicles.length){
+        this.vehiclesChanged(data.vehicles)
+      }
+      this.isImportOpen = false
+      this.expectedImport = ''
     },
 
     // open editSkills dialog

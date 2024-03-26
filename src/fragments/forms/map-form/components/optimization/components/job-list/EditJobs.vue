@@ -79,8 +79,7 @@
       </box>
     </v-dialog>
     <edit-skills v-if="showSkillManagement" :skills="skills" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
-    <optimization-import v-if="isImportOpen" :expected-data="'jobs'"
-                         @saveOptimizationImport="saveJobImport"
+    <optimization-import v-if="isImportOpen" :expected-data="'jobs'" @saveOptimizationImport="saveJobImport"
                          @close="isImportOpen=false"></optimization-import>
   </div>
 </template>

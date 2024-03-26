@@ -25,7 +25,7 @@
         </div>
       </template>
       <div v-if="jobs.length === 0">
-        <v-btn @click="manageJobs" color="success">
+        <v-btn @click="addJobFromMap" color="success">
           <v-icon style="margin-right: 5px;">map</v-icon>
           add Job from map
         </v-btn>
@@ -44,7 +44,7 @@
         </v-tooltip>
       </div>
       <div v-if="vehicles.length === 0">
-        <v-btn @click="manageVehicles" color="success">
+        <v-btn @click="addVehicleFromMap" color="success">
           <v-icon style="margin-right: 5px;">map</v-icon>
           add Vehicle from map
         </v-btn>
@@ -73,6 +73,8 @@
     <edit-jobs v-if="showJobManagement" :jobs="jobs" :skills="skills" @jobsChanged="jobsChanged" @close="showJobManagement=false"></edit-jobs>
     <edit-vehicles v-if="showVehicleManagement" :vehicles="vehicles" :skills="skills" @vehiclesChanged="vehiclesChanged" @close="showVehicleManagement=false"></edit-vehicles>
     <edit-skills v-if="showSkillManagement" :skills="skills" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
+    <optimization-import v-if="isImportOpen" :expected-data="expectedImport" @saveOptimizationImport="saveImport"
+                         @close="isImportOpen=false"></optimization-import>
   </div>
 </template>
 
