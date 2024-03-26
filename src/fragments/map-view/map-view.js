@@ -1120,7 +1120,7 @@ export default {
         this.defineActiveRouteIndex()
         this.updateMarkersLabel()
         if (this.hasOnlyOneMarker && this.fitBounds) {
-          this.setFocusedPlace(this.localMapViewData.places[0])
+          this.setFocusedPlace(this.localMapViewData.places[0] || this.localMapViewData.jobs[0] || this.localMapViewData.vehicles[0])
         }
         if (this.mode === constants.modes.place && this.hasOnlyOneMarker && appConfig.showAdminAreaPolygon) {
           this.loadAdminArea()
@@ -1135,9 +1135,11 @@ export default {
      * @param {Place} place
      */
     setFocusedPlace (place) {
-      let layer = place.layer || place.properties.layer
-      if (layer) {
+      if (place.layer || place.properties.layer) {
+        let layer = place.layer || place.properties.layer
         this.zoomLevel = GeoUtils.zoomLevelByLayer(layer)
+        this.setMapCenter(place.getLatLng())
+      } else {
         this.setMapCenter(place.getLatLng())
       }
     },
