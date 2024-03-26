@@ -6,6 +6,7 @@ import Footer from '@/fragments/footer/Footer'
 import appConfig from '@/config/app-config'
 import utils from '@/support/utils'
 import {EventBus} from '@/common/event-bus'
+import constants from '@/resources/constants'
 
 
 export default {
@@ -43,6 +44,10 @@ export default {
     sidebarContentHeightFormula () {
       const formula = `calc(100% - ${this.$store.getters.sidebarHeaderHeight}px)`
       return formula
+    },
+    profileSelectorVisisble () {
+      const mode = this.$store.getters.mode
+      return mode !== constants.modes.optimization
     }
   },
   methods: {

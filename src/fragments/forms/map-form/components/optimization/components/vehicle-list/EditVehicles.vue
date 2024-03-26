@@ -29,23 +29,41 @@
             <div v-if="v.start && editId !== v.id">Start: {{ v.start[0].toPrecision(8) }}, {{ v.start[1].toPrecision(8) }} -
               End: {{ v.end[0].toPrecision(8) }}, {{ v.end[1].toPrecision(8) }}</div>
             <div v-else>
-              <div v-if="!v.start">
-                <place-autocomplete :vehicles="editVehicles" :edit-id="editId" :show-edit-box="isVehiclesOpen" :new-end-point="newEndPoint" :only-start-point="onlyStartPoint"></place-autocomplete>
-                <v-text-field v-if="onlyStartPoint" v-model="editVehicles[i].end" :persistent-hint="true" :hint="'End'"></v-text-field>
-              </div>
-              <div v-else-if="newEndPoint">
-                <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start'"></v-text-field>
-                <place-autocomplete :vehicles="editVehicles" :edit-id="editId" :show-edit-box="isVehiclesOpen" :new-end-point="newEndPoint" :only-start-point="onlyStartPoint"></place-autocomplete>
-              </div>
-              <div v-else-if="sameStartEndPoint">
-                <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start & End'" append-icon="search" @click:append="switchToSearch('start')"></v-text-field>
-                <v-btn class="small-btn" small flat @click="newEndPoint=true">+ add different end point</v-btn>
-              </div>
-              <div v-else>
-                <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start'" append-icon="search" @click:append="switchToSearch('start')"></v-text-field>
-                <v-text-field v-model="editVehicles[i].end" :persistent-hint="true" :hint="'End'" append-icon="search" @click:append="switchToSearch('end')" append-outer-icon="delete" @click:append-outer="removeEndPoint(i)"></v-text-field>
-              </div>
-              <v-text-field v-model.number="editVehicles[i].capacity[0]" type="number" style="width: 50%" :persistent-hint="true" :hint="'Capacity'"></v-text-field>
+                <div v-if="!v.start">
+                  <place-autocomplete :vehicles="editVehicles" :edit-id="editId" :show-edit-box="isVehiclesOpen" :new-end-point="newEndPoint" :only-start-point="onlyStartPoint"></place-autocomplete>
+                  <v-text-field v-if="onlyStartPoint" v-model="editVehicles[i].end" :persistent-hint="true" :hint="'End'"></v-text-field>
+                </div>
+                <div v-else-if="newEndPoint">
+                  <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start'"></v-text-field>
+                  <place-autocomplete :vehicles="editVehicles" :edit-id="editId" :show-edit-box="isVehiclesOpen" :new-end-point="newEndPoint" :only-start-point="onlyStartPoint"></place-autocomplete>
+                </div>
+                <div v-else-if="sameStartEndPoint">
+                  <div>
+                    <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start & End'" append-icon="search" @click:append="switchToSearch('start')" append-outer-icon="add" @click:append-outer="newEndPoint=true"></v-text-field>
+                  </div>
+                </div>
+                <div v-else>
+                  <v-text-field v-model="editVehicles[i].start" :persistent-hint="true" :hint="'Start'" append-icon="search" @click:append="switchToSearch('start')"></v-text-field>
+                  <v-text-field v-model="editVehicles[i].end" :persistent-hint="true" :hint="'End'" append-icon="search" @click:append="switchToSearch('end')" append-outer-icon="delete" @click:append-outer="removeEndPoint(i)"></v-text-field>
+                </div>
+
+              <v-layout row-wrap>
+                <v-text-field v-model.number="editVehicles[i].capacity[0]" type="number" style="width: 50%" :persistent-hint="true" :hint="'Capacity'"></v-text-field>
+                <box no-shadow no-top-border style="min-width:275px; height:80px; float: right; margin-left: 20px">
+                  <v-item-group>
+                    <v-layout class="profile-options-wrapper">
+                      <v-item v-for="profile in profilesMapping" :key="profile.slug">
+                        <v-flex style="min-width:45px">
+                          <profile-selector-option @profileSelected="profileSelected" :profile="profile"
+                                                   :active-profile-slug="vehicleProfile(i)" :active-vehicle-type="editVehicles[i].profile"
+                                                   :is-vehicle="true">
+                          </profile-selector-option>
+                        </v-flex>
+                      </v-item>
+                    </v-layout>
+                  </v-item-group>
+                </box>
+              </v-layout>
               <v-text-field v-model="editVehicles[i].time_window" :persistent-hint="true" :hint="'Working time window (in seconds passed since 00:00 or timestamp)'"></v-text-field>
               <v-select v-model="editVehicles[i].skills" :items="vehicleSkills" :item-text="'name'" :item-value="'id'" return-object chips deletable-chips
                         :persistent-hint="true" :hint="'Skills this Vehicle has'" multiple :menu-props="{'closeOnContentClick':true}">

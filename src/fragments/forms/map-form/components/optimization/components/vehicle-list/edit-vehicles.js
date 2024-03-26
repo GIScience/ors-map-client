@@ -1,6 +1,9 @@
 import RouteImporter from '@/fragments/forms/route-importer/RouteImporter.vue'
 import Download from '@/fragments/forms/map-form/components/download/Download'
 import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn.vue'
+import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
+import constants from '@/resources/constants'
+import ProfileSelectorOption from '@/fragments/forms/profile-selector/components/profile-selector-option/ProfileSelectorOption'
 import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
 import PlaceAutocomplete from '@/fragments/forms/place-input/PlaceAutocomplete.vue'
 import EditSkills from '@/fragments/forms/map-form/components/optimization/components/skill-list/EditSkills.vue'
@@ -15,6 +18,9 @@ export default {
     editId: 0,
     editVehicles: [],
     vehicleSkills: [],
+    profile: null,
+    activeProfileSlug: null,
+    activeVehicleType: null,
     pastedVehicles: [],
     pickPlaceSupported: true,
     focused: false,
@@ -44,6 +50,7 @@ export default {
     RouteImporter,
     Download,
     MapFormBtn,
+    ProfileSelectorOption,
     PlaceInput,
     PlaceAutocomplete,
     EditSkills,
@@ -62,6 +69,10 @@ export default {
     sameStartEndPoint () {
       const id = this.editId - 1
       return this.editVehicles[id].start[0] === this.editVehicles[id].end[0] && this.editVehicles[id].start[1] === this.editVehicles[id].end[1]
+    },
+    profilesMapping () {
+      const filter = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
+      return filter.mapping
     }
   },
   created () {
@@ -143,7 +154,7 @@ export default {
         let vehicle = new Vehicle()
         let id = this.editVehicles.length + 1
         vehicle.setId(id)
-        vehicle.capacity = [1]
+        vehicle.profile = this.profileSlug || 'driving-car'
         this.editVehicles.push(vehicle)
         this.editId = id
       }
@@ -174,6 +185,27 @@ export default {
         this.editVehicles[i].setId(parseInt(i)+1)
       }
     },
+
+    profileSelected (data) {
+      this.activeProfileSlug = data.profileSlug
+      this.activeVehicleType = data.vehicleTypeSlug
+
+      OrsFilterUtil.setFilterValue(constants.profileFilterName, data.profileSlug)
+
+      this.editVehicles[this.editId - 1].profile = data.profileSlug
+    },
+    vehicleProfile(id) {
+      const vt = this.editVehicles[id].profile
+      let profile
+      if (vt !== 'wheelchair') {
+        const profilePart = vt.split('-')[0]
+        profile = profilePart.concat('-*')
+      } else {
+        profile = vt
+      }
+      return profile
+    },
+
     copyVehicle () {
       // TODO: add copyVehicle
     },
