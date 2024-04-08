@@ -1,7 +1,7 @@
 <template>
   <v-footer dark
-  :style="{'margin-top': $vuetify.breakpoint.smAndDown ? '-' + $store.getters.footerMiniHeight + 'px': '-' + $store.getters.footerFullHeight + 'px'}"
-  :height="$vuetify.breakpoint.smAndDown? $store.getters.footerMiniHeight : $store.getters.footerFullHeight">
+  :style="{'margin-top':'-' + $store.getters.footerHeight + 'px'}"
+  :height="$store.getters.footerHeight">
       <v-layout justify-center column wrap >
         <span><a :style="linkColor" target="_blank" href="https://github.com/GIScience/ors-map-client">v{{ appVersion }}</a>&nbsp;|&nbsp;© {{currentYear}} <strong>{{footerMainSiteName}}</strong></span>
         <div>{{ $t('global.developedByIntro') }}
