@@ -15,7 +15,7 @@ export default {
     ok: 'OK',
     polygon: 'polígono',
     developedByIntro: 'Serviços desenvolvidos por',
-    developedBy: 'Heidelberg Institute for Geoinformation Technology',
+    developedBy: 'HeiGIT gGmbH',
     duration: 'Duração',
     distance: 'Distância',
     elevation: 'Elevação',

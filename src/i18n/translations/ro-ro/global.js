@@ -15,7 +15,7 @@ export default {
     'ok': 'OK',
     'polygon': 'poligon',
     'developedByIntro': 'Servicii dezvoltate de',
-    'developedBy': 'Institutul Heidelberg pentru tehnologia geoinformațiilor',
+    'developedBy': 'HeiGIT gGmbH',
     'duration': 'Durată',
     'distance': 'Distanță',
     'elevation': 'Elevație',

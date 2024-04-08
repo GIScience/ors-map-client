@@ -15,7 +15,7 @@ export default {
     'ok': 'OK',
     'polygon': 'sokszög',
     'developedByIntro': 'A szolgáltatások fejlesztője',
-    'developedBy': 'a Heidelbergi Geoinformációs Technológiai Intézet',
+    'developedBy': 'HeiGIT gGmbH',
     'duration': 'Időtartam',
     'distance': 'Távolság',
     'elevation': 'Magasság',
