@@ -1,4 +1,5 @@
 import appConfig from '@/config/app-config'
+import theme from '@/config/theme'
 export default {
   data () {
     return {
@@ -9,6 +10,9 @@ export default {
   computed: {
     currentYear () {
       return (new Date()).getFullYear()
+    },
+    linkColor () {
+      return 'color: ' + theme.primary + ';'
     },
     appVersion () {
       let env = process.env

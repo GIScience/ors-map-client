@@ -7,8 +7,7 @@ const state = {
   pickPlaceIndex: null,
   pickPlaceId: null,
   mainMenu: [],
-  footerFullHeight: 89,
-  footerMiniHeight: 140,
+  footerHeight: 89,
   sidebarFullWidth: 400,
   sidebarShrunkWidth: 290,
   sidebarHeaderHeight: 175,
@@ -28,11 +27,8 @@ const getters = {
   mainMenu: state => {
     return state.mainMenu
   },
-  footerFullHeight: state => {
-    return state.footerFullHeight
-  },
-  footerMiniHeight: state => {
-    return state.footerMiniHeight
+  footerHeight: state => {
+    return state.footerHeight
   },
   sidebarHeaderHeight: state => {
     return state.sidebarHeaderHeight

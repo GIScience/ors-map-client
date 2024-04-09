@@ -15,7 +15,7 @@ export default {
     ok: 'OK',
     polygon: 'polygon',
     developedByIntro: 'Služby vyvinuté',
-    developedBy: 'Heidelberským institutem pro geoinformační technologie',
+    developedBy: 'HeiGIT gGmbH',
     duration: 'Trvání',
     distance: 'Vzdálenost',
     elevation: 'Nadmořská výška',

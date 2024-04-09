@@ -1,14 +1,9 @@
 
 footer {
   text-align: center;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding: 5px;
 }
 
-footer.small {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
 footer p{
   color: #cbcbcb;
   margin: auto;
