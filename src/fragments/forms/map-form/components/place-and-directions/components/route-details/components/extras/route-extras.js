@@ -2,6 +2,11 @@ import orsDictionary from '@/resources/ors-dictionary'
 import {EventBus} from '@/common/event-bus'
 
 export default {
+  data () {
+    return {
+      showExtraInfoSection: null
+    }
+  },
   props: {
     route: {
       Type: Object,
@@ -15,6 +20,19 @@ export default {
      */
     routeExtras () {
       return this.route.properties.extras || []
+    }
+  },
+  created() {
+    // get current displayed extras
+    let {key: extraKey, value: extraValue, index: index} = this.$store.getters.extraHighlight
+    if (extraKey) {
+      this.showExtraInfoSection = 0  // show extra section
+      // does the active route have the specific extraValue?
+      if (this.routeExtras[extraKey].summary.map(e => e.value).includes(extraValue)) {
+        this.showSection(extraKey, extraValue, index)
+      } else {
+        this.showAllSections(extraKey)
+      }
     }
   },
   methods: {
@@ -112,6 +130,7 @@ export default {
      * @emits highlightPolylineSections (via EventBus)
      */
     showSection (extraKey, value, index) {
+      this.$store.commit('extraHighlight', {key: extraKey, value: value, index: index})
       const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
       const color = this.colorValue(extraKey, index)
       const highlightData = { extraKey, sectionTitle, sections: [{ intervals: [], color }] }
@@ -130,12 +149,12 @@ export default {
      * @emits highlightPolylineSections (via EventBus)
      */
     showAllSections (extraKey) {
+      this.$store.commit('extraHighlight', {key: extraKey, value: 'all', index: 0})
       const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
       const highlightData = { extraKey: extraKey, sectionTitle, sections: [] }
 
       let index = 0
-      for (const summaryKey in this.routeExtras[extraKey].summary) {
-        const summary = this.routeExtras[extraKey].summary[summaryKey]
+      for (const summary of this.routeExtras[extraKey].summary) {
         const polylineData = this.buildExtraHighlightPolylineData(extraKey, index, summary.value)
         highlightData.sections.push(polylineData)
         index++

@@ -39,6 +39,7 @@ export default {
     removeHighlightedSegments () {
       this.highlightedPolyline = null
       this.highlightedPolylineSnack = false
+      this.$store.commit('extraHighlight', {})
       this.$emit('closed')
     },
     highlightedSectionStyle (backgroundColor) {
