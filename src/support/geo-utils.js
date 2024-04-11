@@ -8,6 +8,8 @@ import HtmlMarker from '@/fragments/html-marker/HtmlMarker'
 // The import below will add some methods to Leaflet.GeometryUtil
 // Even if it is not accessed within this class, it is being used!
 import 'leaflet-geometryutil'
+import constants from '@/resources/constants'
+import theme from '@/config/theme'
 
 // noinspection GrazieInspection
 const geoUtils = {
@@ -47,23 +49,23 @@ const geoUtils = {
    * @param index
    * @param lastIndexKey
    * @param {Boolean} isRoute
-   * @returns {Array} of markers
+   * @returns {String} of markers
    */
   getMarkerColor: (index, lastIndexKey, isRoute) => {
-    let coloredMarkerName
+    let color
 
     if (isRoute) {
       if (index === 0) {
-        coloredMarkerName = 'green'
+        color = 'green'
       } else if (lastIndexKey === index) {
-        coloredMarkerName = 'red'
+        color = 'red'
       } else {
-        coloredMarkerName = '#206fe2'
+        color = '#206fe2'
       }
     } else {
-      coloredMarkerName = '#206fe2'
+      color = '#206fe2'
     }
-    return coloredMarkerName
+    return color
   },
 
   /**
@@ -82,20 +84,20 @@ const geoUtils = {
       if (place.lng && place.lat) {
         // Define the marker color
         const lastIndexKey = places.length - 1
-        let coloredMarkerName = geoUtils.getMarkerColor(key, lastIndexKey, isRoute)
+        let color = geoUtils.getMarkerColor(key, lastIndexKey, isRoute)
 
         if (highlightedPlace) {
           if (place.equals(highlightedPlace)) {
-            coloredMarkerName = 'red'
+            color = 'red'
           }
         } else if (Number(key) === 0 && !isRoute || places.length === 1) {
-          coloredMarkerName = 'red'
+          color = 'red'
         }
 
         let buildAsRoute = isRoute && places.length > 1
 
         // Build the marker
-        const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName, key, buildAsRoute)
+        const markerIcon = geoUtils.buildMarkerIcon(color, key, buildAsRoute)
         const marker = {
           position: {
             lng: place.lng,
@@ -207,7 +209,7 @@ const geoUtils = {
       color: color
     }
     if (isRoute && index !== null) {
-      propsData.markerNumber = Number(index) + 1
+      propsData.markerNumber = (Number(index) + 1).toString()
     }
     const htmlMarkerClass = Vue.extend(HtmlMarker)
     const htmlIconInstance = new htmlMarkerClass({
@@ -585,6 +587,74 @@ const geoUtils = {
       lng -= 360
     }
     return lng
+  },
+  buildOptimizationMarkers(jobs, vehicles) {
+    const markers = []
+    for (const job of jobs) {
+      if (job.lng && job.lat) {
+        // Build the marker
+        let propsData = {
+          color: theme.dark,
+          markerNumber: job.id.toString()
+        }
+        const htmlMarkerClass = Vue.extend(HtmlMarker)
+        const htmlIconInstance = new htmlMarkerClass({
+          propsData
+        })
+        htmlIconInstance.$mount()
+        let markerHtml = htmlIconInstance.$el.innerHTML
+
+        const markerIcon = Leaflet.divIcon({
+          className: 'custom-div-icon',
+          html: markerHtml,
+          iconSize: [30, 42],
+          iconAnchor: [15, 42]
+        })
+        const marker = {
+          position: {
+            lng: job.lng,
+            lat: job.lat
+          },
+          icon: markerIcon,
+          label: `Job ${job.id} - ${job.lng},${job.lat}`,
+          job: job
+        }
+        markers.push(marker)
+      }
+    }
+    for (const v of vehicles) {
+      if (v.lng && v.lat) {
+        // Build the marker
+        let propsData = {
+          color: constants.vehicleColors[v.id],
+          markerNumber: `V ${v.id.toString()}`
+        }
+        const htmlMarkerClass = Vue.extend(HtmlMarker)
+        const htmlIconInstance = new htmlMarkerClass({
+          propsData
+        })
+        htmlIconInstance.$mount()
+        let markerHtml = htmlIconInstance.$el.innerHTML
+
+        const markerIcon = Leaflet.divIcon({
+          className: 'custom-div-icon',
+          html: markerHtml,
+          iconSize: [30, 42],
+          iconAnchor: [15, 42]
+        })
+        const marker = {
+          position: {
+            lng: v.lng,
+            lat: v.lat
+          },
+          icon: markerIcon,
+          label: `Vehicle ${v.id} - ${v.lng},${v.lat}`,
+          vehicle: v
+        }
+        markers.push(marker)
+      }
+    }
+    return markers
   }
 }
 export default geoUtils

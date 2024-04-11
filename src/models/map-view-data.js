@@ -1,6 +1,8 @@
 import constants from '@/resources/constants'
 import utils from '@/support/utils'
 import Place from '@/models/place'
+import Job from '@/models/job'
+import Vehicle from '@/models/vehicle'
 
 /**
  * MapViewData class
@@ -9,10 +11,12 @@ class MapViewData {
   /**
    * MapViewData constructor
    */
-  constructor ({places = []} = {}) {
+  constructor ({places = [], jobs = [], vehicles = []} = {}) {
     this.polygons = []
     this.options = {} // {origin: String, apiVersion: String, contentType: String, timestamp: timestamp, options: {avoid_polygons: Object, avoid_features: Array}},
     this.places = places ? Place.placesFromFeatures(places) : [] // array of Place objects @see /src/models/place
+    this.jobs = jobs ? Job.jobsFromFeatures(jobs) : [] // array of Job objects @see /src/models/job
+    this.vehicles = vehicles ? Vehicle.vehiclesFromFeatures(vehicles) : [] // array of Vehicle objects @see /src/models/vehicle
     this.pois = [] // array of Place objects @see /src/models/place
     this.routes = [] // array of route objects containing route data and summary
     this.origin = 'response' // where the data comes from
@@ -76,6 +80,20 @@ class MapViewData {
       }
     }
 
+    for (let i = 0; i < this.jobs.length; i++) {
+      if (this.jobs[i] instanceof Job) {
+        const job = this.jobs[i]
+        mapViewDataClone.jobs.push(job.clone())
+      }
+    }
+
+    for (let i = 0; i < this.vehicles.length; i++) {
+      if (this.vehicles[i] instanceof Vehicle) {
+        const vehicle = this.vehicles[i]
+        mapViewDataClone.vehicles.push(vehicle.clone())
+      }
+    }
+
     for (let k = 0; k < this.pois.length; k++) {
       if (this.pois[k] instanceof Place) {
         const place = this.pois[k]
@@ -108,6 +126,7 @@ class MapViewData {
         case 'Point': {
           const lat = feature.geometry.coordinates[0]
           const lon = feature.geometry.coordinates[1]
+          // TODO: OPTIMIZATION - load jobs and vehicles
           const place = new Place(lat, lon, feature.properties.label, { properties: feature.properties })
           feature.latlngs = feature.geometry.coordinates
           mapViewAta.places.push(place)
@@ -141,6 +160,7 @@ class MapViewData {
       geoJsonData.features.push(routeFeature)
     }
 
+    // TODO: OPTIMIZATION - build Points with properties for jobs and vehicles
     // Build and add places/points features to the GeoJSON
     for (const plaKey in this.places) {
       const placeFeature = {

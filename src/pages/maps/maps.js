@@ -646,6 +646,12 @@ export default {
         polygons = PolygonUtils.splitMultiPolygonIntoPolygons(multiPolygon)
       }
       this.localAvoidPolygons = polygons
+    },
+    addJob(data) {
+      EventBus.$emit('addJob', data)
+    },
+    addVehicle(data) {
+      EventBus.$emit('addVehicle', data)
     }
   },
 

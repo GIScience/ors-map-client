@@ -9,19 +9,19 @@ export default {
       required: false
     },
     markerNumber: {
-      type: Number,
+      type: String,
       required: false
     }
   },
   computed: {
     doubleDigitText () {
-      return this.markerNumber && this.markerNumber > 9
+      return this.markerNumber.length === 2
     },
     tripleDigitText () {
-      return this.markerNumber && this.markerNumber > 99
+      return this.markerNumber.length === 3
     },
     fourDigitText () {
-      return this.markerNumber && this.markerNumber > 999
+      return this.markerNumber.length === 4
     }
   }
 }

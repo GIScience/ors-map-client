@@ -933,7 +933,9 @@ export default {
     removePlace (markerIndex) {
       if (this.markers[markerIndex]) {
         let place = this.markers[markerIndex].place
-        let data = {place, index: markerIndex}
+        let job = this.markers[markerIndex].job
+        let vehicle = this.markers[markerIndex].vehicle
+        let data = {place, job, vehicle, index: markerIndex}
         this.$emit('removePlace', data)
       }
     },
@@ -1062,11 +1064,11 @@ export default {
      *
      */
     loadMapData () {
-      if (this.localMapViewData.hasPlaces()) {
+      if (this.localMapViewData.hasPlaces() || this.localMapViewData.jobs.length || this.localMapViewData.vehicles.length) {
         this.defineActiveRouteIndex()
         this.updateMarkersLabel()
         if (this.hasOnlyOneMarker && this.fitBounds) {
-          this.setFocusedPlace(this.localMapViewData.places[0])
+          this.setFocusedPlace(this.localMapViewData.places[0] || this.localMapViewData.jobs[0] || this.localMapViewData.vehicles[0])
         }
         if (this.mode === constants.modes.place && this.hasOnlyOneMarker && appConfig.showAdminAreaPolygon) {
           this.loadAdminArea()
@@ -1081,9 +1083,11 @@ export default {
      * @param {Place} place
      */
     setFocusedPlace (place) {
-      let layer = place.layer || place.properties.layer
-      if (layer) {
+      if (place.layer || place.properties.layer) {
+        let layer = place.layer || place.properties.layer
         this.zoomLevel = GeoUtils.zoomLevelByLayer(layer)
+        this.setMapCenter(place.getLatLng())
+      } else {
         this.setMapCenter(place.getLatLng())
       }
     },
@@ -1134,6 +1138,8 @@ export default {
         if (this.localMapViewData.hasPlaces() || polylineData.length > 0) {
           let places = Place.getFilledPlaces(this.localMapViewData.places)
           this.dataBounds = GeoUtils.getBounds(places, polylineData)
+        } else if (this.localMapViewData.jobs.length || this.localMapViewData.vehicles.length) {
+          this.dataBounds = GeoUtils.getBounds([], polylineData)
         } else {
           this.dataBounds = null
         }
