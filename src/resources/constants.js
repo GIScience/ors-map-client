@@ -8,7 +8,8 @@ const constants = {
     geocodeSearch: 'pgeocode/search',
     autocomplete: 'pgeocode/autocomplete',
     pois: 'ppois',
-    reverseGeocode: 'pgeocode/reverse'
+    reverseGeocode: 'pgeocode/reverse',
+    optimization: 'poptimization'
   },
   endpoints: {
     directions: 'directions',
@@ -16,7 +17,8 @@ const constants = {
     geocodeSearch: 'geocode/search',
     autocomplete: 'geocode/autocomplete',
     pois: 'pois',
-    reverseGeocode: 'geocode/reverse'
+    reverseGeocode: 'geocode/reverse',
+    optimization: 'optimization'
   },
   roundTripFilterName: 'round_trip',
   avoidPolygonsFilterName: 'avoid_polygons',
@@ -28,6 +30,7 @@ const constants = {
   dataOrigins: {
     directions: '/directions',
     isochrones: '/isochrones',
+    optimization: '/optimization',
     fileImporter: 'fileImporter'
   },
   modes: {
@@ -36,6 +39,7 @@ const constants = {
     place: 'place',
     search: 'search',
     isochrones: 'isochrones',
+    optimization: 'optimization',
     pageNotFound: 'pageNotFound'
   },
   importableModes: {
@@ -48,7 +52,8 @@ const constants = {
     geocodeSearch: 'geocodeSearch',
     autocomplete: 'autocomplete',
     reverseGeocode: 'reverseGeocode',
-    isochrones: 'isochrones'
+    isochrones: 'isochrones',
+    optimization: 'optimization'
   },
   filterTypes: {
     wrapper: 'wrapper',

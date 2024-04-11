@@ -10,6 +10,7 @@ const placePath = RoutesResolver.place()
 const directionsPath = RoutesResolver.directions()
 const searchPath = RoutesResolver.search()
 const isochronesPath = RoutesResolver.isochronesPath()
+const optimizationPath = RoutesResolver.optimizationPath()
 const embedParameters = '/:embed?/:locale?'
 
 // Build the optional placesNames Path
@@ -100,6 +101,24 @@ const mapRoutes = [
     component: Maps,
     beforeEnter: (to, from, next) => {
       store.commit('mode', constants.modes.isochrones)
+      next()
+    }
+  },
+  {
+    path: `${optimizationPath}:placeName1${optionalPlaceNamesPath}/data/:data${embedParameters}`,
+    name: 'MapOptimization',
+    component: Maps,
+    beforeEnter: (to, from, next) => {
+      store.commit('mode', constants.modes.optimization)
+      next()
+    }
+  },
+  {
+    path: `${optimizationPath}`,
+    name: 'MapOptimizationHome',
+    component: Maps,
+    beforeEnter: (to, from, next) => {
+      store.commit('mode', constants.modes.optimization)
       next()
     }
   },
