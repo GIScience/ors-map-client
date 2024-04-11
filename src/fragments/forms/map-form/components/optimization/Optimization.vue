@@ -14,9 +14,11 @@
           {{ $t('optimization.jobs') }} (Max: 50)
         </div>
       </template>
+      <job-list :jobs="jobs"></job-list>
       <div class="optimization-heading">
         {{ $t('optimization.vehicles') }} (Max: 3)
       </div>
+      <vehicle-list :vehicles="vehicles"></vehicle-list>
       <v-layout row class="form-actions-btns">
         <v-tooltip bottom style="float: right">
         </v-tooltip>
