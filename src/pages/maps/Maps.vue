@@ -38,7 +38,10 @@
       @directChanged="directChanged"
       @mapCenterChanged="mapCenterChanged"
       @setInputPlace="setInputPlace"
-      @markerClicked="markerClicked">
+      @markerClicked="markerClicked"
+      @addJob="addJob"
+      @addVehicle="addVehicle"
+    >
     </map-view>
 
     <v-bottom-nav v-if="showBottomNav && !$store.getters.embed" :style="{height: bottomNavHeight + 'px !important', top: bottomNavTop + 'px !important'}" class="places-nav" absolute color="white" >
