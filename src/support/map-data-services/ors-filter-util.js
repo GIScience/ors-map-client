@@ -1,4 +1,3 @@
-
 import OrsMapFilters from '@/config/ors-map-filters'
 import constants from '@/resources/constants'
 import lodash from 'lodash'
@@ -163,3 +162,18 @@ const filterUtil = {
 }
 
 export default filterUtil
+export const vehicleIcon = (profile) => {
+  const filterRef = getFilterRefByName(constants.profileFilterName)
+  if (filterRef.mapping[profile]) {
+    return filterRef.mapping[profile].icon
+  } else {
+    for (let key in filterRef.mapping) {
+      let hasNestedProfiles = filterRef.mapping[key].nestedProfiles && filterRef.mapping[key].nestedProfiles.includes(profile)
+      let hasVehicleType = filterRef.mapping[key].vehicleTypes && filterRef.mapping[key].vehicleTypes.includes(profile)
+      if (hasNestedProfiles || hasVehicleType) {
+        return filterRef.mapping[key].icon
+      }
+    }
+  }
+  return filterRef.mapping[profile].icon
+}
