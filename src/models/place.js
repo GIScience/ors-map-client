@@ -103,14 +103,6 @@ class Place {
     this.suggestions = places
   }
 
-  /**
-   * Set the place id
-   * @param {*} id
-   */
-  setId(id) {
-    this.placeId = id
-  }
-
   isEmpty() {
     return !this.lat || this.lat === 0 || !this.lng || this.lng === 0
   }
