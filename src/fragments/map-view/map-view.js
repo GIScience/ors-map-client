@@ -168,7 +168,6 @@ export default {
       initialMaxZoom: appConfig.initialMapMaxZoom,
       localMapViewData: new MapViewData(), // we use a local copy of the mapViewData to be able to modify it
       mainRouteColor: theme.primary,
-      alternativeRouteColor: constants.alternativeRouteColor,
       routeBackgroundColor: constants.routeBackgroundColor,
       guid: null,
       clickLatLng: null,
@@ -193,6 +192,9 @@ export default {
     }
   },
   computed: {
+    theme() {
+      return theme
+    },
 
     showMyLocationControl () {
       return this.supportsMyLocationBtn && !this.isAltitudeModalOpen && this.showControls
@@ -378,6 +380,8 @@ export default {
         let markers = GeoUtils.buildMarkers(markersMapViewData.places, isRoute, this.focusedPlace)
         markers = this.$root.appHooks.run('markersCreated', markers)
         return markers
+      } else if (markersMapViewData.jobs.length || markersMapViewData.vehicles.length) {
+        return GeoUtils.buildOptimizationMarkers(markersMapViewData.jobs, markersMapViewData.vehicles)
       }
     },
     /**
@@ -679,6 +683,12 @@ export default {
 
       }, 500)
     },
+    alternativeRouteColor(route) {
+      if(this.mode === constants.modes.optimization) {
+        return constants.vehicleColors[route.vehicle]
+      }
+      return constants.alternativeRouteColor
+    },
     /**
      * Refresh the altitude modal (force a 'destroy' and a 'rebuild')
      * with the new data
@@ -979,6 +989,7 @@ export default {
       if (markerIndex !== null) {
         const marker = this.markers[markerIndex]
         marker.inputIndex = markerIndex
+        marker.text = event.originalEvent.target.innerText
         this.$emit('markerDragged', marker)
       }
     },
