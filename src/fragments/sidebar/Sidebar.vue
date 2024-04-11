@@ -13,7 +13,7 @@
       :permanent="$store.getters.leftSideBarPinned"
       :class="{'auto-height': $lowResolution && !$store.getters.leftSideBarPinned, 'full-height': $store.getters.leftSideBarPinned}">
 
-      <div class="sidebar-header" :style="{height: $store.getters.sidebarHeaderHeight + 'px'}">
+      <div class="sidebar-header" :style="{height: headerHeight}">
         <v-layout row class="sidebar-header-top" >
           <v-flex xs6 md9>
             <div class="logo-container">
@@ -25,7 +25,7 @@
             <top-menu></top-menu>
           </v-flex>
         </v-layout>
-        <profile-selector></profile-selector>
+        <profile-selector v-show="profileSelectorVisisble"></profile-selector>
       </div>
 
       <!-- sidebar-content padding-bottom must be the same that is calculated in footer component height -->
