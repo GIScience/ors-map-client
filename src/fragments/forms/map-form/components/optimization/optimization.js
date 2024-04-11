@@ -14,7 +14,6 @@ import Vehicle from '@/models/vehicle'
 import Skill from '@/models/skill'
 
 // Local components
-import OptimizationDetails from './components/optimization-details/OptimizationDetails'
 import JobList from './components/job-list/JobList.vue'
 import VehicleList from './components/vehicle-list/VehicleList.vue'
 
@@ -25,8 +24,7 @@ export default {
     mapViewData: new MapViewData(),
     skills: [],
     jobs: [],
-    vehicles: [],
-    pickPlaceSupported: true
+    vehicles: []
   }),
   components: {
     FieldsContainer,
@@ -140,35 +138,6 @@ export default {
         }
       }
     })
-
-    // place is picked from Map
-    EventBus.$on('setInputPlace', (data) => {
-      if (context.active) {
-        // pickEditSource indicates which property the place should fill
-        if (data.pickEditSource === 'jobs') {
-          let job = Job.fromPlace(data.place)
-          let id = data.placeInputId
-          job.setId(id)
-
-          context.jobs.push(job)
-          context.manageJobs(id)
-        } else if (data.pickEditSource === 'vehicleStart') {
-          let v = Vehicle.fromPlace(data.place)
-          let id = data.placeInputId
-          v.setId(id)
-
-          context.vehicles.push(v)
-          context.manageVehicles(id)
-        } else if (data.pickEditSource === 'vehicleEnd') {
-          this.vehicles[data.pickPlaceIndex].end = data.place.coordinates
-
-          context.manageVehicles(data.placeInputId)
-        }
-      } else {
-        context.setSidebarIsOpen(true)
-        context.$forceUpdate()
-      }
-    })
   },
   watch: {
     $route: function () {
@@ -199,11 +168,6 @@ export default {
         context.showError(this.$t('optimization.couldNotResolveTheJobLocation'), { timeout: 0 })
       })
     },
-    // when there are no jobs and button in sidebar is clicked
-    addJobFromMap() {
-      this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
-      this.setPickPlaceSource(this.jobs)
-    },
 
     // when the user clicks on the map and selects a point as the route start
     addVehicle (data) {
@@ -221,24 +185,6 @@ export default {
         console.log(err)
         context.showError(this.$t('optimization.couldNotResolveTheVehicleLocation'), { timeout: 0 })
       })
-    },
-    // when there are no vehicles and button in sidebar is clicked
-    addVehicleFromMap() {
-      this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
-      this.setPickPlaceSource(this.vehicles)
-    },
-
-    // Set the pick place input source
-    setPickPlaceSource (source) {
-      if (this.pickPlaceSupported) {
-        this.$store.commit('pickPlaceIndex', source.length)
-        this.$store.commit('pickPlaceId', source.length + 1)
-        if (source === this.jobs) {
-          this.$store.commit('pickEditSource', 'jobs')
-        } else if (source === this.vehicles) {
-          this.$store.commit('pickEditSource', 'vehicleStart')
-        }
-      }
     },
     // remove job or vehicle when marker is deleted from map view
     removePlace (data) {
@@ -275,14 +221,6 @@ export default {
         if (Object.keys(route.params).length > 1) {// params contains data and placeName? props
           this.$router.push(route)
         }
-      }
-    },
-    // return start and end if they differ, otherwise only the start location of vehicle
-    vehicleLocations (vehicle) {
-      if (vehicle.end) {
-        return [vehicle.start, vehicle.end]
-      } else {
-        return vehicle.start
       }
     },
     /**
