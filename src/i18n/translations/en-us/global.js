@@ -102,6 +102,7 @@ export default {
     tollways: 'Tollways',
     traildifficulty: 'Trail difficulty',
     osmid: 'OSM ID',
-    countryinfo: 'Country info'
+    countryinfo: 'Country info',
+    notImplemented: 'Not implemented yet'
   }
 }
