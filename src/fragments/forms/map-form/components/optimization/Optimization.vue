@@ -14,9 +14,21 @@
           {{ $t('optimization.jobs') }} (Max: 50)
         </div>
       </template>
+      <div v-if="jobs.length === 0">
+        <v-btn @click="addJobFromMap" color="success">
+          <v-icon style="margin-right: 5px;">map</v-icon>
+          {{ $t('optimization.addJobFromMap') }}
+        </v-btn>
+      </div>
       <job-list :jobs="jobs"></job-list>
       <div class="optimization-heading">
         {{ $t('optimization.vehicles') }} (Max: 3)
+      </div>
+      <div v-if="vehicles.length === 0">
+        <v-btn @click="addVehicleFromMap" color="success">
+          <v-icon style="margin-right: 5px;">map</v-icon>
+          {{ $t('optimization.addVehicleFromMap') }}
+        </v-btn>
       </div>
       <vehicle-list :vehicles="vehicles"></vehicle-list>
       <v-layout row class="form-actions-btns">

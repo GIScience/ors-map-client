@@ -1252,8 +1252,8 @@ export default {
      * @param pickEditSource
      * @emits setInputPlace
      */
-    setInputPlace (placeIndex, placeInputId, place) {
-      let data = {pickPlaceIndex: placeIndex, placeInputId: placeInputId, place: place}
+    setInputPlace (placeIndex, placeInputId, place, pickEditSource) {
+      let data = {pickPlaceIndex: placeIndex, placeInputId: placeInputId, place: place, pickEditSource: pickEditSource}
       this.$emit('setInputPlace', data)
     },
 
@@ -1443,12 +1443,14 @@ export default {
       let context = this
       let pickPlaceIndex = context.$store.getters.pickPlaceIndex
       let pickPlaceId = context.$store.getters.pickPlaceId
+      let pickEditSource = context.$store.getters.pickEditSource || null
       place.resolve().then(() => {
-        context.setInputPlace(pickPlaceIndex, pickPlaceId, place)
+        context.setInputPlace(pickPlaceIndex, pickPlaceId, place, pickEditSource)
         // Once a place was picked up,
         // remove the store pick place data
         context.$store.commit('pickPlaceIndex', null)
         context.$store.commit('pickPlaceId', null)
+        context.$store.commit('pickEditSource', null)
       })
     },
 
