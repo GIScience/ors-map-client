@@ -14,6 +14,7 @@ import Vehicle from '@/models/vehicle'
 import Skill from '@/models/skill'
 
 // Local components
+import OptimizationDetails from './components/optimization-details/OptimizationDetails'
 import JobList from './components/job-list/JobList.vue'
 import VehicleList from './components/vehicle-list/VehicleList.vue'
 
@@ -30,6 +31,7 @@ export default {
   components: {
     FieldsContainer,
     FormActions,
+    OptimizationDetails,
     JobList,
     VehicleList,
   },
