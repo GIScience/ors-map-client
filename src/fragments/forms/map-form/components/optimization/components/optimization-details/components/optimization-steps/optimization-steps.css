@@ -1,0 +1,16 @@
+.step {
+  border-bottom: 1px solid #f0f1f4;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+
+.step:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.instruction {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
