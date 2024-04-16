@@ -3,12 +3,12 @@ export default {
     units: {
       kilometers: 'kilometri',
       meters: 'metri',
-      miles: 'mile',
+      miles: 'mile'
     },
     areUnits: {
       sqKms: 'km²',
       hectare: 'hectare',
-      sqMeters: 'm²',
-    },
+      sqMeters: 'm²'
+    }
   }
-}
+};

@@ -21,4 +21,4 @@ export default {
     supportText: 'Služba Openrouteservice nabízí bezplatné služby a většinu svých finančních prostředků získává z darů. Pokud chcete podpořit další rozvoj funkcí a serverové infrastruktury, dary jsou velmi vítány.',
     softwareAndLibraries: 'Software & Knihovny'
   }
-}
+};

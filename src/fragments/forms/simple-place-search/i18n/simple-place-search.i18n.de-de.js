@@ -4,4 +4,4 @@ export default {
     openSidebarToSeeRouteDetails: 'Öffnen Sie die Seitenleiste, um Routendetails zu sehen.',
     unknownSearchPlaceError: 'Unbekannter Fehler beim Suchen von Orten'
   }
-}
+};

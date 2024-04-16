@@ -11,4 +11,4 @@ export default {
       sqMeters: 'Metri quadrati'
     }
   }
-}
+};

@@ -1,8 +1,8 @@
 export default {
   steps: {
+    instruction: 'Instrucțiuni',
     on: 'Pe',
     step: 'pasul',
-    gotoStep: 'Mergeți la pas',
-    instruction: 'Instrucțiuni',
+    gotoStep: 'Mergeți la pas'
   }
-}
+};

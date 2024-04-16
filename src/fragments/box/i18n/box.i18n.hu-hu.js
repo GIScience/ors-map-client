@@ -1,6 +1,6 @@
 export default {
   box: {
-    'maximize': 'Teljes méret',
-    'minimize': 'Kis méret'
+    maximize: 'Teljes méret',
+    minimize: 'Kis méret'
   }
-}
+};

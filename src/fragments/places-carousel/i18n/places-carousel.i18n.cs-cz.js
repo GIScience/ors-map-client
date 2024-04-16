@@ -12,4 +12,4 @@ export default {
     distanceFromLocationMarkedOnTheMap: 'Přibližná vzdálenost od místa vyznačeného na mapě',
     selectPlace: 'Vybrat'
   }
-}
+};

@@ -3,4 +3,4 @@ export default {
     hideMenuBar: 'Skrýt panel nabídek',
     showMenuBar: 'Zobrazit panel nabídek'
   }
-}
+};

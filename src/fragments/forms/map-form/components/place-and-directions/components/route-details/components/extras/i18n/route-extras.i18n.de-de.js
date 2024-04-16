@@ -6,4 +6,4 @@ export default {
     clickToHighlightOnMap: 'Klicken, um die Streckenabschnitte auf der Karte anzuzeigen',
     showAllOnMap: 'Alle auf der Karte anzeigen'
   }
-}
+};

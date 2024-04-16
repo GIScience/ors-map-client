@@ -1,4 +1,3 @@
-
 export default {
   formActions: {
     addPlaceInput: 'Adicionar campo',
@@ -7,4 +6,4 @@ export default {
     roundTrip: 'Rota circular',
     toggleRoundTrip: 'Alternar rota circular'
   }
-}
+};

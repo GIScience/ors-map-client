@@ -1,4 +1,3 @@
-
 export default {
   placesAndDirections: {
     isochrones: 'Isócronos',
@@ -36,4 +35,4 @@ export default {
     genericErrorMsg: 'Não foi possível calcular a rota',
     reorder: 'Reordenar'
   }
-}
+};

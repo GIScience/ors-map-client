@@ -1,4 +1,3 @@
-
 export default {
   placesCarousel: {
     layer: 'Camada',
@@ -13,4 +12,4 @@ export default {
     distanceFromLocationMarkedOnTheMap: 'Distância aproximada do local marcado no mapa',
     selectPlace: 'Selecionar'
   }
-}
+};

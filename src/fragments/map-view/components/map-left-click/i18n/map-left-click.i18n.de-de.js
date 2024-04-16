@@ -1,12 +1,12 @@
 export default {
   mapLeftClick: {
     placeInfo: 'Details zum Ort',
-    polygonArea: 'Polygonfläche',
     placeInsidePolygon: 'Details zum Ort (im Polygon)',
-    copyLatlng: 'Im Format "Breitengrad, Längengrad" kopieren',
+    polygonArea: 'Polygonfläche',
     copyLnglat: 'Im format "Längengrad, Breitengrad" kopieren',
+    copyLatlng: 'Im Format "Breitengrad, Längengrad" kopieren',
     directionsToClickedPoint: 'Route zum angeklickten Ort',
-    latlngCopied: 'Breiten- und Längengrad kopiert',
-    lnglatCopied: 'Längen- und Breitengrad kopiert'
+    lnglatCopied: 'Längen- und Breitengrad kopiert',
+    latlngCopied: 'Breiten- und Längengrad kopiert'
   }
-}
+};

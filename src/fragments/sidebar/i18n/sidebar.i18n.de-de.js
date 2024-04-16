@@ -4,4 +4,4 @@ export default {
     showSidebar: 'Seitenleiste anzeigen',
     hideSidebar: 'Seitenleiste ausblenden'
   }
-}
+};

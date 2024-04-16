@@ -4,4 +4,4 @@ export default {
     surface: 'Povrch',
     unknownSurfaceType: 'Neznámý'
   }
-}
+};

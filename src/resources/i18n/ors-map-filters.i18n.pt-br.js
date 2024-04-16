@@ -1,4 +1,3 @@
-
 export default {
   orsMapFilters: {
     profiles: {
@@ -53,15 +52,9 @@ export default {
         label: 'Intervalo',
         description: 'O intervalo a ser usado no cáculo de isócronos'
       },
-      options: {
-        label: 'Opções'
-      },
-      profile_params: {
-        label: 'Parâmetros de perfil'
-      },
-      restrictions: {
-        label: 'Restrições'
-      },
+      options: { label: 'Opções' },
+      profile_params: { label: 'Parâmetros de perfil' },
+      restrictions: { label: 'Restrições' },
       axleload: {
         label: 'Carga do eixo',
         description: 'A carga máxima por eixo em toneladas'
@@ -110,9 +103,7 @@ export default {
         label: 'Nota mínima da rota',
         description: 'Especifica uma nota mínima para a rota. Valores das notas: https://wiki.openstreetmap.org/wiki/Key:tracktype'
       },
-      round_trip: {
-        label: 'Rota circular'
-      },
+      round_trip: { label: 'Rota circular' },
       round_trip_length: {
         label: 'Distância da rota circular',
         description: 'A distância alvo para a rota circular (note que este é um valor desejado, mas os resultados podem ser diferentes).'
@@ -156,9 +147,7 @@ export default {
         label: 'Países a evitar',
         description: 'Países a evitar'
       },
-      alternative_routes: {
-        label: 'Rotas alternativas'
-      },
+      alternative_routes: { label: 'Rotas alternativas' },
       target_count: {
         label: 'Número de rotas',
         description: 'Número alvo de rotas alternativas a calcular. O serviço retorna até este número de rotas que preenchem as restrições do fator de ação e do fator de peso.'
@@ -173,31 +162,29 @@ export default {
       },
       maximum_speed: {
         label: 'Velocidade máxima',
-        description: 'Uma velocidade máxima que deve ser aplicada',
+        description: 'Uma velocidade máxima que deve ser aplicada'
       },
-      weightings: {
-        label: 'Parâmetros adicionais'
-      },
+      weightings: { label: 'Parâmetros adicionais' },
       green: {
         label: 'Verde (somente na Alemanha)',
-        description: 'Prefira áreas verdes (disponível apenas para Alemanha)',
+        description: 'Prefira áreas verdes (disponível apenas para Alemanha)'
       },
       quiet: {
         label: 'Silencioso (apenas Alemanha)',
-        description: 'Prefere áreas tranquilas (disponível apenas para Alemanha)',
+        description: 'Prefere áreas tranquilas (disponível apenas para Alemanha)'
       },
       surface_quality_known: {
         label: 'Somente superfícies com qualidade conhecida',
-        description: 'Força o uso apenas de quinas onde a qualidade da superfície é explicitamente conhecida',
+        description: 'Força o uso apenas de quinas onde a qualidade da superfície é explicitamente conhecida'
       },
       allow_unsuitable: {
         label: 'Permitir inadequado',
-        description: 'Permite o uso de quinas que podem ser inadequadas para cadeira de rodas que anteriormente eram excluídas',
+        description: 'Permite o uso de quinas que podem ser inadequadas para cadeira de rodas que anteriormente eram excluídas'
       },
       vehicle_type: {
         label: 'Tipo de veículo',
-        description: 'Tipo de veículo a ser considerado para o cálculo da rota',
+        description: 'Tipo de veículo a ser considerado para o cálculo da rota'
       }
     }
   }
-}
+};

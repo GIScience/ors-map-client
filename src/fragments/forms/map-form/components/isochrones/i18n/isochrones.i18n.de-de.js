@@ -14,4 +14,4 @@ export default {
     },
     genericErrorMsg: 'Es war nicht möglich, Isochronen zu berechnen.'
   }
-}
+};

@@ -1,5 +1,1 @@
-export default {
-  roundtrip: {
-    roundtripOptions: 'Možnosti zpáteční cesty'
-  }
-}
+export default { roundtrip: { roundtripOptions: 'Možnosti zpáteční cesty' } };

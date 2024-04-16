@@ -1,7 +1,6 @@
-
 export default {
   altitudePreview: {
-    'expandAltitudeChart': 'Ingrandisci grafico',
-    'altitude': 'Altitudine'
+    expandAltitudeChart: 'Ingrandisci grafico',
+    altitude: 'Altitudine'
   }
-}
+};

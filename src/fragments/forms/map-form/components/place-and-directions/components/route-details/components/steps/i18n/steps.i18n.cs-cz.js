@@ -5,4 +5,4 @@ export default {
     step: 'kroku',
     gotoStep: 'Přejít na krok'
   }
-}
+};

@@ -10,4 +10,4 @@ export default {
     addAsIsochroneCenter: 'Přidat jako střed dosahu',
     inspectDataOnOSM: 'Prohlédnout data na OSM'
   }
-}
+};

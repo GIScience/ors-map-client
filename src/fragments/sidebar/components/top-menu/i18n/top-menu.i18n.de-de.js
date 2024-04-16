@@ -6,4 +6,4 @@ export default {
     pinSidebar: 'Seitenleiste dauerhaft anzeigen',
     settingsTooltip: 'Klicken Sie hier, um Einstellungen anzzupassen'
   }
-}
+};

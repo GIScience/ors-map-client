@@ -1,4 +1,3 @@
-
 export default {
   settings: {
     endpointsSectionTitle: 'Pontos finais de serviço (URI ou URL completa)',
@@ -47,4 +46,4 @@ export default {
     skipAllSegments: 'Rota reta para todos os segmentos',
     useStopOptimization: 'Otimizar a rota quando uma parada é criada via arrastar/saltar'
   }
-}
+};

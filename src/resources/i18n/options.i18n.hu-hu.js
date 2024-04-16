@@ -1,14 +1,14 @@
 export default {
   options: {
-    'units': {
-      'kilometers': 'kilométer',
-      'meters': 'méter',
-      'miles': 'mérföld'
+    units: {
+      kilometers: 'kilométer',
+      meters: 'méter',
+      miles: 'mérföld'
     },
-    'areUnits': {
-      'sqKms': 'km²',
-      'hectare': 'hektár',
-      'sqMeters': 'm²'
+    areUnits: {
+      sqKms: 'km²',
+      hectare: 'hektár',
+      sqMeters: 'm²'
     }
   }
-}
+};

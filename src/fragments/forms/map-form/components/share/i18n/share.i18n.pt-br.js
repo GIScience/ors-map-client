@@ -1,4 +1,3 @@
-
 export default {
   share: {
     fullUrl: 'Completa',
@@ -15,4 +14,4 @@ export default {
     embed: 'Código para incorporar (clique para copiar)',
     embedInstructions: 'Use este código para incorporar o mapa ORS em um website'
   }
-}
+};

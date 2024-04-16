@@ -1,4 +1,3 @@
-
 export default {
   settings: {
     endpointsSectionTitle: 'Service-Endpunkte (URI oder vollständige URL)',
@@ -47,4 +46,4 @@ export default {
     skipAllSegments: 'Luftlinien-Route für alle Abschnitte',
     useStopOptimization: 'Route optimieren, wenn ein Wegpunkt via Drag-and-Drop erstellt wird.'
   }
-}
+};

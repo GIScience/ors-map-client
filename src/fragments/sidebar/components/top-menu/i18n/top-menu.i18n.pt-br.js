@@ -6,4 +6,4 @@ export default {
     pinSidebar: 'Fixar barra lateral',
     settingsTooltip: 'Clique aqui se quiser ajustar configurações da aplicação'
   }
-}
+};

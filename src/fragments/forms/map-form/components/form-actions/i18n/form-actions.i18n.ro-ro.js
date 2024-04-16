@@ -4,6 +4,6 @@ export default {
     clearRoute: 'Traseu liber',
     reverseRoute: 'Rută inversă',
     roundTrip: 'Călătorie dus-întors',
-    toggleRoundTrip: 'Comutați călătoria dus-întors',
+    toggleRoundTrip: 'Comutați călătoria dus-întors'
   }
-}
+};

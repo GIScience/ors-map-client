@@ -1,7 +1,6 @@
-
 export default {
   altitudePreview: {
-    'expandAltitudeChart': 'Diagram kibontása',
-    'altitude': 'Magasság'
+    expandAltitudeChart: 'Diagram kibontása',
+    altitude: 'Magasság'
   }
-}
+};

@@ -1,4 +1,3 @@
-
 export default {
   print: {
     print: 'Stampare',
@@ -6,4 +5,4 @@ export default {
     preparingPrinting: 'Preparazione della stampa',
     readyToPrint: 'Pronta per stampare'
   }
-}
+};

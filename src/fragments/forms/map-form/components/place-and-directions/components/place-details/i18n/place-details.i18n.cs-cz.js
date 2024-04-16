@@ -12,4 +12,4 @@ export default {
     copyLnglat: 'Kopírovat ve formátu zeměpisná délka,šířka',
     satelliteView: 'Satelitní pohled'
   }
-}
+};

@@ -3,4 +3,4 @@ export default {
     hideMenuBar: 'Menüleiste ausblenden',
     showMenuBar: 'Menüleiste anzeigen'
   }
-}
+};

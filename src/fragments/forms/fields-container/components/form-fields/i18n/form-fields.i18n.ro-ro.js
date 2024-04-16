@@ -4,6 +4,6 @@ export default {
     defaultAbbreviation: 'df.: ',
     paramJSONContent: 'Conținutul JSON',
     wrongInputValue: 'Valoare de intrare greșită pentru acest parametru.',
-    notValidJsonString: 'Nu există Json valid pentru :fieldName',
+    notValidJsonString: 'Nu există Json valid pentru :fieldName'
   }
-}
+};

@@ -16,8 +16,8 @@ export default {
       1: 'Este posibil să existe restricții pe unele drumuri',
       2: 'Există autostrăzi cu taxă de-a lungul traseului',
       3: 'Există segmente sărite de-a lungul traseului. Este posibil ca duratele și accesibilitatea să nu fie corecte',
-      4: 'Cel puțin o informație suplimentară solicitată, dar care nu este disponibilă',
+      4: 'Cel puțin o informație suplimentară solicitată, dar care nu este disponibilă'
     },
-    routeOpacity: 'Opacitatea rutei',
+    routeOpacity: 'Opacitatea rutei'
   }
-}
+};

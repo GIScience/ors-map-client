@@ -20,4 +20,4 @@ export default {
     },
     routeOpacity: 'Neprůhlednost trasy'
   }
-}
+};

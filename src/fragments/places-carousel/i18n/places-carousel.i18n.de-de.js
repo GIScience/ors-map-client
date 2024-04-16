@@ -12,4 +12,4 @@ export default {
     distanceFromLocationMarkedOnTheMap: 'Ungefähre Entfernung vom auf der Karte markierten Ort',
     selectPlace: 'Auswählen'
   }
-}
+};

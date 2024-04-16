@@ -1,4 +1,3 @@
-
 export default {
   orsDictionary: {
     unknown: 'Unbekannt',
@@ -62,9 +61,9 @@ export default {
     no_category: 'Keine Kategorie',
     highway: 'Autobahn',
     unpaved_road: 'Nicht befestigte Straße',
-    tunnel:	'Tunnel',
-    paved_road:	'Befestigte Straße',
+    tunnel: 'Tunnel',
+    paved_road: 'Befestigte Straße',
     ford: 'Furt',
     no_data: 'Keine Daten'
   }
-}
+};

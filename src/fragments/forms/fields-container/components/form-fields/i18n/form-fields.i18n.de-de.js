@@ -4,6 +4,6 @@ export default {
     defaultAbbreviation: 'df.: ',
     paramJSONContent: 'JSON-Inhalt',
     wrongInputValue: 'Fehlerhafter Wert für diesen Parameter.',
-    notValidJsonString: 'Ungültiges JSON Objekt in :fieldName',
+    notValidJsonString: 'Ungültiges JSON Objekt in :fieldName'
   }
-}
+};

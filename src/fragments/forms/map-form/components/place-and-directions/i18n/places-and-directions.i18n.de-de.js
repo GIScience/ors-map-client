@@ -35,4 +35,4 @@ export default {
     genericErrorMsg: 'Keine Route gefunden',
     reorder: 'Neu ordnen'
   }
-}
+};

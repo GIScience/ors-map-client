@@ -1,4 +1,3 @@
-
 export default {
   placeInput: {
     findAPlace: 'Buscar por local',
@@ -31,4 +30,4 @@ export default {
     goToDirectionsMode: 'Clique no botão de rota para ativar o modo rotas',
     clickToSearchAndShowResultsOnTheMap: 'Click para buscar e exibir os resultados no mapa'
   }
-}
+};

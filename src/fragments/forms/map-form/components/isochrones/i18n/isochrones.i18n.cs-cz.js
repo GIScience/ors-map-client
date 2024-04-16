@@ -8,10 +8,10 @@ export default {
     apiError: {
       2003: 'Plocha polygonu, kterému je třeba se vyhnout, nesmí překročit 20,0000 km2.',
       3001: 'Jeden nebo více parametrů má nesprávnou hodnotu nebo formát.',
-      3003: 'Parametr \'avoid_features\' má nesprávnou hodnotu \'null\'.',
       3004: 'Vybraná kombinace profilu, intervalu a času nebo vzdálenosti překračuje maximální podporovanou hodnotu. Hodnoty upravte.',
-      3099: 'Nelze sestavit izochronní mapu pro vybraný bod (body) a profil.'
+      3099: 'Nelze sestavit izochronní mapu pro vybraný bod (body) a profil.',
+      3003: 'Parametr \'avoid_features\' má nesprávnou hodnotu \'null\'.'
     },
     genericErrorMsg: 'Izochrony nebylo možné vypočítat.'
   }
-}
+};

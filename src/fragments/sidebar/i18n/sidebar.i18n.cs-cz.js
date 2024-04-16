@@ -4,4 +4,4 @@ export default {
     showSidebar: 'Zobrazit boční panel',
     hideSidebar: 'Skrýt boční panel'
   }
-}
+};

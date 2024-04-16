@@ -12,4 +12,4 @@ export default {
     updateSearchAfterZoomOrCenterChange: 'Aktualizace vyhledávání po změně zvětšení nebo středu',
     pageNotFound: 'Stránka nebyla nalezena. Zkontrolujte, zda adresa URL není chybně vytvořena'
   }
-}
+};

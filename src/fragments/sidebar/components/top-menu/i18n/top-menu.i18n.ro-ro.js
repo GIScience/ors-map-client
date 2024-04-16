@@ -4,6 +4,6 @@ export default {
     showAbout: 'Afișați informații generale',
     about: 'Despre ORS',
     pinSidebar: 'Bara laterală Pin',
-    settingsTooltip: 'Faceți clic aici dacă doriți să ajustați setările aplicației',
+    settingsTooltip: 'Faceți clic aici dacă doriți să ajustați setările aplicației'
   }
-}
+};

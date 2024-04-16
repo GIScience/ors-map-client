@@ -10,4 +10,4 @@ export default {
     addAsIsochroneCenter: 'Als Reichweitenzentrum verwenden',
     inspectDataOnOSM: 'Daten in OSM anzeigen'
   }
-}
+};

@@ -11,4 +11,4 @@ export default {
     fileTooBigToBeDownloaded: 'Soubor je příliš velký na to, aby mohl být stažen',
     standard: 'Standard'
   }
-}
+};

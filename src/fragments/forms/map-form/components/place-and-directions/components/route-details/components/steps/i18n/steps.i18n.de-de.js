@@ -5,4 +5,4 @@ export default {
     step: 'Schritt',
     gotoStep: 'Schritt auf Karte anzeigen'
   }
-}
+};

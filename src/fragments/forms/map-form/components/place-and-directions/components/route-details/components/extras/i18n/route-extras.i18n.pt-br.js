@@ -1,4 +1,3 @@
-
 export default {
   routeExtras: {
     extras: 'Extras da rota',
@@ -7,4 +6,4 @@ export default {
     clickToHighlightOnMap: 'Clique para destacar no mapa',
     showAllOnMap: 'Mostrar tudo no mapa'
   }
-}
+};

@@ -1,4 +1,3 @@
-
 export default {
   routeImporter: {
     loadRouteFile: 'Datei importieren',
@@ -12,4 +11,4 @@ export default {
     dictUploadCanceled: 'Upload abgebrochen',
     dictRemoveFile: 'Datei löschen'
   }
-}
+};

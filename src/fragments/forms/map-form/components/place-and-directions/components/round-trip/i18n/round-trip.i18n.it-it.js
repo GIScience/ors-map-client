@@ -1,5 +1,1 @@
-export default {
-  roundtrip: {
-    'roundtripOptions': 'Opzioni di andata e ritorno'
-  }
-}
+export default { roundtrip: { roundtripOptions: 'Opzioni di andata e ritorno' } };

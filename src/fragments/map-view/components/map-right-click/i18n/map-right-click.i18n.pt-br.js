@@ -10,4 +10,4 @@ export default {
     addAsIsochroneCenter: 'Adic. como centro de isócrono',
     inspectDataOnOSM: 'Ver dados no OSM'
   }
-}
+};

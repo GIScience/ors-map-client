@@ -6,4 +6,4 @@ export default {
     clickToHighlightOnMap: 'Kliknutím ji zvýrazníte na mapě',
     showAllOnMap: 'Zobrazit vše na mapě'
   }
-}
+};

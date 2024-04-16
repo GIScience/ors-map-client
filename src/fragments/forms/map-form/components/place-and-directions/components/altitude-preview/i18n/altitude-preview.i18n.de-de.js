@@ -3,4 +3,4 @@ export default {
     expandAltitudeChart: 'Höhenprofil vergrößern',
     altitude: 'Höhe'
   }
-}
+};
