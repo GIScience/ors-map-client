@@ -2,8 +2,6 @@ name:  Crowdin To GitHub
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ crowdin-i18n ]
   schedule:
     - cron: '15 * * * *' # sync every hour
 
