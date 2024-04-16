@@ -19,9 +19,39 @@ files: [
   {
     "source": "**/*.i18n.en-us.js",
     "translation": "%original_path%/%file_name%.i18n.%locale%.js",
+    'languages_mapping': {
+        'locale':
+          {
+            'cs-CZ': 'cs-cz',
+            'de-DE': 'de-de',
+            'fr-FR': 'fr-fr',
+            'hu-HU': 'hu-hu',
+            'it-IT': 'it-it',
+            'pt-BR': 'pt-br',
+            'ro-RO': 'ro-ro',
+            'es-ES': 'es-es',
+          },
+    },
+    "translation_replace": {
+      ".i18n.en-us": ""
+    }
   },
   {
     "source": "/src/i18n/translations/en-us/global.js",
-    "translation": "/src/i18n/translations/%locale%/global.js"
+    "translation": "/src/i18n/translations/%locale%/global.js",
+    'languages_mapping': {
+      'locale':
+        {
+          'cs-CZ': 'cs-cz',
+          'de-DE': 'de-de',
+          'fr-FR': 'fr-fr',
+          'hu-HU': 'hu-hu',
+          'it-IT': 'it-it',
+          'pt-BR': 'pt-br',
+          'ro-RO': 'ro-ro',
+          'es-ES': 'es-es',
+        },
+    }
   }
+
 ]
