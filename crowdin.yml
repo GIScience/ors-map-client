@@ -22,13 +22,13 @@ files: [
     "languages_mapping": {
         "locale":
           {
-            "cs-CZ": "cs-cz",
-            "de-DE": "de-de",
-            "fr-FR": "fr-fr",
-            "hu-HU": "hu-hu",
-            "it-IT": "it-it",
+            "cs": "cs-cz",
+            "de": "de-de",
+            "fr": "fr-fr",
+            "hu": "hu-hu",
+            "it": "it-it",
             "pt-BR": "pt-br",
-            "ro-RO": "ro-ro",
+            "ro": "ro-ro",
             "es-ES": "es-es",
           },
     },
@@ -42,13 +42,13 @@ files: [
     "languages_mapping": {
       "locale":
         {
-          "cs-CZ": "cs-cz",
-          "de-DE": "de-de",
-          "fr-FR": "fr-fr",
-          "hu-HU": "hu-hu",
-          "it-IT": "it-it",
+          "cs": "cs-cz",
+          "de": "de-de",
+          "fr": "fr-fr",
+          "hu": "hu-hu",
+          "it": "it-it",
           "pt-BR": "pt-br",
-          "ro-RO": "ro-ro",
+          "ro": "ro-ro",
           "es-ES": "es-es",
         },
     }
