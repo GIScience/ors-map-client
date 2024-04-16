@@ -14,4 +14,4 @@ export default {
     embed: 'Vkládání (kliknutím zkopírujete)',
     embedInstructions: 'Tento kód použijte k vložení mapy ORS na svůj web'
   }
-}
+};

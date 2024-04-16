@@ -1,4 +1,3 @@
-
 export default {
   about: {
     donate: 'Doe!',
@@ -22,4 +21,4 @@ export default {
     supportText: 'O Openrouteservice oferece serviços gratuitos e conta com doações para a maioria de seu financiamento. Se você gostaria de apoiar esse projeto doações de recursos de infra-estrutura de servidores são muito bem-vindos.',
     softwareAndLibraries: 'Programas de computador & Bibliotecas'
   }
-}
+};

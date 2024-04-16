@@ -1,6 +1,1 @@
-
-export default {
-  profileSelector: {
-    activeProfile: 'Ativo'
-  }
-}
+export default { profileSelector: { activeProfile: 'Ativo' } };

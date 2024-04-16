@@ -1,6 +1,6 @@
 export default {
   altitudePreview: {
     expandAltitudeChart: 'Extindeți graficul',
-    altitude: 'Altitudine',
+    altitude: 'Altitudine'
   }
-}
+};

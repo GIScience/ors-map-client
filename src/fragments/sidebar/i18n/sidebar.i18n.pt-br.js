@@ -4,4 +4,4 @@ export default {
     showSidebar: 'Exibir barra lateral',
     hideSidebar: 'Ocultar barra lateral'
   }
-}
+};

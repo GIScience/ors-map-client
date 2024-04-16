@@ -6,4 +6,4 @@ export default {
     wrongInputValue: 'Špatná vstupní hodnota tohoto parametru.',
     notValidJsonString: 'Žádný platný Json pro :fieldName'
   }
-}
+};

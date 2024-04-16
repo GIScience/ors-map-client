@@ -10,6 +10,6 @@ export default {
     lnglatCopied: 'Longitudine și latitudine copiate',
     copyLatlng: 'Copiați în format latitudine, longitudine',
     copyLnglat: 'Copiați în format longitudine, latitudine',
-    satelliteView: 'vedere din satelit',
+    satelliteView: 'vedere din satelit'
   }
-}
+};

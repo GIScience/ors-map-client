@@ -1,4 +1,3 @@
-
 export default {
   steps: {
     instruction: 'Instrução',
@@ -6,4 +5,4 @@ export default {
     step: 'passo',
     gotoStep: 'Ir para passo'
   }
-}
+};

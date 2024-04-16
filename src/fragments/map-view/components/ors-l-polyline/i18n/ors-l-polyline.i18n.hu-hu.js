@@ -1,8 +1,7 @@
-
 export default {
   orsLPolyline: {
-    'type': 'Típus',
-    'surface': 'Felszín',
-    'unknownSurfaceType': 'Ismeretlen'
+    type: 'Típus',
+    surface: 'Felszín',
+    unknownSurfaceType: 'Ismeretlen'
   }
-}
+};

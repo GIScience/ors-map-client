@@ -1,4 +1,3 @@
-
 export default {
   isochronesDetails: {
     polygons: 'Polígonos',
@@ -7,4 +6,4 @@ export default {
     toggleVisibility: 'Alternar visibilidade',
     opacity: 'Opacidade'
   }
-}
+};

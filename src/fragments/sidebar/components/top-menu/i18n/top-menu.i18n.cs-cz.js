@@ -6,4 +6,4 @@ export default {
     pinSidebar: 'Připnout boční panel',
     settingsTooltip: 'Pokud chcete upravit nastavení aplikace, klikněte sem'
   }
-}
+};

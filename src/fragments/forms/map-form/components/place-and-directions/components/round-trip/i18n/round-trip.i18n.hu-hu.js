@@ -1,5 +1,1 @@
-export default {
-  roundtrip: {
-    'roundtripOptions': 'Körutazás beállításai'
-  }
-}
+export default { roundtrip: { roundtripOptions: 'Körutazás beállításai' } };

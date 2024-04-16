@@ -4,6 +4,6 @@ export default {
     center: 'Centru',
     reachCenters: 'Centrele Reach',
     toggleVisibility: 'Comutați vizibilitatea',
-    opacity: 'Opacitate',
+    opacity: 'Opacitate'
   }
-}
+};

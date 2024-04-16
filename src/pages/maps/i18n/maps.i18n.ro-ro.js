@@ -10,6 +10,6 @@ export default {
     aboutTitle: 'Despre ORS',
     updateSearch: 'Căutați în această zonă',
     updateSearchAfterZoomOrCenterChange: 'Actualizarea căutării după modificarea zoom-ului sau a centrului',
-    pageNotFound: 'Pagina nu a fost găsită. Verificați dacă URL-ul nu este deformat',
+    pageNotFound: 'Pagina nu a fost găsită. Verificați dacă URL-ul nu este deformat'
   }
-}
+};

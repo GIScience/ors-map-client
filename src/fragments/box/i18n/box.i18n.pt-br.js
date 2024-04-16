@@ -3,4 +3,4 @@ export default {
     maximize: 'Maximizar',
     minimize: 'Minimizar'
   }
-}
+};

@@ -61,9 +61,9 @@ export default {
     no_category: 'Bez kategorie',
     highway: 'Dálnice',
     unpaved_road: 'Nezpevněná cesta',
-    tunnel:	'Tunel',
-    paved_road:	'Zpevněná cesta',
+    tunnel: 'Tunel',
+    paved_road: 'Zpevněná cesta',
     ford: 'Brod',
     no_data: 'Nejsou data'
   }
-}
+};

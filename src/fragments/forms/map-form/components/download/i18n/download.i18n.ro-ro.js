@@ -8,7 +8,7 @@ export default {
     preparingDownload: 'Pregătirea pentru descărcare ...',
     fileReady: 'Fișier pregătit',
     errorPreparingFile: 'Eroare la pregătirea fișierului',
-    standard: 'Standard',
     fileTooBigToBeDownloaded: 'Fișier prea mare pentru a fi descărcat',
+    standard: 'Standard'
   }
-}
+};

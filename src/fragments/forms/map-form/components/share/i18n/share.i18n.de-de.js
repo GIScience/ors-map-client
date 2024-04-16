@@ -14,4 +14,4 @@ export default {
     embed: 'Einbindung auf anderer Website (zum Kopieren anklicken)',
     embedInstructions: 'Dieses Code-Fragment zur Einbindung der Karte auf Ihrer Website benutzen'
   }
-}
+};

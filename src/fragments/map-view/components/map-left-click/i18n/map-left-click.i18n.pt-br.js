@@ -9,4 +9,4 @@ export default {
     lnglatCopied: 'Longitude e latitude copiadas',
     latlngCopied: 'Latitude e longitude copiadas'
   }
-}
+};

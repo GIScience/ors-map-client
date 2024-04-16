@@ -35,4 +35,4 @@ export default {
     genericErrorMsg: 'Nebylo možné vypočítat trasu',
     reorder: 'Přeskupit'
   }
-}
+};

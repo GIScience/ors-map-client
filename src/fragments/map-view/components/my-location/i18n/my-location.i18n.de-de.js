@@ -9,4 +9,4 @@ export default {
     onlyOnceLocation: 'Standort nur jetzt bestimmen',
     myPositionToolTip: 'Aktivieren Sie Ihren Standort, um Ihre Position anzuzeigen und Orte in der Nähe leichter zu finden'
   }
-}
+};

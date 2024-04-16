@@ -8,4 +8,4 @@ export default {
     askOpenrouteservice: 'Openrouteservice fragen',
     settingsTooltip: 'Klicken Sie hier, um Einstellungen und weitere Optionen anzupassen'
   }
-}
+};

@@ -6,4 +6,4 @@ export default {
     roundTrip: 'Rundweg',
     toggleRoundTrip: 'Rundweg an/aus'
   }
-}
+};
