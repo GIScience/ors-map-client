@@ -30,6 +30,7 @@ files: [
             "pt-BR": "pt-br",
             "ro": "ro-ro",
             "es-ES": "es-es",
+            "th": "th-th"
           },
     },
     "translation_replace": {
@@ -50,6 +51,7 @@ files: [
           "pt-BR": "pt-br",
           "ro": "ro-ro",
           "es-ES": "es-es",
+          "th": "th-th"
         },
     }
   }
