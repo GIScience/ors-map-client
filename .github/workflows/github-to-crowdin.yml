@@ -2,7 +2,7 @@ name: GitHub To Crowdin
 
 on:
   push:
-    branches: [ crowdin-i18n ]
+    branches: [ main ]
 
 jobs:
   synchronize-with-crowdin:
