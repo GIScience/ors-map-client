@@ -11,7 +11,7 @@ export default {
       'driving-car': 'Voiture',
       'driving-hgv': 'Véhicule lourd',
       'wheelchair': 'Fauteuil roulant',
-      'hgv': 'éhicule lourd',
+      'hgv': 'Véhicule lourd',
       'bus': 'Bus',
       'agricultural': 'Véhicule agricole',
       'delivery': 'Camion de livraison',
