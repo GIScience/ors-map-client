@@ -3,6 +3,7 @@
     <v-dialog v-model="isSkillsOpen" max-width="500" :persistent="true" attach="body">
       <box background="white" closable @closed="closeSkillsModal()">
         <h3 slot="header" style="padding-right: 55px">
+          <download :download-formats-supported="['json']" :data="editSkills" :edit-prop="'skills'"></download>
           <v-btn class="edit-skills-btn" flat :style="{background: 'white'}" @click="isImportOpen=true" :title="$t('optimization.importSkillFile')">
             <v-icon color="primary">cloud_upload</v-icon>
           </v-btn>

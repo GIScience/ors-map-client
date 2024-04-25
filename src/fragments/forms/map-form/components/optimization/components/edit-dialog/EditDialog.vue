@@ -3,6 +3,7 @@
     <v-dialog v-model="isEditOpen" max-width="600" :persistent="true" attach="body">
       <box background="white" closable @closed="closeEditModal()">
         <h3 slot="header" style="padding-right: 55px">
+          <download :download-formats-supported="['json', 'geojson', 'csv']" :data="editData" :edit-prop="editProp"></download>
           <v-btn class="edit-header-btn" flat :style="{}" @click="addItem()" :title="content.add">
             <v-icon color="info">add</v-icon>
           </v-btn>

@@ -1,6 +1,8 @@
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import {Directions} from '@/support/ors-api-runner'
 import MapViewData from '@/models/map-view-data'
+import Job from '@/models/job'
+import Vehicle from '@/models/vehicle'
 import constants from '@/resources/constants'
 import toKml from '@maphubs/tokml'
 import toGpx from 'togpx'
@@ -15,12 +17,20 @@ export default {
   props: {
     mapViewData: {
       Type: MapViewData,
-      Required: true
+      Required: false
+    },
+    data: {
+      Type: Array,
+      Required: false
+    },
+    editProp: {
+      Type: String,
+      Required: false
     },
     downloadFormatsSupported: {
       Type: Array,
       default: function () {
-        return ['json', 'ors-gpx', 'geojson', 'to-gpx', 'kml']
+        return ['json', 'ors-gpx', 'geojson', 'to-gpx', 'kml', 'csv']
       }
     }
   },
@@ -31,8 +41,31 @@ export default {
         { text: 'GeoJSON', value: 'geojson', ext: 'json' },
         { text: 'ORS API GPX', value: 'ors-gpx', ext: 'gpx' },
         { text: `${this.$t('download.standard')} GPX`, value: 'to-gpx', ext: 'gpx' },
-        { text: 'KML', value: 'kml', ext: 'kml' }
+        { text: 'KML', value: 'kml', ext: 'kml' },
+        { text: 'CSV', value: 'csv', ext: 'csv'}
       ]
+    },
+    content () {
+      if (this.editProp === 'jobs') {
+        return {
+          copied: this.$t('download.jobsCopiedToClipboard'),
+          fileName: 'ors-jobs',
+        }
+      } else if (this.editProp === 'vehicles') {
+        return {
+          copied: this.$t('download.vehiclesCopiedToClipboard'),
+          fileName: 'ors-vehicles',
+        }
+      } else if (this.editProp === 'skills') {
+        return {
+          copied: this.$t('download.skillsCopiedToClipboard'),
+          fileName: 'ors-skills',
+        }
+      } else {
+        return {
+          fileName: this.defaultDownloadName,
+        }
+      }
     },
     /**
      * Return the name of the route first's point
@@ -56,14 +89,31 @@ export default {
         return context.downloadFormatsSupported.includes(f.value)
       })
       return available
-    }
+    },
+    dataJson () {
+      const jsonData = []
+      for (const d of this.data) {
+        jsonData.push(d.toJSON())
+      }
+      return jsonData
+    },
+    dataGeoJson () {
+      if (this.editProp === 'skills') {
+        return Error('GeoJSON cannot be created since skills contain no geoinformation')
+      }
+      const jsonData = []
+      for (const d of this.data) {
+        jsonData.push(d.toGeoJSON())
+      }
+      return jsonData
+    },
   },
   methods: {
     /**
      * Set the default filename and format and open the download modal
      */
     openDownload () {
-      this.downloadFileName = this.defaultDownloadName
+      this.downloadFileName = this.content.fileName
       this.downloadFormat = this.downloadFormats[0].value
       this.isDownloadModalOpen = true
     },
@@ -128,8 +178,12 @@ export default {
         try {
           if (context.downloadFormat === 'json') {
             // Get the ORS mapViewData model and stringify it
-            const orsJSONStr = JSON.stringify(context.mapViewData)
-            resolve(orsJSONStr)
+            if (this.mapViewData) {
+              jsonData = JSON.stringify(context.mapViewData)
+            } else {
+              jsonData = JSON.stringify(context.dataJson)
+            }
+            resolve(jsonData)
           } else if (context.downloadFormat === 'ors-gpx') {
             // If the format is ors-gpx, run anew request with the format being 'gpx'
             context.getORSGpx().then((orsGpx) => {
@@ -143,7 +197,11 @@ export default {
             const toGPX = toGpx(geoJSON)
             resolve(toGPX)
           } else if (context.downloadFormat === 'geojson') {
-            jsonData = context.mapViewData.getGeoJson()
+            if (this.mapViewData) {
+              jsonData = context.mapViewData.getGeoJson()
+            } else {
+              jsonData = context.dataGeoJson
+            }
             const jsonStr = JSON.stringify(jsonData)
             resolve(jsonStr)
           } else if (context.downloadFormat === 'kml') {
@@ -156,11 +214,29 @@ export default {
             // Use the third party utility to convert geojson to kml
             const toKML = toKml(jsonData, kmlOptions)
             resolve(toKML)
+          } else if (context.downloadFormat === 'csv') {
+            let csvData
+            if (this.editProp === 'jobs') {
+              csvData = Job.toCsv(this.data)
+            } else if (this.editProp === 'vehicles') {
+              csvData = Vehicle.toCsv(this.data)
+            }
+            resolve(csvData)
           }
         } catch (error) {
           reject(error)
         }
       })
+    },
+
+    copyToClipboard () {
+      const data = this.dataJson
+
+      navigator.clipboard.writeText(JSON.stringify(data)).then(() => {
+        this.showSuccess(this.content.copied, {timeout: 3000})
+      }, () => {
+        this.showError(this.$t('download.copiedToClipboardFailed'), {timeout: 3000})
+      },)
     },
     /**
      * Get the response data routes and make sure that the geometry format is geojson

@@ -1,5 +1,6 @@
 import {EventBus} from '@/common/event-bus'
 import Skill from '@/models/skill'
+import Download from '@/fragments/forms/map-form/components/download/Download'
 
 export default {
   data: () => ({
@@ -15,7 +16,8 @@ export default {
     },
   },
   components: {
-    EventBus
+    EventBus,
+    Download
   },
   computed: {
     editSkillsJSON () {
