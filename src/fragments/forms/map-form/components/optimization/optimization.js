@@ -15,6 +15,7 @@ import Skill from '@/models/skill'
 
 // Local components
 import OptimizationDetails from './components/optimization-details/OptimizationDetails'
+import OptimizationImport from './components/optimization-import/OptimizationImport.vue'
 import JobList from './components/job-list/JobList.vue'
 import VehicleList from './components/vehicle-list/VehicleList.vue'
 import EditDialog from './components/edit-dialog/EditDialog.vue'
@@ -32,12 +33,15 @@ export default {
     showEditDialog: false,
     editProp: '',
     editData: [],
+    isImportOpen: false,
+    expectedImport: '',
     showSkillManagement: false
   }),
   components: {
     FieldsContainer,
     FormActions,
     OptimizationDetails,
+    OptimizationImport,
     JobList,
     VehicleList,
     EditDialog,
@@ -267,6 +271,17 @@ export default {
     addVehicleFromMap() {
       this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
       this.setPickPlaceSource(this.vehicles)
+    },
+
+    // save vehicles from pasted JSON and return error if not a valid JSON
+    saveImport(data) {
+      if (data.jobs.length) {
+        this.jobsChanged(data.jobs)
+      } else if (data.vehicles.length){
+        this.vehiclesChanged(data.vehicles)
+      }
+      this.isImportOpen = false
+      this.expectedImport = ''
     },
 
     // open editSkills dialog

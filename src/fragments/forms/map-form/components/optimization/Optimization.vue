@@ -74,6 +74,8 @@
                  @jobsChanged="jobsChanged" @vehiclesChanged="vehiclesChanged" @skillsChanged="skillsChanged"
                  @close="showEditDialog=false"></edit-dialog>
     <edit-skills v-if="showSkillManagement" :skills="skills" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
+    <optimization-import v-if="isImportOpen" :expected-data="expectedImport" @saveOptimizationImport="saveImport"
+                         @close="isImportOpen=false"></optimization-import>
   </div>
 </template>
 
