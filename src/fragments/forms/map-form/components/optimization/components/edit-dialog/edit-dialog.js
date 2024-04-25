@@ -1,4 +1,5 @@
 import RouteImporter from '@/fragments/forms/route-importer/RouteImporter.vue'
+import Download from '@/fragments/forms/map-form/components/download/Download.vue'
 import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn.vue'
 import OrsFilterUtil, {vehicleIcon} from '@/support/map-data-services/ors-filter-util'
 import constants from '@/resources/constants'
