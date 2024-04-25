@@ -40,6 +40,28 @@
               Start: {{ d.start[0].toPrecision(8) }}, {{ d.start[1].toPrecision(8) }} - End: {{ d.end[0].toPrecision(8) }}, {{ d.end[1].toPrecision(8) }}
             </div>
             <div v-else>
+              <div v-if="jobsBox && !d.location">
+                <place-autocomplete v-if="jobsBox" :jobs="editData" :edit-id="editId" :show-edit-box="isEditOpen"></place-autocomplete>
+              </div>
+              <div v-else-if="vehiclesBox && !d.start">
+                <place-autocomplete :vehicles="editData" :edit-id="editId" :show-edit-box="isEditOpen" :new-end-point="newEndPoint" :only-start-point="onlyStartPoint"></place-autocomplete>
+                <v-text-field v-if="onlyStartPoint" v-model="editData[i].end" :persistent-hint="true" :hint="'End'"></v-text-field>
+              </div>
+              <div v-else-if="vehiclesBox && newEndPoint">
+                <v-text-field v-model="editData[i].start" :persistent-hint="true" :hint="'Start'"></v-text-field>
+                <place-autocomplete :vehicles="editData" :edit-id="editId" :show-edit-box="isEditOpen" :new-end-point="newEndPoint" :only-start-point="onlyStartPoint"></place-autocomplete>
+              </div>
+              <div v-else-if="jobsBox">
+                <v-text-field v-model="editData[i].location" :persistent-hint="true" :hint="'Location'" append-icon="search" @click:append="switchToSearch"></v-text-field>
+              </div>
+              <div v-else-if="sameStartEndPoint">
+                <v-text-field v-model="editData[i].start" :persistent-hint="true" :hint="'Start & End'" append-icon="search" @click:append="switchToSearch('start')" append-outer-icon="add" @click:append-outer="newEndPoint=true"></v-text-field>
+              </div>
+              <div v-else>
+                <v-text-field v-model="editData[i].start" :persistent-hint="true" :hint="'Start'" append-icon="search" @click:append="switchToSearch('start')"></v-text-field>
+                <v-text-field v-model="editData[i].end" :persistent-hint="true" :hint="'End'" append-icon="search" @click:append="switchToSearch('end')" append-outer-icon="delete" @click:append-outer="removeEndPoint(i)"></v-text-field>
+              </div>
+
               <v-layout row-wrap>
                 <v-text-field v-if="jobsBox" v-model.number="editData[i].delivery[0]" type="number" style="padding-right: 10px" :persistent-hint="true" :hint="$t('optimization.delivery')"></v-text-field>
                 <v-text-field v-if="jobsBox" v-model.number="editData[i].pickup[0]" type="number" style="padding-left: 10px" :persistent-hint="true" :hint="$t('optimization.pickup')"></v-text-field>
