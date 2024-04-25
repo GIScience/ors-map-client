@@ -160,25 +160,33 @@ export default {
     // place is picked from Map
     EventBus.$on('setInputPlace', (data) => {
       if (context.active) {
+        let id = data.placeInputId
         // pickEditSource indicates which property the place should fill
         if (data.pickEditSource === 'jobs') {
-          let job = Job.fromPlace(data.place)
-          let id = data.placeInputId
-          job.setId(id)
-
-          context.jobs.push(job)
+          if (id > context.jobs.length) {
+            let job = Job.fromPlace(data.place)
+            job.setId(id)
+            context.jobs.push(job)
+          } else {
+            context.jobs[data.pickPlaceIndex].location = data.place.coordinates
+          }
           context.manageJobs(id)
         } else if (data.pickEditSource === 'vehicleStart') {
-          let v = Vehicle.fromPlace(data.place)
-          let id = data.placeInputId
-          v.setId(id)
-
-          context.vehicles.push(v)
+          if (id > context.vehicles.length) {
+            let v = Vehicle.fromPlace(data.place)
+            v.setId(id)
+            context.vehicles.push(v)
+          } else {
+            const v = context.vehicles[data.pickPlaceIndex]
+            if (v.end[0] === v.start[0] && v.end[1] === v.start[1]) {
+              context.vehicles[data.pickPlaceIndex].end = data.place.coordinates
+            }
+            context.vehicles[data.pickPlaceIndex].start = data.place.coordinates
+          }
           context.manageVehicles(id)
         } else if (data.pickEditSource === 'vehicleEnd') {
           this.vehicles[data.pickPlaceIndex].end = data.place.coordinates
-
-          context.manageVehicles(data.placeInputId)
+          context.manageVehicles(id)
         }
       } else {
         context.setSidebarIsOpen(true)
