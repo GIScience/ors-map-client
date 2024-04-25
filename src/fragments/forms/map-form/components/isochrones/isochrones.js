@@ -1,8 +1,10 @@
-import FormActions from '@/fragments/forms/map-form/components/form-actions/FormActions'
+import MapFormMixin from '../map-form-mixin'
 import MapViewDataBuilder from '@/support/map-data-services/map-view-data-builder'
 import FieldsContainer from '@/fragments/forms/fields-container/FieldsContainer'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
+import FormActions from '@/fragments/forms/map-form/components/form-actions/FormActions'
 import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
+import {EventBus} from '@/common/event-bus'
 import {Isochrones} from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
@@ -10,11 +12,9 @@ import constants from '@/resources/constants'
 import appConfig from '@/config/app-config'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
-import {EventBus} from '@/common/event-bus'
 
 // Local components
 import IschronesDetails from './components/isochrones-details/IsochronesDetails'
-import MapFormMixin from '../map-form-mixin'
 
 export default {
   mixins: [MapFormMixin],
@@ -25,10 +25,10 @@ export default {
     roundTripActive: false
   }),
   components: {
-    PlaceInput,
     FieldsContainer,
-    Draggable,
     FormActions,
+    PlaceInput,
+    Draggable,
     IschronesDetails
   },
   computed: {
