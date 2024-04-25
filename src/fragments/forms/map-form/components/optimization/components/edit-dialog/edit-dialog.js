@@ -1,6 +1,9 @@
 import RouteImporter from '@/fragments/forms/route-importer/RouteImporter.vue'
 import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn.vue'
+import OrsFilterUtil, {vehicleIcon} from '@/support/map-data-services/ors-filter-util'
+import constants from '@/resources/constants'
 import PlaceAutocomplete from '@/fragments/forms/place-input/PlaceAutocomplete.vue'
+import ProfileSelectorOption from '@/fragments/forms/profile-selector/components/profile-selector-option/ProfileSelectorOption'
 import {EventBus} from '@/common/event-bus'
 import Job from '@/models/job'
 import Vehicle from '@/models/vehicle'
@@ -21,6 +24,8 @@ export default {
     focused: false,
     searching: false,
     debounceTimeoutId: null,
+    onlyStartPoint: false,
+    newEndPoint: false,
     activeProfileSlug: null,
     activeVehicleType: null,
   }),
@@ -47,6 +52,7 @@ export default {
     Download,
     MapFormBtn,
     PlaceAutocomplete,
+    ProfileSelectorOption,
     EventBus
   },
   computed: {
@@ -89,6 +95,10 @@ export default {
     sameStartEndPoint () {
       const id = this.editId - 1
       return this.editData[id].start[0] === this.editData[id].end[0] && this.editData[id].start[1] === this.editData[id].end[1]
+    },
+    profilesMapping () {
+      const filter = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
+      return filter.mapping
     },
   },
   created () {
@@ -225,6 +235,28 @@ export default {
         }
       }
       return names
+    },
+
+    // when profile selected in selector, update vehicle properties
+    profileSelected (data) {
+      this.activeProfileSlug = data.profileSlug
+      this.activeVehicleType = data.vehicleTypeSlug
+
+      OrsFilterUtil.setFilterValue(constants.profileFilterName, data.profileSlug)
+
+      this.editData[this.editId - 1].profile = data.profileSlug
+    },
+    // return currently active vehicle profile property
+    vehicleProfile(id) {
+      const vt = this.editData[id].profile
+      let profile
+      if (vt !== 'wheelchair') {
+        const profilePart = vt.split('-')[0]
+        profile = profilePart.concat('-*')
+      } else {
+        profile = vt
+      }
+      return profile
     },
   }
 }
