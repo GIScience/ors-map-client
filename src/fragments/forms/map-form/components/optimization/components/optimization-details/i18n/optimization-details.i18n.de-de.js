@@ -9,6 +9,7 @@ export default {
     'delivery': 'Deliveries',
     'pickup': 'Pickups',
     'waiting_time': 'Waiting time',
-    'isUnassigned': 'is unassigned.'
+    'isUnassigned': 'is unassigned.',
+    getInstructions: 'Get instructions for this Vehicle'
   }
 }
