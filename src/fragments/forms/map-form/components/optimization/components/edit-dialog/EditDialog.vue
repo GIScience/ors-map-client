@@ -1,0 +1,77 @@
+<template>
+  <div>
+    <v-dialog v-model="isEditOpen" max-width="600" :persistent="true" attach="body">
+      <box background="white" closable @closed="closeEditModal()">
+        <h3 slot="header" style="padding-right: 55px">
+          <v-btn class="edit-header-btn" flat :style="{}" @click="addItem()" :title="content.add">
+            <v-icon color="info">add</v-icon>
+          </v-btn>
+          {{ content.header }}  {{ `editing ${editId}`}}
+        </h3>
+        <v-btn v-if="this.editData.length === 0" style="margin-top: 10px" color="info" block :title="content.fromMap" @click="addItem(true)">
+          <v-icon style="margin-right: 5px;">map</v-icon>
+          {{ content.fromMap }}
+        </v-btn>
+        <v-card @click="editId = i+1" elevation="3" style="margin: 5px;cursor: pointer" v-for="(d, i) in editData" :key="i">
+          <v-card-title style="padding-bottom: 0;">
+            <div v-if="jobsBox"><b>Job {{ d.id }} - {{ d.location ? d.location[0].toPrecision(8) + ',' + d.location[1].toPrecision(8) : 'please add Location'}}</b></div>
+            <div v-else><b><v-icon :color="vehicleColors(d.id)" class="pr-5">{{vehicleIcon(d.profile)}}</v-icon>{{ content.item }} {{ d.id }}</b></div>
+            <v-btn v-if="editId === d.id" class="edit-btn" small icon :style="{background: 'white'}" @click.stop="editId = 0" :title="$t('editDialog.keepEdits')">
+              <v-icon color="success">check</v-icon>
+            </v-btn>
+            <v-btn v-else class="edit-btn" small icon :style="{background: 'white'}" @click.stop="editId = d.id" :title="$t('editDialog.makeEdits')">
+              <v-icon color="primary">edit</v-icon>
+            </v-btn>
+            <v-btn class="edit-btn" small icon :style="{background: 'white'}" @click.stop="duplicateItem(d.id)" :title="content.duplicate">
+              <v-icon color="info">content_copy</v-icon>
+            </v-btn>
+            <v-btn class="edit-btn" small icon :style="{background: 'white'}" @click.stop="removeItem(d.id)" :title="content.remove">
+              <v-icon color="primary">delete</v-icon>
+            </v-btn>
+          </v-card-title>
+          <v-card-text>
+            <div v-if="editId !== d.id && jobsBox">
+              <span v-for="(v, k) in d" :key="k">
+                <v-chip v-if="['delivery', 'pickup'].includes(k) && v.length">{{ $t(`optimization.${k}`) }}: {{v[0]}}</v-chip>
+                <v-chip v-if="k === 'skills' && v.length">{{ $t(`optimization.${k}`) }}: {{skillNames(d)}}</v-chip>
+              </span>
+            </div>
+            <div v-else-if="editId !== d.id && d.start">
+              Start: {{ d.start[0].toPrecision(8) }}, {{ d.start[1].toPrecision(8) }} - End: {{ d.end[0].toPrecision(8) }}, {{ d.end[1].toPrecision(8) }}
+            </div>
+            <div v-else>
+              <v-layout row-wrap>
+                <v-text-field v-if="jobsBox" v-model.number="editData[i].delivery[0]" type="number" style="padding-right: 10px" :persistent-hint="true" :hint="$t('optimization.delivery')"></v-text-field>
+                <v-text-field v-if="jobsBox" v-model.number="editData[i].pickup[0]" type="number" style="padding-left: 10px" :persistent-hint="true" :hint="$t('optimization.pickup')"></v-text-field>
+                <v-item-group v-if="vehiclesBox" style="margin: 10px 15px 0 0; border: solid lightgray 1px; padding: 10px">
+                </v-item-group>
+                <v-text-field v-if="vehiclesBox" v-model.number="editData[i].capacity[0]" type="number" style="width: 50%" :persistent-hint="true" :hint="'Capacity'"></v-text-field>
+              </v-layout>
+              <v-text-field v-if="jobsBox" v-model.number="editData[i].service" :persistent-hint="true" :hint="'Service time (in seconds)'"></v-text-field>
+              <v-text-field v-if="vehiclesBox" v-model="editData[i].time_window" :persistent-hint="true" :hint="'Working time window (in seconds passed since 00:00 or timestamp)'"></v-text-field>
+            </div>
+          </v-card-text>
+        </v-card>
+        <v-alert v-if="editData.length >= content.maxLength" :value="true" type="warning" style="color:black" >
+          {{ content.maxWarning }}
+        </v-alert>
+        <v-layout row :wrap="$lowResolution">
+          <v-spacer class="hidden-md-and-down"></v-spacer>
+          <v-flex text-xs-right xs12 sm5 md7 :class="{'ml-2': $vuetify.breakpoint.smAndDown, 'mb-2': $lowResolution}">
+            <v-btn :block="$lowResolution" color="primary" :title="$t('settings.restoreDefaults')"
+                   @click="closeEditModal">{{$t('global.cancel')}}</v-btn>
+          </v-flex>
+          <v-flex text-xs-right xs12 sm3 md3 :class="{'ml-2': $vuetify.breakpoint.smAndDown}">
+            <v-btn :block="$lowResolution" color="success" :title="$t('global.save')" @click="saveItems">
+              {{$t('global.save')}}
+              <v-icon style="margin-left: 5px;">save</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </box>
+    </v-dialog>
+  </div>
+</template>
+
+<script src="./edit-dialog.js"></script>
+<style scoped src="./edit-dialog.css"></style>

@@ -13,6 +13,15 @@
         </template>
         <div class="optimization-heading">
           {{ $t('optimization.jobs') }} (Max: 50)
+          <v-tooltip bottom style="float: right">
+            <template v-slot:activator="{ on }">
+              <v-btn class="no-padding"
+                     icon small @click="manageJobs">
+                <v-icon :title="$t('optimization.manageJobs')" color="dark" :medium="$lowResolution">settings</v-icon>
+              </v-btn>
+            </template>
+            {{ $t('optimization.manageJobs') }}
+          </v-tooltip>
         </div>
       </template>
       <div v-if="jobs.length === 0">
@@ -24,6 +33,15 @@
       <job-list :jobs="jobs"></job-list>
       <div class="optimization-heading">
         {{ $t('optimization.vehicles') }} (Max: 3)
+        <v-tooltip bottom style="float: right">
+          <template v-slot:activator="{ on }">
+            <v-btn class="no-padding"
+                   icon small @click="manageVehicles">
+              <v-icon :title="$t('optimization.manageVehicles')" color="dark" :medium="$lowResolution">settings</v-icon>
+            </v-btn>
+          </template>
+          {{ $t('optimization.manageVehicles') }}
+        </v-tooltip>
       </div>
       <div v-if="vehicles.length === 0">
         <v-btn @click="addVehicleFromMap" color="success">
@@ -43,6 +61,9 @@
         </form-actions>
       </v-layout>
     </v-form>
+    <edit-dialog v-if="showEditDialog" :edit-prop="editProp" :data="editData" :skills="skills"
+                 @jobsChanged="jobsChanged" @vehiclesChanged="vehiclesChanged" @skillsChanged="skillsChanged"
+                 @close="showEditDialog=false"></edit-dialog>
   </div>
 </template>
 
