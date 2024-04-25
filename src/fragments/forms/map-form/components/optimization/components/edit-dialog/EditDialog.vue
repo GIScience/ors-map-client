@@ -10,7 +10,7 @@
           <v-btn class="edit-header-btn" flat :style="{}" @click="addItem()" :title="content.add">
             <v-icon color="info">add</v-icon>
           </v-btn>
-          {{ content.header }}  {{ `editing ${editId}`}}
+          {{ headerText }}
         </h3>
         <v-btn v-if="this.editData.length === 0" style="margin-top: 10px" color="info" block :title="content.fromMap" @click="addItem(true)">
           <v-icon style="margin-right: 5px;">map</v-icon>

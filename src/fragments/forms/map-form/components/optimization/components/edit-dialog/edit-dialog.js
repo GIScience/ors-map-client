@@ -101,6 +101,13 @@ export default {
         }
       }
     },
+    headerText () {
+      if (this.editId === 0) {
+        return this.content.header
+      } else {
+        return this.content.header + ' - editing ' + this.editId
+      }
+    },
     // returns true if start and end point are the same
     sameStartEndPoint () {
       const id = this.editId - 1
