@@ -1,5 +1,6 @@
 import RouteImporter from '@/fragments/forms/route-importer/RouteImporter.vue'
 import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn.vue'
+import PlaceAutocomplete from '@/fragments/forms/place-input/PlaceAutocomplete.vue'
 import {EventBus} from '@/common/event-bus'
 import Job from '@/models/job'
 import Vehicle from '@/models/vehicle'
@@ -45,6 +46,7 @@ export default {
     RouteImporter,
     Download,
     MapFormBtn,
+    PlaceAutocomplete,
     EventBus
   },
   computed: {
@@ -82,6 +84,11 @@ export default {
           emptyLoc: 'Added vehicle does not have a valid start location',
         }
       }
+    },
+    // returns true if start and end point are the same
+    sameStartEndPoint () {
+      const id = this.editId - 1
+      return this.editData[id].start[0] === this.editData[id].end[0] && this.editData[id].start[1] === this.editData[id].end[1]
     },
   },
   created () {
@@ -176,11 +183,30 @@ export default {
         }
       }
     },
+    // delete old location when switching to search to activate placeAutocomplete
+    switchToSearch (mode) {
+      if (this.jobsBox) {
+        this.editData[this.editId - 1].location = null
+      } else if (this.vehiclesBox) {
+        if (mode === 'start') {
+          if (!this.sameStartEndPoint) {
+            this.onlyStartPoint = true
+          }
+          this.editData[this.editId - 1].start = null
+        } else if (mode === 'end') {
+          this.newEndPoint = true
+          this.editData[this.editId - 1].end = null
+        }
+      }
+    },
     removeItem (id) {
       this.editData.splice(id-1,1)
       for (const i in this.editData) {
         this.editData[i].setId(parseInt(i)+1)
       }
+    },
+    removeEndPoint (index) {
+      this.editData[index].end = this.editData[index].start
     },
     duplicateItem (index) {
       let newItem = this.editData[index-1].clone()
