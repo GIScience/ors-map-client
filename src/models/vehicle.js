@@ -125,6 +125,7 @@ class Vehicle extends Place {
   }
 
   toGeoJSON(stringify = false) {
+    // TODO: fix GeoJSON into proper format
     let props = {
       id: this.id,
       description: this.description,

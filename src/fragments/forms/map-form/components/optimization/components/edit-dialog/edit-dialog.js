@@ -160,6 +160,9 @@ export default {
       this.$emit('contentUploaded', data)
     },
 
+    // TODO: add clear all data option,
+    //  possibly also a recover option?
+
     // save jobs from JSON
     saveImport(data) {
       if (this.jobsBox) {
@@ -167,6 +170,8 @@ export default {
       } else if (this.vehiclesBox) {
         this.editData = data.vehicles
       }
+      // TODO: check if editData contains skills that are not in editSkills yet
+      //  write in with empty name if not there
       this.saveItems()
       this.isImportOpen = false
     },
