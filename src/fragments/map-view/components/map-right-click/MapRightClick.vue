@@ -8,6 +8,8 @@
       <v-btn v-if="canAddStop" flat small block :title="$t('mapRightClick.addRouteStop')" @click="rightClickEvent('addRouteStop')" class="right-click-btn" >{{$t('mapRightClick.addRouteStop')}}</v-btn>
       <!-- <v-btn v-if="!canAddStop" flat small block :title="$t('mapRightClick.centerHere')" @click="rightClickEvent('centerHere')" class="right-click-btn" >{{$t('mapRightClick.centerHere')}}</v-btn> -->
       <v-btn v-if="canAddIsochroneCenter" block flat small :title="$t('mapRightClick.addAsIsochroneCenter')" @click="rightClickEvent('addAsIsochroneCenter')" class="right-click-btn" >{{$t('mapRightClick.addAsIsochroneCenter')}}</v-btn>
+      <v-btn v-if="canAddJob" flat small block :title="$t('mapRightClick.addJob')" @click="rightClickEvent('addJob')" class="right-click-btn" >{{$t('mapRightClick.addJob')}}</v-btn>
+      <v-btn v-if="canAddVehicle" flat small block :title="$t('mapRightClick.addVehicle')" @click="rightClickEvent('addVehicle')" class="right-click-btn" >{{$t('mapRightClick.addVehicle')}}</v-btn>
       <v-btn v-if="canShowInspector" block flat small :title="$t('mapRightClick.inspectDataOnOSM')" @click="inspectDataOnOSM()" class="right-click-btn" >{{$t('mapRightClick.inspectDataOnOSM')}}</v-btn>
     </div>
   </box>
