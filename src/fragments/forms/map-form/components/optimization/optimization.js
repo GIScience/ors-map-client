@@ -229,7 +229,7 @@ export default {
         context.updateAppRoute()
       }).catch((err) => {
         console.log(err)
-        context.showError(this.$t('optimization.couldNotResolveTheJobLocation'), { timeout: 0 })
+        context.showError(this.$t('optimization.couldNotResolveTheLocation') + this.$t('optimization.jobs'), { timeout: 0 })
       })
     },
     // open editJobs dialog
@@ -252,14 +252,14 @@ export default {
       const context = this
       vehicle.resolve().then(() => {
         if (this.vehicles.length > 3) {
-          this.showError(this.$t('optimization.vehicleMaxWarning'), {timeout: 3000})
+          this.showError(this.$t('optimization.maxWarning') + '3'  + this.$t('optimization.vehicles'), {timeout: 3000})
         }
         context.vehicles.push(vehicle)
         context.manageVehicles(vehicle.id)
         context.updateAppRoute()
       }).catch((err) => {
         console.log(err)
-        context.showError(this.$t('optimization.couldNotResolveTheVehicleLocation'), { timeout: 0 })
+        context.showError(this.$t('optimization.couldNotResolveTheLocation') + this.$t('optimization.vehicles'), { timeout: 0 })
       })
     },
     // open editVehicles dialog
@@ -377,7 +377,7 @@ export default {
       return new Promise((resolve) => {
         if (context.jobs.length) {
           if (context.vehicles.length) {
-            context.showInfo(context.$t('optimization.optimizeJobs'), { timeout: 0 })
+            context.showInfo(context.$t('optimization.optimize') + this.$t('optimization.jobs'), { timeout: 0 })
             EventBus.$emit('showLoading', true)
 
             // Calculate the optimized routes

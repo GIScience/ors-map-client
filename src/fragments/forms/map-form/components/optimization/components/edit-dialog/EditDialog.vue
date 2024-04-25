@@ -23,7 +23,7 @@
             <v-btn v-if="editId === d.id" class="edit-btn" small icon :style="{background: 'white'}" @click.stop="editId = 0" :title="$t('editDialog.keepEdits')">
               <v-icon color="success">check</v-icon>
             </v-btn>
-            <v-btn v-else class="edit-btn" small icon :style="{background: 'white'}" @click.stop="editId = d.id" :title="$t('editDialog.makeEdits')">
+            <v-btn v-else class="edit-btn" small icon :style="{background: 'white'}" @click.stop="editId = d.id" :title="content.edit">
               <v-icon color="primary">edit</v-icon>
             </v-btn>
             <v-btn class="edit-btn" small icon :style="{background: 'white'}" @click.stop="duplicateItem(d.id)" :title="content.duplicate">

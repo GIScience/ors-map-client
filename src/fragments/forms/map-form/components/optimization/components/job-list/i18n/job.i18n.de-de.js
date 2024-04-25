@@ -3,6 +3,5 @@ export default {
     amount: 'Amount',
     service: 'Expected service time',
     skills: 'Skills needed',
-    copied: 'Job copied to clipboard',
   }
 }

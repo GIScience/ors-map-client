@@ -17,17 +17,17 @@
             <template v-slot:activator="{ on }">
               <v-btn class="no-padding"
                      icon small @click="manageJobs">
-                <v-icon :title="$t('optimization.manageJobs')" color="dark" :medium="$lowResolution">settings</v-icon>
+                <v-icon :title="$t('optimization.manage') + $t('optimization.jobs')" color="dark" :medium="$lowResolution">settings</v-icon>
               </v-btn>
             </template>
-            {{ $t('optimization.manageJobs') }}
+            {{ $t('optimization.manage') + $t('optimization.jobs') }}
           </v-tooltip>
         </div>
       </template>
       <div v-if="jobs.length === 0">
         <v-btn @click="addJobFromMap" color="success">
           <v-icon style="margin-right: 5px;">map</v-icon>
-          {{ $t('optimization.addJobFromMap') }}
+          {{ $t('optimization.addFromMap') + $t('optimization.job') }}
         </v-btn>
       </div>
       <job-list :jobs="jobs"></job-list>
@@ -37,16 +37,16 @@
           <template v-slot:activator="{ on }">
             <v-btn class="no-padding"
                    icon small @click="manageVehicles">
-              <v-icon :title="$t('optimization.manageVehicles')" color="dark" :medium="$lowResolution">settings</v-icon>
+              <v-icon :title="$t('optimization.manage') + $t('optimization.vehicles')" color="dark" :medium="$lowResolution">settings</v-icon>
             </v-btn>
           </template>
-          {{ $t('optimization.manageVehicles') }}
+          {{ $t('optimization.manage') + $t('optimization.vehicles') }}
         </v-tooltip>
       </div>
       <div v-if="vehicles.length === 0">
         <v-btn @click="addVehicleFromMap" color="success">
           <v-icon style="margin-right: 5px;">map</v-icon>
-          {{ $t('optimization.addVehicleFromMap') }}
+          {{ $t('optimization.addFromMap') + $t('optimization.vehicle') }}
         </v-btn>
       </div>
       <vehicle-list :vehicles="vehicles"></vehicle-list>
@@ -56,9 +56,9 @@
             <div class="skill-opt-btn">
               <v-btn class="skill-opt-btn"
                      outline small fab @click="manageSkills">
-                <v-icon :title="$t('optimization.manageSkills')" color="dark" :medium="$lowResolution">settings</v-icon>
+                <v-icon :title="$t('optimization.manage') + $t('optimization.skills')" color="dark" :medium="$lowResolution">settings</v-icon>
               </v-btn>
-              <p class="skill-btn-legend">{{$t('optimization.manageSkills')}}</p>
+              <p class="skill-btn-legend">{{$t('optimization.manage') + $t('optimization.skills')}}</p>
             </div>
           </template>
         </v-tooltip>
