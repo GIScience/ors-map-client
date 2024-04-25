@@ -36,7 +36,7 @@
           <v-card-text>
             <div v-if="editId !== d.id && jobsBox">
               <span v-for="(v, k) in d" :key="k">
-                <v-chip v-if="['delivery', 'pickup'].includes(k) && v.length">{{ $t(`optimization.${k}`) }}: {{v[0]}}</v-chip>
+                <v-chip v-if="['delivery', 'pickup'].includes(k) && v[0] !== 0">{{ $t(`optimization.${k}`) }}: {{v[0]}}</v-chip>
                 <v-chip v-if="k === 'skills' && v.length">{{ $t(`optimization.${k}`) }}: {{skillNames(d)}}</v-chip>
               </span>
             </div>
