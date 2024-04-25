@@ -113,6 +113,7 @@ class Job extends Place {
   }
 
   toGeoJSON(stringify = false) {
+    // TODO: fix GeoJSON into proper format
     let props = {
       id: this.id,
       service: this.service,

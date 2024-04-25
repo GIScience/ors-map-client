@@ -90,6 +90,7 @@ export default {
       })
       return available
     },
+    // low priority TODO: read jobs and vehicles out of MapView data instead of prop
     dataJson () {
       const jsonData = []
       for (const d of this.data) {

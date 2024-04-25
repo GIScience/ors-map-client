@@ -72,6 +72,7 @@ export default {
     },
     // delete a skill
     removeSkill (id) {
+      // TODO: check if skills is used in any job/vehicle, only allow removal if not
       this.editSkills.splice(id-1,1)
       for (const i in this.editSkills) {
         this.editSkills[i].setId(parseInt(i)+1)

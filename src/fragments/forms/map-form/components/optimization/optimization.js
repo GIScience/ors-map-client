@@ -135,6 +135,7 @@ export default {
 
     // On popup edit click -> edit job
     EventBus.$on('editJob', (index) => {
+      // TODO: fix index -> jobId received as undefined in editDialog
       context.manageJobs(index)
     })
 
@@ -145,6 +146,7 @@ export default {
 
     // On popup edit click -> edit vehicle
     EventBus.$on('editVehicle', (index) => {
+      // TODO: fix index -> jobId received as undefined in editDialog
       context.manageVehicles(index)
     })
 
