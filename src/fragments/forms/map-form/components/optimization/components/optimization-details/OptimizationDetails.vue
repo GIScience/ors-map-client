@@ -21,8 +21,8 @@
         </div>
         <div style="padding:0 0 0 10px; display: flex; flex-wrap:wrap;">
           <template v-for="prop in ['distance','duration','service','delivery','pickup','waiting_time']">
-            <v-chip v-if="route[prop] && prop === 'delivery' || prop === 'pickup'" style="flex: 0 1 auto">{{ $t(`optimization.${prop}`) }}: {{ route[prop][0] }}</v-chip>
-            <v-chip v-else-if="route[prop]" style="flex: 0 1 auto">{{ $t(`optimizationDetails.${prop}`) }}: {{ route[prop] }}</v-chip>
+            <v-chip v-if="route[prop] && prop === 'delivery' || prop === 'pickup' && route[prop][0] !== 0" style="flex: 0 1 auto">{{ $t(`optimization.${prop}`) }}: {{ route[prop][0] }}</v-chip>
+            <v-chip v-else-if="route[prop] && prop !== 'delivery' && prop !== 'pickup' && route[prop] !== 0" style="flex: 0 1 auto">{{ $t(`optimizationDetails.${prop}`) }}: {{ route[prop] }}</v-chip>
 
           </template>
         </div>
