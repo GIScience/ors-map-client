@@ -57,7 +57,7 @@ class AppHooks {
       // Order the hooks so that we run then in the correct order
       let orderedHooks = lodash.sortBy(targetHooks, [function(h) { return h.priority }])
 
-      // Loop and run each hook
+      // Loop and run each hook TODO: for-loop that doesn't loop
       for(let key in orderedHooks) {
         let hook = orderedHooks[key]
         return hook.functionToRun(arg)
