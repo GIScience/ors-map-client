@@ -6,8 +6,8 @@
           <v-card-text>
             <template v-for="prop in ['delivery','pickup','skills','time_window','service']">
               <v-chip v-if="j[prop] && prop === 'service'" style="flex: auto">{{ $t(`optimization.${prop}`) }}: {{ j[prop] }}</v-chip>
-              <v-chip v-else-if="j[prop] && prop !== 'skills'" style="flex: auto">{{ $t(`optimization.${prop}`) }}: {{ j[prop][0] }}</v-chip>
-              <v-chip v-else-if="j[prop] && prop === 'skills'" style="flex: auto">
+              <v-chip v-else-if="j[prop] && prop !== 'skills' && j[prop][0] !== 0" style="flex: auto">{{ $t(`optimization.${prop}`) }}: {{ j[prop][0] }}</v-chip>
+              <v-chip v-else-if="j[prop] && prop === 'skills' && j[prop].length" style="flex: auto">
                 {{ $t(`optimization.${prop}`) }}: {{ skillIds(j) }}
               </v-chip>
             </template>
