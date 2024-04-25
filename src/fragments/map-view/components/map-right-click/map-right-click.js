@@ -48,7 +48,13 @@ export default {
       return this.$store.getters.mode === constants.modes.isochrones || (this.$store.getters.mode === constants.modes.place && !this.$store.getters.isSidebarVisible)
     },
     canRoute () {
-      return this.$store.getters.mode !== constants.modes.isochrones
+      return this.$store.getters.mode === constants.modes.directions || this.$store.getters.mode === constants.modes.place
+    },
+    canAddJob () {
+      return this.$store.getters.mode === constants.modes.optimization || (this.$store.getters.mode === constants.modes.place && !this.$store.getters.isSidebarVisible)
+    },
+    canAddVehicle () {
+      return this.$store.getters.mode === constants.modes.optimization || (this.$store.getters.mode === constants.modes.place && !this.$store.getters.isSidebarVisible)
     },
     canShowInspector () {
       return true
