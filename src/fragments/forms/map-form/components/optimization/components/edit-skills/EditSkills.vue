@@ -28,7 +28,7 @@
               <v-icon color="primary">delete</v-icon>
             </v-btn>
           </v-card-title>
-            <v-text-field v-model="skill.name" style="padding: 15px" :persistent-hint="true" :hint="'Skill name'"></v-text-field>
+          <v-text-field v-model="skill.name" style="padding: 15px" :persistent-hint="true" :hint="'Skill name'"></v-text-field>
         </v-card>
         <v-layout row :wrap="$lowResolution">
           <v-spacer class="hidden-md-and-down"></v-spacer>
@@ -45,6 +45,8 @@
         </v-layout>
       </box>
     </v-dialog>
+    <optimization-import v-if="isImportOpen" :expected-data="'skills'" @saveOptimizationImport="saveSkillImport"
+                         @close="isImportOpen=false"></optimization-import>
   </div>
 </template>
 

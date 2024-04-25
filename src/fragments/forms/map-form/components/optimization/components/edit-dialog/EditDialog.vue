@@ -4,6 +4,9 @@
       <box background="white" closable @closed="closeEditModal()">
         <h3 slot="header" style="padding-right: 55px">
           <download :download-formats-supported="['json', 'geojson', 'csv']" :data="editData" :edit-prop="editProp"></download>
+          <v-btn class="edit-header-btn" flat :style="{background: 'white'}" @click="isImportOpen=true" :title="content.import">
+            <v-icon color="primary">cloud_upload</v-icon>
+          </v-btn>
           <v-btn class="edit-header-btn" flat :style="{}" @click="addItem()" :title="content.add">
             <v-icon color="info">add</v-icon>
           </v-btn>
@@ -115,6 +118,8 @@
       </box>
     </v-dialog>
     <edit-skills v-if="showSkillManagement" :skills="skills" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
+    <optimization-import v-if="isImportOpen" :expected-data="content.expected" @saveOptimizationImport="saveImport"
+                         @close="isImportOpen=false"></optimization-import>
   </div>
 </template>
 

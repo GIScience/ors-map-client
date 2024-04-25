@@ -6,6 +6,7 @@ import constants from '@/resources/constants'
 import PlaceAutocomplete from '@/fragments/forms/place-input/PlaceAutocomplete.vue'
 import ProfileSelectorOption from '@/fragments/forms/profile-selector/components/profile-selector-option/ProfileSelectorOption'
 import EditSkills from '@/fragments/forms/map-form/components/optimization/components/edit-skills/EditSkills.vue'
+import OptimizationImport from '@/fragments/forms/map-form/components/optimization/components/optimization-import/OptimizationImport.vue'
 import {EventBus} from '@/common/event-bus'
 import Job from '@/models/job'
 import Vehicle from '@/models/vehicle'
@@ -28,6 +29,7 @@ export default {
     debounceTimeoutId: null,
     showSkillManagement: false,
     isSkillsOpen: false,
+    isImportOpen: false,
     onlyStartPoint: false,
     newEndPoint: false,
     activeProfileSlug: null,
@@ -58,6 +60,7 @@ export default {
     PlaceAutocomplete,
     ProfileSelectorOption,
     EditSkills,
+    OptimizationImport,
     EventBus
   },
   computed: {
@@ -68,6 +71,7 @@ export default {
           class: Job,
           maxLength: 50,
           maxWarning: this.$t('optimization.jobMaxWarning'),
+          import: this.$t('optimization.importJobFile'),
           add: this.$t('optimization.addJob'),
           duplicate: this.$t('optimization.duplicateJob'),
           remove: this.$t('optimization.removeJob'),
@@ -84,6 +88,7 @@ export default {
           class: Vehicle,
           maxLength: 3,
           maxWarning: this.$t('optimization.vehicleMaxWarning'),
+          import: this.$t('optimization.importVehicleFile'),
           add: this.$t('optimization.addVehicle'),
           duplicate: this.$t('optimization.duplicateVehicle'),
           remove: this.$t('optimization.removeVehicle'),
@@ -146,6 +151,17 @@ export default {
 
     contentUploaded (data) {
       this.$emit('contentUploaded', data)
+    },
+
+    // save jobs from JSON
+    saveImport(data) {
+      if (this.jobsBox) {
+        this.editData = data.jobs
+      } else if (this.vehiclesBox) {
+        this.editData = data.vehicles
+      }
+      this.saveItems()
+      this.isImportOpen = false
     },
 
     // check if one of the jobs does not have a location

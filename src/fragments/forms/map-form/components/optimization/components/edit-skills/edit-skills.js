@@ -1,3 +1,4 @@
+import OptimizationImport from '@/fragments/forms/map-form/components/optimization/components/optimization-import/OptimizationImport.vue'
 import {EventBus} from '@/common/event-bus'
 import Skill from '@/models/skill'
 import Download from '@/fragments/forms/map-form/components/download/Download'
@@ -7,7 +8,10 @@ export default {
     isSkillsOpen: true,
     editId: 0,
     editSkills: [],
-    selectedSkills: []
+    selectedSkills: [],
+    pastedSkills: [],
+    JsonPlaceholder: '[{"name":"example skill","id":1}]',
+    isImportOpen: false
   }),
   props: {
     skills: {
@@ -16,6 +20,7 @@ export default {
     },
   },
   components: {
+    OptimizationImport,
     EventBus,
     Download
   },
@@ -45,6 +50,13 @@ export default {
     closeSkillsModal() {
       this.isSkillsOpen = false
       this.$emit('close')
+    },
+
+    // save skills from JSON
+    saveSkillImport(data) {
+      this.editSkills = data.skills
+      this.saveSkills()
+      this.isImportOpen = false
     },
 
     // save changed skills and emit event to update in component
