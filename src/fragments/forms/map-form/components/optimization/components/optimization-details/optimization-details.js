@@ -84,26 +84,14 @@ export default {
         step.distance = distance
       }
     },
-    generateRoute(routeId) {
-      let places = []
-      for (const step of this.parsedRoutes[routeId].steps) {
-        const loadLeft = 'Load (after): ' + step.load.toString()
-        const place = new Place(step.location[0], step.location[1], loadLeft)
-        places.push(place)
-      }
+    /**
+     * constructs the URL for forwarding to directions mode by route ID
+     * @param {number} routeId
+     */
+    generateRouteURL(routeId) {
+      const locationStrings = this.parsedRoutes[routeId].steps.map(e => [e.location[0].toFixed(7), e.location[1].toFixed(7)].toString())
       const profile = this.localMapViewData.vehicles[routeId].profile
-
-      const appMode = new AppMode('directions')
-      let route = appMode.getRoute(places, {'profile': profile})
-      if (Object.keys(route.params).length > 1) { // params contains data and placeName? props
-        this.$router.push(route)
-        // const base = resolver.homeUrl()
-        // const newUrl = [base, constants.modes.directions, centre, route].join('/')
-        // window.open(newUrl, '_blank').focus()
-      }
-
-      console.log(routeId)
-      this.showError(this.$t('global.notImplemented'), {timeout: 3000})
+      return `/#/directions/${locationStrings.join('/')}/data/{"coordinates":"${locationStrings.join(';')}","options":{"profile":"${profile}","preference":"recommended"}}`
     }
   }
 }
