@@ -7,24 +7,24 @@
           <v-btn class="edit-skills-btn" flat :style="{background: 'white'}" @click="isImportOpen=true" :title="$t('optimization.importSkillFile')">
             <v-icon color="primary">cloud_upload</v-icon>
           </v-btn>
-          <v-btn class="edit-skills-btn" flat :style="{}" @click="addSkill(true)" :title="$t('optimization.addSkill')">
+          <v-btn class="edit-skills-btn" flat :style="{}" @click="addSkill(true)" :title="$t('optimization.add') + $t('optimization.skill')">
             <v-icon color="info">add</v-icon>
           </v-btn>
-          {{ $t('optimization.manageSkills') }}
+          {{ $t('optimization.manage') + $t('optimization.skills') }}
         </h3>
         <v-flex v-if="editSkills.length === 0">
           <v-btn style="margin-top: 10px" color="info" block :title="$t('optimization.addSkill')" @click="addSkill()">
             <v-icon style="margin-right: 5px;">map</v-icon>
-            {{$t('optimization.addSkill')}}
+            {{ $t('optimization.add') + $t('optimization.skill') }}
           </v-btn>
         </v-flex>
         <v-card @click="editId = i+1" elevation="3" style="margin: 5px;cursor: pointer" v-for="(skill, i) in editSkills" :key="i">
           <v-card-title style="padding-bottom: 0;">
             <div><b>Skill: {{ skill.name }}</b></div>
-            <v-btn v-if="editId === skill.id" class="edit-btn" flat small :style="{background: 'white'}" @click.stop="editId = 0" :title="$t('optimization.editSkill')">
+            <v-btn v-if="editId === skill.id" class="edit-btn" flat small :style="{background: 'white'}" @click.stop="editId = 0" :title="$t('optimization.edit') + $t('optimization.skill')">
               <v-icon color="primary">edit</v-icon>
             </v-btn>
-            <v-btn class="remove-btn" small icon :style="{background: 'white'}" @click.stop="removeSkill(skill.id)" :title="$t('optimization.removeSkill')">
+            <v-btn class="remove-btn" small icon :style="{background: 'white'}" @click.stop="removeSkill(skill.id)" :title="$t('optimization.remove') + $t('optimization.skill')">
               <v-icon color="primary">delete</v-icon>
             </v-btn>
           </v-card-title>

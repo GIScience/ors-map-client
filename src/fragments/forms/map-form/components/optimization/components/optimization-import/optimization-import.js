@@ -26,19 +26,19 @@ export default {
     content () {
       if (this.expectedData === 'jobs') {
         return {
-          header: this.$t('optimization.importJobFile'),
-          saveImport: this.$t('optimizationImport.saveJobImport'),
+          header: this.$t('optimization.import') + this.$t('optimization.jobs'),
+          saveImport: this.$t('optimizationImport.saveImport') + this.$t('optimization.jobs'),
           jsonPlaceholder: '[{"id":1,"location":[8.68525,49.420822],"service":300,"delivery":[1],"skills":[1]}]',
         }
       } else if (this.expectedData === 'vehicles') {
         return {
-          header: this.$t('optimization.importVehicleFile'),
-          saveImport: this.$t('optimizationImport.saveVehicleImport'),
+          header: this.$t('optimization.import') + this.$t('optimization.vehicles'),
+          saveImport: this.$t('optimizationImport.saveImport') + this.$t('optimization.vehicles'),
           jsonPlaceholder: '[{"id":1,"description":"","profile":"driving-car","start":[8.675863,49.418477],"end":[8.675863,49.418477],"capacity":[4],"skills":[1]}]',
         }
       } else if (this.expectedData === 'skills') {
         return {
-          header: this.$t('optimization.importSkillFile'),
+          header: this.$t('optimization.import') + this.$t('optimization.skills'),
           saveImport: this.$t('optimizationImport.saveSkillImport'),
           jsonPlaceholder: '["{"name":"length over 1.5m","id":1}"]',
         }
@@ -116,7 +116,7 @@ export default {
             try {
               newJobs.push(Job.fromObject(j))
             } catch {
-              this.showError(this.$t('optimizationImport.notValidJob'))
+              this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.jobs'),)
             }
           }
         } else if (this.expectedData === 'vehicles') {
@@ -124,7 +124,7 @@ export default {
             try {
               newVehicles.push(Vehicle.fromObject(v))
             } catch {
-              this.showError(this.$t('optimizationImport.notValidVehicle'))
+              this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.vehicles'),)
             }
           }
         } else if (this.expectedData === 'skills') {
