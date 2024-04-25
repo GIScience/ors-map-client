@@ -91,7 +91,7 @@
                 <template v-slot:append-item>
                   <v-divider class="mt-2"></v-divider>
                   <v-btn @click="showSkillManagement = true">
-                    <v-icon :title="$t('optimization.manageSkills')" color="dark" :medium="$lowResolution">settings</v-icon>
+                    <v-icon :title="$t('optimization.manage') + $t('optimization.skills')" color="dark" :medium="$lowResolution">settings</v-icon>
                     {{ 'manage Skills' }}
                   </v-btn>
                 </template>

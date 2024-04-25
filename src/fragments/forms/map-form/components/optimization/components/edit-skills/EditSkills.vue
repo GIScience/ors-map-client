@@ -4,7 +4,7 @@
       <box background="white" closable @closed="closeSkillsModal()">
         <h3 slot="header" style="padding-right: 55px">
           <download :download-formats-supported="['json']" :data="editSkills" :edit-prop="'skills'"></download>
-          <v-btn class="edit-skills-btn" flat :style="{background: 'white'}" @click="isImportOpen=true" :title="$t('optimization.importSkillFile')">
+          <v-btn class="edit-skills-btn" flat :style="{background: 'white'}" @click="isImportOpen=true" :title="$t('optimization.import') + $t('optimization.skills')">
             <v-icon color="primary">cloud_upload</v-icon>
           </v-btn>
           <v-btn class="edit-skills-btn" flat :style="{}" @click="addSkill(true)" :title="$t('optimization.add') + $t('optimization.skill')">
@@ -13,7 +13,7 @@
           {{ $t('optimization.manage') + $t('optimization.skills') }}
         </h3>
         <v-flex v-if="editSkills.length === 0">
-          <v-btn style="margin-top: 10px" color="info" block :title="$t('optimization.addSkill')" @click="addSkill()">
+          <v-btn style="margin-top: 10px" color="info" block :title="$t('optimization.add') + $t('optimization.skill')" @click="addSkill()">
             <v-icon style="margin-right: 5px;">map</v-icon>
             {{ $t('optimization.add') + $t('optimization.skill') }}
           </v-btn>

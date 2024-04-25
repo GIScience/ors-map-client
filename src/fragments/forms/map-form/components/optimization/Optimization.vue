@@ -73,7 +73,7 @@
     <edit-dialog v-if="showEditDialog" :edit-prop="editProp" :data="editData" :skills="skills"
                  @jobsChanged="jobsChanged" @vehiclesChanged="vehiclesChanged" @skillsChanged="skillsChanged"
                  @close="showEditDialog=false"></edit-dialog>
-    <edit-skills v-if="showSkillManagement" :skills="skills" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
+    <edit-skills v-if="showSkillManagement" :skills="skills" :skills-in-use="skillsInUse" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
     <optimization-import v-if="isImportOpen" :expected-data="expectedImport" @saveOptimizationImport="saveImport"
                          @close="isImportOpen=false"></optimization-import>
   </div>
