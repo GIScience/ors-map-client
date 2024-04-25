@@ -52,6 +52,15 @@
       <vehicle-list :vehicles="vehicles"></vehicle-list>
       <v-layout row class="form-actions-btns">
         <v-tooltip bottom style="float: right">
+          <template v-slot:activator="{ on }">
+            <div class="skill-opt-btn">
+              <v-btn class="skill-opt-btn"
+                     outline small fab @click="manageSkills">
+                <v-icon :title="$t('optimization.manageSkills')" color="dark" :medium="$lowResolution">settings</v-icon>
+              </v-btn>
+              <p class="skill-btn-legend">{{$t('optimization.manageSkills')}}</p>
+            </div>
+          </template>
         </v-tooltip>
         <form-actions :place-inputs="jobs.length" :disabled-actions="disabledActions"
                       @addPlaceInput="addPlaceInput"
@@ -64,6 +73,7 @@
     <edit-dialog v-if="showEditDialog" :edit-prop="editProp" :data="editData" :skills="skills"
                  @jobsChanged="jobsChanged" @vehiclesChanged="vehiclesChanged" @skillsChanged="skillsChanged"
                  @close="showEditDialog=false"></edit-dialog>
+    <edit-skills v-if="showSkillManagement" :skills="skills" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
   </div>
 </template>
 

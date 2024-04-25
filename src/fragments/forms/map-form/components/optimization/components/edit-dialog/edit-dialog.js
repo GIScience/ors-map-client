@@ -4,6 +4,7 @@ import OrsFilterUtil, {vehicleIcon} from '@/support/map-data-services/ors-filter
 import constants from '@/resources/constants'
 import PlaceAutocomplete from '@/fragments/forms/place-input/PlaceAutocomplete.vue'
 import ProfileSelectorOption from '@/fragments/forms/profile-selector/components/profile-selector-option/ProfileSelectorOption'
+import EditSkills from '@/fragments/forms/map-form/components/optimization/components/edit-skills/EditSkills.vue'
 import {EventBus} from '@/common/event-bus'
 import Job from '@/models/job'
 import Vehicle from '@/models/vehicle'
@@ -24,6 +25,8 @@ export default {
     focused: false,
     searching: false,
     debounceTimeoutId: null,
+    showSkillManagement: false,
+    isSkillsOpen: false,
     onlyStartPoint: false,
     newEndPoint: false,
     activeProfileSlug: null,
@@ -53,6 +56,7 @@ export default {
     MapFormBtn,
     PlaceAutocomplete,
     ProfileSelectorOption,
+    EditSkills,
     EventBus
   },
   computed: {
@@ -224,6 +228,15 @@ export default {
       newItem.setId(id)
       this.editData.push(newItem)
       this.editId = id
+    },
+    // update job skills selection when the skills were changed
+    skillsChanged(editedSkills) {
+      let newSkills = []
+      for (const skill of editedSkills) {
+        newSkills.push(skill.clone())
+      }
+      this.editSkills = newSkills
+      this.$emit('skillsChanged', this.editSkills)
     },
     skillNames(item) {
       let names = ''

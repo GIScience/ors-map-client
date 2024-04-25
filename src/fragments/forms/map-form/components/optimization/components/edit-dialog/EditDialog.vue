@@ -81,6 +81,17 @@
               </v-layout>
               <v-text-field v-if="jobsBox" v-model.number="editData[i].service" :persistent-hint="true" :hint="'Service time (in seconds)'"></v-text-field>
               <v-text-field v-if="vehiclesBox" v-model="editData[i].time_window" :persistent-hint="true" :hint="'Working time window (in seconds passed since 00:00 or timestamp)'"></v-text-field>
+
+              <v-select v-model="editData[i].skills" :items="editSkills" :item-text="'name'" :item-value="'id'" return-object chips deletable-chips
+                        :persistent-hint="true" :hint="content.skills" multiple :menu-props="{'closeOnContentClick':true}">
+                <template v-slot:append-item>
+                  <v-divider class="mt-2"></v-divider>
+                  <v-btn @click="showSkillManagement = true">
+                    <v-icon :title="$t('optimization.manageSkills')" color="dark" :medium="$lowResolution">settings</v-icon>
+                    {{ 'manage Skills' }}
+                  </v-btn>
+                </template>
+              </v-select>
             </div>
           </v-card-text>
         </v-card>
@@ -102,6 +113,7 @@
         </v-layout>
       </box>
     </v-dialog>
+    <edit-skills v-if="showSkillManagement" :skills="skills" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
   </div>
 </template>
 

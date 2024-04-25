@@ -18,6 +18,7 @@ import OptimizationDetails from './components/optimization-details/OptimizationD
 import JobList from './components/job-list/JobList.vue'
 import VehicleList from './components/vehicle-list/VehicleList.vue'
 import EditDialog from './components/edit-dialog/EditDialog.vue'
+import EditSkills from './components/edit-skills/EditSkills.vue'
 
 export default {
   mixins: [MapFormMixin],
@@ -30,7 +31,8 @@ export default {
     pickPlaceSupported: true,
     showEditDialog: false,
     editProp: '',
-    editData: []
+    editData: [],
+    showSkillManagement: false
   }),
   components: {
     FieldsContainer,
@@ -39,6 +41,7 @@ export default {
     JobList,
     VehicleList,
     EditDialog,
+    EditSkills
   },
   computed: {
     jobsJSON () {
@@ -264,6 +267,12 @@ export default {
     addVehicleFromMap() {
       this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
       this.setPickPlaceSource(this.vehicles)
+    },
+
+    // open editSkills dialog
+    manageSkills(skillId) {
+      this.showSkillManagement = true
+      EventBus.$emit('showSkillsModal', skillId)
     },
 
     // Set the pick place input source
