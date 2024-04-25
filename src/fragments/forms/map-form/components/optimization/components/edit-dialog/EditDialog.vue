@@ -66,6 +66,16 @@
                 <v-text-field v-if="jobsBox" v-model.number="editData[i].delivery[0]" type="number" style="padding-right: 10px" :persistent-hint="true" :hint="$t('optimization.delivery')"></v-text-field>
                 <v-text-field v-if="jobsBox" v-model.number="editData[i].pickup[0]" type="number" style="padding-left: 10px" :persistent-hint="true" :hint="$t('optimization.pickup')"></v-text-field>
                 <v-item-group v-if="vehiclesBox" style="margin: 10px 15px 0 0; border: solid lightgray 1px; padding: 10px">
+                  <v-layout class="profile-options-wrapper">
+                    <v-item v-for="profile in profilesMapping" :key="profile.slug">
+                      <v-flex style="min-width:45px">
+                        <profile-selector-option @profileSelected="profileSelected" :profile="profile"
+                                                 :active-profile-slug="vehicleProfile(i)" :active-vehicle-type="editData[i].profile"
+                                                 :is-vehicle="true">
+                        </profile-selector-option>
+                      </v-flex>
+                    </v-item>
+                  </v-layout>
                 </v-item-group>
                 <v-text-field v-if="vehiclesBox" v-model.number="editData[i].capacity[0]" type="number" style="width: 50%" :persistent-hint="true" :hint="'Capacity'"></v-text-field>
               </v-layout>
