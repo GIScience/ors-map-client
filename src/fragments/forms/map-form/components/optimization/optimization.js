@@ -17,6 +17,7 @@ import Skill from '@/models/skill'
 import OptimizationDetails from './components/optimization-details/OptimizationDetails'
 import JobList from './components/job-list/JobList.vue'
 import VehicleList from './components/vehicle-list/VehicleList.vue'
+import EditDialog from './components/edit-dialog/EditDialog.vue'
 
 export default {
   mixins: [MapFormMixin],
@@ -26,7 +27,10 @@ export default {
     skills: [],
     jobs: [],
     vehicles: [],
-    pickPlaceSupported: true
+    pickPlaceSupported: true,
+    showEditDialog: false,
+    editProp: '',
+    editData: []
   }),
   components: {
     FieldsContainer,
@@ -34,6 +38,7 @@ export default {
     OptimizationDetails,
     JobList,
     VehicleList,
+    EditDialog,
   },
   computed: {
     jobsJSON () {
@@ -121,9 +126,19 @@ export default {
       context.addJob(data)
     })
 
+    // On popup edit click -> edit job
+    EventBus.$on('editJob', (index) => {
+      context.manageJobs(index)
+    })
+
     // On map right click -> addVehicle
     EventBus.$on('addVehicle', (data) => {
       context.addVehicle(data)
+    })
+
+    // On popup edit click -> edit vehicle
+    EventBus.$on('editVehicle', (index) => {
+      context.manageVehicles(index)
     })
 
     // When a marker drag finishes, update
@@ -200,6 +215,13 @@ export default {
         context.showError(this.$t('optimization.couldNotResolveTheJobLocation'), { timeout: 0 })
       })
     },
+    // open editJobs dialog
+    manageJobs(jobId) {
+      this.editProp = 'jobs'
+      this.editData = this.jobs
+      this.showEditDialog = true
+      EventBus.$emit('showEditModal', jobId)
+    },
     // when there are no jobs and button in sidebar is clicked
     addJobFromMap() {
       this.showInfo(this.$t('placeInput.clickOnTheMapToSelectAPlace'))
@@ -222,6 +244,13 @@ export default {
         console.log(err)
         context.showError(this.$t('optimization.couldNotResolveTheVehicleLocation'), { timeout: 0 })
       })
+    },
+    // open editVehicles dialog
+    manageVehicles(vehicleId) {
+      this.editProp = 'vehicles'
+      this.editData = this.vehicles
+      this.showEditDialog = true
+      EventBus.$emit('showEditModal', vehicleId)
     },
     // when there are no vehicles and button in sidebar is clicked
     addVehicleFromMap() {
