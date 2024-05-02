@@ -32,6 +32,7 @@ export default {
     pickPlaceSupported: true,
     showEditDialog: false,
     editProp: '',
+    editId: 0,
     editData: [],
     isImportOpen: false,
     expectedImport: '',
@@ -135,7 +136,6 @@ export default {
 
     // On popup edit click -> edit job
     EventBus.$on('editJob', (index) => {
-      // TODO: fix index -> jobId received as undefined in editDialog
       context.manageJobs(index)
     })
 
@@ -146,7 +146,6 @@ export default {
 
     // On popup edit click -> edit vehicle
     EventBus.$on('editVehicle', (index) => {
-      // TODO: fix index -> jobId received as undefined in editDialog
       context.manageVehicles(index)
     })
 
@@ -237,7 +236,7 @@ export default {
       this.editProp = 'jobs'
       this.editData = this.jobs
       this.showEditDialog = true
-      EventBus.$emit('showEditModal', jobId)
+      this.editId = jobId
     },
     // when there are no jobs and button in sidebar is clicked
     addJobFromMap() {
@@ -267,7 +266,7 @@ export default {
       this.editProp = 'vehicles'
       this.editData = this.vehicles
       this.showEditDialog = true
-      EventBus.$emit('showEditModal', vehicleId)
+      this.editId = vehicleId
     },
     // when there are no vehicles and button in sidebar is clicked
     addVehicleFromMap() {
