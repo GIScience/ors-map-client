@@ -19,8 +19,6 @@ export default {
     isEditOpen: true,
     editId: 0,
     editData: [],
-    editJobs: [],
-    editVehicles: [],
     editSkills: [],
     jobsBox: false,
     vehiclesBox: false,
@@ -124,6 +122,13 @@ export default {
       const filter = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
       return filter.mapping
     },
+    editSkillsJson () {
+      const jsonSkills = []
+      for (const skill of this.editSkills) {
+        jsonSkills.push(skill.toJSON())
+      }
+      return jsonSkills
+    },
   },
   created () {
     if (this.editProp === 'jobs') {
@@ -175,8 +180,28 @@ export default {
       } else if (this.vehiclesBox) {
         this.editData = data.vehicles
       }
-      // TODO: check if editData contains skills that are not in editSkills yet
-      //  write in with empty name if not there
+
+      let importedSkill = []
+      for (const d of this.editData) {
+        importedSkill.push(...d.skills)
+      }
+      let newSkillIds = []
+      for (const s of importedSkill) {
+        if (!newSkillIds.includes(s.id)) {
+          newSkillIds.push(s.id)
+        }
+      }
+      let editSkillIds = []
+      for (const s of this.editSkills) {
+        editSkillIds.push(s.id)
+      }
+      for (const id of newSkillIds.sort()) {
+        if (!editSkillIds.includes(id)) {
+          this.editSkills.push(new Skill(' Skill from imported ' + this.content.item + ' ' + id, id))
+        }
+      }
+      this.$emit('skillsChanged', this.editSkills)
+      localStorage.setItem('skills', JSON.stringify(this.editSkillsJson))
       this.saveItems()
       this.isImportOpen = false
     },

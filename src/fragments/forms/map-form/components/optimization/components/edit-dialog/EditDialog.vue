@@ -117,7 +117,7 @@
         </v-layout>
       </box>
     </v-dialog>
-    <edit-skills v-if="showSkillManagement" :skills="skills" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
+    <edit-skills v-if="showSkillManagement" :skills="skills" :skills-in-use="editSkillsJson" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
     <optimization-import v-if="isImportOpen" :expected-data="content.expected" @saveOptimizationImport="saveImport"
                          @close="isImportOpen=false"></optimization-import>
   </div>

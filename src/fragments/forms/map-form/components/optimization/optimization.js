@@ -70,6 +70,26 @@ export default {
       }
       return jsonSkills
     },
+    skillsInUse () {
+      let skills = []
+      for (const j of this.jobs) {
+        if (j.skills) {
+          skills.push(...j.skills)
+        }
+      }
+      for (const v of this.vehicles) {
+        if (v.skills) {
+          skills.push(...v.skills)
+        }
+      }
+      let skillIds = []
+      for (const s of skills) {
+        if (s && !skillIds.includes(s.id)) {
+          skillIds.push(s.id)
+        }
+      }
+      return skillIds
+    },
     disabledActions () {
       return appConfig.disabledActionsForOptimization
     }
