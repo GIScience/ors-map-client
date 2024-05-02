@@ -8,6 +8,7 @@ import ProfileSelectorOption from '@/fragments/forms/profile-selector/components
 import EditSkills from '@/fragments/forms/map-form/components/optimization/components/edit-skills/EditSkills.vue'
 import OptimizationImport from '@/fragments/forms/map-form/components/optimization/components/optimization-import/OptimizationImport.vue'
 import {EventBus} from '@/common/event-bus'
+import {integer} from 'vee-validate/dist/rules.esm'
 import Job from '@/models/job'
 import Vehicle from '@/models/vehicle'
 import Skill from '@/models/skill'
@@ -47,6 +48,10 @@ export default {
     editProp: {
       Type: String,
       Required: true
+    },
+    index: {
+      Type: integer,
+      Required: false
     },
     disabledActions: {
       default: () => [],
@@ -134,12 +139,10 @@ export default {
       this.editSkills.push(skill.clone())
     }
 
-    const context = this
-    // edit box is open
-    EventBus.$on('showEditModal', (editId) => {
-      context.isEditOpen = true
-      context.editId = editId
-    })
+    if (this.index > 0) {
+      this.editId = this.index
+    }
+
     // close editJobs box to pick a place from the map
     EventBus.$on('pickAPlace', () => {
       this.closeEditModal()

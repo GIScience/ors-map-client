@@ -70,7 +70,7 @@
         </form-actions>
       </v-layout>
     </v-form>
-    <edit-dialog v-if="showEditDialog" :edit-prop="editProp" :data="editData" :skills="skills"
+    <edit-dialog v-if="showEditDialog" :edit-prop="editProp" :data="editData" :skills="skills" :index="editId"
                  @jobsChanged="jobsChanged" @vehiclesChanged="vehiclesChanged" @skillsChanged="skillsChanged"
                  @close="showEditDialog=false"></edit-dialog>
     <edit-skills v-if="showSkillManagement" :skills="skills" :skills-in-use="skillsInUse" @skillsChanged="skillsChanged" @close="showSkillManagement=false"></edit-skills>
