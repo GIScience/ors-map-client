@@ -106,7 +106,7 @@ export default {
       for (const d of this.data) {
         jsonData.push(d.toGeoJSON())
       }
-      return jsonData
+      return { type: 'FeatureCollection', features: jsonData }
     },
   },
   methods: {

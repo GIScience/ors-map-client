@@ -49,6 +49,25 @@ class Job extends Place {
     })
   }
 
+  static fromGeoJsonObject(jobObject) {
+    let skillObjects = []
+    if (jobObject.properties.skills) {
+      for (let id of jobObject.properties.skills) {
+        skillObjects.push(Skill.getName(id))
+      }
+    }
+    return new Job(jobObject.geometry.coordinates[0], jobObject.geometry.coordinates[1], '', {
+      id: jobObject.properties.id,
+      service: jobObject.properties.service,
+      skills: skillObjects,
+      priority: jobObject.properties.priority,
+      delivery: jobObject.properties.delivery,
+      pickup: jobObject.properties.pickup,
+      time_windows: jobObject.properties.time_windows,
+      resolve: true
+    })
+  }
+
   static fromCsv(csv) {
     const lines = csv.split('\n')
     const header = lines[0].split(',')
@@ -113,7 +132,6 @@ class Job extends Place {
   }
 
   toGeoJSON(stringify = false) {
-    // TODO: fix GeoJSON into proper format
     let props = {
       id: this.id,
       service: this.service,
