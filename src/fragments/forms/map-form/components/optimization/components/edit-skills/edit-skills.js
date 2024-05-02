@@ -16,8 +16,12 @@ export default {
   props: {
     skills: {
       Type: Array[Skill],
-      Required: false
+      Required: true
     },
+    skillsInUse: {
+      Type: Array,
+      Required: true
+    }
   },
   components: {
     OptimizationImport,
@@ -25,7 +29,7 @@ export default {
     Download
   },
   computed: {
-    editSkillsJSON () {
+    editSkillsJson () {
       const jsonSkills = []
       for (const skill of this.editSkills) {
         jsonSkills.push(skill.toJSON())
@@ -62,7 +66,7 @@ export default {
     // save changed skills and emit event to update in component
     saveSkills () {
       this.$emit('skillsChanged', this.editSkills)
-      localStorage.setItem('skills', JSON.stringify(this.editSkillsJSON))
+      localStorage.setItem('skills', JSON.stringify(this.editSkillsJson))
       this.closeSkillsModal()
     },
     // add a new skill
@@ -72,10 +76,13 @@ export default {
     },
     // delete a skill
     removeSkill (id) {
-      // TODO: check if skills is used in any job/vehicle, only allow removal if not
-      this.editSkills.splice(id-1,1)
-      for (const i in this.editSkills) {
-        this.editSkills[i].setId(parseInt(i)+1)
+      if (this.skillsInUse.includes(this.editSkills[id-1].id)) {
+        this.showWarning(this.$t('editSkills.inUse'))
+      } else {
+        this.editSkills.splice(id-1,1)
+        for (const i in this.editSkills) {
+          this.editSkills[i].setId(parseInt(i)+1)
+        }
       }
     },
   }

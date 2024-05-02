@@ -21,12 +21,16 @@
         <v-card @click="editId = i+1" elevation="3" style="margin: 5px;cursor: pointer" v-for="(skill, i) in editSkills" :key="i">
           <v-card-title style="padding-bottom: 0;">
             <div><b>Skill: {{ skill.name }}</b></div>
-            <v-btn v-if="editId === skill.id" class="edit-btn" flat small :style="{background: 'white'}" @click.stop="editId = 0" :title="$t('optimization.edit') + $t('optimization.skill')">
+            <v-btn v-if="editId === skill.id" class="edit-btn" small icon :style="{background: 'white'}" @click.stop="editId = 0" :title="$t('editDialog.keepEdits')">
+              <v-icon color="success">check</v-icon>
+            </v-btn>
+            <v-btn v-else class="edit-btn" small icon :style="{background: 'white'}" @click.stop="editId = skill.id" :title="$t('optimization.edit') + $t('optimization.skill')">
               <v-icon color="primary">edit</v-icon>
             </v-btn>
             <v-btn class="remove-btn" small icon :style="{background: 'white'}" @click.stop="removeSkill(skill.id)" :title="$t('optimization.remove') + $t('optimization.skill')">
               <v-icon color="primary">delete</v-icon>
             </v-btn>
+            <v-chip v-if="skillsInUse.includes(skill.id)" text-color="info" outline disabled>{{ $t('editSkills.inUseShort') }}</v-chip>
           </v-card-title>
           <v-text-field v-model="skill.name" style="padding: 15px" :persistent-hint="true" :hint="'Skill name'"></v-text-field>
         </v-card>
