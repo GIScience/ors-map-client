@@ -108,31 +108,48 @@ export default {
         const parsedJson = JSON.parse(fileContent)
         if (parsedJson && parsedJson.features) {
           fileType = 'geojson'
+          if (this.expectedData === 'jobs') {
+            for (const j of parsedJson.features) {
+              try {
+                newJobs.push(Job.fromGeoJsonObject(j))
+              } catch {
+                this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.jobs'),)
+              }
+            }
+          } else if (this.expectedData === 'vehicles') {
+            for (const v of parsedJson.features) {
+              try {
+                newVehicles.push(Vehicle.fromGeoJsonObject(v))
+              } catch {
+                this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.vehicles'),)
+              }
+            }
+          }
         } else {
           fileType = 'json'
-        }
-        if (this.expectedData === 'jobs') {
-          for (const j of parsedJson) {
-            try {
-              newJobs.push(Job.fromObject(j))
-            } catch {
-              this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.jobs'),)
+          if (this.expectedData === 'jobs') {
+            for (const j of parsedJson) {
+              try {
+                newJobs.push(Job.fromObject(j))
+              } catch {
+                this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.jobs'),)
+              }
             }
-          }
-        } else if (this.expectedData === 'vehicles') {
-          for (const v of parsedJson) {
-            try {
-              newVehicles.push(Vehicle.fromObject(v))
-            } catch {
-              this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.vehicles'),)
+          } else if (this.expectedData === 'vehicles') {
+            for (const v of parsedJson) {
+              try {
+                newVehicles.push(Vehicle.fromObject(v))
+              } catch {
+                this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.vehicles'),)
+              }
             }
-          }
-        } else if (this.expectedData === 'skills') {
-          for (const s of parsedJson) {
-            try {
-              newSkills.push(Skill.fromObject(s))
-            } catch {
-              this.showError(this.$t('optimizationImport.notValidSkill'))
+          } else if (this.expectedData === 'skills') {
+            for (const s of parsedJson) {
+              try {
+                newSkills.push(Skill.fromObject(s))
+              } catch {
+                this.showError(this.$t('optimizationImport.notValidSkill'))
+              }
             }
           }
         }

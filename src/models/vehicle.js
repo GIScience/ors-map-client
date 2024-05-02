@@ -55,6 +55,31 @@ class Vehicle extends Place {
     )
   }
 
+  static fromGeoJsonObject(vObject) {
+    let skillObjects = []
+    if (vObject.properties.skills) {
+      for (let id of vObject.properties.skills) {
+        skillObjects.push(Skill.getName(id))
+      }
+    }
+    return new Vehicle(
+      vObject.geometry.coordinates[0][0],
+      vObject.geometry.coordinates[0][1],
+      '',
+      {
+        id: vObject.properties.id,
+        description: vObject.properties.description,
+        profile: vObject.properties.profile,
+        start: vObject.properties.start,
+        end: vObject.geometry.coordinates[1],
+        capacity: vObject.properties.capacity,
+        skills: skillObjects,
+        time_window: vObject.properties.time_window,
+        resolve: true,
+      }
+    )
+  }
+
   static fromCsv(csv) {
     const lines = csv.split('\n')
     const header = lines[0].split(',')
@@ -125,7 +150,6 @@ class Vehicle extends Place {
   }
 
   toGeoJSON(stringify = false) {
-    // TODO: fix GeoJSON into proper format
     let props = {
       id: this.id,
       description: this.description,
@@ -145,9 +169,9 @@ class Vehicle extends Place {
       props.time_windows = this.time_windows
     }
 
-    const geoJsonData = { type: 'FeatureCollection', features: [
-      { type: 'Feature', geometry: {type: 'Point', coordinates: this.start }, },
-      { type: 'Feature', geometry: { type: 'Point', coordinates: this.end }, }], properties: props }
+    const geoJsonData = { type: 'Feature',
+      geometry: { type: 'MultiPoint', coordinates: [this.start, this.end] },
+      properties: props }
     return stringify ? JSON.stringify(geoJsonData) : geoJsonData
   }
 
