@@ -35,6 +35,10 @@
           <v-text-field v-model="skill.name" style="padding: 15px" :persistent-hint="true" :hint="'Skill name'"></v-text-field>
         </v-card>
         <v-layout row :wrap="$lowResolution">
+          <v-flex v-if="editSkills.length" text-xs-left xs12 sm5 md7 :class="{'ml-2': $vuetify.breakpoint.smAndDown, 'mb-2': $lowResolution}">
+            <v-btn :block="$lowResolution" color="primary" :title="$t('settings.restoreDefaults')"
+                   @click="clearData">{{ $t('optimization.clear') + $t('optimization.skills') }}</v-btn>
+          </v-flex>
           <v-spacer class="hidden-md-and-down"></v-spacer>
           <v-flex text-xs-right xs12 sm5 md7 :class="{'ml-2': $vuetify.breakpoint.smAndDown, 'mb-2': $lowResolution}">
             <v-btn :block="$lowResolution" color="primary" :title="$t('settings.restoreDefaults')"
