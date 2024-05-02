@@ -56,6 +56,25 @@ export default {
       this.$emit('close')
     },
 
+    clearData () {
+      let wholeSkillsInUse = []
+      let notInUse = []
+      for (const skill of this.editSkills) {
+        if (this.skillsInUse.includes(skill.id)) {
+          wholeSkillsInUse.push(skill.clone())
+        } else {
+          notInUse.push(skill.id)
+        }
+      }
+      if (notInUse.length === 0) {
+        this.showWarning(this.$t('editSkills.allSkills') + this.$t('editSkills.inUseShort'))
+      } else {
+        this.showInfo(this.$t('editSkills.onlyDelete') + this.$t('editSkills.inUseShort'))
+        this.editId = 0
+        this.editSkills = wholeSkillsInUse
+      }
+    },
+
     // save skills from JSON
     saveSkillImport(data) {
       this.editSkills = data.skills

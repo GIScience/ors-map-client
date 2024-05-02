@@ -103,6 +103,10 @@
           {{ content.maxWarning }}
         </v-alert>
         <v-layout row :wrap="$lowResolution">
+          <v-flex v-if="data.length" text-xs-left xs12 sm5 md7 :class="{'ml-2': $vuetify.breakpoint.smAndDown, 'mb-2': $lowResolution}">
+            <v-btn :block="$lowResolution" color="primary" :title="$t('settings.restoreDefaults')"
+                   @click="clearData">{{ $t('optimization.clear') + content.expected }}</v-btn>
+          </v-flex>
           <v-spacer class="hidden-md-and-down"></v-spacer>
           <v-flex text-xs-right xs12 sm5 md7 :class="{'ml-2': $vuetify.breakpoint.smAndDown, 'mb-2': $lowResolution}">
             <v-btn :block="$lowResolution" color="primary" :title="$t('settings.restoreDefaults')"

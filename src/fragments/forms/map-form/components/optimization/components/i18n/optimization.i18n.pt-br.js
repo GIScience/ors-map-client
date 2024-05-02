@@ -19,6 +19,7 @@ export default {
     add: 'Add ',
     addFromMap: 'From map, add ',
     remove: 'Remove ',
+    clear: 'Clear all ',
     duplicate: 'Duplicate ',
     nothingToManage: ' not available. Import or use button to add from map',
     skills: 'Skills',

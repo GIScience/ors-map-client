@@ -170,8 +170,12 @@ export default {
       this.$emit('contentUploaded', data)
     },
 
-    // TODO: add clear all data option,
-    //  possibly also a recover option?
+    clearData () {
+      this.editId = 0
+      this.editData = []
+    },
+
+    // TODO: add a recover option?
 
     // save jobs from JSON
     saveImport(data) {
