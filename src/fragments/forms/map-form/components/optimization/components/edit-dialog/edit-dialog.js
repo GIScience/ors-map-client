@@ -73,7 +73,7 @@ export default {
           item: 'Job',
           class: Job,
           maxLength: 50,
-          maxWarning: this.$t('optimization.maxWarning') + '50' + this.$t('optimization.jobs'),
+          maxWarning: this.$t('optimization.maxWarning') + '50 ' + this.$t('optimization.jobs'),
           import: this.$t('optimization.import') + this.$t('optimization.jobs'),
           edit: this.$t('optimization.edit') + this.$t('optimization.job'),
           add: this.$t('optimization.add') + this.$t('optimization.job'),
@@ -91,7 +91,7 @@ export default {
           item: 'Vehicle',
           class: Vehicle,
           maxLength: 3,
-          maxWarning: this.$t('optimization.maxWarning') + '3' + this.$t('optimization.vehicles'),
+          maxWarning: this.$t('optimization.maxWarning') + '3 ' + this.$t('optimization.vehicles'),
           import: this.$t('optimization.import') + this.$t('optimization.vehicles'),
           edit: this.$t('optimization.edit') + this.$t('optimization.vehicle'),
           add: this.$t('optimization.add') + this.$t('optimization.vehicle'),
@@ -117,6 +117,15 @@ export default {
     sameStartEndPoint () {
       const id = this.editId - 1
       return this.editData[id].start[0] === this.editData[id].end[0] && this.editData[id].start[1] === this.editData[id].end[1]
+    },
+    // check if one of the items does not have a location
+    hasEmptyLocation () {
+      for (let item of this.editData) {
+        if (item.location === null || item.start === null) {
+          return true
+        }
+      }
+      return false
     },
     profilesMapping () {
       const filter = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
@@ -210,18 +219,22 @@ export default {
       this.isImportOpen = false
     },
 
-    // check if one of the jobs does not have a location
-    hasEmptyLocation () {
-      for (let item of this.editData) {
-        if (item.location === null || item.start === null) {
-          return true
+    // check if vehicle has only a time window start and no time window end
+    validateTimeWindow () {
+      for (let index in this.editData) {
+        if (this.editData[index].time_window[0] === '') {
+          this.editData[index].time_window = []
+        } else if (this.editData[index].time_window.length === 1 || this.editData[index].time_window[1] === '') {
+          this.editData[index].time_window[1] = this.editData[index].time_window[0] + 3600
         }
       }
-      return false
     },
     // save items and close the edit box, show error if one or more of them has an empty location
     saveItems () {
-      if (this.hasEmptyLocation()) {
+      if (this.content.item === 'Vehicle') {
+        this.validateTimeWindow()
+      }
+      if (this.hasEmptyLocation) {
         this.showError(this.content.emptyLoc, {timeout: 3000})
       } else {
         this.$emit(this.content.changedEvent, this.editData)

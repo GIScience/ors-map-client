@@ -72,7 +72,7 @@
                 <v-item-group v-if="vehiclesBox" style="margin: 10px 15px 0 0; border: solid lightgray 1px; padding: 10px">
                   <v-layout class="profile-options-wrapper">
                     <v-item v-for="profile in profilesMapping" :key="profile.slug">
-                      <v-flex style="min-width:45px">
+                      <v-flex style="min-width: 48px">
                         <profile-selector-option @profileSelected="profileSelected" :profile="profile"
                                                  :active-profile-slug="vehicleProfile(i)" :active-vehicle-type="editData[i].profile"
                                                  :is-vehicle="true">
@@ -83,8 +83,11 @@
                 </v-item-group>
                 <v-text-field v-if="vehiclesBox" v-model.number="editData[i].capacity[0]" type="number" style="width: 50%" :persistent-hint="true" :hint="'Capacity'"></v-text-field>
               </v-layout>
-              <v-text-field v-if="jobsBox" v-model.number="editData[i].service" :persistent-hint="true" :hint="'Service time (in seconds)'"></v-text-field>
-              <v-text-field v-if="vehiclesBox" v-model="editData[i].time_window" :persistent-hint="true" :hint="'Working time window (in seconds passed since 00:00 or timestamp)'"></v-text-field>
+              <v-text-field v-if="jobsBox" v-model.number="editData[i].service" :persistent-hint="true" :hint="$t('editDialog.service')"></v-text-field>
+              <v-layout row-wrap>
+                <v-text-field v-if="vehiclesBox" v-model.number="editData[i].time_window[0]" style="padding-right: 10px" :persistent-hint="true" :hint="$t('editDialog.start') + $t('editDialog.timeWindow')"></v-text-field>
+                <v-text-field v-if="vehiclesBox" v-model.number="editData[i].time_window[1]" style="padding-right: 10px" :persistent-hint="true" :hint="$t('editDialog.end') + $t('editDialog.timeWindow')"></v-text-field>
+              </v-layout>
 
               <v-select v-model="editData[i].skills" :items="editSkills" :item-text="'name'" :item-value="'id'" return-object chips deletable-chips
                         :persistent-hint="true" :hint="content.skills" multiple :menu-props="{'closeOnContentClick':true}">
@@ -99,7 +102,7 @@
             </div>
           </v-card-text>
         </v-card>
-        <v-alert v-if="editData.length >= content.maxLength" :value="true" type="warning" style="color:black" >
+        <v-alert v-if="editData.length > content.maxLength" :value="true" type="warning" style="color:black" >
           {{ content.maxWarning }}
         </v-alert>
         <v-layout row :wrap="$lowResolution">
