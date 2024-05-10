@@ -29,15 +29,20 @@
             {{marker.label}}
             <template v-if="modeIsOptimization">
               <div style="width: 100%; height: auto" v-for="(j, i) in marker.job" :key="i">
-                <div v-if="['amount','service','skills','time_window','amount'].includes(i)">
-                  <v-chip v-if="j && j.length && i !== 'skills'">{{i}}: {{j}}</v-chip>
-                  <v-chip v-if="j && j.length && i === 'skills'">{{i}}: {{ skillIds(j) }}</v-chip>
+                <div v-if="['delivery','pickup','skills','time_window','service'].includes(i)">
+                  <v-chip v-if="j && j.length === 'service'" style="flex: auto">{{ $t(`optimization.${i}`) }}: {{ j }}</v-chip>
+                  <v-chip v-else-if="j && j.length && i !== 'skills' && j[0] !== 0" style="flex: auto">{{ $t(`optimization.${i}`) }}: {{ j[0] }}</v-chip>
+                  <v-chip v-else-if="j && j.length  && i === 'skills'" style="flex: auto">
+                    {{ $t(`optimization.${i}`) }}: {{ skillIds(j) }}
+                  </v-chip>
                 </div>
               </div>
               <div style="width: 100%; height: auto" v-for="(v, i) in marker.vehicle" :key="i">
                 <div v-if="['amount','service','skills','time_window','profile','capacity', 'description'].includes(i)">
-                  <v-chip v-if="v && v.length && i !== 'skills'">{{i}}: {{v}}</v-chip>
-                  <v-chip v-if="v && v.length && i === 'skills'">{{i}}: {{ skillIds(v) }}</v-chip>
+                  <v-chip v-if="v && v.length && i === 'time_window' && v[0] > 0 " style="flex: auto">{{ $t(`optimization.${i}`) }}: {{ v[0] }} - {{ v[1] }}</v-chip>
+                  <v-chip v-else-if="v && v.length && i === 'capacity'">{{ $t(`optimization.${i}`) }}: {{ v[0] }}</v-chip>
+                  <v-chip v-else-if="v && v.length && i === 'skills'">{{ $t(`optimization.${i}`) }}: {{ skillIds(v) }}</v-chip>
+                  <v-chip v-else-if="v && v.length">{{i}}: {{v}}</v-chip>
                 </div>
               </div>
             </template>
