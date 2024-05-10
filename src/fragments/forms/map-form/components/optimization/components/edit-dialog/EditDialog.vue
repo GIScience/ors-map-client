@@ -16,6 +16,9 @@
           <v-icon style="margin-right: 5px;">map</v-icon>
           {{ content.fromMap }}
         </v-btn>
+        <v-alert v-if="editData.length > content.maxLength" :value="true" type="warning" style="color:black" >
+          {{ content.maxWarning }}
+        </v-alert>
         <v-card @click="editId = i+1" elevation="3" style="margin: 5px;cursor: pointer" v-for="(d, i) in editData" :key="i">
           <v-card-title style="padding-bottom: 0;">
             <div v-if="jobsBox"><b>Job {{ d.id }} - {{ d.location ? d.location[0].toPrecision(8) + ',' + d.location[1].toPrecision(8) : 'please add Location'}}</b></div>
@@ -102,9 +105,6 @@
             </div>
           </v-card-text>
         </v-card>
-        <v-alert v-if="editData.length > content.maxLength" :value="true" type="warning" style="color:black" >
-          {{ content.maxWarning }}
-        </v-alert>
         <v-layout row :wrap="$lowResolution">
           <v-flex v-if="data.length" text-xs-left xs12 sm5 md7 :class="{'ml-2': $vuetify.breakpoint.smAndDown, 'mb-2': $lowResolution}">
             <v-btn :block="$lowResolution" color="primary" :title="$t('settings.restoreDefaults')"
