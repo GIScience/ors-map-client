@@ -1,14 +1,12 @@
 import MapFormMixin from '../map-form-mixin'
 import MapViewDataBuilder from '@/support/map-data-services/map-view-data-builder'
 import FieldsContainer from '@/fragments/forms/fields-container/FieldsContainer'
-import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import FormActions from '@/fragments/forms/map-form/components/form-actions/FormActions'
 import {EventBus} from '@/common/event-bus'
 import { Optimization } from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
-import appConfig from '@/config/app-config'
 import Job from '@/models/job'
 import Vehicle from '@/models/vehicle'
 import Skill from '@/models/skill'
@@ -89,9 +87,6 @@ export default {
         }
       }
       return skillIds
-    },
-    disabledActions () {
-      return appConfig.disabledActionsForOptimization
     }
   },
   created () {
@@ -360,31 +355,6 @@ export default {
         }
       }
     },
-    // return start and end if they differ, otherwise only the start location of vehicle
-    vehicleLocations (vehicle) {
-      if (vehicle.end) {
-        return [vehicle.start, vehicle.end]
-      } else {
-        return vehicle.start
-      }
-    },
-    /**
-     * Update the value in the filter when a parameter is updated in form-fields
-     * and then change the app route
-     *
-     * @param {*} data
-     */
-    filterUpdated (data) {
-      if (data.value !== undefined) {
-        if (data.parentIndex !== undefined) {
-          const parent = OrsFilterUtil.getFilterByAncestryAndItemIndex(data.parentIndex, data.index)
-          parent.value = data.value
-        } else {
-          this.OrsMapFiltersAccessor[data.index].value = data.value
-        }
-      }
-      this.updateAppRoute()
-    },
     /**
      * Request and draw a route based on the value of multiples places input
      * @returns {Promise}
@@ -434,7 +404,6 @@ export default {
     /**
      * Handle the route places error response displaying the correct message
      * @param {*} result
-     * @param {*} args
      */
     handleOptimizeJobsError (result) {
       this.$root.appHooks.run('beforeHandleOptimizationError', result)
