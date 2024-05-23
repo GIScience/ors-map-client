@@ -187,26 +187,10 @@ export default {
         let id = data.placeInputId
         // pickEditSource indicates which property the place should fill
         if (data.pickEditSource === 'jobs') {
-          if (id > context.jobs.length) {
-            let job = Job.fromPlace(data.place)
-            job.setId(id)
-            context.jobs.push(job)
-          } else {
-            context.jobs[data.pickPlaceIndex].location = data.place.coordinates
-          }
+          context.setJobLocation(id, data)
           context.manageJobs(id)
         } else if (data.pickEditSource === 'vehicleStart') {
-          if (id > context.vehicles.length) {
-            let v = Vehicle.fromPlace(data.place)
-            v.setId(id)
-            context.vehicles.push(v)
-          } else {
-            const v = context.vehicles[data.pickPlaceIndex]
-            if (v.end[0] === v.start[0] && v.end[1] === v.start[1]) {
-              context.vehicles[data.pickPlaceIndex].end = data.place.coordinates
-            }
-            context.vehicles[data.pickPlaceIndex].start = data.place.coordinates
-          }
+          context.setVehicleStartLocation(id, data)
           context.manageVehicles(id)
         } else if (data.pickEditSource === 'vehicleEnd') {
           this.vehicles[data.pickPlaceIndex].end = data.place.coordinates
@@ -335,6 +319,38 @@ export default {
         }
       }
       this.updateAppRoute()
+    },
+    /**
+     * Set location of job with id from given data or create new Job
+     * @param id
+     * @param data
+     */
+    setJobLocation(id, data){
+      if (id > this.jobs.length) {
+        let job = Job.fromPlace(data.place)
+        job.setId(id)
+        this.jobs.push(job)
+      } else {
+        this.jobs[data.pickPlaceIndex].location = data.place.coordinates
+      }
+    },
+    /**
+     * Set start location of vehicle with id from given data or create new Job
+     * @param id
+     * @param data
+     */
+    setVehicleStartLocation(id, data){
+      if (id > this.vehicles.length) {
+        let v = Vehicle.fromPlace(data.place)
+        v.setId(id)
+        this.vehicles.push(v)
+      } else {
+        const v = this.vehicles[data.pickPlaceIndex]
+        if (v.end[0] === v.start[0] && v.end[1] === v.start[1]) {
+          this.vehicles[data.pickPlaceIndex].end = data.place.coordinates
+        }
+        this.vehicles[data.pickPlaceIndex].start = data.place.coordinates
+      }
     },
     /**
      * After each change on the map search we redirect the user to the built target app route
