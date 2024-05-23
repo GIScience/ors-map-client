@@ -62,7 +62,7 @@
             </div>
           </template>
         </v-tooltip>
-        <form-actions :place-inputs="jobs.length" :disabled-actions="disabledActions"
+        <form-actions :place-inputs="jobs.length"
                       @addPlaceInput="addPlaceInput"
                       @clearPlaces="clearPlaces"
                       @reverseRoute="reverseRoute"
