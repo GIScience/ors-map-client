@@ -219,6 +219,12 @@ class Place {
     })
   }
 
+  static fromJob(job) {
+    return new Place(job.location[0], job.location[1], '', {
+      placeId: job.id
+    })
+  }
+
   /**
    * Get place models that are filled
    * @returns {Array} of filled places
