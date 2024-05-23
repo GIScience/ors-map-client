@@ -7,6 +7,7 @@ import { Optimization } from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
+import Place from '@/models/place'
 import Job from '@/models/job'
 import Vehicle from '@/models/vehicle'
 import Skill from '@/models/skill'
@@ -341,19 +342,65 @@ export default {
      * url synchronized with the current map status
      */
     updateAppRoute () {
-      let localCoords = this.jobs.map(j => j.coordinates)
-      const appRouteData = this.$store.getters.appRouteData
-      let urlCoords = appRouteData.places.map(urlJ => urlJ.coordinates)
-      if (JSON.stringify(localCoords) !== JSON.stringify(urlCoords) || JSON.stringify(this.vehiclesJSON) !== JSON.stringify(appRouteData.options.vehicles)) {
-        const jobs = this.jobs
-        const vehicles = this.vehiclesJSON
-        this.$store.commit('mode', constants.modes.optimization)
-        const appMode = new AppMode(this.$store.getters.mode)
-        const route = appMode.getRoute(jobs, {vehicles: vehicles})
-        if (Object.keys(route.params).length > 1) {// params contains data and placeName? props
-          this.$router.push(route)
+      this.$store.commit('mode', constants.modes.optimization)
+      const appMode = new AppMode(this.$store.getters.mode)
+      let jobLocations = []
+      let jobProps = []
+      for (const job of this.jobs) {
+        jobLocations.push(Place.fromJob(job))
+        jobProps.push(this.getPropsFromJob(job))
+      }
+      const route = appMode.getRoute(jobLocations, {vehicles: this.vehiclesJSON, jobProps: jobProps})
+      if (Object.keys(route.params).length > 1) {// params contains data and placeName? props
+        this.$router.push(route)
+      }
+    },
+    getPropsFromJob (job) {
+      let jobProps = {id: job.id}
+      if (job.skills.length) {
+        let skillIds = []
+        for (const skill of job.skills) {
+          skillIds.push(skill.id)
+        }
+        skillIds.sort()
+        jobProps.skills = skillIds
+      }
+      for (const prop of ['service', 'priority', 'delivery', 'pickup', 'time_windows']) {
+        if (job[prop].length && job[prop][0] !== 0) {
+          jobProps[prop] = job[prop]
         }
       }
+      return jobProps
+    },
+    parseProps(jobProps) {
+      if (!jobProps) {
+        return undefined
+      }
+      let parsedProps = []
+      for (const j of jobProps) {
+        let parsedJobProps = {id: j.id}
+        for (const prop of ['service', 'priority', 'delivery', 'pickup', 'time_windows']) {
+          if (j[prop]) {
+            parsedJobProps[prop] = j[prop]
+          }
+        }
+        let propSkills = []
+        for (const s of j.skills) {
+          let skillIds = []
+          for (const skill of this.skills) {
+            skillIds.push(skill.id)
+          }
+          if (skillIds.includes(s)) {
+            propSkills.push(this.skills[s-1])
+          } else {
+            propSkills.push(new Skill('Skill from added ' + this.$t('optimization.job') + ' ' + j.id, s))
+          }
+        }
+        parsedJobProps.skills = propSkills
+
+        parsedProps.push(parsedJobProps)
+      }
+      return parsedProps
     },
     /**
      * Request and draw a route based on the value of multiples places input
@@ -435,9 +482,9 @@ export default {
         // object reference because it is a prop
         const defaultJobs = this.jobs
         const defaultVehicles = this.vehicles
-        this.jobs = this.$store.getters.appRouteData.jobs
+        const jobProps = this.parseProps(this.$store.getters.appRouteData.options.jobProps)
         const urlVehicles = this.$store.getters.appRouteData.options.vehicles
-        let places = this.$store.getters.appRouteData.places
+        const places = this.$store.getters.appRouteData.places
         let storedJobs = localStorage.getItem('jobs')
         let storedVehicles = localStorage.getItem('vehicles')
         // prioritise data from url, then data from local storage
@@ -459,9 +506,7 @@ export default {
         const jobs = []
         if (places.length > 0) {
           for (const [i, place] of places.entries()) {
-            const job = Job.fromPlace(place)
-            job.setId(i + 1)
-            jobs.push(job)
+            jobs.push(new Job(place.lng, place.lat, place.placeName, jobProps[i]))
           }
         } else if (this.jobs === undefined && storedJobs) {
           for (const job of JSON.parse(storedJobs)) {
