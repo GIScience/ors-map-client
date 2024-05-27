@@ -389,9 +389,6 @@ export default {
       return jobProps
     },
     parseProps(jobProps) {
-      if (!jobProps) {
-        return undefined
-      }
       let parsedProps = []
       for (const j of jobProps) {
         let parsedJobProps = {id: j.id}
@@ -400,19 +397,21 @@ export default {
             parsedJobProps[prop] = j[prop]
           }
         }
-        let propSkills = []
-        for (const s of j.skills) {
-          let skillIds = []
-          for (const skill of this.skills) {
-            skillIds.push(skill.id)
+        if (j.skills) {
+          let propSkills = []
+          for (const s of j.skills) {
+            let skillIds = []
+            for (const skill of this.skills) {
+              skillIds.push(skill.id)
+            }
+            if (skillIds.includes(s)) {
+              propSkills.push(this.skills[s-1])
+            } else {
+              propSkills.push(new Skill('Skill from added ' + this.$t('optimization.job') + ' ' + j.id, s))
+            }
           }
-          if (skillIds.includes(s)) {
-            propSkills.push(this.skills[s-1])
-          } else {
-            propSkills.push(new Skill('Skill from added ' + this.$t('optimization.job') + ' ' + j.id, s))
-          }
+          parsedJobProps.skills = propSkills
         }
-        parsedJobProps.skills = propSkills
 
         parsedProps.push(parsedJobProps)
       }
@@ -534,13 +533,18 @@ export default {
       // places from the appRoute without changing the
       // object reference because it is a prop
       const defaultJobs = this.jobs
-      const jobProps = this.parseProps(this.$store.getters.appRouteData.options.jobProps)
       const places = this.$store.getters.appRouteData.places
+      const propData = this.$store.getters.appRouteData.options.jobProps
       let storedJobs = localStorage.getItem('jobs')
       const jobs = []
-      if (places.length > 0) {
+      if (propData && places.length === propData.length) {
+        const jobProps = this.parseProps(propData)
         for (const [i, place] of places.entries()) {
           jobs.push(new Job(place.lng, place.lat, place.placeName, jobProps[i]))
+        }
+      } else if (places.length > 0) {
+        for (const [i, place] of places.entries()) {
+          jobs.push(new Job(place.lng, place.lat, place.placeName, {id: i+1}))
         }
       } else if (this.jobs === undefined && storedJobs) {
         for (const job of JSON.parse(storedJobs)) {
