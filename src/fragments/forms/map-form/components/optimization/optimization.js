@@ -493,47 +493,63 @@ export default {
      */
     loadData () {
       if (this.$store.getters.mode === constants.modes.optimization) {
-        // Empty the array and populate it with the
-        // places from the appRoute without changing the
-        // object reference because it is a prop
-        const defaultJobs = this.jobs
-        const defaultVehicles = this.vehicles
-        const jobProps = this.parseProps(this.$store.getters.appRouteData.options.jobProps)
-        const urlVehicles = this.$store.getters.appRouteData.options.vehicles
-        const places = this.$store.getters.appRouteData.places
-        let storedJobs = localStorage.getItem('jobs')
-        let storedVehicles = localStorage.getItem('vehicles')
-        // prioritise data from url, then data from local storage
-        if (urlVehicles) {
-          const vehicles = []
-          for (let v of urlVehicles) {
-            vehicles.push(Vehicle.fromObject(v))
-          }
-          this.vehicles = vehicles
-        } else if (this.vehicles === undefined && storedVehicles) {
-          const vehicles = []
-          for (const v of JSON.parse(storedVehicles)) {
-            vehicles.push(Vehicle.fromObject(v))
-          }
-          this.vehicles = vehicles
-        } else if (this.vehicles === undefined || !this.vehicles.length) {
-          this.vehicles = defaultVehicles
-        }
-        const jobs = []
-        if (places.length > 0) {
-          for (const [i, place] of places.entries()) {
-            jobs.push(new Job(place.lng, place.lat, place.placeName, jobProps[i]))
-          }
-        } else if (this.jobs === undefined && storedJobs) {
-          for (const job of JSON.parse(storedJobs)) {
-            jobs.push(Job.fromObject(job))
-          }
-        }
-        this.jobs = jobs
-        if (!this.jobs.length) {
-          this.jobs = defaultJobs
-        }
+        this.loadVehicles()
+        this.loadJobs()
         this.optimizeJobs()
+      }
+    },
+
+    /**
+     * Load data of vehicles
+     * prioritizing url data over storage data
+     */
+    loadVehicles() {
+      const defaultVehicles = this.vehicles
+      const urlVehicles = this.$store.getters.appRouteData.options.vehicles
+      let storedVehicles = localStorage.getItem('vehicles')
+      // prioritise data from url, then data from local storage
+      if (urlVehicles) {
+        const vehicles = []
+        for (let v of urlVehicles) {
+          vehicles.push(Vehicle.fromObject(v))
+        }
+        this.vehicles = vehicles
+      } else if (this.vehicles === undefined && storedVehicles) {
+        const vehicles = []
+        for (const v of JSON.parse(storedVehicles)) {
+          vehicles.push(Vehicle.fromObject(v))
+        }
+        this.vehicles = vehicles
+      } else if (this.vehicles === undefined || !this.vehicles.length) {
+        this.vehicles = defaultVehicles
+      }
+    },
+
+    /**
+     * Load data of jobs
+     * prioritizing url data over storage data
+     */
+    loadJobs() {
+      // Empty the array and populate it with the
+      // places from the appRoute without changing the
+      // object reference because it is a prop
+      const defaultJobs = this.jobs
+      const jobProps = this.parseProps(this.$store.getters.appRouteData.options.jobProps)
+      const places = this.$store.getters.appRouteData.places
+      let storedJobs = localStorage.getItem('jobs')
+      const jobs = []
+      if (places.length > 0) {
+        for (const [i, place] of places.entries()) {
+          jobs.push(new Job(place.lng, place.lat, place.placeName, jobProps[i]))
+        }
+      } else if (this.jobs === undefined && storedJobs) {
+        for (const job of JSON.parse(storedJobs)) {
+          jobs.push(Job.fromObject(job))
+        }
+      }
+      this.jobs = jobs
+      if (!this.jobs.length) {
+        this.jobs = defaultJobs
       }
     },
     // when jobs are changed update jobs and generate new route
