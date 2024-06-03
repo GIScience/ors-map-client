@@ -297,6 +297,27 @@ const geoUtils = {
   },
 
   /**
+   * Get readable time output from seconds after midnight
+   * @param {number} timeInput
+   * @returns {string} - e.g. 00:30
+   */
+  getHumanizedTime: (timeInput) => {
+    if (timeInput > 86400) return geoUtils.getHumanizedTimestamp(timeInput)
+    // convert to date to read out seconds as hours and minutes
+    const date = new Date(Date.UTC(0, 0, 0, 0, 0, timeInput))
+    return `${date.toISOString().substring(11, 16)}`
+  },
+  /**
+   * Get readable date output from timestamp
+   * @param {number} ts - timestamp
+   * @returns {string} - e.g. 2020-01-15T20:00
+   */
+  getHumanizedTimestamp: (ts) => {
+    const date = new Date(ts * 1000)
+    return `${date.toISOString().substring(0, 16)}`
+  },
+
+  /**
    * Get the seconds segments (days, hours, minutes, seconds) or empty string for each segment
    * @returns {String} formatted tool tip, durationSegments
    * @param {Number} seconds duration in seconds
