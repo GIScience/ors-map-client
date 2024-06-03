@@ -69,42 +69,40 @@ export default {
   },
   computed: {
     content () {
-      if (this.jobsBox) {
-        return {
-          item: 'Job',
-          class: Job,
-          maxLength: 50,
-          maxWarning: this.$t('optimization.maxWarning') + '50 ' + this.$t('optimization.jobs'),
-          import: this.$t('optimization.import') + this.$t('optimization.jobs'),
-          edit: this.$t('optimization.edit') + this.$t('optimization.job'),
-          add: this.$t('optimization.add') + this.$t('optimization.job'),
-          duplicate: this.$t('optimization.duplicate') + this.$t('optimization.job'),
-          remove: this.$t('optimization.remove') + this.$t('optimization.job'),
-          header: this.$t('optimization.manage') + this.$t('optimization.jobs'),
-          fromMap: this.$t('optimization.addFromMap') + this.$t('optimization.job'),
-          expected: 'jobs',
-          changedEvent: 'jobsChanged',
-          skills: 'Skills needed for this Job',
-          emptyLoc: 'Added job does not have a valid location',
-        }
-      } else if (this.vehiclesBox) {
-        return {
-          item: 'Vehicle',
-          class: Vehicle,
-          maxLength: 3,
-          maxWarning: this.$t('optimization.maxWarning') + '3 ' + this.$t('optimization.vehicles'),
-          import: this.$t('optimization.import') + this.$t('optimization.vehicles'),
-          edit: this.$t('optimization.edit') + this.$t('optimization.vehicle'),
-          add: this.$t('optimization.add') + this.$t('optimization.vehicle'),
-          duplicate: this.$t('optimization.duplicate') + this.$t('optimization.vehicle'),
-          remove: this.$t('optimization.remove') + this.$t('optimization.vehicle'),
-          header: this.$t('optimization.manage') + this.$t('optimization.vehicles'),
-          fromMap: this.$t('optimization.addFromMap') + this.$t('optimization.vehicle'),
-          expected: 'vehicles',
-          changedEvent: 'vehiclesChanged',
-          skills: 'Skills this Vehicle has',
-          emptyLoc: 'Added vehicle does not have a valid start location',
-        }
+      let item
+      let items
+      let itemClass
+      let maxLength
+      let skillsMessage
+
+      if(this.jobsBox){
+        item = 'job'
+        itemClass = Job
+        maxLength = 50
+        skillsMessage = 'Skills needed for this job'
+      } else if(this.vehiclesBox){
+        item = 'vehicle'
+        itemClass = Vehicle
+        maxLength = 3
+        skillsMessage = 'Skills this vehicle has'
+      }
+      items = item + 's'
+      return {
+        item: item.charAt(0).toUpperCase() + item.slice(1),
+        class: itemClass,
+        maxLength: maxLength,
+        maxWarning: this.$t('optimization.maxWarning') + maxLength + this.$t(`optimization.${items}`),
+        import: this.$t('optimization.import') + this.$t(`optimization.${items}`),
+        edit: this.$t('optimization.edit') + this.$t(`optimization.${item}`),
+        add: this.$t('optimization.add') + this.$t(`optimization.${item}`),
+        duplicate: this.$t('optimization.duplicate') + this.$t(`optimization.${item}`),
+        remove: this.$t('optimization.remove') + this.$t(`optimization.${item}`),
+        header: this.$t('optimization.manage') + this.$t(`optimization.${items}`),
+        fromMap: this.$t('optimization.addFromMap') + this.$t(`optimization.${item}`),
+        expected: items,
+        changedEvent: `${items}Changed`,
+        skills: skillsMessage,
+        emptyLoc: `Added ${item} does not have a valid location`,
       }
     },
     headerText () {
