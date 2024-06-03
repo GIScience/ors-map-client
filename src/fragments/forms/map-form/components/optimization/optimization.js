@@ -382,7 +382,7 @@ export default {
         for (const skill of job.skills) {
           skillIds.push(skill.id)
         }
-        skillIds.sort()
+        skillIds.sort((a,b) => a-b)
         jobProps.skills = skillIds
       }
       for (const prop of ['service', 'priority', 'delivery', 'pickup']) {

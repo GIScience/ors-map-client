@@ -212,7 +212,7 @@ export default {
       for (const s of this.editSkills) {
         editSkillIds.push(s.id)
       }
-      for (const id of newSkillIds.sort()) {
+      for (const id of newSkillIds.sort((a,b) => a-b)) {
         if (!editSkillIds.includes(id)) {
           this.editSkills.push(new Skill(' Skill from imported ' + this.content.item + ' ' + id, id))
         }
