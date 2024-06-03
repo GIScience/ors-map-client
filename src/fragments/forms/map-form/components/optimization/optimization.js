@@ -7,6 +7,7 @@ import { Optimization } from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
+import appConfig from '@/config/app-config'
 import Place from '@/models/place'
 import Job from '@/models/job'
 import Vehicle from '@/models/vehicle'
@@ -88,6 +89,9 @@ export default {
         }
       }
       return skillIds
+    },
+    disabledActions () {
+      return appConfig.disabledActionsForOptimization
     }
   },
   created () {
