@@ -13,6 +13,7 @@ import Job from '@/models/job'
 import Vehicle from '@/models/vehicle'
 import Skill from '@/models/skill'
 import {vehicleColors} from '@/support/optimization-utils'
+import geoUtils from '@/support/geo-utils'
 
 export default {
   data: () => ({
@@ -177,6 +178,11 @@ export default {
 
     contentUploaded (data) {
       this.$emit('contentUploaded', data)
+    },
+
+    humanisedTime (time) {
+      const data = geoUtils.getHumanizedTimeAndDistance({duration: time},  this.$t('global.units'))
+      return data.duration
     },
 
     clearData () {

@@ -1,3 +1,5 @@
+import geoUtils from '@/support/geo-utils'
+
 export default {
   data: () => ({
     jobExtended: [true]
@@ -19,6 +21,10 @@ export default {
         }
       }
       return ids
-    }
+    },
+    humanisedTime (time) {
+      const data = geoUtils.getHumanizedTimeAndDistance({duration: time},  this.$t('global.units'))
+      return data.duration
+    },
   }
 }

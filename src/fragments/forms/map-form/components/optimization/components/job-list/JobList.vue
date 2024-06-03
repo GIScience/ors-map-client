@@ -5,7 +5,7 @@
           <div slot="header" style="padding-bottom: 0;"><v-icon style="padding: 0 5px 0 0">work</v-icon><b>Job {{j.id}} - {{ j.location[0].toPrecision(8) }}, {{ j.location[1].toPrecision(8)}}</b></div>
           <v-card-text>
             <template v-for="prop in ['delivery','pickup','skills','time_window','service']">
-              <v-chip v-if="j[prop] && prop === 'service'" style="flex: auto">{{ $t(`optimization.${prop}`) }}: {{ j[prop] }}</v-chip>
+              <v-chip v-if="j[prop] && prop === 'service'" style="flex: auto">{{ $t(`optimization.${prop}`) }}: {{ humanisedTime(j[prop]) }}</v-chip>
               <v-chip v-else-if="j[prop] && prop !== 'skills' && j[prop][0] !== 0" style="flex: auto">{{ $t(`optimization.${prop}`) }}: {{ j[prop][0] }}</v-chip>
               <v-chip v-else-if="j[prop] && prop === 'skills' && j[prop].length" style="flex: auto">
                 {{ $t(`optimization.${prop}`) }}: {{ skillIds(j) }}
