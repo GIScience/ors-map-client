@@ -122,7 +122,7 @@ class Job extends Place {
       for (const skill of this.skills) {
         skillIds.push(skill.id)
       }
-      skillIds.sort()
+      skillIds.sort((a,b) => a-b)
       out['skills'] = skillIds
     }
     if (this.time_windows.length) {
@@ -144,7 +144,7 @@ class Job extends Place {
       for (const skill of this.skills) {
         skillIds.push(skill.id)
       }
-      skillIds.sort()
+      skillIds.sort((a,b) => a-b)
       props.skills = skillIds
     }
     if (this.time_windows) {
