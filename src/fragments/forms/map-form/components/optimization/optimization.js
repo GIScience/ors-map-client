@@ -385,8 +385,8 @@ export default {
         skillIds.sort()
         jobProps.skills = skillIds
       }
-      for (const prop of ['service', 'priority', 'delivery', 'pickup', 'time_windows']) {
-        if (job[prop].length && job[prop][0] !== 0) {
+      for (const prop of ['service', 'priority', 'delivery', 'pickup']) {
+        if (job[prop] && job[prop] !== 0 && job[prop][0] !== 0) {
           jobProps[prop] = job[prop]
         }
       }
