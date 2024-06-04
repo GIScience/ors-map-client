@@ -1,6 +1,6 @@
 import {vehicleIcon} from '@/support/map-data-services/ors-filter-util'
 import {vehicleColors} from '@/support/optimization-utils'
-import geoUtils from "@/support/geo-utils";
+import geoUtils from '@/support/geo-utils'
 
 export default {
   data: () => ({

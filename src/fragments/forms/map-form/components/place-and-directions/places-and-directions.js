@@ -1,5 +1,4 @@
 import MapFormMixin from '../map-form-mixin'
-import MapFormMixin from '../map-form-mixin'
 import MapViewDataBuilder from '@/support/map-data-services/map-view-data-builder'
 import FieldsContainer from '@/fragments/forms/fields-container/FieldsContainer'
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'

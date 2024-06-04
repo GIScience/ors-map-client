@@ -1,4 +1,4 @@
-import geoUtils from "@/support/geo-utils";
+import geoUtils from '@/support/geo-utils'
 
 export default {
   data: () => ({
