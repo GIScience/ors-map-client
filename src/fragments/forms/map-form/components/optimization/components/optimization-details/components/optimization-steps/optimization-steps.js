@@ -1,6 +1,3 @@
-import {EventBus} from '@/common/event-bus'
-import constants from '@/resources/constants'
-
 export default {
   name: 'OptimizationSteps',
   props: {
@@ -38,20 +35,6 @@ export default {
 
       }
       return symbol
-    },
-    stepClicked (step) {
-      // const sectionTitle = this.$t('steps.step')
-      const highlightData = {step: step}
-      console.log(highlightData)
-      // const segmentData = this.buildExtraHighlightPolylineData(step, index)
-      // highlightData.sections.push(segmentData)
-      EventBus.$emit('highlightStep', highlightData)
-    },
-    buildExtraHighlightPolylineData (step) {
-      const color = constants.segmentHighlightColor
-      const label = step.instruction.replace(/<(?:.|\n)*?>/gm, '')
-      const intervals = [step.way_points]
-      return { intervals, color, label }
     }
   }
 }

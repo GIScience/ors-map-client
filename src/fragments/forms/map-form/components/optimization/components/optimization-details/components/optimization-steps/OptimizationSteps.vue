@@ -3,10 +3,7 @@
     <div class="step" v-for="(step, index) in steps" :key="'step-'+index">
       <template v-if="step.type">
         <div class="instruction" >
-          <v-icon v-html="typeSymbol(step.type)"></v-icon> <span v-html="step.type"></span><b> {{step.id}} </b>
-<!--          <v-btn :max-width="30" style="height:15px" fab icon small @click="stepClicked(step)" :title="$t('steps.gotoStep')">-->
-<!--            <v-icon>remove_red_eye</v-icon>-->
-<!--          </v-btn>-->
+          <v-icon>{{typeSymbol(step.type)}}</v-icon> <span>{{step.type}}</span><b> {{step.id}} </b>
         </div>
       </template>
       <div v-if="step.distance">{{$t('global.distance')}}: <b>{{step.distance}} </b></div>
