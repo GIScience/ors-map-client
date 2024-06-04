@@ -85,10 +85,9 @@ export default {
     },
     availableDownloadFormats () {
       const context = this
-      const available = this.lodash.filter(this.downloadFormats, (f) => {
+      return this.lodash.filter(this.downloadFormats, (f) => {
         return context.downloadFormatsSupported.includes(f.value)
       })
-      return available
     },
     // low priority TODO: read jobs and vehicles out of MapView data instead of prop
     dataJson () {
