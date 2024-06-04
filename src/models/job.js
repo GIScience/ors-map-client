@@ -132,14 +132,14 @@ class Job extends Place {
   }
 
   toGeoJSON(stringify = false) {
-    let props = {
-      id: this.id,
-      service: this.service,
-      delivery: this.delivery,
-      pickup: this.pickup
+    let props = {label: 'Job ' + this.id}
+    for (const p in ['id', 'service', 'delivery', 'pickup', 'time_windows']) {
+      if (this[p] && this[p].length) {
+        props[p] = this[p]
+      }
     }
 
-    if (this.skills) {
+    if (this.skills && this.skills.length) {
       let skillIds = []
       for (const skill of this.skills) {
         skillIds.push(skill.id)
@@ -147,11 +147,8 @@ class Job extends Place {
       skillIds.sort((a,b) => a-b)
       props.skills = skillIds
     }
-    if (this.time_windows) {
-      props.time_windows = this.time_windows
-    }
 
-    const geoJsonData = { type: 'Feature', geometry: { type: 'Point', coordinates: this.location }, properties: props }
+    const geoJsonData = { type: 'Feature',  properties: props, geometry: { type: 'Point', coordinates: this.location }}
     return stringify ? JSON.stringify(geoJsonData) : geoJsonData
   }
 

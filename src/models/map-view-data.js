@@ -160,7 +160,6 @@ class MapViewData {
       geoJsonData.features.push(routeFeature)
     }
 
-    // TODO: OPTIMIZATION - build Points with properties for jobs and vehicles
     // Build and add places/points features to the GeoJSON
     for (const plaKey in this.places) {
       const placeFeature = {
@@ -184,6 +183,14 @@ class MapViewData {
         geometry: polygon.geometry
       }
       geoJsonData.features.push(polygonFeature)
+    }
+
+    for (const jobKey in this.jobs) {
+      geoJsonData.features.push(this.jobs[jobKey].toGeoJSON())
+    }
+
+    for (const vKey in this.vehicles) {
+      geoJsonData.features.push(this.vehicles[vKey].toGeoJSON())
     }
 
     // Return GeoJSON with features
