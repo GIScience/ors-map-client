@@ -268,7 +268,7 @@ const geoUtils = {
   /**
    * Get humanized tool tip string
    * @param {*} data {duration: Number, distance: Number, unit: String}
-   * @returns {String} formatted tool tip
+   * @returns {Object} formatted tool tip
    */
   getHumanizedTimeAndDistance: (data, translations) => {
     let humanizedDistance = null
