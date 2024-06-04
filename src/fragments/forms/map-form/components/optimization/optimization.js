@@ -443,6 +443,7 @@ export default {
               if (data) {
                 MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
                   context.mapViewData = mapViewData
+                  context.mapViewData.mode = constants.modes.optimization
                   context.mapViewData.jobs = context.jobs
                   context.mapViewData.vehicles = context.vehicles
                   EventBus.$emit('mapViewDataChanged', mapViewData)

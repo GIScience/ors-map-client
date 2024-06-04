@@ -150,14 +150,14 @@ class Vehicle extends Place {
   }
 
   toGeoJSON(stringify = false) {
-    let props = {
-      id: this.id,
-      description: this.description,
-      profile: this.profile,
-      capacity: this.capacity,
+    let props = {label: 'Vehicle ' + this.id}
+    for (const p in ['id', 'description', 'profile', 'capacity']) {
+      if (this[p] && this[p].length) {
+        props[p] = this[p]
+      }
     }
 
-    if (this.skills) {
+    if (this.skills && this.skills.length) {
       let skillIds = []
       for (const skill of this.skills) {
         skillIds.push(skill.id)
@@ -169,9 +169,8 @@ class Vehicle extends Place {
       props.time_windows = this.time_windows
     }
 
-    const geoJsonData = { type: 'Feature',
-      geometry: { type: 'MultiPoint', coordinates: [this.start, this.end] },
-      properties: props }
+    const geoJsonData = { type: 'Feature', properties: props,
+      geometry: { type: 'MultiPoint', coordinates: [this.start, this.end] }}
     return stringify ? JSON.stringify(geoJsonData) : geoJsonData
   }
 

@@ -180,7 +180,7 @@ export default {
           if (context.downloadFormat === 'json') {
             // Get the ORS mapViewData model and stringify it
             if (this.mapViewData) {
-              jsonData = JSON.stringify(context.mapViewData)
+              jsonData = JSON.stringify(this.parseMapView(context.mapViewData))
             } else {
               jsonData = JSON.stringify(context.dataJson)
             }
@@ -228,6 +228,26 @@ export default {
           reject(error)
         }
       })
+    },
+
+    parseMapView (mapViewData) {
+      let localMapViewData = mapViewData
+
+      if (mapViewData.mode === constants.modes.optimization) {
+        let jsonJobs = []
+        for (const job of mapViewData.jobs) {
+          jsonJobs.push(job.toJSON())
+        }
+        localMapViewData.jobs = jsonJobs
+
+        let jsonVehicles = []
+        for (const v of mapViewData.vehicles) {
+          jsonVehicles.push(v.toJSON())
+        }
+        localMapViewData.vehicles = jsonVehicles
+      }
+
+      return localMapViewData
     },
 
     copyToClipboard () {
