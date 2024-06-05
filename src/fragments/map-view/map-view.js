@@ -910,7 +910,7 @@ export default {
       // Only marker changes that are a result of user interaction are treated here.
       // With vue2-leaflet version 2.5.2 the event.originalEvent is not  an instance of
       // window.PointerEvent anymore and use parent window.MouseEvent instead
-      if (event.originalEvent instanceof window.MouseEvent || event.originalEvent instanceof window.TouchEvent) {
+      if (event.originalEvent?.type === 'mousemove') {
         clearTimeout(this.markerMoveTimeoutId)
         this.markerMoveTimeoutId = setTimeout(() => {
           this.markerDragEnd(event)
