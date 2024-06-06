@@ -81,7 +81,7 @@ export default {
           let parts = file.name.split('.')
           let extension = parts.at(-1)
           let type = file.type || extension
-          context.catchAndParseFile(content, type, new Date().getTime())
+          context.catchAndParseFile(content, type)
         }
       })
       this.$refs.importRouteDropzone.removeAllFiles()
@@ -93,76 +93,103 @@ export default {
      * @param {*} type
      */
     catchAndParseFile (fileContent, type) {
-      let fileType = null
-      let newJobs = []
-      let newVehicles = []
+      let parsedInfos = null
       let newSkills = []
+
       if (type.indexOf('csv') > -1) {
-        fileType = 'csv'
-        if (this.expectedData === 'jobs') {
-          newJobs = Job.fromCsv(fileContent)
-        } else if (this.expectedData === 'vehicles') {
-          newVehicles = Vehicle.fromCsv(fileContent)
-        }
+        parsedInfos = this.parseCsvFile(fileContent)
       } else if (type.indexOf('json') > -1 || type.indexOf('geojson') > -1) {
         const parsedJson = JSON.parse(fileContent)
         if (parsedJson && parsedJson.features) {
-          fileType = 'geojson'
-          if (this.expectedData === 'jobs') {
-            for (const j of parsedJson.features) {
-              try {
-                newJobs.push(Job.fromGeoJsonObject(j))
-              } catch {
-                this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.jobs'),)
-              }
-            }
-          } else if (this.expectedData === 'vehicles') {
-            for (const v of parsedJson.features) {
-              try {
-                newVehicles.push(Vehicle.fromGeoJsonObject(v))
-              } catch {
-                this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.vehicles'),)
-              }
-            }
-          }
+          parsedInfos = this.parseGeojsonFile(parsedJson)
         } else {
-          fileType = 'json'
-          if (this.expectedData === 'jobs') {
-            for (const j of parsedJson) {
-              try {
-                newJobs.push(Job.fromObject(j))
-              } catch {
-                this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.jobs'),)
-              }
-            }
-          } else if (this.expectedData === 'vehicles') {
-            for (const v of parsedJson) {
-              try {
-                newVehicles.push(Vehicle.fromObject(v))
-              } catch {
-                this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.vehicles'),)
-              }
-            }
-          } else if (this.expectedData === 'skills') {
-            for (const s of parsedJson) {
-              try {
-                newSkills.push(Skill.fromObject(s))
-              } catch {
-                this.showError(this.$t('optimizationImport.notValidSkill'))
-              }
-            }
-          }
+          parsedInfos= this.parseJsonFile(parsedJson)
+          newSkills = parsedInfos.newSkills
         }
       }
-      if (fileType) {
-        this.$emit('saveOptimizationImport', {jobs: newJobs, vehicles: newVehicles, skills: newSkills})
+
+      if (parsedInfos) {
+        this.$emit('saveOptimizationImport', {jobs: parsedInfos.newJobs, vehicles: parsedInfos.newVehicles, skills: newSkills})
         this.closeImporter()
       } else {
         this.showError(this.$t('routeImporter.failedToLoadFile'), {timeout: 0})
         this.$emit('failedToImportFile')
       }
     },
+    parseCsvFile(fileContent) {
+      let newJobs = []
+      let newVehicles = []
 
+      if (this.expectedData === 'jobs') {
+        newJobs = Job.fromCsv(fileContent)
+      } else if (this.expectedData === 'vehicles') {
+        newVehicles = Vehicle.fromCsv(fileContent)
+      }
+      return {newJobs, newVehicles}
+    },
+    /**
+     * Parse geojson file
+     * @param parsedJson
+     * @returns {{newJobs: *[], newVehicles: *[]}}
+     */
+    parseGeojsonFile(parsedJson) {
+      let newJobs = []
+      let newVehicles = []
+
+      if (this.expectedData === 'jobs') {
+        for (const j of parsedJson.features) {
+          try {
+            newJobs.push(Job.fromGeoJsonObject(j))
+          } catch {
+            this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.jobs'),)
+          }
+        }
+      } else if (this.expectedData === 'vehicles') {
+        for (const v of parsedJson.features) {
+          try {
+            newVehicles.push(Vehicle.fromGeoJsonObject(v))
+          } catch {
+            this.showError(this.$t('optimizationImport.notValid') + this.$t('optimization.vehicles'),)
+          }
+        }
+      }
+      return {newJobs, newVehicles}
+    },
+    /**
+     * Parse json file
+     * @param parsedJson
+     * @returns {{newJobs: *[], newVehicles: *[], newSkills: *[]}}
+     */
+    parseJsonFile(parsedJson) {
+      let newJobs = []
+      let newVehicles = []
+      let newSkills = []
+
+      if (this.expectedData === 'jobs') {
+        newJobs = this.parseJsonObjects(parsedJson, newJobs, Job, 'jobs')
+      } else if (this.expectedData === 'vehicles') {
+        newVehicles = this.parseJsonObjects(parsedJson, newVehicles, Vehicle, 'vehicles')
+      } else if (this.expectedData === 'skills') {
+        for (const s of parsedJson) {
+          try {
+            newSkills.push(Skill.fromObject(s))
+          } catch {
+            this.showError(this.$t('optimizationImport.notValidSkill'))
+          }
+        }
+      }
+      return {newJobs, newVehicles, newSkills}
+    },
+    parseJsonObjects(parsedJson, newObjects, ObjectClass, item) {
+      for (const j of parsedJson) {
+        try {
+          newObjects.push(ObjectClass.fromObject(j))
+        } catch {
+          this.showError(this.$t('optimizationImport.notValid') + this.$t(`optimization.${item}`),)
+        }
+      }
+      return newObjects
+    },
     // save jobs from pasted JSON and return error if not a valid JSON
     savePastedJson() {
       try {
