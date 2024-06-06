@@ -1,7 +1,7 @@
 <template>
   <box background="white" no-shadow>
     <div slot="header">
-      <download :download-formats-supported="['json', 'geojson']" :map-view-data="localMapViewData"></download>
+      <download :download-formats-supported="['json', 'geojson']" :map-view-data="mapViewData"></download>
       <share :url="shareUrl"></share>
       <print :map-view-data="localMapViewData"></print>
       <h3>{{$t('optimizationDetails.optimizationDetails')}}</h3>
