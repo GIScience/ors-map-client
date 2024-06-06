@@ -110,7 +110,7 @@ class MapViewData {
    * @returns {MapViewData} mapViewAta
    */
   static buildFromGeoJson (geoJson) {
-    const mapViewAta = new MapViewData()
+    const mapViewData = new MapViewData()
 
     for (const fKey in geoJson.features) {
       const feature = {
@@ -121,23 +121,29 @@ class MapViewData {
       }
       switch (geoJson.features[fKey].geometry.type) {
         case 'LineString':
-          mapViewAta.routes.push(feature)
+          mapViewData.routes.push(feature)
           break
         case 'Point': {
-          const lat = feature.geometry.coordinates[0]
-          const lon = feature.geometry.coordinates[1]
-          // TODO: OPTIMIZATION - load jobs and vehicles
-          const place = new Place(lat, lon, feature.properties.label, { properties: feature.properties })
-          feature.latlngs = feature.geometry.coordinates
-          mapViewAta.places.push(place)
+          if (feature.properties.label.includes('Job')) {
+            mapViewData.jobs.push(Job.fromGeoJsonObject(feature))
+          } else {
+            const lat = feature.geometry.coordinates[0]
+            const lon = feature.geometry.coordinates[1]
+            const place = new Place(lat, lon, feature.properties.label, { properties: feature.properties })
+            feature.latlngs = feature.geometry.coordinates
+            mapViewData.places.push(place)
+          }
           break
         }
+        case 'MultiPoint':
+          mapViewData.vehicles.push(Vehicle.fromGeoJsonObject(feature))
+          break
         case 'Polygon':
-          mapViewAta.polygons.push(feature)
+          mapViewData.polygons.push(feature)
           break
       }
     }
-    return mapViewAta
+    return mapViewData
   }
 
   /**
