@@ -225,6 +225,11 @@ class Place {
     })
   }
 
+  static fromGeoJsonObject(placeObject) {
+    return new Place(placeObject.geometry.coordinates[0], placeObject.geometry.coordinates[1],
+      placeObject.properties.label, { properties: placeObject.properties })
+  }
+
   /**
    * Get place models that are filled
    * @returns {Array} of filled places
