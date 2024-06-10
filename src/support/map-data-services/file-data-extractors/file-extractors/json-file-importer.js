@@ -26,7 +26,11 @@ class JsonImporter {
         mapViewData = parsingResult
 
         if (!mapViewData.mode) {
-          mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
+          if (mapViewData.jobs.length > 0) {
+            mapViewData.mode = constants.modes.optimization
+          } else {
+            mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
+          }
         }
 
         // Make sure that the mode defined
