@@ -127,11 +127,8 @@ class MapViewData {
           if (feature.properties.label.includes('Job')) {
             mapViewData.jobs.push(Job.fromGeoJsonObject(feature))
           } else {
-            const lat = feature.geometry.coordinates[0]
-            const lon = feature.geometry.coordinates[1]
-            const place = new Place(lat, lon, feature.properties.label, { properties: feature.properties })
+            mapViewData.places.push(Place.fromGeoJsonObject(feature))
             feature.latlngs = feature.geometry.coordinates
-            mapViewData.places.push(place)
           }
           break
         }
