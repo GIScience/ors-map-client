@@ -46,7 +46,8 @@ const constants = {
   importableModes: {
     roundTrip: 'roundtrip',
     directions: 'directions',
-    isochrones: 'isochrones'
+    isochrones: 'isochrones',
+    optimization: 'optimization'
   },
   services: {
     directions: 'directions',

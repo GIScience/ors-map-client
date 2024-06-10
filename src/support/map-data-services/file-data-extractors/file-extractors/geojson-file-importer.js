@@ -30,6 +30,8 @@ class GeoJsonImporter {
           mapViewData.timestamp = context.options.timestamp
           if (mapViewData.polygons.length > 0) {
             mapViewData.mode = constants.modes.isochrones
+          } else if (mapViewData.jobs.length > 0) {
+            mapViewData.mode = constants.modes.optimization
           } else {
             mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
           }
