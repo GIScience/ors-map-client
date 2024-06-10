@@ -126,50 +126,36 @@ class Vehicle extends Place {
   }
 
   toJSON(stringify = false) {
-    let out = {
+    let props = {
+      start: this.start,
+      end: this.end,
       id: this.id,
       description: this.description,
       profile: this.profile,
-      start: this.start,
-      end: this.end,
       capacity: this.capacity,
+      skills: this.skills,
+      time_window: this.time_window
     }
+    let out = this.checkProps(props)
 
-    if (this.skills.length) {
-      let skillIds = []
-      for (const skill of this.skills) {
-        skillIds.push(skill.id)
-      }
-      skillIds.sort((a,b) => a-b)
-      out.skills = skillIds
-    }
-    if (this.time_window.length) {
-      out.time_window = this.time_window
-    }
     return stringify ? JSON.stringify(out) : out
   }
 
   toGeoJSON(stringify = false) {
-    let props = {label: 'Vehicle ' + this.id}
-    for (const p in ['id', 'description', 'profile', 'capacity']) {
-      if (this[p] && this[p].length) {
-        props[p] = this[p]
-      }
+    let props = {
+      start: this.start,
+      end: this.end,
+      id: this.id,
+      description: this.description,
+      profile: this.profile,
+      capacity: this.capacity,
+      skills: this.skills,
+      time_window: this.time_window
     }
+    let out = this.checkProps(props)
+    out.label = 'Vehicle ' + this.id
 
-    if (this.skills && this.skills.length) {
-      let skillIds = []
-      for (const skill of this.skills) {
-        skillIds.push(skill.id)
-      }
-      skillIds.sort((a,b) => a-b)
-      props.skills = skillIds
-    }
-    if (this.time_windows) {
-      props.time_windows = this.time_windows
-    }
-
-    const geoJsonData = { type: 'Feature', properties: props,
+    const geoJsonData = { type: 'Feature', properties: out,
       geometry: { type: 'MultiPoint', coordinates: [this.start, this.end] }}
     return stringify ? JSON.stringify(geoJsonData) : geoJsonData
   }
@@ -205,6 +191,31 @@ class Vehicle extends Place {
     super.setLngLat(lng, lat)
     this.start = this.coordinates
     this.end = this.coordinates
+  }
+
+  checkProps (props) {
+    let out = {id: props.id, start: props.start}
+    for (const p of ['end', 'description', 'profile', 'time_window']) {
+      if (props[p].length && props[p] !== 0) {
+        out[p] = props[p]
+      }
+    }
+    for (const p of ['capacity']) {
+      if (props[p][0] !== 0) {
+        out[p] = props[p]
+      }
+    }
+
+    if (props.skills.length) {
+      let skillIds = []
+      for (const skill of props.skills) {
+        skillIds.push(skill.id)
+      }
+      skillIds.sort((a,b) => a-b)
+      out.skills = skillIds
+    }
+
+    return out
   }
 }
 
