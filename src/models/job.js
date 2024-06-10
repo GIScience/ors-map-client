@@ -109,46 +109,34 @@ class Job extends Place {
   }
 
   toJSON(stringify = false) {
-    let out = {
-      'id': this.id,
+    let props = {
       'location': this.location,
+      'id': this.id,
       'service': this.service,
+      'skills': this.skills,
       'delivery': this.delivery,
-      'pickup': this.pickup
+      'pickup': this.pickup,
+      'time_windows': this.time_windows
     }
+    let out = this.checkProps(props)
 
-    if (this.skills.length) {
-      let skillIds = []
-      for (const skill of this.skills) {
-        skillIds.push(skill.id)
-      }
-      skillIds.sort((a,b) => a-b)
-      out['skills'] = skillIds
-    }
-    if (this.time_windows.length) {
-      out['time_windows'] = this.time_windows
-    }
     return stringify ? JSON.stringify(out) : out
   }
 
   toGeoJSON(stringify = false) {
-    let props = {label: 'Job ' + this.id}
-    for (const p in ['id', 'service', 'delivery', 'pickup', 'time_windows']) {
-      if (this[p] && this[p].length) {
-        props[p] = this[p]
-      }
+    let props = {
+      'location': this.location,
+      'id': this.id,
+      'service': this.service,
+      'skills': this.skills,
+      'delivery': this.delivery,
+      'pickup': this.pickup,
+      'time_windows': this.time_windows
     }
+    let out = this.checkProps(props)
+    out.label = 'Job ' + this.id
 
-    if (this.skills && this.skills.length) {
-      let skillIds = []
-      for (const skill of this.skills) {
-        skillIds.push(skill.id)
-      }
-      skillIds.sort((a,b) => a-b)
-      props.skills = skillIds
-    }
-
-    const geoJsonData = { type: 'Feature',  properties: props, geometry: { type: 'Point', coordinates: this.location }}
+    const geoJsonData = { type: 'Feature',  properties: out, geometry: { type: 'Point', coordinates: this.location }}
     return stringify ? JSON.stringify(geoJsonData) : geoJsonData
   }
 
@@ -182,6 +170,31 @@ class Job extends Place {
   setLngLat (lng, lat) {
     super.setLngLat(lng, lat)
     this.location = this.coordinates
+  }
+
+  checkProps (props) {
+    let out = {id: props.id, location: props.location}
+    for (const p of ['service', 'time_windows']) {
+      if (props[p].length && props[p] !== 0) {
+        out[p] = props[p]
+      }
+    }
+    for (const p of ['delivery', 'pickup',]) {
+      if (props[p][0] !== 0) {
+        out[p] = props[p]
+      }
+    }
+
+    if (props.skills && props.skills.length) {
+      let skillIds = []
+      for (const skill of props.skills) {
+        skillIds.push(skill.id)
+      }
+      skillIds.sort((a,b) => a-b)
+      out.skills = skillIds
+    }
+
+    return out
   }
 }
 export default Job
