@@ -165,11 +165,11 @@ class Vehicle extends Place {
     const header = ['id', 'start_lng', 'start_lat', 'end_lng', 'end_lat', 'description', 'profile', 'capacity', 'skills', 'time_windows']
     let data = header.join()
     for (let v of vehicles) {
-      v = v.toJSON()
+      let vehicle = v.toJSON()
       let vehicleValues = []
       for (const key of csvKeys) {
-        if (key in v) {
-          vehicleValues.push(v[key].toString())
+        if (key in vehicle) {
+          vehicleValues.push(vehicle[key].toString())
         } else {
           vehicleValues.push('')
         }
