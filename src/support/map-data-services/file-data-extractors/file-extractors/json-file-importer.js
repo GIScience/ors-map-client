@@ -24,14 +24,7 @@ class JsonImporter {
       const parsingResult = context.parseFileContentToMapViewData()
       if (parsingResult) {
         mapViewData = parsingResult
-
-        if (!mapViewData.mode) {
-          if (mapViewData.jobs.length > 0) {
-            mapViewData.mode = constants.modes.optimization
-          } else {
-            mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
-          }
-        }
+        mapViewData = context.setMode(mapViewData)
 
         // Make sure that the mode defined
         // in the imported file/object is valid
@@ -61,6 +54,22 @@ class JsonImporter {
       }
       resolve(mapViewData)
     })
+  }
+
+  /**
+   * Set mode for mapViewData if no mode exist
+   * @param mapViewData
+   * @returns {*} mapViewData with mode
+   */
+  setMode(mapViewData) {
+    if (!mapViewData.mode) {
+      if (mapViewData.jobs.length > 0) {
+        mapViewData.mode = constants.modes.optimization
+      } else {
+        mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
+      }
+    }
+    return mapViewData
   }
 
   /**
