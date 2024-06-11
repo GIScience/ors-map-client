@@ -55,34 +55,21 @@ class OptimizationBuilder {
     let lng = 0
     let ele = 0
     while (index < len) {
-      let b
-      let shift = 0
       let result = 0
-      do {
-        b = encodedPolyline.charAt(index++).charCodeAt(0) - 63 // finds ascii
-        // and subtract it by 63
-        result |= (b & 0x1f) << shift
-        shift += 5
-      } while (b >= 0x20)
+      let decodedLine = this.decodeLine(encodedPolyline, index)
+      result = decodedLine.result
+      index = decodedLine.index
 
       lat += ((result & 1) !== 0 ? ~(result >> 1) : (result >> 1))
-      shift = 0
-      result = 0
-      do {
-        b = encodedPolyline.charAt(index++).charCodeAt(0) - 63
-        result |= (b & 0x1f) << shift
-        shift += 5
-      } while (b >= 0x20)
+      decodedLine = this.decodeLine(encodedPolyline, index)
+      result = decodedLine.result
+      index = decodedLine.index
       lng += ((result & 1) !== 0 ? ~(result >> 1) : (result >> 1))
 
       if (includeElevation) {
-        shift = 0
-        result = 0
-        do {
-          b = encodedPolyline.charAt(index++).charCodeAt(0) - 63
-          result |= (b & 0x1f) << shift
-          shift += 5
-        } while (b >= 0x20)
+        decodedLine = this.decodeLine(encodedPolyline, index)
+        result = decodedLine.result
+        index = decodedLine.index
         ele += ((result & 1) !== 0 ? ~(result >> 1) : (result >> 1))
       }
       try {
@@ -94,6 +81,19 @@ class OptimizationBuilder {
       }
     }
     return points
+  }
+
+  decodeLine(encodedPolyline, index){
+    let b
+    let shift = 0
+    let result = 0
+    do {
+      b = encodedPolyline.charAt(index++).charCodeAt(0) - 63 // finds ascii
+      // and subtract it by 63
+      result |= (b & 0x1f) << shift
+      shift += 5
+    } while (b >= 0x20)
+    return {result, index}
   }
 }
 export default OptimizationBuilder
