@@ -144,8 +144,8 @@ class Job extends Place {
     const csvKeys = ['id', 'location', 'service', 'delivery', 'pickup', 'skills', 'time_windows']
     const header = ['id', 'location_lng', 'location_lat', 'service', 'delivery', 'pickup', 'skills', 'time_windows']
     let data = header.join()
-    for (let job of jobs) {
-      job = job.toJSON()
+    for (let j of jobs) {
+      let job = j.toJSON()
       let jobValues = []
       for (const key of csvKeys) {
         if (key in job) {
