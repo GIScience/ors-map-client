@@ -88,14 +88,6 @@ class Place {
   }
 
   /**
-   * Returns an array containing lat and lng
-   * @returns {Array} containing [lat, lng]
-   */
-  getLatLngArr() {
-    return this.getLngLatArr().reverse()
-  }
-
-  /**
    * Set the suggestions
    * @param {Array} places
    */
