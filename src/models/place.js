@@ -1,9 +1,7 @@
-import {
-  Geocode,
-  ReverseGeocode
-} from '@/support/ors-api-runner'
+import { Geocode, ReverseGeocode } from '@/support/ors-api-runner'
 import GeoUtils from '@/support/geo-utils'
 import lodash from 'lodash'
+
 /**
  * Place model class
  * @param {Number} lat - default null
@@ -69,8 +67,7 @@ class Place {
       return [this.lng, this.lat]
     } else {
       if (this.nameIsNumeric()) {
-        const coords = this.getCoordsFromName()
-        return coords
+        return this.getCoordsFromName()
       } else {
         return [0, 0]
       }
@@ -87,14 +84,6 @@ class Place {
       return GeoUtils.buildLatLong(coords[1], coords[0])
     }
     return GeoUtils.buildLatLong(this.lat, this.lng)
-  }
-
-  /**
-   * Returns an array containing lat and lng
-   * @returns {Array} containing [lat, lng]
-   */
-  getLatLngArr() {
-    return this.getLngLatArr().reverse()
   }
 
   /**
@@ -185,8 +174,7 @@ class Place {
    */
   setCoordsAsName() {
     if (this.lat && this.lng) {
-      const coords = `${this.lat},${this.lng}`
-      this.placeName = coords
+      this.placeName = `${this.lat},${this.lng}`
     }
   }
 
@@ -300,6 +288,8 @@ class Place {
    * Build a place using only lng and lat
    * @param {*} lng
    * @param {*} lat
+   * @param placeName
+   * @param options
    */
   static build(lng, lat, placeName = '', options = {}) {
     return new Place(lng, lat, placeName, options)

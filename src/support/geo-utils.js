@@ -170,15 +170,6 @@ const geoUtils = {
   },
 
   /**
-   * Get marker coordinates
-   * @param {*} marker
-   */
-  getMarkerCoordinates(marker) {
-    const markerCoordinates = lodash.get(marker, 'data.geometry.coordinates')
-    return markerCoordinates
-  },
-
-  /**
    * Calculate geodesic area
    * @param {Array} coords
    */
@@ -209,6 +200,8 @@ const geoUtils = {
   /**
    * Build an HTML marker icon based on parameters
    * @param {String} color
+   * @param index
+   * @param isRoute
    * @returns {Object} markerIcon
    */
   buildMarkerIcon: (color, index, isRoute) => {
@@ -225,13 +218,12 @@ const geoUtils = {
     htmlIconInstance.$mount()
     let markerHtml = htmlIconInstance.$el.innerHTML
 
-    const markerIcon = Leaflet.divIcon({
+    return Leaflet.divIcon({
       className: 'custom-div-icon',
       html: markerHtml,
       iconSize: [30, 42],
       iconAnchor: [15, 42]
     })
-    return markerIcon
   },
 
   /**
@@ -268,6 +260,7 @@ const geoUtils = {
   /**
    * Get humanized tool tip string
    * @param {*} data {duration: Number, distance: Number, unit: String}
+   * @param translations
    * @returns {Object} formatted tool tip
    */
   getHumanizedTimeAndDistance: (data, translations) => {
@@ -325,18 +318,18 @@ const geoUtils = {
 
   /**
    * Get the seconds segments (days, hours, minutes, seconds) or empty string for each segment
-   * @param {*} data {duration: Number, distance: Number, unit: String}
-   * @returns {String} formatted tool tip
+   * @returns {{hours: (string|string), seconds: (string|string), minutes: (string|string), days: (*|string)}} formatted tool tip
+   * @param seconds
+   * @param translations
    */
   getDurationInSegments: (seconds, translations) => {
     const durationObj = moment.duration(seconds, 'seconds') // the duration value is expected to be always in seconds
-    let durationSegments = {
+    return {
       days: durationObj._data.days > 0 ? durationObj._data.days + translations.days : '',
       hours: durationObj._data.hours > 0 ? durationObj._data.hours + ' ' + translations.hours : '',
       minutes: durationObj._data.minutes > 0 ? durationObj._data.minutes + ' ' + translations.min : '',
       seconds: durationObj._data.seconds > 0 ? durationObj._data.seconds + ' ' + translations.s : ''
     }
-    return durationSegments
   },
 
   /**
@@ -574,8 +567,7 @@ const geoUtils = {
    * @see {@link http://geomalgorithms.com/a03-_inclusion.html Inclusion of a Point in a Polygon} by Dan Sunday.
    */
   isOverLine: (p0, p1, p2) => {
-    let val = ((p1.lng - p0.lng) * (p2.lat - p0.lat) - (p2.lng - p0.lng) * (p1.lat - p0.lat))
-    return val
+    return ((p1.lng - p0.lng) * (p2.lat - p0.lat) - (p2.lng - p0.lng) * (p1.lat - p0.lat))
   },
 
   /**
