@@ -91,26 +91,32 @@ class Vehicle extends Place {
 
       for (const k in header){
         let parsedLine
-        if (header[k] !== 'description' || header[k] !== 'profile') {
+        const input = header[k]
+        if (input !== 'description' || input !== 'profile') {
           parsedLine = Number(currentLine[k])
         } else {
           parsedLine = currentLine[k]
         }
-
-        if (header[k] === 'start_lng' || header[k] === 'end_lng') {
-          obj[header[k].split('_')[0]] = [parsedLine]
-        } else if (header[k] === 'start_lat' || header[k] === 'end_lat') {
-          obj[header[k].split('_')[0]].push(parsedLine)
-        } else if (['skills', 'capacity', 'time_window'].includes(header[k])) {
-          obj[header[k]] = [parsedLine]
-        } else {
-          obj[header[k]] = parsedLine
-        }
+        obj = this.createObject(input, parsedLine)
       }
       vehicles.push(Vehicle.fromObject(obj))
     }
 
     return vehicles
+  }
+
+  createObject(input, parsedLine) {
+    let obj = {}
+    if (input === 'start_lng' || input === 'end_lng') {
+      obj[input.split('_')[0]] = [parsedLine]
+    } else if (input === 'start_lat' || input === 'end_lat') {
+      obj[input.split('_')[0]].push(parsedLine)
+    } else if (['skills', 'capacity', 'time_window'].includes(input)) {
+      obj[input] = [parsedLine]
+    } else {
+      obj[input] = parsedLine
+    }
+    return obj
   }
 
   clone() {
