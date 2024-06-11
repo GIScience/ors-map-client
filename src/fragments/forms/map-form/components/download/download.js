@@ -176,59 +176,66 @@ export default {
       const context = this
       return new Promise((resolve, reject) => {
         try {
-          if (context.downloadFormat === 'json') {
-            // Get the ORS mapViewData model and stringify it
-            if (this.mapViewData) {
-              jsonData = JSON.stringify(this.parseMapView(context.mapViewData))
-            } else {
-              jsonData = JSON.stringify(context.dataJson)
-            }
-            resolve(jsonData)
-          } else if (context.downloadFormat === 'ors-gpx') {
-            // If the format is ors-gpx, run anew request with the format being 'gpx'
-            context.getORSGpx().then((orsGpx) => {
-              resolve(orsGpx)
-            }).catch(error => {
-              reject(error)
-            })
-          } else if (context.downloadFormat === 'to-gpx') {
-            const geoJSON = context.mapViewData.getGeoJson()
-            // Use the third party utility to convert geojson to gpx
-            const toGPX = toGpx(geoJSON)
-            resolve(toGPX)
-          } else if (context.downloadFormat === 'geojson') {
-            if (this.mapViewData) {
-              jsonData = context.mapViewData.getGeoJson()
-            } else {
-              jsonData = context.dataGeoJson
-            }
-            const jsonStr = JSON.stringify(jsonData)
-            resolve(jsonStr)
-          } else if (context.downloadFormat === 'kml') {
-            const routeTitle = context.originName.length > 0 ? `${context.originName} -> ${context.destinationName}` : context.$t('download.documentTitle')
-            const kmlOptions = {
-              documentName: routeTitle,
-              documentDescription: constants.orsKmlDocumentDescription
-            }
-            jsonData = context.mapViewData.getGeoJson()
-            // Use the third party utility to convert geojson to kml
-            const toKML = toKml(jsonData, kmlOptions)
-            resolve(toKML)
-          } else if (context.downloadFormat === 'csv') {
-            let csvData
-            if (this.editProp === 'jobs') {
-              csvData = Job.toCsv(this.data)
-            } else if (this.editProp === 'vehicles') {
-              csvData = Vehicle.toCsv(this.data)
-            }
-            resolve(csvData)
+          switch (context.downloadFormat) {
+            case 'json':
+              // Get the ORS mapViewData model and stringify it
+              if (this.mapViewData) {
+                jsonData = JSON.stringify(this.parseMapView(context.mapViewData))
+              } else {
+                jsonData = JSON.stringify(context.dataJson)
+              }
+              resolve(jsonData)
+              break
+            case 'ors-gpx':
+              // If the format is ors-gpx, run anew request with the format being 'gpx'
+              context.getORSGpx().then((orsGpx) => {
+                resolve(orsGpx)
+              }).catch(error => {
+                reject(error)
+              })
+              break
+            case 'to-gpx':
+              // Use the third party utility to convert geojson to gpx
+              resolve(toGpx(context.mapViewData.getGeoJson()))
+              break
+            case 'geojson':
+              if (this.mapViewData) {
+                jsonData = context.mapViewData.getGeoJson()
+              } else {
+                jsonData = context.dataGeoJson
+              }
+              resolve(JSON.stringify(jsonData))
+              break
+            case 'kml':
+              resolve(this.buildKmlData())
+              break
+            case 'csv':
+              resolve(this.buildCsvData())
           }
         } catch (error) {
           reject(error)
         }
       })
     },
-
+    buildKmlData() {
+      const routeTitle = this.originName.length > 0 ? `${this.originName} -> ${this.destinationName}` : this.$t('download.documentTitle')
+      const kmlOptions = {
+        documentName: routeTitle,
+        documentDescription: constants.orsKmlDocumentDescription
+      }
+      let jsonData = this.mapViewData.getGeoJson()
+      // Use the third party utility to convert geojson to kml
+      return toKml(jsonData, kmlOptions)
+    },
+    buildCsvData() {
+      let csvData
+      if (this.editProp === 'jobs') {
+        csvData = Job.toCsv(this.data)
+      } else if (this.editProp === 'vehicles') {
+        csvData = Vehicle.toCsv(this.data)
+      }
+      return csvData
+    },
     parseMapView (mapViewData) {
       let localMapViewData = mapViewData
 
@@ -258,19 +265,6 @@ export default {
         this.showError(this.$t('download.copiedToClipboardFailed'), {timeout: 3000})
       },)
     },
-    /**
-     * Get the response data routes and make sure that the geometry format is geojson
-     * @returns {Array} of route objects
-     */
-    getOrsRoutesJson () {
-      let orsRoutes = []
-      // Retrieve the route data
-      if (this.mapViewData && this.mapViewData.routes) {
-        orsRoutes = Object.assign({}, this.mapViewData.routes)
-      }
-      return orsRoutes
-    },
-
     /**
      * Get the ors gpx text running a new request
      * using the same args but changing the format to `gpx`
