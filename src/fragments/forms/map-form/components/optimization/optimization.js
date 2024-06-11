@@ -3,7 +3,7 @@ import MapViewDataBuilder from '@/support/map-data-services/map-view-data-builde
 import FieldsContainer from '@/fragments/forms/fields-container/FieldsContainer'
 import FormActions from '@/fragments/forms/map-form/components/form-actions/FormActions'
 import {EventBus} from '@/common/event-bus'
-import { Optimization } from '@/support/ors-api-runner'
+import {Optimization} from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
@@ -392,6 +392,21 @@ export default {
       }
       return jobProps
     },
+    parsePropSkills(propsOfJob) {
+      let propSkills = []
+      for (const s of propsOfJob.skills) {
+        let skillIds = []
+        for (const skill of this.skills) {
+          skillIds.push(skill.id)
+        }
+        if (skillIds.includes(s)) {
+          propSkills.push(this.skills[s - 1])
+        } else {
+          propSkills.push(new Skill('Skill from added ' + this.$t('optimization.job') + ' ' + propsOfJob.id, s))
+        }
+      }
+      return propSkills
+    },
     parseProps(jobProps) {
       let parsedProps = []
       for (const j of jobProps) {
@@ -402,19 +417,7 @@ export default {
           }
         }
         if (j.skills) {
-          let propSkills = []
-          for (const s of j.skills) {
-            let skillIds = []
-            for (const skill of this.skills) {
-              skillIds.push(skill.id)
-            }
-            if (skillIds.includes(s)) {
-              propSkills.push(this.skills[s-1])
-            } else {
-              propSkills.push(new Skill('Skill from added ' + this.$t('optimization.job') + ' ' + j.id, s))
-            }
-          }
-          parsedJobProps.skills = propSkills
+          parsedJobProps.skills = this.parsePropSkills(j)
         }
 
         parsedProps.push(parsedJobProps)
