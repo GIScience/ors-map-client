@@ -88,7 +88,7 @@ class MapViewDataBuilder {
         // to avoid having to resolve each place coordinates to a placeName again
         // If there is no places in appRouteData (dealing with a route import, for example)
         // nothing happens because appRouteData.places will be an empty array
-        if (mapViewData.mode === constants.modes.directions) {
+        if (mapViewData.mode !== constants.modes.optimization) {
           for (const key in appRouteData.places) {
             if (mapViewData.places[key]) {
               mapViewData.places[key].placeName = appRouteData.places[key].placeName
