@@ -2,7 +2,7 @@
 <div>
   <box background="white" v-if="hasRoutes" custom-class="expansion-box" no-shadow>
     <div slot="header">
-      <download :map-view-data="mapViewData" ></download>
+      <download :download-formats-supported="['json','geojson','ors-gpx','to-gpx','kml']" :map-view-data="mapViewData" ></download>
       <share :url="shareUrl"></share>
       <print :map-view-data="mapViewData"></print>
       <h3>{{$t('routeDetails.routeDetails')}}</h3>
