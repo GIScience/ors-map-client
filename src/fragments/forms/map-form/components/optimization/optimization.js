@@ -104,7 +104,7 @@ export default {
       }
       this.skills = skills
     } else {
-      this.skills = [Skill.fromJSON('{"name":"length over 1.5m", "id":1}')]
+      this.skills = [Skill.fromJSON('{"name":"cold chain", "id":1}')]
       localStorage.setItem('skills', JSON.stringify(this.skillsJSON))
     }
     // TODO: remove defaults
