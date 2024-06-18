@@ -134,6 +134,7 @@ export default {
         context.mapViewData = mapViewData
         context.jobs = mapViewData.jobs
         context.vehicles = mapViewData.vehicles
+        context.updateAppRoute()
       }
     })
 
