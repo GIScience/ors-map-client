@@ -42,7 +42,7 @@ export default {
       }
       const routes = []
       for (const key in this.localMapViewData.routes) {
-        const route = Object.assign({}, this.localMapViewData.routes[key])
+        const route = {...this.localMapViewData.routes[key]}
         if (!route.summary) {
           route.summary = geoUtils.getHumanizedTimeAndDistance({distance: route.distance, duration:route.duration, unit: 'm'},  this.$t('global.units'))
           this.parseSteps(route.steps)
