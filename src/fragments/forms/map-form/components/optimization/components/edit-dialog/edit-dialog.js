@@ -164,10 +164,6 @@ export default {
   methods: {
     vehicleColors,
     vehicleIcon,
-    isEnabled (action) {
-      const disabled = this.disabledActions
-      return !disabled.includes(action)
-    },
     // close editJobs dialog
     closeEditModal () {
       this.isEditOpen = false
@@ -212,7 +208,8 @@ export default {
       for (const s of this.editSkills) {
         editSkillIds.push(s.id)
       }
-      for (const id of newSkillIds.sort((a,b) => a-b)) {
+      newSkillIds.sort((a,b) => a-b)
+      for (const id of newSkillIds) {
         if (!editSkillIds.includes(id)) {
           this.editSkills.push(new Skill(' Skill from imported ' + this.content.item + ' ' + id, id))
         }

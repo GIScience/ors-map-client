@@ -100,7 +100,7 @@ export default {
         parsedInfos = this.parseCsvFile(fileContent)
       } else if (type.indexOf('json') > -1 || type.indexOf('geojson') > -1) {
         const parsedJson = JSON.parse(fileContent)
-        if (parsedJson && parsedJson.features) {
+        if (parsedJson?.features) {
           parsedInfos = this.parseGeojsonFile(parsedJson)
         } else {
           parsedInfos= this.parseJsonFile(parsedJson)
