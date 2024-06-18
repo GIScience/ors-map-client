@@ -237,7 +237,7 @@ export default {
       return csvData
     },
     parseMapView (mapViewData) {
-      let localMapViewData = mapViewData
+      let localMapViewData = mapViewData.clone()
 
       if (mapViewData.mode === constants.modes.optimization) {
         let jsonJobs = []
