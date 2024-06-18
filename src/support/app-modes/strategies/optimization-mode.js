@@ -25,14 +25,14 @@ class OptimizationMode {
   /**
    * Build an optimization route
    * @param {*} appRouteData
-   * @returns {Object} route like {name: 'MapDirections', params: {...} }
+   * @param options
+   * @returns {Object} route like {name: 'MapDirections', params: {...}}
    */
   getRoute = (appRouteData, options = null) => {
     options = options || appRouteData.options
     const params = RouteUtils.buildRouteParams(appRouteData, options)
     // Build and return the route object
-    const route = { name: 'MapOptimization', params: params }
-    return route
+    return {name: 'MapOptimization', params: params}
   }
 
   /**
@@ -50,7 +50,7 @@ class OptimizationMode {
     // In the 'directions' mode, the options parameter may contain an options object
     // that is expected to be used as the ORS API request options (avoid_polygons, avoid_features etc.)
     // So, as they are stringified on the url, we try to parse them back to an object
-    if (appRouteData.options && appRouteData.options.options) {
+    if (appRouteData.options?.options) {
       appRouteData.options.options = Utils.tryParseJson(appRouteData.options.options) || appRouteData.options.options
     }
 

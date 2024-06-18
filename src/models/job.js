@@ -185,7 +185,7 @@ class Job extends Place {
       }
     }
 
-    if (props.skills && props.skills.length) {
+    if (props.skills?.length) {
       let skillIds = []
       for (const skill of props.skills) {
         skillIds.push(skill.id)
