@@ -7,8 +7,7 @@
       <h3>{{$t('optimizationDetails.optimizationDetails')}}</h3>
     </div>
     <div  style="padding:0 0 0 10px" v-show="localMapViewData.rawData.summary.unassigned">
-      <h4>{{$t('optimizationDetails.warningUnassigned')}}</h4>
-      <v-alert :key="job.id" v-for="job in localMapViewData.rawData.unassigned" :value="job.id"  type="warning" style="color:black" >Job {{job.id}} {{$t('optimizationDetails.isUnassigned')}}</v-alert>
+      <v-alert :value="true" type="warning" style="color:black">{{$t('optimizationDetails.warningUnassigned')}} {{ unassignedJobsString }}</v-alert>
     </div>
     <v-expansion-panel slot="content" class="no-shadow" v-if="hasRoutes" :value="panelExtended" :expand="true">
       <v-expansion-panel-content style="background: transparent;" class="routes-header" :key="routeIndex" v-for="(route, routeIndex) in parsedRoutes">

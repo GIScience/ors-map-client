@@ -53,6 +53,14 @@ export default {
       }
       return routes
     },
+    unassignedJobsString () {
+      let ids = []
+      for (const job of this.mapViewData.rawData.unassigned) {
+        ids.push(job.id)
+      }
+      ids.sort()
+      return 'Job ' + ids.join(', Job ')
+    }
   },
   created() {
     this.localMapViewData = this.mapViewData.clone()
