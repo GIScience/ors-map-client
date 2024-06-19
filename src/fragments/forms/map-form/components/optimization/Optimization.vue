@@ -30,7 +30,9 @@
           {{ $t('optimization.addFromMap') + $t('optimization.job') }}
         </v-btn>
       </div>
-      <job-list :jobs="jobs"></job-list>
+      <!-- low priority TODO: more elegant solution for this? -->
+      <job-list v-if="mapViewData.hasRoutes()" :jobs="jobs" :map-view-data="mapViewData"></job-list>
+      <job-list v-else :jobs="jobs"></job-list>
       <div class="optimization-heading">
         {{ $t('optimization.vehicles') }} (Max: 3)
         <v-tooltip bottom style="float: right">
