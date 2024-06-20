@@ -58,7 +58,7 @@ export default {
       for (const job of this.mapViewData.rawData.unassigned) {
         ids.push(job.id)
       }
-      ids.sort()
+      ids.sort((a,b) => a-b)
       return 'Job ' + ids.join(', Job ')
     }
   },
