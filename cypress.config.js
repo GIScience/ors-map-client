@@ -3,6 +3,7 @@ const config = require('./config');
 const webpackPreprocessor = require('@cypress/webpack-preprocessor')
 
 module.exports = defineConfig({
+  defaultCommandTimeout: 6000,
   projectId: '2npvgh',
   video: false,
   e2e: {
