@@ -102,8 +102,7 @@ export default {
      * @returns {String}
      */
     predictableId () {
-      let id = `place-input-container-${this.idPostfix}-${this.index}`
-      return id
+      return `place-input-container-${this.idPostfix}-${this.index}`
     },
     /**
      * Determines if the automatic focus must be set or not
@@ -122,16 +121,14 @@ export default {
      * @returns {Boolean}
      */
     isMobile () {
-      let isMobile = Utils.isMobile()
-      return isMobile
+      return Utils.isMobile()
     },
     /**
      * Determines if the 'pick a place' button must show its tooltip
      * @returns {Boolean}
      */
     showInputPickPlaceTooltip () {
-      let show = this.model.isEmpty() && !this.single && this.$store.getters.isSidebarVisible
-      return show
+      return this.model.isEmpty() && !this.single && this.$store.getters.isSidebarVisible
     },
     /**
      * Get the input hint to be displayed
@@ -149,17 +146,7 @@ export default {
      * @returns {Boolean}
      */
     hideDetails () {
-      let hide =  this.single || (!this.focused && !this.hasAutomaticFocus)
-      return hide
-    },
-    /**
-     * Returns the place input rule required message if it is empty
-     * @returns {Boolean|String}
-     */
-    placeNameRules () {
-      return [
-        v => !!v || this.$t('placeInput.placeNameRequired')
-      ]
+      return this.single || (!this.focused && !this.hasAutomaticFocus)
     },
     /**
      * Return the column breakpoint that must be applied to the input flex
@@ -214,7 +201,6 @@ export default {
     },
     /**
      * Get the place input label based on the current view mode
-     * @param {*} index
      */
     placeInputLabel () {
       let label = null
@@ -257,12 +243,10 @@ export default {
     },
     // Switch the coordinates position ([lat, long] -> [long, lat] and [long, lat] -> [lat, long])
     switchCoordsAvailable () {
-      const canSwitch = this.model.nameIsNumeric()
-      return canSwitch
+      return this.model.nameIsNumeric()
     },
     searchAvailable () {
-      let available = appConfig.supportsSearchMode
-      return available
+      return appConfig.supportsSearchMode
     },
     /**
      * Determines if the place input floating menu button is available for the current place input
@@ -305,8 +289,7 @@ export default {
     },
 
     showSuggestion () {
-      let show = this.focused && !this.focusIsAutomatic
-      return show
+      return this.focused && !this.focusIsAutomatic
     },
     appendBtn () {
       if (this.supportSearch) {
@@ -332,16 +315,20 @@ export default {
     /**
      * highlight typed place name
      * @param {String} placeName
-     * @returns {Html}
+     * @returns {string}
      */
     highlightedName (placeName) {
       let searchMask = this.localModel.placeName
       const regEx = new RegExp(searchMask, 'ig')
       let localPlaceName = this.localModel.placeName
       let replaceMask
+      //return early if placeName is empty and nothing needs to be highlighted
+      if(localPlaceName === ''){
+        return placeName.trim()
+      }
       if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase() + ' ') === 0) {
         localPlaceName = localPlaceName[0].toUpperCase() + localPlaceName.substring(1) + '&nbsp;'
-      } else if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase()) === 0 ) {
+      } else if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase()) === 0) {
         localPlaceName = localPlaceName[0].toUpperCase() + localPlaceName.substring(1)
       } else if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase()) > 0 ) {
         localPlaceName = '&nbsp;' + localPlaceName[0].toUpperCase() + localPlaceName.substring(1)
@@ -386,8 +373,7 @@ export default {
       }, 1000)
     },
     showAreaIcon (place) {
-      let show = place.properties.layer === 'country' || place.properties.layer === 'region'
-      return show
+      return place.properties.layer === 'country' || place.properties.layer === 'region'
     },
     inputFocused (event) {
       event.stopPropagation()
@@ -638,12 +624,14 @@ export default {
         this.showError(this.$t('placeInput.pleaseTypeSomething'))
 
       } else {
+        const previousMode = this.$store.getters.mode
         if (previousMode === constants.modes.search) {
           this.$emit('searchChanged')
-        } else {
+        }
+        //TODO: check if the following else is needed (seems like event is not been caught)
+        else {
           this.$emit('switchedToSearchMode')
         }
-        const previousMode = this.$store.getters.mode
         this.$store.commit('mode', constants.modes.search)
         const appMode = new AppMode(this.$store.getters.mode)
         const route = appMode.getRoute([this.localModel])
@@ -738,7 +726,6 @@ export default {
 
     /**
      * Reset a place input at a given index
-     * @param {*} index
      */
     placeCleared () {
       if (!this.model.isEmpty()) {
@@ -872,8 +859,7 @@ export default {
       this.$emit('changedDirectPlace', data)
     },
     getNewGuid (prefix) {
-      let guid = Utils.guid(prefix)
-      return guid
+      return Utils.guid(prefix)
     }
   }
 }

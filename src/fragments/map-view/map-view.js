@@ -168,7 +168,6 @@ export default {
       initialMaxZoom: appConfig.initialMapMaxZoom,
       localMapViewData: new MapViewData(), // we use a local copy of the mapViewData to be able to modify it
       mainRouteColor: theme.primary,
-      alternativeRouteColor: constants.alternativeRouteColor,
       routeBackgroundColor: constants.routeBackgroundColor,
       guid: null,
       clickLatLng: null,
@@ -193,6 +192,9 @@ export default {
     }
   },
   computed: {
+    theme() {
+      return theme
+    },
 
     showMyLocationControl () {
       return this.supportsMyLocationBtn && !this.isAltitudeModalOpen && this.showControls
@@ -396,6 +398,8 @@ export default {
         let markers = GeoUtils.buildMarkers(markersMapViewData.places, isRoute, this.focusedPlace)
         markers = this.$root.appHooks.run('markersCreated', markers)
         return markers
+      } else if (markersMapViewData.jobs.length || markersMapViewData.vehicles.length) {
+        return GeoUtils.buildOptimizationMarkers(markersMapViewData.jobs, markersMapViewData.vehicles)
       }
     },
     /**
@@ -707,6 +711,12 @@ export default {
 
       }, 500)
     },
+    alternativeRouteColor(route) {
+      if(this.mode === constants.modes.optimization) {
+        return constants.vehicleColors[route.vehicle]
+      }
+      return constants.alternativeRouteColor
+    },
     /**
      * Refresh the altitude modal (force a 'destroy' and a 'rebuild')
      * with the new data
@@ -939,7 +949,7 @@ export default {
       // Only marker changes that are a result of user interaction are treated here.
       // With vue2-leaflet version 2.5.2 the event.originalEvent is not  an instance of
       // window.PointerEvent anymore and use parent window.MouseEvent instead
-      if (event.originalEvent instanceof window.MouseEvent || event.originalEvent instanceof window.TouchEvent) {
+      if (event.originalEvent?.type === 'mousemove') {
         clearTimeout(this.markerMoveTimeoutId)
         this.markerMoveTimeoutId = setTimeout(() => {
           this.markerDragEnd(event)
@@ -973,7 +983,9 @@ export default {
     removePlace (markerIndex) {
       if (this.markers[markerIndex]) {
         let place = this.markers[markerIndex].place
-        let data = {place, index: markerIndex}
+        let job = this.markers[markerIndex].job
+        let vehicle = this.markers[markerIndex].vehicle
+        let data = {place, job, vehicle, index: markerIndex}
         this.$emit('removePlace', data)
       }
     },
@@ -1018,6 +1030,7 @@ export default {
       if (markerIndex !== null) {
         const marker = this.markers[markerIndex]
         marker.inputIndex = markerIndex
+        marker.text = event.originalEvent.target.innerText
         this.$emit('markerDragged', marker)
       }
     },
@@ -1103,11 +1116,11 @@ export default {
      *
      */
     loadMapData () {
-      if (this.localMapViewData.hasPlaces()) {
+      if (this.localMapViewData.hasPlaces() || this.localMapViewData.jobs.length || this.localMapViewData.vehicles.length) {
         this.defineActiveRouteIndex()
         this.updateMarkersLabel()
         if (this.hasOnlyOneMarker && this.fitBounds) {
-          this.setFocusedPlace(this.localMapViewData.places[0])
+          this.setFocusedPlace(this.localMapViewData.places[0] || this.localMapViewData.jobs[0] || this.localMapViewData.vehicles[0])
         }
         if (this.mode === constants.modes.place && this.hasOnlyOneMarker && appConfig.showAdminAreaPolygon) {
           this.loadAdminArea()
@@ -1122,9 +1135,11 @@ export default {
      * @param {Place} place
      */
     setFocusedPlace (place) {
-      let layer = place.layer || place.properties.layer
-      if (layer) {
+      if (place.layer || place.properties.layer) {
+        let layer = place.layer || place.properties.layer
         this.zoomLevel = GeoUtils.zoomLevelByLayer(layer)
+        this.setMapCenter(place.getLatLng())
+      } else {
         this.setMapCenter(place.getLatLng())
       }
     },
@@ -1175,6 +1190,8 @@ export default {
         if (this.localMapViewData.hasPlaces() || polylineData.length > 0) {
           let places = Place.getFilledPlaces(this.localMapViewData.places)
           this.dataBounds = GeoUtils.getBounds(places, polylineData)
+        } else if (this.localMapViewData.jobs.length || this.localMapViewData.vehicles.length) {
+          this.dataBounds = GeoUtils.getBounds([], polylineData)
         } else {
           this.dataBounds = null
         }
@@ -1274,8 +1291,8 @@ export default {
      * @param {Place} place
      * @emits setInputPlace
      */
-    setInputPlace (placeIndex, placeInputId, place) {
-      let data = {pickPlaceIndex: placeIndex, placeInputId: placeInputId, place: place}
+    setInputPlace (placeIndex, placeInputId, place, pickEditSource) {
+      let data = {pickPlaceIndex: placeIndex, placeInputId: placeInputId, place: place, pickEditSource: pickEditSource}
       this.$emit('setInputPlace', data)
     },
 
@@ -1474,12 +1491,14 @@ export default {
       let context = this
       let pickPlaceIndex = context.$store.getters.pickPlaceIndex
       let pickPlaceId = context.$store.getters.pickPlaceId
+      let pickEditSource = context.$store.getters.pickEditSource || null
       place.resolve().then(() => {
-        context.setInputPlace(pickPlaceIndex, pickPlaceId, place)
+        context.setInputPlace(pickPlaceIndex, pickPlaceId, place, pickEditSource)
         // Once a place was picked up,
         // remove the store pick place data
         context.$store.commit('pickPlaceIndex', null)
         context.$store.commit('pickPlaceId', null)
+        context.$store.commit('pickEditSource', null)
       })
     },
 

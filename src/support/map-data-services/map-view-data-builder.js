@@ -74,6 +74,7 @@ class MapViewDataBuilder {
   /**
    * Build the mapViewData object
    * @param {*} data {content:..., options:...}
+   * @param appRouteData
    * @emits mapViewDataChanged - using EventBus
    */
   static buildMapData = (data, appRouteData) => {
@@ -87,10 +88,12 @@ class MapViewDataBuilder {
         // to avoid having to resolve each place coordinates to a placeName again
         // If there is no places in appRouteData (dealing with a route import, for example)
         // nothing happens because appRouteData.places will be an empty array
-        for (const key in appRouteData.places) {
-          if (mapViewData.places[key]) {
-            mapViewData.places[key].placeName = appRouteData.places[key].placeName
-            mapViewData.places[key].direct = appRouteData.places[key].direct
+        if (mapViewData.mode !== constants.modes.optimization) {
+          for (const key in appRouteData.places) {
+            if (mapViewData.places[key]) {
+              mapViewData.places[key].placeName = appRouteData.places[key].placeName
+              mapViewData.places[key].direct = appRouteData.places[key].direct
+            }
           }
         }
 

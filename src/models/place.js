@@ -1,9 +1,7 @@
-import {
-  Geocode,
-  ReverseGeocode
-} from '@/support/ors-api-runner'
+import { Geocode, ReverseGeocode } from '@/support/ors-api-runner'
 import GeoUtils from '@/support/geo-utils'
 import lodash from 'lodash'
+
 /**
  * Place model class
  * @param {Number} lat - default null
@@ -69,8 +67,7 @@ class Place {
       return [this.lng, this.lat]
     } else {
       if (this.nameIsNumeric()) {
-        const coords = this.getCoordsFromName()
-        return coords
+        return this.getCoordsFromName()
       } else {
         return [0, 0]
       }
@@ -90,27 +87,11 @@ class Place {
   }
 
   /**
-   * Returns an array containing lat and lng
-   * @returns {Array} containing [lat, lng]
-   */
-  getLatLngArr() {
-    return this.getLngLatArr().reverse()
-  }
-
-  /**
    * Set the suggestions
    * @param {Array} places
    */
   setSuggestions(places) {
     this.suggestions = places
-  }
-
-  /**
-   * Set the place id
-   * @param {*} id
-   */
-  setId(id) {
-    this.placeId = id
   }
 
   isEmpty() {
@@ -193,8 +174,7 @@ class Place {
    */
   setCoordsAsName() {
     if (this.lat && this.lng) {
-      const coords = `${this.lat},${this.lng}`
-      this.placeName = coords
+      this.placeName = `${this.lat},${this.lng}`
     }
   }
 
@@ -227,6 +207,17 @@ class Place {
         reject(response)
       })
     })
+  }
+
+  static fromJob(job) {
+    return new Place(job.location[0], job.location[1], '', {
+      placeId: job.id
+    })
+  }
+
+  static fromGeoJsonObject(placeObject) {
+    return new Place(placeObject.geometry.coordinates[0], placeObject.geometry.coordinates[1],
+      placeObject.properties.label, { properties: placeObject.properties })
   }
 
   /**
@@ -297,6 +288,8 @@ class Place {
    * Build a place using only lng and lat
    * @param {*} lng
    * @param {*} lat
+   * @param placeName
+   * @param options
    */
   static build(lng, lat, placeName = '', options = {}) {
     return new Place(lng, lat, placeName, options)

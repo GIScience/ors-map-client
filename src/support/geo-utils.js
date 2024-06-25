@@ -8,6 +8,8 @@ import HtmlMarker from '@/fragments/html-marker/HtmlMarker'
 // The import below will add some methods to Leaflet.GeometryUtil
 // Even if it is not accessed within this class, it is being used!
 import 'leaflet-geometryutil'
+import constants from '@/resources/constants'
+import theme from '@/config/theme'
 
 // noinspection GrazieInspection
 const geoUtils = {
@@ -47,23 +49,23 @@ const geoUtils = {
    * @param index
    * @param lastIndexKey
    * @param {Boolean} isRoute
-   * @returns {Array} of markers
+   * @returns {String} of markers
    */
   getMarkerColor: (index, lastIndexKey, isRoute) => {
-    let coloredMarkerName
+    let color
 
     if (isRoute) {
       if (index === 0) {
-        coloredMarkerName = 'green'
+        color = 'green'
       } else if (lastIndexKey === index) {
-        coloredMarkerName = 'red'
+        color = 'red'
       } else {
-        coloredMarkerName = '#206fe2'
+        color = '#206fe2'
       }
     } else {
-      coloredMarkerName = '#206fe2'
+      color = '#206fe2'
     }
-    return coloredMarkerName
+    return color
   },
 
   /**
@@ -82,20 +84,20 @@ const geoUtils = {
       if (place.lng && place.lat) {
         // Define the marker color
         const lastIndexKey = places.length - 1
-        let coloredMarkerName = geoUtils.getMarkerColor(key, lastIndexKey, isRoute)
+        let color = geoUtils.getMarkerColor(key, lastIndexKey, isRoute)
 
         if (highlightedPlace) {
           if (place.equals(highlightedPlace)) {
-            coloredMarkerName = 'red'
+            color = 'red'
           }
         } else if (Number(key) === 0 && !isRoute || places.length === 1) {
-          coloredMarkerName = 'red'
+          color = 'red'
         }
 
         let buildAsRoute = isRoute && places.length > 1
 
         // Build the marker
-        const markerIcon = geoUtils.buildMarkerIcon(coloredMarkerName, key, buildAsRoute)
+        const markerIcon = geoUtils.buildMarkerIcon(color, key, buildAsRoute)
         const marker = {
           position: {
             lng: place.lng,
@@ -168,15 +170,6 @@ const geoUtils = {
   },
 
   /**
-   * Get marker coordinates
-   * @param {*} marker
-   */
-  getMarkerCoordinates(marker) {
-    const markerCoordinates = lodash.get(marker, 'data.geometry.coordinates')
-    return markerCoordinates
-  },
-
-  /**
    * Calculate geodesic area
    * @param {Array} coords
    */
@@ -207,6 +200,8 @@ const geoUtils = {
   /**
    * Build an HTML marker icon based on parameters
    * @param {String} color
+   * @param index
+   * @param isRoute
    * @returns {Object} markerIcon
    */
   buildMarkerIcon: (color, index, isRoute) => {
@@ -214,7 +209,7 @@ const geoUtils = {
       color: color
     }
     if (isRoute && index !== null) {
-      propsData.markerNumber = Number(index) + 1
+      propsData.markerNumber = (Number(index) + 1).toString()
     }
     const htmlMarkerClass = Vue.extend(HtmlMarker)
     const htmlIconInstance = new htmlMarkerClass({
@@ -223,13 +218,12 @@ const geoUtils = {
     htmlIconInstance.$mount()
     let markerHtml = htmlIconInstance.$el.innerHTML
 
-    const markerIcon = Leaflet.divIcon({
+    return Leaflet.divIcon({
       className: 'custom-div-icon',
       html: markerHtml,
       iconSize: [30, 42],
       iconAnchor: [15, 42]
     })
-    return markerIcon
   },
 
   /**
@@ -266,7 +260,8 @@ const geoUtils = {
   /**
    * Get humanized tool tip string
    * @param {*} data {duration: Number, distance: Number, unit: String}
-   * @returns {String} formatted tool tip
+   * @param translations
+   * @returns {Object} formatted tool tip
    */
   getHumanizedTimeAndDistance: (data, translations) => {
     let humanizedDistance = null
@@ -301,19 +296,40 @@ const geoUtils = {
   },
 
   /**
+   * Get readable time output from seconds after midnight
+   * @param {number} timeInput
+   * @returns {string} - e.g. 00:30
+   */
+  getHumanizedTime: (timeInput) => {
+    if (timeInput > 86400) return geoUtils.getHumanizedTimestamp(timeInput)
+    // convert to date to read out seconds as hours and minutes
+    const date = new Date(Date.UTC(0, 0, 0, 0, 0, timeInput))
+    return `${date.toISOString().substring(11, 16)}`
+  },
+  /**
+   * Get readable date output from timestamp
+   * @param {number} ts - timestamp
+   * @returns {string} - e.g. 2020-01-15T20:00
+   */
+  getHumanizedTimestamp: (ts) => {
+    const date = new Date(ts * 1000)
+    return `${date.toISOString().substring(0, 16)}`
+  },
+
+  /**
    * Get the seconds segments (days, hours, minutes, seconds) or empty string for each segment
-   * @param {*} data {duration: Number, distance: Number, unit: String}
-   * @returns {String} formatted tool tip
+   * @returns {{hours: (string|string), seconds: (string|string), minutes: (string|string), days: (*|string)}} formatted tool tip
+   * @param seconds
+   * @param translations
    */
   getDurationInSegments: (seconds, translations) => {
     const durationObj = moment.duration(seconds, 'seconds') // the duration value is expected to be always in seconds
-    let durationSegments = {
+    return {
       days: durationObj._data.days > 0 ? durationObj._data.days + translations.days : '',
       hours: durationObj._data.hours > 0 ? durationObj._data.hours + ' ' + translations.hours : '',
       minutes: durationObj._data.minutes > 0 ? durationObj._data.minutes + ' ' + translations.min : '',
       seconds: durationObj._data.seconds > 0 ? durationObj._data.seconds + ' ' + translations.s : ''
     }
-    return durationSegments
   },
 
   /**
@@ -551,8 +567,7 @@ const geoUtils = {
    * @see {@link http://geomalgorithms.com/a03-_inclusion.html Inclusion of a Point in a Polygon} by Dan Sunday.
    */
   isOverLine: (p0, p1, p2) => {
-    let val = ((p1.lng - p0.lng) * (p2.lat - p0.lat) - (p2.lng - p0.lng) * (p1.lat - p0.lat))
-    return val
+    return ((p1.lng - p0.lng) * (p2.lat - p0.lat) - (p2.lng - p0.lng) * (p1.lat - p0.lat))
   },
 
   /**
@@ -590,6 +605,74 @@ const geoUtils = {
       lng -= 360
     }
     return lng
+  },
+  buildOptimizationMarkers(jobs, vehicles) {
+    const markers = []
+    for (const job of jobs) {
+      if (job.lng && job.lat) {
+        // Build the marker
+        let propsData = {
+          color: theme.dark,
+          markerNumber: job.id.toString()
+        }
+        const htmlMarkerClass = Vue.extend(HtmlMarker)
+        const htmlIconInstance = new htmlMarkerClass({
+          propsData
+        })
+        htmlIconInstance.$mount()
+        let markerHtml = htmlIconInstance.$el.innerHTML
+
+        const markerIcon = Leaflet.divIcon({
+          className: 'custom-div-icon',
+          html: markerHtml,
+          iconSize: [30, 42],
+          iconAnchor: [15, 42]
+        })
+        const marker = {
+          position: {
+            lng: job.lng,
+            lat: job.lat
+          },
+          icon: markerIcon,
+          label: `Job ${job.id} - ${job.lng},${job.lat}`,
+          job: job
+        }
+        markers.push(marker)
+      }
+    }
+    for (const v of vehicles) {
+      if (v.lng && v.lat) {
+        // Build the marker
+        let propsData = {
+          color: constants.vehicleColors[v.id],
+          markerNumber: `V ${v.id.toString()}`
+        }
+        const htmlMarkerClass = Vue.extend(HtmlMarker)
+        const htmlIconInstance = new htmlMarkerClass({
+          propsData
+        })
+        htmlIconInstance.$mount()
+        let markerHtml = htmlIconInstance.$el.innerHTML
+
+        const markerIcon = Leaflet.divIcon({
+          className: 'custom-div-icon',
+          html: markerHtml,
+          iconSize: [30, 42],
+          iconAnchor: [15, 42]
+        })
+        const marker = {
+          position: {
+            lng: v.lng,
+            lat: v.lat
+          },
+          icon: markerIcon,
+          label: `Vehicle ${v.id} - ${v.lng},${v.lat}`,
+          vehicle: v
+        }
+        markers.push(marker)
+      }
+    }
+    return markers
   }
 }
 export default geoUtils

@@ -18,6 +18,10 @@ export default {
     activeVehicleType: {
       type: String,
       required: false
+    },
+    isVehicle: {
+      type: Boolean,
+      required: false
     }
   },
   created() {
@@ -30,7 +34,9 @@ export default {
   },
   computed: {
     rootProfileActive () {
-      if (this.$store.getters.mapSettings.skipAllSegments) {
+      if (this.isVehicle && this.activeVehicleType === this.profile.slug) {
+        return true
+      } else if (this.$store.getters.mapSettings.skipAllSegments) {
         return false
       }
       if (this.localActiveProfileSlug === this.profile.slug) {
