@@ -322,9 +322,13 @@ export default {
       const regEx = new RegExp(searchMask, 'ig')
       let localPlaceName = this.localModel.placeName
       let replaceMask
+      //return early if placeName is empty and nothing needs to be highlighted
+      if(localPlaceName === ''){
+        return placeName.trim()
+      }
       if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase() + ' ') === 0) {
         localPlaceName = localPlaceName[0].toUpperCase() + localPlaceName.substring(1) + '&nbsp;'
-      } else if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase()) === 0 ) {
+      } else if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase()) === 0) {
         localPlaceName = localPlaceName[0].toUpperCase() + localPlaceName.substring(1)
       } else if ((placeName.toLowerCase()).indexOf(this.localModel.placeName.toLowerCase()) > 0 ) {
         localPlaceName = '&nbsp;' + localPlaceName[0].toUpperCase() + localPlaceName.substring(1)
