@@ -1,6 +1,5 @@
 <template>
   <div class="maps" :style="{height: viewHeight + 'px'}">
-    <info-banner />
     <resize-observer @notify="setViewHeight()" />
     <simple-place-search :height="simpleMapSearchHeight" v-if="simpleSearchIsVisible"></simple-place-search>
     <v-btn round v-if="refreshSearchAvailable"

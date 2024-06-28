@@ -16,7 +16,6 @@ import { ResizeObserver } from 'vue-resize'
 import Place from '@/models/place'
 import lodash from 'lodash'
 import {EventBus} from '@/common/event-bus'
-import InfoBanner from '@/fragments/InfoBanner.vue'
 
 export default {
   data: () => ({
@@ -42,7 +41,6 @@ export default {
     previousMapViewDataTimeStamp: null
   }),
   components: {
-    InfoBanner,
     MapView,
     SimplePlaceSearch,
     Altitude,
