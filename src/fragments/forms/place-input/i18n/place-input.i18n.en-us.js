@@ -3,6 +3,7 @@ export default {
   placeInput: {
     findAPlace: 'Find a place',
     place: 'Place',
+    location: 'Location',
     addRouteStop: 'Add a route stop',
     routePlace: 'Route stop',
     routeDestination: 'Destination',

@@ -2,7 +2,7 @@
   <div>
     <v-text-field class="locationInput"
                   v-model="model.placeName"
-                  :persistent-hint="true"  :hint="'Location'"
+                  :persistent-hint="true"  :hint="$t('placeInput.location')"
                   @click="setFocus(true)"
                   @keyup="locationInputChanged($event)">
       <template v-slot:append-outer>

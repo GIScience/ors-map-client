@@ -2,6 +2,7 @@ export default {
   placeInput: {
     'findAPlace': 'Trova un luogo',
     'place': 'Luogo',
+    'location': 'Location',
     'addRouteStop': 'Aggiungi un punto',
     'routePlace': 'Punto',
     'routeDestination': 'Destinazione',

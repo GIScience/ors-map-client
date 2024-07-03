@@ -3,6 +3,7 @@ export default {
   'placeInput': {
     'findAPlace': 'Trouver un lieu',
     'place': 'Lieu',
+    'location': 'Location',
     'addRouteStop': 'Ajouter un arrêt',
     'routePlace': 'Arrêt de l\'itinéraire',
     'routeDestination': 'Destination',
