@@ -19,6 +19,7 @@ import IschronesDetails from './components/isochrones-details/IsochronesDetails'
 export default {
   mixins: [MapFormMixin],
   data: () => ({
+    active: true,
     mode: constants.modes.isochrones,
     mapViewData: new MapViewData(),
     places: [new Place()],
@@ -121,6 +122,9 @@ export default {
       } else {
         this.places = [new Place()]
       }
+    },
+    '$store.getters.mode': function (activeMode) {
+      this.active = activeMode === this.mode
     }
   },
   methods: {

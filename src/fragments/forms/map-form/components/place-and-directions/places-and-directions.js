@@ -26,6 +26,7 @@ import RoundTrip from './components/round-trip/RoundTrip.vue'
 export default {
   mixins: [MapFormMixin],
   data: () => ({
+    active: true,
     mapViewData: new MapViewData(),
     places: [new Place()],
     roundTripActive: false,
@@ -51,6 +52,9 @@ export default {
       if (newVal === true && this.places.length === 1) {
         this.setFocusedPlaceInput(0)
       }
+    },
+    '$store.getters.mode': function (activeMode) {
+      this.active = activeMode === constants.modes.place || activeMode === constants.modes.directions
     }
   },
   computed: {

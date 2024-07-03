@@ -24,6 +24,7 @@ import EditSkills from './components/edit-skills/EditSkills.vue'
 export default {
   mixins: [MapFormMixin],
   data: () => ({
+    active: true,
     mode: constants.modes.optimization,
     mapViewData: new MapViewData(),
     skills: [],
@@ -216,6 +217,9 @@ export default {
         this.jobs = []
         this.vehicles = []
       }
+    },
+    '$store.getters.mode': function (activeMode) {
+      this.active = activeMode === this.mode
     }
   },
   methods: {
