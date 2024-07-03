@@ -10,7 +10,8 @@ const constants = {
     geocodeSearch: 'pgeocode/search',
     autocomplete: 'pgeocode/autocomplete',
     pois: 'ppois',
-    reverseGeocode: 'pgeocode/reverse'
+    reverseGeocode: 'pgeocode/reverse',
+    optimization: 'poptimization'
   },
   endpoints: {
     directions: 'directions',
