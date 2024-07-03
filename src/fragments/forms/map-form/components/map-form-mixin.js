@@ -8,17 +8,6 @@ import Place from '@/models/place'
 import {EventBus} from '@/common/event-bus'
 
 export default {
-  props: {
-    active: {
-      default: true,
-      type: Boolean
-    }
-  },
-  watch: {
-    active: function (newVal) {
-      this.activeChanged(newVal)
-    }
-  },
   computed: {
     /**
      * Provides an accessor to the ors map filters object
@@ -44,16 +33,6 @@ export default {
     }
   },
   methods: {
-    /**
-     * If the active state changes
-     * reset the places array
-     * @param {Boolean} isActive
-     */
-    activeChanged(isActive) {
-      if (isActive) {
-        // this.places = [new Place()]
-      }
-    },
     /**
      * Toggle round trip
      */
