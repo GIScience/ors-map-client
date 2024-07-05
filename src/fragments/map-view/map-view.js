@@ -176,6 +176,8 @@ export default {
       myLocationActive: false,
       setDrawingTimeout: null,
       markerMoveTimeoutId: null,
+      snapMarkerLocation: {},
+      showSnapMarker: false,
       drawControlRef: null, // a reference to the drawing polygon component
       clickInsidePolygon: null,
       currentInnerHeight: null,
@@ -947,9 +949,10 @@ export default {
         }, 1000)
         // TODO: console log as placeholder for snapping request
         if (store.getters.mapSettings.showSnapLocationDuringDrag) {
+          this.showSnapMarker = true
           setTimeout(() => {
-            console.log(event.latlng)
-          }, 1000)
+            this.snapMarkerLocation = GeoUtils.buildSnappedLocation(event.latlng)
+          }, 100)
         }
       }
     },
@@ -1025,6 +1028,7 @@ export default {
       if (markerIndex !== null) {
         const marker = this.markers[markerIndex]
         marker.inputIndex = markerIndex
+        this.showSnapMarker = false
         this.$emit('markerDragged', marker)
       }
     },
