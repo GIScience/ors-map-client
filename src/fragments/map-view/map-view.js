@@ -77,6 +77,7 @@ import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import 'leaflet-measure/dist/leaflet-measure.css'
 import 'vue-resize/dist/vue-resize.css'
 import 'leaflet/dist/leaflet.css'
+import store from '@/store/store'
 
 export default {
   components: {
@@ -944,9 +945,8 @@ export default {
         this.markerMoveTimeoutId = setTimeout(() => {
           this.markerDragEnd(event)
         }, 1000)
-        // TODO: console log as placeholder for snapping request, snappingIsEnabled as placeholder for settings prop
-        let snappingIsEnabled = true
-        if (snappingIsEnabled) {
+        // TODO: console log as placeholder for snapping request
+        if (store.getters.mapSettings.showSnapLocationDuringDrag) {
           setTimeout(() => {
             console.log(event.latlng)
           }, 1000)

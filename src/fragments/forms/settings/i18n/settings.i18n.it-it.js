@@ -8,6 +8,7 @@ export default {
     'saveToLocalStorage': 'Salva nel browser',
     'routeInstructions': 'Istruzioni itinerario',
     'alternativeIsochroneColors': 'Colori isocrone alternativi',
+    'showSnapLocationDuringDrag': 'show snap location during dragging',
     'distanceMarkers': 'Indicatori distanza',
     'elevationProfile': 'Profilo altitudine',
     'mapSettings': 'Visualizzazione mappa e informazioni extra',

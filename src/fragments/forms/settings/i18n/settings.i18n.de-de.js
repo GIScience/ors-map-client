@@ -9,6 +9,7 @@ export default {
     saveToLocalStorage: 'Im Browser speichern',
     routeInstructions: 'Sprache der Wegbeschreibung',
     alternativeIsochroneColors: 'Alternative Isochronenfarben',
+    showSnapLocationDuringDrag: 'show snap location during dragging',
     distanceMarkers: 'Distanzmarkierungen',
     elevationProfile: 'Höhenprofil',
     mapSettings: 'Kartenansicht und extra Infos',

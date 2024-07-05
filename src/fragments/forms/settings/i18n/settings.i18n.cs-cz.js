@@ -8,6 +8,7 @@ export default {
     saveToLocalStorage: 'Uložit v mém prohlížeči',
     routeInstructions: 'Instrukce pro navigaci',
     alternativeIsochroneColors: 'Alternativní izochronní barvy',
+    showSnapLocationDuringDrag: 'show snap location during dragging',
     distanceMarkers: 'Značky vzdálenosti',
     elevationProfile: 'Profil převýšení',
     mapSettings: 'Zobrazení mapy a další informace',

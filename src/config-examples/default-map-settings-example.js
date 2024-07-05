@@ -48,6 +48,7 @@ const defaultMapSettings = {
   alternativeIsochroneColors: false,
   distanceMarkers: false,
   skipAllSegments: false,
+  showSnapLocationDuringDrag: false,
 
   steepness: true,
   surface: true,

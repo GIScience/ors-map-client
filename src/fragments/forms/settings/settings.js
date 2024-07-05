@@ -40,7 +40,7 @@ export default {
       return options
     },
     apiKeyLabel () {
-      return this.customApiKey == true ? this.$t('settings.customApiKey') : this.$t('settings.apiKey')
+      return this.customApiKey === true ? this.$t('settings.customApiKey') : this.$t('settings.apiKey')
     }
   },
   methods: {

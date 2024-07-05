@@ -7,6 +7,7 @@ export default {
     saveToLocalStorage: 'Salvați în browserul meu',
     routeInstructions: 'Instrucțiuni de rutare',
     alternativeIsochroneColors: 'Culori izocrone alternative',
+    showSnapLocationDuringDrag: 'show snap location during dragging',
     elevationProfile: 'Profil de elevație',
     mapSettings: 'Vizualizarea hărții și informații suplimentare',
     endpointsTitle: {

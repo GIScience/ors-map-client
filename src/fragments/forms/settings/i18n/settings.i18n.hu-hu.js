@@ -8,6 +8,7 @@ export default {
     'saveToLocalStorage': 'Mentés a böngészőmbe',
     'routeInstructions': 'Útvonaltervezési utasítások',
     'alternativeIsochroneColors': 'Alternatív izokronvonal-színek',
+    'showSnapLocationDuringDrag': 'show snap location during dragging',
     'distanceMarkers': 'Távolságjelölők',
     'elevationProfile': 'Magassági profil',
     'mapSettings': 'Térképnézet és további információk',
