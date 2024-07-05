@@ -944,6 +944,13 @@ export default {
         this.markerMoveTimeoutId = setTimeout(() => {
           this.markerDragEnd(event)
         }, 1000)
+        // TODO: console log as placeholder for snapping request, snappingIsEnabled as placeholder for settings prop
+        let snappingIsEnabled = true
+        if (snappingIsEnabled) {
+          setTimeout(() => {
+            console.log(event.latlng)
+          }, 1000)
+        }
       }
     },
     /**
