@@ -124,17 +124,17 @@ const geoUtils = {
 
   /**
    * Build the markers based in an array of coordinates
-   * @param {Object} location - coordinates of the marker
+   * @param {Array} location - coordinates of the marker and snapped location
    * @returns {Object} of marker
    */
-  buildSnappedLocation: (location) => {
-    if (!location || location.length === 0) {
+  buildSnappedLocation: (locations) => {
+    if (!locations || locations[0].length === 0) {
       return {}
     }
-    if (location.lng && location.lat) {
+    if (locations[0].location) {
       return {
-        lng: location.lng,
-        lat: location.lat
+        lng: locations[0].location[0],
+        lat: locations[0].location[1]
       }
     }
   },

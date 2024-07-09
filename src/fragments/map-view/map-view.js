@@ -71,6 +71,7 @@ import {EventBus} from '@/common/event-bus'
 import 'vue2-leaflet-draw-toolbar'
 import Leaflet from 'leaflet'
 import lodash from 'lodash'
+import Openrouteservice from 'openrouteservice-js'
 
 // Import leaflet-related styles
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
@@ -938,7 +939,7 @@ export default {
      * position only when the movement has ended
      * @param {*} event
      */
-    markerMoved (event) {
+    async markerMoved (event) {
       // Only marker changes that are a result of user interaction are treated here.
       // With vue2-leaflet version 2.5.2 the event.originalEvent is not  an instance of
       // window.PointerEvent anymore and use parent window.MouseEvent instead
@@ -947,12 +948,30 @@ export default {
         this.markerMoveTimeoutId = setTimeout(() => {
           this.markerDragEnd(event)
         }, 1000)
-        // TODO: console log as placeholder for snapping request
+
         if (store.getters.mapSettings.showSnapLocationDuringDrag) {
-          this.showSnapMarker = true
-          setTimeout(() => {
-            this.snapMarkerLocation = GeoUtils.buildSnappedLocation(event.latlng)
-          }, 100)
+          const orsSnap = new Openrouteservice.Snap({
+            api_key: appConfig.orsApiKey
+          })
+          const coords = [event.latlng.lng, event.latlng.lat]
+
+          // TODO: fix timeout/sleep function
+          await new Promise(res => setTimeout(res, 1000))
+
+          try {
+            const json = await orsSnap.calculate({
+              locations: [coords],
+              radius: 300,
+              profile: 'driving-car',
+              format: 'json'
+            })
+            this.showSnapMarker = true
+            this.snapMarkerLocation = GeoUtils.buildSnappedLocation(json.locations)
+          } catch (err) {
+            console.error(err)
+            this.showSnapMarker = false
+            this.snapMarkerLocation = {}
+          }
         }
       }
     },

@@ -42,7 +42,7 @@
         @markerClicked="markerClicked">
       </map-view-markers>
 
-      <l-circle-marker v-if="showSnapMarker" :lat-lng="snapMarkerLocation" :color="'#00ff11'" :radius="4"></l-circle-marker>
+      <l-circle-marker v-if="showSnapMarker" :lat-lng="snapMarkerLocation" :radius="4"></l-circle-marker>
 
       <!--render polygons -->
       <template v-if="polygons">
