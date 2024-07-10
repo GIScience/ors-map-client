@@ -17,7 +17,7 @@
             <template v-slot:activator="{ on }">
               <v-btn class="no-padding"
                      icon small @click="manageJobs">
-                <v-icon :title="$t('optimization.manage') + $t('optimization.jobs')" color="dark" :medium="$lowResolution">settings</v-icon>
+                <v-icon size="1.5rem" :title="$t('optimization.manage') + $t('optimization.jobs')" color="dark" :medium="$lowResolution">edit</v-icon>
               </v-btn>
             </template>
             {{ $t('optimization.manage') + $t('optimization.jobs') }}
@@ -39,7 +39,7 @@
           <template v-slot:activator="{ on }">
             <v-btn class="no-padding"
                    icon small @click="manageVehicles">
-              <v-icon :title="$t('optimization.manage') + $t('optimization.vehicles')" color="dark" :medium="$lowResolution">settings</v-icon>
+              <v-icon size="1.5rem" :title="$t('optimization.manage') + $t('optimization.vehicles')" color="dark" :medium="$lowResolution">edit</v-icon>
             </v-btn>
           </template>
           {{ $t('optimization.manage') + $t('optimization.vehicles') }}
@@ -58,7 +58,7 @@
             <div class="skill-opt-btn">
               <v-btn class="skill-opt-btn"
                      outline small fab @click="manageSkills">
-                <v-icon :title="$t('optimization.manage') + $t('optimization.skills')" color="dark" :medium="$lowResolution">settings</v-icon>
+                <v-icon :title="$t('optimization.manage') + $t('optimization.skills')" color="dark" :medium="$lowResolution">edit</v-icon>
               </v-btn>
               <p class="skill-btn-legend">{{$t('optimization.manage') + $t('optimization.skills')}}</p>
             </div>
