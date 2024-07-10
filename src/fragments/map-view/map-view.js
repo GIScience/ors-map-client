@@ -179,6 +179,7 @@ export default {
       markerMoveTimeoutId: null,
       snapMarkerLocation: {},
       showSnapMarker: false,
+      snapIsAwake: true,
       drawControlRef: null, // a reference to the drawing polygon component
       clickInsidePolygon: null,
       currentInnerHeight: null,
@@ -949,20 +950,19 @@ export default {
           this.markerDragEnd(event)
         }, 1000)
 
-        if (store.getters.mapSettings.showSnapLocationDuringDrag) {
+        if (store.getters.mapSettings.showSnapLocationDuringDrag && this.snapIsAwake) {
           const orsSnap = new Openrouteservice.Snap({
             api_key: appConfig.orsApiKey
           })
           const coords = [event.latlng.lng, event.latlng.lat]
-
-          // TODO: fix timeout/sleep function
-          await new Promise(res => setTimeout(res, 1000))
+          const mapSettings = store.getters.mapSettings
 
           try {
+            this.snapIsAwake = false
             const json = await orsSnap.calculate({
               locations: [coords],
               radius: 300,
-              profile: 'driving-car',
+              profile: mapSettings.defaultProfile,
               format: 'json'
             })
             this.showSnapMarker = true
@@ -972,6 +972,12 @@ export default {
             this.showSnapMarker = false
             this.snapMarkerLocation = {}
           }
+          // marker move events repeatedly call this function
+          // this promise introduces a sleep period after a snapping request
+          await new Promise((res) => setTimeout(() => {
+            this.snapIsAwake = true
+            res('foo')
+          }, 75))
         }
       }
     },
