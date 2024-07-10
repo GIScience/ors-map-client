@@ -4,12 +4,6 @@
       <template>
         <template v-if="mapViewData">
           <optimization-details v-if="mapViewData.hasRoutes()" :map-view-data="mapViewData"></optimization-details>
-          <div class="route-btn">
-            <v-btn @click="optimizeJobs" color="success" fab small>
-              <v-icon :title="'Calculate route(s)'">send</v-icon>
-            </v-btn>
-          </div>
-          <br>
         </template>
         <div class="optimization-heading">
           {{ $t('optimization.jobs') }} (Max: 50)
