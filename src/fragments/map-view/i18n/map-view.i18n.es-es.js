@@ -79,5 +79,6 @@ export default {
       'scroll': 'Pulse Ctrl y desplace la pantalla simultáneamente para ampliar el mapa',
       'scrollMac': 'Utilice ⌘ y desplace la pantalla simultáneamente para ampliar el mapa'
     }
-  }
+  },
+  'requestFailed': 'The snapping request failed'
 }

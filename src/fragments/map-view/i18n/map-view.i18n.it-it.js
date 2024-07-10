@@ -79,5 +79,6 @@ export default {
       'scroll': 'Utilizza CTRL + scorrimento per eseguire lo zoom della mappa',
       'scrollMac': 'Utilizza ⌘ + scorrimento per eseguire lo zoom della mappa'
     }
-  }
+  },
+  'requestFailed': 'The snapping request failed'
 }

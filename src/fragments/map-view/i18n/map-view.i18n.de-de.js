@@ -78,6 +78,7 @@ export default {
       touch: 'Verwenden Sie zwei Finger, um die Karte zu bewegen.',
       scroll: 'Verwenden Sie Strg + Scrollen zum Zoomen der Karte',
       scrollMac: 'Verwenden Sie \u2318 + Scrollen, um die Karte zu zoomen'
-    }
+    },
+    requestFailed: 'The snapping request failed'
   }
 }

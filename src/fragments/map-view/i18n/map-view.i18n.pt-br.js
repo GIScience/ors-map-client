@@ -79,5 +79,6 @@ export default {
       scroll: 'Pressione Ctrl e role a tela simultaneamente para aplicar zoom no mapa',
       scrollMac: 'Use \u2318 e role a tela simultaneamente para aplicar zoom no mapa'
     }
-  }
+  },
+  requestFailed: 'The snapping request failed'
 }

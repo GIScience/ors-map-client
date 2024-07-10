@@ -79,5 +79,6 @@ export default {
       'scroll': 'Utilisez ctrl + défilement pour agrandir la carte',
       'scrollMac': 'Utilisez ⌘ + faire défiler pour agrandir la carte'
     }
-  }
+  },
+  'requestFailed': 'The snapping request failed'
 }

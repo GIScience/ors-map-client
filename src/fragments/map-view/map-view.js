@@ -968,16 +968,16 @@ export default {
             this.showSnapMarker = true
             this.snapMarkerLocation = GeoUtils.buildSnappedLocation(json.locations)
           } catch (err) {
-            console.error(err)
             this.showSnapMarker = false
             this.snapMarkerLocation = {}
+            this.showWarning(this.$t('mapView.requestFailed'), { timeout: 0 })
           }
           // marker move events repeatedly call this function
           // this promise introduces a sleep period after a snapping request
           await new Promise((res) => setTimeout(() => {
             this.snapIsAwake = true
             res('foo')
-          }, 75))
+          }, 50))
         }
       }
     },

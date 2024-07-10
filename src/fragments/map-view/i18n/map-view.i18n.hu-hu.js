@@ -79,5 +79,6 @@ export default {
       'scroll': 'A térkép nagyításához használja a Ctrl + egérgörgetőt',
       'scrollMac': 'A térkép nagyításához használja a ⌘ + egérgörgetőt'
     }
-  }
+  },
+  'requestFailed': 'The snapping request failed'
 }

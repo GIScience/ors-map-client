@@ -78,6 +78,7 @@ export default {
       touch: 'Posunujte mapu pomocí dvou prstů',
       scroll: 'Pro přiblížení mapy použijte ctrl + rolování',
       scrollMac: 'Pro přiblížení mapy použijte \u2318 + rolování'
-    }
+    },
+    requestFailed: 'The snapping request failed'
   }
 }

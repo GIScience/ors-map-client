@@ -78,5 +78,6 @@ export default {
     options: 'Opțiuni',
     polygonDetails: 'Detalii poligon',
     directionsFromHere: 'Direcții de aici',
-  }
+  },
+  requestFailed: 'The snapping request failed'
 }
