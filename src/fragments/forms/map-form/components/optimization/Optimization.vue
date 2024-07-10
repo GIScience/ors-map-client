@@ -16,17 +16,28 @@
             </template>
             {{ $t('optimization.manage') + $t('optimization.jobs') }}
           </v-tooltip>
+          <v-btn class="hide-button" icon small @click="jobsExpanded=!jobsExpanded">
+            <v-icon v-if="jobsExpanded" color="info" :medium="$lowResolution">visibility_off</v-icon>
+            <v-icon v-else color="info" :medium="$lowResolution">visibility</v-icon>
+          </v-btn>
         </div>
       </template>
-      <div v-if="jobs.length === 0">
-        <v-btn @click="addJobFromMap" color="success">
-          <v-icon style="margin-right: 5px;">map</v-icon>
-          {{ $t('optimization.addFromMap') + $t('optimization.job') }}
-        </v-btn>
-      </div>
+      <v-btn v-if="jobs.length === 0" @click="addJobFromMap" color="success">
+        <v-icon style="margin-right: 5px;">map</v-icon>
+        {{ $t('optimization.addFromMap') + $t('optimization.job') }}
+      </v-btn>
       <!-- low priority TODO: more elegant solution for this? -->
-      <job-list v-if="mapViewData.hasRoutes()" :jobs="jobs" :map-view-data="mapViewData"></job-list>
-      <job-list v-else :jobs="jobs"></job-list>
+      <job-list v-if="mapViewData.hasRoutes()" :jobs="jobs" :jobs-shown="jobsExpanded" :map-view-data="mapViewData"
+                v-show="jobsExpanded"></job-list>
+      <job-list v-else :jobs="jobs" :jobs-shown="jobsExpanded"></job-list>
+      <v-card v-if="!jobsExpanded" @click="jobsExpanded=!jobsExpanded">
+        <v-card-title>
+          <v-icon style="padding: 0 5px 0 7px">work</v-icon>
+          <b>{{ $t('optimization.savedJobs') + jobs.length }}</b>
+        </v-card-title>
+      </v-card>
+
+      <!--TODO: add another thin divider?-->
       <div class="optimization-heading">
         {{ $t('optimization.vehicles') }} (Max: 3)
         <v-tooltip bottom style="float: right">
