@@ -6,7 +6,7 @@
         <span><a :style="linkColor" target="_blank" href="https://github.com/GIScience/ors-map-client">v{{ appVersion }}</a>&nbsp;|&nbsp;© {{currentYear}} <strong>{{footerMainSiteName}}</strong></span>
         <div>{{ $t('global.developedByIntro') }}
             <a :style="linkColor" target="_blank" :title="$t('global.developedBy')" :href="footerLink">{{ $t('global.developedBy') }}</a>
-        </div><br>
+        </div>
         <a :style="linkColor" class="link" :title="$t('about.privacyPolicy')" :href="constants.links.privacyPolicy"
            target="_blank">{{ $t('about.privacyPolicy') }}</a>
         <v-spacer shrink></v-spacer>
