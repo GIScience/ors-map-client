@@ -4,7 +4,7 @@ import geoUtils from '@/support/geo-utils'
 
 export default {
   data: () => ({
-    vehicleExtended: [false]
+    vehicleExtended: [true]
   }),
   props: {
     vehicles: {
