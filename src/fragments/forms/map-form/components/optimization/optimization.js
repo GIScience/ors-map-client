@@ -108,9 +108,6 @@ export default {
       this.skills = [Skill.fromJSON('{"name":"cold chain", "id":1}')]
       localStorage.setItem('skills', JSON.stringify(this.skillsJSON))
     }
-    // TODO: remove defaults
-    this.jobs = [Job.fromJSON('{"id":1,"service":300,"skills":[1],"amount":[1],"location":[8.68525,49.420822]}')]
-    this.vehicles = [Vehicle.fromJSON('{"id":1,"profile":"driving-car","start":[ 8.675863, 49.418477 ],"end":[ 8.675863, 49.418477 ],"capacity":[4],"skills":[1]}')]
     this.loadData()
 
     const context = this
