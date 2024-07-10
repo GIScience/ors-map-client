@@ -37,7 +37,8 @@ export default {
     editData: [],
     isImportOpen: false,
     expectedImport: '',
-    showSkillManagement: false
+    showSkillManagement: false,
+    jobsExpanded: true
   }),
   components: {
     FieldsContainer,
