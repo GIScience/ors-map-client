@@ -20,6 +20,7 @@ import JobList from './components/job-list/JobList.vue'
 import VehicleList from './components/vehicle-list/VehicleList.vue'
 import EditDialog from './components/edit-dialog/EditDialog.vue'
 import EditSkills from './components/edit-skills/EditSkills.vue'
+import theme from '@/config/theme'
 
 export default {
   mixins: [MapFormMixin],
@@ -93,6 +94,9 @@ export default {
     },
     disabledActions () {
       return appConfig.disabledActionsForOptimization
+    },
+    borderColor () {
+      return theme.primary || '#cbced1'
     }
   },
   created () {

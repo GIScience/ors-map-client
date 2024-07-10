@@ -5,7 +5,7 @@
         <template v-if="mapViewData">
           <optimization-details v-if="mapViewData.hasRoutes()" :map-view-data="mapViewData"></optimization-details>
         </template>
-        <div class="optimization-heading">
+        <div class="optimization-heading" v-top-border:color="borderColor">
           {{ $t('optimization.jobs') }} (Max: 50)
           <v-tooltip bottom style="float: right">
             <template v-slot:activator="{ on }">
