@@ -1,7 +1,8 @@
 <template>
   <div class="vehicle-inputs">
-    <v-card elevation="3" style="margin: 5px;" v-for="(v, i) in vehicles" :key="i">
-      <v-card-title style="padding-bottom: 0;"><v-icon :color="vehicleColors(v.id)" style="padding: 0 5px 0 0">{{vehicleIcon(v.profile)}}</v-icon><b>Vehicle {{v.id}} ({{v.profile}})</b></v-card-title>
+    <v-expansion-panel  class="no-shadow" :value="vehicleExtended" :expand="true">
+      <v-expansion-panel-content style="background: transparent;" v-for="(v, i) in vehicles" :key="i">
+        <div slot="header" style="padding-bottom: 0;"><v-icon :color="vehicleColors(v.id)" style="padding: 0 5px 0 0">{{vehicleIcon(v.profile)}}</v-icon><b>Vehicle {{v.id}} ({{v.profile}})</b></div>
       <v-card-text>
           <template v-for="prop in ['capacity','skills','time_window']">
             <v-chip v-if="prop === 'time_window' && v[prop].length && v[prop].every(e => e != null) " style="flex: auto">{{
@@ -13,7 +14,8 @@
             </v-chip>
           </template>
         </v-card-text>
-      </v-card>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
   </div>
 </template>
 

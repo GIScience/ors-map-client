@@ -12,6 +12,14 @@ ul.job-inputs {
   padding: 10px 0;
 }
 
+ul.vehicle-inputs li {
+  list-style: none;
+}
+
+ul.vehicle-inputs {
+  padding: 10px 0;
+}
+
 .route-btn {
   float: right;
   margin-right: 8px;
