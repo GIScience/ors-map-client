@@ -160,7 +160,7 @@ export default {
   computed: {
     routeOpacity () {
       let opacity = lodash.get(this.route, 'properties.opacity')
-      if (opacity) {
+      if (lodash.isNumber(opacity)) {
         return opacity
       } else {
         return 0.9
