@@ -445,6 +445,10 @@ export default {
      * @param {*} data {latLng: ..., place:...}
      */
     addRouteStop (data) {
+      // leaflet native drag event exposes under .latlng
+      if (data.latLng === undefined) {
+        data.latLng = data.latlng
+      }
       // Only one place input, so the selected point will be the 'from'
       if (this.places.length === 1) {
         this.directionsFromPoint(data)
