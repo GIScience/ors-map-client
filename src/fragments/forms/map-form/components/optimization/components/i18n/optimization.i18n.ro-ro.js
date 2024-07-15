@@ -7,6 +7,7 @@ export default {
     couldNotResolveTheLocation: 'Could not resolve the location of the ',
     maxWarning: 'The live API can consider a maximum of ',
     genericErrorMsg: 'It was not possible to optimize Jobs',
+    savedJobs: 'Saved Jobs: ',
     service: 'Service time',
     capacity: 'Capacity',
     delivery: 'Deliveries',

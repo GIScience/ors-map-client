@@ -4,6 +4,12 @@
   font-weight: bold;
 }
 
+.hide-button {
+  padding: 0;
+  float: right;
+  margin-right: 20px
+}
+
 ul.job-inputs li {
   list-style: none;
 }
