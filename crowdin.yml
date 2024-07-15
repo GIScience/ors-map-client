@@ -1,0 +1,59 @@
+#
+# Your Crowdin credentials
+#
+"project_id_env": "CROWDIN_PROJECT_ID"
+"api_token_env": "CROWDIN_PERSONAL_TOKEN"
+"base_path": "."
+"base_url": "https://api.crowdin.com"
+
+#
+# Choose file structure in Crowdin
+# e.g. true or false
+#
+"preserve_hierarchy": true
+
+#
+# Files configuration
+#
+files: [
+  {
+    "source": "**/*.i18n.en-us.js",
+    "translation": "%original_path%/%file_name%.i18n.%locale%.js",
+    "languages_mapping": {
+        "locale":
+          {
+            "cs": "cs-cz",
+            "de": "de-de",
+            "fr": "fr-fr",
+            "hu": "hu-hu",
+            "it": "it-it",
+            "pt-BR": "pt-br",
+            "ro": "ro-ro",
+            "es-ES": "es-es",
+            "th": "th-th"
+          },
+    },
+    "translation_replace": {
+      ".i18n.en-us": ""
+    }
+  },
+  {
+    "source": "/src/i18n/translations/en-us/global.js",
+    "translation": "/src/i18n/translations/%locale%/global.js",
+    "languages_mapping": {
+      "locale":
+        {
+          "cs": "cs-cz",
+          "de": "de-de",
+          "fr": "fr-fr",
+          "hu": "hu-hu",
+          "it": "it-it",
+          "pt-BR": "pt-br",
+          "ro": "ro-ro",
+          "es-ES": "es-es",
+          "th": "th-th"
+        },
+    }
+  }
+
+]

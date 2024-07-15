@@ -52,15 +52,9 @@ export default {
         label: 'Interval',
         description: 'Interval isochron, které se mají vypočítat'
       },
-      options: {
-        label: 'Možnosti'
-      },
-      profile_params: {
-        label: 'Parametry profilu'
-      },
-      restrictions: {
-        label: 'Omezení'
-      },
+      options: { label: 'Možnosti' },
+      profile_params: { label: 'Parametry profilu' },
+      restrictions: { label: 'Omezení' },
       axleload: {
         label: 'Zatížení nápravy',
         description: 'Maximální zatížení nápravy v tunách'
@@ -109,9 +103,7 @@ export default {
         label: 'Minimální stupeň trasy',
         description: 'Určuje minimální stoupání trasy. Hodnoty stupně: https://wiki.openstreetmap.org/wiki/Key:tracktype'
       },
-      round_trip: {
-        label: 'Cesta tam a zpět'
-      },
+      round_trip: { label: 'Cesta tam a zpět' },
       round_trip_length: {
         label: 'Délka cesty tam a zpět',
         description: 'Cílová délka trasy (upozorňujeme, že se jedná o preferovanou hodnotu, ale výsledky se mohou lišit).'
@@ -155,9 +147,7 @@ export default {
         label: 'Vyhnout se zemím',
         description: 'Vyhnout se zemím'
       },
-      alternative_routes: {
-        label: 'Alternativní trasy'
-      },
+      alternative_routes: { label: 'Alternativní trasy' },
       target_count: {
         label: 'Počet tras',
         description: 'Cílový počet alternativních tras k výpočtu. Služba vrátí až tento počet tras, které splňují omezení podílového a váhového faktoru.'
@@ -174,9 +164,7 @@ export default {
         label: 'Maximální rychlost',
         description: 'Maximální rychlost, která musí být použita'
       },
-      weightings: {
-        label: 'Další nastavení'
-      },
+      weightings: { label: 'Další nastavení' },
       green: {
         label: 'Zeleň (pouze Německo)',
         description: 'Preferovat zelené plochy (k dispozici pouze pro Německo)'
@@ -199,4 +187,4 @@ export default {
       }
     }
   }
-}
+};

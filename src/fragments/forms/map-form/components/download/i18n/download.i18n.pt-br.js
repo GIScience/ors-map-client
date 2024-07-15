@@ -1,4 +1,3 @@
-
 export default {
   download: {
     documentTitle: 'Rota ORS',
@@ -12,4 +11,4 @@ export default {
     fileTooBigToBeDownloaded: 'Arquivo muito grande para ser baixado',
     standard: 'Padrão'
   }
-}
+};

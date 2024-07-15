@@ -57,13 +57,14 @@ export default {
       km: 'km',
       mi: 'M',
       m: 'm',
-      meters: 'Meter',
       seconds: 'Sekunden',
       s: 's',
       minutes: 'Minuten',
-      min: 'min',
       hours: 'h',
       days: 't',
+      h: 'h',
+      min: 'min',
+      meters: 'Meter',
       lat: 'Breite',
       lng: 'Länge',
       tones: 'Töne',
@@ -103,4 +104,4 @@ export default {
     osmid: 'OSM ID',
     countryinfo: 'Länderinfo'
   }
-}
+};

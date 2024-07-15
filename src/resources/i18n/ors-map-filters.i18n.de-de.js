@@ -11,7 +11,6 @@ export default {
       'driving-car': 'Auto',
       'driving-hgv': 'LKW',
       'wheelchair': 'Rollstuhl',
-
       'hgv': 'LKW',
       'bus': 'Bus',
       'agricultural': 'Landwirtschaftliches Fahrzeug',
@@ -53,15 +52,9 @@ export default {
         label: 'Intervall',
         description: 'Intervall der zu berechnenden Isochronen'
       },
-      options: {
-        label: 'Einstellungen'
-      },
-      profile_params: {
-        label: 'Profil-Parameter'
-      },
-      restrictions: {
-        label: 'Einschränkungen'
-      },
+      options: { label: 'Einstellungen' },
+      profile_params: { label: 'Profil-Parameter' },
+      restrictions: { label: 'Einschränkungen' },
       axleload: {
         label: 'Achslast',
         description: 'Die maximale Achslast in Tonnen'
@@ -110,9 +103,7 @@ export default {
         label: 'Min. Wegzustand',
         description: 'Schlechtester nutzbarer Zustand des Weges. Informationen über Wegzustand: https://wiki.openstreetmap.org/wiki/DE:Key:tracktype'
       },
-      round_trip: {
-        label: 'Rundweg'
-      },
+      round_trip: { label: 'Rundweg' },
       round_trip_length: {
         label: 'Länge des Rundweges',
         description: 'Längenvorgabe für den Rundweg (Dies ist ein Richtwert. Die resultierende Länge kann abweichen.).'
@@ -156,9 +147,7 @@ export default {
         label: 'Länder vermeiden',
         description: 'Vermeide ein oder mehrere Länder'
       },
-      alternative_routes: {
-        label: 'Alternative Routen'
-      },
+      alternative_routes: { label: 'Alternative Routen' },
       target_count: {
         label: 'Anzahl der Routen',
         description: 'Anzahl der zu berechnenden Routen. Wenn möglich wird diese Anzahl an Routen, welche die Einschränkungen für den Anteilfaktor und den Gewichtungsfaktor erfüllen, zurückgegeben.'
@@ -173,22 +162,20 @@ export default {
       },
       maximum_speed: {
         label: 'Maximale Geschwindigkeit',
-        description: 'Maximal mögliche Geschwindigkeit des Fahrzeugs',
+        description: 'Maximal mögliche Geschwindigkeit des Fahrzeugs'
       },
-      weightings: {
-        label: 'Zusätzliche Einstellungen'
-      },
+      weightings: { label: 'Zusätzliche Einstellungen' },
       green: {
         label: 'Grün (nur Deutschland)',
-        description: 'Grünflächen bevorzugen (nur für Deutschland verfügbar)',
+        description: 'Grünflächen bevorzugen (nur für Deutschland verfügbar)'
       },
       quiet: {
         label: 'Ruhig',
-        description: 'Ruhige Gebiete bevorzugen (nur für Deutschland verfügbar)',
+        description: 'Ruhige Gebiete bevorzugen (nur für Deutschland verfügbar)'
       },
       surface_quality_known: {
         label: 'Nur Oberflächen mit bekannter Qualität',
-        description: 'Bevorzugte Verwendung von Kanten, deren Oberflächenqualität explizit bekannt ist',
+        description: 'Bevorzugte Verwendung von Kanten, deren Oberflächenqualität explizit bekannt ist'
       },
       allow_unsuitable: {
         label: 'Ungeeignete Kanten zulassen',
@@ -196,8 +183,8 @@ export default {
       },
       vehicle_type: {
         label: 'Fahrzeugtyp',
-        description: 'Für die Routenberechnung zu berücksichtigender Fahrzeugtyp',
+        description: 'Für die Routenberechnung zu berücksichtigender Fahrzeugtyp'
       }
     }
   }
-}
+};

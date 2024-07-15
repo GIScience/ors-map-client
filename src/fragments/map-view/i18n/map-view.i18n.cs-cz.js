@@ -77,7 +77,7 @@ export default {
     gestureHandling: {
       touch: 'Posunujte mapu pomocí dvou prstů',
       scroll: 'Pro přiblížení mapy použijte ctrl + rolování',
-      scrollMac: 'Pro přiblížení mapy použijte \u2318 + rolování'
+      scrollMac: 'Pro přiblížení mapy použijte ⌘ + rolování'
     }
   }
-}
+};

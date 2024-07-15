@@ -39,11 +39,11 @@ export default {
     defaultProfile: 'Výchozí profil',
     compressDataUrlSegment: 'Komprese segmentu URL po /data/',
     autoFitHighlightedBounds: 'Automatické přizpůsobení zvýrazněných hranic',
-    reloadToApplyLanguageChangeTitl: 'Je nutné aplikaci znovu načíst',
+    reloadToApplyLanguageChangeTitle: 'It is necessary to reload the app',
     reloadToApplyLanguageChangeText: 'Pro úplné uplatnění změny jazyka je nutné aplikaci znovu načíst. Znovu načíst nyní?',
     resetShownOnceTooltips: 'Zobrazit popisky nástrojů při novém načtení aplikace',
     convertStopAfterRouteEndingToDestination: 'Převést zastávku přidanou na konci trasy na cíl trasy',
     skipAllSegments: 'přímá trasa pro všechny úseky',
     useStopOptimization: 'Optimalizace trasy při vytvoření zastávky přetažením.'
   }
-}
+};

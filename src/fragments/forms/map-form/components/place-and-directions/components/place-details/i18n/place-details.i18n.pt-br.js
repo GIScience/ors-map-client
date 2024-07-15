@@ -1,4 +1,3 @@
-
 export default {
   placeDetails: {
     layer: 'Camada',
@@ -13,4 +12,4 @@ export default {
     copyLnglat: 'Copiar no formato longitude,latitude',
     satelliteView: 'Vista de satélite'
   }
-}
+};

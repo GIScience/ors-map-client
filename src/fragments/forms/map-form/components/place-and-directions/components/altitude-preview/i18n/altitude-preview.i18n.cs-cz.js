@@ -3,4 +3,4 @@ export default {
     expandAltitudeChart: 'Rozbalit tabulku',
     altitude: 'Nadmořská výška'
   }
-}
+};

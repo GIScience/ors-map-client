@@ -12,4 +12,4 @@ export default {
     copyLnglat: 'Im Format "Längengrad, Breitengrad" kopieren',
     satelliteView: 'Satellitenbild'
   }
-}
+};

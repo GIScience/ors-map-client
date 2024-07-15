@@ -4,4 +4,4 @@ export default {
     openSidebarToSeeRouteDetails: 'Otevřete postranní panel a zobrazte podrobnosti o trase',
     unknownSearchPlaceError: 'Chyba neznámého místa hledání'
   }
-}
+};

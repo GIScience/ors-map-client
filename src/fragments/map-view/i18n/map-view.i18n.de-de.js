@@ -77,7 +77,7 @@ export default {
     gestureHandling: {
       touch: 'Verwenden Sie zwei Finger, um die Karte zu bewegen.',
       scroll: 'Verwenden Sie Strg + Scrollen zum Zoomen der Karte',
-      scrollMac: 'Verwenden Sie \u2318 + Scrollen, um die Karte zu zoomen'
+      scrollMac: 'Verwenden Sie ⌘ + Scrollen, um die Karte zu zoomen'
     }
   }
-}
+};

@@ -1,4 +1,3 @@
-
 export default {
   placeInput: {
     findAPlace: 'Ort finden',
@@ -31,4 +30,4 @@ export default {
     goToDirectionsMode: 'Klicken Sie auf den Wegbeschreibungs-Knopf, um zum Routing-Modus zu wechseln',
     clickToSearchAndShowResultsOnTheMap: 'Hier klicken um zu Suchen und die Ergebnisse auf der Karte anzuzeigen'
   }
-}
+};

@@ -6,4 +6,4 @@ export default {
     toggleVisibility: 'Přepnout viditelnost',
     opacity: 'Průhlednost'
   }
-}
+};

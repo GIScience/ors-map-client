@@ -9,4 +9,4 @@ export default {
     onlyOnceLocation: 'Získat pozici pouze jednou',
     myPositionToolTip: 'Aktivace polohy pro zobrazení vaší polohy a snadnější vyhledávání míst v okolí'
   }
-}
+};

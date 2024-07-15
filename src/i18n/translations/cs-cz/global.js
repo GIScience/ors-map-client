@@ -104,4 +104,4 @@ export default {
     osmid: 'OSM ID',
     countryinfo: 'Informace o zemi'
   }
-}
+};

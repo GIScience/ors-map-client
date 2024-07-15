@@ -11,4 +11,4 @@ export default {
     dictUploadCanceled: 'Nahrávání zrušeno',
     dictRemoveFile: 'Odebrat soubor'
   }
-}
+};

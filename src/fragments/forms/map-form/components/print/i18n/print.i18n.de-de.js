@@ -5,4 +5,4 @@ export default {
     preparingPrinting: 'Druck vorbereiten…',
     readyToPrint: 'Bereit zum Drucken'
   }
-}
+};

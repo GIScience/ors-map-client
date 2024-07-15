@@ -1,4 +1,3 @@
-
 export default {
   maps: {
     pageTitle: 'ORS-Karten',
@@ -13,4 +12,4 @@ export default {
     updateSearchAfterZoomOrCenterChange: 'Orts-Suche nach Kartenbewegung aktualisieren',
     pageNotFound: 'Seite nicht gefunden. Überprüfen Sie, ob die URL unvollständig oder falsch ist'
   }
-}
+};

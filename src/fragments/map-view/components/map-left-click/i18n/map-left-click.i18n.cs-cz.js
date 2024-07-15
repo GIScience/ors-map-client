@@ -9,4 +9,4 @@ export default {
     lnglatCopied: 'Zeměpisná délka a šířka zkopírována',
     latlngCopied: 'Zeměpisná šířka a délka zkopírována'
   }
-}
+};

@@ -9,4 +9,4 @@ export default {
     onlyOnceLocation: 'Acessar sua posição apenas uma vez',
     myPositionToolTip: 'Ative a localização para mostrar sua posição e encontrar lugares próximos mais facilmente'
   }
-}
+};

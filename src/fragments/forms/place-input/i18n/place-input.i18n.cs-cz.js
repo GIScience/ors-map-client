@@ -30,4 +30,4 @@ export default {
     goToDirectionsMode: 'Kliknutím na tlačítko navigace se přepnete do režimu navigace.',
     clickToSearchAndShowResultsOnTheMap: 'Kliknutím zobrazíte výsledky vyhledávání na mapě'
   }
-}
+};

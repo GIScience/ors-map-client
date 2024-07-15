@@ -1,4 +1,3 @@
-
 export default {
   download: {
     documentTitle: 'ORS Route',
@@ -12,4 +11,4 @@ export default {
     fileTooBigToBeDownloaded: 'Datei ist zu groß zum Herunterladen',
     standard: 'Standard'
   }
-}
+};

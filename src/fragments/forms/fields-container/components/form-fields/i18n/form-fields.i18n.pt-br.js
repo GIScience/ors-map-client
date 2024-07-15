@@ -4,6 +4,6 @@ export default {
     defaultAbbreviation: 'padr.: ',
     paramJSONContent: 'conteúdo JSON',
     wrongInputValue: 'Valor de entrada errado para este parâmetro.',
-    notValidJsonString: 'JSON não válido para :fieldName',
+    notValidJsonString: 'JSON não válido para :fieldName'
   }
-}
+};

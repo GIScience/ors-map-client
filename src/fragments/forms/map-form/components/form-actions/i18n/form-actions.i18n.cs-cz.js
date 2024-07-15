@@ -6,4 +6,4 @@ export default {
     roundTrip: 'Cesta tam a zpět',
     toggleRoundTrip: 'Přepnout zpáteční cestu'
   }
-}
+};

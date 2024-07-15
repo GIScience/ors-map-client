@@ -3,4 +3,4 @@ export default {
     hideMenuBar: 'Ocultar barra de menu',
     showMenuBar: 'Exibir barra de menu'
   }
-}
+};
