@@ -237,6 +237,29 @@ const orsParamsParser = {
       if (skipSegments.length > 0) {
         args.skip_segments = skipSegments
       }
+      const alternativeRoutesIndex = lodash.findIndex(OrsMapFilters, (f) => {
+        return f.name === 'alternative_routes'
+      })
+
+      // if we have more than 2 places, we need to remove the alternative_route filter
+      if (places.length > 2) {
+        if (alternativeRoutesIndex !== -1) {
+        //   delete alternative_routes from OrsMapFilters
+        //     OrsMapFilters.splice(index, 1)
+          const targetCountIndex = lodash.findIndex(OrsMapFilters[alternativeRoutesIndex].props, (f) => {
+            return f.name === 'target_count'
+          })
+          OrsMapFilters[alternativeRoutesIndex].props[targetCountIndex].value = 1
+        }
+      } else {
+        // reinstate the alternative_route object if we have > 2 places
+        // TODO this way we override the config values, need better solution
+        const targetCountIndex = lodash.findIndex(OrsMapFilters[alternativeRoutesIndex].props, (f) => {
+          return f.name === 'target_count'
+        })
+        OrsMapFilters[alternativeRoutesIndex].props[targetCountIndex].value = 3
+      }
+
       // Add the filters defined in the ORS filters that are manipulated
       // directly by external components
       orsParamsParser.setFilters(args, OrsMapFilters, constants.services.directions)
