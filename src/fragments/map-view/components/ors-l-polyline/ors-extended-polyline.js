@@ -367,10 +367,7 @@ class OrsExtendedPolyline {
       return true
     }
 
-    if ((this.options.vertices.middle === false || this.options.vertices.insert === false) && index === -1) {
-      return true
-    }
-    return false
+    return (this.options.vertices.middle === false || this.options.vertices.insert === false) && index === -1
   }
 
   /**
