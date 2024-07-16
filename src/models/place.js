@@ -297,6 +297,8 @@ class Place {
    * Build a place using only lng and lat
    * @param {*} lng
    * @param {*} lat
+   * @param {string} placeName
+   * @param options
    */
   static build(lng, lat, placeName = '', options = {}) {
     return new Place(lng, lat, placeName, options)

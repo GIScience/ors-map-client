@@ -7,6 +7,7 @@ import lodash from 'lodash'
  * Get filter object reference by filter name
  * @param {*} OrsMapFiltersAccessor
  * @param {*} filterName
+ * @param {boolean} onlyIfEnabled
  * @returns {*|false} filter object or false
  */
 const getFilterRefByName = (filterName, OrsMapFiltersAccessor = null, onlyIfEnabled = false) => {

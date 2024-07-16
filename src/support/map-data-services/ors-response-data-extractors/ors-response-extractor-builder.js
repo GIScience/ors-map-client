@@ -51,8 +51,8 @@ class OrsResponseExtractorBuilder {
   /**
    * Get the map data extractor based on the current selected api version
    *
-   * @param String builderName
-   * @param data {responseData: {}, requestData: {}, translations: {}}
+   * @param extractorName
+   * @param {Object} data {responseData: {}, requestData: {}, translations: {}}
    * @param  apiVersion {String}
    * @returns {*} Map data extractor instance
    */
@@ -82,8 +82,7 @@ class OrsResponseExtractorBuilder {
       requestData: data.dataOrigin,
       translations: data.translations
     }
-    const extractorInstance = new extractors[extractorNameWithVersion](builderInputData)
-    return extractorInstance
+    return new extractors[extractorNameWithVersion](builderInputData)
   }
 
   /**
@@ -91,7 +90,9 @@ class OrsResponseExtractorBuilder {
    * for given endpoint
    *
    * @static
+   * @param dataFromType
    * @param {*} data {responseData: {}, requestData: {}, apiVersion: String}
+   * @param apiVersion
    * @memberof TableDataBuilder
    */
   static hasMapBuilderFor = (dataFromType, data, apiVersion) => {

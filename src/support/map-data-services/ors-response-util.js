@@ -12,8 +12,9 @@ const buildSinglePlaceResponse = (place) => {
 
 /**
  * Filter a response data so that only the selected place will be part of it
- * @param {*} suggestedPlaceSelected
  * @returns {object}
+ * @param featureId
+ * @param rawResponse
  */
 const getFilteredFeatureResponse = (featureId, rawResponse) => {
   const filteredResponse = {}
@@ -39,8 +40,8 @@ const isANewResponse = (newResponse, oldResponse) => {
 /**
  * Determines if the new map-view-data is really different from the old one
  * using the response timestamp metadata as reference
- * @param {*} newResponse
- * @param {*} oldResponse
+ * @param {*} newMapData
+ * @param {*} oldMapData
 */
 const isANewMapViewData = (newMapData, oldMapData) => {
   return !newMapData || !oldMapData || !newMapData.timestamp || newMapData.timestamp > oldMapData.timestamp

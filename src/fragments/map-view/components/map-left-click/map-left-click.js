@@ -99,9 +99,8 @@ export default {
     },
     /**
      * Resolve the coordinates of a point to a qualified location
-     * @param lar
+     * @param lat
      * @param lng
-     * @param options
      * @returns {Promise}
      * @emits showLoading (via EventBus)
      */

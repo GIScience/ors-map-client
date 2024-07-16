@@ -162,7 +162,6 @@ export default {
      * if it is not the last one (over the other)
      * Method is intended to be called when the global
      * event `boxMaximizedStackChanged` if emitted
-     * @param {*} value
      */
     syncBoxesMaximized () {
       // We can have a list of boxes considered as maximized, but only the

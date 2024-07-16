@@ -236,7 +236,7 @@ export default {
      * once the map has been moved, the user may want to
      * refresh the search to get features within the
      * visible map view
-     * @param {Object} { zoom: Object, map: Object, context: Object}
+     * @param {Object} data { zoom: Object, map: Object, context: Object}
      */
     zoomChanged (data) {
       this.$root.appHooks.run('zoomChanged', data)
@@ -442,7 +442,7 @@ export default {
     },
     /**
      * Load route, store zoom value and mode and store appRouteData
-     * @param {*} appRouteFrom
+     * @emits clearMap
      * @emits appRouteDataChanged
      */
     loadRoute () {

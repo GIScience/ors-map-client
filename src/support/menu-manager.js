@@ -94,7 +94,7 @@ const parseItem = (item) => {
 /**
  * Define if the menu item is active or not
  * @param {*} item
- * @param {} router to object
+ * @param to router to object
  */
 const setItemActiveStatus = (item, to) => {
   if (item.href !== undefined && item.href !== null) {
@@ -122,7 +122,7 @@ const setItemActiveStatus = (item, to) => {
 /**
  * Run over each menu item and set the active status of each one
  * @param {*} menuItems
- * @param {} router to object
+ * @param to router to object
  */
 const setMenuActiveStatus = (menuItems, to) => {
   Vue.lodash.each(menuItems, (item) => {
@@ -133,7 +133,7 @@ const setMenuActiveStatus = (menuItems, to) => {
 /**
  * Replace a menu item by a replacement according its ending href string
  * @param {*} menu
- * @param string itemEnding
+ * @param {string} itemEnding
  * @param {*} replacement
  */
 const replaceItemEndingWith = (menu, itemEnding, replacement) => {
@@ -152,7 +152,7 @@ const replaceItemEndingWith = (menu, itemEnding, replacement) => {
 /**
  * Replace a menu item by a replacement by its starting href string
  * @param {*} menu
- * @param string itemStart
+ * @param {string} itemStart
  * @param {*} replacement
  */
 const replaceItemStartingWith = (menu, itemStart, replacement) => {

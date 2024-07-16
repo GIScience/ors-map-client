@@ -261,7 +261,6 @@ export default {
     /**
      * Handle the route places error response displaying the correct message
      * @param {*} result
-     * @param {*} args
      */
     handleCalculateIsochronesError (result) {
       this.$root.appHooks.run('beforeHandleIsochronesError', result)

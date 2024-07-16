@@ -48,6 +48,7 @@ const PolygonUtils = {
   /**
    * Build polygon options
    * @param {Object} polygonData
+   * @param defaultColor
    * @returns {Object}
    */
   buildPolygonOptions (polygonData, defaultColor) {
@@ -117,8 +118,9 @@ const PolygonUtils = {
   },
   /**
    * Build polygon label
-   * @param {Number} index
    * @returns {String} label
+   * @param polygon
+   * @param translations
    */
   buildPolygonLabel(polygon, translations) {
     let label = ''
@@ -193,7 +195,7 @@ const PolygonUtils = {
    * Checks if a single point is contained in a polyline or polygon
    * Note that L.Polygon, L.GeodesicPolygons, and L.GeodesicCircles are types of L.Polygon.
    * @param {Leaflet.LatLng} point A geographical point
-   * @param {Array} polygonCoords: array of LatLng points
+   * @param {Array} polygonCoords array of LatLng points
    * @returns {boolean} True if the point is contained in the polygon or polyline; otherwise,
    *
    */
@@ -235,7 +237,8 @@ const PolygonUtils = {
    * This is a JavaScript and Leaflet port of the `wn_PnPoly()` C++ function by Dan Sunday.
    * Unlike the C++ version, this implementation does include points on the line and vertices.
    *
-   * @param p {Leaflet.LatLng} A point.
+   * @param point {Leaflet.LatLng} A point.
+   * @param vertices
    * @returns {Number} The winding number (=0 only when the point is outside)
    *
    * @see {@link http://geomalgorithms.com/a03-_inclusion.html Inclusion of a Point in a Polygon} by Dan Sunday.

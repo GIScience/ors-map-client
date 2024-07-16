@@ -668,7 +668,6 @@ export default {
     /**
      * Handle the route places error response displaying the correct message
      * @param {*} result
-     * @param {*} args
      */
     handleCalculateDirectionsError (result) {
       this.$root.appHooks.run('beforeHandleDirectionsError', result)
@@ -905,7 +904,6 @@ export default {
 
     /**
      * Toggle the round trip state view mode
-     * @param {Boolean} roundTripActive
      */
     toggleRoundTrip () {
       // If it is in roundTrip mode, we must be reset to single place mode

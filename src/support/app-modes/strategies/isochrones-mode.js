@@ -25,6 +25,7 @@ class IsochronesMode {
   /**
    * Build a directions route
    * @param {*} appRouteData
+   * @param options
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
   getRoute = (appRouteData, options = null) => {
@@ -38,7 +39,6 @@ class IsochronesMode {
   /**
    * Decode single place path
    * @param {*} currentRoute
-   * @param {Object} data
    * @returns {AppRouteData}
    */
   decodePath = (currentRoute) => {

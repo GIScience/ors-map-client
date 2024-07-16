@@ -110,7 +110,6 @@ const orsParamsParser = {
    * Build reverse search args
    * @param {Number} lat
    * @param {Number} long
-   * @param {Object} options
    * @returns {Object} args
    */
   buildReverseSearchArgs: (lat, long) => {
@@ -334,7 +333,7 @@ const orsParamsParser = {
   /**
    * Add OrsMapFilters to intoArgs object to a given service
    * @param {Object} intoArgs - target object to the filters that will be extracted from sourceFilters
-   * @param {Object} orsFilters
+   * @param {Object} sourceFilters
    * @param {String} service
    * @returns {Array} intoArgs
    * @uses store.getters.mode
@@ -394,12 +393,12 @@ const orsParamsParser = {
   },
   /**
    * Determines if a filter value is valid
+   * @param filter
    * @param {*} filterValue
    * @returns {Boolean}
    */
   isFilterValueValid (filter, filterValue) {
-    const isValid = filterValue !== '' && filterValue !== undefined && filterValue !== null && filterValue !== '{}' && (typeof filterValue !== 'object' || Object.keys(filterValue).length > 0)
-    return isValid
+    return filterValue !== '' && filterValue !== undefined && filterValue !== null && filterValue !== '{}' && (typeof filterValue !== 'object' || Object.keys(filterValue).length > 0)
   },
 
   /**

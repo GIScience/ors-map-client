@@ -455,7 +455,6 @@ class OrsExtendedPolyline {
   /**
    * Process the polyline drag by adding a temporary
    * vertex to represent user drag action
-   * @param {*} event
    */
   processDrag () {
     const closestIndex = this._getClosestIndex()

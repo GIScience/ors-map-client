@@ -24,8 +24,7 @@ class MapViewData {
 
   /**
    * Build a place using only lng a lat
-   * @param {*} lng
-   * @param {*} lat
+   * @param geoJson
    */
   static build (geoJson) {
     return new MapViewData(geoJson)
@@ -33,17 +32,13 @@ class MapViewData {
 
   /**
    * Check if the object has places
-   * @param {*} lng
-   * @param {*} lat
    */
   hasPlaces () {
     return this.places.length > 0
   }
 
   /**
-   * Check if the object has places
-   * @param {*} lng
-   * @param {*} lat
+   * Check if the object has pois
    */
   hasPois () {
     return this.pois.length > 0
@@ -51,8 +46,6 @@ class MapViewData {
 
   /**
    * Check if the object has routes
-   * @param {*} lng
-   * @param {*} lat
    */
   hasRoutes () {
     return this.routes.length > 0
