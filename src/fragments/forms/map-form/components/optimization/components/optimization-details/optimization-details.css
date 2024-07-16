@@ -14,3 +14,8 @@
 .action-options-wrapper {
   height: 45px;
 }
+
+.optimization-routes {
+  background: transparent;
+  border-bottom: 1px solid #cbced1;
+}

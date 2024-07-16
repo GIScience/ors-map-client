@@ -10,7 +10,7 @@
       <v-alert :value="true" type="warning" style="color:black">{{$t('optimizationDetails.warningUnassigned')}} {{ unassignedJobsString }}</v-alert>
     </div>
     <v-expansion-panel slot="content" class="no-shadow" v-if="hasRoutes" :value="panelExtended" :expand="true">
-      <v-expansion-panel-content style="background: transparent;" class="routes-header" :key="routeIndex" v-for="(route, routeIndex) in parsedRoutes">
+      <v-expansion-panel-content class="optimization-routes" :key="routeIndex" v-for="(route, routeIndex) in parsedRoutes">
         <div slot="header">
           <h4><v-icon :color="vehicleColors(route.vehicle)" style="padding: 0 5px 0 0">{{ getVehicleIconName(route.vehicle) }}</v-icon>{{$t('routeDetails.route')}} {{routeIndex + 1}} (Vehicle {{route.vehicle}})
             <v-btn icon target="_blank" :href="generateRouteURL(routeIndex)" v-if="parsedRoutes.length > 0" :title="$t('optimizationDetails.getInstructions')">
