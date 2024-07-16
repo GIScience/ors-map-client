@@ -18,6 +18,7 @@
           </v-tooltip>
           <v-btn class="hide-button" icon small @click="jobsExpanded=!jobsExpanded">
             <v-icon v-if="jobsExpanded" color="info" :medium="$lowResolution">visibility_off</v-icon>
+            <v-icon v-else color="info" :medium="$lowResolution">visibility</v-icon>
           </v-btn>
         </div>
       </template>
@@ -31,7 +32,7 @@
       <job-list v-else :jobs="jobs" :jobs-shown="jobsExpanded"></job-list>
       <v-card v-if="!jobsExpanded" @click="jobsExpanded=!jobsExpanded">
         <v-card-title>
-          <v-icon style="padding: 0 5px 0 7px" color="info">visibility</v-icon>
+          <v-icon style="padding: 0 5px 0 7px">work</v-icon>
           <b>{{ $t('optimization.savedJobs') + jobs.length }}</b>
         </v-card-title>
       </v-card>
