@@ -168,15 +168,6 @@ const geoUtils = {
   },
 
   /**
-   * Get marker coordinates
-   * @param {*} marker
-   */
-  getMarkerCoordinates(marker) {
-    const markerCoordinates = lodash.get(marker, 'data.geometry.coordinates')
-    return markerCoordinates
-  },
-
-  /**
    * Calculate geodesic area
    * @param {Array} coords
    */

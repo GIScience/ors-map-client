@@ -293,24 +293,6 @@ export default {
       return this.mapHeight > 450 || this.$store.getters.embed
     },
     /**
-     * Build and return the GeoJSON options based on the
-     * color defined as main
-     * @returns {Object}
-     */
-    geoJsonOptions () {
-      return {
-        style: { color: this.mainRouteColor, weight: '5' },
-      }
-    },
-    /**
-     * Return the GeoJSON style options
-     * using the value in constants object
-     * @returns {Object}
-     */
-    geoJsonOutlineOptions () {
-      return { style: { color: constants.routeBackgroundColor, weight: '9' } }
-    },
-    /**
      * Build and return the active route data
      * based on the $store.getters.activeRouteIndex
      * @returns {Array} of latLng
@@ -525,16 +507,6 @@ export default {
     displayActiveRouteData () {
       const show = this.activeRouteData && this.showActiveRouteData
       return show
-    },
-
-    /**
-     * Determines if the current active
-     * route is draggable based on app mode
-     * @returns {Boolean} isDraggable
-     */
-    activeRouteIsDraggable () {
-      let isDraggable = this.mode === constants.modes.directions
-      return isDraggable
     },
     /**
      * Return the accessibility btn top position
@@ -1367,14 +1339,6 @@ export default {
         }, 400)
       }
     },
-    /**
-     * Handle the polygon click event and show the polygon data in a pop-up
-     * @param {*} polygon
-     */
-    polygonInfoClick (polygon) {
-      this.infoDialog(polygon.label, null, { code: polygon.data, resizable: true, zIndex: 1001 })
-    },
-
     /**
      * Handle the map right click event,
      * Set the clickLatLng current value

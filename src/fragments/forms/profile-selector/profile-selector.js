@@ -69,17 +69,6 @@ export default {
       return filterRef.value
     },
 
-    /**
-     * Get the primary profiles
-     * @returns {Array}
-     */
-    getPrimaryProfiles () {
-      const primaryProfiles = this.lodash.filter(this.profilesMapping, (p) => {
-        return p.primary === true
-      })
-      return primaryProfiles
-    },
-
     notifyProfileChanged () {
       EventBus.$emit('filtersChangedExternally')
     },
