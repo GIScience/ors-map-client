@@ -20,7 +20,9 @@ export default {
     isEditOpen: true,
     editId: 0,
     editData: [],
+    dataCopy: '',
     editSkills: [],
+    skillsCopy: '',
     jobsBox: false,
     vehiclesBox: false,
     pickPlaceSupported: true,
@@ -137,12 +139,21 @@ export default {
       }
       return jsonSkills
     },
+    editDataJson () {
+      const jsonData = []
+      for (const data of this.editData) {
+        jsonData.push(data.toJSON())
+      }
+      return jsonData
+    },
   },
   created () {
     if (this.editProp === 'jobs') {
       this.jobsBox = true
+      this.dataCopy = localStorage.getItem('jobs')
     } else if (this.editProp === 'vehicles') {
       this.vehiclesBox = true
+      this.dataCopy = localStorage.getItem('vehicles')
     }
 
     for (let item of this.data) {
@@ -238,7 +249,9 @@ export default {
       if (this.hasEmptyLocation) {
         this.showError(this.content.emptyLoc, {timeout: 3000})
       } else {
-        this.$emit(this.content.changedEvent, this.editData)
+        if(JSON.stringify(this.editDataJson) !== this.dataCopy){
+          this.$emit(this.content.changedEvent, this.editData)
+        }
         this.closeEditModal()
       }
     },
