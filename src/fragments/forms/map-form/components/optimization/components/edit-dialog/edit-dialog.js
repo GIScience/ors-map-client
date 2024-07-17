@@ -20,7 +20,9 @@ export default {
     isEditOpen: true,
     editId: 0,
     editData: [],
+    dataCopy: '',
     editSkills: [],
+    skillsCopy: '',
     jobsBox: false,
     vehiclesBox: false,
     pickPlaceSupported: true,
@@ -155,6 +157,9 @@ export default {
     if (this.index > 0) {
       this.editId = this.index
     }
+    //create a string of data as copy
+    this.dataCopy = JSON.stringify(this.editData)
+    this.skillsCopy = JSON.stringify(this.editSkills)
 
     // close editJobs box to pick a place from the map
     EventBus.$on('pickAPlace', () => {
@@ -235,10 +240,15 @@ export default {
       if (this.content.item === 'Vehicle') {
         this.validateTimeWindow()
       }
+      /* if(JSON.stringify(this.editSkills) !== this.skillsCopy){
+        TODO: update skills
+      }*/
       if (this.hasEmptyLocation) {
         this.showError(this.content.emptyLoc, {timeout: 3000})
       } else {
-        this.$emit(this.content.changedEvent, this.editData)
+        if(JSON.stringify(this.editData) !== this.dataCopy){
+          this.$emit(this.content.changedEvent, this.editData)
+        }
         this.closeEditModal()
       }
     },
