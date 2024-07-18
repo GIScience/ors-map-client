@@ -24,6 +24,12 @@ jobs:
       - name: copy example configs to config folder
         working-directory: ${{ secrets.work_dir }}
         run: cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
+      - name: Replace ORS API Key in app-config.js
+        working-directory: ${{ secrets.work_dir }}
+        run: |
+          cd src/config
+          secret_value="${{ secrets.ORS_API_KEY }}"
+          sed -i "s/'put-here-an-ors-api-key'/'$secret_value'/g" app-config.js
       - name: build docker rebuild and restart
         working-directory: ${{ secrets.work_dir }}
         run: docker compose up --build --force-recreate -d
