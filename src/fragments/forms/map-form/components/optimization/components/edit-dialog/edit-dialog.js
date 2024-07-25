@@ -139,12 +139,21 @@ export default {
       }
       return jsonSkills
     },
+    editDataJson () {
+      const jsonData = []
+      for (const data of this.editData) {
+        jsonData.push(data.toJSON())
+      }
+      return jsonData
+    },
   },
   created () {
     if (this.editProp === 'jobs') {
       this.jobsBox = true
+      this.dataCopy = localStorage.getItem('jobs')
     } else if (this.editProp === 'vehicles') {
       this.vehiclesBox = true
+      this.dataCopy = localStorage.getItem('vehicles')
     }
 
     for (let item of this.data) {
@@ -157,9 +166,6 @@ export default {
     if (this.index > 0) {
       this.editId = this.index
     }
-    //create a string of data as copy
-    this.dataCopy = JSON.stringify(this.editData)
-    this.skillsCopy = JSON.stringify(this.editSkills)
 
     // close editJobs box to pick a place from the map
     EventBus.$on('pickAPlace', () => {
@@ -240,13 +246,10 @@ export default {
       if (this.content.item === 'Vehicle') {
         this.validateTimeWindow()
       }
-      /* if(JSON.stringify(this.editSkills) !== this.skillsCopy){
-        TODO: update skills
-      }*/
       if (this.hasEmptyLocation) {
         this.showError(this.content.emptyLoc, {timeout: 3000})
       } else {
-        if(JSON.stringify(this.editData) !== this.dataCopy){
+        if(JSON.stringify(this.editDataJson) !== this.dataCopy){
           this.$emit(this.content.changedEvent, this.editData)
         }
         this.closeEditModal()
