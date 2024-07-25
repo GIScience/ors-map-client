@@ -609,13 +609,18 @@ const geoUtils = {
     }
     return lng
   },
-  buildOptimizationMarkers(jobs, vehicles) {
-    const markers = []
+  buildOptimizationMarkers(jobs, vehicles, unassignedJobs) {
+    let markers = []
+    let unassignedJobIds = []
+    for (const uaj of unassignedJobs) {
+      unassignedJobIds.push(uaj.id)
+    }
     for (const job of jobs) {
       if (job.lng && job.lat) {
         // Build the marker
         let propsData = {
-          color: theme.dark,
+          color: unassignedJobIds.includes(job.id) ? '#8a8a8a' : theme.dark,
+          textColor: unassignedJobIds.includes(job.id) ? 'black' : 'white',
           markerNumber: job.id.toString()
         }
         const htmlMarkerClass = Vue.extend(HtmlMarker)

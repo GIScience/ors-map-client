@@ -4,6 +4,10 @@ export default {
       Type: String,
       default: 'white'
     },
+    textColor: {
+      Type: String,
+      default: 'white'
+    },
     markerImg: {
       type: String,
       required: false
