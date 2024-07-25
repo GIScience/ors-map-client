@@ -619,7 +619,7 @@ const geoUtils = {
       if (job.lng && job.lat) {
         // Build the marker
         let propsData = {
-          color: unassignedJobIds.includes(job.id) ? theme.neutral : theme.dark,
+          color: unassignedJobIds.includes(job.id) ? '#8a8a8a' : theme.dark,
           textColor: unassignedJobIds.includes(job.id) ? 'black' : 'white',
           markerNumber: job.id.toString()
         }
