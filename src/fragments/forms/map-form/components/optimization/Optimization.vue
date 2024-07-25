@@ -27,17 +27,16 @@
         {{ $t('optimization.addFromMap') + $t('optimization.job') }}
       </v-btn>
       <!-- low priority TODO: more elegant solution for this? -->
-      <job-list v-if="mapViewData.hasRoutes()" :jobs="jobs" :jobs-shown="jobsExpanded" :map-view-data="mapViewData"
+      <job-list class="content-list" v-if="mapViewData.hasRoutes()" :jobs="jobs" :jobs-shown="jobsExpanded" :map-view-data="mapViewData"
                 v-show="jobsExpanded"></job-list>
-      <job-list v-else :jobs="jobs" :jobs-shown="jobsExpanded"></job-list>
-      <v-card v-if="!jobsExpanded" @click="jobsExpanded=!jobsExpanded">
+      <job-list class="content-list" v-else :jobs="jobs" :jobs-shown="jobsExpanded"></job-list>
+      <v-card class="content-list" v-if="!jobsExpanded" @click="jobsExpanded=!jobsExpanded">
         <v-card-title>
           <v-icon style="padding: 0 5px 0 7px">work</v-icon>
           <b>{{ $t('optimization.savedJobs') + jobs.length }}</b>
         </v-card-title>
       </v-card>
 
-      <!--TODO: add another thin divider?-->
       <div class="optimization-heading">
         {{ $t('optimization.vehicles') }} (Max: 3)
         <v-tooltip bottom style="float: right">
@@ -56,7 +55,7 @@
           {{ $t('optimization.addFromMap') + $t('optimization.vehicle') }}
         </v-btn>
       </div>
-      <vehicle-list :vehicles="vehicles"></vehicle-list>
+      <vehicle-list class="content-list" :vehicles="vehicles"></vehicle-list>
       <v-layout row class="form-actions-btns">
         <v-tooltip bottom style="float: right">
           <template v-slot:activator="{ on }">

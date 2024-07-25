@@ -6,3 +6,7 @@
   background-color: #ffd54f;
   color: darkgoldenrod
 }
+
+.no-shadow {
+  box-shadow: none;
+}
