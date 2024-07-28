@@ -46,3 +46,8 @@ ul.vehicle-inputs {
   max-width: 58px;
   margin-left: 0;
 }
+
+.content-list {
+  box-shadow: none;
+  border-bottom: 2px solid #c62828;
+}

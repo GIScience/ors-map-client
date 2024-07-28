@@ -7,8 +7,6 @@
   color: darkgoldenrod
 }
 
-.content-list {
+.no-shadow {
   box-shadow: none;
-  border-bottom: 2px solid #c62828;
-  margin: 0 0 5px 0;
 }
