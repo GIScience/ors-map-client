@@ -381,7 +381,8 @@ export default {
         markers = this.$root.appHooks.run('markersCreated', markers)
         return markers
       } else if (markersMapViewData.jobs.length || markersMapViewData.vehicles.length) {
-        return GeoUtils.buildOptimizationMarkers(markersMapViewData.jobs, markersMapViewData.vehicles, this.localMapViewData.rawData.unassigned)
+        const unassignedJobs = this.localMapViewData.rawData !== null ? this.localMapViewData.rawData.unassigned : []
+        return GeoUtils.buildOptimizationMarkers(markersMapViewData.jobs, markersMapViewData.vehicles, unassignedJobs)
       }
     },
     /**
@@ -896,6 +897,11 @@ export default {
           this.localMapViewData.places[key].index = humanizedIndex
         }
       }
+    },
+    updateOnlyMarkers (data) {
+      this.localMapViewData.jobs = data.jobs
+      this.localMapViewData.vehicles = data.vehicles
+      this.localMapViewData.routes = []
     },
     /**
      * Handles the marker move
@@ -1971,6 +1977,12 @@ export default {
       EventBus.$on('redrawAndFitMap', (data) => {
         if (data.guid && data.guid === context.guid) {
           context.adjustMap()
+        }
+      })
+
+      EventBus.$on('updateOnlyMarkers', (data) => {
+        if (data.jobs || data.vehicles) {
+          context.updateOnlyMarkers(data)
         }
       })
     },

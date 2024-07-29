@@ -380,6 +380,8 @@ export default {
       const route = appMode.getRoute(jobLocations, {vehicles: this.vehiclesJSON, jobProps: jobProps})
       if (Object.keys(route.params).length > 1) {// params contains data and placeName? props
         this.$router.push(route)
+      } else {
+        this.optimizeJobs()
       }
     },
     getPropsFromJob (job) {
@@ -470,9 +472,13 @@ export default {
             })
           } else {
             context.showError(context.$t('optimization.vehicles') + context.$t('optimization.nothingToManage'))
+            EventBus.$emit('updateOnlyMarkers', {jobs: context.jobs, vehicles: context.vehicles})
           }
         } else {
-          context.showError(context.$t('optimization.jobs') + context.$t('optimization.nothingToManage'))
+          if (context.vehicles.length) {
+            context.showError(context.$t('optimization.jobs') + context.$t('optimization.nothingToManage'))
+          }
+          EventBus.$emit('updateOnlyMarkers', {jobs: context.jobs, vehicles: context.vehicles})
           // There are no enough places or round trip to be routed
           resolve({})
         }
