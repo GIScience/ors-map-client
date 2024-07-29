@@ -20,4 +20,4 @@
 </template>
 
 <script src="./vehicle-list.js"></script>
-<style scoped src="./vehicle-list.css"></style>
+<style scoped src="./item-list.css"></style>

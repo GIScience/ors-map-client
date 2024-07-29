@@ -20,4 +20,4 @@
 </template>
 
 <script src="./job-list.js"></script>
-<style scoped src="./job-list.css"></style>
+<style scoped src="./item-list.css"></style>
