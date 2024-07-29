@@ -906,6 +906,11 @@ export default {
         }
       }
     },
+    updateOnlyMarkers (data) {
+      this.localMapViewData.jobs = data.jobs
+      this.localMapViewData.vehicles = data.vehicles
+      this.localMapViewData.routes = []
+    },
     /**
      * Handles the marker move
      * by creating a debounce-timeout in order to
@@ -1980,6 +1985,12 @@ export default {
       EventBus.$on('redrawAndFitMap', (data) => {
         if (data.guid && data.guid === context.guid) {
           context.adjustMap()
+        }
+      })
+
+      EventBus.$on('updateOnlyMarkers', (data) => {
+        if (data.jobs || data.vehicles) {
+          context.updateOnlyMarkers(data)
         }
       })
     },
