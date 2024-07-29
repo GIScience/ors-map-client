@@ -469,10 +469,10 @@ export default {
               EventBus.$emit('showLoading', false)
             })
           } else {
-            context.showError('No vehicles given. Please add a Vehicle to optimize')
+            context.showError(context.$t('optimization.vehicles') + context.$t('optimization.nothingToManage'))
           }
         } else {
-          context.showError('No jobs given. Please add some Jobs to optimize')
+          context.showError(context.$t('optimization.jobs') + context.$t('optimization.nothingToManage'))
           // There are no enough places or round trip to be routed
           resolve({})
         }
