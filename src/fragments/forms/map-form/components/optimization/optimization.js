@@ -563,10 +563,6 @@ export default {
         for (const [i, place] of places.entries()) {
           jobs.push(new Job(place.lng, place.lat, place.placeName, jobProps[i]))
         }
-      } else if (places.length > 0) {
-        for (const [i, place] of places.entries()) {
-          jobs.push(new Job(place.lng, place.lat, place.placeName, {id: i+1}))
-        }
       } else if (this.jobs === undefined && storedJobs) {
         for (const job of JSON.parse(storedJobs)) {
           jobs.push(Job.fromObject(job))
