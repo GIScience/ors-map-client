@@ -381,7 +381,8 @@ export default {
         markers = this.$root.appHooks.run('markersCreated', markers)
         return markers
       } else if (markersMapViewData.jobs.length || markersMapViewData.vehicles.length) {
-        return GeoUtils.buildOptimizationMarkers(markersMapViewData.jobs, markersMapViewData.vehicles, this.localMapViewData.rawData.unassigned)
+        const unassignedJobs = this.localMapViewData.rawData !== null ? this.localMapViewData.rawData.unassigned : []
+        return GeoUtils.buildOptimizationMarkers(markersMapViewData.jobs, markersMapViewData.vehicles, unassignedJobs)
       }
     },
     /**

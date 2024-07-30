@@ -472,13 +472,13 @@ export default {
             })
           } else {
             context.showError(context.$t('optimization.vehicles') + context.$t('optimization.nothingToManage'))
-            EventBus.$emit('updateOnlyMarkers', {jobs: this.jobs, vehicles: this.vehicles})
+            EventBus.$emit('updateOnlyMarkers', {jobs: context.jobs, vehicles: context.vehicles})
           }
         } else {
           if (context.vehicles.length) {
             context.showError(context.$t('optimization.jobs') + context.$t('optimization.nothingToManage'))
-            EventBus.$emit('updateOnlyMarkers', {jobs: this.jobs, vehicles: this.vehicles})
           }
+          EventBus.$emit('updateOnlyMarkers', {jobs: context.jobs, vehicles: context.vehicles})
           // There are no enough places or round trip to be routed
           resolve({})
         }
