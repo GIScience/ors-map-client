@@ -4,7 +4,7 @@ import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
 import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn'
-import { Directions } from '@/support/ors-api-runner'
+import {Directions} from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
@@ -668,7 +668,6 @@ export default {
     /**
      * Handle the route places error response displaying the correct message
      * @param {*} result
-     * @param {*} args
      */
     handleCalculateDirectionsError (result) {
       this.$root.appHooks.run('beforeHandleDirectionsError', result)
@@ -905,7 +904,6 @@ export default {
 
     /**
      * Toggle the round trip state view mode
-     * @param {Boolean} roundTripActive
      */
     toggleRoundTrip () {
       // If it is in roundTrip mode, we must be reset to single place mode

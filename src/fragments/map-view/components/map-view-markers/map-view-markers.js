@@ -1,6 +1,6 @@
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
 import constants from '@/resources/constants'
-import {LMarker, LPopup } from 'vue2-leaflet'
+import {LMarker, LPopup} from 'vue2-leaflet'
 import appConfig from '@/config/app-config'
 
 import 'leaflet.markercluster/dist/MarkerCluster.css'

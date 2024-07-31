@@ -168,15 +168,6 @@ const geoUtils = {
   },
 
   /**
-   * Get marker coordinates
-   * @param {*} marker
-   */
-  getMarkerCoordinates(marker) {
-    const markerCoordinates = lodash.get(marker, 'data.geometry.coordinates')
-    return markerCoordinates
-  },
-
-  /**
    * Calculate geodesic area
    * @param {Array} coords
    */
@@ -207,6 +198,8 @@ const geoUtils = {
   /**
    * Build an HTML marker icon based on parameters
    * @param {String} color
+   * @param index
+   * @param isRoute
    * @returns {Object} markerIcon
    */
   buildMarkerIcon: (color, index, isRoute) => {
@@ -266,6 +259,7 @@ const geoUtils = {
   /**
    * Get humanized tool tip string
    * @param {*} data {duration: Number, distance: Number, unit: String}
+   * @param translations
    * @returns {String} formatted tool tip
    */
   getHumanizedTimeAndDistance: (data, translations) => {
@@ -302,8 +296,9 @@ const geoUtils = {
 
   /**
    * Get the seconds segments (days, hours, minutes, seconds) or empty string for each segment
-   * @param {*} data {duration: Number, distance: Number, unit: String}
-   * @returns {String} formatted tool tip
+   * @returns {String} formatted tool tip, durationSegments
+   * @param {Number} seconds duration in seconds
+   * @param translations
    */
   getDurationInSegments: (seconds, translations) => {
     const durationObj = moment.duration(seconds, 'seconds') // the duration value is expected to be always in seconds

@@ -127,7 +127,6 @@ export default {
     /**
      * Update filed modal when the combo component triggers an update
      * @param {*} index
-     * @param {*} newVal
      */
     sliderComboUpdated (index) {
       let parameter = this.parameters[index]
@@ -156,6 +155,7 @@ export default {
     /**
      * Set item option structure and translation
      * @param {Array} items
+     * @param parameter
      * @return {Array} items
      */
     adjustItems (items, parameter) {
@@ -187,6 +187,7 @@ export default {
     /**
      * Get item translation by item value
      * @param {String} itemValue
+     * @param parameter
      * @returns {String}
      */
     getItemTranslation (itemValue, parameter) {

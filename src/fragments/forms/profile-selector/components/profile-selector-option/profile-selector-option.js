@@ -1,4 +1,3 @@
-
 import utils from '@/support/utils'
 
 export default {

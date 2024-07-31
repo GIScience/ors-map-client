@@ -23,10 +23,8 @@ class FileExtractorBuilder {
 
   /**
    * Get the map data extractor based on the current selected api version
-   *
-   * @param String builderName
-   * @param data {responseData: {}, requestData: {}, translations: {}}
-   * @param  apiVersion {String}
+   * @param {Object} data {responseData: {}, requestData: {}, translations: {}}
+   * @param fileType
    * @returns {*} Map data extractor instance
    */
   static getFileDataExtractor = (data, fileType) => {

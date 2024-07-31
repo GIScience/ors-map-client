@@ -10,6 +10,7 @@ class AdminAreaLoader {
   /**
    * Build the admin area query filter based on place properties
    * @param {*} place
+   * @param layer
    * @returns {Object} adminAreaFilter
    */
   buildAdminAreaFilter(place, layer) {
@@ -167,7 +168,7 @@ class AdminAreaLoader {
   /**
    * Adjust the area polygon and validate it
    * @param {*} place
-   * @param {*} polygon
+   * @param data polygon
    * @returns {Object| false}
    */
   adjustAdminArea(place, data) {
@@ -200,7 +201,7 @@ class AdminAreaLoader {
 
   /**
    * Build a polygon collection from a multipolygon area object
-   * @param {Geojson} area
+   * @param {geojson} areaGeojson
    * @param {Place} place
    * @returns {Array}
    */

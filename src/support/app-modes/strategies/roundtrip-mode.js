@@ -28,14 +28,14 @@ class RoundTripMode {
   /**
    * Build a directions route
    * @param {*} appRouteData
+   * @param options
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
   getRoute = (appRouteData, options = null) => {
     options = options || appRouteData.options
     const params = RouteUtils.buildRouteParams(appRouteData, options)
     // Build and return the route object
-    const route = { name: 'MapDirections', params: params }
-    return route
+    return {name: 'MapDirections', params: params}
   }
 
   /**

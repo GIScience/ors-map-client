@@ -1,6 +1,7 @@
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import store from '@/store/store'
+
 /**
  * GeoJsonImporter Map data Builder class
  * @param {*} data {mapRawData: {}, translations: {}}

@@ -1,4 +1,3 @@
-
 import customSlider from './custom-slider'
 
 export default {

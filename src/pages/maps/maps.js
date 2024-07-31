@@ -12,7 +12,7 @@ import About from '@/fragments/about/About.vue'
 import RouteUtils from '@/support/route-utils'
 import appConfig from '@/config/app-config'
 import constants from '@/resources/constants'
-import { ResizeObserver } from 'vue-resize'
+import {ResizeObserver} from 'vue-resize'
 import Place from '@/models/place'
 import lodash from 'lodash'
 import {EventBus} from '@/common/event-bus'
@@ -236,7 +236,7 @@ export default {
      * once the map has been moved, the user may want to
      * refresh the search to get features within the
      * visible map view
-     * @param {Object} { zoom: Object, map: Object, context: Object}
+     * @param {Object} data { zoom: Object, map: Object, context: Object}
      */
     zoomChanged (data) {
       this.$root.appHooks.run('zoomChanged', data)
@@ -442,7 +442,7 @@ export default {
     },
     /**
      * Load route, store zoom value and mode and store appRouteData
-     * @param {*} appRouteFrom
+     * @emits clearMap
      * @emits appRouteDataChanged
      */
     loadRoute () {

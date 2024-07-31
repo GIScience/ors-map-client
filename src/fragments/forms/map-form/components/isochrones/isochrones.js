@@ -3,7 +3,7 @@ import MapViewDataBuilder from '@/support/map-data-services/map-view-data-builde
 import FieldsContainer from '@/fragments/forms/fields-container/FieldsContainer'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
-import { Isochrones } from '@/support/ors-api-runner'
+import {Isochrones} from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
@@ -261,7 +261,6 @@ export default {
     /**
      * Handle the route places error response displaying the correct message
      * @param {*} result
-     * @param {*} args
      */
     handleCalculateIsochronesError (result) {
       this.$root.appHooks.run('beforeHandleIsochronesError', result)

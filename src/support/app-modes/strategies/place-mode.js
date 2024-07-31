@@ -34,7 +34,6 @@ class PlaceMode {
   /**
    * Build a place route
    * @param {*} appRouteData
-   * @param {*} options
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
   getRoute = (appRouteData) => {

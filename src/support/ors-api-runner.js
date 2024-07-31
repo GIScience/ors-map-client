@@ -18,7 +18,7 @@ import OrsApiClient from 'openrouteservice-js'
 
 /**
  * Get the Directions function accessor
- * @param {Array} Places
+ * @param {Array} places
  * @param {Object} customArgs
  * @returns {Promise}
  */
@@ -173,6 +173,7 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
 /**
  * Build places result from promises response
  * @param {Array} responses
+ * @param quantity
  * @returns {Array} of Places
  */
 const buildPlacesSearchResult = (responses, quantity) => {

@@ -28,20 +28,20 @@
  */
 
 import {
-  LMap,
-  LTileLayer,
-  LLayerGroup,
-  LTooltip,
-  LPopup,
-  LControlZoom,
-  LControlAttribution,
-  LControlScale,
-  LWMSTileLayer,
-  LControlLayers,
-  LGeoJson,
-  LPolygon,
   LCircle,
-  LCircleMarker
+  LCircleMarker,
+  LControlAttribution,
+  LControlLayers,
+  LControlScale,
+  LControlZoom,
+  LGeoJson,
+  LLayerGroup,
+  LMap,
+  LPolygon,
+  LPopup,
+  LTileLayer,
+  LTooltip,
+  LWMSTileLayer
 } from 'vue2-leaflet'
 
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
@@ -53,7 +53,7 @@ import MapLeftClick from './components/map-left-click/MapLeftClick'
 import OrsLPolyline from './components/ors-l-polyline/OrsLPolyline'
 import AdminAreaLoader from '@/support/admin-area-loader'
 import MyLocation from './components/my-location/MyLocation'
-import { GestureHandling } from 'leaflet-gesture-handling'
+import {GestureHandling} from 'leaflet-gesture-handling'
 import orsDictionary from '@/resources/ors-dictionary'
 import LHeightGraph from 'vue2-leaflet-height-graph'
 import PolygonUtils from '@/support/polygon-utils'
@@ -293,24 +293,6 @@ export default {
       return this.mapHeight > 450 || this.$store.getters.embed
     },
     /**
-     * Build and return the GeoJSON options based on the
-     * color defined as main
-     * @returns {Object}
-     */
-    geoJsonOptions () {
-      return {
-        style: { color: this.mainRouteColor, weight: '5' },
-      }
-    },
-    /**
-     * Return the GeoJSON style options
-     * using the value in constants object
-     * @returns {Object}
-     */
-    geoJsonOutlineOptions () {
-      return { style: { color: constants.routeBackgroundColor, weight: '9' } }
-    },
-    /**
      * Build and return the active route data
      * based on the $store.getters.activeRouteIndex
      * @returns {Array} of latLng
@@ -525,16 +507,6 @@ export default {
     displayActiveRouteData () {
       const show = this.activeRouteData && this.showActiveRouteData
       return show
-    },
-
-    /**
-     * Determines if the current active
-     * route is draggable based on app mode
-     * @returns {Boolean} isDraggable
-     */
-    activeRouteIsDraggable () {
-      let isDraggable = this.mode === constants.modes.directions
-      return isDraggable
     },
     /**
      * Return the accessibility btn top position
@@ -762,7 +734,6 @@ export default {
      * preventing the propagation and emitting
      * a local event
      * @param {*} place
-     * @param {*} event
      * @emits markerClicked
      */
     markerClicked (place) {
@@ -773,7 +744,6 @@ export default {
      * Handle the isochrone polygon clicked event
      * @param {Number} index
      * @param {Object} polygon
-     * @param {Event} event
      */
     isochroneClicked (index, polygon) {
       let isochronePopupContainerRef = this.$refs[`isochronePopupContainer${index}`]
@@ -966,7 +936,6 @@ export default {
     },
     /**
      * Remove a marker/place when in directions or isochrones mode
-     * @param {*} event
      * @param {*} markerIndex
      * @emits removePlace
      */
@@ -979,7 +948,6 @@ export default {
     },
     /**
      * Remove a marker/place when in directions or isochrones mode
-     * @param {*} event
      * @param {*} markerIndex
      * @emits directChanged
      */
@@ -1271,7 +1239,9 @@ export default {
     /**
      * Emit the event that will trigger the setInputPlace to place contained in the data object
      * @param {Number} placeIndex
+     * @param placeInputId
      * @param {Place} place
+     * @param pickEditSource
      * @emits setInputPlace
      */
     setInputPlace (placeIndex, placeInputId, place) {
@@ -1313,7 +1283,7 @@ export default {
               context.buildAndSetBounds()
               if (context.$refs.map && context.isValidBounds(context.dataBounds)) {
                 context.map = context.$refs.map.mapObject // Work as expected when wrapped in a $nextTick
-                context.fit(force, maxFitBoundsZoom)
+                context.fit(maxFitBoundsZoom)
               }
               resolve()
             })
@@ -1340,7 +1310,6 @@ export default {
 
     /**
      * Fit the bounds of the map considering the data bounds defined
-     * @param {Boolean} force
      * @param {Number} maxFitBoundsZoom integer
      */
     fit (maxFitBoundsZoom) {
@@ -1370,14 +1339,6 @@ export default {
         }, 400)
       }
     },
-    /**
-     * Handle the polygon click event and show the polygon data in a pop-up
-     * @param {*} polygon
-     */
-    polygonInfoClick (polygon) {
-      this.infoDialog(polygon.label, null, { code: polygon.data, resizable: true, zIndex: 1001 })
-    },
-
     /**
      * Handle the map right click event,
      * Set the clickLatLng current value
@@ -1847,6 +1808,7 @@ export default {
     /**
      * Enable edit mode for polygon by adding an edit popup when clicked
      * @param {*} polygon
+     * @param map
      */
     onAvoidPolygonClicked (polygon, map) {
       // polygon is already in edit mode
@@ -1863,7 +1825,7 @@ export default {
     /**
      * Build polygon clicked popup content
      * @param {Object} polygon
-     * @returns {DocumentFragment}
+     * @returns {HTMLDivElement}
      */
     buildPolygonClickPopupContent (polygon) {
       const popupContentWrapper = document.createElement('div')

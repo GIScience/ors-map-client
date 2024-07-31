@@ -74,6 +74,7 @@ class MapViewDataBuilder {
   /**
    * Build the mapViewData object
    * @param {*} data {content:..., options:...}
+   * @param appRouteData
    * @emits mapViewDataChanged - using EventBus
    */
   static buildMapData = (data, appRouteData) => {

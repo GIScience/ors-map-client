@@ -367,10 +367,7 @@ class OrsExtendedPolyline {
       return true
     }
 
-    if ((this.options.vertices.middle === false || this.options.vertices.insert === false) && index === -1) {
-      return true
-    }
-    return false
+    return (this.options.vertices.middle === false || this.options.vertices.insert === false) && index === -1
   }
 
   /**
@@ -455,7 +452,6 @@ class OrsExtendedPolyline {
   /**
    * Process the polyline drag by adding a temporary
    * vertex to represent user drag action
-   * @param {*} event
    */
   processDrag () {
     const closestIndex = this._getClosestIndex()

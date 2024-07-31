@@ -89,7 +89,7 @@ export default {
      * Build and return
      * the segment style object
      * @param {String} extraKey
-     * @param {Number} amount
+     * @param summary amount, value
      * @param {Integer} index
      * @returns {Object}
      */

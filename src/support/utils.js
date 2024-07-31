@@ -161,7 +161,7 @@ const Utils = {
 
   /**
    * Get the slugged version of a string
-   * @param {String}
+   * @param {String} input
    * @returns {String}
    */
   slug: (input) => {

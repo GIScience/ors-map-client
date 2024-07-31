@@ -6,7 +6,7 @@
  * @listens mapRightClicked
  * @listens mapLeftClicked (to close the right click pop up)
  */
-import { ReverseGeocode } from '@/support/ors-api-runner'
+import {ReverseGeocode} from '@/support/ors-api-runner'
 import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
 import {EventBus} from '@/common/event-bus'
@@ -99,9 +99,8 @@ export default {
     },
     /**
      * Resolve the coordinates of a point to a qualified location
-     * @param lar
+     * @param lat
      * @param lng
-     * @param options
      * @returns {Promise}
      * @emits showLoading (via EventBus)
      */

@@ -58,6 +58,7 @@ export default {
      * Catch file contents and type, parse and call load
      * @param {*} fileContent
      * @param {*} type
+     * @param timestamp
      */
     catchAndParseFile (fileContent, type, timestamp) {
       let fileType = null

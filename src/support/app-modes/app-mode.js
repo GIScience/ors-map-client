@@ -32,6 +32,7 @@ class AppMode {
   /**
    * Get a route object based on the places given and the app mode
    * @param {Array} places
+   * @param options
    * @returns {Object} - {name: ..., params: ...}
    */
   getRoute (places = null,  options = {}) {
@@ -46,6 +47,7 @@ class AppMode {
   /**
    * Build an appRouteData object based on the places given
    * @param {*} places
+   * @param options
    * @returns {AppRouteData} newAppRouteData
    */
   getAppRouteData (places, options = {}) {

@@ -1,4 +1,4 @@
-import { PlacesSearch, ReverseGeocode } from '@/support/ors-api-runner'
+import {PlacesSearch, ReverseGeocode} from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
 import constants from '@/resources/constants'
 import appConfig from '@/config/app-config'
@@ -214,7 +214,6 @@ export default {
     },
     /**
      * Get the place input label based on the current view mode
-     * @param {*} index
      */
     placeInputLabel () {
       let label = null
@@ -332,7 +331,7 @@ export default {
     /**
      * highlight typed place name
      * @param {String} placeName
-     * @returns {Html}
+     * @returns {string}
      */
     highlightedName (placeName) {
       let searchMask = this.localModel.placeName
@@ -738,7 +737,6 @@ export default {
 
     /**
      * Reset a place input at a given index
-     * @param {*} index
      */
     placeCleared () {
       if (!this.model.isEmpty()) {

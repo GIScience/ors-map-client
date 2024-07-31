@@ -19,7 +19,6 @@ const updateFieldsStatus = (scopedFilters) => {
 /**
  * Get the filter value considering its attributes and dependencies
  * @param {*} filter
- * @param {*} service
  * @returns {*} filterValue
  */
 const getFilterValue = (filter) => {
@@ -67,7 +66,6 @@ const applyFilterValueConditions = (filterClone, filterValue) => {
 /**
  * Get filter children value
  * @param {*} filter
- * @param {*} service
  * @returns {*}
  */
 const getChildrenFilterValue = (filter) => {
@@ -360,7 +358,7 @@ const applyValuesRestrictions = (scopedFilters, key) => {
  * Set the filter values based on the dependence rules
  * @param {*} scopedFilters
  * @param {*} key
- * @param {*} validWhen
+ * @param dependsOnFilter
  * @param {*} rule
  */
 const setFilteredValues = (scopedFilters, key, dependsOnFilter, rule) => {
@@ -539,7 +537,6 @@ const getParsedValue = (value, defaultValue = null) => {
  * and get the target parameter object
  * @param {String} path
  * @param {Array} filters
- * @param {Boolean} checkAvailability
  * @returns {*} rootTargetObject
  */
 const getDependencyRelationTargetObj = (path, filters) => {

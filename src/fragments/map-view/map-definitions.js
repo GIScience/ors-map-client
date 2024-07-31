@@ -5,12 +5,12 @@ import store from '@/store/store'
 const mapDefinitions = {
   /**
    * Reorder the values of an array of coordinates switching the position of lat and long of each coordinate
-   * @param {*} coordinatesArr
    * @returns {Array} of reordered coordinates
+   * @param polylineMeasureTranslations
    */
   polylineMeasureOptions: (polylineMeasureTranslations) => {
     // eslint-disable-block no-multi-spaces
-    const options = {
+    return {
       // language options
       ...polylineMeasureTranslations,
       // other options
@@ -58,7 +58,6 @@ const mapDefinitions = {
         radius: 6 // Radius of the circle
       }
     }
-    return options
   },
   /**
    * Build the draw options object
