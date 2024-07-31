@@ -68,7 +68,7 @@
     "lz-string": "^1.4.4",
     "mini-css-extract-plugin": "^2.0.0",
     "moment": "^2.29.4",
-    "openrouteservice-js": "^0.3.2",
+    "openrouteservice-js": "^0.4.1",
     "path-browserify": "^1.0.1",
     "postcss": "^8.4.16",
     "postcss-import": "^11.0.0",
