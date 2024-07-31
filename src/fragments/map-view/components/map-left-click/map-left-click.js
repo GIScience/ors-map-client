@@ -6,7 +6,7 @@
  * @listens mapRightClicked
  * @listens mapLeftClicked (to close the right click pop up)
  */
-import { ReverseGeocode } from '@/support/ors-api-runner'
+import {ReverseGeocode} from '@/support/ors-api-runner'
 import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
 import {EventBus} from '@/common/event-bus'

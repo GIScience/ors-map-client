@@ -1,9 +1,7 @@
-import {
-  Geocode,
-  ReverseGeocode
-} from '@/support/ors-api-runner'
+import {Geocode, ReverseGeocode} from '@/support/ors-api-runner'
 import GeoUtils from '@/support/geo-utils'
 import lodash from 'lodash'
+
 /**
  * Place model class
  * @param {Number} lat - default null

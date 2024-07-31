@@ -28,20 +28,20 @@
  */
 
 import {
-  LMap,
-  LTileLayer,
-  LLayerGroup,
-  LTooltip,
-  LPopup,
-  LControlZoom,
-  LControlAttribution,
-  LControlScale,
-  LWMSTileLayer,
-  LControlLayers,
-  LGeoJson,
-  LPolygon,
   LCircle,
-  LCircleMarker
+  LCircleMarker,
+  LControlAttribution,
+  LControlLayers,
+  LControlScale,
+  LControlZoom,
+  LGeoJson,
+  LLayerGroup,
+  LMap,
+  LPolygon,
+  LPopup,
+  LTileLayer,
+  LTooltip,
+  LWMSTileLayer
 } from 'vue2-leaflet'
 
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
@@ -53,7 +53,7 @@ import MapLeftClick from './components/map-left-click/MapLeftClick'
 import OrsLPolyline from './components/ors-l-polyline/OrsLPolyline'
 import AdminAreaLoader from '@/support/admin-area-loader'
 import MyLocation from './components/my-location/MyLocation'
-import { GestureHandling } from 'leaflet-gesture-handling'
+import {GestureHandling} from 'leaflet-gesture-handling'
 import orsDictionary from '@/resources/ors-dictionary'
 import LHeightGraph from 'vue2-leaflet-height-graph'
 import PolygonUtils from '@/support/polygon-utils'

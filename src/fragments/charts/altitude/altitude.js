@@ -4,14 +4,14 @@ import MapViewData from '@/models/map-view-data'
 import {EventBus} from '@/common/event-bus'
 import theme from '@/config/theme'
 import {
-  Chart as ChartJS,
   CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip,
+  Chart as ChartJS,
+  Filler,
   Legend,
-  Filler
+  LinearScale,
+  LineElement,
+  PointElement,
+  Tooltip
 } from 'chart.js'
 
 ChartJS.register(

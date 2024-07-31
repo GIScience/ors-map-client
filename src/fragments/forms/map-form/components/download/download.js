@@ -1,5 +1,5 @@
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
-import { Directions } from '@/support/ors-api-runner'
+import {Directions} from '@/support/ors-api-runner'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import toKml from '@maphubs/tokml'

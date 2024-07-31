@@ -1,5 +1,6 @@
 import appConfig from '@/config/app-config'
 import theme from '@/config/theme'
+
 export default {
   data () {
     return {
