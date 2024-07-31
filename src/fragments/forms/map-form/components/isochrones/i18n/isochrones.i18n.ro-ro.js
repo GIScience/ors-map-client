@@ -13,5 +13,6 @@ export default {
       3099: 'Nu se poate construi o hartă izocronă pentru punctul (punctele) și profilul selectat(e).',
     },
     genericErrorMsg: 'Nu a fost posibil să se calculeze izocronii.',
+    timeoutError: 'Solicitarea a durat prea mult și a fost anulată. Încercați intervale sau intervale mai mici.'
   }
 }

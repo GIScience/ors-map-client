@@ -143,7 +143,6 @@ const orsParamsParser = {
       const args = {
         locations: locations,
         area_units: store.getters.mapSettings.unit,
-        timeout: constants.orsApiRequestTimeout,
         attributes:['total_pop']
       }
       // Add the filters defined in the ORS filters that are manipulated
@@ -204,8 +203,7 @@ const orsParamsParser = {
         instructions_format: 'html',
         extra_info: extraInfo,
         language: mapSettings.routingInstructionsLocale,
-        units: mapSettings.unit,
-        timeout: constants.orsApiRequestTimeout
+        units: mapSettings.unit
       }
 
       let skipSegments = []

@@ -266,7 +266,9 @@ export default {
       this.$root.appHooks.run('beforeHandleIsochronesError', result)
 
       const errorCode = this.lodash.get(result, constants.responseErrorCodePath)
-      if (errorCode) {
+      if (result === 'TimeoutError') {
+        this.showError(this.$t('isochrones.timeoutError'), { timeout: 0 })
+      } else if (errorCode) {
         const errorKey = `isochrones.apiError.${errorCode}`
         let errorMsg = this.$t(errorKey)
         if (errorMsg === errorKey) {

@@ -1,4 +1,3 @@
-
 export default {
   isochrones: {
     isochrones: 'Isochrones',
@@ -13,6 +12,7 @@ export default {
       3099: 'Unable to build an isochrone map for the selected point(s) and profile.',
       3003: 'Parameter \'avoid_features\' has incorrect value of \'null\''
     },
-    genericErrorMsg: 'It was not possible to calculate the isochrones.'
+    genericErrorMsg: 'It was not possible to calculate the isochrones.',
+    timeoutError: 'The request took too long and timed out. Try smaller ranges or intervals.'
   }
 }

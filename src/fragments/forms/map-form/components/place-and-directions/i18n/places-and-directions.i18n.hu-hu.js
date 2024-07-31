@@ -34,6 +34,7 @@ export default {
       '2099': 'Nem lehet a kiválasztott helyeket összekötő útvonalat tervezni'
     },
     'genericErrorMsg': 'Nem lehetett megtervezni az útvonalat',
-    'reorder': 'Átrendezés'
+    'reorder': 'Átrendezés',
+    timeoutError: 'A kérés túl sokáig tartott, és megszakították. Próbálkozzon rövidebb távolságokkal.'
   }
 }

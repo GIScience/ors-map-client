@@ -33,6 +33,7 @@ export default {
       '2099': 'Impossible de trouver un point valide après 3 essais'
     },
     'genericErrorMsg': 'Il n\'a pas été possible de calculer l\'itinéraire',
-    'reorder': 'Réorganiser'
+    'reorder': 'Réorganiser',
+    timeoutError: 'La requête a pris trop de temps et a été abandonnée. Essayez des distances plus courtes.'
   }
 }

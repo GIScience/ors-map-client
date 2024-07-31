@@ -33,6 +33,7 @@ export default {
       2099: 'Nelze vypočítat trasu spojující vybraná místa'
     },
     genericErrorMsg: 'Nebylo možné vypočítat trasu',
-    reorder: 'Přeskupit'
+    reorder: 'Přeskupit',
+    timeoutError: 'Žádost trvala příliš dlouho a byla přerušena. Zkuste kratší vzdálenosti.'
   }
 }

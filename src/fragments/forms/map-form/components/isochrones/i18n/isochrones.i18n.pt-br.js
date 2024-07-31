@@ -1,4 +1,3 @@
-
 export default {
   isochrones: {
     isochrones: 'Isócronos',
@@ -12,6 +11,7 @@ export default {
       3004: 'A combinação de perfil, intervalo e tempo ou distância selecionada excede o máximo suportado. Por favor, ajuste os valores.',
       3099: 'Não foi possível construir um mapa isocrônico para o(s) ponto(s) e perfil selecionado(s).'
     },
-    genericErrorMsg: 'Não foi possível calcular os isócronos.'
+    genericErrorMsg: 'Não foi possível calcular os isócronos.',
+    timeoutError: 'A solicitação demorou muito e foi abortada. Tente intervalos ou faixas menores.'
   }
 }

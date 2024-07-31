@@ -673,7 +673,9 @@ export default {
       this.$root.appHooks.run('beforeHandleDirectionsError', result)
 
       const errorCode = this.lodash.get(result, constants.responseErrorCodePath)
-      if (errorCode) {
+      if (result === 'TimeoutError') {
+        this.showError(this.$t('placesAndDirections.timeoutError'), { timeout: 0 })
+      } else if (errorCode) {
         const errorKey = `placesAndDirections.apiError.${errorCode}`
         let errorMsg = this.$t(errorKey)
         if (errorMsg === errorKey) {

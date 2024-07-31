@@ -33,6 +33,7 @@ export default {
       '2099': 'No se puede calcular la ruta'
     },
     'genericErrorMsg': 'No se puede calcular la ruta',
-    'reorder': 'Reordenar'
+    'reorder': 'Reordenar',
+    timeoutError: 'La solicitud tardó demasiado y se canceló. Intente con distancias más cortas.'
   }
 }

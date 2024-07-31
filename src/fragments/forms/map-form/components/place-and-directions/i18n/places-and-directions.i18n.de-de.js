@@ -33,6 +33,7 @@ export default {
       2099: 'Es konnte keine Route gefunden werden, die die ausgewählten Orte verbindet.'
     },
     genericErrorMsg: 'Keine Route gefunden',
-    reorder: 'Neu ordnen'
+    reorder: 'Neu ordnen',
+    timeoutError: 'Die Anfrage dauerte zu lange und wurde abgebrochen. Versuchen Sie kürzere Distanzen.'
   }
 }

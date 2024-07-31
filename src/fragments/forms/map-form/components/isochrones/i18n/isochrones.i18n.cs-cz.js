@@ -12,6 +12,7 @@ export default {
       3004: 'Vybraná kombinace profilu, intervalu a času nebo vzdálenosti překračuje maximální podporovanou hodnotu. Hodnoty upravte.',
       3099: 'Nelze sestavit izochronní mapu pro vybraný bod (body) a profil.'
     },
-    genericErrorMsg: 'Izochrony nebylo možné vypočítat.'
+    genericErrorMsg: 'Izochrony nebylo možné vypočítat.',
+    timeoutError: 'Žádost trvala příliš dlouho a byla přerušena. Zkuste menší rozsahy nebo intervaly.'
   }
 }

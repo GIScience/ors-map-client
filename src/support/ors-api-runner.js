@@ -29,7 +29,8 @@ const Directions = (places, customArgs = null) => {
   const directions = new OrsApiClient.Directions({
     api_key: mapSettings.apiKey,
     host: mapSettings.apiBaseUrl,
-    service: mapSettings.endpoints.directions
+    service: mapSettings.endpoints.directions,
+    timeout: constants.orsApiRequestTimeout
   })
 
   return new Promise((resolve, reject) => {
@@ -41,10 +42,14 @@ const Directions = (places, customArgs = null) => {
         const data = { options: { origin: constants.dataOrigins.directions, apiVersion: constants.apiVersion }, content: response }
         resolve(data)
       }).catch(err => {
-        err.response.json().then((error) => {
-          const result = { response: error, args: args }
-          reject(result)
-        })
+        if (err instanceof DOMException && err.name === 'AbortError') {
+          reject('TimeoutError')
+        } else {
+          err.response.json().then((error) => {
+            const result = { response: error, args: args }
+            reject(result)
+          })
+        }
       })
     })
   })
@@ -318,7 +323,8 @@ const Isochrones = (places) => {
   const isochrones = new OrsApiClient.Isochrones({
     api_key: mapSettings.apiKey,
     host: mapSettings.apiBaseUrl,
-    service: mapSettings.endpoints.isochrones
+    service: mapSettings.endpoints.isochrones,
+    timeout: constants.orsApiRequestTimeout
   })
   return new Promise((resolve, reject) => {
     OrsParamsParser.buildIsochronesArgs(places).then(args => {
@@ -326,10 +332,14 @@ const Isochrones = (places) => {
         const data = { options: { origin: constants.dataOrigins.isochrones, apiVersion: constants.apiVersion }, content: response }
         resolve(data)
       }).catch((err) => {
-        err.response.json().then((error) => {
-          const result = { response: error, args: args }
-          reject(result)
-        })
+        if (err instanceof DOMException  && err.name === 'AbortError') {
+          reject('TimeoutError')
+        } else {
+          err.response.json().then((error) => {
+            const result = { response: error, args: args }
+            reject(result)
+          })
+        }
       })
     })
   })
