@@ -14,7 +14,7 @@
     "release": "standard-version",
     "start": "pnpm dev",
     "test": "cypress open",
-    "test:ci": "start-server-and-test 'pnpm dev' http://localhost:8080/ 'cypress run -q && cypress run --component -q'",
+    "test:ci": "start-server-and-test 'webpack serve --config build/webpack.dev.conf.js --host local-ipv6' http://localhost:8080/ 'cypress run -q && cypress run --component -q'",
     "test:component": "cypress open --component",
     "test:component:ci": "start-server-and-test 'pnpm dev' http://localhost:8080/ 'cypress run --component -q'",
     "test:e2e": "cypress open --e2e",
