@@ -17,22 +17,22 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up Docker for hadolint-docker pre-commit
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
         id: buildx
         with:
           install: true
       - name: Install Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install and run pre-commit
-        uses: pre-commit/action@v3.0.0
+        uses: pre-commit/action@v3.0.1
         with:
           extra_args: --all-files
   Run-tests:
@@ -46,13 +46,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up default config files
         run: cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
       - name: Set up pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 9
           run_install: false
       - name: Get pnpm store directory
         id: pnpm-cache
@@ -60,7 +60,7 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
       - name: Cache PNPM and Cypress
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cache/Cypress
@@ -69,7 +69,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-cypress-store-
       - name: Cypress install
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v6
         with:
           runTests: false
           install-command: pnpm install --frozen-lockfile --silent

@@ -14,14 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
         id: buildx
         with:
           install: true
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: "Get Previous tag"
@@ -59,14 +59,14 @@ jobs:
           echo ::set-output name=buildx_args_nightly::--platform ${DOCKER_PLATFORMS} \
                       ${TAGS_NIGHTLY} .
       - name: Checkout tag ${{ steps.previoustag.outputs.tag }}
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         if: ${{ steps.prepare.outputs.build_version == 'true' }}
         with:
           fetch-depth: 0
           ref: ${{ steps.previoustag.outputs.tag }}
       - name: Check file existence
         id: check_files
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v3
         with:
           files: "Dockerfile"
       - name: Build ${{ steps.previoustag.outputs.tag }} if not present and Dockerfile is present
@@ -77,7 +77,7 @@ jobs:
           docker buildx build --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args_version }}
           docker buildx build --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args_latest }}
       - name: Checkout main/master as nightly
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Build nightly
