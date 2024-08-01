@@ -11,6 +11,7 @@ export default {
       '3004': 'La combinación seleccionada de perfil, intervalo y tiempo o distancia supera el máximo admitido. Por favor, ajuste los valores.',
       '3099': 'No ha sido posible construir un mapa isócrono para los puntos y perfiles seleccionados.'
     },
-    'genericErrorMsg': 'No fue posible calcular las isocronas.'
+    'genericErrorMsg': 'No fue posible calcular las isocronas.',
+    timeoutError: 'La solicitud tardó demasiado y se canceló. Pruebe con rangos o intervalos más pequeños.'
   }
 }

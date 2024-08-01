@@ -1,4 +1,3 @@
-
 export default {
   isochrones: {
     'isochrones': 'Izokron vonalak',
@@ -12,6 +11,7 @@ export default {
       '3004': 'A kiválasztott profil, intervallum és idő vagy távolság kombinációja meghaladja a legnagyobb támogatott értéket. Kérjük, korrigálja az értékeket.',
       '3099': 'A kiválasztott pont(ok)hoz és profilhoz nem lehet izokron térképet készíteni.'
     },
-    'genericErrorMsg': 'Nem lehetett kiszámítani az izokron vonalakat.'
+    'genericErrorMsg': 'Nem lehetett kiszámítani az izokron vonalakat.',
+    timeoutError: 'A kérés túl sokáig tartott, és megszakították. Próbálkozzon kisebb tartományokkal vagy intervallumokkal.'
   }
 }

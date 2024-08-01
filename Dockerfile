@@ -1,11 +1,11 @@
 # Multistage build
 # 1. Stage: Build the app
-FROM node:16-alpine as build-stage
+FROM node:20-alpine as build-stage
 WORKDIR /opt/client/
 
 # System deps and app setup:
 RUN apk --no-cache add 'build-base>=0.5' 'git>=2.38' \
-    && npm install -g 'pnpm@^8'
+    && npm install -g 'pnpm@^9'
 
 # Add diretories with necessary config files
 COPY pnpm-lock.yaml package.json /opt/client/

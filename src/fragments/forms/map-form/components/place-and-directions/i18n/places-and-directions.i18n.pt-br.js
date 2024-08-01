@@ -34,6 +34,7 @@ export default {
       2099: 'Não foi possível calcular a rota'
     },
     genericErrorMsg: 'Não foi possível calcular a rota',
-    reorder: 'Reordenar'
+    reorder: 'Reordenar',
+    timeoutError: 'A solicitação demorou muito e foi abortada. Tente distâncias mais curtas.',
   }
 }

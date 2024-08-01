@@ -11,6 +11,7 @@ export default {
       '3004': 'La combinaison du profil, de l\'intervalle et du temps ou de la distance sélectionnée dépasse le maximum pris en charge. Veuillez ajuster les valeurs.',
       '3099': 'Impossible de créer une carte isochrone pour le(s) point(s) et le profil sélectionnés.'
     },
-    'genericErrorMsg': 'Il n\'a pas été possible de calculer les isochrones.'
+    'genericErrorMsg': 'Il n\'a pas été possible de calculer les isochrones.',
+    timeoutError: 'La requête a pris trop de temps et a été abandonnée. Essayez des plages ou des intervalles plus petits.'
   },
 }

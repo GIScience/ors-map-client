@@ -34,5 +34,6 @@ export default {
     },
     genericErrorMsg: 'Nu a fost posibil să se calculeze ruta',
     reorder: 'Reordonare',
+    timeoutError: 'Solicitarea a durat prea mult și a fost anulată. Încercați distanțe mai scurte.'
   }
 }

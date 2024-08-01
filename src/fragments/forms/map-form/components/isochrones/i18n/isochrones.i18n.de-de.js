@@ -12,6 +12,7 @@ export default {
       3099: 'Es war nicht möglich Isochronen für die gewählten Punkte mit diesem Fahrzeugprofil zu berechnen.',
       3003: 'Der Parameter "avoid features" hat den falschen Wert "null".'
     },
-    genericErrorMsg: 'Es war nicht möglich, Isochronen zu berechnen.'
+    genericErrorMsg: 'Es war nicht möglich, Isochronen zu berechnen.',
+    timeoutError: 'Die Anfrage dauerte zu lange und wurde abgebrochen. Versuchen Sie kleinere Reichweiten und Intervalle.'
   }
 }

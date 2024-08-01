@@ -7,10 +7,9 @@ describe('place component', () => {
     cy.get('.place-input-component input[type=text]').should('be.visible')
     cy.get('.custom-html-icon-div').should('have.length', 0)
     // TODO: map is currently not moved. See https://stackoverflow.com/questions/60987787/test-dragging-a-leaflet-map-in-cypress
-    cy.get('#map-view')
-      .trigger('mousedown', 'center')
-      .trigger('mousemove', {movementX: 5, movementY: 5})
-      .trigger('mouseup')
+    cy.get('#map-view').trigger('mousedown', 'center')
+    cy.get('#map-view').trigger('mousemove', {movementX: 5, movementY: 5})
+    cy.get('#map-view').trigger('mouseup')
     // cy.url().should('not.contain', '-48.467559814453125,-23.856953970230652')
   })
   it('renders single place correctly', () => {

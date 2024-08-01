@@ -11,6 +11,7 @@ export default {
       '3004': 'La combinazione di mezzo di trasporto, d\'intervallo e di tempo o distanza eccede il valore massimo dell\'istanza ORS. Cambia i valori.',
       '3099': 'Impossibile creare una mappa isocrona con i punti e il mezzo di trasporto selezionati.'
     },
-    'genericErrorMsg': 'Non è stato possibile calcorare gli isocroni.'
+    'genericErrorMsg': 'Non è stato possibile calcorare gli isocroni.',
+    timeoutError: 'La richiesta ha richiesto troppo tempo ed è stata annullata. Prova intervalli o range più piccoli.'
   }
 }
