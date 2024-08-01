@@ -9,7 +9,8 @@ describe('download functionality', function () {
     const cleanName = typeTitle.replace(' ', '_')
     cy.get('.open-download-btn').click()
     cy.get('.download-modal')
-    cy.get('.export-file-name input[type=text]').clear().type(cleanName)
+    cy.get('.export-file-name input[type=text]').clear()
+    cy.get('.export-file-name input[type=text]').type(cleanName)
     cy.get('.download-format .v-select__selections').click()
     cy.get('.v-menu__content--fixed > .v-select-list > .v-list')
       .contains('div > .v-list__tile > ' +
