@@ -27,9 +27,9 @@
         {{ $t('optimization.addFromMap') + $t('optimization.job') }}
       </v-btn>
       <!-- low priority TODO: more elegant solution for this? -->
-      <job-list class="content-list" v-if="mapViewData.hasRoutes()" :jobs="jobs" :jobs-shown="jobsExpanded" :map-view-data="mapViewData"
+      <job-list class="content-list" v-if="mapViewData.hasRoutes()" :jobs="jobs" :map-view-data="mapViewData"
                 v-show="jobsExpanded"></job-list>
-      <job-list class="content-list" v-else :jobs="jobs" :jobs-shown="jobsExpanded"></job-list>
+      <job-list class="content-list" v-else :jobs="jobs" v-show="jobsExpanded"></job-list>
       <v-card class="content-list" v-if="!jobsExpanded" @click="jobsExpanded=!jobsExpanded">
         <v-card-title>
           <v-icon style="padding: 0 5px 0 7px">work</v-icon>

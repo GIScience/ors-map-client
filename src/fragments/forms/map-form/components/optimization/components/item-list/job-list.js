@@ -4,7 +4,6 @@ import MapViewData from '@/models/map-view-data'
 export default {
   data: () => ({
     localMapViewData: null,
-    jobExtended: [true]
   }),
   props: {
     jobs: {
@@ -23,7 +22,7 @@ export default {
         unassignedIds.push(job.id)
       }
       return unassignedIds
-    },
+    }
   },
   watch: {
     // Every time the response data changes the map builder is reset and the map data is reloaded
