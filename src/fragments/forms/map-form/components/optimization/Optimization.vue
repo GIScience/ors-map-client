@@ -9,7 +9,7 @@
           {{ $t('optimization.jobs') }} (Max: 50)
           <v-tooltip bottom style="float: right">
             <template v-slot:activator="{ on }">
-              <v-btn class="no-padding"
+              <v-btn class="manage-jobs"
                      icon small @click="manageJobs">
                 <v-icon size="1.5rem" :title="$t('optimization.manage') + $t('optimization.jobs')" color="dark" :medium="$lowResolution">edit</v-icon>
               </v-btn>
@@ -41,7 +41,7 @@
         {{ $t('optimization.vehicles') }} (Max: 3)
         <v-tooltip bottom style="float: right">
           <template v-slot:activator="{ on }">
-            <v-btn class="no-padding"
+            <v-btn class="manage-vehicles"
                    icon small @click="manageVehicles">
               <v-icon size="1.5rem" :title="$t('optimization.manage') + $t('optimization.vehicles')" color="dark" :medium="$lowResolution">edit</v-icon>
             </v-btn>
