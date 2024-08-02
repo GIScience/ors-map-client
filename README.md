@@ -421,9 +421,26 @@ clarity be named the same e.g. `../support/__tests__/utils.cy.js` for `../suppor
 
 End-to-end tests should be created in `./cypress/e2e/test-name.cy.js`
 
+### Report a bug
+If you identified a bug, please [create an issue](https://github.com/GIScience/ors-map-client/issues/new) with thorough description
+and steps to reproduce it (e.g. URL, Screenshot or Screen recording). Feel free to [contribute a fix](#contribute)
+
+### Feature improvements
+If you have an idea for a new feature or want to improve an existing one, please also
+[create an issue](https://github.com/GIScience/ors-map-client/issues/new) first to discuss the idea.
+We are happy if you also want to [contribute](#contribute) a pull request.
+
 ### Contribute
 
-#### pre-commit git hooks
+Make sure to [set up](#set-up-and-run) and [configure](#configuration) the project, branch of current `main` and prefix
+your branch name with `feat/` for features and `fix/` for bug fixes e.g.
+```sh
+git switch -c feat/leaflet-control-for-statistics
+# or
+git switch -c fix/map-moving-all-the-time
+```
+
+#### set up pre-commit git hooks
 
 We use `pre-commit` to make sure contributions have the same basic quality.
 Before you commit make sure that your commit satisfies all `pre-commit` checks.
@@ -436,89 +453,22 @@ pre-commit install --hook-type commit-msg --hook-type pre-push --hook-type pre-c
 pre-commit run --all
 ```
 
-#### Commits and versioning
+#### Commits
 
-- This app uses the `commitizen` plugin to generate standardized commit types/messages. After applying any change in a feature branch, use `git add .` and then `pnpm commit` (instead of `git commit ...`)
-- The plugin `standard-version` is used to generate changelog entries, version tag and to bump the app version in package.json.
+- This app uses [conventional commit syntax](https://www.conventionalcommits.org/en/v1.0.0/#summary) to automate
+  changelog entries.
+  You can use e.g. [conventional-commits-plugin](https://plugins.jetbrains.com/plugin/13389-conventional-commit) for
+  JetBrains IDEs or a global installation of the [commitizen npm package](https://github.com/commitizen/cz-cli) to help
+  you with the syntax.
 
-Deployment flow:
-
-1. Apply the changes in a feature branch and test it locally
-
-   _Important_: to run the tests, `src/config/app-config.js` must contain:
-
-- `orsApiKey`: 'a-valid-ors-api-key-here',
-- `useUserKey`: true,
-
-By default, `src/config/app-config.js` is ignored by git. So, the changes are just local and used to run the tests.
-
-```sh
-# Run automated tests
-pnpm test:ci
-```
-
-_Important:_ Besides the automated tests, some manual/human tests are also recommended
-
-2. Once the feature is ready, merge it to `master`, and run the tests
-
-   ```sh
-   git checkout master
-   git merge feature/<name-of-my-future-branch>
-   # Run automated tests after merge
-   pnpm test
-   ```
-
-3. If the tests pass, create a release
-
-   ```sh
-   # Create a release. This will :
-   # - bump the app version,
-   # - generate a new release commit
-   # - create a new git tag with the app version
-   # - Create an entry in CHANGELOG.md
-   pnpm release
-   ```
-
-4. Push the changes applied to master
-
-   _Important_: the release command will output a command, but We `DON'T USE the whole outputted command`, since there is no npm package to be published.
-
-   ```sh
-   # The command outputted is expected to be:
-   # `git push --follow-tags origin master && pnpm publish`
-
-   # We must use/run only
-   git push --follow-tags origin master
-
-   # Once you push it, the automated tests will be triggered on Github actions
-   # Check the automated tests results on https://github.com/GIScience/ors-map-client/actions
-   ```
-
-_For more details about `commitizen` and `standard-version` see [this article](https://medium.com/tunaiku-tech/automate-javascript-project-versioning-with-commitizen-and-standard-version-6a967afae7)_ and [standard-version documentation](https://github.com/conventional-changelog/standard-version)
-
-#### Branch policy
-
-The `master` branch is used as the stable and most updated branch. Any new feature goes to feature branch, then it is tested, committed and finally merged into `master`. So, master has always the latest version and the production version.
-Considering this, any merge request must be done targeting `master`.
-
-Like almost every team, we have limited workforce, and we have to define priorities.
-
-`Bugs`:
-If you think you have identified any bug and that you can help to fix it, please create an issue first, instead of directly submitting a push request. So the people involved will have the opportunity to discuss it.
-
-`New features`:
-
-If you want to contribute by adding a new feature or improve an existing one, please also create an issue.
-We do want contributions, and the community effort is very important to us, but features may add complexity and future
-maintenance effort.
-Because of this, we have also to analyze the trade-off of such contributions.
-We just have to decide about them together before the hands on.
-This approach is intended to create cohesion and keep the project sustainable.
+> Note:
+> Don't add `closing` or `fixes` keywords in commits but rather tag the issue in the pull request that solves it.
+> This avoids multiple references in the issues after your branch is rebased on newer changes.
 
 ### Additional documentation
 
-There are additional documents that are part of the software documentation. they are in the folder `/docs` and are listed below:
+There is additional software documentation in the `/docs` folder:
 
-- [docs/dynamic-inputs.md](docs/dynamic-inputs.md) - describe how the inputs are rendered using a custom engine and not hard-coded
-- [docs/search-results-criteria.md](docs/search-results-criteria.md) - explains what are the criteria for the search results
-- [docs/plugins.md](docs/plugins.md) - explains how the plugins can be added to the maps client
+- [docs/dynamic-inputs.md](docs/dynamic-inputs.md) - describes how the inputs are rendered using a custom engine
+- [docs/search-results-criteria.md](docs/search-results-criteria.md) - explains the criteria for search results
+- [docs/plugins.md](docs/plugins.md) - explains how to add plugins
