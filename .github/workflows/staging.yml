@@ -22,7 +22,7 @@ jobs:
         run: git fetch --prune
       - name: checkout trigger branch
         working-directory: ${{ secrets.work_dir }}
-        run: git checkout --progress --force -B ${GITHUB_REF_NAME} ${GITHUB_REF}
+        run: git checkout --progress --force ${GITHUB_REF_NAME}
       - name: hard reset to origin state
         working-directory: ${{ secrets.work_dir }}
         run: git reset --hard origin/${GITHUB_REF_NAME}

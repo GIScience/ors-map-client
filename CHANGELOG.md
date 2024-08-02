@@ -2,6 +2,116 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/GIScience/ors-map-client/compare/v2.1.0...v2.2.0) (2024-08-01)
+
+
+### Features
+
+* **accessibility:** add missing alternative img descriptions ([a8b8f45](https://github.com/GIScience/ors-map-client/commit/a8b8f45ff11123d483bfe80086f0fc60969d2e44))
+* **route-extras:** expand extra info section dynamically ([3c7b9e8](https://github.com/GIScience/ors-map-client/commit/3c7b9e8ae2dd226401524db75178d6028dccc30d))
+* **route-extras:** store displayed extra ([d8219a5](https://github.com/GIScience/ors-map-client/commit/d8219a5de24d6c667954b99002ceebdd1e931f59))
+
+
+### Bug Fixes
+
+* add stop by dragging route ([#442](https://github.com/GIScience/ors-map-client/issues/442)) ([5821cc4](https://github.com/GIScience/ors-map-client/commit/5821cc4f73a2f3cb4af760cc2b862e475a12dd64))
+* **alternative-routes:** mismatched open route details ([dbbaa51](https://github.com/GIScience/ors-map-client/commit/dbbaa512248213d4f2174e642dd6e2034a7f94dd))
+* altitude not showing asc & desc summary ([#396](https://github.com/GIScience/ors-map-client/issues/396)) ([d0cf24f](https://github.com/GIScience/ors-map-client/commit/d0cf24fd596e26dfe19d1da67300f5a6db9872a0))
+* chart not rebuilding on active route change ([a5a05b2](https://github.com/GIScience/ors-map-client/commit/a5a05b2564ceea53be228d60a5aea9771df9f05c))
+* check for difference in opacity ([0c9325d](https://github.com/GIScience/ors-map-client/commit/0c9325dfd65d1cc4cc39e590ad76e327ae5b7aaa))
+* drag point from route not working ([62cfc73](https://github.com/GIScience/ors-map-client/commit/62cfc731033a3196aa5e006c74811d0c8bf6d24d))
+* extra info highlight drawn below route ([26271df](https://github.com/GIScience/ors-map-client/commit/26271df24e605948467079ab1c9644d8957a7ae0))
+* footer overlaps in chrome ([#441](https://github.com/GIScience/ors-map-client/issues/441)) ([e32a692](https://github.com/GIScience/ors-map-client/commit/e32a692a3b47276a77c5870efe1ca1706c8cf7ce))
+* hot-fix for compatibility issues with disaster-ors plugin ([c2fa7f8](https://github.com/GIScience/ors-map-client/commit/c2fa7f87a83b14aef990302a9245b8c0d11b3d12))
+* keeping active route index for new routes ([0830c7a](https://github.com/GIScience/ors-map-client/commit/0830c7ad13e2689defaab10de3613f5552bfb54b))
+* opacity 0 not respected ([#444](https://github.com/GIScience/ors-map-client/issues/444)) ([394a589](https://github.com/GIScience/ors-map-client/commit/394a5898c55b62dd377040ebafea2df4358b8d64))
+* route details expanding ([8516c87](https://github.com/GIScience/ors-map-client/commit/8516c87eb6e4b1fe8f57350c923815de6013230c))
+
+
+### Others
+
+* remove unused chart-wrapper component ([b11fc54](https://github.com/GIScience/ors-map-client/commit/b11fc54a57283c2e7457afe110581ab10fc5a4a8))
+
+
+### Docs
+
+* **README:** add info on USB debugging ([1b4b832](https://github.com/GIScience/ors-map-client/commit/1b4b832256468502bcfa0de678eeb56b9679f3b0))
+
+
+### Styling
+
+* **CSS:** fix overwritten properties ([2031ea2](https://github.com/GIScience/ors-map-client/commit/2031ea2552fa6d51a19f4e840d404451c647d3e3))
+* **CSS:** remove redundant qualifier ([2310e6d](https://github.com/GIScience/ors-map-client/commit/2310e6d7cb33900986f9c8e9308e95d8c144691d))
+* **CSS:** suppress CssNoGenericFontName ([9f37701](https://github.com/GIScience/ors-map-client/commit/9f377018b793f8f61185c2112f402170f11b401a))
+* **ES2015:** convert var to let/const ([7caf2c9](https://github.com/GIScience/ors-map-client/commit/7caf2c9a21d0f1dbbd81caee2988fb33eb7181f2))
+* fix typos ([fa9de17](https://github.com/GIScience/ors-map-client/commit/fa9de17662ed6ab0a02fe00ca48911b9573c37d2))
+* fix various grammar mistakes ([c22d596](https://github.com/GIScience/ors-map-client/commit/c22d5961580165d1a86ed40e74ebf7bb117dabbb))
+* **JS:** remove pointless code ([577a203](https://github.com/GIScience/ors-map-client/commit/577a2039c519bef51e516cd3150491cb731a9642))
+* **JS:** remove unnecessary return statements ([c549979](https://github.com/GIScience/ors-map-client/commit/c549979d0314b07e3eb05e294827c43d40736e30))
+* **JS:** simplify redundant if statements ([db0e5e0](https://github.com/GIScience/ors-map-client/commit/db0e5e0d32d5aa03d3c50a3a9e6aeb9a70075a26))
+* optimize imports ([78c11f6](https://github.com/GIScience/ors-map-client/commit/78c11f6ec80ec2f6aab456c836885084f066f8ce))
+* suppress HttpUrlsUsage ([e24682f](https://github.com/GIScience/ors-map-client/commit/e24682fdd3c0c7fbca5b0a8b00b73e1ee6d81afe))
+* suppress spell check for static lists ([70a842d](https://github.com/GIScience/ors-map-client/commit/70a842df86bdde470e014960455ae10eac9de2b8))
+* suppress spell check for test data ([002aa6d](https://github.com/GIScience/ors-map-client/commit/002aa6d1e2fa24781fa3d3d3d4121b644dda1660))
+* **XML:** remove duplicate attribute scoped ([5bcb07f](https://github.com/GIScience/ors-map-client/commit/5bcb07f92294a631e8fffa22b0d01de6952243bb))
+
+
+### Code Refactoring
+
+* **app-config:** adjust zoom levels to production values ([faf2ec9](https://github.com/GIScience/ors-map-client/commit/faf2ec97ea2634812b856c8bb04e6e54a67ebf33))
+* cleanup various problems ([#389](https://github.com/GIScience/ors-map-client/issues/389)) ([14872a6](https://github.com/GIScience/ors-map-client/commit/14872a65a044f8d001b271167ac3beff256c008c))
+* **constants:** fix and rename links ([bd454bd](https://github.com/GIScience/ors-map-client/commit/bd454bd4586aacbcbf02328400eab893321143ae))
+* fix typo in function name and variables ([22e36a0](https://github.com/GIScience/ors-map-client/commit/22e36a0de5f41dddd04d21cae0d80704fcb47578))
+* fix typos in CSS classes ([b50257b](https://github.com/GIScience/ors-map-client/commit/b50257ba15844e78f060fb1eae03f60e504c981c))
+* **footer:** color links & use v-layout ([7434bb4](https://github.com/GIScience/ors-map-client/commit/7434bb4f3121ca5e5ff10daeffaaf8c9a097b426))
+* **footer:** reduce padding ([0cc55de](https://github.com/GIScience/ors-map-client/commit/0cc55defd54521c5bc77b1afb94123080a3eed24))
+* **footer:** use official short HeiGIT name ([c23eeda](https://github.com/GIScience/ors-map-client/commit/c23eeda44cd9cdc80a7ff972478002efc7552456))
+* **footer:** use single footer height ([a8e3584](https://github.com/GIScience/ors-map-client/commit/a8e358407cf99e268fbde9a0f12163a67c4a96c7))
+* geoUtils.getBounds() ([338e6ee](https://github.com/GIScience/ors-map-client/commit/338e6ee04aff3d03cd0611f7d61d17ca3efe5ea0))
+* handle timeout correctly ([c1f7bfb](https://github.com/GIScience/ors-map-client/commit/c1f7bfb933ac10ff61ed001c65c41dfaa0eb072c))
+* increase orsApiRequestTimeout ([8284954](https://github.com/GIScience/ors-map-client/commit/8284954a4e2a305d9a0d8664ade2ea91a58dd6b9))
+* remove unused function ([03ae195](https://github.com/GIScience/ors-map-client/commit/03ae19556f4db5a92681bbf4097220c303f27189))
+* remove unused function routeSummary ([e8f886b](https://github.com/GIScience/ors-map-client/commit/e8f886b220f3bc4f4132fae4735df70adaca35fd))
+* remove unused functions ([d889b63](https://github.com/GIScience/ors-map-client/commit/d889b63041fb8aed702fc728d15c8b592fd223b8))
+* rename event name to camel case convention ([da605f9](https://github.com/GIScience/ors-map-client/commit/da605f97712b86f9734ad0d2c75d11f55aa3dbd0))
+* rename to camel case convention ([87b66af](https://github.com/GIScience/ors-map-client/commit/87b66af0cffa4b6032415b8509e0f4372c2d624a))
+* rename variables for readability ([b1458fe](https://github.com/GIScience/ors-map-client/commit/b1458fe44ac98c8f31ebf6a0c2f83893030dce7c))
+* replace deprecated hash keyword ([f25b8fb](https://github.com/GIScience/ors-map-client/commit/f25b8fbe500c156823c966a8ff91b46d09273622))
+* replace property with padding shorthand ([5c22853](https://github.com/GIScience/ors-map-client/commit/5c2285380e33d4a47fbc083e23b0df9111f1be88))
+* simplify if statement ([9cabcca](https://github.com/GIScience/ors-map-client/commit/9cabcca05abb4d289edacac7ae2bbe36562d0b2e))
+* switch to 'for of' loop ([7735ba9](https://github.com/GIScience/ors-map-client/commit/7735ba9b4f8684efe0fb052e48776c01e5def108))
+* update JSDocs ([2e0458b](https://github.com/GIScience/ors-map-client/commit/2e0458b3cd6733b1bb21cf0299d591d1d595433b))
+* use Array.prototype.at() method ([2d50894](https://github.com/GIScience/ors-map-client/commit/2d50894fd1d82fd8d51479523c759de4101dd9d1))
+* use for-of instead of for-in loops ([0ff7847](https://github.com/GIScience/ors-map-client/commit/0ff7847a6825416755d3540135c41aec62e4ad29))
+
+
+### Tests
+
+* adjust test to cypress 12 ([93b0dec](https://github.com/GIScience/ors-map-client/commit/93b0decf636f0548e88d89759cc7a843bb0fdcf2))
+* fix linting issue with unsafe chaining ([b106976](https://github.com/GIScience/ors-map-client/commit/b106976088b15c4984a33f0a191d45eb80858c70))
+
+
+### Build System
+
+* **deps:** update chromedriver to 127.0.1 ([419334d](https://github.com/GIScience/ors-map-client/commit/419334d091c35d76131e9b70695ee8acfb26fefb))
+* **deps:** update openrouteservice-js to v0.3.2 ([d3aae38](https://github.com/GIScience/ors-map-client/commit/d3aae3811d9dbb1925ba85fe5f82994b2854b349))
+* **deps:** update ors-js to 0.4.1 ([9128c7d](https://github.com/GIScience/ors-map-client/commit/9128c7d5efffdd13b1d68bebb21e883145a285e7))
+* migrate to vue chartjs 5.2.0 ([#390](https://github.com/GIScience/ors-map-client/issues/390)) ([a249e38](https://github.com/GIScience/ors-map-client/commit/a249e38e3e3ee0490ef507c4760b03369302c7e8))
+* refactor altitude component to work with vue-chartjs 5.2 ([7f28bdd](https://github.com/GIScience/ors-map-client/commit/7f28bddd35d7a1b84a2c217c66b4a1b85aa64627))
+* switch from node-sass to sass ([8ccddf5](https://github.com/GIScience/ors-map-client/commit/8ccddf59968325f22a0d89024c48d17406bf2feb))
+* update dependencies ([febbca4](https://github.com/GIScience/ors-map-client/commit/febbca470b90d7db071e695710136f73cdda76df))
+* update dependencies ([#395](https://github.com/GIScience/ors-map-client/issues/395)) ([a31a7f1](https://github.com/GIScience/ors-map-client/commit/a31a7f1ae8e4561b40699eb1a47680d76c3eaf7b))
+* update openrouteservice-js to v0.3.1 ([#393](https://github.com/GIScience/ors-map-client/issues/393)) ([33b6475](https://github.com/GIScience/ors-map-client/commit/33b6475984a21288d73c7fa65cc9c1e678738768))
+* update to node 20 & pnpm 9 ([b7f8e37](https://github.com/GIScience/ors-map-client/commit/b7f8e375e82fcba8440d10272f84e9be0bbbd753))
+
+
+### CI
+
+* add --host value to make gh actions work ([3dc8124](https://github.com/GIScience/ors-map-client/commit/3dc8124be0c5c7aaaa1f919e1e8f2ceee5e5c7f4))
+* update actions ([c86992f](https://github.com/GIScience/ors-map-client/commit/c86992fdb48137f65a720bb97c28f12bc151a72d))
+* upgrade pnpm version in docker to 8 ([6de0b6d](https://github.com/GIScience/ors-map-client/commit/6de0b6d3e2dd1ed5f8cf9b7904fa8eff4cc1987e))
+* upgrade pnpm version to 8 ([2c26a24](https://github.com/GIScience/ors-map-client/commit/2c26a2424c323077aa21158447bae4119b2d9f3f))
+
 ## [2.1.0](https://github.com/GIScience/ors-map-client/compare/v2.0.0...v2.1.0) (2023-06-23)
 
 
