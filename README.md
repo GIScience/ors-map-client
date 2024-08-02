@@ -70,8 +70,6 @@ first.
 2. Set the app-config.js values for:
 
 - `orsApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
-- `bitlyApiKey` - the Bitly key (used to shorten the share URL)
-- `bitlyLogin` - the Bitly login (used to shorten the share URL)
 
 3. The ORS menu is loaded/used by default. If you want to use a custom menu, have a look in the `hooks-example.js`.
 
