@@ -17,7 +17,7 @@ code understanding.
 
 ![ORS map client](docs/ors-map-client.png?raw=true "ORS map client")
 
-### Set up and run
+## Set up and run
 
 The app can be run with `docker`, `docker-compose`, and `natively`.
 
@@ -29,36 +29,35 @@ git clone https://github.com/GIScience/ors-map-client.git
 cd ors-map-client
 ```
 
-##### Configure
+### Configure
 
 In order to run the app either with `docker`, `docker-compose`, or `native`, you have to configure you application
 first.
 
 1. Copy the files in the `src/config-example` to `src/config`, without `-example` in their names. The files are:
 
-- app-config-`example`.js => **app-config.js**
-- ors-map-filters`-example`.js => **ors-map-filters.js**
-- layer-zoom-mapping`-example`.js => **layer-zoom-mapping.js**
-- hooks`-example`.js => **hooks.js**
-- theme`-example`.js => **theme.js**
-- default-map-settings`-example`.js => **default-map-settings.js**
-- settings-options`-example`.js => **settings-options.js**
+   - app-config-`example`.js => **app-config.js**
+   - ors-map-filters`-example`.js => **ors-map-filters.js**
+   - layer-zoom-mapping`-example`.js => **layer-zoom-mapping.js**
+   - hooks`-example`.js => **hooks.js**
+   - theme`-example`.js => **theme.js**
+   - default-map-settings`-example`.js => **default-map-settings.js**
+   - settings-options`-example`.js => **settings-options.js**
 
-  If you are using a linux/unix compatible terminal, you can do that by running:
+   If you are using a linux/unix compatible terminal, you can do that by running:
 
-  ```sh
-  cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
-  ```
+     ```sh
+     cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
+     ```
 
-2. Set the app-config.js values for:
-
-- `orsApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
+2. Set the app-config.js values for `orsApiKey` to be used when not running the app from valid ors domains
 
 3. The ORS menu is loaded/used by default. If you want to use a custom menu, have a look in the `hooks-example.js`.
 
-The filters, theme and hooks of the map client can be customized if needed.
+The filters, theme and hooks of the map client can be [customized](#configuration-theming-customization-and-extension)
+if needed.
 
-##### Run with `Docker`
+### Run with `Docker`
 
 ```shell
 # Build the image
@@ -73,7 +72,7 @@ docker logs --follow ors-map-client
 
 The app should now be running at http://127.0.0.1:8080.
 
-##### Run with `docker-compose`
+### Run with `docker-compose`
 
 ```shell
 # Build and run the image
@@ -85,7 +84,7 @@ docker-compose logs -ft
 
 The app should now be running at http://127.0.0.1:8080.
 
-##### Run `natively`
+### Run `natively`
 
 Run the app locally without docker in three steps: set the environment up, and define a configuration file.
 
