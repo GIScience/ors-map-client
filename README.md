@@ -17,23 +17,6 @@ code understanding.
 
 ![ORS map client](docs/ors-map-client.png?raw=true "ORS map client")
 
-## Sections
-
-- [Set up and run](#set-up-and-run)
-- [App folders](#app-folders)
-- [App flow overview](#app-flow-overview)
-- [Feature-by-folder design](#feature-by-folder-design)
-- [Reserved methods and accessors](#reserved-methods-and-accessors)
-- [pages](#pages)
-- [Configuration, theming, customization and extension](#configuration-theming-customization-and-extension)
-- [Add language](#add-language)
-- [Menu](#menu)
-- [Debug](#debug)
-- [Build and deploy](#build-and-deploy)
-- [Tests](#tests)
-- [Contribute](#contribute)
-- [Additional documentation](#additional-documentation)
-
 ### Set up and run
 
 The app can be run with `docker`, `docker-compose`, and `natively`.
