@@ -363,12 +363,11 @@ cd <project-root-folder>/
 pnpm build
 ```
 
-_Important:_ to run the built application you have to set up a web server and put this repository (after the build)
-there.
-The `index.html` at the root of this repository will load the app.
-
-For a detailed explanation on how webpack works, check out the [guide](http://vuejs-templates.github.io/webpack/) and
-[docs for vue-loader](http://vuejs.github.io/vue-loader).
+The built files are meant to be served by a web server like nginx or apache.
+You can try if everything works locally e.g. with:
+```sh
+pnpx http-server .
+```
 
 ### Tests
 
@@ -493,3 +492,6 @@ There is additional software documentation in the `/docs` folder:
 - [docs/dynamic-inputs.md](docs/dynamic-inputs.md) - describes how the inputs are rendered using a custom engine
 - [docs/search-results-criteria.md](docs/search-results-criteria.md) - explains the criteria for search results
 - [docs/plugins.md](docs/plugins.md) - explains how to add plugins
+
+For a detailed explanation on how webpack works, check out the [guide](http://vuejs-templates.github.io/webpack/) and
+[docs for vue-loader](http://vuejs.github.io/vue-loader).
