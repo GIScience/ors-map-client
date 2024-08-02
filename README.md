@@ -175,6 +175,7 @@ We are happy if you also want to [contribute](#contribute) a pull request.
 
 ### Contribute
 
+To better understand and navigate the codebase best get to know the [project structure](docs/project-structure.md) first.
 Make sure to [set up](#set-up-and-run) and [configure](#configuration) the project, branch of current `main` and prefix
 your branch name with `feat/` for features and `fix/` for bug fixes e.g.
 
@@ -324,6 +325,7 @@ Use the workflow dispatch to deploy e.g. a feature branch to staging or an inter
 
 There is additional software documentation in the `/docs` folder:
 
+- [docs/project-structure.md](docs/project-structure.md) - explains the project & folder structure
 - [docs/dynamic-inputs.md](docs/dynamic-inputs.md) - describes how the inputs are rendered using a custom engine
 - [docs/search-results-criteria.md](docs/search-results-criteria.md) - explains the criteria for search results
 - [docs/plugins.md](docs/plugins.md) - explains how to add plugins
