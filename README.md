@@ -366,8 +366,8 @@ git push -u origin master
 The ways to change/extend the app are:
 
 1. Define custom settings (see files in `src/config`) that will change the standard way that the app works.
-1. Add hook listeners in `src/config/hooks.js` and run custom code inside those hooks
-1. Create a plug-in that has its methods linked to hooks called during the app flow
+2. Add hook listeners in `src/config/hooks.js` and run custom code inside those hooks
+3. Create a plug-in that has its methods linked to hooks called during the app flow
    (see `src/plugins/example-plugin/`)
 
 #### Configuration
