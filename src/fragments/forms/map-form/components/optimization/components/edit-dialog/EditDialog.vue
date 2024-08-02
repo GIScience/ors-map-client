@@ -19,7 +19,7 @@
         <v-alert v-if="editData.length > content.maxLength" :value="true" type="warning" style="color:black" >
           {{ content.maxWarning }}
         </v-alert>
-        <v-card @click="editId = i+1" elevation="3" style="margin: 5px;cursor: pointer" v-for="(d, i) in editData" :key="i">
+        <v-card data-cy="dataCards" @click="editId = i+1" elevation="3" style="margin: 5px;cursor: pointer" v-for="(d, i) in editData" :key="i">
           <v-card-title style="padding-bottom: 0;">
             <div v-if="jobsBox"><b>Job {{ d.id }} - {{ d.location ? d.location[0].toPrecision(8) + ',' + d.location[1].toPrecision(8) : 'please add Location'}}</b></div>
             <div v-else><b><v-icon :color="vehicleColors(d.id)" class="pr-5">{{vehicleIcon(d.profile)}}</v-icon>{{ content.item }} {{ d.id }}</b></div>
@@ -36,7 +36,7 @@
               <v-icon color="primary">delete</v-icon>
             </v-btn>
           </v-card-title>
-          <v-card-text>
+          <v-card-text data-cy="cardText">
             <div v-if="editId !== d.id && jobsBox">
               <span v-for="(v, k) in d" :key="k">
                 <v-chip v-if="['service'].includes(k) && v !== 0">{{ $t(`optimization.${k}`) }}: {{humanisedTime(v)}}</v-chip>
@@ -71,8 +71,8 @@
               </div>
 
               <v-layout row-wrap>
-                <v-text-field v-if="jobsBox" v-model.number="editData[i].delivery[0]" type="number" style="padding-right: 10px" :persistent-hint="true" :hint="$t('optimization.delivery')"></v-text-field>
-                <v-text-field v-if="jobsBox" v-model.number="editData[i].pickup[0]" type="number" style="padding-left: 10px" :persistent-hint="true" :hint="$t('optimization.pickup')"></v-text-field>
+                <v-text-field data-cy="delivery" v-if="jobsBox" v-model.number="editData[i].delivery[0]" type="number" style="padding-right: 10px" :persistent-hint="true" :hint="$t('optimization.delivery')"></v-text-field>
+                <v-text-field data-cy="pickup" v-if="jobsBox" v-model.number="editData[i].pickup[0]" type="number" style="padding-left: 10px" :persistent-hint="true" :hint="$t('optimization.pickup')"></v-text-field>
                 <v-item-group v-if="vehiclesBox" style="margin: 10px 15px 0 0; border: solid lightgray 1px; padding: 10px">
                   <v-layout class="profile-options-wrapper">
                     <v-item v-for="profile in profilesMapping" :key="profile.slug">
@@ -87,13 +87,13 @@
                 </v-item-group>
                 <v-text-field v-if="vehiclesBox" v-model.number="editData[i].capacity[0]" type="number" style="width: 50%" :persistent-hint="true" :hint="'Capacity'"></v-text-field>
               </v-layout>
-              <v-text-field v-if="jobsBox" v-model.number="editData[i].service" :persistent-hint="true" :hint="$t('editDialog.service')"></v-text-field>
+              <v-text-field data-cy="service" v-if="jobsBox" v-model.number="editData[i].service" :persistent-hint="true" :hint="$t('editDialog.service')"></v-text-field>
               <v-layout row-wrap>
                 <v-text-field v-if="vehiclesBox" v-model.number="editData[i].time_window[0]" style="padding-right: 10px" :persistent-hint="true" :hint="$t('editDialog.start') + $t('editDialog.timeWindow')"></v-text-field>
                 <v-text-field v-if="vehiclesBox" v-model.number="editData[i].time_window[1]" style="padding-right: 10px" :persistent-hint="true" :hint="$t('editDialog.end') + $t('editDialog.timeWindow')"></v-text-field>
               </v-layout>
 
-              <v-select v-model="editData[i].skills" :items="editSkills" :item-text="'name'" :item-value="'id'" return-object chips deletable-chips
+              <v-select data-cy="skills" v-model="editData[i].skills" :items="editSkills" :item-text="'name'" :item-value="'id'" return-object chips deletable-chips
                         :persistent-hint="true" :hint="content.skills" multiple :menu-props="{'closeOnContentClick':true}">
                 <template v-slot:append-item>
                   <v-divider class="mt-2"></v-divider>
