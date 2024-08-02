@@ -46,9 +46,9 @@ first.
 
    If you are using a linux/unix compatible terminal, you can do that by running:
 
-     ```sh
-     cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
-     ```
+   ```sh
+   cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
+   ```
 
 2. Set the app-config.js values for `orsApiKey` to be used when not running the app from valid ors domains
 
@@ -120,6 +120,7 @@ pnpm build
 
 The built files are meant to be served by a web server like nginx or apache.
 You can try if everything works locally e.g. with:
+
 ```sh
 pnpx http-server .
 ```
@@ -143,7 +144,8 @@ pnpm test
 ```
 
 You can run tests in any standard browser that you have installed.
-If you are new to cypress check out the "[Getting started](https://docs.cypress.io/guides/getting-started/opening-the-app)"
+If you are new to cypress check out
+the "[Getting started](https://docs.cypress.io/guides/getting-started/opening-the-app)"
 documentation, and keep it close.
 An overview on the usable [assertions](https://docs.cypress.io/guides/references/assertions) will help with simple
 test cases.
@@ -153,16 +155,20 @@ test cases.
 Component tests should be written in the component itself e.g.
 `../fragments/MyComponent.cy.js` for `../fragments/MyComponent.vue`
 
-Unit tests for js source files should be created in a separate `./__tests__` folder next to the source file and for the sake of
+Unit tests for js source files should be created in a separate `./__tests__` folder next to the source file and for the
+sake of
 clarity be named the same e.g. `../support/__tests__/utils.cy.js` for `../support/utils.js`
 
 End-to-end tests should be created in `./cypress/e2e/test-name.cy.js`
 
 ### Report a bug
-If you identified a bug, please [create an issue](https://github.com/GIScience/ors-map-client/issues/new) with thorough description
+
+If you identified a bug, please [create an issue](https://github.com/GIScience/ors-map-client/issues/new) with thorough
+description
 and steps to reproduce it (e.g. URL, Screenshot or Screen recording). Feel free to [contribute a fix](#contribute)
 
 ### Feature improvements
+
 If you have an idea for a new feature or want to improve an existing one, please also
 [create an issue](https://github.com/GIScience/ors-map-client/issues/new) first to discuss the idea.
 We are happy if you also want to [contribute](#contribute) a pull request.
@@ -171,6 +177,7 @@ We are happy if you also want to [contribute](#contribute) a pull request.
 
 Make sure to [set up](#set-up-and-run) and [configure](#configuration) the project, branch of current `main` and prefix
 your branch name with `feat/` for features and `fix/` for bug fixes e.g.
+
 ```sh
 git switch -c feat/leaflet-control-for-statistics
 # or
@@ -202,7 +209,6 @@ pre-commit run --all
 > Don't add `closing` or `fixes` keywords in commits but rather tag the issue in the pull request that solves it.
 > This avoids multiple references in the issues after your branch is rebased on newer changes.
 
-
 #### Add language
 
 ##### - Generate a translation file
@@ -211,7 +217,8 @@ If you just want to translate the application strings for a certain language, bu
 it into the app, just download the [en-translation-source-merged.json](/docs/en-translation-source-merged.json),
 translate it, and contact us.
 
-\*_Check the file [src/i18n/i18n-builder.js](src/i18n/i18n-builder.js) to see how to generate merged translation sources_
+\*_Check the file [src/i18n/i18n-builder.js](src/i18n/i18n-builder.js) to see how to generate merged translation
+sources_
 
 ##### - Add a language to the app
 
@@ -229,7 +236,8 @@ follow the steps below.
 - Translate the language strings for each key in the `global.js` file
 
 - Search for each file inside the `/src` folder that ends with `i18n.en-us.js` and create a copy of it and each one so
-  that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux/unix compatible terminal, you can do that by running:
+  that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux/unix compatible terminal, you can
+  do that by running:
 
   ```sh
   find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \;
@@ -269,18 +277,20 @@ After doing that, open the application in the browser and press F12 and select t
 
 #### USB debugging
 
-To debug the client on a mobile phone you can follow e.g. [this guide](https://chenhuijing.com/blog/debugging-firefox-on-android/#%F0%9F%8F%80).
+To debug the client on a mobile phone you can follow
+e.g. [this guide](https://chenhuijing.com/blog/debugging-firefox-on-android/#%F0%9F%8F%80).
 
 ### Releasing a new Version
 
-1. Create a `chore/release-v*.*.*` branch with the new version from `main` branch (use [semantic versioning](https://semver.org/))
-    ```sh
-    git checkout main && git switch -c chore/release-v*.*.*
-    ```
+1. Create a `chore/release-v*.*.*` branch with the new version from `main` branch (
+   use [semantic versioning](https://semver.org/))
+   ```sh
+   git checkout main && git switch -c chore/release-v*.*.*
+   ```
 2. Run the release script to bump version, create changelog entries and release tag
-    ```sh
+   ```sh
    pnpm release
-    ```
+   ```
 3. Make sure the changelog & version is what you expected and adjust if needed
    - adjust branch name: `git branch -m chore/release-<new-version>`
    - adjust changelog or version in files. Then amend commit and re-tag:
@@ -289,20 +299,21 @@ To debug the client on a mobile phone you can follow e.g. [this guide](https://c
      git tag -fa v*.*.* -m 'v*.*.*'
      ```
 4. Push the release branch to remote
-    ```sh
-    git push --set-upstream origin $(git_current_branch)
+   ```sh
+   git push --set-upstream origin $(git_current_branch)
    ```
 5. Click on the link to open a pull request for the release branch, create it and link relevant issues
 
 > Note:
-Pre-commit hooks and test:ci tasks are run for every pull request and any change to it.
+> Pre-commit hooks and test:ci tasks are run for every pull request and any change to it.
 
 ### Deployment
 
-Deployments happen automatically if the conditions for the [environment](https://github.com/GIScience/ors-map-client/settings/environments) are met:
+Deployments happen automatically if the conditions for
+the [environment](https://github.com/GIScience/ors-map-client/settings/environments) are met:
 
 | Environment | Condition                                                     | Target                                    | Workflow dispatch  |
-|-------------|---------------------------------------------------------------|-------------------------------------------|--------------------|
+| ----------- | ------------------------------------------------------------- | ----------------------------------------- | ------------------ |
 | Staging     | open pull request for / push to `chore/release-v*.*.*` branch | https://maps-staging.openrouteservice.org | :heavy_check_mark: |
 | Production  | merge `chore/release-v*.*.*` branch to `main`                 | https://maps.openrouteservice.org         | :heavy_check_mark: |
 | HEAL        | push to `heal` branch                                         | https://heal.openrouteservice.org         | :no_entry_sign:    |
