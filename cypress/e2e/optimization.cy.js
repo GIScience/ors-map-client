@@ -1,5 +1,5 @@
 
-describe('Directions component', () => {
+describe('Optimization component', () => {
   context('loads route from URL link', () => {
     it('shows optimization page and features correctly', () => {
       cy.visit('/#/optimize/49.419614285204595,8.688426017761232/data/{"coordinates":"8.688426017761232,49.419614285204595","options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],"profile":"driving-car","time_window":[45000,50420],"capacity":[5],"skills":[1]}],"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
@@ -76,6 +76,63 @@ describe('Directions component', () => {
       cy.get('.no-shadow').contains('Capacity')
       cy.get('.no-shadow').contains('Skills')
       cy.get('.no-shadow').contains('Time window')
+    })
+  })
+
+  context('opens edit dialog', () => {
+    it('shows manageJobs and features correctly', () => {
+      cy.visit('/#/optimize/49.419614285204595,8.688426017761232/data/{"coordinates":"8.688426017761232,49.419614285204595","options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],"profile":"driving-car","time_window":[45000,50420],"capacity":[5],"skills":[1]}],"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
+      cy.viewport(1848, 980)
+      cy.get('#app')
+      cy.get('.app-content')
+      cy.get('#map-view')
+      cy.get('.sidebar')
+
+      cy.get('.manage-jobs').click()
+
+      // shows dialog and card content correctly
+      cy.get('.edit-header-btn')
+      cy.get('.download-container')
+      cy.get('[data-cy="dataCards"]').should('have.length', 1)
+      cy.get('[data-cy="cardText"]').as('cardText')
+
+      cy.contains('edit').should('be.visible')
+      cy.get('@cardText').contains('Service time')
+      cy.get('@cardText').contains('Skills')
+      cy.get('@cardText').contains('Deliveries')
+      cy.get('@cardText').contains('Pickups')
+
+      cy.get('@cardText').click()
+
+      cy.contains('check').should('be.visible')
+
+      cy.get('[data-cy="delivery"]').clear().type(2)
+      cy.get('[data-cy="pickup"]').clear().type(2)
+      cy.get('[data-cy="service"]').clear().type(0)
+      // TODO: add skill selector check
+
+      // TODO: test closing by the x in the top corner and whether changes hare not saved when cancelled
+    })
+
+    it('picks place from map', () => {
+      cy.visit('/#/optimize/49.419614285204595,8.688426017761232/data/{"coordinates":"8.688426017761232,49.419614285204595","options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],"profile":"driving-car","time_window":[45000,50420],"capacity":[5],"skills":[1]}],"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
+      cy.viewport(1848, 980)
+      cy.get('#app')
+      cy.get('.app-content')
+      cy.get('#map-view')
+      cy.get('.sidebar')
+
+      cy.get('.manage-jobs').click()
+      cy.get('[data-cy="cardText"]').click()
+
+      cy.contains('search').click()
+      cy.get('.locationInput').should('be.visible')
+      cy.contains('map').should('be.visible')
+      cy.contains('map').click()
+
+      cy.get('.edit-header-btn').should('not.exist')
+
+      // TODO: test closing by save button
     })
   })
 })
