@@ -6,13 +6,13 @@ This application implements a map client for the [openrouteservice API](https://
 Single Page Application (SPA). It is a base application that can be used for multiple purposes,
 customized via configurations and extended via plug-ins.
 
-The base application is using VueJS, Vuetify and a set of custom components, directives and services.
+The base application is using Vue.js, Vuetify and a set of custom components, directives and services.
 The structure uses a feature-by-folder design, allowing view, code and translation elements to be contained in a folder.
 
 This app uses single file components and others non-native javascript code that are transpiled to native javascript
 during the build process.
 Therefore, the app needs to be compiled before running it either in dev or production mode.
-The VueJS components allow a better code organization, weak and clear coupling between components and an easier
+The Vue.js components allow a better code organization, weak and clear coupling between components and an easier
 code understanding.
 
 ![ORS map client](docs/ors-map-client.png?raw=true "ORS map client")
@@ -158,7 +158,7 @@ Meaning, that the front-end (this app) is decoupled from the back-ends (ORS API 
 The app load cycle follows these steps:
 
 1. Execute the `main.js` file and add global extensions, mixins components and external libs. The file `main.js` also includes the main files of the router, vuex-store and i18n-translations, which will internally load all `.router.js` ,`.store.js` and `.i18n.js` files from sub-folders.
-2. `main.js` will run a request to get necessary data from a service and then create a VueJS app instance and load the `App.vue`. At this point `AppHooks` is set up and attached to the main VueJS instance and then the `appLoaded` hook is called.
+2. `main.js` will run a request to get necessary data from a service and then create a Vue.js app instance and load the `App.vue`. At this point `AppHooks` is set up and attached to the main Vue.js instance and then the `appLoaded` hook is called.
 3. `App.vue` includes all basic navigation components, like menu, sidebar, footer etc.
 4. After loading all routes (including the ones in the `pages` sub folder) the page with the `/` route (`Maps.vue`) will
    also be rendered in the `<router-view></router-view>` slot in `App.vue` component.
@@ -218,7 +218,7 @@ The app will automatically load:
 
 ### Reserved methods and accessors
 
-All the VueJS components created (including the fragments) will have, by default, the following methods/accessors
+All the Vue.js components created (including the fragments) will have, by default, the following methods/accessors
 defined in the main vue instance app:
 
 - `showMessage (msg, theme, options)` - shows a message using the toaster with specified theme and options
@@ -340,7 +340,7 @@ follow the steps below.
     - the new language placeholder object to the messages object (e.g. `, 'fr-fr': {}`).
 
     - the result of the new language building to the previously created message object
-      (e.g. `i18n.messages['fr-fr'] = frFRTranslations.build()`.
+      (e.g. `i18n.messages['fr-fr'] = frFRTranslations.build()`).
 
   - Save all the files changed and rebuild the application.
 
@@ -364,7 +364,7 @@ _webpack config_ (settings -> Languages & Frameworks -> JavaScript -> Webpack) t
 `{path to ors-map-client}/build/webpack.base.conf.js` to resolve file paths correctly.
 
 To debug the application you must run it in [`dev` mode](#set-up-and-run).
-For better debugging in your browser install the [VueJS devtools](https://github.com/vuejs/vue-devtools#installation)
+For better debugging in your browser install the [Vue.js devtools](https://github.com/vuejs/vue-devtools#installation)
 extension.
 After doing that, open the application in the browser and press F12 and select the tab `Console`, `Vue` or `Sources`
 (and then expand e.g.: `webpack://src`).
