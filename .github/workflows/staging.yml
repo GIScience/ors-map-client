@@ -4,11 +4,10 @@ on:
   push:
     branches:
       - chore/release*
-    tags:
-      - "*.*.*"
   pull_request:
     branches:
       - chore/release*
+  workflow_dispatch:
 
 jobs:
   deploy:
