@@ -465,6 +465,44 @@ pre-commit run --all
 > Don't add `closing` or `fixes` keywords in commits but rather tag the issue in the pull request that solves it.
 > This avoids multiple references in the issues after your branch is rebased on newer changes.
 
+### Releasing a new Version
+
+1. Create a `chore/release-v*.*.*` branch with the new version from `main` branch (use [semantic versioning](https://semver.org/))
+    ```sh
+    git checkout main && git switch -c chore/release-v*.*.*
+    ```
+2. Run the release script to bump version, create changelog entries and release tag
+    ```sh
+   pnpm release
+    ```
+3. Make sure the changelog & version is what you expected and adjust if needed
+   - adjust branch name: `git branch -m chore/release-<new-version>`
+   - adjust changelog or version in files. Then amend commit and re-tag:
+     ```sh
+     git commit --amend
+     git tag -fa v*.*.* -m 'v*.*.*'
+     ```
+4. Push the release branch to remote
+    ```sh
+    git push --set-upstream origin $(git_current_branch)
+   ```
+5. Click on the link to open a pull request for the release branch, create it and link relevant issues
+
+> Note:
+Pre-commit hooks and test:ci tasks are run for every pull request and any change to it.
+
+### Deployment
+
+Deployments happen automatically if the conditions for the [environment](https://github.com/GIScience/ors-map-client/settings/environments) are met:
+
+| Environment | Condition                                                     | Target                                    | Workflow dispatch  |
+|-------------|---------------------------------------------------------------|-------------------------------------------|--------------------|
+| Staging     | open pull request for / push to `chore/release-v*.*.*` branch | https://maps-staging.openrouteservice.org | :heavy_check_mark: |
+| Production  | merge `chore/release-v*.*.*` branch to `main`                 | https://maps.openrouteservice.org         | :heavy_check_mark: |
+| HEAL        | push to `heal` branch                                         | https://heal.openrouteservice.org         | :no_entry_sign:    |
+
+Use the workflow dispatch to deploy e.g. a feature branch to staging or an intermediate state of `main` to production.
+
 ### Additional documentation
 
 There is additional software documentation in the `/docs` folder:
