@@ -109,126 +109,6 @@ pnpm dev
 # This will start a standalone http node server and the host and port to access it will be displayed
 ```
 
-### Configuration, theming, customization and extension
-
-The map client app can be configured, customized and extended. Several aspects can be defined/changed in order to
-disable features, customize visual identity and change/extend its features/behaviors.
-It is also possible to add custom plug-ins to the app and subscribe to hooks, listen and emit events.
-The items of the menu can also be customized via hooks.
-
-It is possible to define your custom settings and plug-ins and keep getting updates from the ORS repository because
-the `src/plugins` and `src/config` folders are not versioned.
-To keep the original ors-map-client as a secondary repository, do the following:
-
-```sh
-# Rename the original remote
-git remote rename origin ors-map-client-origin
-
-# Add your remote as the origin one
-git remote add origin <git-repo-url>
-
-# Set your new origin as the default upstream
-git branch --set-upstream-to=origin/master
-```
-
-After doing this we recommend you to remove from `.gitignore` the lines that tell git to ignore the folders
-`/src/config`, `src/plugins` and eventually `/static`.
-Then, run the initial push to the just defined new origin repository, with the following command:
-
-```sh
-git push -u origin master
-```
-
-The ways to change/extend the app are:
-
-1. Define custom settings (see files in `src/config`) that will change the standard way that the app works.
-1. Add hook listeners in `src/config/hooks.js` and run custom code inside those hooks
-1. Create a plug-in that has its methods linked to hooks called during the app flow
-   (see `src/plugins/example-plugin/`)
-
-#### Configuration
-
-It is possible to configure/disable some app features and behaviors by changing the values
-of the `src/config/app-config.js`. It is also possible to change the app theme/colors by changing the values of
-`src/config/theme.js`.
-The app logo can also be changed in the `src/config/app-config` file.
-The available filters/options to be used in the services are defined in the `src/config/ors-map-filters.js`.
-They can be adjusted according the needs. Other files can be used to adjust app configurations are the
-`layer-zoom-mapping.js`, `settings-options.js` and the `default-map-settings.js`.
-
-#### Plug-ins
-
-It is possible to add plug-ins to the application in order to change its behavior or extend it.
-Please check [docs/plugins.md](docs/plugins.md) for more details.
-
-### Add language
-
-#### - Generate a translation file
-
-If you just want to translate the application strings for a certain language, but you don't have the skills to `"code"`
-it into the app, just download the [en-translation-source-merged.json](/docs/en-translation-source-merged.json),
-translate it, and contact us.
-
-\*_Check the file [src/i18n/i18n-builder.js](src/i18n/i18n-builder.js) to see how to generate merged translation sources_
-
-#### - Add a language to the app
-
-The app uses a feature-by-folder design, so each component might have its own translation strings.
-That is why there is no single translation file. If you want to add a translation and `"implement"` it into the app,
-follow the steps below.
-
-- Create a copy of the /src/i18n/translations/`en-us` folder giving it the identification of the target language.
-  For example: if you are adding the French from France, then the folder should be called `fr-fr`.
-
-- Edit the `builder.js` file inside the just created folder in order to replace the language pattern to the one you are
-  creating.
-  For example, similar to `/\.i18n\.en-us\.js$` add `/\.i18n\.fr-fr\.js$`.
-
-- Translate the language strings for each key in the `global.js` file
-
-- Search for each file inside the `/src` folder that ends with `i18n.en-us.js` and create a copy of it and each one so
-  that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux/unix compatible terminal, you can do that by running:
-
-  ```sh
-  find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \;
-  # where the last occurrence of locale id (in this case `fr-fr`) is the one you are creating
-  ```
-
-- Translate the language strings for each key in all the files created in the previous step.
-
-- Edit `/src/config/settings-options.js` and add the new locale object to the `appLocales` array (e.g.
-  `{ text: 'Français FR', value: 'fr-fr' }`).
-
-- Open the src/i18n/`i18n-builder.js` file and apply the following changes:
-
-  - Import the object from the new language builder that you just created
-    (e.g. `import frFRTranslations from './translations/fr-fr/builder'`)
-
-  - Inside the `build` method, add:
-
-    - the new language placeholder object to the messages object (e.g. `, 'fr-fr': {}`).
-
-    - the result of the new language building to the previously created message object
-      (e.g. `i18n.messages['fr-fr'] = frFRTranslations.build()`).
-
-  - Save all the files changed and rebuild the application.
-
-### Debug
-
-If you are using [WebStorm](https://www.jetbrains.com/webstorm/download) you should set the
-_webpack config_ (settings -> Languages & Frameworks -> JavaScript -> Webpack) to
-`{path to ors-map-client}/build/webpack.base.conf.js` to resolve file paths correctly.
-
-To debug the application you must run it in [`dev` mode](#set-up-and-run).
-For better debugging in your browser install the [Vue.js devtools](https://github.com/vuejs/vue-devtools#installation)
-extension.
-After doing that, open the application in the browser and press F12 and select the tab `Console`, `Vue` or `Sources`
-(and then expand e.g.: `webpack://src`).
-
-##### USB debugging
-
-To debug the client on a mobile phone you can follow e.g. [this guide](https://chenhuijing.com/blog/debugging-firefox-on-android/#%F0%9F%8F%80).
-
 ### Build and deploy
 
 The app must be built before it is deployed. To do so, run:
@@ -322,6 +202,75 @@ pre-commit run --all
 > Don't add `closing` or `fixes` keywords in commits but rather tag the issue in the pull request that solves it.
 > This avoids multiple references in the issues after your branch is rebased on newer changes.
 
+
+#### Add language
+
+##### - Generate a translation file
+
+If you just want to translate the application strings for a certain language, but you don't have the skills to `"code"`
+it into the app, just download the [en-translation-source-merged.json](/docs/en-translation-source-merged.json),
+translate it, and contact us.
+
+\*_Check the file [src/i18n/i18n-builder.js](src/i18n/i18n-builder.js) to see how to generate merged translation sources_
+
+##### - Add a language to the app
+
+The app uses a feature-by-folder design, so each component might have its own translation strings.
+That is why there is no single translation file. If you want to add a translation and `"implement"` it into the app,
+follow the steps below.
+
+- Create a copy of the /src/i18n/translations/`en-us` folder giving it the identification of the target language.
+  For example: if you are adding the French from France, then the folder should be called `fr-fr`.
+
+- Edit the `builder.js` file inside the just created folder in order to replace the language pattern to the one you are
+  creating.
+  For example, similar to `/\.i18n\.en-us\.js$` add `/\.i18n\.fr-fr\.js$`.
+
+- Translate the language strings for each key in the `global.js` file
+
+- Search for each file inside the `/src` folder that ends with `i18n.en-us.js` and create a copy of it and each one so
+  that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux/unix compatible terminal, you can do that by running:
+
+  ```sh
+  find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \;
+  # where the last occurrence of locale id (in this case `fr-fr`) is the one you are creating
+  ```
+
+- Translate the language strings for each key in all the files created in the previous step.
+
+- Edit `/src/config/settings-options.js` and add the new locale object to the `appLocales` array (e.g.
+  `{ text: 'Français FR', value: 'fr-fr' }`).
+
+- Open the src/i18n/`i18n-builder.js` file and apply the following changes:
+
+  - Import the object from the new language builder that you just created
+    (e.g. `import frFRTranslations from './translations/fr-fr/builder'`)
+
+  - Inside the `build` method, add:
+
+    - the new language placeholder object to the messages object (e.g. `, 'fr-fr': {}`).
+
+    - the result of the new language building to the previously created message object
+      (e.g. `i18n.messages['fr-fr'] = frFRTranslations.build()`).
+
+  - Save all the files changed and rebuild the application.
+
+#### Debug
+
+If you are using [WebStorm](https://www.jetbrains.com/webstorm/download) you should set the
+_webpack config_ (settings -> Languages & Frameworks -> JavaScript -> Webpack) to
+`{path to ors-map-client}/build/webpack.base.conf.js` to resolve file paths correctly.
+
+To debug the application you must run it in [`dev` mode](#set-up-and-run).
+For better debugging in your browser install the [Vue.js devtools](https://github.com/vuejs/vue-devtools#installation)
+extension.
+After doing that, open the application in the browser and press F12 and select the tab `Console`, `Vue` or `Sources`
+(and then expand e.g.: `webpack://src`).
+
+#### USB debugging
+
+To debug the client on a mobile phone you can follow e.g. [this guide](https://chenhuijing.com/blog/debugging-firefox-on-android/#%F0%9F%8F%80).
+
 ### Releasing a new Version
 
 1. Create a `chore/release-v*.*.*` branch with the new version from `main` branch (use [semantic versioning](https://semver.org/))
@@ -370,3 +319,55 @@ There is additional software documentation in the `/docs` folder:
 
 For a detailed explanation on how webpack works, check out the [guide](http://vuejs-templates.github.io/webpack/) and
 [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+### Configuration, theming, customization and extension
+
+The map client app can be configured, customized and extended. Several aspects can be defined/changed in order to
+disable features, customize visual identity and change/extend its features/behaviors.
+It is also possible to add custom plug-ins to the app and subscribe to hooks, listen and emit events.
+The items of the menu can also be customized via hooks.
+
+It is possible to define your custom settings and plug-ins and keep getting updates from the ORS repository because
+the `src/plugins` and `src/config` folders are not versioned.
+To keep the original ors-map-client as a secondary repository, do the following:
+
+```sh
+# Rename the original remote
+git remote rename origin ors-map-client-origin
+
+# Add your remote as the origin one
+git remote add origin <git-repo-url>
+
+# Set your new origin as the default upstream
+git branch --set-upstream-to=origin/master
+```
+
+After doing this we recommend you to remove from `.gitignore` the lines that tell git to ignore the folders
+`/src/config`, `src/plugins` and eventually `/static`.
+Then, run the initial push to the just defined new origin repository, with the following command:
+
+```sh
+git push -u origin master
+```
+
+The ways to change/extend the app are:
+
+1. Define custom settings (see files in `src/config`) that will change the standard way that the app works.
+1. Add hook listeners in `src/config/hooks.js` and run custom code inside those hooks
+1. Create a plug-in that has its methods linked to hooks called during the app flow
+   (see `src/plugins/example-plugin/`)
+
+#### Configuration
+
+It is possible to configure/disable some app features and behaviors by changing the values
+of the `src/config/app-config.js`. It is also possible to change the app theme/colors by changing the values of
+`src/config/theme.js`.
+The app logo can also be changed in the `src/config/app-config` file.
+The available filters/options to be used in the services are defined in the `src/config/ors-map-filters.js`.
+They can be adjusted according the needs. Other files can be used to adjust app configurations are the
+`layer-zoom-mapping.js`, `settings-options.js` and the `default-map-settings.js`.
+
+#### Plug-ins
+
+It is possible to add plug-ins to the application in order to change its behavior or extend it.
+Please check [docs/plugins.md](docs/plugins.md) for more details.
