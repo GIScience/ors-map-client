@@ -174,13 +174,12 @@ class Job extends Place {
 
   checkProps (props) {
     let out = {id: props.id, location: props.location}
-    for (const p of ['service', 'time_windows']) {
-      if (props[p].length && props[p] !== 0) {
-        out[p] = props[p]
-      }
+    if (props.service !== 0) {
+      out.service = props.service
     }
-    for (const p of ['delivery', 'pickup',]) {
-      if (props[p][0] !== 0) {
+
+    for (const p of ['delivery', 'pickup', 'time_windows']) {
+      if (props[p].length && props[p][0] !== 0) {
         out[p] = props[p]
       }
     }
