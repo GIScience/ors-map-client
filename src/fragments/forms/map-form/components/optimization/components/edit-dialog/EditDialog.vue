@@ -117,7 +117,7 @@
                    @click="closeEditModal">{{$t('global.cancel')}}</v-btn>
           </v-flex>
           <v-flex text-xs-right xs12 sm3 md3 :class="{'ml-2': $vuetify.breakpoint.smAndDown}">
-            <v-btn :block="$lowResolution" color="success" :title="$t('global.save')" @click="saveItems">
+            <v-btn data-cy="save" :block="$lowResolution" color="success" :title="$t('global.save')" @click="saveItems">
               {{$t('global.save')}}
               <v-icon style="margin-left: 5px;">save</v-icon>
             </v-btn>
