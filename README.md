@@ -6,35 +6,18 @@ This application implements a map client for the [openrouteservice API](https://
 Single Page Application (SPA). It is a base application that can be used for multiple purposes,
 customized via configurations and extended via plug-ins.
 
-The base application is using VueJS, Vuetify and a set of custom components, directives and services.
+The base application is using Vue.js, Vuetify and a set of custom components, directives and services.
 The structure uses a feature-by-folder design, allowing view, code and translation elements to be contained in a folder.
 
 This app uses single file components and others non-native javascript code that are transpiled to native javascript
 during the build process.
 Therefore, the app needs to be compiled before running it either in dev or production mode.
-The VueJS components allow a better code organization, weak and clear coupling between components and an easier
+The Vue.js components allow a better code organization, weak and clear coupling between components and an easier
 code understanding.
 
 ![ORS map client](docs/ors-map-client.png?raw=true "ORS map client")
 
-## Sections
-
-- [Set up and run](#set-up-and-run)
-- [App folders](#app-folders)
-- [App flow overview](#app-flow-overview)
-- [Feature-by-folder design](#feature-by-folder-design)
-- [Reserved methods and accessors](#reserved-methods-and-accessors)
-- [pages](#pages)
-- [Configuration, theming, customization and extension](#configuration-theming-customization-and-extension)
-- [Add language](#add-language)
-- [Menu](#menu)
-- [Debug](#debug)
-- [Build and deploy](#build-and-deploy)
-- [Tests](#tests)
-- [Contribute](#contribute)
-- [Additional documentation](#additional-documentation)
-
-### Set up and run
+## Set up and run
 
 The app can be run with `docker`, `docker-compose`, and `natively`.
 
@@ -46,38 +29,35 @@ git clone https://github.com/GIScience/ors-map-client.git
 cd ors-map-client
 ```
 
-##### Configure
+### Configure
 
 In order to run the app either with `docker`, `docker-compose`, or `native`, you have to configure you application
 first.
 
 1. Copy the files in the `src/config-example` to `src/config`, without `-example` in their names. The files are:
 
-- app-config-`example`.js => **app-config.js**
-- ors-map-filters`-example`.js => **ors-map-filters.js**
-- layer-zoom-mapping`-example`.js => **layer-zoom-mapping.js**
-- hooks`-example`.js => **hooks.js**
-- theme`-example`.js => **theme.js**
-- default-map-settings`-example`.js => **default-map-settings.js**
-- settings-options`-example`.js => **settings-options.js**
+   - app-config-`example`.js => **app-config.js**
+   - ors-map-filters`-example`.js => **ors-map-filters.js**
+   - layer-zoom-mapping`-example`.js => **layer-zoom-mapping.js**
+   - hooks`-example`.js => **hooks.js**
+   - theme`-example`.js => **theme.js**
+   - default-map-settings`-example`.js => **default-map-settings.js**
+   - settings-options`-example`.js => **settings-options.js**
 
-  If you are using a linux/unix compatible terminal, you can do that by running:
+   If you are using a linux/unix compatible terminal, you can do that by running:
 
-  ```sh
-  cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
-  ```
+   ```sh
+   cd src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
+   ```
 
-2. Set the app-config.js values for:
-
-- `orsApiKey` - ORS API key to be used when ot running the app from localhost or ors valid domains
-- `bitlyApiKey` - the Bitly key (used to shorten the share URL)
-- `bitlyLogin` - the Bitly login (used to shorten the share URL)
+2. Set the app-config.js values for `orsApiKey` to be used when not running the app from valid ors domains
 
 3. The ORS menu is loaded/used by default. If you want to use a custom menu, have a look in the `hooks-example.js`.
 
-The filters, theme and hooks of the map client can be customized if needed.
+The filters, theme and hooks of the map client can be [customized](#configuration-theming-customization-and-extension)
+if needed.
 
-##### Run with `Docker`
+### Run with `Docker`
 
 ```shell
 # Build the image
@@ -92,7 +72,7 @@ docker logs --follow ors-map-client
 
 The app should now be running at http://127.0.0.1:8080.
 
-##### Run with `docker-compose`
+### Run with `docker-compose`
 
 ```shell
 # Build and run the image
@@ -104,7 +84,7 @@ docker-compose logs -ft
 
 The app should now be running at http://127.0.0.1:8080.
 
-##### Run `natively`
+### Run `natively`
 
 Run the app locally without docker in three steps: set the environment up, and define a configuration file.
 
@@ -129,116 +109,229 @@ pnpm dev
 # This will start a standalone http node server and the host and port to access it will be displayed
 ```
 
-### App folders
+### Build and deploy
 
-App folder structure under `src`:
+The app must be built before it is deployed. To do so, run:
 
-- `assets` - images and icons storage
-- `common` - available mixins, http client, main menu, Vue with Vuetify and theme
-- `directives` - custom directives
-- `filters` - custom filters
-- `fragments` - all app fragments used by pages
-- `i18n` - internationalization resources
-- `models` - models used to deal transport ors response data and deals with app state and transitions
-- `pages` - app pages (currently only the `maps` page is available)
-- `resources` - support files like the loader lib, definitions and options used to process requests and responses
-- `router` - router component based on vue-router components
-- `store` - app store definitions
-- `support` - support utilities, like geo-utils, ors-api-runner, routes-resolver and app modes
+```sh
+cd <project-root-folder>/
+pnpm build
+```
 
-### App flow overview
+The built files are meant to be served by a web server like nginx or apache.
+You can try if everything works locally e.g. with:
 
-This is a Single Page Application (SPA). This means that the client app is loaded in the browser and defines which
-components and pages are processed based on the browser URL.
-The app watches every change in the browser URL and updates its state based on that.
-These URL changes don't trigger a request to the back-end directly, but the components loaded/updated will decide which
-requests must be run to load the required data.
-Meaning, that the front-end (this app) is decoupled from the back-ends (ORS API and ORS website)
+```sh
+pnpx http-server .
+```
 
-The app load cycle follows these steps:
+### Tests
 
-1. Execute the `main.js` file and add global extensions, mixins components and external libs. The file `main.js` also includes the main files of the router, vuex-store and i18n-translations, which will internally load all `.router.js` ,`.store.js` and `.i18n.js` files from sub-folders.
-2. `main.js` will run a request to get necessary data from a service and then create a VueJS app instance and load the `App.vue`. At this point `AppHooks` is set up and attached to the main VueJS instance and then the `appLoaded` hook is called.
-3. `App.vue` includes all basic navigation components, like menu, sidebar, footer etc.
-4. After loading all routes (including the ones in the `pages` sub folder) the page with the `/` route (`Maps.vue`) will
-   also be rendered in the `<router-view></router-view>` slot in `App.vue` component.
+Testing is done using the [cypress](https://docs.cypress.io) testing framework.
 
-Data flow, state and requests to services, in a simplified view, happens as follows:
+All tests (End-to-end(e2e), component and unit) can be executed by running:
 
-- The app is loaded
-  1. the API data are fetched from ORS website service and if `appConfig.appMenu.useORSMenu` is **true**, the menu items
-     are loaded in `src/main.js` using `src/app-loader.js`.
-  2. the app `mode` is defined based on the matching URL in the `maps.route.js`
-  3. the `maps` page, uses the app mode utility to define the app state using the current `mode`.
-     This utility will also populate the values of the `ors-map-filters` based on the URL and build the `AppRouteData`
-     (in src/models/app-route-data.js).
-  4. based on the app mode/state certain components are activated/displayed
-  5. Every component, once activated, may use the data in `src/config/ors-map-filters` to render its elements and may
-     run requests to the ORS api using the `src/support/ors-api-runner`.
-     Once the request succeed, the response data will be used to fill the `MapViewData` object.
-  6. Once an input is changed the app goes to a new URL and this makes the flow restart at the step 2.
-  7. If a component changes the `MapViewData` model, it emits an event to the `maps` page, that passes the current
-     `MapViewData` object to the `MapView` component.
-  8. Interactions via `MapView` may result in events sent back to `maps` page, that may notify other child components,
-     that in their turn may change the URL and trigger the step 2 again.
-  9. Several app hooks are called during the app flow, and it is possible to listen to these hooks and run custom code
-     to modify some app behavior.
-     The available hooks are listed in `src/config-examples/hooks-example.js` and must be coded in `src/config/hooks.js`.
+```sh
+pnpm test:ci
+```
 
-### Feature-by-folder design
+During development, you start the development server and use the following command which opens the cypress UI interface
+to view the test output and hot reload after making changes:
 
-This app uses feature by folder components and predefined folders where the business code should be placed in.
-Example of this design usage:
+```shell
+# and do 'pnpm dev' before
+pnpm test
+```
 
-Page:
+You can run tests in any standard browser that you have installed.
+If you are new to cypress check out
+the "[Getting started](https://docs.cypress.io/guides/getting-started/opening-the-app)"
+documentation, and keep it close.
+An overview on the usable [assertions](https://docs.cypress.io/guides/references/assertions) will help with simple
+test cases.
 
-- my-page-name (folder)
-  - MyPageName.vue (main VueJS component file)
-  - my-page-name.css (styles for the page, included by the MyPageName.vue component)
-  - my-page-name`.store.js` (Vuex store module for the page, included by the store/store.js loader)
-  - my-page-name`.route.js` (route to reach this page, included by the router/index loader)
-  - i18n (folder)
-    - my-page-name`.i18n.en.js` (in this example containing the EN resources for the page)
+#### Structure
 
-Component:
+Component tests should be written in the component itself e.g.
+`../fragments/MyComponent.cy.js` for `../fragments/MyComponent.vue`
 
-- my-fragment-name (folder under `src/fragments/`)
+Unit tests for js source files should be created in a separate `./__tests__` folder next to the source file and for the
+sake of
+clarity be named the same e.g. `../support/__tests__/utils.cy.js` for `../support/utils.js`
 
-  - MyFragmentName.vue (main VueJS component file)
-  - my-fragment-name.css (styles for the page, included by the MyFragmentName.vue component)
-  - my-fragment-name`.store.js` (Vuex store module for the fragment, included by the store/store.js loader)
-  - i18n (folder)
-    - my-fragment-name`.i18n.en.js` (in this example containing the EN resources for the component)
+End-to-end tests should be created in `./cypress/e2e/test-name.cy.js`
 
-The app will automatically load:
+### Report a bug
 
-- all the locale resources in i18n folder ending with `.i18n.*.js` where `*` is the locale
-- the defined routes in files ending with `.routes.js`
-- the store definitions in files ending with `.store.js`
+If you identified a bug, please [create an issue](https://github.com/GIScience/ors-map-client/issues/new) with thorough
+description
+and steps to reproduce it (e.g. URL, Screenshot or Screen recording). Feel free to [contribute a fix](#contribute)
 
-### Reserved methods and accessors
+### Feature improvements
 
-All the VueJS components created (including the fragments) will have, by default, the following methods/accessors
-defined in the main vue instance app:
+If you have an idea for a new feature or want to improve an existing one, please also
+[create an issue](https://github.com/GIScience/ors-map-client/issues/new) first to discuss the idea.
+We are happy if you also want to [contribute](#contribute) a pull request.
 
-- `showMessage (msg, theme, options)` - shows a message using the toaster with specified theme and options
+### Contribute
 
-- `showError (msg, options)` - shows an error message using the toaster with the specified options
+To better understand and navigate the codebase best get to know the [project structure](docs/project-structure.md) first.
+Make sure to [set up](#set-up-and-run) and [configure](#configuration) the project, branch of current `main` and prefix
+your branch name with `feat/` for features and `fix/` for bug fixes e.g.
 
-- `showWarning (msg, options)` - shows a warning message using the toaster with the specified options
+```sh
+git switch -c feat/leaflet-control-for-statistics
+# or
+git switch -c fix/map-moving-all-the-time
+```
 
-- `showInfo (msg, options)` - shows an info message using the toaster with the specified options
+#### set up pre-commit git hooks
 
-- `showSuccess (msg, options)` - shows a success message using the toaster with the specified options
+We use `pre-commit` to make sure contributions have the same basic quality.
+Before you commit make sure that your commit satisfies all `pre-commit` checks.
+For details on individual checks see `.pre-commit-config.yaml`.
 
-- `confirmDialog (title, text, options)` - shows a confirm-dialog with the specified title, text and options and returns
-  a promise. If the user clicks `yes`, the promise will be resolved, if s/he clicks on `no`, the promise will be rejected.
+```bash
+# Install the pre-commit git hooks to be automatically executed before committing.
+pre-commit install --hook-type commit-msg --hook-type pre-push --hook-type pre-commit
+# Manually run all pre-commits. The first execution will setup the environment and can take some time.
+pre-commit run --all
+```
 
-- `$store` - accessor to app vuex-store
+#### Commits
 
-### Pages
+- This app uses [conventional commit syntax](https://www.conventionalcommits.org/en/v1.0.0/#summary) to automate
+  changelog entries.
+  You can use e.g. [conventional-commits-plugin](https://plugins.jetbrains.com/plugin/13389-conventional-commit) for
+  JetBrains IDEs or a global installation of the [commitizen npm package](https://github.com/commitizen/cz-cli) to help
+  you with the syntax.
 
-- `maps` - the page where the user can search places, routes and create isochrones.
+> Note:
+> Don't add `closing` or `fixes` keywords in commits but rather tag the issue in the pull request that solves it.
+> This avoids multiple references in the issues after your branch is rebased on newer changes.
+
+#### Add language
+
+##### - Generate a translation file
+
+If you just want to translate the application strings for a certain language, but you don't have the skills to `"code"`
+it into the app, just download the [en-translation-source-merged.json](/docs/en-translation-source-merged.json),
+translate it, and contact us.
+
+\*_Check the file [src/i18n/i18n-builder.js](src/i18n/i18n-builder.js) to see how to generate merged translation
+sources_
+
+##### - Add a language to the app
+
+The app uses a feature-by-folder design, so each component might have its own translation strings.
+That is why there is no single translation file. If you want to add a translation and `"implement"` it into the app,
+follow the steps below.
+
+- Create a copy of the /src/i18n/translations/`en-us` folder giving it the identification of the target language.
+  For example: if you are adding the French from France, then the folder should be called `fr-fr`.
+
+- Edit the `builder.js` file inside the just created folder in order to replace the language pattern to the one you are
+  creating.
+  For example, similar to `/\.i18n\.en-us\.js$` add `/\.i18n\.fr-fr\.js$`.
+
+- Translate the language strings for each key in the `global.js` file
+
+- Search for each file inside the `/src` folder that ends with `i18n.en-us.js` and create a copy of it and each one so
+  that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux/unix compatible terminal, you can
+  do that by running:
+
+  ```sh
+  find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \;
+  # where the last occurrence of locale id (in this case `fr-fr`) is the one you are creating
+  ```
+
+- Translate the language strings for each key in all the files created in the previous step.
+
+- Edit `/src/config/settings-options.js` and add the new locale object to the `appLocales` array (e.g.
+  `{ text: 'Français FR', value: 'fr-fr' }`).
+
+- Open the src/i18n/`i18n-builder.js` file and apply the following changes:
+
+  - Import the object from the new language builder that you just created
+    (e.g. `import frFRTranslations from './translations/fr-fr/builder'`)
+
+  - Inside the `build` method, add:
+
+    - the new language placeholder object to the messages object (e.g. `, 'fr-fr': {}`).
+
+    - the result of the new language building to the previously created message object
+      (e.g. `i18n.messages['fr-fr'] = frFRTranslations.build()`).
+
+  - Save all the files changed and rebuild the application.
+
+#### Debug
+
+If you are using [WebStorm](https://www.jetbrains.com/webstorm/download) you should set the
+_webpack config_ (settings -> Languages & Frameworks -> JavaScript -> Webpack) to
+`{path to ors-map-client}/build/webpack.base.conf.js` to resolve file paths correctly.
+
+To debug the application you must run it in [`dev` mode](#set-up-and-run).
+For better debugging in your browser install the [Vue.js devtools](https://github.com/vuejs/vue-devtools#installation)
+extension.
+After doing that, open the application in the browser and press F12 and select the tab `Console`, `Vue` or `Sources`
+(and then expand e.g.: `webpack://src`).
+
+#### USB debugging
+
+To debug the client on a mobile phone you can follow
+e.g. [this guide](https://chenhuijing.com/blog/debugging-firefox-on-android/#%F0%9F%8F%80).
+
+### Releasing a new Version
+
+1. Create a `chore/release-v*.*.*` branch with the new version from `main` branch (
+   use [semantic versioning](https://semver.org/))
+   ```sh
+   git checkout main && git switch -c chore/release-v*.*.*
+   ```
+2. Run the release script to bump version, create changelog entries and release tag
+   ```sh
+   pnpm release
+   ```
+3. Make sure the changelog & version is what you expected and adjust if needed
+   - adjust branch name: `git branch -m chore/release-<new-version>`
+   - adjust changelog or version in files. Then amend commit and re-tag:
+     ```sh
+     git commit --amend
+     git tag -fa v*.*.* -m 'v*.*.*'
+     ```
+4. Push the release branch to remote
+   ```sh
+   git push --set-upstream origin $(git_current_branch)
+   ```
+5. Click on the link to open a pull request for the release branch, create it and link relevant issues
+
+> Note:
+> Pre-commit hooks and test:ci tasks are run for every pull request and any change to it.
+
+### Deployment
+
+Deployments happen automatically if the conditions for
+the [environment](https://github.com/GIScience/ors-map-client/settings/environments) are met:
+
+| Environment | Condition                                                     | Target                                    | Workflow dispatch  |
+| ----------- | ------------------------------------------------------------- | ----------------------------------------- | ------------------ |
+| Staging     | open pull request for / push to `chore/release-v*.*.*` branch | https://maps-staging.openrouteservice.org | :heavy_check_mark: |
+| Production  | merge `chore/release-v*.*.*` branch to `main`                 | https://maps.openrouteservice.org         | :heavy_check_mark: |
+| HEAL        | push to `heal` branch                                         | https://heal.openrouteservice.org         | :no_entry_sign:    |
+
+Use the workflow dispatch to deploy e.g. a feature branch to staging or an intermediate state of `main` to production.
+
+### Additional documentation
+
+There is additional software documentation in the `/docs` folder:
+
+- [docs/project-structure.md](docs/project-structure.md) - explains the project & folder structure
+- [docs/dynamic-inputs.md](docs/dynamic-inputs.md) - describes how the inputs are rendered using a custom engine
+- [docs/search-results-criteria.md](docs/search-results-criteria.md) - explains the criteria for search results
+- [docs/plugins.md](docs/plugins.md) - explains how to add plugins
+
+For a detailed explanation on how webpack works, check out the [guide](http://vuejs-templates.github.io/webpack/) and
+[docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ### Configuration, theming, customization and extension
 
@@ -273,8 +366,8 @@ git push -u origin master
 The ways to change/extend the app are:
 
 1. Define custom settings (see files in `src/config`) that will change the standard way that the app works.
-1. Add hook listeners in `src/config/hooks.js` and run custom code inside those hooks
-1. Create a plug-in that has its methods linked to hooks called during the app flow
+2. Add hook listeners in `src/config/hooks.js` and run custom code inside those hooks
+3. Create a plug-in that has its methods linked to hooks called during the app flow
    (see `src/plugins/example-plugin/`)
 
 #### Configuration
@@ -291,236 +384,3 @@ They can be adjusted according the needs. Other files can be used to adjust app 
 
 It is possible to add plug-ins to the application in order to change its behavior or extend it.
 Please check [docs/plugins.md](docs/plugins.md) for more details.
-
-### Add language
-
-#### - Generate a translation file
-
-If you just want to translate the application strings for a certain language, but you don't have the skills to `"code"`
-it into the app, just download the [en-translation-source-merged.json](/docs/en-translation-source-merged.json),
-translate it, and contact us.
-
-\*_Check the file [src/i18n/i18n-builder.js](src/i18n/i18n-builder.js) to see how to generate merged translation sources_
-
-#### - Add a language to the app
-
-The app uses a feature-by-folder design, so each component might have its own translation strings.
-That is why there is no single translation file. If you want to add a translation and `"implement"` it into the app,
-follow the steps below.
-
-- Create a copy of the /src/i18n/translations/`en-us` folder giving it the identification of the target language.
-  For example: if you are adding the French from France, then the folder should be called `fr-fr`.
-
-- Edit the `builder.js` file inside the just created folder in order to replace the language pattern to the one you are
-  creating.
-  For example, similar to `/\.i18n\.en-us\.js$` add `/\.i18n\.fr-fr\.js$`.
-
-- Translate the language strings for each key in the `global.js` file
-
-- Search for each file inside the `/src` folder that ends with `i18n.en-us.js` and create a copy of it and each one so
-  that each new created file now ends with `i18n.fr-fr.js`. If you are using a linux/unix compatible terminal, you can do that by running:
-
-  ```sh
-  find . -name "*i18n.en-us.js" -exec bash -c 'cp "$0" "${0/i18n.en-us.js/i18n.fr-fr.js}"' {} \;
-  # where the last occurrence of locale id (in this case `fr-fr`) is the one you are creating
-  ```
-
-- Translate the language strings for each key in all the files created in the previous step.
-
-- Edit `/src/config/settings-options.js` and add the new locale object to the `appLocales` array (e.g.
-  `{ text: 'Français FR', value: 'fr-fr' }`).
-
-- Open the src/i18n/`i18n-builder.js` file and apply the following changes:
-
-  - Import the object from the new language builder that you just created
-    (e.g. `import frFRTranslations from './translations/fr-fr/builder'`)
-
-  - Inside the `build` method, add:
-
-    - the new language placeholder object to the messages object (e.g. `, 'fr-fr': {}`).
-
-    - the result of the new language building to the previously created message object
-      (e.g. `i18n.messages['fr-fr'] = frFRTranslations.build()`.
-
-  - Save all the files changed and rebuild the application.
-
-### Menu
-
-The menu displayed in the header and in the sidebar (low resolution and mobile devices) is loaded from the ORS website
-back-end and adjusted to be shown according the resolution.
-
-The menu items are fetched on the app load (`src/app-loader.js`).
-It dispatches the store `fetchMainMenu` and `@/common/main-menu.js` retrieves the menu that uses
-`@/support/menu-manager.js` and `@/support/model-service.js`.
-Once the items from the back-end are loaded, `MenuManager` adds or removes custom items and defines icons for sidebar
-items.
-The items displayed on the menu can be changed by running custom code on the `loadMenuItems` and/or the
-`modifyMenu` hooks. Check the `/src/config-example/hooks-example.js` to see more details.
-
-### Debug
-
-If you are using [WebStorm](https://www.jetbrains.com/webstorm/download) you should set the
-_webpack config_ (settings -> Languages & Frameworks -> JavaScript -> Webpack) to
-`{path to ors-map-client}/build/webpack.base.conf.js` to resolve file paths correctly.
-
-To debug the application you must run it in [`dev` mode](#set-up-and-run).
-For better debugging in your browser install the [VueJS devtools](https://github.com/vuejs/vue-devtools#installation)
-extension.
-After doing that, open the application in the browser and press F12 and select the tab `Console`, `Vue` or `Sources`
-(and then expand e.g.: `webpack://src`).
-
-##### USB debugging
-
-To debug the client on a mobile phone you can follow e.g. [this guide](https://chenhuijing.com/blog/debugging-firefox-on-android/#%F0%9F%8F%80).
-
-### Build and deploy
-
-The app must be built before it is deployed. To do so, run:
-
-```sh
-cd <project-root-folder>/
-pnpm build
-```
-
-_Important:_ to run the built application you have to set up a web server and put this repository (after the build)
-there.
-The `index.html` at the root of this repository will load the app.
-
-For a detailed explanation on how webpack works, check out the [guide](http://vuejs-templates.github.io/webpack/) and
-[docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-### Tests
-
-Testing is done using the [cypress](https://docs.cypress.io) testing framework.
-
-All tests (End-to-end(e2e), component and unit) can be executed by running:
-
-```sh
-pnpm test:ci
-```
-
-During development, you start the development server and use the following command which opens the cypress UI interface
-to view the test output and hot reload after making changes:
-
-```shell
-# and do 'pnpm dev' before
-pnpm test
-```
-
-You can run tests in any standard browser that you have installed.
-If you are new to cypress check out the "[Getting started](https://docs.cypress.io/guides/getting-started/opening-the-app)"
-documentation, and keep it close.
-An overview on the usable [assertions](https://docs.cypress.io/guides/references/assertions) will help with simple
-test cases.
-
-#### Structure
-
-Component tests should be written in the component itself e.g.
-`../fragments/MyComponent.cy.js` for `../fragments/MyComponent.vue`
-
-Unit tests for js source files should be created in a separate `./__tests__` folder next to the source file and for the sake of
-clarity be named the same e.g. `../support/__tests__/utils.cy.js` for `../support/utils.js`
-
-End-to-end tests should be created in `./cypress/e2e/test-name.cy.js`
-
-### Contribute
-
-#### pre-commit git hooks
-
-We use `pre-commit` to make sure contributions have the same basic quality.
-Before you commit make sure that your commit satisfies all `pre-commit` checks.
-For details on individual checks see `.pre-commit-config.yaml`.
-
-```bash
-# Install the pre-commit git hooks to be automatically executed before committing.
-pre-commit install --hook-type commit-msg --hook-type pre-push --hook-type pre-commit
-# Manually run all pre-commits. The first execution will setup the environment and can take some time.
-pre-commit run --all
-```
-
-#### Commits and versioning
-
-- This app uses the `commitizen` plugin to generate standardized commit types/messages. After applying any change in a feature branch, use `git add .` and then `pnpm commit` (instead of `git commit ...`)
-- The plugin `standard-version` is used to generate changelog entries, version tag and to bump the app version in package.json.
-
-Deployment flow:
-
-1. Apply the changes in a feature branch and test it locally
-
-   _Important_: to run the tests, `src/config/app-config.js` must contain:
-
-- `orsApiKey`: 'a-valid-ors-api-key-here',
-- `useUserKey`: true,
-
-By default, `src/config/app-config.js` is ignored by git. So, the changes are just local and used to run the tests.
-
-```sh
-# Run automated tests
-pnpm test:ci
-```
-
-_Important:_ Besides the automated tests, some manual/human tests are also recommended
-
-2. Once the feature is ready, merge it to `master`, and run the tests
-
-   ```sh
-   git checkout master
-   git merge feature/<name-of-my-future-branch>
-   # Run automated tests after merge
-   pnpm test
-   ```
-
-3. If the tests pass, create a release
-
-   ```sh
-   # Create a release. This will :
-   # - bump the app version,
-   # - generate a new release commit
-   # - create a new git tag with the app version
-   # - Create an entry in CHANGELOG.md
-   pnpm release
-   ```
-
-4. Push the changes applied to master
-
-   _Important_: the release command will output a command, but We `DON'T USE the whole outputted command`, since there is no npm package to be published.
-
-   ```sh
-   # The command outputted is expected to be:
-   # `git push --follow-tags origin master && pnpm publish`
-
-   # We must use/run only
-   git push --follow-tags origin master
-
-   # Once you push it, the automated tests will be triggered on Github actions
-   # Check the automated tests results on https://github.com/GIScience/ors-map-client/actions
-   ```
-
-_For more details about `commitizen` and `standard-version` see [this article](https://medium.com/tunaiku-tech/automate-javascript-project-versioning-with-commitizen-and-standard-version-6a967afae7)_ and [standard-version documentation](https://github.com/conventional-changelog/standard-version)
-
-#### Branch policy
-
-The `master` branch is used as the stable and most updated branch. Any new feature goes to feature branch, then it is tested, committed and finally merged into `master`. So, master has always the latest version and the production version.
-Considering this, any merge request must be done targeting `master`.
-
-Like almost every team, we have limited workforce, and we have to define priorities.
-
-`Bugs`:
-If you think you have identified any bug and that you can help to fix it, please create an issue first, instead of directly submitting a push request. So the people involved will have the opportunity to discuss it.
-
-`New features`:
-
-If you want to contribute by adding a new feature or improve an existing one, please also create an issue.
-We do want contributions, and the community effort is very important to us, but features may add complexity and future
-maintenance effort.
-Because of this, we have also to analyze the trade-off of such contributions.
-We just have to decide about them together before the hands on.
-This approach is intended to create cohesion and keep the project sustainable.
-
-### Additional documentation
-
-There are additional documents that are part of the software documentation. they are in the folder `/docs` and are listed below:
-
-- [docs/dynamic-inputs.md](docs/dynamic-inputs.md) - describe how the inputs are rendered using a custom engine and not hard-coded
-- [docs/search-results-criteria.md](docs/search-results-criteria.md) - explains what are the criteria for the search results
-- [docs/plugins.md](docs/plugins.md) - explains how the plugins can be added to the maps client
