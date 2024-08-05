@@ -132,7 +132,8 @@ describe('Optimization component', () => {
 
       cy.get('.edit-header-btn').should('not.exist')
 
-      // TODO: test closing by save button
+      cy.get('#map-view').click()
+      cy.get('[data-cy=save]').click()
     })
   })
 })
