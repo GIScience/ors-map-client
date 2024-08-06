@@ -1,6 +1,8 @@
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import Place from '@/models/place'
+import Job from '@/models/job'
+import Vehicle from '@/models/vehicle'
 import store from '@/store/store'
 import lodash from 'lodash'
 /**
@@ -22,12 +24,9 @@ class JsonImporter {
     return new Promise((resolve, reject) => {
       let mapViewData = new MapViewData()
       const parsingResult = context.parseFileContentToMapViewData()
-      if (parsingResult) {
-        mapViewData = parsingResult
 
-        if (!mapViewData.mode) {
-          mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
-        }
+      if (parsingResult) {
+        mapViewData = context.setMode(parsingResult)
 
         // Make sure that the mode defined
         // in the imported file/object is valid
@@ -60,6 +59,22 @@ class JsonImporter {
   }
 
   /**
+   * Set mode for mapViewData if no mode exist
+   * @param mapViewData
+   * @returns {*} mapViewData with mode
+   */
+  setMode(mapViewData) {
+    if (!mapViewData.mode) {
+      if (mapViewData.jobs.length > 0) {
+        mapViewData.mode = constants.modes.optimization
+      } else {
+        mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
+      }
+    }
+    return mapViewData
+  }
+
+  /**
    * Parse the file content to an object
    * @returns {Object}
    */
@@ -80,6 +95,10 @@ class JsonImporter {
       } else {
         if (key === 'places') {
           mapViewData.places = this.parsePlaces(content)
+        } else if (key === 'jobs') {
+          mapViewData.jobs = this.parseJobs(content)
+        } else if (key === 'vehicles') {
+          mapViewData.vehicles = this.parseVehicles(content)
         } else if (content[key]) {
           mapViewData[key] = content[key]
         }
@@ -103,6 +122,22 @@ class JsonImporter {
       places.push(place)
     }
     return places
+  }
+
+  parseJobs = (content) => {
+    const jobs = []
+    for (const job of content.jobs) {
+      jobs.push(Job.fromObject(job))
+    }
+    return jobs
+  }
+
+  parseVehicles = (content) => {
+    const vehicles = []
+    for (const v of content.vehicles) {
+      vehicles.push(Vehicle.fromObject(v))
+    }
+    return vehicles
   }
 
   /**

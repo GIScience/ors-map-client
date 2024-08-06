@@ -8,6 +8,8 @@ export default {
     addRouteStop: 'Add stop here',
     centerHere: 'Center here',
     addAsIsochroneCenter: 'Add as reach center',
-    inspectDataOnOSM: 'Inspect data on OSM'
+    inspectDataOnOSM: 'Inspect data on OSM',
+    addJob: 'Add Job',
+    addVehicle: 'Add Vehicle'
   }
 }
