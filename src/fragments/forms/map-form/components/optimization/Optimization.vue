@@ -60,7 +60,7 @@
         <v-tooltip bottom style="float: right">
           <template v-slot:activator="{ on }">
             <div class="skill-opt-btn">
-              <v-btn class="skill-opt-btn"
+              <v-btn data-cy="manage-skills" class="skill-opt-btn"
                      outline small fab @click="manageSkills">
                 <v-icon :title="$t('optimization.manage') + $t('optimization.skills')" color="dark" :medium="$lowResolution">edit</v-icon>
               </v-btn>
