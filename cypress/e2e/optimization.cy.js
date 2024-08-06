@@ -25,19 +25,18 @@ describe('Optimization component', () => {
       cy.get('.sidebar-content')
 
       // shows routes correctly
-      cy.get('.optimization-routes').should('have.length', 1)
-      cy.get('.optimization-routes').contains('Distance')
-      cy.get('.optimization-routes').contains('Duration')
-      cy.get('.optimization-routes').contains('Service time')
-      cy.get('.optimization-routes').contains('Deliveries')
-      cy.get('.optimization-routes').contains('Pickups')
+      cy.get('[data-cy=optimization-routes]').as('routes')
+      cy.get('@routes').should('have.length', 1)
+      cy.get('@routes').contains('Distance')
+      cy.get('@routes').contains('Duration')
+      cy.get('@routes').contains('Service time')
+      cy.get('@routes').contains('Deliveries')
+      cy.get('@routes').contains('Pickups')
       cy.get('.route-details').should('have.length', 1)
       cy.get('.step').should('have.length', 3)
 
       // shows buttons
-      cy.get('.skill-opt-btn')
-      cy.get('.add-place-btn')
-
+      cy.get('[data-cy="manage-skills"]').should('be.visible')
     })
 
     it('shows job correctly', () => {
