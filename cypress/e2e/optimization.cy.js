@@ -2,12 +2,13 @@
 describe('Optimization component', () => {
   context('loads route from URL link', () => {
     it('shows optimization page and features correctly', () => {
-      cy.visit('/#/optimize/49.419614285204595,8.688426017761232/data/{"coordinates":"8.688426017761232,49.419614285204595","options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],"profile":"driving-car","time_window":[45000,50420],"capacity":[5],"skills":[1]}],"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
-      cy.viewport(1848, 980)
-      cy.get('#app')
-      cy.get('.app-content')
-      cy.get('#map-view')
-      cy.get('.sidebar')
+      viewPage('/#/optimize/49.419614285204595,8.688426017761232/data/' +
+        '{"coordinates":"8.688426017761232,49.419614285204595",' +
+        '"options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,' +
+        '"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],' +
+        '"profile":"driving-car","time_window":[45000,50420],"capacity":[5],' +
+        '"skills":[1]}],' +
+        '"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
 
       // shows the map view correctly
       cy.get('.simple-place-search').should('not.exist')
@@ -40,12 +41,13 @@ describe('Optimization component', () => {
     })
 
     it('shows job correctly', () => {
-      cy.visit('/#/optimize/49.419614285204595,8.688426017761232/data/{"coordinates":"8.688426017761232,49.419614285204595","options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],"profile":"driving-car","time_window":[45000,50420],"capacity":[5],"skills":[1]}],"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
-      cy.viewport(1848, 980)
-      cy.get('#app')
-      cy.get('.app-content')
-      cy.get('#map-view')
-      cy.get('.sidebar')
+      viewPage('/#/optimize/49.419614285204595,8.688426017761232/data/' +
+        '{"coordinates":"8.688426017761232,49.419614285204595",' +
+        '"options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,' +
+        '"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],' +
+        '"profile":"driving-car","time_window":[45000,50420],"capacity":[5],' +
+        '"skills":[1]}],' +
+        '"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
 
       cy.get('.manage-jobs').should('be.visible')
       cy.get('.hide-button').should('be.visible')
@@ -60,12 +62,13 @@ describe('Optimization component', () => {
     })
 
     it('shows vehicle correctly', () => {
-      cy.visit('/#/optimize/49.419614285204595,8.688426017761232/data/{"coordinates":"8.688426017761232,49.419614285204595","options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],"profile":"driving-car","time_window":[45000,50420],"capacity":[5],"skills":[1]}],"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
-      cy.viewport(1848, 980)
-      cy.get('#app')
-      cy.get('.app-content')
-      cy.get('#map-view')
-      cy.get('.sidebar')
+      viewPage('/#/optimize/49.419614285204595,8.688426017761232/data/' +
+        '{"coordinates":"8.688426017761232,49.419614285204595",' +
+        '"options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,' +
+        '"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],' +
+        '"profile":"driving-car","time_window":[45000,50420],"capacity":[5],' +
+        '"skills":[1]}],' +
+        '"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
 
       cy.get('.manage-jobs').should('be.visible')
       cy.get('.vehicle-inputs').should('have.length', 1)
@@ -80,12 +83,13 @@ describe('Optimization component', () => {
 
   context('opens edit dialog', () => {
     it('shows manageJobs and features correctly', () => {
-      cy.visit('/#/optimize/49.419614285204595,8.688426017761232/data/{"coordinates":"8.688426017761232,49.419614285204595","options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],"profile":"driving-car","time_window":[45000,50420],"capacity":[5],"skills":[1]}],"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
-      cy.viewport(1848, 980)
-      cy.get('#app')
-      cy.get('.app-content')
-      cy.get('#map-view')
-      cy.get('.sidebar')
+      viewPage('/#/optimize/49.419614285204595,8.688426017761232/data/' +
+        '{"coordinates":"8.688426017761232,49.419614285204595",' +
+        '"options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,' +
+        '"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],' +
+        '"profile":"driving-car","time_window":[45000,50420],"capacity":[5],' +
+        '"skills":[1]}],' +
+        '"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
 
       cy.get('.manage-jobs').click()
 
@@ -114,12 +118,13 @@ describe('Optimization component', () => {
     })
 
     it('picks place from map', () => {
-      cy.visit('/#/optimize/49.419614285204595,8.688426017761232/data/{"coordinates":"8.688426017761232,49.419614285204595","options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],"profile":"driving-car","time_window":[45000,50420],"capacity":[5],"skills":[1]}],"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
-      cy.viewport(1848, 980)
-      cy.get('#app')
-      cy.get('.app-content')
-      cy.get('#map-view')
-      cy.get('.sidebar')
+      viewPage('/#/optimize/49.419614285204595,8.688426017761232/data/' +
+        '{"coordinates":"8.688426017761232,49.419614285204595",' +
+        '"options":{"center":{"lat":49.41743941444882,"lng":8.681871455062602},"zoom":18,' +
+        '"vehicles":[{"id":1,"start":[8.678770065307619,49.4197817871778],"end":[8.678770065307619,49.4197817871778],' +
+        '"profile":"driving-car","time_window":[45000,50420],"capacity":[5],' +
+        '"skills":[1]}],' +
+        '"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
 
       cy.get('.manage-jobs').click()
       cy.get('[data-cy="cardText"]').click()
@@ -135,4 +140,12 @@ describe('Optimization component', () => {
       cy.get('[data-cy=save]').click()
     })
   })
+  function viewPage(url) {
+    cy.visit(url)
+    cy.viewport(1848, 980)
+    cy.get('#app')
+    cy.get('.app-content')
+    cy.get('#map-view')
+    cy.get('.sidebar')
+  }
 })
