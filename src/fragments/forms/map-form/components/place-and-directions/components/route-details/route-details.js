@@ -76,6 +76,18 @@ export default {
           // Heal stuff ends
           route.summary = context.getHumanizedSummary(route.summary, unit)
           route.summary.humanized = true
+          for (let item of Object.values(route.properties.extras)) {
+            // frontend fix for wrong total amount see https://github.com/GIScience/openrouteservice/issues/1455
+            const total_amount = item.summary.reduce((a, b) => a + b.amount, 0)
+            if (total_amount > 100) {
+              const surplus = total_amount - 100
+              // deduct from largest segment
+              const idxOfLargest = item.summary.reduce(
+                (maxIndex, curObj, curIndex, array) => {
+                  return curObj.amount > array[maxIndex].amount ? curIndex : maxIndex
+                }, 0)
+              item.summary[idxOfLargest].amount -= surplus
+            }}
           context.parseSegments(route.properties.segments)
           this.localMapViewData.routes[key].summary = route.summary
         }
