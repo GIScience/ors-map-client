@@ -12,25 +12,26 @@ export default {
   components: {},
   data: () => {
     return {
+      today_toggle: 't',
       timesOfTheDay: [
         {
           label: 'morning',
-          value: 'heat_morning'
+          value: 'morning'
         },
         {
           label: 'noon',
-          value: 'heat_noon'
+          value: 'noon'
         },
         {
           label: 'afternoon',
-          value: 'heat_afternoon'
+          value: 'afternoon'
         },
         {
           label: 'evening',
-          value: 'heat_evening'
+          value: 'evening'
         }
       ],
-      selectedHour: 'heat_noon'
+      selectedTOD: 'noon'
     }
   },
   computed: {
@@ -49,9 +50,9 @@ export default {
     },*/
     departHourChange() {
       let appRouteData = this.$store.getters.appRouteData
-      // console.log('>>> departHourChange ', this.selectedHour, appRouteData)
+      // console.log('>>> departHourChange ', this.selectedTOD, appRouteData)
 
-      appRouteData.options.options.profile_params.weightings.csv_column = `${this.selectedHour}`
+      appRouteData.options.options.profile_params.weightings.csv_column = `${this.selectedTOD}_${this.today_toggle}`
       // this.$store.commit('appRouteData', appRouteData)
       EventBus.$emit('appRouteDataChanged', appRouteData)
     },
@@ -75,6 +76,20 @@ export default {
     const currentHour = currentTime.getHours()
     const currentMinute = currentTime.getMinutes()
 
-    this.selectedHour = this.getTimeOfDay(currentHour, currentMinute)
+    this.selectedTOD = this.getTimeOfDay(currentHour, currentMinute)
+    let appRouteData = this.$store.getters.appRouteData
+    if (appRouteData.options.options.profile_params.weightings.csv_column) {
+      let [url_TOD, url_today] = appRouteData.options.options.profile_params.weightings.csv_column.split('_')
+      if (url_TOD === 'heat') {
+        // old column names in url
+        this.selectedTOD = url_today
+        this.today_toggle = 't'
+      } else {
+        this.selectedTOD = url_TOD
+        this.today_toggle = url_today
+      }
+    } else {
+      console.log(appRouteData)
+    }
   }
 }

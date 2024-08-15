@@ -4,6 +4,9 @@ export default {
     morning: 'Morgens',
     noon: 'Mittags',
     afternoon: 'Nachmittags',
-    evening: 'Abends'
+    evening: 'Abends',
+    timeOfDay: 'Tageszeit',
+    today: 'Heute',
+    typicalHotDay: 'Typischer Hitzetag'
   }
 }

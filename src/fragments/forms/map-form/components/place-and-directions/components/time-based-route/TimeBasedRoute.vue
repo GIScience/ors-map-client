@@ -1,14 +1,27 @@
 <template>
   <div>
-    <v-layout row>
-      <v-select :label="$t('timeBasedRoute.hour')" :items="timesOfTheDayLabel"
+    <v-btn-toggle
+      v-model="today_toggle"
+      mandatory
+      v-on:change="departHourChange()"
+    >
+      <v-btn :value="'r'" flat>
+        {{$t('timeBasedRoute.today')}}
+      </v-btn>
+      <v-btn :value="'t'" flat>
+        {{$t('timeBasedRoute.typicalHotDay')}}
+      </v-btn>
+    </v-btn-toggle>
+      <v-layout row>
+      <v-select :label="$t('timeBasedRoute.timeOfDay')" :items="timesOfTheDayLabel"
         item-text="label"
         item-value="value"
-        v-model="selectedHour" v-on:change="departHourChange()"></v-select>
+        v-model="selectedTOD" v-on:change="departHourChange()"></v-select>
     </v-layout>
     <v-divider></v-divider>
-<!--    <v-btn class="form-actions" flat :title="$t('timeBasedRoute.hotDays')" @click="routeOnHotDays()">{{$t('timeBasedRoute.hotDays')}}</v-btn>-->
   </div>
 </template>
 
 <script src="./time-based-route.js"></script>
+
+<style scoped src="./time-based-route.css"></style>
