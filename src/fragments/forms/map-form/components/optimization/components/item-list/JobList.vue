@@ -1,6 +1,6 @@
 <template>
-  <div class="job-inputs">
-    <v-expansion-panel  class="no-shadow" :expand="true">
+  <div data-cy="job-inputs" class="job-inputs">
+    <v-expansion-panel  data-cy="job-list" class="no-shadow" :expand="true">
       <v-expansion-panel-content style="background: transparent;" v-for="(j, i) in jobs" :key="i">
         <div v-if="localMapViewData === null || !unassignedIds.includes(j.id)" slot="header" style="padding-bottom: 0;"><v-icon style="padding: 0 5px 0 0">work</v-icon><b>Job {{j.id}} - {{ j.location[0].toPrecision(8) }}, {{ j.location[1].toPrecision(8)}}</b></div>
         <div v-else slot="header" style="padding-bottom: 0"><v-icon style="padding: 0 5px 0 0">work</v-icon><b>Job {{j.id}} - {{ j.location[0].toPrecision(8) }}, {{ j.location[1].toPrecision(8)}}

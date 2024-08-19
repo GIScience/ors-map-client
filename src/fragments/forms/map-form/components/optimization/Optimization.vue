@@ -9,14 +9,14 @@
           {{ $t('optimization.jobs') }} (Max: 50)
           <v-tooltip bottom style="float: right">
             <template v-slot:activator="{ on }">
-              <v-btn class="manage-jobs"
+              <v-btn data-cy="manage-jobs" class="manage-jobs"
                      icon small @click="manageJobs">
                 <v-icon size="1.5rem" :title="$t('optimization.manage') + $t('optimization.jobs')" color="dark" :medium="$lowResolution">edit</v-icon>
               </v-btn>
             </template>
             {{ $t('optimization.manage') + $t('optimization.jobs') }}
           </v-tooltip>
-          <v-btn class="hide-button" icon small @click="jobsExpanded=!jobsExpanded">
+          <v-btn data-cy="hide-jobs" class="hide-button" icon small @click="jobsExpanded=!jobsExpanded">
             <v-icon v-if="jobsExpanded" color="info" :medium="$lowResolution">visibility_off</v-icon>
             <v-icon v-else color="info" :medium="$lowResolution">visibility</v-icon>
           </v-btn>
@@ -30,7 +30,7 @@
       <job-list class="content-list" v-if="mapViewData.hasRoutes()" :jobs="jobs" :map-view-data="mapViewData"
                 v-show="jobsExpanded"></job-list>
       <job-list class="content-list" v-else :jobs="jobs" v-show="jobsExpanded"></job-list>
-      <v-card class="content-list" v-if="!jobsExpanded" @click="jobsExpanded=!jobsExpanded">
+      <v-card data-cy="hidden-jobs" class="content-list" v-if="!jobsExpanded" @click="jobsExpanded=!jobsExpanded">
         <v-card-title>
           <v-icon style="padding: 0 5px 0 7px">work</v-icon>
           <b>{{ $t('optimization.savedJobs') + jobs.length }}</b>
@@ -41,7 +41,7 @@
         {{ $t('optimization.vehicles') }} (Max: 3)
         <v-tooltip bottom style="float: right">
           <template v-slot:activator="{ on }">
-            <v-btn class="manage-vehicles"
+            <v-btn data-cy="manage-vehicles" class="manage-vehicles"
                    icon small @click="manageVehicles">
               <v-icon size="1.5rem" :title="$t('optimization.manage') + $t('optimization.vehicles')" color="dark" :medium="$lowResolution">edit</v-icon>
             </v-btn>

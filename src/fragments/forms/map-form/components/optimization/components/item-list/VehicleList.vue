@@ -1,6 +1,6 @@
 <template>
-  <div class="vehicle-inputs">
-    <v-expansion-panel  class="no-shadow" :value="vehicleExtended" :expand="true">
+  <div data-cy="vehicle-inputs" class="vehicle-inputs">
+    <v-expansion-panel data-cy="vehicle-list" class="no-shadow" :value="vehicleExtended" :expand="true">
       <v-expansion-panel-content style="background: transparent;" v-for="(v, i) in vehicles" :key="i">
         <div slot="header" style="padding-bottom: 0;"><v-icon :color="vehicleColors(v.id)" style="padding: 0 5px 0 0">{{vehicleIcon(v.profile)}}</v-icon><b>Vehicle {{v.id}} ({{v.profile}})</b></div>
       <v-card-text>

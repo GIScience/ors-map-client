@@ -49,16 +49,21 @@ describe('Optimization component', () => {
         '"skills":[1]}],' +
         '"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
 
-      cy.get('.manage-jobs').should('be.visible')
-      cy.get('.hide-button').should('be.visible')
-      cy.get('.job-inputs').should('have.length', 1)
+      cy.get('[data-cy="manage-jobs"]').should('be.visible')
+      cy.get('[data-cy="hide-jobs"]').as('hide').should('be.visible')
+      cy.get('[data-cy="job-inputs"]').should('have.length', 1)
 
-      cy.get('.no-shadow').contains('Job 1')
-      cy.get('.no-shadow').contains('8.6884260, 49.419614')
-      cy.get('.no-shadow').contains('Deliveries')
-      cy.get('.no-shadow').contains('Pickups')
-      cy.get('.no-shadow').contains('Skills')
-      cy.get('.no-shadow').contains('Service time')
+      cy.get('[data-cy="job-list"]').as('jobs').should('be.visible')
+      cy.get('@jobs').contains('Job 1')
+      cy.get('@jobs').contains('8.6884260, 49.419614')
+      cy.get('@jobs').contains('Deliveries')
+      cy.get('@jobs').contains('Pickups')
+      cy.get('@jobs').contains('Skills')
+      cy.get('@jobs').contains('Service time')
+
+      //hide job correctly
+      cy.get('@hide').click()
+      cy.get('[data-cy="hidden-jobs"]').contains('Saved Jobs: 1')
     })
 
     it('shows vehicle correctly', () => {
@@ -70,14 +75,15 @@ describe('Optimization component', () => {
         '"skills":[1]}],' +
         '"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
 
-      cy.get('.manage-jobs').should('be.visible')
-      cy.get('.vehicle-inputs').should('have.length', 1)
+      cy.get('[data-cy="manage-vehicles"]').should('be.visible')
+      cy.get('[data-cy="vehicle-inputs"]').should('have.length', 1)
 
-      cy.get('.no-shadow').contains('Vehicle 1')
-      cy.get('.no-shadow').contains('driving-car')
-      cy.get('.no-shadow').contains('Capacity')
-      cy.get('.no-shadow').contains('Skills')
-      cy.get('.no-shadow').contains('Time window')
+      cy.get('[data-cy="vehicle-list"]').as('vehicles').should('be.visible')
+      cy.get('@vehicles').contains('Vehicle 1')
+      cy.get('@vehicles').contains('driving-car')
+      cy.get('@vehicles').contains('Capacity')
+      cy.get('@vehicles').contains('Skills')
+      cy.get('@vehicles').contains('Time window')
     })
   })
 
