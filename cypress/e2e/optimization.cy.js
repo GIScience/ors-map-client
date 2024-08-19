@@ -54,12 +54,18 @@ describe('Optimization component', () => {
       cy.get('[data-cy="job-inputs"]').should('have.length', 1)
 
       cy.get('[data-cy="job-list"]').as('jobs').should('be.visible')
-      cy.get('@jobs').contains('Job 1')
-      cy.get('@jobs').contains('8.6884260, 49.419614')
-      cy.get('@jobs').contains('Deliveries')
-      cy.get('@jobs').contains('Pickups')
-      cy.get('@jobs').contains('Skills')
-      cy.get('@jobs').contains('Service time')
+      cy.get('@jobs').contains('Job 1').should('be.visible')
+      cy.get('@jobs').contains('8.6884260, 49.419614').should('be.visible')
+      cy.get('@jobs').contains('Deliveries').should('be.not.visible')
+      cy.get('@jobs').contains('Pickups').should('be.not.visible')
+      cy.get('@jobs').contains('Skills').should('be.not.visible')
+      cy.get('@jobs').contains('Service time').should('be.not.visible')
+      //expand job
+      cy.get('@jobs').click()
+      cy.get('@jobs').contains('Deliveries').should('be.visible')
+      cy.get('@jobs').contains('Pickups').should('be.visible')
+      cy.get('@jobs').contains('Skills').should('be.visible')
+      cy.get('@jobs').contains('Service time').should('be.visible')
 
       //hide job correctly
       cy.get('@hide').click()
