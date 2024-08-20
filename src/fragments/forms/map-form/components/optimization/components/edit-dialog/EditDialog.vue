@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog v-model="isEditOpen" max-width="600" :persistent="true" attach="body">
-      <box background="white" closable @closed="closeEditModal()">
+      <box data-cy="edit-dialog" background="white" closable @closed="closeEditModal()">
         <h3 slot="header" style="padding-right: 55px">
           <download :download-formats-supported="['json', 'geojson', 'csv']" :data="editData" :edit-prop="editProp"></download>
           <v-btn class="edit-header-btn" flat :style="{background: 'white'}" @click="isImportOpen=true" :title="content.import">
@@ -93,7 +93,7 @@
                 <v-text-field v-if="vehiclesBox" v-model.number="editData[i].time_window[1]" style="padding-right: 10px" :persistent-hint="true" :hint="$t('editDialog.end') + $t('editDialog.timeWindow')"></v-text-field>
               </v-layout>
 
-              <v-select data-cy="skills" v-model="editData[i].skills" :items="editSkills" :item-text="'name'" :item-value="'id'" return-object chips deletable-chips
+              <v-select v-model="editData[i].skills" :items="editSkills" :item-text="'name'" :item-value="'id'" return-object chips deletable-chips
                         :persistent-hint="true" :hint="content.skills" multiple :menu-props="{'closeOnContentClick':true}">
                 <template v-slot:append-item>
                   <v-divider class="mt-2"></v-divider>

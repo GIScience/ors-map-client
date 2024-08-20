@@ -103,30 +103,46 @@ describe('Optimization component', () => {
         '"skills":[1]}],' +
         '"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
 
-      cy.get('.manage-jobs').click()
+      cy.get('[data-cy="manage-jobs"]').click()
 
       // shows dialog and card content correctly
       cy.get('.edit-header-btn')
       cy.get('.download-container')
-      cy.get('[data-cy="dataCards"]').should('have.length', 1)
+      cy.get('[data-cy="dataCards"]').as('dataCards').should('have.length', 1)
       cy.get('[data-cy="cardText"]').as('cardText')
 
-      cy.contains('edit').should('be.visible')
-      cy.get('@cardText').contains('Service time')
-      cy.get('@cardText').contains('Skills')
-      cy.get('@cardText').contains('Deliveries')
-      cy.get('@cardText').contains('Pickups')
+      cy.get('@dataCards').contains('edit').should('be.visible')
+      cy.get('@dataCards').contains('copy').should('be.visible')
+      cy.get('@dataCards').contains('delete').should('be.visible')
 
+      cy.get('@cardText').contains('Service time').should('be.visible')
+      cy.get('@cardText').contains('Skills').should('be.visible')
+      cy.get('@cardText').contains('Deliveries').should('be.visible')
+      cy.get('@cardText').contains('Pickups').should('be.visible')
+
+      //expand card and change job
       cy.get('@cardText').click()
+      cy.get('@dataCards').contains('check').should('be.visible')
 
-      cy.contains('check').should('be.visible')
+      cy.get('[data-cy="delivery"]').clear()
+        .type('2')
+      cy.get('[data-cy="pickup"]').clear()
+        .type('2')
+      cy.get('[data-cy="service"]').clear()
+        .type('0')
+      cy.get('@cardText').contains('drop_down').click()
+      cy.contains('settings').should('be.visible')
+      cy.contains('check_box').click()
 
-      cy.get('[data-cy="delivery"]').clear().type(2)
-      cy.get('[data-cy="pickup"]').clear().type(2)
-      cy.get('[data-cy="service"]').clear().type(0)
-      // TODO: add skill selector check
-
-      // TODO: test closing by the x in the top corner and whether changes hare not saved when cancelled
+      // close dialog with x and check if job has not changed
+      cy.get('[data-cy="edit-dialog"]').contains('close').click()
+      cy.get('[data-cy="job-list"]').as('jobs').click()
+      cy.get('@jobs').contains('Job 1').should('be.visible')
+      cy.get('@jobs').contains('8.6884260, 49.419614').should('be.visible')
+      cy.get('@jobs').contains('Deliveries: 1').should('be.visible')
+      cy.get('@jobs').contains('Pickups: 1').should('be.visible')
+      cy.get('@jobs').contains('Skills: 1').should('be.visible')
+      cy.get('@jobs').contains('Service time: 1').should('be.visible')
     })
 
     it('picks place from map', () => {
