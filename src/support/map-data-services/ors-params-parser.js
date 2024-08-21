@@ -257,7 +257,7 @@ const orsParamsParser = {
         const targetCountIndex = lodash.findIndex(OrsMapFilters[alternativeRoutesIndex].props, (f) => {
           return f.name === 'target_count'
         })
-        OrsMapFilters[alternativeRoutesIndex].props[targetCountIndex].value = 3
+        OrsMapFilters[alternativeRoutesIndex].props[targetCountIndex].value = 2
       }
 
       // Add the filters defined in the ORS filters that are manipulated
