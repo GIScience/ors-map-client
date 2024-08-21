@@ -11,7 +11,7 @@ describe('Optimization component', () => {
         '"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
 
       // shows the map view correctly
-      cy.get('.simple-place-search').should('not.exist')
+      cy.get('[data-cy="place-search"]').should('not.exist')
       cy.get('.view-on-ors').should('not.exist')
       cy.get('.v-snack__content')
       cy.get('.ors-toolbar').should('not.be.visible')
@@ -22,8 +22,13 @@ describe('Optimization component', () => {
       cy.get('.my-location-btn').should('be.visible')
 
       // shows the sidebar correctly
-      cy.get('.sidebar-header')
-      cy.get('.sidebar-content')
+      cy.get('[data-cy="sidebar-header"]')
+      cy.get('[data-cy="sidebar-content"]').should('be.visible')
+      cy.get('[data-cy="route-details"]').should('be.visible')
+      cy.get('[data-cy="job-heading"]').should('be.visible')
+      cy.get('[data-cy="job-inputs"]').should('be.visible')
+      cy.get('[data-cy="vehicle-heading"]').should('be.visible')
+      cy.get('[data-cy="vehicle-inputs"]').should('be.visible')
 
       // shows routes correctly
       cy.get('[data-cy=optimization-routes]').as('routes')
@@ -38,6 +43,9 @@ describe('Optimization component', () => {
 
       // shows buttons
       cy.get('[data-cy="manage-skills"]').should('be.visible')
+      cy.get('[data-cy="add-place-input"]').should('be.not.visible')
+      cy.get('[data-cy="round-trip"]').should('be.not.visible')
+      cy.get('[data-cy="route-importer"]').should('be.not.visible')
     })
 
     it('shows job correctly', () => {
@@ -175,6 +183,6 @@ describe('Optimization component', () => {
     cy.get('#app')
     cy.get('.app-content')
     cy.get('#map-view')
-    cy.get('.sidebar')
+    cy.get('[data-cy="sidebar"]')
   }
 })

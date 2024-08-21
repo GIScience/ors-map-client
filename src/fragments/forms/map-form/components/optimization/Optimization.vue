@@ -3,9 +3,9 @@
     <v-form @submit.prevent style="background:white">
       <template>
         <template v-if="mapViewData">
-          <optimization-details v-if="mapViewData.hasRoutes()" :map-view-data="mapViewData"></optimization-details>
+          <optimization-details data-cy="route-details" v-if="mapViewData.hasRoutes()" :map-view-data="mapViewData"></optimization-details>
         </template>
-        <div class="optimization-heading" v-top-border:color="borderColor">
+        <div data-cy="job-heading" class="optimization-heading" v-top-border:color="borderColor">
           {{ $t('optimization.jobs') }} (Max: 50)
           <v-tooltip bottom style="float: right">
             <template v-slot:activator="{ on }">
@@ -37,7 +37,7 @@
         </v-card-title>
       </v-card>
 
-      <div class="optimization-heading">
+      <div data-cy="vehicle-heading" class="optimization-heading">
         {{ $t('optimization.vehicles') }} (Max: 3)
         <v-tooltip bottom style="float: right">
           <template v-slot:activator="{ on }">
