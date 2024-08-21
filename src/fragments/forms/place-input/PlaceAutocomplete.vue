@@ -4,7 +4,8 @@
                   v-model="model.placeName"
                   :persistent-hint="true"  :hint="$t('placeInput.location')"
                   @click="setFocus(true)"
-                  @keyup="locationInputChanged($event)">
+                  @keyup="locationInputChanged($event)"
+                  data-cy="location-input">
       <template v-slot:append-outer>
         <v-btn v-if="appendBtn === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
                @click="pickPlaceMapClick($event)"

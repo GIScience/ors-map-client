@@ -154,18 +154,19 @@ describe('Optimization component', () => {
         '"skills":[1]}],' +
         '"jobProps":[{"id":1,"skills":[1],"service":3600,"delivery":[1],"pickup":[1]}]}}')
 
-      cy.get('.manage-jobs').click()
+      cy.get('[data-cy="manage-jobs"]').click()
       cy.get('[data-cy="cardText"]').click()
 
       cy.contains('search').click()
-      cy.get('.locationInput').should('be.visible')
+      cy.get('[data-cy="location-input"]').should('be.visible')
       cy.contains('map').should('be.visible')
-      cy.contains('map').click()
+        .click()
 
-      cy.get('.edit-header-btn').should('not.exist')
+      cy.get('[data-cy="edit-dialog"]').should('not.exist')
 
       cy.get('#map-view').click()
       cy.get('[data-cy=save]').click()
+      cy.get('[data-cy="job-list"]').contains('Job 1')
     })
   })
   function viewPage(url) {
