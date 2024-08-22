@@ -546,7 +546,7 @@ export default {
             let summary = extra.summary[summaryKey]
             let map = {
               text: translations[extraDict[summary.value]] || extraDict[summary.value],
-              color: dict.colors[extraKey][summaryKey]
+              color: dict.colors[extraKey][summary.value]
             }
             mappings[extraKey][summary.value] = map
           }

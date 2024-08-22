@@ -77,7 +77,7 @@ export default {
     colorValue (extraKey, index, value = null) {
       let dict = orsDictionary
       let color
-      if (value) {
+      if (value !== null) {
         color = dict.colors[extraKey][value]
       } else {
         color = dict.colors[extraKey][index]
