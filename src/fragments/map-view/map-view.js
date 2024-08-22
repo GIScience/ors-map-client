@@ -788,6 +788,7 @@ export default {
      * @emits activeRouteIndexChanged
      */
     alternativeRouteIndexSelected (index, event) {
+      Leaflet.DomEvent.stopPropagation(event)
       event.originalEvent.stopPropagation()
       event.originalEvent.preventDefault()
       EventBus.$emit('activeRouteIndexChanged', index)
@@ -800,16 +801,6 @@ export default {
     setActiveRouteIndex (index) {
       const context = this
       this.$store.commit('activeRouteIndex', index)
-
-      // We just want to disable the showClickPopups
-      // temporarily, so we get the original state
-      // set it as false and after two seconds
-      // we restore the original value
-      const showPopupBefore = this.showClickPopups
-      this.showClickPopups = false
-      setTimeout(() => {
-        context.showClickPopups = showPopupBefore
-      }, 2000)
 
       // Force the active route polyline to render again
       // after a timeout in order to make sure it
@@ -1358,7 +1349,7 @@ export default {
           EventBus.$emit('mapRightClicked', data)
         }
         this.clickLatLng = { lat: event.latlng.lat, lng: event.latlng.lng }
-      } else if (this.$store.getters.isSidebarVisible) {
+      } else if (this.$store.getters.isSidebarVisible && this.$lowResolution) {
         EventBus.$emit('setSidebarStatus', false)
       }
     },

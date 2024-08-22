@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     showMapViewClickPopups () {
-      let show = ((!this.$store.getters.isSidebarVisible || this.$highResolution) || (this.$highResolution && this.$store.getters.leftSideBarPinned)) && !this.showBottomNav
+      let show = ((!this.$store.getters.isSidebarVisible || this.$mdAndUpResolution) || (this.$mdAndUpResolution && this.$store.getters.leftSideBarPinned)) && !this.showBottomNav
       return show
     },
     /**
