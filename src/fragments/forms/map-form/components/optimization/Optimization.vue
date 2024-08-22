@@ -17,8 +17,8 @@
             {{ $t('optimization.manage') + $t('optimization.jobs') }}
           </v-tooltip>
           <v-btn data-cy="hide-jobs" class="hide-button" icon small @click="jobsExpanded=!jobsExpanded">
-            <v-icon v-if="jobsExpanded" color="info" :medium="$lowResolution">visibility_off</v-icon>
-            <v-icon v-else color="info" :medium="$lowResolution">visibility</v-icon>
+            <v-icon v-if="jobsExpanded" color="rgba(0,0,0,0.54)" :medium="$lowResolution">keyboard_arrow_up</v-icon>
+            <v-icon v-else color="rgba(0,0,0,0.54)" :medium="$lowResolution">keyboard_arrow_down</v-icon>
           </v-btn>
         </div>
       </template>
