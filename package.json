@@ -1,6 +1,6 @@
 {
   "name": "ors-maps-client",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "private": false,
   "description": "Openrouteservice maps client",
   "repository": "https://github.com/GIScience/ors-map-client",
