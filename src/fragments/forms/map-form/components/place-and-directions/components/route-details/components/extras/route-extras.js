@@ -31,6 +31,9 @@ export default {
      * @returns {Array}
      */
     routeExtras () {
+      if (this.route.properties.extras?.['steepness']) {
+        this.route.properties.extras['steepness'].summary = this.route.properties.extras['steepness'].summary.sort((a, b) => parseInt(a.value) - parseInt(b.value))
+      }
       return this.route.properties.extras || []
     }
   },
