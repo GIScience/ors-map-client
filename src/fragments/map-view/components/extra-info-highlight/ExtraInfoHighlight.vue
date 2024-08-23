@@ -2,14 +2,16 @@
   <div>
     <template v-if="highlightedPolylines" >
       <template v-for="(polyline, index) in highlightedPolylines">
-        <l-polyline :key="index" :lat-lngs="polyline.polylines" :weight="4" :color="polyline.color">
+        <l-polyline :lat-lngs="polyline.polylines" :weight="10" :color="'white'" :opacity="highlightedPolylines.length === 1 ? 1 : 0"></l-polyline>
+        <l-polyline :key="index" :lat-lngs="polyline.polylines" :weight="highlightedPolylines.length === 1 ? 6 : 4" :color="polyline.color">
         <l-tooltip v-html="polyline.label"></l-tooltip>
       </l-polyline>
+        <l-polyline :lat-lngs="polyline.polylines" :weight="2" :color="'white'" :opacity="highlightedPolylines.length === 1 ? 1 : 0" dash-array="1 4"></l-polyline>
       </template>
     </template>
 
     <template v-if="highlightedPolylines">
-      <v-snackbar class="segments-highlight-snack" @click.stop="" style="cursor:grab" :style="{marginLeft: $lowResolution ? '' : '405px'}"
+      <v-snackbar class="segments-highlight-snack" @click.stop="" style="cursor:grab;z-index: 1001" :style="{marginLeft: $lowResolution ? '' : '405px'}"
         v-model="highlightedPolylineSnack"
         :bottom="true"
         :auto-height="true"

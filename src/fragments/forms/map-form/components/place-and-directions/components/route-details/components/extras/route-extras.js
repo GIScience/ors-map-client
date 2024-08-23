@@ -1,5 +1,6 @@
 import orsDictionary from '@/resources/ors-dictionary'
 import {EventBus} from '@/common/event-bus'
+import Utils from '@/support/utils'
 
 export default {
   data () {
@@ -13,29 +14,46 @@ export default {
       Required: true
     }
   },
+  watch: {
+    route: {
+      handler: function (newVal, oldVal) {
+        // avoid update on map center move
+        let diff = Utils.getObjectsDiff(newVal, oldVal)
+        if (diff.different.length) {
+          this.showFromExistingSetting()
+        }
+      }
+    }
+  },
   computed: {
     /**
      * Return the array of extras or an empty array
      * @returns {Array}
      */
     routeExtras () {
+      if (this.route.properties.extras?.['steepness']) {
+        this.route.properties.extras['steepness'].summary = this.route.properties.extras['steepness'].summary.sort((a, b) => parseInt(a.value) - parseInt(b.value))
+      }
       return this.route.properties.extras || []
     }
   },
   created() {
-    // get current displayed extras
-    let {key: extraKey, value: extraValue, index: index} = this.$store.getters.extraHighlight
-    if (extraKey) {
-      this.showExtraInfoSection = 0  // show extra section
-      // does the active route have the specific extraValue?
-      if (this.routeExtras[extraKey].summary.map(e => e.value).includes(extraValue)) {
-        this.showSection(extraKey, extraValue, index)
-      } else {
-        this.showAllSections(extraKey)
-      }
-    }
+    this.showFromExistingSetting()
   },
   methods: {
+    showFromExistingSetting() {
+      // get current displayed extras
+      let {key: extraKey, value: extraValue, index: index} = this.$store.getters.extraHighlight
+      if (extraKey) {
+        this.showExtraInfoSection = 0  // show extra section
+        // does the active route have the specific extraValue?
+        if (this.routeExtras[extraKey].summary.map(e => e.value).includes(extraValue)) {
+          this.showSection(extraKey, extraValue, index)
+        } else {
+          this.showAllSections(extraKey)
+        }
+      }
+    },
     /**
      * Determines if a given
      * extra must be shown by
@@ -77,7 +95,7 @@ export default {
     colorValue (extraKey, index, value = null) {
       let dict = orsDictionary
       let color
-      if (value) {
+      if (value !== null) {
         color = dict.colors[extraKey][value]
       } else {
         color = dict.colors[extraKey][index]
