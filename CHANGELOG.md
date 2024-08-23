@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/GIScience/ors-map-client/compare/v2.2.0...v2.3.0) (2024-08-23)
+
+
+### Features
+
+* add map scale ([89a86a8](https://github.com/GIScience/ors-map-client/commit/89a86a82fa9e68695868756f0a0f608bd43aba13))
+* better highlight single extra info selections ([648e993](https://github.com/GIScience/ors-map-client/commit/648e993c7fa135253704de4c53cd4741b28b36b4))
+* sort steepness by value ([7fdb00d](https://github.com/GIScience/ors-map-client/commit/7fdb00d8181dc1260dc0d02ef031950052c04a56))
+
+
+### Bug Fixes
+
+* extra info highlights not recalculated ([f83e5ed](https://github.com/GIScience/ors-map-client/commit/f83e5edb2896012b83e3d94d9672eea59ca8e15f))
+* show extra info snackbar on top of controls ([5233a22](https://github.com/GIScience/ors-map-client/commit/5233a2216df9738c2e441bf7a3861617153f3c82))
+* sidebar hiding on right-click ([ea493bd](https://github.com/GIScience/ors-map-client/commit/ea493bd32435d7d9019b20e1db07a6f85b01f2b2))
+* steepness coloring & description ([95fe560](https://github.com/GIScience/ors-map-client/commit/95fe5609ac07a5fa8267e43a03ef7def293c0562))
+
+
+### CI
+
+* fix checkout command ([a48391a](https://github.com/GIScience/ors-map-client/commit/a48391a27dce89b1a80bf0cc1add6dfb77248411))
+* fix production deployment ([914aa3a](https://github.com/GIScience/ors-map-client/commit/914aa3a9b068ea6b295f5c1e4406a8cdc959b825))
+* **staging:** don't run on tags & enable workflow-dispatch ([c78bc51](https://github.com/GIScience/ors-map-client/commit/c78bc515e91d82989819e161c5cf0633ebe26657))
+
+
+### Docs
+
+* extract project structure to additional doc file ([97df047](https://github.com/GIScience/ors-map-client/commit/97df0477c5c4db2e5e01ab48cf5189d07259f75c))
+* **README:** add project structure parts ([94e390f](https://github.com/GIScience/ors-map-client/commit/94e390f1f4fe3d85bbfca807b3796668e2f7030c))
+* **README:** add sections for releasing and deployment ([9f56fef](https://github.com/GIScience/ors-map-client/commit/9f56fef6fe81633c5d4cf3eb604bfd8c2fd24557))
+* **README:** adjust build and deploy section ([d6af55c](https://github.com/GIScience/ors-map-client/commit/d6af55c5d2506cf0d18e51623678dfc43fb60a8c))
+* **README:** fix heading levels and syntax ([2aa1e9c](https://github.com/GIScience/ors-map-client/commit/2aa1e9cd839ff8119c337fd2943a05dddc791eeb))
+* **README:** fix list numbering ([b34080f](https://github.com/GIScience/ors-map-client/commit/b34080ffa51e20806f12d2a0f14785dc80367f93))
+* **README:** fix typos ([86291ce](https://github.com/GIScience/ors-map-client/commit/86291ce213fd20da276b42b0614c7e9cd578f221))
+* **README:** reformat file ([ac1b5a9](https://github.com/GIScience/ors-map-client/commit/ac1b5a904401689465e164d26184b61a04215f2e))
+* **README:** remove Bitly config setup, since it's not working ([7e1a05c](https://github.com/GIScience/ors-map-client/commit/7e1a05c3ea4db6ecf968a86428a7df12e29c06a4))
+* **README:** remove section links ([09c41a9](https://github.com/GIScience/ors-map-client/commit/09c41a9f6de53946aab57d55ee0673c36c92f7a4))
+* **README:** reorder sections ([ec472ae](https://github.com/GIScience/ors-map-client/commit/ec472aeda02ac5037576653fc4750bbaede3706b))
+* **README:** update and adjust contribution sections ([eb5898b](https://github.com/GIScience/ors-map-client/commit/eb5898bf7ea2eb921c5a98e3daeb99a93231a102))
+* structure heading levels ([8b26d3d](https://github.com/GIScience/ors-map-client/commit/8b26d3db0cfb5001a28b10de3c2cd8e6ea358749))
+
 ## [2.2.0](https://github.com/GIScience/ors-map-client/compare/v2.1.0...v2.2.0) (2024-08-01)
 
 
