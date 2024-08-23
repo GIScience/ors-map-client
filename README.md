@@ -109,7 +109,7 @@ pnpm dev
 # This will start a standalone http node server and the host and port to access it will be displayed
 ```
 
-### Build and deploy
+## Build and deploy
 
 The app must be built before it is deployed. To do so, run:
 
@@ -125,7 +125,7 @@ You can try if everything works locally e.g. with:
 pnpx http-server .
 ```
 
-### Tests
+## Tests
 
 Testing is done using the [cypress](https://docs.cypress.io) testing framework.
 
@@ -150,7 +150,7 @@ documentation, and keep it close.
 An overview on the usable [assertions](https://docs.cypress.io/guides/references/assertions) will help with simple
 test cases.
 
-#### Structure
+### Structure
 
 Component tests should be written in the component itself e.g.
 `../fragments/MyComponent.cy.js` for `../fragments/MyComponent.vue`
@@ -161,19 +161,19 @@ clarity be named the same e.g. `../support/__tests__/utils.cy.js` for `../suppor
 
 End-to-end tests should be created in `./cypress/e2e/test-name.cy.js`
 
-### Report a bug
+## Report a bug
 
 If you identified a bug, please [create an issue](https://github.com/GIScience/ors-map-client/issues/new) with thorough
 description
 and steps to reproduce it (e.g. URL, Screenshot or Screen recording). Feel free to [contribute a fix](#contribute)
 
-### Feature improvements
+## Feature improvements
 
 If you have an idea for a new feature or want to improve an existing one, please also
 [create an issue](https://github.com/GIScience/ors-map-client/issues/new) first to discuss the idea.
 We are happy if you also want to [contribute](#contribute) a pull request.
 
-### Contribute
+## Contribute
 
 To better understand and navigate the codebase best get to know the [project structure](docs/project-structure.md) first.
 Make sure to [set up](#set-up-and-run) and [configure](#configuration) the project, branch of current `main` and prefix
@@ -185,7 +185,7 @@ git switch -c feat/leaflet-control-for-statistics
 git switch -c fix/map-moving-all-the-time
 ```
 
-#### set up pre-commit git hooks
+### set up pre-commit git hooks
 
 We use `pre-commit` to make sure contributions have the same basic quality.
 Before you commit make sure that your commit satisfies all `pre-commit` checks.
@@ -198,7 +198,7 @@ pre-commit install --hook-type commit-msg --hook-type pre-push --hook-type pre-c
 pre-commit run --all
 ```
 
-#### Commits
+### Commits
 
 - This app uses [conventional commit syntax](https://www.conventionalcommits.org/en/v1.0.0/#summary) to automate
   changelog entries.
@@ -210,9 +210,9 @@ pre-commit run --all
 > Don't add `closing` or `fixes` keywords in commits but rather tag the issue in the pull request that solves it.
 > This avoids multiple references in the issues after your branch is rebased on newer changes.
 
-#### Add language
+### Add language
 
-##### - Generate a translation file
+#### Generate a translation file
 
 If you just want to translate the application strings for a certain language, but you don't have the skills to `"code"`
 it into the app, just download the [en-translation-source-merged.json](/docs/en-translation-source-merged.json),
@@ -221,7 +221,7 @@ translate it, and contact us.
 \*_Check the file [src/i18n/i18n-builder.js](src/i18n/i18n-builder.js) to see how to generate merged translation
 sources_
 
-##### - Add a language to the app
+#### Add a language to the app
 
 The app uses a feature-by-folder design, so each component might have its own translation strings.
 That is why there is no single translation file. If you want to add a translation and `"implement"` it into the app,
@@ -264,7 +264,7 @@ follow the steps below.
 
   - Save all the files changed and rebuild the application.
 
-#### Debug
+### Debug
 
 If you are using [WebStorm](https://www.jetbrains.com/webstorm/download) you should set the
 _webpack config_ (settings -> Languages & Frameworks -> JavaScript -> Webpack) to
@@ -276,12 +276,12 @@ extension.
 After doing that, open the application in the browser and press F12 and select the tab `Console`, `Vue` or `Sources`
 (and then expand e.g.: `webpack://src`).
 
-#### USB debugging
+### USB debugging
 
 To debug the client on a mobile phone you can follow
 e.g. [this guide](https://chenhuijing.com/blog/debugging-firefox-on-android/#%F0%9F%8F%80).
 
-### Releasing a new Version
+## Releasing a new Version
 
 1. Create a `chore/release-v*.*.*` branch with the new version from `main` branch (
    use [semantic versioning](https://semver.org/))
@@ -308,7 +308,7 @@ e.g. [this guide](https://chenhuijing.com/blog/debugging-firefox-on-android/#%F0
 > Note:
 > Pre-commit hooks and test:ci tasks are run for every pull request and any change to it.
 
-### Deployment
+## Deployment
 
 Deployments happen automatically if the conditions for
 the [environment](https://github.com/GIScience/ors-map-client/settings/environments) are met:
@@ -321,7 +321,7 @@ the [environment](https://github.com/GIScience/ors-map-client/settings/environme
 
 Use the workflow dispatch to deploy e.g. a feature branch to staging or an intermediate state of `main` to production.
 
-### Additional documentation
+## Additional documentation
 
 There is additional software documentation in the `/docs` folder:
 
