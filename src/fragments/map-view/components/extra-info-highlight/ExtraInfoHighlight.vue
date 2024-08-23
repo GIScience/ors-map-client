@@ -9,7 +9,7 @@
     </template>
 
     <template v-if="highlightedPolylines">
-      <v-snackbar class="segments-highlight-snack" @click.stop="" style="cursor:grab" :style="{marginLeft: $lowResolution ? '' : '405px'}"
+      <v-snackbar class="segments-highlight-snack" @click.stop="" style="cursor:grab;z-index: 1001" :style="{marginLeft: $lowResolution ? '' : '405px'}"
         v-model="highlightedPolylineSnack"
         :bottom="true"
         :auto-height="true"
