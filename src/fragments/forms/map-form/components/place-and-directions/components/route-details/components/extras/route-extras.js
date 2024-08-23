@@ -1,5 +1,6 @@
 import orsDictionary from '@/resources/ors-dictionary'
 import {EventBus} from '@/common/event-bus'
+import Utils from '@/support/utils'
 
 export default {
   data () {
@@ -13,6 +14,17 @@ export default {
       Required: true
     }
   },
+  watch: {
+    route: {
+      handler: function (newVal, oldVal) {
+        // avoid update on map center move
+        let diff = Utils.getObjectsDiff(newVal, oldVal)
+        if (diff.different.length) {
+          this.showFromExistingSetting()
+        }
+      }
+    }
+  },
   computed: {
     /**
      * Return the array of extras or an empty array
@@ -23,19 +35,22 @@ export default {
     }
   },
   created() {
-    // get current displayed extras
-    let {key: extraKey, value: extraValue, index: index} = this.$store.getters.extraHighlight
-    if (extraKey) {
-      this.showExtraInfoSection = 0  // show extra section
-      // does the active route have the specific extraValue?
-      if (this.routeExtras[extraKey].summary.map(e => e.value).includes(extraValue)) {
-        this.showSection(extraKey, extraValue, index)
-      } else {
-        this.showAllSections(extraKey)
-      }
-    }
+    this.showFromExistingSetting()
   },
   methods: {
+    showFromExistingSetting() {
+      // get current displayed extras
+      let {key: extraKey, value: extraValue, index: index} = this.$store.getters.extraHighlight
+      if (extraKey) {
+        this.showExtraInfoSection = 0  // show extra section
+        // does the active route have the specific extraValue?
+        if (this.routeExtras[extraKey].summary.map(e => e.value).includes(extraValue)) {
+          this.showSection(extraKey, extraValue, index)
+        } else {
+          this.showAllSections(extraKey)
+        }
+      }
+    },
     /**
      * Determines if a given
      * extra must be shown by
