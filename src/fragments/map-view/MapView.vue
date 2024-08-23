@@ -24,6 +24,7 @@
       :style="{height: mapHeight + 'px'}">
 
       <l-control-polyline-measure v-if="showControls && distanceMeasureToolAvailable" :options="polylineMeasureOptions"/>
+      <l-control-scale position="bottomleft" :imperial="true" :metric="true"></l-control-scale>
 
       <!-- draw tool bar is added programmatically via map-view.js setAvoidPolygonDrawingTool method -->
       <!-- <l-draw-toolbar :options="drawingOptions" position="topright"/> -->
