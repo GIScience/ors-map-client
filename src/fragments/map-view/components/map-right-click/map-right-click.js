@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     canAddStop () {
-      return this.$store.getters.mode === constants.modes.directions && this.mapViewData.hasRoutes()
+      return this.$store.getters.mode === constants.modes.directions && this.mapViewData.hasRoutes() && this.mapViewData.places.length < appConfig.maxPlaceInputs
     },
     show () {
       return this.showRightClickPopup

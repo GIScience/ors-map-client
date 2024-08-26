@@ -449,13 +449,6 @@ export default {
       }
     },
     /**
-     * Determines if a route stop can be added
-     */
-    canAddStop () {
-      const can = !Array.isArray(this.markers) || this.markers.length < appConfig.maxPlaceInputs
-      return can
-    },
-    /**
      * Return the current map polyline measures options
      * @returns {Object} options
      */
@@ -1367,7 +1360,7 @@ export default {
         if (!insidePolygon) {
           const mapEl = this.$refs.map.$el
           GeoUtils.normalizeCoordinates(event.latlng)
-          const data = { event, mapEl, canAddStop: this.canAddStop }
+          const data = { event, mapEl }
           // Event to be caught by the MapRightClick.vue component
           EventBus.$emit('mapRightClicked', data)
         }
