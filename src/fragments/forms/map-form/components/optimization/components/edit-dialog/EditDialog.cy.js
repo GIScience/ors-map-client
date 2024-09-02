@@ -1,9 +1,9 @@
 import I18nBuilder from '@/i18n/i18n-builder'
 import EditDialog from './EditDialog.vue'
 import store from '@/store/store'
-import Job from '../../../../../../../models/job'
-import Skill from '../../../../../../../models/skill'
-import Vehicle from '../../../../../../../models/vehicle'
+import Job from '@/models/job'
+import Skill from '@/models/skill'
+import Vehicle from '@/models/vehicle'
 
 const i18n = I18nBuilder.build()
 
