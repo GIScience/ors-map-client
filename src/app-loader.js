@@ -13,123 +13,108 @@ import router from '@/router'
 import lodash from 'lodash'
 import Vue from 'vue'
 
-
 class AppLoader {
   constructor() {
     this.debounceTimeoutId = null
     this.vueInstance = null
   }
+
   /**
    * Fetch required api data to run the app
    */
-  fetchApiInitialData () {
-    return new Promise((resolve) => {
-      // If the data was already acquired
-      // don't run the request again
-      if (store.getters.dataAcquired) {
-        resolve(store.getters.mapSettings.apiKey)
+  async fetchApiInitialData() {
+    // If the data was already acquired, don't run the request again
+    if (store.getters.dataAcquired) {
+      return store.getters.mapSettings.apiKey
+    }
+
+    const BITLYLOGIN = process.env.BITLYLOGIN
+    const BITLYAPIKEY = process.env.BITLYAPIKEY
+    if (BITLYLOGIN) {
+      appConfig.bitlyLogin = BITLYLOGIN
+    }
+    if (BITLYAPIKEY) {
+      appConfig.bitlyApiKey = BITLYAPIKEY
+    }
+
+    // For some reason not yet identified (maybe a vue router bug?)
+    // the `beforeEnter` guard used to fire this action is being called
+    // multiple times. so, we had to implement this `apiDataRequested` flag
+    // so that we avoid running several requests before the promise is resolved
+    if (!store.getters.apiDataRequested) {
+      store.commit('apiDataRequested', true)
+
+      const ORSKEY = process.env.ORSKEY
+
+      // By default, the app must use an ors API key stored in config.js
+      if (appConfig.useUserKey) {
+        if (appConfig.orsApiKey === 'put-here-an-ors-api-key' && ORSKEY && ORSKEY !== '') {
+          appConfig.orsApiKey = ORSKEY
+        }
+        this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)
       } else {
-        // eslint-disable-next-line no-undef
-        const BITLYLOGIN = process.env.BITLYLOGIN
-        // eslint-disable-next-line no-undef
-        const BITLYAPIKEY = process.env.BITLYAPIKEY
-        if (BITLYLOGIN) {
-          appConfig.bitlyLogin = BITLYLOGIN
-        }
-        if (BITLYAPIKEY) {
-          appConfig.bitlyApiKey = BITLYAPIKEY
-        }
+        const httpClient = new HttpClient({baseURL: appConfig.dataServiceBaseUrl})
 
-        // For some reason not yet identified (maybe a vue router bug?)
-        // the `beforeEnter` guard used to fire this action is being called
-        // multiple times. so, we had to implement this `apiDataRequested` flag
-        // so that we avoid running several requests before the promise is resolved
-        if (!store.getters.apiDataRequested) {
-          store.commit('apiDataRequested', true)
-
-          // eslint-disable-next-line no-undef
-          const ORSKEY = process.env.ORSKEY
-
-          // By default, the app must use an ors API key stored in config.js
-          if (appConfig.useUserKey) {
-            if (appConfig.orsApiKey === 'put-here-an-ors-api-key' && ORSKEY && ORSKEY != '') {
-              appConfig.orsApiKey = ORSKEY
-            }
-            this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)
-            resolve()
-          } else {
-            let httpClient = new HttpClient({baseURL: appConfig.dataServiceBaseUrl})
-            // Request the public API key from the remote service
-            // (only works when running the app on valid ORS domains).
-            // If the request fails, use the local user key instead
-            httpClient.http.get(appConfig.publicApiKeyUrl).then(response => {
-              this.setInitialSettings(response.data, constants.publicEndpoints)
-              resolve(response.data)
-            }).catch(error => {
-              if (ORSKEY && ORSKEY !== 'put-an-ors-key-here' && ORSKEY != '') {
-                appConfig.orsApiKey = ORSKEY
-              }
-              this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)
-              console.log('Error acquiring api key:', error)
-              resolve()
-            })
+        try {
+          // Request the public API key from the remote service
+          // (only works when running the app on valid ORS domains).
+          const response = await httpClient.http.get(appConfig.publicApiKeyUrl)
+          this.setInitialSettings(response.data, constants.publicEndpoints)
+          return response.data
+        } catch (error) {
+          // If the request fails, use the local user key instead
+          if (ORSKEY && ORSKEY !== 'put-an-ors-key-here' && ORSKEY !== '') {
+            appConfig.orsApiKey = ORSKEY
           }
-        } else {
-          resolve()
+          this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)
+          console.log('Error acquiring api key:', error)
         }
       }
-    })
+    }
   }
+
   /**
    * Find the fitting locale
    * @returns {String}
    * @param storedLocale
    */
-  getFittingLocale (storedLocale) {
+  getFittingLocale(storedLocale) {
     const deviceLocale = window.navigator.language || window.navigator.userLanguage
-    let locale =  storedLocale || deviceLocale
+    let locale = storedLocale || deviceLocale
     if (locale) {
       locale = locale.toLowerCase()
     }
-    let isLocaleValid = lodash.find(settingsOptions.appLocales, (l) => {
-      return l.value === locale
-    })
+    let isLocaleValid = lodash.find(settingsOptions.appLocales, (l) => l.value === locale)
+
     // If the exact locale of the device is not available, try at least to use the language
     if (!isLocaleValid) {
       let language = locale
       if (locale.length > 2 && locale.indexOf('-') > -1) {
         language = locale.split('-')[0]
       }
-      isLocaleValid = lodash.find(settingsOptions.appLocales, (l) => {
-        return l.value.split('-')[0] === language
-      })
+      isLocaleValid = lodash.find(settingsOptions.appLocales, (l) => l.value.split('-')[0] === language)
       if (isLocaleValid) {
         locale = isLocaleValid.value
       }
     }
-    // If the selected locale is not supported, set the default
+
     if (!isLocaleValid) {
       locale = appConfig.defaultLocale
     }
     return locale
   }
+
   /**
    * Save the API data
    * @param {*} apiKey
    * @param {*} endpoints
    */
-  setInitialSettings (apiKey, endpoints) {
-    // Save the api key and the endpoints to the default settings object
+  setInitialSettings(apiKey, endpoints) {
     defaultMapSettings.apiKey = apiKey
     defaultMapSettings.endpoints = endpoints
 
-    // WE will save the mapSettings on our store
-    // but the default settings are preserved
     const mapSettings = utils.clone(defaultMapSettings)
-
-    // Get map settings from local storage
     const serializedMapSettings = localStorage.getItem('mapSettings')
-
     let locale = null
 
     // Restore settings stored in local storage, if available
@@ -146,15 +131,14 @@ class AppLoader {
           }
         }
       }
-      if ( typeof mapSettings.apiKey !== 'string' || mapSettings.apiKey === '') {
+      if (typeof mapSettings.apiKey !== 'string' || mapSettings.apiKey === '') {
         mapSettings.apiKey = defaultMapSettings.apiKey
       }
       // If the settings was saved in local storage
-      // then this option is must start as true
+      // then this option must start as true
       mapSettings.saveToLocalStorage = true
     }
 
-    // Set the default value for profile in ors-filter
     const profile = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
     if (!profile.value) {
       OrsFilterUtil.setFilterValue(constants.profileFilterName, defaultMapSettings.defaultProfile)
@@ -162,58 +146,53 @@ class AppLoader {
 
     this.saveSettings(mapSettings, locale)
 
-    let appInstance = AppLoader.getInstance()
-    if (appInstance) { // main app instance may not be available when app is still loading
+    const appInstance = AppLoader.getInstance()
+    if (appInstance) {
+      // main app instance may not be available when app is still loading
       appInstance.appHooks.run('mapSettingsChanged', mapSettings)
     }
 
-    // Save the data acquired flag as true
     store.commit('dataAcquired', true)
   }
+
   /**
    * Store the map settings locale and routing locale
    * @param {*} mapSettings
    * @param {*} locale
    */
-  saveSettings (mapSettings, locale = null) {
-    let fittingLocale = this.getFittingLocale(locale)
+  saveSettings(mapSettings, locale = null) {
+    const fittingLocale = this.getFittingLocale(locale)
     mapSettings.locale = fittingLocale
 
-    let validRoutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) => {
-      return l.value === fittingLocale
-    })
+    let validRoutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) => l.value === fittingLocale)
     if (validRoutingLocale) {
       settingsOptions.routingInstructionsLocale = locale
     } else {
-      validRoutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) => {
-        return l.value === fittingLocale.split('-')[0]
-      })
+      validRoutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) => l.value === fittingLocale.split('-')[0])
       if (validRoutingLocale) {
         mapSettings.routingInstructionsLocale = validRoutingLocale.value
       }
     }
 
-    // Save the map settings
     store.commit('mapSettings', mapSettings)
   }
+
   /**
    * check if the embed is in the url params and set the embed state
    */
-  static checkAndSetEmbedState () {
-    return new Promise((resolve) => {
-      let isEmbed = location.href.indexOf('/embed') > -1
-      store.commit('embed', isEmbed)
+  static async checkAndSetEmbedState() {
+    const isEmbed = location.href.indexOf('/embed') > -1
+    store.commit('embed', isEmbed)
 
-      let parts = location.href.split('/embed/')
-      let mapSettings = store.getters.mapSettings
-      if (Object.keys(mapSettings).length > 0 && isEmbed && Array.isArray(parts) && parts.length > 1 && parts[1] ) {
-        let locale = parts[1]
-        let appLoader = new AppLoader()
-        locale = appLoader.getFittingLocale(locale)
-        appLoader.saveSettings(mapSettings, locale)
-      }
-      resolve(isEmbed)
-    })
+    const parts = location.href.split('/embed/')
+    const mapSettings = store.getters.mapSettings
+    if (Object.keys(mapSettings).length > 0 && isEmbed && Array.isArray(parts) && parts.length > 1 && parts[1]) {
+      let locale = parts[1]
+      const appLoader = new AppLoader()
+      locale = appLoader.getFittingLocale(locale)
+      appLoader.saveSettings(mapSettings, locale)
+    }
+    return isEmbed
   }
 
   /**
@@ -223,56 +202,49 @@ class AppLoader {
    * @param {String} templateTag
    * @returns {Promise} resolves main Vue instance
    */
-  loadApp (App, elementSelector, templateTag) {
-    let context = this
+  async loadApp(App, elementSelector, templateTag) {
+    if (this.vueInstance) {
+      return this.vueInstance
+    } else if (store.getters.mainAppInstanceRef) {
+      this.vueInstance = store.getters.mainAppInstanceRef
+      return store.getters.mainAppInstanceRef
+    }
 
-    return new Promise((resolve) => {
-      if (context.vueInstance) {
-        resolve(context.vueInstance)
-      } else if (store.getters.mainAppInstanceRef) {
-        context.vueInstance = store.getters.mainAppInstanceRef
-        resolve(store.getters.mainAppInstanceRef)
-      } else {
-        context.loadAppData().then(() => {
-          let i18n = I18nBuilder.build()
+    await this.loadAppData()
+    const i18n = I18nBuilder.build()
 
-          // In previous versions of this app the `en` locale was stored as `en-us`
-          i18n.locale = store.getters.mapSettings.locale === 'en' ? 'en-us' : store.getters.mapSettings.locale
+    i18n.locale = store.getters.mapSettings.locale === 'en' ? 'en-us' : store.getters.mapSettings.locale
 
-          /* eslint-disable no-new */
-          context.vueInstance = new PreparedVue({
-            el: elementSelector,
-            i18n,
-            router,
-            components: { App },
-            store: store,
-            template: templateTag
-          })
-          store.commit('mainAppInstanceRef', context.vueInstance)
-          resolve(context.vueInstance)
-        })
-      }
+    this.vueInstance = new PreparedVue({
+      el: elementSelector,
+      i18n,
+      router,
+      components: {App},
+      store,
+      template: templateTag
     })
+
+    store.commit('mainAppInstanceRef', this.vueInstance)
+    return this.vueInstance
   }
 
   /**
    * Load app external data
    * @returns {Promise}
    */
-  loadAppData () {
-    let context = this
-    return new Promise((resolve) => {
-      if (context.debounceTimeoutId) {
-        clearTimeout(context.debounceTimeoutId)
-      }
-      context.debounceTimeoutId = setTimeout(function () {
-        let apiDataPromise = context.fetchApiInitialData()
-        let embedPromise = AppLoader.checkAndSetEmbedState()
-        let fetchMainMenu = store.dispatch('fetchMainMenu')
+  async loadAppData() {
+    if (this.debounceTimeoutId) {
+      clearTimeout(this.debounceTimeoutId)
+    }
 
-        Promise.all([apiDataPromise, embedPromise, fetchMainMenu]).then(() => {
-          resolve()
-        })
+    return new Promise((resolve) => {
+      this.debounceTimeoutId = setTimeout(async () => {
+        await Promise.all([
+          this.fetchApiInitialData(),
+          AppLoader.checkAndSetEmbedState(),
+          store.dispatch('fetchMainMenu')
+        ])
+        resolve()
       }, 500)
     })
   }
@@ -281,13 +253,13 @@ class AppLoader {
    * Get a pointer to the main app vue instance
    * @returns {Vue} instance
    */
-  static getInstance () {
+  static getInstance() {
     let ref
     if (store.getters.mainAppInstanceRef) {
       ref = store.getters.mainAppInstanceRef
     } else {
       ref = new Vue({
-        data: { appHooks: new AppHooks() },
+        data: {appHooks: new AppHooks()},
         i18n: I18nBuilder.build(),
         store
       })
