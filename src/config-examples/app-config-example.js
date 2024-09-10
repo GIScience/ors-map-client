@@ -26,6 +26,12 @@ const appConfig = {
   defaultLocale: 'en-us', // only set as default a locale that is present in the app. By default, they are: 'en-us', 'de-de' and 'pt-br'
   orsApiKey: 'put-here-an-ors-api-key', // ORS API key to be used on the ORS requests. You can get one here: https://openrouteservice.org/dev/#/signup
   useUserKey: true, // If the app is using a user ORS API key. // Don't change this unless you know what your doing!
+  appwrite: { // used for HeiGIT apps
+    endpoint: '',
+    projectId: '',
+    policy: '',
+    linkAnonFunctionId: ''
+  },
   bitlyApiKey: 'put-the-bitly-api-key-here', // Bit.ly key used to generate the short url
   bitlyLogin: 'put-the-bitly-login-here', // Bit.ly login used to generate the short url
 
