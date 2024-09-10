@@ -6,12 +6,12 @@ import I18nBuilder from '@/i18n/i18n-builder'
 import constants from '@/resources/constants'
 import appConfig from '@/config/app-config'
 import AppHooks from '@/support/app-hooks'
-import {HttpClient} from 'vue-rest-client'
 import utils from '@/support/utils'
 import store from '@/store/store'
 import router from '@/router'
 import lodash from 'lodash'
 import Vue from 'vue'
+import {getKeyObject} from '@/support/appwrite-utils'
 
 class AppLoader {
   constructor() {
@@ -53,22 +53,16 @@ class AppLoader {
         }
         this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)
       } else {
-        const httpClient = new HttpClient({baseURL: appConfig.dataServiceBaseUrl})
-
         try {
-          // Request the public API key from the remote service
-          // (only works when running the app on valid ORS domains).
-          const response = await httpClient.http.get(appConfig.publicApiKeyUrl)
-          this.setInitialSettings(response.data, constants.publicEndpoints)
-          return response.data
+          let key_object = await getKeyObject()
+          this.setInitialSettings(key_object['key'], constants.publicEndpoints)
         } catch (error) {
-          // If the request fails, use the local user key instead
-          if (ORSKEY && ORSKEY !== 'put-an-ors-key-here' && ORSKEY !== '') {
-            appConfig.orsApiKey = ORSKEY
-          }
-          this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)
-          console.log('Error acquiring api key:', error)
+          console.log(error.code)
+          console.log(error.type)
+          console.log(error.message)
+          throw error
         }
+
       }
     }
   }
