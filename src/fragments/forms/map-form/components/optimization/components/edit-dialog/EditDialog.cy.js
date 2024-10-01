@@ -9,18 +9,14 @@ const i18n = I18nBuilder.build()
 
 describe('<EditDialog />', () => {
   const skills= [Skill.fromObject({id: 1, name: 'heating'})]
-  const jobs = [Job.fromObject({
-    id: 1,
-    location: [8.67400646209717,49.41703189076835],
-    delivery: [1]
-  }),
-  Job.fromObject({
-    id: 2,
-    location: [8.690314292907717,49.4144633204352],
-    service: 2400,
-    delivery: [2],
-    pickup: [3]
-  })]
+  const jobs = [
+    Job.fromObject({
+      id: 1,
+      location: [8.690314292907717,49.4144633204352],
+      service: 2400,
+      delivery: [2],
+      pickup: [3]
+    })]
   const vehicles = [
     Vehicle.fromObject({
       id: 1,
@@ -31,8 +27,8 @@ describe('<EditDialog />', () => {
     }),
     Vehicle.fromObject({
       id: 2,
-      start: [8.68773937225342,49.4212474050559],
-      end: [8.68773937225342,49.4212474050559],
+      start: [8.667955398559572,49.41915365183029],
+      end: [8.68597984313965,49.41281601436811],
       profile: 'driving-car',
       capacity: [10]
     })
@@ -50,6 +46,7 @@ describe('<EditDialog />', () => {
         data: jobs, skills: skills, editProp: 'jobs'
       }, i18n: i18n, store: store
     })
+    cy.get('[data-cy="dataCards"]').should('have.length', 1)
   })
   it('renders with vehicles', () => {
     cy.mount(EditDialog, {
@@ -57,5 +54,6 @@ describe('<EditDialog />', () => {
         data: vehicles, skills: skills, editProp: 'vehicles'
       }, i18n: i18n, store: store
     })
+    cy.get('[data-cy="dataCards"]').should('have.length', 2)
   })
 })
