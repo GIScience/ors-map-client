@@ -53,6 +53,7 @@ export default {
     yourLocation: 'Use your location',
     setMyLocationAsMapCenter: 'Do you want to center the map at your current location? This will improve place search precision. You will have to authorize it if prompted.',
     removePlace: 'Remove place',
+    editDetails: 'Edit details',
     viewOnORS: 'View on ORS',
     moveMapPositionToLeft: 'Move map center to the left',
     moveMapPositionToRight: 'Move map center to the right',

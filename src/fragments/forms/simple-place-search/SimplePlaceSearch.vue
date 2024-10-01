@@ -1,5 +1,5 @@
 <template>
-  <box background="white" class="simple-place-search" :class="{'extra-low-resolution': $xlResolution}" :style="{height: height+ 'px'}">
+  <box data-cy="place-search" background="white" class="simple-place-search" :class="{'extra-low-resolution': $xlResolution}" :style="{height: height+ 'px'}">
     <v-layout row wrap>
       <v-flex xs2 sm2 md1>
         <v-badge overlap left v-model="showNewInfo" color="info">

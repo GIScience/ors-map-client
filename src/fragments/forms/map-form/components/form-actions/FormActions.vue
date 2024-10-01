@@ -1,8 +1,8 @@
 <template>
-  <div class="form-actions">
+  <div data-cy="form-actions" class="form-actions">
     <v-layout class="action-options-wrapper">
       <v-flex :class="{'high-resolution': $highResolution}" v-if="canAddPlaceInput && isEnabled('addPlaceInput')">
-        <map-form-btn @clicked="addPlaceInput" :icon="'add_location'" class="add-place-btn" :title="$t('formActions.addPlaceInput')">
+        <map-form-btn data-cy="add-place-input" @clicked="addPlaceInput" :icon="'add_location'" class="add-place-btn" :title="$t('formActions.addPlaceInput')">
         </map-form-btn>
       </v-flex>
       <v-flex :class="{'high-resolution': $highResolution}" v-if="$store.getters.mode === constants.modes.directions && isEnabled('clearPlaces')">
@@ -12,12 +12,12 @@
         <map-form-btn @clicked="reverseRoute" :icon="'repeat'" class="reverse-route-btn" :title="$t('formActions.reverseRoute')"></map-form-btn>
       </v-flex>
       <v-flex :class="{'high-resolution': $highResolution}" v-if="isEnabled('roundtrip')">
-        <map-form-btn :text="$t('formActions.roundTrip')" class="round-trip-btn" :title="$t('formActions.toggleRoundTrip')"
+        <map-form-btn data-cy="round-trip" :text="$t('formActions.roundTrip')" class="round-trip-btn" :title="$t('formActions.toggleRoundTrip')"
           @clicked="toggleRoundTrip" :icon="'settings_backup_restore'"
           :color="roundTripActive ? 'primary' : 'default'"></map-form-btn>
       </v-flex>
       <v-flex :class="{'high-resolution': $highResolution}" v-if="isEnabled('routeImporter')">
-        <route-importer class="route-importer" @contentUploaded="contentUploaded"></route-importer>
+        <route-importer data-cy="route-importer" class="route-importer" @contentUploaded="contentUploaded"></route-importer>
       </v-flex>
       <v-spacer></v-spacer>
     </v-layout>

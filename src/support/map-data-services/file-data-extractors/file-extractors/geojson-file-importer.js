@@ -28,11 +28,7 @@ class GeoJsonImporter {
           mapViewData.isRouteData = true
           mapViewData.origin = constants.dataOrigins.fileImporter
           mapViewData.timestamp = context.options.timestamp
-          if (mapViewData.polygons.length > 0) {
-            mapViewData.mode = constants.modes.isochrones
-          } else {
-            mapViewData.mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
-          }
+          mapViewData.mode = context.getMode(mapViewData)
         } else {
           reject(Error('invalid-file-content'))
         }
@@ -41,6 +37,23 @@ class GeoJsonImporter {
         reject(Error('invalid-file-content'))
       }
     })
+  }
+
+  /**
+   * Set mode for mapViewData
+   * @param mapViewData
+   * @returns {*} mode
+   */
+  getMode (mapViewData) {
+    let mode
+    if (mapViewData.polygons.length > 0) {
+      mode = constants.modes.isochrones
+    } else if (mapViewData.jobs.length > 0) {
+      mode = constants.modes.optimization
+    } else {
+      mode = mapViewData.places.length === 1 ? constants.modes.roundTrip : constants.modes.directions
+    }
+    return mode
   }
 
   /**

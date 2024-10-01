@@ -11,9 +11,10 @@
       disable-resize-watcher
       :width="$mdAndUpResolution ? $store.getters.sidebarFullWidth : $store.getters.sidebarShrunkWidth"
       :permanent="$store.getters.leftSideBarPinned"
-      :class="{'auto-height': $lowResolution && !$store.getters.leftSideBarPinned, 'full-height': $store.getters.leftSideBarPinned}">
+      :class="{'auto-height': $lowResolution && !$store.getters.leftSideBarPinned, 'full-height': $store.getters.leftSideBarPinned}"
+      data-cy="sidebar">
 
-      <div class="sidebar-header" :style="{height: $store.getters.sidebarHeaderHeight + 'px'}">
+      <div data-cy="sidebar-header" class="sidebar-header" :style="{height: headerHeight}">
         <v-layout row class="sidebar-header-top" >
           <v-flex xs6 md9>
             <div class="logo-container">
@@ -25,11 +26,11 @@
             <top-menu></top-menu>
           </v-flex>
         </v-layout>
-        <profile-selector></profile-selector>
+        <profile-selector v-show="profileSelectorVisisble"></profile-selector>
       </div>
 
       <!-- sidebar-content padding-bottom must be the same that is calculated in footer component height -->
-      <div class="sidebar-content" :style="{height: sidebarContentHeightFormula}">
+      <div data-cy="sidebar-content" class="sidebar-content" :style="{height: sidebarContentHeightFormula}">
         <div class="sidebar-content-form" :style="{'padding-bottom': $store.getters.footerHeight + 'px'}">
           <map-form v-if="$store.getters.mapReady" class="map-search"></map-form>
           <v-expansion-panel :value="null" v-if="!$highResolution">
