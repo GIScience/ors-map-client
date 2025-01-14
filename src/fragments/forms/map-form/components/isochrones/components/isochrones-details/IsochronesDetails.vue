@@ -1,20 +1,20 @@
 <template>
   <box background="white" no-shadow>
-    <div slot="header">
+    <template v-slot:header>
       <download :download-formats-supported="['json', 'geojson']" :map-view-data="localMapViewData"></download>
       <share :url="shareUrl"></share>
       <print :map-view-data="localMapViewData"></print>
       <h3>{{$t('isochrones.isochrones')}}</h3>
-    </div>
-    <div slot="content">
+    </template>
+    <template v-slot:content>
       <h4>{{$t('isochronesDetails.reachCenters')}}</h4>
       <v-list dense class="centers">
         <template v-for="(place, index) in localMapViewData.places">
           <v-expansion-panel :key="index" style="box-shadow: none;" :value="index === 0 ? 0 : null">
             <v-expansion-panel-content class="polygons-header">
-              <div slot="header">
+              <template v-slot:header>
                 <h5>{{place.placeName}}</h5>
-              </div>
+              </template>
               <template v-for="(polygon, polygonIndex) in localMapViewData.polygons">
                 <template v-if="hasAsCenter(place, polygon)">
                   <div :key="polygonIndex" style="padding-left:10px">
@@ -55,7 +55,7 @@
           </v-expansion-panel>
         </template>
       </v-list>
-    </div>
+    </template>
   </box>
 </template>
 <script src="./isochrones-details.js"></script>

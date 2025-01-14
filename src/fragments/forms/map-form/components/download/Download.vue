@@ -3,7 +3,9 @@
     <v-btn class="open-download-btn" style="float:right; margin-top:0" small icon :title="$t('download.download')" @click="openDownload()"><v-icon>cloud_download</v-icon></v-btn>
     <v-dialog v-model="isDownloadModalOpen" max-width="600" attach="body" :persistent="true">
       <box customClass="download-modal" v-model="isDownloadModalOpen" background="white" closable @closed="closeDownload()">
-        <h3 slot="header">{{$t('download.downloadRoute')}}</h3>
+        <template v-slot:header>
+          <h3>{{$t('download.downloadRoute')}}</h3>
+        </template>
         <v-text-field class="export-file-name" :label="$t('download.downloadFileName')" v-model="downloadFileName" :required="true"></v-text-field>
         <v-select class="download-format" :label="$t('download.downloadFormat')" :items="availableDownloadFormats" v-model="downloadFormat"></v-select>
         <v-layout row wrap>

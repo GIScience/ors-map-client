@@ -1,8 +1,8 @@
 <template>
   <box customClass="fields-container" no-shadow no-top-border no-border>
-    <div slot="content">
+    <template v-slot:content>
       <form-fields v-if="build" :parameters="parameters" @fieldUpdated="fieldUpdated"></form-fields>
-    </div>
+    </template>
   </box>
 </template>
 

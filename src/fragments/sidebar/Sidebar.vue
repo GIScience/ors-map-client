@@ -34,7 +34,9 @@
           <map-form v-if="$store.getters.mapReady" class="map-search"></map-form>
           <v-expansion-panel :value="null" v-if="!$highResolution">
             <v-expansion-panel-content style="background: transparent;">
-              <div slot="header">Menu</div>
+              <template v-slot:header>
+                <div>Menu</div>
+              </template>
               <v-list>
                 <v-divider></v-divider>
                 <v-list dense>

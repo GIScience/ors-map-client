@@ -1,21 +1,21 @@
 <template>
 <div>
   <box background="white" v-if="hasRoutes" custom-class="expansion-box" no-shadow>
-    <div slot="header">
+    <template v-slot:header>
       <download :map-view-data="mapViewData" ></download>
       <share :url="shareUrl"></share>
       <print :map-view-data="mapViewData"></print>
       <h3>{{$t('routeDetails.routeDetails')}}</h3>
-    </div>
+    </template>
     <v-expansion-panel slot="content" class="no-shadow" v-if="hasRoutes" :value="panelExtended">
       <v-expansion-panel-content style="background: transparent;" class="routes-header" :key="routeIndex" v-for="(route, routeIndex) in parsedRoutes">
-        <div slot="header">
+        <template v-slot:header>
           <h4 >{{$t('routeDetails.route')}} {{routeIndex + 1}} ({{route.summary.distance}})
             <v-btn icon @click.stop="changeActiveRouteIndex(routeIndex)" v-if="parsedRoutes.length > 1" :title="routeIndex === $store.getters.activeRouteIndex? $t('routeDetails.selectedRoute') : $t('routeDetails.selectRoute')">
               <v-icon :color="routeIndex === $store.getters.activeRouteIndex? 'primary' : 'dark' " >done</v-icon>
             </v-btn>
           </h4>
-        </div>
+        </template>
         <v-list>
           <v-divider></v-divider>
           <v-list dense class="route-details">
@@ -30,7 +30,9 @@
             <div v-if="route.properties.segments.length > 1 && routeIndex === $store.getters.activeRouteIndex" class="route-container">
               <v-expansion-panel class="no-shadow" v-if="hasRoutes" :value="route.properties.segments.length === 1 ? 0 : null">
                 <v-expansion-panel-content class="route-panel"  v-for="(segment, segmentIndex) in route.properties.segments" :key="segmentIndex">
-                  <div slot="header"><h4 >{{$t('routeDetails.segment')}} {{segmentIndex + 1}}</h4></div>
+                  <template v-slot:header>
+                    <h4 >{{$t('routeDetails.segment')}} {{segmentIndex + 1}}</h4>
+                  </template>
                   <v-list>
                     <v-divider></v-divider>
                     <v-list dense class="instructions-scroll">
@@ -76,7 +78,9 @@
               <div style="padding:0 0 0 5px">
                 <v-expansion-panel class="no-shadow" v-if="hasRoutes" :value="null">
                   <v-expansion-panel-content class="route-panel" style="background: transparent;" >
-                    <div slot="header"><h4 >{{$t('routeDetails.instructions')}}</h4></div>
+                    <template v-slot:header>
+                      <h4 >{{$t('routeDetails.instructions')}}</h4>
+                    </template>
                     <v-list class="instructions-scroll">
                       <v-divider></v-divider>
                       <v-list dense>

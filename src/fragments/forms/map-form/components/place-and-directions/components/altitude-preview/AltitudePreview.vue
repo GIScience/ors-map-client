@@ -1,9 +1,9 @@
 <template>
   <box background="white" no-shadow>
-    <div slot="header">
+    <template v-slot:header>
       <v-btn style="float:right; margin-top:0" class="expand-altitude-btn" small icon :title="$t('altitudePreview.expandAltitudeChart')" @click="openAltitudeBox()"><v-icon>open_in_new</v-icon></v-btn>
       <h3>{{$t('altitudePreview.altitude')}}</h3>
-    </div>
+    </template>
     <altitude :height="height" :map-view-data="mapViewData"></altitude>
   </box>
 </template>

@@ -46,7 +46,7 @@
               :title="buildLabel(parameter)"
               v-model="formParameters[index].value"
               :required="parameter.required">
-              <template slot="append">
+              <template v-slot:append>
                 <v-icon style="cursor:pointer" class="generate-random" @click="setNewRandomValue(index)">autorenew</v-icon>
               </template>
             </v-text-field>
@@ -68,7 +68,9 @@
 
             <v-expansion-panel v-else-if="parameter.type === constants.filterTypes.wrapper" :value="showPanelExpanded(parameter)" class="fields-panel">
               <v-expansion-panel-content style="background: transparent">
-                <div slot="header"><h4>{{buildLabel(parameter)}}</h4></div>
+                <template v-slot:header>
+                  <h4>{{buildLabel(parameter)}}</h4>
+                </template>
                 <template>
                   <form-fields :level="level + 1" :parent-index="index" :parameters="parameter.props" @fieldUpdated="fieldUpdated"></form-fields>
                 </template>

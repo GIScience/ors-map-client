@@ -44,9 +44,9 @@
         <br>
       </template>
       <box v-if="$store.getters.mode === constants.modes.isochrones" background="white" no-shadow>
-        <div slot="header">
+        <template v-slot:header>
           <h3>{{$t('global.parameters')}}</h3>
-        </div>
+        </template>
         <fields-container @fieldUpdated="filterUpdated" :parameters="OrsMapFiltersAccessor"></fields-container>
         <br/>
       </box>

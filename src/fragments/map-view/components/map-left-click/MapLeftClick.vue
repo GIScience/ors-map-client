@@ -1,7 +1,10 @@
 <template>
  <box background="white" no-border ref="placeInfoBox" closable @closed="closePlaceInfo" v-show="showLeftClickPopup" noTopBorder customClass="left-context-menu" >
-    <div slot="header">{{placeInfoTitle}}</div>
-    <div slot="content" ref="placeInfoContainer">
+   <template v-slot:header>
+     <div>{{placeInfoTitle}}</div>
+   </template>
+   <template v-slot:content>
+    <div ref="placeInfoContainer">
       <template v-if="hasPlaceInfo && clickInsidePolygon">
         {{$t('mapLeftClick.polygonArea')}}: <b>{{placeInfo.containerArea}}</b><br/>
       </template>
@@ -21,6 +24,7 @@
         <v-btn :title="$t('mapLeftClick.copyLatlng')" flat small color="primary" icon class="copy-inverted" @click="copyLatLng()" > <v-icon>content_copy</v-icon> </v-btn>
       </template>
     </div>
+   </template>
   </box>
 </template>
 <script src="./map-left-click.js"></script>

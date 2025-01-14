@@ -1,10 +1,10 @@
 <template>
   <box background="white" no-shadow>
-    <div slot="header">
+    <template v-slot:header>
       <share :url="shareUrl"></share>
       <print :map-view-data="mapViewData"></print>
       <h3>{{$t('placeDetails.placeDetails')}}</h3>
-    </div>
+    </template>
     <div>
       <template v-if="$highResolution">
         <v-img :src="imagePath" :lazy-src="imageUrlFallBack" :title="place.placeName + ' - ' + $t('placeDetails.satelliteView') "  style="width:100%;max-height:250px"></v-img>

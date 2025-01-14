@@ -2,7 +2,9 @@
 <div>
   <v-expansion-panel v-if="showExtras()" slot="content" class="no-shadow" :value="showExtraInfoSection">
     <v-expansion-panel-content style="background: transparent;" class="extras-header" >
-      <div slot="header"><h4 >{{$t('routeExtras.extraInfo')}}</h4></div>
+      <template v-slot:header>
+        <h4 >{{$t('routeExtras.extraInfo')}}</h4>
+      </template>
       <div><p class="click-action-info">{{$t('routeExtras.clickToHighlightOnMap')}}</p></div>
       <template v-for="(extra, extraKey) in routeExtras">
         <v-layout row wrap :key="extraKey" v-if="showExtra(extraKey)">

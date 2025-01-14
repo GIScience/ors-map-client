@@ -6,9 +6,9 @@
           <br>
           <v-expansion-panel slot="content" :value="0">
             <v-expansion-panel-content class="panel-content" style="background: transparent;">
-              <div slot="header">
+              <template v-slot:header>
                 <h4>{{$t('settings.language')}}</h4>
-              </div>
+              </template>
               <v-list>
                 <v-list dense>
                   <div style="padding:0 0 0 10px">
@@ -42,9 +42,9 @@
           <br>
           <v-expansion-panel slot="content" :value="null">
             <v-expansion-panel-content class="panel-content" style="background: transparent;">
-              <div slot="header">
+              <template v-slot:header>
                 <h4>{{$t('settings.mapSettings')}}</h4>
-              </div>
+              </template>
               <v-list>
                 <v-list dense>
                   <v-container fluid style="padding-top: 0;padding-bottom: 0">
@@ -96,9 +96,9 @@
           <br>
           <v-expansion-panel slot="content" :value="null">
             <v-expansion-panel-content class="panel-content" style="background: transparent;">
-              <div slot="header">
+              <template v-slot:header>
                 <h4>{{$t('settings.advanced')}}</h4>
-              </div>
+              </template>
               <div style="padding:5px">
                 <i>{{$t('settings.advancedSettingsWarning')}}</i>
               </div>

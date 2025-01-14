@@ -2,16 +2,18 @@
   <v-layout row justify-center>
     <v-dialog v-model="show" attach="body" :max-width="infoMaxWidth" :style="{zIndex: zIndex}" :persistent="persistent">
       <box closable @closed="onOk" v-model="show" :fillHeight="true" :resizable="resizable" background="white">
-        <div slot="header">
+        <template v-slot:header>
           <h3>{{infoTitle}}</h3>
-          </div>
-        <div slot="content" >
+          </template>
+        <template v-slot:content >
           <div v-html="infoText"></div>
-        </div>
-        <div slot="footer" class="text-right">
-          <v-spacer></v-spacer>
-          <v-btn color="primary" flat @click.native="onOk($event)">{{infoOk}}</v-btn>
-        </div>
+        </template>
+        <template v-slot:footer>
+          <div class="text-right">
+            <v-spacer></v-spacer>
+            <v-btn color="primary" flat @click.native="onOk($event)">{{infoOk}}</v-btn>
+          </div>
+        </template>
       </box>
     </v-dialog>
   </v-layout>

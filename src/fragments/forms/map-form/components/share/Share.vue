@@ -3,7 +3,9 @@
     <v-btn class="open-share-btn" style="float:right; margin-top:0" small icon :title="$t('share.share')" @click="openShare()"><v-icon>share</v-icon></v-btn>
     <v-dialog v-model="isShareModalOpen" max-width="600" :persistent="true" attach="body">
       <box customClass="share-modal" v-model="isShareModalOpen" background="white" closable @closed="closeShare()">
-        <h3 slot="header">{{$t('share.shareLink')}}</h3>
+        <template v-slot:header>
+          <h3>{{$t('share.shareLink')}}</h3>
+        </template>
         <v-layout row wrap>
           <v-flex xs12 sm10 d-flex>
             <v-text-field append-icon="file_copy"
