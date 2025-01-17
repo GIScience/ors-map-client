@@ -33,10 +33,14 @@ export const getKeyObject = async () => {
  */
 const getExistingUserSession = async (account, client) => {
   const currentUser = await account.get()
+  const hasAccount = currentUser.name !== '' &&
+    currentUser.email !== '' &&
+    currentUser.emailVerification === true &&
+    currentUser.labels.length
   const databases = new Databases(client)
   return await databases.getDocument(
     'tyk_integration',
-    'anonymous_keys',
+    hasAccount ? 'basic_keys' : 'anonymous_keys',
     currentUser.$id
   )
 }
