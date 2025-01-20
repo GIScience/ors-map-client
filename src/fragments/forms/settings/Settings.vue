@@ -1,10 +1,10 @@
-<template>
+<template v-slot:content>
   <v-container fluid>
     <v-form @keyup.native.enter="saveAll">
       <v-slide-y-transition mode="out-in">
         <div>
           <br>
-          <v-expansion-panel slot="content" :value="0">
+          <v-expansion-panel :value="0">
             <v-expansion-panel-content class="panel-content" style="background: transparent;">
               <template v-slot:header>
                 <h4>{{$t('settings.language')}}</h4>
@@ -40,7 +40,7 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
           <br>
-          <v-expansion-panel slot="content" :value="null">
+          <v-expansion-panel :value="null">
             <v-expansion-panel-content class="panel-content" style="background: transparent;">
               <template v-slot:header>
                 <h4>{{$t('settings.mapSettings')}}</h4>
@@ -94,7 +94,7 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
           <br>
-          <v-expansion-panel slot="content" :value="null">
+          <v-expansion-panel :value="null">
             <v-expansion-panel-content class="panel-content" style="background: transparent;">
               <template v-slot:header>
                 <h4>{{$t('settings.advanced')}}</h4>

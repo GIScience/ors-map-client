@@ -1,6 +1,6 @@
-<template>
+<template v-slot:content>
 <div>
-  <v-expansion-panel v-if="showExtras()" slot="content" class="no-shadow" :value="showExtraInfoSection">
+  <v-expansion-panel v-if="showExtras()" class="no-shadow" :value="showExtraInfoSection">
     <v-expansion-panel-content style="background: transparent;" class="extras-header" >
       <template v-slot:header>
         <h4 >{{$t('routeExtras.extraInfo')}}</h4>
@@ -15,7 +15,9 @@
                 <div class="extra-bar">
                   <template v-for="(summary, index) in routeExtras[extraKey].summary">
                     <v-tooltip :key="index + extraKey" :disabled="$lowResolution" top>
-                      <div @click="showSection(extraKey, summary.value, index)" slot="activator" class="segment" :style="segmentStyle(extraKey, summary, index)"></div>
+                      <template v-slot:activator="{ on }">
+                        <div @click="showSection(extraKey, summary.value, index)" class="segment" :style="segmentStyle(extraKey, summary, index)" v-on="on"></div>
+                      </template>
                       {{getExtraValueLabel(extraKey, summary.value)}} - {{$t('routeExtras.clickToHighlightOnMap')}}
                     </v-tooltip>
                   </template>

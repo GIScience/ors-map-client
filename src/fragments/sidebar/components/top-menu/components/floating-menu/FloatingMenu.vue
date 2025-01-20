@@ -1,9 +1,11 @@
 <template>
   <v-menu v-if="menuItemsReady" class="info-menu" :open-on-hover="openOnHover" :open-on-click="!openOnHover" nudge-top="10" offset-y attach="body">
-    <v-btn class="no-padding pl2 pr2" flat slot="activator" @click="menuClicked"
-      v-smart-tooltip="{show: showSettingsTooltip, text: $t('floatingTopMenu.settingsTooltip'), position: 'bottom', dark: true, showOnce: true, name: 'settingsTooltip'}">
-      <v-icon>{{showSettings ? 'more_vert' : 'info'}}</v-icon>
-    </v-btn>
+    <template v-slot:activator="{ on }">
+      <v-btn class="no-padding pl2 pr2" flat @click="menuClicked" v-on="on"
+             v-smart-tooltip="{show: showSettingsTooltip, text: $t('floatingTopMenu.settingsTooltip'), position: 'bottom', dark: true, showOnce: true, name: 'settingsTooltip'}">
+        <v-icon>{{showSettings ? 'more_vert' : 'info'}}</v-icon>
+      </v-btn>
+    </template>
     <v-list>
       <template v-for="(item, index) in menuItems">
         <v-layout row :key="index" v-if="item.show">

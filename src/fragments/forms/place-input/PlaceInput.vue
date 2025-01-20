@@ -56,10 +56,11 @@
           :close-on-click="true"
           :close-on-content-click="true"
           bottom >
-
-          <v-btn slot="activator" flat class="floating-menu-activator no-padding">
-            <v-icon  :title="$t('placeInput.openInputOptions')" style="font-size:29px" color="dark" large class="input-icon" >more_vert</v-icon>
-          </v-btn>
+          <template v-slot:activator="{ on }">
+            <v-btn flat class="floating-menu-activator no-padding" v-on="{on}">
+              <v-icon  :title="$t('placeInput.openInputOptions')" style="font-size:29px" color="dark" large class="input-icon" >more_vert</v-icon>
+            </v-btn>
+          </template>
           <v-list light style="background:white" class="input-pop-up-list">
             <v-list-tile @click.stop="removePlaceInput()" v-if="deleteAvailable">
               <v-list-tile-title>

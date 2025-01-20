@@ -3,19 +3,20 @@
     <v-layout row wrap>
       <v-flex xs2 sm2 md1>
         <v-badge overlap left v-model="showNewInfo" color="info">
-          <b slot="badge">i</b>
-          <v-btn
-            :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''"
-            class="open-menu" slot="default" flat @click="openMenu()"
-            v-smart-tooltip="{
+          <template v-slot:default>
+            <v-btn
+              :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''"
+              class="open-menu" flat @click="openMenu()"
+              v-smart-tooltip="{
               show: showRouteDetailsTooltip,
               text: $t('simplePlaceSearch.openSidebarToSeeRouteDetails'),
               position: 'right',
               dark: true
             }"
-          >
-          <v-icon>menu</v-icon>
-          </v-btn>
+            >
+              <v-icon>menu</v-icon>
+            </v-btn>
+          </template>
         </v-badge>
       </v-flex>
       <v-flex xs10 sm10 md11>

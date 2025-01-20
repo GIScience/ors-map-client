@@ -8,9 +8,11 @@
     </v-btn>
     <v-menu attach="body" v-if="profile.vehicleTypes" class="profile-option-menu" v-model="subProfileIsOpen"
       transition="slide-y-transition" close-on-click close-on-content-click :open-on-hover="!isMobile" bottom>
-      <v-btn icon class="profile-menu-activator" slot="activator">
-        <v-icon>keyboard_arrow_down</v-icon>
-      </v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn icon class="profile-menu-activator" v-on="on">
+          <v-icon>keyboard_arrow_down</v-icon>
+        </v-btn>
+      </template>
       <v-list light style="background:white">
         <template v-for="(vehicleType, index) in profile.vehicleTypes">
           <v-list-tile :key="index" @click.stop.prevent="profileSelected(profile.slug, vehicleType)">
@@ -24,9 +26,11 @@
     </v-menu>
     <v-menu v-else-if="profile.nestedProfiles" class="profile-option-menu" v-model="subProfileIsOpen" attach="body"
       transition="slide-y-transition" close-on-click close-on-content-click :open-on-hover="!isMobile" bottom>
-      <v-btn icon class="profile-menu-activator" slot="activator">
-        <v-icon>keyboard_arrow_down</v-icon>
-      </v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn icon class="profile-menu-activator" v-on="on">
+          <v-icon>keyboard_arrow_down</v-icon>
+        </v-btn>
+      </template>
       <v-list light style="background:white">
         <template v-for="(nestedProfile, index) in profile.nestedProfiles">
           <v-list-tile :key="index" @click.stop.prevent="profileSelected(nestedProfile)">
