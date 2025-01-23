@@ -10,3 +10,8 @@
   text-transform: none;
   padding-left: 0
 }
+
+.info-button {
+  min-width: 0;
+  padding: 0;
+}
