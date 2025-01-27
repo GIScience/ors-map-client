@@ -18,6 +18,9 @@ export const getKeyObject = async () => {
     if (error.code === 401 && error.type === 'general_unauthorized_scope') {
       console.log('No existing Account')
       return await creatNewAnonUser(account, client)
+    } else if (error.code === 404 && error.type === 'document_not_found') {
+      console.log('No anon key found')
+      return await createAnonKey(client)
     } else {
       throw error
     }
@@ -60,6 +63,21 @@ function executeLinkAnonFunction(functions) {
 }
 
 /**
+ * Runs anon key creation function with retry
+ * @param {Client} client
+ */
+async function createAnonKey(client) {
+  const functions = new Functions(client)
+
+  let res = await executeLinkAnonFunction(functions)
+
+  if (res.status === 'failed' && res.responseStatusCode === 500) {
+    res = await executeLinkAnonFunction(functions)
+  }
+  return JSON.parse(res.responseBody)
+}
+
+/**
  * Creates a new anonymous user & session.
  * Passes domain & configured policy to specific appwrite function
  * @param account
@@ -69,14 +87,7 @@ function executeLinkAnonFunction(functions) {
 const creatNewAnonUser = async (account, client) => {
   try {
     await account.createAnonymousSession()
-    const functions = new Functions(client)
-
-    let res = await executeLinkAnonFunction(functions)
-
-    if (res.status === 'failed' && res.responseStatusCode === 500) {
-      res = await executeLinkAnonFunction(functions)
-    }
-    return JSON.parse(res.responseBody)
+    return await createAnonKey(client)
   } catch (error) {
     console.error('Error creating anonymous user: ', error)
     throw error
