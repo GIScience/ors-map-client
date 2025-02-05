@@ -7,14 +7,14 @@
   "license": "MIT",
   "author": "amon@openrouteservice.org",
   "scripts": {
-    "build": "rimraf ./static && webpack --progress --config build/webpack.prod.conf.js",
+    "build": "rimraf ./static && vite build",
     "commit": "git-cz",
-    "dev": "webpack serve --progress --config build/webpack.dev.conf.js",
+    "dev": "vite",
     "lint": "eslint --ext .js,.vue src cypress/e2e/*.cy.js",
     "release": "standard-version",
     "start": "pnpm dev",
     "test": "cypress open",
-    "test:ci": "start-server-and-test 'webpack serve --config build/webpack.dev.conf.js --host local-ipv6' http://localhost:8080/ 'cypress run -q && cypress run --component -q'",
+    "test:ci": "start-server-and-test 'vite serve --host local-ipv6' http://localhost:8080/ 'cypress run -q && cypress run --component -q'",
     "test:component": "cypress open --component",
     "test:component:ci": "start-server-and-test 'pnpm dev' http://localhost:8080/ 'cypress run --component -q'",
     "test:e2e": "cypress open --e2e",
@@ -108,9 +108,7 @@
     "vuedraggable": "^2.17.0",
     "vuetify": "^1.5.19",
     "vuex": "^3.0.1",
-    "webpack": "^5.88.2",
     "webpack-bundle-analyzer": "^4.9.0",
-    "webpack-cli": "^4.0.0",
     "webpack-merge": "^4.1.0",
     "xml2js": "^0.6.0"
   },
@@ -132,11 +130,12 @@
     "portfinder": "^1.0.13",
     "standard-version": "^9.3.0",
     "start-server-and-test": "^1.14.0",
+    "vite": "^6.0.11",
+    "vite-plugin-vue2": "^2.0.3",
     "vm-browserify": "^1.1.2",
     "vue-hot-reload-api": "^2.3.4",
     "vue-server-renderer": "^2.7.14",
-    "vue-template-compiler": "^2.7.14",
-    "webpack-dev-server": "^4.15.1"
+    "vue-template-compiler": "^2.7.14"
   },
   "engines": {
     "node": ">=14.0.0",
