@@ -1,5 +1,5 @@
-import PlacesAndDirections from './components/place-and-directions/PlacesAndDirections'
-import Isochrones from './components/isochrones/Isochrones'
+import PlacesAndDirections from './components/place-and-directions/PlacesAndDirections.vue'
+import Isochrones from './components/isochrones/Isochrones.vue'
 import resolver from '@/support/routes-resolver'
 import constants from '@/resources/constants'
 import appConfig from '@/config/app-config'

@@ -4,9 +4,9 @@ import DomToImage from 'dom-to-image'
 import Vue from 'vue'
 
 // Printing templates
-import PrintDirections from './components/directions-template/PrintDirections'
-import PrintIsochrones from './components/isochrones-template/PrintIsochrones'
-import PrintPlace from './components/place-template/PrintPlace'
+import PrintDirections from './components/directions-template/PrintDirections.vue'
+import PrintIsochrones from './components/isochrones-template/PrintIsochrones.vue'
+import PrintPlace from './components/place-template/PrintPlace.vue'
 
 export default {
   created() {

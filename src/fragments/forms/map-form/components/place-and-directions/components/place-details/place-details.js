@@ -1,5 +1,5 @@
-import Share from '@/fragments/forms/map-form/components/share/Share'
-import Print from '@/fragments/forms/map-form/components/print/Print'
+import Share from '@/fragments/forms/map-form/components/share/Share.vue'
+import Print from '@/fragments/forms/map-form/components/print/Print.vue'
 import resolver from '@/support/routes-resolver'
 import MapViewData from '@/models/map-view-data'
 import geoUtils from '@/support/geo-utils'

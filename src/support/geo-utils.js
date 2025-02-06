@@ -3,7 +3,7 @@ import lodash from 'lodash'
 import Leaflet from 'leaflet'
 import moment from 'moment'
 import Vue from 'vue'
-import HtmlMarker from '@/fragments/html-marker/HtmlMarker'
+import HtmlMarker from '@/fragments/html-marker/HtmlMarker.vue'
 
 // The import below will add some methods to Leaflet.GeometryUtil
 // Even if it is not accessed within this class, it is being used!

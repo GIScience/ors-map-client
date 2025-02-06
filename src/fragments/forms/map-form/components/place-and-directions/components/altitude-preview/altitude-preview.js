@@ -1,4 +1,4 @@
-import Altitude from '@/fragments/charts/altitude/Altitude'
+import Altitude from '@/fragments/charts/altitude/Altitude.vue'
 import MapViewData from '@/models/map-view-data'
 import {EventBus} from '@/common/event-bus'
 

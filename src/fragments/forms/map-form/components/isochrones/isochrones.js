@@ -1,6 +1,6 @@
-import FormActions from '@/fragments/forms/map-form/components/form-actions/FormActions'
+import FormActions from '@/fragments/forms/map-form/components/form-actions/FormActions.vue'
 import MapViewDataBuilder from '@/support/map-data-services/map-view-data-builder'
-import FieldsContainer from '@/fragments/forms/fields-container/FieldsContainer'
+import FieldsContainer from '@/fragments/forms/fields-container/FieldsContainer.vue'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
 import {Isochrones} from '@/support/ors-api-runner'
@@ -13,7 +13,7 @@ import Place from '@/models/place'
 import {EventBus} from '@/common/event-bus'
 
 // Local components
-import IschronesDetails from './components/isochrones-details/IsochronesDetails'
+import IschronesDetails from './components/isochrones-details/IsochronesDetails.vue'
 import MapFormMixin from '../map-form-mixin'
 
 export default {

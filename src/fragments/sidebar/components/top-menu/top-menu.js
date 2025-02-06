@@ -1,4 +1,4 @@
-import FloatingMenu from './components/floating-menu/FloatingMenu'
+import FloatingMenu from './components/floating-menu/FloatingMenu.vue'
 import {EventBus} from '@/common/event-bus'
 
 

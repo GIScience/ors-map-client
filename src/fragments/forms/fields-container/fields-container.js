@@ -1,4 +1,4 @@
-import FormFields from './components/form-fields/FormFields'
+import FormFields from './components/form-fields/FormFields.vue'
 
 export default {
   props: {

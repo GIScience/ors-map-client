@@ -1,5 +1,5 @@
 import AppLoader from '@/app-loader'
-import AppRootComponent from '@/App'
+import AppRootComponent from '@/App.vue'
 import {EventBus} from '@/common/event-bus'
 
 
