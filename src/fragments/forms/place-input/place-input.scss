@@ -70,7 +70,7 @@
   padding: 0;
 }
 
-.suggestions >>> .v-list__tile__content {
+.suggestions :deep(.v-list__tile__content) {
   border-bottom: 1px solid #ededed;
 }
 
@@ -78,11 +78,11 @@
   min-width: 0;
 }
 
-.input-pop-up-list >>> a.v-list__tile {
+.input-pop-up-list :deep(a.v-list__tile) {
   padding: 5px;
 }
 
-.input-pop-up-list >>> .v-list__tile__title {
+.input-pop-up-list :deep(.v-list__tile__title) {
   height: 50px;
 }
 
@@ -90,7 +90,7 @@
   margin-right: 0;
 }
 
-.suggestions >>> .v-list__tile__sub-title {
+.suggestions :deep(.v-list__tile__sub-title) {
   font-size: 12px !important;
 }
 
