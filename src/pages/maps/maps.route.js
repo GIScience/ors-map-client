@@ -1,4 +1,4 @@
-import Maps from '@/pages/maps/Maps'
+import Maps from '@/pages/maps/Maps.vue'
 import store from '@/store/store'
 import RoutesResolver from '@/support/routes-resolver'
 import constants from '@/resources/constants'
