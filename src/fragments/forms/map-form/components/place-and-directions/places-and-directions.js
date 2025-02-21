@@ -1,9 +1,12 @@
+import MapFormMixin from '../map-form-mixin'
 import MapViewDataBuilder from '@/support/map-data-services/map-view-data-builder'
 import FieldsContainer from '@/fragments/forms/fields-container/FieldsContainer'
 import OrsParamsParser from '@/support/map-data-services/ors-params-parser'
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
-import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
+import FormActions from '../form-actions/FormActions'
 import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn'
+import PlaceInput from '@/fragments/forms/place-input/PlaceInput.vue'
+import {EventBus} from '@/common/event-bus'
 import {Directions} from '@/support/ors-api-runner'
 import AppMode from '@/support/app-modes/app-mode'
 import MapViewData from '@/models/map-view-data'
@@ -19,28 +22,26 @@ import AltitudePreview from './components/altitude-preview/AltitudePreview'
 import RouteDetails from './components/route-details/RouteDetails.vue'
 import PlaceDetails from './components/place-details/PlaceDetails.vue'
 import RoundTrip from './components/round-trip/RoundTrip.vue'
-import FormActions from '../form-actions/FormActions'
-import MapFormMixin from '../map-form-mixin'
-import {EventBus} from '@/common/event-bus'
 
 export default {
   mixins: [MapFormMixin],
   data: () => ({
+    active: true,
     mapViewData: new MapViewData(),
     places: [new Place()],
     roundTripActive: false,
     placeFocusIndex: null
   }),
   components: {
-    PlaceInput,
-    PlaceDetails,
-    RouteDetails,
-    Draggable,
     FieldsContainer,
-    AltitudePreview,
-    RoundTrip,
     FormActions,
-    MapFormBtn
+    MapFormBtn,
+    PlaceInput,
+    Draggable,
+    AltitudePreview,
+    RouteDetails,
+    PlaceDetails,
+    RoundTrip
   },
   created () {
     this.setListeners()
@@ -51,6 +52,9 @@ export default {
       if (newVal === true && this.places.length === 1) {
         this.setFocusedPlaceInput(0)
       }
+    },
+    '$store.getters.mode': function (activeMode) {
+      this.active = activeMode === constants.modes.place || activeMode === constants.modes.directions
     }
   },
   computed: {
