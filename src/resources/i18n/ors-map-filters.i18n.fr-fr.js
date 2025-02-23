@@ -183,7 +183,7 @@ export default {
       },
       'quiet': {
         'label': 'Calme (Allemagne uniquement)',
-        'description': 'Préfèrer les zones calmes (uniquement disponible pour l\'Allemagne)',
+        'description': 'Préférer les zones calmes (uniquement disponible pour l\'Allemagne)',
       },
       'surface_quality_known': {
         'label': 'Uniquement surfaces de qualité connue',
