@@ -1,6 +1,6 @@
 export default {
   'header': {
-    'hideMenuBar': 'Ocultar la barra de menu',
-    'showMenuBar': 'Mostrar la barra de menu'
+    'hideMenuBar': 'Masquer la barre de menu',
+    'showMenuBar': 'Afficher la barre de menu'
   }
 }

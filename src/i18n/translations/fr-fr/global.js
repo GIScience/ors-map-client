@@ -1,7 +1,7 @@
 export default {
   'global': {
     'send': 'Envoyer',
-    'save': 'Enregister',
+    'save': 'Enregistrer',
     'confirm': 'Confirmer',
     'cancel': 'Annuler',
     'brand': 'HeiGIT - Heidelberg University',
@@ -13,7 +13,7 @@ export default {
     'and': 'et',
     'noAndDonAskAgain': 'Non (et ne plus demander)',
     'ok': 'OK',
-    'polygon': 'polygone',
+    'polygon': 'Polygone',
     'developedByIntro': 'Services développés par',
     'developedBy': 'HeiGIT gGmbH',
     'duration': 'Durée',
@@ -27,7 +27,7 @@ export default {
     'rawRouting': 'Routage brut',
     'months': {
       'january': 'Janvier',
-      'february': 'février',
+      'february': 'Février',
       'march': 'Mars',
       'april': 'Avril',
       'may': 'Mai',
@@ -41,7 +41,7 @@ export default {
     },
     'monthsShort': {
       'january': 'Jan',
-      'february': 'Fev',
+      'february': 'Fév',
       'march': 'Mar',
       'april': 'Avr',
       'may': 'Mai',
@@ -51,15 +51,15 @@ export default {
       'september': 'Sep',
       'october': 'Oct',
       'november': 'Nov',
-      'december': 'Dec'
+      'december': 'Déc'
     },
     'units': {
-      'km': 'km(s)',
-      'mi': 'mi(s)',
+      'km': 'km',
+      'mi': 'mi',
       'm': 'm',
-      'seconds': 'sec',
+      'seconds': 'secondes',
       's': 's',
-      'minutes': 'min',
+      'minutes': 'minunes',
       'hours': 'h',
       'min': 'min',
       'days': 'J',
@@ -83,8 +83,8 @@ export default {
       'address': 'Adresse',
       'street': 'Rue',
       'venue': 'Lieu',
-      'rawCoordinate': 'Brutes lon. et lat. coordonnées',
-      'notAvailable': 'Pas disponible',
+      'rawCoordinate': 'Coordonnées long./lat.',
+      'notAvailable': 'Non disponible',
       'postalcode': 'Code postal',
       'undefined': 'Non défini',
       'ocean': 'Océan'
@@ -96,10 +96,10 @@ export default {
     'surface': 'Surface',
     'roadaccessrestrictions': 'Restrictions d\'accès à la route',
     'waytypes': 'Types de voie',
-    'suitability': 'pertinence',
+    'suitability': 'Pertinence',
     'waycategory': 'Catégorie de voie',
     'tollways': 'Péages',
-    'traildifficulty': 'Difficulté du sentier',
+    'traildifficulty': 'Difficulté du chemin',
     'osmid': 'OSM ID',
     'countryinfo': 'Informations sur le pays'
   }

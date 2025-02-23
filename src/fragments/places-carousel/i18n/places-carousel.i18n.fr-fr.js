@@ -3,7 +3,7 @@ export default {
   'placesCarousel': {
     'layer': 'Couche',
     'lat': 'Lat.',
-    'lon': 'Lon.',
+    'lon': 'Long.',
     'notAvailable': 'Pas disponible',
     'placeDetails': 'Détails du lieu',
     'next': 'Bloc suivant',

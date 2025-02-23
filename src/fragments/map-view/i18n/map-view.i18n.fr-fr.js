@@ -14,11 +14,11 @@ export default {
       'permissionDenied': 'Votre position n\'a pas pu être acquise car le navigateur/l\'appareil en a refusé l\'accès. Vous pouvez réessayer en modifiant les paramètres du navigateur/de l\'appareil, puis en cliquant à nouveau sur le \'bouton ma position \'',
       'timeout': 'Votre navigateur/appareil a returné \'timeout\' en essayant d\'acquérir une position. Vous pouvez réessayer en cliquant sur le bouton \'ma position\''
     },
-    'yourCurrentLocation': 'Votre location actuelle',
+    'yourCurrentLocation': 'Votre emplacement actuel',
     'options': 'Options',
     'polylineMeasure': {
       'bearingTextIn': 'Entrée',
-      'bearingTextOut': 'Sortir',
+      'bearingTextOut': 'Sortie',
       'tooltipTextDragAndDelete': 'Cliquez et faites glisser jusqu\'au <b>point de déplacement</b><br>Appuyez sur la touche MAJ et cliquez pour <b>supprimer le point</b>',
       'tooltipTextResume': '<br>Appuyez sur la touche CTRL et cliquez pour <b>reprendre la ligne</b>',
       'tooltipTextDelete': 'Appuyez sur la touche MAJ et cliquez pour <b>supprimer le point</b>',
@@ -29,8 +29,8 @@ export default {
       'unitControlTitle': {
         'text': 'Changer les unités',
         'metres': 'mètres',
-        'landmiles': 'miles terrestres',
-        'nauticalmiles': 'miles nautiques'
+        'landmiles': 'milles terrestres',
+        'nauticalmiles': 'milles nautiques'
       },
       'clearControlLabel': '&times',
       'measureControlLabel': '&#8614;',
@@ -38,7 +38,7 @@ export default {
       'unitControlLabel': {
         'metres': 'm',
         'kilometres': 'km',
-        'feet': 'Pieds',
+        'feet': 'ft',
         'landmiles': 'M',
         'nauticalmiles': 'MN'
       }
