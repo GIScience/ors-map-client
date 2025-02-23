@@ -2,12 +2,12 @@ export default {
   'orsMapFilters': {
     'profiles': {
       'cycling-regular': 'Vélo',
-      'cycling-road': 'Route vélo',
+      'cycling-road': 'Vélo de route',
       'cycling-electric': 'Vélo électrique',
       'cycling-mountain': 'Vélo de montagne',
-      'cycling-safe': 'Cyclisme en sécurité',
-      'foot-walking': 'À pied',
-      'foot-hiking': 'Randonnée',
+      'cycling-safe': 'Vélo de sécurité',
+      'foot-walking': 'Marche à pied',
+      'foot-hiking': 'Randonnée pédestre',
       'driving-car': 'Voiture',
       'driving-hgv': 'Véhicule lourd',
       'wheelchair': 'Fauteuil roulant',
@@ -21,7 +21,7 @@ export default {
     'filters': {
       'preference': {
         'label': 'Préférence d\'itinéraire',
-        'description': 'Le facteur préféré à prendre en compte lors du calcul des itinéraires',
+        'description': 'Le réglage à prendre en compte lors du calcul des itinéraires',
         'enum': {
           'fastest': 'Le plus rapide',
           'shortest': 'Le plus court',
@@ -98,23 +98,23 @@ export default {
         'description': 'Spécifie la largeur minimale de la passerelle en mètres'
       },
       'smoothness_type': {
-        'label': 'La fluidité de l\'itinéraire',
-        'description': 'Spécifie la fluidité minimale de l\'itinéraire. Plus d\'infos: https://wiki.openstreetmap.org/wiki/Key:smoothness'
+        'label': 'Régularité de surface',
+        'description': 'Spécifie la régularité minimale de la surface des voies. Plus d\'infos: https://wiki.openstreetmap.org/wiki/Key:smoothness'
       },
       'surface_type': {
-        'label': 'Min. type de surface',
-        'description': 'Spécifie le type de surface minimum. Ordre de type: https://wiki.openstreetmap.org/wiki/Key:surface'
+        'label': 'Type de surface min.',
+        'description': 'Spécifie le type de surface minimal. Plus d\'infos: https://wiki.openstreetmap.org/wiki/Key:surface'
       },
       'track_type': {
-        'label': 'Classe minimale de l\'itinéraire',
-        'description': 'Spécifie la pente minimale de l\'itinéraire. Valeurs de note: https://wiki.openstreetmap.org/wiki/Key:tracktype'
+        'label': 'Qualité minimale de l\'itinéraire',
+        'description': 'Spécifie la qualité minimale d\'entretien de l\'itinéraire. Plus d\'infos: https://wiki.openstreetmap.org/wiki/Key:tracktype'
       },
       'round_trip': {
         'label': 'Route circulaire'
       },
       'round_trip_length': {
         'label': 'Durée de la route circulaire',
-        'description': 'La longueur cible de l\'itinéraire (notez qu\'il s\'agit d\'une valeur préférée, mais les résultats peuvent être différents).'
+        'description': 'La longueur cible de l\'itinéraire (il s\'agit d\'une valeur cible, les résultats peuvent être différents).'
       },
       'points': {
         'label': 'Points',
@@ -125,35 +125,35 @@ export default {
         'description': 'Une graine aléatoire à utiliser pour ajouter une randomisation à l\'itinéraire généré (min: 0, max: 90)'
       },
       'avoid_polygons': {
-        'label': 'polygones à évitez',
-        'description': 'olygones à évitez dans la route'
+        'label': 'Polygones à éviter',
+        'description': 'Polygones à éviter dans la route'
       },
       'avoid_features': {
-        'label': 'Choses à éviter',
-        'description': 'Choses à éviter dans la route',
+        'label': 'Particularités à éviter',
+        'description': 'Particularités à éviter dans la route',
         'enum': {
           'highways': 'Autoroutes',
           'tollways': 'Péages',
           'ferries': 'Ferries',
           'tunnels': 'Tunnels',
-          'hills': 'Collines',
-          'fords': 'Gué',
-          'steps': 'Marches',
+          'hills': 'Pentes',
+          'fords': 'Gués',
+          'steps': 'Escaliers',
           'pavedroads': 'Routes pavées',
-          'unpavedroads': 'Des routes non pavées'
+          'unpavedroads': 'Routes non pavées'
         }
       },
       'avoid_borders': {
-        'label': 'Évitez les frontières',
-        'description': 'Évitez les frontières',
+        'label': 'Frontières à éviter',
+        'description': 'Frontières à éviter',
         'enum': {
           'all': 'Toutes',
-          'controlled': 'Contrôlé'
+          'controlled': 'Contrôlées'
         }
       },
       'avoid_countries': {
-        'label': 'Évitez les pays',
-        'description': 'Évitez les pays'
+        'label': 'Pays à éviter',
+        'description': 'Pays à éviter'
       },
       'alternative_routes': {
         'label': 'Itinéraires alternatifs'
@@ -179,19 +179,19 @@ export default {
       },
       'green': {
         'label': 'Vert (uniquement en Allemagne)',
-        'description': 'Préférez les espaces verts (disponible uniquement pour l\'Allemagne)',
+        'description': 'Préférer les espaces verts (disponible uniquement pour l\'Allemagne)',
       },
       'quiet': {
         'label': 'Calme (Allemagne uniquement)',
-        'description': 'Préfère les zones calmes (uniquement disponible pour l\'Allemagne)',
+        'description': 'Préfèrer les zones calmes (uniquement disponible pour l\'Allemagne)',
       },
       'surface_quality_known': {
-        'label': 'Uniquement des surfaces de qualité connue',
-        'description': 'Force l\'utilisation des seules arêtes dont la qualité de surface est explicitement connue',
+        'label': 'Uniquement surfaces de qualité connue',
+        'description': 'Forcer l\'utilisation de segments dont la qualité de surface est explicitement connue',
       },
       'allow_unsuitable': {
         'label': 'Permettre inadéquat',
-        'description': 'Permet l\'utilisation de bords qui pourraient ne pas convenir aux fauteuils roulants qui étaient auparavant exclus',
+        'description': 'Permettre l\'utilisation de chemins qui pourraient ne pas convenir aux fauteuils roulants, auparavant exclus',
       },
       'vehicle_type': {
         'label': 'Type de véhicule',
