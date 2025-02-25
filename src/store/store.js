@@ -4,7 +4,6 @@ import Vuex from 'vuex'
 import appUI from './modules/app-ui'
 import mapState from './modules/map-state'
 import appState from './modules/app-state'
-import loader from '@/support/loader'
 
 Vue.use(Vuex)
 
@@ -25,9 +24,9 @@ const storeBuilder = {
 }
 
 // load and get all routes from *.route.js default export using custom loader
-const storeModules = loader.load(require.context('@/pages/', true, /\.store\.js$/), true)
-const fragmentModules = loader.load(require.context('@/fragments/', true, /\.store\.js$/), true)
-const pluginsModules = loader.load(require.context('@/plugins/', true, /\.store\.js$/), true)
+const storeModules = import.meta.glob('@/pages/**.store.js', { eager: true})
+const fragmentModules = import.meta.glob('@/fragments/**.store.js', { eager: true})
+const pluginsModules = import.meta.glob('@/plugins/**.store.js', { eager: true})
 const mergedModules = { ...storeModules, ...fragmentModules, ...pluginsModules }
 
 for (let key in mergedModules) {

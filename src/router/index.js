@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import resolver from '@/support/routes-resolver'
 import appConfig from '@/config/app-config'
-import loader from '@/support/loader'
 import AppLoader from '@/app-loader'
 import Router from 'vue-router'
 import Vue from 'vue'
@@ -26,12 +25,12 @@ router.beforeEach((to, from, next) => {
 
 
 // load and get all routes from components with name following the pattern *.route.js
-const pageRoutes = loader.load(require.context('@/pages/', true, /\.route\.js$/))
+const pageRoutes = import.meta.glob('@/pages/**.route.js', { eager: true})
 
 // load and get all routes from plugins with name following the pattern *.route.js
-const pluginRoutes = loader.load(require.context('@/plugins/', true, /\.route\.js$/))
+const pluginRoutes = import.meta.glob('@/plugins/**.route.js', { eager: true})
 
-let routeFiles = pageRoutes.concat(pluginRoutes)
+let routeFiles = [ ...Object.values(pageRoutes), ...Object.values(pluginRoutes)]
 
 routeFiles.forEach(routeFile => {
   if (Array.isArray(routeFile)) {
@@ -39,7 +38,10 @@ routeFiles.forEach(routeFile => {
       router.addRoute(route)
     })
   } else {
-    router.addRoute(routeFile)
+    //register route from default export
+    routeFile.default.forEach(route => {
+      router.addRoute(route)
+    })
   }
 })
 
