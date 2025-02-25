@@ -44,7 +44,7 @@ class AppLoader {
     if (!store.getters.apiDataRequested) {
       store.commit('apiDataRequested', true)
 
-      const ORSKEY = process.env.ORSKEY
+      const ORSKEY = import.meta.env.ORSKEY
 
       // By default, the app must use an ors API key stored in config.js
       if (appConfig.useUserKey) {
