@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import {Account, Client, Databases, Functions, Models, AppwriteException} from 'appwrite'
+import {Account, Client, Databases, Functions, AppwriteException} from 'appwrite'
 import config from '@/config/app-config'
 
 /**
