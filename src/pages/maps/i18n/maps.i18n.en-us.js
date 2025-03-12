@@ -1,7 +1,7 @@
 
 export default {
   maps: {
-    pageTitle: 'ORS Maps',
+    pageTitle: 'HEAL-Heat avoidance routing',
     Places: 'Places',
     isochrones: 'Isochrones',
     placeNameRequired: 'Place name required',
