@@ -16,8 +16,7 @@ export default {
       return 'color: ' + theme.primary + ';'
     },
     appVersion () {
-      let env = process.env
-      let version = env.PACKAGE_JSON.version
+      let version = __APP_VERSION__
       return version
     }
   }

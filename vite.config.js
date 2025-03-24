@@ -26,6 +26,7 @@ export default defineConfig(({ command, mode }) => {
     let devConfig = {
       define: {
         __APP_ENV__: JSON.stringify(env.APP_ENV),
+        __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
       },
       esbuild: {
         minify: true
