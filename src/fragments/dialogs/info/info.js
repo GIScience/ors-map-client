@@ -34,8 +34,10 @@ export default {
       this.persistent = info.persistent || this.persistent
     },
     onOk (event) {
-      event.preventDefault()
-      event.stopPropagation()
+      if (typeof event === 'object') {
+        event.preventDefault()
+        event.stopPropagation()
+      }
       this.show = false
       EventBus.$emit('infoOk', { event: 'ok', guid: this.guid })
     }
