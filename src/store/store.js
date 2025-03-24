@@ -30,7 +30,7 @@ const pluginsModules = import.meta.glob('@/plugins/**.store.js', { eager: true})
 const mergedModules = { ...storeModules, ...fragmentModules, ...pluginsModules }
 
 for (let key in mergedModules) {
-  storeBuilder.modules[key] = mergedModules[key]
+  storeBuilder.modules[key] = mergedModules[key].default
 }
 
 const store = new Vuex.Store(storeBuilder)
