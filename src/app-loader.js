@@ -28,14 +28,14 @@ class AppLoader {
       return store.getters.mapSettings.apiKey
     }
 
-    const BITLYLOGIN = process.env.BITLYLOGIN
-    const BITLYAPIKEY = process.env.BITLYAPIKEY
-    if (BITLYLOGIN) {
-      appConfig.bitlyLogin = BITLYLOGIN
-    }
-    if (BITLYAPIKEY) {
-      appConfig.bitlyApiKey = BITLYAPIKEY
-    }
+    // const BITLYLOGIN = process.env.BITLYLOGIN
+    // const BITLYAPIKEY = process.env.BITLYAPIKEY
+    // if (BITLYLOGIN) {
+    //   appConfig.bitlyLogin = BITLYLOGIN
+    // }
+    // if (BITLYAPIKEY) {
+    //   appConfig.bitlyApiKey = BITLYAPIKEY
+    // }
 
     // For some reason not yet identified (maybe a vue router bug?)
     // the `beforeEnter` guard used to fire this action is being called
@@ -190,13 +190,12 @@ class AppLoader {
   }
 
   /**
-   * Load and mount the main VueJS app using the
+   * Load and mount the main Vue.js app using the
    * @param {Object} App
    * @param {String} elementSelector
-   * @param {String} templateTag
    * @returns {Promise} resolves main Vue instance
    */
-  async loadApp(App, elementSelector, templateTag) {
+  async loadApp(App, elementSelector) {
     if (this.vueInstance) {
       return this.vueInstance
     } else if (store.getters.mainAppInstanceRef) {
@@ -215,7 +214,7 @@ class AppLoader {
       router,
       components: {App},
       store,
-      template: templateTag
+      render: h => h(App)
     })
 
     store.commit('mainAppInstanceRef', this.vueInstance)

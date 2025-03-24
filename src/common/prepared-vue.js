@@ -20,47 +20,24 @@ import Vue from 'vue'
 
 
 import '../../node_modules/vuetify/src/stylus/app.styl'
-
+import Vuetify from 'vuetify'
 import {
-  Vuetify,
-  VApp,
-  VNavigationDrawer,
-  VFooter,
-  VList,
-  VBtn,
-  VMenu,
-  VIcon,
-  VGrid,
-  VToolbar,
-  transitions,
-  VDivider,
-  VExpansionPanel,
-  VSubheader,
-  VForm,
-  VTextField,
-  VTextarea,
-  VDialog,
-  VCard,
-  VJumbotron,
-  VSnackbar,
-  VSelect,
-  VCheckbox,
-  VTabs,
-  VDataTable,
-  VProgressLinear,
-  VChip,
-  VSwitch,
   VAlert,
-  VImg,
-  VBtnToggle,
-  VTooltip,
+  VApp,
   VAutocomplete,
-  VSlider,
   VBadge,
-  VBottomNav,
-  VCarousel,
-  VItemGroup
-} from 'vuetify'
+  VBottomNav, VBtn,
+  VBtnToggle, VCard,
+  VCarousel, VCheckbox, VChip, VDataTable, VDialog, VDivider, VExpansionPanel, VFooter, VForm, VIcon, VImg,
+  VItemGroup, VJumbotron, VList, VMenu,
+  VNavigationDrawer, VProgressLinear, VSelect, VSnackbar, VSubheader, VSwitch, VTabs, VTextarea, VTextField, VToolbar,
+  VTooltip,
+  VSlider
+} from 'vuetify/lib'
+import transitions from 'vuetify/lib/components/transitions'
+import VGrid from 'vuetify/lib/components/VGrid'
+
+
 
 Vue.use(Vuetify, {
   theme: theme,
