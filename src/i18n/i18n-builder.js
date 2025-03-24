@@ -38,6 +38,7 @@ const build = () => {
     replace 'en-us' below by any of the supported
     locale, like 'de-de' or 'fr-fr'.
   */
+  console.log(i18n)
   // console.log(JSON.stringify(i18n.messages['en-us']))
 
   Vue.use(VueI18n)
