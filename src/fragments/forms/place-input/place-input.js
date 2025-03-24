@@ -637,12 +637,12 @@ export default {
         this.showError(this.$t('placeInput.pleaseTypeSomething'))
 
       } else {
+        const previousMode = this.$store.getters.mode
         if (previousMode === constants.modes.search) {
           this.$emit('searchChanged')
         } else {
           this.$emit('switchedToSearchMode')
         }
-        const previousMode = this.$store.getters.mode
         this.$store.commit('mode', constants.modes.search)
         const appMode = new AppMode(this.$store.getters.mode)
         const route = appMode.getRoute([this.localModel])

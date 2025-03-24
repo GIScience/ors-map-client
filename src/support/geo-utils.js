@@ -182,7 +182,7 @@ const geoUtils = {
    */
   readableArea(coords, unit) {
     // see https://github.com/Leaflet/Leaflet.draw/blob/33ea262678bbfc3da7e92c226f70c017bd328434/src/ext/GeometryUtil.js#L66-L99
-    let precision = precision || 2
+    let precision = 2
     let area = this.geodesicArea(coords)
     let areaStr
     if (area >= 10000 && unit === 'km') {
