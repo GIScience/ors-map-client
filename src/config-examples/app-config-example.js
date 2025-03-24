@@ -6,10 +6,10 @@
 const appConfig = {
   appName: 'Openrouteservice Maps', // The App name that is used as title for the logo
   footerAppName: 'openrouteservice', // The App name that appears on the bottom
-  favIcon: '@/assets/img/favicon.ico', // The favicon used in the browser tab
-  logoImgSrc: '@/assets/img/logo.png', // The logo used in the top-right corner of the sidebar and on the header menu
-  brandLogoSrc: '@/assets/img/heigit-and-hd-uni.png', // used for 'About' page and map overlay on large screens
-  countryIconImgSrc: '@/assets/img/country-icon.png', // used for Place search as icon for country level results
+  favIcon: '/favicon.ico', // The favicon used in the browser tab
+  logoImgSrc: '/logo.png', // The logo used in the top-right corner of the sidebar and on the header menu
+  brandLogoSrc: '/heigit-and-hd-uni.png', // used for 'About' page and map overlay on large screens
+  countryIconImgSrc: '/country-icon.png', // used for Place search as icon for country level results
   footerDevelopedByLink: 'https://www.heigit.org/', // The url that is used on the footer developed by link
   urlMode: 'hash', // The url mode for vue router: `hash` or `history`
   baseAppUrl: '/', // Could be, for example, '/map' if your app is running in a folder under a domain

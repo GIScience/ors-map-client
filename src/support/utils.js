@@ -308,8 +308,7 @@ const Utils = {
    * @param {string} configKey -
    */
   getImgSrc (configKey) {
-    const imgPath = appConfig[configKey]
-    return 'static/img/' + imgPath.split('/').pop()
+    return appConfig[configKey]
   }
 }
 export default Utils
