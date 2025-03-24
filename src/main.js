@@ -10,7 +10,7 @@ const main = {
 
 let appLoader = new AppLoader()
 
-appLoader.loadApp(AppRootComponent, '#app', '<App/>').then(vueInstance => {
+appLoader.loadApp(AppRootComponent, '#app').then(vueInstance => {
   main.vueInstance = vueInstance
   main.vueInstance.appHooks.loadRegisteredHooks()
   EventBus.$emit('appLoaded')
