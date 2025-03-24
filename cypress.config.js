@@ -3,7 +3,6 @@ const vitePreprocessor = require('cypress-vite')
 
 module.exports = defineConfig({
   projectId: '2npvgh',
-  video: false,
   e2e: {
     specPattern: [
       "cypress/e2e/*.{cy,spec}.{js,jsx,ts,tsx}",
