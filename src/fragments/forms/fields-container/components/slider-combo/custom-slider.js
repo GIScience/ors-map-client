@@ -1,5 +1,5 @@
+import {VSlider} from 'vuetify/lib'
 
-import { VSlider } from 'vuetify'
 
 export default {
   name:'custom-slider',
