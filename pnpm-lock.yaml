@@ -240,6 +240,9 @@ importers:
       cypress:
         specifier: ^12.17.3
         version: 12.17.4
+      cypress-vite:
+        specifier: ^1.6.0
+        version: 1.6.0(vite@6.0.11(@types/node@22.0.0)(jiti@1.21.6)(sass-embedded@1.83.4)(sass@1.77.8)(stylus@0.59.0)(terser@5.38.1))
       cz-conventional-changelog:
         specifier: ^3.3.0
         version: 3.3.0(@types/node@22.0.0)(typescript@5.5.4)
@@ -2656,6 +2659,11 @@ packages:
 
   current-script-polyfill@1.0.0:
     resolution: {integrity: sha512-qv8s+G47V6Hq+g2kRE5th+ASzzrL7b6l+tap1DHKK25ZQJv3yIFhH96XaQ7NGL+zRW3t/RDbweJf/dJDe5Z5KA==}
+
+  cypress-vite@1.6.0:
+    resolution: {integrity: sha512-6oZPDvHgLEZjuFgoejtRuyph369zbVn7fjh4hzhMar3XvKT5YhTEoA+KixksMuxNEaLn9uqA4HJVz6l7BybwBQ==}
+    peerDependencies:
+      vite: ^2.9.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
 
   cypress@12.17.4:
     resolution: {integrity: sha512-gAN8Pmns9MA5eCDFSDJXWKUpaL3IDd89N9TtIupjYnzLSmlpVr+ZR+vb4U/qaMp+lB6tBvAmt7504c3Z4RU5KQ==}
@@ -9740,6 +9748,14 @@ snapshots:
 
   current-script-polyfill@1.0.0: {}
 
+  cypress-vite@1.6.0(vite@6.0.11(@types/node@22.0.0)(jiti@1.21.6)(sass-embedded@1.83.4)(sass@1.77.8)(stylus@0.59.0)(terser@5.38.1)):
+    dependencies:
+      chokidar: 3.6.0
+      debug: 4.3.6(supports-color@8.1.1)
+      vite: 6.0.11(@types/node@22.0.0)(jiti@1.21.6)(sass-embedded@1.83.4)(sass@1.77.8)(stylus@0.59.0)(terser@5.38.1)
+    transitivePeerDependencies:
+      - supports-color
+
   cypress@12.17.4:
     dependencies:
       '@cypress/request': 2.88.12
@@ -10349,7 +10365,7 @@ snapshots:
       eslint: 4.19.1
       get-stdin: 6.0.0
 
-  eslint-config-standard@11.0.0(eslint-plugin-import@2.29.1(eslint@7.32.0))(eslint-plugin-node@7.0.1(eslint@7.32.0))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@7.32.0))(eslint@4.19.1):
+  eslint-config-standard@11.0.0(eslint-plugin-import@2.29.1(eslint@4.19.1))(eslint-plugin-node@7.0.1(eslint@7.32.0))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@7.32.0))(eslint@4.19.1):
     dependencies:
       eslint: 4.19.1
       eslint-plugin-import: 2.29.1(eslint@4.19.1)
@@ -14003,7 +14019,7 @@ snapshots:
       derequire: 2.1.1
       eslint: 4.19.1
       eslint-config-prettier: 3.6.0(eslint@4.19.1)
-      eslint-config-standard: 11.0.0(eslint-plugin-import@2.29.1(eslint@7.32.0))(eslint-plugin-node@7.0.1(eslint@7.32.0))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@7.32.0))(eslint@4.19.1)
+      eslint-config-standard: 11.0.0(eslint-plugin-import@2.29.1(eslint@4.19.1))(eslint-plugin-node@7.0.1(eslint@7.32.0))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@7.32.0))(eslint@4.19.1)
       eslint-plugin-import: 2.29.1(eslint@4.19.1)
       eslint-plugin-node: 7.0.1(eslint@4.19.1)
       eslint-plugin-prettier: 2.7.0(prettier@1.19.1)

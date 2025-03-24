@@ -110,6 +110,7 @@
     "chromedriver": "^127.0.1",
     "commitizen": "^4.2.4",
     "cypress": "^12.17.3",
+    "cypress-vite": "^1.6.0",
     "cz-conventional-changelog": "^3.3.0",
     "geckodriver": "^3.0.2",
     "node-notifier": "^5.1.2",
