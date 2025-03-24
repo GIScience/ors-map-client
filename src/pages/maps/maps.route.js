@@ -38,7 +38,7 @@ const mapRoutes = [
         next(currentPath)
       } else {
         // Otherwise load the map in the default or previous location
-        let zoom = store.getters.appRouteData.options.zoom || appConfig.initialZoomLevel
+        let zoom = store.getters.appRouteData?.options.zoom || appConfig.initialZoomLevel
         let newMapLocation = `${placePath}@${store.getters.mapCenter.lng},${store.getters.mapCenter.lat},${zoom}`
         if (newMapLocation !== from.path) {
           next(newMapLocation)
