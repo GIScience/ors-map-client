@@ -2,7 +2,7 @@
 
 .app-btn-mh {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-transform: capitalize;
+  text-transform: capitalize !important;
   content: unset;
 }
 
