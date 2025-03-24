@@ -30,6 +30,8 @@ import {
   VBtn,
   VBtnToggle,
   VCard,
+  VCardActions,
+  VCardTitle,
   VCarousel,
   VCheckbox,
   VChip,
@@ -46,11 +48,13 @@ import {
   VItemGroup,
   VJumbotron,
   VList,
+  VListGroup,
   VListTile,
+  VListTileAction,
   VListTileAvatar,
   VListTileContent,
-  VListTileTitle,
   VListTileSubTitle,
+  VListTileTitle,
   VMenu,
   VNavigationDrawer,
   VProgressLinear,
@@ -68,7 +72,7 @@ import {
   VToolbar,
   VToolbarItems,
   VToolbarTitle,
-  VTooltip, VListTileAction, VCardTitle, VCardActions
+  VTooltip
 } from 'vuetify/lib'
 import transitions from 'vuetify/lib/components/transitions'
 import VGrid from 'vuetify/lib/components/VGrid'
@@ -84,8 +88,8 @@ Vue.use(Vuetify, {
     VBtn,
     VBtnToggle,
     VCard,
-    VCardTitle,
     VCardActions,
+    VCardTitle,
     VCarousel,
     VCheckbox,
     VChip,
@@ -102,12 +106,13 @@ Vue.use(Vuetify, {
     VItemGroup,
     VJumbotron,
     VList,
+    VListGroup,
     VListTile,
-    VListTileAvatar,
     VListTileAction,
+    VListTileAvatar,
     VListTileContent,
-    VListTileTitle,
     VListTileSubTitle,
+    VListTileTitle,
     VMenu,
     VNavigationDrawer,
     VProgressLinear,
@@ -131,7 +136,7 @@ Vue.use(Vuetify, {
   }
 })
 
-const options = { lodash: lodash } // customize the way you want to call it
+const options = {lodash: lodash} // customize the way you want to call it
 Vue.use(VueLodash, options) // options is optional
 
 // Use vee validate to easily validate forms
