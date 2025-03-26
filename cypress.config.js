@@ -1,7 +1,7 @@
-const { defineConfig } = require('cypress');
-const vitePreprocessor = require('cypress-vite')
+import { defineConfig } from 'cypress'
+import vitePreprocessor from 'cypress-vite'
 
-module.exports = defineConfig({
+export default defineConfig({
   projectId: '2npvgh',
   e2e: {
     specPattern: [
@@ -9,7 +9,7 @@ module.exports = defineConfig({
       "src/**/__tests__/*.{cy,spec}.{js,ts,jsx,tsx}"
     ],
     baseUrl: 'http://localhost:8080',
-    setupNodeEvents(on, config) {
+    setupNodeEvents(on) {
       on('file:preprocessor', vitePreprocessor())
     },
   },
@@ -21,5 +21,4 @@ module.exports = defineConfig({
     specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
     excludeSpecPattern: "src/**/__tests__/*.{cy,spec}.{js,ts,jsx,tsx}"
   },
-
-});
+})
