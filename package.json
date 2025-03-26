@@ -6,8 +6,9 @@
   "repository": "https://github.com/GIScience/ors-map-client",
   "license": "MIT",
   "author": "amon@openrouteservice.org",
+  "type": "module",
   "scripts": {
-    "build": "rimraf ./static && vite build",
+    "build": "rimraf ./dist && vite build",
     "commit": "git-cz",
     "dev": "vite",
     "lint": "eslint --ext .js,.vue src cypress/e2e/*.cy.js",

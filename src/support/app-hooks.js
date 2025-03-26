@@ -17,7 +17,7 @@ class AppHooks {
    */
   loadRegisteredHooks () {
     // eslint-disable-next-line no-undef
-    require('@/config/hooks')
+    import('@/config/hooks').catch(console.error)
   }
 
   /**

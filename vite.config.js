@@ -54,7 +54,24 @@ export default defineConfig(({ command, mode }) => {
     return mergeConfig(viteConfig, devConfig)
   } else {
     //command === 'build'
-    const prodConfig = {}
+    const prodConfig = {
+      define: {
+        // This is necessary in Vue 2 codebases. It is automatic in Vue 3
+        __VUE_PROD_DEVTOOLS__: 'false',
+      },
+      rollupOptions: {
+
+      },
+      build: {
+        // sourcemap: true,  // takes more time to build, turn off before committing
+        minify: 'terser',
+        terserOptions: {
+          format: {
+            comments: false
+          }
+        }
+      }
+    }
     return mergeConfig(viteConfig, prodConfig)
   }
 })
