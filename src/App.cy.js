@@ -7,7 +7,7 @@ import store from '@/store/store'
 import I18nBuilder from '@/i18n/i18n-builder'
 import router from '@/router'
 import AppRootComponent from '@/App.vue'
-import Footer from '@/fragments/footer/Footer'
+import Footer from '@/fragments/footer/Footer.vue'
 import {EventBus} from '@/common/event-bus'
 
 describe('<App />', () => {
