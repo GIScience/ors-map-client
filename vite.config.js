@@ -15,7 +15,7 @@ export default defineConfig(({ command, mode }) => {
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
-        'vue$': 'vue/dist/vue.esm.js',
+        vue : 'vue/dist/vue.runtime.esm.js',
         'fixtures': fileURLToPath(new URL('cypress/fixtures', import.meta.url))
     }
   },
