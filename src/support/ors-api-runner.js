@@ -16,6 +16,23 @@ import OrsApiClient from 'openrouteservice-js'
 // and uncomment the import line below to use a local and unpacked openrouteservice-js lib
 // import OrsApiClient from '@/ors-js/src'
 
+function getCustomEndpointSettings(apiBaseUrl, endpoint) {
+  let host
+  let service
+  if (!endpoint.startsWith('http')){
+    return [apiBaseUrl, endpoint]
+  } else {
+    let parts = endpoint.split('/')
+    if ( parts.includes('ors') ) {
+      host = parts.slice(0,4).join('/')
+    } else {
+      host = parts.slice(0,3).join('/')
+    }
+    service = '/' + parts.slice(-1)
+    return [host, service]
+  }
+}
+
 /**
  * Get the Directions function accessor
  * @param {Array} places
@@ -25,11 +42,12 @@ import OrsApiClient from 'openrouteservice-js'
 const Directions = (places, customArgs = null) => {
   const mapSettings = store.getters.mapSettings
 
+  const [host, service] = getCustomEndpointSettings(mapSettings.apiBaseUrl, mapSettings.endpoints.directions)
   // Build the ors client object
   const directions = new OrsApiClient.Directions({
     api_key: mapSettings.apiKey,
-    host: mapSettings.apiBaseUrl,
-    service: mapSettings.endpoints.directions,
+    host: host,
+    service: service,
     timeout: constants.orsApiRequestTimeout
   })
 
@@ -63,10 +81,11 @@ const Directions = (places, customArgs = null) => {
  */
 const Geocode = (term, size = 10) => {
   const mapSettings = store.getters.mapSettings
+  const [host, service] = getCustomEndpointSettings(mapSettings.apiBaseUrl, mapSettings.endpoints.geocodeSearch)
   const client = new OrsApiClient.Geocode({
     api_key: mapSettings.apiKey,
-    host: mapSettings.apiBaseUrl,
-    service: mapSettings.endpoints.geocodeSearch
+    host: host,
+    service: service
   })
   const args = OrsParamsParser.buildPlaceSearchArgs(term)
   args.size = size
@@ -91,11 +110,12 @@ const Geocode = (term, size = 10) => {
  */
 const ReverseGeocode = (lat, lng, size = 10) => {
   const mapSettings = store.getters.mapSettings
+  const [host, service] = getCustomEndpointSettings(mapSettings.apiBaseUrl, mapSettings.endpoints.reverseGeocode)
 
   const client = new OrsApiClient.Geocode({
     api_key: mapSettings.apiKey,
-    host: mapSettings.apiBaseUrl,
-    service: mapSettings.endpoints.reverseGeocode
+    host: host,
+    service: service
   })
   const args = OrsParamsParser.buildReverseSearchArgs(lat, lng)
   args.size = size
@@ -124,11 +144,12 @@ const ReverseGeocode = (lat, lng, size = 10) => {
 const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
   return new Promise((resolve, reject) => {
     const mapSettings = store.getters.mapSettings
+    const [host, service] = getCustomEndpointSettings(mapSettings.apiBaseUrl, mapSettings.endpoints.geocodeSearch)
 
     const client = new OrsApiClient.Geocode({
       api_key: mapSettings.apiKey,
-      host: mapSettings.apiBaseUrl,
-      service: mapSettings.endpoints.geocodeSearch
+      host: host,
+      service: service
     })
 
     let promises = []
@@ -293,11 +314,12 @@ const sortFeatures  = (features) => {
  */
 const Pois = (filters, limit = 100, distanceBuffer = 500) => {
   const mapSettings = store.getters.mapSettings
+  const [host, service] = getCustomEndpointSettings(mapSettings.apiBaseUrl, mapSettings.endpoints.pois)
 
   const pois = new OrsApiClient.Pois({
     api_key: mapSettings.apiKey,
-    host: mapSettings.apiBaseUrl,
-    service: mapSettings.endpoints.pois
+    host: host,
+    service: service
   })
 
   return new Promise((resolve, reject) => {
@@ -319,11 +341,12 @@ const Pois = (filters, limit = 100, distanceBuffer = 500) => {
  */
 const Isochrones = (places) => {
   const mapSettings = store.getters.mapSettings
+  const [host, service] = getCustomEndpointSettings(mapSettings.apiBaseUrl, mapSettings.endpoints.isochrones)
 
   const isochrones = new OrsApiClient.Isochrones({
     api_key: mapSettings.apiKey,
-    host: mapSettings.apiBaseUrl,
-    service: mapSettings.endpoints.isochrones,
+    host: host,
+    service: service,
     timeout: constants.orsApiRequestTimeout
   })
   return new Promise((resolve, reject) => {
