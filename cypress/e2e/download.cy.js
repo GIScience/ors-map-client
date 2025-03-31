@@ -1,4 +1,3 @@
-import path from 'path'
 describe('download functionality', function () {
   beforeEach(()  => {
     cy.viewport(1848, 980)
@@ -17,7 +16,7 @@ describe('download functionality', function () {
     '.v-list__tile__content > .v-list__tile__title', typeTitle).click({force: true})
     cy.get('.download').click()
     let fileName = `${cleanName}.${ext}`
-    return path.join(Cypress.config('downloadsFolder'), fileName)
+    return `${Cypress.config('downloadsFolder')}/${fileName}`
   }
 
   it('downloads route json file', () => {
