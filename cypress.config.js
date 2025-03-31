@@ -18,6 +18,7 @@ export default defineConfig({
       framework: 'vue',
       bundler: 'vite',
     },
+    port: 8083,
     specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
     excludeSpecPattern: "src/**/__tests__/*.{cy,spec}.{js,ts,jsx,tsx}"
   },
