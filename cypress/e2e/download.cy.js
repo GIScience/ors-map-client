@@ -36,7 +36,7 @@ describe('download functionality', function () {
     const filePath = downloadFile('GeoJSON', 'json')
     cy.readFile(filePath).its('features').should('have.length', 3)
   })
-  it.skip('downloads a gpx file', () => {
+  it('downloads a gpx file', () => {
     const filePath = downloadFile('ORS API GPX', 'gpx')
     cy.readFile(filePath)
   })

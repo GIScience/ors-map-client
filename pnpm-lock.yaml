@@ -144,8 +144,8 @@ importers:
         specifier: ^1.4.1
         version: 1.6.0
       togpx:
-        specifier: ^0.5.4
-        version: 0.5.4
+        specifier: rvillanueva/togpx
+        version: https://codeload.github.com/rvillanueva/togpx/tar.gz/664f9154a7408194d65e8b5fd27a53dcbddbd9d6
       vee-validate:
         specifier: ^2.0.6
         version: 2.2.15
@@ -6196,8 +6196,9 @@ packages:
   to-utf8@0.0.1:
     resolution: {integrity: sha512-zks18/TWT1iHO3v0vFp5qLKOG27m67ycq/Y7a7cTiRuUNlc4gf3HGnkRgMv0NyhnfTamtkYBJl+YeD1/j07gBQ==}
 
-  togpx@0.5.4:
-    resolution: {integrity: sha512-1LY9ZjBrCYbcWfD63ZaqRw53U0tkigGC9fOdhRaTZH6yrmhlQGbbsEVTyCFzagvbPO36sZuBz0SrEQ+paaCPiw==}
+  togpx@https://codeload.github.com/rvillanueva/togpx/tar.gz/664f9154a7408194d65e8b5fd27a53dcbddbd9d6:
+    resolution: {tarball: https://codeload.github.com/rvillanueva/togpx/tar.gz/664f9154a7408194d65e8b5fd27a53dcbddbd9d6}
+    version: 0.5.5
     hasBin: true
 
   tough-cookie@5.1.2:
@@ -6637,6 +6638,10 @@ packages:
     resolution: {integrity: sha512-yS2uJflVQs6n+CyjHoaBmVSqIDevTAWrzMmjG1Gc7h1qQ7uVozNhEPJAwZXWyGQ/Gafo3fCwrcaokezLPupVyQ==}
     engines: {node: '>=0.1'}
     deprecated: Deprecated due to CVE-2021-21366 resolved in 0.5.0
+
+  xmldom@0.6.0:
+    resolution: {integrity: sha512-iAcin401y58LckRZ0TkI4k0VSM1Qg0KGSc3i8rU+xrxe19A/BN1zHyVSJY7uoutVlaTSzYyk/v5AmkewAP7jtg==}
+    engines: {node: '>=10.0.0'}
 
   xtend@2.1.2:
     resolution: {integrity: sha512-vMNKzr2rHP9Dp/e1NQFnLQlwlhp9L/LfvnsVdHxN1f+uggyVI3i08uD14GPvCToPkdsRfyPqIyYGmIk58V98ZQ==}
@@ -10233,7 +10238,7 @@ snapshots:
       eslint: 4.19.1
       get-stdin: 6.0.0
 
-  eslint-config-standard@11.0.0(eslint-plugin-import@2.29.1(eslint@7.32.0))(eslint-plugin-node@7.0.1(eslint@7.32.0))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@7.32.0))(eslint@4.19.1):
+  eslint-config-standard@11.0.0(eslint-plugin-import@2.29.1(eslint@4.19.1))(eslint-plugin-node@7.0.1(eslint@7.32.0))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@4.19.1))(eslint@4.19.1):
     dependencies:
       eslint: 4.19.1
       eslint-plugin-import: 2.29.1(eslint@4.19.1)
@@ -13541,12 +13546,12 @@ snapshots:
 
   to-utf8@0.0.1: {}
 
-  togpx@0.5.4:
+  togpx@https://codeload.github.com/rvillanueva/togpx/tar.gz/664f9154a7408194d65e8b5fd27a53dcbddbd9d6:
     dependencies:
       concat-stream: 1.0.1
       jxon: 2.0.0-beta.5
       optimist: 0.3.7
-      xmldom: 0.1.31
+      xmldom: 0.6.0
 
   tough-cookie@5.1.2:
     dependencies:
@@ -13824,7 +13829,7 @@ snapshots:
       derequire: 2.1.1
       eslint: 4.19.1
       eslint-config-prettier: 3.6.0(eslint@4.19.1)
-      eslint-config-standard: 11.0.0(eslint-plugin-import@2.29.1(eslint@7.32.0))(eslint-plugin-node@7.0.1(eslint@7.32.0))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@7.32.0))(eslint@4.19.1)
+      eslint-config-standard: 11.0.0(eslint-plugin-import@2.29.1(eslint@4.19.1))(eslint-plugin-node@7.0.1(eslint@7.32.0))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@4.19.1))(eslint@4.19.1)
       eslint-plugin-import: 2.29.1(eslint@4.19.1)
       eslint-plugin-node: 7.0.1(eslint@4.19.1)
       eslint-plugin-prettier: 2.7.0(prettier@1.19.1)
@@ -14041,6 +14046,8 @@ snapshots:
   xmlbuilder@11.0.1: {}
 
   xmldom@0.1.31: {}
+
+  xmldom@0.6.0: {}
 
   xtend@2.1.2:
     dependencies:

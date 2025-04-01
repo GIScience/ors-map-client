@@ -77,7 +77,7 @@
     "stylus-loader": "^3.0.2",
     "timers-browserify": "^2.0.12",
     "tinycolor2": "^1.4.1",
-    "togpx": "^0.5.4",
+    "togpx": "rvillanueva/togpx",
     "vee-validate": "^2.0.6",
     "vue": "^2.7.14",
     "vue-chartjs": "^5.2.0",

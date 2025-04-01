@@ -55,7 +55,7 @@ describe('<Download />', () => {
     cy.get('@output').should('match', /^<gpx version="1\.0" creator="openrouteservice".*<\/gpx>$/)
   })
 
-  it.skip('downloads standard GPX route', () => {
+  it('downloads standard GPX route', () => {
     let format = 'Standard GPX'
     let ext = 'gpx'
     choose_format_change_name_and_download(format, ext)
