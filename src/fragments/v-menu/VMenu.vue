@@ -1,6 +1,7 @@
 <template>
   <v-list-group v-model="item.startOpen" v-if='item.items && showMenuItem(item)' :key="item.href" v-bind:group='item.group'>
-      <v-list-tile :target="item.target" :href="item.href" class="v-menu-item" :class="itemClass" :title="item.title" slot="activator">
+    <template v-slot:activator>
+      <v-list-tile :target="item.target" :href="item.href" class="v-menu-item" :class="itemClass" :title="item.title">
         <v-list-tile-action>
           <v-icon> {{ item.icon }}</v-icon>
         </v-list-tile-action>
@@ -8,6 +9,7 @@
           <v-list-tile-title> {{ item.title }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+    </template>
     <v-list-tile @click.stop="nav(subItem)" v-if="showMenuItem(subItem)" class="v-menu-item" :class="itemClass" v-for='subItem in item.items' :key='subItem.href' ripple
       v-bind:disabled='subItem.disabled'>
       <app-v-menu :item="subItem" :navigateFn="navigateFn" :itemClass="itemClass" :showIcon="false" :key="subItem.href" :showMenuItemFn="showMenuItem" ></app-v-menu>
