@@ -87,13 +87,13 @@ export default {
       const context = this
       this.resolvePoint(data.event.latlng.lat, data.event.latlng.lng).then((place) => {
         if (place) {
+          this.$set(context.clickPoint, 'placeName', place.placeName)
           context.clickPoint.placeName = place.placeName
           let hookData = {placeInfo: this.clickPoint, htmlFragment: this.$refs.placeInfoContainer}
           this.$root.appHooks.run('beforeShowResolvedPlaceInfo', hookData)
           if (context.$refs.placeInfoBox) {
             context.$refs.placeInfoBox.show()
           }
-          context.$forceUpdate()
         }
       })
     },
