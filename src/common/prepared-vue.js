@@ -140,7 +140,7 @@ const options = {lodash: lodash} // customize the way you want to call it
 Vue.use(VueLodash, options) // options is optional
 
 // Use vee validate to easily validate forms
-Vue.use(VeeValidate)
+//Vue.use(VeeValidate)
 
 // Managing Date and Times
 Vue.use(VueMoment)
