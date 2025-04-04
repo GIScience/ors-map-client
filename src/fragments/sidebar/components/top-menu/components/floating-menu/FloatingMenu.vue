@@ -9,11 +9,11 @@
     <v-list>
       <template v-for="(item, index) in menuItems">
         <v-layout row :key="index" v-if="item.show">
-          <v-btn class="floating-item" :key="index" flat v-if="item.emitEvent" @click="emitEvent(item.emitEvent)">
+          <v-btn class="floating-item" :key="index + 'emitEvent'" flat v-if="item.emitEvent" @click="emitEvent(item.emitEvent)">
             <v-icon :title="item.title" left color="dark">{{item.icon}}</v-icon>
             <template>{{item.title}}</template>
           </v-btn>
-          <v-btn class="floating-item" :key="index" v-else flat :target="item.target" :href="item.href">
+          <v-btn class="floating-item" :key="index + 'noEvent'" v-else flat :target="item.target" :href="item.href">
             <v-icon :title="item.title" left color="dark">{{item.icon}}</v-icon>
             <template>{{item.title}}</template>
           </v-btn>
