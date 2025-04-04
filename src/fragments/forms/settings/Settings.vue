@@ -1,6 +1,6 @@
 <template v-slot:content>
   <v-container fluid>
-    <v-form @keyup.native.enter="saveAll">
+    <v-form @keyup.enter="saveAll">
       <v-slide-y-transition mode="out-in">
         <div>
           <br>

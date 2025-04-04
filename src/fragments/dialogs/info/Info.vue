@@ -11,7 +11,7 @@
         <template v-slot:footer>
           <div class="text-right">
             <v-spacer></v-spacer>
-            <v-btn color="primary" flat @click.native="onOk($event)">{{infoOk}}</v-btn>
+            <v-btn color="primary" flat @click="onOk($event)">{{infoOk}}</v-btn>
           </div>
         </template>
       </box>
