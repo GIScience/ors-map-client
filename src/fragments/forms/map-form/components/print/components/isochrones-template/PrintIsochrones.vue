@@ -4,8 +4,8 @@
     <br /><br />
 
     <img alt="Map print view" width="auto" height="400" :src="mapViewImage" />
-    <template v-for="(place, index) in localMapViewData.places">
-      <div :key="index">
+    <template v-for="(place) in localMapViewData.places">
+      <div>
         <h5>{{place.placeName}}</h5>
         <template v-for="(polygon, polygonIndex) in localMapViewData.polygons">
           <template v-if="hasAsCenter(place, polygon)">

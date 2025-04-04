@@ -80,8 +80,8 @@
           </div>
         </l-popup>
       </l-circle-marker>
-      <template  v-for="(alternativeRoute) in alternativeRoutes">
-        <ors-l-polyline :key="alternativeRoute.properties.index" not-active
+      <template :key="alternativeRoute.properties.index" v-for="(alternativeRoute) in alternativeRoutes">
+        <ors-l-polyline not-active
           :color="alternativeRouteColor"
           @click="alternativeRouteIndexSelected(alternativeRoute.properties.index, $event)"
           :route="alternativeRoute" >

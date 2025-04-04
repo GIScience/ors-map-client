@@ -14,8 +14,8 @@
         </v-btn>
       </template>
       <v-list light style="background:white">
-        <template v-for="(vehicleType, index) in profile.vehicleTypes">
-          <v-list-tile :key="index" @click.stop.prevent="profileSelected(profile.slug, vehicleType)">
+        <template v-for="(vehicleType) in profile.vehicleTypes">
+          <v-list-tile @click.stop.prevent="profileSelected(profile.slug, vehicleType)">
             <v-list-tile-title>
               {{ getProfileTitle(profile.slug, vehicleType) }}
               <v-icon v-if="activeVehicleType === vehicleType" color="primary" small large>check</v-icon>
@@ -32,8 +32,8 @@
         </v-btn>
       </template>
       <v-list light style="background:white">
-        <template v-for="(nestedProfile, index) in profile.nestedProfiles">
-          <v-list-tile :key="index" @click.stop.prevent="profileSelected(nestedProfile)">
+        <template v-for="(nestedProfile) in profile.nestedProfiles">
+          <v-list-tile @click.stop.prevent="profileSelected(nestedProfile)">
             <v-list-tile-title>
               {{ getProfileTitle(nestedProfile)}}
               <v-icon v-if="nestedProfile === activeProfileSlug" color="primary" small large>check</v-icon>

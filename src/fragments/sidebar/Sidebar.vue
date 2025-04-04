@@ -40,8 +40,8 @@
               <v-list>
                 <v-divider></v-divider>
                 <v-list dense>
-                  <template v-for='(item, index) in menuItems'>
-                    <app-v-menu :item="item" :showIcon="true" :key="index"></app-v-menu>
+                  <template v-for='(item) in menuItems'>
+                    <app-v-menu :item="item" :showIcon="true"></app-v-menu>
                   </template>
                 </v-list>
               </v-list>

@@ -9,8 +9,8 @@
     <template v-slot:content>
       <h4>{{$t('isochronesDetails.reachCenters')}}</h4>
       <v-list dense class="centers">
-        <template v-for="(place, index) in localMapViewData.places">
-          <v-expansion-panel :key="index" style="box-shadow: none;" :value="index === 0 ? 0 : null">
+        <template v-for="(place, index) in localMapViewData.places" :key="index">
+          <v-expansion-panel style="box-shadow: none;" :value="index === 0 ? 0 : null">
             <v-expansion-panel-content class="polygons-header">
               <template v-slot:header>
                 <h5>{{place.placeName}}</h5>

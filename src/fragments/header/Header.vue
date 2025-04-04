@@ -7,8 +7,8 @@
       </a>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <template v-for="(item, index) in menuItems">
-          <app-h-menu :item="item" :showIcon="false" :key="index"></app-h-menu>
+        <template v-for="(item) in menuItems">
+          <app-h-menu :item="item" :showIcon="false"></app-h-menu>
         </template>
       </v-toolbar-items>
       <v-spacer></v-spacer>
