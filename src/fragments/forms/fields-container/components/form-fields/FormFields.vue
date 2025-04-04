@@ -17,7 +17,7 @@
               :title="buildLabel(parameter)"
               :clearable="!parameter.notClearable"
               autocomplete
-              :search-input.sync="parameter.searchInput"
+              v-model:search-input="parameter.searchInput"
               :multiple="parameter.multiSelect"
               :menu-props="{contentClass: 'form-fields-autocomplete-menu'}"
               :chips="parameter.multiSelect"
