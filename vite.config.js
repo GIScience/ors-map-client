@@ -1,5 +1,5 @@
 import {defineConfig, loadEnv, mergeConfig} from 'vite'
-import vue from '@vitejs/plugin-vue2'
+import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import path from 'path'
@@ -15,7 +15,7 @@ export default defineConfig(({ command, mode }) => {
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
-        vue : 'vue/dist/vue.runtime.esm.js',
+        vue : '@vue/compat',
         'fixtures': fileURLToPath(new URL('cypress/fixtures', import.meta.url))
     }
   },
@@ -23,7 +23,15 @@ export default defineConfig(({ command, mode }) => {
       minify: true
     },
     plugins: [
-      vue(),
+      vue({
+        template: {
+          compilerOptions: {
+            compatConfig: {
+              MODE: 2
+            }
+          }
+        }
+      }),
       viteCommonjs(),
     ],
     static: {
