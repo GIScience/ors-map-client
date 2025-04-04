@@ -3,7 +3,7 @@
   padding-right: 5px;
 }
 
-.polygons-header>>>.v-expansion-panel__header {
+.polygons-header :deep(.v-expansion-panel__header) {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
   padding-left: 5px;

@@ -10,7 +10,7 @@
   padding: 5px;
 }
 
-.segments-highlight-snack >>> .v-snack__content {
+.segments-highlight-snack :deep(.v-snack__content) {
   padding: 5px !important;
 }
 

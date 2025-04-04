@@ -11,15 +11,15 @@
   white-space: nowrap;
 }
 
-.carousel >>> .item {
+.carousel :deep(.item) {
   opacity: 0.5;
 }
 
-.carousel >>> .item .place-data {
+.carousel :deep(.item .place-data) {
   width: 100%;
 }
 
-.carousel >>> .item.active {
+.carousel :deep(.item.active) {
   opacity: 1;
 }
 
@@ -37,20 +37,20 @@
   padding-top: 5px;
 }
 
-.carousel >>> .vhl-btn-right {
+.carousel :deep(.vhl-btn-right) {
   margin-right: -10px !important;
   margin-bottom: 90px;
 }
 
-.carousel >>> .vhl-btn-left {
+.carousel :deep(.vhl-btn-left) {
   margin-left: -10px !important;
   margin-bottom: 90px;
 }
-.carousel >>> .vhl-item {
+.carousel :deep(.vhl-item) {
   padding-top: 5px;
 }
 
-.carousel >>> .previous {
+.carousel :deep(.previous) {
   position: absolute;
   left: 0;
   z-index: 11;
@@ -62,7 +62,7 @@
   padding-top: 2px;
 }
 
-.carousel >>> .next {
+.carousel :deep(.next) {
   position: absolute;
   right: 0;
   z-index: 11;
@@ -74,7 +74,7 @@
   padding-top: 2px;
 }
 
-.carousel >>> .navigate-btn {
+.carousel :deep(.navigate-btn) {
   height: 35px;
   width: 100%;
   padding: 0;
@@ -82,30 +82,30 @@
 }
 
 
-.carousel >>> .navigate-btn .text {
+.carousel :deep(.navigate-btn .text) {
   flex-direction: unset;
   color: black;
   text-transform: uppercase;
 }
 
-.carousel >>> .navigate-btn .icon {
+.carousel :deep(.navigate-btn .icon) {
   flex-direction: unset;
   color: black !important;
   margin-left: 5px;
 }
 
-.carousel >>> .navigate-btn .v-btn__content {
+.carousel :deep(.navigate-btn .v-btn__content) {
   flex-direction: unset;
 }
 
-.carousel >>> .distance {
+.carousel :deep(.distance) {
   font-size: 11px;
 }
 
-.carousel >>> .distance span {
+.carousel :deep(.distance span) {
   font-weight: 700;
 }
 
-.carousel >>> .vhl-item {
+.carousel :deep(.vhl-item) {
   padding-bottom: 1px;
 }

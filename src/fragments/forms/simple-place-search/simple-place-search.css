@@ -37,12 +37,12 @@
   max-width: 98%;
 }
 
-.simple-place-search >>> .box-content {
+.simple-place-search :deep(.box-content) {
   padding-top: 0;
   padding-bottom: 0;
 }
 
-.mini-input >>> .suggestions {
+.mini-input :deep(.suggestions) {
   right: 10px;
   width: 100%
 }

@@ -8,7 +8,7 @@
   height: 40px;
 }
 
-.form-fields-slider-text-input >>> input {
+.form-fields-slider-text-input :deep(input) {
   -webkit-appearance: none;
   margin: 0;
   -moz-appearance: textfield;
@@ -16,20 +16,20 @@
 
 
 
-.form-fields-slider-text-input >>> .v-input__slot {
+.form-fields-slider-text-input :deep(.v-input__slot) {
   padding: 2px !important;
   min-height: 40px !important;
 }
 
-.form-fields-slider-text-input >>> input::-webkit-inner-spin-button, .form-fields-slider-text-input >>>
-input::-webkit-outer-spin-button {
+.form-fields-slider-text-input :deep(input::-webkit-inner-spin-button),
+.form-fields-slider-text-input :deep(input::-webkit-outer-spin-button) {
   -webkit-appearance: none;
   -moz-appearance: textfield;
   margin: 0;
 }
 
 
-.form-fields-slider-text-input >>> input {
+.form-fields-slider-text-input :deep(input) {
   margin-top: 5px;
 }
 

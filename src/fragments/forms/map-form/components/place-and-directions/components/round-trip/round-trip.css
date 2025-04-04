@@ -3,7 +3,7 @@
   width: calc(100% - 10px);
 }
 
-.round-trip-panel >>> li > div  {
+.round-trip-panel :deep(li > div)  {
   padding: 0;
 }
 

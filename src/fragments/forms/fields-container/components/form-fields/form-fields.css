@@ -41,7 +41,7 @@
   box-shadow:none
 }
 
-.fields-panel >>> li > div  {
+.fields-panel :deep(li > div)  {
   padding: 0;
 }
 
@@ -50,10 +50,10 @@
   margin-bottom: 0;
 }
 
-.form-fields-autocomplete >>> input {
+.form-fields-autocomplete :deep(input) {
   text-transform: capitalize;
 }
 
-.form-fields-checkbox >>> label {
+.form-fields-checkbox :deep(label) {
   color:black !important
 }

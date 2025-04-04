@@ -10,7 +10,7 @@
   text-align:left;
 }
 
-.right-click-btn >>> .v-btn__content {
+.right-click-btn :deep(.v-btn__content) {
   padding-left:0;
   display:block;
 }

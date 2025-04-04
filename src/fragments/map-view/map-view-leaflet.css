@@ -1,35 +1,35 @@
-.map-view >>> .leaflet-top.leaflet-left {
+.map-view :deep(.leaflet-top.leaflet-left) {
   margin-top: 70px;
 }
 
-.map-view.extra-low-resolution:not(.embedded) >>> .leaflet-top.leaflet-right {
+.map-view.extra-low-resolution:not(.embedded) :deep(.leaflet-top.leaflet-right) {
   margin-top: 70px;
 }
 
-.map-view.hide-controls >>> .leaflet-top.leaflet-right {
+.map-view.hide-controls :deep(.leaflet-top.leaflet-right) {
   display: none;
 }
 
-.map-view.extra-low-resolution.hide-controls >>> .leaflet-control-attribution {
+.map-view.extra-low-resolution.hide-controls :deep(.leaflet-control-attribution) {
   display: none;
 }
 
-.map-view.extra-low-resolution.hide-controls >>> .leaflet-control-zoom {
+.map-view.extra-low-resolution.hide-controls :deep(.leaflet-control-zoom) {
   display: none;
 }
 
-.map-view >>> .leaflet-control-attribution.leaflet-control {
+.map-view :deep(.leaflet-control-attribution.leaflet-control) {
   background-color: rgba(256,256,256, 0.6);
 }
 
-.map-view >>> .leaflet-control-layers-toggle {
+.map-view :deep(.leaflet-control-layers-toggle) {
   width: 36px;
   height: 36px;
 }
 
 
 
-.map-view >>> .leaflet-popup-close-button {
+.map-view :deep(.leaflet-popup-close-button) {
   position: absolute;
   right: 5px;
   top: 0;
@@ -38,12 +38,12 @@
   text-decoration: none;
 }
 
-.map-view >>> .leaflet-popup-content {
+.map-view :deep(.leaflet-popup-content) {
   word-break: break-all;
   min-width: 150px;
 }
 
-.map-view.low-resolution >>> .leaflet-popup-content {
+.map-view.low-resolution :deep(.leaflet-popup-content) {
   max-width: 200px;
   max-height: 300px;
 }
