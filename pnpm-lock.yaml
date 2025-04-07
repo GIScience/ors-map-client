@@ -213,8 +213,8 @@ importers:
         specifier: ^1.5.19
         version: 1.5.24(vue@3.5.13(typescript@5.5.4))
       vuex:
-        specifier: ^3.0.1
-        version: 3.6.2(vue@3.5.13(typescript@5.5.4))
+        specifier: ^4.1.0
+        version: 4.1.0(vue@3.5.13(typescript@5.5.4))
       xml2js:
         specifier: ^0.6.0
         version: 0.6.2
@@ -6633,10 +6633,10 @@ packages:
     peerDependencies:
       vue: ^2.5.18
 
-  vuex@3.6.2:
-    resolution: {integrity: sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==}
+  vuex@4.1.0:
+    resolution: {integrity: sha512-hmV6UerDrPcgbSy9ORAtNXDr9M4wlNP4pEFKye4ujJF8oqgFFuxDCdOLS3eNoRTtq5O3hoBDh9Doj1bQMYHRbQ==}
     peerDependencies:
-      vue: ^2.0.0
+      vue: ^3.2.0
 
   wait-on@7.0.1:
     resolution: {integrity: sha512-9AnJE9qTjRQOlTZIldAaf/da2eW0eSRSgcqq85mXQja/DW3MriHxkpODDSUEg+Gri/rKEcXUZHe+cevvYItaog==}
@@ -14125,8 +14125,9 @@ snapshots:
     dependencies:
       vue: 3.5.13(typescript@5.5.4)
 
-  vuex@3.6.2(vue@3.5.13(typescript@5.5.4)):
+  vuex@4.1.0(vue@3.5.13(typescript@5.5.4)):
     dependencies:
+      '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.5.4)
 
   wait-on@7.0.1(debug@4.3.4):

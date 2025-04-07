@@ -1,21 +1,15 @@
 /* eslint-disable no-undef */
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 import appUI from './modules/app-ui'
 import mapState from './modules/map-state'
 import appState from './modules/app-state'
-
-Vue.use(Vuex)
 
 const storeBuilder = {
   state: {
     value: 0
   },
-  getters: {
-  },
-  mutations: {
-
-  },
+  getters: {},
+  mutations: {},
   modules: {
     appUI,
     mapState,
@@ -33,6 +27,6 @@ for (let key in mergedModules) {
   storeBuilder.modules[key] = mergedModules[key].default
 }
 
-const store = new Vuex.Store(storeBuilder)
+const store = createStore(storeBuilder)
 
 export default store
