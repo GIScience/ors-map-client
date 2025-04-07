@@ -1,16 +1,15 @@
 import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
 import defaultMapSettings from '@/config/default-map-settings'
 import settingsOptions from '@/config/settings-options.js'
-import PreparedVue from '@/common/prepared-vue.js'
+import createPreparedVue from '@/common/prepared-vue.js'
 import I18nBuilder from '@/i18n/i18n-builder'
 import constants from '@/resources/constants'
 import appConfig from '@/config/app-config'
 import AppHooks from '@/support/app-hooks'
 import utils from '@/support/utils'
 import store from '@/store/store'
-import router from '@/router'
 import lodash from 'lodash'
-import Vue from 'vue'
+import { createApp } from 'vue'
 import {getKeyObject} from '@/support/appwrite-utils'
 
 class AppLoader {
@@ -208,14 +207,10 @@ class AppLoader {
 
     i18n.locale = store.getters.mapSettings.locale === 'en' ? 'en-us' : store.getters.mapSettings.locale
 
-    this.vueInstance = new PreparedVue({
-      el: elementSelector,
-      i18n,
-      router,
-      components: {App},
-      store,
-      render: h => h(App)
-    })
+    const app = createPreparedVue(App)
+
+    app.mount(elementSelector)
+    this.vueInstance = app
 
     store.commit('mainAppInstanceRef', this.vueInstance)
     return this.vueInstance
@@ -251,11 +246,15 @@ class AppLoader {
     if (store.getters.mainAppInstanceRef) {
       ref = store.getters.mainAppInstanceRef
     } else {
-      ref = new Vue({
-        data: {appHooks: new AppHooks()},
-        i18n: I18nBuilder.build(),
-        store
+      const i18n = I18nBuilder.build()
+      ref = createApp({
+        data() {
+          return {
+            appHooks: new AppHooks()
+          }},
       })
+      ref.use(i18n)
+      ref.use(store)
     }
     return ref
   }
