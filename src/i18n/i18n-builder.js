@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
+import { createI18n } from 'vue-i18n'
 import enUSTranslations from './translations/en-us/builder'
 import deDETranslations from './translations/de-de/builder'
 import ptBRTranslations from './translations/pt-br/builder'
@@ -11,25 +10,24 @@ import csCZTranslations from './translations/cs-cz/builder'
 import roROTranslations from './translations/ro-ro/builder'
 import appConfig from '@/config/app-config'
 
-Vue.use(VueI18n)
-
 const build = () => {
-  const i18n = {
-    locale: appConfig.defaultLocale,
-    messages: { 'de-de': {}, 'en-us': {}, 'pt-br': {}, 'it-it': {}, 'fr-fr': {}, 'hu-hu': {}, 'es-es': {}, 'cs-cz': {}, 'ro-ro': {}},
-    fallbackLocale: appConfig.defaultLocale
+  const messages = {
+    'en-us': enUSTranslations.build(),
+    'de-de': deDETranslations.build(),
+    'pt-br': ptBRTranslations.build(),
+    'it-it': itITTranslations.build(),
+    'fr-fr': frFRTranslations.build(),
+    'hu-hu': huHUTranslations.build(),
+    'es-es': esESTranslations.build(),
+    'cs-cz': csCZTranslations.build(),
+    'ro-ro': roROTranslations.build()
   }
 
-  i18n.messages['en-us'] = enUSTranslations.build()
-  i18n.messages['de-de'] = deDETranslations.build()
-  i18n.messages['pt-br'] = ptBRTranslations.build()
-  i18n.messages['it-it'] = itITTranslations.build()
-  i18n.messages['fr-fr'] = frFRTranslations.build()
-  i18n.messages['hu-hu'] = huHUTranslations.build()
-  i18n.messages['es-es'] = esESTranslations.build()
-  i18n.messages['cs-cz'] = csCZTranslations.build()
-  i18n.messages['ro-ro'] = roROTranslations.build()
-
+  const i18n = createI18n({
+    locale: appConfig.defaultLocale,
+    fallbackLocale: appConfig.defaultLocale,
+    messages
+  })
 
   /*
     Uncomment the line below to output, via browser
@@ -40,8 +38,7 @@ const build = () => {
   */
   // console.log(JSON.stringify(i18n.messages['en-us']))
 
-  Vue.use(VueI18n)
-  return new VueI18n(i18n)
+  return i18n
 }
 
 const getShortLocale = (locale) => {

@@ -83,7 +83,7 @@
     "vue": "^3.1.0",
     "vue-chartjs": "^5.2.0",
     "vue-horizontal-list": "^1.0.7",
-    "vue-i18n": "^7.6.0",
+    "vue-i18n": "^9.14.2",
     "vue-json-pretty": "^1.4.1",
     "vue-lodash": "^2.1.2",
     "vue-moment": "^4.0.0",
