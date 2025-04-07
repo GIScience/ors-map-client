@@ -90,7 +90,7 @@
     "vue-moment": "^4.0.0",
     "vue-resize": "^1.0.1",
     "vue-rest-client": "^0.1.15",
-    "vue-router": "^3.0.1",
+    "vue-router": "^4.5.0",
     "vue-style-loader": "^3.0.1",
     "vue2-dropzone": "^3.6.0",
     "vue2-leaflet": "^2.7.1",

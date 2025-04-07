@@ -2,14 +2,14 @@
 import resolver from '@/support/routes-resolver'
 import appConfig from '@/config/app-config'
 import AppLoader from '@/app-loader'
-import Router from 'vue-router'
-import Vue from 'vue'
+import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
 
-Vue.use(Router)
+const history = appConfig.urlMode === 'history'
+  ? createWebHistory(resolver.homeUrl())
+  : createWebHashHistory(resolver.homeUrl())
 
-const router = new Router({
-  mode: appConfig.urlMode,
-  base: resolver.homeUrl(),
+const router = createRouter({
+  history,
   // We use the feature-by-folder strategy, so
   // each component declares its routes and
   // these routes are loaded below, with the loader helper
