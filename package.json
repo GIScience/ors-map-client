@@ -77,6 +77,7 @@
     "stylus": "^0.59.0",
     "stylus-loader": "^3.0.2",
     "timers-browserify": "^2.0.12",
+    "tiny-emitter": "^2.1.0",
     "tinycolor2": "^1.4.1",
     "togpx": "rvillanueva/togpx",
     "vee-validate": "^2.0.6",

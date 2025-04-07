@@ -143,6 +143,9 @@ importers:
       timers-browserify:
         specifier: ^2.0.12
         version: 2.0.12
+      tiny-emitter:
+        specifier: ^2.1.0
+        version: 2.1.0
       tinycolor2:
         specifier: ^1.4.1
         version: 1.6.0
@@ -6235,6 +6238,9 @@ packages:
     resolution: {integrity: sha512-9phl76Cqm6FhSX9Xe1ZUAMLtm1BLkKj2Qd5ApyWkXzsMRaA7dgr81kf4wJmQf/hAvg8EEyJxDo3du/0KlhPiKQ==}
     engines: {node: '>=0.6.0'}
 
+  tiny-emitter@2.1.0:
+    resolution: {integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==}
+
   tinycolor2@1.6.0:
     resolution: {integrity: sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw==}
 
@@ -10410,7 +10416,7 @@ snapshots:
       eslint: 4.19.1
       get-stdin: 6.0.0
 
-  eslint-config-standard@11.0.0(eslint-plugin-import@2.29.1(eslint@7.32.0))(eslint-plugin-node@7.0.1(eslint@7.32.0))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@4.19.1))(eslint@4.19.1):
+  eslint-config-standard@11.0.0(eslint-plugin-import@2.29.1(eslint@4.19.1))(eslint-plugin-node@7.0.1(eslint@4.19.1))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@4.19.1))(eslint@4.19.1):
     dependencies:
       eslint: 4.19.1
       eslint-plugin-import: 2.29.1(eslint@4.19.1)
@@ -13698,6 +13704,8 @@ snapshots:
     dependencies:
       setimmediate: 1.0.5
 
+  tiny-emitter@2.1.0: {}
+
   tinycolor2@1.6.0: {}
 
   tldts-core@6.1.85: {}
@@ -14010,7 +14018,7 @@ snapshots:
       derequire: 2.1.1
       eslint: 4.19.1
       eslint-config-prettier: 3.6.0(eslint@4.19.1)
-      eslint-config-standard: 11.0.0(eslint-plugin-import@2.29.1(eslint@7.32.0))(eslint-plugin-node@7.0.1(eslint@7.32.0))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@4.19.1))(eslint@4.19.1)
+      eslint-config-standard: 11.0.0(eslint-plugin-import@2.29.1(eslint@4.19.1))(eslint-plugin-node@7.0.1(eslint@4.19.1))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@4.19.1))(eslint@4.19.1)
       eslint-plugin-import: 2.29.1(eslint@4.19.1)
       eslint-plugin-node: 7.0.1(eslint@4.19.1)
       eslint-plugin-prettier: 2.7.0(prettier@1.19.1)
