@@ -4,9 +4,7 @@ import smartTooltip from '@/directives/smart-tooltip'
 import globalMixins from '@/common/global-mixins'
 // import AppVMenu from '@/fragments/v-menu/VMenu.vue'
 import topBorder from '@/directives/top-border'
-import capitalize from '@/filters/capitalize'
 // import HMenu from '@/fragments/h-menu/HMenu.vue'
-import uppercase from '@/filters/uppercase'
 import title from '@/directives/title'
 import focus from '@/directives/focus'
 // import VeeValidate from 'vee-validate'
@@ -174,11 +172,6 @@ export default function createPreparedVue(App) {
 // Vue.component('app-h-menu', HMenu)
 // Vue.component('app-v-menu', AppVMenu)
   app.component('wrapper-tag', wrapperTag)
-
-  //TODO: add global custom filters
-  //app.config.globalProperties.$filters = {} //new way to declare filter below
-  //Vue.filter('uppercase', uppercase) //removed in vue3
-  //Vue.filter('capitalize', capitalize) //removed in vue3
 
   return app
 }
