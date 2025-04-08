@@ -210,8 +210,8 @@ importers:
         specifier: ^2.17.0
         version: 2.24.3
       vuetify:
-        specifier: ^1.5.19
-        version: 1.5.24(vue@3.5.13(typescript@5.5.4))
+        specifier: ^3.8.1
+        version: 3.8.1(typescript@5.5.4)(vue@3.5.13(typescript@5.5.4))
       vuex:
         specifier: ^4.1.0
         version: 4.1.0(vue@3.5.13(typescript@5.5.4))
@@ -6628,10 +6628,21 @@ packages:
   vuedraggable@2.24.3:
     resolution: {integrity: sha512-6/HDXi92GzB+Hcs9fC6PAAozK1RLt1ewPTLjK0anTYguXLAeySDmcnqE8IC0xa7shvSzRjQXq3/+dsZ7ETGF3g==}
 
-  vuetify@1.5.24:
-    resolution: {integrity: sha512-guFOgEgZ8VpSgNXOv1QL2fOliaJBoiyNnf+bBqcXsnIppJGRlW1wyT6Ux7ZlQyphSHs+UK1aJNUjcyAtoOiHWg==}
+  vuetify@3.8.1:
+    resolution: {integrity: sha512-3qReKBBWIIdJJmwnFU1blVIKHDtnLfIP7kk0MwUrrfjYkWmsDpsymtDnsukkTCnlJ1WvhLr64eQFosr0RVbj9w==}
+    engines: {node: ^12.20 || >=14.13}
     peerDependencies:
-      vue: ^2.5.18
+      typescript: '>=4.7'
+      vite-plugin-vuetify: '>=2.1.0'
+      vue: ^3.5.0
+      webpack-plugin-vuetify: '>=3.1.0'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+      vite-plugin-vuetify:
+        optional: true
+      webpack-plugin-vuetify:
+        optional: true
 
   vuex@4.1.0:
     resolution: {integrity: sha512-hmV6UerDrPcgbSy9ORAtNXDr9M4wlNP4pEFKye4ujJF8oqgFFuxDCdOLS3eNoRTtq5O3hoBDh9Doj1bQMYHRbQ==}
@@ -14121,9 +14132,11 @@ snapshots:
     dependencies:
       sortablejs: 1.10.2
 
-  vuetify@1.5.24(vue@3.5.13(typescript@5.5.4)):
+  vuetify@3.8.1(typescript@5.5.4)(vue@3.5.13(typescript@5.5.4)):
     dependencies:
       vue: 3.5.13(typescript@5.5.4)
+    optionalDependencies:
+      typescript: 5.5.4
 
   vuex@4.1.0(vue@3.5.13(typescript@5.5.4)):
     dependencies:

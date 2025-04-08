@@ -99,7 +99,7 @@
     "vue2-leaflet-markercluster": "^3.1.0",
     "vue2-leaflet-polyline-measure": "^1.0.0",
     "vuedraggable": "^2.17.0",
-    "vuetify": "^1.5.19",
+    "vuetify": "^3.8.1",
     "vuex": "^4.1.0",
     "xml2js": "^0.6.0"
   },
