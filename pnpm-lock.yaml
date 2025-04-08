@@ -96,7 +96,7 @@ importers:
         specifier: ^1.5.3
         version: 1.5.3(leaflet@1.9.4)
       lodash:
-        specifier: ^4.17.19
+        specifier: ^4.17.21
         version: 4.17.21
       lz-string:
         specifier: ^1.4.4

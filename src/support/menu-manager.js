@@ -2,7 +2,7 @@
 
 import menuService from './menu-service'
 import appConfig from '@/config/app-config'
-import Vue from 'vue'
+import _ from 'lodash'
 
 /**
  * Get a menu from remove service by its slug
@@ -18,7 +18,7 @@ const getMenu = (slug) => {
   return new Promise((resolve) => {
     menuService.query()
       .then(response => {
-        const menuBySlug = Vue.lodash.find(response.data, (menu) => {
+        const menuBySlug = _.find(response.data, (menu) => {
           return menu.slug === slug
         })
         menuService.get(menuBySlug.term_id)
@@ -56,7 +56,7 @@ const addBaseExternalUrl = (item) => {
  */
 const parseMenu = (items) => {
   const menu = []
-  Vue.lodash.each(items, (item) => {
+  _.each(items, (item) => {
     const parsedItem = parseItem(item)
     menu.push(parsedItem)
   })
@@ -84,7 +84,7 @@ const parseItem = (item) => {
   /* If the menu item has children, parse the children too */
   if (item.children && Array.isArray(item.children)) {
     parsedItem.items = []
-    Vue.lodash.each(item.children, (child) => {
+    _.each(item.children, (child) => {
       parsedItem.items.push(parseItem(child))
     })
   }
@@ -125,7 +125,7 @@ const setItemActiveStatus = (item, to) => {
  * @param to router to object
  */
 const setMenuActiveStatus = (menuItems, to) => {
-  Vue.lodash.each(menuItems, (item) => {
+  _.each(menuItems, (item) => {
     setItemActiveStatus(item, to)
   })
 }
@@ -137,7 +137,7 @@ const setMenuActiveStatus = (menuItems, to) => {
  * @param {*} replacement
  */
 const replaceItemEndingWith = (menu, itemEnding, replacement) => {
-  const replaceItemIndex = Vue.lodash.findIndex(menu, (item) => {
+  const replaceItemIndex = _.findIndex(menu, (item) => {
     if (!item.href) return false
     const href = item.href.endsWith('/') ? item.href.substr(0, (item.href.length - 1)) : item.href
     return href && href.endsWith(itemEnding)
@@ -156,7 +156,7 @@ const replaceItemEndingWith = (menu, itemEnding, replacement) => {
  * @param {*} replacement
  */
 const replaceItemStartingWith = (menu, itemStart, replacement) => {
-  const replaceItemIndex = Vue.lodash.findIndex(menu, (item) => {
+  const replaceItemIndex = _.findIndex(menu, (item) => {
     if (!item.href) return false
     const href = item.href.replace('http://', '').replace('https://', '')
     return href && href.startsWith(itemStart)
@@ -175,7 +175,7 @@ const replaceItemStartingWith = (menu, itemStart, replacement) => {
  * @param {*} injectItem
  */
 const injectBeforeItemEndingWith = (menu, beforeItemEnding, injectItem) => {
-  const beforeItemIndex = Vue.lodash.findIndex(menu, (item) => {
+  const beforeItemIndex = _.findIndex(menu, (item) => {
     if (!item.href) return false
     const href = item.href.endsWith('/') ? item.href.substr(0, (item.href.length - 1)) : item.href
     return href && href.endsWith(beforeItemEnding)
@@ -201,7 +201,7 @@ const injectAt = (menu, atIndex, injectItem) => {
  * @param {*} itemEnding
  */
 const removeItemEndingWith = (menu, itemEnding) => {
-  const removeItemIndex = Vue.lodash.findIndex(menu, (item) => {
+  const removeItemIndex = _.findIndex(menu, (item) => {
     if (!item.href) return false
     const href = item.href.endsWith('/') ? item.href.substr(0, (item.href.length - 1)) : item.href
     return href && href.endsWith(itemEnding)
