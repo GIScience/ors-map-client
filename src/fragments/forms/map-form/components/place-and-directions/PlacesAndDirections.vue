@@ -11,7 +11,7 @@
                     <v-icon color="dark">reorder</v-icon>
                   </v-btn>
                 </v-flex>
-                <v-flex v-bind="{[ $store.getters.mode === constants.modes.directions? 'sm10 md11' : 'sm12']: true}">
+                <v-flex :class="$store.getters.mode === constants.modes.directions ? 'sm10 md11' : 'sm12'">
                   <place-input :ref="'place'+index"
                     id-postfix="places-and-directions"
                     :support-directions="inputSupportsDirections"

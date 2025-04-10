@@ -9,7 +9,7 @@
                   <v-flex xs1 v-if="$store.getters.mode === constants.modes.isochrones && places.length > 1">
                     <v-icon class="reorder-handle">reorder</v-icon>
                   </v-flex>
-                  <v-flex v-bind="{[ $store.getters.mode === constants.modes.directions? 'xs11' : 'xs12']: true}">
+                  <v-flex :class="$store.getters.mode === constants.modes.directions ? 'md11' : 'sm12'">
                     <place-input :ref="'place'+index"
                       id-postfix="isochrones"
                       :support-directions="false"

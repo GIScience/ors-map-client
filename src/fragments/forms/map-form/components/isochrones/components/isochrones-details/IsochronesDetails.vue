@@ -20,7 +20,7 @@
                   <template v-if="hasAsCenter(place, polygon)">
                     <div :key="polygonIndex" style="padding-left:10px">
                       <v-layout class="action-options-wrapper">
-                        <v-flex v-bind="{[ $highResolution? 'lg4' : 'md12']: true}">
+                        <v-flex :class="$highResolution ? 'lg4' : 'md12'">
                           <v-btn icon @click="toggleVisibility(polygonIndex)" class="no-margin"
                             :title="$t('isochronesDetails.toggleVisibility')">
                             <v-icon :color="polygon.properties.visible? 'primary' : 'dark' ">visibility</v-icon>

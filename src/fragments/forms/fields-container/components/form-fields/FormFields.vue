@@ -3,7 +3,7 @@
     <template v-if="formParameters">
       <template v-for="(parameter, index) in formParameters">
         <v-layout v-if="showField(parameter)" :key="index" row class="field-row" :style="{'padding-left': (level * 5) + 'px'}" >
-          <v-flex v-bind="{[parameter.type === constants.filterTypes.wrapper ? 'sm12': 'sm11']: true}">
+          <v-flex :class="constants.filterTypes.wrapper ? 'sm12': 'sm11'">
             <v-autocomplete v-if="parameter.isEnum || parameter.items" :ref="'field'+ index"
               class="field-input no-input-details form-fields-autocomplete"
               :class="{'multi-select': parameter.multiSelect}"
