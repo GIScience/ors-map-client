@@ -2,9 +2,9 @@ import wrapperTag from '@/fragments/wrapper/wrapper-tag'
 import clickOutside from '@/directives/click-outside'
 import smartTooltip from '@/directives/smart-tooltip'
 import globalMixins from '@/common/global-mixins'
-// import AppVMenu from '@/fragments/v-menu/VMenu.vue'
+import AppVMenu from '@/fragments/v-menu/VMenu.vue'
 import topBorder from '@/directives/top-border'
-// import HMenu from '@/fragments/h-menu/HMenu.vue'
+import HMenu from '@/fragments/h-menu/HMenu.vue'
 import title from '@/directives/title'
 import focus from '@/directives/focus'
 // import VeeValidate from 'vee-validate'
@@ -152,8 +152,8 @@ export default function createPreparedVue(App) {
 
   // add global custom components
   app.component('box', box)
-// Vue.component('app-h-menu', HMenu)
-// Vue.component('app-v-menu', AppVMenu)
+  app.component('app-h-menu', HMenu)
+  app.component('app-v-menu', AppVMenu)
   app.component('wrapper-tag', wrapperTag)
 
   return app
