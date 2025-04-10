@@ -43,29 +43,29 @@ const globalMixins = {
   },
   computed: {
     $xlResolution () {
-      const extraLow = this.$vuetify.breakpoint.xs
+      const extraLow = this.$vuetify.display.xs
       return extraLow
     },
     $lowResolution () {
-      const lowResolution = this.$vuetify.breakpoint.smAndDown
+      const lowResolution = this.$vuetify.display.smAndDown
       return lowResolution
     },
     $highResolution () {
-      const highResolution = this.$vuetify.breakpoint.lgAndUp
+      const highResolution = this.$vuetify.display.lgAndUp
       return highResolution
     },
 
     $mdResolution () {
-      const highResolution = this.$vuetify.breakpoint.md
+      const highResolution = this.$vuetify.display.md
       return highResolution
     },
 
     $mdAndUpResolution () {
-      const mdAndUpResolution = this.$vuetify.breakpoint.mdAndUp
+      const mdAndUpResolution = this.$vuetify.display.mdAndUp
       return mdAndUpResolution
     },
     $mdAndDownResolution () {
-      const mdAndDownResolution = this.$vuetify.breakpoint.mdAndDown
+      const mdAndDownResolution = this.$vuetify.display.mdAndDown
       return mdAndDownResolution
     },
     constants () {
