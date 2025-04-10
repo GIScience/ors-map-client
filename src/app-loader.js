@@ -142,7 +142,7 @@ class AppLoader {
     const appInstance = AppLoader.getInstance()
     if (appInstance) {
       // main app instance may not be available when app is still loading
-      appInstance.appHooks.run('mapSettingsChanged', mapSettings)
+      //appInstance.appHooks.run('mapSettingsChanged', mapSettings)
     }
 
     store.commit('dataAcquired', true)

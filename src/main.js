@@ -12,9 +12,9 @@ let appLoader = new AppLoader()
 
 appLoader.loadApp(AppRootComponent, '#app').then(vueInstance => {
   main.vueInstance = vueInstance
-  main.vueInstance.appHooks.loadRegisteredHooks()
+  //main.vueInstance.appHooks.loadRegisteredHooks()
   EventBus.$emit('appLoaded')
-  main.vueInstance.appHooks.run('appLoaded', main.vueInstance)
+  //main.vueInstance.appHooks.run('appLoaded', main.vueInstance)
 })
 
 

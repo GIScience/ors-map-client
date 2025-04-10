@@ -44,7 +44,7 @@ const getters = {
 const mutations = {
   mode: (state, mode) => {
     state.mode = mode
-    AppLoader.getInstance().appHooks.run('appModeChanged', mode)
+    //AppLoader.getInstance().appHooks.run('appModeChanged', mode)
   },
   apiDataRequested: (state, requested) => {
     state.apiDataRequested = requested

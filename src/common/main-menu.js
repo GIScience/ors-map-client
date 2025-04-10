@@ -17,22 +17,22 @@ const loadItems = () => {
         resolve([])
       })
     } else {
-      let expectedPromise = AppLoader.getInstance().appHooks.run('loadMenuItems')
-      if (expectedPromise instanceof Promise) {
-        expectedPromise.then((result) => {
-          resolve(result)
-        }).catch (err => {
-          console.log(err)
-        })
-      } else {
-        resolve([])
-      }
+      //let expectedPromise = AppLoader.getInstance().appHooks.run('loadMenuItems')
+      // if (expectedPromise instanceof Promise) {
+      //   expectedPromise.then((result) => {
+      //     resolve(result)
+      //   }).catch (err => {
+      //     console.log(err)
+      //   })
+      // } else {
+      //   resolve([])
+      // }
     }
   })
 }
 
 const adjustMenu = () => {
-  AppLoader.getInstance().appHooks.run('modifyMenu', store.getters.mainMenu)
+  //AppLoader.getInstance().appHooks.run('modifyMenu', store.getters.mainMenu)
 }
 
 /**

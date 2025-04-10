@@ -30,7 +30,7 @@ const getters = {
 const mutations = {
   appRouteData: (state, value) => {
     state.appRouteData = value
-    AppLoader.getInstance().appHooks.run('appRouteDataChanged', state.appRouteData)
+    //AppLoader.getInstance().appHooks.run('appRouteDataChanged', state.appRouteData)
   },
   mapReady: (state, value) => {
     state.mapReady = value

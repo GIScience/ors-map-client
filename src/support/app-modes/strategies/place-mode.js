@@ -99,7 +99,7 @@ class PlaceMode {
       }
     }
     // Return the object
-    AppLoader.getInstance().appHooks.run('afterPlacePathDecoded', appRouteData)
+    //AppLoader.getInstance().appHooks.run('afterPlacePathDecoded', appRouteData)
     return appRouteData
   }
 }
