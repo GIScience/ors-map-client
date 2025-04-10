@@ -45,6 +45,7 @@ import {
   VImg,
   VItem,
   VItemGroup,
+  VLayout,
   VList,
   VListGroup,
   VListItem,
@@ -55,16 +56,17 @@ import {
   VSelect,
   VSlider,
   VSnackbar,
+  VSpacer,
   VSwitch,
   VTab,
-  VWindowItem,
   VTabs,
   VTextarea,
   VTextField,
   VToolbar,
   VToolbarItems,
   VToolbarTitle,
-  VTooltip
+  VTooltip,
+  VWindowItem
 } from 'vuetify/components'
 
 
@@ -102,6 +104,7 @@ export default function createPreparedVue(App) {
       VImg,
       VItem,
       VItemGroup,
+      VLayout,
       VList,
       VListGroup,
       VListItem,
@@ -111,10 +114,10 @@ export default function createPreparedVue(App) {
       VSelect,
       VSlider,
       VSnackbar,
+      VSpacer,
       VListSubheader,
       VSwitch,
       VTab,
-      VWindowItem,
       VTabs,
       VTextarea,
       VTextField,
@@ -122,6 +125,7 @@ export default function createPreparedVue(App) {
       VToolbarItems,
       VToolbarTitle,
       VTooltip,
+      VWindowItem,
     }
   })
   app.use(vuetify)
