@@ -41,7 +41,7 @@
       @markerClicked="markerClicked">
     </map-view>
 
-    <v-bottom-nav v-if="showBottomNav && !$store.getters.embed" :style="{height: bottomNavHeight + 'px !important', top: bottomNavTop + 'px !important'}" class="places-nav" absolute color="white" >
+    <v-bottom-navigation v-if="showBottomNav && !$store.getters.embed" :style="{height: bottomNavHeight + 'px !important', top: bottomNavTop + 'px !important'}" class="places-nav" absolute background-color="white" >
       <places-carousel
         :active-index="activePlaceIndex"
         :map-view-data="mapViewData"
@@ -50,7 +50,7 @@
         @gotToPlace="gotToPlace"
         @directionsToPoint="directionsToPoint">
       </places-carousel>
-    </v-bottom-nav>
+    </v-bottom-navigation>
 
     <v-dialog v-model="isSettingsOpen" max-width="600" :persistent="true" attach="body">
       <box background="white" v-if="isSettingsOpen" class="settings-modal" resizable closable @closed="closeSettingsModal()">
