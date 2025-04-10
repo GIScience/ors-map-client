@@ -66,16 +66,16 @@
               :label="buildLabel(parameter)" @change="fieldUpdated({index: index, parameter: parameter})" v-model="formParameters[index].value"
             ></v-switch>
 
-            <v-expansion-panel v-else-if="parameter.type === constants.filterTypes.wrapper" :value="showPanelExpanded(parameter)" class="fields-panel">
-              <v-expansion-panel-content style="background: transparent">
-                <template v-slot:header>
+            <v-expansion-panels v-else-if="parameter.type === constants.filterTypes.wrapper" :value="showPanelExpanded(parameter)" class="fields-panel">
+              <v-expansion-panel style="background: transparent">
+                <v-expansion-panel-title>
                   <h4>{{buildLabel(parameter)}}</h4>
-                </template>
-                <template>
+                </v-expansion-panel-title>
+                <v-expansion-panel-text>
                   <form-fields :level="level + 1" :parent-index="index" :parameters="parameter.props" @fieldUpdated="fieldUpdated"></form-fields>
-                </template>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
+                </v-expansion-panel-text>
+              </v-expansion-panel>
+            </v-expansion-panels>
           </v-flex>
           <v-flex sm1 class="txt-right top-15" v-if="parameter.type !== constants.filterTypes.wrapper">
             <v-btn :title="buildDescription(parameter)" flat icon class="help-btn" @click="infoDialog(buildLabel(parameter), buildDescription(parameter), {markdown: true, resizable: true})">

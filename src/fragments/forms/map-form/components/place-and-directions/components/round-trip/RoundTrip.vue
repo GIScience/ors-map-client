@@ -1,14 +1,14 @@
 <template>
-  <v-expansion-panel :value="0" class="round-trip-panel">
-    <v-expansion-panel-content class="round-trip-panel-content">
-      <template v-slot:header>
+  <v-expansion-panels :value="0" class="round-trip-panel">
+    <v-expansion-panel class="round-trip-panel-content">
+      <v-expansion-panel-title>
         <h4>{{$t('roundtrip.roundtripOptions')}}</h4>
-      </template>
-      <template>
+      </v-expansion-panel-title>
+      <v-expansion-panel-text>
         <fields-container @fieldUpdated="filterUpdated" :parameters="roundTripFilterAccessor.props"></fields-container>
-      </template>
-    </v-expansion-panel-content>
-  </v-expansion-panel>
+      </v-expansion-panel-text>
+    </v-expansion-panel>
+  </v-expansion-panels>
 </template>
 
 <script src="./round-trip.js"></script>

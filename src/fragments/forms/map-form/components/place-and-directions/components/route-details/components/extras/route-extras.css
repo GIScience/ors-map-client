@@ -6,14 +6,14 @@
   background: transparent;
 }
 
-.extras-header :deep(.v-expansion-panel__header) {
+.extras-header :deep(.v-expansion-panel-title) {
  padding-top: 0 !important;
  padding-bottom: 0 !important;
  padding-left: 5px;
  min-height: 35px;
 }
 
-.extras-header :deep(.v-expansion-panel__body .v-list) {
+.extras-header :deep(.v-expansion-panel-text .v-list) {
   padding-top: 5px !important;
 }
 

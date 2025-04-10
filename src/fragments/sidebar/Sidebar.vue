@@ -32,21 +32,21 @@
       <div class="sidebar-content" :style="{height: sidebarContentHeightFormula}">
         <div class="sidebar-content-form" :style="{'padding-bottom': $store.getters.footerHeight + 'px'}">
           <map-form v-if="$store.getters.mapReady" class="map-search"></map-form>
-          <v-expansion-panel :value="null" v-if="!$highResolution">
-            <v-expansion-panel-content style="background: transparent;">
-              <template v-slot:header>
-                <div>Menu</div>
-              </template>
-              <v-list>
-                <v-divider></v-divider>
-                <v-list dense>
-                  <template v-for='(item) in menuItems'>
-                    <app-v-menu :item="item" :showIcon="true"></app-v-menu>
-                  </template>
+          <v-expansion-panels :value="null" v-if="!$highResolution">
+            <v-expansion-panel style="background: transparent;">
+              <v-expansion-panel-title>Menu</v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <v-list>
+                  <v-divider></v-divider>
+                  <v-list dense>
+                    <template v-for='(item) in menuItems'>
+                      <app-v-menu :item="item" :showIcon="true"></app-v-menu>
+                    </template>
+                  </v-list>
                 </v-list>
-              </v-list>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels>
         </div>
         <app-footer></app-footer>
       </div>
