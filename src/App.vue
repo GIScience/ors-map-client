@@ -6,9 +6,11 @@
     <v-main class="app-content" :class="{'a11y' : $store.getters.mapSettings.accessibleModeActive}">
       <app-confirm></app-confirm>
       <app-info></app-info>
-      <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
-        <router-view v-title="title"></router-view>
-      </transition>
+      <router-view v-title="title" v-slot="{ Component }">
+        <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </v-main>
     <app-sidebar :class="{'a11y' : $store.getters.mapSettings.accessibleModeActive}"></app-sidebar>
   </v-app>
