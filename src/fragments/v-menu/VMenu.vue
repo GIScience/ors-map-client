@@ -1,35 +1,35 @@
 <template>
   <v-list-group v-model="item.startOpen" v-if='item.items && showMenuItem(item)' :key="item.href" v-bind:group='item.group'>
     <template v-slot:activator>
-      <v-list-tile :target="item.target" :href="item.href" class="v-menu-item" :class="itemClass" :title="item.title">
-        <v-list-tile-action>
+      <v-list-item :target="item.target" :href="item.href" class="v-menu-item" :class="itemClass" :title="item.title">
+        <v-list-item-action>
           <v-icon> {{ item.icon }}</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title> {{ item.title }}</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        </v-list-item-action>
+        <div class="d-flex flex-column justify-center flex-grow-1 min-w-0">
+          <div class="text-body-1 font-weight-medium"> {{ item.title }}</div>
+        </div>
+      </v-list-item>
     </template>
-    <v-list-tile @click.stop="nav(subItem)" v-if="showMenuItem(subItem)" class="v-menu-item" :class="itemClass" v-for='subItem in item.items' :key='subItem.href' ripple
+    <v-list-item @click.stop="nav(subItem)" v-if="showMenuItem(subItem)" class="v-menu-item" :class="itemClass" v-for='subItem in item.items' :key='subItem.href' ripple
       v-bind:disabled='subItem.disabled'>
       <app-v-menu :item="subItem" :navigateFn="navigateFn" :itemClass="itemClass" :showIcon="false" :key="subItem.href" :showMenuItemFn="showMenuItem" ></app-v-menu>
-    </v-list-tile>
+    </v-list-item>
   </v-list-group>
-  <v-subheader :key="item.href" v-else-if="item.header && showMenuItem(item)"> {{ item.header }}</v-subheader>
+  <v-list-subheader :key="item.href" v-else-if="item.header && showMenuItem(item)"> {{ item.header }}</v-list-subheader>
   <v-divider :key="item.href" v-else-if="item.divider && showMenuItem(item)"></v-divider>
 
-  <v-list-tile :key="item.href" v-else-if="showMenuItem(item)" class="v-menu-item" :class="itemClass" :target="item.target" :href="item.href" ripple v-bind:disabled="item.disabled"
+  <v-list-item :key="item.href" v-else-if="showMenuItem(item)" class="v-menu-item" :class="itemClass" :target="item.target" :href="item.href" ripple v-bind:disabled="item.disabled"
     :title="item.title">
-    <v-list-tile-action>
+    <v-list-item-action>
       <v-icon> {{ item.icon }} </v-icon>
-    </v-list-tile-action>
-    <v-list-tile-content>
-      <v-list-tile-title> {{ item.title}} </v-list-tile-title>
-    </v-list-tile-content>
-    <v-list-tile-action v-if='item.subAction'>
+    </v-list-item-action>
+    <div class="d-flex flex-column justify-center flex-grow-1 min-w-0">
+      <div class="text-body-1 font-weight-medium"> {{ item.title}} </div>
+    </div>
+    <v-list-item-action v-if='item.subAction'>
       <v-icon class="success--text"> {{ item.subAction }}</v-icon>
-    </v-list-tile-action>
-  </v-list-tile>
+    </v-list-item-action>
+  </v-list-item>
 </template>
 
 

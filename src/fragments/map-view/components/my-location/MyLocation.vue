@@ -21,32 +21,32 @@
       </v-btn>
     </template>
     <v-list v-if="!locationActive" light style="border-radius: 20px" class="input-pop-up-list">
-      <v-list-tile key="1" @click="setLocationFromBrowser(true)">
+      <v-list-item key="1" @click="setLocationFromBrowser(true)">
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-list-tile-content v-on="on">
-              <v-list-tile-title v-text="$t('myLocation.continuously')"/>
-            </v-list-tile-content>
+            <div class="list-item-content" v-on="on">
+              <div class="list-item-title" v-text="$t('myLocation.continuously')"/>
+            </div>
           </template>
           <span>{{$t('myLocation.continuouslyLocation')}}</span>
         </v-tooltip>
-        <v-list-tile-avatar>
+        <template #prepend>
           <v-icon color="primary">autorenew</v-icon>
-        </v-list-tile-avatar>
-      </v-list-tile>
-      <v-list-tile key="2" @click="setLocationFromBrowser()">
+        </template>
+      </v-list-item>
+      <v-list-item key="2" @click="setLocationFromBrowser()">
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-list-tile-content v-on="on">
-              <v-list-tile-title v-text="$t('myLocation.onlyOnce')"/>
-            </v-list-tile-content>
+            <div class="list-item-content" v-on="on">
+              <div class="list-item-title" v-text="$t('myLocation.onlyOnce')"/>
+            </div>
           </template>
           <span>{{$t('myLocation.onlyOnceLocation')}}</span>
         </v-tooltip>
-        <v-list-tile-avatar>
+        <template #prepend>
           <v-icon color="primary">play_for_work</v-icon>
-        </v-list-tile-avatar>
-      </v-list-tile>
+        </template>
+      </v-list-item>
     </v-list>
   </v-menu>
 </div>

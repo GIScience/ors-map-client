@@ -62,27 +62,27 @@
             </v-btn>
           </template>
           <v-list light style="background:white" class="input-pop-up-list">
-            <v-list-tile @click.stop="removePlaceInput()" v-if="deleteAvailable">
-              <v-list-tile-title>
+            <v-list-item @click.stop="removePlaceInput()" v-if="deleteAvailable">
+              <v-list-item-title>
                 <v-btn flat class="no-padding">
                   <v-icon :title="$t('placeInput.removeInput')" color="dark" large >delete</v-icon>
                 </v-btn>
-              </v-list-tile-title>
-            </v-list-tile>
-            <v-list-tile v-if="switchCoordsAvailable">
-              <v-list-tile-title>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item v-if="switchCoordsAvailable">
+              <v-list-item-title>
                 <v-btn flat class="no-padding" @click.stop="switchCoords()">
                   <v-icon :title="$t('placeInput.switchCoords')" color="dark" large >compare_arrows</v-icon>
                 </v-btn>
-              </v-list-tile-title>
-            </v-list-tile>
-             <v-list-tile v-if="directIsAvailable">
-              <v-list-tile-title>
+              </v-list-item-title>
+            </v-list-item>
+             <v-list-item v-if="directIsAvailable">
+              <v-list-item-title>
                 <v-btn flat class="input-btn" @click.stop="toggleDirect()">
                   <v-icon :color="this.model.direct? 'primary': 'dark'" :title="$t('placeInput.toggleDirect')" class="input-icon" >settings_ethernet</v-icon>
                 </v-btn>
-              </v-list-tile-title>
-            </v-list-tile>
+              </v-list-item-title>
+            </v-list-item>
           </v-list>
         </v-menu>
       </v-flex>
@@ -92,19 +92,19 @@
         <v-flex>
           <v-layout row>
             <v-flex xs10 sm10 md11>
-              <v-list-tile  @click.stop="setLocationFromBrowser()" v-if="showBrowserLocationInPlacesList" :title="$t('placeInput.yourLocation')">
-                <v-list-tile-action>
+              <v-list-item  @click.stop="setLocationFromBrowser()" v-if="showBrowserLocationInPlacesList" :title="$t('placeInput.yourLocation')">
+                <v-list-item-action>
                   <v-icon>gps_fixed</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+                </v-list-item-action>
+                <div class="list-item-content">
+                  <div class="list-item-title">
                     <v-btn flat small @click.stop="setLocationFromBrowser()" class="no-padding no-margin no-capitalize">
                       {{ $t('placeInput.yourLocation') }}
                     </v-btn>
-                  </v-list-tile-title>
-                  <v-list-tile-sub-title>{{ $t('placeInput.fromYourBrowser') }}</v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
+                  </div>
+                  <div class="list-item-subtitle">{{ $t('placeInput.fromYourBrowser') }}</div>
+                </div>
+              </v-list-item>
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex xs2 sm2 md1 >
@@ -115,19 +115,19 @@
               </div>
             </v-flex>
           </v-layout>
-          <v-list-tile class="place-suggestion" :class="{'raw-coord': placeSuggested.rawCoordinate}" @click="selectSuggestion(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'
+          <v-list-item class="place-suggestion" :class="{'raw-coord': placeSuggested.rawCoordinate}" @click="selectSuggestion(placeSuggested)" :key="placeSuggested.id" v-for='placeSuggested in placeSuggestions'
             :title="placeSuggested.placeName.trim()">
-            <v-list-tile-action class="hidden-sm-and-down">
+            <v-list-item-action class="hidden-sm-and-down">
               <v-icon v-if="placeSuggested.properties.layer === 'locality' || placeSuggested.properties.layer === 'city' || placeSuggested.properties.layer === 'county'">location_city</v-icon>
               <img alt="Icon or image for suggested place" width="25px" v-else-if="showAreaIcon(placeSuggested)" :src="getImgSrc('countryIconImgSrc')" height="auto" />
               <v-icon v-else>place</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title :title="placeSuggested.placeName.trim()">
+            </v-list-item-action>
+            <div class="list-item-content">
+              <div class="list-item-title" :title="placeSuggested.placeName.trim()">
                 <v-btn v-html="highlightedName(placeSuggested.placeName)" style="min-width: fit-content" flat small @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">
                 </v-btn>
-              </v-list-tile-title>
-              <v-list-tile-sub-title>
+              </div>
+              <div class="list-item-subtitle">
                 {{ getLayerTranslation(placeSuggested.properties.layer) }}
                 <span v-if="placeSuggested.properties.locality"> - {{ placeSuggested.properties.locality }} </span>
                 <span v-if="placeSuggested.properties.country"> - {{ placeSuggested.properties.country }} </span>
@@ -135,9 +135,9 @@
                   ~{{distance(placeSuggested)}}
                   {{$t('global.units.' + $store.getters.mapSettings.unit)}}
                 </span>
-              </v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+              </div>
+            </div>
+          </v-list-item>
         </v-flex>
       </v-layout>
     </div>

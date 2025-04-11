@@ -7,9 +7,9 @@
       </v-btn>
     </template>
     <v-list class="app-hm-list">
-      <v-list-tile v-for="(child, childIndex) in item.items" :key="item.href+'-'+childIndex">
+      <v-list-item v-for="(child, childIndex) in item.items" :key="item.href+'-'+childIndex">
         <app-h-menu :item="child" :showIcon="showIcon" :showMenuItemFn="showMenuItem" ></app-h-menu>
-      </v-list-tile>
+      </v-list-item>
     </v-list>
   </v-menu>
   <v-btn v-else-if="!item.divider && !item.header && !item.notInHeader && showMenuItem(item)" class="app-btn-mh" :class="{'has-icon':item.showIcon, 'active':item.active}" :href="getHref(item)" :title="item.title" :key="item.href" flat>

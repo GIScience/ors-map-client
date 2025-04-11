@@ -15,12 +15,12 @@
       </template>
       <v-list light style="background:white">
         <template v-for="(vehicleType) in profile.vehicleTypes">
-          <v-list-tile @click.stop.prevent="profileSelected(profile.slug, vehicleType)">
-            <v-list-tile-title>
+          <v-list-item @click.stop.prevent="profileSelected(profile.slug, vehicleType)">
+            <v-list-item-title>
               {{ getProfileTitle(profile.slug, vehicleType) }}
               <v-icon v-if="activeVehicleType === vehicleType" color="primary" small large>check</v-icon>
-            </v-list-tile-title>
-          </v-list-tile>
+            </v-list-item-title>
+          </v-list-item>
         </template>
       </v-list>
     </v-menu>
@@ -33,12 +33,12 @@
       </template>
       <v-list light style="background:white">
         <template v-for="(nestedProfile) in profile.nestedProfiles">
-          <v-list-tile @click.stop.prevent="profileSelected(nestedProfile)">
-            <v-list-tile-title>
+          <v-list-item @click.stop.prevent="profileSelected(nestedProfile)">
+            <v-list-item-title>
               {{ getProfileTitle(nestedProfile)}}
               <v-icon v-if="nestedProfile === activeProfileSlug" color="primary" small large>check</v-icon>
-            </v-list-tile-title>
-          </v-list-tile>
+            </v-list-item-title>
+          </v-list-item>
         </template>
       </v-list>
     </v-menu>

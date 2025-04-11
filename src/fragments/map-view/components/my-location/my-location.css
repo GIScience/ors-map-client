@@ -6,3 +6,17 @@
   box-shadow: none;
   margin-top: -10px;
 }
+
+.list-item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.list-item-title {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
