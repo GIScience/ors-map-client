@@ -71,6 +71,7 @@ import {
   VToolbarItems,
   VToolbarTitle,
   VTooltip,
+  VWindow,
   VWindowItem
 } from 'vuetify/components'
 
@@ -135,6 +136,7 @@ export default function createPreparedVue(App) {
       VToolbarItems,
       VToolbarTitle,
       VTooltip,
+      VWindow,
       VWindowItem,
     }
   })
