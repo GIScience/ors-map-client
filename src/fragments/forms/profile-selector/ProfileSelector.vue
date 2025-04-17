@@ -4,11 +4,11 @@
       <div style="min-width:275px; height:70px">
         <v-layout class="profile-options-wrapper">
           <v-item v-for="profile in profilesMapping" :key="profile.slug">
-            <v-flex style="min-width:45px">
+            <v-col style="min-width:45px">
               <profile-selector-option @profileSelected="profileSelected" :profile="profile"
                 :active-profile-slug="activeProfileSlug" :active-vehicle-type="activeVehicleType">
               </profile-selector-option>
-            </v-flex>
+            </v-col>
           </v-item>
         </v-layout>
       </div>

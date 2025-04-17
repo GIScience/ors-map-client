@@ -28,6 +28,8 @@
 .sidebar-content {
   overflow-y: auto;
   overflow-x: hidden;
+  display: block;
+  width: 100%;
 }
 
 .sidebar-content-form {
@@ -76,6 +78,10 @@
   text-transform: none;
 }
 
+.sidebar-header {
+  display: block;
+  width: 100%;
+}
 
 .sidebar-top-menu {
   text-align: right;
