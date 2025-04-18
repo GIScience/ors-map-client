@@ -5,13 +5,14 @@
         <ul class="place-inputs">
           <draggable v-model="places" @end="onReordered()" handle=".reorder-handle">
             <li :key="index" v-for="(place, index) in getPlaces">
-              <v-layout row >
-                <v-flex sm2 md1 v-if="$store.getters.mode === constants.modes.directions">
+              <v-row>
+                <v-col cols="2" md="1" v-if="$store.getters.mode === constants.modes.directions">
                   <v-btn class="reorder-handle" small flat icon :title="$t('placesAndDirections.reorder')">
                     <v-icon color="dark">reorder</v-icon>
                   </v-btn>
-                </v-flex>
-                <v-flex :class="$store.getters.mode === constants.modes.directions ? 'sm10 md11' : 'sm12'">
+                </v-col>
+                <v-col :sm="$store.getters.mode === constants.modes.directions ? 10 : 12"
+                       :md="$store.getters.mode === constants.modes.directions ? 11 : undefined">
                   <place-input :ref="'place'+index"
                     id-postfix="places-and-directions"
                     :support-directions="inputSupportsDirections"
@@ -32,13 +33,13 @@
                     @startDirections="startDirections"
                     @cleared="placeCleared">
                   </place-input>
-                </v-flex>
-              </v-layout >
+                </v-col>
+              </v-row >
             </li>
           </draggable>
         </ul>
       </template>
-      <v-layout row class="form-actions-btns">
+      <v-row class="form-actions-btns">
          <form-actions :place-inputs="places.length" :disabled-actions="disabledActions"
             @addPlaceInput="addInput"
             @clearPlaces="clearPlaces"
@@ -46,7 +47,7 @@
             @toggleRoundTrip="toggleRoundTrip"
             @contentUploaded="contentUploaded">
           </form-actions>
-      </v-layout>
+      </v-row>
       <br/>
       <template  v-if="showRouteDetails" >
         <route-details :map-view-data="mapViewData"></route-details>
