@@ -87,7 +87,6 @@
     "vue-i18n": "^9.14.2",
     "vue-json-pretty": "^1.4.1",
     "vue-lodash": "^2.1.2",
-    "vue-moment": "^4.0.0",
     "vue-resize": "^1.0.1",
     "vue-rest-client": "^0.1.15",
     "vue-router": "^4.5.0",

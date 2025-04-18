@@ -11,7 +11,6 @@ import focus from '@/directives/focus'
 import box from '@/fragments/box/Box.vue'
 import theme from '@/config/theme'
 import VueLodash from 'vue-lodash'
-import VueMoment from 'vue-moment'
 import bg from '@/directives/bg'
 import lodash from 'lodash'
 import { createApp } from 'vue'
@@ -149,9 +148,6 @@ export default function createPreparedVue(App) {
 
   // Use vee validate to easily validate forms
   //app.use(VeeValidate)
-
-// Managing Date and Times
-  app.use(VueMoment)
 
   // Add global mixins to vue instance
   app.mixin(globalMixins)
