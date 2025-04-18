@@ -74,6 +74,9 @@ importers:
       eslint-plugin-vue:
         specifier: ^9.33.0
         version: 9.33.0(eslint@8.57.1)
+      eslint-plugin-vuetify:
+        specifier: ^2.5.2
+        version: 2.5.2(eslint@8.57.1)(vuetify@3.8.1(typescript@5.5.4)(vue@3.5.13(typescript@5.5.4)))
       leaflet:
         specifier: ^1.8.0
         version: 1.9.4
@@ -3323,6 +3326,12 @@ packages:
     peerDependencies:
       eslint: ^6.2.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
 
+  eslint-plugin-vuetify@2.5.2:
+    resolution: {integrity: sha512-Gm3W2R+tmEcATI5Qk8W13uZKmsdajlykG/AdL44E6Lwt1ttAbMi50DNMfkgZrCg7WAq3qd2IRiYx0QKtkpdf/A==}
+    peerDependencies:
+      eslint: ^8.0.0 || ^9.0.0
+      vuetify: ^3.0.0
+
   eslint-scope@3.7.3:
     resolution: {integrity: sha512-W+B0SvF4gamyCTmUc+uITPY0989iXVfKvhwtmJocTaYoc/3khEHmEmvfY/Gn9HA9VV75jrQECsHizkNw1b68FA==}
     engines: {node: '>=4.0.0'}
@@ -5598,6 +5607,10 @@ packages:
   require-uncached@1.0.3:
     resolution: {integrity: sha512-Xct+41K3twrbBHdxAgMoOS+cNcoqIjfM2/VxBF4LL2hVph7YsF8VSKyQ3BDFZwEVbok9yeDl2le/qo0S77WG2w==}
     engines: {node: '>=0.10.0'}
+
+  requireindex@1.2.0:
+    resolution: {integrity: sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww==}
+    engines: {node: '>=0.10.5'}
 
   resolve-alpn@1.2.1:
     resolution: {integrity: sha512-0a1F4l73/ZFZOakJnQ3FvkJ2+gSTQWz/r2KE5OdDY0TxPm5h4GkqkWWfM47T7HsbnOtcJVEF4epCVy6u7Q3K+g==}
@@ -10456,7 +10469,7 @@ snapshots:
       eslint: 4.19.1
       get-stdin: 6.0.0
 
-  eslint-config-standard@11.0.0(eslint-plugin-import@2.29.1(eslint@8.57.1))(eslint-plugin-node@7.0.1(eslint@8.57.1))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@4.19.1))(eslint@4.19.1):
+  eslint-config-standard@11.0.0(eslint-plugin-import@2.29.1(eslint@8.57.1))(eslint-plugin-node@7.0.1(eslint@8.57.1))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@8.57.1))(eslint@4.19.1):
     dependencies:
       eslint: 4.19.1
       eslint-plugin-import: 2.29.1(eslint@4.19.1)
@@ -10566,6 +10579,15 @@ snapshots:
       semver: 7.6.3
       vue-eslint-parser: 9.4.3(eslint@8.57.1)
       xml-name-validator: 4.0.0
+    transitivePeerDependencies:
+      - supports-color
+
+  eslint-plugin-vuetify@2.5.2(eslint@8.57.1)(vuetify@3.8.1(typescript@5.5.4)(vue@3.5.13(typescript@5.5.4))):
+    dependencies:
+      eslint: 8.57.1
+      eslint-plugin-vue: 9.33.0(eslint@8.57.1)
+      requireindex: 1.2.0
+      vuetify: 3.8.1(typescript@5.5.4)(vue@3.5.13(typescript@5.5.4))
     transitivePeerDependencies:
       - supports-color
 
@@ -13030,6 +13052,8 @@ snapshots:
       caller-path: 0.1.0
       resolve-from: 1.0.1
 
+  requireindex@1.2.0: {}
+
   resolve-alpn@1.2.1: {}
 
   resolve-dir@1.0.1:
@@ -14055,7 +14079,7 @@ snapshots:
       derequire: 2.1.1
       eslint: 4.19.1
       eslint-config-prettier: 3.6.0(eslint@4.19.1)
-      eslint-config-standard: 11.0.0(eslint-plugin-import@2.29.1(eslint@8.57.1))(eslint-plugin-node@7.0.1(eslint@8.57.1))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@4.19.1))(eslint@4.19.1)
+      eslint-config-standard: 11.0.0(eslint-plugin-import@2.29.1(eslint@8.57.1))(eslint-plugin-node@7.0.1(eslint@8.57.1))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@8.57.1))(eslint@4.19.1)
       eslint-plugin-import: 2.29.1(eslint@4.19.1)
       eslint-plugin-node: 7.0.1(eslint@4.19.1)
       eslint-plugin-prettier: 2.7.0(prettier@1.19.1)

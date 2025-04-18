@@ -10,6 +10,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:vue/vue3-essential',
+    'plugin:vuetify/base',
     'plugin:cypress/recommended'
   ],
   // add your custom rules here

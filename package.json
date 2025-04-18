@@ -54,6 +54,7 @@
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-vue": "^9.33.0",
+    "eslint-plugin-vuetify": "^2.5.2",
     "leaflet": "^1.8.0",
     "leaflet-draw-locales": "^1.1.0",
     "leaflet-geometryutil": "^0.10.2",
