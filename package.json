@@ -33,7 +33,6 @@
   ],
   "dependencies": {
     "@babel/core": "^7.15.8",
-    "@babel/eslint-parser": "^7.11.3",
     "@babel/node": "^7.14.9",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
@@ -54,7 +53,7 @@
     "eslint-config-standard": "^14.1.1",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-plugin-cypress": "^2.12.1",
-    "eslint-plugin-vue": "^7.0.0-beta.2",
+    "eslint-plugin-vue": "^9.33.0",
     "leaflet": "^1.8.0",
     "leaflet-draw-locales": "^1.1.0",
     "leaflet-geometryutil": "^0.10.2",

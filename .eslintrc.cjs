@@ -2,20 +2,15 @@
 
 module.exports = {
   root: true,
-  parserOptions: {
-    parser: '@babel/eslint-parser',
-    sourceType: 'module',
-    requireConfigFile: false
-  },
   env: {
     node: true,
     browser: true,
   },
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
   extends: [
-    "eslint:recommended",
-    "plugin:vue/base",
-    "plugin:cypress/recommended"
+    'eslint:recommended',
+    'plugin:vue/vue3-essential',
+    'plugin:cypress/recommended'
   ],
   // add your custom rules here
   rules: {
@@ -23,22 +18,22 @@ module.exports = {
     'generator-star-spacing': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    "indent": [
-      "error",
+    'indent': [
+      'error',
       2,
-      { "SwitchCase": 1 }
+      { 'SwitchCase': 1 }
     ],
-    "linebreak-style": [
-      "error",
-      "unix"
+    'linebreak-style': [
+      'error',
+      'unix'
     ],
-    "quotes": [
-      "error",
-      "single"
+    'quotes': [
+      'error',
+      'single'
     ],
-    "semi": [
-      "error",
-      "never"
+    'semi': [
+      'error',
+      'never'
     ]
   }
 }
