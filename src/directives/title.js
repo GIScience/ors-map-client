@@ -1,9 +1,9 @@
 
 const title = {
-  inserted: (el, binding) => {
+  mounted: (el, binding) => {
     document.title = binding.value
   },
-  update: (el, binding) => {
+  updated: (el, binding) => {
     document.title = binding.value
   }
 }

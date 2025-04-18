@@ -8,18 +8,15 @@ import store from '@/store/store'
  * Popper tooltip directive handler
  */
 const smartTooltip = {
-  bind(el, binding, vNode) {
+  beforeMount(el, binding, vNode) {
     render(el, binding, vNode)
   },
-  unbind(el, binding, vNode) {
+  unmounted(el, binding, vNode) {
     if (vNode.context.popperTooltipGuid) {
       closeTooltip(vNode.context.popperTooltipGuid)
     }
   },
-  update(el, binding, vNode) {
-    render(el, binding, vNode, true)
-  },
-  componentUpdated(el, binding, vNode) {
+  updated(el, binding, vNode) {
     render(el, binding, vNode, true)
   }
 }

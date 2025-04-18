@@ -1,12 +1,9 @@
 import theme from '@/config/theme'
 const bg = {
-  bind (el, binding) {
+  beforeMount (el, binding) {
     render(el, binding)
   },
-  update (el, binding) {
-    render(el, binding)
-  },
-  componentUpdated (el, binding) {
+  updated (el, binding) {
     render(el, binding)
   }
 }

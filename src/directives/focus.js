@@ -1,9 +1,9 @@
 import PreparedVue from '@/common/prepared-vue.js'
 const focus = {
-  inserted: (el, binding) => {
+  mounted: (el, binding) => {
     focus.processFocus(el, binding)
   },
-  update: (el, binding) => {
+  updated: (el, binding) => {
     focus.processFocus(el, binding)
   },
   processFocus: (el, binding) => {
