@@ -50,7 +50,7 @@
     "babel-plugin-transform-imports": "^1.4.1",
     "chart.js": "4.1.1",
     "dom-to-image": "^2.6.0",
-    "eslint": "^7.6.0",
+    "eslint": "^8.57.1",
     "eslint-config-standard": "^14.1.1",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-plugin-cypress": "^2.12.1",
