@@ -1,7 +1,7 @@
 <template>
   <v-menu v-if="menuItemsReady" class="info-menu" :open-on-hover="openOnHover" :open-on-click="!openOnHover" nudge-top="10" offset-y attach="body">
     <template v-slot:activator="{ on }">
-      <v-btn class="info-button pl2 pr2" flat @click="menuClicked" v-on="on"
+      <v-btn class="info-button pl2 pr2" variant="text" @click="menuClicked" v-on="on"
              v-smart-tooltip="{show: showSettingsTooltip, text: $t('floatingTopMenu.settingsTooltip'), position: 'bottom', dark: true, showOnce: true, name: 'settingsTooltip'}">
         <v-icon>{{showSettings ? 'more_vert' : 'info'}}</v-icon>
       </v-btn>
@@ -9,11 +9,11 @@
     <v-list>
       <template v-for="(item, index) in menuItems">
         <v-layout row :key="index" v-if="item.show">
-          <v-btn class="floating-item" :key="index + 'emitEvent'" flat v-if="item.emitEvent" @click="emitEvent(item.emitEvent)">
+          <v-btn class="floating-item" :key="index + 'emitEvent'" variant="text" v-if="item.emitEvent" @click="emitEvent(item.emitEvent)">
             <v-icon :title="item.title" left color="dark">{{item.icon}}</v-icon>
             <template>{{item.title}}</template>
           </v-btn>
-          <v-btn class="floating-item" :key="index + 'noEvent'" v-else flat :target="item.target" :href="item.href">
+          <v-btn class="floating-item" :key="index + 'noEvent'" v-else variant="text" :target="item.target" :href="item.href">
             <v-icon :title="item.title" left color="dark">{{item.icon}}</v-icon>
             <template>{{item.title}}</template>
           </v-btn>

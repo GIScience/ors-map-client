@@ -1,6 +1,6 @@
 <template>
   <div class="share-container" ref="shareContainer">
-    <v-btn class="open-share-btn" style="float:right; margin-top:0" small icon :title="$t('share.share')" @click="openShare()"><v-icon>share</v-icon></v-btn>
+    <v-btn class="open-share-btn" style="float:right; margin-top:0" size="small" icon :title="$t('share.share')" @click="openShare()"><v-icon>share</v-icon></v-btn>
     <v-dialog v-model="isShareModalOpen" max-width="600" :persistent="true" attach="body">
       <box customClass="share-modal" v-model="isShareModalOpen" background="white" closable @closed="closeShare()">
         <template v-slot:header>

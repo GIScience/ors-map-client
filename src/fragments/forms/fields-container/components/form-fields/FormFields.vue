@@ -78,7 +78,7 @@
             </v-expansion-panels>
           </v-flex>
           <v-flex sm1 class="txt-right top-15" v-if="parameter.type !== constants.filterTypes.wrapper">
-            <v-btn :title="buildDescription(parameter)" flat icon class="help-btn" @click="infoDialog(buildLabel(parameter), buildDescription(parameter), {markdown: true, resizable: true})">
+            <v-btn :title="buildDescription(parameter)" variant="text" icon class="help-btn" @click="infoDialog(buildLabel(parameter), buildDescription(parameter), {markdown: true, resizable: true})">
               <v-icon class="pointer">help</v-icon>
             </v-btn>
           </v-flex>

@@ -21,13 +21,13 @@
             @keyup="changed($event)"
             @click:clear="() => placeCleared(index)">
             <template v-slot:append v-if="searchAvailable">
-              <v-btn v-if="appendBtn === 'search'" icon small flat class="append-input-btn search" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
+              <v-btn v-if="appendBtn === 'search'" icon size="small" variant="text" class="append-input-btn search" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
                 @click="sendToSearchMode()">
                 <v-icon left>search</v-icon>
               </v-btn>
             </template>
             <template v-slot:append-outer>
-              <v-btn v-if="appendBtn === 'map'" icon small flat class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
+              <v-btn v-if="appendBtn === 'map'" icon size="small" variant="text" class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
                 @click="pickPlaceClick($event)"
                 v-smart-tooltip="{show: showInputPickPlaceTooltip, text: $t('placeInput.clickOnTheMapBtnToPickAPlace'), position: 'bottom', dark: true, showOnce: true, name: 'pickAPlaceOnTheMap'}">
                 <v-icon left>map</v-icon>
@@ -36,20 +36,20 @@
           </v-text-field>
         </v-col>
         <v-col v-if="iconsBtnCounter > 0" v-bind="{[iconsColumns]: true}" class="input-btn-group">
-          <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="deleteAvailable && $mdAndUpResolution"  @click="removePlaceInput()">
+          <v-btn variant="text" class="input-btn" :class="{small: $mdAndUpResolution}" v-if="deleteAvailable && $mdAndUpResolution"  @click="removePlaceInput()">
             <v-icon :title="$t('placeInput.removeInput')" class="input-icon" >delete</v-icon>
           </v-btn>
-          <v-btn flat class="input-btn" :class="{small: $mdAndUpResolution}" v-if="directIsAvailable && $mdAndUpResolution"  @click="toggleDirect()">
+          <v-btn variant="text" class="input-btn" :class="{small: $mdAndUpResolution}" v-if="directIsAvailable && $mdAndUpResolution"  @click="toggleDirect()">
             <v-icon :color="localModel.direct? 'primary': 'dark'" :title="$t('placeInput.toggleDirect')" class="input-icon" >settings_ethernet</v-icon>
           </v-btn>
 
-          <v-btn flat class="input-btn" :id="getNewGuid('directions')" :class="{small: $mdAndUpResolution}"
+          <v-btn variant="text" class="input-btn" :id="getNewGuid('directions')" :class="{small: $mdAndUpResolution}"
             v-if="directionsAvailable" @click="startDirections()"
             v-smart-tooltip="{show: directionsButtonTooltip, text: $t('placeInput.goToDirectionsMode'), position: directionsButtonTooltipPosition, dark: true, showOnce: true, name: 'useDirectionsButton'}">
             <v-icon :title="$t('placeInput.directions')" color="dark" :large="$lowResolution" class="input-icon" >directions</v-icon>
           </v-btn>
 
-          <v-btn flat class="input-btn switch-coords" :class="{small: $mdAndUpResolution}" v-if="switchCoordsAvailable && ($mdAndUpResolution || single)" @click="switchCoords()">
+          <v-btn variant="text" class="input-btn switch-coords" :class="{small: $mdAndUpResolution}" v-if="switchCoordsAvailable && ($mdAndUpResolution || single)" @click="switchCoords()">
             <v-icon :title="$t('placeInput.switchCoords')" color="dark" :large="$lowResolution" class="input-icon" >compare_arrows</v-icon>
           </v-btn>
 
@@ -58,28 +58,28 @@
             :close-on-content-click="true"
             bottom >
             <template v-slot:activator="{ on }">
-              <v-btn flat class="floating-menu-activator no-padding" v-on="{on}">
+              <v-btn variant="text" class="floating-menu-activator no-padding" v-on="{on}">
                 <v-icon  :title="$t('placeInput.openInputOptions')" style="font-size:29px" color="dark" large class="input-icon" >more_vert</v-icon>
               </v-btn>
             </template>
             <v-list light style="background:white" class="input-pop-up-list">
               <v-list-item @click.stop="removePlaceInput()" v-if="deleteAvailable">
                 <v-list-item-title>
-                  <v-btn flat class="no-padding">
+                  <v-btn variant="text" class="no-padding">
                     <v-icon :title="$t('placeInput.removeInput')" color="dark" large >delete</v-icon>
                   </v-btn>
                 </v-list-item-title>
               </v-list-item>
               <v-list-item v-if="switchCoordsAvailable">
                 <v-list-item-title>
-                  <v-btn flat class="no-padding" @click.stop="switchCoords()">
+                  <v-btn variant="text" class="no-padding" @click.stop="switchCoords()">
                     <v-icon :title="$t('placeInput.switchCoords')" color="dark" large >compare_arrows</v-icon>
                   </v-btn>
                 </v-list-item-title>
               </v-list-item>
                <v-list-item v-if="directIsAvailable">
                 <v-list-item-title>
-                  <v-btn flat class="input-btn" @click.stop="toggleDirect()">
+                  <v-btn variant="text" class="input-btn" @click.stop="toggleDirect()">
                     <v-icon :color="this.model.direct? 'primary': 'dark'" :title="$t('placeInput.toggleDirect')" class="input-icon" >settings_ethernet</v-icon>
                   </v-btn>
                 </v-list-item-title>
@@ -99,7 +99,7 @@
                   </v-list-item-action>
                   <div class="list-item-content">
                     <div class="list-item-title">
-                      <v-btn flat small @click.stop="setLocationFromBrowser()" class="no-padding no-margin no-capitalize">
+                      <v-btn variant="text" size="small" @click.stop="setLocationFromBrowser()" class="no-padding no-margin no-capitalize">
                         {{ $t('placeInput.yourLocation') }}
                       </v-btn>
                     </div>
@@ -110,7 +110,7 @@
               <v-spacer></v-spacer>
               <v-col cols="2" sm="2" md="1">
                 <div>
-                  <v-btn flat small fab class="close-suggestions no-margin no-padding" style="width:40px" @click="setFocus(false)">
+                  <v-btn variant="text" size="small" class="close-suggestions no-margin no-padding" style="width:40px" @click="setFocus(false)">
                     <v-icon :title="$t('global.close')" :large="$lowResolution" >close</v-icon>
                   </v-btn>
                 </div>
@@ -125,7 +125,7 @@
               </v-list-item-action>
               <div class="list-item-content">
                 <div class="list-item-title" :title="placeSuggested.placeName.trim()">
-                  <v-btn v-html="highlightedName(placeSuggested.placeName)" style="min-width: fit-content" flat small @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">
+                  <v-btn v-html="highlightedName(placeSuggested.placeName)" style="min-width: fit-content" variant="text" size="small" @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">
                   </v-btn>
                 </div>
                 <div class="list-item-subtitle">

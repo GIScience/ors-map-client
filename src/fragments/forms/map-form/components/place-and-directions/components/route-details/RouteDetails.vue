@@ -42,7 +42,7 @@
                             <div style="padding:0 0 0 0">
                               <div>
                                 {{$t('global.distance')}}:  <b>{{segment.distance}} </b>
-                                <v-btn :max-width="30" style="height:15px" fab icon small @click="segmentClicked(segment, segmentIndex)" :title="$t('routeDetails.gotoSegment')">
+                                <v-btn :max-width="30" style="height:15px" icon size="small" @click="segmentClicked(segment, segmentIndex)" :title="$t('routeDetails.gotoSegment')">
                                   <v-icon>remove_red_eye</v-icon>
                                 </v-btn>
                               </div>

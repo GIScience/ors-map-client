@@ -16,8 +16,8 @@
         <div>{{$t('placeDetails.layer')}}: <b>{{ $t('global.layers.'+ place.properties.layer) }}</b></div>
         <div>{{$t('placeDetails.lon')}}: <b>{{place.lng}}</b></div>
         <div>{{$t('placeDetails.lat')}}: <b>{{place.lat}}</b></div>
-        <v-btn :title="$t('placeDetails.copyLnglat')" flat small icon  @click="copyLngLat()" > <v-icon>content_copy</v-icon> </v-btn>
-        <v-btn :title="$t('placeDetails.copyLatlng')" flat small color="primary" icon class="copy-inverted" @click="copyLatLng()" > <v-icon>content_copy</v-icon></v-btn>
+        <v-btn :title="$t('placeDetails.copyLnglat')" variant="text" size="small" icon  @click="copyLngLat()" > <v-icon>content_copy</v-icon> </v-btn>
+        <v-btn :title="$t('placeDetails.copyLatlng')" variant="text" size="small" color="primary" icon class="copy-inverted" @click="copyLatLng()" > <v-icon>content_copy</v-icon></v-btn>
       </div>
     </div>
   </box>

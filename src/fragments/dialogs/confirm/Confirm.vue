@@ -11,9 +11,9 @@
         <template v-slot:footer>
           <div class="text-right">
             <v-spacer></v-spacer>
-            <v-btn color="primary" flat @click="onNo">{{confirmNo}}</v-btn>
-            <v-btn v-if="neverOption" color="primary" style="text-transform:initial" flat @click="onNever">{{confirmNever}}</v-btn>
-            <v-btn color="success" flat @click="onYes">{{confirmYes}}</v-btn>
+            <v-btn color="primary" variant="text" @click="onNo">{{confirmNo}}</v-btn>
+            <v-btn v-if="neverOption" color="primary" style="text-transform:initial" variant="text" @click="onNever">{{confirmNever}}</v-btn>
+            <v-btn color="success" variant="text" @click="onYes">{{confirmYes}}</v-btn>
           </div>
         </template>
       </box>

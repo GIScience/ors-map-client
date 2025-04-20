@@ -27,7 +27,7 @@
               </v-list>
             </v-flex>
             <v-flex xs2 sm1>
-              <v-btn class="show-all-on-map" :max-width="30" fab icon @click="showAllSections(extraKey)" :title="$t('routeExtras.showAllOnMap')">
+              <v-btn class="show-all-on-map" :max-width="30" icon @click="showAllSections(extraKey)" :title="$t('routeExtras.showAllOnMap')">
                 <v-icon>remove_red_eye</v-icon>
               </v-btn>
             </v-flex>

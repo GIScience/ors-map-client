@@ -7,7 +7,7 @@
     <template #activator="{ on: menu }">
       <v-btn v-if="locationActive"
              v-on="menu"
-             small fab
+             size="small"
              class="my-location-btn" @click.stop="activatorClicked()"
              :title="$t('myLocation.stopShowingCurrentLocation')">
         <v-icon large :color="continuously === true ? 'primary' : 'dark'" >my_location</v-icon>
@@ -15,7 +15,7 @@
       <v-btn @click.stop="activatorClicked()"
              v-on="menu"
              v-else
-             small fab class="my-location-btn"
+             size="small" class="my-location-btn"
              :title="$t('myLocation.showCurrentLocation')">
         <v-icon large color="dark" >person_pin_circle</v-icon>
       </v-btn>

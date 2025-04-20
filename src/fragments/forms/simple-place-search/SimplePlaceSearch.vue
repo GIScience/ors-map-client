@@ -6,7 +6,7 @@
           <template v-slot:default>
             <v-btn
               :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''"
-              class="open-menu" flat @click="openMenu()"
+              class="open-menu" variant="text" @click="openMenu()"
               v-smart-tooltip="{
               show: showRouteDetailsTooltip,
               text: $t('simplePlaceSearch.openSidebarToSeeRouteDetails'),

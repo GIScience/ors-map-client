@@ -7,7 +7,7 @@
             <li :key="index" v-for="(place, index) in getPlaces">
               <v-row>
                 <v-col cols="2" md="1" v-if="$store.getters.mode === constants.modes.directions">
-                  <v-btn class="reorder-handle" small flat icon :title="$t('placesAndDirections.reorder')">
+                  <v-btn class="reorder-handle" size="small" variant="text" icon :title="$t('placesAndDirections.reorder')">
                     <v-icon color="dark">reorder</v-icon>
                   </v-btn>
                 </v-col>

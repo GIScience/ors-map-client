@@ -1,6 +1,6 @@
 <template>
   <div class="option-container">
-    <v-btn flat class="profile-option-btn no-padding no-margin"
+    <v-btn variant="text" class="profile-option-btn no-padding no-margin"
       :title="getProfileTitle(profile.slug)" :class="{'active': rootProfileActive}"
       :color="rootProfileActive ? 'primary' : 'dark'" :key="profile.slug"
       @click="profileSelected(profile.slug)">
