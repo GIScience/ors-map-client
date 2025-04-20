@@ -16,8 +16,8 @@
                   <div class="extra-bar">
                     <template v-for="(summary, index) in routeExtras[extraKey].summary" :key="index + extraKey">
                       <v-tooltip :disabled="$lowResolution" top>
-                        <template v-slot:activator="{ on }">
-                          <div @click="showSection(extraKey, summary.value, index)" class="segment" :style="segmentStyle(extraKey, summary, index)" v-on="on"></div>
+                        <template #activator="{ props }">
+                          <div @click="showSection(extraKey, summary.value, index)" class="segment" :style="segmentStyle(extraKey, summary, index)" v-bind="props"></div>
                         </template>
                         {{getExtraValueLabel(extraKey, summary.value)}} - {{$t('routeExtras.clickToHighlightOnMap')}}
                       </v-tooltip>

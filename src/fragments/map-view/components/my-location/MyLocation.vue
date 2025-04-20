@@ -4,16 +4,16 @@
           v-model="menuOpen"
           close-on-click
           close-on-content-click>
-    <template #activator="{ on: menu }">
+    <template #activator="{ props }">
       <v-btn v-if="locationActive"
-             v-on="menu"
+             v-bind="props"
              size="small"
              class="my-location-btn" @click.stop="activatorClicked()"
              :title="$t('myLocation.stopShowingCurrentLocation')">
         <v-icon large :color="continuously === true ? 'primary' : 'dark'" >my_location</v-icon>
       </v-btn>
       <v-btn @click.stop="activatorClicked()"
-             v-on="menu"
+             v-bind="props"
              v-else
              size="small" class="my-location-btn"
              :title="$t('myLocation.showCurrentLocation')">
@@ -23,8 +23,8 @@
     <v-list v-if="!locationActive" light style="border-radius: 20px" class="input-pop-up-list">
       <v-list-item key="1" @click="setLocationFromBrowser(true)">
         <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <div class="list-item-content" v-on="on">
+          <template #activator="{ props }">
+            <div class="list-item-content" v-bind="props">
               <div class="list-item-title" v-text="$t('myLocation.continuously')"/>
             </div>
           </template>
@@ -36,8 +36,8 @@
       </v-list-item>
       <v-list-item key="2" @click="setLocationFromBrowser()">
         <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <div class="list-item-content" v-on="on">
+          <template #activator="{ props }">
+            <div class="list-item-content" v-bind="props">
               <div class="list-item-title" v-text="$t('myLocation.onlyOnce')"/>
             </div>
           </template>

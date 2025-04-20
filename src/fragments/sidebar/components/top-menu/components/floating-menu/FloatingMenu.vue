@@ -1,7 +1,7 @@
 <template>
   <v-menu v-if="menuItemsReady" class="info-menu" :open-on-hover="openOnHover" :open-on-click="!openOnHover" nudge-top="10" offset-y attach="body">
-    <template v-slot:activator="{ on }">
-      <v-btn class="info-button pl2 pr2" variant="text" @click="menuClicked" v-on="on"
+    <template #activator="{ props }">
+      <v-btn class="info-button pl2 pr2" variant="text" @click="menuClicked" v-bind="props"
              v-smart-tooltip="{show: showSettingsTooltip, text: $t('floatingTopMenu.settingsTooltip'), position: 'bottom', dark: true, showOnce: true, name: 'settingsTooltip'}">
         <v-icon>{{showSettings ? 'more_vert' : 'info'}}</v-icon>
       </v-btn>

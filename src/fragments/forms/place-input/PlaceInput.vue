@@ -57,8 +57,8 @@
             :close-on-click="true"
             :close-on-content-click="true"
             bottom >
-            <template v-slot:activator="{ on }">
-              <v-btn variant="text" class="floating-menu-activator no-padding" v-on="{on}">
+            <template #activator="{ props }">
+              <v-btn variant="text" class="floating-menu-activator no-padding" v-bind="props">
                 <v-icon  :title="$t('placeInput.openInputOptions')" style="font-size:29px" color="dark" large class="input-icon" >more_vert</v-icon>
               </v-btn>
             </template>
