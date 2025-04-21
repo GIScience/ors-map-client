@@ -13,10 +13,9 @@
     <template v-if="highlightedPolylines">
       <v-snackbar class="segments-highlight-snack" @click.stop="" style="cursor:grab;z-index: 1001" :style="{marginLeft: $lowResolution ? '' : '405px'}"
         v-model="highlightedPolylineSnack"
-        :bottom="true"
+        location="bottom left"
         :auto-height="true"
         color="white"
-        :left="true"
         :timeout="0" >
         <div class="snack-highlighted-content">
           <v-btn class="snack-highlighted-close" location="right" variant="text" @click.stop="removeHighlightedSegments()">

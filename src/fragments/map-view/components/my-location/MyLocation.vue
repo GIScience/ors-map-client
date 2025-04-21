@@ -1,6 +1,6 @@
 <template>
 <div style="height:0">
-  <v-menu border-radius top offset-y style="box-shadow:none" transition="slide-y-transition"
+  <v-menu border-radius location="top" offset-y style="box-shadow:none" transition="slide-y-transition"
           v-model="menuOpen"
           close-on-click
           close-on-content-click>
@@ -22,7 +22,7 @@
     </template>
     <v-list v-if="!locationActive" light style="border-radius: 20px" class="input-pop-up-list">
       <v-list-item key="1" @click="setLocationFromBrowser(true)">
-        <v-tooltip top>
+        <v-tooltip location="top">
           <template #activator="{ props }">
             <div class="list-item-content" v-bind="props">
               <div class="list-item-title" v-text="$t('myLocation.continuously')"/>
@@ -35,7 +35,7 @@
         </template>
       </v-list-item>
       <v-list-item key="2" @click="setLocationFromBrowser()">
-        <v-tooltip top>
+        <v-tooltip location="top">
           <template #activator="{ props }">
             <div class="list-item-content" v-bind="props">
               <div class="list-item-title" v-text="$t('myLocation.onlyOnce')"/>

@@ -52,11 +52,9 @@ export default {
     timeout () {
       return this.snackbarTimeout
     },
-    top () {
-      return this.snackbarY === 'top' && this.$highResolution
-    },
-    bottom () {
-      return this.snackbarY === 'bottom' || this.$mdAndDownResolution
+    snackbarLocation() {
+      const vertical = (this.snackbarY === 'top' && this.$highResolution) ? 'top' : 'bottom'
+      return `${vertical} ${this.snackbarX}`
     }
   },
   created () {

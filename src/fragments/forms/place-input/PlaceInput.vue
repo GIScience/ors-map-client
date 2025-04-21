@@ -56,7 +56,7 @@
           <v-menu class="floating-menu" transition="slide-y-transition" v-if="placeMenuAvailable" v-model="placeInputFloatingMenu"
             :close-on-click="true"
             :close-on-content-click="true"
-            bottom >
+            location="bottom" >
             <template #activator="{ props }">
               <v-btn variant="text" class="floating-menu-activator no-padding" v-bind="props">
                 <v-icon  :title="$t('placeInput.openInputOptions')" style="font-size:29px" color="dark" size="large" class="input-icon" >more_vert</v-icon>

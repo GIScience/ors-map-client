@@ -15,7 +15,7 @@
                   <h5 >{{$t('global.' + extraKey )}}</h5>
                   <div class="extra-bar">
                     <template v-for="(summary, index) in routeExtras[extraKey].summary" :key="index + extraKey">
-                      <v-tooltip :disabled="$lowResolution" top>
+                      <v-tooltip :disabled="$lowResolution" location="top">
                         <template #activator="{ props }">
                           <div @click="showSection(extraKey, summary.value, index)" class="segment" :style="segmentStyle(extraKey, summary, index)" v-bind="props"></div>
                         </template>

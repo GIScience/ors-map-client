@@ -7,7 +7,7 @@
       <v-icon size="large">{{profile.icon}}</v-icon>
     </v-btn>
     <v-menu attach="body" v-if="profile.vehicleTypes" class="profile-option-menu" v-model="subProfileIsOpen"
-      transition="slide-y-transition" close-on-click close-on-content-click :open-on-hover="!isMobile" bottom>
+      transition="slide-y-transition" close-on-click close-on-content-click :open-on-hover="!isMobile" location="bottom">
       <template #activator="{ props }">
         <v-btn icon class="profile-menu-activator" v-bind="props">
           <v-icon>keyboard_arrow_down</v-icon>
@@ -25,7 +25,7 @@
       </v-list>
     </v-menu>
     <v-menu v-else-if="profile.nestedProfiles" class="profile-option-menu" v-model="subProfileIsOpen" attach="body"
-      transition="slide-y-transition" close-on-click close-on-content-click :open-on-hover="!isMobile" bottom>
+      transition="slide-y-transition" close-on-click close-on-content-click :open-on-hover="!isMobile" location="bottom">
       <template #activator="{ props }">
         <v-btn icon class="profile-menu-activator" v-bind="props">
           <v-icon>keyboard_arrow_down</v-icon>
