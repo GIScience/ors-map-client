@@ -19,8 +19,8 @@
     background-clip: padding-box; box-shadow: none"
       :style="{top: $store.getters.topBarOpen? '103px' : '3px'}"
       @click.stop="toggleTopBar" >
-      <v-icon large v-if="$store.getters.topBarOpen" >keyboard_arrow_up </v-icon>
-      <v-icon large v-else >keyboard_arrow_down </v-icon>
+      <v-icon size="large" v-if="$store.getters.topBarOpen" >keyboard_arrow_up </v-icon>
+      <v-icon size="large" v-else >keyboard_arrow_down </v-icon>
     </v-btn>
   </div>
 </template>

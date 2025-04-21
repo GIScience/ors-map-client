@@ -10,14 +10,14 @@
              size="small"
              class="my-location-btn" @click.stop="activatorClicked()"
              :title="$t('myLocation.stopShowingCurrentLocation')">
-        <v-icon large :color="continuously === true ? 'primary' : 'dark'" >my_location</v-icon>
+        <v-icon size="large" :color="continuously === true ? 'primary' : 'dark'" >my_location</v-icon>
       </v-btn>
       <v-btn @click.stop="activatorClicked()"
              v-bind="props"
              v-else
              size="small" class="my-location-btn"
              :title="$t('myLocation.showCurrentLocation')">
-        <v-icon large color="dark" >person_pin_circle</v-icon>
+        <v-icon size="large" color="dark" >person_pin_circle</v-icon>
       </v-btn>
     </template>
     <v-list v-if="!locationActive" light style="border-radius: 20px" class="input-pop-up-list">

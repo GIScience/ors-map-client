@@ -46,11 +46,11 @@
           <v-btn variant="text" class="input-btn" :id="getNewGuid('directions')" :class="{small: $mdAndUpResolution}"
             v-if="directionsAvailable" @click="startDirections()"
             v-smart-tooltip="{show: directionsButtonTooltip, text: $t('placeInput.goToDirectionsMode'), position: directionsButtonTooltipPosition, dark: true, showOnce: true, name: 'useDirectionsButton'}">
-            <v-icon :title="$t('placeInput.directions')" color="dark" :large="$lowResolution" class="input-icon" >directions</v-icon>
+            <v-icon :title="$t('placeInput.directions')" color="dark" :size="$lowResolution ? 'large' : undefined" class="input-icon" >directions</v-icon>
           </v-btn>
 
           <v-btn variant="text" class="input-btn switch-coords" :class="{small: $mdAndUpResolution}" v-if="switchCoordsAvailable && ($mdAndUpResolution || single)" @click="switchCoords()">
-            <v-icon :title="$t('placeInput.switchCoords')" color="dark" :large="$lowResolution" class="input-icon" >compare_arrows</v-icon>
+            <v-icon :title="$t('placeInput.switchCoords')" color="dark" :size="$lowResolution ? 'large' : undefined" class="input-icon" >compare_arrows</v-icon>
           </v-btn>
 
           <v-menu class="floating-menu" transition="slide-y-transition" v-if="placeMenuAvailable" v-model="placeInputFloatingMenu"
@@ -59,21 +59,21 @@
             bottom >
             <template #activator="{ props }">
               <v-btn variant="text" class="floating-menu-activator no-padding" v-bind="props">
-                <v-icon  :title="$t('placeInput.openInputOptions')" style="font-size:29px" color="dark" large class="input-icon" >more_vert</v-icon>
+                <v-icon  :title="$t('placeInput.openInputOptions')" style="font-size:29px" color="dark" size="large" class="input-icon" >more_vert</v-icon>
               </v-btn>
             </template>
             <v-list light style="background:white" class="input-pop-up-list">
               <v-list-item @click.stop="removePlaceInput()" v-if="deleteAvailable">
                 <v-list-item-title>
                   <v-btn variant="text" class="no-padding">
-                    <v-icon :title="$t('placeInput.removeInput')" color="dark" large >delete</v-icon>
+                    <v-icon :title="$t('placeInput.removeInput')" color="dark" size="large" >delete</v-icon>
                   </v-btn>
                 </v-list-item-title>
               </v-list-item>
               <v-list-item v-if="switchCoordsAvailable">
                 <v-list-item-title>
                   <v-btn variant="text" class="no-padding" @click.stop="switchCoords()">
-                    <v-icon :title="$t('placeInput.switchCoords')" color="dark" large >compare_arrows</v-icon>
+                    <v-icon :title="$t('placeInput.switchCoords')" color="dark" size="large" >compare_arrows</v-icon>
                   </v-btn>
                 </v-list-item-title>
               </v-list-item>
@@ -111,7 +111,7 @@
               <v-col cols="2" sm="2" md="1">
                 <div>
                   <v-btn variant="text" size="small" class="close-suggestions no-margin no-padding" style="width:40px" @click="setFocus(false)">
-                    <v-icon :title="$t('global.close')" :large="$lowResolution" >close</v-icon>
+                    <v-icon :title="$t('global.close')" :size="$lowResolution ? 'large' : undefined" >close</v-icon>
                   </v-btn>
                 </div>
               </v-col>

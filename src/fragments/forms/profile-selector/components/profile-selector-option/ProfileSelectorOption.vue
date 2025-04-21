@@ -4,7 +4,7 @@
       :title="getProfileTitle(profile.slug)" :class="{'active': rootProfileActive}"
       :color="rootProfileActive ? 'primary' : 'dark'" :key="profile.slug"
       @click="profileSelected(profile.slug)">
-      <v-icon large>{{profile.icon}}</v-icon>
+      <v-icon size="large">{{profile.icon}}</v-icon>
     </v-btn>
     <v-menu attach="body" v-if="profile.vehicleTypes" class="profile-option-menu" v-model="subProfileIsOpen"
       transition="slide-y-transition" close-on-click close-on-content-click :open-on-hover="!isMobile" bottom>
@@ -18,7 +18,7 @@
           <v-list-item @click.stop.prevent="profileSelected(profile.slug, vehicleType)">
             <v-list-item-title>
               {{ getProfileTitle(profile.slug, vehicleType) }}
-              <v-icon v-if="activeVehicleType === vehicleType" color="primary" small large>check</v-icon>
+              <v-icon v-if="activeVehicleType === vehicleType" color="primary" size="large">check</v-icon>
             </v-list-item-title>
           </v-list-item>
         </template>
@@ -36,7 +36,7 @@
           <v-list-item @click.stop.prevent="profileSelected(nestedProfile)">
             <v-list-item-title>
               {{ getProfileTitle(nestedProfile)}}
-              <v-icon v-if="nestedProfile === activeProfileSlug" color="primary" small large>check</v-icon>
+              <v-icon v-if="nestedProfile === activeProfileSlug" color="primary" size="large">check</v-icon>
             </v-list-item-title>
           </v-list-item>
         </template>

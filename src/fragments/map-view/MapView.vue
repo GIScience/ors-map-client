@@ -134,14 +134,14 @@
         :title="$t('maps.toggleAccessibleMode')"
         :class="{'extra-low-resolution': $xlResolution}"
         class="do-not-trigger-close-bottom-nav accessibility-btn" >
-        <v-icon large :color="$store.getters.mapSettings.accessibleModeActive? 'primary': 'default'" >accessibility</v-icon>
+        <v-icon size="large" :color="$store.getters.mapSettings.accessibleModeActive? 'primary': 'default'" >accessibility</v-icon>
       </v-btn>
       <v-btn size="small" v-if="canFitFeatures && showControls"
         class="fit-all-features"
         :title="$t('mapView.fitAllFeatures')"
         :class="{'extra-low-resolution': $xlResolution}"
         @click.stop="fitAllFeatures()" >
-        <v-icon large >all_out</v-icon>
+        <v-icon size="large" >all_out</v-icon>
       </v-btn>
 
       <!-- highlight extra info polyline -->
@@ -154,22 +154,24 @@
       <!-- the container below might be used to to programmatically add controls/components -->
       <div ref="customMapControlsContainer" style="z-index: 501" class="custom-controls" ></div>
     </l-map>
-    <v-btn v-if="$store.getters.embed" size="small" :title="$t('mapView.viewOnORS')" class="view-on-ors" target="_blank" :href="nonEmbedUrl" > {{$t('mapView.viewOnORS')}} <v-icon right small >open_in_new</v-icon> </v-btn>
+    <v-btn v-if="$store.getters.embed" size="small" :title="$t('mapView.viewOnORS')" class="view-on-ors" target="_blank" :href="nonEmbedUrl" > {{$t('mapView.viewOnORS')}}
+      <v-icon right size="small">open_in_new</v-icon>
+    </v-btn>
     <map-right-click v-if="!$store.getters.embed" :map-view-data="mapViewData" @closed="clickLatLng = null" @rightClickEvent="handleRightClickEvent"></map-right-click>
     <map-left-click :show="showControls && showClickPopups" :current-zoom="zoom" @closed="clickLatLng = null" @directionsToPoint="directionsToPoint"></map-left-click>
 
     <div v-if="$store.getters.mapSettings.accessibleModeActive">
       <v-btn size="small" @click="moveMapCenter('left')" :title="$t('mapView.moveMapPositionToLeft')" class="move-map-arrow left do-not-trigger-close-bottom-nav" >
-        <v-icon large color="primary" >arrow_back</v-icon>
+        <v-icon size="large" color="primary" >arrow_back</v-icon>
       </v-btn>
       <v-btn size="small" @click="moveMapCenter('up')" :title="$t('mapView.moveMapPositionToUp')" class="move-map-arrow up do-not-trigger-close-bottom-nav" >
-        <v-icon large color="primary" >arrow_upward</v-icon>
+        <v-icon size="large" color="primary" >arrow_upward</v-icon>
       </v-btn>
       <v-btn size="small" @click="moveMapCenter('right')" :title="$t('mapView.moveMapPositionToRight')" class="move-map-arrow right do-not-trigger-close-bottom-nav" >
-        <v-icon large color="primary" >arrow_forward</v-icon>
+        <v-icon size="large" color="primary" >arrow_forward</v-icon>
       </v-btn>
       <v-btn size="small" @click="moveMapCenter('down')" :title="$t('mapView.moveMapPositionToDown')" class="move-map-arrow down do-not-trigger-close-bottom-nav" :style="{top: accessibilityBtnTopPosition}" >
-        <v-icon large color="primary" >arrow_downward</v-icon>
+        <v-icon size="large" color="primary" >arrow_downward</v-icon>
       </v-btn>
     </div>
   </div>

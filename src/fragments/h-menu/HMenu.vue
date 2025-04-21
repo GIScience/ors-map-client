@@ -13,7 +13,7 @@
     </v-list>
   </v-menu>
   <v-btn v-else-if="!item.divider && !item.header && !item.notInHeader && showMenuItem(item)" class="app-btn-mh" :class="{'has-icon':item.showIcon, 'active':item.active}" :href="getHref(item)" :title="item.title" :key="item.href" variant="text">
-    <v-icon v-if="item.showIcon" large start>{{item.icon}}</v-icon>
+    <v-icon v-if="item.showIcon" size="large" start>{{item.icon}}</v-icon>
     <template v-else>
       {{item.title}}
     </template>

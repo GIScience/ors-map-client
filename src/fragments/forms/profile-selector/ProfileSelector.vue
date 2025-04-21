@@ -15,12 +15,12 @@
     </v-item-group>
 
     <div v-if="activeVehicleType">
-      <v-chip outline small disabled color="primary">
+      <v-chip outline size="small" disabled color="primary">
         {{$t('global.profile')}}: {{($t('orsMapFilters.profiles.' + activeVehicleType))}}
       </v-chip>
     </div>
     <div v-else-if="activeProfileSlug">
-      <v-chip outline small disabled color="primary">
+      <v-chip outline size="small" disabled color="primary">
         {{$t('global.profile')}}: <span v-if="$store.getters.mapSettings.skipAllSegments">{{($t('global.rawRouting'))}}</span><span v-else>{{($t('orsMapFilters.profiles.' + activeProfileSlug))}}</span>
       </v-chip>
     </div>

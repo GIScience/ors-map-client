@@ -20,7 +20,7 @@
         :timeout="0" >
         <div class="snack-highlighted-content">
           <v-btn class="snack-highlighted-close" location="right" variant="text" @click.stop="removeHighlightedSegments()">
-            <v-icon large :title="$t('global.close')" color="black" >close</v-icon>
+            <v-icon size="large" :title="$t('global.close')" color="black" >close</v-icon>
           </v-btn>
           <span class="highlight-intro">
             {{$t('mapView.highlighting')}} {{ extraInfo.sectionTitle }}:

@@ -35,10 +35,10 @@
       </template>
     </vue-horizontal-list>
     <v-btn class="previous" icon @click.stop="previous()">
-      <v-icon large :title="$t('placesCarousel.prev')">keyboard_arrow_left </v-icon>
+      <v-icon size="large" :title="$t('placesCarousel.prev')">keyboard_arrow_left </v-icon>
     </v-btn>
     <v-btn class="next" icon @click.stop="next()">
-      <v-icon large :title="$t('placesCarousel.next')">keyboard_arrow_right </v-icon>
+      <v-icon size="large" :title="$t('placesCarousel.next')">keyboard_arrow_right </v-icon>
     </v-btn>
   </div>
 </template>
