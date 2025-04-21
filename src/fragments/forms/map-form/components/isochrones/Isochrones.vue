@@ -2,9 +2,10 @@
   <div>
     <v-form @submit.prevent style="background:white">
       <template  v-if="places.length > 0">
-          <ul class="place-inputs">
-            <draggable v-model="places" @end="onReordered()" handle=".reorder-handle">
-              <li :key="index" v-for="(place, index) in places">
+        <ul class="place-inputs">
+          <draggable v-model:list="places" item.key="id" @end="onReordered()" handle=".reorder-handle">
+            <template #item="{ element: place, index }">
+              <li :key="place.id">
                 <v-layout row >
                   <v-flex xs1 v-if="$store.getters.mode === constants.modes.isochrones && places.length > 1">
                     <v-icon class="reorder-handle">reorder</v-icon>
@@ -28,9 +29,10 @@
                   </v-flex>
                 </v-layout >
               </li>
-            </draggable>
-          </ul>
-        </template>
+            </template>
+          </draggable>
+        </ul>
+      </template>
       <v-layout row class="form-actions-btns">
         <form-actions :place-inputs="places.length" :disabled-actions="disabledActions"
           @addPlaceInput="addPlaceInput"

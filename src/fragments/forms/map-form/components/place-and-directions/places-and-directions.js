@@ -53,15 +53,14 @@ export default {
       }
     }
   },
+  mounted() {
+    if (this.places.length === 0) {
+      this.addPlaceInput()
+    }
+  },
   computed: {
     disabledActions () {
       return appConfig.disabledActionsForPlacesAndDirections
-    },
-    getPlaces () {
-      if (this.places.length === 0) {
-        this.addPlaceInput()
-      }
-      return this.places
     },
     /**
      * Return a boolean determining if the place details must be visible

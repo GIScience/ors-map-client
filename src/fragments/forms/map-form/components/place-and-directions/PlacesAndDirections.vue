@@ -3,39 +3,41 @@
     <v-form style="background:white" @submit.prevent>
       <template >
         <ul class="place-inputs">
-          <draggable v-model="places" @end="onReordered()" handle=".reorder-handle">
-            <li :key="index" v-for="(place, index) in getPlaces">
-              <v-row>
-                <v-col cols="2" md="1" v-if="$store.getters.mode === constants.modes.directions">
-                  <v-btn class="reorder-handle" size="small" variant="text" icon :title="$t('placesAndDirections.reorder')">
-                    <v-icon color="dark">reorder</v-icon>
-                  </v-btn>
-                </v-col>
-                <v-col :sm="$store.getters.mode === constants.modes.directions ? 10 : 12"
-                       :md="$store.getters.mode === constants.modes.directions ? 11 : undefined">
-                  <place-input :ref="'place'+index"
-                    id-postfix="places-and-directions"
-                    :support-directions="inputSupportsDirections"
-                    :directions-button-tooltip="$store.getters.isSidebarVisible && active"
-                    directions-button-tooltip-position="right"
-                    support-direct-routing
-                    :pick-place-supported="places.length > 1"
-                    :support-search="places.length === 1"
-                    :box="places.length === 1"
-                    :index="index"
-                    :autofocus="autofocusEnabled(index)"
-                    :model="places[index]"
-                    :single="places.length === 1"
-                    :is-last="(places.length -1) === index && index !== 0"
-                    @selected="selectPlace"
-                    @changedDirectPlace="changedDirectPlace"
-                    @removeInput="removePlaceInput"
-                    @startDirections="startDirections"
-                    @cleared="placeCleared">
-                  </place-input>
-                </v-col>
-              </v-row >
-            </li>
+          <draggable v-model:list="places" item-key="id" @end="onReordered()" handle=".reorder-handle">
+            <template #item="{ element: place, index }">
+              <li :key="place.id">
+                <v-row>
+                  <v-col cols="2" md="1" v-if="$store.getters.mode === constants.modes.directions">
+                    <v-btn class="reorder-handle" size="small" variant="text" icon :title="$t('placesAndDirections.reorder')">
+                      <v-icon color="dark">reorder</v-icon>
+                    </v-btn>
+                  </v-col>
+                  <v-col :sm="$store.getters.mode === constants.modes.directions ? 10 : 12"
+                         :md="$store.getters.mode === constants.modes.directions ? 11 : undefined">
+                    <place-input :ref="'place'+index"
+                      id-postfix="places-and-directions"
+                      :support-directions="inputSupportsDirections"
+                      :directions-button-tooltip="$store.getters.isSidebarVisible && active"
+                      directions-button-tooltip-position="right"
+                      support-direct-routing
+                      :pick-place-supported="places.length > 1"
+                      :support-search="places.length === 1"
+                      :box="places.length === 1"
+                      :index="index"
+                      :autofocus="autofocusEnabled(index)"
+                      :model="places[index]"
+                      :single="places.length === 1"
+                      :is-last="(places.length -1) === index && index !== 0"
+                      @selected="selectPlace"
+                      @changedDirectPlace="changedDirectPlace"
+                      @removeInput="removePlaceInput"
+                      @startDirections="startDirections"
+                      @cleared="placeCleared">
+                    </place-input>
+                  </v-col>
+                </v-row >
+              </li>
+            </template>
           </draggable>
         </ul>
       </template>
