@@ -10,7 +10,7 @@
         </div>
       </v-list-item>
     </template>
-    <v-list-item @click.stop="nav(subItem)" v-if="showMenuItem(subItem)" class="v-menu-item" :class="itemClass" v-for='subItem in item.items' :key='subItem.href' ripple
+    <v-list-item @click.stop="nav(subItem)" class="v-menu-item" :class="itemClass" v-for='subItem in visibleSubItems' :key='subItem.href' ripple
       v-bind:disabled='subItem.disabled'>
       <app-v-menu :item="subItem" :navigateFn="navigateFn" :itemClass="itemClass" :showIcon="false" :key="subItem.href" :showMenuItemFn="showMenuItem" ></app-v-menu>
     </v-list-item>

@@ -25,6 +25,11 @@ export default {
       required: false
     }
   },
+  computed: {
+    visibleSubItems () {
+      return this.item.items.filter(subItem => this.showMenuItem(subItem))
+    }
+  },
   methods: {
     ...menuMixin,
     nav (to) {
