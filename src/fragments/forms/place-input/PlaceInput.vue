@@ -23,14 +23,14 @@
             <template v-slot:append v-if="searchAvailable">
               <v-btn v-if="appendBtn === 'search'" icon size="small" variant="text" class="append-input-btn search" :title="$t('placeInput.clickToSearchAndShowResultsOnTheMap')"
                 @click="sendToSearchMode()">
-                <v-icon left>search</v-icon>
+                <v-icon start>search</v-icon>
               </v-btn>
             </template>
             <template v-slot:append-outer>
               <v-btn v-if="appendBtn === 'map'" icon size="small" variant="text" class="append-input-btn" :title="$t('placeInput.clickOnTheMapBtnToPickAPlace')"
                 @click="pickPlaceClick($event)"
                 v-smart-tooltip="{show: showInputPickPlaceTooltip, text: $t('placeInput.clickOnTheMapBtnToPickAPlace'), position: 'bottom', dark: true, showOnce: true, name: 'pickAPlaceOnTheMap'}">
-                <v-icon left>map</v-icon>
+                <v-icon start>map</v-icon>
               </v-btn>
             </template>
           </v-text-field>
