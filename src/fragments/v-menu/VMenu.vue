@@ -27,7 +27,7 @@
       <div class="text-body-1 font-weight-medium"> {{ item.title}} </div>
     </div>
     <v-list-item-action v-if='item.subAction'>
-      <v-icon class="success--text"> {{ item.subAction }}</v-icon>
+      <v-icon class="text-success"> {{ item.subAction }}</v-icon>
     </v-list-item-action>
   </v-list-item>
 </template>
