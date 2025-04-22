@@ -2,13 +2,13 @@ export default {
   'options': {
     'units': {
       'kilometers': 'kilomètres',
-      'meters': 'Mètres',
-      'miles': 'Miles',
+      'meters': 'mètres',
+      'miles': 'milles',
     },
     'areUnits': {
-      'sqKms': 'Kms carrés',
-      'hectare': 'Hectare',
-      'sqMeters': 'Mètres carrés'
+      'sqKms': 'kilomètres carrés',
+      'hectare': 'hectares',
+      'sqMeters': 'mètres carrés'
     }
   }
 }
