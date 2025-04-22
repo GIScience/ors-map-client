@@ -95,7 +95,7 @@ export default {
     'steepness': 'Inclinaison',
     'surface': 'Surface',
     'roadaccessrestrictions': 'Restrictions d\'accès à la route',
-    'waytypes': 'Types de voie',
+    'waytype': 'Type de voie',
     'suitability': 'pertinence',
     'waycategory': 'Catégorie de voie',
     'tollways': 'Péages',

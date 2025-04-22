@@ -95,7 +95,7 @@ export default {
     'steepness': 'Meredekség',
     'surface': 'Felszín',
     'roadaccessrestrictions': 'Behajtási korlátozások',
-    'waytypes': 'Úttípusok',
+    'waytype': 'Út típusa',
     'suitability': 'Alkalmasság',
     'waycategory': 'Útkategória',
     'tollways': 'Fizetős utak',

@@ -95,7 +95,7 @@ export default {
     steepness: 'Steilheit',
     surface: 'Oberfläche',
     roadaccessrestrictions: 'Straßen Zugangsbeschränkung',
-    waytypes: 'Weg Arten',
+    waytype: 'Weg Art',
     suitability: 'Eignung',
     waycategory: 'Wegkategorie',
     tollways: 'Mautstraßen',

@@ -1,5 +1,5 @@
 const orsDictionary = {
-  waytypes: [
+  waytype: [
     'unknown', // at position 0
     'stateRoad', // at position 1
     'road', // at position 2
@@ -107,7 +107,7 @@ const orsDictionary = {
     '10': '10'
   },
   colors: {
-    waytypes: [
+    waytype: [
       // 11 colors accessed by index
       '#AFEEEE',
       '#40E0D0',

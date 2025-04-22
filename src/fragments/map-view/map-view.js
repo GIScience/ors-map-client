@@ -186,7 +186,7 @@ export default {
       focusedPlace: null, // the place that must be focused among the ones visible on the map view (for search mode)
       highlightedRoutePointIndex: null, // a point on the route that must be highlighted (a Leaflet latLng)
       isAltitudeModalOpen: false,
-      extraInfo: null, // Extra route info (waytypes, surface, steepness etc)
+      extraInfo: null, // Extra route info (waytype, surface, steepness etc)
       featuresJustFitted: false,
       localAvoidPolygons: null,
       mapDataViewChangeDebounceTimeoutId: null

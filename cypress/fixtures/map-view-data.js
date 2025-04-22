@@ -2502,7 +2502,7 @@ let routes = [
           }
           ]
         },
-        'waytypes': {
+        'waytype': {
           'values': [
             [
               0,
@@ -4394,7 +4394,7 @@ let rawData = {
               }
             ]
           },
-          'waytypes': {
+          'waytype': {
             'values': [
               [
                 0,

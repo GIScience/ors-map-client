@@ -95,7 +95,7 @@ export default {
     'steepness': 'Ripidezza',
     'surface': 'Superficie',
     'roadaccessrestrictions': 'Restrizioni d\'accesso alla strada',
-    'waytypes': 'Tipo di percorsi',
+    'waytype': 'Tipo di percorsi',
     'suitability': 'adeguatezza',
     'waycategory': 'Categoria di via',
     'tollways': 'Pedaggios',

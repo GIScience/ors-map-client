@@ -56,7 +56,7 @@
                     <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.surface"
                       :label="$t('global.surface')"></v-checkbox>
                     <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.waytype"
-                      :label="$t('global.waytypes')"></v-checkbox>
+                      :label="$t('global.waytype')"></v-checkbox>
 
                     <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.tollways"
                       :label="$t('global.tollways')"></v-checkbox>

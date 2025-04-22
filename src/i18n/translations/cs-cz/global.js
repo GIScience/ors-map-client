@@ -96,7 +96,7 @@ export default {
     steepness: 'Strmost',
     surface: 'Povrch',
     roadaccessrestrictions: 'Omezení přístupu na silnice',
-    waytypes: 'Typy cest',
+    waytype: 'Typy cest',
     suitability: 'Vhodnost',
     waycategory: 'Kategorie cest',
     tollways: 'Mýtné brány',

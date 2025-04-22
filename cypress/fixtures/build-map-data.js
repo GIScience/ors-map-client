@@ -302,7 +302,7 @@ const buildMapData = {
               }
               ]
             },
-            'waytypes': {
+            'waytype': {
               'values': [
                 [
                   0,

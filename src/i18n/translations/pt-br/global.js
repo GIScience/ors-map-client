@@ -95,7 +95,7 @@ export default {
     steepness: 'Inclinação',
     surface: 'Superfície',
     roadaccessrestrictions: 'Road access restrictions',
-    waytypes: 'tipos de caminho',
+    waytype: 'tipo de caminho',
     suitability: 'Adequação',
     waycategory: 'Categoria do caminho',
     tollways: 'Pedágios',

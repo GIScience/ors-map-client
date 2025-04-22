@@ -96,7 +96,7 @@ export default {
     'noise': 'Zgomot',
     'steepness': 'Abrupt',
     'surface': 'Suprafață',
-    'waytypes': 'Tipuri de căi',
+    'waytype': 'Tipul de căi',
     'suitability': 'Adecvare',
     'waycategory': 'Categoria Calea',
     'tollways': 'Autostrăzi cu taxă',
