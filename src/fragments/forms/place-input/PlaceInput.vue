@@ -8,7 +8,7 @@
             v-model="model.placeName"
             clearable
             flat
-            :box="box"
+            :variant="box ? 'filled' : undefined"
             :hide-details="hideDetails"
             :hint="hint"
             :persistent-hint="!hideDetails"

@@ -8,13 +8,13 @@
       </header>
       <v-divider></v-divider>
       <section>
-        <v-alert outline :value="true" color="info">
+        <v-alert variant="outlined" :value="true" color="info">
           <h3 class="header"> {{$t('about.donate')}}</h3>
           <span class="text-justify">{{$t('about.donateText')}}</span>
           <a class="link" :href="constants.links.osm" target="_blank">{{$t('about.openStreetMapOrg')}}</a>
         </v-alert>
         <p class="text-justify">{{$t('about.info_I')}}</p>
-        <v-alert outline :value="true" color="info">
+        <v-alert variant="outlined" :value="true" color="info">
           <h3 class="header">{{$t('about.infoSupport') }}</h3>
           <div class="text-justify">
             <a class="link" :href="constants.links.donate" target="_blank">{{$t('about.supportText')}}</a>
