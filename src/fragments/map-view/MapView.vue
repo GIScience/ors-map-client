@@ -155,7 +155,7 @@
       <div ref="customMapControlsContainer" style="z-index: 501" class="custom-controls" ></div>
     </l-map>
     <v-btn v-if="$store.getters.embed" size="small" :title="$t('mapView.viewOnORS')" class="view-on-ors" target="_blank" :href="nonEmbedUrl" > {{$t('mapView.viewOnORS')}}
-      <v-icon right size="small">open_in_new</v-icon>
+      <v-icon end size="small">open_in_new</v-icon>
     </v-btn>
     <map-right-click v-if="!$store.getters.embed" :map-view-data="mapViewData" @closed="clickLatLng = null" @rightClickEvent="handleRightClickEvent"></map-right-click>
     <map-left-click :show="showControls && showClickPopups" :current-zoom="zoom" @closed="clickLatLng = null" @directionsToPoint="directionsToPoint"></map-left-click>
