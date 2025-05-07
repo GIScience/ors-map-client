@@ -75,7 +75,7 @@ import lodash from 'lodash'
 // Import leaflet-related styles
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import 'leaflet-measure/dist/leaflet-measure.css'
-import 'vue-resize/dist/vue-resize.css'
+import 'vue3-resize/dist/vue3-resize.css'
 import 'leaflet/dist/leaflet.css'
 
 export default {

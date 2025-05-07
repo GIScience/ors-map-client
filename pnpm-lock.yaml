@@ -173,9 +173,6 @@ importers:
       vue-lodash:
         specifier: ^2.1.2
         version: 2.1.2(vue@3.5.13(typescript@5.5.4))
-      vue-resize:
-        specifier: ^1.0.1
-        version: 1.0.1(vue@3.5.13(typescript@5.5.4))
       vue-rest-client:
         specifier: ^0.1.15
         version: 0.1.15(vue@3.5.13(typescript@5.5.4))(webpack@5.97.1)
@@ -203,6 +200,9 @@ importers:
       vue2-leaflet-polyline-measure:
         specifier: ^1.0.0
         version: 1.2.1(@types/leaflet@1.9.12)(leaflet@1.9.4)(vue@3.5.13(typescript@5.5.4))
+      vue3-resize:
+        specifier: ^0.2.0
+        version: 0.2.0(vue@3.5.13(typescript@5.5.4))
       vuedraggable:
         specifier: ^4.1.0
         version: 4.1.0(vue@3.5.13(typescript@5.5.4))
@@ -6592,11 +6592,6 @@ packages:
     peerDependencies:
       vue: ^2.0.0
 
-  vue-resize@1.0.1:
-    resolution: {integrity: sha512-z5M7lJs0QluJnaoMFTIeGx6dIkYxOwHThlZDeQnWZBizKblb99GSejPnK37ZbNE/rVwDcYcHY+Io+AxdpY952w==}
-    peerDependencies:
-      vue: ^2.6.0
-
   vue-rest-client@0.1.15:
     resolution: {integrity: sha512-HDc+31b+JmVVYleIgOPzXM3g5wiWqeocVmwFfAFRhJmSQgLeu5OiwRoC9HdfbIyxnqCku0JyRa47wN3TKUvK+A==}
 
@@ -6642,6 +6637,11 @@ packages:
       '@types/leaflet': ^1.5.7
       leaflet: ^1.3.4
       vue: ^2.5.17
+
+  vue3-resize@0.2.0:
+    resolution: {integrity: sha512-vZkbEv4PjMEWFV0igAxCvdSIH9hrIJjXyJ9XPTxH0cS/L2/VW1dLVORMWJKU0VXHpHiYKwskB62ju7aBQMVpOQ==}
+    peerDependencies:
+      vue: ^3.0.0
 
   vue@2.7.16:
     resolution: {integrity: sha512-4gCtFXaAA3zYZdTp5s4Hl2sozuySsgz4jy1EnpBHNfpMa9dK1ZCG7viqBPCwXtmgc8nHqUsAu3G4gtmXkkY3Sw==}
@@ -14057,11 +14057,6 @@ snapshots:
     dependencies:
       vue: 3.5.13(typescript@5.5.4)
 
-  vue-resize@1.0.1(vue@3.5.13(typescript@5.5.4)):
-    dependencies:
-      '@babel/runtime': 7.25.0
-      vue: 3.5.13(typescript@5.5.4)
-
   vue-rest-client@0.1.15(vue@3.5.13(typescript@5.5.4))(webpack@5.97.1):
     dependencies:
       '@babel/cli': 7.24.8(@babel/core@7.25.2)
@@ -14163,6 +14158,10 @@ snapshots:
     dependencies:
       '@types/leaflet': 1.9.12
       leaflet: 1.9.4
+      vue: 3.5.13(typescript@5.5.4)
+
+  vue3-resize@0.2.0(vue@3.5.13(typescript@5.5.4)):
+    dependencies:
       vue: 3.5.13(typescript@5.5.4)
 
   vue@2.7.16:
