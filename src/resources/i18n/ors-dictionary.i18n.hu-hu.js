@@ -27,6 +27,7 @@ export default {
     'delivery': 'Áruszállítás',
     'private': 'Engedéllyel',
     'permissive': 'Megtűrt',
+    'permit': 'Engedély',
     'stateRoad': 'Főút',
     'road': 'Egyéb út',
     'street': 'Utca',
