@@ -11,6 +11,7 @@ export default {
     destination: 'Destinație',
     private: 'Privat',
     permissive: 'Permisivitate',
+    permit: 'Permis',
     road: 'Drumul',
     street: 'Strada',
     path: 'Calea',

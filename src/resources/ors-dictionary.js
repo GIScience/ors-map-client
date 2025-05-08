@@ -78,7 +78,8 @@ const orsDictionary = {
     '4': 'destination',
     '8': 'delivery',
     '16': 'private',
-    '32': 'permissive'
+    '32': 'permissive',
+    '64': 'permit'
   },
   green: {
     '0': '0',
@@ -157,13 +158,15 @@ const orsDictionary = {
       5: '#c71400'
     },
     roadaccessrestrictions: {
-      0: 'gray',
-      1: 'green',
-      2: '#FFFF66',
-      4: '#FFFF33',
-      8: '#FFFF00',
-      16: '#CCCC00',
-      32: '#333300'
+      // https://colorbrewer2.org/#type=qualitative&scheme=Accent&n=8
+      0: '#808080',
+      1: '#7fc97f',
+      2: '#beaed4',
+      4: '#ffff99',
+      8: '#bf5b17',
+      16: '#f0027f',
+      32: '#386cb0',
+      64: '#fdc086'
     },
     tollways: {
       '0': '#708090',

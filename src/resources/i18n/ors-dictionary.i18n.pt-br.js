@@ -27,6 +27,7 @@ export default {
     delivery: 'Entrega',
     private: 'Privado',
     permissive: 'Permissivo',
+    permit: 'Permissão',
     stateRoad: 'Rodovia estadual',
     road: 'Rodovia',
     street: 'Rua',

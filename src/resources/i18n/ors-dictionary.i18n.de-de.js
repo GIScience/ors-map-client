@@ -27,6 +27,7 @@ export default {
     delivery: 'Lieferverkehr',
     private: 'Privat',
     permissive: 'Geduldet',
+    permit: 'Mit Erlaubnis',
     stateRoad: 'Bundesstraße',
     road: 'Landstraße',
     street: 'Straße',
