@@ -80,19 +80,21 @@
                 </div>
                 <div v-else-if="routeIndex === $store.getters.activeRouteIndex" class="route-container">
                   <div style="padding:0 0 0 5px">
-                    <v-expansion-panel class="no-shadow" v-if="hasRoutes" :value="null">
-                      <v-expansion-panel-content class="route-panel" style="background: transparent;" >
-                        <template v-slot:header>
+                    <v-expansion-panels class="no-shadow" v-if="hasRoutes" :value="null">
+                      <v-expansion-panel class="route-panel" style="background: transparent;" >
+                        <v-expansion-panel-title>
                           <h4 >{{$t('routeDetails.instructions')}}</h4>
-                        </template>
-                        <v-list class="instructions-scroll">
-                          <v-divider></v-divider>
-                          <v-list dense>
-                            <steps :steps="route.properties.segments[0].steps"></steps>
+                        </v-expansion-panel-title>
+                        <v-expansion-panel-text>
+                          <v-list class="instructions-scroll">
+                            <v-divider></v-divider>
+                            <v-list dense>
+                              <steps :steps="route.properties.segments[0].steps"></steps>
+                            </v-list>
                           </v-list>
-                        </v-list>
-                      </v-expansion-panel-content>
-                    </v-expansion-panel>
+                        </v-expansion-panel-text>
+                      </v-expansion-panel>
+                    </v-expansion-panels>
                     <route-extras :route="route"></route-extras>
                     <div style="padding-left: 5px; padding-right:30px; padding-top:10px">
                       <v-slider class="route-opacity-slider" :min="0" :max="1"
