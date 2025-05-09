@@ -368,9 +368,39 @@ const Isochrones = (places) => {
   })
 }
 
+/**
+ * Optimize a list of Jobs for Vehicles
+ * @returns {Promise}
+ * @param jobs
+ * @param vehicles
+ */
+const Optimization = (jobs, vehicles = []) => {
+  const mapSettings = store.getters.mapSettings
+
+  const optimization = new OrsApiClient.Optimization({
+    api_key: mapSettings.apiKey,
+    host: mapSettings.apiBaseUrl,
+    service: mapSettings.endpoints.optimization
+  })
+  return new Promise((resolve, reject) => {
+    OrsParamsParser.buildOptimizationArgs(jobs, vehicles).then(args => {
+      optimization.calculate(args).then((response) => {
+        const data = { options: { origin: constants.dataOrigins.optimization, apiVersion: constants.apiVersion }, content: response }
+        resolve(data)
+      }).catch((err) => {
+        err.response.json().then((error) => {
+          const result = { response: error, args: args }
+          reject(result)
+        })
+      })
+    })
+  })
+}
+
 export { Directions }
 export { Geocode }
 export { Pois }
 export { PlacesSearch }
 export { ReverseGeocode }
 export { Isochrones }
+export { Optimization }

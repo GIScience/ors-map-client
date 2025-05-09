@@ -1,6 +1,6 @@
 import SimplePlaceSearch from '@/fragments/forms/simple-place-search/SimplePlaceSearch'
 import PlacesCarousel from '@/fragments/places-carousel/PlacesCarousel'
-import OrsFilterUtil from '@/support/map-data-services/ors-filter-util'
+import {vehicleIcon} from '@/support/map-data-services/ors-filter-util'
 import Settings from '@/fragments/forms/settings/Settings.vue'
 import Altitude from '@/fragments/charts/altitude/Altitude'
 import MapView from '@/fragments/map-view/MapView.vue'
@@ -98,18 +98,7 @@ export default {
     currentProfileIcon () {
       if (this.mapViewData.options.profile) {
         let profile = this.mapViewData.options.profile
-        const filterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
-        if (filterRef.mapping[profile]) {
-          return filterRef.mapping[profile].icon
-        } else {
-          for (let key in filterRef.mapping) {
-            let hasNestedProfiles = filterRef.mapping[key].nestedProfiles && filterRef.mapping[key].nestedProfiles.includes(profile)
-            let hasVehicleType = filterRef.mapping[key].vehicleTypes && filterRef.mapping[key].vehicleTypes.includes(profile)
-            if (hasNestedProfiles || hasVehicleType) {
-              return filterRef.mapping[key].icon
-            }
-          }
-        }
+        return vehicleIcon(profile)
       }
     },
     /**
@@ -600,6 +589,7 @@ export default {
         this.$router.push({ name: 'Maps' })
       }
     },
+
     /**
      * When an avoid polygons option changes,
      * merge the avoid-polygons-array into a multiPolygon and
@@ -646,6 +636,12 @@ export default {
         polygons = PolygonUtils.splitMultiPolygonIntoPolygons(multiPolygon)
       }
       this.localAvoidPolygons = polygons
+    },
+    addJob(data) {
+      EventBus.$emit('addJob', data)
+    },
+    addVehicle(data) {
+      EventBus.$emit('addVehicle', data)
     }
   },
 
