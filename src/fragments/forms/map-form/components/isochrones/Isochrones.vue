@@ -33,14 +33,14 @@
           </draggable>
         </ul>
       </template>
-      <v-layout row class="form-actions-btns">
+      <v-row class="form-actions-btns" no-gutters>
         <form-actions :place-inputs="places.length" :disabled-actions="disabledActions"
           @addPlaceInput="addPlaceInput"
           @clearPlaces="clearPlaces"
           @reverseRoute="reverseRoute"
           @contentUploaded="contentUploaded">
         </form-actions>
-      </v-layout>
+      </v-row>
       <template v-if="mapViewData">
         <ischrones-details v-if="mapViewData && mapViewData.hasPlaces()" :map-view-data="mapViewData"></ischrones-details>
         <br>

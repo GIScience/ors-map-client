@@ -41,7 +41,7 @@
           </draggable>
         </ul>
       </template>
-      <v-row class="form-actions-btns">
+      <v-row class="form-actions-btns" no-gutters>
          <form-actions :place-inputs="places.length" :disabled-actions="disabledActions"
             @addPlaceInput="addInput"
             @clearPlaces="clearPlaces"
