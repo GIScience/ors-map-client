@@ -19,6 +19,7 @@ import store from '@/store/store'
 import router from '@/router'
 
 import { createVuetify } from 'vuetify'
+import 'vuetify/styles' // Required for utility classes
 import {
   VAlert,
   VApp,

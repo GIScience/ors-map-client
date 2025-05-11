@@ -85,8 +85,8 @@
 
 .sidebar-top-menu {
   text-align: right;
-  padding-right: 10px;
-  padding-top: 10px;
+  padding-right: 10px !important;
+  padding-top: 10px !important;
 }
 
 .brands {

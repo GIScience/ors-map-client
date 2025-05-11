@@ -14,7 +14,7 @@
       :class="{'auto-height': $lowResolution && !$store.getters.leftSideBarPinned, 'full-height': $store.getters.leftSideBarPinned}">
 
       <div class="sidebar-header" :style="{height: $store.getters.sidebarHeaderHeight + 'px'}">
-        <v-layout row class="sidebar-header-top" >
+        <v-row class="sidebar-header-top" no-gutters>
           <v-col cols="6" md="9">
             <div class="logo-container">
               <a :href="homeUrl"><img height="52.5" class="small ml-2" :src="getImgSrc('logoImgSrc')" :title="getConfigVal('appName')" :alt="getConfigVal('appName')"></a>
@@ -24,7 +24,7 @@
           <v-col cols="6" md="3" class="sidebar-top-menu">
             <top-menu></top-menu>
           </v-col>
-        </v-layout>
+        </v-row>
         <profile-selector></profile-selector>
       </div>
 

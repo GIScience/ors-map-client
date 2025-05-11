@@ -2,7 +2,7 @@
   <div>
     <v-item-group>
       <div style="min-width:275px; height:70px">
-        <v-layout class="profile-options-wrapper">
+        <v-row class="profile-options-wrapper" no-gutters>
           <v-item v-for="profile in profilesMapping" :key="profile.slug">
             <v-col style="min-width:45px">
               <profile-selector-option @profileSelected="profileSelected" :profile="profile"
@@ -10,7 +10,7 @@
               </profile-selector-option>
             </v-col>
           </v-item>
-        </v-layout>
+        </v-row>
       </div>
     </v-item-group>
 

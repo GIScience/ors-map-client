@@ -1,5 +1,5 @@
 <template>
-  <v-layout row class="top-menu">
+  <v-row class="top-menu flex-nowrap" no-gutters>
     <v-col cols="4" v-if="$mdAndUpResolution">
       <v-btn class="no-padding" v-if="$mdAndUpResolution"
         variant="text" @click="settingsClicked"
@@ -25,7 +25,7 @@
         <v-icon :title="$t('global.close')" color="dark" :size="$lowResolution ? 'medium' : undefined">close </v-icon>
       </v-btn>
     </v-col>
-  </v-layout>
+  </v-row>
 </template>
 
 <script src="./top-menu.js"></script>
