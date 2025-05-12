@@ -116,6 +116,7 @@
     "cypress-vite": "^1.6.0",
     "cz-conventional-changelog": "^3.3.0",
     "geckodriver": "^3.0.2",
+    "material-design-icons-iconfont": "^6.7.0",
     "node-notifier": "^5.1.2",
     "ora": "^1.2.0",
     "os-browserify": "^0.3.0",

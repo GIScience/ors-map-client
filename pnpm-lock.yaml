@@ -255,6 +255,9 @@ importers:
       geckodriver:
         specifier: ^3.0.2
         version: 3.2.0
+      material-design-icons-iconfont:
+        specifier: ^6.7.0
+        version: 6.7.0
       node-notifier:
         specifier: ^5.1.2
         version: 5.4.5
@@ -4626,6 +4629,9 @@ packages:
 
   map-stream@0.1.0:
     resolution: {integrity: sha512-CkYQrPYZfWnu/DAmVCpTSX/xHpKZ80eKh2lAkyA6AJTef6bW+6JpbQZN5rofum7da+SyN1bi5ctTm+lTfcCW3g==}
+
+  material-design-icons-iconfont@6.7.0:
+    resolution: {integrity: sha512-lSj71DgVv20kO0kGbs42icDzbRot61gEDBLQACzkUuznRQBUYmbxzEkGU6dNBb5fRWHMaScYlAXX96HQ4/cJWA==}
 
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
@@ -12011,6 +12017,8 @@ snapshots:
   map-obj@4.3.0: {}
 
   map-stream@0.1.0: {}
+
+  material-design-icons-iconfont@6.7.0: {}
 
   math-intrinsics@1.1.0: {}
 

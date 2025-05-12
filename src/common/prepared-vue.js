@@ -18,7 +18,9 @@ import I18nBuilder from '@/i18n/i18n-builder'
 import store from '@/store/store'
 import router from '@/router'
 
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import { createVuetify } from 'vuetify'
+import { aliases, md } from 'vuetify/iconsets/md'
 import 'vuetify/styles' // Required for utility classes
 import {
   VAlert,
@@ -88,7 +90,15 @@ export default function createPreparedVue(App) {
   app.use(i18n)
 
   const vuetify = createVuetify({
-    theme: theme, components: {
+    theme: theme,
+    icons: {
+      defaultSet: 'md',
+      aliases,
+      sets: {
+        md,
+      },
+    },
+    components: {
       VAlert,
       VApp,
       VAutocomplete,
