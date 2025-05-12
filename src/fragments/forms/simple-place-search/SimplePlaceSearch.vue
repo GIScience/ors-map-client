@@ -1,8 +1,8 @@
 <template>
   <box background="white" class="simple-place-search" :class="{'extra-low-resolution': $xlResolution}" :style="{height: height+ 'px'}">
-    <v-layout row wrap>
-      <v-flex xs2 sm2 md1>
-        <v-badge overlap location="left" v-model="showNewInfo" color="info">
+    <v-row>
+      <v-col cols="2" sm="2" md="1">
+        <v-badge location="left" v-model="showNewInfo" color="info">
           <template v-slot:default>
             <v-btn
               :title="showNewInfo === true ? $t('simplePlaceSearch.openSidebarToSeeRouteDetails') : ''"
@@ -18,8 +18,8 @@
             </v-btn>
           </template>
         </v-badge>
-      </v-flex>
-      <v-flex xs10 sm10 md11>
+      </v-col>
+      <v-col cols="10" sm="10" md="11">
         <v-form ref="form" @submit.prevent>
           <place-input class="mini-input" :height="27" :mb="0" :index="0"
             id-postfix="simple-place-search"
@@ -35,8 +35,8 @@
             @cleared="placeCleared">
           </place-input>
         </v-form>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </box>
 </template>
 
