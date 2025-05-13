@@ -4,20 +4,45 @@ networks:
     name: production
 
 services:
-  web:
-    # wait for proper env implementation in the app.
-    #    env_file:
-    #      - ./production.env
+  heal-client-heidelberg:
     build:
       context: .
       dockerfile: Dockerfile
     user: "${UID:-0}:${GID:-0}"
-    image: heigit/ors-map-client:local
-    container_name: ors-map-client
+    image: heigit/ors-map-client:heal
     volumes:
+      - /opt/heal/heal-instances/client-heidelberg:/usr/share/nginx/html/static/config
       - ./nginx/logs:/var/log/nginx
     ports:
       - "8080:80"
+    restart: unless-stopped
+    networks:
+      - production
+  heal-client-walldorf:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: "${UID:-0}:${GID:-0}"
+    image: heigit/ors-map-client:heal
+    volumes:
+      - /opt/heal/heal-instances/client-walldorf:/usr/share/nginx/html/static/config
+      - ./nginx/logs:/var/log/nginx
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+    networks:
+      - production
+  heal-client-worms:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: "${UID:-0}:${GID:-0}"
+    image: heigit/ors-map-client:heal
+    volumes:
+      - /opt/heal/heal-instances/client-worms:/usr/share/nginx/html/static/config
+      - ./nginx/logs:/var/log/nginx
+    ports:
+      - "8082:80"
     restart: unless-stopped
     networks:
       - production
