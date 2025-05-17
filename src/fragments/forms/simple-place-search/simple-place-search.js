@@ -178,7 +178,9 @@ export default {
           })
         }
       } else {
-        this.$forceUpdate()
+        // TODO: can it be removed? Otherwise move method to mounted for example
+        // throws error job is null during created, because component is not mounted
+        // this.$forceUpdate()
       }
 
     },
