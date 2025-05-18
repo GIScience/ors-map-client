@@ -1,6 +1,6 @@
 <template>
   <div class="carousel" v-click-outside="clickOutside">
-    <vue-horizontal-list ref="horizontalList" :items="mapViewData.places" :options="horizontalListOptions">
+    <vue3-horizontal-list ref="horizontalList" :items="mapViewData.places" :options="horizontalListOptions">
       <template v-slot:default="{item}">
         <div @click="itemClicked(item)" :class="{'active': isActive(item)}" class="item">
           <v-card class="card">
@@ -33,7 +33,7 @@
           </v-card>
         </div>
       </template>
-    </vue-horizontal-list>
+    </vue3-horizontal-list>
     <v-btn class="previous" icon @click.stop="previous()">
       <v-icon size="large" :title="$t('placesCarousel.prev')">keyboard_arrow_left </v-icon>
     </v-btn>

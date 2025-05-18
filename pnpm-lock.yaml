@@ -161,9 +161,6 @@ importers:
       vue-chartjs:
         specifier: ^5.2.0
         version: 5.3.1(chart.js@4.1.1)(vue@3.5.13(typescript@5.5.4))
-      vue-horizontal-list:
-        specifier: ^1.0.7
-        version: 1.3.0(vue@3.5.13(typescript@5.5.4))
       vue-i18n:
         specifier: ^9.14.2
         version: 9.14.4(vue@3.5.13(typescript@5.5.4))
@@ -200,6 +197,9 @@ importers:
       vue2-leaflet-polyline-measure:
         specifier: ^1.0.0
         version: 1.2.1(@types/leaflet@1.9.12)(leaflet@1.9.4)(vue@3.5.13(typescript@5.5.4))
+      vue3-horizontal-list:
+        specifier: ^0.0.3
+        version: 0.0.3(vue@3.5.13(typescript@5.5.4))
       vue3-resize:
         specifier: ^0.2.0
         version: 0.2.0(vue@3.5.13(typescript@5.5.4))
@@ -6569,12 +6569,6 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
-  vue-horizontal-list@1.3.0:
-    resolution: {integrity: sha512-mBN/aUD+w4bKwpni0MVBVd7BMYnMR4ahv3So7pjg3A1rmIBHHWmO9biIogkqqBFkpAY2TbMmp467RoIlUiV2KA==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      vue: ^2.6.11
-
   vue-hot-reload-api@2.3.4:
     resolution: {integrity: sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==}
 
@@ -6643,6 +6637,12 @@ packages:
       '@types/leaflet': ^1.5.7
       leaflet: ^1.3.4
       vue: ^2.5.17
+
+  vue3-horizontal-list@0.0.3:
+    resolution: {integrity: sha512-c4tVQ0weV2gtrAwg6wSMN0xODX9wdaDJalcU4iGFcwB2FUEW2M38nFQIjM/1m0F/7sKOGKNiwUe9OHOTCkmd0w==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      vue: ^3.2.13
 
   vue3-resize@0.2.0:
     resolution: {integrity: sha512-vZkbEv4PjMEWFV0igAxCvdSIH9hrIJjXyJ9XPTxH0cS/L2/VW1dLVORMWJKU0VXHpHiYKwskB62ju7aBQMVpOQ==}
@@ -14041,11 +14041,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-horizontal-list@1.3.0(vue@3.5.13(typescript@5.5.4)):
-    dependencies:
-      smoothscroll-polyfill: 0.4.4
-      vue: 3.5.13(typescript@5.5.4)
-
   vue-hot-reload-api@2.3.4: {}
 
   vue-i18n@9.14.4(vue@3.5.13(typescript@5.5.4)):
@@ -14166,6 +14161,11 @@ snapshots:
     dependencies:
       '@types/leaflet': 1.9.12
       leaflet: 1.9.4
+      vue: 3.5.13(typescript@5.5.4)
+
+  vue3-horizontal-list@0.0.3(vue@3.5.13(typescript@5.5.4)):
+    dependencies:
+      smoothscroll-polyfill: 0.4.4
       vue: 3.5.13(typescript@5.5.4)
 
   vue3-resize@0.2.0(vue@3.5.13(typescript@5.5.4)):

@@ -1,4 +1,4 @@
-import VueHorizontalList from 'vue-horizontal-list'
+import vue3HorizontalList from 'vue3-horizontal-list'
 import resolver from '@/support/routes-resolver'
 import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
@@ -205,6 +205,6 @@ export default {
     }, 1000)
   },
   components: {
-    VueHorizontalList
+    vue3HorizontalList
   }
 }
