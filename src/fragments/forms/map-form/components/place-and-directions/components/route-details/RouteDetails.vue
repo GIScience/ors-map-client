@@ -20,7 +20,7 @@
           <v-expansion-panel-text>
             <v-list>
               <v-divider></v-divider>
-              <v-list dense class="route-details">
+              <v-list density="compact" class="route-details">
                 <div style="padding:0 0 0 10px">
                   <div>{{$t('global.distance')}}:  <b>{{route.summary.distance}} </b></div>
                   <div v-if="route.summary.duration" >{{$t('global.duration')}}:  <b>{{route.summary.duration}} </b></div>
@@ -38,7 +38,7 @@
                       <v-expansion-panel-text>
                         <v-list>
                           <v-divider></v-divider>
-                          <v-list dense class="instructions-scroll">
+                          <v-list density="compact" class="instructions-scroll">
                             <div style="padding:0 0 0 0">
                               <div>
                                 {{$t('global.distance')}}:  <b>{{segment.distance}} </b>
@@ -88,7 +88,7 @@
                         <v-expansion-panel-text>
                           <v-list class="instructions-scroll">
                             <v-divider></v-divider>
-                            <v-list dense>
+                            <v-list density="compact">
                               <steps :steps="route.properties.segments[0].steps"></steps>
                             </v-list>
                           </v-list>

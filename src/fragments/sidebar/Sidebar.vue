@@ -38,7 +38,7 @@
               <v-expansion-panel-text>
                 <v-list>
                   <v-divider></v-divider>
-                  <v-list dense>
+                  <v-list density="compact">
                     <template v-for='(item) in menuItems' v-bind:key="item.id">
                       <app-v-menu :item="item" :showIcon="true"></app-v-menu>
                     </template>

@@ -11,7 +11,7 @@
               </v-expansion-panel-title>
               <v-expansion-panel-text>
                 <v-list>
-                  <v-list dense>
+                  <v-list density="compact">
                     <div style="padding:0 0 0 10px">
                       <v-layout row>
                         <v-spacer></v-spacer>
@@ -49,7 +49,7 @@
               </v-expansion-panel-title>
               <v-expansion-panel-text>
                 <v-list>
-                  <v-list dense>
+                  <v-list density="compact">
                     <v-container fluid style="padding-top: 0;padding-bottom: 0">
                       <h4>{{$t('settings.routeExtraInfo')}}</h4>
                       <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.elevationProfile"
@@ -79,7 +79,7 @@
                     </v-container>
                   </v-list>
                 </v-list>
-                <v-list dense>
+                <v-list density="compact">
                   <v-container fluid style="padding-top: 0;padding-bottom: 0">
                     <h4>{{$t('settings.mapViewOptions')}}</h4>
                     <v-checkbox class="pt-0 top-0" v-model="mapSettingsTransient.alwaysFitBounds"
@@ -109,7 +109,7 @@
                 </div>
                 <br>
                 <v-list>
-                  <v-list dense>
+                  <v-list density="compact">
                     <div style="padding:0 0 0 10px">
                       <v-text-field hide-details clearable required flat v-model="mapSettingsTransient.apiKey"
                         :type="customApiKey ? 'text' : 'password'" @change="setIsCustomApiKey"
@@ -123,7 +123,7 @@
                     </div>
                   </v-list>
                   <v-divider></v-divider>
-                  <v-list dense>
+                  <v-list density="compact">
                     <div style="padding:0 0 0 10px">
                       <h4>{{$t('settings.endpointsSectionTitle')}}</h4>
                       <v-text-field v-for="(endpoint, key) in mapSettingsTransient.endpoints" :key="key" hide-details
