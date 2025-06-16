@@ -4,7 +4,7 @@
     <br /><br />
 
     <img alt="Map print view" width="auto" height="400" :src="mapViewImage" />
-    <template v-for="(place) in localMapViewData.places">
+    <template v-for="(place) in localMapViewData.places" v-bind:key="place.id">
       <div>
         <h5>{{place.placeName}}</h5>
         <template v-for="(polygon, polygonIndex) in localMapViewData.polygons">
