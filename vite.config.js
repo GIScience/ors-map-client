@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import path from 'path'
+import vuetify from 'vite-plugin-vuetify'
 
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
@@ -32,6 +33,7 @@ export default defineConfig(({ command, mode }) => {
           }
         }
       }),
+      vuetify({autoImport: true}),
       viteCommonjs(),
     ],
     static: {
