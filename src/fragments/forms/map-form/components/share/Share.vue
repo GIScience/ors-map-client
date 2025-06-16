@@ -19,7 +19,7 @@
             <v-btn style="margin-top:11px" class="toggle-short-url" color="primary" :title="shortBtnTitle" @click="toggleShortUrl()">{{shortBtnTitle}}</v-btn>
           </v-flex>
         </v-layout>
-        <v-alert :value="true" type="info" > {{$t('share.copyUrlInfo')}}</v-alert>
+        <v-alert type="info"> {{$t('share.copyUrlInfo')}}</v-alert>
         <br><br>
         <v-layout row wrap>
           <v-flex xs12 sm12 d-flex>
@@ -30,7 +30,7 @@
             </v-textarea>
           </v-flex>
         </v-layout>
-        <v-alert :value="true" type="info" > {{$t('share.embedInstructions')}}</v-alert>
+        <v-alert type="info"> {{$t('share.embedInstructions')}}</v-alert>
       </box>
     </v-dialog>
   </div>

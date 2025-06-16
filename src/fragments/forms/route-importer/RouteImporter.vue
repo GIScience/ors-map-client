@@ -7,7 +7,7 @@
           <h3>{{$t('routeImporter.loadRouteFile')}}</h3>
         </template>
         <vue-dropzone ref="importRouteDropzone" @vdropzone-file-added="fileAdded" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
-        <v-alert :value="true" type="info" style="color:white" >
+        <v-alert type="info" style="color:white" >
           {{$t('routeImporter.acceptedImportTypes')}}: <b>ors-json</b>, <b>GeoJSON</b>, <b>kml</b> {{$t('global.and')}} <b>gpx</b>
         </v-alert>
       </box>
