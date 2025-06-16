@@ -1,6 +1,6 @@
 <template>
 <div style="height:0">
-  <v-menu border-radius location="top" offset-y style="box-shadow:none" transition="slide-y-transition"
+  <v-menu border-radius location="top" style="box-shadow:none" transition="slide-y-transition"
           v-model="menuOpen"
           close-on-click
           close-on-content-click>
