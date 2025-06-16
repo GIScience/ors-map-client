@@ -54,7 +54,7 @@
           </v-btn>
 
           <v-menu class="floating-menu" transition="slide-y-transition" v-if="placeMenuAvailable" v-model="placeInputFloatingMenu"
-            :close-on-click="true"
+            :persistent="false"
             :close-on-content-click="true"
             location="bottom" >
             <template #activator="{ props }">

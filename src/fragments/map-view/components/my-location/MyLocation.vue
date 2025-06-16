@@ -2,7 +2,7 @@
 <div style="height:0">
   <v-menu border-radius location="top" style="box-shadow:none" transition="slide-y-transition"
           v-model="menuOpen"
-          close-on-click
+          :persistent="false"
           close-on-content-click>
     <template #activator="{ props }">
       <v-btn v-if="locationActive"
