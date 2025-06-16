@@ -16,6 +16,7 @@ export default {
       return 'color: ' + theme.primary + ';'
     },
     appVersion () {
+      // eslint-disable-next-line no-undef
       let version = __APP_VERSION__
       return version
     }
