@@ -17,6 +17,7 @@ module.exports = {
   rules: {
     // allow async-await
     'generator-star-spacing': 'off',
+    'vue/multi-word-component-names': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'indent': [
