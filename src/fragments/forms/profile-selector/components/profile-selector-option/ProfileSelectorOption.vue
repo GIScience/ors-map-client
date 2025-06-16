@@ -13,7 +13,7 @@
           <v-icon>keyboard_arrow_down</v-icon>
         </v-btn>
       </template>
-      <v-list light style="background:white">
+      <v-list theme="light" style="background:white">
         <template v-for="(vehicleType) in profile.vehicleTypes" v-bind:key="vehicleType.id">
           <v-list-item @click.stop.prevent="profileSelected(profile.slug, vehicleType)">
             <v-list-item-title>
@@ -31,7 +31,7 @@
           <v-icon>keyboard_arrow_down</v-icon>
         </v-btn>
       </template>
-      <v-list light style="background:white">
+      <v-list theme="light" style="background:white">
         <template v-for="(nestedProfile) in profile.nestedProfiles" v-bind:key="nestedProfile.id">
           <v-list-item @click.stop.prevent="profileSelected(nestedProfile)">
             <v-list-item-title>

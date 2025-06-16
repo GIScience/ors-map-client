@@ -20,7 +20,7 @@
         <v-icon size="large" color="dark" >person_pin_circle</v-icon>
       </v-btn>
     </template>
-    <v-list v-if="!locationActive" light style="border-radius: 20px" class="input-pop-up-list">
+    <v-list v-if="!locationActive" theme="light" style="border-radius: 20px" class="input-pop-up-list">
       <v-list-item key="1" @click="setLocationFromBrowser(true)">
         <v-tooltip location="top">
           <template #activator="{ props }">

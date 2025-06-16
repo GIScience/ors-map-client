@@ -19,13 +19,13 @@
               <v-layout>
                 <v-flex xs5>
                   <v-btn class="navigate-btn" @click="gotToPlace(item)"><span class="text">{{$t('placesCarousel.selectPlace')}}</span>
-                    <v-icon class="icon" end dark>place</v-icon>
+                    <v-icon class="icon" end theme="dark">place</v-icon>
                   </v-btn>
                 </v-flex>
                 <v-spacer></v-spacer>
                 <v-flex xs6>
                   <v-btn class="navigate-btn" @click="directionsTo(item)"><span class="text">{{$t('placesCarousel.directionsTo')}}</span>
-                    <v-icon class="icon" end dark>directions</v-icon>
+                    <v-icon class="icon" end theme="dark">directions</v-icon>
                   </v-btn>
                 </v-flex>
               </v-layout>

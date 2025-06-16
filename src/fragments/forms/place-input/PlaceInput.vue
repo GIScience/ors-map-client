@@ -62,7 +62,7 @@
                 <v-icon  :title="$t('placeInput.openInputOptions')" style="font-size:29px" color="dark" size="large" class="input-icon" >more_vert</v-icon>
               </v-btn>
             </template>
-            <v-list light style="background:white" class="input-pop-up-list">
+            <v-list theme="light" style="background:white" class="input-pop-up-list">
               <v-list-item @click.stop="removePlaceInput()" v-if="deleteAvailable">
                 <v-list-item-title>
                   <v-btn variant="text" class="no-padding">
