@@ -51,11 +51,11 @@
               </template>
             </v-text-field>
 
-            <template v-else-if="parameter.type === constants.filterTypes.steps" :ref="'field'+ index">
+            <template v-else-if="parameter.type === constants.filterTypes.steps">
               <slider-combo @change="(newVal) => sliderComboUpdated(index, newVal)" :filter="comboFilterParameter(index)" :label="buildLabel(parameter)" ></slider-combo>
             </template>
 
-            <template v-else-if="parameter.type === constants.filterTypes.boolean" :ref="'field'+ index">
+            <template v-else-if="parameter.type === constants.filterTypes.boolean">
               <v-checkbox class="pt-0 top-0 form-fields-checkbox"
               v-model="formParameters[index].value" :label="buildLabel(parameter)"
               @change="fieldUpdated({index: index, parameter: parameter})">
