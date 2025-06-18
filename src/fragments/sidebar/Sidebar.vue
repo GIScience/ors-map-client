@@ -32,8 +32,8 @@
       <div class="sidebar-content" :style="{height: sidebarContentHeightFormula}">
         <div class="sidebar-content-form" :style="{'padding-bottom': $store.getters.footerHeight + 'px'}">
           <map-form v-if="$store.getters.mapReady" class="map-search"></map-form>
-          <v-expansion-panels :value="null" v-if="!$highResolution">
-            <v-expansion-panel style="background: transparent;">
+          <v-expansion-panels v-if="!$highResolution">
+            <v-expansion-panel :value="null" style="background: transparent;">
               <v-expansion-panel-title>Menu</v-expansion-panel-title>
               <v-expansion-panel-text>
                 <v-list>

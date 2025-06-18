@@ -4,8 +4,8 @@
       <v-slide-y-transition mode="out-in">
         <div>
           <br>
-          <v-expansion-panels :value="0">
-            <v-expansion-panel class="panel-content" style="background: transparent;">
+          <v-expansion-panels>
+            <v-expansion-panel :value="0" class="panel-content" style="background: transparent;">
               <v-expansion-panel-title>
                 <h4>{{$t('settings.language')}}</h4>
               </v-expansion-panel-title>
@@ -42,8 +42,8 @@
             </v-expansion-panel>
           </v-expansion-panels>
           <br>
-          <v-expansion-panels :value="null">
-            <v-expansion-panel class="panel-content" style="background: transparent;">
+          <v-expansion-panels>
+            <v-expansion-panel :value="null" class="panel-content" style="background: transparent;">
               <v-expansion-panel-title>
                 <h4>{{$t('settings.mapSettings')}}</h4>
               </v-expansion-panel-title>
@@ -98,8 +98,8 @@
             </v-expansion-panel>
           </v-expansion-panels>
           <br>
-          <v-expansion-panels :value="null">
-            <v-expansion-panel class="panel-content" style="background: transparent;">
+          <v-expansion-panels>
+            <v-expansion-panel :value="null" class="panel-content" style="background: transparent;">
               <v-expansion-panel-title>
                 <h4>{{$t('settings.advanced')}}</h4>
               </v-expansion-panel-title>

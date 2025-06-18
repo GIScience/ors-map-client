@@ -66,8 +66,8 @@
               :label="buildLabel(parameter)" @change="fieldUpdated({index: index, parameter: parameter})" v-model="formParameters[index].value"
             ></v-switch>
 
-            <v-expansion-panels v-else-if="parameter.type === constants.filterTypes.wrapper" :value="showPanelExpanded(parameter)" class="fields-panel">
-              <v-expansion-panel style="background: transparent">
+            <v-expansion-panels v-else-if="parameter.type === constants.filterTypes.wrapper" class="fields-panel">
+              <v-expansion-panel :value="showPanelExpanded(parameter)" style="background: transparent">
                 <v-expansion-panel-title>
                   <h4>{{buildLabel(parameter)}}</h4>
                 </v-expansion-panel-title>

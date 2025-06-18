@@ -1,7 +1,7 @@
 <template v-slot:content>
 <div>
-  <v-expansion-panels v-if="showExtras()" class="no-shadow" :value="showExtraInfoSection">
-    <v-expansion-panel style="background: transparent;" class="extras-header" >
+  <v-expansion-panels v-if="showExtras()" class="no-shadow">
+    <v-expansion-panel :value="showExtraInfoSection" style="background: transparent;" class="extras-header" >
       <v-expansion-panel-title>
         <h4 >{{$t('routeExtras.extraInfo')}}</h4>
       </v-expansion-panel-title>

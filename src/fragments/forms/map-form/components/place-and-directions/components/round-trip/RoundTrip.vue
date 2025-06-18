@@ -1,6 +1,6 @@
 <template>
-  <v-expansion-panels :value="0" class="round-trip-panel">
-    <v-expansion-panel class="round-trip-panel-content">
+  <v-expansion-panels class="round-trip-panel">
+    <v-expansion-panel :value="0" class="round-trip-panel-content">
       <v-expansion-panel-title>
         <h4>{{$t('roundtrip.roundtripOptions')}}</h4>
       </v-expansion-panel-title>

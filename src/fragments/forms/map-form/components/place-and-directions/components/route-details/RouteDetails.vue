@@ -8,8 +8,8 @@
       <h3>{{$t('routeDetails.routeDetails')}}</h3>
     </template>
     <template v-slot:content>
-      <v-expansion-panels class="no-shadow" v-if="hasRoutes" :value="panelExtended">
-        <v-expansion-panel style="background: transparent;" class="routes-header" :key="routeIndex" v-for="(route, routeIndex) in parsedRoutes">
+      <v-expansion-panels class="no-shadow" v-if="hasRoutes">
+        <v-expansion-panel :value="panelExtended" style="background: transparent;" class="routes-header" :key="routeIndex" v-for="(route, routeIndex) in parsedRoutes">
           <v-expansion-panel-title>
             <h4 >{{$t('routeDetails.route')}} {{routeIndex + 1}} ({{route.summary.distance}})
               <v-btn icon @click.stop="changeActiveRouteIndex(routeIndex)" v-if="parsedRoutes.length > 1" :title="routeIndex === $store.getters.activeRouteIndex? $t('routeDetails.selectedRoute') : $t('routeDetails.selectRoute')">
@@ -30,8 +30,8 @@
                   <v-alert :key="warning.code" v-for="warning in route.properties.warnings" :value="getWarningTranslated(warning)"  type="warning" style="color:black" >{{ getWarningTranslated(warning) }}</v-alert>
                 </div>
                 <div v-if="route.properties.segments.length > 1 && routeIndex === $store.getters.activeRouteIndex" class="route-container">
-                  <v-expansion-panels class="no-shadow" v-if="hasRoutes" :value="route.properties.segments.length === 1 ? 0 : null">
-                    <v-expansion-panel class="route-panel"  v-for="(segment, segmentIndex) in route.properties.segments" :key="segmentIndex">
+                  <v-expansion-panels class="no-shadow" v-if="hasRoutes">
+                    <v-expansion-panel class="route-panel" v-for="(segment, segmentIndex) in route.properties.segments" :key="segmentIndex" :value="route.properties.segments.length === 1 ? 0 : null">
                       <v-expansion-panel-title>
                         <h4 >{{$t('routeDetails.segment')}} {{segmentIndex + 1}}</h4>
                       </v-expansion-panel-title>
@@ -80,8 +80,8 @@
                 </div>
                 <div v-else-if="routeIndex === $store.getters.activeRouteIndex" class="route-container">
                   <div style="padding:0 0 0 5px">
-                    <v-expansion-panels class="no-shadow" v-if="hasRoutes" :value="null">
-                      <v-expansion-panel class="route-panel" style="background: transparent;" >
+                    <v-expansion-panels class="no-shadow" v-if="hasRoutes">
+                      <v-expansion-panel :value="null" class="route-panel" style="background: transparent;" >
                         <v-expansion-panel-title>
                           <h4 >{{$t('routeDetails.instructions')}}</h4>
                         </v-expansion-panel-title>
