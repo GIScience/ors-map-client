@@ -8,7 +8,7 @@
               class="field-input no-input-details form-fields-autocomplete"
               :class="{'multi-select': parameter.multiSelect}"
               :required="parameter.required"
-              @change="multiSelectChanged({index: index, value: $event, parameter: parameter})"
+              @update:modelValue="multiSelectChanged({index: index, value: $event, parameter: parameter})"
               :items="getSelectableItems(parameter)"
               v-model="formParameters[index].value"
               item-title="itemText"
@@ -52,18 +52,18 @@
             </v-text-field>
 
             <template v-else-if="parameter.type === constants.filterTypes.steps">
-              <slider-combo @change="(newVal) => sliderComboUpdated(index, newVal)" :filter="comboFilterParameter(index)" :label="buildLabel(parameter)" ></slider-combo>
+              <slider-combo @update:modelValue="(newVal) => sliderComboUpdated(index, newVal)" :filter="comboFilterParameter(index)" :label="buildLabel(parameter)" ></slider-combo>
             </template>
 
             <template v-else-if="parameter.type === constants.filterTypes.boolean">
               <v-checkbox class="pt-0 top-0 form-fields-checkbox"
               v-model="formParameters[index].value" :label="buildLabel(parameter)"
-              @change="fieldUpdated({index: index, parameter: parameter})">
+              @update:modelValue="fieldUpdated({index: index, parameter: parameter})">
               </v-checkbox>
             </template>
 
             <v-switch class="form-switch" v-else-if="parameter.type === constants.filterTypes.switch"
-              :label="buildLabel(parameter)" @change="fieldUpdated({index: index, parameter: parameter})" v-model="formParameters[index].value"
+              :label="buildLabel(parameter)" @update:modelValue="fieldUpdated({index: index, parameter: parameter})" v-model="formParameters[index].value"
             ></v-switch>
 
             <v-expansion-panels v-else-if="parameter.type === constants.filterTypes.wrapper" class="fields-panel">

@@ -74,7 +74,7 @@
                       :thumb-size="24"
                       thumb-label="always"
                       v-model="route.properties.opacity" :title="$t('routeDetails.routeOpacity')"
-                      @change="routeOpacityChanged(routeIndex)" :step="0.1">
+                      @update:modelValue="routeOpacityChanged(routeIndex)" :step="0.1">
                     </v-slider>
                   </div>
                 </div>
@@ -102,7 +102,7 @@
                         :thumb-size="24"
                         thumb-label="always"
                         v-model="route.properties.opacity" :title="$t('routeDetails.routeOpacity')"
-                        @change="routeOpacityChanged(routeIndex)" :step="0.1">
+                        @update:modelValue="routeOpacityChanged(routeIndex)" :step="0.1">
                       </v-slider>
                     </div>
                   </div>

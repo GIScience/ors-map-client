@@ -43,7 +43,7 @@
                             :thumb-size="24"
                             thumb-label="always"
                             v-model="polygon.properties.fillOpacity" label="" :title="$t('isochronesDetails.opacity')"
-                            @change="polygonOpacityChanged(polygonIndex)" :step="0.1">
+                            @update:modelValue="polygonOpacityChanged(polygonIndex)" :step="0.1">
                           </v-slider>
                           <br/>
                         </v-flex>

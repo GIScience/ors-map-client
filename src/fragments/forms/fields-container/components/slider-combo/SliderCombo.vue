@@ -12,7 +12,7 @@
         <custom-slider ref="slider" class="form-fields-slider" :min="filterMin" :max="filterMax" inverse-label v-model="localModel"
           :thumb-size="localModel > 999 ? 32 : 24"
           :thumb-label="localModel > 0 ? 'always' : true"
-          :label="buildUnit() " :title="label" @change="sliderValueChanged()" :step="filter.step"></custom-slider>
+          :label="buildUnit() " :title="label" @update:modelValue="sliderValueChanged()" :step="filter.step"></custom-slider>
       </v-flex>
     </v-layout>
   </div>

@@ -112,7 +112,7 @@
                   <v-list density="compact">
                     <div style="padding:0 0 0 10px">
                       <v-text-field hide-details clearable required flat v-model="mapSettingsTransient.apiKey"
-                        :type="customApiKey ? 'text' : 'password'" @change="setIsCustomApiKey"
+                        :type="customApiKey ? 'text' : 'password'" @update:modelValue="setIsCustomApiKey"
                         :style="{'margin-bottom':'10px'}" :label="apiKeyLabel">
                       </v-text-field>
                     </div>
