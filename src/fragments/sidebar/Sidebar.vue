@@ -2,11 +2,8 @@
   <div >
     <v-navigation-drawer
       touchless
-      app
-      clipped
-      stateless
-      hide-overlay
       class="sidebar"
+      order="1"
       v-model="isSideBarOpen"
       disable-resize-watcher
       :width="$mdAndUpResolution ? $store.getters.sidebarFullWidth : $store.getters.sidebarShrunkWidth"
