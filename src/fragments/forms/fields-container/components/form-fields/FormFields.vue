@@ -11,7 +11,7 @@
               @change="multiSelectChanged({index: index, value: $event, parameter: parameter})"
               :items="getSelectableItems(parameter)"
               v-model="formParameters[index].value"
-              item-text="itemText"
+              item-title="itemText"
               item-value="itemValue"
               :label="buildLabel(parameter)"
               :title="buildLabel(parameter)"
@@ -21,7 +21,7 @@
               :multiple="parameter.multiSelect"
               :menu-props="{contentClass: 'form-fields-autocomplete-menu'}"
               :chips="parameter.multiSelect"
-              deletable-chips>
+              closable-chips>
             </v-autocomplete>
 
             <v-text-field v-else-if="parameter.type === constants.filterTypes.text" :ref="'field'+ index"
