@@ -161,13 +161,13 @@
     <map-left-click :show="showControls && showClickPopups" :current-zoom="zoom" @closed="clickLatLng = null" @directionsToPoint="directionsToPoint"></map-left-click>
 
     <div v-if="$store.getters.mapSettings.accessibleModeActive">
-      <v-btn size="small" @click="moveMapCenter('left')" :title="$t('mapView.moveMapPositionToLeft')" class="move-map-arrow left do-not-trigger-close-bottom-nav" >
+      <v-btn size="small" @click="moveMapCenter('left')" :title="$t('mapView.moveMapPositionToLeft')" class="move-map-arrow float-left do-not-trigger-close-bottom-nav" >
         <v-icon size="large" color="primary" >arrow_back</v-icon>
       </v-btn>
       <v-btn size="small" @click="moveMapCenter('up')" :title="$t('mapView.moveMapPositionToUp')" class="move-map-arrow up do-not-trigger-close-bottom-nav" >
         <v-icon size="large" color="primary" >arrow_upward</v-icon>
       </v-btn>
-      <v-btn size="small" @click="moveMapCenter('right')" :title="$t('mapView.moveMapPositionToRight')" class="move-map-arrow right do-not-trigger-close-bottom-nav" >
+      <v-btn size="small" @click="moveMapCenter('right')" :title="$t('mapView.moveMapPositionToRight')" class="move-map-arrow float-right do-not-trigger-close-bottom-nav" >
         <v-icon size="large" color="primary" >arrow_forward</v-icon>
       </v-btn>
       <v-btn size="small" @click="moveMapCenter('down')" :title="$t('mapView.moveMapPositionToDown')" class="move-map-arrow down do-not-trigger-close-bottom-nav" :style="{top: accessibilityBtnTopPosition}" >
