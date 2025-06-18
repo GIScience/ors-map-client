@@ -4,8 +4,8 @@
     <v-layout>
       <v-flex xs4 sm3>
         <v-text-field hide-details class="field-input form-fields-slider-text-input no-input-details"
-          type="number" variant="filled" height="40px" label="" title="" v-model="textLocalModel"
-          @keyup="debounceTextFieldChange()" :required="filter.required">
+                      type="number" variant="filled" label="" title="" v-model="textLocalModel"
+                      @keyup="debounceTextFieldChange()" :required="filter.required">
         </v-text-field>
       </v-flex >
       <v-flex sm8>

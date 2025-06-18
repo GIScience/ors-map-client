@@ -12,7 +12,6 @@
             :hide-details="hideDetails"
             :hint="hint"
             :persistent-hint="!hideDetails"
-            :height="height"
             :style="{'margin-bottom': mb +'px'}"
             :disabled="disabled"
             :label="placeInputLabel"
