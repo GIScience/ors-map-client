@@ -17,7 +17,7 @@ class JsonImporter {
    * Build the map data for directions json response
    * @returns {Promise} that returns in the resolve mapData object
    */
-  buildMapData = () => {
+  buildMapData() {
     const context = this
     return new Promise((resolve, reject) => {
       let mapViewData = new MapViewData()
@@ -63,7 +63,7 @@ class JsonImporter {
    * Parse the file content to an object
    * @returns {Object}
    */
-  parseFileContentToMapViewData = () => {
+  parseFileContentToMapViewData() {
     const content = JSON.parse(this.fileRawContent)
 
     const mapViewData = new MapViewData()
@@ -92,7 +92,7 @@ class JsonImporter {
    * Parse places from content
    * @return [Places]
    */
-  parsePlaces = (content) => {
+  parsePlaces(content) {
     const places = []
     for (const placeKey in content.places) {
       const place = new Place()
@@ -108,7 +108,7 @@ class JsonImporter {
   /**
    * Adjust summary data
    */
-  setRoutesSummaryData = () => {
+  setRoutesSummaryData() {
     if (lodash.get(this, 'mapRawData.features[0].properties.summary')) {
       for (const key in this.mapRawData.features) {
         const summary = Object.assign({}, this.mapRawData.features[key].properties.summary)
@@ -128,7 +128,7 @@ class JsonImporter {
    * Get the places data based in the response data
    * @returns {Array} places
    */
-  buildPlaces = () => {
+  buildPlaces() {
     const places = []
     // If there are less than 15, so we get all
     if (this.coordinates.length < 16) {

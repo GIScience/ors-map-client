@@ -19,7 +19,7 @@ class OrsResponseExtractorBuilder {
    * Build the map data for the target strategy, using the appropriate builder
    * @returns {Promise} that returns in the resolve mapData object
    */
-  buildMapData = () => {
+  buildMapData() {
     return this.dataBuilder.buildMapData()
   }
 
@@ -56,7 +56,7 @@ class OrsResponseExtractorBuilder {
    * @param  apiVersion {String}
    * @returns {*} Map data extractor instance
    */
-  static getMapDataExtractor = (extractorName, data, apiVersion) => {
+  static getMapDataExtractor(extractorName, data, apiVersion) {
     // This is a dictionary that translates
     // the API version to an extractor version
     const apiVersionToExtractorDictionary = {
@@ -95,7 +95,7 @@ class OrsResponseExtractorBuilder {
    * @param apiVersion
    * @memberof TableDataBuilder
    */
-  static hasMapBuilderFor = (dataFromType, data, apiVersion) => {
+  static hasMapBuilderFor(dataFromType, data, apiVersion) {
     const builder = OrsResponseExtractorBuilder.getMapDataBuilder(dataFromType, data, apiVersion)
     return builder !== null && builder !== undefined
   }

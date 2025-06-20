@@ -18,7 +18,7 @@ class IsochronesBuilder {
    * Build the map data for geocode search response
    * @returns {Promise} that returns in the resolve mapData object
    */
-  buildMapData = () => {
+  buildMapData() {
     const mapViewData = new MapViewData()
     const context = this
     return new Promise((resolve) => {
@@ -37,7 +37,7 @@ class IsochronesBuilder {
    * Get the places data based in the response data
    * @returns {Array} markers
    */
-  buildPlaces = () => {
+  buildPlaces() {
     const places = []
     if (lodash.get(this, 'responseData.metadata.query.locations')) {
       const polygonCenters = []
@@ -58,7 +58,7 @@ class IsochronesBuilder {
    * Get the markers data based in the response data
    * @returns {Array} markers
    */
-  getPolygons = () => {
+  getPolygons() {
     const polygons = []
     if (this.responseData.features) {
       // When you request multiple points in an isochrone request, ors returns them all as a single array

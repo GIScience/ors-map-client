@@ -14,7 +14,7 @@ class PoisBuilder {
    * Build the map data for poi response
    * @returns {Promise} that returns in the resolve mapViewData object
    */
-  buildMapData = () => {
+  buildMapData() {
     const mapViewData = new MapViewData()
     const context = this
     return new Promise((resolve) => {
@@ -27,7 +27,7 @@ class PoisBuilder {
    * Get the places data based in the response data
    * @returns {Array} markers
    */
-  buildPlaces = () => {
+  buildPlaces() {
     const places = []
     if (this.responseData.features) {
       this.responseData.features.forEach(feature => {

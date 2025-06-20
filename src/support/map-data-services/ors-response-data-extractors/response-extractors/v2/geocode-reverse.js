@@ -15,7 +15,7 @@ class GeocodeReverseBuilder {
    * Build the map data for geocode reverse response
    * @returns {Promise} that returns in the resolve mapData object
    */
-  buildMapData = () => {
+  buildMapData() {
     const mapViewData = new MapViewData()
     const context = this
     return new Promise((resolve) => {
@@ -31,7 +31,7 @@ class GeocodeReverseBuilder {
    * Get the markers data based in the response data
    * @returns {Array} places
    */
-  buildPlaces = () => {
+  buildPlaces() {
     const places = []
     if (this.responseData.features) {
       this.responseData.features.forEach(feature => {

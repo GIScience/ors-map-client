@@ -31,7 +31,7 @@ class RoundTripMode {
    * @param options
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
-  getRoute = (appRouteData, options = null) => {
+  getRoute(appRouteData, options = null) {
     options = options || appRouteData.options
     const params = RouteUtils.buildRouteParams(appRouteData, options)
     // Build and return the route object
@@ -43,7 +43,7 @@ class RoundTripMode {
    * @param {*} currentRoute
    * @returns {AppRouteData}
    */
-  decodePath = (currentRoute) => {
+  decodePath(currentRoute) {
     const appRouteData = new AppRouteData()
     const data = RouteUtils.decodeDataParam(currentRoute.params.data)
 

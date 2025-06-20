@@ -18,7 +18,7 @@ class DirectionsJSONBuilder {
    * Build the map data for directions json response
    * @returns {Promise} that returns in the resolve mapData object
    */
-  buildMapData = () => {
+  buildMapData() {
     const mapViewData = new MapViewData()
     const context = this
     return new Promise((resolve) => {
@@ -33,7 +33,7 @@ class DirectionsJSONBuilder {
     })
   }
 
-  buildRoutes = () => {
+  buildRoutes() {
     for (const key in this.responseData.features) {
       this.responseData.features[key].properties.opacity = 0.9
     }
@@ -44,7 +44,7 @@ class DirectionsJSONBuilder {
    * Get the places data based in the response data
    * @returns {Array} markersData
    */
-  buildPlaces = () => {
+  buildPlaces() {
     const places = []
     if (lodash.get(this, 'responseData.metadata.query.coordinates')) {
       for (const key in this.responseData.metadata.query.coordinates) {
@@ -60,7 +60,7 @@ class DirectionsJSONBuilder {
   /**
    * Adjust summary data
    */
-  setRoutesSummaryData = () => {
+  setRoutesSummaryData() {
     if (lodash.get(this, 'responseData.features[0].properties.summary')) {
       for (const key in this.responseData.features) {
         const summary = Object.assign({}, this.responseData.features[key].properties.summary)

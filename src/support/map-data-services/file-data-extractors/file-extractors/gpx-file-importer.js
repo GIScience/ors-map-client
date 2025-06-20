@@ -18,7 +18,7 @@ class GpxImporter {
    * Parse the file content to an object
    * @returns {Promise}
    */
-  parseFileContent = () => {
+  parseFileContent() {
     return new Promise((resolve, reject) => {
       parseString(this.fileRawContent, { trim: true }, function (err, parsedXml) {
         if (err) {
@@ -34,7 +34,7 @@ class GpxImporter {
    * Build the map data for directions json response
    * @returns {Promise} that returns in the resolve mapData object
    */
-  buildMapData = () => {
+  buildMapData() {
     const mapViewData = new MapViewData()
     const context = this
     return new Promise((resolve, reject) => {
@@ -61,7 +61,7 @@ class GpxImporter {
    * @param {*} mapViewData
    * @param {*} fileObject
    */
-  setPlaces = (mapViewData, fileObject) => {
+  setPlaces(mapViewData, fileObject) {
     mapViewData.places = this.getPlaces(fileObject)
     if (mapViewData.places.length === 0) {
       mapViewData.places = this.buildPlaces(mapViewData.routes)
@@ -72,8 +72,8 @@ class GpxImporter {
    * Get the places data based in the response data
    * @param {Array} routes
    * @returns {Array} places
-  */
-  buildPlaces = (routes) => {
+   */
+  buildPlaces(routes) {
     const places = []
 
     if (routes.length > 0) {
@@ -109,7 +109,7 @@ class GpxImporter {
    * @param {*} fileObject
    * @returns {Array} of places
    */
-  getPlaces = (fileObject) => {
+  getPlaces(fileObject) {
     const places = []
     const pts = lodash.get(fileObject, 'gpx.wpt')
 
@@ -134,7 +134,7 @@ class GpxImporter {
    * Get the polyline data if the response contains polyline data
    * @returns {Array} coordinates
    */
-  getRoutes = (fileObject) => {
+  getRoutes(fileObject) {
     const routes = []
     const tracks = lodash.get(fileObject, 'gpx.trk') || lodash.get(fileObject, 'gpx.rte')
     const creator = lodash.get(fileObject, 'gpx.$.creator')

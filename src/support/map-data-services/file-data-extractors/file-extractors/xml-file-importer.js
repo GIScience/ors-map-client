@@ -19,7 +19,7 @@ class XmlImporter {
    * Parse the file content to an object
    * @returns {Promise}
    */
-  parseFileContent = () => {
+  parseFileContent() {
     return new Promise((resolve, reject) => {
       parseString(this.fileRawContent, { trim: true }, function (err, parsedXml) {
         if (err) {
@@ -35,7 +35,7 @@ class XmlImporter {
    * Build the map data for directions json response
    * @returns {Promise} that returns in the resolve mapData object
    */
-  buildMapData = () => {
+  buildMapData() {
     const mapViewData = new MapViewData()
     const context = this
     return new Promise((resolve, reject) => {
@@ -63,7 +63,7 @@ class XmlImporter {
    * @param {*} mapViewData
    * @param {*} fileObject
    */
-  setPlaces = (mapViewData, fileObject) => {
+  setPlaces(mapViewData, fileObject) {
     let places = this.getPlaces(fileObject)
     if (places.length > appConfig.maxPlaceInputs) {
       mapViewData.pois = places
@@ -81,7 +81,7 @@ class XmlImporter {
    * @param {*} fileObject
    * @returns {Array} of places
    */
-  getPlaces = (fileObject) => {
+  getPlaces(fileObject) {
     const places = []
     const placeMarks = lodash.get(fileObject, 'kml.Document[0].Placemark') || lodash.get(fileObject, 'kml.Document[0].Folder[0].Placemark')
 
@@ -107,7 +107,7 @@ class XmlImporter {
    * Get the places data based in the response data
    * @returns {Array} places
    */
-  buildPlaces = (routes) => {
+  buildPlaces(routes) {
     const places = []
 
     if (routes.length > 0) {

@@ -79,7 +79,7 @@ class AppMode {
    * @param {*} options
    * @returns {*} options
    */
-  getRouteOptions = (options) => {
+  getRouteOptions(options) {
     options = utils.merge(store.getters.appRouteData.options, options)
     AppLoader.getInstance().appHooks.run('afterGetRouteOptions', options)
     return options

@@ -48,7 +48,7 @@ class DirectionsMode {
    * @param options
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
-  getRoute = (appRouteData, options = null) => {
+  getRoute (appRouteData, options = null) {
     options = options || appRouteData.options
     // Get only the valid params for directions
     const validOptions = {}
@@ -70,7 +70,7 @@ class DirectionsMode {
    * @param {*} currentRoute
    * @returns {AppRouteData}
    */
-  decodePath = (currentRoute) => {
+  decodePath(currentRoute) {
     const data = RouteUtils.decodeDataParam(currentRoute.params.data)
     const appRouteData = new AppRouteData()
 

@@ -16,7 +16,7 @@ class GeoJsonImporter {
    * Build the map data for directions json response
    * @returns {Promise} that returns in the resolve mapData object
    */
-  buildMapData = () => {
+  buildMapData() {
     const context = this
     return new Promise((resolve, reject) => {
       try {
@@ -47,7 +47,7 @@ class GeoJsonImporter {
    * Parse the file content to an object
    * @returns {Object}
    */
-  buildMapViewData = () => {
+  buildMapViewData() {
     const geoJson = JSON.parse(this.fileRawContent)
     const mapViewData = MapViewData.buildFromGeoJson(geoJson)
     return mapViewData
@@ -56,7 +56,7 @@ class GeoJsonImporter {
   /**
    * Adjust summary data
    */
-  setRoutesSummaryData = (mapViewData) => {
+  setRoutesSummaryData(mapViewData) {
     for (const key in mapViewData.routes) {
       const summary = Object.assign({}, mapViewData.routes[key].properties.summary)
       summary.descent = mapViewData.routes[key].properties.descent

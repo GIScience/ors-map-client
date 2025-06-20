@@ -28,7 +28,7 @@ class IsochronesMode {
    * @param options
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
-  getRoute = (appRouteData, options = null) => {
+  getRoute(appRouteData, options = null) {
     options = options || appRouteData.options
     const params = RouteUtils.buildRouteParams(appRouteData, options)
     // Build the route object
@@ -41,7 +41,7 @@ class IsochronesMode {
    * @param {*} currentRoute
    * @returns {AppRouteData}
    */
-  decodePath = (currentRoute) => {
+  decodePath(currentRoute) {
     const data = RouteUtils.decodeDataParam(currentRoute.params.data)
     const appRouteData = new AppRouteData()
 

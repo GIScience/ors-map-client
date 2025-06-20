@@ -36,7 +36,7 @@ class PlaceMode {
    * @param {*} appRouteData
    * @returns {Object} route like {name: 'MapDirections', params: {...} }
    */
-  getRoute = (appRouteData) => {
+  getRoute(appRouteData) {
     if (appRouteData.places.length > 0) {
       const place = appRouteData.places[0]
       const name = place.placeName ? place.placeName.replace(/, /g, ',') : ''
@@ -47,14 +47,12 @@ class PlaceMode {
         lngLatStr = `${lngLatStr},${appRouteData.options.zoom}`
       }
 
-
-
       // Create the route object
       const params = { coordinates: lngLatStr}
       let route = { name: 'MapLocation' }
 
       if (name && name !== 'null' && Object.keys(appRouteData.options).length > 1) {
-        params.placeName= name
+        params.placeName = name
         route.name = 'MapPlace'
         let options = JSON.stringify(appRouteData.options)
         params.data = store.getters.mapSettings.compressDataUrlSegment ? utils.compressTxt(options) : options
@@ -73,7 +71,7 @@ class PlaceMode {
    * @param {*} currentRoute
    * @returns {AppRouteData}
    */
-  decodePath = (currentRoute) => {
+  decodePath(currentRoute) {
     const appRouteData = new AppRouteData()
     const data = RouteUtils.decodeDataParam(currentRoute.params.data)
     if (data && data !== '') {
@@ -82,7 +80,7 @@ class PlaceMode {
 
     if (currentRoute.params.coordinates) {
       const coordinates = currentRoute.params.coordinates.split(',')
-      appRouteData.options.center =  GeoUtils.buildLatLong(coordinates[1], coordinates[0])
+      appRouteData.options.center = GeoUtils.buildLatLong(coordinates[1], coordinates[0])
       if (coordinates.length > 2) {
         appRouteData.options.zoom = Number(coordinates[2])
       }

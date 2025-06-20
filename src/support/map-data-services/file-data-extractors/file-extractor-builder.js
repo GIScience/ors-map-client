@@ -17,7 +17,7 @@ class FileExtractorBuilder {
    * Build the map data for the target strategy, using the appropriate builder
    * @returns {Promise} that returns in the resolve mapData object
    */
-  buildMapData = () => {
+  buildMapData() {
     return this.dataBuilder.buildMapData()
   }
 
@@ -27,7 +27,7 @@ class FileExtractorBuilder {
    * @param fileType
    * @returns {*} Map data extractor instance
    */
-  static getFileDataExtractor = (data, fileType) => {
+  static getFileDataExtractor(data, fileType) {
     const fileExtractors = {
       xmlImporter,
       gpxImporter,

@@ -17,7 +17,7 @@ class MapViewDataBuilder {
    * Build and returns map data
    * @returns {Promise} with MapViewData @see @/models/map-view-data
    */
-  buildMapViewData = () => {
+  buildMapViewData() {
     this.setMapExtractorBuilder()
     const context = this
     return new Promise((resolve, reject) => {
@@ -37,7 +37,7 @@ class MapViewDataBuilder {
    * It is used to determine the map data extractor that is going to be used
    * to extract the data from the response and render it
    */
-  getSourceType = () => {
+  getSourceType() {
     let sourceType
     if (this.dataOrigin && this.dataOrigin === constants.dataOrigins.fileImporter) {
       return this.dataOrigin
@@ -50,7 +50,7 @@ class MapViewDataBuilder {
   /**
    * Define the map builder instance according the current response, request and api version
    */
-  setMapExtractorBuilder = () => {
+  setMapExtractorBuilder() {
     const sourceType = this.getSourceType()
 
     // If we have a valid source type
@@ -77,7 +77,7 @@ class MapViewDataBuilder {
    * @param appRouteData
    * @emits mapViewDataChanged - using EventBus
    */
-  static buildMapData = (data, appRouteData) => {
+  static buildMapData(data, appRouteData) {
     const rawContent = data.content
     const options = data.options
     const mapViewDataBuilder = new MapViewDataBuilder(rawContent, options)
