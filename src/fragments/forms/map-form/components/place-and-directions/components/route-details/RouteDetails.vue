@@ -27,7 +27,7 @@
                 </div>
                 <div  style="padding:0 0 0 10px" v-if="route.properties.warnings">
                   <h4 >{{$t('routeDetails.warnings')}}:</h4>
-                  <v-alert :key="warning.code" v-for="warning in route.properties.warnings" :value="getWarningTranslated(warning)"  type="warning" style="color:black" >{{ getWarningTranslated(warning) }}</v-alert>
+                  <v-alert :key="warning.code" v-for="warning in route.properties.warnings" :model-value="getWarningTranslated(warning)"  type="warning" style="color:black" >{{ getWarningTranslated(warning) }}</v-alert>
                 </div>
                 <div v-if="route.properties.segments.length > 1 && routeIndex === $store.getters.activeRouteIndex" class="route-container">
                   <v-expansion-panels class="no-shadow" v-if="hasRoutes">
