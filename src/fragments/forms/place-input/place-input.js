@@ -6,7 +6,7 @@ import GeoUtils from '@/support/geo-utils'
 import Place from '@/models/place'
 import Utils from '@/support/utils'
 import {EventBus} from '@/common/event-bus'
-
+import {filter as lodash_filter} from 'lodash'
 
 export default {
   data: () => ({
@@ -591,7 +591,7 @@ export default {
           PlacesSearch(this.localModel.placeName, 10).then(places => {
             // If the first result is an address and the match_type is exact,
             // then we auto select the first item on the enter/return action
-            const addresses = this.lodash.filter(places, (p) => {
+            const addresses = lodash_filter(places, (p) => {
               return (p.properties.layer === 'address' || p.properties.layer === 'postalcode') && p.properties.match_type === 'exact'
             })
 

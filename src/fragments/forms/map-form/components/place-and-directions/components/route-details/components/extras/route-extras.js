@@ -1,6 +1,7 @@
 import orsDictionary from '@/resources/ors-dictionary'
 import {EventBus} from '@/common/event-bus'
 import Utils from '@/support/utils'
+import {filter as lodash_filter } from 'lodash'
 
 export default {
   data () {
@@ -202,7 +203,7 @@ export default {
       // As some extra info may be present in several non-continuous
       // segments we must get the intervals where the value matches
       // so that we show only the extra info wth the value selected by the user
-      const intervals = this.lodash.filter(values, (v) => {
+      const intervals = lodash_filter(values, (v) => {
         return v[2] === value
       })
       return {

@@ -11,6 +11,7 @@ import appConfig from '@/config/app-config'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
 import {EventBus} from '@/common/event-bus'
+import {get as lodash_get} from 'lodash'
 
 // Local components
 import IschronesDetails from './components/isochrones-details/IsochronesDetails.vue'
@@ -265,7 +266,7 @@ export default {
     handleCalculateIsochronesError (result) {
       this.$root.appHooks.run('beforeHandleIsochronesError', result)
 
-      const errorCode = this.lodash.get(result, constants.responseErrorCodePath)
+      const errorCode = lodash_get(result, constants.responseErrorCodePath)
       if (result === 'TimeoutError') {
         this.showError(this.$t('isochrones.timeoutError'), { timeout: 0 })
       } else if (errorCode) {

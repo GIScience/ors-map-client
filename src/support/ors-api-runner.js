@@ -4,7 +4,7 @@ import GeoUtils from '@/support/geo-utils'
 import AppLoader from '@/app-loader'
 import Place from '@/models/place'
 import store from '@/store/store'
-import lodash from 'lodash'
+import {findIndex as lodash_findIndex, sortBy as lodash_sortBy, uniqBy as lodash_uniqBy} from 'lodash'
 
 import OrsApiClient from 'openrouteservice-js'
 
@@ -242,38 +242,38 @@ const sortFeatures  = (features) => {
     features[key].properties.unique_id = features[key].properties.id || `osm_id_${features[key].properties.osm_id}`
   }
   // Sort by distance
-  features = lodash.sortBy(features, ['distance', 'asc'])
+  features = lodash_sortBy(features, ['distance', 'asc'])
 
-  let bestMatchIndex = lodash.findIndex(features, function(f) { return f.bestMatch === true})
+  let bestMatchIndex = lodash_findIndex(features, function(f) { return f.bestMatch === true})
   if (bestMatchIndex > -1) {
     // Move best match to first position (duplicated items will be removed later)
     features.splice(0, 0, features[bestMatchIndex])
   }
 
-  let postalCodeIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'postalcode'})
+  let postalCodeIndex = lodash_findIndex(features, function(f) { return f.properties.layer === 'postalcode'})
   if (postalCodeIndex > 1) {
     // Move postalcode place to first position (duplicated items will be removed later)
     features.splice(0, 0, features[postalCodeIndex])
   } else {
-    let closestCityIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'locality' || f.properties.layer === 'city'})
+    let closestCityIndex = lodash_findIndex(features, function(f) { return f.properties.layer === 'locality' || f.properties.layer === 'city'})
     if (closestCityIndex > 1) {
       // Move the closest city to second position (duplicated items will be removed later)
       features.splice(1, 0, features[closestCityIndex])
     }
   }
-  let closestCountyIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'county' })
+  let closestCountyIndex = lodash_findIndex(features, function(f) { return f.properties.layer === 'county' })
   if (closestCountyIndex > 1) {
     // Move the closest city to second position (duplicated items will be removed later)
     features.splice(2, 0, features[closestCountyIndex])
   }
 
-  let closestCountryIndex = lodash.findIndex(features, function(f) { return f.properties.layer === 'country'})
+  let closestCountryIndex = lodash_findIndex(features, function(f) { return f.properties.layer === 'country'})
   if (closestCountryIndex > 2) {
     // Move the closest city to third position (duplicated items will be removed later)
     features.splice(3, 0, features[closestCountryIndex])
   }
   // remove duplicated
-  features = lodash.uniqBy(features, function (f) { return f.properties.unique_id })
+  features = lodash_uniqBy(features, function (f) { return f.properties.unique_id })
   return features
 }
 

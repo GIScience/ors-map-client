@@ -10,9 +10,7 @@ import focus from '@/directives/focus'
 // import VeeValidate from 'vee-validate'
 import box from '@/fragments/box/Box.vue'
 import theme from '@/config/theme'
-import VueLodash from 'vue-lodash'
 import bg from '@/directives/bg'
-import lodash from 'lodash'
 import { createApp } from 'vue'
 import I18nBuilder from '@/i18n/i18n-builder'
 import store from '@/store/store'
@@ -157,9 +155,6 @@ export default function createPreparedVue(App) {
     }
   })
   app.use(vuetify)
-
-  const options = {lodash: lodash} // customize the way you want to call it
-  app.use(VueLodash, options) // options is optional
 
   // Use vee validate to easily validate forms
   //app.use(VeeValidate)

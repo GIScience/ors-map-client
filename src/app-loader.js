@@ -8,7 +8,7 @@ import appConfig from '@/config/app-config'
 import AppHooks from '@/support/app-hooks'
 import utils from '@/support/utils'
 import store from '@/store/store'
-import lodash from 'lodash'
+import {find as lodash_find} from 'lodash'
 import { createApp } from 'vue'
 import {getKeyObject} from '@/support/appwrite-utils'
 
@@ -77,7 +77,7 @@ class AppLoader {
     if (locale) {
       locale = locale.toLowerCase()
     }
-    let isLocaleValid = lodash.find(settingsOptions.appLocales, (l) => l.value === locale)
+    let isLocaleValid = lodash_find(settingsOptions.appLocales, (l) => l.value === locale)
 
     // If the exact locale of the device is not available, try at least to use the language
     if (!isLocaleValid) {
@@ -85,7 +85,7 @@ class AppLoader {
       if (locale.length > 2 && locale.indexOf('-') > -1) {
         language = locale.split('-')[0]
       }
-      isLocaleValid = lodash.find(settingsOptions.appLocales, (l) => l.value.split('-')[0] === language)
+      isLocaleValid = lodash_find(settingsOptions.appLocales, (l) => l.value.split('-')[0] === language)
       if (isLocaleValid) {
         locale = isLocaleValid.value
       }
@@ -157,11 +157,11 @@ class AppLoader {
     const fittingLocale = this.getFittingLocale(locale)
     mapSettings.locale = fittingLocale
 
-    let validRoutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) => l.value === fittingLocale)
+    let validRoutingLocale = lodash_find(settingsOptions.routingInstructionsLocales, (l) => l.value === fittingLocale)
     if (validRoutingLocale) {
       settingsOptions.routingInstructionsLocale = locale
     } else {
-      validRoutingLocale = lodash.find(settingsOptions.routingInstructionsLocales, (l) => l.value === fittingLocale.split('-')[0])
+      validRoutingLocale = lodash_find(settingsOptions.routingInstructionsLocales, (l) => l.value === fittingLocale.split('-')[0])
       if (validRoutingLocale) {
         mapSettings.routingInstructionsLocale = validRoutingLocale.value
       }

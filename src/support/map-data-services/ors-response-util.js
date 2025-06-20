@@ -1,4 +1,4 @@
-import lodash from 'lodash'
+import {findIndex as lodash_findIndex, filter as lodash_filter, get as lodash_get} from 'lodash'
 
 /**
  * Build a geolocation response like object based on a given place object
@@ -20,7 +20,7 @@ const getFilteredFeatureResponse = (featureId, rawResponse) => {
   const filteredResponse = {}
   Object.assign(filteredResponse, rawResponse)
   if (rawResponse && Array.isArray(rawResponse.features)) {
-    filteredResponse.features = lodash.filter(rawResponse.features, function (f) { return f.properties.id === featureId })
+    filteredResponse.features = lodash_filter(rawResponse.features, function (f) { return f.properties.id === featureId })
     return filteredResponse
   }
 }
@@ -32,8 +32,8 @@ const getFilteredFeatureResponse = (featureId, rawResponse) => {
  * @param {*} oldResponse
 */
 const isANewResponse = (newResponse, oldResponse) => {
-  const newTimestamp = lodash.get(newResponse, 'metadata.timestamp')
-  const oldTimestamp = lodash.get(oldResponse, 'metadata.timestamp')
+  const newTimestamp = lodash_get(newResponse, 'metadata.timestamp')
+  const oldTimestamp = lodash_get(oldResponse, 'metadata.timestamp')
   return !oldTimestamp || (newTimestamp !== oldTimestamp)
 }
 
@@ -55,7 +55,7 @@ const isANewMapViewData = (newMapData, oldMapData) => {
  * @returns {*} filter object
  */
 const getFilterIndexByName = (OrsMapFiltersAccessor, name) => {
-  const filterIndex = lodash.findIndex(OrsMapFiltersAccessor, (f) => {
+  const filterIndex = lodash_findIndex(OrsMapFiltersAccessor, (f) => {
     return f.name === name
   })
   return filterIndex

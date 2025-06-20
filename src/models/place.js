@@ -1,6 +1,6 @@
 import {Geocode, ReverseGeocode} from '@/support/ors-api-runner'
 import GeoUtils from '@/support/geo-utils'
-import lodash from 'lodash'
+import {findIndex as lodash_findIndex, filter as lodash_filter} from 'lodash'
 
 /**
  * Place model class
@@ -158,7 +158,7 @@ class Place {
    */
   findIndex(places) {
     const context = this
-    const index = lodash.findIndex(places, (p) => {
+    const index = lodash_findIndex(places, (p) => {
       return p.lat === context.lat && p.lng === context.lng && p.placeName === context.placeName
     })
     return index
@@ -232,7 +232,7 @@ class Place {
    * @returns {Array} of filled places
    */
   static getFilledPlaces(places) {
-    const filledPlaces = lodash.filter(places, (p) => {
+    const filledPlaces = lodash_filter(places, (p) => {
       if (!p.isEmpty()) {
         return p
       }

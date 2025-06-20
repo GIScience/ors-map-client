@@ -1,6 +1,6 @@
 import OrsMapFilters from '@/config/ors-map-filters'
 import constants from '@/resources/constants'
-import lodash from 'lodash'
+import {findIndex as lodash_findIndex, get as lodash_get} from 'lodash'
 
 /**
  * Get filter object reference by filter name
@@ -41,7 +41,7 @@ const getFilterRefByName = (filterName, OrsMapFiltersAccessor = null, onlyIfEnab
 const getFilterByAncestryAndItemIndex = (ancestry, itemIndex = null) => {
   let path = buildAncestryAccessorString(ancestry, itemIndex)
   let OrsMapFiltersAccessor = OrsMapFilters
-  let accessor = lodash.get(OrsMapFiltersAccessor, path)
+  let accessor = lodash_get(OrsMapFiltersAccessor, path)
   return accessor
 }
 
@@ -146,7 +146,7 @@ const getFilterRefByRootIndex = (index, OrsMapFiltersAccessor = null) => {
  */
 const getFilterIndexByName = (name, OrsMapFiltersAccessor = null) => {
   OrsMapFiltersAccessor = OrsMapFiltersAccessor || OrsMapFilters
-  const filterIndex = lodash.findIndex(OrsMapFiltersAccessor, (f) => {
+  const filterIndex = lodash_findIndex(OrsMapFiltersAccessor, (f) => {
     return f.name === name
   })
   return filterIndex

@@ -12,7 +12,7 @@ import appConfig from '@/config/app-config'
 import GeoUtils from '@/support/geo-utils'
 import Draggable from 'vuedraggable'
 import Place from '@/models/place'
-import lodash from 'lodash'
+import {get as lodash_get} from 'lodash'
 
 // Local components:
 import AltitudePreview from './components/altitude-preview/AltitudePreview.vue'
@@ -86,7 +86,7 @@ export default {
      */
     showRouteDetails () {
       let show = false
-      let summaryProp = lodash.get(this.mapViewData, `routes[${this.$store.getters.activeRouteIndex}].summary`)
+      let summaryProp = lodash_get(this.mapViewData, `routes[${this.$store.getters.activeRouteIndex}].summary`)
       if (summaryProp)
         show = true
       return show
@@ -223,7 +223,7 @@ export default {
         // and. If the app is, for example in place mode
         // there is nothing to be done
         let readyToDirections = (context.$store.getters.mode === constants.modes.directions)
-        let hasRoundTripInAppRoute = lodash.get(context, '$store.getters.appRouteData.options.options.round_trip')
+        let hasRoundTripInAppRoute = lodash_get(context, '$store.getters.appRouteData.options.options.round_trip')
         let readyToRoundTrip = (context.$store.getters.mode === constants.modes.roundTrip && hasRoundTripInAppRoute)
 
         if (context.active && (readyToDirections || readyToRoundTrip)) {
@@ -671,7 +671,7 @@ export default {
     handleCalculateDirectionsError (result) {
       this.$root.appHooks.run('beforeHandleDirectionsError', result)
 
-      const errorCode = this.lodash.get(result, constants.responseErrorCodePath)
+      const errorCode = lodash_get(result, constants.responseErrorCodePath)
       if (result === 'TimeoutError') {
         this.showError(this.$t('placesAndDirections.timeoutError'), { timeout: 0 })
       } else if (errorCode) {
@@ -681,7 +681,7 @@ export default {
           errorMsg = this.$t('placesAndDirections.genericErrorMsg')
         }
         this.showError(errorMsg, { timeout: 0, mode: 'multi-line' })
-        console.error('Original error', this.lodash.get(result, 'response.error'))
+        console.error('Original error', lodash_get(result, 'response.error'))
       } else {
         if (this.hasRouteFilters(result.args)) {
           this.showError(this.$t('placesAndDirections.notRouteFoundWithFilters'), { timeout: 0 })
@@ -710,7 +710,7 @@ export default {
       if (mode === null) {
         if (this.places.length === 1) {
           // Set roundTrip mode if appRouteData options contains round trip data
-          if (this.lodash.get(this.$store.getters.appRouteData.options, constants.roundTripOptionsPath)) {
+          if (lodash_get(this.$store.getters.appRouteData.options, constants.roundTripOptionsPath)) {
             mode = constants.modes.roundTrip
           } else {
             mode = constants.modes.place
@@ -916,7 +916,7 @@ export default {
       if (this.$store.getters.mode === constants.modes.roundTrip) {
         // Remove round trip from appRouteData if present
         let filterPath = `appRouteData.options.options[${constants.roundTripFilterName}]`
-        if (this.lodash.get(appRouteData, filterPath)) {
+        if (lodash_get(appRouteData, filterPath)) {
           delete appRouteData.options.options[constants.roundTripFilterName]
         }
         this.$store.commit('appRouteData', appRouteData)

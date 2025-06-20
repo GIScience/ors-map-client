@@ -70,7 +70,7 @@ import Place from '@/models/place'
 import {EventBus} from '@/common/event-bus'
 import 'vue2-leaflet-draw-toolbar'
 import Leaflet from 'leaflet'
-import lodash from 'lodash'
+import {get as lodash_get, find as lodash_find} from 'lodash'
 
 // Import leaflet-related styles
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
@@ -404,7 +404,7 @@ export default {
       if (this.localMapViewData.maxZoom) {
         return this.localMapViewData.maxZoom
       } else  {
-        let activeTileProvider = lodash.find(this.tileProviders, (t) => {
+        let activeTileProvider = lodash_find(this.tileProviders, (t) => {
           return t.id === this.$store.getters.mapSettings.defaultTilesProvider
         })
         if (activeTileProvider){
@@ -530,7 +530,7 @@ export default {
       // that will be displayed in the graph
       // including the translation and the color
       // associated to each extra value
-      let extras = lodash.get(activeRoute, 'properties.extras')
+      let extras = lodash_get(activeRoute, 'properties.extras')
       if (extras) {
         let dict = orsDictionary
         let translations = this.$t('orsDictionary')
@@ -823,7 +823,7 @@ export default {
         layerControl.classList.remove('leaflet-control-layers-expanded')
       }
       // Get the new active tile object based on its url
-      let activeTileProvider = lodash.find(this.tileProviders, (t) => {
+      let activeTileProvider = lodash_find(this.tileProviders, (t) => {
         return t.url === newTileProvider.layer._url
       })
       // Retrieve the mapSettings and set the profile id
@@ -1405,7 +1405,7 @@ export default {
      * @emits mapLeftClicked
      */
     handleShowLeftClickPlaceInfo (event) {
-      const drawPolygonToolbarActive = this.lodash.get(this.drawControlRef, '_toolbars.draw._activeMode')
+      const drawPolygonToolbarActive = lodash_get(this.drawControlRef, '_toolbars.draw._activeMode')
       const clickedOverPolyline = event.originalEvent && event.originalEvent.clickedOverPolyline === true
       if (this.showClickPopups && !drawPolygonToolbarActive && !clickedOverPolyline) {
         const insidePolygon = this.isPointInsidePolygons(event.latlng)
@@ -1737,7 +1737,7 @@ export default {
         let map = this.map
         map.eachLayer(function (layer) {
           if (layer instanceof Leaflet.Polygon) {
-            if (lodash.get(layer, 'feature.properties.avoidPolygon')) {
+            if (lodash_get(layer, 'feature.properties.avoidPolygon')) {
               map.removeLayer(layer)
             }
           }

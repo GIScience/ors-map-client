@@ -16,6 +16,7 @@ import {ResizeObserver} from 'vue3-resize'
 import Place from '@/models/place'
 import lodash from 'lodash'
 import {EventBus} from '@/common/event-bus'
+import {filter as lodash_filter} from 'lodash'
 
 export default {
   data: () => ({
@@ -185,7 +186,7 @@ export default {
       if (this.$store.getters.appRouteData.options.center) {
         center = this.$store.getters.appRouteData.options.center
       } else { // set the map center based on the only place available (if it is the case)
-        const filledPlaces = this.lodash.filter(this.$store.getters.appRouteData.places, (p) => { if (!p.isEmpty()) { return p } })
+        const filledPlaces = lodash_filter(this.$store.getters.appRouteData.places, (p) => { if (!p.isEmpty()) { return p } })
         if (filledPlaces.length === 1) {
           center = {lat: filledPlaces[0].lat, lng: filledPlaces[0].lng}
         }

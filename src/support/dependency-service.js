@@ -3,7 +3,7 @@ import OrsMapFilters from '@/config/ors-map-filters'
 import constants from '@/resources/constants'
 import utils from '@/support/utils'
 import store from '@/store/store'
-import lodash from 'lodash'
+import {find as lodash_find, includes as lodash_includes, get as lodash_get} from 'lodash'
 
 /**
  * Update the status and data of the parameters based on the dependencies declared
@@ -135,10 +135,10 @@ const adjustFilterValue = (filter, filterValue) => {
 const matchForExistingRuleValue = (filterValue, ruleValue, invertedMatch = false) => {
   let match
   if (Array.isArray(filterValue)) {
-    match = lodash.includes(filterValue, ruleValue)
+    match = lodash_includes(filterValue, ruleValue)
     return invertedMatch ? !match : match
   } else if (Array.isArray(ruleValue)) {
-    match = lodash.find(ruleValue, (element) => { return valueMatchesRule(filterValue, element) }) !== undefined
+    match = lodash_find(ruleValue, (element) => { return valueMatchesRule(filterValue, element) }) !== undefined
     return invertedMatch ? !match : match
   } else {
     match = valueMatchesRule(filterValue, ruleValue)
@@ -547,7 +547,7 @@ const getDependencyRelationTargetObj = (path, filters) => {
     rootFilterName = path.split('.')[0]
     childPath = path.replace(`${rootFilterName}.`, '')
   }
-  const rootTargetObject = lodash.find(globalFilters, function (filter) {
+  const rootTargetObject = lodash_find(globalFilters, function (filter) {
     return filter.name === rootFilterName
   })
 
@@ -571,14 +571,14 @@ const getChildProp = (rootObject, propPath) => {
     const childPath = propPath.replace('props.', '')
     if (childPath.indexOf('props.') > -1) {
       const subRootName = childPath.split('.')[0]
-      const subRoot = lodash.find(rootObject.props, function (p) { return p.name === subRootName })
+      const subRoot = lodash_find(rootObject.props, function (p) { return p.name === subRootName })
       return getChildProp(subRoot, childPath.replace(`${subRootName}.`, ''))
     } else {
-      const childTargetObject = lodash.find(rootObject.props, function (p) { return p.name === childPath })
+      const childTargetObject = lodash_find(rootObject.props, function (p) { return p.name === childPath })
       return childTargetObject
     }
   } else {
-    const child = lodash.get(rootObject, propPath)
+    const child = lodash_get(rootObject, propPath)
     return child
   }
 }

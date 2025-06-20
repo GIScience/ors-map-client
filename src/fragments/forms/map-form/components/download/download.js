@@ -4,6 +4,7 @@ import MapViewData from '@/models/map-view-data'
 import constants from '@/resources/constants'
 import toKml from '@maphubs/tokml'
 import toGpx from 'togpx'
+import {filter as lodash_filter, find as lodash_find} from 'lodash'
 
 export default {
   data: () => ({
@@ -52,7 +53,7 @@ export default {
     },
     availableDownloadFormats () {
       const context = this
-      const available = this.lodash.filter(this.downloadFormats, (f) => {
+      const available = lodash_filter(this.downloadFormats, (f) => {
         return context.downloadFormatsSupported.includes(f.value)
       })
       return available
@@ -94,7 +95,7 @@ export default {
         } else {
           // Set the filename
           const timestamp = new Date().getTime()
-          const format = context.lodash.find(context.downloadFormats, (df) => { return df.value === context.downloadFormat })
+          const format = lodash_find(context.downloadFormats, (df) => { return df.value === context.downloadFormat })
           // If the file has the default name, add a unique timestamp
           if (context.downloadFileName === context.defaultDownloadName) {
             anchor.download = `${context.downloadFileName}_${timestamp}.${format.ext}`
