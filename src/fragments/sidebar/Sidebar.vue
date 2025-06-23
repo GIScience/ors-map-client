@@ -48,11 +48,11 @@
         <app-footer></app-footer>
       </div>
     </v-navigation-drawer>
-    <v-btn size="small" v-if="isSideBarOpen && $highResolution" :title="$t('sidebar.hideSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen, 'low-res': $lowResolution}" @click.stop="isSideBarOpen = false" >
-      <v-icon size="large">keyboard_arrow_left</v-icon>
+    <v-btn size="small" v-if="isSideBarOpen && $highResolution" :title="$t('sidebar.hideSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen, 'low-res': $lowResolution}" @click.stop="isSideBarOpen = false"
+      :icon="isSideBarOpen ? 'keyboard_arrow_left' : 'keyboard_arrow_right'">
     </v-btn>
-    <v-btn size="small" v-else-if="!isSideBarOpen && !$lowResolution && !$store.getters.embed" :title="$t('sidebar.showSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen}" @click.stop="isSideBarOpen = true" >
-      <v-icon size="large">keyboard_arrow_right</v-icon>
+    <v-btn size="small" v-else-if="!isSideBarOpen && !$lowResolution && !$store.getters.embed" :title="$t('sidebar.showSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen}" @click.stop="isSideBarOpen = true"
+      :icon="isSideBarOpen ? 'keyboard_arrow_left' : 'keyboard_arrow_right'">
     </v-btn>
   </div>
 </template>

@@ -5,11 +5,11 @@
   border-bottom: 2px solid #e7e7e7;
   -webkit-box-shadow:none;
   box-shadow:none;
-  z-index: 5;
+  z-index: 1005;
   padding-left: 0 !important;
   position: absolute;
   top:0;
-  transition:all 1s ease;
+  transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .app-toolbar.hidden {
@@ -24,3 +24,14 @@
 }
 
 /* End customize the ORS toolbar */
+.toggle-header {
+  position: absolute;
+  right: 170px;
+  margin-top: 6px;
+  z-index: 4;
+  transition: all 0.2s ease;
+  border-radius: 5px;
+  border: 2px solid rgba(0, 0, 0, .2);
+  background-clip: padding-box;
+  box-shadow: none !important ;
+}

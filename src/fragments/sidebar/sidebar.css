@@ -21,7 +21,6 @@
 .sidebar{
   margin-top: 0 !important;
   max-height: 100% !important;
-  z-index: 4;
   height:100%;
 }
 
@@ -51,14 +50,12 @@
   left: 402px;
   z-index: 3;
   background: #fff;
-  transition:all 0.5s ease;
+  transition: .2s cubic-bezier(.4,0,.2,1);
   border: 2px solid rgba(0,0,0,.2);
   background-clip: padding-box;
+  margin-left: 10px;
   border-radius: 5px;
-  width: 38px;
-  height: 38px;
-  box-shadow: none !important
-
+  box-shadow: none !important;
 }
 
 

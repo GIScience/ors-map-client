@@ -27,6 +27,9 @@ export default {
     getConfigVal (key) {
       let configVal = appConfig[key]
       return configVal
+    },
+    include () {
+      return [document.querySelector('.toggle-header')]
     }
   },
   created () {
