@@ -16,7 +16,7 @@
             </v-text-field>
           </v-flex>
           <v-flex xs12 sm2 d-flex>
-            <v-btn style="margin-top:11px" class="toggle-short-url" color="primary" :title="shortBtnTitle" @click="toggleShortUrl()">{{shortBtnTitle}}</v-btn>
+            <v-btn disabled style="margin-top:11px" class="toggle-short-url" color="primary" :title="shortBtnTitle" @click="console.log('not implemented')">{{shortBtnTitle}}</v-btn>
           </v-flex>
         </v-layout>
         <v-alert type="info"> {{$t('share.copyUrlInfo')}}</v-alert>

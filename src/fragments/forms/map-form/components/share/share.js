@@ -1,6 +1,6 @@
-import {HttpClient} from 'vue-rest-client'
-import appConfig from '@/config/app-config'
-import constants from '@/resources/constants'
+// import {HttpClient} from 'vue-rest-client'
+// import appConfig from '@/config/app-config'
+// import constants from '@/resources/constants'
 
 export default {
   data: () => ({
@@ -31,21 +31,21 @@ export default {
     /**
      * Toggle the url short/full
      */
-    toggleShortUrl () {
-      if (this.isShortened) {
-        this.shareUrl = this.currentUrl
-      } else {
-        let context = this
-        this.short().then((shortUrl => {
-          context.shareUrl = shortUrl
-          context.isShortened = true
-          context.showSuccess(context.$t('share.urlShortened'), { timeout: 2000 })
-        })).catch(() => {
-          context.showError(context.$t('share.shorteningNotPossible'), { timeout: 2000 })
-        })
-      }
-      this.isShortened = !this.isShortened
-    },
+    // toggleShortUrl () {
+    //   if (this.isShortened) {
+    //     this.shareUrl = this.currentUrl
+    //   } else {
+    //     let context = this
+    //     this.short().then((shortUrl => {
+    //       context.shareUrl = shortUrl
+    //       context.isShortened = true
+    //       context.showSuccess(context.$t('share.urlShortened'), { timeout: 2000 })
+    //     })).catch(() => {
+    //       context.showError(context.$t('share.shorteningNotPossible'), { timeout: 2000 })
+    //     })
+    //   }
+    //   this.isShortened = !this.isShortened
+    // },
     openShare () {
       this.shareUrl = this.currentUrl
       this.isShareModalOpen = true
@@ -91,39 +91,39 @@ export default {
     /**
      * Convert the full url to a short url using bit.ly api
      */
-    short () {
-      const bitlyBaseApiUrl = 'https://api-ssl.bitly.com/v3/shorten'
-      const apiKey = appConfig.bitlyApiKey
-      const login = appConfig.bitlyLogin
-
-      let publicUrl = location.href
-
-      // The bit.ly service does not work with localhost.
-      // So we always replace the current host by the public host
-      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-        const baseUrl = `${location.protocol}//${location.host}`
-        publicUrl = location.href.replace(baseUrl, constants.orsPublicHost)
-      }
-
-      const longUrl = encodeURIComponent(publicUrl)
-      const shortenerRequestUrl = `${bitlyBaseApiUrl}?login=${login}&apiKey=${apiKey}&longUrl=${longUrl}`
-
-      // Run the request and get the short url
-      let httpClient = new HttpClient({getVueInstance: () => { return this }})
-
-      return new Promise((resolve, reject) => {
-        httpClient.http.get(shortenerRequestUrl).then((response) => {
-          if (response.data.status_code === 200) {
-            resolve(response.data.data.url)
-          } else {
-            console.log(response)
-            reject(response)
-          }
-        }).catch((error) => {
-          console.log(error)
-          reject(error)
-        })
-      })
-    }
+    // short () {
+    //   const bitlyBaseApiUrl = 'https://api-ssl.bitly.com/v3/shorten'
+    //   const apiKey = appConfig.bitlyApiKey
+    //   const login = appConfig.bitlyLogin
+    //
+    //   let publicUrl = location.href
+    //
+    //   // The bit.ly service does not work with localhost.
+    //   // So we always replace the current host by the public host
+    //   if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    //     const baseUrl = `${location.protocol}//${location.host}`
+    //     publicUrl = location.href.replace(baseUrl, constants.orsPublicHost)
+    //   }
+    //
+    //   const longUrl = encodeURIComponent(publicUrl)
+    //   const shortenerRequestUrl = `${bitlyBaseApiUrl}?login=${login}&apiKey=${apiKey}&longUrl=${longUrl}`
+    //
+    //   // Run the request and get the short url
+    //   let httpClient = new HttpClient({getVueInstance: () => { return this }})
+    //
+    //   return new Promise((resolve, reject) => {
+    //     httpClient.http.get(shortenerRequestUrl).then((response) => {
+    //       if (response.data.status_code === 200) {
+    //         resolve(response.data.data.url)
+    //       } else {
+    //         console.log(response)
+    //         reject(response)
+    //       }
+    //     }).catch((error) => {
+    //       console.log(error)
+    //       reject(error)
+    //     })
+    //   })
+    // }
   }
 }
