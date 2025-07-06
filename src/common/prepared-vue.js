@@ -77,9 +77,13 @@ import {
   VWindow,
   VWindowItem
 } from 'vuetify/components'
+import {configureCompat} from '@vue/compat'
 
 
 export default function createPreparedVue(App) {
+  configureCompat({
+    WATCH_ARRAY: false
+  })
   const app = createApp(App)
 
   const i18n = I18nBuilder.build()
