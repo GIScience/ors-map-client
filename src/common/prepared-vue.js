@@ -15,6 +15,7 @@ import { createApp } from 'vue'
 import I18nBuilder from '@/i18n/i18n-builder'
 import store from '@/store/store'
 import router from '@/router'
+import AppHooks from '@/support/app-hooks'
 
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import { createVuetify } from 'vuetify'
@@ -85,6 +86,7 @@ export default function createPreparedVue(App) {
     WATCH_ARRAY: false
   })
   const app = createApp(App)
+  app.config.globalProperties.$appHooks = AppHooks
 
   const i18n = I18nBuilder.build()
   app.use(store)

@@ -125,4 +125,4 @@ class AppHooks {
   }
 }
 // Export the AppHooks class
-export default AppHooks
+export default new AppHooks()
