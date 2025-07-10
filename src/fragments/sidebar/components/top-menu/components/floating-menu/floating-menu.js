@@ -1,5 +1,6 @@
 import constants from '@/resources/constants'
 import {EventBus} from '@/common/event-bus'
+import AppHooks from '@/support/app-hooks.js'
 
 export default {
   props: {
@@ -71,7 +72,7 @@ export default {
           target: '_blank'
         }
       ]
-      items = this.$root.appHooks.run('floatingMenuItemsDefined', items)
+      items = AppHooks.run('floatingMenuItemsDefined', items)
       return items
     }
   },
@@ -82,7 +83,7 @@ export default {
     setReadyStatus () {
       let context = this
       setTimeout(() => {
-        if (context.$root.appHooks) {
+        if (AppHooks) {
           context.ready = true
         } else {
           context.setReadyStatus()

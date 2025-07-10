@@ -376,7 +376,7 @@ export default {
       if (markersMapViewData.places.length > 0) {
         let isRoute = markersMapViewData.hasRoutes() || this.mode === constants.modes.directions
         let markers = GeoUtils.buildMarkers(markersMapViewData.places, isRoute, this.focusedPlace)
-        markers = this.$root.appHooks.run('markersCreated', markers)
+        markers = this.$appHooks.run('markersCreated', markers)
         return markers
       }
     },
@@ -388,7 +388,7 @@ export default {
     pois () {
       if (this.localMapViewData.pois.length > 0) {
         let poisMarkers = GeoUtils.buildMarkers(this.localMapViewData.pois)
-        poisMarkers = this.$root.appHooks.run('poisMarkersCreated', poisMarkers)
+        poisMarkers = this.$appHooks.run('poisMarkersCreated', poisMarkers)
         return poisMarkers
       } else {
         return []
@@ -456,7 +456,7 @@ export default {
      */
     polylineMeasureOptions () {
       const options = mapDefinitions.polylineMeasureOptions(this.$t('mapView.polylineMeasure'))
-      this.$root.appHooks.run('polylineMeasureOptionsBuilt', options)
+      this.$appHooks.run('polylineMeasureOptionsBuilt', options)
       return options
     },
 
@@ -466,7 +466,7 @@ export default {
      */
     drawOptions () {
       const options = mapDefinitions.drawOptions(this.$t('mapView.youCantIntersectPolygons'))
-      this.$root.appHooks.run('drawingOptionsBuilt', options)
+      this.$appHooks.run('drawingOptionsBuilt', options)
       return options
     },
 
@@ -748,7 +748,7 @@ export default {
     isochroneClicked (index, polygon) {
       let isochronePopupContainerRef = this.$refs[`isochronePopupContainer${index}`]
       isochronePopupContainerRef = Array.isArray(isochronePopupContainerRef) ? isochronePopupContainerRef[0] : isochronePopupContainerRef
-      this.$root.appHooks.run('beforeOpenIsochronePopup', {isochronePopupContainerRef, polygon})
+      this.$appHooks.run('beforeOpenIsochronePopup', {isochronePopupContainerRef, polygon})
     },
     /**
      * Deals with the map center changed event triggered by the vue2-leaflet
@@ -873,7 +873,7 @@ export default {
         wmsOverlayerTileProviders: this.wmsOverlayerTileProviders,
         context: this
       }
-      this.$root.appHooks.run('layerProvidersLoaded', hookData)
+      this.$appHooks.run('layerProvidersLoaded', hookData)
     },
     /**
     * Update markers label
@@ -1045,7 +1045,7 @@ export default {
         let oldBounds = JSON.stringify(this.$store.getters.mapBounds)
         if (newBounds !== oldBounds) {
           this.$store.commit('mapBounds', mapBounds)
-          this.$root.appHooks.run('mapBoundsChanged', {mapBounds, map: map, context: this})
+          this.$appHooks.run('mapBoundsChanged', {mapBounds, map: map, context: this})
         }
         this.$emit('mapReady', map)
       })
@@ -1600,7 +1600,7 @@ export default {
           avoidRectangle: this.$t('mapView.defineAvoidRectangle')
         }
         // Run the hook that mey modify the translations
-        this.$root.appHooks.run('avoidPolygonBtnTranslations', avoidPolygonBtnTranslations)
+        this.$appHooks.run('avoidPolygonBtnTranslations', avoidPolygonBtnTranslations)
 
         // Set the translations to the buttons
         locale.draw.toolbar.buttons.polygon = avoidPolygonBtnTranslations.avoidPolygon
@@ -1656,7 +1656,7 @@ export default {
       let context = this
       polygon.addTo(map)
       polygon.on('click', function () { context.onAvoidPolygonClicked(polygon, map) })
-      let expectedPromise = this.$root.appHooks.run('avoidPolygonCreated', {polygon, map, context})
+      let expectedPromise = this.$appHooks.run('avoidPolygonCreated', {polygon, map, context})
 
       // If a promise is returned
       if (expectedPromise instanceof Promise) {
@@ -1677,7 +1677,7 @@ export default {
      */
     saveAvoidPolygonChanges (polygon, map) {
       let context = this
-      let expectedPromise = this.$root.appHooks.run('avoidPolygonEdited', {polygon, map, context})
+      let expectedPromise = this.$appHooks.run('avoidPolygonEdited', {polygon, map, context})
 
       // If a promise is returned
       if (expectedPromise instanceof Promise) {
@@ -1702,7 +1702,7 @@ export default {
     deleteAvoidPolygon (polygon) {
       let context = this
       this.getMapObject().then((map) => {
-        let expectedPromise = this.$root.appHooks.run('avoidPolygonRemoved', {polygon, map, context})
+        let expectedPromise = this.$appHooks.run('avoidPolygonRemoved', {polygon, map, context})
         // If a promise is returned
         if (expectedPromise instanceof Promise) {
           expectedPromise.then(() => {
@@ -1725,7 +1725,7 @@ export default {
     enableAvoidPolygonShapeEdit(polygon) {
       polygon.editing.enable()
       polygon.closePopup()
-      this.$root.appHooks.run('avoidPolygonEditModeEnabled', polygon)
+      this.$appHooks.run('avoidPolygonEditModeEnabled', polygon)
       this.showInfo(this.$t('mapView.polygonEditModeEnabled'), {timeout: 10000})
     },
 
@@ -1808,7 +1808,7 @@ export default {
         this.saveAvoidPolygonChanges(polygon, map)
       } else { // build the standard popup, run the popup hook and open the popup
         let popupHtmlFragment = this.buildPolygonClickPopupContent(polygon)
-        this.$root.appHooks.run('beforeShowAvoidPolygonPopup', {popupHtmlFragment, polygon})
+        this.$appHooks.run('beforeShowAvoidPolygonPopup', {popupHtmlFragment, polygon})
         polygon.bindPopup(popupHtmlFragment).openPopup()
       }
     },

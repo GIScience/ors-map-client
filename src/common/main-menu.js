@@ -1,7 +1,7 @@
 import menuManager from '@/support/menu-manager'
 import appConfig from '@/config/app-config'
-import AppLoader from '@/app-loader'
 import store from '@/store/store'
+import AppHooks from '@/support/app-hooks'
 
 /**
  * Load the primary menu by its slug defined app config
@@ -17,22 +17,22 @@ const loadItems = () => {
         resolve([])
       })
     } else {
-      //let expectedPromise = AppLoader.getInstance().appHooks.run('loadMenuItems')
-      // if (expectedPromise instanceof Promise) {
-      //   expectedPromise.then((result) => {
-      //     resolve(result)
-      //   }).catch (err => {
-      //     console.log(err)
-      //   })
-      // } else {
-      //   resolve([])
-      // }
+      let expectedPromise = AppHooks.run('loadMenuItems')
+      if (expectedPromise instanceof Promise) {
+        expectedPromise.then((result) => {
+          resolve(result)
+        }).catch (err => {
+          console.log(err)
+        })
+      } else {
+        resolve([])
+      }
     }
   })
 }
 
 const adjustMenu = () => {
-  //AppLoader.getInstance().appHooks.run('modifyMenu', store.getters.mainMenu)
+  AppHooks.run('modifyMenu', store.getters.mainMenu)
 }
 
 /**

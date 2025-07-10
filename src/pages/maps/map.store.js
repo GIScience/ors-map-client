@@ -1,5 +1,5 @@
 import AppRouteData from '@/models/app-route-data'
-import AppLoader from '@/app-loader'
+import AppHooks from '@/support/app-hooks'
 
 const state = {
   appRouteData: new AppRouteData(),
@@ -30,7 +30,7 @@ const getters = {
 const mutations = {
   appRouteData: (state, value) => {
     state.appRouteData = value
-    //AppLoader.getInstance().appHooks.run('appRouteDataChanged', state.appRouteData)
+    AppHooks.run('appRouteDataChanged', state.appRouteData)
   },
   mapReady: (state, value) => {
     state.mapReady = value

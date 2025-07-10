@@ -78,7 +78,7 @@ export default {
       }
       if (fileType) {
         let parseData = {fileType, fileContent, timestamp}
-        this.$root.appHooks.run('importedFileParsed', parseData)
+        this.$appHooks.run('importedFileParsed', parseData)
         this.closeImporter()
         this.sendDataToMap(parseData.fileType, parseData.fileContent, parseData.timestamp)
       } else {
@@ -116,6 +116,6 @@ export default {
     }
   },
   created() {
-    this.acceptedFiles = this.$root.appHooks.run('importerAcceptedFilesDefined', this.acceptedFiles)
+    this.acceptedFiles = this.$appHooks.run('importerAcceptedFilesDefined', this.acceptedFiles)
   },
 }

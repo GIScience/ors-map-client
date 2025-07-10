@@ -226,7 +226,7 @@ export default {
     mapReady (mapObject) {
       if (mapObject) {
         this.$store.commit('mapReady', true)
-        this.$root.appHooks.run('mapReady', {context: this.$refs.mapView, map: mapObject})
+        this.$appHooks.run('mapReady', {context: this.$refs.mapView, map: mapObject})
       } else {
         this.$store.commit('mapReady', false)
       }
@@ -318,7 +318,7 @@ export default {
       let mapSettings = this.$store.getters.mapSettings
       mapSettings.mapCenter = latLng
       this.$store.dispatch('saveSettings', mapSettings).then(() => {
-        context.$root.appHooks.run('mapCenterChanged', mapSettings.mapCenter)
+        context.$appHooks.run('mapCenterChanged', mapSettings.mapCenter)
         EventBus.$emit('mapCenterChanged', mapSettings.mapCenter)
       })
     },

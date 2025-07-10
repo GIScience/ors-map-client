@@ -46,7 +46,7 @@ export default {
       let options = {}
       // If the options object is modified in the hook, the changes
       // will reflect here and the returned object will incorporate the changes
-      this.$root.appHooks.run('beforeUseMarkerClusterOptions', options)
+      this.$appHooks.run('beforeUseMarkerClusterOptions', options)
       return options
     },
     /**
@@ -119,7 +119,7 @@ export default {
       this.$emit('markerClicked', marker.place)
       let markerPopupContainerRef = this.$refs[`markerPopupContainer${index}`]
       markerPopupContainerRef = Array.isArray(markerPopupContainerRef) ? markerPopupContainerRef[0] : markerPopupContainerRef
-      this.$root.appHooks.run('beforeOpenMarkerPopup', {markerPopupContainerRef, marker})
+      this.$appHooks.run('beforeOpenMarkerPopup', {markerPopupContainerRef, marker})
     },
     removePlace(index) {
       this.$emit('removePlace', index)

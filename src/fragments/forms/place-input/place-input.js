@@ -238,7 +238,7 @@ export default {
         label= `${this.$t('placeInput.findAPlace')}`
       }
       let labelData = {label: label, supportDirections: this.supportDirections, single: this.single, placeModel: this.model}
-      this.$root.appHooks.run('placeInputLabelBuilt', labelData)
+      this.$appHooks.run('placeInputLabelBuilt', labelData)
       return labelData.label
     },
 
@@ -693,7 +693,7 @@ export default {
       this.focused = false
       let data =  { index: this.index, place: this.model, single: this.single }
 
-      let expectedPromise = this.$root.appHooks.run('placeSelected', data)
+      let expectedPromise = this.$appHooks.run('placeSelected', data)
       let context = this
       // If a promise is returned
       if (expectedPromise instanceof Promise) {

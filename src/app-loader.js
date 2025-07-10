@@ -142,7 +142,7 @@ class AppLoader {
     const appInstance = AppLoader.getInstance()
     if (appInstance) {
       // main app instance may not be available when app is still loading
-      //appInstance.appHooks.run('mapSettingsChanged', mapSettings)
+      AppHooks.run('mapSettingsChanged', mapSettings)
     }
 
     store.commit('dataAcquired', true)
@@ -247,12 +247,8 @@ class AppLoader {
       ref = store.getters.mainAppInstanceRef
     } else {
       const i18n = I18nBuilder.build()
-      ref = createApp({
-        data() {
-          return {
-            appHooks: new AppHooks()
-          }},
-      })
+      ref = createApp({})
+      ref.config.globalProperties.$appHooks = AppHooks
       ref.use(i18n)
       ref.use(store)
     }

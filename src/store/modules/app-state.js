@@ -1,7 +1,7 @@
 import constants from '@/resources/constants'
 import defaultMapSettings from '@/config/default-map-settings'
 import utils from '@/support/utils'
-import AppLoader from '@/app-loader'
+import AppHooks from '@/support/app-hooks'
 
 const state = {
   mode: constants.modes.place,
@@ -44,7 +44,7 @@ const getters = {
 const mutations = {
   mode: (state, mode) => {
     state.mode = mode
-    //AppLoader.getInstance().appHooks.run('appModeChanged', mode)
+    AppHooks.run('appModeChanged', mode)
   },
   apiDataRequested: (state, requested) => {
     state.apiDataRequested = requested

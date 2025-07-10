@@ -1,10 +1,10 @@
 import AppRouteData from '@/models/app-route-data'
 import RouteUtils from '@/support/route-utils'
 import GeoUtils from '@/support/geo-utils'
-import AppLoader from '@/app-loader'
 import utils from '@/support/utils'
 import Place from '@/models/place'
 import store from '@/store/store'
+import AppHooks from '@/support/app-hooks'
 
 /**
  * PlaceMode class
@@ -97,7 +97,7 @@ class PlaceMode {
       }
     }
     // Return the object
-    //AppLoader.getInstance().appHooks.run('afterPlacePathDecoded', appRouteData)
+    AppHooks.run('afterPlacePathDecoded', appRouteData)
     return appRouteData
   }
 }
