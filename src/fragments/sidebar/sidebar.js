@@ -11,7 +11,6 @@ import {EventBus} from '@/common/event-bus'
 export default {
   data () {
     return {
-      clipped: false,
       drawer: true,
       right: false,
       fixed: false,
