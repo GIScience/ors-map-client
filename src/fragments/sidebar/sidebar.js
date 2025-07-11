@@ -23,14 +23,14 @@ export default {
   computed: {
     isSideBarOpen: {
       get () {
-        return this.$store.getters.isSidebarVisible && !this.$store.getters.embed
+        return this.$store.getters.isSidebarVisible && !this.$store.getters.embed ? true : null
       },
       set (open) {
         this.$store.commit('setLeftSideBarIsOpen', open)
         // If the sidebar is closed by a user's action, then
         // we can set the sidebar pined status as false
         if (open === false) {
-          this.$store.commit('setLeftSideBarIsPinned', open)
+          this.$store.commit('setLeftSideBarIsPinned', null)
           // Close mobile virtual keyboard if it was open
           utils.hideMobileKeyboard()
         }

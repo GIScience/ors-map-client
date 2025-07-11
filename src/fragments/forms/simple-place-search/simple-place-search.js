@@ -52,7 +52,7 @@ export default {
       return isVisible
     },
     showNewInfo () {
-      return this.newInfoAvailable
+      return this.newInfoAvailable || null
     },
     showRouteDetailsTooltip () {
       return this.showNewInfo && !this.$store.getters.isSidebarVisible
