@@ -11,9 +11,10 @@ const smartTooltip = {
   beforeMount(el, binding, vNode) {
     render(el, binding, vNode)
   },
-  unmounted(el, binding, vNode) {
-    if (vNode.context.popperTooltipGuid) {
-      closeTooltip(vNode.context.popperTooltipGuid)
+  unmounted(el, binding) {
+    const context = binding.instance
+    if (context.popperTooltipGuid) {
+      closeTooltip(context.popperTooltipGuid)
     }
   },
   updated(el, binding, vNode) {
@@ -29,17 +30,18 @@ const smartTooltip = {
  * @param {*} updated - if the tooltip is being updated
  */
 const render = (el, binding, vNode, updated = false) => {
-  let options = binding.value
+  const options = binding.value
+  const context = binding.instance
   if (options.show) {
     if (updated) { // it is updated, show it immediately
-      showToolTip(el, options, vNode)
+      showToolTip(el, options, context)
     } else { // otherwise, wait 2 seconds
       setTimeout(() => {
-        showToolTip(el, options, vNode)
+        showToolTip(el, options, context)
       }, 2000)
     }
-  } else if (vNode.context.popperTooltipGuid) {
-    removeTooltipEl(vNode.context.popperTooltipGuid)
+  } else if (context.popperTooltipGuid) {
+    removeTooltipEl(context.popperTooltipGuid)
   }
 }
 
@@ -87,10 +89,10 @@ const storeTooltipAlreadyShown = (tooltipName) => {
  * Show tooltip
  * @param {*} el - DOM the element which the tooltip will be attached to
  * @param {*} options tool tip options object
- * @param {*} vNode - vue element which the tooltip will be attached to
+ * @param {*} context - vue element which the tooltip will be attached to
  */
-const showToolTip = (el, options, vNode) => {
-  vNode.context.$nextTick(() => {
+const showToolTip = (el, options, context) => {
+  context.$nextTick(() => {
     let mustBeShown = true
     // Check if tool tip was already shown
     if ((options.showOnce || options.saveClose) && options.name) {
@@ -106,7 +108,7 @@ const showToolTip = (el, options, vNode) => {
 
     if (mustBeShown) {
       // Will remove the tooltip from DOM if it already exists
-      removeTooltipEl(vNode.context.popperTooltipGuid)
+      removeTooltipEl(context.popperTooltipGuid)
 
       //Generate an unique id for this tooltip element
       let guid = utils.guid('popper-tooltip')
@@ -132,7 +134,7 @@ const showToolTip = (el, options, vNode) => {
       }
 
       // Store the tooltip unique id in the vue component
-      vNode.context.popperTooltipGuid = guid
+      context.popperTooltipGuid = guid
 
       // Create the popper tooltip
       createPopper(el, toolTipEl, popperOptions)
@@ -150,7 +152,7 @@ const showToolTip = (el, options, vNode) => {
  * Build tooltip el html fragment
  * @param {*} guid
  * @param {*} options
- * @returns {HtmlFragment}
+ * @returns {HTMLDivElement}
  */
 const buildTooltipEl = (guid, options) => {
   let vueInstance = AppLoader.getInstance()
@@ -237,6 +239,5 @@ const buildArrowPosition = (options) => {
   }
   return arrowPosition
 }
-
 
 export default smartTooltip
