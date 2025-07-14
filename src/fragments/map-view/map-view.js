@@ -26,81 +26,66 @@
  * @emits addDestinationToRoute
  * @emits setInputPlace
  */
-
+import 'leaflet/dist/leaflet.css'
 import {
-  LCircle,
-  LCircleMarker,
-  LControlAttribution,
-  LControlLayers,
-  LControlScale,
-  LControlZoom,
-  LGeoJson,
-  LLayerGroup,
   LMap,
-  LPolygon,
-  LPopup,
   LTileLayer,
-  LTooltip,
-  LWMSTileLayer
-} from 'vue2-leaflet'
+  LControlScale,
+  LWmsTileLayer,
+  LControlLayers
+} from '@vue-leaflet/vue-leaflet'
 
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
-import ExtraInfoHighlight from './components/extra-info-highlight/ExtraInfoHighlight.vue'
-import MapRightClick from './components/map-right-click/MapRightClick.vue'
-import MapViewMarkers from './components/map-view-markers/MapViewMarkers.vue'
-import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
-import MapLeftClick from './components/map-left-click/MapLeftClick.vue'
-import OrsLPolyline from './components/ors-l-polyline/OrsLPolyline.vue'
+// import LControlPolylineMeasure from 'vue2-leaflet-polyline-measure'
 import AdminAreaLoader from '@/support/admin-area-loader'
-import MyLocation from './components/my-location/MyLocation.vue'
-import {GestureHandling} from 'leaflet-gesture-handling'
+// import {GestureHandling} from 'leaflet-gesture-handling'
 import orsDictionary from '@/resources/ors-dictionary'
-import LHeightGraph from 'vue2-leaflet-height-graph'
+// import LHeightGraph from 'vue2-leaflet-height-graph'
 import PolygonUtils from '@/support/polygon-utils'
 import MapViewData from '@/models/map-view-data'
-import drawLocales from 'leaflet-draw-locales'
+// import drawLocales from 'leaflet-draw-locales'
 import mapDefinitions from './map-definitions'
 import constants from '@/resources/constants'
-import I18nBuilder from '@/i18n/i18n-builder'
+// import I18nBuilder from '@/i18n/i18n-builder'
 import appConfig from '@/config/app-config'
 import GeoUtils from '@/support/geo-utils'
 import Utils from '@/support/utils'
 import theme from '@/config/theme'
 import Place from '@/models/place'
 import {EventBus} from '@/common/event-bus'
-import 'vue2-leaflet-draw-toolbar'
+// import 'vue2-leaflet-draw-toolbar'
 import Leaflet from 'leaflet'
 import {get as lodash_get, find as lodash_find} from 'lodash'
 
 // Import leaflet-related styles
-import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
-import 'leaflet-measure/dist/leaflet-measure.css'
+// import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
+// import 'leaflet-measure/dist/leaflet-measure.css'
 import 'leaflet/dist/leaflet.css'
 
 export default {
   components: {
     LMap,
     LTileLayer,
-    OrsLPolyline,
-    LLayerGroup,
-    LTooltip,
-    LPopup,
-    LControlZoom,
-    LControlAttribution,
+    // OrsLPolyline,
+    // LLayerGroup,
+    // LTooltip,
+    // LPopup,
+    // LControlZoom,
+    // LControlAttribution,
     LControlScale,
     LControlLayers,
-    'l-wms-tile-layer': LWMSTileLayer,
-    LGeoJson,
-    LPolygon,
-    LCircle,
-    LCircleMarker,
-    LControlPolylineMeasure,
-    ExtraInfoHighlight,
-    MapRightClick,
-    MapLeftClick,
-    MyLocation,
-    LHeightGraph,
-    MapViewMarkers
+    'l-wms-tile-layer': LWmsTileLayer,
+    // LGeoJson,
+    // LPolygon,
+    // LCircle,
+    // LCircleMarker,
+    // // LControlPolylineMeasure,
+    // ExtraInfoHighlight,
+    // MapRightClick,
+    // MapLeftClick,
+    // MyLocation,
+    // // LHeightGraph,
+    // MapViewMarkers
   },
   props: {
     mapViewData: {
@@ -160,9 +145,8 @@ export default {
       tileProviders: [], // list of tiles provider that will be set via setProviders
       overlayerTileProviders: [], // list of overlay tiles provider that will be set via setProviders
       wmsOverlayerTileProviders: [], // list of WMS overlay tiles provider that will be set via setProviders
-      layersPosition: 'topright',
       map: null, // map object reference
-      zoomLevel: null,
+      zoomLevel: 11,
       mapDataBuilder: null,
       initialMaxZoom: appConfig.initialMapMaxZoom,
       localMapViewData: new MapViewData(), // we use a local copy of the mapViewData to be able to modify it
@@ -875,8 +859,8 @@ export default {
       this.$appHooks.run('layerProvidersLoaded', hookData)
     },
     /**
-    * Update markers label
-    */
+     * Update markers label
+     */
     updateMarkersLabel () {
       // Before returning the markers update the label of the marker using the places data in the localMapViewData storage
       if (this.localMapViewData.hasPlaces()) {
@@ -1025,29 +1009,29 @@ export default {
      * @stores mapBounds
      */
     storeMapBoundsAndSetMapAsReady () {
-      const buildBoundaries = (bounds) => {
-        const boundary = {
-          rect: {
-            min_lon: bounds._southWest.lng,
-            max_lon: bounds._northEast.lng,
-            min_lat: bounds._southWest.lat,
-            max_lat: bounds._northEast.lat
-          }
-        }
-
-        return boundary
-      }
-      this.getMapObject().then((map) => {
-        const bounds = map.getBounds()
-        const mapBounds = buildBoundaries(bounds)
-        let newBounds = JSON.stringify(bounds)
-        let oldBounds = JSON.stringify(this.$store.getters.mapBounds)
-        if (newBounds !== oldBounds) {
-          this.$store.commit('mapBounds', mapBounds)
-          this.$appHooks.run('mapBoundsChanged', {mapBounds, map: map, context: this})
-        }
-        this.$emit('mapReady', map)
-      })
+      // const buildBoundaries = (bounds) => {
+      //   const boundary = {
+      //     rect: {
+      //       min_lon: bounds._southWest.lng,
+      //       max_lon: bounds._northEast.lng,
+      //       min_lat: bounds._southWest.lat,
+      //       max_lat: bounds._northEast.lat
+      //     }
+      //   }
+      //
+      //   return boundary
+      // }
+      // this.getMapObject().then((map) => {
+      //   const bounds = map.getBounds()
+      //   const mapBounds = buildBoundaries(bounds)
+      //   let newBounds = JSON.stringify(bounds)
+      //   let oldBounds = JSON.stringify(this.$store.getters.mapBounds)
+      //   if (newBounds !== oldBounds) {
+      //     this.$store.commit('mapBounds', mapBounds)
+      //     this.$root.appHooks.run('mapBoundsChanged', {mapBounds, map: map, context: this})
+      //   }
+      //   this.$emit('mapReady', map)
+      // })
     },
 
     /**
@@ -1571,54 +1555,54 @@ export default {
      */
     setAvoidPolygonDrawingTool () {
       // Get a reference to the map object
-      const map = this.$refs.map.mapObject
-
-      if (!this.showControls && this.drawControlRef) {
-        map.removeControl(this.drawControlRef)
-        this.drawControlRef = null
-      } else {
-        // If the drawing controller is already attached
-        // we have nothing to do here
-        if (this.drawControlRef) {
-          return
-        }
-
-        // Tell the leaflet drawing locale to use the current app locale
-        let shortLocale = I18nBuilder.getShortLocale(this.$i18n.locale)
-        let locale
-        try {
-          locale = drawLocales(shortLocale)
-        } catch (error) {
-          shortLocale = I18nBuilder.getShortLocale(this.$i18n.fallbackLocale)
-          locale = drawLocales(shortLocale)
-        }
-
-        // Override the tooltip message
-        let avoidPolygonBtnTranslations = {
-          avoidPolygon: this.$t('mapView.defineAvoidPolygon'),
-          avoidRectangle: this.$t('mapView.defineAvoidRectangle')
-        }
-        // Run the hook that mey modify the translations
-        this.$appHooks.run('avoidPolygonBtnTranslations', avoidPolygonBtnTranslations)
-
-        // Set the translations to the buttons
-        locale.draw.toolbar.buttons.polygon = avoidPolygonBtnTranslations.avoidPolygon
-        locale.draw.toolbar.buttons.rectangle = avoidPolygonBtnTranslations.avoidRectangle
-
-        // Set th custom draw locale to the leaflet draw locale
-        Leaflet.drawLocal = locale
-
-        // Add the draw control with custom locale to the map
-        this.drawControlRef = new Leaflet.Control.Draw(this.drawOptions)
-        map.addControl(this.drawControlRef)
-
-        const context = this
-
-        // Add listener to draw created,
-        map.on('draw:created', function (e) {
-          context.avoidPolygonCreated(e, map)
-        })
-      }
+      // const map = this.$refs.map.mapObject
+      //
+      // if (!this.showControls && this.drawControlRef) {
+      //   map.removeControl(this.drawControlRef)
+      //   this.drawControlRef = null
+      // } else {
+      //   // If the drawing controller is already attached
+      //   // we have nothing to do here
+      //   if (this.drawControlRef) {
+      //     return
+      //   }
+      //
+      //   // Tell the leaflet drawing locale to use the current app locale
+      //   let shortLocale = I18nBuilder.getShortLocale(this.$i18n.locale)
+      //   let locale
+      //   try {
+      //     locale = drawLocales(shortLocale)
+      //   } catch (error) {
+      //     shortLocale = I18nBuilder.getShortLocale(this.$i18n.fallbackLocale)
+      //     locale = drawLocales(shortLocale)
+      //   }
+      //
+      //   // Override the tooltip message
+      //   let avoidPolygonBtnTranslations = {
+      //     avoidPolygon: this.$t('mapView.defineAvoidPolygon'),
+      //     avoidRectangle: this.$t('mapView.defineAvoidRectangle')
+      //   }
+      //   // Run the hook that mey modify the translations
+      //   this.$root.appHooks.run('avoidPolygonBtnTranslations', avoidPolygonBtnTranslations)
+      //
+      //   // Set the translations to the buttons
+      //   locale.draw.toolbar.buttons.polygon = avoidPolygonBtnTranslations.avoidPolygon
+      //   locale.draw.toolbar.buttons.rectangle = avoidPolygonBtnTranslations.avoidRectangle
+      //
+      //   // Set th custom draw locale to the leaflet draw locale
+      //   Leaflet.drawLocal = locale
+      //
+      //   // Add the draw control with custom locale to the map
+      //   this.drawControlRef = new Leaflet.Control.Draw(this.drawOptions)
+      //   map.addControl(this.drawControlRef)
+      //
+      //   const context = this
+      //
+      //   // Add listener to draw created,
+      //   map.on('draw:created', function (e) {
+      //     context.avoidPolygonCreated(e, map)
+      //   })
+      // }
     },
 
     /**
@@ -1994,7 +1978,7 @@ export default {
     // Add the gesture handling so that when the user is
     // scrolling a page (embed state) with an ors map it
     // will actually scroll the page and not the map
-    Leaflet.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
+    // Leaflet.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
 
     // Once the map component is mounted, load the map data
     this.loadMapData()

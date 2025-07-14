@@ -1,5 +1,5 @@
 import routeData from '@/support/map-data-services/ors-response-data-extractors/route-data'
-import { LPolyline, LTooltip } from 'vue2-leaflet'
+import { LPolyline, LTooltip } from '@vue-leaflet/vue-leaflet'
 import Utils from '@/support/utils'
 
 export default {

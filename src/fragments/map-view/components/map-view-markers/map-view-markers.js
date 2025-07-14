@@ -1,6 +1,6 @@
-import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
+// import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
 import constants from '@/resources/constants'
-import {LMarker, LPopup} from 'vue2-leaflet'
+import {LMarker, LPopup} from '@vue-leaflet/vue-leaflet'
 import appConfig from '@/config/app-config'
 
 import 'leaflet.markercluster/dist/MarkerCluster.css'
@@ -24,31 +24,31 @@ export default {
   components: {
     LMarker,
     LPopup,
-    'v-marker-cluster': Vue2LeafletMarkerCluster
+    // 'v-marker-cluster': Vue2LeafletMarkerCluster
   },
   computed: {
     localMarkers () {
       return this.markers
     },
-    /**
-     * Determines if marker cluster must be used or not
-     * @returns {Boolean}
-     */
-    supportsClusteredMarkers () {
-      return appConfig.supportsClusteredMarkers
-    },
-    /**
-     * Return the marker cluster options. By default, it is empty,
-     * but it can be changed via app hook
-     * @returns {Object}
-     */
-    markersClusterOptions () {
-      let options = {}
-      // If the options object is modified in the hook, the changes
-      // will reflect here and the returned object will incorporate the changes
-      this.$appHooks.run('beforeUseMarkerClusterOptions', options)
-      return options
-    },
+    // /**
+    //  * Determines if marker cluster must be used or not
+    //  * @returns {Boolean}
+    //  */
+    // supportsClusteredMarkers () {
+    //   return appConfig.supportsClusteredMarkers
+    // },
+    // /**
+    //  * Return the marker cluster options. By default, it is empty,
+    //  * but it can be changed via app hook
+    //  * @returns {Object}
+    //  */
+    // markersClusterOptions () {
+    //   let options = {}
+    //   // If the options object is modified in the hook, the changes
+    //   // will reflect here and the returned object will incorporate the changes
+    //   this.$root.appHooks.run('beforeUseMarkerClusterOptions', options)
+    //   return options
+    // },
     /**
      * Determines if markers are removable
      * based on the current app mode

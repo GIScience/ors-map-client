@@ -1,7 +1,6 @@
-import vueDropzone from 'vue2-dropzone'
+// import vueDropzone from 'vue3-dropzone'
 import constants from '@/resources/constants'
 import MapFormBtn from '@/fragments/forms/map-form-btn/MapFormBtn.vue'
-import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 export default {
   data: () => ({
@@ -28,7 +27,7 @@ export default {
     }
   },
   components: {
-    vueDropzone,
+    // vueDropzone,
     MapFormBtn
   },
 

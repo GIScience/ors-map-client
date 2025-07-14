@@ -1,5 +1,5 @@
 import OrsExtendedPolyline from './ors-extended-polyline'
-import {LPolyline, LPopup, LTooltip} from 'vue2-leaflet'
+import {LPolyline, LPopup, LTooltip} from '@vue-leaflet/vue-leaflet'
 import constants from '@/resources/constants'
 import GeoUtils from '@/support/geo-utils'
 import Utils from '@/support/utils'

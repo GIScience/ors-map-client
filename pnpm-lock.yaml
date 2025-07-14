@@ -38,6 +38,9 @@ importers:
       '@vitejs/plugin-vue':
         specifier: ^5.2.3
         version: 5.2.3(vite@6.0.11(@types/node@22.0.0)(jiti@1.21.6)(sass-embedded@1.83.4)(sass@1.77.8)(stylus@0.59.0)(terser@5.38.1))(vue@3.5.13(typescript@5.5.4))
+      '@vue-leaflet/vue-leaflet':
+        specifier: ^0.10.1
+        version: 0.10.1(@types/leaflet@1.9.12)(leaflet@1.9.4)(typescript@5.5.4)
       '@vue/compat':
         specifier: ^3.1.0
         version: 3.5.13(vue@3.5.13(typescript@5.5.4))
@@ -80,21 +83,9 @@ importers:
       leaflet:
         specifier: ^1.8.0
         version: 1.9.4
-      leaflet-draw-locales:
-        specifier: ^1.1.0
-        version: 1.2.3
       leaflet-geometryutil:
-        specifier: ^0.10.2
+        specifier: ^0.10.3
         version: 0.10.3
-      leaflet-gesture-handling:
-        specifier: ^1.1.8
-        version: 1.2.2
-      leaflet-measure:
-        specifier: ^3.1.0
-        version: 3.1.0(leaflet@1.9.4)
-      leaflet.markercluster:
-        specifier: ^1.5.3
-        version: 1.5.3(leaflet@1.9.4)
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -176,24 +167,9 @@ importers:
       vue-style-loader:
         specifier: ^3.0.1
         version: 3.1.2
-      vue2-dropzone:
-        specifier: ^3.6.0
-        version: 3.6.0
-      vue2-leaflet:
-        specifier: ^2.7.1
-        version: 2.7.1(@types/leaflet@1.9.12)(leaflet@1.9.4)(vue@3.5.13(typescript@5.5.4))
-      vue2-leaflet-draw-toolbar:
-        specifier: ^0.1.1
-        version: 0.1.1
-      vue2-leaflet-height-graph:
-        specifier: git+https://github.com/GIScience/vue2-leaflet-height-graph.git
-        version: https://codeload.github.com/GIScience/vue2-leaflet-height-graph/tar.gz/d44cc4b7c9b3d46d4b42ff9ae183228c9f5984c2(@types/leaflet@1.9.12)(leaflet@1.9.4)(vue2-leaflet@2.7.1(@types/leaflet@1.9.12)(leaflet@1.9.4)(vue@3.5.13(typescript@5.5.4)))
-      vue2-leaflet-markercluster:
-        specifier: ^3.1.0
-        version: 3.1.0(leaflet@1.9.4)
-      vue2-leaflet-polyline-measure:
-        specifier: ^1.0.0
-        version: 1.2.1(@types/leaflet@1.9.12)(leaflet@1.9.4)(vue@3.5.13(typescript@5.5.4))
+      vue3-dropzone:
+        specifier: ^2.2.1
+        version: 2.2.1(vue@3.5.13(typescript@5.5.4))
       vue3-horizontal-list:
         specifier: ^0.0.3
         version: 0.0.3(vue@3.5.13(typescript@5.5.4))
@@ -1512,24 +1488,6 @@ packages:
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
 
-  '@turf/area@5.1.5':
-    resolution: {integrity: sha512-lz16gqtvoz+j1jD9y3zj0Z5JnGNd3YfS0h+DQY1EcZymvi75Frm9i5YbEyth0RfxYZeOVufY7YIS3LXbJlI57g==}
-
-  '@turf/distance@5.1.5':
-    resolution: {integrity: sha512-sYCAgYZ2MjNKMtx17EijHlK9qHwpA0MuuQWbR4P30LTCl52UlG/reBfV899wKyF3HuDL9ux78IbILwOfeQ4zgA==}
-
-  '@turf/helpers@5.1.5':
-    resolution: {integrity: sha512-/lF+JR+qNDHZ8bF9d+Cp58nxtZWJ3sqFe6n3u3Vpj+/0cqkjk4nXKYBSY0azm+GIYB5mWKxUXvuP/m0ZnKj1bw==}
-
-  '@turf/invariant@5.2.0':
-    resolution: {integrity: sha512-28RCBGvCYsajVkw2EydpzLdcYyhSA77LovuOvgCJplJWaNVyJYH6BOR3HR9w50MEkPqb/Vc/jdo6I6ermlRtQA==}
-
-  '@turf/length@5.1.5':
-    resolution: {integrity: sha512-0ryx68h512wCoNfwyksLdabxEfwkGNTPg61/QiY+QfGFUOUNhHbP+QimViFpwF5hyX7qmroaSHVclLUqyLGRbg==}
-
-  '@turf/meta@5.2.0':
-    resolution: {integrity: sha512-ZjQ3Ii62X9FjnK4hhdsbT+64AYRpaI8XMBMcyftEOGSmPMUVnkbvuv3C9geuElAXfQU7Zk1oWGOcrGOD9zr78Q==}
-
   '@types/cacheable-request@6.0.3':
     resolution: {integrity: sha512-IQ3EbTzGxIigb1I3qPZc1rWJnH0BmSKv5QYTalEwweFvyBDLSAe24zP0le/hyi7ecGfZVlIVAg4BZqb8WBwKqw==}
 
@@ -1597,6 +1555,15 @@ packages:
       vite: ^5.0.0 || ^6.0.0
       vue: ^3.2.25
 
+  '@vue-leaflet/vue-leaflet@0.10.1':
+    resolution: {integrity: sha512-RNEDk8TbnwrJl8ujdbKgZRFygLCxd0aBcWLQ05q/pGv4+d0jamE3KXQgQBqGAteE1mbQsk3xoNcqqUgaIGfWVg==}
+    peerDependencies:
+      '@types/leaflet': ^1.5.7
+      leaflet: ^1.6.0
+    peerDependenciesMeta:
+      '@types/leaflet':
+        optional: true
+
   '@vue/compat@3.5.13':
     resolution: {integrity: sha512-Q3xRdTPN4l+kddxU98REyUBgvc0meAo9CefCWE2lW8Fg3dyPn3vSCce52b338ihrJAx1RQQhO5wMWhJ/PAKUpA==}
     peerDependencies:
@@ -1607,9 +1574,6 @@ packages:
 
   '@vue/compiler-dom@3.5.13':
     resolution: {integrity: sha512-ZOJ46sMOKUjO3e94wPdCzQ6P1Lx/vhp2RSvfaab88Ajexs0AHeV0uasYhi99WPaogmBlRHNRuly8xV75cNTMDA==}
-
-  '@vue/compiler-sfc@2.7.16':
-    resolution: {integrity: sha512-KWhJ9k5nXuNtygPU7+t1rX6baZeqOYLEforUPjgNDBnLicfHCoi48H87Q8XyLZOrNNsmhuwKqtpDQWjEFe6Ekg==}
 
   '@vue/compiler-sfc@3.5.13':
     resolution: {integrity: sha512-6VdaljMpD82w6c2749Zhf5T9u5uLBWKnVue6XWxprDobftnletJ8+oel7sexFfM3qIxNmVE7LSFGTpv6obNyaQ==}
@@ -1952,6 +1916,10 @@ packages:
   at-least-node@1.0.0:
     resolution: {integrity: sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==}
     engines: {node: '>= 4.0.0'}
+
+  attr-accept@2.2.5:
+    resolution: {integrity: sha512-0bDNnY/u6pPwHDMoF0FieU354oBi0a8rD9FcsLwzcGWbc8KS8KPIi7y+s13OlVY+gMWc/9xEMUgNE6Qm8ZllYQ==}
+    engines: {node: '>=4'}
 
   autoprefixer@10.4.19:
     resolution: {integrity: sha512-BaENR2+zBZ8xXhM4pUaKUxlVdxZ0EZhjvbopwnXmxRUfqDmwSpC2lAi/QXvx7NRdPCo1WKEcEF6mV64si1z4Ew==}
@@ -2731,9 +2699,6 @@ packages:
   cuint@0.2.2:
     resolution: {integrity: sha512-d4ZVpCW31eWwCMe1YT3ur7mUDnTXbgwyzaL320DrcRT45rfjYxkt5QWLrmOJ+/UEAI2+fQgKe/fCjR8l4TpRgw==}
 
-  current-script-polyfill@1.0.0:
-    resolution: {integrity: sha512-qv8s+G47V6Hq+g2kRE5th+ASzzrL7b6l+tap1DHKK25ZQJv3yIFhH96XaQ7NGL+zRW3t/RDbweJf/dJDe5Z5KA==}
-
   cypress-vite@1.6.0:
     resolution: {integrity: sha512-6oZPDvHgLEZjuFgoejtRuyph369zbVn7fjh4hzhMar3XvKT5YhTEoA+KixksMuxNEaLn9uqA4HJVz6l7BybwBQ==}
     peerDependencies:
@@ -2952,9 +2917,6 @@ packages:
   dotgitignore@2.1.0:
     resolution: {integrity: sha512-sCm11ak2oY6DglEPpCB8TixLjWAxd3kJTs6UIcSasNYxXdFPV+YKlye92c8H4kKFqV5qYMIh7d+cYecEg0dIkA==}
     engines: {node: '>=6'}
-
-  dropzone@5.9.3:
-    resolution: {integrity: sha512-Azk8kD/2/nJIuVPK+zQ9sjKMRIpRvNyqn9XwbBHNq+iNuSccbJS6hwm1Woy0pMST0erSo0u4j+KJaodndDk4vA==}
 
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
@@ -3537,6 +3499,10 @@ packages:
   file-entry-cache@6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
     engines: {node: ^10.12.0 || >=12.0.0}
+
+  file-selector@0.2.4:
+    resolution: {integrity: sha512-ZDsQNbrv6qRi1YTDOEWzf5J2KjZ9KMI1Q2SGeTkCJmNNW25Jg4TW4UMcmoqcg4WrAyKRcpBXdbWRxkfrOzVRbA==}
+    engines: {node: '>= 10'}
 
   filename-regex@2.0.1:
     resolution: {integrity: sha512-BTCqyBaWBTsauvnHiE8i562+EdJj+oUpkqWp2R1iCoR8f6oo8STRu3of7WJJ0TqWtxN50a5YFpzYK4Jj9esYfQ==}
@@ -4418,40 +4384,8 @@ packages:
     resolution: {integrity: sha512-cc8oEVoctTvsFZ/Oje/kGnHbpWHYBe8IAJe4C0QNc3t8uM/0Y8+erSz/7Y1ALuXTEZTMvxXwO6YbX1ey3ujiZw==}
     engines: {node: '> 0.8'}
 
-  leaflet-draw-locales@1.2.3:
-    resolution: {integrity: sha512-YsQtm01EAPvA77HR4NH8cNSIs31m22DgeS0ZahTHMmOv8x+rQIyvOWmqew0wF1qUZpeohhhYsUosFxn/n1fxrA==}
-    engines: {node: '>=8', npm: '>=5'}
-
-  leaflet-draw@1.0.4:
-    resolution: {integrity: sha512-rsQ6saQO5ST5Aj6XRFylr5zvarWgzWnrg46zQ1MEOEIHsppdC/8hnN8qMoFvACsPvTioAuysya/TVtog15tyAQ==}
-
   leaflet-geometryutil@0.10.3:
     resolution: {integrity: sha512-Qeas+KsnenE0Km/ydt8km3AqFe7kJhVwuLdbCYM2xe2epsxv5UFEaVJiagvP9fnxS8QvBNbm7DJlDA0tkKo9VA==}
-
-  leaflet-gesture-handling@1.2.2:
-    resolution: {integrity: sha512-Blf5V4PoNphWkzL7Y1qge+Spkd4OCQ2atjwUNhMhLIcjKzPcBH++x/lwOinaR9jSqLWqJ6oKYO8d0XdTffy4hQ==}
-
-  leaflet-measure@3.1.0:
-    resolution: {integrity: sha512-ln5c9UNaWDEd24tIzDt9hwnpb8OaCPBfSWNBg2H8rb9SA3cbXW9+NqohA6/8TdsNDGJZr36woXMrqRq07Pcl3w==}
-    peerDependencies:
-      leaflet: ^1.0.0
-
-  leaflet-toolbar@0.4.0-alpha.2:
-    resolution: {integrity: sha512-g1KeU3DYGUOwXTS0vKIgJ8KgY0h/2B0qENNQUSYMFtSY2yzwaHWMbDyhDbk+aO8LgJ1iOX4fUt2bh1sYZbpmmQ==}
-    peerDependencies:
-      leaflet: '*'
-
-  leaflet.heightgraph@1.4.0:
-    resolution: {integrity: sha512-X/HEtDIr9SCKbyJYdhv+jxqN1MwWEusxIaDB4fjQ5Cz4Tx8u7blcRZtVgig7tP237nVuHNnTpS6FZKdfCGMVng==}
-
-  leaflet.markercluster@1.5.3:
-    resolution: {integrity: sha512-vPTw/Bndq7eQHjLBVlWpnGeLa3t+3zGiuM7fJwCkiMFq+nmRuG3RI3f7f4N4TDX7T4NpbAXpR2+NTRSEGfCSeA==}
-    peerDependencies:
-      leaflet: ^1.3.1
-
-  leaflet.polylinemeasure@https://codeload.github.com/ppete2/Leaflet.PolylineMeasure/tar.gz/b85a4b9:
-    resolution: {tarball: https://codeload.github.com/ppete2/Leaflet.PolylineMeasure/tar.gz/b85a4b9}
-    version: 1.0.0
 
   leaflet@1.9.4:
     resolution: {integrity: sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==}
@@ -5368,11 +5302,6 @@ packages:
   prettier@1.19.1:
     resolution: {integrity: sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==}
     engines: {node: '>=4'}
-    hasBin: true
-
-  prettier@2.8.8:
-    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
-    engines: {node: '>=10.13.0'}
     hasBin: true
 
   pretty-bytes@5.6.0:
@@ -6622,34 +6551,10 @@ packages:
   vue-template-compiler@2.7.16:
     resolution: {integrity: sha512-AYbUWAJHLGGQM7+cNTELw+KsOG9nl2CnSv467WobS5Cv9uk3wFcnr1Etsz2sEIHEZvw1U+o9mRlEO6QbZvUPGQ==}
 
-  vue2-dropzone@3.6.0:
-    resolution: {integrity: sha512-YXC1nCWIZvfa98e/i6h+EshZCkFSxFEh0Sxr9ODfThAPPDVhAzLLlz/4XIx0NGO1QeSy6htwSstte47R7vVhLQ==}
-
-  vue2-leaflet-draw-toolbar@0.1.1:
-    resolution: {integrity: sha512-1cTfNu9FJP+mZ9nRjHCIB/jDCulnHVMSFsP8H/usajlUuJot4Tzs5Yq5Lfcm2r9K6GHOlHaQTitENkWlCx04iQ==}
-
-  vue2-leaflet-height-graph@https://codeload.github.com/GIScience/vue2-leaflet-height-graph/tar.gz/d44cc4b7c9b3d46d4b42ff9ae183228c9f5984c2:
-    resolution: {tarball: https://codeload.github.com/GIScience/vue2-leaflet-height-graph/tar.gz/d44cc4b7c9b3d46d4b42ff9ae183228c9f5984c2}
-    version: 0.3.2
+  vue3-dropzone@2.2.1:
+    resolution: {integrity: sha512-TWV/BWTMHePoAcHVn+S5a+a69S1Hwkpdn1LlcBkzvesGZTBqL0TDnKuXWMrF+aWlPLVBUfRJO0uIy9+n2jkDxA==}
     peerDependencies:
-      '@types/leaflet': ^1.5.17
-      leaflet: ^1.5.7
-      vue2-leaflet: ^2.5.2
-
-  vue2-leaflet-markercluster@3.1.0:
-    resolution: {integrity: sha512-v94tns6/PmBlFaPY2XvCUL69yUwRO43qYAP7T9hLmPDdu3Vgl15SDcC1qara8M56aNzWMPAcfP/uy4toUE5wcA==}
-    peerDependencies:
-      leaflet: ^1.3.4
-
-  vue2-leaflet-polyline-measure@1.2.1:
-    resolution: {integrity: sha512-C4Y6CV4fsfDqguagOjBsYkAIJg7nRkJTm1XrrOj94i2q5Ws+FE35tn6Se1AiZfSrg0VzpEmhHRFX64ECmvP5Eg==}
-
-  vue2-leaflet@2.7.1:
-    resolution: {integrity: sha512-K7HOlzRhjt3Z7+IvTqEavIBRbmCwSZSCVUlz9u4Rc+3xGCLsHKz4TAL4diAmfHElCQdPPVdZdJk8wPUt2fu6WQ==}
-    peerDependencies:
-      '@types/leaflet': ^1.5.7
-      leaflet: ^1.3.4
-      vue: ^2.5.17
+      vue: '>=3'
 
   vue3-horizontal-list@0.0.3:
     resolution: {integrity: sha512-c4tVQ0weV2gtrAwg6wSMN0xODX9wdaDJalcU4iGFcwB2FUEW2M38nFQIjM/1m0F/7sKOGKNiwUe9OHOTCkmd0w==}
@@ -6661,10 +6566,6 @@ packages:
     resolution: {integrity: sha512-vZkbEv4PjMEWFV0igAxCvdSIH9hrIJjXyJ9XPTxH0cS/L2/VW1dLVORMWJKU0VXHpHiYKwskB62ju7aBQMVpOQ==}
     peerDependencies:
       vue: ^3.0.0
-
-  vue@2.7.16:
-    resolution: {integrity: sha512-4gCtFXaAA3zYZdTp5s4Hl2sozuySsgz4jy1EnpBHNfpMa9dK1ZCG7viqBPCwXtmgc8nHqUsAu3G4gtmXkkY3Sw==}
-    deprecated: Vue 2 has reached EOL and is no longer actively maintained. See https://v2.vuejs.org/eol/ for more details.
 
   vue@3.5.13:
     resolution: {integrity: sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ==}
@@ -8213,32 +8114,6 @@ snapshots:
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
-  '@turf/area@5.1.5':
-    dependencies:
-      '@turf/helpers': 5.1.5
-      '@turf/meta': 5.2.0
-
-  '@turf/distance@5.1.5':
-    dependencies:
-      '@turf/helpers': 5.1.5
-      '@turf/invariant': 5.2.0
-
-  '@turf/helpers@5.1.5': {}
-
-  '@turf/invariant@5.2.0':
-    dependencies:
-      '@turf/helpers': 5.1.5
-
-  '@turf/length@5.1.5':
-    dependencies:
-      '@turf/distance': 5.1.5
-      '@turf/helpers': 5.1.5
-      '@turf/meta': 5.2.0
-
-  '@turf/meta@5.2.0':
-    dependencies:
-      '@turf/helpers': 5.1.5
-
   '@types/cacheable-request@6.0.3':
     dependencies:
       '@types/http-cache-semantics': 4.0.4
@@ -8311,6 +8186,15 @@ snapshots:
       vite: 6.0.11(@types/node@22.0.0)(jiti@1.21.6)(sass-embedded@1.83.4)(sass@1.77.8)(stylus@0.59.0)(terser@5.38.1)
       vue: 3.5.13(typescript@5.5.4)
 
+  '@vue-leaflet/vue-leaflet@0.10.1(@types/leaflet@1.9.12)(leaflet@1.9.4)(typescript@5.5.4)':
+    dependencies:
+      leaflet: 1.9.4
+      vue: 3.5.13(typescript@5.5.4)
+    optionalDependencies:
+      '@types/leaflet': 1.9.12
+    transitivePeerDependencies:
+      - typescript
+
   '@vue/compat@3.5.13(vue@3.5.13(typescript@5.5.4))':
     dependencies:
       '@babel/parser': 7.27.0
@@ -8330,14 +8214,6 @@ snapshots:
     dependencies:
       '@vue/compiler-core': 3.5.13
       '@vue/shared': 3.5.13
-
-  '@vue/compiler-sfc@2.7.16':
-    dependencies:
-      '@babel/parser': 7.27.0
-      postcss: 8.4.40
-      source-map: 0.6.1
-    optionalDependencies:
-      prettier: 2.8.8
 
   '@vue/compiler-sfc@3.5.13':
     dependencies:
@@ -8726,6 +8602,8 @@ snapshots:
   asynckit@0.4.0: {}
 
   at-least-node@1.0.0: {}
+
+  attr-accept@2.2.5: {}
 
   autoprefixer@10.4.19(postcss@8.4.40):
     dependencies:
@@ -9896,8 +9774,6 @@ snapshots:
 
   cuint@0.2.2: {}
 
-  current-script-polyfill@1.0.0: {}
-
   cypress-vite@1.6.0(vite@6.0.11(@types/node@22.0.0)(jiti@1.21.6)(sass-embedded@1.83.4)(sass@1.77.8)(stylus@0.59.0)(terser@5.38.1)):
     dependencies:
       chokidar: 3.6.0
@@ -10156,8 +10032,6 @@ snapshots:
     dependencies:
       find-up: 3.0.0
       minimatch: 3.1.2
-
-  dropzone@5.9.3: {}
 
   dunder-proto@1.0.1:
     dependencies:
@@ -10496,7 +10370,7 @@ snapshots:
       eslint: 4.19.1
       get-stdin: 6.0.0
 
-  eslint-config-standard@11.0.0(eslint-plugin-import@2.29.1(eslint@4.19.1))(eslint-plugin-node@7.0.1(eslint@8.57.1))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@8.57.1))(eslint@4.19.1):
+  eslint-config-standard@11.0.0(eslint-plugin-import@2.29.1(eslint@8.57.1))(eslint-plugin-node@7.0.1(eslint@8.57.1))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@8.57.1))(eslint@4.19.1):
     dependencies:
       eslint: 4.19.1
       eslint-plugin-import: 2.29.1(eslint@4.19.1)
@@ -10907,6 +10781,10 @@ snapshots:
   file-entry-cache@6.0.1:
     dependencies:
       flat-cache: 3.2.0
+
+  file-selector@0.2.4:
+    dependencies:
+      tslib: 2.6.3
 
   filename-regex@2.0.1: {}
 
@@ -11825,36 +11703,9 @@ snapshots:
 
   lazy-ass@1.6.0: {}
 
-  leaflet-draw-locales@1.2.3: {}
-
-  leaflet-draw@1.0.4: {}
-
   leaflet-geometryutil@0.10.3:
     dependencies:
       leaflet: 1.9.4
-
-  leaflet-gesture-handling@1.2.2: {}
-
-  leaflet-measure@3.1.0(leaflet@1.9.4):
-    dependencies:
-      '@turf/area': 5.1.5
-      '@turf/length': 5.1.5
-      leaflet: 1.9.4
-      lodash: 4.17.21
-
-  leaflet-toolbar@0.4.0-alpha.2(leaflet@1.9.4):
-    dependencies:
-      leaflet: 1.9.4
-
-  leaflet.heightgraph@1.4.0:
-    dependencies:
-      leaflet: 1.9.4
-
-  leaflet.markercluster@1.5.3(leaflet@1.9.4):
-    dependencies:
-      leaflet: 1.9.4
-
-  leaflet.polylinemeasure@https://codeload.github.com/ppete2/Leaflet.PolylineMeasure/tar.gz/b85a4b9: {}
 
   leaflet@1.9.4: {}
 
@@ -12813,9 +12664,6 @@ snapshots:
   preserve@0.2.0: {}
 
   prettier@1.19.1: {}
-
-  prettier@2.8.8:
-    optional: true
 
   pretty-bytes@5.6.0: {}
 
@@ -14107,7 +13955,7 @@ snapshots:
       derequire: 2.1.1
       eslint: 4.19.1
       eslint-config-prettier: 3.6.0(eslint@4.19.1)
-      eslint-config-standard: 11.0.0(eslint-plugin-import@2.29.1(eslint@4.19.1))(eslint-plugin-node@7.0.1(eslint@8.57.1))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@8.57.1))(eslint@4.19.1)
+      eslint-config-standard: 11.0.0(eslint-plugin-import@2.29.1(eslint@8.57.1))(eslint-plugin-node@7.0.1(eslint@8.57.1))(eslint-plugin-promise@4.3.1)(eslint-plugin-standard@3.1.0(eslint@8.57.1))(eslint@4.19.1)
       eslint-plugin-import: 2.29.1(eslint@4.19.1)
       eslint-plugin-node: 7.0.1(eslint@4.19.1)
       eslint-plugin-prettier: 2.7.0(prettier@1.19.1)
@@ -14151,44 +13999,10 @@ snapshots:
       de-indent: 1.0.2
       he: 1.2.0
 
-  vue2-dropzone@3.6.0:
+  vue3-dropzone@2.2.1(vue@3.5.13(typescript@5.5.4)):
     dependencies:
-      dropzone: 5.9.3
-
-  vue2-leaflet-draw-toolbar@0.1.1:
-    dependencies:
-      core-js: 2.6.12
-      leaflet: 1.9.4
-      leaflet-draw: 1.0.4
-      leaflet-toolbar: 0.4.0-alpha.2(leaflet@1.9.4)
-      vue: 2.7.16
-
-  vue2-leaflet-height-graph@https://codeload.github.com/GIScience/vue2-leaflet-height-graph/tar.gz/d44cc4b7c9b3d46d4b42ff9ae183228c9f5984c2(@types/leaflet@1.9.12)(leaflet@1.9.4)(vue2-leaflet@2.7.1(@types/leaflet@1.9.12)(leaflet@1.9.4)(vue@3.5.13(typescript@5.5.4))):
-    dependencies:
-      '@types/leaflet': 1.9.12
-      current-script-polyfill: 1.0.0
-      leaflet: 1.9.4
-      leaflet.heightgraph: 1.4.0
-      vue2-leaflet: 2.7.1(@types/leaflet@1.9.12)(leaflet@1.9.4)(vue@3.5.13(typescript@5.5.4))
-
-  vue2-leaflet-markercluster@3.1.0(leaflet@1.9.4):
-    dependencies:
-      leaflet: 1.9.4
-      leaflet.markercluster: 1.5.3(leaflet@1.9.4)
-
-  vue2-leaflet-polyline-measure@1.2.1(@types/leaflet@1.9.12)(leaflet@1.9.4)(vue@3.5.13(typescript@5.5.4)):
-    dependencies:
-      leaflet.polylinemeasure: https://codeload.github.com/ppete2/Leaflet.PolylineMeasure/tar.gz/b85a4b9
-      vue2-leaflet: 2.7.1(@types/leaflet@1.9.12)(leaflet@1.9.4)(vue@3.5.13(typescript@5.5.4))
-    transitivePeerDependencies:
-      - '@types/leaflet'
-      - leaflet
-      - vue
-
-  vue2-leaflet@2.7.1(@types/leaflet@1.9.12)(leaflet@1.9.4)(vue@3.5.13(typescript@5.5.4)):
-    dependencies:
-      '@types/leaflet': 1.9.12
-      leaflet: 1.9.4
+      attr-accept: 2.2.5
+      file-selector: 0.2.4
       vue: 3.5.13(typescript@5.5.4)
 
   vue3-horizontal-list@0.0.3(vue@3.5.13(typescript@5.5.4)):
@@ -14199,11 +14013,6 @@ snapshots:
   vue3-resize@0.2.0(vue@3.5.13(typescript@5.5.4)):
     dependencies:
       vue: 3.5.13(typescript@5.5.4)
-
-  vue@2.7.16:
-    dependencies:
-      '@vue/compiler-sfc': 2.7.16
-      csstype: 3.1.3
 
   vue@3.5.13(typescript@5.5.4):
     dependencies:
