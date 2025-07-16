@@ -25,7 +25,11 @@ import {configureCompat} from '@vue/compat'
 
 export default function createPreparedVue(App) {
   configureCompat({
-    WATCH_ARRAY: false
+    WATCH_ARRAY: false,
+    COMPONENT_V_MODEL: false,
+    COMPONENT_ASYNC: false,
+    RENDER_FUNCTION: false,
+    MODE: 3
   })
   const app = createApp(App)
   app.config.globalProperties.$appHooks = AppHooks
