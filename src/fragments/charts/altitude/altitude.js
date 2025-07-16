@@ -105,7 +105,7 @@ export default {
      * These are global defaults for ChartJS and should be moved/adjusted if other charts are added.
      */
     setChartDefaults () {
-      ChartJS.defaults.datasets.line.borderColor = theme.info
+      ChartJS.defaults.datasets.line.borderColor = theme.themes.light.colors.info
       ChartJS.defaults.datasets.line.borderWidth = 3
       ChartJS.defaults.datasets.line.lineTension = 0.5
       ChartJS.defaults.datasets.line.backgroundColor = '#A1C8DC'

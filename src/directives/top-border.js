@@ -27,7 +27,7 @@ const render = (el, binding) => {
       } else if (binding.arg === 'color') {
         el.style.borderTop = '5px solid ' + binding.value
       } else { // if arg is not defined, just apply the primary color from the theme
-        el.style.borderTop = '5px solid ' + theme.primary
+        el.style.borderTop = '5px solid ' + theme.themes.light.colors.primary
       }
     }
 

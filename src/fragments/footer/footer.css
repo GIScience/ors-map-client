@@ -12,3 +12,7 @@ footer a {
   color: #cbcbcb;
   text-decoration: none;
 }
+
+.primary-color {
+  color: rgb(var(--v-theme-primary));
+}

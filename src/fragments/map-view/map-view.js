@@ -167,7 +167,7 @@ export default {
       mapDataBuilder: null,
       initialMaxZoom: appConfig.initialMapMaxZoom,
       localMapViewData: new MapViewData(), // we use a local copy of the mapViewData to be able to modify it
-      mainRouteColor: theme.primary,
+      mainRouteColor: theme.themes.light.colors.primary,
       alternativeRouteColor: constants.alternativeRouteColor,
       routeBackgroundColor: constants.routeBackgroundColor,
       guid: null,

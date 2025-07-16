@@ -49,7 +49,7 @@ export default {
     },
     color: {
       type: String,
-      default: theme.primary
+      default: theme.themes.light.colors.primary
     },
     backgroundColor: {
       type: String,

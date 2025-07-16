@@ -250,7 +250,7 @@ class AdminAreaLoader {
     }
     polygon = {geometry: {coordinates: flattenCoordinates}, type: polygon.type, properties: {}}
     polygon.properties.label = place.placeName
-    polygon.properties.color = theme.primary
+    polygon.properties.color = theme.themes.light.colors.primary
     polygon.properties.visible = true
     polygon.properties.fillColor = 'transparent'
     return polygon

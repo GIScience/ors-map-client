@@ -1,6 +1,6 @@
 <template>
   <v-app >
-    <v-progress-linear :indeterminate="true" class="progress-linear" :class="{'progress-linear-disabled': !showLoading}"></v-progress-linear>
+    <v-progress-linear color="primary" :indeterminate="true" class="progress-linear" :class="{'progress-linear-disabled': !showLoading}"></v-progress-linear>
     <app-toaster></app-toaster>
     <app-header :class="{'a11y' : $store.getters.mapSettings.accessibleModeActive}"></app-header>
     <v-main class="app-content" :class="{'a11y' : $store.getters.mapSettings.accessibleModeActive}">

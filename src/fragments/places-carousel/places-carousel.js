@@ -70,7 +70,7 @@ export default {
         navigation: {
           // when to show navigation
           start: 10000000, // define a very big value in order to avoid the navigation arrows to be shown. We are using custom navigation
-          color: theme.primary
+          color: theme.themes.light.colors.primary
         }
       }
     }
