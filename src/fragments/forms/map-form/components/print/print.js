@@ -91,13 +91,13 @@ export default {
       switch (this.localMapViewData.mode) {
         case constants.modes.directions:
         case constants.modes.roundTrip:
-          PrintTemplateClass = Vue.extend(PrintDirections)
+          PrintTemplateClass = PrintDirections
           break
         case constants.modes.place:
-          PrintTemplateClass = Vue.extend(PrintPlace)
+          PrintTemplateClass = PrintPlace
           break
         case constants.modes.isochrones:
-          PrintTemplateClass = Vue.extend(PrintIsochrones)
+          PrintTemplateClass = PrintIsochrones
           break
         default:
           break
@@ -112,7 +112,8 @@ export default {
         store: this.$store
       }
       const printingTemplate = new PrintTemplateClass(bidingData)
-      this.modePrintingHtml = printingTemplate.$mount().$el.innerHTML
+      const mounted = Vue.createApp(printingTemplate).mount()
+      this.modePrintingHtml = mounted.$el.innerHTML
     },
 
     /**

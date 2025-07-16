@@ -209,12 +209,12 @@ const geoUtils = {
     if (isRoute && index !== null) {
       propsData.markerNumber = Number(index) + 1
     }
-    const htmlMarkerClass = Vue.extend(HtmlMarker)
+    const htmlMarkerClass = HtmlMarker
     const htmlIconInstance = new htmlMarkerClass({
       propsData
     })
-    htmlIconInstance.$mount()
-    let markerHtml = htmlIconInstance.$el.innerHTML
+    const mounted = Vue.createApp(htmlIconInstance).mount()
+    let markerHtml = mounted.$el.innerHTML
 
     const markerIcon = Leaflet.divIcon({
       className: 'custom-div-icon',
