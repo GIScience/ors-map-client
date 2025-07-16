@@ -15,10 +15,10 @@
       <app-v-menu :item="subItem" :navigateFn="navigateFn" :itemClass="itemClass" :showIcon="false" :key="subItem.href" :showMenuItemFn="showMenuItem" ></app-v-menu>
     </v-list-item>
   </v-list-group>
-  <v-list-subheader :key="item.href" v-else-if="item.header && showMenuItem(item)"> {{ item.header }}</v-list-subheader>
-  <v-divider :key="item.href" v-else-if="item.divider && showMenuItem(item)"></v-divider>
+  <v-list-subheader :key="item.href+'header'" v-else-if="item.header && showMenuItem(item)"> {{ item.header }}</v-list-subheader>
+  <v-divider :key="item.href+'divider'" v-else-if="item.divider && showMenuItem(item)"></v-divider>
 
-  <v-list-item :key="item.href" v-else-if="showMenuItem(item)" class="v-menu-item" :class="itemClass" :target="item.target" :href="item.href" ripple v-bind:disabled="item.disabled"
+  <v-list-item :key="item.href+'item'" v-else-if="showMenuItem(item)" class="v-menu-item" :class="itemClass" :target="item.target" :href="item.href" ripple v-bind:disabled="item.disabled"
     :title="item.title">
     <v-list-item-action>
       <v-icon> {{ item.icon }} </v-icon>
