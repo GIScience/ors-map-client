@@ -4,7 +4,7 @@
       <template v-for="(polyline) in highlightedPolylines" v-bind:key="polyline.id">
         <l-polyline :lat-lngs="polyline.polylines" :weight="10" :color="'white'" :opacity="highlightedPolylines.length === 1 ? 1 : 0"></l-polyline>
         <l-polyline :lat-lngs="polyline.polylines" :weight="highlightedPolylines.length === 1 ? 6 : 4" :color="polyline.color">
-        <l-tooltip v-html="polyline.label"></l-tooltip>
+          <l-tooltip>{{polyline.label}}</l-tooltip>
       </l-polyline>
         <l-polyline :lat-lngs="polyline.polylines" :weight="2" :color="'white'" :opacity="highlightedPolylines.length === 1 ? 1 : 0" dash-array="1 4"></l-polyline>
       </template>

@@ -124,7 +124,8 @@
               </v-list-item-action>
               <div class="list-item-content">
                 <div class="list-item-title" :title="placeSuggested.placeName.trim()">
-                  <v-btn v-html="highlightedName(placeSuggested.placeName)" style="min-width: fit-content" variant="text" size="small" @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">
+                  <v-btn style="min-width: fit-content" variant="text" size="small" @click.stop="selectSuggestion(placeSuggested)" class="no-padding no-margin no-capitalize">
+                    {{highlightedName(placeSuggested.placeName)}}
                   </v-btn>
                 </div>
                 <div class="list-item-subtitle">
