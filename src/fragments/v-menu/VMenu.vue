@@ -1,5 +1,5 @@
 <template>
-  <v-list-group v-model="item.startOpen" v-if='item.items && showMenuItem(item)' :key="item.href" v-bind:group='item.group'>
+  <v-list-group v-model="item.startOpen" v-if='item.items && showMenuItem(item)' :key="item.href">
     <template v-slot:activator>
       <v-list-item :target="item.target" :href="item.href" class="v-menu-item" :class="itemClass" :title="item.title">
         <v-list-item-action>
