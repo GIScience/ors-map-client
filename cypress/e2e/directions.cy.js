@@ -101,7 +101,7 @@ describe('Directions component', () => {
       // shows the sidebar correctly
       cy.get('.sidebar-header')
       cy.get('.round-trip-btn')
-      cy.get('.round-trip-btn .opt-btn i.primary--text').should('have.css', 'color', 'rgb(198, 40, 40)') // TODO: use primary theme color variable
+      cy.get('.round-trip-btn .opt-btn i.text-primary').should('have.css', 'color', 'rgb(198, 40, 40)') // TODO: use primary theme color variable
       cy.get('.routes-header')
     })
   })
