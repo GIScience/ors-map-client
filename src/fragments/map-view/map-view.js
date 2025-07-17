@@ -60,7 +60,6 @@ import {get as lodash_get, find as lodash_find} from 'lodash'
 // Import leaflet-related styles
 // import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 // import 'leaflet-measure/dist/leaflet-measure.css'
-import 'leaflet/dist/leaflet.css'
 
 export default {
   components: {
@@ -86,6 +85,18 @@ export default {
     // MyLocation,
     // // LHeightGraph,
     // MapViewMarkers
+  },
+  emits: {
+    'zoomChanged': null,
+    'markerDragged': null,
+    'markerClicked': null,
+    'onCreate': null,
+    'mapCenterChanged': null,
+    'directionsFromPoint': null,
+    'directionsToPoint': null,
+    'addRouteStop': null,
+    'addDestinationToRoute': null,
+    'setInputPlace': null,
   },
   props: {
     mapViewData: {
