@@ -227,9 +227,14 @@ export default {
      * on the maxZoom
      * @returns {Number} zoom
      */
-    zoom () {
-      const zoom = this.zoomLevel > 0 ? this.zoomLevel : this.maxZoom
-      return zoom
+    zoom: {
+      get() {
+        const zoom = this.zoomLevel > 0 ? this.zoomLevel : this.maxZoom
+        return zoom
+      },
+      set(val) {
+        this.zoomLevel = val > this.maxZoom ? this.maxZoom : val
+      }
     },
 
     /**
