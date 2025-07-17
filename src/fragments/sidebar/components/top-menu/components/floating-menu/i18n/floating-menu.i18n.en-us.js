@@ -1,6 +1,6 @@
 export default {
   floatingTopMenu: {
-    openSettings: 'Settings',
+    settings: 'Settings',
     showAbout: 'Show general information',
     about: 'About ORS',
     openrouteserviceAPI: 'Openrouteservice API',

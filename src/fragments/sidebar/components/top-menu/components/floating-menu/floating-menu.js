@@ -33,8 +33,8 @@ export default {
           id: 'settings',
           show: this.showSettings,
           emitEvent: 'showSettingsModal',
-          title: this.$t('floatingTopMenu.openSettings'),
-          text: this.$t('floatingTopMenu.openSettings'),
+          title: this.$t('floatingTopMenu.settings'),
+          text: this.$t('floatingTopMenu.settings'),
           icon: 'settings',
         },
         {
@@ -42,7 +42,7 @@ export default {
           show: true,
           emitEvent: 'showAboutModal',
           title: this.$t('floatingTopMenu.about'),
-          text: this.$t('floatingTopMenu.showAbout'),
+          text: this.$t('floatingTopMenu.about'),
           icon: 'info'
         },
         {

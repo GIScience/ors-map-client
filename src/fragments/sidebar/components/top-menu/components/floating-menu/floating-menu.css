@@ -1,14 +1,12 @@
-.info-menu.v-btn__content {
-  padding: 0;
-}
-
 .info-menu .v-btn {
   min-width: 0;
+  text-align: left;
+  margin: 5px 0;
 }
 
 .floating-item {
   text-transform: none;
-  padding-left: 0
+  letter-spacing: normal;
 }
 
 .info-button {

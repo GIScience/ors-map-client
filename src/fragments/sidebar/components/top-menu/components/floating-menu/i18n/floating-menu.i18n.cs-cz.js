@@ -1,6 +1,6 @@
 export default {
   floatingTopMenu: {
-    openSettings: 'Nastavení',
+    settings: 'Nastavení',
     showAbout: 'Zobrazit obecné informace',
     about: 'O ORS',
     openrouteserviceAPI: 'Openrouteservice API',

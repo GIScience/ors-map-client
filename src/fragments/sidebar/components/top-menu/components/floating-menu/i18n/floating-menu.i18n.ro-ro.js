@@ -1,6 +1,6 @@
 export default {
   floatingTopMenu: {
-    openSettings: 'Setări',
+    settings: 'Setări',
     about: 'Despre ORS',
     openrouteserviceAPI: 'Openrouteservice API',
     openrouteserviceForDisasters: 'Openrouteservice pentru dezastre',

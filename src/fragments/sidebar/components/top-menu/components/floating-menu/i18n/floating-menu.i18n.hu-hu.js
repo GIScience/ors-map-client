@@ -1,6 +1,6 @@
 export default {
   floatingTopMenu: {
-    'openSettings': 'Beállítások',
+    'settings': 'Beállítások',
     'showAbout': 'Általános információk megjelenítése',
     'about': 'Az ORS névjegye',
     'openrouteserviceAPI': 'Az Openrouteservice API',
