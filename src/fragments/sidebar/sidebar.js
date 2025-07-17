@@ -16,8 +16,19 @@ export default {
       fixed: false,
       menuItems: [],
       subMenuOpen: [],
-      activeTab: '0'
+      activeTab: '0',
+      mdAndDown: false,
+      mdAndUp: false,
+      smAndDown: false,
+      lgAndUp: true,
     }
+  },
+  mounted() {
+    const {mdAndUp, mdAndDown, smAndDown, lgAndUp} = this.$vuetify.display
+    this.mdAndDown = mdAndDown
+    this.mdAndUp = mdAndUp
+    this.smAndDown = smAndDown
+    this.lgAndUp = lgAndUp
   },
   computed: {
     isSideBarOpen: {

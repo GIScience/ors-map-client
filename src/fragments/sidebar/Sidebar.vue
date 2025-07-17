@@ -8,7 +8,7 @@
       disable-resize-watcher
       :width="$mdAndUpResolution ? $store.getters.sidebarFullWidth : $store.getters.sidebarShrunkWidth"
       :permanent="$store.getters.leftSideBarPinned"
-      :class="{'auto-height': $lowResolution && !$store.getters.leftSideBarPinned, 'full-height': $store.getters.leftSideBarPinned}">
+      :class="{'auto-height': smAndDown && !$store.getters.leftSideBarPinned, 'full-height': $store.getters.leftSideBarPinned}">
 
       <div class="sidebar-header" :style="{height: $store.getters.sidebarHeaderHeight + 'px'}">
         <v-row class="sidebar-header-top" no-gutters>
@@ -29,7 +29,7 @@
       <div class="sidebar-content" :style="{height: sidebarContentHeightFormula}">
         <div class="sidebar-content-form" :style="{'padding-bottom': $store.getters.footerHeight + 'px'}">
           <map-form v-if="$store.getters.mapReady" class="map-search"></map-form>
-          <v-expansion-panels v-if="!$highResolution">
+          <v-expansion-panels v-if="!lgAndUp">
             <v-expansion-panel :value="null" style="background: transparent;">
               <v-expansion-panel-title>Menu</v-expansion-panel-title>
               <v-expansion-panel-text>
@@ -48,10 +48,10 @@
         <app-footer></app-footer>
       </div>
     </v-navigation-drawer>
-    <v-btn size="small" v-if="isSideBarOpen && $highResolution" :title="$t('sidebar.hideSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen, 'low-res': $lowResolution}" @click.stop="isSideBarOpen = false"
+    <v-btn size="small" v-if="isSideBarOpen && lgAndUp" :title="$t('sidebar.hideSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen, 'low-res': smAndDown}" @click.stop="isSideBarOpen = false"
       :icon="isSideBarOpen ? 'keyboard_arrow_left' : 'keyboard_arrow_right'">
     </v-btn>
-    <v-btn size="small" v-else-if="!isSideBarOpen && !$lowResolution && !$store.getters.embed" :title="$t('sidebar.showSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen}" @click.stop="isSideBarOpen = true"
+    <v-btn size="small" v-else-if="!isSideBarOpen && !smAndDown && !$store.getters.embed" :title="$t('sidebar.showSidebar')" class="toggle-sidebar" :class="{'hidden': !isSideBarOpen}" @click.stop="isSideBarOpen = true"
       :icon="isSideBarOpen ? 'keyboard_arrow_left' : 'keyboard_arrow_right'">
     </v-btn>
   </div>

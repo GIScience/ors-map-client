@@ -5,7 +5,10 @@ import {EventBus} from '@/common/event-bus'
 export default {
   data () {
     return {
-      settingsTooltipClicked: false
+      settingsTooltipClicked: false,
+      mdAndDown: false,
+      mdAndUp: true,
+      smAndDown: false,
     }
   },
   computed: {
@@ -17,6 +20,12 @@ export default {
       let show = !this.settingsTooltipClicked && this.$store.getters.isSidebarVisible
       return show
     }
+  },
+  mounted () {
+    const {mdAndUp, mdAndDown, smAndDown} = this.$vuetify.display
+    this.mdAndDown = mdAndDown
+    this.mdAndUp = mdAndUp
+    this.smAndDown = smAndDown
   },
   methods: {
     toggleSidebarIsPinned () {
