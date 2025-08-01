@@ -4,9 +4,6 @@
 
 .profile-option-btn {
   min-width: 35px;
-  margin-bottom: 5px;
-  padding-left: 8px;
-  padding-right: 5px;
 }
 
 .profile-option-btn::before {
