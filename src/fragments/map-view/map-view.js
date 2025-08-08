@@ -1025,29 +1025,29 @@ export default {
      * @stores mapBounds
      */
     storeMapBoundsAndSetMapAsReady () {
-      // const buildBoundaries = (bounds) => {
-      //   const boundary = {
-      //     rect: {
-      //       min_lon: bounds._southWest.lng,
-      //       max_lon: bounds._northEast.lng,
-      //       min_lat: bounds._southWest.lat,
-      //       max_lat: bounds._northEast.lat
-      //     }
-      //   }
-      //
-      //   return boundary
-      // }
-      // this.getMapObject().then((map) => {
-      //   const bounds = map.getBounds()
-      //   const mapBounds = buildBoundaries(bounds)
-      //   let newBounds = JSON.stringify(bounds)
-      //   let oldBounds = JSON.stringify(this.$store.getters.mapBounds)
-      //   if (newBounds !== oldBounds) {
-      //     this.$store.commit('mapBounds', mapBounds)
-      //     this.$root.appHooks.run('mapBoundsChanged', {mapBounds, map: map, context: this})
-      //   }
-      //   this.$emit('mapReady', map)
-      // })
+      const buildBoundaries = (bounds) => {
+        const boundary = {
+          rect: {
+            min_lon: bounds._southWest.lng,
+            max_lon: bounds._northEast.lng,
+            min_lat: bounds._southWest.lat,
+            max_lat: bounds._northEast.lat
+          }
+        }
+
+        return boundary
+      }
+      this.getMapObject().then((map) => {
+        const bounds = map.getBounds()
+        const mapBounds = buildBoundaries(bounds)
+        let newBounds = JSON.stringify(bounds)
+        let oldBounds = JSON.stringify(this.$store.getters.mapBounds)
+        if (newBounds !== oldBounds) {
+          this.$store.commit('mapBounds', mapBounds)
+          this.$appHooks.run('mapBoundsChanged', {mapBounds, map: map, context: this})
+        }
+        this.$emit('mapReady', map)
+      })
     },
 
     /**
@@ -1539,7 +1539,7 @@ export default {
           resolve(context.map)
         } else {
           context.$nextTick(() => {
-            context.map = context.$refs.map.mapObject
+            context.map = context.$refs.map.leafletObject
             resolve(context.map)
           })
         }
@@ -1999,7 +1999,6 @@ export default {
     // Once the map component is mounted, load the map data
     this.loadMapData()
     this.setDrawingTool()
-    this.storeMapBoundsAndSetMapAsReady()
   },
   /**
    * Set the local showClickPopups value

@@ -3,6 +3,7 @@
     <l-map
       :id="constants.mapViewElementId"
       ref="map"
+      @ready="storeMapBoundsAndSetMapAsReady"
       :use-global-leaflet="false"
       :class="'map-view'"
       v-model:zoom="zoom" :center="[49.510944, 8.76709]">
