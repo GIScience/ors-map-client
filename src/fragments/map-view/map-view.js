@@ -97,6 +97,7 @@ export default {
     'addRouteStop': null,
     'addDestinationToRoute': null,
     'setInputPlace': null,
+    'mapReady': null,
   },
   props: {
     mapViewData: {
