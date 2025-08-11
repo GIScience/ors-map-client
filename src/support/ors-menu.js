@@ -34,7 +34,6 @@ const loginMenuItem = {
  */
 const runORSMenuCustomization = (menu) => {
   for (const key in menu) {
-    menu[key] = menuManager.addBaseExternalUrl(menu[key])
     menu[key].target = '_blank'
   }
 

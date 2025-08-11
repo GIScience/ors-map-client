@@ -10,7 +10,7 @@ import store from '@/store/store'
 const loadItems = () => {
   return new Promise((resolve) => {
     if (appConfig.appMenu.useORSMenu) {
-      menuManager.getMenu(appConfig.appMenu.mainMenuId).then((menu) => {
+      menuManager.getMenu().then((menu) => {
         resolve(menu)
       }).catch(error => {
         console.error(error)

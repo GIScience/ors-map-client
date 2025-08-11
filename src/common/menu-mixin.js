@@ -4,14 +4,10 @@ import router from '@/router/index'
 const showMenuItem = function (item) {
   // a custom show menu item function can be passed
   // if passed, use the custom one. If not, use the default
-  if (this.showMenuItemFn) {
-    return this.showMenuItemFn(item)
+  if (store.getters.isAuthenticated) {
+    return !item.requiresNotBeAuthenticated
   } else {
-    if (store.getters.isAuthenticated) {
-      return !item.requiresNotBeAuthenticated
-    } else {
-      return !item.requiresBeAuthenticated
-    }
+    return !item.requiresBeAuthenticated
   }
 }
 const navigate = function (to) {

@@ -17,9 +17,6 @@ const appConfig = {
   maxPlaceInputs: 50, // The ORS API support max 50 points
   appMenu: {
     useORSMenu: true, // If the default ORS menu must be used
-    mainMenuId: 'primary_menu',// only necessary if useORSMenu is true
-    menuServiceEndpoint: 'wp-api-menus/v2/menus',// only necessary if useORSMenu is true
-    menuPrimaryKeyField: 'term_id', // Only necessary if useORSMenu is true
     setCustomMenuIcons: true, // If the icons of the menu loaded must be customized via (only necessary if useORSMenu is true)
     baseMenuExternalUrl: 'https://openrouteservice.org' // The base url to retrieve the menu items
   },
