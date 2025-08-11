@@ -70,6 +70,9 @@ export default {
           context.parseSegments(route.properties.segments)
           this.localMapViewData.routes[key].summary = route.summary
         }
+        if (route.properties.extras?.['waytypes']) {
+          delete Object.assign(route.properties.extras, {['waytype']: route.properties.extras['waytypes'] })['waytypes']
+        }
         routes.push(route)
       }
       return routes
