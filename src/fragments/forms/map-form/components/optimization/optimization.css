@@ -1,0 +1,53 @@
+.optimization-heading {
+  font-size: medium;
+  padding: 10px 10px 0 10px;
+  font-weight: bold;
+  border-bottom: 1px solid #cbced1;
+}
+
+.hide-button {
+  padding: 0;
+  float: right;
+  margin-right: 20px
+}
+
+ul.job-inputs li {
+  list-style: none;
+}
+
+ul.job-inputs {
+  padding: 10px 0;
+}
+
+ul.vehicle-inputs li {
+  list-style: none;
+}
+
+ul.vehicle-inputs {
+  padding: 10px 0;
+}
+
+.route-btn {
+  float: right;
+  margin-right: 8px;
+  margin-top: 4px;
+}
+
+.skill-opt-btn {
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 3px
+}
+.skill-btn-legend {
+  font-size: 9px;
+  text-align: center;
+  word-break: break-word;
+  max-width: 58px;
+  margin-left: 0;
+}
+
+.content-list {
+  box-shadow: none;
+  border-bottom: 2px solid #c62828;
+}

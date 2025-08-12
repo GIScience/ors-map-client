@@ -69,6 +69,8 @@ const routeData = {
           return 'pois'
         case '/matrix':
           return 'matrix'
+        case '/optimization':
+          return 'optimization'
       }
     }
   }

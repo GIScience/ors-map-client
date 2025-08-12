@@ -2,6 +2,7 @@ export default {
   placeInput: {
     findAPlace: 'Găsiți un loc',
     place: 'Locul',
+    location: 'Location',
     addRouteStop: 'Adăugați o oprire pe traseu',
     routePlace: 'Oprire traseu',
     routeDestination: 'Destinație',

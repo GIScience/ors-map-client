@@ -39,10 +39,12 @@ const appConfig = {
 
   autoSelectFirstExactAddressMatchOnSearchEnter: true, // If the first exact address match must be auto selected when the user type a text and in the place search and hit enter/return
 
+  disabledActionsForOptimization: ['addPlaceInput', 'roundtrip', 'routeImporter'], // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
   disabledActionsForIsochrones: ['roundtrip'], // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
   disabledActionsForPlacesAndDirections: [], // // Possible values: `addPlaceInput`, `clearPlaces`, `reverseRoute`, `roundtrip`, `routeImporter`
   supportsPlacesAndDirections: true, // If the whole places and directions feature is supported/enabled in the application
   supportsIsochrones: true, // If isochrones is supported/enabled in the application
+  supportsOptimization: true, // If optimization is enabled
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
   supportsDirections: true, // If the directions functionality is available
   sidebarStartsOpenInHighResolution: false, // if the sidebar must start open in high resolution

@@ -3,6 +3,7 @@ export default {
   placeInput: {
     'findAPlace': 'Hely keresése',
     'place': 'Hely',
+    'location': 'Location',
     'addRouteStop': 'Köztes úticél hozzáadása',
     'routePlace': 'Köztes úticél',
     'routeDestination': 'Úticél',

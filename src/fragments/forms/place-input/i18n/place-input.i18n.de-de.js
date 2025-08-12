@@ -3,6 +3,7 @@ export default {
   placeInput: {
     findAPlace: 'Ort finden',
     place: 'Ort',
+    location: 'Standort',
     addRouteStop: 'Wegpunkt hinzufügen',
     routePlace: 'Wegpunkt',
     routeDestination: 'Ziel',

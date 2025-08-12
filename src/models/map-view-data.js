@@ -1,6 +1,8 @@
 import constants from '@/resources/constants'
 import utils from '@/support/utils'
 import Place from '@/models/place'
+import Job from '@/models/job'
+import Vehicle from '@/models/vehicle'
 
 /**
  * MapViewData class
@@ -9,10 +11,12 @@ class MapViewData {
   /**
    * MapViewData constructor
    */
-  constructor ({places = []} = {}) {
+  constructor ({places = [], jobs = [], vehicles = []} = {}) {
     this.polygons = []
     this.options = {} // {origin: String, apiVersion: String, contentType: String, timestamp: timestamp, options: {avoid_polygons: Object, avoid_features: Array}},
     this.places = places ? Place.placesFromFeatures(places) : [] // array of Place objects @see /src/models/place
+    this.jobs = jobs ? Job.jobsFromFeatures(jobs) : [] // array of Job objects @see /src/models/job
+    this.vehicles = vehicles ? Vehicle.vehiclesFromFeatures(vehicles) : [] // array of Vehicle objects @see /src/models/vehicle
     this.pois = [] // array of Place objects @see /src/models/place
     this.routes = [] // array of route objects containing route data and summary
     this.origin = 'response' // where the data comes from
@@ -76,6 +80,20 @@ class MapViewData {
       }
     }
 
+    for (let i = 0; i < this.jobs.length; i++) {
+      if (this.jobs[i] instanceof Job) {
+        const job = this.jobs[i]
+        mapViewDataClone.jobs.push(job.clone())
+      }
+    }
+
+    for (let i = 0; i < this.vehicles.length; i++) {
+      if (this.vehicles[i] instanceof Vehicle) {
+        const vehicle = this.vehicles[i]
+        mapViewDataClone.vehicles.push(vehicle.clone())
+      }
+    }
+
     for (let k = 0; k < this.pois.length; k++) {
       if (this.pois[k] instanceof Place) {
         const place = this.pois[k]
@@ -92,7 +110,7 @@ class MapViewData {
    * @returns {MapViewData} mapViewAta
    */
   static buildFromGeoJson (geoJson) {
-    const mapViewAta = new MapViewData()
+    const mapViewData = new MapViewData()
 
     for (const fKey in geoJson.features) {
       const feature = {
@@ -103,22 +121,26 @@ class MapViewData {
       }
       switch (geoJson.features[fKey].geometry.type) {
         case 'LineString':
-          mapViewAta.routes.push(feature)
+          mapViewData.routes.push(feature)
           break
         case 'Point': {
-          const lat = feature.geometry.coordinates[0]
-          const lon = feature.geometry.coordinates[1]
-          const place = new Place(lat, lon, feature.properties.label, { properties: feature.properties })
-          feature.latlngs = feature.geometry.coordinates
-          mapViewAta.places.push(place)
+          if (feature.properties.label.includes('Job')) {
+            mapViewData.jobs.push(Job.fromGeoJsonObject(feature))
+          } else {
+            mapViewData.places.push(Place.fromGeoJsonObject(feature))
+            feature.latlngs = feature.geometry.coordinates
+          }
           break
         }
+        case 'MultiPoint':
+          mapViewData.vehicles.push(Vehicle.fromGeoJsonObject(feature))
+          break
         case 'Polygon':
-          mapViewAta.polygons.push(feature)
+          mapViewData.polygons.push(feature)
           break
       }
     }
-    return mapViewAta
+    return mapViewData
   }
 
   /**
@@ -164,6 +186,14 @@ class MapViewData {
         geometry: polygon.geometry
       }
       geoJsonData.features.push(polygonFeature)
+    }
+
+    for (const jobKey in this.jobs) {
+      geoJsonData.features.push(this.jobs[jobKey].toGeoJSON())
+    }
+
+    for (const vKey in this.vehicles) {
+      geoJsonData.features.push(this.vehicles[vKey].toGeoJSON())
     }
 
     // Return GeoJSON with features

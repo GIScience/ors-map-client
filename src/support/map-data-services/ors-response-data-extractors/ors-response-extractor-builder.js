@@ -3,6 +3,7 @@ import GeocodeSearchBuilderV2 from './response-extractors/v2/geocode-search'
 import GeocodeReverseBuilderV2 from './response-extractors/v2/geocode-reverse'
 import IsochronesBuilderV2 from './response-extractors/v2/isochrones'
 import PoisBuilderV2 from './response-extractors/v2/pois'
+import OptimizationBuilderV2 from './response-extractors/v2/optimization'
 
 /**
  * Map data Builder class
@@ -45,6 +46,8 @@ class OrsResponseExtractorBuilder {
         return OrsResponseExtractorBuilder.getMapDataExtractor('IsochronesBuilder', data, apiVersion)
       case 'pois':
         return OrsResponseExtractorBuilder.getMapDataExtractor('PoisBuilder', data, apiVersion)
+      case 'optimization':
+        return OrsResponseExtractorBuilder.getMapDataExtractor('OptimizationBuilder', data, apiVersion)
     }
   }
 
@@ -70,7 +73,8 @@ class OrsResponseExtractorBuilder {
       GeocodeSearchBuilderV2,
       GeocodeReverseBuilderV2,
       IsochronesBuilderV2,
-      PoisBuilderV2
+      PoisBuilderV2,
+      OptimizationBuilderV2
       // we can add more versions here in the future
     }
 

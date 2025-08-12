@@ -88,27 +88,11 @@ class Place {
   }
 
   /**
-   * Returns an array containing lat and lng
-   * @returns {Array} containing [lat, lng]
-   */
-  getLatLngArr() {
-    return this.getLngLatArr().reverse()
-  }
-
-  /**
    * Set the suggestions
    * @param {Array} places
    */
   setSuggestions(places) {
     this.suggestions = places
-  }
-
-  /**
-   * Set the place id
-   * @param {*} id
-   */
-  setId(id) {
-    this.placeId = id
   }
 
   isEmpty() {
@@ -225,6 +209,17 @@ class Place {
         reject(response)
       })
     })
+  }
+
+  static fromJob(job) {
+    return new Place(job.location[0], job.location[1], '', {
+      placeId: job.id
+    })
+  }
+
+  static fromGeoJsonObject(placeObject) {
+    return new Place(placeObject.geometry.coordinates[0], placeObject.geometry.coordinates[1],
+      placeObject.properties.label, { properties: placeObject.properties })
   }
 
   /**
