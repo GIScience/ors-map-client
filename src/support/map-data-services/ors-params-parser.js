@@ -42,7 +42,7 @@ const orsParamsParser = {
       size: 8,
       focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng],
       // Use GeoJSON Region as bbox
-      boundary_bbox : [[region_bbox[0], region_bbox[1]], [region_bbox[2], region_bbox[3]]]
+      boundary_bbox: [[region_bbox._southWest.lng, region_bbox._southWest.lat], [region_bbox._northEast.lng, region_bbox._northEast.lat]]
     }
     // If is set to restrict the search to current mapBounds,
     // then apply the restriction
@@ -66,7 +66,7 @@ const orsParamsParser = {
    * Get current bbox based on the stored map bounds
    * @returns {Array} bbox
    */
-  getCurrentBbox () {
+  getCurrentBbox() {
     if (!store.getters.mapBounds) {
       return false
     }
@@ -166,7 +166,7 @@ const orsParamsParser = {
       const args = {
         locations: locations,
         area_units: store.getters.mapSettings.unit,
-        attributes:['total_pop']
+        attributes: ['total_pop']
       }
       // Add the filters defined in the ORS filters that are manipulated
       // directly by external components
@@ -192,7 +192,7 @@ const orsParamsParser = {
       if (promiseOrArgs instanceof Promise) {
         promiseOrArgs.then((promiseArgs) => {
           resolve(promiseArgs)
-        }).catch (err => {
+        }).catch(err => {
           console.error(err)
         })
       } else { // returned value is already an args object
@@ -232,7 +232,7 @@ const orsParamsParser = {
       let skipSegments = []
       for (let pIndex in places) {
         if (places[pIndex].direct) {
-          let segment = Number(pIndex) +1
+          let segment = Number(pIndex) + 1
           skipSegments.push(segment)
         }
       }
@@ -246,8 +246,8 @@ const orsParamsParser = {
       // if we have more than 2 places, we need to remove the alternative_route filter
       if (places.length > 2) {
         if (alternativeRoutesIndex !== -1) {
-        //   delete alternative_routes from OrsMapFilters
-        //     OrsMapFilters.splice(index, 1)
+          //   delete alternative_routes from OrsMapFilters
+          //     OrsMapFilters.splice(index, 1)
           const targetCountIndex = lodash.findIndex(OrsMapFilters[alternativeRoutesIndex].props, (f) => {
             return f.name === 'target_count'
           })
@@ -272,7 +272,7 @@ const orsParamsParser = {
       if (promiseOrArgs instanceof Promise) {
         promiseOrArgs.then((promiseArgs) => {
           resolve(promiseArgs)
-        }).catch (err => {
+        }).catch(err => {
           console.error(err)
         })
       } else { // returned value is already an args object
@@ -286,7 +286,7 @@ const orsParamsParser = {
    * Get active profile form OrsMapFilter
    * @returns {Object}
    */
-  getActiveProfileObj () {
+  getActiveProfileObj() {
     const profileFilterRef = OrsFilterUtil.getFilterRefByName(constants.profileFilterName)
     let activeProfileObj = profileFilterRef.mapping[profileFilterRef.value]
 
@@ -315,7 +315,7 @@ const orsParamsParser = {
    * @param {Object} mapSettings
    * @returns {Array} extraInfo
    */
-  buildExtraInfoOptions (mapSettings) {
+  buildExtraInfoOptions(mapSettings) {
     const extraInfo = []
 
     let profileObj = orsParamsParser.getActiveProfileObj()
@@ -382,7 +382,7 @@ const orsParamsParser = {
    * @returns {Array} intoArgs
    * @uses store.getters.mode
    */
-  setFilters (intoArgs, sourceFilters, service) {
+  setFilters(intoArgs, sourceFilters, service) {
     for (const key in sourceFilters) {
       const filter = sourceFilters[key]
       // Define if the current filter is available fot the current app mode
@@ -419,7 +419,7 @@ const orsParamsParser = {
    * @param {*} intoArgs
    * @hook mapFilterAdded
    */
-  setFilterVal (filter, filterValue, intoArgs) {
+  setFilterVal(filter, filterValue, intoArgs) {
     let filterName = filter.internalName || filter.name
     // If the parent is a wrapping object, and it is already defined in intoArgs, add it to the object
     if (filter.type === constants.filterTypes.wrapper && typeof intoArgs[filterName] !== 'undefined') {
@@ -441,7 +441,7 @@ const orsParamsParser = {
    * @param {*} filterValue
    * @returns {Boolean}
    */
-  isFilterValueValid (filter, filterValue) {
+  isFilterValueValid(filter, filterValue) {
     return filterValue !== '' && filterValue !== undefined && filterValue !== null && filterValue !== '{}' && (typeof filterValue !== 'object' || Object.keys(filterValue).length > 0)
   },
 
@@ -455,7 +455,7 @@ const orsParamsParser = {
    * @param {String|Object} adding an object or string representing an object that will be merged to a parent object
    * @returns {String} representing a stringified object
    */
-  getMergedParameterValues (current, adding) {
+  getMergedParameterValues(current, adding) {
     const addingParsedJson = typeof adding === 'string' ? Utils.tryParseJson(adding) : adding
 
     // If we want to add a stringified object
@@ -484,7 +484,7 @@ const orsParamsParser = {
    * @param {*} filtersInto
    * @param {*} options
    */
-  parseOptions (filtersInto, options) {
+  parseOptions(filtersInto, options) {
     for (const key in options) {
       for (const filtersKey in filtersInto) {
         const filter = filtersInto[filtersKey]
@@ -521,7 +521,7 @@ const orsParamsParser = {
    * @param {Object} filter
    * @param {*} paramValue
    */
-  setFilterValueFromParam (filter, paramValue) {
+  setFilterValueFromParam(filter, paramValue) {
     if (filter.type === constants.filterTypes.wrapper && filter.props && typeof paramValue === 'object') {
       for (const propKey in filter.props) {
         const prop = filter.props[propKey]
