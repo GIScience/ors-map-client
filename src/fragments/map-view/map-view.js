@@ -1144,17 +1144,17 @@ export default {
      * @returns {Array} polylineData
      */
     buildExtraInfoBoundsPolyline() {
-      return [] // todo: this raises errors but seems unneeded
-      // let polylineData = []
-      // const coordinates = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
-      // const highlightData = routeData.buildHighlightedPolylines(coordinates, this.extraInfo)
-      // for (const highlightDatum of highlightData) {
-      //   let polylines = highlightDatum.polylines
-      //   for (const polyline of polylines) {
-      //     polylineData = polylineData.concat(polyline)
-      //   }
-      // }
-      // return polylineData
+      if (this.localMapViewData.routes.length === 0) return []
+      let polylineData = []
+      const coordinates = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
+      const highlightData = routeData.buildHighlightedPolylines(coordinates, this.extraInfo)
+      for (const highlightDatum of highlightData) {
+        let polylines = highlightDatum.polylines
+        for (const polyline of polylines) {
+          polylineData = polylineData.concat(polyline)
+        }
+      }
+      return polylineData
     },
     /**
      * Make sure the active route index is valid
