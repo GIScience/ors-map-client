@@ -248,6 +248,9 @@ export default {
         const appMode = new AppMode(this.$store.getters.mode)
         let places = this.getCurrentMapPlaces()
         const route = appMode.getRoute(places, {zoom: data.zoom})
+        route.query = {
+          ...this.$route.query
+        }
         if (route.params && Object.keys(route.params).length > 0) { // params contains data and placeName? props
           this.$router.push(route)
         }
@@ -295,6 +298,9 @@ export default {
         const appMode = new AppMode(this.$store.getters.mode)
         let places = this.getCurrentMapPlaces()
         const route = appMode.getRoute(places, {zoom: data.zoom})
+        route.query = {
+          ...this.$route.query
+        }
         if (route.params && Object.keys(route.params).length > 0) { // params contains data and placeName? props
           this.$router.push(route)
         }
@@ -454,7 +460,11 @@ export default {
       if (this.$store.getters.mode !== constants.modes.pageNotFound) {
         appRouteData = AppMode.decodePath(this.$route)
         if (appRouteData === false) { // if there is no app route data, load default state
-          this.$router.push({name: 'Maps'})
+          this.$router.push({
+            name: 'Maps', query: {
+              ...this.$route.query
+            }
+          })
         } else {
           // TODO: When the zoom changes, the map moves a bit!
           this.$store.commit('appRouteData', appRouteData)
@@ -535,6 +545,9 @@ export default {
 
       // Define new app route
       const route = appMode.getRoute([place])
+      route.query = {
+        ...this.$route.query
+      }
       this.$store.commit('cleanMap', this.$store.getters.appRouteData.places.length === 0)
       this.$router.push(route)
       this.$store.commit('setLeftSideBarIsOpen', true)
@@ -584,7 +597,11 @@ export default {
       this.isSettingsOpen = false
       if (this.$route.name === 'MapSettings') {
         this.$store.commit('cleanMap', true)
-        this.$router.push({ name: 'Maps' })
+        this.$router.push({
+          name: 'Maps', query: {
+            ...this.$route.query
+          }
+        })
       }
     },
     /**
@@ -597,7 +614,13 @@ export default {
       this.isAboutOpen = false
       if (this.$route.name === 'MapAbout') {
         this.$store.commit('cleanMap', true)
-        this.$router.push({ name: 'Maps' })
+        this.$router.push({
+          name: 'Maps',
+          query: {
+            ...this.$route.query,
+          }
+        })
+
       }
     },
     /**

@@ -1,0 +1,11 @@
+.container {
+  position: absolute;
+  bottom: 2rem;
+  z-index: 9999;
+  left: 33.333%;
+  width: 33.333%;
+  min-width: 300px;
+  background-color: #fff;
+  border: 5px solid #ccc;
+  border-radius: 30px;
+}

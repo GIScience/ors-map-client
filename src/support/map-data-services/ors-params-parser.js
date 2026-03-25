@@ -6,22 +6,24 @@ import AppLoader from '@/app-loader'
 import Utils from '@/support/utils'
 import store from '@/store/store'
 import lodash from 'lodash'
+import appConfig from '@/config/app-config'
+import Leaflet from 'leaflet'
+import {EventBus} from '@/common/event-bus'
+
 
 let region_bbox = []
+EventBus.$on('city-change', (path) => {
+  const region = JSON.parse(require(`@/assets/aois/${path}.geojson`))
+
+  region_bbox = Leaflet.geoJSON(region).getBounds()
+})
 try {
-  fetch('/static/config/region-of-interest.json').then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`)
-    }
-    return response.json()
-  })
-    .then(data => {
-      region_bbox = data['bbox']
-    })
-    .catch(err => {
-      this.error = err.message
-      console.error('Error loading region config:', err)
-    })
+  const urlParams = new URLSearchParams(window.location.search)
+  const state = urlParams.get('state') || appConfig.defaultState
+  const city = urlParams.get('city') || appConfig.defaultCity
+  const region = JSON.parse(require(`@/assets/aois/${state}/${city}.geojson`))
+
+  region_bbox = Leaflet.geoJSON(region).getBounds()
 } catch (e) {
   console.error('Error loading region config:', e)
 }

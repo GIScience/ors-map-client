@@ -7,6 +7,7 @@ import Info from '@/fragments/dialogs/info/Info'
 import MainMenu from '@/common/main-menu'
 import utils from '@/support/utils'
 import {EventBus} from '@/common/event-bus'
+import CitySelector from '@/fragments/city-selector/CitySelector.vue';
 
 
 export default {
@@ -23,7 +24,8 @@ export default {
     appFooter: Footer,
     appToaster: Toaster,
     appConfirm: Confirm,
-    appInfo: Info
+    appInfo: Info,
+    appCitySelector: CitySelector
   },
   created () {
     // Register the listener for the showLoading and titleChanged events

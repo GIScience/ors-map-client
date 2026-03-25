@@ -42,3 +42,6 @@ yarn-error.log*
 /cypress/downloads/
 /index.html
 /nginx/
+
+# aois geojsons:
+/src/assets/aois/*

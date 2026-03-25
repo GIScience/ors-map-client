@@ -11,7 +11,6 @@ import store from '@/store/store'
 import router from '@/router'
 import lodash from 'lodash'
 import Vue from 'vue'
-import {getKeyObject} from '@/support/appwrite-utils'
 
 class AppLoader {
   constructor() {
@@ -52,17 +51,6 @@ class AppLoader {
           appConfig.orsApiKey = ORSKEY
         }
         this.setInitialSettings(appConfig.orsApiKey, constants.endpoints)
-      } else {
-        try {
-          let key_object = await getKeyObject()
-          this.setInitialSettings(key_object['key'], constants.publicEndpoints)
-        } catch (error) {
-          console.log(error.code)
-          console.log(error.type)
-          console.log(error.message)
-          throw error
-        }
-
       }
     }
   }

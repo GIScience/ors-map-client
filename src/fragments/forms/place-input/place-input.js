@@ -646,6 +646,9 @@ export default {
         this.$store.commit('mode', constants.modes.search)
         const appMode = new AppMode(this.$store.getters.mode)
         const route = appMode.getRoute([this.localModel])
+        route.query = {
+          ...this.$route.query
+        }
         this.$router.push(route)
       }
     },
