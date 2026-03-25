@@ -1111,6 +1111,7 @@ export default {
 
       if (this.extraInfo) {
         polylineData = this.buildExtraInfoBoundsPolyline()
+        if (polylineData.length===0) return
         this.dataBounds = GeoUtils.getBounds([], polylineData)
       } else {
         // Add the routes coordinates to the polyline that must
@@ -1144,7 +1145,12 @@ export default {
      * @returns {Array} polylineData
      */
     buildExtraInfoBoundsPolyline() {
-      if (this.localMapViewData.routes.length === 0) return []
+      if (this.localMapViewData.routes.length === 0) {
+        this.refreshMapViewData()
+        if (this.localMapViewData.routes.length === 0) {
+          return []
+        }
+      }
       let polylineData = []
       const coordinates = this.localMapViewData.routes[this.$store.getters.activeRouteIndex].geometry.coordinates
       const highlightData = routeData.buildHighlightedPolylines(coordinates, this.extraInfo)
