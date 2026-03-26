@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "heal-map-client.fullname" . }}
+  labels:
+    {{- include "heal-map-client.labels" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "heal-map-client.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
