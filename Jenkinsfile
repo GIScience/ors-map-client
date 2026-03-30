@@ -4,6 +4,7 @@ pipeline {
         stage('Prepare Config') {
             steps {
                 sh '''
+                    echo "foo"
                     cd src
                     cp config-examples/* config
                     for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
