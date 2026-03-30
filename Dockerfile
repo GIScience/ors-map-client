@@ -1,6 +1,6 @@
 # Multistage build
 # 1. Stage: Build the app
-FROM node:20-alpine as build-stage
+FROM node:20-alpine AS build-stage
 WORKDIR /opt/client/
 
 # System deps and app setup:
@@ -21,7 +21,7 @@ COPY .eslintignore pnpm-lock.yaml cypress.config.js .babelrc .eslintrc.js dev.ht
 RUN pnpm build
 
 # 2. Stage: Start server with needed files only
-FROM nginx:stable-alpine as production-stage
+FROM nginx:stable-alpine AS production-stage
 
 RUN apk add --no-cache 'openssl>=3.0' 'bash>=5.1'  \
     && rm -rf /usr/share/nginx/html/*

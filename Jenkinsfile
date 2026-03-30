@@ -2,6 +2,9 @@ pipeline {
     agent { label 'worker' }
     stages {
         stage('Prepare Config') {
+            environment {
+                HEAL_API_KEY = credentials('heal-map-client-api-key')
+            }
             steps {
                 sh '''
                     cd src
