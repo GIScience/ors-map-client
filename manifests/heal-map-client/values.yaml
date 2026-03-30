@@ -6,6 +6,10 @@ image:
   repository: repo.heigit.org/heigit/heal-map-client
   tag: latest
 
+helperImage:
+  repository: repo.heigit.org/heigit/heal-map-client-helper-geojson-import
+  tag: latest
+
 resources:
   requests:
     memory: 128Mi

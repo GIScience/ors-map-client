@@ -14,6 +14,12 @@ spec:
       labels:
         {{- include "heal-map-client.selectorLabels" . | nindent 8 }}
     spec:
+      initContainers:
+        - name: heal-map-client-helper-geojson-import
+          image: "{{ .Values.helperImage.repository }}:{{ .Values.helperImage.tag }}"
+          volumeMounts:
+            - name: geojsonVolume
+              mountPath: /home/heal/aois
       containers:
         - name: heal-map-client
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -25,3 +31,9 @@ spec:
           ports:
             - containerPort: 80
               name: http
+          volumeMounts:
+            - name: geojsonVolume
+              mountPath: /usr/share/nginx/html/static/aois
+      volumes:
+        - name: geojsonVolume
+          emptyDir: {}
