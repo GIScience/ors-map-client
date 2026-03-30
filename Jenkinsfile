@@ -4,7 +4,6 @@ pipeline {
         stage('Prepare Config') {
             steps {
                 sh '''
-                    echo "foo"
                     cd src
                     cp config-examples/* config
                     for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
@@ -16,12 +15,10 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://repo.heigit.org', 'docker-heigit-ci-service') {
-                        if (env.BRANCH_NAME ==~ /(^heal-at-scale$)/) {
-                            dockerImage = docker.build('heigit/heal-map-client:latest')
-                            dockerImage.push()
-                            helperImage = docker.build('heigit/heal-map-client-helper-geojson-import:latest', '-f ./helper-img/Dockerfile ./helper-img')
-                            helperImage.push()
-                        }
+                        dockerImage = docker.build('heigit/heal-map-client:latest')
+                        dockerImage.push()
+                        helperImage = docker.build('heigit/heal-map-client-helper-geojson-import:latest', '-f ./helper-img/Dockerfile ./helper-img')
+                        helperImage.push()
                     }
                 }
             }
