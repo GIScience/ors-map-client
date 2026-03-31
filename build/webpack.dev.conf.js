@@ -16,7 +16,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   stats: "normal",
   module: {
-    rules: styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+    rules: styleLoaders({sourceMap: config.dev.cssSourceMap, usePostCSS: true})
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
@@ -25,11 +25,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   devServer: {
     client: {
       logging: 'verbose',
-      overlay: { warnings: false, errors: true },
+      overlay: {warnings: false, errors: true},
     },
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'dev.html') }
+        {from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'dev.html')}
       ],
     },
     hot: true,
@@ -37,16 +37,23 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
     open: false,
-    static: {
-      directory: 'src/assets',
-      publicPath: '/static',
-    },
+    static: [
+      {
+        directory: 'src/assets',
+        publicPath: '/static',
+      },
+      {
+        directory: 'public',
+        publicPath: '/',
+      }
+    ],
     proxy: config.dev.proxyTable
   },
   watchOptions: {
     poll: 1000,
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),

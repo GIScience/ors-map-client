@@ -18,7 +18,6 @@ if [ -z "$HEAL_URL" ] || [ -z "$HEAL_KEY_ID" ] || [ -z "$HEAL_ACCESS_KEY" ] || [
   exit 1
 fi
 
-
 echo "Preparing S3 access for heal bucket..."
 rclone config create heal s3 --non-interactive --quiet \
   provider=Minio \
@@ -34,7 +33,6 @@ else
 fi
 
 echo "Listing HEAL solar index CSV files..."
-# List all CSVs under the solar_index directory structure and capture their paths
 csv_paths=$(rclone lsf heal:/"$HEAL_BUCKET"/"$HEAL_PREFIX"/output/solar_index/ \
   --recursive \
   --files-only \
@@ -50,13 +48,11 @@ fi
 echo "Downloading corresponding GeoJSON files..."
 mkdir -p aois
 failed=0
+declare -A state_cities
 
 while IFS= read -r csv_rel_path; do
-  # csv_rel_path is relative to the solar_index/ prefix, e.g. {state}/{city}/solar_index/file.csv
-  # Extract state and city from the path structure: {state}/{city}/solar_index/...
   state=$(echo "$csv_rel_path" | cut -d'/' -f1)
   city=$(echo "$csv_rel_path"  | cut -d'/' -f2)
-
   if [ -z "$state" ] || [ -z "$city" ]; then
     error "Could not parse state/city from path: $csv_rel_path — skipping."
     failed=$((failed + 1))
@@ -65,7 +61,6 @@ while IFS= read -r csv_rel_path; do
 
   geojson_remote="output/aois/${state}/${city}.geojson"
   geojson_local="./aois/${state}/${city}.geojson"
-
   echo "  Downloading aois/${state}/${city}.geojson..."
   rclone copyto heal:/"$HEAL_BUCKET"/"$HEAL_PREFIX"/"$geojson_remote" "$geojson_local" --quiet
   if [ $? -ne 0 ]; then
@@ -73,12 +68,32 @@ while IFS= read -r csv_rel_path; do
     failed=$((failed + 1))
   else
     success "Downloaded GeoJSON for ${state}/${city}."
+    state_cities["$state"]+="$city "
   fi
 done <<< "$csv_paths"
 
-if [ $failed -gt 0 ]; then
-  error "$failed GeoJSON download(s) failed."
-  exit 1
-fi
+if [ $failed -gt 0 ]; then error "$failed GeoJSON download(s) failed."; exit 1; fi
+
+#######################################################################################################################
+echo "Writing aois/index.json..."
+index_json="{"
+first_state=true
+for state in "${!state_cities[@]}"; do
+  cities_raw="${state_cities[$state]}"
+  city_array=""
+  for city in $cities_raw; do
+    city_array="${city_array}\"${city}\","
+  done
+  city_array="[${city_array%,}]"   # strip trailing comma, wrap in []
+
+  $first_state || index_json+=","
+  index_json+="\"${state}\":${city_array}"
+  first_state=false
+done
+index_json+="}"
+
+echo "$index_json" > ./aois/index.json
+if [ $? -ne 0 ]; then error "Failed to write index.json."; exit 1
+else success "index.json written successfully."; fi
 
 success "HEAL GeoJSON import completed successfully."

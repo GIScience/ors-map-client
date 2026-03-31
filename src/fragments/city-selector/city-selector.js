@@ -1,55 +1,64 @@
-import {EventBus} from '@/common/event-bus'
+import { EventBus } from '@/common/event-bus'
 import appConfig from '@/config/app-config'
 
 export default {
   name: 'app-city-selector',
+
+  data() {
+    const url = window.location.href.split('?')
+    let urlParams = new URLSearchParams()
+    if (url.length > 1) {
+      urlParams = new URLSearchParams(url[1])
+    }
+
+    return {
+      selectedState: urlParams.get('state') || appConfig.defaultState,
+      selectedCity: urlParams.get('city') || appConfig.defaultCity,
+      aois: {}
+    }
+  },
+
+  async created() {
+    try {
+      const res = await fetch(`/aois/index.json`)
+      this.aois = await res.json()
+    } catch (e) {
+      console.error('Failed to load AOIs:', e)
+    }
+  },
+
   computed: {
-    stateCityMap: function () {
-      const ctx = require.context(
-        '@/assets/aois',
-        true,
-        /\.geojson$/
-      )
+    stateCityMap() {
+      const map = {}
 
-      return ctx.keys().reduce((map, path) => {
-        const parts = path
-          .replace(/^\.\//, '')
-          .replace(/\.geojson$/, '')
-          .split('/')
-
-        const rawState = parts[0]
-        const rawCity = parts[1]
-
-        if (!map[rawState]) {
-          map[rawState] = {
-            text: this.prepareString(rawState),
-            value: rawState,
-            cities: []
-          }
+      Object.entries(this.aois).forEach(([rawState, cities]) => {
+        map[rawState] = {
+          text: this.prepareString(rawState),
+          value: rawState,
+          cities: cities.map(rawCity => ({
+            text: this.prepareString(rawCity),
+            value: rawCity
+          }))
         }
+      })
 
-        map[rawState].cities.push({
-          text: this.prepareString(rawCity),
-          value: rawCity
-        })
-
-        return map
-      }, {})
+      return map
     },
 
-    states: function () {
+    states() {
       return Object.values(this.stateCityMap)
         .sort((a, b) => a.text.localeCompare(b.text))
     },
 
-    cities: function () {
+    cities() {
       if (!this.selectedState) return []
       return (this.stateCityMap[this.selectedState]?.cities || [])
         .sort((a, b) => a.text.localeCompare(b.text))
     }
   },
+
   methods: {
-    prepareString: function (s) {
+    prepareString(s) {
       return (String(s[0]).toUpperCase() + String(s).slice(1))
         .replace('ae', 'ä')
         .replace('oe', 'ö')
@@ -64,18 +73,11 @@ export default {
           city: this.selectedCity,
         }
       })
-      EventBus.$emit('city-change', this.selectedState + '/' + this.selectedCity)
-    }
-  },
-  data() {
-    const url = window.location.href.split('?')
-    let urlParams = new URLSearchParams()
-    if (url.length>1){
-      urlParams = new URLSearchParams(url[1])
-    }
-    return {
-      selectedState: urlParams.get('state') || appConfig.defaultState,
-      selectedCity: urlParams.get('city') || appConfig.defaultCity
+
+      EventBus.$emit(
+        'city-change',
+        this.selectedState + '/' + this.selectedCity
+      )
     }
   }
 }

@@ -1111,7 +1111,7 @@ export default {
 
       if (this.extraInfo) {
         polylineData = this.buildExtraInfoBoundsPolyline()
-        if (polylineData.length===0) return
+        if (polylineData.length === 0) return
         this.dataBounds = GeoUtils.getBounds([], polylineData)
       } else {
         // Add the routes coordinates to the polyline that must
@@ -1968,8 +1968,12 @@ export default {
     },
     loadRegion(state, city) {
       try {
-        this.region = JSON.parse(require(`@/assets/aois/${state}/${city}.geojson`))
-        this.addRegionOfInterest()
+        fetch(`/aois/${state}/${city}.geojson`)
+          .then(result => result.json())
+          .then(json => {
+            this.region = json
+            this.addRegionOfInterest()
+          })
       } catch (e) {
         console.error(`Error loading region for ${state}/${city}:`, e)
       }
@@ -2083,7 +2087,7 @@ export default {
     try {
       const url = window.location.href.split('?')
       let urlParams = new URLSearchParams()
-      if (url.length>1){
+      if (url.length > 1) {
         urlParams = new URLSearchParams(url[1])
       }
       const initialState = urlParams.get('state') || appConfig.defaultState

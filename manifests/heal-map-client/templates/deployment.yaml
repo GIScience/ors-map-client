@@ -45,7 +45,7 @@ spec:
               name: http
           volumeMounts:
             - name: geojson-volume
-              mountPath: /usr/share/nginx/html/static/aois
+              mountPath: /usr/share/nginx/html/aois
       volumes:
         - name: geojson-volume
           emptyDir: {}

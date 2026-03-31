@@ -13,17 +13,22 @@ import {EventBus} from '@/common/event-bus'
 
 let region_bbox = []
 EventBus.$on('city-change', (path) => {
-  const region = JSON.parse(require(`@/assets/aois/${path}.geojson`))
-
-  region_bbox = Leaflet.geoJSON(region).getBounds()
+  fetch(`/aois/${path}.geojson`)
+    .then(result => result.json())
+    .then(json => {
+      region_bbox = Leaflet.geoJSON(json).getBounds()
+    })
 })
+
 try {
   const urlParams = new URLSearchParams(window.location.search)
   const state = urlParams.get('state') || appConfig.defaultState
   const city = urlParams.get('city') || appConfig.defaultCity
-  const region = JSON.parse(require(`@/assets/aois/${state}/${city}.geojson`))
-
-  region_bbox = Leaflet.geoJSON(region).getBounds()
+  fetch(`/aois/${state}/${city}.geojson`)
+    .then(result => result.json())
+    .then(json => {
+      region_bbox = Leaflet.geoJSON(json).getBounds()
+    })
 } catch (e) {
   console.error('Error loading region config:', e)
 }

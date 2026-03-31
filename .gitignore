@@ -44,4 +44,4 @@ yarn-error.log*
 /nginx/
 
 # aois geojsons:
-/src/assets/aois/*
+/public/aois/*
