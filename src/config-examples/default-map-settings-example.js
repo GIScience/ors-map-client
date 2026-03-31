@@ -60,7 +60,7 @@ const defaultMapSettings = {
   noise: false,
   // heal specific
   csv: true,
-  healRouteApiUrl: './api',
+  healRouteApiUrl: 'https://staging.api.heal.heigitk8s.de',
 
   // Extra settings not being used yet
   suitability: false
