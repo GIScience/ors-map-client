@@ -18,7 +18,7 @@ spec:
         - name: heal-map-client-helper-geojson-import
           image: "{{ .Values.helperImage.repository }}:{{ .Values.helperImage.tag }}"
           volumeMounts:
-            - name: geojsonVolume
+            - name: geojson-volume
               mountPath: /home/heal/aois
       containers:
         - name: heal-map-client
@@ -32,8 +32,8 @@ spec:
             - containerPort: 80
               name: http
           volumeMounts:
-            - name: geojsonVolume
+            - name: geojson-volume
               mountPath: /usr/share/nginx/html/static/aois
       volumes:
-        - name: geojsonVolume
+        - name: geojson-volume
           emptyDir: {}
