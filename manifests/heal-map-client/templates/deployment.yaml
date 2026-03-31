@@ -16,7 +16,15 @@ spec:
     spec:
       initContainers:
         - name: heal-map-client-helper-geojson-import
-          image: "{{ .Values.helperImage.repository }}:{{ .Values.helperImage.tag }}"
+          image: "{{ .Values.helper.image.repository }}:{{ .Values.helper.image.tag }}"
+          {{- with .Values.helper.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.helper.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - name: geojson-volume
               mountPath: /home/heal/aois
@@ -26,6 +34,10 @@ spec:
           imagePullPolicy: Always
           {{- with .Values.resources }}
           resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.env }}
+          env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           ports:

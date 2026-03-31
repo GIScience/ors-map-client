@@ -2,14 +2,12 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# Image to use for the main container
 image:
   repository: repo.heigit.org/heigit/heal-map-client
   tag: latest
 
-helperImage:
-  repository: repo.heigit.org/heigit/heal-map-client-helper-geojson-import
-  tag: latest
-
+# Resource requests and limits to apply to the main container
 resources:
   requests:
     memory: 128Mi
@@ -17,6 +15,32 @@ resources:
   limits:
     memory: 128Mi
     cpu: 100m
+
+# Environment variables to add to the main container
+# env:
+#   - name: FOO
+#     value: BAR
+#   - name: SECRET_FOO
+#     valueFrom:
+#       secretKeyRef:
+#         name: my-secret
+#         key: my-key-in-my-secret
+
+# Setting for the init container that downloads aoi geojsons from s3
+helper:
+  image:
+    repository: repo.heigit.org/heigit/heal-map-client-helper-geojson-import
+    tag: latest
+  # resources:
+  #   requests:
+  #     memory: 128Mi
+  #     cpu: 100m
+  #   limits:
+  #     memory: 128Mi
+  #     cpu: 100m
+  # env:
+  #   - name: FOO
+  #     value: BAR
 
 ingress:
   enabled: false
