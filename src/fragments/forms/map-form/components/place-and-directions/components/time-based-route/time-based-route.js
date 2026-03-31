@@ -12,23 +12,41 @@ export default {
   components: {},
   data: () => {
     return {
-      today_toggle: 't',
+      month: 202,
+      months: [
+        {
+          label: 'may',
+          value: 141
+        },
+        {
+          label: 'june',
+          value: 172
+        },
+        {
+          label: 'july',
+          value: 202
+        },
+        {
+          label: 'august',
+          value: 233
+        },
+      ],
       timesOfTheDay: [
         {
           label: 'morning',
-          value: 'morning'
+          value: 9
         },
         {
           label: 'noon',
-          value: 'noon'
+          value: 12
         },
         {
           label: 'afternoon',
-          value: 'afternoon'
+          value: 15
         },
         {
           label: 'evening',
-          value: 'evening'
+          value: 18
         }
       ],
       selectedTOD: 'noon'
@@ -37,6 +55,14 @@ export default {
   computed: {
     timesOfTheDayLabel() {
       return this.timesOfTheDay.map(t => {
+        return {
+          label: `${this.$t('timeBasedRoute.' + t.label)}`,
+          value: t.value
+        }
+      })
+    },
+    monthsLabel() {
+      return this.months.map(t => {
         return {
           label: `${this.$t('timeBasedRoute.' + t.label)}`,
           value: t.value
@@ -52,7 +78,7 @@ export default {
       let appRouteData = this.$store.getters.appRouteData
       // console.log('>>> departHourChange ', this.selectedTOD, appRouteData)
 
-      appRouteData.options.options.profile_params.weightings.csv_column = `${this.selectedTOD}_${this.today_toggle}`
+      appRouteData.options.options.profile_params.weightings.csv_column = `${this.month}_${this.selectedTOD}`
       // this.$store.commit('appRouteData', appRouteData)
       EventBus.$emit('appRouteDataChanged', appRouteData)
     },
@@ -80,14 +106,8 @@ export default {
     let appRouteData = this.$store.getters.appRouteData
     if (appRouteData.options.options.profile_params.weightings.csv_column) {
       let [url_TOD, url_today] = appRouteData.options.options.profile_params.weightings.csv_column.split('_')
-      if (url_TOD === 'heat') {
-        // old column names in url
-        this.selectedTOD = url_today
-        this.today_toggle = 't'
-      } else {
-        this.selectedTOD = url_TOD
-        this.today_toggle = url_today
-      }
+      this.selectedTOD = url_TOD
+      this.month = Number.parseInt(url_today)
     } else {
       console.log(appRouteData)
     }

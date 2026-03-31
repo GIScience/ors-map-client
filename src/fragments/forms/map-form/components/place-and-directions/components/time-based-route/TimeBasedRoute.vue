@@ -1,17 +1,13 @@
 <template>
   <div>
-    <v-btn-toggle
-      v-model="today_toggle"
-      mandatory
+    <v-select
+      :label="$t('timeBasedRoute.month')"
+      :items="monthsLabel"
+      v-model="month"
       v-on:change="departHourChange()"
-    >
-      <v-btn :value="'r'" flat>
-        {{$t('timeBasedRoute.today')}}
-      </v-btn>
-      <v-btn :value="'t'" flat>
-        {{$t('timeBasedRoute.typicalHotDay')}}
-      </v-btn>
-    </v-btn-toggle>
+      item-text="label"
+      item-value="value"
+    />
       <v-layout row>
       <v-select :label="$t('timeBasedRoute.timeOfDay')" :items="timesOfTheDayLabel"
         item-text="label"

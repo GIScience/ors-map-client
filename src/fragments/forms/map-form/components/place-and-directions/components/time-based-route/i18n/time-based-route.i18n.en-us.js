@@ -6,7 +6,10 @@ export default {
     afternoon: 'Afternoon',
     evening: 'Evening',
     timeOfDay: 'Time of Day',
-    today: 'Today',
-    typicalHotDay: 'Typical Hot Day'
+    may: 'May',
+    june: 'June',
+    july: 'July',
+    august: 'August',
+    month: 'Month'
   }
 }

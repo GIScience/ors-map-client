@@ -39,7 +39,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         "postcss-loader",
         "sass-loader",
       ],
-    },{
+    }, {
       test: /\.(styl|stylus)$/,
       use: [
         MiniCssExtractPlugin.loader,
@@ -47,14 +47,14 @@ const webpackConfig = merge(baseWebpackConfig, {
         "postcss-loader",
         "stylus-loader"
       ]
-    },{
+    }, {
       test: /\.css$/,
       include: [
         resolveRoot("node_modules/leaflet/dist"),
         resolveRoot("node_modules/leaflet-measure/dist"),
         resolveRoot("node_modules/vue2-leaflet-height-graph"),
         resolveRoot("node_modules/leaflet/dist"),
-        ],
+      ],
       use: [
         MiniCssExtractPlugin.loader,
         "css-loader",
@@ -63,7 +63,11 @@ const webpackConfig = merge(baseWebpackConfig, {
       generator: {
         outputPath: 'static/img',
       }
-    }
+    },
+    {
+      test: /\.geojson$/,
+      type: 'json'
+    },
     ]
   },
   resolve: {
@@ -124,11 +128,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.ids.HashedModuleIdsPlugin(),
     // copy custom static assets
     new CopyWebpackPlugin({
-        patterns: [{
-            from: resolveRoot("src/assets"),
-            to: resolveRoot("static")
-          }]
-      }),
+      patterns: [{
+        from: resolveRoot("src/assets"),
+        to: resolveRoot("static")
+      }]
+    }),
   ]
 })
 
