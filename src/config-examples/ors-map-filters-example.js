@@ -620,7 +620,7 @@ const filters = [
               },
               {
                 name: 'csv_column',
-                value: 'noon_r' // default value if nothing is selected by the user
+                value: '202_15' // default value if nothing is selected by the user
               },
             ]
           },

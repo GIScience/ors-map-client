@@ -12,7 +12,7 @@ export default {
   components: {},
   data: () => {
     return {
-      month: 202,
+      doy: 202,
       months: [
         {
           label: 'may',
@@ -49,7 +49,7 @@ export default {
           value: 18
         }
       ],
-      selectedTOD: 'noon'
+      selectedTOD: 12
     }
   },
   computed: {
@@ -71,15 +71,9 @@ export default {
     },
   },
   methods: {
-    /*routeOnHotDays(time) {
-      console.log('>>> timeBasedRoute >>> routeOnHotDays ', time)
-    },*/
     departHourChange() {
       let appRouteData = this.$store.getters.appRouteData
-      // console.log('>>> departHourChange ', this.selectedTOD, appRouteData)
-
-      appRouteData.options.options.profile_params.weightings.csv_column = `${this.month}_${this.selectedTOD}`
-      // this.$store.commit('appRouteData', appRouteData)
+      appRouteData.options.options.profile_params.weightings.csv_column = `${this.doy}_${this.selectedTOD}`
       EventBus.$emit('appRouteDataChanged', appRouteData)
     },
     getTimeOfDay(hour, minute) {
@@ -95,21 +89,24 @@ export default {
       } else {
         return this.timesOfTheDay[3].value // Evening
       }
+    },
+    monthToDOY(month){
+      const monthMap = {
+        4: 141,
+        5: 172,
+        6: 202,
+        7: 233
+      }
+      if (month < 4) return monthMap[4]
+      else if (month > 7) return monthMap[7]
+      else return monthMap[month]
     }
   },
   created() {
     const currentTime = new Date()
     const currentHour = currentTime.getHours()
     const currentMinute = currentTime.getMinutes()
-
+    this.doy = this.monthToDOY(currentTime.getMonth())
     this.selectedTOD = this.getTimeOfDay(currentHour, currentMinute)
-    let appRouteData = this.$store.getters.appRouteData
-    if (appRouteData.options.options.profile_params.weightings.csv_column) {
-      let [url_TOD, url_today] = appRouteData.options.options.profile_params.weightings.csv_column.split('_')
-      this.selectedTOD = url_TOD
-      this.month = Number.parseInt(url_today)
-    } else {
-      console.log(appRouteData)
-    }
   }
 }

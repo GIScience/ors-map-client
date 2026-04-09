@@ -3,7 +3,7 @@
     <v-select
       :label="$t('timeBasedRoute.month')"
       :items="monthsLabel"
-      v-model="month"
+      v-model="doy"
       v-on:change="departHourChange()"
       item-text="label"
       item-value="value"
