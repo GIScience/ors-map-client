@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <v-select
-      label="State"
+      :label="$t('citySelector.state')"
       :items="states"
       item-text="text"
       item-value="value"
@@ -9,7 +9,7 @@
       @change="selectedCity = null"
     />
     <v-select
-      label="City"
+      :label="$t('citySelector.city')"
       :items="cities"
       item-text="text"
       item-value="value"
