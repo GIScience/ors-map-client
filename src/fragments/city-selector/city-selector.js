@@ -1,4 +1,4 @@
-import { EventBus } from '@/common/event-bus'
+import {EventBus} from '@/common/event-bus'
 import appConfig from '@/config/app-config'
 
 export default {
@@ -56,7 +56,17 @@ export default {
         .sort((a, b) => a.text.localeCompare(b.text))
     }
   },
-
+  watch: {
+    selectedState(newState) {
+      const cities = this.stateCityMap[newState]?.cities || []
+      if (cities.length === 1) {
+        this.selectedCity = cities[0].value
+        this.changeCity()
+      } else {
+        this.selectedCity = null
+      }
+    }
+  },
   methods: {
     prepareString(s) {
       return (String(s[0]).toUpperCase() + String(s).slice(1))

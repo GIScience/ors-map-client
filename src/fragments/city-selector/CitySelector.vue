@@ -6,7 +6,6 @@
       item-text="text"
       item-value="value"
       v-model="selectedState"
-      @change="selectedCity = null"
     />
     <v-select
       :label="$t('citySelector.city')"
