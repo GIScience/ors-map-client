@@ -83,22 +83,6 @@ const appConfig = {
       maxZoom: 19
     },
     {
-      name: 'Lite contrast',
-      id: 'stamen-toner-lite',
-      visible: false,
-      url: 'https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png',
-      attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> <a href="https://stamen.com/" target="_blank">&copy; Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/about" target="_blank">OpenStreetMap</a> contributors',
-      maxZoom: 19
-    },
-    {
-      name: 'High contrast',
-      id: 'stamen-toner',
-      visible: false,
-      url: 'https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png',
-      attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> <a href="https://stamen.com/" target="_blank">&copy; Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/about" target="_blank">OpenStreetMap</a> contributors',
-      maxZoom: 19
-    },
-    {
       name: 'Light color',
       id: 'cartodb-positron',
       visible: false,
