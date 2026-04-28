@@ -23,6 +23,7 @@ import TimeBasedRoute from './components/time-based-route/TimeBasedRoute.vue'
 import FormActions from '../form-actions/FormActions'
 import MapFormMixin from '../map-form-mixin'
 import {EventBus} from '@/common/event-bus'
+import CitySelector from '@/fragments/city-selector/CitySelector.vue'
 
 export default {
   mixins: [MapFormMixin],
@@ -33,6 +34,7 @@ export default {
     placeFocusIndex: null
   }),
   components: {
+    CitySelector,
     PlaceInput,
     PlaceDetails,
     RouteDetails,

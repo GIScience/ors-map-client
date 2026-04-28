@@ -1,12 +1,7 @@
 .container {
-  position: absolute;
-  bottom: 2rem;
-  z-index: 9999;
-  left: 40%;
-  width: 20%;
+  padding: 0 8px ;
+  width: 100%;
   min-width: 300px;
   background-color: #fff;
-  border: 3px solid rgb(198, 40, 40);
-  border-radius: 30px;
-  padding: 20px;
+  border-bottom: 5px solid rgb(198, 40, 40);
 }

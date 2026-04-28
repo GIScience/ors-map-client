@@ -2,7 +2,7 @@ import {EventBus} from '@/common/event-bus'
 import appConfig from '@/config/app-config'
 
 export default {
-  name: 'app-city-selector',
+  name: 'city-selector',
 
   data() {
     const url = window.location.href.split('?')

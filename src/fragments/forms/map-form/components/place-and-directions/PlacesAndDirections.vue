@@ -2,6 +2,7 @@
   <div>
     <v-form style="background:white" @submit.prevent>
       <template >
+        <city-selector></city-selector>
         <ul class="place-inputs">
           <draggable v-model="places" @end="onReordered()" handle=".reorder-handle">
             <li :key="index" v-for="(place, index) in getPlaces">
