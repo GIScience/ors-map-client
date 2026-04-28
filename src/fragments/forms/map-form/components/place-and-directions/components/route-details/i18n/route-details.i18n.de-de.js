@@ -9,8 +9,8 @@ export default {
     instructions: 'Wegbeschreibungen',
     instruction: 'Wegbeschreibung',
     name: 'Name',
-    selectRoute: 'Diese Route wählen',
-    selectedRoute: 'Gewählte Route',
+    selectRoute: 'Diese Route farbig darstellen',
+    selectedRoute: 'Farbig dargestellte Route',
     gotoSegment: 'Gehe zu Abschnitt',
     warningCodes: {
       1: 'Auf einigen Straßen können Zufahrts- oder Zugangsbeschränkungen gelten',
@@ -18,6 +18,8 @@ export default {
       3: 'Auf der Route gibt es übersprungene Abschnitte. Dauer und Zugangsbeschränkungen sind möglicherweise nicht korrekt.',
       4: 'Mindestens eine angefragte Zusatzinformation ist nicht verfügbar.'
     },
-    routeOpacity: 'Routendeckkraft'
+    routeOpacity: 'Routendeckkraft',
+    heatRoute: 'Niedrige Sonneneinstrahlung',
+    fastestRoute: 'Schnellste Route',
   }
 }

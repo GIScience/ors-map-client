@@ -49,9 +49,9 @@ const defaultMapSettings = {
   distanceMarkers: false,
   skipAllSegments: false,
 
-  steepness: true,
-  surface: true,
-  waytype: true,
+  steepness: false,
+  surface: false,
+  waytype: false,
   tollways: false,
   waycategory: false,
   traildifficulty: false,

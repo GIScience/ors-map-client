@@ -10,8 +10,8 @@ export default {
     instructions: 'Instructions',
     instruction: 'Instruction',
     name: 'Name',
-    selectRoute: 'Select this route',
-    selectedRoute: 'Selected route',
+    selectRoute: 'Display in color',
+    selectedRoute: 'Displayed in color',
     gotoSegment: 'Go to segment',
     warningCodes: {
       1: 'There may be restrictions on some roads',
@@ -19,6 +19,8 @@ export default {
       3: 'There are skipped segments along the route. Durations and accessibility may not be correct',
       4: 'At least one extra info requested but it is not available',
     },
-    routeOpacity: 'Route opacity'
+    routeOpacity: 'Route opacity',
+    heatRoute: 'Low solar exposure',
+    fastestRoute: 'Fastest route',
   }
 }
