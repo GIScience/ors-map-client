@@ -59,7 +59,7 @@ const appConfig = {
   supportsClusteredMarkers: true, // If clustered markers is supported (then markers with `clustered=true` property will be clustered)
   supportsSearchBottomCarousel: true, // If the bottom carousel with the search results must be displayed or not.
   supportsSearchMode: true, // If the search mode is supported
-  supportsMyLocationBtn: true, // If the `my location` button is supported on the map view
+  supportsMyLocationBtn: false, // If the `my location` button is supported on the map view
   initialZoomLevel: 13, // The initial map view zoom level
   initialMapMaxZoom: 18, // The initial map view max zoom
 
