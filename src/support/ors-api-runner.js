@@ -155,21 +155,21 @@ const PlacesSearch = (term, quantity = 100, restrictArea = true) => {
     let promises = []
 
     // Build a search localities only
-    let localityArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
+    let localityArgs = OrsParamsParser.buildPlaceSearchArgs(term)
     localityArgs.size = quantity / (quantity / 2)
     localityArgs.layers = ['locality']
     promises.push(client.geocode(localityArgs))
     AppLoader.getInstance().appHooks.run('placeSearchLocalityArgsDefined', localityArgs)
 
     // Build a search counties only
-    let countyArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
+    let countyArgs = OrsParamsParser.buildPlaceSearchArgs(term)
     countyArgs.size = quantity / (quantity / 1)
     countyArgs.layers = ['county']
     promises.push(client.geocode(countyArgs))
     AppLoader.getInstance().appHooks.run('placeSearchCountyArgsDefined', countyArgs)
 
     // Build a search for addresses
-    let addressesArgs = OrsParamsParser.buildPlaceSearchArgs(term, false)
+    let addressesArgs = OrsParamsParser.buildPlaceSearchArgs(term)
     addressesArgs.size = quantity
     addressesArgs.layers = ['country', 'region', 'macrocounty', 'macroregion', 'neighbourhood', 'borough', 'street', 'address', 'postalcode'] // `coarse` will bring places by postal code
     promises.push(client.geocode(addressesArgs))

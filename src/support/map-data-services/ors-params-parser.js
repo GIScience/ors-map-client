@@ -21,7 +21,11 @@ EventBus.$on('city-change', (path) => {
 })
 
 try {
-  const urlParams = new URLSearchParams(window.location.search)
+  const url = window.location.href.split('?')
+  let urlParams = new URLSearchParams()
+  if (url.length > 1) {
+    urlParams = new URLSearchParams(url[1])
+  }
   const state = urlParams.get('state') || appConfig.defaultState
   const city = urlParams.get('city') || appConfig.defaultCity
   fetch(`/aois/${state}/${city}.geojson`)
@@ -37,31 +41,16 @@ const orsParamsParser = {
   /**
    * Build the args object to be used in autocomplete places request
    * @param {*} placeName
-   * @param {Boolean} restrictToBbox - restrict the search to stored bbox
    * @returns {Object} args
    */
-  buildPlaceSearchArgs: (placeName, restrictToBbox = false) => {
+  buildPlaceSearchArgs: (placeName) => {
     // build the args object
     const args = {
       text: placeName,
       size: 8,
-      focus_point: [store.getters.mapCenter.lat, store.getters.mapCenter.lng],
-      // Use GeoJSON Region as bbox
-      boundary_bbox: [[region_bbox._southWest.lng, region_bbox._southWest.lat], [region_bbox._northEast.lng, region_bbox._northEast.lat]]
-    }
-    // If is set to restrict the search to current mapBounds,
-    // then apply the restriction
-    if (restrictToBbox) {
-      let bbox = orsParamsParser.getCurrentBbox()
-      // If the bounding box is valid, then add it to the args
-      if (bbox) {
-        args.boundary_bbox = bbox
-        delete args.focus_point // if we restrict by boundary bbox focus point is not necessary
-      }
+      boundary_bbox: [[region_bbox._southWest.lat,region_bbox._southWest.lng ], [ region_bbox._northEast.lat, region_bbox._northEast.lng]]
     }
 
-    // Add the filters defined in the ORS filters that are manipulated
-    // directly by external components
     orsParamsParser.setFilters(args, OrsMapFilters, constants.services.autocomplete)
     AppLoader.getInstance().appHooks.run('placeSearchArgsCreated', args)
     return args
