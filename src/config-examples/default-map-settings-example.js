@@ -27,7 +27,7 @@ const defaultMapSettings = {
   prioritizeSearchingForNearbyPlaces: true,
   defaultProfile: 'foot-walking',
   compressDataUrlSegment: true,
-  autoFitHighlightedBounds: true,
+  autoFitHighlightedBounds: false,
   convertStopAfterRouteEndingToDestination: false,
   useStopOptimization: false,
   accessibleModeActive: false,
