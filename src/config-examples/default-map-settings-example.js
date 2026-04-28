@@ -19,7 +19,7 @@ const defaultMapSettings = {
   locale: 'en-us',
   routingInstructionsLocale: 'en',
   unit: 'km',
-  alwaysFitBounds: false,
+  alwaysFitBounds: true,
   areaUnit: 'km',
   defaultTilesProvider: 'osm',
   customTileProviderUrl: '',
