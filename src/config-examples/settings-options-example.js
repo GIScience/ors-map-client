@@ -26,8 +26,6 @@ const settingsOptions = {
   tileServices: [
     { text: 'OpenStreetMap', value: 'osm' },
     { text: 'World Imagery', value: 'world-imagery' },
-    { text: 'Lite contrast', value: 'stamen-toner-lite' },
-    { text: 'High contrast', value: 'stamen-toner' },
     { text: 'Light color', value: 'cartodb-positron' }
   ]
 }
