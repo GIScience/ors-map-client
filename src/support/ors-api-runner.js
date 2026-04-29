@@ -33,6 +33,13 @@ function getCustomEndpointSettings(apiBaseUrl, endpoint) {
   }
 }
 
+function createArgsWithoutWeights(args) {
+  const argsWithoutWeightings = JSON.parse(JSON.stringify(args))
+  argsWithoutWeightings.options.profile_params.weightings.csv_factor = 0
+
+  return argsWithoutWeightings
+}
+
 /**
  * Get the Directions function accessor
  * @param {Array} places
@@ -56,19 +63,34 @@ const Directions = (places, customArgs = null) => {
       if (customArgs) {
         args = Object.assign(args, customArgs)
       }
-      directions.calculate(args).then(response => {
-        const data = { options: { origin: constants.dataOrigins.directions, apiVersion: constants.apiVersion }, content: response }
-        resolve(data)
-      }).catch(err => {
-        if (err instanceof DOMException && err.name === 'AbortError') {
-          reject('TimeoutError')
-        } else {
-          err.response.json().then((error) => {
-            const result = { response: error, args: args }
-            reject(result)
-          })
-        }
-      })
+      delete args.alternative_routes
+      const argsWithoutWeightings = createArgsWithoutWeights(args)
+
+
+      Promise.all([directions.calculate(args), directions.calculate(argsWithoutWeightings)])
+        .then(([response1, response2]) => {
+
+          const combinedResponse = {
+            ...response1,
+            features: [response1.features[0], response2.features[0]]
+          }
+
+          const data = {
+            options: { origin: constants.dataOrigins.directions, apiVersion: constants.apiVersion },
+            content: combinedResponse
+          }
+          resolve(data)
+        })
+        .catch(err => {
+          if (err instanceof DOMException && err.name === 'AbortError') {
+            reject('TimeoutError')
+          } else {
+            err.response.json().then((error) => {
+              const result = { response: error, args: args }
+              reject(result)
+            })
+          }
+        })
     })
   })
 }

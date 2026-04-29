@@ -49,7 +49,7 @@ export default {
     },
     color: {
       type: String,
-      default: 'black'
+      default: 'white'
     },
     backgroundColor: {
       type: String,
