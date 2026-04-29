@@ -1,6 +1,5 @@
 <template>
   <div class="ors-l-polyline">
-    <l-polyline :lat-lngs="coordinates" :opacity="routeOpacity" :weight="backgroundWeight" :color="backgroundColor"></l-polyline>
     <l-polyline ref="foregroundPolyline"
       @follow="followPolyline"
       @rightClicked="rightClicked"

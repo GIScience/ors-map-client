@@ -41,7 +41,7 @@ export default {
     },
     weight: {
       type: Number,
-      default: 7
+      default: 10
     },
     focusedPolyIndex: {
       type: Number,
@@ -49,7 +49,7 @@ export default {
     },
     color: {
       type: String,
-      default: theme.primary
+      default: 'black'
     },
     backgroundColor: {
       type: String,
