@@ -177,7 +177,8 @@ export default {
         highlightData.sections.push(polylineData)
         index++
       }
-      EventBus.$emit('highlightPolylineSections', highlightData)
+      // This is disabled now since we do styling inside map-view.js
+      // EventBus.$emit('highlightPolylineSections', highlightData)
     },
     /**
      * Build the extra info highlighting data

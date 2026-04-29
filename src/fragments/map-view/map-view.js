@@ -76,6 +76,7 @@ import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import 'leaflet-measure/dist/leaflet-measure.css'
 import 'vue-resize/dist/vue-resize.css'
 import 'leaflet/dist/leaflet.css'
+import {buildExtraHighlightPolylineData} from "../../support/heal-utils";
 
 export default {
   components: {
@@ -311,6 +312,19 @@ export default {
         // So we invert them to provide what the component expects
         route.geometry.coordinates = GeoUtils.switchLatLonIndex(route.geometry.coordinates)
         route.properties.opacity=0.3
+
+        const extraKey = 'csv'
+        const sectionTitle = this.$t('global.' + extraKey)
+        const highlightData = { extraKey: extraKey, sectionTitle, sections: [] }
+        let index = 0
+
+        for (const summary of route.properties.extras[extraKey].summary) {
+          const polylineData = buildExtraHighlightPolylineData(route.properties.extras[extraKey].values, extraKey, index, summary.value, this.$t)
+          highlightData.sections.push(polylineData)
+          index++
+        }
+
+        this.extraInfo=highlightData
         return route
       }
     },

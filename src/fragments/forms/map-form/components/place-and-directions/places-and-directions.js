@@ -633,6 +633,42 @@ export default {
      * @returns {Promise}
      */
     calculateDirections() {
+      function classifyHeatStressValue(rawValue) {
+        if (rawValue >= 0  && rawValue <= 33) return 0
+        if (rawValue >= 34 && rawValue <= 66) return 1
+        return 2
+      }
+
+      function reduceCsvSummaryToThreeClasses(route) {
+        const tempSummary = route.properties.extras['csv'].summary
+        const groupedSummary = lodash.groupBy(tempSummary, s => classifyHeatStressValue(s.value))
+        const reducedSummary = []
+        lodash.forEach(groupedSummary, summaries => {
+          reducedSummary.push(
+            lodash.reduce(summaries, (acc, cur) => ({
+              amount:   acc.amount   + cur.amount,
+              distance: acc.distance + cur.distance,
+              value:    classifyHeatStressValue(cur.value)
+            }), { amount: 0, distance: 0, value: 0 })
+          )
+        })
+        return reducedSummary
+      }
+
+      function classifyRouteCsvExtras(mapViewData) {
+        for (const route of mapViewData.routes) {
+          if (route.properties?.extras?.['csv']) {
+            const csv = route.properties.extras['csv']
+            csv.summary = reduceCsvSummaryToThreeClasses(route)
+            csv.values  = lodash.map(csv.values, ([from, to, raw]) => [
+              from,
+              to,
+              classifyHeatStressValue(raw)
+            ])
+          }
+        }
+      }
+
       const context = this
       return new Promise((resolve) => {
         const places = context.getFilledPlaces()
@@ -647,6 +683,8 @@ export default {
             data = context.$root.appHooks.run('beforeBuildDirectionsMapViewData', data)
             if (data) {
               MapViewDataBuilder.buildMapData(data, context.$store.getters.appRouteData).then((mapViewData) => {
+                classifyRouteCsvExtras(mapViewData)
+
                 mapViewData.places = context.places // places from context have more fine data, so use it
                 context.mapViewData = mapViewData
                 EventBus.$emit('newInfoAvailable', true)

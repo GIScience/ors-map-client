@@ -1,14 +1,11 @@
-import Download from '@/fragments/forms/map-form/components/download/Download'
-import Share from '@/fragments/forms/map-form/components/share/Share'
-import Print from '@/fragments/forms/map-form/components/print/Print'
+import Download   from '@/fragments/forms/map-form/components/download/Download'
+import Share      from '@/fragments/forms/map-form/components/share/Share'
+import Print      from '@/fragments/forms/map-form/components/print/Print'
 import RouteExtras from './components/extras/RouteExtras'
 import MapViewData from '@/models/map-view-data'
-import Steps from './components/steps/Steps'
-import constants from '@/resources/constants'
-import geoUtils from '@/support/geo-utils'
-import {EventBus} from '@/common/event-bus'
-import lodash from 'lodash'
-
+import Steps      from './components/steps/Steps'
+import geoUtils   from '@/support/geo-utils'
+import { EventBus } from '@/common/event-bus'
 
 export default {
   props: {
@@ -27,14 +24,10 @@ export default {
   },
   watch: {
     /**
-     * Every time the response data changes
-     * the map builder is reset and the
-     * map data is reloaded
+     * Every time the response data changes the local copy is refreshed.
      */
     'mapViewData.routes': {
-      handler: function () {
-        // When the mapViewData prop changes, we copy its value to a
-        // local instance so that we can modify it when necessary
+      handler () {
         this.localMapViewData = this.mapViewData.clone()
       },
       deep: true
@@ -51,10 +44,8 @@ export default {
       return this.localMapViewData.routes.length > 0 ? this.$store.getters.activeRouteIndex : null
     },
     /**
-     * Builds and return the routes
-     * parsed, with translations and
-     * humanized content
-     * @returns {Array} of route objects
+     * Returns the routes with humanized distance/duration labels.
+     * @returns {Array}
      */
     parsedRoutes () {
       if (!this.hasRoutes) {
@@ -66,14 +57,6 @@ export default {
         const route = Object.assign({}, this.localMapViewData.routes[key])
         const unit = route.summary.unit || route.summary.originalUnit
         if (!route.summary.humanized) {
-          // Heal
-          if(route.properties.extras['csv']) {
-            route.properties.extras['csv'].summary = this.reduceCsvSummaryToThreeClasses(route)
-            route.properties.extras['csv'].values = lodash.map(route.properties.extras['csv'].values, values => {
-              return [values[0], values[1], this.classifyHeatStressValues(values[2])]
-            })
-          }
-          // Heal stuff ends
           route.summary = context.getHumanizedSummary(route.summary, unit)
           route.summary.humanized = true
           for (let item of Object.values(route.properties.extras)) {
@@ -157,78 +140,6 @@ export default {
     changeActiveRouteIndex (index) {
       EventBus.$emit('changeActiveRouteIndex', index)
       EventBus.$emit('activeRouteIndexChanged', index)
-    },
-    /**
-     * When a segment is clicked
-     * prepare the data and emit
-     * and event targeting the highlight
-     * of this segment
-     * @param {*} segment
-     * @param {*} index
-     * @emits highlightPolylineSections
-     */
-    segmentClicked (segment, index) {
-      const sectionTitle = ''
-      const highlightData = {sectionTitle, sections: [] }
-      const segmentData = this.buildExtraHighlightPolylineData(segment, index)
-      highlightData.sections.push(segmentData)
-      EventBus.$emit('highlightPolylineSections', highlightData)
-    },
-    /**
-     * Build the extra info highlighting data
-     * @param {*} segment
-     * @param {*} index
-     * @returns {Object}
-     */
-    buildExtraHighlightPolylineData (segment, index) {
-      const color = constants.segmentHighlightColor
-      const label = `${this.$t('routeDetails.segment')} ${index+1}`
-      const intervals = []
-      for (let key in segment.steps) {
-        let wps = segment.steps[key].way_points
-        intervals.push(wps)
-      }
-      return { intervals, color, label }
-    },
-    /**
-     * Classifies the Heat Stress levels into 3 classes as 0,1,2
-     *
-     * @param rawValue
-     * @returns {number}
-     */
-    classifyHeatStressValues(rawValue) {
-      // console.log('rawValue = ', rawValue)
-      let value
-      if(rawValue >= 0 && rawValue <= 33)
-        value = 0
-      if(rawValue >= 34 && rawValue <= 66)
-        value = 1
-      if(rawValue >= 67)
-        value = 2
-      return value
-    },
-    /**
-     * Gets the summary part of the extrainfo and reduces them into groups of classes classified based on values
-     * in classifyHeatStressValues function and returns the new summary
-     *
-     * @param route
-     * @returns {*[]}
-     */
-    reduceCsvSummaryToThreeClasses(route) {
-      const tempSummary = route.properties.extras['csv'].summary
-      let groupedSummary = lodash.groupBy(tempSummary, summary => this.classifyHeatStressValues(summary.value))
-      let reducedSummary = []
-      lodash.forEach(groupedSummary, summaries => {
-        reducedSummary.push(lodash.reduce(summaries, (acc, cur) => {
-          return {
-            amount: acc.amount + cur.amount,
-            distance: acc.distance + cur.distance,
-            value: this.classifyHeatStressValues(cur.value)
-          }
-        }, {amount: 0, distance: 0, value: 0})
-        )
-      })
-      return reducedSummary
     }
   },
   components: {
