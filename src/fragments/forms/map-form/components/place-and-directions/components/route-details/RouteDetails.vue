@@ -5,9 +5,9 @@
     <div slot="header">
       <h4>{{ $t('routeDetails.legend') }}</h4>
       <div class="legend">
-        <div class="flex-row"><span class="legend-box low"/> {{ $t('routeDetails.legendLow') }}</div>
-        <div class="flex-row"><span class="legend-box mid"/> {{ $t('routeDetails.legendMid') }}</div>
-        <div class="flex-row"><span class="legend-box high"/> {{ $t('routeDetails.legendHigh') }}</div>
+        <div class="flex-row"><span class="legend-box" :style="{backgroundColor: orsDictionary.colors.csv[0]}"/> {{ $t('routeDetails.legendLow') }}</div>
+        <div class="flex-row"><span class="legend-box" :style="{backgroundColor: orsDictionary.colors.csv[1]}"/> {{ $t('routeDetails.legendMid') }}</div>
+        <div class="flex-row"><span class="legend-box" :style="{backgroundColor: orsDictionary.colors.csv[2]}"/> {{ $t('routeDetails.legendHigh') }}</div>
       </div>
     </div>
     <v-expansion-panel slot="content" class="no-shadow" v-if="hasRoutes" expand :value="parsedRoutes.map((_, index) => index+1)">

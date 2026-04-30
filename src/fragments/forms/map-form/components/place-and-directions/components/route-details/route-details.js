@@ -6,6 +6,7 @@ import MapViewData from '@/models/map-view-data'
 import Steps      from './components/steps/Steps'
 import geoUtils   from '@/support/geo-utils'
 import { EventBus } from '@/common/event-bus'
+import orsDictionary from "@/resources/ors-dictionary";
 
 export default {
   props: {
@@ -34,6 +35,9 @@ export default {
     }
   },
   computed: {
+    orsDictionary() {
+      return orsDictionary
+    },
     hasRoutes () {
       return this.localMapViewData.isRouteData
     },

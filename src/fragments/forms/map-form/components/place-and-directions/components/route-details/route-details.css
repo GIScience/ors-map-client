@@ -43,18 +43,6 @@
   margin-right: 5px;
 }
 
-.legend-box.low {
-  background-color: rgb(79, 195, 247);
-}
-
-.legend-box.mid {
-  background-color: rgb(255, 213, 79);
-}
-
-.legend-box.high {
-  background-color: rgb(255, 112, 67);
-}
-
 .flex-row {
   display: flex;
   align-items: center;
