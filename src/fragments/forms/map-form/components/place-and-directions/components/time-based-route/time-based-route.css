@@ -2,3 +2,8 @@
   flex-direction: column;
   width: 100%;
 }
+
+.container {
+  padding-top: 0px;
+  padding-bottom: 2px;
+}

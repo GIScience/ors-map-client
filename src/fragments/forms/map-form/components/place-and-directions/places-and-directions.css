@@ -37,3 +37,15 @@ ul.place-inputs li {
   margin-top: 9px;
   float: left;
 }
+
+h4 {
+  margin: 10px 5px;
+  font-size: 15px;
+}
+
+.seperator {
+  display: block;
+  width: 100%;
+  height: 1px;
+  border-bottom: 2px solid rgb(198, 40, 40);
+}

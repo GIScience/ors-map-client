@@ -1,8 +1,15 @@
 <template>
   <div>
     <v-form style="background:white" @submit.prevent>
-      <template >
+      <template>
+        <span class="seperator"></span>
+        <h4>1. {{ $t('placesAndDirections.citySelection') }}</h4>
         <city-selector></city-selector>
+        <span class="seperator"></span>
+        <h4>2. {{ $t('placesAndDirections.timeBasedRouteHeader') }}</h4>
+        <time-based-route :places="places" :mapViewData="mapViewData"></time-based-route>
+        <span class="seperator"></span>
+        <h4>3. {{ $t('placesAndDirections.planRoute') }}</h4>
         <ul class="place-inputs">
           <draggable v-model="places" @end="onReordered()" handle=".reorder-handle">
             <li :key="index" v-for="(place, index) in getPlaces">
@@ -49,15 +56,6 @@
           </form-actions>
       </v-layout>
       <br/>
-      <box v-if="$store.getters.mode === constants.modes.directions" background="white" no-shadow>
-        <div slot="header">
-          <h3>{{$t('placesAndDirections.timeBasedRouteHeader')}}
-          <!-- : {{new Date().toLocaleDateString('de-DE')}}-->
-          </h3>
-        </div>
-        <time-based-route :places="places" :mapViewData="mapViewData"></time-based-route>
-        <br/>
-      </box>
       <template  v-if="showRouteDetails" >
         <route-details :map-view-data="mapViewData"></route-details>
         <br/>

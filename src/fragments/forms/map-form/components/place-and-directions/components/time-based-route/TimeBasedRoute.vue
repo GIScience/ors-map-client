@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <v-select
       :label="$t('timeBasedRoute.month')"
       :items="monthsLabel"
@@ -8,13 +8,11 @@
       item-text="label"
       item-value="value"
     />
-      <v-layout row>
-      <v-select :label="$t('timeBasedRoute.timeOfDay')" :items="timesOfTheDayLabel"
-        item-text="label"
-        item-value="value"
-        v-model="selectedTOD" v-on:change="departHourChange()"></v-select>
-    </v-layout>
-    <v-divider></v-divider>
+    <v-select :label="$t('timeBasedRoute.timeOfDay')" :items="timesOfTheDayLabel"
+      item-text="label"
+      item-value="value"
+      v-model="selectedTOD" v-on:change="departHourChange()"
+    />
   </div>
 </template>
 
