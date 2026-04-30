@@ -22,5 +22,9 @@ export default {
     routeOpacity: 'Route opacity',
     heatRoute: 'Low solar exposure',
     fastestRoute: 'Fastest route',
+    legendHigh: 'High solar exposure - mostly unshaded',
+    legendMid: 'Moderate solar exposure - partly shaded',
+    legendLow: 'Low solar exposure - mostly shaded',
+    legend: 'Legend'
   }
 }

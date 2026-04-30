@@ -1,11 +1,14 @@
 <template>
 <div>
+
   <box background="white" v-if="hasRoutes" custom-class="expansion-box" no-shadow>
     <div slot="header">
-<!--      <download :map-view-data="mapViewData" ></download>-->
-      <share :url="shareUrl"></share>
-      <print :map-view-data="mapViewData"></print>
-      <h3>{{$t('routeDetails.routeDetails')}}</h3>
+      <h4>{{ $t('routeDetails.legend') }}</h4>
+      <div class="legend">
+        <div class="flex-row"><span class="legend-box low"/> {{ $t('routeDetails.legendLow') }}</div>
+        <div class="flex-row"><span class="legend-box mid"/> {{ $t('routeDetails.legendMid') }}</div>
+        <div class="flex-row"><span class="legend-box high"/> {{ $t('routeDetails.legendHigh') }}</div>
+      </div>
     </div>
     <v-expansion-panel slot="content" class="no-shadow" v-if="hasRoutes" expand :value="parsedRoutes.map((_, index) => index+1)">
       <v-expansion-panel-content style="background: transparent;" class="routes-header" :key="routeIndex" v-for="(route, routeIndex) in parsedRoutes">

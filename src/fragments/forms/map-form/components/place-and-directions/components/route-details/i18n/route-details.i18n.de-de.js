@@ -21,5 +21,9 @@ export default {
     routeOpacity: 'Routendeckkraft',
     heatRoute: 'Niedrige Sonneneinstrahlung',
     fastestRoute: 'Schnellste Route',
+    legendHigh: 'Hohe Solarexposition - wenig Schatten',
+    legendMid: 'Mittlere Solarexposition - teilweise Schatten',
+    legendLow: 'Niedrige Solarexposition - größtenteils Beschattet',
+    legend: 'Legende'
   }
 }
