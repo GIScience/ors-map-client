@@ -48,3 +48,46 @@
   margin: 0;
   margin-top: 22px !important;
 }
+
+.extra-bar-labels {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 2px;
+}
+
+@keyframes show-overflow {
+  to { overflow: visible; }
+}
+
+@keyframes align-left {
+  to { text-align: left; }
+}
+
+@keyframes align-right {
+  to { text-align: right; }
+}
+
+.segment-label {
+  flex: 0 0 var(--seg-width);
+  text-align: center;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #555;
+}
+
+.extra-bar-labels:hover .segment-label {
+  flex: 1 1 0;
+  transition: flex-basis 0.2s ease 0.3s;
+  animation: show-overflow 0.2s 0.3s forwards;
+}
+
+.extra-bar-labels:hover .segment-label:first-child {
+  animation: show-overflow 0.2s 0.3s forwards, align-left 0.2s 0.3s forwards;
+}
+
+.extra-bar-labels:hover .segment-label:last-child {
+  animation: show-overflow 0.2s 0.3s forwards, align-right 0.2s 0.3s forwards;
+}
