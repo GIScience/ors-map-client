@@ -311,7 +311,7 @@ export default {
         // but the GeoJSON format returned by ORS API contains coordinates in the [lon,lat] order.
         // So we invert them to provide what the component expects
         route.geometry.coordinates = GeoUtils.switchLatLonIndex(route.geometry.coordinates)
-        route.properties.opacity=0.3
+        route.properties.opacity=0.7
 
         const extraKey = 'csv'
         const sectionTitle = this.$t('global.' + extraKey)
