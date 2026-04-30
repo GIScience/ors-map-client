@@ -1,7 +1,7 @@
 import orsDictionary from '@/resources/ors-dictionary'
 
 export default {
-  data () {
+  data() {
     return {
       labelsOverflow: false,
       showExtraInfoSection: null
@@ -22,7 +22,7 @@ export default {
      * Return the array of extras or an empty array
      * @returns {Array}
      */
-    routeExtras () {
+    routeExtras() {
       if (this.route.properties.extras?.['steepness']) {
         this.route.properties.extras['steepness'].summary = this.route.properties.extras['steepness'].summary.sort((a, b) => parseInt(a.value) - parseInt(b.value))
       }
@@ -102,15 +102,12 @@ export default {
       const container = document.getElementById('extra-bar-labels' + this.idx)
       if (!container) return
       this.labelsOverflow = Array.from(container.querySelectorAll('.segment-label')).some(label => {
-        const range = document.createRange()
-        range.selectNodeContents(label)
-        const textWidth = range.getBoundingClientRect().width
-        return textWidth > label.clientWidth
+        return label.scrollWidth > label.clientWidth
       })
     }
   },
   mounted() {
-    setTimeout(this.checkForOverflow,100)
+    setTimeout(this.checkForOverflow, 100)
   },
   updated() {
     this.checkForOverflow()
