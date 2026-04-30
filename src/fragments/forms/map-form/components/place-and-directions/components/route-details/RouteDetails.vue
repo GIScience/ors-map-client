@@ -16,7 +16,7 @@
           <h4 >{{ routeIndex === 0 ? $t('routeDetails.heatRoute') : $t('routeDetails.fastestRoute') }}
             ({{ route.summary.distance }})</h4>
             <v-btn icon  v-if="parsedRoutes.length > 1" :title="routeIndex === $store.getters.activeRouteIndex? $t('routeDetails.selectedRoute') : $t('routeDetails.selectRoute')">
-              <v-icon @click.stop="changeActiveRouteIndex(routeIndex)" :color="routeIndex === $store.getters.activeRouteIndex ? dark : 'grey lighten-1'" >{{ routeIndex === $store.getters.activeRouteIndex ? "visibility" : "visibility_off" }}</v-icon>
+              <v-icon @click.stop="changeActiveRouteIndex(routeIndex)" :color="routeIndex === $store.getters.activeRouteIndex ? 'dark' : 'grey lighten-1'" >{{ routeIndex === $store.getters.activeRouteIndex ? "visibility" : "visibility_off" }}</v-icon>
             </v-btn>
 
         </div>
@@ -26,7 +26,7 @@
             <div style="padding:0 0 0 10px">
               <div v-if="route.summary.duration" >{{$t('global.duration')}}:  <b>{{route.summary.duration}} </b></div>
             </div>
-            <route-extras :route="route"></route-extras>
+            <route-extras :route="route" :idx="routeIndex"></route-extras>
           </v-list>
         </v-list>
       </v-expansion-panel-content>

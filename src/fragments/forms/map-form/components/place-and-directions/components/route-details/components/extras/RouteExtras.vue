@@ -12,7 +12,11 @@
                 </v-tooltip>
               </template>
             </div>
-            <div class="extra-bar-labels">
+            <div
+              class="extra-bar-labels"
+              :class="labelsOverflow? 'has-overflow': ''"
+              :id="'extra-bar-labels'+ idx"
+            >
               <template v-for="(summary, index) in routeExtras[extraKey].summary">
                 <div
                   :key="'label-' + index + extraKey"

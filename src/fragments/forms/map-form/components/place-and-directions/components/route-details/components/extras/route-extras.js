@@ -1,11 +1,9 @@
 import orsDictionary from '@/resources/ors-dictionary'
-import {EventBus} from '@/common/event-bus'
-import Utils from '@/support/utils'
-import {buildExtraHighlightPolylineData} from '@/support/heal-utils'
 
 export default {
   data () {
     return {
+      labelsOverflow: false,
       showExtraInfoSection: null
     }
   },
@@ -13,17 +11,10 @@ export default {
     route: {
       Type: Object,
       Required: true
-    }
-  },
-  watch: {
-    route: {
-      handler: function (newVal, oldVal) {
-        // avoid update on map center move
-        let diff = Utils.getObjectsDiff(newVal, oldVal)
-        if (diff.different.length) {
-          this.showFromExistingSetting()
-        }
-      }
+    },
+    idx: {
+      type: Number,
+      required: true
     }
   },
   computed: {
@@ -38,23 +29,7 @@ export default {
       return this.route.properties.extras || []
     }
   },
-  created() {
-    this.showFromExistingSetting()
-  },
   methods: {
-    showFromExistingSetting() {
-      // get current displayed extras
-      let {key: extraKey, value: extraValue, index: index} = this.$store.getters.extraHighlight
-      if (extraKey) {
-        this.showExtraInfoSection = 0  // show extra section
-        // does the active route have the specific extraValue?
-        if (this.routeExtras[extraKey].summary.map(e => e.value).includes(extraValue)) {
-          this.showSection(extraKey, extraValue, index)
-        } else {
-          this.showAllSections(extraKey)
-        }
-      }
-    },
     /**
      * Determines if a given
      * extra must be shown by
@@ -63,7 +38,7 @@ export default {
      * @param {*} extraKey
      * @returns {Boolean}
      */
-    showExtra (extraKey) {
+    showExtra(extraKey) {
       let show = (this.$store.getters.mapSettings[extraKey] === true)
       if (!show) { // check if the extra is being returned in a singular keyed property
         const singular = extraKey.substring(0, extraKey.length - 1)
@@ -78,7 +53,7 @@ export default {
      * @param {*} index
      * @param {*} value
      */
-    colorValue (extraKey, index, value = null) {
+    colorValue(extraKey, index, value = null) {
       let dict = orsDictionary
       let color
       if (value !== null) {
@@ -97,7 +72,7 @@ export default {
      * @param {Integer} index
      * @returns {Object}
      */
-    segmentStyle (extraKey, summary, index) {
+    segmentStyle(extraKey, summary, index) {
       const style = {
         width: summary.amount + '%',
         background: this.colorValue(extraKey, index, summary.value)
@@ -110,7 +85,7 @@ export default {
      * @param {Integer} value
      * @returns {Integer} value
      */
-    getExtraValueLabel (extraKey, value) {
+    getExtraValueLabel(extraKey, value) {
       let dict = orsDictionary
       if (dict[extraKey] && dict[extraKey][value]) {
         const key = dict[extraKey][value]
@@ -122,49 +97,22 @@ export default {
       }
       return value
     },
-    /**
-     * Handle the show section click by
-     * building the object and emitting a
-     * highlightPolylineSections event
-     * that will be caught by the map view
-     * to highlight a given section of a given extra key
-     * @param {String} extraKey
-     * @param {Integer} value
-     * @param {Integer} index
-     * @emits highlightPolylineSections (via EventBus)
-     */
-    showSection (extraKey, value, index) {
-      this.$store.commit('extraHighlight', {key: extraKey, value: value, index: index})
-      const sectionTitle = this.$t('global.' + extraKey).toLowerCase()
-      const color = this.colorValue(extraKey, index)
-      const highlightData = { extraKey, sectionTitle, sections: [{ intervals: [], color }] }
 
-      const polylineData = buildExtraHighlightPolylineData(extraKey, index, value, this.$t)
-      highlightData.sections.push(polylineData)
-      EventBus.$emit('highlightPolylineSections', highlightData)
-    },
-    /**
-     * Handle the show all sections click by
-     * building the object and emitting a
-     * highlightPolylineSections event
-     * that will be caught by the map view
-     * to highlight all sections of a given extra key
-     * @param {String} extraKey
-     * @emits highlightPolylineSections (via EventBus)
-     */
-    showAllSections (extraKey) {
-      this.$store.commit('extraHighlight', {key: extraKey, value: 'all', index: 0})
-      const sectionTitle = this.$t('global.' + extraKey)
-      const highlightData = { extraKey: extraKey, sectionTitle, sections: [] }
-
-      let index = 0
-      for (const summary of this.routeExtras[extraKey].summary) {
-        const polylineData = buildExtraHighlightPolylineData(extraKey, index, summary.value, this.$t)
-        highlightData.sections.push(polylineData)
-        index++
-      }
-      // This is disabled now since we do styling inside map-view.js
-      // EventBus.$emit('highlightPolylineSections', highlightData)
-    },
+    checkForOverflow() {
+      const container = document.getElementById('extra-bar-labels' + this.idx)
+      if (!container) return
+      this.labelsOverflow = Array.from(container.querySelectorAll('.segment-label')).some(label => {
+        const range = document.createRange()
+        range.selectNodeContents(label)
+        const textWidth = range.getBoundingClientRect().width
+        return textWidth > label.clientWidth
+      })
+    }
+  },
+  mounted() {
+    setTimeout(this.checkForOverflow,100)
+  },
+  updated() {
+    this.checkForOverflow()
   }
 }
