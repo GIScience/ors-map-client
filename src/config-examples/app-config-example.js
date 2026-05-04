@@ -50,7 +50,7 @@ const appConfig = {
   supportsIsochrones: false, // If isochrones is supported/enabled in the application
   supportsMapFiltersOnSidebar: true, // if the filters options box is present/enabled in the app
   supportsDirections: true, // If the directions functionality is available
-  sidebarStartsOpenInHighResolution: false, // if the sidebar must start open in high resolution
+  sidebarStartsOpenInHighResolution: true, // if the sidebar must start open in high resolution
   defaultTilesProvider: 'osm', // The default tile provider  (valid values are the `id` property of one of the `mapTileProviders` array below)
   supportsAvoidPolygonDrawing: false, // If the avoid polygon drawing tools must be available on the map view
   distanceMeasureToolAvailable: false, // If the polyline distance measure tool must be available on the map view
