@@ -1,7 +1,7 @@
 
 export default {
   maps: {
-    pageTitle: 'HEAL-Heat avoidance routing',
+    pageTitle: 'openrouteservice: Shaded Edition',
     Places: 'Places',
     isochrones: 'Isochrones',
     placeNameRequired: 'Place name required',
