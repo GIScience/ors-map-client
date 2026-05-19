@@ -92,3 +92,11 @@
 .brands.small {
   height: 170px !important;
 }
+
+@media (max-width:960px) {
+  .medium {
+    width: 160px;
+    height: auto;
+  }
+}
+

@@ -17,7 +17,7 @@
         <v-layout row class="sidebar-header-top" >
           <v-flex xs6 md9>
             <div class="logo-container">
-              <a :href="homeUrl"><img height="52.5" class="small ml-2" :src="getImgSrc('logoImgSrc')" :title="getConfigVal('appName')" :alt="getConfigVal('appName')"></a>
+              <a :href="homeUrl"><img height="52.5" class="medium ml-2" :src="getImgSrc('logoImgSrc')" :title="getConfigVal('appName')" :alt="getConfigVal('appName')"></a>
             </div>
           </v-flex>
           <v-spacer></v-spacer>

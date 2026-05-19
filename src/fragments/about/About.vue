@@ -4,7 +4,7 @@
     </div>
     <div v-if="showDefaultAboutContent" class="about-container" ref="aboutContainer">
       <header style="margin-top: 0">
-        <img alt="Main about page logo" ref="aboutLogo" height="auto" class="logo" :src="getImgSrc('logoImgSrc')" width="200px" />
+        <img alt="Main about page logo" ref="aboutLogo" height="auto" class="logo" :src="getImgSrc('logoImgSrc')" width="300px" />
       </header>
       <v-divider></v-divider>
       <section>
