@@ -19,14 +19,16 @@ pipeline {
                 IMAGE_TAG = "${env.TAG_NAME ? env.TAG_NAME : 'latest'}"
             }
             steps {
-                script {
-                    docker.withRegistry('https://repo.heigit.org', 'docker-heigit-ci-service') {
-                        dockerImage = docker.build('heigit/heal-map-client:${IMAGE_TAG}')
-                        dockerImage.push()
-                        helperImage = docker.build('heigit/heal-map-client-helper-geojson-import:${IMAGE_TAG}', '-f ./helper-img/Dockerfile ./helper-img')
-                        helperImage.push()
-                    }
+                withCredentials([usernamePassword(credentialsId: 'docker-heigit-ci-service', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh 'docker login -p $PASSWORD -u $USERNAME repo.heigit.org'
                 }
+                sh '''
+                echo $IMAGE_TAG
+                docker build -t repo.heigit.org/heigit/heal-map-client:${IMAGE_TAG} .
+                docker push repo.heigit.org/heigit/heal-map-client:${IMAGE_TAG}
+                docker build -t repo.heigit.org/heal-map-client-helper-geojson-import:${IMAGE_TAG} -f ./helper-img/Dockerfile ./helper-img
+                docker push repo.heigit.org/heal-map-client-helper-geojson-import:${IMAGE_TAG}
+                '''
             }
         }
     }
