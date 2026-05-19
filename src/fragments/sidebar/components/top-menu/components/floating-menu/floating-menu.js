@@ -45,6 +45,14 @@ export default {
           icon: 'info'
         },
         {
+          id: 'shadedRouting',
+          show: true,
+          href: this.$t('floatingTopMenu.shadedRoutingLink'),
+          title: this.$t('floatingTopMenu.shadedRouting'),
+          text: this.$t('floatingTopMenu.shadedRouting'),
+          icon: 'wb_sunny'
+        },
+        {
           id: 'openrouteserviceAPI',
           show: true,
           href: constants.links.ors,
