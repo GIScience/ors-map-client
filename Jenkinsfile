@@ -15,12 +15,15 @@ pipeline {
             }
         }
         stage('Build Container Image') {
+            environment {
+                IMAGE_TAG = "${env.TAG_NAME ? env.TAG_NAME : 'latest'}"
+            }
             steps {
                 script {
                     docker.withRegistry('https://repo.heigit.org', 'docker-heigit-ci-service') {
-                        dockerImage = docker.build('heigit/heal-map-client:latest')
+                        dockerImage = docker.build('heigit/heal-map-client:${IMAGE_TAG}')
                         dockerImage.push()
-                        helperImage = docker.build('heigit/heal-map-client-helper-geojson-import:latest', '-f ./helper-img/Dockerfile ./helper-img')
+                        helperImage = docker.build('heigit/heal-map-client-helper-geojson-import:${IMAGE_TAG}', '-f ./helper-img/Dockerfile ./helper-img')
                         helperImage.push()
                     }
                 }
