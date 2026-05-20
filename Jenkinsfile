@@ -26,8 +26,8 @@ pipeline {
                 echo $IMAGE_TAG
                 docker build -t repo.heigit.org/heigit/heal-map-client:${IMAGE_TAG} .
                 docker push repo.heigit.org/heigit/heal-map-client:${IMAGE_TAG}
-                docker build -t repo.heigit.org/heal-map-client-helper-geojson-import:${IMAGE_TAG} -f ./helper-img/Dockerfile ./helper-img
-                docker push repo.heigit.org/heal-map-client-helper-geojson-import:${IMAGE_TAG}
+                docker build -t repo.heigit.org/heigit/heal-map-client-helper-geojson-import:${IMAGE_TAG} -f ./helper-img/Dockerfile ./helper-img
+                docker push repo.heigit.org/heigit/heal-map-client-helper-geojson-import:${IMAGE_TAG}
                 '''
             }
         }
