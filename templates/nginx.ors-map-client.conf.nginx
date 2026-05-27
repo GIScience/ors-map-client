@@ -36,6 +36,15 @@ server {
   text/x-component
   text/x-cross-domain-policy;
 
+  # Explicit location for index.json to disable caching
+  location = /aois/index.json {
+    root   /usr/share/nginx/html;
+    add_header Cache-Control 'no-store, no-cache';
+    if_modified_since off;
+    expires off;
+    etag off;
+  }
+  
   location / {
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
