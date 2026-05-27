@@ -36,6 +36,15 @@ server {
   text/x-component
   text/x-cross-domain-policy;
 
+  # Regex match: any path containing /base/aois/ and ending in .geojson
+  location ~* /aois/.*\.geojson$ {
+    root   /usr/share/nginx/html;
+    add_header Cache-Control "no-store, no-cache";	  
+    if_modified_since off;
+    expires off;
+    etag off;
+  }
+
   # Explicit location for index.json to disable caching
   location = /aois/index.json {
     root   /usr/share/nginx/html;
