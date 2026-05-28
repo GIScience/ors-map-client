@@ -53,8 +53,19 @@ server {
     expires off;
     etag off;
   }
+
+  # Explicit location to avoid caching of our main.html page
+  
+  location = /index.html {
+    root /usr/share/nginx/html;
+    add_header Cache-Control "no-store, no-cache, must-revalidate";
+  }
   
   location / {
+    # We force browser cache cleaning for a while
+    add_header Clear-Site-Data '"cache"'; 
+
+
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
     proxy_set_header Host $host;
