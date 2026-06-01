@@ -10,6 +10,14 @@
               </profile-selector-option>
             </v-flex>
           </v-item>
+          <v-item v-if="appConfig.showLinkToShadedRouting" :key="'shaded-routing'">
+            <v-btn flat class="no-padding no-margin shaded-ors-button"
+              :title="($t('profileSelector.shadedRouting'))"
+              :color="'dark'" :key="'shaded-routing'"
+              @click="openShadedORS">
+              <v-icon large>wb_sunny</v-icon>
+            </v-btn>
+          </v-item>
         </v-layout>
       </div>
     </v-item-group>

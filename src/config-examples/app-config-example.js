@@ -57,6 +57,7 @@ const appConfig = {
   supportsMyLocationBtn: true, // If the `my location` button is supported on the map view
   initialZoomLevel: 6, // The initial map view zoom level
   initialMapMaxZoom: 18, // The initial map view max zoom
+  showLinkToShadedRouting: true,
 
 
   // The map tile providers available. At least one must be present

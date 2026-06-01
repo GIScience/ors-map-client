@@ -5,6 +5,7 @@ import ProfileSelectorOption from './components/profile-selector-option/ProfileS
 import lodash from 'lodash'
 import constants from '@/resources/constants'
 import {EventBus} from '@/common/event-bus'
+import appConfig from '@/config/app-config'
 
 export default {
   data: () => ({
@@ -15,6 +16,9 @@ export default {
     vehicleType: null
   }),
   computed: {
+    appConfig() {
+      return appConfig
+    },
     currentNestedItem () {
       return this.activeVehicleType
     },
@@ -46,6 +50,9 @@ export default {
     }
   },
   methods: {
+    openShadedORS() {
+      window.open('https://shaded.openrouteservice.org', '_blank');
+    },
     profileSelected (data) {
       this.setProfile(data.profileSlug, data.vehicleType).then(() => {
         this.notifyProfileChanged()

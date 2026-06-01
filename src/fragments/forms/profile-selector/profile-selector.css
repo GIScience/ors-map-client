@@ -11,11 +11,22 @@
 
 .profile-options-wrapper {
   margin-left: 2px;
-  max-width: 275px;
   padding-top: 5px;
   padding-right: 10px;
   border-radius: 4px;
   border: 1px solid #cbced1;
   background-color: #f5f5f5;
   float: left;
+}
+
+.shaded-ors-button {
+  min-width: 35px;
+  margin-bottom: 5px;
+  padding-left: 8px;
+  padding-right: 5px;
+  transition: none;
+}
+
+.shaded-ors-button::before {
+  background-color: white !important;
 }

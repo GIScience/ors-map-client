@@ -1,6 +1,7 @@
 
 export default {
   profileSelector: {
-    activeProfile: 'Active'
+    activeProfile: 'Active',
+    shadedRouting: 'Shaded Routing - Germany only'
   }
 }
