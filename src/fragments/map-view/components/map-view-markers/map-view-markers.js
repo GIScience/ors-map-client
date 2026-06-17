@@ -2,6 +2,7 @@ import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
 import constants from '@/resources/constants'
 import {LMarker, LPopup} from 'vue2-leaflet'
 import appConfig from '@/config/app-config'
+import {EventBus} from '@/common/event-bus'
 
 import 'leaflet.markercluster/dist/MarkerCluster.css'
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
@@ -58,7 +59,7 @@ export default {
       if (this.isPoi || this.$store.getters.embed) {
         return false
       }
-      let markerRemovableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones, constants.modes.place]
+      let markerRemovableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones, constants.modes.place, constants.modes.optimization]
       let isRemovable = markerRemovableModes.includes(this.mode)
       return isRemovable
     },
@@ -71,9 +72,15 @@ export default {
       if (this.isPoi || this.$store.getters.embed) {
         return false
       }
-      const draggableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones]
+      const draggableModes = [constants.modes.directions, constants.modes.roundTrip, constants.modes.isochrones, constants.modes.optimization]
       const isDraggable = draggableModes.includes(this.mode)
       return isDraggable
+    },
+
+    modeIsOptimization () {
+      if (this.mode === constants.modes.optimization) {
+        return true
+      }
     },
 
     /**
@@ -124,8 +131,27 @@ export default {
     removePlace(index) {
       this.$emit('removePlace', index)
     },
+    editPlace(index) {
+      if (this.markers[index].job) {
+        EventBus.$emit('editJob', this.markers[index].job.id)
+      } else if (this.markers[index].vehicle) {
+        EventBus.$emit('editVehicle', this.markers[index].vehicle.id)
+      }
+    },
     markAsDirectFromHere (index) {
       this.$emit('markAsDirectFromHere', index)
+    },
+
+    skillIds(skills) {
+      let ids = ''
+      for (const skill of skills) {
+        if(ids === ''){
+          ids = skill.id
+        } else {
+          ids = ids + ', ' + skill.id
+        }
+      }
+      return ids
     }
   },
 }

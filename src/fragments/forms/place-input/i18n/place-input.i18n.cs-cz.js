@@ -2,6 +2,7 @@ export default {
   placeInput: {
     findAPlace: 'Najít místo',
     place: 'Místo',
+    location: 'Location',
     addRouteStop: 'Přidat zastávku na trase',
     routePlace: 'Zastávka na trase',
     routeDestination: 'Cíl',

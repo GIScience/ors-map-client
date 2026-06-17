@@ -28,10 +28,9 @@ describe('download functionality', function () {
         'profile': 'driving-car',
         'preference': 'recommended'
       })
-    // TODO: extend download tests. Aliasing the readFile with as(..) doesn't work
-    // cy.get('@response').its('places[0].placeName').should('eq', 'Mannheim, BW,Germany')
-    // cy.get('@response').its('mode').should('eq', 'directions')
-    // cy.get('@response').its('isRouteData').should('eq', 'directions')
+    cy.readFile(filePath).its('places[0].placeName').should('eq', 'Mannheim, BW,Germany')
+    cy.readFile(filePath).its('mode').should('eq', 'directions')
+    cy.readFile(filePath).its('isRouteData').should('eq', true)
   })
   it('downloads a geojson file', () => {
     const filePath = downloadFile('GeoJSON', 'json')

@@ -180,6 +180,26 @@ const orsParamsParser = {
   },
 
   /**
+   * Build optimization search args
+   * @param {Array} jobs
+   * @param {Array} vehicles
+   * @returns {Object} args
+   */
+  buildOptimizationArgs: (jobs, vehicles) => {
+    let jsonJobs = []
+    let jsonVehicles = []
+    for (const job of jobs) {
+      jsonJobs.push(job.toJSON())
+    }
+    for (const v of vehicles) {
+      jsonVehicles.push(v.toJSON())
+    }
+    return new Promise((resolve) => {
+      resolve({'jobs': jsonJobs, 'vehicles': jsonVehicles,'options':{'g':'true'}})
+    })
+  },
+
+  /**
    * Build routing request args object
    * @param {Array} places
    * @returns {Object} args

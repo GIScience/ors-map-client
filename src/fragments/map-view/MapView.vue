@@ -82,7 +82,7 @@
       </l-circle-marker>
       <template  v-for="(alternativeRoute) in alternativeRoutes">
         <ors-l-polyline :key="alternativeRoute.properties.index" not-active
-          :color="alternativeRouteColor"
+          :color="alternativeRouteColor(alternativeRoute)"
           @click="alternativeRouteIndexSelected(alternativeRoute.properties.index, $event)"
           :route="alternativeRoute" >
         </ors-l-polyline>
@@ -90,6 +90,7 @@
       <template v-if="displayActiveRouteData">
         <ors-l-polyline :draggable="isPolylineDraggable"
           @rightClicked="mapRightClick"
+          :color="mode === 'optimization' ? constants.vehicleColors[activeRouteData.vehicle] : theme.primary"
           :focused-poly-index="highlightedRoutePointIndex"
           @addStopViaPolylineDrag="addStopViaPolylineDrag"
           :route="activeRouteData"

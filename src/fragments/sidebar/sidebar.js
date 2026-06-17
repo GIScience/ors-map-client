@@ -6,6 +6,7 @@ import Footer from '@/fragments/footer/Footer'
 import appConfig from '@/config/app-config'
 import utils from '@/support/utils'
 import {EventBus} from '@/common/event-bus'
+import constants from '@/resources/constants'
 
 
 export default {
@@ -41,9 +42,20 @@ export default {
       return url
     },
     sidebarContentHeightFormula () {
-      const formula = `calc(100% - ${this.$store.getters.sidebarHeaderHeight}px)`
+      const formula = `calc(100% - ${this.headerHeight})`
       return formula
-    }
+    },
+    profileSelectorVisisble () {
+      const mode = this.$store.getters.mode
+      return mode !== constants.modes.optimization
+    },
+    headerHeight() {
+      if (this.profileSelectorVisisble) {
+        return this.$store.getters.sidebarHeaderHeight + 'px'
+      } else {
+        return this.$store.getters.sidebarHeaderHeight - 117 + 'px'
+      }
+    },
   },
   methods: {
     getConfigVal (key) {

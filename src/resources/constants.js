@@ -1,3 +1,5 @@
+import theme from '@/config/theme'
+
 const constants = {
   apiVersion: '5.0',
   orsPublicHost: 'https://maps.openrouteservice.org',
@@ -8,7 +10,8 @@ const constants = {
     geocodeSearch: 'pgeocode/search',
     autocomplete: 'pgeocode/autocomplete',
     pois: 'ppois',
-    reverseGeocode: 'pgeocode/reverse'
+    reverseGeocode: 'pgeocode/reverse',
+    optimization: 'poptimization'
   },
   endpoints: {
     directions: 'directions',
@@ -16,7 +19,8 @@ const constants = {
     geocodeSearch: 'geocode/search',
     autocomplete: 'geocode/autocomplete',
     pois: 'pois',
-    reverseGeocode: 'geocode/reverse'
+    reverseGeocode: 'geocode/reverse',
+    optimization: 'optimization'
   },
   roundTripFilterName: 'round_trip',
   avoidPolygonsFilterName: 'avoid_polygons',
@@ -28,6 +32,7 @@ const constants = {
   dataOrigins: {
     directions: '/directions',
     isochrones: '/isochrones',
+    optimization: '/optimization',
     fileImporter: 'fileImporter'
   },
   modes: {
@@ -36,19 +41,22 @@ const constants = {
     place: 'place',
     search: 'search',
     isochrones: 'isochrones',
+    optimization: 'optimization',
     pageNotFound: 'pageNotFound'
   },
   importableModes: {
     roundTrip: 'roundtrip',
     directions: 'directions',
-    isochrones: 'isochrones'
+    isochrones: 'isochrones',
+    optimization: 'optimization'
   },
   services: {
     directions: 'directions',
     geocodeSearch: 'geocodeSearch',
     autocomplete: 'autocomplete',
     reverseGeocode: 'reverseGeocode',
-    isochrones: 'isochrones'
+    isochrones: 'isochrones',
+    optimization: 'optimization'
   },
   filterTypes: {
     wrapper: 'wrapper',
@@ -92,6 +100,11 @@ const constants = {
     osm: 'https://osm.org',
     disaster: 'https://disaster.openrouteservice.org',
     ors: 'https://openrouteservice.org'
+  },
+  vehicleColors: {
+    1: theme.primary,
+    2: theme.info,
+    3: theme.success
   }
 }
 

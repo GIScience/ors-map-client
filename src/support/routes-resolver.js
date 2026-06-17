@@ -26,6 +26,9 @@ const resolver = {
   },
   isochronesPath: () => {
     return '/reach/'
+  },
+  optimizationPath: () => {
+    return '/optimize/'
   }
 }
 

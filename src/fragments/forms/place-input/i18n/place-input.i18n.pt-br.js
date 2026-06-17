@@ -3,6 +3,7 @@ export default {
   placeInput: {
     findAPlace: 'Buscar por local',
     place: 'Local',
+    location: 'Location',
     addRouteStop: 'Adicionar uma parada',
     routePlace: 'Parada',
     routeDestination: 'Destino',

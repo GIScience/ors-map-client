@@ -12,6 +12,7 @@ import roundtripMode from './strategies/roundtrip-mode'
 import searchMode from './strategies/search-mode'
 import placeMode from './strategies/place-mode'
 import isochronesMode from './strategies/isochrones-mode'
+import optimizationMode from './strategies/optimization-mode'
 
 /**
  * AppState
@@ -23,7 +24,7 @@ class AppMode {
    */
   constructor (modeTo) {
     this.modeTo = modeTo
-    const modes = { directionsMode, placeMode, roundtripMode, searchMode, isochronesMode }
+    const modes = { directionsMode, placeMode, roundtripMode, searchMode, isochronesMode , optimizationMode}
 
     const mode = `${this.modeTo}Mode`
     this.targetMode = new modes[mode]()

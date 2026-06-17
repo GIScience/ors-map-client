@@ -1,0 +1,13 @@
+.edit-header-btn {
+  padding: 0 20px;
+  min-width: 5px;
+  float: right;
+  margin: 0;
+  height: 24px;
+  background: white;
+}
+
+.edit-btn {
+  float: right;
+  margin-left: 30px;
+}

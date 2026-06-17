@@ -1,12 +1,12 @@
 <template>
-  <div class="option-container">
+  <div id="profile-selector-option" class="option-container">
     <v-btn flat class="profile-option-btn no-padding no-margin"
       :title="getProfileTitle(profile.slug)" :class="{'active': rootProfileActive}"
       :color="rootProfileActive ? 'primary' : 'dark'" :key="profile.slug"
       @click="profileSelected(profile.slug)">
       <v-icon large>{{profile.icon}}</v-icon>
     </v-btn>
-    <v-menu attach="body" v-if="profile.vehicleTypes" class="profile-option-menu" v-model="subProfileIsOpen"
+    <v-menu attach="profile-selector-option" v-if="profile.vehicleTypes" class="profile-option-menu" v-model="subProfileIsOpen"
       transition="slide-y-transition" close-on-click close-on-content-click :open-on-hover="!isMobile" bottom>
       <v-btn icon class="profile-menu-activator" slot="activator">
         <v-icon>keyboard_arrow_down</v-icon>
@@ -22,7 +22,7 @@
         </template>
       </v-list>
     </v-menu>
-    <v-menu v-else-if="profile.nestedProfiles" class="profile-option-menu" v-model="subProfileIsOpen" attach="body"
+    <v-menu v-else-if="profile.nestedProfiles" class="profile-option-menu" v-model="subProfileIsOpen" attach="profile-selector-option"
       transition="slide-y-transition" close-on-click close-on-content-click :open-on-hover="!isMobile" bottom>
       <v-btn icon class="profile-menu-activator" slot="activator">
         <v-icon>keyboard_arrow_down</v-icon>
