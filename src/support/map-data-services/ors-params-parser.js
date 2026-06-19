@@ -26,9 +26,10 @@ try {
   if (url.length > 1) {
     urlParams = new URLSearchParams(url[1])
   }
+  const country = urlParams.get('country') || appConfig.defaultCountry
   const state = urlParams.get('state') || appConfig.defaultState
   const city = urlParams.get('city') || appConfig.defaultCity
-  fetch(`/aois/${state}/${city}.geojson`)
+  fetch(`/aois/${country}/${state}/${city}.geojson`)
     .then(result => result.json())
     .then(json => {
       region_bbox = Leaflet.geoJSON(json).getBounds()

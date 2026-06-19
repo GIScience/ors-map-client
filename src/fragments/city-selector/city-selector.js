@@ -12,53 +12,79 @@ export default {
     }
 
     return {
+      selectedCountry: urlParams.get('country') || appConfig.defaultCountry,
       selectedState: urlParams.get('state') || appConfig.defaultState,
       selectedCity: urlParams.get('city') || appConfig.defaultCity,
-      aois: {}
+      countries: {}
     }
   },
 
   async created() {
     try {
-      const res = await fetch(`/aois/index.json`)
-      this.aois = await res.json()
+      const res = await fetch('/aois/countries.json')
+      this.countries = await res.json()
     } catch (e) {
-      console.error('Failed to load AOIs:', e)
+      console.error('Failed to load countries:', e)
     }
   },
 
   computed: {
-    stateCityMap() {
+    countryStateCityMap() {
       const map = {}
 
-      Object.entries(this.aois).forEach(([rawState, cities]) => {
-        map[rawState] = {
-          text: this.prepareString(rawState),
-          value: rawState,
-          cities: cities.map(rawCity => ({
-            text: this.prepareString(rawCity),
-            value: rawCity
-          }))
+      Object.entries(this.countries).forEach(([rawCountry, states]) => {
+        const stateMap = {}
+
+        Object.entries(states).forEach(([rawState, cities]) => {
+          stateMap[rawState] = {
+            text: this.prepareString(rawState),
+            value: rawState,
+            cities: cities.map(rawCity => ({
+              text: this.prepareString(rawCity),
+              value: rawCity
+            }))
+          }
+        })
+
+        map[rawCountry] = {
+          text: this.prepareString(rawCountry),
+          value: rawCountry,
+          states: stateMap
         }
       })
 
       return map
     },
 
+    countryOptions() {
+      return Object.values(this.countryStateCityMap)
+        .sort((a, b) => a.text.localeCompare(b.text))
+    },
+
     states() {
-      return Object.values(this.stateCityMap)
+      if (!this.selectedCountry) return []
+      return Object.values(this.countryStateCityMap[this.selectedCountry]?.states || {})
         .sort((a, b) => a.text.localeCompare(b.text))
     },
 
     cities() {
-      if (!this.selectedState) return []
-      return (this.stateCityMap[this.selectedState]?.cities || [])
+      if (!this.selectedCountry || !this.selectedState) return []
+      return (this.countryStateCityMap[this.selectedCountry]?.states[this.selectedState]?.cities || [])
         .sort((a, b) => a.text.localeCompare(b.text))
     }
   },
   watch: {
+    selectedCountry(newCountry) {
+      const states = Object.values(this.countryStateCityMap[newCountry]?.states || {})
+      if (states.length === 1) {
+        this.selectedState = states[0].value
+      } else {
+        this.selectedState = null
+        this.selectedCity = null
+      }
+    },
     selectedState(newState) {
-      const cities = this.stateCityMap[newState]?.cities || []
+      const cities = this.countryStateCityMap[this.selectedCountry]?.states[newState]?.cities || []
       if (cities.length === 1) {
         this.selectedCity = cities[0].value
         this.changeCity()
@@ -79,6 +105,7 @@ export default {
       this.$router.push({
         name: 'MapLocation',
         query: {
+          country: this.selectedCountry,
           state: this.selectedState,
           city: this.selectedCity,
         }
@@ -86,7 +113,7 @@ export default {
 
       EventBus.$emit(
         'city-change',
-        this.selectedState + '/' + this.selectedCity
+        this.selectedCountry + '/' + this.selectedState + '/' + this.selectedCity
       )
     }
   }
