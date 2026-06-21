@@ -1981,16 +1981,16 @@ export default {
         })
       }
     },
-    loadRegion(state, city) {
+    loadRegion(country, state, city) {
       try {
-        fetch(`/aois/${state}/${city}.geojson`)
+        fetch(`/aois/${country}/${state}/${city}.geojson`)
           .then(result => result.json())
           .then(json => {
             this.region = json
             this.addRegionOfInterest()
           })
       } catch (e) {
-        console.error(`Error loading region for ${state}/${city}:`, e)
+        console.error(`Error loading region for ${country}/${state}/${city}:`, e)
       }
     },
     /**
@@ -2032,10 +2032,10 @@ export default {
         }
       })
 
-      EventBus.$on('city-change', (stateCityPath) => {
-        const [state, city] = stateCityPath.split('/')
-        if (state && city) {
-          context.loadRegion(state, city)
+      EventBus.$on('city-change', (countryStateCityPath) => {
+        const [country, state, city] = countryStateCityPath.split('/')
+        if (country && state && city) {
+          context.loadRegion(country, state, city)
         }
       })
     },
@@ -2105,10 +2105,11 @@ export default {
       if (url.length > 1) {
         urlParams = new URLSearchParams(url[1])
       }
+      const initialCountry = urlParams.get('country') || appConfig.defaultCountry
       const initialState = urlParams.get('state') || appConfig.defaultState
       const initialCity = urlParams.get('city') || appConfig.defaultCity
 
-      this.loadRegion(initialState, initialCity)
+      this.loadRegion(initialCountry, initialState, initialCity)
     } catch (e) {
       console.error('Error loading region config:', e)
     }

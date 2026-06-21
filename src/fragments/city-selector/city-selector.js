@@ -35,19 +35,19 @@ export default {
       Object.entries(this.countries).forEach(([rawCountry, states]) => {
         const stateMap = {}
 
-        Object.entries(states).forEach(([rawState, cities]) => {
+        Object.entries(states || {}).forEach(([rawState, cities]) => {
           stateMap[rawState] = {
-            text: this.prepareString(rawState),
+            text: this.localizedName("states", rawState),
             value: rawState,
-            cities: cities.map(rawCity => ({
-              text: this.prepareString(rawCity),
+            cities: (cities || []).map((rawCity) => ({
+              text: this.localizedName("cities", rawCity),
               value: rawCity
             }))
           }
         })
 
         map[rawCountry] = {
-          text: this.prepareString(rawCountry),
+          text: this.localizedName("countries", rawCountry),
           value: rawCountry,
           states: stateMap
         }
@@ -94,6 +94,10 @@ export default {
     }
   },
   methods: {
+    localizedName(category, slug) {
+      const key = `citySelector.places.${category}.${slug}`
+      return this.$te(key) ? this.$t(key) : this.prepareString(slug)
+    },
     prepareString(s) {
       return (String(s[0]).toUpperCase() + String(s).slice(1))
         .replace('ae', 'ä')
