@@ -9,7 +9,28 @@ import lodash from 'lodash'
 import appConfig from '@/config/app-config'
 import Leaflet from 'leaflet'
 import {EventBus} from '@/common/event-bus'
+import {getTimeOfDay, monthToDOY} from '@/support/heal-utils'
 
+function adjustCSVColumn(input) {
+  var column = input
+  if (!column) {
+    const currentTime = new Date()
+    const currentHour = currentTime.getHours()
+    const currentMinute = currentTime.getMinutes()
+    const doy = monthToDOY(currentTime.getMonth())
+    const selectedTOD = getTimeOfDay(currentHour, currentMinute)
+    column = `${doy}_${selectedTOD}`
+  }
+
+  OrsMapFilters
+    .find(i => i.name === 'options').props
+    .find(i => i.name === 'profile_params').props
+    .find(i => i.name === 'weightings').props
+    .find(i => i.name === 'csv_column').value = column
+}
+
+EventBus.$on('new-csv-column', (column) => adjustCSVColumn(column))
+adjustCSVColumn()
 
 let region_bbox = []
 
@@ -63,7 +84,7 @@ const orsParamsParser = {
     const args = {
       text: placeName,
       size: 8,
-      boundary_bbox: [[region_bbox._southWest.lat,region_bbox._southWest.lng ], [ region_bbox._northEast.lat, region_bbox._northEast.lng]]
+      boundary_bbox: [[region_bbox._southWest.lat, region_bbox._southWest.lng], [region_bbox._northEast.lat, region_bbox._northEast.lng]]
     }
 
     orsParamsParser.setFilters(args, OrsMapFilters, constants.services.autocomplete)
