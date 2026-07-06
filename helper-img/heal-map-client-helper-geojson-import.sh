@@ -17,11 +17,13 @@ mkdir -p aois
 
 while IFS= read -r state; do
   while IFS= read -r city; do
-    echo "  Downloading aois/${state}/${city}.geojson..."
+    echo "  Downloading germany/aois/${state}/${city}.geojson..."
     rclone copyto \
       heal:/"$HEAL_BUCKET"/"$HEAL_PREFIX"/output/aois/germany/"${state}"/"${city}".geojson \
       ./aois/"${state}"/"${city}".geojson --quiet
   done < <(jq -r --arg s "$state" '.[$s][]' ./aois/index.json)
 done < <(jq -r 'keys[]' ./aois/index.json)
+
+find ./aois
 
 echo "HEAL GeoJSON import completed successfully."
