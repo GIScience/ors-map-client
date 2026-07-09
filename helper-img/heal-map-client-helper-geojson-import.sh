@@ -24,6 +24,7 @@ while IFS= read -r country; do
     done < <(jq -r --arg c "$country" --arg s "$state" '.[$c][$s][]' ./aois/countries.json)
   done < <(jq -r --arg c "$country" '.[$c] | keys[]' ./aois/countries.json)
 done < <(jq -r 'keys[]' ./aois/countries.json)
+
 find ./aois
 
 echo "HEAL GeoJSON import completed successfully."
