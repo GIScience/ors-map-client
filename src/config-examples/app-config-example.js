@@ -23,6 +23,7 @@ const appConfig = {
     setCustomMenuIcons: true, // If the icons of the menu loaded must be customized via (only necessary if useORSMenu is true)
     baseMenuExternalUrl: 'https://openrouteservice.org' // The base url to retrieve the menu items
   },
+  defaultCountry: 'germany',
   defaultState: 'baden-wuerttemberg',
   defaultCity: 'heidelberg',
   defaultLocale: 'de-de', // only set as default a locale that is present in the app. By default, they are: 'en-us', 'de-de' and 'pt-br'

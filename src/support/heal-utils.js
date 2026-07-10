@@ -1,4 +1,4 @@
-import orsDictionary from "@/resources/ors-dictionary";
+import orsDictionary from '@/resources/ors-dictionary'
 import lodash from 'lodash'
 
 function getExtraValueLabel(extraKey, value, $t) {

@@ -7,7 +7,7 @@ import Info from '@/fragments/dialogs/info/Info'
 import MainMenu from '@/common/main-menu'
 import utils from '@/support/utils'
 import {EventBus} from '@/common/event-bus'
-import CitySelector from '@/fragments/city-selector/CitySelector.vue';
+import CitySelector from '@/fragments/city-selector/CitySelector.vue'
 
 
 export default {

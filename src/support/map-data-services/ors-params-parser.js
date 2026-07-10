@@ -33,7 +33,18 @@ EventBus.$on('new-csv-column', (column) => adjustCSVColumn(column))
 adjustCSVColumn()
 
 let region_bbox = []
+
+// aois/ path segments are slugs like 'baden-wuerttemberg' or 'heidelberg' - reject
+// anything else (e.g. '..', '/', encoded path traversal) before it reaches fetch().
+const AOI_SEGMENT_PATTERN = /^[a-z0-9-]+$/
+const isValidAoiSegment = (segment) => typeof segment === 'string' && AOI_SEGMENT_PATTERN.test(segment)
+
 EventBus.$on('city-change', (path) => {
+  const segments = path.split('/')
+  if (segments.length !== 3 || !segments.every(isValidAoiSegment)) {
+    console.error('Invalid city-change path, ignoring:', path)
+    return
+  }
   fetch(`/aois/${path}.geojson`)
     .then(result => result.json())
     .then(json => {
@@ -47,9 +58,13 @@ try {
   if (url.length > 1) {
     urlParams = new URLSearchParams(url[1])
   }
+  const country = urlParams.get('country') || appConfig.defaultCountry
   const state = urlParams.get('state') || appConfig.defaultState
   const city = urlParams.get('city') || appConfig.defaultCity
-  fetch(`/aois/${state}/${city}.geojson`)
+  if (![country, state, city].every(isValidAoiSegment)) {
+    throw new Error(`Invalid country/state/city in URL: ${country}/${state}/${city}`)
+  }
+  fetch(`/aois/${country}/${state}/${city}.geojson`)
     .then(result => result.json())
     .then(json => {
       region_bbox = Leaflet.geoJSON(json).getBounds()
