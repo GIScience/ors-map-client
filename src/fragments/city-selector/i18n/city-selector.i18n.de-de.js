@@ -6,8 +6,50 @@ export default {
     city: 'Stadt',
     places: {
       countries: {
+        albania: 'Albanien',
+        andorra: 'Andorra',
+        austria: 'Österreich',
+        belgium: 'Belgien',
+        'bosnia-and-herzegovina': 'Bosnien und Herzegowina',
+        bulgaria: 'Bulgarien',
+        croatia: 'Kroatien',
+        cyprus: 'Zypern',
+        czechia: 'Tschechien',
+        denmark: 'Dänemark',
+        estonia: 'Estland',
+        finland: 'Finnland',
+        france: 'Frankreich',
         germany: 'Deutschland',
-        austria: 'Österreich'
+        greece: 'Griechenland',
+        hungary: 'Ungarn',
+        iceland: 'Island',
+        ireland: 'Irland',
+        italy: 'Italien',
+        kosovo: 'Kosovo',
+        latvia: 'Lettland',
+        liechtenstein: 'Liechtenstein',
+        lithuania: 'Litauen',
+        luxembourg: 'Luxemburg',
+        malta: 'Malta',
+        moldova: 'Moldau',
+        monaco: 'Monaco',
+        montenegro: 'Montenegro',
+        netherlands: 'Niederlande',
+        'north-macedonia': 'Nordmazedonien',
+        norway: 'Norwegen',
+        poland: 'Polen',
+        portugal: 'Portugal',
+        romania: 'Rumänien',
+        'san-marino': 'San Marino',
+        serbia: 'Serbien',
+        slovakia: 'Slowakei',
+        slovenia: 'Slowenien',
+        spain: 'Spanien',
+        sweden: 'Schweden',
+        switzerland: 'Schweiz',
+        turkey: 'Türkei',
+        ukraine: 'Ukraine',
+        'united-kingdom': 'Vereinigtes Königreich'
       },
       states: {
         'baden-wuerttemberg': 'Baden-Württemberg',
@@ -33,12 +75,31 @@ export default {
         tirol: 'Tirol'
       },
       // Only cities whose German name differs from the slug-derived
-      // fallback (prepareString) need an entry here.
+      // fallback (prepareString) need an entry here. German exonyms are
+      // only used where they are the regular form in everyday German
+      // (e.g. Prag, Warschau) - not for archaic ones (Laibach, Pressburg).
       cities: {
-        muenchen: 'München',
-        koeln: 'Köln',
-        nuernberg: 'Nürnberg',
+        'andorra-la-vella': 'Andorra la Vella',
+        athens: 'Athen',
+        belgrade: 'Belgrad',
+        brussels: 'Brüssel',
+        bucharest: 'Bukarest',
+        copenhagen: 'Kopenhagen',
         hannover: 'Hannover',
+        kharkiv: 'Charkiw',
+        koeln: 'Köln',
+        kyiv: 'Kiew',
+        lisbon: 'Lissabon',
+        milan: 'Mailand',
+        moers: 'Moers',
+        muenchen: 'München',
+        nicosia: 'Nikosia',
+        nuernberg: 'Nürnberg',
+        odesa: 'Odessa',
+        prague: 'Prag',
+        rome: 'Rom',
+        'san-marino': 'San Marino',
+        warsaw: 'Warschau',
         wien: 'Wien'
       }
     }

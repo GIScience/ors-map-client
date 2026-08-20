@@ -1,6 +1,8 @@
 import {EventBus} from '@/common/event-bus'
 import appConfig from '@/config/app-config'
 
+const NO_STATE = '_'
+
 export default {
   name: 'city-selector',
 
@@ -23,6 +25,9 @@ export default {
     try {
       const res = await fetch('/aois/countries.json')
       this.countries = await res.json()
+      if (!this.hasStateLevel) {
+        this.selectedState = NO_STATE
+      }
     } catch (e) {
       console.error('Failed to load countries:', e)
     }
@@ -37,17 +42,17 @@ export default {
 
         Object.entries(states || {}).forEach(([rawState, cities]) => {
           stateMap[rawState] = {
-            text: this.localizedName("states", rawState),
+            text: this.localizedName('states', rawState),
             value: rawState,
             cities: (cities || []).map((rawCity) => ({
-              text: this.localizedName("cities", rawCity),
+              text: this.localizedName('cities', rawCity),
               value: rawCity
             }))
           }
         })
 
         map[rawCountry] = {
-          text: this.localizedName("countries", rawCountry),
+          text: this.localizedName('countries', rawCountry),
           value: rawCountry,
           states: stateMap
         }
@@ -62,9 +67,15 @@ export default {
     },
 
     states() {
-      if (!this.selectedCountry) return []
+      if (!this.selectedCountry || !this.hasStateLevel) return []
       return Object.values(this.countryStateCityMap[this.selectedCountry]?.states || {})
         .sort((a, b) => a.text.localeCompare(b.text))
+    },
+
+    hasStateLevel() {
+      if (!this.selectedCountry) return false
+      const stateKeys = Object.keys(this.countryStateCityMap[this.selectedCountry]?.states || {})
+      return !(stateKeys.length === 1 && stateKeys[0] === NO_STATE)
     },
 
     cities() {
@@ -75,6 +86,14 @@ export default {
   },
   watch: {
     selectedCountry(newCountry) {
+      if (!this.hasStateLevel) {
+        const previousState = this.selectedState
+        this.selectedState = NO_STATE
+        if (previousState === NO_STATE) {
+          this.selectCity()
+        }
+        return
+      }
       const states = Object.values(this.countryStateCityMap[newCountry]?.states || {})
       if (states.length === 1) {
         this.selectedState = states[0].value
@@ -83,20 +102,30 @@ export default {
         this.selectedCity = null
       }
     },
-    selectedState(newState) {
-      const cities = this.countryStateCityMap[this.selectedCountry]?.states[newState]?.cities || []
+    selectedState() {
+      this.selectCity()
+    }
+  },
+  methods: {
+    selectCity() {
+      const cities = this.cities
       if (cities.length === 1) {
         this.selectedCity = cities[0].value
         this.changeCity()
       } else {
         this.selectedCity = null
       }
-    }
-  },
-  methods: {
+    },
     localizedName(category, slug) {
       const key = `citySelector.places.${category}.${slug}`
-      return this.$te(key) ? this.$t(key) : this.prepareString(slug)
+      if (this.$te(key)) {
+        return this.$t(key)
+      }
+      const fallbackLocale = this.$i18n.fallbackLocale
+      if (fallbackLocale && this.$te(key, fallbackLocale)) {
+        return this.$t(key, fallbackLocale)
+      }
+      return this.prepareString(slug)
     },
     prepareString(s) {
       return (String(s[0]).toUpperCase() + String(s).slice(1))

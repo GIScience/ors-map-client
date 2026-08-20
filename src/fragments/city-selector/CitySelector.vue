@@ -8,6 +8,7 @@
       v-model="selectedCountry"
     />
     <v-select
+      v-if="hasStateLevel"
       :label="$t('citySelector.state')"
       :items="states"
       item-text="text"

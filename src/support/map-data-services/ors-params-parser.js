@@ -34,9 +34,11 @@ adjustCSVColumn()
 
 let region_bbox = []
 
-// aois/ path segments are slugs like 'baden-wuerttemberg' or 'heidelberg' - reject
-// anything else (e.g. '..', '/', encoded path traversal) before it reaches fetch().
-const AOI_SEGMENT_PATTERN = /^[a-z0-9-]+$/
+// aois/ path segments are slugs like 'baden-wuerttemberg' or 'heidelberg', or the
+// bare '_' placeholder used as the state segment of countries without states -
+// reject anything else (e.g. '..', '/', encoded path traversal) before it
+// reaches fetch().
+const AOI_SEGMENT_PATTERN = /^(?:_|[a-z0-9-]+)$/
 const isValidAoiSegment = (segment) => typeof segment === 'string' && AOI_SEGMENT_PATTERN.test(segment)
 
 EventBus.$on('city-change', (path) => {

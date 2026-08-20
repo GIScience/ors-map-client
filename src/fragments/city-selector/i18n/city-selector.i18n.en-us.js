@@ -6,8 +6,50 @@ export default {
     city: 'City',
     places: {
       countries: {
+        albania: 'Albania',
+        andorra: 'Andorra',
+        austria: 'Austria',
+        belgium: 'Belgium',
+        'bosnia-and-herzegovina': 'Bosnia and Herzegovina',
+        bulgaria: 'Bulgaria',
+        croatia: 'Croatia',
+        cyprus: 'Cyprus',
+        czechia: 'Czechia',
+        denmark: 'Denmark',
+        estonia: 'Estonia',
+        finland: 'Finland',
+        france: 'France',
         germany: 'Germany',
-        austria: 'Austria'
+        greece: 'Greece',
+        hungary: 'Hungary',
+        iceland: 'Iceland',
+        ireland: 'Ireland',
+        italy: 'Italy',
+        kosovo: 'Kosovo',
+        latvia: 'Latvia',
+        liechtenstein: 'Liechtenstein',
+        lithuania: 'Lithuania',
+        luxembourg: 'Luxembourg',
+        malta: 'Malta',
+        moldova: 'Moldova',
+        monaco: 'Monaco',
+        montenegro: 'Montenegro',
+        netherlands: 'Netherlands',
+        'north-macedonia': 'North Macedonia',
+        norway: 'Norway',
+        poland: 'Poland',
+        portugal: 'Portugal',
+        romania: 'Romania',
+        'san-marino': 'San Marino',
+        serbia: 'Serbia',
+        slovakia: 'Slovakia',
+        slovenia: 'Slovenia',
+        spain: 'Spain',
+        sweden: 'Sweden',
+        switzerland: 'Switzerland',
+        turkey: 'Turkey',
+        ukraine: 'Ukraine',
+        'united-kingdom': 'United Kingdom'
       },
       states: {
         'baden-wuerttemberg': 'Baden-Württemberg',
@@ -35,10 +77,14 @@ export default {
       // Only cities whose anglicized name differs from the slug-derived
       // fallback (prepareString) need an entry here.
       cities: {
-        muenchen: 'Munich',
+        'andorra-la-vella': 'Andorra la Vella',
         koeln: 'Cologne',
-        nuernberg: 'Nuremberg',
         hannover: 'Hanover',
+        moers: 'Moers',
+        muenchen: 'Munich',
+        nuernberg: 'Nuremberg',
+        prague: 'Prague',
+        'san-marino': 'San Marino',
         wien: 'Vienna'
       }
     }
